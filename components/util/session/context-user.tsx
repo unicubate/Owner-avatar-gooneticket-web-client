@@ -61,6 +61,9 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
 
   const logout = () => {
     setUserStorage(undefined);
+    window.localStorage.removeItem(
+      String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+    );
   };
 
   return (

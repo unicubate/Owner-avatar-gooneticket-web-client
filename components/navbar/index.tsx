@@ -8,12 +8,19 @@ import { useState } from "react";
 import type { SizeType } from "antd/es/config-provider/SizeContext";
 import { Button } from "antd";
 import { useRouter } from "next/router";
+import { useAuth } from "../util/session/context-user";
 // import { MenuAlt4Icon } from '@heroicons/react/outline';
 // import { HomeIcon } from '@heroicons/react/solid';
 
-const Navbar = () => {
+interface Props {
+  user: any;
+}
+
+const Navbar: React.FC<Props> = ({ user }) => {
   const router = useRouter();
   const [size, setSize] = useState<SizeType>("large");
+
+  console.log("user ======>", user);
   return (
     <nav className="flex items-center justify-between px-5 h-14 gap-5">
       <Logo />
@@ -43,23 +50,35 @@ const Navbar = () => {
           <Button type="text">Explore</Button>
           <Button type="text">About</Button>
           <Button type="text">Blog</Button>
-          <Button
-            onClick={() => {
-              router.push(`${`/login`}`);
-            }}
-            size={size}
-          >
-            Log In
-          </Button>
-          <Button
-            onClick={() => {
-              router.push(`${`/register`}`);
-            }}
-            type="primary"
-            size={size}
-          >
-            Sign Up
-          </Button>
+          
+          {user?.id ? (
+            <>
+              <Path Icon={MessengerIcon} />
+              <Path Icon={PostIcon} />
+              <Path Icon={ExploreIcon} />
+              <Path Icon={HeartIcon} />
+            </>
+          ) : (
+            <>
+              <Button
+                onClick={() => {
+                  router.push(`${`/login`}`);
+                }}
+                size={size}
+              >
+                Log In
+              </Button>
+              <Button
+                onClick={() => {
+                  router.push(`${`/register`}`);
+                }}
+                type="primary"
+                size={size}
+              >
+                Sign Up
+              </Button>
+            </>
+          )}
         </ul>
         {/* <MenuAlt4Icon className="w-6 sm:hidden" /> */}
         {/* <Profile /> */}

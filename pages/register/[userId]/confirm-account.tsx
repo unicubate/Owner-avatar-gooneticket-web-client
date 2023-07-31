@@ -46,9 +46,13 @@ const ConfirmAccount = () => {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  
-  if (user?.nextStep === "COMPLETE_REGISTRATION") {
-    router.push(`${`/profile`}`);
+
+  if (user?.nextStep === "SETTING_PROFILE") {
+    router.push(`${`/register/${userId}/setting-profile`}`);
+  } else if (user?.nextStep === "SETTING_INTEREST") {
+    router.push(`${`/register/${userId}/setting-interest`}`);
+  } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
+    router.push(`${`/`}`);
   }
 
   const onSubmit: SubmitHandler<{ code: string }> = async (payload: {
@@ -138,7 +142,7 @@ const ConfirmAccount = () => {
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block>
+              <Button type="primary" size="large" loading block disabled>
                 Please wait...
               </Button>
             ) : (

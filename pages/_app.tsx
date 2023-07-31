@@ -16,12 +16,12 @@ export default function App({ Component, pageProps }: AppProps) {
       <ContextUserProvider>
         <ConfigProvider>
           <Component {...pageProps} />
+
+          {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
+            <ReactQueryDevtools initialIsOpen={false} />
+          )}
         </ConfigProvider>
       </ContextUserProvider>
-
-      {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
     </QueryClientProvider>
   );
 }

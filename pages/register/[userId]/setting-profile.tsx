@@ -21,9 +21,10 @@ import {
   updateOneProfileNextStepAPI,
 } from "@/pages/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
-import { LoadingOutlined, SolutionOutlined, UserOutlined } from "@ant-design/icons";
+import { resendCodeAPI } from "@/pages/api/user";
 
 const schema = yup.object({
+  username: yup.string().required(),
   url: yup.string().url().optional(),
   birthday: yup.date().required(),
   currencyId: yup.string().uuid().required(),
@@ -55,8 +56,8 @@ const SettingProfile = () => {
   });
   const currencies: any = data?.data;
 
-  if (user?.nextStep === "SETTING_INTEREST") {
-    router.push(`${`/register/${userId}/setting-interest`}`);
+  if (user?.nextStep === "CONFIRM_EMAIL") {
+    router.push(`${`/register/${userId}/confirm-account`}`);
   }
 
   useEffect(() => {
@@ -75,12 +76,14 @@ const SettingProfile = () => {
     try {
       await updateOneProfileNextStepAPI({
         ...payload,
-        nextStep: "SETTING_INTEREST",
+        nextStep: "CONFIRM_EMAIL",
         userId: userId,
       });
       setHasErrors(false);
       setLoading(false);
-      router.push(`${`/register/${userId}/setting-interest`}`);
+      router.push(`${`/register/${userId}/confirm-account`}`);
+      await resendCodeAPI({ userId });
+      window.location.reload();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -94,7 +97,6 @@ const SettingProfile = () => {
     }
   };
 
-  console.log("user =======>", user?.username);
   return (
     <Layout title="Log In">
       <div className="w-full max-w-lg p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
@@ -111,14 +113,12 @@ const SettingProfile = () => {
           </h6>
         </div>
 
-  
-
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-          {hasErrors ? (
+          {hasErrors && (
             <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
               {hasErrors}
             </div>
-          ) : null}
+          )}
 
           {user?.username ? (
             <div className="mb-4">

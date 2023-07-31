@@ -31,11 +31,11 @@ const schema = yup.object({
     .required(),
 });
 
-const Register = () =>{
+const Register = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    false
   );
   const {
     control,
@@ -89,11 +89,18 @@ const Register = () =>{
             alt=""
           />
         </div>
-
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex justify-center mx-auto">
           <h6 className="mt-3 text-xl text-center font-bold">
             {`Sign up. It's free!`}
           </h6>
+        </div>
+
+        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+          {hasErrors && (
+            <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
+              {hasErrors}
+            </div>
+          )}
 
           <div className="mb-4">
             <TextInput
@@ -172,7 +179,7 @@ const Register = () =>{
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block>
+              <Button type="primary" size="large" loading block disabled>
                 Please wait...
               </Button>
             ) : (
@@ -238,5 +245,5 @@ const Register = () =>{
       </div>
     </Layout>
   );
-}
+};
 export default PublicComponent(Register);

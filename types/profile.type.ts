@@ -14,6 +14,7 @@ export type ProfileFormModel = {
 
 export type NextStepProfileFormModel = {
   birthday: Date;
+  username: string;
   url?: string;
   currencyId: string;
   userId?: string;

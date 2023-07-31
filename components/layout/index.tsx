@@ -8,6 +8,7 @@ interface IProps {
 }
 
 const Layout = ({ children, title }: IProps) => {
+  
   return (
     <>
       <Head>

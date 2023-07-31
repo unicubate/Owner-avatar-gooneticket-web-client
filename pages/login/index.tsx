@@ -132,7 +132,7 @@ const Login = () => {
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block>
+              <Button type="primary" size="large" loading block disabled>
                 Please wait...
               </Button>
             ) : (
