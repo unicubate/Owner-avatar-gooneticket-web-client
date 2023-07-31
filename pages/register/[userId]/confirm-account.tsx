@@ -52,7 +52,7 @@ const ConfirmAccount = () => {
   } else if (user?.nextStep === "SETTING_INTEREST") {
     router.push(`${`/register/${userId}/setting-interest`}`);
   } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-    router.push(`${`/`}`);
+    router.push(`${`/${user?.username}`}`);
   }
 
   const saveMutation = ValidCodeAPI({
@@ -77,7 +77,7 @@ const ConfirmAccount = () => {
         ...payload,
         nextStep: "COMPLETE_REGISTRATION",
       });
-      router.push(`${`/profile`}`);
+      router.push(`${`/${user?.username}`}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -154,11 +154,24 @@ const ConfirmAccount = () => {
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block disabled>
+              <Button
+                type="primary"
+                size="large"
+                loading
+                block
+                disabled
+                shape="round"
+              >
                 Please wait...
               </Button>
             ) : (
-              <Button type="primary" size="large" block htmlType="submit">
+              <Button
+                type="primary"
+                size="large"
+                block
+                htmlType="submit"
+                shape="round"
+              >
                 Continue
               </Button>
             )}

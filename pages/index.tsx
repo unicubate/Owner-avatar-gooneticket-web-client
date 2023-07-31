@@ -11,6 +11,7 @@ import {
   FloatButton,
   Form,
   Input,
+  Result,
   Select,
   Space,
   Switch,
@@ -126,6 +127,18 @@ export default function Home() {
             alt=""
           />
         </div>
+
+        <Result
+          status="success"
+          title="Success"
+          subTitle="Registration completed successfully"
+          extra={[
+            <Button type="primary" key="console">
+              Home
+            </Button>,
+            <Button key="buy">Profile</Button>,
+          ]}
+        />
 
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           <h6 className="mt-3 text-xl text-center font-bold">Register</h6>

@@ -179,11 +179,24 @@ const Register = () => {
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block disabled>
+              <Button
+                type="primary"
+                size="large"
+                loading
+                block
+                disabled
+                shape="round"
+              >
                 Please wait...
               </Button>
             ) : (
-              <Button type="primary" size="large" block htmlType="submit">
+              <Button
+                type="primary"
+                size="large"
+                block
+                htmlType="submit"
+                shape="round"
+              >
                 Create account
               </Button>
             )}

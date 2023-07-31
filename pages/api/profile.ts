@@ -4,7 +4,6 @@ import {
   ProfileModel,
 } from "@/types/profile.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { PaginationRequest } from "@/utils/pagination-item";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const UpdateOneProfileNextStepAPI = ({

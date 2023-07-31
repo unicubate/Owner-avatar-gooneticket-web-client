@@ -18,7 +18,11 @@ import { PublicComponent } from "@/components/util/session/public-component";
 
 const schema = yup.object({
   newPassword: yup.string().min(8, "Minimum 8 symbols").required(),
-  passwordConfirm: yup.string().min(8, "Minimum 8 symbols").required(),
+  passwordConfirm: yup
+    .string()
+    .min(8, "Minimum 8 symbols")
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required(),
 });
 
 const ResetPassword = () => {
@@ -56,7 +60,7 @@ const ResetPassword = () => {
         position: "center",
       });
       reset();
-      // router.push(`${`/login`}`);
+      router.push(`${`/login`}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -81,9 +85,7 @@ const ResetPassword = () => {
           />
         </div>
         <div className="flex justify-center mx-auto">
-          <h6 className="mt-3 text-xl font-bold">
-            {`Reset password?`}
-          </h6>
+          <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
         </div>
 
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
@@ -111,22 +113,35 @@ const ResetPassword = () => {
 
           <div className="mt-6">
             {loading ? (
-              <Button type="primary" size="large" loading block disabled>
+              <Button
+                type="primary"
+                size="large"
+                loading
+                block
+                disabled
+                shape="round"
+              >
                 Please wait...
               </Button>
             ) : (
-              <Button type="primary" size="large" block htmlType="submit">
+              <Button
+                type="primary"
+                size="large"
+                block
+                htmlType="submit"
+                shape="round"
+              >
                 Reset Password
               </Button>
             )}
           </div>
         </form>
 
-        <Link href="/login">
+        {/* <Link href="/login">
           <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
             Already have an account? Log in here
           </p>
-        </Link>
+        </Link> */}
       </div>
     </Layout>
   );
