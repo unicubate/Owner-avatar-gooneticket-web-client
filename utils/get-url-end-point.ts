@@ -116,9 +116,13 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/profile/update/:userId`,
     method: PUT,
   },
-  /****************** Currency route */
+  /****************** Currency or Countries route */
   getAllCurrencies: {
     endpoint: `${baseUrl}/currencies`,
+    method: GET,
+  },
+  getAllCounties: {
+    endpoint: `${baseUrl}/countries`,
     method: GET,
   },
 };

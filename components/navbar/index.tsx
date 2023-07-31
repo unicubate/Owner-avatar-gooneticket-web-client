@@ -20,7 +20,6 @@ const Navbar: React.FC<Props> = ({ user }) => {
   const router = useRouter();
   const [size, setSize] = useState<SizeType>("large");
 
-  console.log("user ======>", user);
   return (
     <nav className="flex items-center justify-between px-5 h-14 gap-5">
       <Logo />

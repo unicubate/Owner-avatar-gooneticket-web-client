@@ -17,17 +17,26 @@ import { useQuery } from "@tanstack/react-query";
 import { useAuth } from "@/components/util/session/context-user";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import {
+  getAllCountiesAPI,
   getAllCurrenciesAPI,
-  updateOneProfileNextStepAPI,
+  UpdateOneProfileNextStepAPI,
 } from "@/pages/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
 import { resendCodeAPI } from "@/pages/api/user";
+import { SelectSearchInput } from "@/components/util/form/select-search-input";
 
 const schema = yup.object({
-  username: yup.string().required(),
+  username: yup
+    .string()
+    .trim("The username name cannot include leading and trailing spaces")
+    .strict(true)
+    .min(1, "The username name needs to be at least 1 char")
+    .max(512, "The username name cannot exceed 512 char")
+    .required(),
   url: yup.string().url().optional(),
   birthday: yup.date().required(),
   currencyId: yup.string().uuid().required(),
+  countryId: yup.string().uuid().required(),
 });
 
 const SettingProfile = () => {
@@ -49,12 +58,25 @@ const SettingProfile = () => {
     mode: "onChange",
   });
 
-  const fetchCurrencies = async () =>
-    await getAllCurrenciesAPI({ sort: "DESC", page: 1, take: 30 });
-  const { data } = useQuery(["contacts"], () => fetchCurrencies(), {
-    refetchOnWindowFocus: false,
-  });
-  const currencies: any = data?.data;
+  const fetchCurrencies = async () => await getAllCurrenciesAPI();
+  const { data: dataCurrencies } = useQuery(
+    ["contacts"],
+    () => fetchCurrencies(),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+  const currencies: any = dataCurrencies?.data;
+
+  const fetchCountries = async () => await getAllCountiesAPI();
+  const { data: dataCountries } = useQuery(
+    ["countries"],
+    () => fetchCountries(),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+  const countries: any = dataCountries?.data;
 
   if (user?.nextStep === "CONFIRM_EMAIL") {
     router.push(`${`/register/${userId}/confirm-account`}`);
@@ -67,23 +89,32 @@ const SettingProfile = () => {
     }
   }, [user, setValue]);
 
+  const saveMutation = UpdateOneProfileNextStepAPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
+
   const onSubmit: SubmitHandler<NextStepProfileFormModel> = async (
     payload: NextStepProfileFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-
     try {
-      await updateOneProfileNextStepAPI({
+      await saveMutation.mutateAsync({
         ...payload,
         nextStep: "CONFIRM_EMAIL",
         userId: userId,
       });
+      await resendCodeAPI({ userId });
+      router.push(`${`/register/${userId}/confirm-account`}`);
       setHasErrors(false);
       setLoading(false);
-      router.push(`${`/register/${userId}/confirm-account`}`);
-      await resendCodeAPI({ userId });
-      window.location.reload();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -135,7 +166,7 @@ const SettingProfile = () => {
           ) : null}
 
           <div className="mb-4">
-            <SelectInput
+            <SelectSearchInput
               firstOptionName="Currency"
               label="Currency"
               optionType="other"
@@ -144,6 +175,19 @@ const SettingProfile = () => {
               placeholder="Currency"
               name="currencyId"
               dataItem={currencies}
+            />
+          </div>
+
+          <div className="mb-4">
+            <SelectSearchInput
+              firstOptionName="Country"
+              label="Country residence"
+              optionType="other"
+              control={control}
+              errors={errors}
+              placeholder="Country"
+              name="countryId"
+              dataItem={countries}
             />
           </div>
 

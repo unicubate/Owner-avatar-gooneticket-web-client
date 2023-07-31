@@ -19,7 +19,7 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { getOneUserAPI, resendCodeAPI, validCodeAPI } from "@/pages/api/user";
+import { getOneUserAPI, resendCodeAPI, ValidCodeAPI } from "@/pages/api/user";
 import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useAuth } from "@/components/util/session/context-user";
@@ -55,6 +55,17 @@ const ConfirmAccount = () => {
     router.push(`${`/`}`);
   }
 
+  const saveMutation = ValidCodeAPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
+
   const onSubmit: SubmitHandler<{ code: string }> = async (payload: {
     code: string;
   }) => {
@@ -62,9 +73,10 @@ const ConfirmAccount = () => {
     setHasErrors(undefined);
 
     try {
-      await validCodeAPI({ ...payload, nextStep: "COMPLETE_REGISTRATION" });
-      setHasErrors(false);
-      setLoading(false);
+      await saveMutation.mutateAsync({
+        ...payload,
+        nextStep: "COMPLETE_REGISTRATION",
+      });
       router.push(`${`/profile`}`);
     } catch (error: any) {
       setHasErrors(true);

@@ -1,29 +1,51 @@
 import {
   CurrencyModel,
   NextStepProfileFormModel,
-  ProfileFormModel,
   ProfileModel,
 } from "@/types/profile.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest } from "@/utils/pagination-item";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const updateOneProfileNextStepAPI = async (
-  payload: NextStepProfileFormModel
-): Promise<{ data: ProfileModel }> => {
-  return await makeApiCall({
-    action: "updateOneProfileNextStep",
-    body: payload,
-    urlParams: { userId: payload?.userId },
-  });
-};
+export const UpdateOneProfileNextStepAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryClient = useQueryClient();
+  const result = useMutation(
+    async (payload: NextStepProfileFormModel): Promise<any> => {
+      return await makeApiCall({
+        action: "updateOneProfileNextStep",
+        body: payload,
+        urlParams: { userId: payload?.userId },
+      });
+    },
+    {
+      onSettled: async () => {
+        await queryClient.invalidateQueries();
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries();
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onError: async (error: any) => {
+        await queryClient.invalidateQueries();
+        if (onError) {
+          onError(error);
+        }
+      },
+    }
+  );
 
-export const updateOneProfileAPI = async (
-  payload: ProfileFormModel
-): Promise<{ data: ProfileModel }> => {
-  return await makeApiCall({
-    action: "updateOneProfile",
-    body: payload,
-  });
+  return result;
 };
 
 export const getOneProfileAPI = async (payload: {
@@ -37,10 +59,19 @@ export const getOneProfileAPI = async (payload: {
 };
 
 export const getAllCurrenciesAPI = async (
-  payload: PaginationRequest
+  search?: string
 ): Promise<{ data: CurrencyModel }> => {
   return await makeApiCall({
     action: "getAllCurrencies",
-    queryParams: payload,
+    queryParams: search,
+  });
+};
+
+export const getAllCountiesAPI = async (
+  search?: string
+): Promise<{ data: CurrencyModel }> => {
+  return await makeApiCall({
+    action: "getAllCounties",
+    queryParams: search,
   });
 };

@@ -53,6 +53,7 @@ const schema = yup.object({
   password: yup.string().optional(),
   description: yup.string().optional(),
   currency: yup.string().optional(),
+  country: yup.string().optional(),
   age: yup.number().optional(),
   birthday: yup.date().min(new Date(), "Please choose future date").optional(),
   confirm: yup
@@ -99,14 +100,14 @@ export default function Home() {
   });
 
   const onSubmit: SubmitHandler<UserModelForm> = (payload: UserModelForm) => {
-    let data = new FormData();
-    data.append("confirm", `${payload.confirm}`);
-    payload?.attachment?.fileList?.length > 0 &&
-      payload?.attachment?.fileList.forEach((file: any) => {
-        data.append("attachment", file as RcFile);
-      });
+    // let data = new FormData();
+    // data.append("confirm", `${payload.confirm}`);
+    // payload?.attachment?.fileList?.length > 0 &&
+    //   payload?.attachment?.fileList.forEach((file: any) => {
+    //     data.append("attachment", file as RcFile);
+    //   });
 
-    console.log("data =======>", data);
+    console.log("payload =======>", payload);
   };
 
   return (
@@ -248,6 +249,41 @@ export default function Home() {
               placeholder="Birthday date"
               name="birthday"
               errors={errors}
+            />
+          </div>
+
+          <div className="mb-4">
+            <Controller
+              name="country"
+              control={control}
+              render={({ field: { value, onChange } }) => (
+                <>
+                  <Select
+                    showSearch
+                    size="large"
+                    style={{ width: "100%" }}
+                    placeholder="Select a person"
+                    optionFilterProp="children"
+                    filterOption={(input, option) =>
+                      (option?.name ?? "")
+                        .toLowerCase()
+                        .includes(input.toLowerCase())
+                    }
+                    onChange={(value) => {
+                      onChange(value);
+                    }}
+                  >
+                    <Option value="china" label="China">
+                      <Space>
+                        <span role="img" aria-label="China">
+                          🇨🇳
+                        </span>
+                        China (中国)
+                      </Space>
+                    </Option>
+                  </Select>
+                </>
+              )}
             />
           </div>
 

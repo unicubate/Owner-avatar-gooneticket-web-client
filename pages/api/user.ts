@@ -7,6 +7,7 @@ import {
   NextStep,
 } from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel
@@ -56,14 +57,47 @@ export const resendCodeAPI = async (payload: {
   });
 };
 
-export const validCodeAPI = async (payload: {
-  code: string;
-  nextStep: NextStep;
-}): Promise<{ data: UserModel }> => {
-  return await makeApiCall({
-    action: "validCode",
-    body: payload,
-  });
+export const ValidCodeAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryClient = useQueryClient();
+  const result = useMutation(
+    async (payload: {
+      code: string;
+      nextStep: NextStep;
+    }): Promise<{ data: UserModel }> => {
+      return await makeApiCall({
+        action: "validCode",
+        body: payload,
+      });
+    },
+    {
+      onSettled: async () => {
+        await queryClient.invalidateQueries();
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries();
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onError: async (error: any) => {
+        await queryClient.invalidateQueries();
+        if (onError) {
+          onError(error);
+        }
+      },
+    }
+  );
+
+  return result;
 };
 
 export const getOneUserAPI = async (payload: {
