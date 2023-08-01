@@ -73,7 +73,7 @@ const Setting = () => {
         type="button"
         onClick={() => setShowModal(true)}
       >
-        Fill Details
+        Fill Setting
       </button>
 
       {showModal ? (
@@ -122,10 +122,9 @@ const Setting = () => {
                   />
                 </div>
               </div>
-              <div className="mt-2 text-center space-x-4">
+              <div className="mt-2 text-center space-x-2">
                 <Button
                   onClick={() => setShowModal(false)}
-                  icon={<PauseOutlined />}
                   type="default"
                   size="large"
                   shape="round"
@@ -147,13 +146,12 @@ const Setting = () => {
 
                 <Button
                   type="primary"
-                  icon={<PlusOutlined />}
                   shape="round"
                   size="large"
                   danger
                   htmlType="submit"
                 >
-                  Create
+                  Save
                 </Button>
               </div>
             </form>
