@@ -2,9 +2,7 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 
-
-
-const Donations = () => {
+const Gifts = () => {
   const onSubmit: SubmitHandler<any> = (payload: any) => {
     // let data = new FormData();
     // data.append("confirm", `${payload.confirm}`);
@@ -18,7 +16,7 @@ const Donations = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Donations"}>
+      <LayoutDashboard title={"Gifts"}>
 
       <div className="flex flex-col flex-1">
             <main>
@@ -347,4 +345,4 @@ const Donations = () => {
   );
 };
 
-export default PrivateComponent(Donations);
+export default PrivateComponent(Gifts);

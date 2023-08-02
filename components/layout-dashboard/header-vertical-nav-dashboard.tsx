@@ -10,7 +10,7 @@ import {
 } from "react-icons/bi";
 import { FiList } from "react-icons/fi";
 import { VscOpenPreview } from "react-icons/vsc";
-import { BsGift } from "react-icons/bs";
+import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 
@@ -77,6 +77,11 @@ const SUPPORT_ITEMS = [
 
 const SETTINGS_ITEMS = [
   {
+    title: "Shops",
+    href: "/shops",
+    icon: <BsShop className={classIcon} />,
+  },
+  {
     title: "Integrations",
     href: "aIntegrations",
     icon: <BiCodeCurly className={classIcon} />,
@@ -87,8 +92,6 @@ const SETTINGS_ITEMS = [
     icon: <BiCog className={classIcon} />,
   },
 ];
-
-import { useAuth } from "../util/session/context-user";
 
 interface Props {
   user?: any;
