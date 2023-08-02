@@ -195,7 +195,7 @@ const SettingProfile = () => {
             <DateInput
               control={control}
               label="Birthday"
-              placeholder="Birthday"
+              placeholder="12/01/2023"
               name="birthday"
               errors={errors}
             />

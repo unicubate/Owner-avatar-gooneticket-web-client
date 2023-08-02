@@ -2,12 +2,9 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
   experimental: {
-    transpilePackages: ["ui"],
+     transpilePackages: ["ui"],
   },
-  // i18n: {
-  //   locales: ["fr", "en"],
-  //   defaultLocale: "en",
-  // },
+  
   env: {
     NAME_SITE: process.env.NEXT_PUBLIC_NAME_SITE,
     QUERY_DEV_TOOLS: process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS,
@@ -18,14 +15,4 @@ module.exports = {
     DEBUG: process.env.NEXT_PUBLIC_DEBUG === "true",
     MEDIA_HOST: process.env.NEXT_PUBLIC_MEDIA_HOST ?? "",
   },
-  // images: process.env.NEXT_PUBLIC_MEDIA_HOST ? {
-  //   remotePatterns: [
-  //     {
-  //       protocol: 'https',
-  //       hostname: process.env.NEXT_PUBLIC_MEDIA_HOST.split("https://")?.[1] ?? "",
-  //       port: '',
-  //       pathname: '/**',
-  //     },
-  //   ],
-  // } : {}
 };
