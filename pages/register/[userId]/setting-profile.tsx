@@ -24,6 +24,7 @@ import {
 import { NextStepProfileFormModel } from "@/types/profile.type";
 import { resendCodeAPI } from "@/pages/api/user";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const schema = yup.object({
   username: yup
@@ -223,28 +224,10 @@ const SettingProfile = () => {
           </div>
 
           <div className="mt-6">
-            {loading ? (
-              <Button
-                type="primary"
-                size="large"
-                loading
-                block
-                disabled
-                shape="round"
-              >
-                Please wait...
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                size="large"
-                block
-                htmlType="submit"
-                shape="round"
-              >
-                Continue
-              </Button>
-            )}
+
+            <ButtonInput shape="round" type="submit" size="normal" loading={loading} color='indigo'>
+              Continue
+            </ButtonInput>
           </div>
         </form>
       </div>

@@ -23,6 +23,7 @@ import { getOneUserAPI, resendCodeAPI, ValidCodeAPI } from "@/pages/api/user";
 import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useAuth } from "@/components/util/session/context-user";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const schema = yup.object({
   code: yup.string().max(8, "Maximum 8 symbols").required(),
@@ -153,28 +154,9 @@ const ConfirmAccount = () => {
           </div>
 
           <div className="mt-6">
-            {loading ? (
-              <Button
-                type="primary"
-                size="large"
-                loading
-                block
-                disabled
-                shape="round"
-              >
-                Please wait...
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                size="large"
-                block
-                htmlType="submit"
-                shape="round"
-              >
-                Continue
-              </Button>
-            )}
+             <ButtonInput shape="round" type="submit" size="normal" loading={loading} color='indigo'>
+              Continue
+            </ButtonInput>
           </div>
         </form>
 

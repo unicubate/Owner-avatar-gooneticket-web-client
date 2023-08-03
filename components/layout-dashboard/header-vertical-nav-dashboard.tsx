@@ -14,10 +14,10 @@ import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 
-type NavbarProps = {
+export type NavbarProps = {
   title: string;
   href: string;
-  icon: any;
+  icon?: any;
 };
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
@@ -116,7 +116,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                       title=""
                       className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
                         isActive
-                          ? "text-white bg-blue-600"
+                          ? "text-white bg-red-600"
                           : "hover:bg-gray-200 text-gray-900"
                       } `}
                     >
@@ -143,7 +143,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                         title=""
                         className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
                           isActive
-                            ? "text-white bg-blue-600"
+                            ? "text-white bg-red-600"
                             : "hover:bg-gray-200 text-gray-900"
                         } `}
                       >
@@ -178,7 +178,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                         title=""
                         className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
                           isActive
-                            ? "text-white bg-blue-600"
+                            ? "text-white bg-red-600"
                             : "hover:bg-gray-200 text-gray-900"
                         } `}
                       >
@@ -205,7 +205,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                         title=""
                         className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
                           isActive
-                            ? "text-white bg-blue-600"
+                            ? "text-white bg-red-600"
                             : "hover:bg-gray-200 text-gray-900"
                         } `}
                       >

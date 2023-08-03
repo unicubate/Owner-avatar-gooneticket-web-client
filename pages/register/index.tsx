@@ -15,6 +15,7 @@ import {
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const schema = yup.object({
   email: yup
@@ -178,28 +179,9 @@ const Register = () => {
           </div>
 
           <div className="mt-6">
-            {loading ? (
-              <Button
-                type="primary"
-                size="large"
-                loading
-                block
-                disabled
-                shape="round"
-              >
-                Please wait...
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                size="large"
-                block
-                htmlType="submit"
-                shape="round"
-              >
-                Create account
-              </Button>
-            )}
+            <ButtonInput shape="round" type="submit" size="normal" loading={loading} color='indigo'>
+              Create account
+            </ButtonInput>
           </div>
         </form>
 

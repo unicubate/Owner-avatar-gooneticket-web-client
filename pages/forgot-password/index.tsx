@@ -1,27 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 import React, { useState } from "react";
-import { Inter } from "next/font/google";
 import Layout from "@/components/layout";
 import Link from "next/link";
-import {
-  Button,
-  Checkbox,
-  DatePicker,
-  FloatButton,
-  Form,
-  Input,
-  Select,
-  Space,
-  Switch,
-  Upload,
-  UploadFile,
-} from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput, TextInputPassword } from "@/components/util/form";
+import { TextInput } from "@/components/util/form";
 import { UserForgotPasswordFormModel } from "@/types/user.type";
 import {
   AlertDangerNotification,
@@ -29,6 +13,7 @@ import {
 } from "@/utils/alert-notification";
 import { passwordResetUserAPI } from "../api/user";
 import { PublicComponent } from "@/components/util/session/public-component";
+import { ButtonInput } from '@/components/templates/button-input';
 
 const schema = yup.object({
   email: yup
@@ -102,15 +87,9 @@ const ForgotPassword = () => {
           </div>
 
           <div className="mt-6">
-            {loading ? (
-              <Button type="primary" size="large" loading block disabled>
-                Please wait...
-              </Button>
-            ) : (
-              <Button type="primary" size="large" block htmlType="submit">
-                Request Password Reset
-              </Button>
-            )}
+            <ButtonInput shape="round" type="submit" size="normal" loading={loading} color='indigo'>
+              Request Password Reset
+            </ButtonInput>
           </div>
         </form>
 
