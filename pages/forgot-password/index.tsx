@@ -87,7 +87,7 @@ const ForgotPassword = () => {
           </div>
 
           <div className="mt-6">
-            <ButtonInput shape="round" type="submit" size="normal" loading={loading} color='indigo'>
+            <ButtonInput shape="round" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
               Request Password Reset
             </ButtonInput>
           </div>
