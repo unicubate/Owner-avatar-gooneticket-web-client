@@ -24,7 +24,8 @@ interface Props {
   children: React.ReactNode;
   type: "button" | "submit";
   color: "gray" | "green" | "indigo" | "red";
-  shape?: 'round' | 'default'
+  shape?: 'round' | 'default',
+  onClick?: () => void,
 }
 
 const ButtonInput: React.FC<Props> = ({
@@ -34,11 +35,13 @@ const ButtonInput: React.FC<Props> = ({
   color,
   loading,
   children,
+  onClick,
 }) => {
   return (
     <>
       <button
         type={loading ? 'button' : type}
+        onClick={onClick}
         className={`
             rounded-${shapeType[String(shape ?? 'default')]}
             inline-flex

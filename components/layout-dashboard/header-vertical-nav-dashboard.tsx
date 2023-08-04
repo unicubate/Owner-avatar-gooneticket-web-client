@@ -128,7 +128,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                 })}
               </nav>
 
-              <div>
+              <>
                 <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
                   Monetize
                 </p>
@@ -162,9 +162,9 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                                         <span className="text-xs uppercase ml-auto font-semibold text-indigo-600 bg-indigo-50 border border-indigo-300 rounded-full inline-flex items-center px-2 py-0.5"> New </span>
                                     </a> */}
                 </nav>
-              </div>
+              </>
 
-              <div>
+              <>
                 <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
                   Support
                 </p>
@@ -189,9 +189,9 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     );
                   })}
                 </nav>
-              </div>
+              </>
 
-              <div>
+              <>
                 <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
                   Settings
                 </p>
@@ -238,7 +238,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     Logout
                   </a>
                 </nav>
-              </div>
+              </>
             </div>
 
             {/* <div className="pb-4 mt-12">

@@ -46,10 +46,16 @@ const Navbar: React.FC<Props> = ({ user }) => {
           <Path Icon={PostIcon} />
           <Path Icon={ExploreIcon} />
           <Path Icon={HeartIcon} /> */}
-          <Button type="text">Explore</Button>
-          <Button type="text">About</Button>
+          <Button onClick={() => {
+            router.push(`${`/explore`}`);
+          }} type="text">
+            Explore
+          </Button>
+          <Button onClick={() => {
+            router.push(`${`/about`}`);
+          }} type="text">About</Button>
           <Button type="text">Blog</Button>
-          
+
           {user?.id ? (
             <>
               <Path Icon={MessengerIcon} />

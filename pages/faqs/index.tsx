@@ -1,6 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
+import Layout from "@/components/layout";
 
 const faqs = [
   {
@@ -43,14 +44,13 @@ const Faqs = () => {
 
   return (
     <>
+      <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
 
 
-   
 
-      <section className="py-12 bg-gray-50 sm:py-16 lg:py-20 xl:py-24">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl lg:text-4xl">
               Frequently asked questions
             </h2>
             <p className="mt-4 text-base font-normal leading-7 text-gray-600 lg:text-lg lg:mt-6 lg:leading-8">
@@ -106,7 +106,10 @@ const Faqs = () => {
             </div>
           </div>
         </div>
-      </section>
+      </Layout>
+
+
+
     </>
   );
 };
