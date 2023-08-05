@@ -2,13 +2,13 @@ import React, { useEffect } from 'react'
 import { NavbarProps } from '../layout-dashboard/header-vertical-nav-dashboard';
 import Link from 'next/link';
 import { Button, Spin } from 'antd';
-import { getAllCountiesAPI, getOneProfileAPI } from '@/pages/api/profile';
+import { getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
 import { useQuery } from '@tanstack/react-query';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SelectSearchInput } from '../util/form/select-search-input';
-import { DateInput, TextAreaInput, TextInput } from '../util/form';
+import { DateInput, TextAreaInput, TextInput, TextInputPassword } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
 import { LoadingOutlined, SyncOutlined } from '@ant-design/icons';
 
@@ -17,7 +17,7 @@ type Props = {
 }
 
 const schema = yup.object({
-    fullName: yup.string().optional(),
+    fullName: yup.string().required(),
     url: yup.string().url().optional(),
     birthday: yup.date().required(),
     currencyId: yup.string().uuid().required(),
@@ -34,6 +34,16 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
         resolver: yupResolver(schema),
         mode: "onChange",
     });
+
+    const fetchCurrencies = async () => await getAllCurrenciesAPI();
+    const { data: dataCurrencies } = useQuery(
+        ["currencies"],
+        () => fetchCurrencies(),
+        {
+            refetchOnWindowFocus: false,
+        }
+    );
+    const currencies: any = dataCurrencies?.data;
 
     const fetchCountries = async () => await getAllCountiesAPI();
     const { data: dataCountries } = useQuery(
@@ -77,41 +87,125 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
     return (
         <>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-3xl mt-12">
-                <div className="space-y-8">
 
+            <form onSubmit={handleSubmit(onSubmit)} className="py-7">
 
+                <h2 className="text-base font-bold text-gray-900"> Personal Info </h2>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
-                        <label className="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Website </label>
-                        <div className="mt-2 sm:mt-0 sm:col-span-2">
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-1 gap-y-5 gap-x-6">
+
+                    <div>
+                        <label className="text-sm font-medium text-gray-600"> Username </label>
+                        <div className="mt-2">
                             <TextInput
                                 control={control}
                                 type="text"
-                                name="url"
-                                placeholder="https://www.yousite.com"
+                                name="username"
+                                placeholder="username"
                                 errors={errors}
                             />
                         </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
-                        <label className="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Birthday </label>
-                        <div className="mt-2 sm:mt-0 sm:col-span-2">
-                            <DateInput
+                </div>
+
+
+                <div className="mt-8">
+                    <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
+                        Save changes
+                    </ButtonInput>
+                </div>
+
+            </form>
+
+
+            <form onSubmit={handleSubmit(onSubmit)} className="py-7">
+
+                <h2 className="text-base font-bold text-gray-900"> Profile </h2>
+
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-2 gap-y-5 gap-x-6">
+                    <div>
+                        <div className="mt-2">
+                            <TextInput
+                                label="Full name"
                                 control={control}
-                                placeholder="12/01/2023"
-                                name="birthday"
+                                type="text"
+                                name="fullName"
+                                placeholder="Full name"
                                 errors={errors}
                             />
                         </div>
                     </div>
 
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
-                        <label className="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Country </label>
-                        <div className="mt-2 sm:mt-0 sm:col-span-2">
+                    <div>
+                        <div className="mt-2">
+                            <TextInput
+                                label="Phone"
+                                control={control}
+                                type="text"
+                                name="phone"
+                                placeholder="Phone"
+                                errors={errors}
+                            />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
+                    <div>
+                        <div className="mt-2">
+                            <TextInput
+                                label="Website"
+                                control={control}
+                                type="url"
+                                name="url"
+                                placeholder="Website"
+                                errors={errors}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mt-2">
+                            <TextInput
+                                label="First address"
+                                control={control}
+                                type="text"
+                                name="firstAddress"
+                                placeholder="First address"
+                                errors={errors}
+                            />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mt-2">
+                            <TextInput
+                                label="Second address"
+                                control={control}
+                                type="text"
+                                name="secondAddress"
+                                placeholder="First address"
+                                errors={errors}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
+                    <div>
+                        <label className="text-sm font-bold text-gray-600 mb-2"> Birthday </label>
+                        <DateInput
+                            control={control}
+                            placeholder="12/01/2023"
+                            name="birthday"
+                            errors={errors}
+                        />
+                    </div>
+                    <div>
+                        <div className="mt-2">
                             <SelectSearchInput
-                                firstOptionName="Country"
+                                label="Counties"
+                                firstOptionName="Second address"
                                 optionType="other"
                                 control={control}
                                 errors={errors}
@@ -121,11 +215,28 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
                             />
                         </div>
                     </div>
-                    <div className="sm:grid sm:grid-cols-3 sm:gap-5 sm:items-start">
-                        <label className="block text-sm font-bold text-gray-900 sm:mt-px sm:pt-2"> Write Your Bio </label>
-                        <div className="mt-2 sm:mt-0 sm:col-span-2">
+                    <div>
+                        <div className="mt-2">
+                            <SelectSearchInput
+                                label="Currency"
+                                firstOptionName="Currency"
+                                optionType="other"
+                                control={control}
+                                errors={errors}
+                                placeholder="Currency"
+                                name="currencyId"
+                                dataItem={currencies}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 mt-6 gap-y-5 gap-x-6">
+                    <div>
+                        <div className="mt-2">
                             <TextAreaInput
                                 control={control}
+                                label="Bio"
                                 name="description"
                                 placeholder="Introduce yourself and what you're creating"
                                 errors={errors}
@@ -134,66 +245,15 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
                     </div>
                 </div>
 
-                {/* <div className="mt-6 sm:mt-12">
-                    <Button type="primary" danger block size="large" htmlType="submit">
-                        Save
-                    </Button>
 
-                    <ButtonInput type="submit" color='red'>
-                        Save
-                    </ButtonInput>
-                </div> */}
-
-
-
-                {/* <div className="mt-8">
-                    <button
-                        type="button"
-                        className="inline-flex items-center justify-center shrink-0 w-full px-6 py-4 text-xs font-bold tracking-widest text-white uppercase transition-all duration-200 bg-indigo-600 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700"
-                    >
-                        Approve Transaction
-                    </button>
-                </div>
-
-                <div className="bg-gray-50">
-                    <div className="p-6 sm:p-8">
-                        <div className="sm:space-x-5 sm:flex sm:items-center sm:justify-center">
-                            <button
-                                type="button"
-                                className="inline-flex items-center justify-center w-full px-6 py-4 text-xs font-bold tracking-widest text-gray-500 uppercase transition-all duration-200 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 hover:bg-gray-100 hover:text-gray-900 sm:w-auto"
-                            >
-                                Cancel
-                            </button>
-
-                            <button
-                                type="button"
-                                className="inline-flex items-center justify-center flex-1 w-full px-6 py-4 mt-4 text-xs font-bold tracking-widest text-white uppercase transition-all duration-200 bg-indigo-600 border border-transparent rounded-lg shrink-0 sm:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-700 sm:mt-0"
-                            >
-                                Approve Transaction
-                            </button>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="mt-8">
                     <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
-                        Save
+                        Save changes
                     </ButtonInput>
                 </div>
-
-
-                {/* <div className="grid grid-cols-1 mt-10 sm:grid-cols-2 sm:gap-x-5 gap-y-4">
-
-
-                    <ButtonInput type="submit" loading={false} color='indigo'>
-                        Save
-                    </ButtonInput>
-                    <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
-                        Save
-                    </ButtonInput>
-                </div> */}
-
-
             </form>
+
+
         </>
     )
 }

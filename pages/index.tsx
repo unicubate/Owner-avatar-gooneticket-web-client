@@ -27,7 +27,7 @@ export default function Home() {
                   type="text"
                   name=""
                   id=""
-                  placeholder="username"
+                  placeholder="yourname"
                   className="block w-full px-4 py-4 text-gray-900 placeholder-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
                 />
 

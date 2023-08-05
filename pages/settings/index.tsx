@@ -8,6 +8,7 @@ import { getOneProfileAPI } from "../api/profile";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
+import { UpdateFormPassword } from "@/components/user/update-form-password";
 
 
 
@@ -36,7 +37,7 @@ const Settings = () => {
 
 
 
-  
+
 
 
     // useEffect(() => {
@@ -50,7 +51,7 @@ const Settings = () => {
         <>
             <LayoutDashboard title={"Gifts"}>
 
-          
+
 
                 <div className="flex-1">
                     <main>
@@ -65,10 +66,24 @@ const Settings = () => {
 
                                 <HorizontalNavSetting />
 
+                                <div className="rounded-lg mx-auto mt-12 sm:px-10">
 
-                                {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} /> : null}
 
-                      
+                                    <div className="pt-6 border-t border-gray-200 lg:order-1 lg:col-span-10">
+                                        <div className="flow-root">
+                                            <div className="divide-y divide-gray-200 -my-7">
+
+
+
+                                                {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} /> : null}
+
+                                                {user?.profileId ? <UpdateFormPassword userId={user?.id} /> : null}
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 {/* <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
                                     <div className="px-4 py-5 sm:p-6">
                                         <div className="sm:flex sm:items-center sm:justify-between">

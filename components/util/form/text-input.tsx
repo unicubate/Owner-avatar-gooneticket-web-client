@@ -6,7 +6,7 @@ interface Props {
   prefix?: any;
   label?: string;
   name: string;
-  type: "text" | "email" | "password";
+  type: "text" | "email" | "password" | "url";
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: "on" | "off";

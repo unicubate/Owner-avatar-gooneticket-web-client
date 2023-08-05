@@ -31,6 +31,7 @@ const TextInputPassword: React.FC<Props> = ({
         className="block text-gray-700 text-sm font-bold mb-2"
         htmlFor={name}
       >
+        {/* className="text-sm font-medium text-gray-600" */}
         {label}
       </label>
       <Controller
