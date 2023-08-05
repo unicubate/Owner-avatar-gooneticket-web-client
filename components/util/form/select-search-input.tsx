@@ -11,7 +11,8 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   firstOptionName: string;
-  optionType: "currency" | "other";
+  valueType: "key" | "text";
+  icon?: React.ReactNode;
 }
 
 const SelectSearchInput: React.FC<Props> = ({
@@ -21,7 +22,8 @@ const SelectSearchInput: React.FC<Props> = ({
   name,
   errors,
   placeholder = "",
-  optionType,
+  valueType,
+  icon,
   firstOptionName = "",
 }) => {
   return (
@@ -51,8 +53,10 @@ const SelectSearchInput: React.FC<Props> = ({
             <>
               {dataItem?.length > 0
                 ? dataItem?.map((item: any, index: number) => (
-                    <Option key={index} value={item?.id} name={item?.name}>
+                    <Option key={index} value={valueType === "key" ? item?.id : item?.name} name={item?.name}>
                       <Space>
+                        {icon}
+
                         {item?.name}
                       </Space>
                     </Option>

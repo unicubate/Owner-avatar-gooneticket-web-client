@@ -1,3 +1,4 @@
+import { ColorType } from "@/types/profile.type";
 
 
 
@@ -23,7 +24,7 @@ interface Props {
   loading: boolean;
   children: React.ReactNode;
   type: "button" | "submit";
-  color: "gray" | "green" | "indigo" | "red";
+  color: ColorType;
   shape?: 'round' | 'default',
   onClick?: () => void,
 }
@@ -66,6 +67,7 @@ const ButtonInput: React.FC<Props> = ({
             focus:ring-${color}-100
             hover:bg-${color}-${loading ? '200' : '500'}
         `}
+
       >
         {loading ? <>Please wait...</> : <>{children}</>}
       </button>

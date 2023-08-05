@@ -4,6 +4,7 @@ import { ConfigProvider } from "antd";
 import { NextIntlProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 import "toastify-js/src/toastify.css";
+import 'animate.css'
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

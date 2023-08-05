@@ -170,7 +170,7 @@ const SettingProfile = () => {
             <SelectSearchInput
               firstOptionName="Currency"
               label="Currency"
-              optionType="other"
+              valueType="key"
               control={control}
               errors={errors}
               placeholder="Currency"
@@ -183,7 +183,7 @@ const SettingProfile = () => {
             <SelectSearchInput
               firstOptionName="Country"
               label="Country residence"
-              optionType="other"
+              valueType="key"
               control={control}
               errors={errors}
               placeholder="Country"

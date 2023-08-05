@@ -1,19 +1,13 @@
-import React, { useEffect } from 'react'
-import { NavbarProps } from '../layout-dashboard/header-vertical-nav-dashboard';
-import Link from 'next/link';
-import { Button, Spin } from 'antd';
-import { getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
-import { useQuery } from '@tanstack/react-query';
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import React, { useState } from 'react'
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { SelectSearchInput } from '../util/form/select-search-input';
-import { DateInput, TextAreaInput, TextInput, TextInputPassword } from '../util/form';
+import { TextInputPassword } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
-import { LoadingOutlined, SyncOutlined } from '@ant-design/icons';
 
 type Props = {
     userId: string
+    user: any
 }
 
 const schema = yup.object({
@@ -22,7 +16,11 @@ const schema = yup.object({
     confirmPassword: yup.string().optional(),
 });
 
-const UpdateFormPassword: React.FC<Props> = ({ userId }) => {
+const UpdateFormPassword: React.FC<Props> = ({ userId,user }) => {
+    const [loading, setLoading] = useState(false);
+    const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+        undefined
+    );
     const {
         control,
         setValue,
@@ -48,11 +46,6 @@ const UpdateFormPassword: React.FC<Props> = ({ userId }) => {
 
     return (
         <>
-
-
-
-
-
             <form onSubmit={handleSubmit(onSubmit)} className="py-7">
 
                 <h2 className="text-base font-bold text-gray-900"> Change password </h2>
@@ -101,17 +94,12 @@ const UpdateFormPassword: React.FC<Props> = ({ userId }) => {
 
 
                 <div className="mt-8">
-                    <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
+                     <ButtonInput shape="round" type="submit" size="normal" loading={loading} color={loading ? 'gray' : user?.profile?.color}>
                         Save changes
                     </ButtonInput>
                 </div>
+                
             </form>
-
-
-
-
-
-
         </>
     )
 }

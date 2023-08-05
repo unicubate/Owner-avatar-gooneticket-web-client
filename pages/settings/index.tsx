@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
+import { UpdateFormUser } from "@/components/user/update-form-user";
 
 
 
@@ -74,10 +75,12 @@ const Settings = () => {
                                             <div className="divide-y divide-gray-200 -my-7">
 
 
+                                                {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
 
-                                                {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} /> : null}
+                                                {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} user={user} /> : null}
 
-                                                {user?.profileId ? <UpdateFormPassword userId={user?.id} /> : null}
+                                                {user?.profileId ? <UpdateFormPassword userId={user?.id} user={user} /> : null}
+
 
                                             </div>
                                         </div>

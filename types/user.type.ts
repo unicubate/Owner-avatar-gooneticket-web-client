@@ -32,6 +32,15 @@ export type UserModel = {
   id: string;
   organizationInUtilizationId: string;
   profileId: string;
+  profile: {
+    color: string;
+    countryId: string;
+    fullName: string;
+    id: string;
+    image: string;
+    url: string;
+    userId: string;
+  };
   refreshToken: string;
   nextStep: NextStep;
   token: string;

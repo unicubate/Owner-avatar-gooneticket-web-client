@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
-import { NavbarProps } from '../layout-dashboard/header-vertical-nav-dashboard';
-import Link from 'next/link';
-import { Button, Spin } from 'antd';
+import React, { useEffect, useState } from 'react'
+import { Select, Space } from 'antd';
 import { getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
 import { useQuery } from '@tanstack/react-query';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SelectSearchInput } from '../util/form/select-search-input';
-import { DateInput, TextAreaInput, TextInput, TextInputPassword } from '../util/form';
+import { DateInput, TextAreaInput, TextInput } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
-import { LoadingOutlined, SyncOutlined } from '@ant-design/icons';
+import { arrayColors } from '@/types/profile.type';
+
+const { Option } = Select;
 
 type Props = {
     profileId: string
+    user: any
 }
 
 const schema = yup.object({
@@ -24,7 +25,12 @@ const schema = yup.object({
     countryId: yup.string().uuid().required(),
 });
 
-const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
+const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
+    const [colors] = useState(arrayColors)
+    const [loading, setLoading] = useState(false);
+    const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+        undefined
+    );
     const {
         control,
         setValue,
@@ -74,6 +80,8 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
 
 
     const onSubmit: SubmitHandler<any> = (payload: any) => {
+        setLoading(true);
+        setHasErrors(undefined);
         // let data = new FormData();
         // data.append("confirm", `${payload.confirm}`);
         // payload?.attachment?.fileList?.length > 0 &&
@@ -86,39 +94,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
 
     return (
         <>
-
-
-            <form onSubmit={handleSubmit(onSubmit)} className="py-7">
-
-                <h2 className="text-base font-bold text-gray-900"> Personal Info </h2>
-
-                <div className="grid grid-cols-1 mt-6 sm:grid-cols-1 gap-y-5 gap-x-6">
-
-                    <div>
-                        <label className="text-sm font-medium text-gray-600"> Username </label>
-                        <div className="mt-2">
-                            <TextInput
-                                control={control}
-                                type="text"
-                                name="username"
-                                placeholder="username"
-                                errors={errors}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div className="mt-8">
-                    <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
-                        Save changes
-                    </ButtonInput>
-                </div>
-
-            </form>
-
-
             <form onSubmit={handleSubmit(onSubmit)} className="py-7">
 
                 <h2 className="text-base font-bold text-gray-900"> Profile </h2>
@@ -152,7 +127,8 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
 
                 </div>
 
-                <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
+
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-2 gap-y-5 gap-x-6">
                     <div>
                         <div className="mt-2">
                             <TextInput
@@ -165,6 +141,20 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
                             />
                         </div>
                     </div>
+                    <div>
+                        <div className="mt-2">
+                            <DateInput
+                                label="Birthday"
+                                control={control}
+                                placeholder="12/01/2023"
+                                name="birthday"
+                                errors={errors}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 mt-6 sm:grid-cols-2 gap-y-5 gap-x-6">
                     <div>
                         <div className="mt-2">
                             <TextInput
@@ -192,21 +182,54 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
                 </div>
 
                 <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
+
                     <div>
-                        <label className="text-sm font-bold text-gray-600 mb-2"> Birthday </label>
-                        <DateInput
-                            control={control}
-                            placeholder="12/01/2023"
-                            name="birthday"
-                            errors={errors}
-                        />
+                        <div className="mt-2">
+                            <label
+                                className="block text-gray-700 text-sm font-bold mb-2"
+                            >
+                                Color
+                            </label>
+                            <Controller
+                                name={'color'}
+                                control={control}
+                                render={({ field }) => (
+                                    <Select
+                                        showSearch
+                                        size="large"
+                                        style={{ width: "100%" }}
+                                        id={'color'}
+                                        placeholder={'Color'}
+                                        status={errors?.color?.message ? "error" : ""}
+                                        filterOption={(input, option) =>
+                                            (option?.name ?? "").toLowerCase().includes(input.toLowerCase())
+                                        }
+                                        {...field}>
+                                        <>
+                                            {colors?.length > 0
+                                                ? colors?.map((item: any, index: number) => (
+                                                    <Option key={index} value={item?.name} name={item?.name}>
+                                                        <Space>
+                                                            <span className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}>
+                                                                {item?.name}
+                                                            </span>
+                                                        </Space>
+                                                    </Option>
+                                                ))
+                                                : null}
+                                        </>
+                                    </Select>
+                                )}
+                            />
+                        </div>
                     </div>
+
                     <div>
                         <div className="mt-2">
                             <SelectSearchInput
                                 label="Counties"
-                                firstOptionName="Second address"
-                                optionType="other"
+                                firstOptionName="Country"
+                                valueType="key"
                                 control={control}
                                 errors={errors}
                                 placeholder="Country"
@@ -220,7 +243,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
                             <SelectSearchInput
                                 label="Currency"
                                 firstOptionName="Currency"
-                                optionType="other"
+                                valueType="key"
                                 control={control}
                                 errors={errors}
                                 placeholder="Currency"
@@ -247,7 +270,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId }) => {
 
 
                 <div className="mt-8">
-                    <ButtonInput shape="round" type="submit" size="normal" loading={false} color='indigo'>
+                    <ButtonInput shape="round" type="submit" size="normal" loading={loading} color={loading ? 'gray' : user?.profile?.color}>
                         Save changes
                     </ButtonInput>
                 </div>

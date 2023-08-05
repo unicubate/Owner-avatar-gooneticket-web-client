@@ -13,7 +13,7 @@ import { getOneUserAPI } from "@/pages/api/user";
 import jwt_decode from "jwt-decode";
 
 type AuthContextProps = {
-  currentUser: UserModel | undefined;
+  user: UserModel | undefined;
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
   logout: () => void;
 };
@@ -36,7 +36,7 @@ export const getCurrentUserFormToken = () => {
 const initAuthContextPropsState = {
   saveAuth: () => {},
   setCurrentUser: () => {},
-  currentUser: undefined,
+  user: undefined,
   logout: () => {},
 };
 
