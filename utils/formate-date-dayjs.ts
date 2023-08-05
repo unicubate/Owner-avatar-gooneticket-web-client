@@ -28,6 +28,10 @@ export const formateDDMMYYHH = (date: Date) => {
   return date ? dayjs(date).format("DD/MM/YYYY HH:mm") : null;
 };
 
+export const formateDDMMYYYY = (date: Date) => {
+  return date ? dayjs(date).format("DD/MM/YYYY") : null;
+};
+
 export const subtractYears = (numOfYears: number, date: Date) => {
   const dateSub = new Date(date.getTime());
   dateSub.setFullYear(dateSub.getFullYear() - numOfYears);

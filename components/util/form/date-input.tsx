@@ -1,4 +1,6 @@
+import { formateDDMMYYHH } from "@/utils/formate-date-dayjs";
 import { DatePicker, Input } from "antd";
+import dayjs from "dayjs";
 import { Control, Controller } from "react-hook-form";
 
 interface Props {
@@ -27,7 +29,7 @@ const DateInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field: { onChange, value } }) => (
+        render={({ field }) => (
           <DatePicker
             picker="date"
             size="large"
@@ -35,8 +37,9 @@ const DateInput: React.FC<Props> = ({
             style={{ width: "100%" }}
             id={name}
             placeholder={placeholder}
+            value={dayjs(field.value)}
             onChange={(value) => {
-              onChange(value);
+              field.onChange(value);
             }}
             status={errors?.[name]?.message ? "error" : ""}
           />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Select, Space } from 'antd';
-import { getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
+import { UpdateOneProfileAPI, getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
 import { useQuery } from '@tanstack/react-query';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,7 +8,8 @@ import * as yup from "yup";
 import { SelectSearchInput } from '../util/form/select-search-input';
 import { DateInput, TextAreaInput, TextInput } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
-import { arrayColors } from '@/types/profile.type';
+import { ProfileFormModel, arrayColors } from '@/types/profile.type';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
 
 const { Option } = Select;
 
@@ -73,23 +74,62 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
 
     useEffect(() => {
         if (profile) {
-            const fields = ['birthday', 'currencyId', 'countryId', 'url', 'phone', 'color', 'fullName', 'firstAddress'];
+            const fields = [
+                'birthday',
+                'currencyId',
+                'countryId',
+                'url',
+                'phone',
+                'color',
+                'fullName',
+                'secondAddress',
+                'firstAddress',
+                'description'
+            ];
             fields?.forEach((field: any) => setValue(field, profile[field]));
         }
     }, [profile, profileId, setValue]);
 
+    const saveMutation = UpdateOneProfileAPI({
+        onSuccess: () => {
+            setHasErrors(false);
+            setLoading(false);
+        },
+        onError: (error?: any) => {
+            setHasErrors(true);
+            setHasErrors(error.response.data.message);
+        },
+    });
 
-    const onSubmit: SubmitHandler<any> = (payload: any) => {
+    const onSubmit: SubmitHandler<ProfileFormModel> = async (
+        payload: ProfileFormModel
+    ) => {
         setLoading(true);
         setHasErrors(undefined);
-        // let data = new FormData();
-        // data.append("confirm", `${payload.confirm}`);
-        // payload?.attachment?.fileList?.length > 0 &&
-        //   payload?.attachment?.fileList.forEach((file: any) => {
-        //     data.append("attachment", file as RcFile);
-        //   });
-
-        console.log("payload =======>", payload);
+        try {
+            await saveMutation.mutateAsync({
+                ...payload,
+                profileId: profileId,
+            });
+            setHasErrors(false);
+            setLoading(false);
+            AlertSuccessNotification({
+                text: `Information save successfully`,
+                gravity: "bottom",
+                className: "info",
+                position: "center",
+            });
+        } catch (error: any) {
+            setHasErrors(true);
+            setLoading(false);
+            setHasErrors(error.response.data.message);
+            AlertDangerNotification({
+                text: `${error.response.data.message}`,
+                gravity: "bottom",
+                className: "info",
+                position: "center",
+            });
+        }
     };
 
     return (
@@ -174,7 +214,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                                 control={control}
                                 type="text"
                                 name="secondAddress"
-                                placeholder="First address"
+                                placeholder="Second address"
                                 errors={errors}
                             />
                         </div>
@@ -223,6 +263,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                             />
                         </div>
                     </div>
+
 
                     <div>
                         <div className="mt-2">
