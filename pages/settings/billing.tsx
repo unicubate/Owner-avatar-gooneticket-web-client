@@ -66,7 +66,7 @@ const Billing = () => {
                                 <HorizontalNavSetting />
 
 
-                                <div className="mt-8 bg-white border-gray-200 rounded-xl">
+                                {/* <div className="mt-8 bg-white border-gray-200 rounded-xl"> */}
 
                                     {/* <Row>
                                         <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
@@ -322,7 +322,7 @@ const Billing = () => {
 
 
 
-                                    <div className="flex flex-col mt-4 lg:mt-8">
+                                    <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
                                         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                                 <table className="min-w-full lg:divide-gray-200 lg:divide-y">
@@ -411,7 +411,7 @@ const Billing = () => {
                                     </div>
 
 
-                                </div>
+                                {/* </div> */}
 
 
 

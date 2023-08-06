@@ -1,14 +1,18 @@
-import Head from "next/head";
-import Navbar from "../navbar";
-import { useAuth } from "../util/session/context-user";
+import { Drawer } from "antd";
+import { VerticalNavDashboard } from "./vertical-nav-dashboard";
+import { useState } from "react";
 
 interface Props {
   user?: any;
 }
 
 const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const showDrawer = () => { setOpen((item) => !item) };
+  const onClose = () => { setOpen((item) => !item)};
 
-  console.log('user =====>',user)
+
+  console.log('user =====>', user)
   return (
     <>
       <header className="bg-white border-b border-gray-200">
@@ -16,6 +20,7 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
               <button
+                onClick={showDrawer}
                 type="button"
                 className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-lg hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
               >
@@ -136,6 +141,14 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
           </div>
         </div>
       </header>
+
+      {/* Fix Drawer */}
+
+      <Drawer title="" placement="right" onClose={onClose} open={open}>
+
+        <VerticalNavDashboard />
+
+      </Drawer>
     </>
   );
 };

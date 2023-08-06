@@ -68,14 +68,15 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
                 <div className="grid grid-cols-1 mt-6 sm:grid-cols-1 gap-y-5 gap-x-6">
 
                     <div>
-                        <label className="text-sm font-medium text-gray-600"> Username </label>
                         <div className="mt-2">
                             <TextInput
                                 control={control}
+                                label="Username"
                                 type="text"
                                 name="username"
                                 placeholder="username"
                                 errors={errors}
+                                prefix={`${process.env.NEXT_PUBLIC_SITE}/`}
                             />
                         </div>
                     </div>

@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { HeaderHorizontalNavDashboard } from "./header-horizontal-nav-dashboard";
 import { HeaderVerticalNavDashboard } from "./header-vertical-nav-dashboard";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Button, Drawer } from "antd";
 
 
 interface IProps {
@@ -10,7 +11,6 @@ interface IProps {
 }
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  // console.log('user =====>',user)
   return (
     <>
       <Head>
@@ -20,10 +20,12 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       </Head>
 
       <div className="flex flex-col">
-        <HeaderHorizontalNavDashboard  />
+        <HeaderHorizontalNavDashboard />
 
         <div className="flex flex-1">
-          <HeaderVerticalNavDashboard  />
+
+          <HeaderVerticalNavDashboard />
+
 
           {children}
         </div>

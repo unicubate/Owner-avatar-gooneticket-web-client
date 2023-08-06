@@ -80,7 +80,7 @@ const GET = "get";
 const DELETE = "delete";
 const PUT = "put";
 
-const baseUrl = process.env.NEXT_PUBLIC_HOST;
+const baseUrl = process.env.NEXT_PUBLIC_HOST_SERVER;
 export const apiEndpoints: ClientApiMethods = {
   /****************** User route */
   loginUser: {

@@ -2,11 +2,11 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button } from "antd";
+import { Button, Drawer } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
 import { getOneProfileAPI } from "../api/profile";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
@@ -14,6 +14,7 @@ import { UpdateFormUser } from "@/components/user/update-form-user";
 
 
 const Settings = () => {
+
     const user = useAuth() as any;
     // const {
     //     control,
@@ -65,28 +66,28 @@ const Settings = () => {
 
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
+
                                 <HorizontalNavSetting />
 
-                                <div className="rounded-lg mx-auto mt-12 sm:px-10">
 
 
-                                    <div className="pt-6 border-t border-gray-200 lg:order-1 lg:col-span-10">
-                                        <div className="flow-root">
-                                            <div className="divide-y divide-gray-200 -my-7">
+                                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
+                                    <div className="flow-root">
+                                        <div className="divide-y divide-gray-200 -my-7">
 
 
-                                                {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
+                                           
+                                            {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
 
-                                                {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} user={user} /> : null}
+                                            {user?.profileId ? <UpdateFormProfile profileId={user?.profileId} user={user} /> : null}
 
-                                                {user?.profileId ? <UpdateFormPassword userId={user?.id} user={user} /> : null}
+                                            {user?.profileId ? <UpdateFormPassword userId={user?.id} user={user} /> : null}
+                                            
 
-
-                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
+
                                 {/* <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
                                     <div className="px-4 py-5 sm:p-6">
                                         <div className="sm:flex sm:items-center sm:justify-between">
