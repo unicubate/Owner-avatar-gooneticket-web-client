@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
+import { ButtonInput } from "@/components/templates/button-input";
 
 
 
@@ -103,6 +104,61 @@ const Payments = () => {
                                                 >
                                                     Join Another Team
                                                 </button>
+                                            </div>
+                                        </div>
+
+                                        <div className="flow-root mt-8">
+                                            <div className="-my-5 divide-y divide-gray-100">
+                                                <div className="py-5">
+                                                    <div className="flex items-center">
+                                                        <div className="relative flex-shrink-0">
+                                                            <img className="object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/1/rareblocks-logo.png" alt="" />
+                                                        </div>
+
+                                                        <div className="ml-4">
+                                                            <p className="text-sm font-bold text-gray-900">Rareblocks</p>
+                                                            <p className="mt-1 text-sm font-medium text-gray-500">3 members</p>
+                                                        </div>
+
+                                                        <div className="ml-auto">
+                                                            <a href="#" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> Leave </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="py-5">
+                                                    <div className="flex items-center">
+                                                        <div className="relative flex-shrink-0">
+                                                            <img className="object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/1/astrona-logo.png" alt="" />
+                                                        </div>
+
+                                                        <div className="ml-4">
+                                                            <p className="text-sm font-bold text-gray-900">Astrona</p>
+                                                            <p className="mt-1 text-sm font-medium text-gray-500">12 members</p>
+                                                        </div>
+
+                                                        <div className="ml-auto">
+                                                            <a href="#" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> Leave </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
+                                    <div className="px-4 py-5 sm:p-6">
+                                        <div className="sm:flex sm:items-center sm:justify-between">
+                                            <div>
+                                                <p className="text-base font-bold text-gray-900">Donation Settings</p>
+                                                <p className="mt-1 text-sm font-medium text-gray-500">Customize the donation panel on your page.</p>
+                                            </div>
+
+                                            <div className="mt-4 sm:mt-0">
+                                                <ButtonInput shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>
+                                                    Create donation
+                                                </ButtonInput>
                                             </div>
                                         </div>
 

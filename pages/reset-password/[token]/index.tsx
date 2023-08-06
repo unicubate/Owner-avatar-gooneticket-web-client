@@ -15,6 +15,7 @@ import {
 import { resetPasswordAPI } from "../../api/user";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const schema = yup.object({
   newPassword: yup.string().min(8, "Minimum 8 symbols").required(),
@@ -112,28 +113,9 @@ const ResetPassword = () => {
           </div>
 
           <div className="mt-6">
-            {loading ? (
-              <Button
-                type="primary"
-                size="large"
-                loading
-                block
-                disabled
-                shape="round"
-              >
-                Please wait...
-              </Button>
-            ) : (
-              <Button
-                type="primary"
-                size="large"
-                block
-                htmlType="submit"
-                shape="round"
-              >
-                Reset Password
-              </Button>
-            )}
+            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
+              Log In
+            </ButtonInput>
           </div>
         </form>
 

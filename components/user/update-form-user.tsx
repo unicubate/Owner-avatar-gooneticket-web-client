@@ -85,7 +85,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
 
 
                 <div className="mt-8">
-                    <ButtonInput shape="round" type="submit" size="normal" loading={loading} color={loading ? 'gray' : user?.profile?.color}>
+                    <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : user?.profile?.color}>
                         Save changes
                     </ButtonInput>
                 </div>

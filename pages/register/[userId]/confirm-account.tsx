@@ -154,7 +154,7 @@ const ConfirmAccount = () => {
           </div>
 
           <div className="mt-6">
-             <ButtonInput shape="round" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
+             <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
               Continue
             </ButtonInput>
           </div>
