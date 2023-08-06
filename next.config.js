@@ -15,4 +15,5 @@ module.exports = {
     DEBUG: process.env.NEXT_PUBLIC_DEBUG === "true",
     MEDIA_HOST: process.env.NEXT_PUBLIC_MEDIA_HOST ?? "",
   },
+  images: { domains: ['*'] }
 };

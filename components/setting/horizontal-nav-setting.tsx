@@ -16,24 +16,28 @@ const HorizontalNavSetting: React.FC = () => {
             href: "/settings",
         },
         {
-            title: "Notifications",
-            href: "/settings/notifications",
-        },
-        {
-            title: "Billing",
-            href: "/settings/billing",
+            title: "Payments",
+            href: "/settings/payments",
         },
         {
             title: "Configurations",
             href: "/settings/config",
         },
         {
+            title: "Billing",
+            href: "/settings/billing",
+        },
+        {
+            title: "Notifications",
+            href: "/settings/notifications",
+        },
+        {
             title: "Followings",
-            href: "/following",
+            href: "/settings/followings",
         },
         {
             title: "Followers",
-            href: "/followers",
+            href: "/settings/followers",
         },
     ])
 
@@ -60,18 +64,6 @@ const HorizontalNavSetting: React.FC = () => {
                             </Link>
                         );
                     })}
-
-                    {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Profile </a>
-
-                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Password </a>
-
-                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Team </a>
-
-                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 rounded-lg group whitespace-nowrap bg-transparent hover:text-gray-900 hover:bg-gray-100"> Notification </a>
-
-                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 transition-all duration-200 rounded-lg group whitespace-nowrap bg-gray-100"> Billing Details </a>
-
-                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Integrations </a> */}
                 </nav>
             </div>
             {/* <div className="w-full pb-1 overflow-x-auto">
