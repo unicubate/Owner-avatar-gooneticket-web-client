@@ -1,8 +1,8 @@
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
-import { NavbarProps } from '../layout-dashboard/header-vertical-nav-dashboard';
 import Link from 'next/link';
 import { useAuth } from '../util/session/context-user';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 
 

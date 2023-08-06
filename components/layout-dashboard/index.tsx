@@ -3,6 +3,7 @@ import { HeaderHorizontalNavDashboard } from "./header-horizontal-nav-dashboard"
 import { HeaderVerticalNavDashboard } from "./header-vertical-nav-dashboard";
 import { useContext, useState } from "react";
 import { Button, Drawer } from "antd";
+import { useAuth } from "../util/session/context-user";
 
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 const LayoutDashboard = ({ children, title }: IProps) => {
+  const user = useAuth() as any;
   return (
     <>
       <Head>
@@ -20,11 +22,11 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       </Head>
 
       <div className="flex flex-col">
-        <HeaderHorizontalNavDashboard />
+        <HeaderHorizontalNavDashboard user={user} />
 
         <div className="flex flex-1">
 
-          <HeaderVerticalNavDashboard />
+          <HeaderVerticalNavDashboard user={user}  />
 
 
           {children}

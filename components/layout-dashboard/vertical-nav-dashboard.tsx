@@ -115,7 +115,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   href={`${item.href}`}
                   title=""
                   className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                    ? "text-white bg-red-600"
+                    ? `text-white bg-${user?.profile?.color}-600`
                     : "hover:bg-gray-200 text-gray-900"
                     } `}
                 >
@@ -141,7 +141,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     href={`${item.href}`}
                     title=""
                     className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? "text-white bg-red-600"
+                      ? `text-white bg-${user?.profile?.color}-600`
                       : "hover:bg-gray-200 text-gray-900"
                       } `}
                   >
@@ -175,7 +175,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     href={`${item.href}`}
                     title=""
                     className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? "text-white bg-red-600"
+                      ? `text-white bg-${user?.profile?.color}-600`
                       : "hover:bg-gray-200 text-gray-900"
                       } `}
                   >
@@ -201,7 +201,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     href={`${item.href}`}
                     title=""
                     className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? "text-white bg-red-600"
+                      ? `text-white bg-${user?.profile?.color}-600`
                       : "hover:bg-gray-200 text-gray-900"
                       } `}
                   >

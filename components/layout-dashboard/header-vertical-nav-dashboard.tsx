@@ -29,7 +29,7 @@ const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
       <div className="hidden border-r border-gray-200 md:flex md:w-64 md:flex-col">
         <div className="flex flex-col pt-5 overflow-y-auto">
 
-          <VerticalNavDashboard />
+          <VerticalNavDashboard user={user} />
 
         </div>
       </div>

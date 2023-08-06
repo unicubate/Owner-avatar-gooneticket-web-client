@@ -9,10 +9,9 @@ interface Props {
 const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
   const [open, setOpen] = useState<boolean>(false);
   const showDrawer = () => { setOpen((item) => !item) };
-  const onClose = () => { setOpen((item) => !item)};
+  const onClose = () => { setOpen((item) => !item) };
 
 
-  console.log('user =====>', user)
   return (
     <>
       <header className="bg-white border-b border-gray-200">
@@ -144,10 +143,10 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
 
       {/* Fix Drawer */}
 
-      <Drawer title="" placement="right" onClose={onClose} open={open}>
-
-        <VerticalNavDashboard />
-
+      <Drawer title="" placement="right" closable={false} onClose={onClose} open={open}>
+        <div className="flex flex-col pt-5 overflow-y-auto">
+          <VerticalNavDashboard user={user} />
+        </div>
       </Drawer>
     </>
   );
