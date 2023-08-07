@@ -20,10 +20,11 @@ const Articles = () => {
         <>
             <LayoutDashboard title={"Articles"}>
 
-                <div className="flex-1">
+
+                <div className="flex flex-col flex-1">
                     <main>
                         <div className="py-6">
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Articles</h1>
                                     <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
@@ -31,7 +32,6 @@ const Articles = () => {
                                     </p>
                                 </div>
                             </div>
-
 
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
@@ -69,7 +69,7 @@ const Articles = () => {
                                     </div>
                                 </div>
 
-                          
+
 
                                 <div className="grid grid-cols-1 gap-6 px-8 mt-12 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 sm:px-0">
 

@@ -9,7 +9,7 @@ interface SizeInterface {
 const sizeType: SizeInterface = {
   large: "2",
   normal: "1",
-  medium: "0.5",
+  medium: "0.2",
 }
 
 const shapeType: SizeInterface = {

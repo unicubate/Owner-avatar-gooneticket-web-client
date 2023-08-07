@@ -32,13 +32,13 @@ const TextAreaInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <TextArea
             size="large"
             id={name}
             maxLength={1000}
             style={{ height: 120 }}
-            defaultValue={defaultValue}
             autoSize={{ minRows: 4, maxRows: 10 }}
             placeholder={placeholder}
             autoComplete={autoComplete}

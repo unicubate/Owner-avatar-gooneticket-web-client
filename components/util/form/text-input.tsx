@@ -35,12 +35,12 @@ const TextInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <Input
             size="large"
             type={type}
             id={name}
-            defaultValue={defaultValue}
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}

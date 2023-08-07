@@ -51,13 +51,13 @@ const Billing = () => {
         <>
             <LayoutDashboard title={"Profile"}>
 
-                <div className="flex-1">
+
+                <div className="flex flex-col flex-1">
                     <main>
                         <div className="py-6">
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Billing</h1>
-                                    {/* <p className="mt-2 text-sm font-medium leading-6 text-gray-500">Modifier votre profile</p> */}
                                 </div>
                             </div>
 
@@ -68,7 +68,7 @@ const Billing = () => {
 
                                 {/* <div className="mt-8 bg-white border-gray-200 rounded-xl"> */}
 
-                                    {/* <Row>
+                                {/* <Row>
                                         <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                                         <Button type="primary" icon={<DownloadOutlined />} size={'large'}>
                                                 Create
@@ -88,7 +88,7 @@ const Billing = () => {
 
 
 
-                                    {/* <div className="flex flex-col mt-4">
+                                {/* <div className="flex flex-col mt-4">
                                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                             <div className="flex items-center justify-between">
                                                 <p className="text-xl font-bold text-gray-900">Sales</p>
@@ -322,65 +322,65 @@ const Billing = () => {
 
 
 
-                                    <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
-                                        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                                <table className="min-w-full lg:divide-gray-200 lg:divide-y">
-                                                    <thead className="hidden lg:table-header-group">
-                                                        <tr>
-                                                            <th className="py-3.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-widest">Customer</th>
+                                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
+                                    <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                                        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                                            <table className="min-w-full lg:divide-gray-200 lg:divide-y">
+                                                <thead className="hidden lg:table-header-group">
+                                                    <tr>
+                                                        <th className="py-3.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-widest">Customer</th>
 
-                                                            <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Email Address</th>
+                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Email Address</th>
 
-                                                            <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Phone Number</th>
+                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Phone Number</th>
 
-                                                            <th className="py-3.5 px-4 text-left hidden xl:table-cell text-xs uppercase tracking-widest font-medium text-gray-500">Join Date</th>
+                                                        <th className="py-3.5 px-4 text-left hidden xl:table-cell text-xs uppercase tracking-widest font-medium text-gray-500">Join Date</th>
 
-                                                            <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Country</th>
+                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Country</th>
 
-                                                            <th className="relative py-3.5 pl-4 pr-4 md:pr-0">
-                                                                <span className="sr-only"> Actions </span>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
+                                                        <th className="relative py-3.5 pl-4 pr-4 md:pr-0">
+                                                            <span className="sr-only"> Actions </span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
 
-                                                    <tbody className="divide-y divide-gray-200">
+                                                <tbody className="divide-y divide-gray-200">
 
-                                                        {people.map((person, index) => (
+                                                    {people.map((person, index) => (
 
 
-                                                            <tr key={index} className="bg-white">
-                                                                <td className="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
-                                                                    <div className="flex items-center">
-                                                                        <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src={person?.image} alt="" />
-                                                                        {person?.name}
-                                                                    </div>
-                                                                </td>
+                                                        <tr key={index} className="bg-white">
+                                                            <td className="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src={person?.image} alt="" />
+                                                                    {person?.name}
+                                                                </div>
+                                                            </td>
 
-                                                                <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                                    <div className="flex items-center">
-                                                                        {person?.email}
-                                                                    </div>
-                                                                </td>
+                                                            <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    {person?.email}
+                                                                </div>
+                                                            </td>
 
-                                                                <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
-                                                                    <div className="flex items-center">
-                                                                        (480) 555-0103
-                                                                    </div>
-                                                                </td>
+                                                            <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    (480) 555-0103
+                                                                </div>
+                                                            </td>
 
-                                                                <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
-                                                                    <div className="flex items-center">
-                                                                        Janvier 9, 2002
-                                                                    </div>
-                                                                </td>
+                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
+                                                                <div className="flex items-center">
+                                                                    Janvier 9, 2002
+                                                                </div>
+                                                            </td>
 
-                                                                <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">USA</td>
+                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">USA</td>
 
-                                                                <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
-                                                                    <div className="flex items-center space-x-4">
+                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
+                                                                <div className="flex items-center space-x-4">
 
-                                                                        {/* <Button
+                                                                    {/* <Button
                                                                             type="text"
                                                                             icon={<FundViewOutlined />}
                                                                         >
@@ -392,23 +392,23 @@ const Billing = () => {
                                                                         >
                                                                         </Button> */}
 
-                                                                        <Button
-                                                                            type="link"
-                                                                            icon={<DownloadOutlined />}
-                                                                        >
-                                                                            download
-                                                                        </Button>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        ))}
+                                                                    <Button
+                                                                        type="link"
+                                                                        icon={<DownloadOutlined />}
+                                                                    >
+                                                                        download
+                                                                    </Button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    ))}
 
 
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
+                                </div>
 
 
                                 {/* </div> */}

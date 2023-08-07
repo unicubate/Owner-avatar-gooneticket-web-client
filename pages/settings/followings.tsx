@@ -61,13 +61,12 @@ const Followings = () => {
         <>
             <LayoutDashboard title={"Followings"}>
 
-                <div className="flex-1">
+                <div className="flex flex-col flex-1">
                     <main>
                         <div className="py-6">
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Followings</h1>
-                                    {/* <p className="mt-2 text-sm font-medium leading-6 text-gray-500">Modifier votre profile</p> */}
                                 </div>
                             </div>
 

@@ -1,5 +1,4 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Button, Drawer } from "antd";
@@ -11,10 +10,34 @@ import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
 import { ButtonInput } from "@/components/templates/button-input";
+import { TextAreaInput, TextInput } from "@/components/util/form";
+import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
-
+const schema = yup.object({
+    email: yup
+        .string()
+        .email("Wrong email format")
+        .min(3, "Minimum 3 symbols")
+        .max(50, "Maximum 50 symbols")
+        .optional(),
+    password: yup.string().optional(),
+    description: yup.string().optional(),
+});
 
 const Payments = () => {
+    const [showModal, setShowModal] = useState(false);
+    const {
+        control,
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<any>({
+        resolver: yupResolver(schema),
+        mode: "onChange",
+    });
+
 
     const user = useAuth() as any;
     // const {
@@ -55,13 +78,12 @@ const Payments = () => {
             <LayoutDashboard title={"Gifts"}>
 
 
-
-                <div className="flex-1">
+                <div className="flex flex-col flex-1">
                     <main>
                         <div className="py-6">
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
-                                    <h1 className="text-lg font-bold text-gray-900"> Accept Payments </h1>
+                                    <h1 className="text-lg font-bold text-gray-900">Accept Payments</h1>
                                 </div>
                             </div>
 
@@ -156,7 +178,7 @@ const Payments = () => {
                                             </div>
 
                                             <div className="mt-4 sm:mt-0">
-                                                <ButtonInput shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>
+                                                <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>
                                                     Create donation
                                                 </ButtonInput>
                                             </div>
@@ -329,7 +351,10 @@ const Payments = () => {
                         </div>
                     </main>
                 </div>
+
             </LayoutDashboard>
+
+
 
 
         </>

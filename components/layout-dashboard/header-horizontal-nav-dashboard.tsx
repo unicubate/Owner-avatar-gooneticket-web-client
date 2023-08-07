@@ -119,7 +119,7 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
                 />
                 <span className="hidden ml-2 text-sm font-medium text-gray-900 md:block">
                   {" "}
-                  Jacob Jones{" "}
+                 {user?.profile?.fullName}
                 </span>
                 <svg
                   className="w-4 h-4 ml-3 text-gray-500"
