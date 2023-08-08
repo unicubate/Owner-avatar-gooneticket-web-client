@@ -3,14 +3,16 @@ import { Control, Controller } from "react-hook-form";
 
 interface Props {
   control: Control<any>;
-  prefix?: any;
   label?: string;
   name: string;
   type: "text" | "email" | "password" | "url";
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: "on" | "off";
+  required?: boolean;
   defaultValue?: string;
+  suffix?: React.ReactNode;
+  prefix?:  React.ReactNode;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -23,6 +25,8 @@ const TextInput: React.FC<Props> = ({
   placeholder = "",
   defaultValue,
   autoComplete,
+  required,
+  suffix,
 }) => {
   return (
     <>
@@ -41,6 +45,8 @@ const TextInput: React.FC<Props> = ({
             size="large"
             type={type}
             id={name}
+            suffix={suffix}
+            required={required}
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}

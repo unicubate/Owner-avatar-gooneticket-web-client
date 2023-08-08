@@ -3,7 +3,6 @@ import { Control, Controller } from "react-hook-form";
 
 interface Props {
   control: Control<any>;
-  prefix?: any;
   label?: string;
   name: string;
   type: "number";
@@ -11,12 +10,15 @@ interface Props {
   placeholder?: string;
   autoComplete?: "on" | "off";
   required?: boolean;
-  defaultValue?: string;
+  defaultValue?: number;
+  suffix?: React.ReactNode;
+  prefix?:  React.ReactNode;
 }
 
 const NumberInput: React.FC<Props> = ({
   control,
   prefix,
+  suffix,
   label = "",
   type,
   name,
@@ -43,6 +45,7 @@ const NumberInput: React.FC<Props> = ({
             size="large"
             id={name}
             required={required}
+            suffix={suffix}
             style={{ width: "100%" }}
             type={type}
             placeholder={placeholder}

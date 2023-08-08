@@ -7,14 +7,14 @@ import {
   BiDetail,
   BiCog,
   BiCodeCurly,
+  BiLockOpen,
 } from "react-icons/bi";
 import { FiList } from "react-icons/fi";
+import { GrGallery } from "react-icons/gr";
 import { VscOpenPreview } from "react-icons/vsc";
 import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { Button, Drawer } from "antd";
-import { useState } from "react";
 
 export type NavbarProps = {
   title: string;
@@ -41,7 +41,7 @@ const NAVIGATION_ITEMS: NavbarProps[] = [
   },
 ];
 
-const MONETIZE_ITEMS: NavbarProps[] = [
+const MONETIZE_ITEMS: NavbarProps[] = [  
   {
     title: "Donations",
     href: "/donations",
@@ -51,6 +51,11 @@ const MONETIZE_ITEMS: NavbarProps[] = [
     title: "Gift",
     href: "/gifts",
     icon: <BsGift className={classIcon} />,
+  },
+  {
+    title: "Memberships",
+    href: "/memberships",
+    icon: <BiLockOpen className={classIcon} />,
   },
 ];
 
@@ -74,6 +79,11 @@ const SUPPORT_ITEMS = [
     title: "Articles",
     href: "/articles",
     icon: <BiDetail className={classIcon} />,
+  },
+  {
+    title: "Gallery",
+    href: "/gallery",
+    icon: <GrGallery className={classIcon} />,
   },
 ];
 

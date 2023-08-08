@@ -9,6 +9,7 @@ interface Props {
   label?: string;
   name: string;
   type: "password";
+  required: boolean;
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: "on" | "off";
@@ -23,6 +24,7 @@ const TextInputPassword: React.FC<Props> = ({
   errors,
   placeholder = "",
   autoComplete,
+  required,
 }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   return (
@@ -42,6 +44,7 @@ const TextInputPassword: React.FC<Props> = ({
             size="large"
             type={type}
             id={name}
+            required={required}
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}
