@@ -76,7 +76,7 @@ const MembershipsLevelCreate = () => {
                         <div className="py-6">
                             <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
-                                    <h1 className="text-lg font-bold text-gray-900">Levels</h1>
+                                    <h1 className="text-lg font-bold text-gray-900">Create level</h1>
                                     <p className="mt-2 text-sm font-medium leading-6 text-gray-500">Creer pluser donation et partager avec vos contact</p>
                                 </div>
                             </div>

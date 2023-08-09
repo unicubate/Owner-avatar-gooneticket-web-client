@@ -7,8 +7,9 @@ import { TextAreaInput } from "@/components/util/form";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { Radio } from "antd";
+import { SwitchInput } from "@/components/util/form/switch-input";
+import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
 
 const schema = yup.object({
     email: yup
@@ -70,7 +71,7 @@ const SettingDonations = () => {
 
     return (
         <>
-            <LayoutDashboard title={"Gifts"}>
+            <LayoutDashboard title={"Memberships setting"}>
 
 
 
@@ -86,7 +87,7 @@ const SettingDonations = () => {
 
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
-                                <HorizontalNavDonation />
+                            <HorizontalNavMembership />
 
                                 {/* <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
                                     <div className="px-4 py-5 sm:p-6">
@@ -231,11 +232,93 @@ const SettingDonations = () => {
                                                             <Radio.Button value="4">4000 Fcfa</Radio.Button>
                                                             <Radio.Button value="5">5000 Fcfa</Radio.Button>
                                                         </Radio.Group>
-                                                        
+
 
                                                     </div>
                                                 </div>
                                             </div>
+                                            <hr className="mt-6 border-gray-200" />
+                                        </div>
+
+
+                                        <div className="px-4 py-5 sm:p-6">
+
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm font-bold text-gray-900 truncate">Accept annual memberships</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500 truncate">New members can choose to pay for 12 months upfront.</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="facebookNotif"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            <div className="py-5">
+                                                <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                    <div className="flex items-center flex-1 min-w-0">
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-bold text-gray-900 truncate">Display member count</p>
+                                                            <p className="mt-1 text-sm font-medium text-gray-500 truncate">Showing your member count might encourage more people to join.</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                        <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                        <div
+                                                            className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                        >
+                                                            <SwitchInput
+                                                                control={control}
+                                                                name="confirmSwitch"
+                                                                label=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="py-5">
+                                                <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                    <div className="flex items-center flex-1 min-w-0">
+                                                        <div className="flex-1 min-w-0">
+                                                            <p className="text-sm font-bold text-gray-900 truncate">Display monthly earnings</p>
+                                                            <p className="mt-1 text-sm font-medium text-gray-500 truncate">Displaying earnings allows you to be transparent with your supporters.</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                        <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                        <div
+                                                            className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                        >
+                                                            <SwitchInput
+                                                                control={control}
+                                                                name="telegramNotif"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <hr className="mt-6 border-gray-200" />
                                         </div>
 
@@ -246,12 +329,6 @@ const SettingDonations = () => {
                                                     <p className="text-base font-bold text-gray-900">Thank you message</p>
                                                     <p className="mt-1 text-sm font-medium text-gray-500">This will be visible after the payment and in the receipt email. Write a personable thank you message, and include any rewards if you like.</p>
                                                 </div>
-
-                                                {/* <div className="mt-4 sm:mt-0">
-                                                <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>
-                                                    Create donation
-                                                </ButtonInput>
-                                            </div> */}
                                             </div>
 
                                             <div className="flow-root mt-8">
@@ -268,7 +345,6 @@ const SettingDonations = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <hr className="mt-6 border-gray-200" />
                                         </div>
 
 
@@ -278,10 +354,9 @@ const SettingDonations = () => {
                                                 Save changes
                                             </ButtonInput>
                                         </div>
+
+
                                     </div>
-
-
-
                                 </form>
                             </div>
                         </div>

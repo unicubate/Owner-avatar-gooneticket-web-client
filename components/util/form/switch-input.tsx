@@ -24,8 +24,8 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
               {label ? <span className="font-bold mr-3">{label}</span> : null}
 
               <Switch
-                checkedChildren={<CheckOutlined />}
-                unCheckedChildren={<CloseOutlined />}
+                // checkedChildren={<CheckOutlined />}
+                // unCheckedChildren={<CloseOutlined />}
                 checked={value}
                 onChange={onChange}
               />

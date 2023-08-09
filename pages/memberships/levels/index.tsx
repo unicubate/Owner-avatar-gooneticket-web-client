@@ -20,7 +20,7 @@ const MembershipsLevels = () => {
     return (
         <>
 
-            <LayoutDashboard title={"Memberships"}>
+            <LayoutDashboard title={"Memberships levels"}>
 
 
                 {showModal ? (
