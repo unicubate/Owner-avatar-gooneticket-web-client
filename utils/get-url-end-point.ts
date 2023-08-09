@@ -107,8 +107,12 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/valid/code`,
     method: POST,
   },
-  getOneUser: {
+  getOneUserPrivate: {
     endpoint: `${baseUrl}/users/show/:userId`,
+    method: GET,
+  },
+  getOneUserPublic: {
+    endpoint: `${baseUrl}/users/view`,
     method: GET,
   },
   /****************** Profile route */

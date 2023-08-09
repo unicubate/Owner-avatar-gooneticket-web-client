@@ -19,7 +19,7 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { getOneUserAPI, resendCodeAPI, ValidCodeAPI } from "@/pages/api/user";
+import { resendCodeAPI, ValidCodeAPI } from "@/pages/api/user";
 import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useAuth } from "@/components/util/session/context-user";
@@ -154,7 +154,7 @@ const ConfirmAccount = () => {
           </div>
 
           <div className="mt-6">
-             <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
+            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : 'indigo'}>
               Continue
             </ButtonInput>
           </div>

@@ -100,12 +100,23 @@ export const ValidCodeAPI = ({
   return result;
 };
 
-export const getOneUserAPI = async (payload: {
+export const getOneUserPrivateAPI = async (payload: {
   userId: string;
 }): Promise<{ data: UserModel }> => {
   const { userId } = payload;
   return await makeApiCall({
-    action: "getOneUser",
+    action: "getOneUserPrivate",
     urlParams: { userId },
+  });
+};
+
+export const getOneUserPublicAPI = async (payload: {
+  userId?: string;
+  username?: string;
+}): Promise<{ data: UserModel }> => {
+  const { userId, username } = payload;
+  return await makeApiCall({
+    action: "getOneUserPublic",
+    queryParams: { userId, username },
   });
 };

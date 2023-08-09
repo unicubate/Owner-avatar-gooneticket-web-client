@@ -9,7 +9,7 @@ interface Props {
   label?: string;
   name: string;
   type: "password";
-  required: boolean;
+  required?: boolean;
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: "on" | "off";

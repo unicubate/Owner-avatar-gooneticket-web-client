@@ -9,7 +9,7 @@ import {
 } from "react";
 import { UserModel } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
-import { getOneUserAPI } from "@/pages/api/user";
+import { getOneUserPrivateAPI } from "@/pages/api/user";
 import jwt_decode from "jwt-decode";
 
 type AuthContextProps = {
@@ -52,7 +52,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
 
   const fetchOneUser = async () =>
-    await getOneUserAPI({ userId: userStorage?.id });
+    await getOneUserPrivateAPI({ userId: userStorage?.id });
   const { data } = useQuery(["user", userStorage?.id], () => fetchOneUser(), {
     refetchOnWindowFocus: false,
     enabled: Boolean(userStorage?.id),
