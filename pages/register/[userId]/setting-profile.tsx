@@ -22,7 +22,7 @@ import {
   UpdateOneProfileNextStepAPI,
 } from "@/pages/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
-import { resendCodeAPI } from "@/pages/api/user";
+import { getOneUserPublicAPI, resendCodeAPI } from "@/pages/api/user";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { ButtonInput } from "@/components/templates/button-input";
 
@@ -41,7 +41,7 @@ const schema = yup.object({
 });
 
 const SettingProfile = () => {
-  const user = useAuth() as any;
+  // const user = useAuth() as any;
   const router = useRouter();
   const { query } = useRouter();
   const userId = String(query?.userId);
@@ -79,9 +79,18 @@ const SettingProfile = () => {
   );
   const countries: any = dataCountries?.data;
 
+  const fetchOneUser = async () =>
+    await getOneUserPublicAPI({ userId });
+  const { data } = useQuery(["user", userId], () => fetchOneUser(), {
+    refetchOnWindowFocus: false,
+    enabled: Boolean(query?.userId),
+  });
+  const user: any = data?.data;
+
   if (user?.nextStep === "CONFIRM_EMAIL") {
     router.push(`${`/register/${userId}/confirm-account`}`);
   }
+
 
   useEffect(() => {
     if (user) {

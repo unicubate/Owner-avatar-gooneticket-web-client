@@ -1,13 +1,11 @@
 import { NextStep } from "./user.type";
 
-export type ColorType = "gray" | "green" | "indigo" | "red" | "sky";
+export type ColorType = "gray" | "indigo" | "red" | "sky";
 
 export const arrayColors = [
   { id: "1", name: "gray" },
-  { id: "2", name: "green" },
-  { id: "3", name: "indigo" },
-  { id: "4", name: "red" },
-  { id: "5", name: "sky" },
+  { id: "2", name: "indigo" },
+  { id: "3", name: "red" },
 ];
 
 export type ProfileFormModel = {

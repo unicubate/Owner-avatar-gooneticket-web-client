@@ -61,11 +61,11 @@ const Register = () => {
       });
       setHasErrors(false);
       setLoading(false);
-      router.push(`${`/register/${user?.id}/setting-profile`}`);
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         JSON.stringify(user?.accessToken)
       );
+      router.push(`${`/register/${user?.id}/setting-profile`}`);
       window.location.reload();
     } catch (error: any) {
       setHasErrors(true);
