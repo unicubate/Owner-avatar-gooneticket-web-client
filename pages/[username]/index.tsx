@@ -19,6 +19,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextAreaInput, TextInput } from "@/components/util/form";
 import { PublicComponent } from "@/components/util/session/public-component";
+import { useQuery } from "@tanstack/react-query";
+import { getOneUserPublicAPI } from "../api/user";
 
 const schema = yup.object({
   email: yup
@@ -34,7 +36,7 @@ const schema = yup.object({
 const ProfilePublic = () => {
   const router = useRouter();
   const { query } = useRouter();
-  const userId = String(query?.userId);
+  const username = String(query?.username);
   const [showModal, setShowModal] = useState(false);
 
   const [modal1Open, setModal1Open] = useState(false);
@@ -54,6 +56,15 @@ const ProfilePublic = () => {
     setModal2Open(false);
   };
 
+
+  const fetchOneUser = async () =>
+    await getOneUserPublicAPI({ username });
+  const { data } = useQuery(["user", username], () => fetchOneUser(), {
+    refetchOnWindowFocus: false,
+    enabled: Boolean(query?.username),
+  });
+  const user: any = data?.data;
+
   const onSubmit: SubmitHandler<any> = (payload: any) => {
     // let data = new FormData();
     // data.append("confirm", `${payload.confirm}`);
@@ -65,6 +76,8 @@ const ProfilePublic = () => {
     console.log("payload =======>", payload);
   };
 
+
+  console.log("user payload payload =======>", user);
   return (
     <>
       <div className="py-12 bg-gray-900 sm:pb-6 sm:pt-16 lg:pt-20">

@@ -3,7 +3,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { usePathname } from "next/navigation";
 import LayoutDashboard from "@/components/layout-dashboard";
 
-const Home = () => {
+const Dashboard = () => {
   const pathname = usePathname();
   const onSubmit: SubmitHandler<any> = (payload: any) => {
     // let data = new FormData();
@@ -437,4 +437,4 @@ const Home = () => {
   );
 };
 
-export default PrivateComponent(Home);
+export default PrivateComponent(Dashboard);

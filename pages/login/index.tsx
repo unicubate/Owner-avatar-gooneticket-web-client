@@ -58,7 +58,7 @@ const Login = () => {
         await resendCodeAPI({ userId: findOneUser?.id });
         router.push(`${`/register/${user?.id}/confirm-account`}`);
       } else if (findOneUser?.nextStep === "COMPLETE_REGISTRATION") {
-        router.push(`${`/`}`);
+        router.push(`${`/dashboard`}`);
       }
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),

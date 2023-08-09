@@ -26,7 +26,7 @@ const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
     title: "Home",
-    href: "/home",
+    href: "/dashboard",
     icon: <BiHomeCircle className={classIcon} />,
   },
   {
