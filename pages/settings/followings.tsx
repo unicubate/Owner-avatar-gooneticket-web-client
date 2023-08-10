@@ -78,31 +78,40 @@ const Followings = () => {
 
                                 <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
 
+
                                     <div className="flow-root">
+
                                         <div className="overflow-hidden bg-white border border-gray-200">
                                             <div className="px-4 py-5">
 
+                                                <div className="sm:flex sm:items-center sm:justify-between">
+                                                    <p className="text-base font-bold text-gray-900">Followings</p>
+                                                </div>
+
                                                 {people.map((person, index) => (
+                                                    <>
+                                                        <hr className="mt-1 border-gray-200" />
 
-                                                    <div key={index} className="py-5">
-                                                        <div className="flex items-center">
-                                                            <div className="relative flex-shrink-0 cursor-pointer">
-                                                                <Avatar size="large" src={person?.image} alt={person?.name} />
-                                                            </div>
+                                                        <div key={index} className="py-5">
+                                                            <div className="flex items-center">
+                                                                <div className="relative flex-shrink-0 cursor-pointer">
+                                                                    <Avatar size="large" src={person?.image} alt={person?.name} />
+                                                                </div>
 
-                                                            <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                <p className="text-sm font-bold text-gray-900">{person?.name}</p>
-                                                                <p className="mt-1 text-sm font-medium text-gray-500">{person?.email}</p>
-                                                            </div>
+                                                                <div className="flex-1 min-w-0 ml-4 cursor-pointer">
+                                                                    <p className="text-sm font-bold text-gray-900">{person?.name}</p>
+                                                                    <p className="mt-1 text-sm font-medium text-gray-500">{person?.email}</p>
+                                                                </div>
 
-                                                            <div className="flex items-center justify-end ml-auto space-x-8">
-                                                                <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
-                                                                    Unfollow
-                                                                </ButtonInput>
+                                                                <div className="flex items-center justify-end ml-auto space-x-8">
+                                                                    <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
+                                                                        Unfollow
+                                                                    </ButtonInput>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
 
+                                                    </>
                                                 ))}
 
 

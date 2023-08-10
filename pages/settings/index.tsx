@@ -71,7 +71,7 @@ const Settings = () => {
 
 
 
-                                <div className="pt-6  border-gray-200 lg:order-1 lg:col-span-10">
+                                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
                                     <div className="flow-root">
 
                                             {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
