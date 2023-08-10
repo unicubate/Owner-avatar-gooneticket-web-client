@@ -63,7 +63,7 @@ const MembershipsLevels = () => {
                                 <div className="grid grid-cols-1 gap-6 text-center sm:grid-cols-1 px-4 mt-4 sm:mt-4 lg:grid-cols-2 xl:grid-cols-4 sm:px-0">
 
 
-                                    {membershipsArrays.map((item, index) => (
+                                    {membershipsArrays.map((item: any, index) => (
 
 
                                         <div key={index} className="flex flex-col overflow-hidden transition-all duration-200 transform bg-white border border-gray-100 shadow group rounded-xl hover:shadow-lg hover:-translate-y-1">

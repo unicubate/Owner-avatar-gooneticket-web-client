@@ -143,7 +143,7 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
 
       {/* Fix Drawer */}
 
-      <Drawer title="" placement="right" closable={false} onClose={onClose} open={open}>
+      <Drawer title="" placement="right" closable={true} onClose={onClose} open={open}>
         <div className="flex flex-col pt-5 overflow-y-auto">
           <VerticalNavDashboard user={user} />
         </div>

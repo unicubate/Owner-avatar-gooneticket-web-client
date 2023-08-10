@@ -96,27 +96,25 @@ const Donations = () => {
                                                 <table className="min-w-full lg:divide-y lg:divide-gray-200">
                                                     <thead className="hidden lg:table-header-group">
                                                         <tr>
-                                                            <th className="py-3.5 px-3 text-left text-sm font-medium text-gray-500">
+                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
                                                                 <div className="flex items-center">
                                                                     Title
                                                                 </div>
                                                             </th>
 
-                                                            <th className="py-3.5 px-3 text-left text-sm font-medium text-gray-500">
+                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
                                                                 <div className="flex items-center">
                                                                     Amount
                                                                 </div>
                                                             </th>
 
-                                                            <th className="py-3.5 px-3 text-left text-sm font-medium text-gray-500">
+                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
                                                                 <div className="flex items-center">
                                                                     Date
                                                                 </div>
                                                             </th>
 
-                                                            <th className="relative py-3.5 pl-3 pr-4 sm:pr-6 md:pr-0">
-                                                                <span className="sr-only"> Actions </span>
-                                                            </th>
+                                                            <th className="relative py-4 pl-3 pr-4 sm:pr-6 md:pr-0"></th>
                                                         </tr>
                                                     </thead>
 
@@ -127,7 +125,7 @@ const Donations = () => {
 
                                                             <tr key={index}>
 
-                                                                <td className="px-4 py-4 text-sm font-bold text-gray-900">
+                                                                <td className="py-4 text-sm font-bold text-gray-900">
                                                                     <div className="inline-flex items-center">
                                                                         {donation?.title}
                                                                     </div>
@@ -136,23 +134,23 @@ const Donations = () => {
                                                                     </div>
                                                                 </td>
 
-                                                                <td className="hidden px-4 py-4 text-sm font-bold text-gray-900 lg:table-cell">{donation?.amount} €</td>
+                                                                <td className="hidden py-4 text-sm font-bold text-gray-900 lg:table-cell">{donation?.amount}&nbsp;€</td>
 
-                                                                <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
+                                                                <td className="hidden py-4 text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
 
 
 
-                                                                <td className="px-4 py-4 text-sm font-medium text-right text-gray-900">
+                                                                <td className="py-4 text-sm font-medium text-right text-gray-900">
                                                                     <Button type="text" shape="circle" icon={<CopyOutlined />} size="small" />
                                                                     <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
                                                                     <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" onClick={() => deleteItem(donation)} />
-                                                                    <div className="mt-1 lg:hidden pt-1">
-                                                                        <p>{donation?.amount} €</p>
+                                                                    <div className="text-xl mt-1 lg:hidden pt-1">
+                                                                        <p>{donation?.amount}&nbsp;€</p>
                                                                         {/* <div className="inline-flex items-center justify-end mt-1">
                                                                     <svg className="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
                                                                         <circle cx="4" cy="4" r="3" />
                                                                     </svg>
-                                                                    Complete
+                                                                    1000.000.000
                                                                 </div> */}
                                                                     </div>
                                                                 </td>
