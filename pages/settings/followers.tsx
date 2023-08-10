@@ -79,34 +79,41 @@ const Followers = () => {
 
                                 <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
 
-                                    <div className="flow-root mt-8">
-                                        <div className="-my-5 divide-y divide-gray-100">
+                                    <div className="flow-root">
 
-                                            {people.map((person, index) => (
+                                        <div className="overflow-hidden bg-white border border-gray-200">
+                                            <div className="px-4 py-5">
+                                                {people.map((person, index) => (
 
-                                                <div key={index} className="py-5">
-                                                    <div className="flex items-center">
-                                                        <div className="relative flex-shrink-0 cursor-pointer">
-                                                            <Avatar size="large" src={person?.image} alt={person?.name} />
-                                                        </div>
+                                                    <div key={index} className="py-5">
+                                                        <div className="flex items-center">
+                                                            <div className="relative flex-shrink-0 cursor-pointer">
+                                                                <Avatar size="large" src={person?.image} alt={person?.name} />
+                                                            </div>
 
-                                                        <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                            <p className="text-sm font-bold text-gray-900">{person?.name}</p>
-                                                            <p className="mt-1 text-sm font-medium text-gray-500">{person?.email}</p>
-                                                        </div>
+                                                            <div className="flex-1 min-w-0 ml-4 cursor-pointer">
+                                                                <p className="text-sm font-bold text-gray-900">{person?.name}</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">{person?.email}</p>
+                                                            </div>
 
-                                                        <div className="flex items-center justify-end ml-auto space-x-8">
-                                                            <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
-                                                                Following
-                                                            </ButtonInput>
+                                                            <div className="flex items-center justify-end ml-auto space-x-8">
+                                                                <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
+                                                                    Following
+                                                                </ButtonInput>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
 
-                                            ))}
+                                                ))}
 
 
+                                            </div>
                                         </div>
+
+
+
+
+                                        {/* </div> */}
                                     </div>
 
                                 </div>

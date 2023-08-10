@@ -58,14 +58,14 @@ const ButtonInput: React.FC<Props> = ({
             text-white
             transition-all
             duration-200
-            bg-${color}-${loading ? '200' : '500'}
+            bg-${color}-500
             border-1
             font-semibold
             border-transparent
             focus:outline-none 
             focus:ring-offset-1 
             focus:ring-${color}-100
-            hover:bg-${color}-${loading ? '200' : '500'}
+            hover:bg-${color}-500
         `}
 
       >

@@ -16,7 +16,7 @@ const schema = yup.object({
     confirmPassword: yup.string().optional(),
 });
 
-const UpdateFormPassword: React.FC<Props> = ({ userId,user }) => {
+const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
     const [loading, setLoading] = useState(false);
     const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
         undefined
@@ -46,57 +46,63 @@ const UpdateFormPassword: React.FC<Props> = ({ userId,user }) => {
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)} className="py-7">
+            <form onSubmit={handleSubmit(onSubmit)}>
 
-                <h2 className="text-base font-bold text-gray-900"> Change password </h2>
+                <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+                    <div className="px-4 py-5">
 
-                <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
-                    <div>
-                        <div className="mt-2">
-                            <TextInputPassword
-                                label="Old password"
-                                control={control}
-                                type="password"
-                                name="oldPassword"
-                                placeholder="Old password"
-                                errors={errors}
-                            />
+                        <h2 className="text-base font-bold text-gray-900"> Change password </h2>
+
+                        <div className="grid grid-cols-1 mt-6 sm:grid-cols-3 gap-y-5 gap-x-6">
+                            <div>
+                                <div className="mt-2">
+                                    <TextInputPassword
+                                        label="Old password"
+                                        control={control}
+                                        type="password"
+                                        name="oldPassword"
+                                        placeholder="Old password"
+                                        errors={errors}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="mt-2">
+                                    <TextInputPassword
+                                        label="New password"
+                                        control={control}
+                                        type="password"
+                                        name="newPassword"
+                                        placeholder="New password"
+                                        errors={errors}
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label className="text-sm font-medium text-gray-600"> Confirm password </label>
+                                <div className="mt-2">
+                                    <TextInputPassword
+                                        control={control}
+                                        type="password"
+                                        name="confirmPassword"
+                                        placeholder="Confirm password"
+                                        errors={errors}
+                                    />
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
 
-                    <div>
-                        <div className="mt-2">
-                            <TextInputPassword
-                                label="New password"
-                                control={control}
-                                type="password"
-                                name="newPassword"
-                                placeholder="New password"
-                                errors={errors}
-                            />
+
+                        <div className="mt-8">
+                            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={user?.profile?.color}>
+                                Save changes
+                            </ButtonInput>
                         </div>
+
                     </div>
-
-                    <div>
-                        <label className="text-sm font-medium text-gray-600"> Confirm password </label>
-                        <div className="mt-2">
-                            <TextInputPassword
-                                control={control}
-                                type="password"
-                                name="confirmPassword"
-                                placeholder="Confirm password"
-                                errors={errors}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div className="mt-8">
-                     <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={loading ? 'gray' : user?.profile?.color}>
-                        Save changes
-                    </ButtonInput>
                 </div>
 
             </form>

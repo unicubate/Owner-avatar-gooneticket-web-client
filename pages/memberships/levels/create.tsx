@@ -55,10 +55,6 @@ const MembershipsLevelCreate = () => {
         console.log("payload =======>", payload);
     };
 
-
-    console.log('watchPrice ==========>', watchPricePerMonthly)
-    // console.log('defaultValues ==========>', defaultValues)
-    const defaultPricePerYearly = watchPricePerMonthly * 10 ?? ''
     return (
         <>
 
@@ -160,10 +156,6 @@ const MembershipsLevelCreate = () => {
 
                                         </div>
                                     </div>
-
-
-
-
 
 
 
@@ -275,22 +267,14 @@ const MembershipsLevelCreate = () => {
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            
                                         </form>
                                     </div>
 
 
 
                                 </div>
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -124,141 +124,152 @@ const Configs = () => {
                                     </div>
                                 </div> */}
 
+
+
                                 <div className="flow-root mt-8">
-                                    <div className="-my-5 divide-y divide-gray-200">
-                                        <div className="py-5">
-                                            <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                                                <div className="flex items-center flex-1 min-w-0">
-                                                    {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
-                                                    <div className="flex-1 min-w-0 ml-4">
-                                                        <p className="text-sm font-bold text-gray-900 truncate">Mailchimp</p>
-                                                        <p className="mt-1 text-sm font-medium text-gray-500 truncate">Lorem ipsum dolor sit amet, consectetur adipis.</p>
+
+                                    <div className="overflow-hidden bg-white border border-gray-200">
+                                        <div className="px-4 py-5">
+
+
+                                            <div className="-my-5 divide-y divide-gray-200">
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
+                                                            <div className="flex-1 min-w-0 ml-4">
+                                                                <p className="text-sm font-bold text-gray-900">Mailchimp</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectetur adipis.</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="facebookNotif"
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
-                                                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                                                    <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
+                                                            <div className="flex-1 min-w-0 ml-4">
+                                                                <p className="text-sm font-bold text-gray-900">Zapier</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectes.</p>
+                                                            </div>
+                                                        </div>
 
-                                                    <div
-                                                        className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
 
-                                                    >
-                                                        <SwitchInput
-                                                            control={control}
-                                                            name="facebookNotif"
-                                                        />
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="confirmSwitch"
+                                                                    label=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
+                                                            <div className="flex-1 min-w-0 ml-4">
+                                                                <p className="text-sm font-bold text-gray-900">Telegram</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet.</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="telegramNotif"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
+                                                            <div className="flex-1 min-w-0 ml-4">
+                                                                <p className="text-sm font-bold text-gray-900">Slack</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectetur adipis.</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="confirmSwitch"
+                                                                    label=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="py-5">
+                                                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                                                        <div className="flex items-center flex-1 min-w-0">
+                                                            {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
+                                                            <div className="flex-1 min-w-0 ml-4">
+                                                                <p className="text-sm font-bold text-gray-900">Dropbox</p>
+                                                                <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet adipis.</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                                                            <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
+
+                                                            <div
+                                                                className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
+
+                                                            >
+                                                                <SwitchInput
+                                                                    control={control}
+                                                                    name="confirmSwitch"
+                                                                    label=""
+                                                                />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div className="py-5">
-                                            <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                                                <div className="flex items-center flex-1 min-w-0">
-                                                    {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
-                                                    <div className="flex-1 min-w-0 ml-4">
-                                                        <p className="text-sm font-bold text-gray-900 truncate">Zapier</p>
-                                                        <p className="mt-1 text-sm font-medium text-gray-500 truncate">Lorem ipsum dolor sit amet, consectes.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                                                    <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
-
-                                                    <div
-                                                        className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
-
-                                                    >
-                                                        <SwitchInput
-                                                            control={control}
-                                                            name="confirmSwitch"
-                                                            label=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="py-5">
-                                            <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                                                <div className="flex items-center flex-1 min-w-0">
-                                                    {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
-                                                    <div className="flex-1 min-w-0 ml-4">
-                                                        <p className="text-sm font-bold text-gray-900 truncate">Telegram</p>
-                                                        <p className="mt-1 text-sm font-medium text-gray-500 truncate">Lorem ipsum dolor sit amet.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                                                    <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
-
-                                                    <div
-                                                        className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
-
-                                                    >
-                                                        <SwitchInput
-                                                            control={control}
-                                                            name="telegramNotif"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="py-5">
-                                            <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                                                <div className="flex items-center flex-1 min-w-0">
-                                                    {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
-                                                    <div className="flex-1 min-w-0 ml-4">
-                                                        <p className="text-sm font-bold text-gray-900 truncate">Slack</p>
-                                                        <p className="mt-1 text-sm font-medium text-gray-500 truncate">Lorem ipsum dolor sit amet, consectetur adipis.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                                                    <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
-
-                                                    <div
-                                                        className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
-
-                                                    >
-                                                        <SwitchInput
-                                                            control={control}
-                                                            name="confirmSwitch"
-                                                            label=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="py-5">
-                                            <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                                                <div className="flex items-center flex-1 min-w-0">
-                                                    {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
-                                                    <div className="flex-1 min-w-0 ml-4">
-                                                        <p className="text-sm font-bold text-gray-900 truncate">Dropbox</p>
-                                                        <p className="mt-1 text-sm font-medium text-gray-500 truncate">Lorem ipsum dolor sit amet adipis.</p>
-                                                    </div>
-                                                </div>
-
-                                                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                                                    <button type="button" title="" className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"> </button>
-
-                                                    <div
-                                                        className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none"
-
-                                                    >
-                                                        <SwitchInput
-                                                            control={control}
-                                                            name="confirmSwitch"
-                                                            label=""
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
+
                                 </div>
 
 

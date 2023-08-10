@@ -21,7 +21,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         </title>
       </Head>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col bg-gray-100">
         <HeaderHorizontalNavDashboard user={user} />
 
         <div className="flex flex-1">
