@@ -10,7 +10,7 @@ import {
   BiLockOpen,
 } from "react-icons/bi";
 import { FiList } from "react-icons/fi";
-import { GrGallery } from "react-icons/gr";
+import { TfiGallery } from "react-icons/tfi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
@@ -83,7 +83,7 @@ const SUPPORT_ITEMS = [
   {
     title: "Gallery",
     href: "/gallery",
-    icon: <GrGallery className={classIcon} />,
+    icon: <TfiGallery className={classIcon} />,
   },
 ];
 

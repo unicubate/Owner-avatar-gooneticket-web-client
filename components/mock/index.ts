@@ -20,6 +20,68 @@ export const arrayDonation = [
   },
 ];
 
+export const arrayGallery = [
+  {
+    title: "Regional Paradigm Technician",
+    image: "https://bit.ly/33HnjK0",
+    createdAt: "12/01/2023 11:30",
+    type: "Public",
+  },
+  {
+    title: "Regional Paradigm Technician",
+    image: "https://bit.ly/3I9nL2D",
+    createdAt: "18/01/2023 13:30",
+    type: "Public",
+  },
+  {
+    title: "Regional Paradigm Technician",
+    image: "https://bit.ly/3vaOTe1",
+    createdAt: "10/02/2023 10:30",
+    type: "Membership",
+  },
+  {
+    title: "Regional Paradigm Technician",
+    image: "https://bit.ly/3I9nL2D",
+    createdAt: "10/03/2023 10:30",
+    type: "Public",
+  },
+];
+
+export const arrayPeoples = [
+  {
+    name: "Jane Cooper",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Admin",
+    email: "jane.cooper@example.com",
+    image: "https://bit.ly/33HnjK0",
+  },
+  {
+    name: "John Doe",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Tester",
+    email: "john.doe@example.com",
+    image: "https://bit.ly/3I9nL2D",
+  },
+  {
+    name: "Veronica Lodge",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: " Software Engineer",
+    email: "veronica.lodge@example.com",
+    image: "https://bit.ly/3vaOTe1",
+  },
+  {
+    name: "Omega Test",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: " Software Engineer",
+    email: "omega.lodge@example.com",
+    image: "https://bit.ly/3I9nL2D",
+  },
+];
+
 export const arrayMemberships = [
   {
     id: 1,

@@ -59,117 +59,91 @@ const Memberships = () => {
                                                     </div>
                                                 </div>
 
-                                                {/* <p className="text-base font-bold text-gray-900">Memberships</p> */}
 
-                                                {/* <div className="mt-4 sm:mt-0"> */}
-                                                {/* <button
-                                                        type="button"
-                                                        className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold leading-5 text-gray-600 transition-all duration-200 bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                                                    >
-                                                        Create donation
-                                                    </button> */}
-                                                {/* <Button onClick={() => setShowModal(true)} size={'middle'}>
-                                                        Create membership
-                                                    </Button> */}
-                                                {/* <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={'indigo'}>
-                                                        Create membership
-                                                    </ButtonInput> */}
-                                                {/* </div> */}
-
-
-                                                {/* <hr className="mt-6 border-gray-200" /> */}
-
-                                                {/* <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8"> */}
-
-
-
-
-
-                                                {membershipsArrays.length > 0 ? <table className="min-w-full lg:divide-y lg:divide-gray-200">
-                                                    <thead className="hidden lg:table-header-group">
-                                                        <tr>
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Title
-                                                                </div>
-                                                            </th>
-
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Price per month
-                                                                </div>
-                                                            </th>
-
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Price per year
-                                                                </div>
-                                                            </th>
-
-
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Date
-                                                                </div>
-                                                            </th>
-                                                            <th className="relative py-4 pl-3 pr-4 sm:pr-6 md:pr-0">
-                                                                <span className="sr-only"> Actions </span>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody className="divide-y divide-gray-200">
-
-                                                        {membershipsArrays.map((donation: any, index: number) => (
-
-
-                                                            <tr key={index}>
-
-                                                                <td className="py-4 text-sm font-bold text-gray-900">
-                                                                    <div className="inline-flex items-center">
-                                                                        {/* <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-landing-logo.png" alt="" /> */}
-                                                                        {donation?.title}
+                                                {membershipsArrays.length > 0 ?
+                                                    <table className="min-w-full lg:divide-y lg:divide-gray-200">
+                                                        <thead className="hidden lg:table-header-group">
+                                                            <tr>
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Title
                                                                     </div>
-                                                                    <div className="space-y-1 lg:hidden pt-2">
-                                                                        {/* <p className="text-sm font-medium text-gray-500">#29345</p> */}
-                                                                        <p className="text-sm font-medium text-gray-500">07 January, 2022</p>
+                                                                </th>
+
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Price per month
                                                                     </div>
-                                                                </td>
+                                                                </th>
 
-                                                                <td className="py-4 hidden text-sm font-bold text-gray-900 lg:table-cell">{donation?.pricePerMonthly}&nbsp;€</td>
-
-                                                                <td className="py-4 hidden text-sm font-bold text-gray-900 lg:table-cell">{donation?.pricePerYearly}&nbsp;€</td>
-
-                                                                <td className="py-4 hidden text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
-
-
-
-                                                                <td className="py-4 text-sm font-medium text-right text-gray-900">
-                                                                    <Button type="text" shape="circle" icon={<CopyOutlined />} size="small" />
-                                                                    <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
-                                                                    <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" />
-                                                                    <div className="text-xl mt-1 lg:hidden pt-1">
-                                                                        <p>{donation?.pricePerMonthly}&nbsp;€ - {donation?.pricePerYearly}&nbsp;€</p>
-                                                                        {/* <div className="inline-flex items-center justify-end mt-1">
-                                <svg className="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
-                                    <circle cx="4" cy="4" r="3" />
-                                </svg>
-                                Complete
-                            </div> */}
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Price per year
                                                                     </div>
-                                                                </td>
+                                                                </th>
+
+
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Date
+                                                                    </div>
+                                                                </th>
+                                                                <th className="relative py-4 pl-3 pr-4 sm:pr-6 md:pr-0">
+                                                                    <span className="sr-only"> Actions </span>
+                                                                </th>
                                                             </tr>
+                                                        </thead>
 
-                                                        ))}
+                                                        <tbody className="divide-y divide-gray-200">
+
+                                                            {membershipsArrays.map((donation: any, index: number) => (
+
+
+                                                                <tr key={index}>
+
+                                                                    <td className="py-4 text-sm font-bold text-gray-900">
+                                                                        <div className="inline-flex items-center">
+                                                                            {/* <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-landing-logo.png" alt="" /> */}
+                                                                            {donation?.title}
+                                                                        </div>
+                                                                        <div className="space-y-1 lg:hidden pt-2">
+                                                                            {/* <p className="text-sm font-medium text-gray-500">#29345</p> */}
+                                                                            <p className="text-sm font-medium text-gray-500">07 January, 2022</p>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td className="py-4 hidden text-sm font-bold text-gray-900 lg:table-cell">{donation?.pricePerMonthly}&nbsp;€</td>
+
+                                                                    <td className="py-4 hidden text-sm font-bold text-gray-900 lg:table-cell">{donation?.pricePerYearly}&nbsp;€</td>
+
+                                                                    <td className="py-4 hidden text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
 
 
 
-                                                    </tbody>
-                                                </table> :
+                                                                    <td className="py-4 text-sm font-medium text-right text-gray-900">
+                                                                        <Button type="text" shape="circle" icon={<CopyOutlined />} size="small" />
+                                                                        <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
+                                                                        <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" />
+                                                                        <div className="mt-1 lg:hidden pt-1">
+                                                                            <p>{donation?.pricePerMonthly}&nbsp;€ - {donation?.pricePerYearly}&nbsp;€</p>
+                                                                            {/* <div className="inline-flex items-center justify-end mt-1">
+                                                                                    <svg className="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
+                                                                                        <circle cx="4" cy="4" r="3" />
+                                                                                    </svg>
+                                                                                    Complete
+                                                                                </div> */}
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
 
-                                                    <EmptyData 
-                                                    title='Add your first listing to get started' 
-                                                    description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}  
+                                                            ))}
+
+                                                        </tbody>
+                                                    </table> :
+
+                                                    <EmptyData
+                                                        title='Add your first listing to get started'
+                                                        description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
                                                     />
                                                 }
 

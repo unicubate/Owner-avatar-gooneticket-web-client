@@ -8,6 +8,7 @@ import { CopyOutlined, DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-d
 import { Button, Input } from "antd";
 import { arrayDonation } from "@/components/mock";
 import Swal from 'sweetalert2';
+import { EmptyData } from "@/components/templates/empty-data";
 
 
 const Donations = () => {
@@ -93,75 +94,82 @@ const Donations = () => {
 
 
 
-                                                <table className="min-w-full lg:divide-y lg:divide-gray-200">
-                                                    <thead className="hidden lg:table-header-group">
-                                                        <tr>
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Title
-                                                                </div>
-                                                            </th>
-
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Amount
-                                                                </div>
-                                                            </th>
-
-                                                            <th className="py-4 text-left text-sm font-medium text-gray-500">
-                                                                <div className="flex items-center">
-                                                                    Date
-                                                                </div>
-                                                            </th>
-
-                                                            <th className="relative py-4 pl-3 pr-4 sm:pr-6 md:pr-0"></th>
-                                                        </tr>
-                                                    </thead>
-
-                                                    <tbody className="divide-y divide-gray-200">
-
-                                                        {donationsArrays.map((donation, index) => (
-
-
-                                                            <tr key={index}>
-
-                                                                <td className="py-4 text-sm font-bold text-gray-900">
-                                                                    <div className="inline-flex items-center">
-                                                                        {donation?.title}
+                                                {donationsArrays.length > 0 ?
+                                                    <table className="min-w-full lg:divide-y lg:divide-gray-200">
+                                                        <thead className="hidden lg:table-header-group">
+                                                            <tr>
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Title
                                                                     </div>
-                                                                    <div className="space-y-1 lg:hidden pt-2">
-                                                                        <p className="text-sm font-medium text-gray-500">07 January, 2022</p>
+                                                                </th>
+
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Amount
                                                                     </div>
-                                                                </td>
+                                                                </th>
 
-                                                                <td className="hidden py-4 text-sm font-bold text-gray-900 lg:table-cell">{donation?.amount}&nbsp;€</td>
+                                                                <th className="py-4 text-left text-sm font-medium text-gray-500">
+                                                                    <div className="flex items-center">
+                                                                        Date
+                                                                    </div>
+                                                                </th>
 
-                                                                <td className="hidden py-4 text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
+                                                                <th className="relative py-4 pl-3 pr-4 sm:pr-6 md:pr-0"></th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody className="divide-y divide-gray-200">
+
+                                                            {donationsArrays.map((donation: any, index) => (
+
+
+                                                                <tr key={index}>
+
+                                                                    <td className="py-4 text-sm font-bold text-gray-900">
+                                                                        <div className="inline-flex items-center">
+                                                                            {donation?.title}
+                                                                        </div>
+                                                                        <div className="space-y-1 lg:hidden pt-2">
+                                                                            <p className="text-sm font-medium text-gray-500">07 January, 2022</p>
+                                                                        </div>
+                                                                    </td>
+
+                                                                    <td className="hidden py-4 text-sm font-bold text-gray-900 lg:table-cell">{donation?.amount}&nbsp;€</td>
+
+                                                                    <td className="hidden py-4 text-sm font-medium text-gray-900 lg:table-cell">07 January, 2022</td>
 
 
 
-                                                                <td className="py-4 text-sm font-medium text-right text-gray-900">
-                                                                    <Button type="text" shape="circle" icon={<CopyOutlined />} size="small" />
-                                                                    <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
-                                                                    <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" onClick={() => deleteItem(donation)} />
-                                                                    <div className="text-xl mt-1 lg:hidden pt-1">
-                                                                        <p>{donation?.amount}&nbsp;€</p>
-                                                                        {/* <div className="inline-flex items-center justify-end mt-1">
+                                                                    <td className="py-4 text-sm font-medium text-right text-gray-900">
+                                                                        <Button type="text" shape="circle" icon={<CopyOutlined />} size="small" />
+                                                                        <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
+                                                                        <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" onClick={() => deleteItem(donation)} />
+                                                                        <div className="mt-1 lg:hidden pt-1">
+                                                                            <p>{donation?.amount}&nbsp;€</p>
+                                                                            {/* <div className="inline-flex items-center justify-end mt-1">
                                                                     <svg className="mr-1.5 h-2.5 w-2.5 text-green-500" fill="currentColor" viewBox="0 0 8 8">
                                                                         <circle cx="4" cy="4" r="3" />
                                                                     </svg>
                                                                     1000.000.000
                                                                 </div> */}
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
 
-                                                        ))}
+                                                            ))}
 
 
 
-                                                    </tbody>
-                                                </table>
+                                                        </tbody>
+                                                    </table>
+                                                    : <EmptyData
+                                                        title='Add your first donation to get started'
+                                                        description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
+                                                    />}
+
+
 
 
                                             </div>
