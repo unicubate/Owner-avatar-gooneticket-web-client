@@ -17,6 +17,18 @@ export type PaginationRequest = {
     take: number
 }
 
+export type PaginationResponse = {
+    total: number,
+    per_page: number,
+    current_page: number,
+    next_page: number,
+    last_page: number,
+    skip: number,
+    sort: SortModel,
+    total_page: number,
+    total_value: number,
+}
+
 export const PaginationItem: React.FC<Props> = ({
     data,
     setPageItem,

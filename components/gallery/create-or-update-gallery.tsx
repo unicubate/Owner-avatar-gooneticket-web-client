@@ -4,12 +4,12 @@ import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { ButtonInput } from '../templates/button-input';
-import { Button, Upload, UploadFile } from 'antd';
+import { Alert, Button, Checkbox, Upload, UploadFile } from 'antd';
 import { useState } from 'react';
 import { SelectSearchInput } from '../util/form/select-search-input';
 import { RcFile } from 'antd/es/upload';
 import { GalleryFormModel } from '@/types/gallery';
-import { AlertDangerNotification } from '@/utils/alert-notification';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
 import { CreateOneGalleryAPI } from '@/api/gallery';
 
 const { Dragger } = Upload;
@@ -18,6 +18,7 @@ const schema = yup.object({
     title: yup.string().optional(),
     description: yup.string().optional(),
     whoCanSee: yup.string().required(),
+    allowDownload: yup.string().required(),
 });
 
 
@@ -59,6 +60,13 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
             });
             setHasErrors(false);
             setLoading(false);
+            AlertSuccessNotification({
+                text: "Image save successfully",
+                className: "info",
+                gravity: "top",
+                position: "center",
+            });
+            setShowModal(false)
         } catch (error: any) {
             setHasErrors(true);
             setLoading(false);
@@ -88,9 +96,13 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                         </button>
                         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
                             <div className="p-2 flex-auto justify-center">
-                                {/* <div className="font-regular text-center relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-                                    Error message save to de db je me demande ou je suis merde
-                                </div> */}
+
+                                {hasErrors ?
+                                    <div className="mb-4">
+                                        <Alert message={hasErrors} type="error" showIcon />
+                                    </div>
+                                    : null}
+
 
                                 <div className="mb-4">
                                     <Controller
@@ -107,12 +119,17 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                                                         onChange={onChange}
                                                         accept=".png,.jpg"
                                                     >
-                                                       <Button icon={<UploadOutlined />}>Upload</Button>
+                                                        <Button icon={<UploadOutlined />}>Click to Upload</Button>
                                                     </Upload>
                                                 </div>
                                             </>
                                         )}
                                     />
+                                    {/* {errors?.attachment && (
+                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                            {errors?.attachment?.message}
+                                        </span>
+                                    )} */}
                                 </div>
                                 <div className="mb-4">
                                     <TextInput
@@ -134,10 +151,33 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                                         valueType="text"
                                         name="whoCanSee"
                                         dataItem={[
-                                            { name: "PUBLIC", code: "PUBLIC" },
-                                            { name: "MEMBERSHIP", code: "MEMBERSHIP" },
-                                            { name: "PRIVATE", code: "PRIVATE" },
+                                            { name: "PUBLIC" },
+                                            { name: "MEMBERSHIP" },
+                                            { name: "PRIVATE" },
                                         ]}
+                                    />
+                                </div>
+                                <div className="mb-4">
+                                    <Controller
+                                        name="allowDownload"
+                                        control={control}
+                                        render={({ field: { value, onChange } }) => (
+                                            <>
+                                                <div className="flex items-center">
+                                                    <div className="flex">
+                                                        <Checkbox checked={value} onChange={onChange} />
+                                                    </div>
+                                                    <div className="ml-3">
+                                                        <label
+                                                            htmlFor="allowDownload"
+                                                            className="text-sm text-gray-700 font-bold"
+                                                        >
+                                                            Allow download in original quality
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </>
+                                        )}
                                     />
                                 </div>
                                 <div className="mb-4">
@@ -151,7 +191,7 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                                 </div>
                             </div>
                             <div className="mt-2 text-center space-x-2">
-                                <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={'indigo'}>
+                                <ButtonInput shape="default" type="submit" size="large" loading={loading} color={'indigo'}>
                                     Save
                                 </ButtonInput>
                             </div>

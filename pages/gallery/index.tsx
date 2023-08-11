@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { ButtonInput } from "@/components/templates/button-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateOrUpdateDonation } from "@/components/donation/create-or-update-donation";
 import { CommentOutlined, CopyOutlined, DeleteOutlined, EditOutlined, EyeOutlined, FieldTimeOutlined, FundOutlined, HeartOutlined, LikeOutlined, PlusOutlined, SmallDashOutlined } from "@ant-design/icons";
 import { Avatar, Button, Dropdown, Input, MenuProps, Tooltip } from "antd";
@@ -10,64 +10,97 @@ import { arrayDonation, arrayGallery } from "@/components/mock";
 import Swal from 'sweetalert2';
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
+import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
+import { DeleteOneGalleryAPI, getGalleriesApi } from "@/api/gallery";
+import { AlertDangerNotification, useDebounce } from "@/utils";
+import ListGallery from "@/components/gallery/list-gallery";
 
-
-const items: MenuProps['items'] = [
-    {
-        key: '1',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-                Edit
-            </a>
-        ),
-    },
-    {
-        key: '2',
-        label: (
-            <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-                Delete
-            </a>
-        ),
-    },
-];
 
 const Gallery = () => {
     const [galleryArrays] = useState(arrayGallery)
     const [showModal, setShowModal] = useState(false);
+    const userId = '27470c31-8409-48d4-bbfc-90f773534ef3'
+
+    const fetchData = async (pageParam: number) => await
+        getGalleriesApi({
+            userId: userId,
+            take: 6,
+            page: pageParam,
+            sort: 'DESC'
+        })
+    const {
+        status,
+        error,
+        isLoading: isLoadingGallery,
+        isError: isErrorGallery,
+        data: dataGallery,
+        isFetchingNextPage,
+        hasNextPage,
+        fetchNextPage,
+    } = useInfiniteQuery({
+        queryKey: ["galleries"],
+        getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+        queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
+        keepPreviousData: true,
+    })
 
 
-    const deleteItem = (donation: any) => {
+    if (status === "loading") return <h1>Loading...</h1>
+    if (status === "error") return <h1>{JSON.stringify(error)}</h1>
 
-        Swal.fire({
-            title: 'Delete?',
-            text: 'Are you sure you want to perform this action?',
-            confirmButtonText: 'Yes, Deleted',
-            cancelButtonText: 'No, Cancel',
-            // confirmButtonColor: '#3085d6',
-            // cancelButtonColor: '#d33',
-            // customClass: {
-            //   confirmButton: 'btn btn-primary',
-            //   cancelButton: 'btn btn-outline-default',
-            // },
-            showCancelButton: true,
-            reverseButtons: true,
-            footer: `<b>Delete: ${donation?.title} </b>`
-        }).then(async (result) => {
-            // if (result.value) {
-            //   //Envoyer la requet au serve
-            //   const payloadSave = { code: voucher?.code }
-            //   // eslint-disable-next-line no-lone-blocks
-            //   {
-            //     voucher?.voucherType === 'COUPON' ?
-            //       actionDeleteCouponMutation.mutateAsync(payloadSave) :
-            //       actionDeleteVoucherMutation.mutateAsync(payloadSave)
-            //   }
 
-            // }
-        });
+    // console.log('data =======>', data)
+    // console.log('fetchNextPage =======>', fetchNextPage())
+    // const saveMutation = DeleteOneGalleryAPI({
+    //     onSuccess: () => { },
+    //     onError: (error?: any) => { },
+    // });
+
+
+    const deleteItem = (item: any) => {
+
+        // Swal.fire({
+        //     title: 'Delete?',
+        //     text: 'Are you sure you want to delete this?',
+        //     confirmButtonText: 'Yes, Deleted',
+        //     cancelButtonText: 'No, Cancel',
+        //     confirmButtonColor: '#2A0BC7',
+        //     cancelButtonColor: '#9FB7CE',
+        //     showCancelButton: true,
+        //     reverseButtons: true,
+        //     footer: `<b>Delete: ${item?.id} </b>`
+        // }).then(async (result) => {
+        //     if (result.value) {
+        //         //Envoyer la requet au serve
+        //         try {
+        //              await saveMutation.mutateAsync({ galleryId: item?.id });
+        //         } catch (error: any) {
+        //             AlertDangerNotification({
+        //                 text: `${error.response.data.message}`,
+        //                 gravity: "top",
+        //                 className: "info",
+        //                 position: "center",
+        //             });
+        //         }
+        //     }
+        // });
 
     }
 
+
+    const dataTableGallery = isLoadingGallery ? (<strong>Loading...</strong>) :
+        isErrorGallery ? (<strong>Error find data please try again...</strong>) :
+            (dataGallery?.pages?.length <= 0) ? ('') :
+                (
+                    dataGallery.pages.flatMap((page: any) => page?.data?.value)
+                        .map((item, index) => (
+                            <ListGallery item={item} key={index} index={index} />
+
+                        ))
+
+                )
+
+    console.log('hasNextPage ========>', hasNextPage)
     return (
         <>
 
@@ -114,42 +147,59 @@ const Gallery = () => {
 
                                                 <div className="divide-y divide-gray-200">
 
-                                                    {galleryArrays.map((item, index) => (
-                                                        <div key={index} className="py-5 divide-y divide-gray-200">
-                                                            <div className="flex items-center">
-                                                                <div className="relative flex-shrink-0 cursor-pointer">
-                                                                    <Avatar size={150} shape="square" src={item?.image} alt={item?.title} />
-                                                                </div>
 
-                                                                <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><FieldTimeOutlined /> {item?.createdAt}</p>
-                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><LikeOutlined /> 0</p>
-                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><CommentOutlined /> 0</p>
-                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><FundOutlined /> {item?.type}</p>
-                                                                </div>
-
-                                                                {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                        <p className="text-sm font-medium text-gray-500">200 <LikeOutlined /></p>
-                                                                        <p className="mt-20 text-sm font-medium text-gray-500">150 <CommentOutlined /></p>
-                                                                    </div> */}
-
-                                                                <div className="py-4 text-sm font-medium text-right text-gray-900">
-                                                                    <Tooltip placement="bottomRight" title={'View'}>
-                                                                        <Button type="text" shape="circle" icon={<EyeOutlined />} size="small" />
-                                                                    </Tooltip>
-                                                                    <Tooltip placement="bottomRight" title={'Edit'}>
-                                                                        <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
-                                                                    </Tooltip>
-                                                                    <Tooltip placement="bottomRight" title={'Delete'}>
-                                                                        <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" />
-                                                                    </Tooltip>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    ))}
-
+                                                    { dataTableGallery}
+                                                    
                                                 </div>
+
+                                                {hasNextPage && (
+                                                    <div className="text-center justify-center mx-auto">
+
+
+                                                        <div className="mt-4 sm:mt-0">
+                                                            <ButtonInput onClick={() => fetchNextPage()} shape="default" type="button" size="large" loading={isFetchingNextPage ? true : false} color={'indigo'} minW="fit">
+                                                                Load More
+                                                            </ButtonInput>
+                                                        </div>
+                                                    </div>
+                                                )}
+
+
+
+                                                <div className="text-center justify-center mx-auto">
+                                                    {/* <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"> */}
+                                                    {/* <h2 className="text-xl font-semibold text-gray-900">Button with Icons</h2> */}
+
+                                                    {/* <div className="flex flex-wrap gap-5 mt-8"> */}
+                                                    {/* <button
+                                                                type="button"
+                                                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500"
+                                                            >
+                                                                Button name
+                                                                <svg className="w-6 h-6 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                                                </svg>
+                                                            </button> */}
+
+                                                    {/* <button
+                                                                type="button"
+                                                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500"
+                                                            >
+                                                                <svg className="w-6 h-6 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+                                                                </svg>
+                                                                Button name
+                                                            </button> */}
+
+                                                    {/* <button type="button" className="inline-flex items-center justify-center p-3 font-semibold text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500">
+                                                                <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                                                </svg>
+                                                            </button> */}
+                                                    {/* </div> */}
+                                                    {/* </div> */}
+                                                </div>
+
 
 
 

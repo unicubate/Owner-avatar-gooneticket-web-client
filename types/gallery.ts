@@ -1,3 +1,9 @@
+import { PaginationResponse } from "@/utils/pagination-item";
+
+export type ResponseGalleryModel = {
+  value: Array<GalleryModel>;
+} & PaginationResponse;
+
 export type GalleryModel = {
   id: string;
   createdAt: Date;
@@ -12,6 +18,7 @@ export type GalleryModel = {
 export type GalleryFormModel = {
   title: string;
   whoCanSee: string;
-  description: boolean;
+  allowDownload: string;
+  description: string;
   attachment: any;
 };
