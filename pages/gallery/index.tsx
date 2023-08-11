@@ -9,6 +9,7 @@ import { Avatar, Button, Dropdown, Input, MenuProps, Tooltip } from "antd";
 import { arrayDonation, arrayGallery } from "@/components/mock";
 import Swal from 'sweetalert2';
 import { EmptyData } from "@/components/templates/empty-data";
+import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 
 
 const items: MenuProps['items'] = [
@@ -74,7 +75,7 @@ const Gallery = () => {
 
 
                 {showModal ? (
-                    <CreateOrUpdateDonation showModal={showModal} setShowModal={setShowModal} />
+                    <CreateOrUpdateGallery showModal={showModal} setShowModal={setShowModal} />
                 ) : null}
 
 
@@ -102,7 +103,7 @@ const Gallery = () => {
                                                 <div className="sm:flex sm:items-center sm:justify-between">
                                                     <div className="mt-4 sm:mt-0">
                                                         <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={'indigo'}>
-                                                            <PlusOutlined color="#ffff" /> Create File
+                                                            Create File
                                                         </ButtonInput>
                                                     </div>
                                                     <div className="mt-4 sm:mt-0">
@@ -114,40 +115,38 @@ const Gallery = () => {
                                                 <div className="divide-y divide-gray-200">
 
                                                     {galleryArrays.map((item, index) => (
-                                                        <>
-                                                            <div key={index} className="py-5 divide-y divide-gray-200">
-                                                                <div className="flex items-center">
-                                                                    <div className="relative flex-shrink-0 cursor-pointer">
-                                                                        <Avatar size={150} shape="square" src={item?.image} alt={item?.title} />
-                                                                    </div>
+                                                        <div key={index} className="py-5 divide-y divide-gray-200">
+                                                            <div className="flex items-center">
+                                                                <div className="relative flex-shrink-0 cursor-pointer">
+                                                                    <Avatar size={150} shape="square" src={item?.image} alt={item?.title} />
+                                                                </div>
 
-                                                                    <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                        <p className="mt-4 text-sm font-medium text-gray-500"><FieldTimeOutlined /> {item?.createdAt}</p>
-                                                                        <p className="mt-4 text-sm font-medium text-gray-500"><LikeOutlined /> 0</p>
-                                                                        <p className="mt-4 text-sm font-medium text-gray-500"><CommentOutlined /> 0</p>
-                                                                        <p className="mt-4 text-sm font-medium text-gray-500"><FundOutlined /> {item?.type}</p>
-                                                                    </div>
+                                                                <div className="flex-1 min-w-0 ml-4 cursor-pointer">
+                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><FieldTimeOutlined /> {item?.createdAt}</p>
+                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><LikeOutlined /> 0</p>
+                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><CommentOutlined /> 0</p>
+                                                                    <p className="mt-4 text-sm font-medium text-gray-500"><FundOutlined /> {item?.type}</p>
+                                                                </div>
 
-                                                                    {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">
+                                                                {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">
                                                                         <p className="text-sm font-medium text-gray-500">200 <LikeOutlined /></p>
                                                                         <p className="mt-20 text-sm font-medium text-gray-500">150 <CommentOutlined /></p>
                                                                     </div> */}
 
-                                                                    <div className="py-4 text-sm font-medium text-right text-gray-900">
-                                                                        <Tooltip placement="bottomRight" title={'View'}>
-                                                                            <Button type="link" shape="circle" icon={<EyeOutlined />} size="small" />
-                                                                        </Tooltip>
-                                                                        <Tooltip placement="bottomRight" title={'Edit'}>
-                                                                            <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
-                                                                        </Tooltip>
-                                                                        <Tooltip placement="bottomRight" title={'Delete'}>
-                                                                            <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" />
-                                                                        </Tooltip>
-                                                                    </div>
+                                                                <div className="py-4 text-sm font-medium text-right text-gray-900">
+                                                                    <Tooltip placement="bottomRight" title={'View'}>
+                                                                        <Button type="text" shape="circle" icon={<EyeOutlined />} size="small" />
+                                                                    </Tooltip>
+                                                                    <Tooltip placement="bottomRight" title={'Edit'}>
+                                                                        <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
+                                                                    </Tooltip>
+                                                                    <Tooltip placement="bottomRight" title={'Delete'}>
+                                                                        <Button type="link" danger shape="circle" icon={<DeleteOutlined />} size="small" />
+                                                                    </Tooltip>
                                                                 </div>
                                                             </div>
+                                                        </div>
 
-                                                        </>
                                                     ))}
 
                                                 </div>

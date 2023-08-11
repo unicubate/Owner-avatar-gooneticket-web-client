@@ -20,7 +20,7 @@ import * as yup from "yup";
 import { TextAreaInput, TextInput } from "@/components/util/form";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { useQuery } from "@tanstack/react-query";
-import { getOneUserPublicAPI } from "../api/user";
+import { getOneUserPublicAPI } from "../../api/user";
 
 const schema = yup.object({
   email: yup

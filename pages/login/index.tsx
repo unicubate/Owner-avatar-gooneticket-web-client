@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput, TextInputPassword } from "@/components/util/form";
 import { UserLoginFormModel } from "@/types/user.type";
-import { getOneUserPublicAPI, loginUserAPI, resendCodeAPI } from "../api/user";
+import { getOneUserPublicAPI, loginUserAPI, resendCodeAPI } from "../../api/user";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";

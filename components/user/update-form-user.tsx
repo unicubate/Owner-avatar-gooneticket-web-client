@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
-import { getOneUserPublicAPI } from '@/pages/api/user';
+import { getOneUserPublicAPI } from '@/api/user';
 
 type Props = {
     userId: string

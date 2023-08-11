@@ -20,9 +20,9 @@ import {
   getAllCountiesAPI,
   getAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
-} from "@/pages/api/profile";
+} from "@/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
-import { getOneUserPublicAPI, resendCodeAPI } from "@/pages/api/user";
+import { getOneUserPublicAPI, resendCodeAPI } from "@/api/user";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { ButtonInput } from "@/components/templates/button-input";
 

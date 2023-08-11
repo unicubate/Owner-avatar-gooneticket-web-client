@@ -9,7 +9,7 @@ import {
 } from "react";
 import { UserModel } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
-import { getOneUserPrivateAPI } from "@/pages/api/user";
+import { getOneUserPrivateAPI } from "@/api/user";
 import jwt_decode from "jwt-decode";
 
 type AuthContextProps = {

@@ -1,4 +1,6 @@
 import { ColorType } from "@/types/profile.type";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 
 
@@ -38,11 +40,13 @@ const ButtonInput: React.FC<Props> = ({
   children,
   onClick,
 }) => {
+  const antIcon = <LoadingOutlined style={{ fontSize: 24, color: "#ffff" }} spin />;
   return (
     <>
       <button
         type={loading ? 'button' : type}
         onClick={onClick}
+        disabled={loading ? true : false}
         className={`
             rounded-${shapeType[String(shape ?? 'default')]}
             inline-flex
@@ -69,7 +73,7 @@ const ButtonInput: React.FC<Props> = ({
         `}
 
       >
-        {loading ? <>Please wait...</> : <>{children}</>}
+        {loading ? <><Spin indicator={antIcon} /> <span className="px-2">Please wait...</span></> : <>{children}</>}
       </button>
     </>
   );

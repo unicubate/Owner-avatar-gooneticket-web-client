@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Select, Space } from 'antd';
-import { UpdateOneProfileAPI, getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/pages/api/profile';
+import { UpdateOneProfileAPI, getAllCountiesAPI, getAllCurrenciesAPI, getOneProfileAPI } from '@/api/profile';
 import { useQuery } from '@tanstack/react-query';
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
