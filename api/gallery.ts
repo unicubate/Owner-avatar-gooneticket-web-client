@@ -4,7 +4,7 @@ import { PaginationRequest } from "@/utils/pagination-item";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { RcFile } from "antd/es/upload";
 
-export const CreateOneGalleryAPI = ({
+export const CreateOrUpdateOneGalleryAPI = ({
   onSuccess,
   onError,
 }: {
@@ -13,7 +13,11 @@ export const CreateOneGalleryAPI = ({
 } = {}) => {
   const queryClient = useQueryClient();
   const result = useMutation(
-    async (payload: GalleryFormModel): Promise<any> => {
+    async (
+      payload: GalleryFormModel & { galleryId?: string }
+    ): Promise<any> => {
+      const { galleryId } = payload;
+
       let data = new FormData();
       data.append("title", payload.title ?? "");
       data.append("description", payload.description ?? "");
@@ -25,10 +29,16 @@ export const CreateOneGalleryAPI = ({
           data.append("attachment", file?.originFileObj as RcFile);
         });
 
-      return await makeApiCall({
-        action: "createOneGallery",
-        body: data,
-      });
+      return galleryId
+        ? await makeApiCall({
+            action: "updateOneGallery",
+            body: payload,
+            urlParams: { galleryId },
+          })
+        : await makeApiCall({
+            action: "createOneGallery",
+            body: data,
+          });
     },
     {
       onSettled: async () => {

@@ -145,6 +145,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/galleries`,
     method: POST,
   },
+  updateOneGallery: {
+    endpoint: `${baseUrl}/galleries/:galleryId`,
+    method: PUT,
+  },
   deleteOneGallery: {
     endpoint: `${baseUrl}/galleries/:galleryId`,
     method: DELETE,

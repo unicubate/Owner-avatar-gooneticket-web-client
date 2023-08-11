@@ -8,6 +8,7 @@ import { Avatar, Button, Tooltip } from 'antd';
 import { CommentOutlined, DeleteOutlined, EditOutlined, EyeOutlined, FieldTimeOutlined, FundOutlined, LikeOutlined } from '@ant-design/icons';
 import { DeleteOneGalleryAPI } from '@/api/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CreateOrUpdateGallery } from './create-or-update-gallery';
 
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
 }
 
 const ListGallery: React.FC<Props> = ({ item, index }) => {
-    const [openCreateOrUpdateModal, setOpenCreateOrUpdateModal] = useState<boolean>(false)
+    const [openModal, setOpenModal] = useState<boolean>(false)
 
     const saveMutation = DeleteOneGalleryAPI({
         onSuccess: () => { },
@@ -35,7 +36,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             showCancelButton: true,
             reverseButtons: true,
             showClass: {
-                popup: 'animate__animated animate__pulse'
+                popup: 'animate__animated contributions'
             },
             // hideClass: {
             //     popup: 'animate__animated animate__bounceOut'
@@ -89,7 +90,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                             <Button type="text" shape="circle" icon={<EyeOutlined />} size="small" />
                         </Tooltip>
                         <Tooltip placement="bottomRight" title={'Edit'}>
-                            <Button type="link" shape="circle" icon={<EditOutlined />} size="small" />
+                            <Button type="link" onClick={() => setOpenModal(true)} shape="circle" icon={<EditOutlined />} size="small" />
                         </Tooltip>
                         <Tooltip placement="bottomRight" title={'Delete'}>
                             <Button type="link" onClick={() => deleteItem(item)} danger shape="circle" icon={<DeleteOutlined />} size="small" />
@@ -98,6 +99,11 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 </div>
             </div>
 
+            {openModal && (<CreateOrUpdateGallery
+                gallery={item}
+                openModal={openModal}
+                setOpenModal={setOpenModal}
+            />)}
         </>
     )
 }

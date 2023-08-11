@@ -4,13 +4,13 @@ import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { CloseOutlined, InboxOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { ButtonInput } from '../templates/button-input';
-import { Alert, Button, Checkbox, Upload, UploadFile } from 'antd';
-import { useState } from 'react';
+import { Alert, Avatar, Button, Checkbox, Upload, UploadFile } from 'antd';
+import { useEffect, useState } from 'react';
 import { SelectSearchInput } from '../util/form/select-search-input';
 import { RcFile } from 'antd/es/upload';
 import { GalleryFormModel } from '@/types/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
-import { CreateOneGalleryAPI } from '@/api/gallery';
+import { CreateOrUpdateOneGalleryAPI } from '@/api/gallery';
 
 const { Dragger } = Upload;
 
@@ -21,15 +21,20 @@ const schema = yup.object({
     allowDownload: yup.string().required(),
 });
 
+type Props = {
+    openModal: boolean,
+    setOpenModal: any,
+    gallery?: any
+}
 
-
-const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }> = ({ showModal, setShowModal }) => {
+const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, gallery }) => {
     const [loading, setLoading] = useState(false);
     const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
         undefined
     );
     const {
         control,
+        setValue,
         handleSubmit,
         formState: { errors },
     } = useForm<any>({
@@ -38,7 +43,16 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
     });
 
 
-    const saveMutation = CreateOneGalleryAPI({
+    useEffect(() => {
+        if (gallery) {
+            const fields = ['title', 'description', 'whoCanSee', 'allowDownload'];
+            fields?.forEach((field: any) => setValue(field, gallery[field]));
+        }
+    }, [gallery, setValue]);
+
+
+    // Create or Update data
+    const saveMutation = CreateOrUpdateOneGalleryAPI({
         onSuccess: () => {
             setHasErrors(false);
             setLoading(false);
@@ -56,7 +70,7 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
         setHasErrors(undefined);
         try {
             await saveMutation.mutateAsync({
-                ...payload,
+                ...payload, galleryId: gallery?.id
             });
             setHasErrors(false);
             setLoading(false);
@@ -66,7 +80,7 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                 gravity: "top",
                 position: "center",
             });
-            setShowModal(false)
+            setOpenModal(false)
         } catch (error: any) {
             setHasErrors(true);
             setLoading(false);
@@ -82,13 +96,13 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
 
     return (
         <>
-            {showModal ? (
+            {openModal ? (
                 <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
                     <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-                    <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
+                    <div className="w-full  max-w-xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
                         <button
                             className="bg-transparent border-0 text-black float-right"
-                            onClick={() => setShowModal(false)}
+                            onClick={() => setOpenModal(false)}
                         >
                             <span className="text-black opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
                                 <CloseOutlined />
@@ -104,33 +118,44 @@ const CreateOrUpdateGallery: React.FC<{ showModal: boolean, setShowModal: any }>
                                     : null}
 
 
-                                <div className="mb-4">
-                                    <Controller
-                                        name="attachment"
-                                        control={control}
-                                        render={({ field: { onChange } }) => (
-                                            <>
-                                                <div className="text-center justify-center mx-auto">
-                                                    <Upload
-                                                        name="attachment"
-                                                        listType="picture"
-                                                        maxCount={1}
-                                                        className="upload-list-inline"
-                                                        onChange={onChange}
-                                                        accept=".png,.jpg"
-                                                    >
-                                                        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                                                    </Upload>
-                                                </div>
-                                            </>
-                                        )}
-                                    />
-                                    {/* {errors?.attachment && (
+
+
+
+                                {gallery?.id ? <div className="mt-2 text-center space-x-2">
+
+                                    <Avatar size={200} shape="square" src={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'} alt={gallery?.title} />
+
+                                </div> :
+                                    <div className="mb-4">
+
+                                        <Controller
+                                            name="attachment"
+                                            control={control}
+                                            render={({ field: { onChange } }) => (
+                                                <>
+                                                    <div className="text-center justify-center mx-auto">
+                                                        <Upload
+                                                            name="attachment"
+                                                            listType="picture"
+                                                            maxCount={1}
+                                                            className="upload-list-inline"
+                                                            onChange={onChange}
+                                                            accept=".png,.jpg"
+                                                        >
+                                                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+                                                        </Upload>
+                                                    </div>
+                                                </>
+                                            )}
+                                        />
+                                        {/* {errors?.attachment && (
                                         <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
                                             {errors?.attachment?.message}
                                         </span>
                                     )} */}
-                                </div>
+                                    </div>}
+
+
                                 <div className="mb-4">
                                     <TextInput
                                         control={control}

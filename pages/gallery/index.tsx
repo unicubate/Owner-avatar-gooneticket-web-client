@@ -18,7 +18,7 @@ import ListGallery from "@/components/gallery/list-gallery";
 
 const Gallery = () => {
     const [galleryArrays] = useState(arrayGallery)
-    const [showModal, setShowModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
     const userId = '27470c31-8409-48d4-bbfc-90f773534ef3'
 
     const fetchData = async (pageParam: number) => await
@@ -107,8 +107,11 @@ const Gallery = () => {
             <LayoutDashboard title={"Gallery"}>
 
 
-                {showModal ? (
-                    <CreateOrUpdateGallery showModal={showModal} setShowModal={setShowModal} />
+                {openModal ? (
+                    <CreateOrUpdateGallery
+                        openModal={openModal}
+                        setOpenModal={setOpenModal}
+                    />
                 ) : null}
 
 
@@ -135,7 +138,7 @@ const Gallery = () => {
 
                                                 <div className="sm:flex sm:items-center sm:justify-between">
                                                     <div className="mt-4 sm:mt-0">
-                                                        <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={'indigo'}>
+                                                        <ButtonInput onClick={() => setOpenModal(true)} shape="default" type="button" size="normal" loading={false} color={'indigo'}>
                                                             Create File
                                                         </ButtonInput>
                                                     </div>
@@ -148,8 +151,8 @@ const Gallery = () => {
                                                 <div className="divide-y divide-gray-200">
 
 
-                                                    { dataTableGallery}
-                                                    
+                                                    {dataTableGallery}
+
                                                 </div>
 
                                                 {hasNextPage && (
