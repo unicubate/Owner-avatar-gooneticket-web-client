@@ -35,12 +35,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             cancelButtonColor: '#BEC1C5',
             showCancelButton: true,
             reverseButtons: true,
-            showClass: {
-                popup: 'animate__animated contributions'
-            },
-            // hideClass: {
-            //     popup: 'animate__animated animate__bounceOut'
-            // },
         }).then(async (result) => {
             if (result.value) {
                 //Envoyer la requet au serve

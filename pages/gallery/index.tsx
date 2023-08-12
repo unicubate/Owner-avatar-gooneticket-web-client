@@ -126,7 +126,7 @@ const Gallery = () => {
                                 </div>
                             </div>
 
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
 
                                 {/* <HorizontalNavDonation /> */}
 
