@@ -117,3 +117,8 @@ export const getGalleriesApi = async (
     queryParams: payload,
   });
 };
+
+export const getOneFileGalleryAPI = (fileName: string) =>
+  fileName
+    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/galleries/file/${fileName}`
+    : null;

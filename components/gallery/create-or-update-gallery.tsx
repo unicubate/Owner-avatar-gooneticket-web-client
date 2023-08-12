@@ -10,7 +10,7 @@ import { SelectSearchInput } from '../util/form/select-search-input';
 import { RcFile } from 'antd/es/upload';
 import { GalleryFormModel } from '@/types/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
-import { CreateOrUpdateOneGalleryAPI } from '@/api/gallery';
+import { CreateOrUpdateOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
 
 const { Dragger } = Upload;
 
@@ -121,9 +121,9 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
 
 
 
-                                {gallery?.id ? <div className="mt-2 text-center space-x-2">
+                                {gallery?.path ? <div className="mt-2 text-center space-x-2">
 
-                                    <Avatar size={200} shape="square" src={'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png'} alt={gallery?.title} />
+                                    <Avatar size={200} shape="square" src={getOneFileGalleryAPI(String(gallery?.path))} alt={gallery?.title} />
 
                                 </div> :
                                     <div className="mb-4">
