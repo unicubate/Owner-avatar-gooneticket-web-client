@@ -18,7 +18,7 @@ const schema = yup.object({
     title: yup.string().optional(),
     description: yup.string().optional(),
     whoCanSee: yup.string().required(),
-    allowDownload: yup.string().required(),
+    allowDownload: yup.string().optional(),
 });
 
 type Props = {
@@ -140,7 +140,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
                                                             maxCount={1}
                                                             className="upload-list-inline"
                                                             onChange={onChange}
-                                                            accept=".png,.jpg"
+                                                            // accept=".png,.jpg"
                                                         >
                                                             <Button icon={<UploadOutlined />}>Click to Upload</Button>
                                                         </Upload>

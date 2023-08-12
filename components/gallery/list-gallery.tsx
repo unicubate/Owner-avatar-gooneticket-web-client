@@ -9,6 +9,7 @@ import { CommentOutlined, DeleteOutlined, EditOutlined, EyeOutlined, FieldTimeOu
 import { DeleteOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateGallery } from './create-or-update-gallery';
+import ReactPlayer from 'react-player'
 
 
 type Props = {
