@@ -14,6 +14,7 @@ import jwt_decode from "jwt-decode";
 
 type AuthContextProps = {
   user: UserModel | undefined;
+  userStorage: any;
   setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
   logout: () => void;
 };
@@ -67,7 +68,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...user, logout }}>
+    <AuthContext.Provider value={{ ...user, userStorage, logout }}>
       {children}
     </AuthContext.Provider>
   );

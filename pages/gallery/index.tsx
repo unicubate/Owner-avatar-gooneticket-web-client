@@ -3,38 +3,21 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { ButtonInput } from "@/components/templates/button-input";
 import { useEffect, useState } from "react";
-import { CreateOrUpdateDonation } from "@/components/donation/create-or-update-donation";
-import {
-  CommentOutlined,
-  CopyOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
-  FieldTimeOutlined,
-  FundOutlined,
-  HeartOutlined,
-  LikeOutlined,
-  PlusOutlined,
-  SmallDashOutlined,
-} from "@ant-design/icons";
-import { Avatar, Button, Dropdown, Input, MenuProps, Tooltip } from "antd";
-import { arrayDonation, arrayGallery } from "@/components/mock";
-import Swal from "sweetalert2";
+import { Input } from "antd";
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { DeleteOneGalleryAPI, getGalleriesApi } from "@/api/gallery";
-import { AlertDangerNotification, useDebounce } from "@/utils";
 import ListGallery from "@/components/gallery/list-gallery";
+import { useAuth } from "@/components/util/session/context-user";
 
 const Gallery = () => {
-  const [galleryArrays] = useState(arrayGallery);
+  const { userStorage } = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
-  const userId = "27470c31-8409-48d4-bbfc-90f773534ef3";
 
   const fetchData = async (pageParam: number) =>
     await getGalleriesApi({
-      userId: userId,
+      userId: userStorage?.id,
       take: 6,
       page: pageParam,
       sort: "DESC",
@@ -60,7 +43,7 @@ const Gallery = () => {
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages?.length <= 0 ? (
-    ""
+    <EmptyData title="Gallery" description="Add " />
   ) : (
     dataGallery.pages
       .flatMap((page: any) => page?.data?.value)
