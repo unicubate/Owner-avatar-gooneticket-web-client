@@ -115,7 +115,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
             setLoading(false);
             AlertSuccessNotification({
                 text: `Information save successfully`,
-                gravity: "bottom",
+                gravity: "top",
                 className: "info",
                 position: "center",
             });
@@ -315,10 +315,12 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                         </div>
 
 
-                        <div className="mt-8">
-                            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={user?.profile?.color}>
-                                Save changes
-                            </ButtonInput>
+                        <div className="sm:flex flex-col sm:items-end sm:justify-between">
+                            <div className="mt-4">
+                                <ButtonInput shape="default" type="submit" size="large" loading={loading} color={user?.profile?.color}>
+                                    Save changes
+                                </ButtonInput>
+                            </div>
                         </div>
 
                     </div>

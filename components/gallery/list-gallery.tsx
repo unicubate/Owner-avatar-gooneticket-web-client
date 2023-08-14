@@ -9,7 +9,6 @@ import { CommentOutlined, DeleteOutlined, EditOutlined, EyeOutlined, FieldTimeOu
 import { DeleteOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateGallery } from './create-or-update-gallery';
-import ReactPlayer from 'react-player'
 
 
 type Props = {
@@ -69,10 +68,11 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                     </div>
 
                     <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                        <p className="mt-4 text-sm font-medium text-gray-500"><FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}</p>
-                        <p className="mt-4 text-sm font-medium text-gray-500"><LikeOutlined /> 0</p>
-                        <p className="mt-4 text-sm font-medium text-gray-500"><CommentOutlined /> 0</p>
-                        <p className="mt-4 text-sm font-medium text-gray-500"><FundOutlined /> {item?.whoCanSee}</p>
+                        {item?.title ? <p className="mt-2 text-lg font-bold text-gray-500">{item?.title}</p> : null}
+                        <p className="mt-2 text-sm font-medium text-gray-500"><FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}</p>
+                        <p className="mt-2 text-sm font-medium text-gray-500"><LikeOutlined /> 0</p>
+                        <p className="mt-2 text-sm font-medium text-gray-500"><CommentOutlined /> 0</p>
+                        <p className="mt-2 text-sm font-medium text-gray-500"><FundOutlined /> {item?.whoCanSee}</p>
                     </div>
 
                     {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">

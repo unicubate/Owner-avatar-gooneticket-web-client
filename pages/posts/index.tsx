@@ -1,10 +1,14 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
+import { AudioMutedOutlined } from "@ant-design/icons";
+import { BiDetail } from "react-icons/bi";
+import { LuFileAudio2 } from "react-icons/lu";
+import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 
 
 
-const Articles = () => {
+const Posts = () => {
     const onSubmit: SubmitHandler<any> = (payload: any) => {
         // let data = new FormData();
         // data.append("confirm", `${payload.confirm}`);
@@ -18,7 +22,7 @@ const Articles = () => {
 
     return (
         <>
-            <LayoutDashboard title={"Articles"}>
+            <LayoutDashboard title={"Posts"}>
 
 
                 <div className="flex flex-col flex-1">
@@ -33,21 +37,59 @@ const Articles = () => {
                                 </div>
                             </div>
 
+
+
+                            <div className="px-4 mx-auto sm:px-6 md:px-8">
+                                <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-2 sm:gap-8 xl:gap-12">
+                                    <HorizontalNavCreatePost />
+                                </div>
+                                {/* <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-2 sm:gap-8 xl:gap-12">
+                                    <div className="bg-white border border-gray-200 rounded-xl">
+                                        <div className="p-6 lg:px-10 lg:py-8">
+                                            <div className="flex items-center justify-start space-x-">
+                                                <BiDetail className="flex-shrink-0 w-10 h-10 text-gray-600 md:w-12 md:h-12" />
+                                                <div>
+                                                    <h3 className="text-sm font-bold text-gray-900 sm:text-base lg:text-lg">
+                                                        <a href="#" title="">
+                                                            Write a post
+                                                        </a>
+                                                    </h3>
+                                                    <p className="mt-2 text-sm font-medium text-gray-500">983 Available Posts</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div className="bg-white border border-gray-200 rounded-xl">
+                                        <div className="p-6 lg:px-10 lg:py-8">
+                                            <div className="flex items-center justify-start space-x-3">
+                                                <LuFileAudio2 className="flex-shrink-0 w-10 h-10 text-gray-600 md:w-12 md:h-12" />
+                                                <div>
+                                                    <h3 className="text-sm font-bold text-gray-900 sm:text-base lg:text-lg">
+                                                        <a href="#" title="">
+                                                            Audio post
+                                                        </a>
+                                                    </h3>
+                                                    <p className="mt-2 text-sm font-medium text-gray-500">142 Available Audio Posts</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> */}
+                            </div>
+
+
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
                                 <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
                                     <nav className="flex flex-wrap gap-4">
-                                        <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Write a post </a>
+                                        <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Publisher </a>
 
-                                        <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Audio post </a>
+                                        <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Drafter </a>
 
-                                        {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Team </a>
 
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 rounded-lg group whitespace-nowrap bg-transparent hover:text-gray-900 hover:bg-gray-100"> Notification </a>
+                                        <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Scheduled </a>
 
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 transition-all duration-200 rounded-lg group whitespace-nowrap bg-gray-100"> Billing Details </a>
-
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Integrations </a> */}
                                     </nav>
                                 </div>
 
@@ -57,7 +99,7 @@ const Articles = () => {
 
 
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                                <div className="w-full pb-1 overflow-x-auto">
+                                {/* <div className="w-full pb-1 overflow-x-auto">
                                     <div className="border-b border-gray-200">
                                         <nav className="flex -mb-px space-x-10">
                                             <a href="#" className="py-4 text-sm font-medium text-indigo-500 transition-all duration-200 border-b-2 border-indigo-600 whitespace-nowrap"> Publisher </a>
@@ -67,7 +109,7 @@ const Articles = () => {
                                             <a href="#" className="py-4 text-sm font-medium text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap"> Scheduled </a>
                                         </nav>
                                     </div>
-                                </div>
+                                </div> */}
 
 
 
@@ -364,4 +406,4 @@ const Articles = () => {
     );
 };
 
-export default PrivateComponent(Articles);
+export default PrivateComponent(Posts);

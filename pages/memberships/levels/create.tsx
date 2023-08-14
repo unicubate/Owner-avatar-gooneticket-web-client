@@ -290,22 +290,6 @@ const MembershipsLevelCreate = () => {
                 </div>
             </LayoutDashboard>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </>
     );
 };

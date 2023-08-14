@@ -95,11 +95,12 @@ const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
 
                         </div>
 
-
-                        <div className="mt-8">
-                            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={user?.profile?.color}>
-                                Save changes
-                            </ButtonInput>
+                        <div className="sm:flex flex-col sm:items-end sm:justify-between">
+                            <div className="mt-4">
+                                <ButtonInput shape="default" type="submit" size="large" loading={loading} color={user?.profile?.color}>
+                                    Save changes
+                                </ButtonInput>
+                            </div>
                         </div>
 
                     </div>

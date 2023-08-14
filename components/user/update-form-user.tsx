@@ -60,43 +60,47 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
     };
 
     return (
-        <> 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <>
+            <form onSubmit={handleSubmit(onSubmit)}>
 
-            <div className="overflow-hidden bg-white border border-gray-200">
+                <div className="overflow-hidden bg-white border border-gray-200">
 
-                <div className="px-4 py-5">
-                    <h2 className="text-base font-bold text-gray-900"> Personal Info </h2>
+                    <div className="px-4 py-5">
+                        <h2 className="text-base font-bold text-gray-900"> Personal Info </h2>
 
-                    <div className="grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6">
+                        <div className="grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6">
 
-                        <div>
-                            <div className="mt-2">
-                                <TextInput
-                                    control={control}
-                                    label="Username"
-                                    type="text"
-                                    name="username"
-                                    placeholder="username"
-                                    errors={errors}
-                                    prefix={`${process.env.NEXT_PUBLIC_SITE}/`}
-                                />
+                            <div>
+                                <div className="mt-2">
+                                    <TextInput
+                                        control={control}
+                                        label="Username"
+                                        type="text"
+                                        name="username"
+                                        placeholder="username"
+                                        errors={errors}
+                                        prefix={`${process.env.NEXT_PUBLIC_SITE}/`}
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div className="sm:flex flex-col sm:items-end sm:justify-between">
+                            <div className="mt-4">
+                                <ButtonInput shape="default" type="submit" size="large" loading={loading} color={user?.profile?.color}>
+                                    Save changes
+                                </ButtonInput>
                             </div>
                         </div>
 
                     </div>
-
-
-                    <div className="mt-8">
-                        <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={user?.profile?.color}>
-                            Save changes
-                        </ButtonInput>
-                    </div>
-
                 </div>
-            </div>
 
-        </form>
+            </form>
         </>
     )
 }

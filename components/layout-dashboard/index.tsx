@@ -17,7 +17,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
     <>
       <Head>
         <title>
-          {process.env.NEXT_PUBLIC_NAME_SITE} | {title}
+          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
         </title>
       </Head>
 
@@ -26,7 +26,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
         <div className="flex flex-1">
 
-          <HeaderVerticalNavDashboard user={user}  />
+          <HeaderVerticalNavDashboard user={user} />
 
 
           {children}

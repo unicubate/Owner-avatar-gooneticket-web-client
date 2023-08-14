@@ -11,6 +11,7 @@ import { RcFile } from 'antd/es/upload';
 import { GalleryFormModel } from '@/types/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
 import { CreateOrUpdateOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
+import { arrayWhoCanSees } from '@/types/post';
 
 const { Dragger } = Upload;
 
@@ -45,7 +46,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
 
     useEffect(() => {
         if (gallery) {
-            const fields = ['title', 'description', 'whoCanSee', 'allowDownload'];
+            const fields = ['title', 'description', 'whoCanSee', 'type'];
             fields?.forEach((field: any) => setValue(field, gallery[field]));
         }
     }, [gallery, setValue]);
@@ -75,7 +76,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
             setHasErrors(false);
             setLoading(false);
             AlertSuccessNotification({
-                text: "Image save successfully",
+                text: "Post save successfully",
                 className: "info",
                 gravity: "top",
                 position: "center",
@@ -175,11 +176,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
                                         placeholder="Select who can see this post?"
                                         valueType="text"
                                         name="whoCanSee"
-                                        dataItem={[
-                                            { name: "PUBLIC" },
-                                            { name: "MEMBERSHIP" },
-                                            { name: "PRIVATE" },
-                                        ]}
+                                        dataItem={arrayWhoCanSees}
                                     />
                                 </div>
                                 <div className="mb-4">
