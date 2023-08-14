@@ -30,7 +30,7 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
         <>
             {navigation.map((item: any, index: number) => {
                 return (
-                    <div key={index} className="bg-white border border-gray-200 rounded-xl">
+                    <div key={index} className="bg-white border border-gray-200 rounded-xl hover:-translate-y-1">
                         <div className="p-6 lg:px-10 lg:py-8">
                             <div className="flex items-center justify-start space-x-3">
                                 {item?.icon}
