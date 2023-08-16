@@ -13,7 +13,8 @@ export type UserRegisterFormModel = {
   email: string;
   confirm: boolean;
   password: string;
-  fullName: string;
+  firstName: string;
+  lastName: string;
   birthday?: string;
   nextStep?: NextStep;
 };

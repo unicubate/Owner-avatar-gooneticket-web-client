@@ -25,7 +25,8 @@ const schema = yup.object({
     .max(50, "Maximum 50 symbols")
     .required(),
   password: yup.string().min(8, "Minimum 8 symbols").required(),
-  fullName: yup.string().required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
   confirm: yup
     .boolean()
     .oneOf([true], "Please check the box to deactivate your account")
@@ -106,9 +107,20 @@ const Register = () => {
           <div className="mb-4">
             <TextInput
               control={control}
-              label="Full Name"
+              label="First Name"
               type="text"
-              name="fullName"
+              name="firstName"
+              placeholder="Full Name"
+              errors={errors}
+            />
+          </div>
+
+          <div className="mb-4">
+            <TextInput
+              control={control}
+              label="Last Name"
+              type="text"
+              name="lastName"
               placeholder="Full Name"
               errors={errors}
             />

@@ -74,6 +74,7 @@ const ButtonInput: React.FC<Props> = ({
             hover:bg-${color}-${loading ? '200' : '500'}
         `}
       >
+        
         {loading ? <><Spin indicator={antIcon} /> <span className="px-2">Please wait...</span></> : <>{children}</>}
       </button>
     </>

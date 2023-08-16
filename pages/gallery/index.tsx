@@ -7,7 +7,7 @@ import { Input } from "antd";
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { DeleteOneGalleryAPI, getGalleriesApi } from "@/api/gallery";
+import { DeleteOneGalleryAPI, getGalleriesAPI } from "@/api/gallery";
 import ListGallery from "@/components/gallery/list-gallery";
 import { useAuth } from "@/components/util/session/context-user";
 
@@ -16,7 +16,7 @@ const Gallery = () => {
     const [openModal, setOpenModal] = useState(false);
 
     const fetchData = async (pageParam: number) =>
-        await getGalleriesApi({
+        await getGalleriesAPI({
             userId: userStorage?.id,
             take: 6,
             page: pageParam,

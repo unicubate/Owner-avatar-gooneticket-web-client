@@ -26,8 +26,8 @@ interface Props {
 const HeaderVerticalNavDashboard: React.FC<Props> = ({ user }) => {
   return (
     <>
-      <div className="hidden border-r border-gray-200 md:flex md:w-64 md:flex-col">
-        <div className="flex flex-col pt-5 overflow-y-auto">
+      <div className="hidden border-r border-gray-200 md:flex md:w-64 md:flex-col overflow-y-auto">
+        <div className="flex flex-col pt-5 max-h-screen overflow-y-auto">
 
           <VerticalNavDashboard user={user} />
 

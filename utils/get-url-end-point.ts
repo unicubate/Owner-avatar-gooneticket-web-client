@@ -129,7 +129,6 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/users/profile/show/:profileId`,
     method: GET,
   },
-
   /****************** Currency or Countries route */
   getAllCurrencies: {
     endpoint: `${baseUrl}/currencies`,
@@ -137,6 +136,23 @@ export const apiEndpoints: ClientApiMethods = {
   },
   getAllCounties: {
     endpoint: `${baseUrl}/countries`,
+    method: GET,
+  },
+  /****************** Follows route */
+  getFollowers: {
+    endpoint: `${baseUrl}/follows/followers`,
+    method: GET,
+  },
+  getFollowings: {
+    endpoint: `${baseUrl}/follows/followings`,
+    method: GET,
+  },
+  createOneFollowers: {
+    endpoint: `${baseUrl}/follows/create/:followerId`,
+    method: GET,
+  },
+  deleteOneFollowers: {
+    endpoint: `${baseUrl}/follows/delete/:followerId`,
     method: GET,
   },
 

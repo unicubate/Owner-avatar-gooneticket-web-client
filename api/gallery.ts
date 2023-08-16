@@ -107,7 +107,7 @@ export const DeleteOneGalleryAPI = ({
   return result;
 };
 
-export const getGalleriesApi = async (
+export const getGalleriesAPI = async (
   payload: {
     userId: string;
   } & PaginationRequest

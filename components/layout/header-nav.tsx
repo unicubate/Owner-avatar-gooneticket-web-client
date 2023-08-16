@@ -9,7 +9,7 @@ const HeaderNav = () => {
     <>
      
     <header className="bg-white border-[1px] border-gray-300 sticky top-0 z-20">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <Navbar user={user} />
       </div>
     </header>
