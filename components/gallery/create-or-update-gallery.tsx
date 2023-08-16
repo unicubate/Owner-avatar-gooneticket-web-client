@@ -7,11 +7,9 @@ import { ButtonInput } from '../templates/button-input';
 import { Alert, Avatar, Button, Checkbox, Upload, UploadFile } from 'antd';
 import { useEffect, useState } from 'react';
 import { SelectSearchInput } from '../util/form/select-search-input';
-import { RcFile } from 'antd/es/upload';
-import { GalleryFormModel } from '@/types/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils/alert-notification';
-import { CreateOrUpdateOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
-import { arrayWhoCanSees } from '@/types/post';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import { CreateOrUpdateOnePostGalleryAPI, getOneFileGalleryAPI } from '@/api/post';
 
 const { Dragger } = Upload;
 
@@ -25,10 +23,10 @@ const schema = yup.object({
 type Props = {
     openModal: boolean,
     setOpenModal: any,
-    gallery?: any
+    post?: any
 }
 
-const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, gallery }) => {
+const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, post }) => {
     const [loading, setLoading] = useState(false);
     const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
         undefined
@@ -45,15 +43,15 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
 
 
     useEffect(() => {
-        if (gallery) {
-            const fields = ['title', 'description', 'whoCanSee', 'type'];
-            fields?.forEach((field: any) => setValue(field, gallery[field]));
+        if (post) {
+            const fields = ['title', 'description', 'whoCanSee', 'type', 'allowDownload'];
+            fields?.forEach((field: any) => setValue(field, post[field]));
         }
-    }, [gallery, setValue]);
+    }, [post, setValue]);
 
 
     // Create or Update data
-    const saveMutation = CreateOrUpdateOneGalleryAPI({
+    const saveMutation = CreateOrUpdateOnePostGalleryAPI({
         onSuccess: () => {
             setHasErrors(false);
             setLoading(false);
@@ -64,14 +62,14 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
         },
     });
 
-    const onSubmit: SubmitHandler<GalleryFormModel> = async (
-        payload: GalleryFormModel
+    const onSubmit: SubmitHandler<PostFormModel> = async (
+        payload: PostFormModel
     ) => {
         setLoading(true);
         setHasErrors(undefined);
         try {
             await saveMutation.mutateAsync({
-                ...payload, galleryId: gallery?.id
+                ...payload, postId: post?.id, type: 'GALLERY'
             });
             setHasErrors(false);
             setLoading(false);
@@ -122,9 +120,9 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
 
 
 
-                                {gallery?.path ? <div className="mt-2 text-center space-x-2">
+                                {post?.image ? <div className="mt-2 text-center space-x-2">
 
-                                    <Avatar size={200} shape="square" src={getOneFileGalleryAPI(String(gallery?.path))} alt={gallery?.title} />
+                                    <Avatar size={200} shape="square" src={getOneFileGalleryAPI(String(post?.image))} alt={post?.title} />
 
                                 </div> :
                                     <div className="mb-4">
@@ -141,7 +139,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({ openModal, setOpenModal, galle
                                                             maxCount={1}
                                                             className="upload-list-inline"
                                                             onChange={onChange}
-                                                            // accept=".png,.jpg"
+                                                            accept=".png,.jpg"
                                                         >
                                                             <Button icon={<UploadOutlined />}>Click to Upload</Button>
                                                         </Upload>

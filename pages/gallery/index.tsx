@@ -1,26 +1,26 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { ButtonInput } from "@/components/templates/button-input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Input } from "antd";
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
-import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
-import { DeleteOneGalleryAPI, getGalleriesAPI } from "@/api/gallery";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import ListGallery from "@/components/gallery/list-gallery";
 import { useAuth } from "@/components/util/session/context-user";
+import { getPostsAPI } from "@/api/post";
 
 const Gallery = () => {
     const { userStorage } = useAuth() as any;
     const [openModal, setOpenModal] = useState(false);
 
     const fetchData = async (pageParam: number) =>
-        await getGalleriesAPI({
+        await getPostsAPI({
             userId: userStorage?.id,
             take: 6,
             page: pageParam,
             sort: "DESC",
+            type: 'GALLERY'
         });
     const {
         status,

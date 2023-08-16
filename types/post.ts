@@ -5,7 +5,7 @@ export const arrayWhoCanSees = [
   { id: "2", name: "MEMBERSHIP" },
 ];
 
-type PostType = "AUDIO" | "ARTICLE" | "GALLERY";
+export type PostType = "AUDIO" | "ARTICLE" | "GALLERY";
 
 export type ResponsePostModel = {
   value: Array<PostModel>;
@@ -28,6 +28,7 @@ export type PostFormModel = {
   whoCanSee: string;
   userId: string;
   image: string;
+  allowDownload: string;
   type: PostType;
   attachment: any;
   categories: any;

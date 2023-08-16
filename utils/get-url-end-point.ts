@@ -162,25 +162,11 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
-  /****************** Galleries route */
-  createOneGallery: {
-    endpoint: `${baseUrl}/galleries`,
+  /****************** Posts route */
+  createOnePostGallery: {
+    endpoint: `${baseUrl}/posts/galleries`,
     method: POST,
   },
-  updateOneGallery: {
-    endpoint: `${baseUrl}/galleries/:galleryId`,
-    method: PUT,
-  },
-  deleteOneGallery: {
-    endpoint: `${baseUrl}/galleries/:galleryId`,
-    method: DELETE,
-  },
-  getGalleries: {
-    endpoint: `${baseUrl}/galleries`,
-    method: GET,
-  },
-
-  /****************** Posts route */
   createOnePost: {
     endpoint: `${baseUrl}/posts`,
     method: POST,

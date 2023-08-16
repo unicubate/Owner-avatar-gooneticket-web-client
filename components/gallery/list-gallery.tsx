@@ -2,24 +2,23 @@
 import React, { useState } from 'react'
 import { formateDateDayjs } from '../../utils/formate-date-dayjs'
 import Swal from 'sweetalert2';
-import { UseFormRegister } from 'react-hook-form'
-import { GalleryModel } from '@/types/gallery';
 import { Avatar, Button, Tooltip } from 'antd';
 import { CommentOutlined, DeleteOutlined, EditOutlined, EyeOutlined, FieldTimeOutlined, FundOutlined, LikeOutlined } from '@ant-design/icons';
-import { DeleteOneGalleryAPI, getOneFileGalleryAPI } from '@/api/gallery';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateGallery } from './create-or-update-gallery';
+import { DeleteOnePostAPI, getOneFileGalleryAPI } from '@/api/post';
+import { PostModel } from '@/types/post';
 
 
 type Props = {
-    item?: GalleryModel;
+    item?: PostModel;
     index: number;
 }
 
 const ListGallery: React.FC<Props> = ({ item, index }) => {
     const [openModal, setOpenModal] = useState<boolean>(false)
 
-    const saveMutation = DeleteOneGalleryAPI({
+    const saveMutation = DeleteOnePostAPI({
         onSuccess: () => { },
         onError: (error?: any) => { },
     });
@@ -39,7 +38,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             if (result.value) {
                 //Envoyer la requet au serve
                 try {
-                    await saveMutation.mutateAsync({ galleryId: item?.id });
+                    await saveMutation.mutateAsync({ postId: item?.id });
                     AlertSuccessNotification({
                         text: "Image deleted successfully",
                         className: "info",
@@ -64,7 +63,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             <div key={index} className="py-5 divide-y divide-gray-200">
                 <div className="flex items-center">
                     <div className="relative flex-shrink-0 cursor-pointer">
-                        <Avatar size={150} shape="square" src={getOneFileGalleryAPI(String(item?.path))} alt={item?.title} />
+                        <Avatar size={150} shape="square" src={getOneFileGalleryAPI(String(item?.image))} alt={item?.title} />
                     </div>
 
                     <div className="flex-1 min-w-0 ml-4 cursor-pointer">
@@ -95,7 +94,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             </div>
 
             {openModal && (<CreateOrUpdateGallery
-                gallery={item}
+                post={item}
                 openModal={openModal}
                 setOpenModal={setOpenModal}
             />)}
