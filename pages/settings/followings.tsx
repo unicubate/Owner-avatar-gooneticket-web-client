@@ -71,7 +71,7 @@ const Followings = () => {
                                                                 </div>
 
                                                                 <div className="flex items-center justify-end ml-auto space-x-8">
-                                                                    <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
+                                                                    <ButtonInput shape="default" type="submit" size="normal" loading={false} color={'indigo'}>
                                                                         Unfollow
                                                                     </ButtonInput>
                                                                 </div>

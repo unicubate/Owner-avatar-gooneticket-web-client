@@ -8,7 +8,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput, TextInputPassword } from "@/components/util/form";
 import { UserLoginFormModel } from "@/types/user.type";
-import { getOneUserPublicAPI, loginUserAPI, resendCodeAPI } from "../../api/user";
+import {
+  getOneUserPublicAPI,
+  loginUserAPI,
+  resendCodeAPI,
+} from "../../api/user";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
@@ -49,7 +53,9 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      const { data: findOneUser } = await getOneUserPublicAPI({ userId: user?.id });
+      const { data: findOneUser } = await getOneUserPublicAPI({
+        userId: user?.id,
+      });
       if (findOneUser?.nextStep === "SETTING_PROFILE") {
         router.push(`${`/register/${user?.id}/setting-profile`}`);
       } else if (findOneUser?.nextStep === "SETTING_INTEREST") {
@@ -59,12 +65,12 @@ const Login = () => {
         router.push(`${`/register/${user?.id}/confirm-account`}`);
       } else if (findOneUser?.nextStep === "COMPLETE_REGISTRATION") {
         router.push(`${`/dashboard`}`);
+        window.location.reload();
       }
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         JSON.stringify(user?.accessToken)
       );
-      window.location.reload();
       setHasErrors(false);
       setLoading(false);
     } catch (error: any) {
@@ -132,7 +138,13 @@ const Login = () => {
           </div>
 
           <div className="mt-6">
-            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={'indigo'}>
+            <ButtonInput
+              shape="default"
+              type="submit"
+              size="normal"
+              loading={loading}
+              color={"indigo"}
+            >
               Log In
             </ButtonInput>
           </div>

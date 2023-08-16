@@ -44,7 +44,7 @@ const HorizontalNavSetting: React.FC = () => {
 
     return (
         <>
-            <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
+            {/* <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
                 <nav className="flex flex-wrap gap-4">
                     {navigation.map((item: any, index: number) => {
                         const isActive = pathname === item.href;
@@ -65,10 +65,10 @@ const HorizontalNavSetting: React.FC = () => {
                         );
                     })}
                 </nav>
-            </div>
-            {/* <div className="w-full pb-1 overflow-x-auto">
-                <div className="border-b border-gray-200">
-                    <nav className="flex -mb-px space-x-10">
+            </div> */}
+            {/* <div className="w-full pb-1 overflow-x-auto"> */}
+                <div className="px-3 py-2 border-b border-gray-200">
+                    <nav className="flex flex-wrap gap-4">
 
                         {navigation.map((item: any, index: number) => {
                             const isActive = pathname === item.href;
@@ -91,7 +91,7 @@ const HorizontalNavSetting: React.FC = () => {
 
                     </nav>
                 </div>
-            </div> */}
+            {/* </div> */}
         </>
     )
 }

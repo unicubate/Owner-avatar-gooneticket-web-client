@@ -10,9 +10,6 @@ import { useState } from "react";
 import { arrayPeoples } from "@/components/mock";
 
 
-
-
-
 const Followers = () => {
     const [peopleArrays] = useState(arrayPeoples)
     const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -72,7 +69,7 @@ const Followers = () => {
                                                                 </div>
 
                                                                 <div className="flex items-center justify-end ml-auto space-x-8">
-                                                                    <ButtonInput shape="default" type="submit" size="medium" loading={false} color={'indigo'}>
+                                                                    <ButtonInput shape="default" type="submit" size="normal" loading={false} color={'indigo'}>
                                                                         Following
                                                                     </ButtonInput>
                                                                 </div>

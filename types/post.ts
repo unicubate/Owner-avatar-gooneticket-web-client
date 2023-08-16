@@ -30,4 +30,5 @@ export type PostFormModel = {
   image: string;
   type: PostType;
   attachment: any;
+  categories: any;
 };

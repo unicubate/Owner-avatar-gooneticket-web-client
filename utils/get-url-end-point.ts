@@ -140,6 +140,12 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Categories route */
+  getCategories: {
+    endpoint: `${baseUrl}/categories`,
+    method: GET,
+  },
+
   /****************** Galleries route */
   createOneGallery: {
     endpoint: `${baseUrl}/galleries`,

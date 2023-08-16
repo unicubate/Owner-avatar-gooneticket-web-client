@@ -15,9 +15,9 @@ export const CreateOrUpdateOnePostAPI = ({
   const result = useMutation(
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
       const { postId } = payload;
-
       let data = new FormData();
       data.append("title", payload.title ?? "");
+      data.append("categories", payload.categories ?? "");
       data.append("description", payload.description ?? "");
       data.append("type", payload.type ?? "");
       data.append("whoCanSee", `${payload.whoCanSee}`);
@@ -112,6 +112,15 @@ export const getPostsAPI = async (
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
     action: "getPosts",
+    queryParams: payload,
+  });
+};
+
+export const getCategoriesAPI = async (payload?: {
+  userId: string;
+}): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getCategories",
     queryParams: payload,
   });
 };
