@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Select, Space } from "antd";
+import { Avatar, Button, Select, Space, Upload } from "antd";
 import {
   UpdateOneProfileAPI,
   getAllCountiesAPI,
   getAllCurrenciesAPI,
+  getOneFileProfileAPI,
   getOneProfileAPI,
 } from "@/api/profile";
 import { useQuery } from "@tanstack/react-query";
@@ -18,6 +19,7 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
+import { UploadOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -148,6 +150,47 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
         <div className="mt-8 overflow-hidden bg-white border border-gray-200">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold text-gray-900"> Profile </h2>
+
+            {profile?.image ? (
+              <div className="mt-2 text-center space-x-2">
+                <Avatar
+                  size={200}
+                  shape="circle"
+                  src={getOneFileProfileAPI(String(profile?.image))}
+                  alt={`${profile?.firstName} ${profile?.lastName}`}
+                />
+              </div>
+            ) : (
+              <div className="mb-4">
+                <Controller
+                  name="attachment"
+                  control={control}
+                  render={({ field: { onChange } }) => (
+                    <>
+                      <div className="text-center justify-center mx-auto">
+                        <Upload
+                          name="attachment"
+                          listType="picture"
+                          maxCount={1}
+                          className="upload-list-inline"
+                          onChange={onChange}
+                          accept=".png,.jpg"
+                        >
+                          <Button icon={<UploadOutlined />}>
+                            Click to Upload
+                          </Button>
+                        </Upload>
+                      </div>
+                    </>
+                  )}
+                />
+                {/* {errors?.attachment && (
+                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                                            {errors?.attachment?.message}
+                                        </span>
+                                    )} */}
+              </div>
+            )}
 
             <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
               <div className="mt-2">
@@ -291,15 +334,15 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
             </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-                <div className="mt-2">
-                  <TextAreaInput
-                    control={control}
-                    label="Bio"
-                    name="description"
-                    placeholder="Introduce yourself and what you're creating"
-                    errors={errors}
-                  />
-                </div>
+              <div className="mt-2">
+                <TextAreaInput
+                  control={control}
+                  label="Bio"
+                  name="description"
+                  placeholder="Introduce yourself and what you're creating"
+                  errors={errors}
+                />
+              </div>
             </div>
 
             <div className="sm:flex flex-col sm:items-end sm:justify-between">

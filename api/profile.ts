@@ -116,3 +116,8 @@ export const getAllCountiesAPI = async (
     queryParams: search,
   });
 };
+
+export const getOneFileProfileAPI = (fileName: string) =>
+  fileName
+    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/users/file/${fileName}`
+    : null;

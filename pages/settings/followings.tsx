@@ -72,52 +72,6 @@ const Followings = () => {
                           </p>
                         </div>
 
-                        <div className="py-12 bg-white sm:py-16 lg:py-20">
-                          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                            <h2 className="text-xl font-semibold text-gray-900">
-                              Button Status
-                            </h2>
-
-                            <div className="flex flex-wrap gap-5 mt-8">
-                              <button
-                                type="button"
-                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-200 hover:bg-indigo-500"
-                              >
-                                Primary
-                              </button>
-
-                              <button
-                                type="button"
-                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-gray-900 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
-                              >
-                                Secondary
-                              </button>
-
-                              <button
-                                type="button"
-                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-red-500 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-200 hover:bg-red-700"
-                              >
-                                Danger
-                              </button>
-
-                              <button
-                                type="button"
-                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-gray-300 border border-transparent rounded-md cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 hover:bg-gray-400"
-                                disabled
-                              >
-                                Disabled
-                              </button>
-
-                              <button
-                                type="button"
-                                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-gray-600 transition-all duration-200 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                              >
-                                Stroke
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-
                         {dataTableFollowings}
                       </div>
                     </div>
