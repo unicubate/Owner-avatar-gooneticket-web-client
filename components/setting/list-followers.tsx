@@ -3,7 +3,6 @@ import React, { Fragment, useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { UseFormRegister } from "react-hook-form";
-import { GalleryModel } from "@/types/gallery";
 import { Avatar, Button, Tooltip } from "antd";
 import {
   CommentOutlined,
@@ -14,10 +13,10 @@ import {
   FundOutlined,
   LikeOutlined,
 } from "@ant-design/icons";
-import { DeleteOneGalleryAPI, getOneFileGalleryAPI } from "@/api/gallery";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { ButtonInput } from "../templates/button-input";
 import { FollowModel } from "@/types/follow";
+import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
 
 type Props = {
   item?: FollowModel;
@@ -25,47 +24,53 @@ type Props = {
 };
 
 const ListFollowers: React.FC<Props> = ({ item, index }) => {
-  // const [openModal, setOpenModal] = useState<boolean>(false)
+  const [loading, setLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+    undefined
+  );
 
-  // const saveMutation = DeleteOneGalleryAPI({
-  //     onSuccess: () => { },
-  //     onError: (error?: any) => { },
-  // });
+  // Create or Update data
+  const saveMutation = CreateOrDeleteOneFollowerAPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
 
-  // const deleteItem = (item: any) => {
+  const followingItem = async (item: any) => {
 
-  //     Swal.fire({
-  //         title: 'Delete?',
-  //         text: 'Are you sure you want to delete this?',
-  //         confirmButtonText: 'Yes, Deleted',
-  //         cancelButtonText: 'No, Cancel',
-  //         confirmButtonColor: '#573DDB',
-  //         cancelButtonColor: '#BEC1C5',
-  //         showCancelButton: true,
-  //         reverseButtons: true,
-  //     }).then(async (result) => {
-  //         if (result.value) {
-  //             //Envoyer la requet au serve
-  //             try {
-  //                 await saveMutation.mutateAsync({ galleryId: item?.id });
-  //                 AlertSuccessNotification({
-  //                     text: "Image deleted successfully",
-  //                     className: "info",
-  //                     gravity: "top",
-  //                     position: "center",
-  //                 });
-  //             } catch (error: any) {
-  //                 AlertDangerNotification({
-  //                     text: `${error.response.data.message}`,
-  //                     gravity: "top",
-  //                     className: "info",
-  //                     position: "center",
-  //                 });
-  //             }
-  //         }
-  //     });
+    setLoading(true);
+    setHasErrors(undefined);
+    try {
+      await saveMutation.mutateAsync({
+        followerId: item?.profile?.userId,
+        action: 'CREATE'
+      });
+      setHasErrors(false);
+      setLoading(false);
+      AlertSuccessNotification({
+        text: "Followed successfully",
+        className: "info",
+        gravity: "top",
+        position: "center",
+      });
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+        gravity: "top",
+        className: "info",
+        position: "center",
+      });
+    }
 
-  // }
+  }
 
   return (
     <>
@@ -89,10 +94,11 @@ const ListFollowers: React.FC<Props> = ({ item, index }) => {
                 shape="default"
                 type="submit"
                 size="normal"
-                loading={false}
+                loading={loading}
                 color={"indigo"}
+                onClick={() => followingItem(item)}
               >
-                Following
+                Follow back
               </ButtonInput>
             </div>
           </div>

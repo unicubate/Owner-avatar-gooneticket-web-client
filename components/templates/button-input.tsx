@@ -9,8 +9,8 @@ interface SizeInterface {
 }
 
 const sizeType: SizeInterface = {
-  large: "2.5",
-  normal: "1.5",
+  large: "2",
+  normal: "1",
   medium: "0.2",
 }
 
@@ -56,7 +56,7 @@ const ButtonInput: React.FC<Props> = ({
             items-center
             justify-center
             min-w-${(minW ?? 'full')}
-            px-8
+            px-6
             py-${sizeType[String(size ?? 'normal')]}
             text-sm
             leading-6
@@ -74,8 +74,8 @@ const ButtonInput: React.FC<Props> = ({
             hover:bg-${color}-${loading ? '200' : '500'}
         `}
       >
-        
-        {loading ? <><Spin indicator={antIcon} /> <span className="px-2">Please wait...</span></> : <>{children}</>}
+        {loading ? <><Spin indicator={antIcon} /></> : <>{children}</>}
+        {/* {loading ? <><Spin indicator={antIcon} /> <span className="px-2">Please wait...</span></> : <>{children}</>} */}
       </button>
     </>
   );

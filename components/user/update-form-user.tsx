@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput } from '../util/form';
 import { ButtonInput } from '../templates/button-input';
-import { getOneUserPublicAPI } from '@/api/user';
+import { getOneUserPrivateAPI, getOneUserPublicAPI } from '@/api/user';
 
 type Props = {
     userId: string
@@ -32,7 +32,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
 
 
     const fetchOneUser = async () =>
-        await getOneUserPublicAPI({ userId: userId });
+        await getOneUserPrivateAPI({ userId: userId });
     const { data: userItem } = useQuery(["user", userId], () => fetchOneUser(), {
         refetchOnWindowFocus: false,
         enabled: Boolean(userId),

@@ -29,7 +29,8 @@ type Props = {
 };
 
 const schema = yup.object({
-  fullName: yup.string().required(),
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
   url: yup.string().url().optional(),
   birthday: yup.date().required(),
   currencyId: yup.string().uuid().required(),
@@ -93,7 +94,8 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
         "url",
         "phone",
         "color",
-        "fullName",
+        "firstName",
+        "lastName",
         "secondAddress",
         "firstAddress",
         "description",
@@ -192,14 +194,25 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             )}
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <TextInput
-                  label="Full name"
+                  label="First name"
                   control={control}
                   type="text"
-                  name="fullName"
-                  placeholder="Full name"
+                  name="firstName"
+                  placeholder="First name"
+                  errors={errors}
+                />
+              </div>
+
+              <div className="mt-2">
+                <TextInput
+                  label="Last name"
+                  control={control}
+                  type="text"
+                  name="lastName"
+                  placeholder="Last name"
                   errors={errors}
                 />
               </div>
@@ -287,20 +300,20 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                       <>
                         {colors?.length > 0
                           ? colors?.map((item: any, index: number) => (
-                              <Option
-                                key={index}
-                                value={item?.name}
-                                name={item?.name}
-                              >
-                                <Space>
-                                  <span
-                                    className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}
-                                  >
-                                    {item?.name}
-                                  </span>
-                                </Space>
-                              </Option>
-                            ))
+                            <Option
+                              key={index}
+                              value={item?.name}
+                              name={item?.name}
+                            >
+                              <Space>
+                                <span
+                                  className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}
+                                >
+                                  {item?.name}
+                                </span>
+                              </Space>
+                            </Option>
+                          ))
                           : null}
                       </>
                     </Select>

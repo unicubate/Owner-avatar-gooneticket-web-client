@@ -35,7 +35,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
 
       return postId
         ? await makeApiCall({
-            action: "updateOnePostGallery",
+            action: "updateOnePost",
             body: payload,
             urlParams: { postId },
           })

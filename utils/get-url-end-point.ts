@@ -149,11 +149,11 @@ export const apiEndpoints: ClientApiMethods = {
   },
   createOneFollowers: {
     endpoint: `${baseUrl}/follows/create/:followerId`,
-    method: GET,
+    method: POST,
   },
   deleteOneFollowers: {
     endpoint: `${baseUrl}/follows/delete/:followerId`,
-    method: GET,
+    method: POST,
   },
 
   /****************** Categories route */

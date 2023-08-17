@@ -37,7 +37,7 @@ const DateInput: React.FC<Props> = ({
             style={{ width: "100%" }}
             id={name}
             placeholder={placeholder}
-            value={dayjs(field.value)}
+            value={dayjs(field.value ?? new Date())}
             onChange={(value) => {
               field.onChange(value);
             }}
