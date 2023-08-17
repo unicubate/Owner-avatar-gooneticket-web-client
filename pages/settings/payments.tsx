@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button, Drawer } from "antd";
+import { Avatar, Button, Drawer, Image } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
 import { getOneProfileAPI } from "../../api/profile";
 import { useQuery } from "@tanstack/react-query";
@@ -14,6 +14,9 @@ import { TextAreaInput, TextInput } from "@/components/util/form";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { CommentOutlined, HeartOutlined } from "@ant-design/icons";
+import { arrayComments } from "@/components/mock";
+import Link from "next/link";
 
 const schema = yup.object({
     email: yup
@@ -27,6 +30,7 @@ const schema = yup.object({
 });
 
 const Payments = () => {
+    const [comments] = useState(arrayComments)
     const [showModal, setShowModal] = useState(false);
     const {
         control,
@@ -110,6 +114,20 @@ const Payments = () => {
                                         </div>
                                     </div>
                                 </div> */}
+
+
+
+
+
+
+
+                           
+
+
+
+
+
+
 
                                 <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
                                     <div className="px-4 py-5 sm:p-6">

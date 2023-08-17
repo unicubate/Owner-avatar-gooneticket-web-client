@@ -112,3 +112,84 @@ export const arrayMemberships = [
     description: "All from Standard + All extras free",
   },
 ];
+
+export const arrayPosts = [
+  {
+    id: 1,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    createdAt: "4 mois",
+    image: "https://shorturl.at/agsW4",
+    description: "",
+  },
+  {
+    id: 2,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    createdAt: "4 mois",
+    image: "https://loremflickr.com/640/480?lock=1236549788237824",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula massa in enim luctus. Rutrum arcu.",
+  },
+  {
+    id: 3,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    createdAt: "10 mois",
+    image: "https://picsum.photos/seed/EFSS0MI/640/480",
+    description:
+      "You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the changes",
+  },
+  {
+    id: 4,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    createdAt: "11 mois",
+    image: "https://shorturl.at/agsW4",
+    description:
+      " simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+  },
+  {
+    id: 5,
+    title: "Lorem ipsum dolor sit amet, consectetur",
+    createdAt: "11 mois",
+    image: "https://shorturl.at/agsW4",
+    description:
+      " simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+  },
+];
+
+export const arrayComments = [
+  {
+    id: 1,
+    firstName: "Boclair",
+    lastName: "Boclair",
+    createdAt: "2 mois",
+    image: "https://shorturl.at/agsW4",
+    description:
+      "Get the source code from all of my Youtube videos + Gold source code access",
+  },
+  {
+    id: 2,
+    firstName: "Jordan",
+    lastName: "Kasse",
+    createdAt: "4 mois",
+    image: "https://loremflickr.com/640/480?lock=1236549788237824",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vehicula massa in enim luctus. Rutrum arcu.",
+  },
+  {
+    id: 3,
+    firstName: "Kasse",
+    lastName: "Claude",
+    createdAt: "10 mois",
+    image: "https://picsum.photos/seed/EFSS0MI/640/480",
+    description:
+      "You made it so simple. My new site is so much faster and easier to work with than my old site. I just choose the page, make the changes",
+  },
+  {
+    id: 4,
+    firstName: "Mokolo",
+    lastName: "Dassa",
+    createdAt: "11 mois",
+    image: "https://shorturl.at/agsW4",
+    description:
+      " simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled",
+  },
+];

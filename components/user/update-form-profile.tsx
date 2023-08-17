@@ -349,6 +349,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <TextAreaInput
+                  row={3}
                   control={control}
                   label="Bio"
                   name="description"

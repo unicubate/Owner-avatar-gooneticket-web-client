@@ -213,6 +213,7 @@ const SettingProfile = () => {
 
           <div className="mb-4">
             <TextAreaInput
+              row={3}
               control={control}
               label="Bio"
               name="description"
