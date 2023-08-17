@@ -182,6 +182,15 @@ export const getPostsAPI = async (
   });
 };
 
+export const getFollowsPostsAPI = async (
+  payload: PaginationRequest
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getFollowsPosts",
+    queryParams: payload,
+  });
+};
+
 export const getCategoriesAPI = async (payload?: {
   userId: string;
 }): Promise<{ data: ResponsePostModel }> => {
