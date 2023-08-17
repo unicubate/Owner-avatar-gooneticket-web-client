@@ -89,8 +89,6 @@ const Home = () => {
                         <div className="py-6">
 
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                                {/* <HorizontalNavSetting /> */}
-
 
                                 {dataTablePosts}
 
@@ -118,6 +116,7 @@ const Home = () => {
                     </main>
                 </div>
             </LayoutDashboard>
+
         </>
     );
 };
