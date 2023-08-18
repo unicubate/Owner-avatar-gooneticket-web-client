@@ -156,6 +156,24 @@ export const apiEndpoints: ClientApiMethods = {
     method: POST,
   },
 
+  /****************** Comments route */
+  getComments: {
+    endpoint: `${baseUrl}/comments`,
+    method: GET,
+  },
+  createOneComment: {
+    endpoint: `${baseUrl}/comments`,
+    method: GET,
+  },
+  updateOneComment: {
+    endpoint: `${baseUrl}/comments/:commentId`,
+    method: PUT,
+  },
+  deleteOneComment: {
+    endpoint: `${baseUrl}/comments/:commentId`,
+    method: DELETE,
+  },
+
   /****************** Categories route */
   getCategories: {
     endpoint: `${baseUrl}/categories`,

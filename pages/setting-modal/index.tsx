@@ -114,6 +114,7 @@ const Setting = () => {
                 </div>
                 <div className="mb-4">
                   <TextAreaInput
+                    row={4}
                     control={control}
                     label="Description"
                     name="description"

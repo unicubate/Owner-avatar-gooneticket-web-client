@@ -189,6 +189,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
 
                 <div className="mt-2">
                   <TextAreaInput
+                    row={4}
                     control={control}
                     label="Description"
                     name="description"

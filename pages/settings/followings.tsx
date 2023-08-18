@@ -7,6 +7,7 @@ import { ButtonInput } from "@/components/templates/button-input";
 import { getFollowingsAPI } from "@/api/follow";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ListFollowings from "../../components/setting/list-followings";
+import { useEffect } from "react";
 
 const Followings = () => {
   const fetchData = async (pageParam: number) =>
@@ -44,6 +45,25 @@ const Followings = () => {
         <ListFollowings item={item} key={index} index={index} />
       ))
   );
+
+  useEffect(() => {
+    let fetching = false;
+    const onScroll = async (event: any) => {
+      const { scrollHeight, scrollTop, clientHeight } =
+        event.target.scrollingElement;
+
+      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+        fetching = true;
+        if (hasNextPage) await fetchNextPage();
+        fetching = false;
+      }
+    };
+
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  }, [fetchNextPage, hasNextPage]);
 
   return (
     <>

@@ -12,14 +12,25 @@ export type ResponsePostModel = {
 } & PaginationResponse;
 
 export type PostModel = {
-  id: string;
   createdAt: Date;
-  description: string;
+  id: string;
+  slug: string;
+  status: boolean;
   title: string;
   whoCanSee: string;
-  userId: string;
-  image: string;
   type: PostType;
+  allowDownload: true;
+  image: string;
+  description: string;
+  profile: {
+    color: string;
+    email: string;
+    image: string;
+    userId: string;
+    fullName: string;
+    lastName: string;
+    firstName: string;
+  };
 };
 
 export type PostFormModel = {
