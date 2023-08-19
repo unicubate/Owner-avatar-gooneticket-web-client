@@ -161,6 +161,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/comments`,
     method: GET,
   },
+  getCommentsRepliesAPI: {
+    endpoint: `${baseUrl}/comments/replies`,
+    method: GET,
+  },
   createOneComment: {
     endpoint: `${baseUrl}/comments`,
     method: GET,

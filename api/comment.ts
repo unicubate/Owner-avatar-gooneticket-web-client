@@ -1,9 +1,5 @@
 import { CommentFormModel } from "@/types/comment";
-import {
-  PostModel,
-  PostType,
-  ResponsePostModel,
-} from "@/types/post";
+import { PostModel, PostType, ResponsePostModel } from "@/types/post";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest } from "@/utils/pagination-item";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -56,7 +52,6 @@ export const CreateOrUpdateOneCommentAPI = ({
   return result;
 };
 
-
 export const DeleteOneCommentAPI = ({
   onSuccess,
   onError,
@@ -101,11 +96,22 @@ export const DeleteOneCommentAPI = ({
 
 export const getCommentsAPI = async (
   payload: {
-    userId: string;
+    postId: string;
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
     action: "getComments",
+    queryParams: payload,
+  });
+};
+
+export const getCommentsRepliesAPI = async (
+  payload: {
+    commentId: string;
+  } & PaginationRequest
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getCommentsReplies",
     queryParams: payload,
   });
 };
