@@ -3,18 +3,6 @@ import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Button, Image, Tooltip } from "antd";
-import {
-  CommentOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
-  FieldTimeOutlined,
-  FundOutlined,
-  HeartOutlined,
-  LikeOutlined,
-} from "@ant-design/icons";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-
 import { PostModel } from "@/types/post";
 import Link from "next/link";
 import { ButtonInput } from "../templates/button-input";
@@ -24,6 +12,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { usePathname } from "next/navigation";
 import { arrayComments } from "../mock";
+import { BiComment } from "react-icons/bi";
+import {
+  MdDeleteOutline,
+  MdEdit,
+  MdEditNote,
+  MdFavorite,
+  MdFavoriteBorder,
+  MdOutlineFavorite,
+  MdOutlineModeEdit,
+} from "react-icons/md";
 
 type Props = {
   item?: PostModel;
@@ -176,20 +174,109 @@ The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for t
                       {item?.description}{" "}
                     </p>
                     <div className="flex mt-2 items-center">
-                      <p className="text-sm font-bold ">
-                        <HeartOutlined />
-                      </p>
-                      <p className="ml-3.5 text-sm font-bold text-gray-900">
-                        <CommentOutlined />
-                      </p>
+                      <button className="font-bold text-red-400">
+                        <MdFavorite />
+                      </button>
+                      {/* <button className="font-bold">
+                        <MdFavoriteBorder />
+                      </button> */}
+                      <button className="ml-3.5 font-bold text-gray-900 cursor-pointer">
+                        <BiComment />
+                      </button>
+                      <button className="ml-3.5 text-sm cursor-pointer">
+                        Reply
+                      </button>
+                      <button className="ml-3.5 font-bold text-gray-900 cursor-pointer">
+                        <MdOutlineModeEdit />
+                      </button>
+                      <button className="ml-3.5 font-bold text-gray-900 cursor-pointer">
+                        <MdDeleteOutline />
+                      </button>
                     </div>
+
+                    <div className="flex items-start mt-4">
+                      <Avatar
+                        size={40}
+                        className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+                        src={item?.image}
+                        alt=""
+                      />
+
+                      <div className="ml-6">
+                        <div className="flex items-center space-x-px">
+                          <div className="flex items-center">
+                            <p className="text-sm font-bold text-gray-900">
+                              {" "}
+                              {item?.firstName} {item?.lastName}{" "}
+                            </p>
+                            <p className="ml-3.5 text-sm font-normal text-gray-500">
+                              {" "}
+                              {item?.createdAt}
+                            </p>
+                          </div>
+                        </div>
+                        <p className="mt-2 text-base font-normal leading-7 text-gray-900">
+                          {" "}
+                          {item?.description}{" "}
+                        </p>
+                        <div className="flex mt-2 items-center">
+                          <button className="font-bold text-red-400">
+                            <MdFavorite />
+                          </button>
+                          {/* <button className="font-bold">
+                        <MdFavoriteBorder />
+                      </button> */}
+                          {/* <button className="ml-3.5 text-sm cursor-pointer">
+                            Reply
+                          </button> */}
+                          <button className="ml-3.5 font-bold text-gray-900 cursor-pointer">
+                            <MdOutlineModeEdit />
+                          </button>
+                          <button className="ml-3.5 font-bold text-gray-900 cursor-pointer">
+                            <MdDeleteOutline />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <form action="#" method="POST">
+                      <div className="mt-4 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
+                        <div className="flex items-start">
+                          <Avatar
+                            size={40}
+                            className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+                            src="https://picsum.photos/seed/NLHCIy/640/480"
+                            alt=""
+                          />
+                        </div>
+                        <TextAreaInput
+                          row={1}
+                          control={control}
+                          name="description"
+                          placeholder="Participate in the conversation"
+                          errors={errors}
+                        />
+
+                        <div className="sm:flex flex-col sm:items-end sm:justify-between">
+                          <ButtonInput
+                            shape="default"
+                            type="submit"
+                            size="large"
+                            loading={false}
+                            color={"indigo"}
+                          >
+                            Save
+                          </ButtonInput>
+                        </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </li>
             ))}
           </ul>
 
-          <div className="flex flex-col justify-between items-center">
+          <div className="mt-6 flex flex-col justify-between items-center">
             <label
               htmlFor="password"
               className="block text-sm mb-2 dark:text-white"
