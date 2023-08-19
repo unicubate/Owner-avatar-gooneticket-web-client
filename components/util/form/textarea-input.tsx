@@ -9,7 +9,8 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   defaultValue?: string;
-  row: number
+  row: number;
+  required?: boolean;
   autoComplete?: "on" | "off";
 }
 
@@ -21,6 +22,7 @@ const TextAreaInput: React.FC<Props> = ({
   row,
   placeholder = "",
   defaultValue = "",
+  required,
   autoComplete,
 }) => {
   return (
@@ -41,6 +43,7 @@ const TextAreaInput: React.FC<Props> = ({
             id={name}
             maxLength={1000}
             style={{ height: 120 }}
+            required={required}
             autoSize={{ minRows: row, maxRows: 100 }}
             placeholder={placeholder}
             autoComplete={autoComplete}

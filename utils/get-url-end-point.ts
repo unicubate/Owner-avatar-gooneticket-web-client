@@ -66,7 +66,7 @@ export const makeApiCall = async ({
 
   axios.defaults.headers.common["Authorization"] = user ?? {};
   const response = await axios.request({
-    method: apiEndpoints[action].method,
+    method: apiEndpoints[action]?.method,
     withCredentials: true,
     url: url,
     data: body,
@@ -167,7 +167,7 @@ export const apiEndpoints: ClientApiMethods = {
   },
   createOneComment: {
     endpoint: `${baseUrl}/comments`,
-    method: GET,
+    method: POST,
   },
   updateOneComment: {
     endpoint: `${baseUrl}/comments/:commentId`,

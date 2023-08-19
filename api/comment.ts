@@ -1,5 +1,7 @@
 import { CommentFormModel } from "@/types/comment";
+import queryString from 'query-string';
 import { PostModel, PostType, ResponsePostModel } from "@/types/post";
+import dyaxios from "@/utils/dyaxios";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest } from "@/utils/pagination-item";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -11,37 +13,40 @@ export const CreateOrUpdateOneCommentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["comments"];
   const queryClient = useQueryClient();
   const result = useMutation(
-    async (payload: CommentFormModel & { postId?: string }): Promise<any> => {
-      const { postId } = payload;
+    async (
+      payload: CommentFormModel & { postId?: string; commentId: string }
+    ): Promise<any> => {
+      const { postId, commentId } = payload;
 
-      return postId
+      return commentId
         ? await makeApiCall({
             action: "updateOneComment",
             body: payload,
-            urlParams: { postId },
+            urlParams: { commentId },
           })
         : await makeApiCall({
             action: "createOneComment",
-            body: payload,
+            body: { ...payload, postId },
           });
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onSuccess: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onError: async (error: any) => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onError) {
           onError(error);
         }
@@ -59,6 +64,7 @@ export const DeleteOneCommentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["comments"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (payload: { commentId: string }): Promise<any> => {
@@ -71,19 +77,19 @@ export const DeleteOneCommentAPI = ({
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onSuccess: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onError: async (error: any) => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onError) {
           onError(error);
         }
@@ -110,8 +116,8 @@ export const getCommentsRepliesAPI = async (
     commentId: string;
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
-  return await makeApiCall({
-    action: "getCommentsReplies",
-    queryParams: payload,
-  });
+  const queyParams = queryString.stringify(payload)
+  return dyaxios.get(
+    `/comments/replies?${queyParams}`
+  );
 };

@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Skeleton } from "antd";
-import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 import { ButtonInput } from "@/components/templates/button-input";
 import { getFollowingsAPI } from "@/api/follow";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";
 
 const Followings = () => {
+  const { ref, inView } = useInView();
   const fetchData = async (pageParam: number) =>
     await getFollowingsAPI({
       take: 10,
@@ -48,6 +49,9 @@ const Followings = () => {
 
   useEffect(() => {
     let fetching = false;
+    if (inView) {
+      fetchNextPage();
+    }
     const onScroll = async (event: any) => {
       const { scrollHeight, scrollTop, clientHeight } =
         event.target.scrollingElement;
@@ -63,7 +67,7 @@ const Followings = () => {
     return () => {
       document.removeEventListener("scroll", onScroll);
     };
-  }, [fetchNextPage, hasNextPage]);
+  }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <>
@@ -99,6 +103,7 @@ const Followings = () => {
                       <div className=" mt-4 text-center justify-center mx-auto">
                         <div className="sm:mt-0">
                           <ButtonInput
+                            ref={ref}
                             onClick={() => fetchNextPage()}
                             shape="default"
                             type="button"
