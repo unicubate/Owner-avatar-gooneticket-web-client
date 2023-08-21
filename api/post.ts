@@ -5,8 +5,12 @@ import {
   ResponsePostModel,
 } from "@/types/post";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { PaginationRequest } from "@/utils/pagination-item";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { RcFile } from "antd/es/upload";
 
 export const CreateOrUpdateOnePostGalleryAPI = ({
@@ -182,15 +186,6 @@ export const getPostsAPI = async (
   });
 };
 
-export const getFollowsPostsAPI = async (
-  payload: PaginationRequest
-): Promise<{ data: ResponsePostModel }> => {
-  return await makeApiCall({
-    action: "getFollowsPosts",
-    queryParams: payload,
-  });
-};
-
 export const getCategoriesAPI = async (payload?: {
   userId: string;
 }): Promise<{ data: ResponsePostModel }> => {
@@ -228,3 +223,30 @@ export const getOneFileGalleryAPI = (fileName: string) =>
   fileName
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/posts/gallery/${fileName}`
     : null;
+
+export const getFollowsPostsAPI = async (
+  payload: PaginationRequest
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getFollowsPosts",
+    queryParams: payload,
+  });
+};
+
+export const GetInfiniteFollowsPostsAPI = (payload: {
+  take: number;
+  sort: SortModel;
+}) => {
+  const { take, sort } = payload;
+  return useInfiniteQuery({
+    queryKey: ["posts-follows", "infinite"],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getFollowsPostsAPI({
+        take: take,
+        page: pageParam,
+        sort: sort,
+      }),
+    keepPreviousData: true,
+  });
+};

@@ -7,7 +7,7 @@ import { GetInfiniteCommentsAPI } from "@/api/comment";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 
 
-const ListComments: React.FC<{ postId: string; userId: string }> = ({ postId, userId }) => {
+const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
 
   const {
     isLoading: isLoadingComments,
@@ -32,7 +32,7 @@ const ListComments: React.FC<{ postId: string; userId: string }> = ({ postId, us
     dataComments.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommentsPosts item={item} key={index} index={index} userId={userId} />
+        <ListCommentsPosts item={item} key={index} index={index} />
       ))
   );
 

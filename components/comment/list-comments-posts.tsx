@@ -12,15 +12,17 @@ import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentAPI, GetInfiniteCommentsRepliesAPI } from "@/api/comment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
+import { useAuth } from "../util/session/context-user";
 
 type Props = {
   item?: CommentModel;
   index?: number;
-  userId: string;
 };
 
 
-const ListCommentsPosts: React.FC<Props> = ({ item, userId, index }) => {
+const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
+  const user = useAuth() as any;
+
   const saveMutation = DeleteOneCommentAPI({
     onSuccess: () => { },
     onError: (error?: any) => { },
@@ -85,7 +87,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userId, index }) => {
     dataComments.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommentsRepliesPosts item={item} key={index} index={index} userId={userId} />
+        <ListCommentsRepliesPosts item={item} key={index} index={index} userId={user?.id} />
       ))
   );
 
@@ -126,7 +128,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userId, index }) => {
                 <BiComment />
               </button>
               <button className="ml-3.5 text-sm">Reply</button>
-              {userId === item?.userId ?
+              {user?.id === item?.userId ?
                 <>
                   <button className="ml-3.5 font-bold">
                     <MdOutlineModeEdit />

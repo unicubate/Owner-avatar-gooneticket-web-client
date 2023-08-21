@@ -1,56 +1,11 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { usePathname } from "next/navigation";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Avatar, Image } from "antd";
-import { arrayComments } from "@/components/mock";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { TextAreaInput } from "@/components/util/form";
 import { ButtonInput } from "@/components/templates/button-input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { CommentOutlined, HeartOutlined } from "@ant-design/icons";
-import { getFollowsPostsAPI } from "@/api/post";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { GetInfiniteFollowsPostsAPI } from "@/api/post";
 import ListFollowPosts from "@/components/post/list-follow-posts";
 import { useAuth } from '@/components/util/session/context-user';
 
-const schema = yup.object({
-    description: yup.string().required(),
-});
-
 const Home = () => {
-    const user = useAuth() as any;
-    const [comments] = useState(arrayComments);
-    const pathname = usePathname();
-    const {
-        control,
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<any>({
-        resolver: yupResolver(schema),
-        mode: "onChange",
-    });
-
-    const onSubmit: SubmitHandler<any> = (payload: any) => {
-        // let data = new FormData();
-        // data.append("confirm", `${payload.confirm}`);
-        // payload?.attachment?.fileList?.length > 0 &&
-        //   payload?.attachment?.fileList.forEach((file: any) => {
-        //     data.append("attachment", file as RcFile);
-        //   });
-
-        console.log("payload =======>", payload);
-    };
-
-    const fetchData = async (pageParam: number) =>
-        await getFollowsPostsAPI({
-            take: 10,
-            page: pageParam,
-            sort: "DESC",
-        });
     const {
         status,
         error,
@@ -60,11 +15,9 @@ const Home = () => {
         isFetchingNextPage,
         hasNextPage,
         fetchNextPage,
-    } = useInfiniteQuery({
-        queryKey: ["posts-follows"],
-        getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-        queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
-        keepPreviousData: true,
+    } = GetInfiniteFollowsPostsAPI({
+        take: 6,
+        sort: "DESC",
     });
 
     const dataTablePosts = isLoadingPosts ? (
@@ -77,7 +30,7 @@ const Home = () => {
         dataPosts.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item, index) => (
-                <ListFollowPosts item={item} key={index} index={index} userId={user?.id} />
+                <ListFollowPosts item={item} key={index} index={index} />
             ))
     );
 

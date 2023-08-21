@@ -2,18 +2,14 @@
 import React from "react";
 import { Avatar, Image } from "antd";
 import { PostModel } from "@/types/post";
-import ListCommentsPosts from "../comment/list-comments-posts";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getCommentsAPI } from "@/api/comment";
 import ListComments from "../comment/list-comments";
 
 type Props = {
   item?: PostModel;
   index: number;
-  userId: string;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, index, userId }) => {
+const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
   return (
     <>
       <div
@@ -74,7 +70,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`}
           </p>
 
-          <ListComments postId={String(item?.id)} userId={userId} />
+          <ListComments postId={String(item?.id)} />
 
         </div>
       </div>
