@@ -10,7 +10,7 @@ import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
 import { TextAreaInput } from "../util/form";
 
 const schema = yup.object({
-  description: yup.string().max(200).required(),
+  description: yup.string().required(),
 });
 
 const CreateOrUpdateFormComment: React.FC<{
@@ -62,9 +62,9 @@ const CreateOrUpdateFormComment: React.FC<{
         postId: postId,
         commentId: comment?.id,
       });
+      reset();
       setHasErrors(false);
       setLoading(false);
-      reset();
       AlertSuccessNotification({
         text: "Comment save successfully",
         className: "info",

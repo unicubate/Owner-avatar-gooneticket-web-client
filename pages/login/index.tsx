@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { TextInput, TextInputPassword } from "@/components/util/form";
 import { UserLoginFormModel } from "@/types/user.type";
 import {
-  getOneUserPublicAPI,
+  GetOneUserPublicAPI,
   loginUserAPI,
   resendCodeAPI,
 } from "../../api/user";
@@ -53,9 +53,7 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      const { data: findOneUser } = await getOneUserPublicAPI({
-        userId: user?.id,
-      });
+      const { data: findOneUser } = GetOneUserPublicAPI({ userId: user?.id, })
       if (findOneUser?.nextStep === "SETTING_PROFILE") {
         router.push(`${`/register/${user?.id}/setting-profile`}`);
       } else if (findOneUser?.nextStep === "SETTING_INTEREST") {

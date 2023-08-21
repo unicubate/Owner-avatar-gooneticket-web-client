@@ -22,7 +22,7 @@ import {
   UpdateOneProfileNextStepAPI,
 } from "@/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
-import { getOneUserPublicAPI, resendCodeAPI } from "@/api/user";
+import { GetOneUserPublicAPI, resendCodeAPI } from "@/api/user";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { ButtonInput } from "@/components/templates/button-input";
 
@@ -79,12 +79,7 @@ const SettingProfile = () => {
   );
   const countries: any = dataCountries?.data;
 
-  const fetchOneUser = async () =>
-    await getOneUserPublicAPI({ userId });
-  const { data } = useQuery(["user", userId], () => fetchOneUser(), {
-    refetchOnWindowFocus: false,
-    enabled: Boolean(query?.userId),
-  });
+  const { data } = GetOneUserPublicAPI({ userId })
   const user: any = data?.data;
 
   if (user?.nextStep === "CONFIRM_EMAIL") {

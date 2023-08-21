@@ -41,10 +41,10 @@ const TextAreaInput: React.FC<Props> = ({
           <TextArea
             size="large"
             id={name}
-            maxLength={1000}
+            maxLength={6000}
             style={{ height: 120 }}
             required={required}
-            autoSize={{ minRows: row, maxRows: 100 }}
+            autoSize={{ minRows: row, maxRows: 500 }}
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}

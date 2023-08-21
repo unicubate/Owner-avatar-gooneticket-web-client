@@ -7,7 +7,7 @@ import {
   NextStep,
 } from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel
@@ -100,23 +100,32 @@ export const ValidCodeAPI = ({
   return result;
 };
 
-export const getOneUserPrivateAPI = async (payload: {
-  userId: string;
-}): Promise<{ data: UserModel }> => {
+export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
   const { userId } = payload;
-  return await makeApiCall({
-    action: "getOneUserPrivate",
-    urlParams: { userId },
+  return useQuery({
+    queryKey: ["user", userId],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOneUserPrivate",
+        urlParams: { userId },
+      }),
+    refetchOnWindowFocus: false,
+    enabled: Boolean(userId),
   });
 };
 
-export const getOneUserPublicAPI = async (payload: {
+export const GetOneUserPublicAPI = (payload: {
   userId?: string;
   username?: string;
-}): Promise<{ data: UserModel }> => {
+}) => {
   const { userId, username } = payload;
-  return await makeApiCall({
-    action: "getOneUserPublic",
-    queryParams: { userId, username },
+  return useQuery({
+    queryKey: ["user", userId],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOneUserPublic",
+        queryParams: { userId, username },
+      }),
+    refetchOnWindowFocus: false,
   });
 };

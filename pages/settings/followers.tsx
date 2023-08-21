@@ -111,9 +111,7 @@ const Followers = () => {
                             shape="default"
                             type="button"
                             size="large"
-                            loading={
-                              !hasNextPage || isFetchingNextPage ? true : false
-                            }
+                            loading={isFetchingNextPage ? true : false}
                             color={"indigo"}
                             minW="fit"
                           >

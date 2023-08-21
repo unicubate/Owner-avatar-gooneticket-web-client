@@ -1,56 +1,28 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { formateDateDayjs } from "../../utils/formate-date-dayjs";
+import React from "react";
 import Swal from "sweetalert2";
-import { Avatar, Button, Image, Tooltip } from "antd";
-import { PostModel } from "@/types/post";
-import Link from "next/link";
-import { ButtonInput } from "../templates/button-input";
-import { TextAreaInput } from "../util/form";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { usePathname } from "next/navigation";
-import { arrayComments } from "../mock";
+import { Avatar } from "antd";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdEdit,
-  MdEditNote,
-  MdFavorite,
   MdFavoriteBorder,
-  MdOutlineFavorite,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
-import { DeleteOneCommentAPI } from "@/api/comment";
+import { DeleteOneCommentAPI, DeleteOneCommentReplyAPI } from "@/api/comment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 
 type Props = {
   item?: CommentModel;
   index?: number;
+  userId: string;
 };
 
-const schema = yup.object({
-  description: yup.string().required(),
-});
 
-const ListCommentsRepliesPosts: React.FC<Props> = ({ item, index }) => {
-  const [comments] = useState(arrayComments);
-  const pathname = usePathname();
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
-
-  const saveMutation = DeleteOneCommentAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
+  const saveMutation = DeleteOneCommentReplyAPI({
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -88,7 +60,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div className="flex items-start mt-4">
+      <div key={index} className="flex items-start mt-4">
         <Avatar
           size={40}
           className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
@@ -125,20 +97,24 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, index }) => {
               <BiComment />
             </button>
             <button className="ml-3.5 text-sm">Reply</button>
-            <button className="ml-3.5 font-bold">
-              <MdOutlineModeEdit />
-            </button>
-            <button
-              onClick={() => deleteItem(item)}
-              className="ml-3.5 font-bold text-red-600"
-            >
-              <MdDeleteOutline />
-            </button>
+            {userId === item?.userId ?
+              <>
+                <button className="ml-3.5 font-bold">
+                  <MdOutlineModeEdit />
+                </button>
+                <button
+                  onClick={() => deleteItem(item)}
+                  className="ml-3.5 font-bold"
+                >
+                  <MdDeleteOutline />
+                </button>
+              </> : null}
+
           </div>
         </div>
       </div>
 
-      <form action="#" method="POST">
+      {/* <form action="#" method="POST">
         <div className="mt-4 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
           <div className="flex items-start">
             <Avatar
@@ -168,7 +144,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, index }) => {
             </ButtonInput>
           </div>
         </div>
-      </form>
+      </form> */}
     </>
   );
 };

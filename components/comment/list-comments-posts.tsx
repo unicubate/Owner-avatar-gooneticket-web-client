@@ -1,58 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { formateDateDayjs } from "../../utils/formate-date-dayjs";
+import React from "react";
 import Swal from "sweetalert2";
-import { Avatar, Button, Image, Skeleton, Tooltip } from "antd";
-import { PostModel } from "@/types/post";
-import Link from "next/link";
-import { ButtonInput } from "../templates/button-input";
-import { TextAreaInput } from "../util/form";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { usePathname } from "next/navigation";
-import { arrayComments } from "../mock";
+import { Avatar, Skeleton } from "antd";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdEdit,
-  MdEditNote,
-  MdFavorite,
   MdFavoriteBorder,
-  MdOutlineFavorite,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
-import { DeleteOneCommentAPI, getCommentsRepliesAPI } from "@/api/comment";
+import { DeleteOneCommentAPI, GetInfiniteCommentsRepliesAPI } from "@/api/comment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 
 type Props = {
   item?: CommentModel;
   index?: number;
+  userId: string;
 };
 
-const schema = yup.object({
-  description: yup.string().required(),
-});
 
-const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
-  const [comments] = useState(arrayComments);
-  const pathname = usePathname();
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
-
+const ListCommentsPosts: React.FC<Props> = ({ item, userId, index }) => {
   const saveMutation = DeleteOneCommentAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -88,13 +59,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const fetchData = async (pageParam: number) =>
-    await getCommentsRepliesAPI({
-      take: 2,
-      page: pageParam,
-      sort: "DESC",
-      commentId: String(item?.id),
-    });
+
   const {
     status,
     error,
@@ -104,24 +69,23 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["comments-replies", item?.id],
-    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
-    keepPreviousData: true,
+  } = GetInfiniteCommentsRepliesAPI({
+    take: 1,
+    sort: "DESC",
+    commentId: String(item?.id),
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
-    ""
+    <Skeleton loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
   ) : isErrorComments ? (
     <strong>Error find data please try again...</strong>
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
-    <Skeleton loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
+    ""
   ) : (
     dataComments.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommentsRepliesPosts item={item} key={index} index={index} />
+        <ListCommentsRepliesPosts item={item} key={index} index={index} userId={userId} />
       ))
   );
 
@@ -162,20 +126,39 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 <BiComment />
               </button>
               <button className="ml-3.5 text-sm">Reply</button>
-              <button className="ml-3.5 font-bold">
-                <MdOutlineModeEdit />
-              </button>
-              <button
-                onClick={() => deleteItem(item)}
-                className="ml-3.5 font-bold text-red-600"
-              >
-                <MdDeleteOutline />
-              </button>
+              {userId === item?.userId ?
+                <>
+                  <button className="ml-3.5 font-bold">
+                    <MdOutlineModeEdit />
+                  </button>
+                  <button
+                    onClick={() => deleteItem(item)}
+                    className="ml-3.5 font-bold"
+                  >
+                    <MdDeleteOutline />
+                  </button>
+                </>
+                : null}
+
             </div>
 
             {/* Replies comments */}
 
             {dataTableCommentsReplies}
+
+            {hasNextPage ? (
+              <>
+                <div className="mt-6 flex flex-col justify-between items-center">
+                  {isFetchingNextPage ? null :
+                    <button
+                      onClick={() => fetchNextPage()}
+                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                    >
+                      Load More Response
+                    </button>}
+                </div>
+              </>
+            ) : null}
 
           </div>
         </div>

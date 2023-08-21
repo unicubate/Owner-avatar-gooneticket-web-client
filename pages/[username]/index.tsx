@@ -20,7 +20,7 @@ import * as yup from "yup";
 import { TextAreaInput, TextInput } from "@/components/util/form";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { useQuery } from "@tanstack/react-query";
-import { getOneUserPublicAPI } from "../../api/user";
+import { GetOneUserPublicAPI } from "../../api/user";
 
 const schema = yup.object({
   email: yup
@@ -56,14 +56,8 @@ const ProfilePublic = () => {
     setModal2Open(false);
   };
 
-
-  const fetchOneUser = async () =>
-    await getOneUserPublicAPI({ username });
-  const { data } = useQuery(["user", username], () => fetchOneUser(), {
-    refetchOnWindowFocus: false,
-    enabled: Boolean(query?.username),
-  });
-  const user: any = data?.data;
+  const { data: userItem } = GetOneUserPublicAPI({ username })
+  const user: any = userItem?.data;
 
   const onSubmit: SubmitHandler<any> = (payload: any) => {
     // let data = new FormData();

@@ -10,9 +10,10 @@ import ListComments from "../comment/list-comments";
 type Props = {
   item?: PostModel;
   index: number;
+  userId: string;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
+const ListFollowPosts: React.FC<Props> = ({ item, index, userId }) => {
   return (
     <>
       <div
@@ -25,7 +26,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
               <Avatar
                 size={40}
                 className="object-cover w-10 h-10 rounded-full"
-                src="https://picsum.photos/seed/bXJsaR0Ga/640/480"
+                src={item?.profile?.image}
                 alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
               />
             </div>
@@ -54,13 +55,13 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
               preview={true}
               src="https://picsum.photos/seed/qiPtavBwFF/640/480"
               alt={item?.title}
-              // placeholder={
-              //     <Image
-              //         preview={true}
-              //         src="https://picsum.photos/seed/qiPtavBwFF/640/480"
-              //         width={200}
-              //     />
-              // }
+            // placeholder={
+            //     <Image
+            //         preview={true}
+            //         src="https://picsum.photos/seed/qiPtavBwFF/640/480"
+            //         width={200}
+            //     />
+            // }
             />
           </div>
 
@@ -73,8 +74,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`}
           </p>
 
-          <ListComments postId={String(item?.id)} />
-          
+          <ListComments postId={String(item?.id)} userId={userId} />
+
         </div>
       </div>
     </>
