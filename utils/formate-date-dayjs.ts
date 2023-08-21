@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
-require(`dayjs/locale/en`);
+require(`dayjs/locale/fr`);
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
-dayjs.locale(`en`);
+dayjs.locale(`fr`);
 
 export const formateDateDayjs = (date: Date) => {
   const todaysDate = new Date();
@@ -17,17 +17,21 @@ export const formateDateDayjs = (date: Date) => {
 };
 
 export const getMonthFormatDays = (date: Date) => {
-  const currentMouth = dayjs(date).format("MMM");
+  const currentMouth = dayjs(date).locale("fr").format("MMM");
   return currentMouth;
 };
 
 export const formateDaysMonthYearFormatDays = (date: Date) => {
-  const currentMouth = dayjs(date).format("DD MMM YYYY");
+  const currentMouth = dayjs(date).locale("fr").format("DD MMM YYYY");
   return currentMouth;
 };
 
 export const formateDDMMYYHH = (date: Date) => {
-  return date ? dayjs(date).format("DD/MM/YYYY HH:mm") : null;
+  return date ? dayjs(date).locale("fr").format("DD/MM/YYYY HH:mm") : null;
+};
+
+export const formateDMYHH = (date: Date) => {
+  return date ? dayjs(date).locale("fr").format("DD MMM YYYY HH:mm") : null;
 };
 
 export const formateDDMMYYYY = (date: Date) => {
@@ -35,7 +39,7 @@ export const formateDDMMYYYY = (date: Date) => {
 };
 
 export const formateFromNow = (date: Date) => {
-  return date ? dayjs(date).fromNow() : null;
+  return date ? dayjs(date).locale("fr").fromNow() : null;
 };
 
 export const subtractYears = (numOfYears: number, date: Date) => {

@@ -3,6 +3,9 @@ import React from "react";
 import { Avatar, Image } from "antd";
 import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
+import { formateDMYHH } from "@/utils";
+import { BiComment } from "react-icons/bi";
+import { MdFavoriteBorder } from "react-icons/md";
 
 type Props = {
   item?: PostModel;
@@ -32,7 +35,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
                 {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
-                18 nov. 2022 à 16:57
+                {formateDMYHH(item?.createdAt as Date)}
               </p>
             </div>
 
@@ -58,7 +61,15 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
           <h3 className="mt-4 text-xl font-bold text-gray-900">
             {item?.title ?? ""}
           </h3>
-          <p className="mt-4 text-base font-normal text-gray-500" dangerouslySetInnerHTML={{ __html: item?.description || '' }} />
+          <div className="flex mt-4 items-center">
+            <button className="text-xl">
+              <MdFavoriteBorder />
+            </button>
+            <button className="ml-3.5 text-xl">
+              <BiComment />
+            </button>
+          </div>
+          <p className="mt-4 text-base font-normal" dangerouslySetInnerHTML={{ __html: item?.description || '' }} />
 
           <ListComments postId={String(item?.id)} />
 
