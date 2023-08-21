@@ -16,7 +16,9 @@ const schema = yup.object({
 const CreateOrUpdateFormComment: React.FC<{
   postId: string;
   comment?: any;
-}> = ({ postId, comment }) => {
+  setOpenModal?: any
+  openModal?: boolean
+}> = ({ postId, comment, openModal, setOpenModal }) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -57,12 +59,12 @@ const CreateOrUpdateFormComment: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
+      reset();
       await saveMutation.mutateAsync({
         ...payload,
         postId: postId,
         commentId: comment?.id,
       });
-      reset();
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -104,6 +106,21 @@ const CreateOrUpdateFormComment: React.FC<{
             placeholder="Participate in the conversation"
             errors={errors}
           />
+
+          {openModal ?
+            <div className="flex justify-between items-center">
+              <ButtonInput
+                shape="default"
+                type="button"
+                size="large"
+                onClick={() => setOpenModal(false)}
+                loading={false}
+                color={"gray"}
+              >
+                Cancel
+              </ButtonInput>
+            </div>
+            : null}
 
           <div className="sm:flex flex-col sm:items-end sm:justify-between">
             <ButtonInput

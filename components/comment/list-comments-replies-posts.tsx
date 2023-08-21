@@ -11,6 +11,7 @@ import {
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentAPI, DeleteOneCommentReplyAPI } from "@/api/comment";
 import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
+import { Linkify } from "@/utils/linkify";
 
 type Props = {
   item?: CommentModel;
@@ -31,8 +32,8 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
       text: "Are you sure you want to delete this?",
       confirmButtonText: "Yes, Deleted",
       cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#573DDB",
-      cancelButtonColor: "#BEC1C5",
+      confirmButtonColor: "#dc3545",
+      cancelButtonColor: "#6f42c1",
       showCancelButton: true,
       reverseButtons: true,
     }).then(async (result) => {
@@ -81,8 +82,9 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
             </div>
           </div>
           <p className="mt-2 text-base font-normal leading-7 text-gray-900">
-            {" "}
-            {item?.description}{" "}
+            <Linkify>
+              {item?.description}
+            </Linkify>
           </p>
 
           <div className="flex mt-2 items-center">

@@ -13,7 +13,7 @@ export const AlertSuccessNotification = (options: {
     gravity: gravity, // `top` or `bottom`
     position: position, // `left`, `center` or `right`
     style: {
-      background: `linear-gradient(to right, #573DDB, #573DDB)`,
+      background: `linear-gradient(to right, #198754, #198754)`,
     },
   }).showToast();
 };

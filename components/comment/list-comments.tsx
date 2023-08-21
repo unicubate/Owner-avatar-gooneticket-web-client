@@ -53,7 +53,7 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
                 onClick={() => fetchNextPage()}
                 className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
               >
-                Load More
+                View more comments
               </button>}
           </div>
         </>

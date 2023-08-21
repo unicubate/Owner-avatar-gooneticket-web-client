@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar, Skeleton } from "antd";
 import { BiComment } from "react-icons/bi";
@@ -13,6 +13,8 @@ import { DeleteOneCommentAPI, GetInfiniteCommentsRepliesAPI } from "@/api/commen
 import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
+import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
+import { Linkify } from "@/utils/linkify";
 
 type Props = {
   item?: CommentModel;
@@ -22,6 +24,11 @@ type Props = {
 
 const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   const user = useAuth() as any;
+  const [openModal, setOpenModal] = useState(false);
+
+  const editItem = (item: any) => {
+    setOpenModal(true)
+  }
 
   const saveMutation = DeleteOneCommentAPI({
     onSuccess: () => { },
@@ -34,8 +41,8 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
       text: "Are you sure you want to delete this?",
       confirmButtonText: "Yes, Deleted",
       cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#573DDB",
-      cancelButtonColor: "#BEC1C5",
+      confirmButtonColor: "#dc3545",
+      cancelButtonColor: "#6f42c1",
       showCancelButton: true,
       reverseButtons: true,
     }).then(async (result) => {
@@ -94,77 +101,83 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   return (
     <>
       <li key={index} className="py-4">
-        <div className="flex items-start">
-          <Avatar
-            size={40}
-            className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-            src={item?.profile?.image}
-            alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-          />
+        {!openModal ?
+          <div className="flex items-start">
+            <Avatar
+              size={40}
+              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+              src={item?.profile?.image}
+              alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
+            />
 
-          <div className="ml-6">
-            <div className="flex items-center space-x-px">
-              <div className="flex items-center">
-                <p className="text-sm font-bold text-gray-900">
-                  {" "}
-                  {item?.profile?.firstName} {item?.profile?.lastName}{" "}
-                </p>
-                <p className="ml-3.5 text-sm font-normal text-gray-500">
-                  {formateFromNow(item?.createdAt as Date)}
-                </p>
+            <div className="ml-6">
+              <div className="flex items-center space-x-px">
+                <div className="flex items-center">
+                  <p className="text-sm font-bold text-gray-900">
+                    {item?.profile?.firstName} {item?.profile?.lastName}{" "}
+                  </p>
+                  <p className="ml-3.5 text-sm font-normal text-gray-500">
+                    {formateFromNow(item?.createdAt as Date)}
+                  </p>
+                </div>
               </div>
-            </div>
-            <p className="mt-2 text-base font-normal leading-7 text-gray-900">
-              {item?.description}
-            </p>
-            <div className="flex mt-2 items-center">
-              {/* <button className="font-bold text-red-400">
+              <p className="mt-2 text-base font-normal leading-7 text-gray-900">
+                <Linkify>
+                  {item?.description}
+                </Linkify>
+              </p>
+              <div className="flex mt-2 items-center">
+                {/* <button className="font-bold text-red-400">
                 <MdFavorite />
               </button> */}
-              <button className="font-bold">
-                <MdFavoriteBorder />
-              </button>
-              <button className="ml-3.5 font-bold">
-                <BiComment />
-              </button>
-              <button className="ml-3.5 text-sm">Reply</button>
-              {user?.id === item?.userId ?
+                <button className="font-bold">
+                  <MdFavoriteBorder />
+                </button>
+                <button className="ml-3.5 font-bold">
+                  <BiComment />
+                </button>
+                <button className="ml-3.5 text-sm">Reply</button>
+                {user?.id === item?.userId ?
+                  <>
+                    <button onClick={() => editItem(item)} className="ml-3.5 font-bold">
+                      <MdOutlineModeEdit />
+                    </button>
+                    <button
+                      onClick={() => deleteItem(item)}
+                      className="ml-3.5 font-bold"
+                    >
+                      <MdDeleteOutline />
+                    </button>
+                  </>
+                  : null}
+
+              </div>
+
+              {/* Replies comments */}
+
+              {dataTableCommentsReplies}
+
+              {hasNextPage ? (
                 <>
-                  <button className="ml-3.5 font-bold">
-                    <MdOutlineModeEdit />
-                  </button>
-                  <button
-                    onClick={() => deleteItem(item)}
-                    className="ml-3.5 font-bold"
-                  >
-                    <MdDeleteOutline />
-                  </button>
+                  <div className="mt-6 flex flex-col justify-between items-center">
+                    {isFetchingNextPage ? null :
+                      <button
+                        disabled={isFetchingNextPage ? true : false}
+                        onClick={() => fetchNextPage()}
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      >
+                        View more response
+                      </button>}
+                  </div>
                 </>
-                : null}
+              ) : null}
 
             </div>
 
-            {/* Replies comments */}
-
-            {dataTableCommentsReplies}
-
-            {hasNextPage ? (
-              <>
-                <div className="mt-6 flex flex-col justify-between items-center">
-                  {isFetchingNextPage ? null :
-                    <button
-                      disabled={isFetchingNextPage ? true : false}
-                      onClick={() => fetchNextPage()}
-                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                    >
-                      Load More Response
-                    </button>}
-                </div>
-              </>
-            ) : null}
-
           </div>
-        </div>
+          : null}
+
+        {openModal ? <CreateOrUpdateFormComment postId={String(item?.postId)} comment={item} openModal={openModal} setOpenModal={setOpenModal} /> : null}
       </li>
     </>
   );
