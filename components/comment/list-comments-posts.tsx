@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentAPI, GetInfiniteCommentsRepliesAPI } from "@/api/comment";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
 
@@ -110,7 +110,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                   {item?.profile?.firstName} {item?.profile?.lastName}{" "}
                 </p>
                 <p className="ml-3.5 text-sm font-normal text-gray-500">
-                  {/* {item?.createdAt} */}
+                  {formateFromNow(item?.createdAt as Date)}
                 </p>
               </div>
             </div>
@@ -153,6 +153,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 <div className="mt-6 flex flex-col justify-between items-center">
                   {isFetchingNextPage ? null :
                     <button
+                      disabled={isFetchingNextPage ? true : false}
                       onClick={() => fetchNextPage()}
                       className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                     >

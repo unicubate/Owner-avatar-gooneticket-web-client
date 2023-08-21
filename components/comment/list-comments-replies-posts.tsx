@@ -10,7 +10,7 @@ import {
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentAPI, DeleteOneCommentReplyAPI } from "@/api/comment";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
 
 type Props = {
   item?: CommentModel;
@@ -76,8 +76,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
               </p>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {" "}
-                {/* {item?.createdAt} */}
+                {formateFromNow(item?.createdAt as Date)}
               </p>
             </div>
           </div>

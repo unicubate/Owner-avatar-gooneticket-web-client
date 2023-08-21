@@ -46,18 +46,15 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
 
       {hasNextPage ? (
         <>
-          <div className="mt-8 flex flex-col justify-between items-center">
-            <ButtonInput
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="medium"
-              loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
+          <div className="mt-6 flex flex-col justify-between items-center">
+            {isFetchingNextPage ? null :
+              <button
+                disabled={isFetchingNextPage ? true : false}
+                onClick={() => fetchNextPage()}
+                className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+              >
+                Load More
+              </button>}
           </div>
         </>
       ) : null}
