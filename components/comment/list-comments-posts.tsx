@@ -5,7 +5,6 @@ import { Avatar, Skeleton } from "antd";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
@@ -16,6 +15,7 @@ import { useAuth } from "../util/session/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { Linkify } from "@/utils/linkify";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
+import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 
 type Props = {
   item?: CommentModel;
@@ -26,6 +26,7 @@ type Props = {
 const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
+  const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
     setOpenModal(true)
@@ -128,13 +129,13 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 </Linkify>
               </p>
               <div className="flex mt-2 items-center">
-                
-               <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
-               
+
+                <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
+
                 <button className="ml-3.5 font-bold">
                   <BiComment />
                 </button>
-                <button className="ml-3.5 text-sm">Reply</button>
+                <button onClick={() => { setOpenModalReply((lk) => !lk) }} className="ml-3.5 text-sm">Reply</button>
                 {user?.id === item?.userId ?
                   <>
                     <button onClick={() => editItem(item)} className="ml-3.5 font-bold">
@@ -150,10 +151,13 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                   : null}
 
               </div>
+              {openModalReply ? <CreateOrUpdateFormCommentReply parentId={String(item?.id)} openModalReply={openModalReply} setOpenModalReply={setOpenModalReply} /> : null}
+
 
               {/* Replies comments */}
 
               {dataTableCommentsReplies}
+
 
               {hasNextPage ? (
                 <>
@@ -170,7 +174,10 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 </>
               ) : null}
 
+
+
             </div>
+
 
           </div>
           : null}

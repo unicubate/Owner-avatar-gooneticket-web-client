@@ -158,11 +158,11 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Like route */
   createOneLike: {
-    endpoint: `${baseUrl}/likes/:likeableId/:type`,
+    endpoint: `${baseUrl}/likes/:type/:likeableId`,
     method: POST,
   },
   deleteOneLike: {
-    endpoint: `${baseUrl}/likes/:likeableId/:type`,
+    endpoint: `${baseUrl}/likes/:type/:likeableId`,
     method: DELETE,
   },
 
@@ -177,6 +177,10 @@ export const apiEndpoints: ClientApiMethods = {
   },
   createOneComment: {
     endpoint: `${baseUrl}/comments`,
+    method: POST,
+  },
+  createOneCommentReply: {
+    endpoint: `${baseUrl}/comments/replies`,
     method: POST,
   },
   updateOneComment: {

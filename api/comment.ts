@@ -21,7 +21,10 @@ export const CreateOrUpdateOneCommentAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation(
     async (
-      payload: CommentFormModel & { postId?: string; commentId: string }
+      payload: CommentFormModel & {
+        postId: string;
+        commentId: string;
+      }
     ): Promise<any> => {
       const { postId, commentId } = payload;
 
@@ -34,6 +37,57 @@ export const CreateOrUpdateOneCommentAPI = ({
         : await makeApiCall({
             action: "createOneComment",
             body: { ...payload, postId },
+          });
+    },
+    {
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onError: async (error: any) => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onError) {
+          onError(error);
+        }
+      },
+    }
+  );
+
+  return result;
+};
+
+export const CreateOrUpdateOneCommentReplyAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ["comments-replies"];
+  const queryClient = useQueryClient();
+  const result = useMutation(
+    async (
+      payload: CommentFormModel & { parentId: string; commentId: string }
+    ): Promise<any> => {
+      const { parentId, commentId } = payload;
+
+      return commentId
+        ? await makeApiCall({
+            action: "updateOneComment",
+            body: payload,
+            urlParams: { commentId },
+          })
+        : await makeApiCall({
+            action: "createOneCommentReply",
+            body: { ...payload, parentId },
           });
     },
     {
@@ -80,13 +134,13 @@ export const DeleteOneCommentReplyAPI = ({
       });
     },
     {
-      onSettled: async () => {
+      onSettled: async (action) => {
         await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
-      onSuccess: async () => {
+      onSuccess: async (action) => {
         await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();

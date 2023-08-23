@@ -1,40 +1,26 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Skeleton } from "antd";
-import Image from "next/image";
 import { ButtonInput } from "@/components/templates/button-input";
-import { Fragment, useEffect, useState } from "react";
-import { arrayPeoples } from "@/components/mock";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { getFollowersAPI } from "@/api/follow";
-import { EmptyData } from "@/components/templates/empty-data";
+import { useEffect } from "react";
+import { GetInfiniteFollowersAPI } from "@/api/follow";
 import ListFollowers from "@/components/setting/list-followers";
 import { useInView } from "react-intersection-observer";
 
 const Followers = () => {
   const { ref, inView } = useInView();
-  const fetchData = async (pageParam: number) =>
-    await getFollowersAPI({
-      take: 10,
-      page: pageParam,
-      sort: "DESC",
-    });
+
   const {
-    status,
-    error,
     isLoading: isLoadingFollowers,
     isError: isErrorFollowers,
     data: dataFollowers,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["followers"],
-    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
-    keepPreviousData: true,
+  } = GetInfiniteFollowersAPI({
+    take: 10,
+    sort: "DESC",
   });
 
   const dataTableFollowers = isLoadingFollowers ? (

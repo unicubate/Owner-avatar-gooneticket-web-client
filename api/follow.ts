@@ -1,7 +1,11 @@
 import { ResponseFollowModel } from "@/types/follow";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { PaginationRequest } from "@/utils/pagination-item";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const CreateOrDeleteOneFollowerAPI = ({
   onSuccess,
@@ -94,5 +98,43 @@ export const getFollowingsAPI = async (
   return await makeApiCall({
     action: "getFollowings",
     queryParams: payload,
+  });
+};
+
+export const GetInfiniteFollowersAPI = (payload: {
+  take: number;
+  sort: SortModel;
+}) => {
+  const { take, sort } = payload;
+  return useInfiniteQuery({
+    queryKey: ["followers", "infinite"],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getFollowersAPI({
+        take: take,
+        page: pageParam,
+        sort: sort,
+      }),
+    staleTime: 60_000,
+    keepPreviousData: true,
+  });
+};
+
+export const GetInfiniteFollowingsAPI = (payload: {
+  take: number;
+  sort: SortModel;
+}) => {
+  const { take, sort } = payload;
+  return useInfiniteQuery({
+    queryKey: ["followings", "infinite"],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getFollowingsAPI({
+        take: take,
+        page: pageParam,
+        sort: sort,
+      }),
+    staleTime: 60_000,
+    keepPreviousData: true,
   });
 };

@@ -1,17 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar } from "antd";
-import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
-import { DeleteOneCommentAPI, DeleteOneCommentReplyAPI } from "@/api/comment";
+import { DeleteOneCommentReplyAPI } from "@/api/comment";
 import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
 import { Linkify } from "@/utils/linkify";
+import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
+import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 
 type Props = {
   item?: CommentModel;
@@ -21,6 +21,12 @@ type Props = {
 
 
 const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
+  const [openModalReply, setOpenModalReply] = useState(false);
+
+  const editItem = (item: any) => {
+    setOpenModalReply(true)
+  }
+
   const saveMutation = DeleteOneCommentReplyAPI({
     onSuccess: () => { },
     onError: (error?: any) => { },
@@ -88,19 +94,16 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
           </p>
 
           <div className="flex mt-2 items-center">
-            {/* <button className="font-bold text-red-400">
-                <MdFavorite />
-              </button> */}
-            <button className="font-bold">
-              <MdFavoriteBorder />
-            </button>
-            <button className="ml-3.5 font-bold">
+
+            <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
+
+            {/* <button className="ml-3.5 font-bold">
               <BiComment />
-            </button>
-            <button className="ml-3.5 text-sm">Reply</button>
+            </button> */}
+            {/* <button onClick={() => { setOpenModalReply(true) }} className="ml-3.5 text-sm">Reply</button> */}
             {userId === item?.userId ?
               <>
-                <button className="ml-3.5 font-bold">
+                <button onClick={() => editItem(item)} className="ml-3.5 font-bold">
                   <MdOutlineModeEdit />
                 </button>
                 <button
@@ -115,37 +118,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
         </div>
       </div>
 
-      {/* <form action="#" method="POST">
-        <div className="mt-4 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
-          <div className="flex items-start">
-            <Avatar
-              size={40}
-              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              src="https://picsum.photos/seed/NLHCIy/640/480"
-              alt=""
-            />
-          </div>
-          <TextAreaInput
-            row={1}
-            control={control}
-            name="description"
-            placeholder="Participate in the conversation"
-            errors={errors}
-          />
-
-          <div className="sm:flex flex-col sm:items-end sm:justify-between">
-            <ButtonInput
-              shape="default"
-              type="submit"
-              size="large"
-              loading={false}
-              color={"indigo"}
-            >
-              Save
-            </ButtonInput>
-          </div>
-        </div>
-      </form> */}
+      {openModalReply ? <CreateOrUpdateFormCommentReply parentId={String(item?.id)} comment={item} openModalReply={openModalReply} setOpenModalReply={setOpenModalReply} /> : null}
     </>
   );
 };

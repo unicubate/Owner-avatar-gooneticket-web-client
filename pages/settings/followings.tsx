@@ -4,19 +4,13 @@ import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-settin
 import { Skeleton } from "antd";
 import { useInView } from "react-intersection-observer";
 import { ButtonInput } from "@/components/templates/button-input";
-import { getFollowingsAPI } from "@/api/follow";
+import { GetInfiniteFollowingsAPI, getFollowingsAPI } from "@/api/follow";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";
 
 const Followings = () => {
   const { ref, inView } = useInView();
-  const fetchData = async (pageParam: number) =>
-    await getFollowingsAPI({
-      take: 10,
-      page: pageParam,
-      sort: "DESC",
-    });
   const {
     status,
     error,
@@ -26,11 +20,9 @@ const Followings = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["followings"],
-    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
-    keepPreviousData: true,
+  } = GetInfiniteFollowingsAPI({
+    take: 10,
+    sort: "DESC",
   });
 
   const dataTableFollowings = isLoadingFollowings ? (
