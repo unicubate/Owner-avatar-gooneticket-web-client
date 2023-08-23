@@ -115,7 +115,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between flex-1 h-full px-4">
+      <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
         <div className="space-y-4">
           <nav className="flex-1 space-y-1">
             {NAVIGATION_ITEMS.map((item: any, index: number) => {

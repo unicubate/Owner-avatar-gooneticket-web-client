@@ -123,7 +123,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                   </p>
                 </div>
               </div>
-              <p className="mt-2 text-base font-normal">
+              <p className="mt-2 text-sm font-normal text-gray-700">
                 <Linkify>
                   {item?.description}
                 </Linkify>

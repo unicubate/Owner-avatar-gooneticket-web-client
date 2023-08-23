@@ -53,15 +53,14 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      const { data: findOneUser } = GetOneUserPublicAPI({ userId: user?.id, })
-      if (findOneUser?.nextStep === "SETTING_PROFILE") {
+      if (user?.nextStep === "SETTING_PROFILE") {
         router.push(`${`/register/${user?.id}/setting-profile`}`);
-      } else if (findOneUser?.nextStep === "SETTING_INTEREST") {
+      } else if (user?.nextStep === "SETTING_INTEREST") {
         router.push(`${`/register/${user?.id}/setting-interest`}`);
-      } else if (findOneUser?.nextStep === "CONFIRM_EMAIL") {
-        await resendCodeAPI({ userId: findOneUser?.id });
+      } else if (user?.nextStep === "CONFIRM_EMAIL") {
+        await resendCodeAPI({ userId: user?.id });
         router.push(`${`/register/${user?.id}/confirm-account`}`);
-      } else if (findOneUser?.nextStep === "COMPLETE_REGISTRATION") {
+      } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
         router.push(`${`/dashboard`}`);
         window.location.reload();
       }

@@ -64,7 +64,7 @@ const Followers = () => {
       <LayoutDashboard title={"Followers"}>
         <div className="flex flex-col flex-1">
           <main>
-            <div className="py-6">
+            <div className="max-w-6xl mx-auto py-6">
               <div className="px-4 mx-auto sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Followers</h1>
@@ -72,6 +72,7 @@ const Followers = () => {
               </div>
 
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                
                 <HorizontalNavSetting />
 
                 <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
@@ -85,6 +86,7 @@ const Followers = () => {
                         </div>
 
                         {dataTableFollowers}
+                        
                       </div>
                     </div>
 

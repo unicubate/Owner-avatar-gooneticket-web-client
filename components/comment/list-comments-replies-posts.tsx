@@ -87,7 +87,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
               </p>
             </div>
           </div>
-          <p className="mt-2 text-base font-normal leading-7 text-gray-900">
+          <p className="mt-2 text-sm font-normal text-gray-700">
             <Linkify>
               {item?.description}
             </Linkify>

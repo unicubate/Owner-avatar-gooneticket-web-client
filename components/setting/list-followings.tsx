@@ -77,7 +77,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   return (
     <>
       <Fragment key={index}>
-        <hr className="mt-1 border-gray-200" />
+        <hr className="mt-4 border-gray-200" />
         <div className="py-5">
           <div className="flex items-center">
             <div className="relative flex-shrink-0 cursor-pointer">
