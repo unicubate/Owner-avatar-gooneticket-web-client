@@ -27,7 +27,7 @@ const Posts = () => {
 
                 <div className="flex flex-col flex-1">
                     <main>
-                        <div className="py-6">
+                        <div className="max-w-6xl mx-auto py-6">
                             <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Articles</h1>

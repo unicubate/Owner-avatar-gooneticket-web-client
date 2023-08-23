@@ -19,7 +19,7 @@ const PostsCreate = () => {
 
                 <div className="flex flex-col flex-1">
                     <main>
-                        <div className="py-6">
+                        <div className="max-w-6xl mx-auto py-6">
 
                             <div className="px-4 mx-auto sm:px-6 md:px-8">
                                 <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-2 sm:gap-8 xl:gap-12">
