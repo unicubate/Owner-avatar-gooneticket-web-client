@@ -123,7 +123,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                   </p>
                 </div>
               </div>
-              <p className="mt-2 text-base font-normal leading-7 text-gray-900">
+              <p className="mt-2 text-base font-normal">
                 <Linkify>
                   {item?.description}
                 </Linkify>
@@ -132,9 +132,6 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
 
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-                <button className="ml-3.5 font-bold">
-                  <BiComment />
-                </button>
                 <button onClick={() => { setOpenModalReply((lk) => !lk) }} className="ml-3.5 text-sm">Reply</button>
                 {user?.id === item?.userId ?
                   <>

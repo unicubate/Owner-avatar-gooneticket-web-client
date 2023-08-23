@@ -26,6 +26,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     undefined
   );
   const {
+    watch,
     reset,
     control,
     setValue,
@@ -35,6 +36,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     resolver: yupResolver(schema),
     mode: "onChange",
   });
+  const watchDescription = watch('description', '');
 
   useEffect(() => {
     if (comment) {
@@ -127,17 +129,21 @@ const CreateOrUpdateFormCommentReply: React.FC<{
             </div>
             : null}
 
-          <div className="sm:flex flex-col sm:items-end sm:justify-between">
-            <ButtonInput
-              shape="default"
-              type="submit"
-              size="large"
-              loading={loading}
-              color={"indigo"}
-            >
-              Save
-            </ButtonInput>
-          </div>
+          {watchDescription.length > 0 && (
+
+            <div className="sm:flex flex-col sm:items-end sm:justify-between">
+              <ButtonInput
+                shape="default"
+                type="submit"
+                size="large"
+                loading={loading}
+                color={"indigo"}
+              >
+                Save
+              </ButtonInput>
+            </div>
+
+          )}
         </div>
       </form>
     </>

@@ -97,10 +97,6 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
 
             <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-            {/* <button className="ml-3.5 font-bold">
-              <BiComment />
-            </button> */}
-            {/* <button onClick={() => { setOpenModalReply(true) }} className="ml-3.5 text-sm">Reply</button> */}
             {userId === item?.userId ?
               <>
                 <button onClick={() => editItem(item)} className="ml-3.5 font-bold">

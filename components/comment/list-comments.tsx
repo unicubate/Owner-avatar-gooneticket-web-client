@@ -40,7 +40,8 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
 
   return (
     <>
-
+      {user?.id ? <CreateOrUpdateFormComment postId={postId} /> : null}
+      
       <ul className="mt-8 divide-y divide-gray-200 -my-9">
 
         {dataTableComments}
@@ -62,8 +63,6 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
         </>
       ) : null}
 
-
-      {user?.id ? <CreateOrUpdateFormComment postId={postId} /> : null}
     </>
   );
 };

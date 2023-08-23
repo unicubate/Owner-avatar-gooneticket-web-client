@@ -26,6 +26,7 @@ const CreateOrUpdateFormComment: React.FC<{
     undefined
   );
   const {
+    watch,
     reset,
     control,
     setValue,
@@ -35,6 +36,7 @@ const CreateOrUpdateFormComment: React.FC<{
     resolver: yupResolver(schema),
     mode: "onChange",
   });
+  const watchDescription = watch('description', '');
 
   useEffect(() => {
     if (comment) {
@@ -61,16 +63,16 @@ const CreateOrUpdateFormComment: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-      if (comment) {
-        setOpenModal((lk: boolean) => !lk)
-      } else {
-        reset();
-      }
       await saveMutation.mutateAsync({
         ...payload,
         postId: postId,
         commentId: comment?.id,
       });
+      if (comment) {
+        setOpenModal((lk: boolean) => !lk)
+      } else {
+        reset();
+      }
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -128,17 +130,21 @@ const CreateOrUpdateFormComment: React.FC<{
             </div>
             : null}
 
-          <div className="sm:flex flex-col sm:items-end sm:justify-between">
-            <ButtonInput
-              shape="default"
-              type="submit"
-              size="large"
-              loading={loading}
-              color={"indigo"}
-            >
-              Save
-            </ButtonInput>
-          </div>
+          {watchDescription.length > 0 && (
+
+            <div className="sm:flex flex-col sm:items-end sm:justify-between">
+              <ButtonInput
+                shape="default"
+                type="submit"
+                size="large"
+                loading={loading}
+                color={"indigo"}
+              >
+                Save
+              </ButtonInput>
+            </div>
+
+          )}
         </div>
       </form>
     </>
