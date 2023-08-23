@@ -8,6 +8,7 @@ import { Avatar, Button, Upload } from "antd";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
 import { TextAreaInput } from "../util/form";
+import { useAuth } from "../util/session/context-user";
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -19,6 +20,7 @@ const CreateOrUpdateFormComment: React.FC<{
   setOpenModal?: any
   openModal?: boolean
 }> = ({ postId, comment, openModal, setOpenModal }) => {
+  const user = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -59,7 +61,11 @@ const CreateOrUpdateFormComment: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-      reset();
+      if (comment) {
+        setOpenModal((lk: boolean) => !lk)
+      } else {
+        reset();
+      }
       await saveMutation.mutateAsync({
         ...payload,
         postId: postId,
@@ -94,7 +100,7 @@ const CreateOrUpdateFormComment: React.FC<{
             <Avatar
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              src="https://picsum.photos/seed/NLHCIy/640/480"
+              src={user?.profile?.image}
               alt=""
             />
           </div>

@@ -183,6 +183,7 @@ export const GetInfiniteCommentsAPI = (payload: {
         sort: sort,
         postId: postId,
       }),
+    staleTime: 60_000,
     keepPreviousData: true,
   });
 };
@@ -206,6 +207,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
         sort: "DESC",
         commentId: payload?.commentId,
       }),
+    staleTime: 60_000,
     keepPreviousData: true,
   });
 };

@@ -2,11 +2,10 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
-import { getOnePostAPI } from "@/api/post";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
 import { ButtonInput } from "@/components/templates/button-input";
+import { GetOnePostAPI } from "@/api/post";
 
 
 
@@ -14,12 +13,8 @@ const PostsCreate = () => {
     const { query } = useRouter()
     const postId = String(query?.postId)
 
-    const fetchOnePost = async () =>
-        await getOnePostAPI({ postId: postId });
-    const { data: postItem } = useQuery(["post", postId], () => fetchOnePost(), {
-        refetchOnWindowFocus: false,
-        enabled: Boolean(postId),
-    });
+    const { data: postItem } = GetOnePostAPI({ postId });
+    
     const post: PostModel | undefined = postItem?.data;
 
     return (

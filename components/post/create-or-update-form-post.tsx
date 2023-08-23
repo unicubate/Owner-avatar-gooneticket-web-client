@@ -83,9 +83,10 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
   ) => {
     setLoading(true);
     setHasErrors(undefined);
+    const newPayload: PostFormModel = { ...payload, type: 'ARTICLE' }
     try {
       await saveMutation.mutateAsync({
-        ...payload,
+        ...newPayload,
         postId: post?.id,
       });
       setHasErrors(false);

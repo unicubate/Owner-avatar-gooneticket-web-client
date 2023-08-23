@@ -30,8 +30,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             text: 'Are you sure you want to delete this?',
             confirmButtonText: 'Yes, Deleted',
             cancelButtonText: 'No, Cancel',
-            confirmButtonColor: '#573DDB',
-            cancelButtonColor: '#BEC1C5',
+            confirmButtonColor: "#dc3545",
+            cancelButtonColor: "#6f42c1",
             showCancelButton: true,
             reverseButtons: true,
         }).then(async (result) => {

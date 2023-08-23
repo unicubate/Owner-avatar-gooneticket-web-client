@@ -22,10 +22,13 @@ export type PostModel = {
   allowDownload: true;
   image: string;
   description: string;
+  totalComment: number;
+  totalLike: number;
   profile: {
     color: string;
     email: string;
     image: string;
+    username: string;
     userId: string;
     fullName: string;
     lastName: string;
@@ -40,6 +43,7 @@ export type PostFormModel = {
   userId: string;
   image: string;
   allowDownload: string;
+  isLike: number;
   type: PostType;
   attachment: any;
   categories: any;

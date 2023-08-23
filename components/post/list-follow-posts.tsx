@@ -6,6 +6,9 @@ import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import { MdFavoriteBorder } from "react-icons/md";
+import { useRouter } from "next/router";
+import { getOneFileGalleryAPI } from "@/api/post";
+import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 
 type Props = {
   item?: PostModel;
@@ -13,6 +16,7 @@ type Props = {
 };
 
 const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
+  const router = useRouter();
   return (
     <>
       <div
@@ -21,7 +25,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
       >
         <div className="p-8 sm:py-10 sm:px-12">
           <div className="flex items-center">
-            <div className="relative flex-shrink-0">
+            <div onClick={() => router.push(`/${item?.profile?.username}`)} className="relative flex-shrink-0 cursor-pointer">
               <Avatar
                 size={40}
                 className="object-cover w-10 h-10 rounded-full"
@@ -30,7 +34,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
               />
             </div>
 
-            <div className="ml-4">
+            <div onClick={() => router.push(`/${item?.profile?.username}`)} className="ml-4 cursor-pointer">
               <p className="text-sm font-bold text-gray-900">
                 {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
               </p>
@@ -53,7 +57,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
                 width="100%"
                 height="100%"
                 preview={false}
-                src={item?.image}
+                src={`${getOneFileGalleryAPI(String(item?.image))}`}
                 alt={item?.title}
               /> : null}
           </div>
@@ -61,15 +65,20 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
           <h3 className="mt-4 text-xl font-bold text-gray-900">
             {item?.title ?? ""}
           </h3>
+          <p className="mt-4 text-base font-normal" dangerouslySetInnerHTML={{ __html: item?.description || '' }} />
+
+
           <div className="flex mt-4 items-center">
-            <button className="text-xl">
-              <MdFavoriteBorder />
-            </button>
-            <button className="ml-3.5 text-xl">
+
+            <CreateOrUpdateFormLike typeLike="POST" item={item} />
+
+            <button className="ml-3.5 text-xl font-bold">
               <BiComment />
             </button>
+            <span className="ml-1.5 font-normal text-sm">
+              {item?.totalComment ?? 0}
+            </span>
           </div>
-          <p className="mt-4 text-base font-normal" dangerouslySetInnerHTML={{ __html: item?.description || '' }} />
 
           <ListComments postId={String(item?.id)} />
 

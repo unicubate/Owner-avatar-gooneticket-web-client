@@ -9,6 +9,7 @@ import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { RcFile } from "antd/es/upload";
@@ -80,6 +81,7 @@ export const CreateOrUpdateOnePostAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["posts"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
@@ -109,19 +111,19 @@ export const CreateOrUpdateOnePostAPI = ({
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onSuccess: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onError: async (error: any) => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onError) {
           onError(error);
         }
@@ -204,13 +206,17 @@ export const createOnUploadPostAPI = async (
   });
 };
 
-export const getOnePostAPI = async (payload: {
-  postId?: string;
-}): Promise<{ data: PostModel }> => {
+export const GetOnePostAPI = (payload: { postId: string }) => {
   const { postId } = payload;
-  return await makeApiCall({
-    action: "getOnePost",
-    urlParams: { postId },
+  return useQuery({
+    queryKey: ["post", postId],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOnePost",
+        urlParams: { postId },
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
   });
 };
 
@@ -233,6 +239,29 @@ export const getFollowsPostsAPI = async (
   });
 };
 
+export const GetInfinitePostsAPI = (payload: {
+  userId: string;
+  take: number;
+  sort: SortModel;
+  type: PostType;
+}) => {
+  const { userId, take, sort, type } = payload;
+  return useInfiniteQuery({
+    queryKey: ["posts", "infinite"],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getPostsAPI({
+        userId: userId,
+        take: take,
+        page: pageParam,
+        sort: sort,
+        type: type,
+      }),
+    staleTime: 60_000,
+    keepPreviousData: true,
+  });
+};
+
 export const GetInfiniteFollowsPostsAPI = (payload: {
   take: number;
   sort: SortModel;
@@ -247,6 +276,7 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
         page: pageParam,
         sort: sort,
       }),
+    staleTime: 60_000,
     keepPreviousData: true,
   });
 };

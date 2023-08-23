@@ -109,6 +109,7 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
         action: "getOneUserPrivate",
         urlParams: { userId },
       }),
+    staleTime: 60_000,
     refetchOnWindowFocus: false,
     enabled: Boolean(userId),
   });
@@ -126,6 +127,7 @@ export const GetOneUserPublicAPI = (payload: {
         action: "getOneUserPublic",
         queryParams: { userId, username },
       }),
+    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 };

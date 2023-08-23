@@ -11,16 +11,6 @@ import { ButtonInput } from "@/components/templates/button-input";
 
 
 const PostsCreate = () => {
-    const onSubmit: SubmitHandler<any> = (payload: any) => {
-        // let data = new FormData();
-        // data.append("confirm", `${payload.confirm}`);
-        // payload?.attachment?.fileList?.length > 0 &&
-        //   payload?.attachment?.fileList.forEach((file: any) => {
-        //     data.append("attachment", file as RcFile);
-        //   });
-
-        console.log("payload =======>", payload);
-    };
 
     return (
         <>

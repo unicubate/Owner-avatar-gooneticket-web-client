@@ -15,6 +15,7 @@ import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { Linkify } from "@/utils/linkify";
+import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 
 type Props = {
   item?: CommentModel;
@@ -127,12 +128,9 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 </Linkify>
               </p>
               <div className="flex mt-2 items-center">
-                {/* <button className="font-bold text-red-400">
-                <MdFavorite />
-              </button> */}
-                <button className="font-bold">
-                  <MdFavoriteBorder />
-                </button>
+                
+               <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
+               
                 <button className="ml-3.5 font-bold">
                   <BiComment />
                 </button>

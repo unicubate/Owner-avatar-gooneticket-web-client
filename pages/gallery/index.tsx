@@ -1,41 +1,32 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/templates/button-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "antd";
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
-import { useInfiniteQuery } from "@tanstack/react-query";
 import ListGallery from "@/components/gallery/list-gallery";
 import { useAuth } from "@/components/util/session/context-user";
-import { getPostsAPI } from "@/api/post";
+import { GetInfinitePostsAPI } from "@/api/post";
+import { useInView } from "react-intersection-observer";
 
 const Gallery = () => {
+    const { ref, inView } = useInView();
     const { userStorage } = useAuth() as any;
     const [openModal, setOpenModal] = useState(false);
 
-    const fetchData = async (pageParam: number) =>
-        await getPostsAPI({
-            userId: userStorage?.id,
-            take: 6,
-            page: pageParam,
-            sort: "DESC",
-            type: 'GALLERY'
-        });
     const {
-        status,
-        error,
         isLoading: isLoadingGallery,
         isError: isErrorGallery,
         data: dataGallery,
         isFetchingNextPage,
         hasNextPage,
         fetchNextPage,
-    } = useInfiniteQuery({
-        queryKey: ["galleries"],
-        getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-        queryFn: ({ pageParam = 1 }) => fetchData(pageParam),
-        keepPreviousData: true,
+    } = GetInfinitePostsAPI({
+        userId: userStorage?.id,
+        take: 6,
+        sort: "DESC",
+        type: 'GALLERY'
     });
 
     const dataTableGallery = isLoadingGallery ? (
@@ -54,6 +45,28 @@ const Gallery = () => {
                 <ListGallery item={item} key={index} index={index} />
             ))
     );
+
+    useEffect(() => {
+        let fetching = false;
+        if (inView) {
+          fetchNextPage();
+        }
+        const onScroll = async (event: any) => {
+          const { scrollHeight, scrollTop, clientHeight } =
+            event.target.scrollingElement;
+    
+          if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+            fetching = true;
+            if (hasNextPage) await fetchNextPage();
+            fetching = false;
+          }
+        };
+    
+        document.addEventListener("scroll", onScroll);
+        return () => {
+          document.removeEventListener("scroll", onScroll);
+        };
+      }, [fetchNextPage, hasNextPage, inView]);
 
     return (
         <>

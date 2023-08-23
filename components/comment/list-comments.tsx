@@ -5,9 +5,11 @@ import { ButtonInput } from "../templates/button-input";
 import ListCommentsPosts from "./list-comments-posts";
 import { GetInfiniteCommentsAPI } from "@/api/comment";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
+import { useAuth } from "../util/session/context-user";
 
 
 const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
+  const user = useAuth() as any;
 
   const {
     isLoading: isLoadingComments,
@@ -38,7 +40,8 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
 
   return (
     <>
-      <ul className="mt-4 divide-y divide-gray-200 -my-9">
+
+      <ul className="mt-8 divide-y divide-gray-200 -my-9">
 
         {dataTableComments}
 
@@ -59,7 +62,8 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
         </>
       ) : null}
 
-      <CreateOrUpdateFormComment postId={postId} />
+
+      {user?.id ? <CreateOrUpdateFormComment postId={postId} /> : null}
     </>
   );
 };
