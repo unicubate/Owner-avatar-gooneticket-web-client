@@ -7,8 +7,8 @@ interface SizeInterface {
 }
 
 const sizeType: SizeInterface = {
-  large: "2",
-  normal: "1",
+  large: "3",
+  normal: "1.5",
   medium: "0.5",
   small: "0.2",
 };
@@ -39,6 +39,7 @@ const ButtonInput: React.FC<Props> = ({
   color,
   loading,
   children,
+  className,
   onClick,
   minW,
 }) => {
@@ -52,28 +53,30 @@ const ButtonInput: React.FC<Props> = ({
         type={loading ? "button" : type}
         onClick={onClick}
         disabled={loading ? true : false}
-        className={`
-            rounded-${shapeType[String(shape ?? "default")]}
-            inline-flex
-            items-center
-            justify-center
-            min-w-${minW ?? "full"}
-            px-4
-            py-${sizeType[String(size ?? "normal")]}
-            text-sm
-            leading-6
-            text-center 
-            text-white
-            transition-all
-            duration-200
-            bg-${loading ? "blue" : color}-${loading ? "200" : "600"}
-            border-1
-            font-semibold
-            border-transparent
-            focus:outline-none 
-            focus:ring-offset-1 
-            focus:ring-${color}-100
-            hover:bg-${color}-${loading ? "200" : "500"}
+        className={className + `
+           rounded-${shapeType[String(shape ?? "default")]}
+           inline-flex 
+           items-center 
+           justify-center 
+           min-w-${minW ?? "fit"}
+           w-full
+           px-4 
+           py-${sizeType[String(size ?? "normal")]} 
+           text-sm 
+           font-semibold 
+           leading-5
+           text-center  
+         text-white 
+           transition-all 
+           duration-200 
+           bg-${loading ? "blue" : color}-${loading ? "200" : "600"}
+           border
+           border-transparent
+           focus:outline-none 
+           focus:ring-2 
+           focus:ring-offset-2 
+           focus:ring-${color}-500
+           hover:bg-${color}-${loading ? "200" : "700"}
         `}
       >
         {loading ? (

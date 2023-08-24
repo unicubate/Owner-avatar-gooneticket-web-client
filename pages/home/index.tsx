@@ -40,7 +40,7 @@ const Home = () => {
             <LayoutDashboard title={"Home"}>
                 <div className="flex flex-col flex-1">
                     <main>
-                        <div className="py-6">
+                        <div className="max-w-2xl mx-auto py-6">
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
                                 {dataTablePosts}

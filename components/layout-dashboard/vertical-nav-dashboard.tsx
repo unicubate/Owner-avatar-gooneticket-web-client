@@ -90,13 +90,13 @@ const SUPPORT_ITEMS = [
 
 const SETTINGS_ITEMS = [
   {
-    title: "Shops",
-    href: "/shops",
+    title: "Shop",
+    href: "/shop",
     icon: <BsShop className={classIcon} />,
   },
   {
     title: "Integrations",
-    href: "aIntegrations",
+    href: "integrations",
     icon: <BiCodeCurly className={classIcon} />,
   },
   {

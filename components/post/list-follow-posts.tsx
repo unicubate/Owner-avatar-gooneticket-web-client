@@ -21,7 +21,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
     <>
       <div
         key={index}
-        className="mt-8 max-w-2xl mx-auto overflow-hidden bg-white shadow-2xl shadow-gray-300/50"
+        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/50"
       >
         <div className="p-8 sm:py-10 sm:px-12">
           <div className="flex items-center">
