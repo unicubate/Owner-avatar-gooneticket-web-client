@@ -113,7 +113,7 @@ const ResetPassword = () => {
           </div>
 
           <div className="mt-6">
-            <ButtonInput shape="default" type="submit" size="normal" loading={loading} color={'indigo'}>
+            <ButtonInput shape="default" type="submit" size="large" loading={loading} color={'indigo'}>
               Log In
             </ButtonInput>
           </div>

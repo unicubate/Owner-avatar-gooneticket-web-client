@@ -138,7 +138,7 @@ const Login = () => {
             <ButtonInput
               shape="default"
               type="submit"
-              size="normal"
+              size="large"
               loading={loading}
               color={"indigo"}
             >

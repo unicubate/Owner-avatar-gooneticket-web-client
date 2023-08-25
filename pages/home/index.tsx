@@ -3,7 +3,8 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/templates/button-input";
 import { GetInfiniteFollowsPostsAPI } from "@/api/post";
 import ListFollowPosts from "@/components/post/list-follow-posts";
-import { useAuth } from '@/components/util/session/context-user';
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const Home = () => {
     const {
@@ -21,7 +22,13 @@ const Home = () => {
     });
 
     const dataTablePosts = isLoadingPosts ? (
-        ""
+        <Spin
+            tip="Loading"
+            indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+            size="large"
+        >
+            <div className="content" />
+        </Spin>
     ) : isErrorPosts ? (
         <strong>Error find data please try again...</strong>
     ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
@@ -40,7 +47,7 @@ const Home = () => {
             <LayoutDashboard title={"Home"}>
                 <div className="flex flex-col flex-1">
                     <main>
-                        <div className="max-w-2xl mx-auto py-6">
+                        <div className="max-w-3xl mx-auto py-6">
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
                                 {dataTablePosts}
