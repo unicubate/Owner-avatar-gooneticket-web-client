@@ -83,7 +83,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
     if (product) {
       const fields = [
         "title",
-        "productId",
         "countryId",
         "url",
         "phone",
@@ -180,20 +179,20 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
               </div>
             </div>
 
-            {/* <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mb-2">
                 <NumberInput
                   control={control}
                   label="Price"
                   type="number"
-                  name="amount"
+                  name="price"
                   placeholder="Price product"
                   errors={errors}
                   required
                   prefix={"€"}
                 />
               </div>
-            </div> */}
+            </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mb-4">
@@ -242,7 +241,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
                   label="Embed Media (optional)"
                   control={control}
                   type="text"
-                  name="name"
+                  name="urlMedia"
                   placeholder="e.g. https://youtube.com/watch?v=abc123"
                   errors={errors}
                 />
@@ -286,7 +285,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
                   row={3}
                   control={control}
                   label="Confirmation message"
-                  name="description"
+                  name="messageAfterPurchase"
                   placeholder="Success page confirmation"
                   errors={errors}
                 />
@@ -308,6 +307,41 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-gray-900">
+                      {" "}
+                      Limit slots (optional){" "}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Limit slots
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                    <SwitchInput
+                      control={control}
+                      name="limitSlots"
+                      label=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="mb-1">
+                <NumberInput
+                  control={control}
+                  label=""
+                  type="number"
+                  name="price"
+                  placeholder="Price product"
+                  errors={errors}
+                  required
+                  prefix={"€"}
+                />
+              </div>
+              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                <div className="flex items-center flex-1 min-w-0">
+                  <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-gray-900">Quantity</p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Allow buyer to choose a quantity
@@ -316,14 +350,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
                 </div>
 
                 <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                  <button
-                    type="button"
-                    title=""
-                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                  >
-                    {" "}
-                  </button>
-
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
