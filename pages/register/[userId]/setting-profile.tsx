@@ -1,24 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout";
-import { Alert, Button, Checkbox, Input, Steps } from "antd";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
   DateInput,
-  SelectInput,
   TextAreaInput,
   TextInput,
 } from "@/components/util/form";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "@/components/util/session/context-user";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import {
-  getAllCountiesAPI,
-  getAllCurrenciesAPI,
+  GetAllCountiesAPI,
+  GetAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
 } from "@/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
@@ -59,24 +55,10 @@ const SettingProfile = () => {
     mode: "onChange",
   });
 
-  const fetchCurrencies = async () => await getAllCurrenciesAPI();
-  const { data: dataCurrencies } = useQuery(
-    ["contacts"],
-    () => fetchCurrencies(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: dataCurrencies } = GetAllCurrenciesAPI();
   const currencies: any = dataCurrencies?.data;
 
-  const fetchCountries = async () => await getAllCountiesAPI();
-  const { data: dataCountries } = useQuery(
-    ["countries"],
-    () => fetchCountries(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: dataCountries } = GetAllCountiesAPI();
   const countries: any = dataCountries?.data;
 
   const { data } = GetOneUserPublicAPI({ userId })

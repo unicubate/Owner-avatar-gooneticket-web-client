@@ -198,6 +198,30 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Uploads route */
+  getUploadsProducts: {
+    endpoint: `${baseUrl}/uploads/products`,
+    method: GET,
+  },
+  updateOneUploadProduct: {
+    endpoint: `${baseUrl}/uploads/products/:productId`,
+    method: PUT,
+  },
+
+  /****************** Products route */
+  createOneProduct: {
+    endpoint: `${baseUrl}/products`,
+    method: POST,
+  },
+  updateOneProduct: {
+    endpoint: `${baseUrl}/products/:productId`,
+    method: PUT,
+  },
+  getOneProduct: {
+    endpoint: `${baseUrl}/products/view`,
+    method: GET,
+  },
+
   /****************** Posts route */
   createOnePostGallery: {
     endpoint: `${baseUrl}/posts/galleries`,

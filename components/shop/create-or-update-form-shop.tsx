@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Checkbox, Select, Upload } from "antd";
+import {
+  Avatar,
+  Button,
+  Checkbox,
+  Select,
+  Upload,
+  UploadFile,
+  UploadProps,
+} from "antd";
 import {
   UpdateOneProfileAPI,
-  getAllCountiesAPI,
-  getAllCurrenciesAPI,
   getOneFileProfileAPI,
   getOneProfileAPI,
 } from "@/api/profile";
@@ -18,32 +24,40 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { UploadOutlined } from "@ant-design/icons";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { ProductFormModel } from "@/types/product";
+import { CreateOrUpdateOneProductAPI } from "@/api/product";
 
 const { Option } = Select;
 
 type Props = {
-  profileId?: string;
-  user?: any;
+  product?: any;
+  uploads?: any;
 };
 
 const schema = yup.object({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  url: yup.string().url().optional(),
-  birthday: yup.date().required(),
-  currencyId: yup.string().uuid().required(),
-  countryId: yup.string().uuid().required(),
+  title: yup.string().required(),
+  // lastName: yup.string().required(),
+  // url: yup.string().url().optional(),
+  // birthday: yup.date().required(),
+  // currencyId: yup.string().uuid().required(),
+  // countryId: yup.string().uuid().required(),
 });
 
-const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
+const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
   const [colors] = useState(arrayColors);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+
+  const [fileList, setFileList] = useState<UploadFile[]>(uploads ?? []);
+
   const {
     control,
     setValue,
@@ -54,42 +68,22 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
     mode: "onChange",
   });
 
-  const fetchCurrencies = async () => await getAllCurrenciesAPI();
-  const { data: dataCurrencies } = useQuery(
-    ["currencies"],
-    () => fetchCurrencies(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const currencies: any = dataCurrencies?.data;
-
-  const fetchCountries = async () => await getAllCountiesAPI();
-  const { data: dataCountries } = useQuery(
-    ["countries"],
-    () => fetchCountries(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const countries: any = dataCountries?.data;
-
-  const fetchOneProfile = async () => await getOneProfileAPI({ profileId: "" });
-  const { data: profileItem } = useQuery(
-    ["profile", profileId],
-    () => fetchOneProfile(),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(profileId),
-    }
-  );
-  const profile: any = profileItem?.data;
+  // const fetchOneProfile = async () => await getOneProfileAPI({ profileId: "" });
+  // const { data: profileItem } = useQuery(
+  //   ["profile", profileId],
+  //   () => fetchOneProfile(),
+  //   {
+  //     refetchOnWindowFocus: false,
+  //     enabled: Boolean(profileId),
+  //   }
+  // );
+  // const profile: any = profileItem?.data;
 
   useEffect(() => {
-    if (profile) {
+    if (product) {
       const fields = [
-        "birthday",
-        "currencyId",
+        "title",
+        "productId",
         "countryId",
         "url",
         "phone",
@@ -100,11 +94,11 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
         "firstAddress",
         "description",
       ];
-      fields?.forEach((field: any) => setValue(field, profile[field]));
+      fields?.forEach((field: any) => setValue(field, product[field]));
     }
-  }, [profile, profileId, setValue]);
+  }, [product, uploads, setValue]);
 
-  const saveMutation = UpdateOneProfileAPI({
+  const saveMutation = CreateOrUpdateOneProductAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -115,20 +109,28 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
     },
   });
 
-  const onSubmit: SubmitHandler<ProfileFormModel> = async (
-    payload: ProfileFormModel
+  const onSubmit: SubmitHandler<ProductFormModel> = async (
+    data: ProductFormModel
   ) => {
+    let newFileLists: any = [];
     setLoading(true);
     setHasErrors(undefined);
     try {
+      fileList
+        .filter((file: any) => file?.status === "success")
+        .forEach((file: any) => {
+          newFileLists.push(file);
+        });
+
+      const payload = { ...data, newFileLists, fileList };
       await saveMutation.mutateAsync({
         ...payload,
-        profileId: "profileId",
+        productId: product?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `Information save successfully`,
+        text: `Product save successfully`,
         gravity: "top",
         className: "info",
         position: "center",
@@ -139,12 +141,22 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "bottom",
+        gravity: "top",
         className: "info",
         position: "center",
       });
     }
   };
+
+  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
+    setFileList(newFileList);
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   return (
     <>
@@ -155,61 +167,20 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
               Create a New Product
             </h2>
 
-            {profile?.image ? (
-              <div className="mt-2 text-center space-x-2">
-                <Avatar
-                  size={200}
-                  shape="circle"
-                  src={getOneFileProfileAPI(String(profile?.image))}
-                  alt={`${profile?.firstName} ${profile?.lastName}`}
-                />
-              </div>
-            ) : (
-              <div className="mb-4">
-                <Controller
-                  name="attachment"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="text-center justify-center mx-auto">
-                        <Upload
-                          name="attachment"
-                          listType="picture"
-                          maxCount={1}
-                          className="upload-list-inline"
-                          onChange={onChange}
-                          accept=".png,.jpg"
-                        >
-                          <Button icon={<UploadOutlined />}>
-                            Click to Upload
-                          </Button>
-                        </Upload>
-                      </div>
-                    </>
-                  )}
-                />
-                {/* {errors?.attachment && (
-                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                                            {errors?.attachment?.message}
-                                        </span>
-                                    )} */}
-              </div>
-            )}
-
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <TextInput
                   label="Name"
                   control={control}
                   type="text"
-                  name="name"
+                  name="title"
                   placeholder="Name product"
                   errors={errors}
                 />
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            {/* <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mb-2">
                 <NumberInput
                   control={control}
@@ -220,6 +191,31 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
                   errors={errors}
                   required
                   prefix={"€"}
+                />
+              </div>
+            </div> */}
+
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <div className="mb-4">
+                <Controller
+                  name="attachments"
+                  control={control}
+                  render={({ field: { onChange } }) => (
+                    <>
+                      <div className="text-center justify-center mx-auto">
+                        <Upload
+                          name="attachments"
+                          listType="picture-card"
+                          fileList={fileList}
+                          onChange={handleChange}
+                          accept=".png,.jpg,.jpeg"
+                          maxCount={6}
+                        >
+                          {fileList.length >= 6 ? null : uploadButton}
+                        </Upload>
+                      </div>
+                    </>
+                  )}
                 />
               </div>
             </div>
@@ -258,6 +254,34 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
+                <Controller
+                  name="attachment"
+                  control={control}
+                  render={({ field: { onChange } }) => (
+                    <>
+                      <div className="justify-center mx-auto">
+                        <Upload
+                          name="attachment"
+                          listType="picture"
+                          maxCount={1}
+                          className="upload-list-inline"
+                          onChange={onChange}
+                          accept=".png,.jpg"
+                        >
+                          <Button icon={<UploadOutlined />}>Upload File</Button>
+                        </Upload>
+                      </div>
+                    </>
+                  )}
+                />
+                <span className="text-sm font-medium text-gray-600">
+                  {`Upload file for this product`}
+                </span>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <div className="mt-2">
                 <TextAreaInput
                   row={3}
                   control={control}
@@ -266,6 +290,9 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
                   placeholder="Success page confirmation"
                   errors={errors}
                 />
+                <span className="text-sm font-medium text-gray-600">
+                  {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
+                </span>
               </div>
             </div>
 
@@ -356,7 +383,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
                 Save and Publish
               </ButtonInput>
             </div>
-            <div className="flex items-center mt-4 space-x-4">
+            <div className="flex items-center mt-4 mb-4 space-x-4">
               <ButtonCancelInput shape="default" size="large" loading={loading}>
                 Cancel
               </ButtonCancelInput>
@@ -365,7 +392,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ profileId, user }) => {
                 shape="default"
                 type="submit"
                 size="large"
-                loading={loading}
+                loading={false}
                 color="indigo"
               >
                 Save as Draft

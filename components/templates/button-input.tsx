@@ -44,7 +44,7 @@ const ButtonInput: React.FC<Props> = ({
   minW,
 }) => {
   const antIcon = (
-    <LoadingOutlined style={{ fontSize: 24, color: "#ffff" }} spin />
+    <LoadingOutlined style={{ fontSize: 15, color: "#ffff" }} spin />
   );
   return (
     <>
@@ -53,7 +53,9 @@ const ButtonInput: React.FC<Props> = ({
         type={loading ? "button" : type}
         onClick={onClick}
         disabled={loading ? true : false}
-        className={className + `
+        className={
+          className +
+          `
            rounded-${shapeType[String(shape ?? "default")]}
            inline-flex 
            items-center 
@@ -64,25 +66,24 @@ const ButtonInput: React.FC<Props> = ({
            py-${sizeType[String(size ?? "normal")]} 
            text-sm 
            font-semibold 
-           leading-5
+           leading-4
            text-center  
-         text-white 
+           text-white 
            transition-all 
            duration-200 
            bg-${loading ? "blue" : color}-${loading ? "200" : "600"}
-           border
+           border-1
            border-transparent
            focus:outline-none 
            focus:ring-2 
            focus:ring-offset-2 
            focus:ring-${color}-500
            hover:bg-${color}-${loading ? "200" : "700"}
-        `}
+        `
+        }
       >
         {loading ? (
-          <>
-            <Spin indicator={antIcon} className="mr-2" />
-          </>
+          <Spin indicator={antIcon} className="mr-2" />
         ) : (
           <>{children}</>
         )}

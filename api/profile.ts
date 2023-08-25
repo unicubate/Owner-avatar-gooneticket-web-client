@@ -5,7 +5,7 @@ import {
   ProfileModel,
 } from "@/types/profile.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const UpdateOneProfileNextStepAPI = ({
   onSuccess,
@@ -99,21 +99,30 @@ export const getOneProfileAPI = async (payload: {
   });
 };
 
-export const getAllCurrenciesAPI = async (
-  search?: string
-): Promise<{ data: CurrencyModel }> => {
-  return await makeApiCall({
-    action: "getAllCurrencies",
-    queryParams: search,
+
+export const GetAllCurrenciesAPI = (search?: string) => {
+  return useQuery({
+    queryKey: ["currencies"],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getAllCurrencies",
+        queryParams: search,
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
   });
 };
 
-export const getAllCountiesAPI = async (
-  search?: string
-): Promise<{ data: CurrencyModel }> => {
-  return await makeApiCall({
-    action: "getAllCounties",
-    queryParams: search,
+export const GetAllCountiesAPI = (search?: string) => {
+  return useQuery({
+    queryKey: ["countries"],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getAllCounties",
+        queryParams: search,
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
   });
 };
 

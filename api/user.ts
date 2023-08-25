@@ -121,7 +121,7 @@ export const GetOneUserPublicAPI = (payload: {
 }) => {
   const { userId, username } = payload;
   return useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user", userId, username],
     queryFn: async () =>
       await makeApiCall({
         action: "getOneUserPublic",

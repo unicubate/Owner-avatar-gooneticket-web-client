@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Button, Select, Space, Upload } from "antd";
 import {
+  GetAllCountiesAPI,
+  GetAllCurrenciesAPI,
   UpdateOneProfileAPI,
-  getAllCountiesAPI,
-  getAllCurrenciesAPI,
   getOneFileProfileAPI,
   getOneProfileAPI,
 } from "@/api/profile";
@@ -53,24 +53,10 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
     mode: "onChange",
   });
 
-  const fetchCurrencies = async () => await getAllCurrenciesAPI();
-  const { data: dataCurrencies } = useQuery(
-    ["currencies"],
-    () => fetchCurrencies(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: dataCurrencies } = GetAllCurrenciesAPI();
   const currencies: any = dataCurrencies?.data;
 
-  const fetchCountries = async () => await getAllCountiesAPI();
-  const { data: dataCountries } = useQuery(
-    ["countries"],
-    () => fetchCountries(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data: dataCountries } = GetAllCountiesAPI();
   const countries: any = dataCountries?.data;
 
   const fetchOneProfile = async () =>

@@ -6,7 +6,10 @@ import { ButtonInput } from "../templates/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { Avatar, Button, Upload } from "antd";
 import { CommentFormModel } from "@/types/comment";
-import { CreateOrUpdateOneCommentAPI, CreateOrUpdateOneCommentReplyAPI } from "@/api/comment";
+import {
+  CreateOrUpdateOneCommentAPI,
+  CreateOrUpdateOneCommentReplyAPI,
+} from "@/api/comment";
 import { TextAreaInput } from "../util/form";
 import { useAuth } from "../util/session/context-user";
 
@@ -17,8 +20,8 @@ const schema = yup.object({
 const CreateOrUpdateFormCommentReply: React.FC<{
   parentId: string;
   comment?: any;
-  setOpenModalReply?: any
-  openModalReply?: boolean
+  setOpenModalReply?: any;
+  openModalReply?: boolean;
 }> = ({ parentId, comment, openModalReply, setOpenModalReply }) => {
   const user = useAuth() as any;
   const [loading, setLoading] = useState(false);
@@ -36,7 +39,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const watchDescription = watch('description', '');
+  const watchDescription = watch("description", "");
 
   useEffect(() => {
     if (comment) {
@@ -63,14 +66,13 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-
       await saveMutation.mutateAsync({
         ...payload,
         commentId: comment?.id,
-        parentId: parentId
+        parentId: parentId,
       });
 
-      setOpenModalReply(false)
+      setOpenModalReply(false);
       reset();
 
       setHasErrors(false);
@@ -114,7 +116,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
             errors={errors}
           />
 
-          {openModalReply ?
+          {openModalReply ? (
             <div className="flex justify-between items-center">
               <ButtonInput
                 shape="default"
@@ -127,10 +129,9 @@ const CreateOrUpdateFormCommentReply: React.FC<{
                 Cancel
               </ButtonInput>
             </div>
-            : null}
+          ) : null}
 
-          {watchDescription.length > 0 && (
-
+          {watchDescription.length >= 1 && (
             <div className="sm:flex flex-col sm:items-end sm:justify-between">
               <ButtonInput
                 shape="default"
@@ -142,7 +143,6 @@ const CreateOrUpdateFormCommentReply: React.FC<{
                 Save
               </ButtonInput>
             </div>
-
           )}
         </div>
       </form>

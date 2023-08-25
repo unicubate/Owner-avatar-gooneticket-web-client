@@ -17,8 +17,8 @@ const schema = yup.object({
 const CreateOrUpdateFormComment: React.FC<{
   postId: string;
   comment?: any;
-  setOpenModal?: any
-  openModal?: boolean
+  setOpenModal?: any;
+  openModal?: boolean;
 }> = ({ postId, comment, openModal, setOpenModal }) => {
   const user = useAuth() as any;
   const [loading, setLoading] = useState(false);
@@ -36,7 +36,7 @@ const CreateOrUpdateFormComment: React.FC<{
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const watchDescription = watch('description', '');
+  const watchDescription = watch("description", "");
 
   useEffect(() => {
     if (comment) {
@@ -69,7 +69,7 @@ const CreateOrUpdateFormComment: React.FC<{
         commentId: comment?.id,
       });
       if (comment) {
-        setOpenModal((lk: boolean) => !lk)
+        setOpenModal((lk: boolean) => !lk);
       } else {
         reset();
       }
@@ -115,7 +115,7 @@ const CreateOrUpdateFormComment: React.FC<{
             errors={errors}
           />
 
-          {openModal ?
+          {openModal ? (
             <div className="flex justify-between items-center">
               <ButtonInput
                 shape="default"
@@ -128,10 +128,9 @@ const CreateOrUpdateFormComment: React.FC<{
                 Cancel
               </ButtonInput>
             </div>
-            : null}
+          ) : null}
 
-          {watchDescription.length > 0 && (
-
+          {watchDescription.length >= 1 && (
             <div className="sm:flex flex-col sm:items-end sm:justify-between">
               <ButtonInput
                 shape="default"
@@ -143,7 +142,6 @@ const CreateOrUpdateFormComment: React.FC<{
                 Save
               </ButtonInput>
             </div>
-
           )}
         </div>
       </form>
