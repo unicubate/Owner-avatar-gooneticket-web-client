@@ -4,11 +4,14 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/templates/button-input";
+import { useRouter } from "next/router";
 
 const Shops = () => {
+  const router = useRouter();
+
   return (
     <>
-      <LayoutDashboard title={"Articles"}>
+      <LayoutDashboard title={"Shop"}>
         <div className="flex-1">
           <main>
             <div className="max-w-6xl mx-auto py-6">
@@ -100,7 +103,7 @@ const Shops = () => {
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
-                            // onClick={() => setOpenModal(true)}
+                            onClick={() => router.push(`${`/shop/create`}`)}
                             shape="default"
                             type="button"
                             size="large"

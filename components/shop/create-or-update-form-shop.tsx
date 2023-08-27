@@ -34,31 +34,35 @@ const { Option } = Select;
 
 type Props = {
   product?: any;
-  uploads?: any;
+  uploadImages?: any;
+  uploadFiles?: any;
 };
 
 const schema = yup.object({
   title: yup.string().required(),
-  // lastName: yup.string().required(),
-  // url: yup.string().url().optional(),
-  // birthday: yup.date().required(),
-  // currencyId: yup.string().uuid().required(),
+  limitSlot: yup.number().nullable(),
+  urlMedia: yup.string().url().nullable(),
+  price: yup.number().required(),
+  messageAfterPurchase: yup.string().nullable(),
+  description: yup.string().nullable(),
   // countryId: yup.string().uuid().required(),
 });
 
-const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
-  const [colors] = useState(arrayColors);
+const CreateOrUpdateFormShop: React.FC<Props> = ({
+  product,
+  uploadImages,
+  uploadFiles,
+}) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
-  const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
 
-  const [fileList, setFileList] = useState<UploadFile[]>(uploads ?? []);
+  const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
+  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
 
   const {
+    watch,
     control,
     setValue,
     handleSubmit,
@@ -67,35 +71,24 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-
-  // const fetchOneProfile = async () => await getOneProfileAPI({ profileId: "" });
-  // const { data: profileItem } = useQuery(
-  //   ["profile", profileId],
-  //   () => fetchOneProfile(),
-  //   {
-  //     refetchOnWindowFocus: false,
-  //     enabled: Boolean(profileId),
-  //   }
-  // );
-  // const profile: any = profileItem?.data;
+  const watchIsLimitSlot = watch("isLimitSlot", false);
 
   useEffect(() => {
     if (product) {
       const fields = [
         "title",
-        "countryId",
-        "url",
-        "phone",
-        "color",
-        "firstName",
-        "lastName",
-        "secondAddress",
-        "firstAddress",
+        "price",
+        "urlMedia",
+        "isLimitSlot",
+        "limitSlot",
         "description",
+        "moreDescription",
+        "isChooseQuantity",
+        "messageAfterPurchase",
       ];
       fields?.forEach((field: any) => setValue(field, product[field]));
     }
-  }, [product, uploads, setValue]);
+  }, [product, uploadFiles, uploadImages, setValue]);
 
   const saveMutation = CreateOrUpdateOneProductAPI({
     onSuccess: () => {
@@ -112,16 +105,29 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
     data: ProductFormModel
   ) => {
     let newFileLists: any = [];
+    let newImageLists: any = [];
     setLoading(true);
     setHasErrors(undefined);
     try {
+      imageList
+        .filter((file: any) => file?.status === "success")
+        .forEach((file: any) => {
+          newImageLists.push(file);
+        });
+
       fileList
         .filter((file: any) => file?.status === "success")
         .forEach((file: any) => {
           newFileLists.push(file);
         });
 
-      const payload = { ...data, newFileLists, fileList };
+      const payload = {
+        ...data,
+        newImageLists,
+        imageList,
+        newFileLists,
+        fileList,
+      };
       await saveMutation.mutateAsync({
         ...payload,
         productId: product?.id,
@@ -147,8 +153,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
     }
   };
 
-  const handleChange: UploadProps["onChange"] = ({ fileList: newFileList }) =>
-    setFileList(newFileList);
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
+
+  const handleFileChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }) => setFileList(newFileList);
 
   const uploadButton = (
     <div>
@@ -197,20 +208,20 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mb-4">
                 <Controller
-                  name="attachments"
+                  name="attachmentImages"
                   control={control}
                   render={({ field: { onChange } }) => (
                     <>
                       <div className="text-center justify-center mx-auto">
                         <Upload
-                          name="attachments"
+                          name="attachmentImages"
                           listType="picture-card"
-                          fileList={fileList}
-                          onChange={handleChange}
+                          fileList={imageList}
+                          onChange={handleImageChange}
                           accept=".png,.jpg,.jpeg"
-                          maxCount={6}
+                          maxCount={10}
                         >
-                          {fileList.length >= 6 ? null : uploadButton}
+                          {imageList.length >= 10 ? null : uploadButton}
                         </Upload>
                       </div>
                     </>
@@ -254,18 +265,19 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <Controller
-                  name="attachment"
+                  name="attachmentFiles"
                   control={control}
                   render={({ field: { onChange } }) => (
                     <>
                       <div className="justify-center mx-auto">
                         <Upload
-                          name="attachment"
+                          multiple
+                          name="attachmentFiles"
                           listType="picture"
-                          maxCount={1}
                           className="upload-list-inline"
-                          onChange={onChange}
-                          accept=".png,.jpg"
+                          fileList={fileList}
+                          onChange={handleFileChange}
+                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv"
                         >
                           <Button icon={<UploadOutlined />}>Upload File</Button>
                         </Upload>
@@ -312,48 +324,100 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({ product, uploads }) => {
                       Limit slots (optional){" "}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
-                      Limit slots
+                      A limited number of slots creates a sense of urgency and
+                      also saves you from burn-out.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <button
+                    type="button"
+                    title=""
+                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                  >
+                    {" "}
+                  </button>
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
-                      name="limitSlots"
+                      name="isLimitSlot"
                       label=""
                     />
                   </div>
                 </div>
               </div>
-              <div className="mb-1">
-                <NumberInput
-                  control={control}
-                  label=""
-                  type="number"
-                  name="price"
-                  placeholder="Price product"
-                  errors={errors}
-                  required
-                  prefix={"€"}
-                />
-              </div>
+              {watchIsLimitSlot ? (
+                <div className="mb-1">
+                  <NumberInput
+                    control={control}
+                    label=""
+                    type="number"
+                    name="limitSlot"
+                    placeholder="10"
+                    errors={errors}
+                    required
+                  />
+                </div>
+              ) : null}
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-900">Quantity</p>
+                    <p className="text-sm font-bold text-gray-900">
+                      {" "}
+                      Special price for members{" "}
+                    </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
-                      Allow buyer to choose a quantity
+                      Offer a discounted extra price to attract new members and
+                      to keep your current members engaged.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <button
+                    type="button"
+                    title=""
+                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                  >
+                    {" "}
+                  </button>
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
-                      name="confirmSwitch"
+                      name="allowChooseInventory"
+                      label=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                <div className="flex items-center flex-1 min-w-0">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-gray-900">
+                      {" "}
+                      Allow buyer to choose a quantity{" "}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Your supporters will be able to select the desired
+                      quantity of this item. You will receive payment based on
+                      the quantity they choose multiplied by your set price.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <button
+                    type="button"
+                    title=""
+                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                  >
+                    {" "}
+                  </button>
+                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                    <SwitchInput
+                      control={control}
+                      name="isChooseQuantity"
                       label=""
                     />
                   </div>

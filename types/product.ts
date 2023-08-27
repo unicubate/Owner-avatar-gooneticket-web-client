@@ -12,38 +12,50 @@ export type ResponseProductModel = {
 export type ProductModel = {
   createdAt: Date;
   id: string;
-  slug: string;
-  status: boolean;
   title: string;
-  whoCanSee: string;
-  allowDownload: true;
-  image: string;
+  subTitle: string;
+  slug: string;
+  sku: string;
+  urlMedia: string;
+  priceNoDiscount: string;
   description: string;
-  totalComment: number;
-  totalLike: number;
+  messageAfterPurchase: string;
+  moreDescription: string;
+  isChooseQuantity: boolean;
+  isLimitSlot: boolean;
+  limitSlot: string;
+  status: string;
+  userId: string;
+  currency: {
+    code: string;
+    name: string;
+    symbol: string;
+  };
   profile: {
     color: string;
-    email: string;
     image: string;
-    username: string;
     userId: string;
     fullName: string;
     lastName: string;
+    username: string;
     firstName: string;
   };
+  price: string;
 };
 
 export type ProductFormModel = {
-  description: string;
   title: string;
-  whoCanSee: string;
-  userId: string;
-  image: string;
-  allowDownload: string;
-  isLike: number;
+  isChooseQuantity: boolean;
+  urlMedia: string;
+  price: number;
+  messageAfterPurchase: string;
+  description: string;
+  limitSlot: number;
+  isLimitSlot: boolean;
   attachments: any;
   attachment: any;
-  categories: any;
   fileList: any;
-  newFileLists: any
+  newFileLists: any;
+  imageList: any;
+  newImageLists: any;
 };

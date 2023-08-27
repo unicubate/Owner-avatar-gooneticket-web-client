@@ -66,7 +66,7 @@ const ButtonInput: React.FC<Props> = ({
            py-${sizeType[String(size ?? "normal")]} 
            text-sm 
            font-semibold 
-           leading-4
+           leading-3
            text-center  
            text-white 
            transition-all 

@@ -3,14 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 
 export const GetUploadsProductsAPI = (payload: {
   productId?: string;
+  uploadType?: "image" | "file";
 }) => {
-  const { productId } = payload;
+  const { productId, uploadType } = payload;
   return useQuery({
-    queryKey: ["uploads", productId],
+    queryKey: ["uploads", productId, uploadType],
     queryFn: async () =>
       await makeApiCall({
         action: "getUploadsProducts",
-        queryParams: { productId},
+        queryParams: { productId, uploadType },
       }),
     staleTime: 60_000,
     refetchOnWindowFocus: false,

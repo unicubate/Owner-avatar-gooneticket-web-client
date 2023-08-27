@@ -14,7 +14,7 @@ const HorizontalNavShop: React.FC = () => {
     },
     {
       title: "Configurations",
-      href: "/config",
+      href: "/shop/config",
     },
   ]);
 

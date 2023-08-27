@@ -14,6 +14,7 @@ import { useAuth } from "@/components/util/session/context-user";
 import Layout from "@/components/layout";
 import ListCarouselUpload from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
+import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -35,14 +36,15 @@ const ShopView = () => {
   const {
     status,
     error,
-    isLoading: isLoadingUploads,
-    isError: isErrorUploads,
-    data: dataUploads,
+    isLoading: isLoadingImages,
+    isError: isErrorImages,
+    data: dataImages,
   } = GetUploadsProductsAPI({
     productId: product?.id,
+    uploadType: 'image'
   });
 
-  const dataTableUploads = isLoadingUploads ? (
+  const dataTableImages = isLoadingImages ? (
     <Spin
       tip="Loading"
       indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
@@ -50,12 +52,10 @@ const ShopView = () => {
     >
       <div className="content" />
     </Spin>
-  ) : isErrorUploads || isErrorProduct ? (
+  ) : isErrorProduct || isErrorImages ? (
     <strong>Error find data please try again...</strong>
-  ) : dataUploads?.data?.length <= 0 ? (
-    ""
   ) : (
-    <ListCarouselUpload uploads={dataUploads?.data} />
+    <ListCarouselUpload uploads={dataImages?.data} />
   );
 
   return (
@@ -134,7 +134,32 @@ const ShopView = () => {
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
                 <div className="overflow-hidden border-2 border-transparent rounded-lg">
-                  {dataTableUploads}
+                  {dataTableImages}
+
+                  {/* {dataUploads?.data?.length >= 0 && (
+                    <>
+                      <Carousel
+                        autoplay
+                        dots={true}
+                        dotPosition={"top"}
+                        pauseOnDotsHover={true}
+                        pauseOnHover={true}
+                        draggable
+                      >
+                        {dataUploads?.data?.map((item: any, index: number) => (
+                          <div key={index}>
+                            <Image
+                              className="object-cover w-full h-full"
+                              style={contentStyle}
+                              src={item?.url}
+                              //src={`${getOneFileUploadProductAPI(item?.path)}`}
+                              alt=""
+                            />
+                          </div>
+                        ))}
+                      </Carousel>
+                    </>
+                  )} */}
                 </div>
               </div>
             </div>
@@ -189,7 +214,7 @@ const ShopView = () => {
 
             <div className="lg:col-span-2 lg:row-end-2 lg:row-span-2">
               <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
-                Jenny’s Closets - The winter top for female, green
+                {product?.title ?? ""}
               </h1>
 
               <div className="flex items-center mt-8">

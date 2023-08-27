@@ -22,33 +22,41 @@ export const CreateOrUpdateOneProductAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["product"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (
       payload: ProductFormModel & { productId?: string }
     ): Promise<any> => {
-      const { productId, newFileLists } = payload;
+      const { productId, newImageLists, newFileLists } = payload;
 
       let data = new FormData();
-      data.append("title", payload.title ?? "");
-      data.append("description", payload.description ?? "");
-      // data.append("type", payload.type ?? "");
-      // data.append("allowDownload", `${payload.allowDownload}`);
+      data.append("title", `${payload.title ?? ""}`);
+      data.append("price", `${payload.price ?? ""}`);
+      data.append("urlMedia", `${payload.urlMedia ?? ""}`);
+      data.append("limitSlot", `${payload.limitSlot ?? ""}`);
+      data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
+      data.append("isChooseQuantity", `${payload.isChooseQuantity}`);
+      data.append(
+        "messageAfterPurchase",
+        `${payload.messageAfterPurchase ?? ""}`
+      );
+      data.append("description", `${payload.description ?? ""}`);
+
+      payload?.imageList?.length > 0 &&
+        payload?.imageList?.forEach((file: any) => {
+          data.append("attachmentImages", file?.originFileObj as RcFile);
+        });
 
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
-          data.append("attachments", file?.originFileObj as RcFile);
-        });
-
-      payload?.attachment?.fileList?.length > 0 &&
-        payload?.attachment?.fileList?.forEach((file: any) => {
-          data.append("attachment", file?.originFileObj as RcFile);
+          data.append("attachmentFiles", file?.originFileObj as RcFile);
         });
 
       if (productId) {
         const result = await makeApiCall({
           action: "updateOneUploadProduct",
-          body: { newFileLists: newFileLists },
+          body: { newImageLists, newFileLists },
           urlParams: { productId },
         });
 
@@ -59,7 +67,7 @@ export const CreateOrUpdateOneProductAPI = ({
             urlParams: { productId },
           });
         }
-        
+
         return "Ok";
       } else {
         return await makeApiCall({
@@ -70,19 +78,19 @@ export const CreateOrUpdateOneProductAPI = ({
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onSuccess: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onError: async (error: any) => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onError) {
           onError(error);
         }

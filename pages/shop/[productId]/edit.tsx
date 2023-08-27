@@ -24,28 +24,41 @@ const ShopEdit = () => {
   const product: any = dataProduct?.data;
 
   const {
-    status,
-    error,
-    isLoading: isLoadingUploads,
-    isError: isErrorUploads,
-    data: dataUploads,
+    isLoading: isLoadingFileUploads,
+    isError: isErrorFileUploads,
+    data: dataFileUploads,
   } = GetUploadsProductsAPI({
     productId: product?.id,
+    uploadType: 'file'
   });
 
-  const dataTableProduct = isLoadingUploads ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
-  ) : isErrorUploads || isErrorProduct ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <CreateOrUpdateFormShop uploads={dataUploads?.data} product={product} />
-  );
+  const {
+    isLoading: isLoadingImageUploads,
+    isError: isErrorImageUploads,
+    data: dataImageUploads,
+  } = GetUploadsProductsAPI({
+    productId: product?.id,
+    uploadType: 'image'
+  });
+
+  const dataTableProduct =
+    isLoadingImageUploads ? (
+      <Spin
+        tip="Loading"
+        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+        size="large"
+      >
+        <div className="content" />
+      </Spin>
+    ) : isErrorFileUploads || isErrorImageUploads || isErrorProduct ? (
+      <strong>Error find data please try again...</strong>
+    ) : (
+      <CreateOrUpdateFormShop
+        uploadFiles={dataFileUploads?.data}
+        uploadImages={dataImageUploads?.data}
+        product={product}
+      />
+    );
 
   return (
     <>
@@ -57,7 +70,6 @@ const ShopEdit = () => {
                 {/* <HorizontalNavShop /> */}
 
                 {dataTableProduct}
-                
               </div>
             </div>
           </main>
