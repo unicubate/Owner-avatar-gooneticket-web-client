@@ -192,6 +192,24 @@ export const apiEndpoints: ClientApiMethods = {
     method: DELETE,
   },
 
+  /****************** Discounts route */
+  getDiscounts: {
+    endpoint: `${baseUrl}/discounts`,
+    method: GET,
+  },
+  createOneDiscount: {
+    endpoint: `${baseUrl}/discounts`,
+    method: POST,
+  },
+  updateOneDiscount: {
+    endpoint: `${baseUrl}/discounts/:discountId`,
+    method: PUT,
+  },
+  deleteOneDiscount: {
+    endpoint: `${baseUrl}/discounts/:discountId`,
+    method: DELETE,
+  },
+
   /****************** Categories route */
   getCategories: {
     endpoint: `${baseUrl}/categories`,

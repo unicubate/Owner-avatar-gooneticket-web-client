@@ -1,5 +1,5 @@
 import { ColorType } from "@/types/profile.type";
-import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
 interface SizeInterface {
@@ -8,7 +8,7 @@ interface SizeInterface {
 
 const sizeType: SizeInterface = {
   large: "3.5",
-  normal: "2",
+  normal: "2.5",
   medium: "0.5",
   small: "0.2",
 };
@@ -24,6 +24,7 @@ interface Props {
   size?: "large" | "medium" | "normal" | "small";
   loading: boolean;
   children: React.ReactNode;
+  icon?: React.ReactNode;
   type: "button" | "submit";
   color: ColorType;
   shape?: "round" | "default";
@@ -37,6 +38,7 @@ const ButtonInput: React.FC<Props> = ({
   size,
   shape,
   color,
+  icon,
   loading,
   children,
   className,
@@ -85,7 +87,10 @@ const ButtonInput: React.FC<Props> = ({
         {loading ? (
           <Spin indicator={antIcon} className="mr-2" />
         ) : (
-          <>{children}</>
+          <>
+            {icon ? <span className="mr-1">{icon}</span> : null}
+            {children}
+          </>
         )}
       </button>
     </>

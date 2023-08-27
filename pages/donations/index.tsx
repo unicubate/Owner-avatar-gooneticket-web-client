@@ -82,7 +82,7 @@ const Donations = () => {
 
                                                 <div className="sm:flex sm:items-center sm:justify-between">
                                                     <div className="mt-4 sm:mt-0">
-                                                        <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={'indigo'}>
+                                                        <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="large" loading={false} color={'indigo'}>
                                                             Create donation
                                                         </ButtonInput>
                                                     </div>

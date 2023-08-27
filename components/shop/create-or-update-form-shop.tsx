@@ -277,7 +277,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                           className="upload-list-inline"
                           fileList={fileList}
                           onChange={handleFileChange}
-                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv"
+                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac"
                         >
                           <Button icon={<UploadOutlined />}>Upload File</Button>
                         </Upload>

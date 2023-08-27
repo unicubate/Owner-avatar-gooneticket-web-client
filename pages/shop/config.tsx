@@ -1,62 +1,60 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button } from "antd";
+import { Button, Input, Skeleton } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
 import { getOneProfileAPI } from "../../api/profile";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { SwitchInput } from "@/components/util/form/switch-input";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-
-const schema = yup.object({
-  confirmSwitch: yup.boolean().optional(),
-  facebookNotif: yup.boolean().optional(),
-  telegramNotif: yup.boolean().optional(),
-});
+import {
+  CopyOutlined,
+  DeleteOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
+import {
+  MdDeleteOutline,
+  MdOutlineModeEdit,
+  MdOutlineIosShare,
+} from "react-icons/md";
+import { ButtonInput } from "@/components/templates/button-input";
+import ListDiscounts from "@/components/discount/list-discounts";
+import { GetInfiniteDiscountsAPI } from "@/api/discount";
+import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";
 
 const Configs = () => {
+  const [showModal, setShowModal] = useState(false);
   const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
+    isLoading: isLoadingDiscounts,
+    isError: isErrorDiscounts,
+    data: dataDiscounts,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfiniteDiscountsAPI({
+    take: 10,
+    sort: "DESC",
   });
-  const user = useAuth() as any;
-  // const {
-  //     control,
-  //     setValue,
-  //     handleSubmit,
-  //     formState: { errors },
-  //   } = useForm<any>({
-  //     resolver: yupResolver(schema),
-  //     mode: "onChange",
-  //   });
 
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
-
-    console.log("payload =======>", payload);
-  };
-
-  // useEffect(() => {
-  //     if (user) {
-  //       const fields = ["username"];
-  //       fields?.forEach((field: any) => setValue(field, user[field]));
-  //     }
-  //   }, [user, setValue]);
+  const dataTableDiscounts = isLoadingDiscounts ? (
+    <Skeleton className="mt-4" loading={isLoadingDiscounts} paragraph={{ rows: 1 }} />
+  ) : isErrorDiscounts ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
+    ""
+  ) : (
+    dataDiscounts.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index: number) => (
+        <ListDiscounts item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
@@ -66,7 +64,9 @@ const Configs = () => {
             <div className="max-w-6xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Configurations</h1>
+                  <h1 className="text-lg font-bold text-gray-900">
+                    Configurations
+                  </h1>
                   {/* <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
                     Sell digital or physical items with a Un-Pot Shop!
                   </p> */}
@@ -80,200 +80,90 @@ const Configs = () => {
 
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <HorizontalNavShop />
-                
-                {/* <div className="mt-8 sm:flex sm:items-center sm:justify-between">
-                                    <div>
-                                        <p className="text-base font-bold text-gray-900">Connect Apps</p>
-                                        <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectetur adipis.</p>
-                                    </div>
 
-                                    <div className="mt-4 sm:mt-0">
-                                        <label className="sr-only"> Search App </label>
-                                        <div className="relative">
-                                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                <svg className="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                                </svg>
-                                            </div>
+                <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
+                  <div className="px-4 py-5 sm:p-6">
+                    <div className="sm:flex sm:items-center sm:justify-between">
+                      <div>
+                        <p className="text-base font-bold text-gray-900">
+                          Discounts Setup
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Discount your shop or commissions for promotions or
+                          membership benefits.
+                        </p>
+                      </div>
+                    </div>
 
-                                            <input type="search" name="" id="" className="border block w-full py-2 pl-10 border-gray-300 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm" placeholder="Search App" />
-                                        </div>
-                                    </div>
-                                </div> */}
+                    <div className="mt-4 sm:flex sm:items-center sm:justify-between">
+                      <div className="mt-4 sm:mt-0">
+                        <ButtonInput
+                          onClick={() => setShowModal(true)}
+                          shape="default"
+                          type="button"
+                          size="normal"
+                          loading={false}
+                          color={"indigo"}
+                          icon={<PlusOutlined />}
+                        >
+                          Create discount
+                        </ButtonInput>
+                      </div>
+                      <div className="mt-4 sm:mt-0">
+                        <Input placeholder="Search discount" />
+                      </div>
+                    </div>
 
-                <div className="flow-root mt-8">
-                  <div className="overflow-hidden bg-white border border-gray-200">
-                    <div className="px-4 py-5">
-                      <div className="-my-5 divide-y divide-gray-200">
-                        <div className="py-5">
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
-                                <p className="text-sm font-bold text-gray-900">
-                                  Mailchimp
-                                </p>
-                                <p className="mt-1 text-sm font-medium text-gray-500">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipis.
-                                </p>
-                              </div>
+                    <div className="flow-root mt-8">
+                      <div className="-my-5 divide-y divide-gray-100">
+                        {showModal ? (
+                          <CreateOrUpdateDiscount
+                            showModal={showModal}
+                            setShowModal={setShowModal}
+                          />
+                        ) : null}
+
+                        {dataTableDiscounts}
+
+                        {hasNextPage ? (
+                          <>
+                            <div className="mb-3 flex flex-col justify-between items-center">
+                              {isFetchingNextPage ? null : (
+                                <button
+                                  disabled={isFetchingNextPage ? true : false}
+                                  onClick={() => fetchNextPage()}
+                                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                                >
+                                  View more
+                                </button>
+                              )}
+                            </div>
+                          </>
+                        ) : null}
+
+                        {/* <div className="py-5">
+                          <div className="flex items-center">
+                            <div className="ml-4">
+                              <p className="text-sm font-bold text-gray-900">
+                                Astrona
+                              </p>
+                              <p className="mt-1 text-sm font-medium text-gray-500">
+                                12 members
+                              </p>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                              <button
-                                type="button"
+                            <div className="ml-auto">
+                              <a
+                                href="#"
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
                                 {" "}
-                              </button>
-
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                                <SwitchInput
-                                  control={control}
-                                  name="facebookNotif"
-                                />
-                              </div>
+                                Leave{" "}
+                              </a>
                             </div>
                           </div>
-                        </div>
-
-                        <div className="py-5">
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
-                                <p className="text-sm font-bold text-gray-900">
-                                  Zapier
-                                </p>
-                                <p className="mt-1 text-sm font-medium text-gray-500">
-                                  Lorem ipsum dolor sit amet, consectes.
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                              <button
-                                type="button"
-                                title=""
-                                className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                              >
-                                {" "}
-                              </button>
-
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                                <SwitchInput
-                                  control={control}
-                                  name="confirmSwitch"
-                                  label=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="py-5">
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
-                                <p className="text-sm font-bold text-gray-900">
-                                  Telegram
-                                </p>
-                                <p className="mt-1 text-sm font-medium text-gray-500">
-                                  Lorem ipsum dolor sit amet.
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                              <button
-                                type="button"
-                                title=""
-                                className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                              >
-                                {" "}
-                              </button>
-
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                                <SwitchInput
-                                  control={control}
-                                  name="telegramNotif"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="py-5">
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
-                                <p className="text-sm font-bold text-gray-900">
-                                  Slack
-                                </p>
-                                <p className="mt-1 text-sm font-medium text-gray-500">
-                                  Lorem ipsum dolor sit amet, consectetur
-                                  adipis.
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                              <button
-                                type="button"
-                                title=""
-                                className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                              >
-                                {" "}
-                              </button>
-
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                                <SwitchInput
-                                  control={control}
-                                  name="confirmSwitch"
-                                  label=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="py-5">
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
-                                <p className="text-sm font-bold text-gray-900">
-                                  Dropbox
-                                </p>
-                                <p className="mt-1 text-sm font-medium text-gray-500">
-                                  Lorem ipsum dolor sit amet adipis.
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                              <button
-                                type="button"
-                                title=""
-                                className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                              >
-                                {" "}
-                              </button>
-
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                                <SwitchInput
-                                  control={control}
-                                  name="confirmSwitch"
-                                  label=""
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
