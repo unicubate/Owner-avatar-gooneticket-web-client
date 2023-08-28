@@ -1,4 +1,4 @@
-import { DateInput, NumberInput, TextInput } from "../util/form";
+import { DateInput, NumberInput, TextAreaInput, TextInput } from "../util/form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -35,7 +35,7 @@ const CreateOrUpdateDiscount: React.FC<{
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const watchIsExpired = watch("isExpired", false);
+  const watchEnableExpiredAt = watch("enableExpiredAt", false);
 
   useEffect(() => {
     if (discount) {
@@ -44,7 +44,7 @@ const CreateOrUpdateDiscount: React.FC<{
         "description",
         "percent",
         "isActive",
-        "expiredAt",
+        "enableExpiredAt",
         "isExpired",
         "startedAt",
       ];
@@ -112,9 +112,20 @@ const CreateOrUpdateDiscount: React.FC<{
             </button>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="p-2 flex-auto justify-center">
-                {/* <div className="font-regular text-center relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-                                    Error message save to de db je me demande ou je suis merde
-                                </div> */}
+                {hasErrors && (
+                  <div className="py-6 bg-white">
+                    <div className="bg-red-100 rounded-lg">
+                      <div className="p-3">
+                        <div className="flex items-center justify-between">
+                          <p className="ml-3 text-sm font-medium text-red-500">
+                            {hasErrors}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 <div className="mb-4">
                   <NumberInput
                     control={control}
@@ -136,47 +147,59 @@ const CreateOrUpdateDiscount: React.FC<{
                     errors={errors}
                   />
                 </div>
-                <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex items-center flex-1 min-w-0">
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-gray-900">
-                          Set Expiry
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Setting expired date
-                        </p>
+                <div className="mb-2">
+                  <TextAreaInput
+                    row={3}
+                    control={control}
+                    label="Description (optional)"
+                    name="description"
+                    placeholder="description discount"
+                    errors={errors}
+                  />
+                </div>
+                <div className="mb-2">
+                  <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                      <div className="flex items-center flex-1 min-w-0">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-gray-900">
+                            Set Expiry
+                          </p>
+                          <p className="mt-1 text-sm font-medium text-gray-500">
+                            Setting expired date
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                        <button
+                          type="button"
+                          title=""
+                          className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                        >
+                          {" "}
+                        </button>
+                        <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                          <SwitchInput
+                            control={control}
+                            name="enableExpiredAt"
+                            label=""
+                          />
+                        </div>
                       </div>
                     </div>
-
-                    <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                      <button
-                        type="button"
-                        title=""
-                        className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                      >
-                        {" "}
-                      </button>
-                      <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                        <SwitchInput
+                    {watchEnableExpiredAt ? (
+                      <div className="mb-1">
+                        <DateInput
+                          label="Expired date"
                           control={control}
-                          name="isExpired"
-                          label=""
+                          placeholder="12/01/2023"
+                          name="expiredAt"
+                          errors={errors}
                         />
                       </div>
-                    </div>
+                    ) : null}
                   </div>
-                  {watchIsExpired ? (
-                    <div className="mb-1">
-                      <DateInput
-                        label="Expired date"
-                        control={control}
-                        placeholder="12/01/2023"
-                        name="expiredAt"
-                        errors={errors}
-                      />
-                    </div>
-                  ) : null}
                 </div>
               </div>
               <div className="mt-2 text-center space-x-2">

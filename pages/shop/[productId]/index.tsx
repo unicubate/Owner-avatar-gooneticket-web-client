@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Carousel, Image, Input } from "antd";
+import { Avatar, Carousel, Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/templates/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
@@ -15,6 +15,8 @@ import Layout from "@/components/layout";
 import ListCarouselUpload from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
+import { formateDMYHH } from "@/utils";
+import { Linkify } from "@/utils/linkify";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -25,6 +27,7 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ShopView = () => {
+  const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
@@ -34,14 +37,12 @@ const ShopView = () => {
   const product: any = dataProduct?.data;
 
   const {
-    status,
-    error,
     isLoading: isLoadingImages,
     isError: isErrorImages,
     data: dataImages,
   } = GetUploadsProductsAPI({
     productId: product?.id,
-    uploadType: 'image'
+    uploadType: "image",
   });
 
   const dataTableImages = isLoadingImages ? (
@@ -62,165 +63,63 @@ const ShopView = () => {
     <>
       <Layout title={`${product?.title ?? ""}`}>
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          {/* <nav className="flex">
-            <ol role="list" className="flex items-center space-x-0.5">
-              <li>
-                <div className="-m-1">
-                  <a
-                    href="#"
-                    className="p-1 text-sm font-medium text-gray-500 rounded-md focus:outline-none focus:ring-2 focus:text-gray-900 focus:ring-gray-900 hover:text-gray-700"
-                  >
-                    {" "}
-                    Home{" "}
-                  </a>
-                </div>
-              </li>
-
-              <li>
-                <div className="flex items-center">
-                  <svg
-                    className="flex-shrink-0 w-5 h-5 text-gray-300"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                  </svg>
-                  <div className="-m-1">
-                    <a
-                      href="#"
-                      className="p-1 ml-0.5 text-sm font-medium text-gray-500 rounded-md focus:outline-none focus:ring-2 focus:text-gray-900 focus:ring-gray-900 hover:text-gray-700"
-                    >
-                      {" "}
-                      Products{" "}
-                    </a>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div className="flex items-center">
-                  <svg
-                    className="flex-shrink-0 w-5 h-5 text-gray-300"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    aria-hidden="true"
-                  >
-                    <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                  </svg>
-                  <div className="-m-1">
-                    <a
-                      href="#"
-                      className="p-1 ml-0.5 text-sm font-medium text-gray-500 rounded-md focus:outline-none focus:ring-2 focus:text-gray-900 focus:ring-gray-900 hover:text-gray-700"
-                      aria-current="page"
-                    >
-                      {" "}
-                      CarityUI{" "}
-                    </a>
-                  </div>
-                </div>
-              </li>
-            </ol>
-          </nav> */}
-
           <div className="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
-            {/* <div className="lg:col-span-3 lg:row-end-1">
-              <div className="lg:flex lg:items-start"> */}
-            {/* <div className="lg:order-2 lg:ml-5">
-                  <div className="overflow-hidden border-2 border-transparent rounded-lg"> */}
-
+            
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
                 <div className="overflow-hidden border-2 border-transparent rounded-lg">
-                  {dataTableImages}
+                  <div className="mb-2 flex items-center">
+                    <div
+                      onClick={() =>
+                        router.push(`/${product?.profile?.username}/shop`)
+                      }
+                      className="relative flex-shrink-0 cursor-pointer"
+                    >
+                      <Avatar
+                        size={40}
+                        className="object-cover w-10 h-10 rounded-full"
+                        src={product?.profile?.image}
+                        alt={`${product?.profile?.firstName} ${product?.profile?.lastName}`}
+                      />
+                    </div>
 
-                  {/* {dataUploads?.data?.length >= 0 && (
-                    <>
-                      <Carousel
-                        autoplay
-                        dots={true}
-                        dotPosition={"top"}
-                        pauseOnDotsHover={true}
-                        pauseOnHover={true}
-                        draggable
-                      >
-                        {dataUploads?.data?.map((item: any, index: number) => (
-                          <div key={index}>
-                            <Image
-                              className="object-cover w-full h-full"
-                              style={contentStyle}
-                              src={item?.url}
-                              //src={`${getOneFileUploadProductAPI(item?.path)}`}
-                              alt=""
-                            />
-                          </div>
-                        ))}
-                      </Carousel>
-                    </>
-                  )} */}
+                    <div
+                      onClick={() =>
+                        router.push(`/${product?.profile?.username}/shop`)
+                      }
+                      className="ml-4 cursor-pointer"
+                    >
+                      <p className="text-sm font-bold text-gray-900">
+                        {product?.profile?.firstName ?? ""}{" "}
+                        {product?.profile?.lastName ?? ""}
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-500">
+                        {formateDMYHH(product?.createdAt as Date)}
+                      </p>
+                    </div>
+
+                    <div className="ml-auto">
+                      <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
+                        {" "}
+                        Private{" "}
+                      </p>
+                    </div>
+                  </div>
+
+                  {dataTableImages}
                 </div>
               </div>
             </div>
-            {/* </div>
-                </div> */}
 
-            {/* <div className="w-full lg:w-32 mt-2.5 lg:mt-0 lg:flex-shrink-0 lg:order-1">
-                  <div className="flex flex-row items-stretch lg:flex-col lg:space-y-5 space-x-2.5 lg:space-x-0"> */}
-            {/* <button type="button" className="flex-1">
-                      <div className="overflow-hidden border-2 border-gray-900 rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                        <img
-                          className="object-cover w-full h-full"
-                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-2.png"
-                          alt=""
-                        />
-                      </div>
-                    </button> */}
-
-            {/* <button type="button" className="flex-1">
-                      <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                        <img
-                          className="object-cover w-full h-full"
-                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-3.png"
-                          alt=""
-                        />
-                      </div>
-                    </button>
-
-                    <button type="button" className="flex-1">
-                      <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                        <img
-                          className="object-cover w-full h-full"
-                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-4.png"
-                          alt=""
-                        />
-                      </div>
-                    </button>
-
-                    <button type="button" className="flex-1">
-                      <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                        <img
-                          className="object-cover w-full h-full"
-                          src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-5.png"
-                          alt=""
-                        />
-                      </div>
-                    </button> */}
-            {/* </div>
-                </div> */}
-            {/* </div>
-            </div> */}
-
-            <div className="lg:col-span-2 lg:row-end-2 lg:row-span-2">
-              <h1 className="text-xl font-bold text-gray-900 sm:text-2xl">
+            <div className="lg:col-span-3 lg:row-end-2 lg:row-span-2">
+              <h1 className="text-2xl font-bold text-gray-900 sm:text-2xl">
                 {product?.title ?? ""}
               </h1>
 
-              <div className="flex items-center mt-8">
-                <p className="text-3xl font-bold text-gray-900">$49</p>
-                <p className="ml-2 text-2xl font-bold text-gray-500">
-                  <del> $99 </del>
+              <div className="flex items-center mt-4">
+                <p className="text-xl font-bold text-gray-900">${product?.priceDiscount ?? ""}</p>
+                <p className="ml-2 text-xl font-bold text-gray-500">
+                  <del> ${product?.price ?? ""} </del>
                 </p>
               </div>
 
@@ -240,7 +139,7 @@ const ShopView = () => {
                 Save 50% right now
               </div>
 
-              <h2 className="mt-8 text-base font-bold text-gray-900">
+              <h2 className="mt-4 text-base font-bold text-gray-900">
                 Features
               </h2>
               <ul className="mt-4 space-y-3 text-base font-medium text-gray-600 list-disc list-inside">
@@ -249,48 +148,17 @@ const ShopView = () => {
                 <li>Quality control by JC</li>
               </ul>
 
-              <div className="flex items-center mt-10 space-x-4">
-                <button
+              <div className="flex items-center mt-8 space-x-4">
+                <ButtonInput
+                  minW="fit"
+                  shape="default"
                   type="button"
-                  className="inline-flex items-center justify-center px-12 py-3 text-base font-bold leading-7 text-white transition-all duration-200 bg-gray-900 border-2 border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:bg-gray-700"
+                  size="large"
+                  loading={false}
+                  color={product?.profile?.color}
                 >
                   Add to cart
-                </button>
-
-                <button
-                  type="button"
-                  className="
-                            inline-flex
-                            items-center
-                            justify-center
-                            px-4
-                            py-3.5
-                            text-gray-900
-                            transition-all
-                            duration-200
-                            bg-transparent
-                            border-2 border-gray-300
-                            rounded-md
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900
-                            hover:border-gray-900 hover:bg-gray-100
-                            focus:border-gray-900
-                        "
-                >
-                  <svg
-                    className="w-6 h-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
-                </button>
+                </ButtonInput>
               </div>
 
               <ul className="mt-8 space-y-3">
@@ -351,7 +219,17 @@ const ShopView = () => {
             </div>
 
             <div className="lg:col-span-3">
-              <div className="border-b border-gray-200">
+            <h2 className="mb-2 text-base font-bold text-gray-900">
+                Description
+              </h2>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: product?.description as string,
+                }}
+                className="text-base lg:text-left"
+              />
+
+              {/* <div className="border-b border-gray-200">
                 <nav className="flex -mb-px space-x-8 sm:space-x-14">
                   <a
                     href="#"
@@ -383,9 +261,9 @@ const ShopView = () => {
                     Support{" "}
                   </a>
                 </nav>
-              </div>
+              </div> */}
 
-              <div className="flow-root mt-8 sm:mt-12">
+              {/* <div className="flow-root mt-8 sm:mt-12">
                 <ul className="divide-y divide-gray-100 -my-9">
                   <li className="py-8">
                     <div className="flex items-start">
@@ -585,9 +463,9 @@ const ShopView = () => {
                     </div>
                   </li>
                 </ul>
-              </div>
+              </div> */}
 
-              <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">
+              {/* <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">
                 <button
                   type="button"
                   className="inline-flex items-center justify-center text-xs font-bold tracking-widest text-gray-400 uppercase transition-all duration-200 rounded hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
@@ -608,7 +486,7 @@ const ShopView = () => {
                   </svg>
                   Load more reviews
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

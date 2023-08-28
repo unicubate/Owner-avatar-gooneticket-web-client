@@ -21,16 +21,17 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
 
   return (
     <>
-        <>
-          <Carousel
-            autoplay
-            dots={true}
-            dotPosition={"top"}
-            pauseOnDotsHover={true}
-            pauseOnHover={true}
-            draggable
-          >
-            {uploads?.length > 0 && uploads?.map((item: any, index: number) => (
+      <>
+        <Carousel
+          autoplay
+          dots={true}
+          dotPosition={"top"}
+          pauseOnDotsHover={true}
+          pauseOnHover={true}
+          draggable
+        >
+          {uploads?.length > 0 &&
+            uploads?.map((item: any, index: number) => (
               <div key={index}>
                 <Image
                   className="object-cover w-full h-full"
@@ -41,8 +42,8 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
                 />
               </div>
             ))}
-          </Carousel>
-          {/* <div className="flex items-center mt-4 mb-4 space-x-4">
+        </Carousel>
+        {/* <div className="flex items-center mt-4 mb-4 space-x-4">
             <ButtonCancelInput shape="default" size="normal" loading={false}>
               Cancel
             </ButtonCancelInput>
@@ -50,7 +51,7 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
               Cancel
             </ButtonCancelInput>
           </div> */}
-        </>
+      </>
     </>
   );
 };

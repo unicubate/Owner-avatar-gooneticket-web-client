@@ -1,12 +1,9 @@
-import { CommentFormModel } from "@/types/comment";
-import queryString from "query-string";
-import { PostModel, PostType, ResponsePostModel } from "@/types/post";
-import dyaxios from "@/utils/dyaxios";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
 import { DiscountFormModel, ResponseDiscountModel } from "@/types/discount";
@@ -116,16 +113,32 @@ export const getDiscountsAPI = async (
   });
 };
 
+export const GetAllDiscountsAPI = (search?: string) => {
+  return useQuery({
+    queryKey: ["discounts"],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getDiscountsUser",
+        queryParams: search,
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+};
+
+
 export const GetInfiniteDiscountsAPI = (payload: {
+  search?: string;
   take: number;
   sort: SortModel;
 }) => {
-  const { take, sort } = payload;
+  const { take, sort, search } = payload;
   return useInfiniteQuery({
     queryKey: ["discounts", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getDiscountsAPI({
+        search: search,
         take: take,
         page: pageParam,
         sort: sort,

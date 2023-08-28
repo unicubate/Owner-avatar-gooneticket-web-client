@@ -19,7 +19,7 @@ const Followers = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteFollowersAPI({
-    take: 10,
+    take: 3,
     sort: "DESC",
   });
 
@@ -39,7 +39,7 @@ const Followers = () => {
 
   useEffect(() => {
     let fetching = false;
-    if (inView) {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
     const onScroll = async (event: any) => {
@@ -72,7 +72,6 @@ const Followers = () => {
               </div>
 
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                
                 <HorizontalNavSetting />
 
                 <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
@@ -86,7 +85,6 @@ const Followers = () => {
                         </div>
 
                         {dataTableFollowers}
-                        
                       </div>
                     </div>
 

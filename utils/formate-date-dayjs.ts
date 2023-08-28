@@ -31,7 +31,7 @@ export const formateDDMMYYHH = (date: Date) => {
 };
 
 export const formateDMYHH = (date: Date) => {
-  return date ? dayjs(date).locale("fr").format("DD MMM YYYY HH:mm") : null;
+  return date ? dayjs(date).locale("fr").format("DD MMM YYYY") : null;
 };
 
 export const formateDDMMYYYY = (date: Date) => {

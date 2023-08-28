@@ -4,16 +4,13 @@ import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-settin
 import { Skeleton } from "antd";
 import { useInView } from "react-intersection-observer";
 import { ButtonInput } from "@/components/templates/button-input";
-import { GetInfiniteFollowingsAPI, getFollowingsAPI } from "@/api/follow";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { GetInfiniteFollowingsAPI } from "@/api/follow";
 import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";
 
 const Followings = () => {
   const { ref, inView } = useInView();
   const {
-    status,
-    error,
     isLoading: isLoadingFollowings,
     isError: isErrorFollowings,
     data: dataFollowings,
@@ -41,7 +38,7 @@ const Followings = () => {
 
   useEffect(() => {
     let fetching = false;
-    if (inView) {
+    if (inView && hasNextPage) {
       fetchNextPage();
     }
     const onScroll = async (event: any) => {

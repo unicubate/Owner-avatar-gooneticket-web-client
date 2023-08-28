@@ -1,35 +1,22 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button, Input, Skeleton } from "antd";
-import { useAuth } from "@/components/util/session/context-user";
-import { getOneProfileAPI } from "../../api/profile";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { UpdateFormProfile } from "@/components/user/update-form-profile";
-import { SwitchInput } from "@/components/util/form/switch-input";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { Input, Skeleton } from "antd";
+import { useState } from "react";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import {
-  CopyOutlined,
-  DeleteOutlined,
-  EditOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import {
-  MdDeleteOutline,
-  MdOutlineModeEdit,
-  MdOutlineIosShare,
-} from "react-icons/md";
 import { ButtonInput } from "@/components/templates/button-input";
 import ListDiscounts from "@/components/discount/list-discounts";
 import { GetInfiniteDiscountsAPI } from "@/api/discount";
 import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";
+import { useDebounce } from "@/utils";
 
 const Configs = () => {
+  const [filter, setFilter] = useState<string>('')
   const [showModal, setShowModal] = useState(false);
+
+  const debouncedFilter = useDebounce(filter, 500);
   const {
     isLoading: isLoadingDiscounts,
     isError: isErrorDiscounts,
@@ -38,12 +25,17 @@ const Configs = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteDiscountsAPI({
+    search: debouncedFilter,
     take: 10,
     sort: "DESC",
   });
 
   const dataTableDiscounts = isLoadingDiscounts ? (
-    <Skeleton className="mt-4" loading={isLoadingDiscounts} paragraph={{ rows: 1 }} />
+    <Skeleton
+      className="mt-4"
+      loading={isLoadingDiscounts}
+      paragraph={{ rows: 1 }}
+    />
   ) : isErrorDiscounts ? (
     <strong>Error find data please try again...</strong>
   ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
@@ -110,7 +102,14 @@ const Configs = () => {
                         </ButtonInput>
                       </div>
                       <div className="mt-4 sm:mt-0">
-                        <Input placeholder="Search discount" />
+                        <Input
+                          placeholder="Search discount"
+                          onChange={(
+                            e: React.ChangeEvent<
+                              HTMLInputElement | HTMLTextAreaElement
+                            >
+                          ) => setFilter(e.target.value)}
+                        />
                       </div>
                     </div>
 
@@ -141,29 +140,6 @@ const Configs = () => {
                           </>
                         ) : null}
 
-                        {/* <div className="py-5">
-                          <div className="flex items-center">
-                            <div className="ml-4">
-                              <p className="text-sm font-bold text-gray-900">
-                                Astrona
-                              </p>
-                              <p className="mt-1 text-sm font-medium text-gray-500">
-                                12 members
-                              </p>
-                            </div>
-
-                            <div className="ml-auto">
-                              <a
-                                href="#"
-                                title=""
-                                className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                              >
-                                {" "}
-                                Leave{" "}
-                              </a>
-                            </div>
-                          </div>
-                        </div> */}
                       </div>
                     </div>
                   </div>

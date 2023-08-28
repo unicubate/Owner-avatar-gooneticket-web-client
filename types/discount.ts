@@ -7,20 +7,21 @@ export type ResponseDiscountModel = {
 export type DiscountModel = {
   createdAt: Date;
   id: string;
-  code: string;
+  name: string;
   description: string;
   percent: string;
-  isActive: boolean;
   expiredAt: Date;
   startedAt: Date;
   userId: string;
+  isValid: boolean;
+  enableExpiredAt: boolean;
 };
 
 export type DiscountFormModel = {
-  code: string;
-  description: string;
+  name: string;
   percent: string;
-  isActive: boolean;
   expiredAt: Date;
   startedAt: Date;
+  description: string;
+  enableExpiredAt: boolean;
 };

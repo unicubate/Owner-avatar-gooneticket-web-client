@@ -193,6 +193,10 @@ export const apiEndpoints: ClientApiMethods = {
   },
 
   /****************** Discounts route */
+  getDiscountsUser: {
+    endpoint: `${baseUrl}/discounts/user`,
+    method: GET,
+  },
   getDiscounts: {
     endpoint: `${baseUrl}/discounts`,
     method: GET,

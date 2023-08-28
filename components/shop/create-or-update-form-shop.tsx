@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NumberInput, TextAreaInput, TextInput } from "../util/form";
+import { NumberInput, ReactQuillInput, TextAreaInput, TextInput } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import { ProfileFormModel, arrayColors } from "@/types/profile.type";
 import {
@@ -29,6 +29,10 @@ import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { ProductFormModel } from "@/types/product";
 import { CreateOrUpdateOneProductAPI } from "@/api/product";
+import { SelectSearchInput } from "../util/form/select-search-input";
+import { GetAllDiscountsAPI } from "@/api/discount";
+import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
+import Link from "next/link";
 
 const { Option } = Select;
 
@@ -45,7 +49,10 @@ const schema = yup.object({
   price: yup.number().required(),
   messageAfterPurchase: yup.string().nullable(),
   description: yup.string().nullable(),
-  // countryId: yup.string().uuid().required(),
+  discountId: yup.string().when("isDiscount", (isDiscount, schema) => {
+    if (isDiscount[0] === true) return schema.required("discount required");
+    return schema.nullable();
+  }),
 });
 
 const CreateOrUpdateFormShop: React.FC<Props> = ({
@@ -72,6 +79,10 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     mode: "onChange",
   });
   const watchIsLimitSlot = watch("isLimitSlot", false);
+  const watchIsDiscount = watch("isDiscount", false);
+
+  const { data: dataDiscounts } = GetAllDiscountsAPI();
+  const discounts: any = dataDiscounts?.data;
 
   useEffect(() => {
     if (product) {
@@ -84,6 +95,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "description",
         "moreDescription",
         "isChooseQuantity",
+        "isDiscount",
+        "discountId",
         "messageAfterPurchase",
       ];
       fields?.forEach((field: any) => setValue(field, product[field]));
@@ -232,14 +245,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
-                <TextAreaInput
-                  row={3}
-                  control={control}
-                  label="Description"
-                  name="description"
-                  placeholder="Introduce yourself and what you're creating"
-                  errors={errors}
-                />
+                <ReactQuillInput
+                    control={control}
+                    label="Description"
+                    name="description"
+                    placeholder="Write description"
+                    errors={errors}
+                  />
                 <span className="text-sm font-medium text-gray-600">
                   {`Provide a full description of the item that you are selling.`}
                 </span>
@@ -319,6 +331,56 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-gray-900"> Discount</p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Apply a discount
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <button
+                    type="button"
+                    title=""
+                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                  >
+                    {" "}
+                  </button>
+                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                    <SwitchInput control={control} name="isDiscount" label="" />
+                  </div>
+                </div>
+              </div>
+              {watchIsDiscount ? (
+                <>
+                  <div className="mb-2">
+                    <SelectDiscountSearchInput
+                      label="Discounts"
+                      firstOptionName="Discount"
+                      control={control}
+                      errors={errors}
+                      placeholder="Discount"
+                      name="discountId"
+                      dataItem={discounts}
+                    />
+                    <div className="flex justify-between items-center">
+                      <label
+                        className="block text-sm mb-2 dark:text-white"
+                      ></label>
+                      <Link
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        href="/shop/config"
+                      >
+                        Create discount
+                      </Link>
+                    </div>
+                  </div>
+                </>
+              ) : null}
+
+              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                <div className="flex items-center flex-1 min-w-0">
+                  <div className="flex-1 min-w-0">
                     <p className="text-sm font-bold text-gray-900">
                       {" "}
                       Limit slots (optional){" "}
@@ -360,6 +422,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                   />
                 </div>
               ) : null}
+
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">

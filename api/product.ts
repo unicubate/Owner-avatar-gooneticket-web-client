@@ -41,6 +41,8 @@ export const CreateOrUpdateOneProductAPI = ({
         "messageAfterPurchase",
         `${payload.messageAfterPurchase ?? ""}`
       );
+      data.append("isDiscount", `${payload.isDiscount ?? ""}`);
+      data.append("discountId", `${payload.discountId ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
 
       payload?.imageList?.length > 0 &&

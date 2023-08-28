@@ -50,8 +50,10 @@ export type ProductFormModel = {
   price: number;
   messageAfterPurchase: string;
   description: string;
+  discountId: string;
   limitSlot: number;
   isLimitSlot: boolean;
+  isDiscount: boolean;
   attachments: any;
   attachment: any;
   fileList: any;
