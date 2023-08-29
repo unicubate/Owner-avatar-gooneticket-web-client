@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import { Alert, Button, Checkbox, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
@@ -24,6 +23,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useAuth } from "@/components/util/session/context-user";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   code: yup.string().max(8, "Maximum 8 symbols").required(),
@@ -112,7 +112,7 @@ const ConfirmAccount = () => {
   };
 
   return (
-    <Layout title="Log In">
+    <LayoutSite title="Log In">
       <div className="w-full max-w-lg p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
@@ -169,7 +169,7 @@ const ConfirmAccount = () => {
           </p>
         </div>
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 

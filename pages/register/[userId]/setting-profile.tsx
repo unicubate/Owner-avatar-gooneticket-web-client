@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
-import Layout from "@/components/layout";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -21,6 +20,7 @@ import { NextStepProfileFormModel } from "@/types/profile.type";
 import { GetOneUserPublicAPI, resendCodeAPI } from "@/api/user";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   username: yup
@@ -116,7 +116,7 @@ const SettingProfile = () => {
   };
 
   return (
-    <Layout title="Log In">
+    <LayoutSite title="Log In">
       <div className="w-full max-w-lg p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
@@ -218,7 +218,7 @@ const SettingProfile = () => {
           </div>
         </form>
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 

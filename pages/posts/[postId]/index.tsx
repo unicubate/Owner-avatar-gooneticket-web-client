@@ -7,11 +7,11 @@ import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { ButtonInput } from "@/components/templates/button-input";
-import Layout from "@/components/layout";
 import { Image } from "antd";
 import ListComments from "@/components/comment/list-comments";
 import { MdFavoriteBorder } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
+import { LayoutSite } from "@/components/layout-site";
 
 
 
@@ -25,7 +25,7 @@ const PostShow = () => {
 
     return (
         <>
-            <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+            <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
 
                 <div className="px-4 mx-auto sm:px-4 lg:px-6 max-w-6xl">
                     <div className="max-w-xl mx-auto text-center">
@@ -200,7 +200,7 @@ const PostShow = () => {
                     </div>
                 </div>
 
-            </Layout>
+            </LayoutSite>
 
         </>
     );

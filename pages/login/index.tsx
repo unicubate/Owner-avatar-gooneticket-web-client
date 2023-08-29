@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import { Alert, Button, Input } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -17,6 +16,7 @@ import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   email: yup
@@ -84,7 +84,7 @@ const Login = () => {
   };
 
   return (
-    <Layout title="Log In">
+    <LayoutSite title="Log In">
       <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
@@ -200,7 +200,7 @@ const Login = () => {
           </p>
         </Link>
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 

@@ -11,7 +11,6 @@ import { GetUploadsProductsAPI } from "@/api/upload";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
-import Layout from "@/components/layout";
 import ListCarouselUpload from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";

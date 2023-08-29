@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
-import Layout from "@/components/layout";
+import { LayoutSite } from "@/components/layout-site";
 
 const faqs = [
   {
@@ -44,7 +44,7 @@ const Faqs = () => {
 
   return (
     <>
-      <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+      <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
 
 
 
@@ -282,7 +282,7 @@ const Faqs = () => {
         </div>
 
 
-      </Layout>
+      </LayoutSite>
 
 
 

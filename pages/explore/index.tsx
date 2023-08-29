@@ -1,6 +1,3 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
-import { FaqsList } from "@/components/faq/faqs-list";
-import Layout from "@/components/layout";
 import { ButtonInput } from "@/components/templates/button-input";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

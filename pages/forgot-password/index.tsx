@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,6 +13,7 @@ import {
 import { passwordResetUserAPI } from "../../api/user";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { ButtonInput } from '@/components/templates/button-input';
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   email: yup
@@ -70,7 +70,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Layout title="Forgot you password">
+    <LayoutSite title="Forgot you password">
       <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           <h6 className="text-xl text-center font-bold">Forgot password?</h6>
@@ -99,7 +99,7 @@ const ForgotPassword = () => {
           </p>
         </Link>
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 

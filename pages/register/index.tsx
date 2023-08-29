@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import { Alert, Button, Checkbox, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
@@ -16,6 +15,7 @@ import {
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   email: yup
@@ -82,7 +82,7 @@ const Register = () => {
   };
 
   return (
-    <Layout title="Log In">
+    <LayoutSite title="Log In">
       <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
@@ -250,7 +250,7 @@ const Register = () => {
           </p>
         </Link>
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 export default PublicComponent(Register);

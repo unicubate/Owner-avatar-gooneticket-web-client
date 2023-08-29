@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { Inter } from "next/font/google";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import {
   Button,
@@ -41,6 +40,7 @@ import {
 import dayjs from "dayjs";
 import { SwitchInput } from "@/components/util/form/switch-input";
 import type { RcFile } from "antd/es/upload";
+import { LayoutSite } from "@/components/layout-site";
 
 const { Option } = Select;
 
@@ -112,7 +112,7 @@ export default function Home() {
   };
 
   return (
-    <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+    <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
       {/* <div className="space-y-3 lg:mx-0">
       <StoryBoard />
       <Feed />
@@ -240,7 +240,6 @@ export default function Home() {
               name="age"
               placeholder="Age Address"
               errors={errors}
-              icon={"EUR"}
             />
           </div>
           <div className="mb-4">
@@ -392,6 +391,7 @@ export default function Home() {
 
           <div className="mb-4">
             <TextAreaInput
+              row={4}
               control={control}
               label="Description"
               name="description"
@@ -607,6 +607,6 @@ export default function Home() {
 
       </div> */}
       {/* <FloatButton icon={<QuestionCircleOutlined />} type="primary" style={{ right: 94 }} /> */}
-    </Layout>
+    </LayoutSite>
   );
 }

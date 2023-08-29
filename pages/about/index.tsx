@@ -1,8 +1,8 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
-import Layout from "@/components/layout";
 import { useState } from "react";
+import { LayoutSite } from "@/components/layout-site";
 
 const faqs = [
   {
@@ -46,7 +46,7 @@ const About = () => {
 
   return (
     <>
-      {/* <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+      {/* <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
 
 
 
@@ -163,9 +163,9 @@ const About = () => {
 
         </div>
 
-      </Layout> */}
+      </LayoutSite> */}
 
-      <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+      <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
         <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-10">
           <div className="absolute inset-0">
             <img
@@ -597,7 +597,7 @@ const About = () => {
             </div>
           </div> */}
         </div>
-      </Layout>
+      </LayoutSite>
     </>
   );
 };

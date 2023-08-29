@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import Link from "next/link";
 import { Button } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -16,6 +15,7 @@ import { resetPasswordAPI } from "../../../api/user";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   newPassword: yup.string().min(8, "Minimum 8 symbols").required(),
@@ -76,7 +76,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <Layout title="Forgot you password">
+    <LayoutSite title="Forgot you password">
       <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
@@ -125,7 +125,7 @@ const ResetPassword = () => {
           </p>
         </Link> */}
       </div>
-    </Layout>
+    </LayoutSite>
   );
 };
 

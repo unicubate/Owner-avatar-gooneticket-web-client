@@ -26,7 +26,6 @@ import { BiHomeCircle, BiUser } from "react-icons/bi";
 import { HiOutlineHashtag } from "react-icons/hi";
 import { HiEnvelope } from "react-icons/hi2";
 import { cookies, headers } from "next/headers";
-import Layout from "@/components/layout";
 
 const NAVIGATION_ITEMS = [
   {
