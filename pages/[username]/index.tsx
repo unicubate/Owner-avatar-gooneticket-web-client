@@ -21,6 +21,7 @@ import { TextAreaInput, TextInput } from "@/components/util/form";
 import { PublicComponent } from "@/components/util/session/public-component";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUserPublicAPI } from "../../api/user";
+import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
   email: yup
@@ -56,7 +57,7 @@ const ProfilePublic = () => {
     setModal2Open(false);
   };
 
-  const { data: userItem } = GetOneUserPublicAPI({ username })
+  const { data: userItem } = GetOneUserPublicAPI({ username });
   const user: any = userItem?.data;
 
   const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -70,10 +71,10 @@ const ProfilePublic = () => {
     console.log("payload =======>", payload);
   };
 
-
   console.log("user payload payload =======>", user);
   return (
     <>
+      {/* <LayoutSite title={`${user?.profile?.firstName ?? ""}`}> */}
       <div className="py-12 bg-gray-900 sm:pb-6 sm:pt-16 lg:pt-20">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="max-w-4xl mx-auto">
@@ -177,6 +178,7 @@ const ProfilePublic = () => {
           </div>
         </div>
       </div>
+      {/* </LayoutSite> */}
     </>
   );
 };

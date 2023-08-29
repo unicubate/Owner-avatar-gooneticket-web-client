@@ -1,4 +1,5 @@
 import { PaginationResponse } from "@/utils/pagination-item";
+import { ColorType } from "./profile.type";
 
 export const arrayWhoCanSees = [
   { id: "1", name: "PUBLIC" },
@@ -23,6 +24,7 @@ export type ProductModel = {
   moreDescription: string;
   isChooseQuantity: boolean;
   isLimitSlot: boolean;
+  enableDiscount: boolean;
   limitSlot: string;
   status: string;
   userId: string;
@@ -32,7 +34,7 @@ export type ProductModel = {
     symbol: string;
   };
   profile: {
-    color: string;
+    color: ColorType;
     image: string;
     userId: string;
     fullName: string;
@@ -40,7 +42,14 @@ export type ProductModel = {
     username: string;
     firstName: string;
   };
+  discount: {
+    isValid: boolean;
+    percent: number;
+    expiredAt: Date;
+    enableExpiredAt: boolean;
+  };
   price: string;
+  priceDiscount: string;
 };
 
 export type ProductFormModel = {
@@ -53,7 +62,7 @@ export type ProductFormModel = {
   discountId: string;
   limitSlot: number;
   isLimitSlot: boolean;
-  isDiscount: boolean;
+  enableDiscount: boolean;
   attachments: any;
   attachment: any;
   fileList: any;

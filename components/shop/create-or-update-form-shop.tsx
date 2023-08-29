@@ -79,7 +79,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     mode: "onChange",
   });
   const watchIsLimitSlot = watch("isLimitSlot", false);
-  const watchIsDiscount = watch("isDiscount", false);
+  const watchEnableDiscount = watch("enableDiscount", false);
 
   const { data: dataDiscounts } = GetAllDiscountsAPI();
   const discounts: any = dataDiscounts?.data;
@@ -95,7 +95,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "description",
         "moreDescription",
         "isChooseQuantity",
-        "isDiscount",
+        "enableDiscount",
         "discountId",
         "messageAfterPurchase",
       ];
@@ -347,11 +347,11 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                     {" "}
                   </button>
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                    <SwitchInput control={control} name="isDiscount" label="" />
+                    <SwitchInput control={control} name="enableDiscount" label="" />
                   </div>
                 </div>
               </div>
-              {watchIsDiscount ? (
+              {watchEnableDiscount ? (
                 <>
                   <div className="mb-2">
                     <SelectDiscountSearchInput

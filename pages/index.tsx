@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import Layout from "@/components/layout";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LayoutSite } from "@/components/layout-site";
 
 export default function Home() {
 
 
   return (
-    <Layout title="Get Donations, Memberships and Shop Sales. No Fees">
+    <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-10">
 
 
@@ -215,6 +215,6 @@ export default function Home() {
       </section>
 
 
-    </Layout>
+    </LayoutSite>
   );
 }

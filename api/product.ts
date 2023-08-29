@@ -41,7 +41,7 @@ export const CreateOrUpdateOneProductAPI = ({
         "messageAfterPurchase",
         `${payload.messageAfterPurchase ?? ""}`
       );
-      data.append("isDiscount", `${payload.isDiscount ?? ""}`);
+      data.append("enableDiscount", `${payload.enableDiscount ?? ""}`);
       data.append("discountId", `${payload.discountId ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
 

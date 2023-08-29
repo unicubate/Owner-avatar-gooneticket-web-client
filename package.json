@@ -9,18 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/cssinjs": "^1.16.2",
+    "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.5",
-    "@hookform/resolvers": "^3.3.0",
+    "@hookform/resolvers": "^3.3.1",
     "@tanstack/react-query": "^4.33.0",
     "@tanstack/react-query-devtools": "^4.33.0",
-    "@types/node": "20.5.6",
+    "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
     "animate.css": "^4.1.1",
-    "antd": "^5.8.4",
+    "antd": "^5.8.5",
     "autoprefixer": "10.4.15",
-    "axios": "^1.4.0",
+    "axios": "^1.5.0",
     "dayjs": "^1.11.9",
     "dompurify": "^3.0.5",
     "eslint": "8.48.0",
@@ -52,7 +52,7 @@
     "yup": "^1.2.0"
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^4.32.5",
+    "@tanstack/eslint-plugin-query": "^4.34.1",
     "@types/dompurify": "^3.0.2",
     "@types/toastify-js": "^1.12.0"
   }

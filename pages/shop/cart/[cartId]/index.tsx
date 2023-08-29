@@ -1,5 +1,6 @@
+"use client";
+
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { Avatar, Carousel, Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
@@ -18,24 +19,45 @@ import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
 import { Linkify } from "@/utils/linkify";
 import Link from "next/link";
+import { useState } from "react";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { TextInput } from "@/components/util/form";
+import { GetAllCountiesAPI } from "@/api/profile";
+import { SelectSearchInput } from "@/components/util/form/select-search-input";
+import { LayoutSite } from "@/components/layout-site";
 
-const contentStyle: React.CSSProperties = {
-  height: "100%",
-  width: "100%",
-  lineHeight: "50px",
-  textAlign: "center",
-  background: "#364d79",
-};
+const schema = yup.object({
+  firstName: yup.string().nullable(),
+});
 
 const ShopView = () => {
   const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
+  const [loading, setLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+    false
+  );
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+  });
+
   const { data: dataProduct, isError: isErrorProduct } = GetOneProductAPI({
     productSlug,
   });
   const product: any = dataProduct?.data;
+
+  const { data: dataCountries } = GetAllCountiesAPI();
+  const countries: any = dataCountries?.data;
 
   const {
     isLoading: isLoadingImages,
@@ -60,9 +82,17 @@ const ShopView = () => {
     <ListCarouselUpload uploads={dataImages?.data} />
   );
 
+  const onSubmit: SubmitHandler<any> = async (payload: any) => {
+    setLoading(true);
+    setHasErrors(undefined);
+
+    console.log("payload ======>", payload);
+  };
+
+  console.log("productSlug ======>", productSlug);
   return (
     <>
-      <Layout title={`${product?.title ?? ""}`}>
+      <LayoutSite title={`${product?.title ?? ""}`}>
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex items-center justify-center">
             <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
@@ -72,7 +102,7 @@ const ShopView = () => {
             </span>
           </div>
 
-          <div className="max-w-2xl mx-auto mt-8 md:mt-12">
+          <div className="max-w-xl mx-auto mt-8 md:mt-12">
             <div className="overflow-hidden bg-white shadow rounded-xl">
               <div className="px-4 py-6 sm:px-8 sm:py-10">
                 <div className="flow-root">
@@ -109,7 +139,7 @@ const ShopView = () => {
 
                           <div className="flex items-end justify-between mt-4 sm:justify-end sm:items-start sm:mt-0">
                             <p className="flex-shrink-0 w-20 text-base font-bold text-left text-gray-900 sm:text-right sm:ml-8 sm:order-2">
-                              $279.00
+                              279 $
                             </p>
 
                             {/* <div className="sm:order-1">
@@ -163,11 +193,114 @@ const ShopView = () => {
 
                 <div className="flex items-center justify-between mt-6">
                   <p className="text-lg font-medium text-gray-900">Total</p>
-                  <p className="text-lg font-bold text-gray-900">$699</p>
+                  <p className="text-lg font-bold text-gray-900">699 $</p>
                 </div>
 
+                {/* <div className="mt-2 text-center"> */}
+                <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+                  {hasErrors && (
+                    <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
+                      {hasErrors}
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                    <div className="mt-2">
+                      <TextInput
+                        label="First name"
+                        control={control}
+                        type="text"
+                        name="firstName"
+                        placeholder="First name"
+                        errors={errors}
+                      />
+                    </div>
+
+                    <div className="mt-2">
+                      <TextInput
+                        label="Last name"
+                        control={control}
+                        type="text"
+                        name="lastName"
+                        placeholder="Last name"
+                        errors={errors}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-2">
+                    <SelectSearchInput
+                      label="Counties"
+                      firstOptionName="Country"
+                      valueType="text"
+                      control={control}
+                      errors={errors}
+                      placeholder="Country"
+                      name="countryId"
+                      dataItem={countries}
+                    />
+                  </div>
+
+                  <div className="mt-2">
+                    <TextInput
+                      control={control}
+                      label="Street address"
+                      type="text"
+                      name="address"
+                      placeholder="Street address"
+                      errors={errors}
+                    />
+                  </div>
+
+                  <div className="mt-2">
+                    <TextInput
+                      control={control}
+                      label="City"
+                      type="text"
+                      name="city"
+                      placeholder="City"
+                      errors={errors}
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                    <div className="mt-2">
+                      <TextInput
+                        label="State/Province"
+                        control={control}
+                        type="text"
+                        name="province"
+                        placeholder="State/Province"
+                        errors={errors}
+                      />
+                    </div>
+
+                    <div className="mt-2">
+                      <TextInput
+                        label="Last name"
+                        control={control}
+                        type="text"
+                        name="postalCode"
+                        placeholder="Postal code"
+                        errors={errors}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <ButtonInput
+                      shape="default"
+                      type="submit"
+                      size="large"
+                      loading={loading}
+                      color={"indigo"}
+                    >
+                      Create account
+                    </ButtonInput>
+                  </div>
+                </form>
                 <div className="mt-2 text-center">
-                  <ButtonInput
+                  {/* <ButtonInput
                     minW="fit"
                     shape="default"
                     type="button"
@@ -176,7 +309,7 @@ const ShopView = () => {
                     color={"indigo"}
                   >
                     Continue to Payment
-                  </ButtonInput>
+                  </ButtonInput> */}
 
                   <p className="mt-4 text-sm font-normal text-gray-500">
                     All the taxes will be calculated while checkout
@@ -186,7 +319,7 @@ const ShopView = () => {
             </div>
           </div>
         </div>
-      </Layout>
+      </LayoutSite>
     </>
   );
 };

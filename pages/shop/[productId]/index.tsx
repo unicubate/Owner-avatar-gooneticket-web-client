@@ -17,6 +17,8 @@ import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
 import { Linkify } from "@/utils/linkify";
+import { ProductModel } from "@/types/product";
+import { LayoutSite } from "@/components/layout-site";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -31,10 +33,14 @@ const ShopView = () => {
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
-  const { data: dataProduct, isError: isErrorProduct } = GetOneProductAPI({
+  const {
+    isLoading: isLoadingProduct,
+    data: dataProduct,
+    isError: isErrorProduct,
+  } = GetOneProductAPI({
     productSlug,
   });
-  const product: any = dataProduct?.data;
+  const product: ProductModel = dataProduct?.data;
 
   const {
     isLoading: isLoadingImages,
@@ -45,7 +51,7 @@ const ShopView = () => {
     uploadType: "image",
   });
 
-  const dataTableImages = isLoadingImages ? (
+  const dataTableImages = isLoadingImages && isLoadingProduct ? (
     <Spin
       tip="Loading"
       indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
@@ -59,12 +65,12 @@ const ShopView = () => {
     <ListCarouselUpload uploads={dataImages?.data} />
   );
 
+
   return (
     <>
-      <Layout title={`${product?.title ?? ""}`}>
+      <LayoutSite title={`${product?.title ?? ""}`}>
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
-            
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
                 <div className="overflow-hidden border-2 border-transparent rounded-lg">
@@ -117,9 +123,11 @@ const ShopView = () => {
               </h1>
 
               <div className="flex items-center mt-4">
-                <p className="text-xl font-bold text-gray-900">${product?.priceDiscount ?? ""}</p>
+                <p className="text-xl font-bold text-gray-900">
+                  {product?.priceDiscount ?? ""} $
+                </p>
                 <p className="ml-2 text-xl font-bold text-gray-500">
-                  <del> ${product?.price ?? ""} </del>
+                  <del> {product?.price ?? ""} $ </del>
                 </p>
               </div>
 
@@ -219,7 +227,7 @@ const ShopView = () => {
             </div>
 
             <div className="lg:col-span-3">
-            <h2 className="mb-2 text-base font-bold text-gray-900">
+              <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>
               <div
@@ -490,7 +498,7 @@ const ShopView = () => {
             </div>
           </div>
         </div>
-      </Layout>
+      </LayoutSite>
     </>
   );
 };
