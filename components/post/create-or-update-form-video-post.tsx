@@ -70,7 +70,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-    const newPayload: PostFormModel = { ...payload, type: 'VIDEO' }
+    const newPayload: PostFormModel = { ...payload, type: "VIDEO" };
     try {
       await saveMutation.mutateAsync({
         ...newPayload,
@@ -191,6 +191,14 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                     placeholder="Write description"
                     errors={errors}
                   />
+                  {/* <TextAreaInput
+                    row={4}
+                    control={control}
+                    label="Description"
+                    name="description"
+                    placeholder="Description"
+                    errors={errors}
+                  /> */}
                   <span className="text-sm font-medium text-gray-400">
                     {`Provide a full description of the item that you are selling.`}
                   </span>

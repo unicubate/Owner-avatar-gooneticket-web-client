@@ -231,12 +231,10 @@ const ShopView = () => {
               <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: product?.description as string,
-                }}
-                className="text-base lg:text-left"
-              />
+              
+              <p className="text-base text-gray-600">
+                <Linkify>{String(product?.description)}</Linkify>
+              </p>
 
               {/* <div className="border-b border-gray-200">
                 <nav className="flex -mb-px space-x-8 sm:space-x-14">

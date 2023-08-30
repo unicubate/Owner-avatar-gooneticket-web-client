@@ -10,6 +10,8 @@ import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
+import { Linkify } from "@/utils/linkify";
+import parse from "html-react-parser";
 
 type Props = {
   item?: PostModel;
@@ -74,7 +76,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             <div className="mt-2">
               <Image
                 width="100%"
-                height="400px"
+                height="100%"
                 preview={false}
                 src={`${getOneFileGalleryAPI(String(item?.image))}`}
                 alt={item?.title}
@@ -82,13 +84,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </div>
           ) : null}
 
-          <h3 className="mt-2 text-xl font-bold text-gray-900">
+          <h3 className="mt-2 text-lg font-bold text-gray-900">
             {item?.title ?? ""}
           </h3>
-          <p
-            className="mt-4 text-base font-normal"
-            dangerouslySetInnerHTML={{ __html: item?.description || "" }}
-          />
+
+         
+          <p className="mt-4 text-sm font-normal text-gray-600">
+            <Linkify>{String(item?.description)}</Linkify>
+          </p>
 
           <div className="flex mt-4 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
