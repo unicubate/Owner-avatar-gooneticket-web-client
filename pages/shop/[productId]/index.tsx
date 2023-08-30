@@ -15,7 +15,7 @@ import ListCarouselUpload from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
-import { Linkify } from "@/utils/linkify";
+import {HtmlParser} from "@/utils/html-parser";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
@@ -231,9 +231,9 @@ const ShopView = () => {
               <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>
-              
+
               <p className="text-base text-gray-600">
-                <Linkify>{String(product?.description)}</Linkify>
+                <HtmlParser html={String(product?.description)} />
               </p>
 
               {/* <div className="border-b border-gray-200">

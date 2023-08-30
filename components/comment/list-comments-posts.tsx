@@ -13,7 +13,7 @@ import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } fro
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
-import { Linkify } from "@/utils/linkify";
+import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 
@@ -124,9 +124,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 </div>
               </div>
               <p className="mt-2 text-sm font-normal text-gray-600">
-                <Linkify>
-                  {item?.description}
-                </Linkify>
+                <HtmlParser html={String(item?.description)} />
               </p>
               <div className="flex mt-2 items-center">
 

@@ -2,14 +2,15 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar } from "antd";
-import {
-  MdDeleteOutline,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentReplyAPI } from "@/api/comment";
-import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
-import { Linkify } from "@/utils/linkify";
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formateFromNow,
+} from "@/utils";
+import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 
@@ -19,17 +20,16 @@ type Props = {
   userId: string;
 };
 
-
 const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
-    setOpenModalReply(true)
-  }
+    setOpenModalReply(true);
+  };
 
   const saveMutation = DeleteOneCommentReplyAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -88,18 +88,18 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
             </div>
           </div>
           <p className="mt-2 text-sm font-normal text-gray-600">
-            <Linkify>
-              {item?.description}
-            </Linkify>
+            <HtmlParser html={String(item?.description)} />
           </p>
 
           <div className="flex mt-2 items-center">
-
             <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-            {userId === item?.userId ?
+            {userId === item?.userId ? (
               <>
-                <button onClick={() => editItem(item)} className="ml-3.5 font-bold">
+                <button
+                  onClick={() => editItem(item)}
+                  className="ml-3.5 font-bold"
+                >
                   <MdOutlineModeEdit />
                 </button>
                 <button
@@ -108,13 +108,20 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
                 >
                   <MdDeleteOutline />
                 </button>
-              </> : null}
-
+              </>
+            ) : null}
           </div>
         </div>
       </div>
 
-      {openModalReply ? <CreateOrUpdateFormCommentReply parentId={String(item?.id)} comment={item} openModalReply={openModalReply} setOpenModalReply={setOpenModalReply} /> : null}
+      {openModalReply ? (
+        <CreateOrUpdateFormCommentReply
+          parentId={String(item?.id)}
+          comment={item}
+          openModalReply={openModalReply}
+          setOpenModalReply={setOpenModalReply}
+        />
+      ) : null}
     </>
   );
 };

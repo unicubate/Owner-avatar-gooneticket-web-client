@@ -10,7 +10,7 @@ import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
-import { Linkify } from "@/utils/linkify";
+import { HtmlParser } from "@/utils/html-parser";
 import parse from "html-react-parser";
 
 type Props = {
@@ -88,9 +88,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             {item?.title ?? ""}
           </h3>
 
-         
           <p className="mt-4 text-sm font-normal text-gray-600">
-            <Linkify>{String(item?.description)}</Linkify>
+            <HtmlParser html={String(item?.description)} />
           </p>
 
           <div className="flex mt-4 items-center">
