@@ -7,6 +7,7 @@ interface SizeInterface {
 }
 
 const sizeType: SizeInterface = {
+  huge: "5",
   large: "3",
   normal: "1.5",
   medium: "0.5",
@@ -15,10 +16,11 @@ const sizeType: SizeInterface = {
 
 interface Props {
   ref?: (node?: Element | null) => void;
-  size?: "large" | "medium" | "normal" | "small";
+  size?: "large" | "medium" | "normal" | "small" | "huge";
   loading: boolean;
   children: React.ReactNode;
   shape?: "round" | "default";
+  minW?: "fit" | "full";
   onClick?: () => void;
 }
 
@@ -28,6 +30,7 @@ const ButtonCancelInput: React.FC<Props> = ({
   loading,
   children,
   onClick,
+  minW,
 }) => {
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 24, color: "#ffff" }} spin />
@@ -43,12 +46,13 @@ const ButtonCancelInput: React.FC<Props> = ({
         inline-flex
         items-center
         justify-center
+        min-w-${minW ?? "fit"}
         w-full
         px-4
         py-${sizeType[String(size ?? "normal")]} 
         text-sm 
         font-semibold 
-        leading-5 
+        leading-3 
         text-gray-600 
         transition-all 
         duration-200 

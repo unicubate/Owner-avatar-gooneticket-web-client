@@ -30,7 +30,7 @@ const schema = yup.object({
   description: yup.string().nullable(),
 });
 
-const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
+const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
@@ -70,7 +70,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-    const newPayload: PostFormModel = { ...payload, type: 'AUDIO' }
+    const newPayload: PostFormModel = { ...payload, type: 'VIDEO' }
     try {
       await saveMutation.mutateAsync({
         ...newPayload,
@@ -105,13 +105,13 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
-                  {post?.id ? "Update" : "Create a New"} Audio
+                  {post?.id ? "Update" : "Create a New"} Video
                 </h2>
 
                 <div className="mt-4">
                   <TextInput
                     control={control}
-                    label="Url audio"
+                    label="Url video"
                     type="text"
                     name="urlMedia"
                     required
@@ -183,39 +183,6 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
                   />
                 </div>
 
-                {/* <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-                  <div className="mt-2">
-                    <SelectSearchInput
-                      firstOptionName="Choose who can see this post?"
-                      label="Who can see this post?"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select who can see this post?"
-                      valueType="text"
-                      name="whoCanSee"
-                      dataItem={arrayWhoCanSees}
-                    />
-                  </div>
-
-                  <div className="mt-2">
-                    <SelectSearchInput
-                      firstOptionName="Choose categories"
-                      label="Categories"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select categories"
-                      valueType="text"
-                      name="whoCanSee"
-                      dataItem={arrayWhoCanSees}
-                    />
-                    <div className="flex flex-col justify-between items-end">
-                      <Button shape="default" type="link">
-                        New Category
-                      </Button>
-                    </div>
-                  </div>
-                </div> */}
-
                 <div className="mt-4">
                   <ReactQuillInput
                     control={control}
@@ -269,4 +236,4 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
   );
 };
 
-export { CreateOrUpdateFormAudioPost };
+export { CreateOrUpdateFormVideoPost };

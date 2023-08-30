@@ -18,6 +18,7 @@ import { formateDMYHH } from "@/utils";
 import { Linkify } from "@/utils/linkify";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
+import { MdOutlineDiscount } from "react-icons/md";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -50,20 +51,20 @@ const ShopView = () => {
     uploadType: "image",
   });
 
-  const dataTableImages = isLoadingImages && isLoadingProduct ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
-  ) : isErrorProduct || isErrorImages ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <ListCarouselUpload uploads={dataImages?.data} />
-  );
-
+  const dataTableImages =
+    isLoadingImages && isLoadingProduct ? (
+      <Spin
+        tip="Loading"
+        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+        size="large"
+      >
+        <div className="content" />
+      </Spin>
+    ) : isErrorProduct || isErrorImages ? (
+      <strong>Error find data please try again...</strong>
+    ) : (
+      <ListCarouselUpload uploads={dataImages?.data} />
+    );
 
   return (
     <>
@@ -117,34 +118,35 @@ const ShopView = () => {
             </div>
 
             <div className="lg:col-span-3 lg:row-end-2 lg:row-span-2">
-              <h1 className="text-2xl font-bold text-gray-900 sm:text-2xl">
+              <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
                 {product?.title ?? ""}
               </h1>
 
               <div className="flex items-center mt-4">
-                <p className="text-xl font-bold text-gray-900">
-                  {product?.priceDiscount ?? ""} $
+                <p className="text-4xl font-bold text-gray-900">
+                  {product?.priceDiscount ?? ""}
                 </p>
-                <p className="ml-2 text-xl font-bold text-gray-500">
-                  <del> {product?.price ?? ""} $ </del>
+                <p className="text-lg font-bold text-gray-900">
+                  {product?.currency?.symbol ?? ""}
                 </p>
+                {product?.enableDiscount ? (
+                  <>
+                    <p className="ml-3 text-2xl font-bold text-gray-500">
+                      <del> {product?.price ?? ""} </del>
+                    </p>
+                    <p className="text-lg font-bold text-gray-500">
+                      <del> {product?.currency?.symbol ?? ""} </del>
+                    </p>
+                  </>
+                ) : null}
               </div>
 
-              <div className="flex items-center mt-3 text-sm font-medium text-gray-500">
-                <svg
-                  className="w-4 h-4 mr-2.5 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M17.707 9.293a1 1 0 010 1.414l-7 7a1 1 0 01-1.414 0l-7-7A.997.997 0 012 10V5a3 3 0 013-3h5c.256 0 .512.098.707.293l7 7zM5 6a1 1 0 100-2 1 1 0 000 2z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-                Save 50% right now
-              </div>
+              {product?.enableDiscount ? (
+                <div className="flex items-center mt-3 text-sm font-medium text-gray-500">
+                  <MdOutlineDiscount className="w-4 h-5 mr-2 text-gray-400" />
+                  Save {product?.discount?.percent}% right now
+                </div>
+              ) : null}
 
               <h2 className="mt-4 text-base font-bold text-gray-900">
                 Features
@@ -160,7 +162,7 @@ const ShopView = () => {
                   minW="fit"
                   shape="default"
                   type="button"
-                  size="large"
+                  size="huge"
                   loading={false}
                   color={product?.profile?.color}
                 >

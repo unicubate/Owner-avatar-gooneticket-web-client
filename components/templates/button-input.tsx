@@ -7,6 +7,7 @@ interface SizeInterface {
 }
 
 const sizeType: SizeInterface = {
+  huge: "5",
   large: "3.5",
   normal: "2.5",
   medium: "0.5",
@@ -21,7 +22,7 @@ const shapeType: SizeInterface = {
 interface Props {
   ref?: (node?: Element | null) => void;
   className?: string;
-  size?: "large" | "medium" | "normal" | "small";
+  size?: "large" | "medium" | "normal" | "small" | "huge";
   loading: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;

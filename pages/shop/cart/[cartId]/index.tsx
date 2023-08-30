@@ -25,6 +25,7 @@ import { TextInput } from "@/components/util/form";
 import { GetAllCountiesAPI } from "@/api/profile";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
+import { MdDeleteOutline } from "react-icons/md";
 
 const schema = yup.object({
   firstName: yup.string().nullable(),
@@ -105,6 +106,7 @@ const ShopView = () => {
               <div className="px-4 py-6 sm:px-8 sm:py-10">
                 <div className="flow-root">
                   <ul className="divide-y divide-gray-200 -my-7">
+
                     <li className="flex py-7">
                       <div className="flex-shrink-0">
                         <Image
@@ -154,27 +156,16 @@ const ShopView = () => {
 
                         <div className="absolute top-0 right-0 flex sm:bottom-0 sm:top-auto">
                           <button
-                            type="button"
-                            className="inline-flex p-2 -m-2 text-gray-400 transition-all duration-200 rounded focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 hover:text-gray-900"
+                            // onClick={() => deleteItem(item)}
+                            className="text-gray-400 hover:text-red-400 focus:ring-red-400"
                           >
-                            <svg
-                              className="w-5 h-5"
-                              xmlns="http://www.w3.org/2000/svg"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                              />
-                            </svg>
+                            <MdDeleteOutline className="w-5 h-5" />
                           </button>
                         </div>
                       </div>
                     </li>
+                    
+
                   </ul>
                 </div>
 
@@ -190,8 +181,8 @@ const ShopView = () => {
                 </div>
 
                 <div className="flex items-center justify-between mt-6">
-                  <p className="text-lg font-medium text-gray-900">Total</p>
-                  <p className="text-lg font-bold text-gray-900">699 $</p>
+                  <p className="text-xl font-medium text-gray-900">Total</p>
+                  <p className="text-xl font-bold text-gray-900">699 $</p>
                 </div>
 
                 {/* <div className="mt-2 text-center"> */}
@@ -260,7 +251,7 @@ const ShopView = () => {
                       errors={errors}
                     />
                   </div>
-
+                  
                   <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
                     <div className="mt-2">
                       <TextInput
@@ -275,7 +266,7 @@ const ShopView = () => {
 
                     <div className="mt-2">
                       <TextInput
-                        label="Last name"
+                        label="Postal code"
                         control={control}
                         type="text"
                         name="postalCode"
@@ -283,6 +274,27 @@ const ShopView = () => {
                         errors={errors}
                       />
                     </div>
+                  </div>
+                  <div className="mt-2">
+                    <TextInput
+                      control={control}
+                      label="Telephone"
+                      type="text"
+                      name="phone"
+                      placeholder="Telephone"
+                      errors={errors}
+                    />
+                  </div>
+
+                  <div className="mt-2">
+                    <TextInput
+                      control={control}
+                      label="Email address"
+                      type="email"
+                      name="email"
+                      placeholder="Email address"
+                      errors={errors}
+                    />
                   </div>
 
                   <div className="mt-6">

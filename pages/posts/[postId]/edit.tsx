@@ -6,62 +6,69 @@ import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
 import { ButtonInput } from "@/components/templates/button-input";
 import { GetOnePostAPI } from "@/api/post";
-
-
+import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
+import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const PostsCreate = () => {
-    const { query } = useRouter()
-    const postId = String(query?.postId)
+  const { query } = useRouter();
+  const { type } = query;
+  const postId = String(query?.postId);
 
-    const { data: postItem } = GetOnePostAPI({ postId });
-    
-    const post: PostModel | undefined = postItem?.data;
+  const {
+    data: postItem,
+    isError: isErrorPost,
+    isLoading: isLoadingPost,
+  } = GetOnePostAPI({
+    postId,
+    type: String(type),
+  });
+  const post: PostModel | undefined = postItem?.data;
 
-    return (
-        <>
-            <LayoutDashboard title={`${post?.title ?? ''}`}>
+  const dataTablePost = isLoadingPost ? (
+    <Spin
+      tip="Loading"
+      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+      size="large"
+    >
+      <div className="content" />
+    </Spin>
+  ) : isErrorPost ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <>
+      {post?.id && type === "article" ? (
+        <CreateOrUpdateFormPost post={post} postId={postId} />
+      ) : null}
 
+      {post?.id && type === "audio" ? (
+        <CreateOrUpdateFormAudioPost post={post} postId={postId} />
+      ) : null}
 
-                <div className="flex flex-col flex-1">
-                    <main>
-                        <div className="max-w-6xl mx-auto py-6">
+      {post?.id && type === "video" ? (
+        <CreateOrUpdateFormVideoPost post={post} postId={postId} />
+      ) : null}
+    </>
+  );
 
-                            <div className="px-4 mx-auto sm:px-6 md:px-8">
-                                <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-2 sm:gap-8 xl:gap-12">
-                                    <HorizontalNavCreatePost />
-                                </div>
-                            </div>
+  return (
+    <>
+      <LayoutDashboard title={`${post?.title ?? ""}`}>
+        <div className="flex-1">
+          <main>
+            <div className="max-w-4xl mx-auto py-6">
+              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
+                {dataTablePost}
 
-                            <div className="px-4 mx-auto mt-2 sm:px-6 md:px-8">
-
-                                <div className="mt-4 sm:flex sm:items-center sm:justify-between">
-
-                                    <p className="text-base font-bold text-gray-900">Posts</p>
-
-                                    <div className="mt-4 sm:mt-0">
-                                        <ButtonInput shape="default" type="button" size="normal" loading={false} color={'indigo'}>
-                                            Post
-                                        </ButtonInput>
-                                    </div>
-                                </div>
-
-
-                                {post?.id ? <CreateOrUpdateFormPost post={post} postId={postId} /> : null}
-
-                            </div>
-                        </div>
-                    </main>
-                </div>
-            </LayoutDashboard>
-
-
-
-
-
-
-        </>
-    );
+              </div>
+            </div>
+          </main>
+        </div>
+      </LayoutDashboard>
+    </>
+  );
 };
 
 export default PrivateComponent(PostsCreate);

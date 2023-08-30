@@ -70,7 +70,8 @@ const ReactQuillInput: React.FC<Props> = ({
         [{ 'align': [] }],
         [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
         [{ 'color': [] }, { 'background': [] }],
-        ['image', 'link']
+        ['link']
+        // ['image', 'link']
       ],
       handlers: {
         image: imageHandler

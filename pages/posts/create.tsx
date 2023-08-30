@@ -1,61 +1,35 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { AudioMutedOutlined } from "@ant-design/icons";
-import { BiDetail } from "react-icons/bi";
-import { LuFileAudio2 } from "react-icons/lu";
-import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
-import { ButtonInput } from "@/components/templates/button-input";
-
-
+import { useRouter } from "next/router";
+import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
+import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 
 const PostsCreate = () => {
+  const { query } = useRouter();
+  const { type } = query;
 
-    return (
-        <>
-            <LayoutDashboard title={"Posts create"}>
+  return (
+    <>
+      <LayoutDashboard title={"Posts create"}>
+        <div className="flex-1">
+          <main>
+            <div className="max-w-4xl mx-auto py-6">
+              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
+                {type === "article" ? <CreateOrUpdateFormPost /> : null}
 
-                <div className="flex flex-col flex-1">
-                    <main>
-                        <div className="max-w-6xl mx-auto py-6">
+                {type === "audio" ? <CreateOrUpdateFormAudioPost /> : null}
 
-                            <div className="px-4 mx-auto sm:px-6 md:px-8">
-                                <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-2 sm:gap-8 xl:gap-12">
-                                    <HorizontalNavCreatePost />
-                                </div>
-                            </div>
-
-
-                            <div className="px-4 mx-auto mt-2 sm:px-6 md:px-8">
-
-                                <div className="mt-4 sm:flex sm:items-center sm:justify-between">
-
-                                    <p className="text-base font-bold text-gray-900">Posts</p>
-
-                                    {/* <div className="mt-4 sm:mt-0">
-                                        <ButtonInput shape="default" type="button" size="normal" loading={false} color={'indigo'}>
-                                            Post
-                                        </ButtonInput>
-                                    </div> */}
-                                </div>
-
-                                <CreateOrUpdateFormPost />
-
-                            </div>
-                        </div>
-                    </main>
-                </div>
-            </LayoutDashboard>
-
-
-
-
-
-
-        </>
-    );
+                {type === "video" ? <CreateOrUpdateFormVideoPost /> : null}
+                
+              </div>
+            </div>
+          </main>
+        </div>
+      </LayoutDashboard>
+    </>
+  );
 };
 
 export default PrivateComponent(PostsCreate);

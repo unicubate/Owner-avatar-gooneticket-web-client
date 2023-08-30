@@ -56,6 +56,7 @@ const HeaderHorizontalNavSite: React.FC<Props> = ({ user }) => {
                   alt=""
                 />
                 <Image
+                  preview={false}
                   className="hidden w-auto h-8 lg:block"
                   src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo.svg"
                   alt=""

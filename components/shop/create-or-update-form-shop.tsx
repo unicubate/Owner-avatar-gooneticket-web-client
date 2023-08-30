@@ -17,7 +17,12 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NumberInput, ReactQuillInput, TextAreaInput, TextInput } from "../util/form";
+import {
+  NumberInput,
+  ReactQuillInput,
+  TextAreaInput,
+  TextInput,
+} from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import { ProfileFormModel, arrayColors } from "@/types/profile.type";
 import {
@@ -174,13 +179,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     fileList: newFileList,
   }) => setFileList(newFileList);
 
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -234,7 +232,12 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                           accept=".png,.jpg,.jpeg"
                           maxCount={10}
                         >
-                          {imageList.length >= 10 ? null : uploadButton}
+                          {imageList.length >= 10 ? null : (
+                            <div>
+                              <PlusOutlined />
+                              <div style={{ marginTop: 8 }}>Upload</div>
+                            </div>
+                          )}
                         </Upload>
                       </div>
                     </>
@@ -246,12 +249,12 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <ReactQuillInput
-                    control={control}
-                    label="Description"
-                    name="description"
-                    placeholder="Write description"
-                    errors={errors}
-                  />
+                  control={control}
+                  label="Description"
+                  name="description"
+                  placeholder="Write description"
+                  errors={errors}
+                />
                 <span className="text-sm font-medium text-gray-600">
                   {`Provide a full description of the item that you are selling.`}
                 </span>
@@ -347,7 +350,11 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                     {" "}
                   </button>
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                    <SwitchInput control={control} name="enableDiscount" label="" />
+                    <SwitchInput
+                      control={control}
+                      name="enableDiscount"
+                      label=""
+                    />
                   </div>
                 </div>
               </div>
@@ -364,9 +371,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                       dataItem={discounts}
                     />
                     <div className="flex justify-between items-center">
-                      <label
-                        className="block text-sm mb-2 dark:text-white"
-                      ></label>
+                      <label className="block text-sm mb-2 dark:text-white"></label>
                       <Link
                         className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                         href="/shop/config"

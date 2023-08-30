@@ -16,6 +16,8 @@ import { Avatar, Button, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
 import { SelectMultipleSearchInput } from "../util/form/select-multiple-search-input";
+import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { useRouter } from "next/router";
 
 type Props = {
   postId?: string;
@@ -29,6 +31,7 @@ const schema = yup.object({
 });
 
 const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -117,6 +120,10 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
           <div className="flow-root">
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
+              <h2 className="text-base font-bold text-gray-900">
+                  {post?.id ? "Update" : "Create a New"} Article
+                </h2>
+
                 {post?.image ? (
                   <div className="mt-2 text-center space-x-2">
                     <Avatar
@@ -212,18 +219,36 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
                   />
                 </div>
 
-                <div className="sm:flex flex-col sm:items-end sm:justify-between">
-                  <div className="mt-4">
-                    <ButtonInput
-                      shape="default"
-                      type="submit"
-                      size="large"
-                      loading={loading}
-                      color={"indigo"}
-                    >
-                      {post?.id ? `Update changes` : `Create post`}
-                    </ButtonInput>
-                  </div>
+                <div className="mt-4">
+                  <ButtonInput
+                    shape="default"
+                    type="submit"
+                    size="large"
+                    loading={loading}
+                    color="indigo"
+                  >
+                    Save and Publish
+                  </ButtonInput>
+                </div>
+                <div className="flex items-center mt-4 mb-4 space-x-4">
+                  <ButtonCancelInput
+                    shape="default"
+                    size="large"
+                    loading={loading}
+                    onClick={() => router.back()}
+                  >
+                    Cancel
+                  </ButtonCancelInput>
+                  <ButtonInput
+                    minW="fit"
+                    shape="default"
+                    type="submit"
+                    size="large"
+                    loading={false}
+                    color="indigo"
+                  >
+                    Save as Draft
+                  </ButtonInput>
                 </div>
               </div>
             </div>

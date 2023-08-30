@@ -58,27 +58,31 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
 
-          <div className="mt-6">
-            {item?.image ? (
+          {item?.urlMedia && ["VIDEO", "AUDIO"].includes(item?.type) ? (
+            <div className="mt-2">
+              <ReactPlayer
+                className="mr-auto"
+                url={item?.urlMedia}
+                width="100%"
+                height="400px"
+                controls
+              />
+            </div>
+          ) : null}
+
+          {item?.image ? (
+            <div className="mt-2">
               <Image
                 width="100%"
-                height="100%"
+                height="400px"
                 preview={false}
                 src={`${getOneFileGalleryAPI(String(item?.image))}`}
                 alt={item?.title}
               />
-            ) : null}
+            </div>
+          ) : null}
 
-            {/* <ReactPlayer
-              className="mr-auto"
-              url="https://www.youtube.com/watch?v=VPRaqAKK5qk&list=RDEMBtlJpSHpaWQq22KzVVmPjA&index=35"
-              width="100%"
-              height="100%"
-              controls
-            /> */}
-          </div>
-
-          <h3 className="mt-4 text-xl font-bold text-gray-900">
+          <h3 className="mt-2 text-xl font-bold text-gray-900">
             {item?.title ?? ""}
           </h3>
           <p

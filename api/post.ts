@@ -87,11 +87,12 @@ export const CreateOrUpdateOnePostAPI = ({
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
       const { postId } = payload;
       let data = new FormData();
-      data.append("title", payload.title ?? "");
-      data.append("categories", payload.categories ?? "");
-      data.append("description", payload.description ?? "");
-      data.append("type", payload.type ?? "");
+      data.append("type", `${payload.type ?? ""}`);
+      data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
+      data.append("urlMedia", `${payload.urlMedia ?? ""}`);
+      data.append("categories", `${payload.categories ?? ""}`);
+      data.append("description", `${payload.description ?? ""}`);
 
       payload?.attachment?.fileList?.length > 0 &&
         payload?.attachment?.fileList?.forEach((file: any) => {
@@ -206,14 +207,15 @@ export const createOnUploadPostAPI = async (
   });
 };
 
-export const GetOnePostAPI = (payload: { postId: string }) => {
-  const { postId } = payload;
+export const GetOnePostAPI = (payload: { postId: string; type: string }) => {
+  const { postId, type } = payload;
   return useQuery({
     queryKey: ["post", postId],
     queryFn: async () =>
       await makeApiCall({
         action: "getOnePost",
         urlParams: { postId },
+        queryParams: { type },
       }),
     staleTime: 60_000,
     refetchOnWindowFocus: false,
