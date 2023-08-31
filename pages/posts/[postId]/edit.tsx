@@ -10,8 +10,10 @@ import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import { useAuth } from "@/components/util/session/context-user";
 
 const PostsCreate = () => {
+  const user = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);
@@ -22,6 +24,7 @@ const PostsCreate = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
     postId,
+    userId: user?.id,
     type: String(type),
   });
   const post: PostModel | undefined = postItem?.data;

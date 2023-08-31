@@ -207,15 +207,18 @@ export const createOnUploadPostAPI = async (
   });
 };
 
-export const GetOnePostAPI = (payload: { postId: string; type: string }) => {
-  const { postId, type } = payload;
+export const GetOnePostAPI = (payload: {
+  postId?: string;
+  type?: string;
+  userId?: string;
+  postSlug?: string;
+}) => {
   return useQuery({
-    queryKey: ["post", postId],
+    queryKey: ["post", payload],
     queryFn: async () =>
       await makeApiCall({
         action: "getOnePost",
-        urlParams: { postId },
-        queryParams: { type },
+        queryParams: payload,
       }),
     staleTime: 60_000,
     refetchOnWindowFocus: false,

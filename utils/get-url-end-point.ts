@@ -258,7 +258,7 @@ export const apiEndpoints: ClientApiMethods = {
     method: POST,
   },
   getOnePost: {
-    endpoint: `${baseUrl}/posts/show/:postId`,
+    endpoint: `${baseUrl}/posts/view`,
     method: GET,
   },
   getFollowsPosts: {
