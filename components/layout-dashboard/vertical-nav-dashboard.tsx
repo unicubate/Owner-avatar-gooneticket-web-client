@@ -8,6 +8,7 @@ import {
   BiCog,
   BiCodeCurly,
   BiLockOpen,
+  BiBookContent,
 } from "react-icons/bi";
 import { FiList } from "react-icons/fi";
 import { TfiGallery } from "react-icons/tfi";
@@ -34,6 +35,11 @@ const NAVIGATION_ITEMS: NavbarProps[] = [
     title: "Your Page",
     href: "/",
     icon: <VscOpenPreview className={classIcon} />,
+  },
+  {
+    title: "Feed",
+    href: "/home",
+    icon: <BiBookContent className={classIcon} />,
   },
   {
     title: "Explore",

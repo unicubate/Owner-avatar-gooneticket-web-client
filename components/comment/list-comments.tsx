@@ -8,7 +8,7 @@ import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { useAuth } from "../util/session/context-user";
 
 
-const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
+const ListComments: React.FC<{ take: number, postId: string }> = ({take, postId }) => {
   const user = useAuth() as any;
 
   const {
@@ -19,9 +19,10 @@ const ListComments: React.FC<{ postId: string }> = ({ postId }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteCommentsAPI({
-    take: 2,
+    take: take,
     sort: "DESC",
     postId: postId,
+    userId: user?.id
   });
 
   const dataTableComments = isLoadingComments ? (

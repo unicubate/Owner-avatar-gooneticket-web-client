@@ -15,7 +15,7 @@ import parse from "html-react-parser";
 
 type Props = {
   item?: PostModel;
-  index: number;
+  index?: number;
 };
 
 const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
@@ -84,9 +84,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </div>
           ) : null}
 
-          <h3 className="mt-2 text-lg font-bold text-gray-900">
-            {item?.title ?? ""}
-          </h3>
+          {item?.id ? (
+            <h3
+              onClick={() => router.push(`/posts/${item?.slug}`)}
+              className="mt-2 text-lg font-bold text-gray-900 cursor-pointer"
+            >
+              {item?.title ?? ""}
+            </h3>
+          ) : null}
 
           <p className="mt-4 text-sm font-normal text-gray-600">
             <HtmlParser html={String(item?.description)} />
@@ -95,7 +100,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
           <div className="flex mt-4 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-3.5 text-xl font-bold">
+            <button className="ml-3.5 text-lg font-bold">
               <BiComment />
             </button>
             <span className="ml-1.5 font-normal text-sm">
@@ -103,7 +108,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </span>
           </div>
 
-          <ListComments postId={String(item?.id)} />
+          <ListComments postId={String(item?.id)} take={2} />
         </div>
       </div>
     </>

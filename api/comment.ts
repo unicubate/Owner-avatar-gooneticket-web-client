@@ -224,18 +224,16 @@ export const getCommentsRepliesAPI = async (
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
   postId: string;
+  userId: string;
   sort: SortModel;
 }) => {
-  const { take, postId, sort } = payload;
   return useInfiniteQuery({
-    queryKey: ["comments", "infinite", { postId: postId }],
+    queryKey: ["comments", "infinite", { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getCommentsAPI({
-        take: take,
+        ...payload,
         page: pageParam,
-        sort: sort,
-        postId: postId,
       }),
     staleTime: 60_000,
     keepPreviousData: true,
@@ -245,21 +243,16 @@ export const GetInfiniteCommentsAPI = (payload: {
 export const GetInfiniteCommentsRepliesAPI = (payload: {
   take: number;
   sort: SortModel;
+  userId: string;
   commentId: string;
 }) => {
   return useInfiniteQuery({
-    queryKey: [
-      "comments-replies",
-      "infinite",
-      { commentId: payload?.commentId },
-    ],
+    queryKey: ["comments-replies", "infinite", { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getCommentsRepliesAPI({
-        take: 1,
+        ...payload,
         page: pageParam,
-        sort: "DESC",
-        commentId: payload?.commentId,
       }),
     staleTime: 60_000,
     keepPreviousData: true,

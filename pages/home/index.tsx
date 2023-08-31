@@ -8,8 +8,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 const Home = () => {
     const {
-        status,
-        error,
         isLoading: isLoadingPosts,
         isError: isErrorPosts,
         data: dataPosts,

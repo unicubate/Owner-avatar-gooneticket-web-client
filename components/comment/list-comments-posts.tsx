@@ -3,25 +3,29 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar, Skeleton } from "antd";
 import { BiComment } from "react-icons/bi";
-import {
-  MdDeleteOutline,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
-import { DeleteOneCommentAPI, GetInfiniteCommentsRepliesAPI } from "@/api/comment";
-import { AlertDangerNotification, AlertSuccessNotification, formateFromNow } from "@/utils";
+import {
+  DeleteOneCommentAPI,
+  GetInfiniteCommentsRepliesAPI,
+} from "@/api/comment";
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formateFromNow,
+} from "@/utils";
 import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
+import { BsReplyAll } from "react-icons/bs";
 
 type Props = {
   item?: CommentModel;
   index?: number;
 };
-
 
 const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   const user = useAuth() as any;
@@ -29,12 +33,12 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
-    setOpenModal(true)
-  }
+    setOpenModal(true);
+  };
 
   const saveMutation = DeleteOneCommentAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -70,10 +74,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-
   const {
-    status,
-    error,
     isLoading: isLoadingComments,
     isError: isErrorComments,
     data: dataComments,
@@ -84,6 +85,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     take: 1,
     sort: "DESC",
     commentId: String(item?.id),
+    userId: user?.id,
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
@@ -96,14 +98,19 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     dataComments.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommentsRepliesPosts item={item} key={index} index={index} userId={user?.id} />
+        <ListCommentsRepliesPosts
+          item={item}
+          key={index}
+          index={index}
+          userId={user?.id}
+        />
       ))
   );
 
   return (
     <>
       <li key={index} className="py-4">
-        {!openModal ?
+        {!openModal ? (
           <div className="flex items-start">
             <Avatar
               size={40}
@@ -127,13 +134,25 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 <HtmlParser html={String(item?.description)} />
               </p>
               <div className="flex mt-2 items-center">
-
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-                <button onClick={() => { setOpenModalReply((lk) => !lk) }} className="ml-3.5 text-sm">Reply</button>
-                {user?.id === item?.userId ?
+                {user?.id ? (
+                  <button
+                    onClick={() => {
+                      setOpenModalReply((lk) => !lk);
+                    }}
+                    className="ml-3.5 text-lg"
+                  >
+                    <BsReplyAll />
+                  </button>
+                ) : null}
+
+                {user?.id === item?.userId ? (
                   <>
-                    <button onClick={() => editItem(item)} className="ml-3.5 font-bold">
+                    <button
+                      onClick={() => editItem(item)}
+                      className="ml-3.5 font-bold"
+                    >
                       <MdOutlineModeEdit />
                     </button>
                     <button
@@ -143,41 +162,47 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                       <MdDeleteOutline />
                     </button>
                   </>
-                  : null}
-
+                ) : null}
               </div>
-              {openModalReply ? <CreateOrUpdateFormCommentReply parentId={String(item?.id)} openModalReply={openModalReply} setOpenModalReply={setOpenModalReply} /> : null}
-
+              {openModalReply ? (
+                <CreateOrUpdateFormCommentReply
+                  parentId={String(item?.id)}
+                  openModalReply={openModalReply}
+                  setOpenModalReply={setOpenModalReply}
+                />
+              ) : null}
 
               {/* Replies comments */}
 
               {dataTableCommentsReplies}
 
-
               {hasNextPage ? (
                 <>
                   <div className="mt-6 flex flex-col justify-between items-center">
-                    {isFetchingNextPage ? null :
+                    {isFetchingNextPage ? null : (
                       <button
                         disabled={isFetchingNextPage ? true : false}
                         onClick={() => fetchNextPage()}
                         className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                       >
                         View more response
-                      </button>}
+                      </button>
+                    )}
                   </div>
                 </>
               ) : null}
-
-
-
             </div>
-
-
           </div>
-          : null}
+        ) : null}
 
-        {openModal ? <CreateOrUpdateFormComment postId={String(item?.postId)} comment={item} openModal={openModal} setOpenModal={setOpenModal} /> : null}
+        {openModal ? (
+          <CreateOrUpdateFormComment
+            postId={String(item?.postId)}
+            comment={item}
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+          />
+        ) : null}
       </li>
     </>
   );
