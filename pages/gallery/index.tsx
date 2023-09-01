@@ -47,26 +47,26 @@ const Gallery = () => {
   );
 
   useEffect(() => {
-      let fetching = false;
-      if (inView) {
-        fetchNextPage();
+    let fetching = false;
+    if (inView) {
+      fetchNextPage();
+    }
+    const onScroll = async (event: any) => {
+      const { scrollHeight, scrollTop, clientHeight } =
+        event.target.scrollingElement;
+
+      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+        fetching = true;
+        if (hasNextPage) await fetchNextPage();
+        fetching = false;
       }
-      const onScroll = async (event: any) => {
-        const { scrollHeight, scrollTop, clientHeight } =
-          event.target.scrollingElement;
+    };
 
-        if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-          fetching = true;
-          if (hasNextPage) await fetchNextPage();
-          fetching = false;
-        }
-      };
-
-      document.addEventListener("scroll", onScroll);
-      return () => {
-        document.removeEventListener("scroll", onScroll);
-      };
-    }, [fetchNextPage, hasNextPage, inView]);
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <>
@@ -80,15 +80,15 @@ const Gallery = () => {
 
         <div className="flex flex-col flex-1">
           <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+            <div className="max-w-3xl mx-auto py-6">
+              {/* <div className="px-4 mx-auto sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Gallery</h1>
                   <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
                     Creer plusieur image et partager avec vos contact
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="px-4 mx-auto sm:px-6 md:px-8">
                 {/* <HorizontalNavDonation /> */}
@@ -118,7 +118,6 @@ const Gallery = () => {
                         <div className="divide-y divide-gray-200">
                           {dataTableGallery}
                         </div>
-
                       </div>
                     </div>
 
@@ -141,8 +140,6 @@ const Gallery = () => {
                     )}
                   </div>
                 </div>
-
-                
               </div>
             </div>
           </main>

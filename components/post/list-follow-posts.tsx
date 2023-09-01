@@ -11,19 +11,20 @@ import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
-import parse from "html-react-parser";
+import { IoShareOutline } from "react-icons/io5";
+import { FiDownload } from "react-icons/fi";
 
 type Props = {
   item?: PostModel;
-  index?: number;
+  commentTake: number;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
+const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
   const router = useRouter();
   return (
     <>
       <div
-        key={index}
+        key={item?.id}
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/50"
       >
         <div className="p-8 sm:py-10 sm:px-12">
@@ -53,10 +54,20 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="ml-auto">
-              <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                {" "}
-                Private{" "}
-              </p>
+              <button
+                title="Share"
+                className="text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+              >
+                <IoShareOutline className="ml-3 w-5 h-5" />
+              </button>
+              {item?.allowDownload ? (
+                <button
+                  title="Download"
+                  className="text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                >
+                  <FiDownload className="ml-3 w-5 h-5" />
+                </button>
+              ) : null}
             </div>
           </div>
 
@@ -108,7 +119,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, index }) => {
             </span>
           </div>
 
-          <ListComments postId={String(item?.id)} take={2} />
+          <ListComments postId={String(item?.id)} take={commentTake} />
         </div>
       </div>
     </>

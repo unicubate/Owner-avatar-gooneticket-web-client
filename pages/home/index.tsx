@@ -35,7 +35,7 @@ const Home = () => {
         dataPosts.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item, index) => (
-                <ListFollowPosts item={item} key={index} index={index} />
+                <ListFollowPosts item={item} key={index} commentTake={2} />
             ))
     );
 

@@ -9,6 +9,7 @@ import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
 import { TextAreaInput } from "../util/form";
 import { useAuth } from "../util/session/context-user";
+import { ButtonCancelInput } from "../templates/button-cancel-input";
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -97,11 +98,11 @@ const CreateOrUpdateFormComment: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-12 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
+        <div className="mt-8 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
           <div className="flex items-start">
             <Avatar
               size={40}
-              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+              className="flex-shrink-0 bg-gray-300 rounded-full w-8 h-10"
               src={user?.profile?.image}
               alt=""
             />
@@ -117,16 +118,14 @@ const CreateOrUpdateFormComment: React.FC<{
 
           {openModal ? (
             <div className="flex justify-between items-center">
-              <ButtonInput
+              <ButtonCancelInput
                 shape="default"
-                type="button"
                 size="large"
                 onClick={() => setOpenModal(false)}
                 loading={false}
-                color={"gray"}
               >
                 Cancel
-              </ButtonInput>
+              </ButtonCancelInput>
             </div>
           ) : null}
 

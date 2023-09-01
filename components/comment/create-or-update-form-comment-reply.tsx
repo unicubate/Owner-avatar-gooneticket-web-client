@@ -12,6 +12,7 @@ import {
 } from "@/api/comment";
 import { TextAreaInput } from "../util/form";
 import { useAuth } from "../util/session/context-user";
+import { ButtonCancelInput } from "../templates/button-cancel-input";
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -99,7 +100,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-4 space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
+        <div className="mt-4 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
           <div className="flex items-start">
             <Avatar
               size={40}
@@ -108,26 +109,26 @@ const CreateOrUpdateFormCommentReply: React.FC<{
               alt=""
             />
           </div>
-          <TextAreaInput
-            row={1}
-            control={control}
-            name="description"
-            placeholder="Participate in the conversation"
-            errors={errors}
-          />
+          <div className="mt-2">
+            <TextAreaInput
+              row={1}
+              control={control}
+              name="description"
+              placeholder="Participate in the conversation"
+              errors={errors}
+            />
+          </div>
 
           {openModalReply ? (
             <div className="flex justify-between items-center">
-              <ButtonInput
+              <ButtonCancelInput
                 shape="default"
-                type="button"
                 size="large"
                 onClick={() => setOpenModalReply(false)}
                 loading={false}
-                color={"gray"}
               >
                 Cancel
-              </ButtonInput>
+              </ButtonCancelInput>
             </div>
           ) : null}
 

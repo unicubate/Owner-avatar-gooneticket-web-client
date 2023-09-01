@@ -15,6 +15,7 @@ export type PostModel = {
   createdAt: Date;
   id: string;
   slug: string;
+  userId: string;
   urlMedia: string;
   status: boolean;
   title: string;
