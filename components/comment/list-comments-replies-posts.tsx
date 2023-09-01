@@ -17,10 +17,10 @@ import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
 type Props = {
   item?: CommentModel;
   index?: number;
-  userId: string;
+  likeUserId: string;
 };
 
-const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
+const ListCommentsRepliesPosts: React.FC<Props> = ({ item, likeUserId, index }) => {
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
@@ -94,7 +94,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
           <div className="flex mt-2 items-center">
             <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-            {userId === item?.userId ? (
+            {likeUserId === item?.userId ? (
               <>
                 <button
                   onClick={() => editItem(item)}

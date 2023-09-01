@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Skeleton } from "antd";
-import { ButtonInput } from "../templates/button-input";
 import ListCommentsPosts from "./list-comments-posts";
 import { GetInfiniteCommentsAPI } from "@/api/comment";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
@@ -22,7 +21,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({take, postId 
     take: take,
     sort: "DESC",
     postId: postId,
-    userId: user?.id
+    likeUserId: user?.id
   });
 
   const dataTableComments = isLoadingComments ? (

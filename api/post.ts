@@ -212,6 +212,7 @@ export const GetOnePostAPI = (payload: {
   type?: string;
   userId?: string;
   postSlug?: string;
+  likeUserId?: string;
 }) => {
   return useQuery({
     queryKey: ["post", payload],

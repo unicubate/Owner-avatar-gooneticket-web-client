@@ -26,7 +26,7 @@ const PostShow = () => {
     data: postItem,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug });
+  } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
   const post: PostModel | undefined = postItem?.data;
 
   const dataTablePosts = isLoadingPost ? (
@@ -50,7 +50,9 @@ const PostShow = () => {
           <main>
             <div className="max-w-3xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+
                 {dataTablePosts}
+                
               </div>
             </div>
           </main>

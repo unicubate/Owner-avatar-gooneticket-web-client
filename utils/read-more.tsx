@@ -8,7 +8,7 @@ interface HtmlParserProps {
 const ReadMore: React.FC<HtmlParserProps> = ({ html, value }) => {
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
-    setIsReadMore(!isReadMore);
+    setIsReadMore((lk) => !lk);
   };
   return (
     <>

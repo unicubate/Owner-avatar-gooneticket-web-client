@@ -27,7 +27,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
         key={item?.id}
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/50"
       >
-        <div className="p-8 sm:py-10 sm:px-12">
+        <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
@@ -98,7 +98,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           {item?.id ? (
             <h3
               onClick={() => router.push(`/posts/${item?.slug}`)}
-              className="mt-2 text-lg font-bold text-gray-900 cursor-pointer"
+              className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
             >
               {item?.title ?? ""}
             </h3>

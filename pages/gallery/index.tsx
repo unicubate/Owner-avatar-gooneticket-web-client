@@ -29,23 +29,6 @@ const Gallery = () => {
     type: "GALLERY",
   });
 
-  const dataTableGallery = isLoadingGallery ? (
-    <strong>Loading...</strong>
-  ) : isErrorGallery ? (
-    <strong>Error find data please try again...</strong>
-  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
-    <EmptyData
-      title="Add your first file gallery"
-      description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
-    />
-  ) : (
-    dataGallery.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListGallery item={item} key={index} index={index} />
-      ))
-  );
-
   useEffect(() => {
     let fetching = false;
     if (inView) {
@@ -67,6 +50,23 @@ const Gallery = () => {
       document.removeEventListener("scroll", onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
+
+  const dataTableGallery = isLoadingGallery ? (
+    <strong>Loading...</strong>
+  ) : isErrorGallery ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+    <EmptyData
+      title="Add your first file gallery"
+      description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
+    />
+  ) : (
+    dataGallery.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListGallery item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
@@ -103,7 +103,7 @@ const Gallery = () => {
                               onClick={() => setOpenModal(true)}
                               shape="default"
                               type="button"
-                              size="normal"
+                              size="large"
                               loading={false}
                               color={"indigo"}
                             >

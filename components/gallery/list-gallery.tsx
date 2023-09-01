@@ -80,8 +80,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
 
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
             {item?.title ? (
-              <p className="mt-2 text-lg font-bold text-gray-500">
-                {/* {truncateInput(item?.title, 8)} */}
+              <p className="mt-2 text-sm font-bold text-gray-600">
                 <ReadMore html={String(item?.title)} value={5} />
               </p>
             ) : null}
