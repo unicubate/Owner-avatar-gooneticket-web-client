@@ -118,14 +118,14 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
 export const GetOneUserPublicAPI = (payload: {
   userId?: string;
   username?: string;
+  followerId?: string;
 }) => {
-  const { userId, username } = payload;
   return useQuery({
-    queryKey: ["user", userId, username],
+    queryKey: ["user", { ...payload }],
     queryFn: async () =>
       await makeApiCall({
         action: "getOneUserPublic",
-        queryParams: { userId, username },
+        queryParams: payload,
       }),
     staleTime: 60_000,
     refetchOnWindowFocus: false,

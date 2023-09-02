@@ -16,6 +16,7 @@ import { VscOpenPreview } from "react-icons/vsc";
 import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { useState } from "react";
 
 export type NavbarProps = {
   title: string;
@@ -25,30 +26,7 @@ export type NavbarProps = {
 };
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
-const NAVIGATION_ITEMS: NavbarProps[] = [
-  {
-    title: "Home",
-    href: "/dashboard",
-    icon: <BiHomeCircle className={classIcon} />,
-  },
-  {
-    title: "Your Page",
-    href: "/",
-    icon: <VscOpenPreview className={classIcon} />,
-  },
-  {
-    title: "Feed",
-    href: "/home",
-    icon: <BiBookContent className={classIcon} />,
-  },
-  {
-    title: "Explore",
-    href: "/explore",
-    icon: <BiSearch className={classIcon} />,
-  },
-];
-
-const MONETIZE_ITEMS: NavbarProps[] = [  
+const MONETIZE_ITEMS: NavbarProps[] = [
   {
     title: "Donations",
     href: "/donations",
@@ -118,23 +96,50 @@ interface Props {
 
 const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
   const pathname = usePathname();
+  const [navigationItems] = useState<NavbarProps[]>([
+    {
+      title: "Home",
+      href: "/dashboard",
+      icon: <BiHomeCircle className={classIcon} />,
+    },
+    {
+      title: "Your Page",
+      href: `/${user?.username}`,
+      icon: <VscOpenPreview className={classIcon} />,
+    },
+    {
+      title: "Feed",
+      href: "/home",
+      icon: <BiBookContent className={classIcon} />,
+    },
+    {
+      title: "Explore",
+      href: "/explore",
+      icon: <BiSearch className={classIcon} />,
+    },
+  ]);
+
+  const [monetizeItems] = useState<NavbarProps[]>(MONETIZE_ITEMS);
+  const [supportItems] = useState<NavbarProps[]>(SUPPORT_ITEMS);
+  const [settingItems] = useState<NavbarProps[]>(SETTINGS_ITEMS);
 
   return (
     <>
       <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
         <div className="space-y-4">
           <nav className="flex-1 space-y-1">
-            {NAVIGATION_ITEMS.map((item: any, index: number) => {
-              const isActive = pathname === item.href;
+            {navigationItems.map((item: any, index: number) => {
+              const isActive = pathname.startsWith(item.href);
               return (
                 <Link
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                    ? `text-white bg-${user?.profile?.color}-600`
-                    : "hover:bg-gray-200 text-gray-900"
-                    } `}
+                  className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    isActive
+                      ? `text-white bg-${user?.profile?.color}-600`
+                      : "hover:bg-gray-200 text-gray-900"
+                  } `}
                 >
                   {item?.icon}
 
@@ -150,17 +155,18 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
             </p>
 
             <nav className="flex-1 mt-4 space-y-1">
-              {MONETIZE_ITEMS.map((item: any, index: number) => {
-                const isActive = pathname === item.href;
+              {monetizeItems.map((item: any, index: number) => {
+                const isActive = pathname.startsWith(item.href);
                 return (
                   <Link
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 text-gray-900"
-                      } `}
+                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 text-gray-900"
+                    } `}
                   >
                     {item?.icon}
 
@@ -184,17 +190,18 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               Support
             </p>
             <nav className="flex-1 mt-4 space-y-1">
-              {SUPPORT_ITEMS.map((item: any, index: number) => {
-                const isActive = pathname === item.href;
+              {supportItems.map((item: any, index: number) => {
+                const isActive = pathname.startsWith(item.href);
                 return (
                   <Link
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 text-gray-900"
-                      } `}
+                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 text-gray-900"
+                    } `}
                   >
                     {item?.icon}
 
@@ -210,17 +217,18 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               Settings
             </p>
             <nav className="flex-1 mt-4 space-y-1">
-              {SETTINGS_ITEMS.map((item: any, index: number) => {
-                const isActive = pathname === item.href;
+              {settingItems.map((item: any, index: number) => {
+                const isActive = pathname.startsWith(item.href);
                 return (
                   <Link
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 text-gray-900"
-                      } `}
+                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 text-gray-900"
+                    } `}
                   >
                     {item?.icon}
 

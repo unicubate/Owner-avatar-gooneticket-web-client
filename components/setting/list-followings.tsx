@@ -6,6 +6,8 @@ import { FollowModel } from "@/types/follow";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 type Props = {
   item?: FollowModel;
@@ -13,6 +15,7 @@ type Props = {
 };
 
 const ListFollowings: React.FC<Props> = ({ item, index }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -31,12 +34,13 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   });
 
   const followerItem = async (item: any) => {
-
     Swal.fire({
-      title: 'Unfollowing?',
-      text: 'Are you sure you want to do this?',
-      confirmButtonText: 'Yes, Unfollow',
-      cancelButtonText: 'No, Cancel',
+      title: "Unfollowing?",
+      text: `Are you sure you want to unfollow ${
+        item?.profile?.firstName ?? ""
+      } ${item?.profile?.lastName ?? ""}`,
+      confirmButtonText: "Yes, Unfollow",
+      cancelButtonText: "No, Cancel",
       confirmButtonColor: "#dc3545",
       cancelButtonColor: "#6f42c1",
       showCancelButton: true,
@@ -49,7 +53,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
         try {
           await saveMutation.mutateAsync({
             followerId: item?.profile?.userId,
-            action: 'DELETE'
+            action: "DELETE",
           });
           setHasErrors(false);
           setLoading(false);
@@ -72,7 +76,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
         }
       }
     });
-  }
+  };
 
   return (
     <>
@@ -80,16 +84,28 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
         <hr className="mt-4 border-gray-200" />
         <div className="py-5">
           <div className="flex items-center">
-            <div className="relative flex-shrink-0 cursor-pointer">
-              <Avatar size="large" src={item?.profile?.image} alt={item?.profile?.firstName} />
+            <div
+              onClick={() => router.push(`/${item?.profile?.username}`)}
+              className="relative flex-shrink-0 cursor-pointer"
+            >
+              <Avatar
+                size="large"
+                src={item?.profile?.image}
+                alt={item?.profile?.firstName}
+              />
             </div>
 
-            <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-              <p className="text-sm font-bold text-gray-900">{item?.profile?.firstName} {item?.profile?.lastName}</p>
+            <Link
+              href={`/${item?.profile?.username}`}
+              className="flex-1 min-w-0 ml-4 cursor-pointer"
+            >
+              <p className="text-sm font-bold text-gray-900">
+                {item?.profile?.firstName} {item?.profile?.lastName}
+              </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {item?.profile?.username}
               </p>
-            </div>
+            </Link>
 
             <div className="flex items-center justify-end ml-auto space-x-8">
               <ButtonInput

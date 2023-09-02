@@ -1,18 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useState } from "react";
-import { formateDateDayjs } from "../../utils/formate-date-dayjs";
-import Swal from "sweetalert2";
-import { UseFormRegister } from "react-hook-form";
-import { Avatar, Button, Tooltip } from "antd";
-import {
-  CommentOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
-  FieldTimeOutlined,
-  FundOutlined,
-  LikeOutlined,
-} from "@ant-design/icons";
+import { Avatar } from "antd";
+import Link from "next/link";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { ButtonInput } from "../templates/button-input";
 import { FollowModel } from "@/types/follow";
@@ -78,16 +67,26 @@ const ListFollowers: React.FC<Props> = ({ item, index }) => {
         <hr className="mt-4 border-gray-200" />
         <div className="py-5">
           <div className="flex items-center">
-            <div className="relative flex-shrink-0 cursor-pointer">
-              <Avatar size="large" src={item?.profile?.image} alt={item?.profile?.firstName} />
-            </div>
+          <Link href={`/${item?.profile?.username}`}
+              className="relative flex-shrink-0 cursor-pointer"
+            >
+              <Avatar
+                size="large"
+                src={item?.profile?.image}
+                alt={item?.profile?.firstName}
+              />
+            </Link>
 
-            <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-              <p className="text-sm font-bold text-gray-900">{item?.profile?.firstName} {item?.profile?.lastName}</p>
+            <Link href={`/${item?.profile?.username}`}
+              className="flex-1 min-w-0 ml-4 cursor-pointer"
+            >
+              <p className="text-sm font-bold text-gray-900">
+                {item?.profile?.firstName} {item?.profile?.lastName}
+              </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {item?.profile?.username}
               </p>
-            </div>
+            </Link>
 
             <div className="flex items-center justify-end ml-auto space-x-8">
               <ButtonInput

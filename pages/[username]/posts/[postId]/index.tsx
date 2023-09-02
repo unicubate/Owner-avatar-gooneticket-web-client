@@ -1,16 +1,17 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Image, Spin } from "antd";
-import { ButtonInput } from "@/components/templates/button-input";
-import { GetInfinitePostsAPI } from "@/api/post";
-import ListFollowPosts from "@/components/post/list-follow-posts";
+import { GetOnePostAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import { BiComment } from "react-icons/bi";
-import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
+import { PostModel } from "@/types/post";
 import { useAuth } from "@/components/util/session/context-user";
+import ListPublicPostsComments from "@/components/post/list-public-posts-comments";
+import { ButtonInput } from "@/components/templates/button-input";
+import { GetOneUserPublicAPI } from "@/api/user";
 
-const ProfilePublic = () => {
+const PostsShowUserPublic = () => {
   const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
@@ -22,45 +23,30 @@ const ProfilePublic = () => {
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
   const user: any = dataUser?.data;
 
+  const postSlug = String(query?.postId);
+
   const {
-    isLoading: isLoadingPosts,
-    isError: isErrorPosts,
-    data: dataPosts,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = GetInfinitePostsAPI({
-    take: 10,
-    sort: "DESC",
-    userId: user?.id,
-  });
+    data: postItem,
+    isError: isErrorPost,
+    isLoading: isLoadingPost,
+  } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
+  const post: PostModel | undefined = postItem?.data;
 
-  const dataTablePosts =
-    isLoadingPosts || isLoadingUser ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
-    ) : isErrorPosts || isErrorUser ? (
-      <strong>Error find data please try again...</strong>
-    ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-      ""
-    ) : (
-      dataPosts.pages
-        .flatMap((page: any) => page?.data?.value)
-        .map((item, index) => (
-          <ListFollowPosts item={item} key={index} commentTake={2} />
-        ))
-    );
-
+  const dataTablePosts = isLoadingPost ? (
+    <Spin
+      tip="Loading"
+      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+      size="large"
+    >
+      <div className="content" />
+    </Spin>
+  ) : isErrorPost ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <ListPublicPostsComments item={post} commentTake={10} />
+  );
   return (
     <>
-      {/* <LayoutSite title={`${user?.profile?.firstName ?? ""}`}> */}
-      {/* <LayoutSite title={"User"}> */}
-
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
@@ -70,25 +56,25 @@ const ProfilePublic = () => {
           <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
+
                 {dataTablePosts}
 
-                <div className="mt-6 text-center justify-center mx-auto">
-                  {hasNextPage && (
+                {user?.id ? (
+                  <div className="mt-4 text-center justify-center mx-auto">
                     <div className="sm:mt-0">
                       <ButtonInput
-                        onClick={() => fetchNextPage()}
                         shape="default"
                         type="button"
                         size="large"
-                        loading={isFetchingNextPage ? true : false}
+                        loading={false}
                         color={"indigo"}
                         minW="fit"
                       >
-                        Load More
+                        Donation
                       </ButtonInput>
                     </div>
-                  )}
-                </div>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -221,11 +207,9 @@ const ProfilePublic = () => {
             </div>
           </div>
         </div>
-
-        {/* </div> */}
       </div>
     </>
   );
 };
 
-export default ProfilePublic;
+export default PostsShowUserPublic;

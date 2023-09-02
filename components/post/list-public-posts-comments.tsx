@@ -20,7 +20,7 @@ type Props = {
   commentTake: number;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
+const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
   const user = useAuth() as any;
   const router = useRouter();
   return (
@@ -34,24 +34,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           
           <div className="flex items-center">
             <div
-              onClick={() => router.push(`/${item?.profile?.username}`)}
-              className="relative flex-shrink-0 cursor-pointer"
+              className="cursor-pointer"
             >
-              <Avatar
-                size={40}
-                className="object-cover w-10 h-10 rounded-full"
-                src={item?.profile?.image}
-                alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-              />
-            </div>
-
-            <div
-              onClick={() => router.push(`/${item?.profile?.username}`)}
-              className="ml-4 cursor-pointer"
-            >
-              <p className="text-sm font-bold text-gray-900">
-                {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
-              </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {formateDMYHH(item?.createdAt as Date)}
               </p>
@@ -127,7 +111,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
 
           {item?.id ? (
             <h3
-              onClick={() => router.push(`/posts/${item?.slug}`)}
+              onClick={() => router.push(`/${item?.profile?.username}/posts/${item?.slug}`)}
               className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
             >
               {item?.title ?? ""}
@@ -156,4 +140,4 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
   );
 };
 
-export default ListFollowPosts;
+export default ListPublicPostsComments;

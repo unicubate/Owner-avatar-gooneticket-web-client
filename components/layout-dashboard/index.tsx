@@ -5,7 +5,6 @@ import { useContext, useState } from "react";
 import { Button, Drawer } from "antd";
 import { useAuth } from "../util/session/context-user";
 
-
 interface IProps {
   title: string;
   children: React.ReactNode;
@@ -25,9 +24,8 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         <HeaderHorizontalNavDashboard user={user} />
 
         <div className="flex flex-1">
-
-          <HeaderVerticalNavDashboard user={user} />
-
+          
+          {user?.id ? <HeaderVerticalNavDashboard user={user} /> : null}
 
           {children}
         </div>

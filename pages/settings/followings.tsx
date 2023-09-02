@@ -22,20 +22,6 @@ const Followings = () => {
     sort: "DESC",
   });
 
-  const dataTableFollowings = isLoadingFollowings ? (
-    <Skeleton loading={isLoadingFollowings} avatar paragraph={{ rows: 1 }} />
-  ) : isErrorFollowings ? (
-    <strong>Error find data please try again...</strong>
-  ) : dataFollowings?.pages[0]?.data?.total <= 0 ? (
-    ""
-  ) : (
-    dataFollowings.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListFollowings item={item} key={index} index={index} />
-      ))
-  );
-
   useEffect(() => {
     let fetching = false;
     if (inView && hasNextPage) {
@@ -57,6 +43,20 @@ const Followings = () => {
       document.removeEventListener("scroll", onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
+
+  const dataTableFollowings = isLoadingFollowings ? (
+    <Skeleton loading={isLoadingFollowings} avatar paragraph={{ rows: 1 }} />
+  ) : isErrorFollowings ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataFollowings?.pages[0]?.data?.total <= 0 ? (
+    ""
+  ) : (
+    dataFollowings.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListFollowings item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>

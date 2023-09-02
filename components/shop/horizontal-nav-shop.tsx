@@ -23,7 +23,7 @@ const HorizontalNavShop: React.FC = () => {
       <div className="px-3 py-2 border-gray-200 border bg-white rounded-lg">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname.startsWith(item.href);
             return (
               <Link
                 key={index}

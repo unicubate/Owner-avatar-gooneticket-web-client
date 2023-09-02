@@ -249,7 +249,7 @@ export const GetInfinitePostsAPI = (payload: {
   userId: string;
   take: number;
   sort: SortModel;
-  type: PostType;
+  type?: PostType;
 }) => {
   const { userId, take, sort, type } = payload;
   return useInfiniteQuery({

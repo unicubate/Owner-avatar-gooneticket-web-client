@@ -11,6 +11,7 @@ import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
+import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 
 const PostsCreate = () => {
   const user = useAuth() as any;
@@ -41,6 +42,10 @@ const PostsCreate = () => {
     <strong>Error find data please try again...</strong>
   ) : (
     <>
+      {post?.id && type === "gallery" ? (
+        <CreateOrUpdateFormGalleryPost post={post} postId={postId} />
+      ) : null}
+
       {post?.id && type === "article" ? (
         <CreateOrUpdateFormPost post={post} postId={postId} />
       ) : null}
@@ -62,9 +67,7 @@ const PostsCreate = () => {
           <main>
             <div className="max-w-4xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-
                 {dataTablePost}
-
               </div>
             </div>
           </main>

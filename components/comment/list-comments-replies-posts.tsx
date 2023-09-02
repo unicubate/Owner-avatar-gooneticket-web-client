@@ -12,7 +12,7 @@ import {
 } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
-import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
+import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 
 type Props = {
   item?: CommentModel;

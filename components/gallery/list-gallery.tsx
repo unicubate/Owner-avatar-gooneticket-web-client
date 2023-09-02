@@ -81,7 +81,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
             {item?.title ? (
               <p className="mt-2 text-sm font-bold text-gray-600">
-                <ReadMore html={String(item?.title)} value={5} />
+                <ReadMore html={String(item?.title ?? "")} value={5} />
               </p>
             ) : null}
             <p className="mt-2 text-sm font-medium text-gray-500">

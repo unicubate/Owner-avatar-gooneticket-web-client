@@ -1,16 +1,13 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import { Image, Spin } from "antd";
-import { ButtonInput } from "@/components/templates/button-input";
-import { GetInfinitePostsAPI } from "@/api/post";
-import ListFollowPosts from "@/components/post/list-follow-posts";
+import { Image } from "antd";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import { BiComment } from "react-icons/bi";
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
+import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/session/context-user";
 
-const ProfilePublic = () => {
+const PostsUserPublic = () => {
   const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
@@ -21,40 +18,6 @@ const ProfilePublic = () => {
     data: dataUser,
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
   const user: any = dataUser?.data;
-
-  const {
-    isLoading: isLoadingPosts,
-    isError: isErrorPosts,
-    data: dataPosts,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = GetInfinitePostsAPI({
-    take: 10,
-    sort: "DESC",
-    userId: user?.id,
-  });
-
-  const dataTablePosts =
-    isLoadingPosts || isLoadingUser ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
-    ) : isErrorPosts || isErrorUser ? (
-      <strong>Error find data please try again...</strong>
-    ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-      ""
-    ) : (
-      dataPosts.pages
-        .flatMap((page: any) => page?.data?.value)
-        .map((item, index) => (
-          <ListFollowPosts item={item} key={index} commentTake={2} />
-        ))
-    );
 
   return (
     <>
@@ -70,25 +33,7 @@ const ProfilePublic = () => {
           <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
-                {dataTablePosts}
-
-                <div className="mt-6 text-center justify-center mx-auto">
-                  {hasNextPage && (
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        onClick={() => fetchNextPage()}
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={isFetchingNextPage ? true : false}
-                        color={"indigo"}
-                        minW="fit"
-                      >
-                        Load More
-                      </ButtonInput>
-                    </div>
-                  )}
-                </div>
+                {user?.id ? <PublicPosts userId={user?.id} /> : null}
               </div>
             </div>
           </div>
@@ -228,4 +173,4 @@ const ProfilePublic = () => {
   );
 };
 
-export default ProfilePublic;
+export default PostsUserPublic;

@@ -6,6 +6,7 @@ interface HtmlParserProps {
 }
 
 const ReadMore: React.FC<HtmlParserProps> = ({ html, value }) => {
+  const lengthValue = html.length;
   const [isReadMore, setIsReadMore] = useState(true);
   const toggleReadMore = () => {
     setIsReadMore((lk) => !lk);
@@ -13,9 +14,14 @@ const ReadMore: React.FC<HtmlParserProps> = ({ html, value }) => {
   return (
     <>
       {isReadMore ? html.slice(0, value) : html}
-      <span onClick={toggleReadMore} className="text-sm text-blue-600">
-        {isReadMore ? "...read more" : " show less"}
-      </span>
+      {lengthValue > value && (
+        <span
+          onClick={toggleReadMore}
+          className="text-sm text-blue-600 cursor-pointer"
+        >
+          {isReadMore ? "...read more" : " show less"}
+        </span>
+      )}
     </>
   );
 };

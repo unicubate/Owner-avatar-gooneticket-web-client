@@ -18,7 +18,7 @@ import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/session/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { HtmlParser } from "@/utils/html-parser";
-import { CreateOrUpdateFormLike } from "../like/create-or-update-form-like";
+import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { BsReplyAll } from "react-icons/bs";
 
