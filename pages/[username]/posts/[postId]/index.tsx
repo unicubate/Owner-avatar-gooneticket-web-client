@@ -32,19 +32,20 @@ const PostsShowUserPublic = () => {
   } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
   const post: PostModel | undefined = postItem?.data;
 
-  const dataTablePosts = isLoadingPost ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
-  ) : isErrorPost ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <ListPublicPostsComments item={post} commentTake={10} />
-  );
+  const dataTablePosts =
+    isLoadingPost || isLoadingUser ? (
+      <Spin
+        tip="Loading"
+        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+        size="large"
+      >
+        <div className="content" />
+      </Spin>
+    ) : isErrorPost || isErrorUser ? (
+      <strong>Error find data please try again...</strong>
+    ) : (
+      <ListPublicPostsComments item={post} commentTake={10} />
+    );
   return (
     <>
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
@@ -53,28 +54,10 @@ const PostsShowUserPublic = () => {
         {/* <div className="max-w-7xl mx-auto"> */}
 
         <div className="grid grid-cols-1 mt-2 lg:grid-cols-5 lg:items-start xl:grid-cols-6 gap-y-10 lg:gap-x-12 xl:gap-x-16">
-          <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
+          <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
-              <div className="mt-4 mx-auto sm:px-6 md:px-8">
-
+              <div className="px-4 mt-4 mx-auto sm:px-6 md:px-8">
                 {dataTablePosts}
-
-                {user?.id ? (
-                  <div className="mt-4 text-center justify-center mx-auto">
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={false}
-                        color={"indigo"}
-                        minW="fit"
-                      >
-                        Donation
-                      </ButtonInput>
-                    </div>
-                  </div>
-                ) : null}
               </div>
             </div>
           </div>
@@ -177,10 +160,6 @@ const PostsShowUserPublic = () => {
                               Voici donc les 3 prochains sujets prévus sur
                               Patreon
                             </p>
-
-                            {/* <p className="mt-1 text-sm font-medium text-gray-500">
-                              01 sept. 2023
-                            </p> */}
                             <div className="flex mt-2 items-center text-gray-500">
                               <CreateOrUpdateFormLike
                                 typeLike="POST"
@@ -202,6 +181,22 @@ const PostsShowUserPublic = () => {
                       </li>
                     </ul>
                   </div>
+                  {user?.id || postItem?.id ? (
+                    <div className="mt-6 text-center justify-center mx-auto">
+                      <div className="sm:mt-0">
+                        <ButtonInput
+                          shape="default"
+                          type="button"
+                          size="normal"
+                          loading={false}
+                          color={user?.profile?.color}
+                          minW="fit"
+                        >
+                          Support
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

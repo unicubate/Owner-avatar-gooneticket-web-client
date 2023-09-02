@@ -5,7 +5,11 @@ import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdFavoriteBorder,
+  MdOutlineModeEdit,
+} from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
@@ -14,6 +18,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
+import Link from "next/link";
 
 type Props = {
   item?: PostModel;
@@ -30,8 +35,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-400/60"
       >
         <div className="p-8 sm:py-7 sm:px-8">
-
-          
           <div className="flex items-center">
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
@@ -72,32 +75,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                   <FiDownload className="w-5 h-5" />
                 </button>
               ) : null}
-
-              {user?.id === item?.userId ? (
-                <>
-                  <button
-                    title="Edit"
-                    onClick={() =>
-                      router.push(
-                        `/posts/${
-                          item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`
-                      )
-                    }
-                    className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
-                  >
-                    <MdOutlineModeEdit className="w-5 h-5" />
-                  </button>
-
-                  <button
-                    // onClick={() => deleteItem(item)}
-                    title="Delete"
-                    className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
-                  >
-                    <MdDeleteOutline className="w-5 h-5" />
-                  </button>
-                </>
-              ) : null}
             </div>
           </div>
 
@@ -119,7 +96,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 width="100%"
                 height="100%"
                 preview={false}
-                src={`${getOneFileGalleryAPI(String(item?.image))}`}
+                //src={`${getOneFileGalleryAPI(String(item?.image))}`}
+                src={item?.image}
                 alt={item?.title}
               />
             </div>
@@ -147,6 +125,27 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             <span className="ml-1.5 font-normal text-sm">
               {item?.totalComment ?? 0}
             </span>
+            {user?.id === item?.userId ? (
+              <>
+                <Link
+                  title="Edit"
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  className="ml-3 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
+                >
+                  <MdOutlineModeEdit className="w-5 h-5" />
+                </Link>
+
+                <button
+                  // onClick={() => deleteItem(item)}
+                  title="Delete"
+                  className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
+                >
+                  <MdDeleteOutline className="w-5 h-5" />
+                </button>
+              </>
+            ) : null}
           </div>
 
           <ListComments postId={String(item?.id)} take={commentTake} />

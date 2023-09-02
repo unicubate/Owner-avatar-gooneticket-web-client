@@ -30,7 +30,7 @@ const PostsUserPublic = () => {
         {/* <div className="max-w-7xl mx-auto"> */}
 
         <div className="grid grid-cols-1 mt-2 lg:grid-cols-5 lg:items-start xl:grid-cols-6 gap-y-10 lg:gap-x-12 xl:gap-x-16">
-          <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
+          <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
                 {user?.id ? <PublicPosts userId={user?.id} /> : null}

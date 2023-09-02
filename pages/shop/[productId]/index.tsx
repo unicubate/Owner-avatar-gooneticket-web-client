@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Avatar, Carousel, Image, Input } from "antd";
+import { Avatar, Button, Carousel, Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/templates/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
@@ -15,7 +15,7 @@ import ListCarouselUpload from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
-import {HtmlParser} from "@/utils/html-parser";
+import { HtmlParser } from "@/utils/html-parser";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
@@ -157,7 +157,57 @@ const ShopView = () => {
                 <li>Quality control by JC</li>
               </ul>
 
-              <div className="flex items-center mt-8 space-x-4">
+              <div className="mt-6 space-y-5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
+                    <Button
+                      shape="default"
+                      size="large"
+                      loading={false}
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M18 12H6"
+                        />
+                      </svg>
+                    </Button>
+
+                    <span className="text-base font-semibold text-gray-900"> 1 </span>
+
+                    <Button
+                      shape="default"
+                      size="large"
+                      loading={false}
+                    >
+                      <svg
+                        className="w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
+                      </svg>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center mt-6 space-x-4">
                 <ButtonInput
                   minW="fit"
                   shape="default"

@@ -22,44 +22,9 @@ const ProfilePublic = () => {
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
   const user: any = dataUser?.data;
 
-  const {
-    isLoading: isLoadingPosts,
-    isError: isErrorPosts,
-    data: dataPosts,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = GetInfinitePostsAPI({
-    take: 10,
-    sort: "DESC",
-    userId: user?.id,
-  });
-
-  const dataTablePosts =
-    isLoadingPosts || isLoadingUser ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
-    ) : isErrorPosts || isErrorUser ? (
-      <strong>Error find data please try again...</strong>
-    ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-      ""
-    ) : (
-      dataPosts.pages
-        .flatMap((page: any) => page?.data?.value)
-        .map((item, index) => (
-          <ListFollowPosts item={item} key={index} commentTake={2} />
-        ))
-    );
 
   return (
     <>
-      {/* <LayoutSite title={`${user?.profile?.firstName ?? ""}`}> */}
-      {/* <LayoutSite title={"User"}> */}
 
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
@@ -70,25 +35,9 @@ const ProfilePublic = () => {
           <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
-                {dataTablePosts}
 
-                <div className="mt-6 text-center justify-center mx-auto">
-                  {hasNextPage && (
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        onClick={() => fetchNextPage()}
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={isFetchingNextPage ? true : false}
-                        color={"indigo"}
-                        minW="fit"
-                      >
-                        Load More
-                      </ButtonInput>
-                    </div>
-                  )}
-                </div>
+             
+
               </div>
             </div>
           </div>
@@ -101,6 +50,7 @@ const ProfilePublic = () => {
 
                   <div className="flow-root mt-8">
                     <ul className="divide-y divide-gray-200 -my-7">
+                      
                       <li className="flex items-stretch justify-between space-x-2 py-7">
                         <div className="flex-shrink-0">
                           <Image
@@ -214,6 +164,7 @@ const ProfilePublic = () => {
                           </div>
                         </div>
                       </li>
+                      
                     </ul>
                   </div>
                 </div>
@@ -222,7 +173,6 @@ const ProfilePublic = () => {
           </div>
         </div>
 
-        {/* </div> */}
       </div>
     </>
   );

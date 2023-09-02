@@ -263,7 +263,6 @@ export const GetInfinitePostsAPI = (payload: {
         sort: sort,
         type: type,
       }),
-    staleTime: 60_000,
     keepPreviousData: true,
   });
 };
@@ -282,7 +281,6 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
         page: pageParam,
         sort: sort,
       }),
-    staleTime: 60_000,
     keepPreviousData: true,
   });
 };

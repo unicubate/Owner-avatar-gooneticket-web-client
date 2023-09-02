@@ -13,7 +13,6 @@ export const GetUploadsProductsAPI = (payload: {
         action: "getUploadsProducts",
         queryParams: { productId, uploadType },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 };

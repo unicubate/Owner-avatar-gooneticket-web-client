@@ -10,7 +10,7 @@ const sizeType: SizeInterface = {
   huge: "5",
   large: "3.5",
   normal: "2.5",
-  medium: "0.5",
+  medium: "2",
   small: "0.2",
 };
 
