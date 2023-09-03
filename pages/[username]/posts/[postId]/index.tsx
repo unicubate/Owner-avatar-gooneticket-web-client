@@ -29,7 +29,7 @@ const PostsShowUserPublic = () => {
     data: postItem,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
+  } = GetOnePostAPI({ postSlug, likeUserId: userVisiter?.id });
   const post: PostModel | undefined = postItem?.data;
 
   const dataTablePosts =
@@ -187,7 +187,7 @@ const PostsShowUserPublic = () => {
                         <ButtonInput
                           shape="default"
                           type="button"
-                          size="normal"
+                          size="huge"
                           loading={false}
                           color={user?.profile?.color}
                           minW="fit"

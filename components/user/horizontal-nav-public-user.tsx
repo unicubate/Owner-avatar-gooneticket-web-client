@@ -38,7 +38,7 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
   return (
     <>
       <div
-        className={`py-12 bg-${user?.profile?.color}-900 sm:pb-6 sm:pt-16 lg:pt-20`}
+        className={`py-12 bg-gray-900 sm:pb-6 sm:pt-16 lg:pt-20`}
       >
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl">
           <div className="max-w-5xl mx-auto">

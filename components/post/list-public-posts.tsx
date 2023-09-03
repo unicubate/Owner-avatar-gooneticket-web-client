@@ -26,7 +26,7 @@ type Props = {
 };
 
 const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
-  const user = useAuth() as any;
+  const userVisiter = useAuth() as any;
   const router = useRouter();
   return (
     <>
@@ -58,21 +58,16 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                 </button>
               ) : null}
 
-              {user?.id === item?.userId ? (
+              {userVisiter?.id === item?.userId ? (
                 <>
-                  <button
+                   <Link
+                    href={`/posts/${item?.id
+                      }/edit?type=${item?.type.toLocaleLowerCase()}`}
                     title="Edit"
-                    onClick={() =>
-                      router.push(
-                        `/posts/${
-                          item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`
-                      )
-                    }
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
                     <MdOutlineModeEdit className="w-5 h-5" />
-                  </button>
+                  </Link>
 
                   <button
                     // onClick={() => deleteItem(item)}

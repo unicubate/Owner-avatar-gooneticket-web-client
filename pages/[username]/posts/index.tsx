@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/session/context-user";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const PostsUserPublic = () => {
   const userVisiter = useAuth() as any;
@@ -161,6 +162,23 @@ const PostsUserPublic = () => {
                       </li>
                     </ul>
                   </div>
+
+                  {user?.id ? (
+                    <div className="mt-6 text-center justify-center mx-auto">
+                      <div className="sm:mt-0">
+                        <ButtonInput
+                          shape="default"
+                          type="button"
+                          size="huge"
+                          loading={false}
+                          color={user?.profile?.color}
+                          minW="fit"
+                        >
+                          Support
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

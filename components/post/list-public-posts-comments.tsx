@@ -1,17 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Image } from "antd";
+import { Image } from "antd";
 import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import ReactPlayer from "react-player";
-import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
@@ -26,8 +24,7 @@ type Props = {
 };
 
 const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
-  const user = useAuth() as any;
-  const router = useRouter();
+  const userVisiter = useAuth() as any;
   return (
     <>
       <div
@@ -58,21 +55,16 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
                 </button>
               ) : null}
 
-              {user?.id === item?.userId ? (
+              {userVisiter?.id === item?.userId ? (
                 <>
-                  <button
+                  <Link
+                    href={`/posts/${item?.id
+                      }/edit?type=${item?.type.toLocaleLowerCase()}`}
                     title="Edit"
-                    onClick={() =>
-                      router.push(
-                        `/posts/${
-                          item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`
-                      )
-                    }
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
                     <MdOutlineModeEdit className="w-5 h-5" />
-                  </button>
+                  </Link>
 
                   <button
                     // onClick={() => deleteItem(item)}
