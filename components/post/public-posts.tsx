@@ -9,9 +9,10 @@ import ListPublicPosts from "./list-public-posts";
 
 type Props = {
   userId: string;
+  likeUserId?: string;
 };
 
-const PublicPosts: React.FC<Props> = ({ userId }) => {
+const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -25,6 +26,7 @@ const PublicPosts: React.FC<Props> = ({ userId }) => {
     take: 10,
     sort: "DESC",
     userId: userId,
+    likeUserId: likeUserId
   });
 
   useEffect(() => {

@@ -14,11 +14,10 @@ const PostsUserPublic = () => {
   const username = String(query?.username);
 
   const {
-    isLoading: isLoadingUser,
-    isError: isErrorUser,
     data: dataUser,
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
   const user: any = dataUser?.data;
+
 
   return (
     <>
@@ -34,7 +33,7 @@ const PostsUserPublic = () => {
           <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
-                {user?.id ? <PublicPosts userId={user?.id} /> : null}
+                {user?.id && userVisiter?.id ? <PublicPosts userId={user?.id} likeUserId={userVisiter?.id} /> : null}
               </div>
             </div>
           </div>

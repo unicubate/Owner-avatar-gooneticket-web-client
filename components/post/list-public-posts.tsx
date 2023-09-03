@@ -60,14 +60,14 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
 
               {userVisiter?.id === item?.userId ? (
                 <>
-                   <Link
-                    href={`/posts/${item?.id
-                      }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  <button
+                    onClick={() => router.push(`/posts/${item?.id
+                      }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
                     <MdOutlineModeEdit className="w-5 h-5" />
-                  </Link>
+                  </button>
 
                   <button
                     // onClick={() => deleteItem(item)}

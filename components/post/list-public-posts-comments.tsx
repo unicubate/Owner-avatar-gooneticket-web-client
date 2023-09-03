@@ -17,6 +17,7 @@ import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type Props = {
   item?: PostModel;
@@ -25,6 +26,7 @@ type Props = {
 
 const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
   const userVisiter = useAuth() as any;
+  const router = useRouter();
   return (
     <>
       <div
@@ -57,14 +59,14 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
 
               {userVisiter?.id === item?.userId ? (
                 <>
-                  <Link
-                    href={`/posts/${item?.id
-                      }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                   <button
+                    onClick={() => router.push(`/posts/${item?.id
+                      }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
                     <MdOutlineModeEdit className="w-5 h-5" />
-                  </Link>
+                  </button>
 
                   <button
                     // onClick={() => deleteItem(item)}
