@@ -14,7 +14,7 @@ const ReadMore: React.FC<HtmlParserProps> = ({ html, value }) => {
   return (
     <>
       {isReadMore ? html.slice(0, value) : html}
-      {lengthValue > value && (
+      {html && lengthValue > value && (
         <span
           onClick={toggleReadMore}
           className="text-sm text-blue-600 cursor-pointer"
