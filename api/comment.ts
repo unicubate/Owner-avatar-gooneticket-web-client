@@ -235,7 +235,6 @@ export const GetInfiniteCommentsAPI = (payload: {
         ...payload,
         page: pageParam,
       }),
-    staleTime: 60_000,
     keepPreviousData: true,
   });
 };
@@ -254,7 +253,6 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
         ...payload,
         page: pageParam,
       }),
-    staleTime: 60_000,
     keepPreviousData: true,
   });
 };
