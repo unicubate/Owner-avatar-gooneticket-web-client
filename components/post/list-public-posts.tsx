@@ -5,7 +5,11 @@ import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdFavoriteBorder,
+  MdOutlineModeEdit,
+} from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api/post";
@@ -14,6 +18,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
+import Link from "next/link";
 
 type Props = {
   item?: PostModel;
@@ -30,12 +35,8 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-400/60"
       >
         <div className="p-8 sm:py-7 sm:px-8">
-
-          
           <div className="flex items-center">
-            <div
-              className="cursor-pointer"
-            >
+            <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {formateDMYHH(item?.createdAt as Date)}
               </p>
@@ -110,12 +111,12 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           {item?.id ? (
-            <h3
-              onClick={() => router.push(`/${item?.profile?.username}/posts/${item?.slug}`)}
+            <Link
+              href={`/${item?.profile?.username}/posts/${item?.slug}`}
               className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
             >
               {item?.title ?? ""}
-            </h3>
+            </Link>
           ) : null}
 
           <p className="mt-4 text-sm font-normal text-gray-600">
@@ -132,7 +133,6 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
               {item?.totalComment ?? 0}
             </span>
           </div>
-
         </div>
       </div>
     </>

@@ -104,12 +104,12 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           {item?.id ? (
-            <h3
-              onClick={() => router.push(`/posts/${item?.slug}`)}
+            <Link
+              href={`/posts/${item?.slug}`}
               className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
             >
               {item?.title ?? ""}
-            </h3>
+            </Link>
           ) : null}
 
           <p className="mt-4 text-sm font-normal text-gray-600">

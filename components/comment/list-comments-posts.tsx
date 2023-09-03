@@ -119,7 +119,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
               alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
             />
 
-            <div className="ml-6">
+            <div className="ml-4">
               <div className="flex items-center space-x-px">
                 <div className="flex items-center">
                   <p className="text-sm font-bold text-gray-900">
