@@ -6,7 +6,8 @@ export const arrayColors = [
   { id: "1", name: "gray" },
   { id: "2", name: "indigo" },
   { id: "3", name: "red" },
-  { id: "4", name: "green" },
+  { id: "4", name: "blue" },
+  // { id: "5", name: "green" },
 ];
 
 export type ProfileFormModel = {

@@ -23,10 +23,18 @@ const ProfilePublic = () => {
   const user: any = dataUser?.data;
 
 
+  const dataHorizontalNav = isLoadingUser ? (
+    ""
+  ) : isErrorUser ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <HorizontalNavPublicUser user={user} />
+  );
+
   return (
     <>
 
-      {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+      {dataHorizontalNav}
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         {/* <div className="max-w-7xl mx-auto"> */}
@@ -36,7 +44,7 @@ const ProfilePublic = () => {
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
 
-             
+
 
               </div>
             </div>
@@ -50,7 +58,7 @@ const ProfilePublic = () => {
 
                   <div className="flow-root mt-8">
                     <ul className="divide-y divide-gray-200 -my-7">
-                      
+
                       <li className="flex items-stretch justify-between space-x-2 py-7">
                         <div className="flex-shrink-0">
                           <Image
@@ -164,7 +172,7 @@ const ProfilePublic = () => {
                           </div>
                         </div>
                       </li>
-                      
+
                     </ul>
                   </div>
                 </div>
