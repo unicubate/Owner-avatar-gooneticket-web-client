@@ -32,7 +32,7 @@ const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   url: yup.string().url().optional(),
-  birthday: yup.date().required(),
+  birthday: yup.date().max(new Date()).required(),
   currencyId: yup.string().uuid().required(),
   countryId: yup.string().uuid().required(),
 });
