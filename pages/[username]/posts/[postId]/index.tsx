@@ -48,7 +48,6 @@ const PostsShowUserPublic = () => {
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        {/* <div className="max-w-7xl mx-auto"> */}
 
         <div className="grid grid-cols-1 mt-2 lg:grid-cols-5 lg:items-start xl:grid-cols-6 gap-y-10 lg:gap-x-12 xl:gap-x-16">
           <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
