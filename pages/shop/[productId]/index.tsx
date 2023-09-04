@@ -35,12 +35,11 @@ const ShopView = () => {
 
   const {
     isLoading: isLoadingProduct,
-    data: dataProduct,
+    data: product,
     isError: isErrorProduct,
   } = GetOneProductAPI({
     productSlug,
   });
-  const product: ProductModel = dataProduct?.data;
 
   const {
     isLoading: isLoadingImages,

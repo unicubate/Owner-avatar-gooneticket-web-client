@@ -52,8 +52,7 @@ const useAuth = () => {
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
 
-  const { data } = GetOneUserPrivateAPI({ userId: userStorage?.id })
-  const user: any = data?.data;
+  const { data: user } = GetOneUserPrivateAPI({ userId: userStorage?.id })
 
   const logout = () => {
     setUserStorage(undefined);

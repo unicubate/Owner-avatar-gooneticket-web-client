@@ -214,7 +214,7 @@ export const GetOnePostAPI = (payload: {
   postSlug?: string;
   likeUserId?: string;
 }) => {
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["post", payload],
     queryFn: async () =>
       await makeApiCall({
@@ -224,6 +224,8 @@ export const GetOnePostAPI = (payload: {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as PostModel, isError, isLoading, status };
 };
 
 export const getOneFilePostAPI = (fileName: string) =>

@@ -8,7 +8,6 @@ import * as yup from "yup";
 import { TextInput, TextInputPassword } from "@/components/util/form";
 import { UserLoginFormModel } from "@/types/user.type";
 import {
-  GetOneUserPublicAPI,
   loginUserAPI,
   resendCodeAPI,
 } from "../../api/user";

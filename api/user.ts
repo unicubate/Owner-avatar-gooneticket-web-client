@@ -102,7 +102,7 @@ export const ValidCodeAPI = ({
 
 export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
   const { userId } = payload;
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["user", userId],
     queryFn: async () =>
       await makeApiCall({
@@ -113,6 +113,8 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
     refetchOnWindowFocus: false,
     enabled: Boolean(userId),
   });
+
+  return { data: data?.data as any, isError, isLoading, status };
 };
 
 export const GetOneUserPublicAPI = (payload: {
@@ -120,7 +122,7 @@ export const GetOneUserPublicAPI = (payload: {
   username?: string;
   followerId?: string;
 }) => {
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["user", { ...payload }],
     queryFn: async () =>
       await makeApiCall({
@@ -130,4 +132,6 @@ export const GetOneUserPublicAPI = (payload: {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as UserModel | any, isError, isLoading, status };
 };

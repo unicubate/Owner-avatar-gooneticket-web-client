@@ -17,11 +17,10 @@ const ShopEdit = () => {
   const { query } = useRouter();
   const productId = String(query?.productId);
 
-  const { data: dataProduct, isError: isErrorProduct } = GetOneProductAPI({
+  const { data: product, isError: isErrorProduct } = GetOneProductAPI({
     productId,
     userId: user?.id,
   });
-  const product: any = dataProduct?.data;
 
   const {
     isLoading: isLoadingFileUploads,

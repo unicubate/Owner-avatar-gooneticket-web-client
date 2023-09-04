@@ -30,8 +30,8 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
         mode: "onChange",
     });
 
-    const { data: userItem } = GetOneUserPrivateAPI({ userId })
-    const user: any = userItem?.data;
+    const { data: user } = GetOneUserPrivateAPI({ userId })
+ 
 
 
     useEffect(() => {

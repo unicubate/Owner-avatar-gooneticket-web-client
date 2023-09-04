@@ -4,7 +4,7 @@ import {
   PostType,
   ResponsePostModel,
 } from "@/types/post";
-import { ProductFormModel } from "@/types/product";
+import { ProductFormModel, ProductModel } from "@/types/product";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
@@ -109,7 +109,7 @@ export const GetOneProductAPI = (payload: {
   userId?: string;
 }) => {
   const { productId, userId, productSlug } = payload;
-  return useQuery({
+  const { data, isError, isLoading, status } =  useQuery({
     queryKey: ["product", productId, userId, productSlug],
     queryFn: async () =>
       await makeApiCall({
@@ -119,4 +119,6 @@ export const GetOneProductAPI = (payload: {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as ProductModel, isError, isLoading, status };
 };

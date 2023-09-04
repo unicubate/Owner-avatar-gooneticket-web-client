@@ -15,22 +15,19 @@ const PostsShowUserPublic = () => {
   const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
+  const postSlug = String(query?.postId);
 
   const {
     isLoading: isLoadingUser,
     isError: isErrorUser,
-    data: dataUser,
+    data: user,
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
-  const user: any = dataUser?.data;
-
-  const postSlug = String(query?.postId);
 
   const {
-    data: postItem,
+    data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
   } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
-  const post: PostModel | undefined = postItem?.data;
 
   const dataTablePosts =
     isLoadingPost || isLoadingUser ? (
@@ -181,7 +178,7 @@ const PostsShowUserPublic = () => {
                       </li>
                     </ul>
                   </div>
-                  {user?.id || postItem?.id ? (
+                  {user?.id || post?.id ? (
                     <div className="mt-6 text-center justify-center mx-auto">
                       <div className="sm:mt-0">
                         <ButtonInput

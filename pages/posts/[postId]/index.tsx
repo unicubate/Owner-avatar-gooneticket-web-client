@@ -23,11 +23,10 @@ const PostShow = () => {
   const postSlug = String(query?.postId);
 
   const {
-    data: postItem,
+    data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
   } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
-  const post: PostModel | undefined = postItem?.data;
 
   const dataTablePosts = isLoadingPost ? (
     <Spin

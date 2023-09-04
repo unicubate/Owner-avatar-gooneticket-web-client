@@ -49,10 +49,9 @@ const ShopView = () => {
     mode: "onChange",
   });
 
-  const { data: dataProduct, isError: isErrorProduct } = GetOneProductAPI({
+  const { data: product, isError: isErrorProduct } = GetOneProductAPI({
     productSlug,
   });
-  const product: any = dataProduct?.data;
 
   const { data: dataCountries } = GetAllCountiesAPI();
   const countries: any = dataCountries?.data;
@@ -105,7 +104,6 @@ const ShopView = () => {
               <div className="px-4 py-6 sm:px-8 sm:py-10">
                 <div className="flow-root">
                   <ul className="divide-y divide-gray-200 -my-7">
-
                     <li className="flex py-7">
                       <div className="flex-shrink-0">
                         <Image
@@ -163,8 +161,6 @@ const ShopView = () => {
                         </div>
                       </div>
                     </li>
-                    
-
                   </ul>
                 </div>
 
@@ -250,7 +246,7 @@ const ShopView = () => {
                       errors={errors}
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
                     <div className="mt-2">
                       <TextInput

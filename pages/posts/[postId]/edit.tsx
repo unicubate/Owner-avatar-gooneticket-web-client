@@ -20,7 +20,7 @@ const PostsCreate = () => {
   const postId = String(query?.postId);
 
   const {
-    data: postItem,
+    data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
@@ -28,7 +28,6 @@ const PostsCreate = () => {
     userId: user?.id,
     type: String(type),
   });
-  const post: PostModel | undefined = postItem?.data;
 
   const dataTablePost = isLoadingPost ? (
     <Spin
