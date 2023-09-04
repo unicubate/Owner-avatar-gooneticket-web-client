@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/session/context-user";
+import { ButtonInput } from "@/components/templates/button-input";
 
 const PostsUserPublic = () => {
   const userVisiter = useAuth() as any;
@@ -17,6 +18,7 @@ const PostsUserPublic = () => {
     isError: isErrorUser,
     data: user,
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+
 
   return (
     <>
@@ -32,7 +34,7 @@ const PostsUserPublic = () => {
           <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
             <div className="flow-root">
               <div className="mt-4 mx-auto sm:px-6 md:px-8">
-                {user?.id ? <PublicPosts userId={user?.id} /> : null}
+                {user?.id && userVisiter?.id ? <PublicPosts userId={user?.id} likeUserId={userVisiter?.id} /> : null}
               </div>
             </div>
           </div>
@@ -160,6 +162,23 @@ const PostsUserPublic = () => {
                       </li>
                     </ul>
                   </div>
+
+                  {user?.id ? (
+                    <div className="mt-6 text-center justify-center mx-auto">
+                      <div className="sm:mt-0">
+                        <ButtonInput
+                          shape="default"
+                          type="button"
+                          size="huge"
+                          loading={false}
+                          color={user?.profile?.color}
+                          minW="fit"
+                        >
+                          Support
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

@@ -34,11 +34,11 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
       href: `/${username}/shop`,
     },
   ]);
-  
+
   return (
     <>
       <div
-        className={`py-12 bg-${user?.profile?.color}-900 sm:pb-6 sm:pt-16 lg:pt-20`}
+        className={`py-12 bg-gray-900 sm:pb-6 sm:pt-16 lg:pt-20`}
       >
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl">
           <div className="max-w-5xl mx-auto">
@@ -58,11 +58,11 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                     <ReadMore html={String(user?.profile?.description ?? '')} value={150} />
                   </p>
                   {user?.profile?.url ? (
-                    <p className="mt-1 text-sm text-white">{user?.profile?.url}</p>
+                    <p className="mt-1 text-sm text-white"><ReadMore html={String(user?.profile?.url ?? '')} value={30} /></p>
                   ) : null}
                 </div>
                 <div className="mt-4 sm:ml-auto sm:mt-0">
-                  <CreateOrUpdateFormFollow  item={user}/>
+                  <CreateOrUpdateFormFollow item={user} />
                 </div>
               </div>
             </div>
@@ -81,11 +81,10 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item.title}
-                    className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
-                      isActive
+                    className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
                         ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
                         : `border-transparent text-gray-500 hover:border-gray-300`
-                    } `}
+                      } `}
                   >
                     {item?.icon}
 

@@ -231,7 +231,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                 >
                   <Avatar
                     className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                    src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/horizontal-menu/3/avatar-male.png"
+                    src={user?.profile?.image}
                     alt=""
                   />
                 </button>

@@ -252,18 +252,15 @@ export const GetInfinitePostsAPI = (payload: {
   take: number;
   sort: SortModel;
   type?: PostType;
+  likeUserId?: string;
 }) => {
-  const { userId, take, sort, type } = payload;
   return useInfiniteQuery({
     queryKey: ["posts", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getPostsAPI({
-        userId: userId,
-        take: take,
+        ...payload,
         page: pageParam,
-        sort: sort,
-        type: type,
       }),
     keepPreviousData: true,
   });

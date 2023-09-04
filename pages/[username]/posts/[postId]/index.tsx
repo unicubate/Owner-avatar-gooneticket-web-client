@@ -184,7 +184,7 @@ const PostsShowUserPublic = () => {
                         <ButtonInput
                           shape="default"
                           type="button"
-                          size="normal"
+                          size="huge"
                           loading={false}
                           color={user?.profile?.color}
                           minW="fit"
