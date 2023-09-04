@@ -1,22 +1,13 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Avatar, Button, Drawer, Image } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
-import { getOneProfileAPI } from "../../api/profile";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { UpdateFormProfile } from "@/components/user/update-form-profile";
-import { UpdateFormPassword } from "@/components/user/update-form-password";
-import { UpdateFormUser } from "@/components/user/update-form-user";
+import { useState } from "react";
 import { ButtonInput } from "@/components/templates/button-input";
-import { TextAreaInput, TextInput } from "@/components/util/form";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { CommentOutlined, HeartOutlined } from "@ant-design/icons";
 import { arrayComments } from "@/components/mock";
-import Link from "next/link";
 
 const schema = yup.object({
     email: yup

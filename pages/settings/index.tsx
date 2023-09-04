@@ -1,12 +1,8 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button, Drawer } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
-import { getOneProfileAPI } from "../../api/profile";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";

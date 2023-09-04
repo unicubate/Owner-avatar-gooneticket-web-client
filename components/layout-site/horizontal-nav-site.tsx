@@ -101,7 +101,7 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                             }-600 border-${
                               user?.profile?.color ?? "indigo"
                             }-600`
-                          : "text-gray-500 hover:border-gray-300 hover:text-gray-900"
+                          : "text-gray-700 hover:border-gray-300 hover:text-gray-900"
                       } `}
                     >
                       {item?.icon}
