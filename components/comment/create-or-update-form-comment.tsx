@@ -47,7 +47,7 @@ const CreateOrUpdateFormComment: React.FC<{
   }, [comment, postId, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOneCommentAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneCommentAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -64,7 +64,7 @@ const CreateOrUpdateFormComment: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
         postId: postId,
         commentId: comment?.id,

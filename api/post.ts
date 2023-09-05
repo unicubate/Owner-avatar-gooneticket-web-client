@@ -253,7 +253,9 @@ export const GetInfinitePostsAPI = (payload: {
   sort: SortModel;
   type?: PostType;
   likeUserId?: string;
+  typeIds?: any;
 }) => {
+  console.log("payload ========>", payload);
   return useInfiniteQuery({
     queryKey: ["posts", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,

@@ -10,6 +10,7 @@ import { useAuth } from "@/components/util/session/context-user";
 import ListPublicPostsComments from "@/components/post/list-public-posts-comments";
 import { ButtonInput } from "@/components/templates/button-input";
 import { GetOneUserPublicAPI } from "@/api/user";
+import PublicListLastPosts from "@/components/post/public-last-posts";
 
 const PostsShowUserPublic = () => {
   const userVisiter = useAuth() as any;
@@ -58,145 +59,8 @@ const PostsShowUserPublic = () => {
             </div>
           </div>
 
-          <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
-            <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-400/60">
-              <div className="overflow-hidden rounded ">
-                <div className="px-4 py-6 sm:p-6 lg:p-8">
-                  <h3 className="font-bold text-gray-700"> Latest Posts </h3>
+          {user?.id ? <PublicListLastPosts post={post} userId={user?.id} likeUserId={userVisiter?.id} /> : null}
 
-                  <div className="flow-root mt-8">
-                    <ul className="divide-y divide-gray-200 -my-7">
-                      <li className="flex items-stretch justify-between space-x-2 py-7">
-                        <div className="flex-shrink-0">
-                          <Image
-                            height={65}
-                            preview={false}
-                            className="object-cover w-16 h-16 rounded-lg"
-                            src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-1.png"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="flex flex-col justify-between flex-1 ml-5">
-                          <div className="flex-1">
-                            <p className="text-sm font-bold text-gray-900">
-                              Apple Watch Series 7
-                            </p>
-                            <div className="flex mt-4 items-center text-gray-500">
-                              <CreateOrUpdateFormLike
-                                typeLike="POST"
-                                item={[]}
-                              />
-
-                              <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                <BiComment />
-                              </button>
-                              <span className="ml-1.5 font-normal text-sm">
-                                20
-                              </span>
-                              <span className="ml-7 font-normal text-sm">
-                                01 sept. 2023
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-
-                      <li className="flex items-stretch justify-between space-x-2 py-7">
-                        <div className="flex-shrink-0">
-                          <Image
-                            height={65}
-                            preview={false}
-                            className="object-cover w-16 h-16 rounded-lg"
-                            src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-2.png"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="flex flex-col justify-between flex-1 ml-5">
-                          <div className="flex-1">
-                            <p className="text-sm font-bold text-gray-900">
-                              Voici donc les 3 prochains sujets prévus sur
-                              Patreon
-                            </p>
-                            <div className="flex mt-4 items-center text-gray-500">
-                              <CreateOrUpdateFormLike
-                                typeLike="POST"
-                                item={[]}
-                              />
-
-                              <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                <BiComment />
-                              </button>
-                              <span className="ml-1.5 font-normal text-sm">
-                                19
-                              </span>
-                              <span className="ml-7 font-normal text-sm">
-                                16 jui. 2023
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-
-                      <li className="flex items-stretch justify-between space-x-2 py-7">
-                        <div className="flex-shrink-0">
-                          <Image
-                            height={65}
-                            preview={false}
-                            className="object-cover w-16 h-16 rounded-lg"
-                            src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-2.png"
-                            alt=""
-                          />
-                        </div>
-
-                        <div className="flex flex-col justify-between flex-1 ml-5">
-                          <div className="flex-1">
-                            <p className="text-sm font-bold text-gray-900">
-                              Voici donc les 3 prochains sujets prévus sur
-                              Patreon
-                            </p>
-                            <div className="flex mt-2 items-center text-gray-500">
-                              <CreateOrUpdateFormLike
-                                typeLike="POST"
-                                item={[]}
-                              />
-
-                              <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                <BiComment />
-                              </button>
-                              <span className="ml-1.5 font-normal text-sm">
-                                599
-                              </span>
-                              <span className="ml-7 font-normal text-sm">
-                                04 jui. 2023
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  {user?.id || post?.id ? (
-                    <div className="mt-6 text-center justify-center mx-auto">
-                      <div className="sm:mt-0">
-                        <ButtonInput
-                          shape="default"
-                          type="button"
-                          size="huge"
-                          loading={false}
-                          color={user?.profile?.color}
-                          minW="fit"
-                        >
-                          Support
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </>

@@ -12,6 +12,7 @@ import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 
 const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
+  const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -61,9 +62,11 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                     <p className="mt-1 text-sm text-white"><ReadMore html={String(user?.profile?.url ?? '')} value={30} /></p>
                   ) : null}
                 </div>
-                <div className="mt-4 sm:ml-auto sm:mt-0">
-                  <CreateOrUpdateFormFollow item={user} />
-                </div>
+                {userVisiter?.id !== user?.id && (
+                  <div className="mt-4 sm:ml-auto sm:mt-0">
+                    <CreateOrUpdateFormFollow item={user} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -82,8 +85,8 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                     href={`${item.href}`}
                     title={item.title}
                     className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
-                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                        : `border-transparent text-gray-500 hover:border-gray-300`
+                      ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                      : `border-transparent text-gray-500 hover:border-gray-300`
                       } `}
                   >
                     {item?.icon}

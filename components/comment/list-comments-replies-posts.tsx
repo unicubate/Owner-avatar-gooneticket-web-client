@@ -27,7 +27,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, likeUserId, index }) 
     setOpenModalReply(true);
   };
 
-  const saveMutation = DeleteOneCommentReplyAPI({
+  const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
@@ -46,7 +46,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, likeUserId, index }) 
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ commentId: item?.id });
+          await saveMutation({ commentId: item?.id });
           AlertSuccessNotification({
             text: "Comment deleted successfully",
             className: "info",

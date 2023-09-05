@@ -21,19 +21,10 @@ const ProfilePublic = () => {
     data: user,
   } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
 
-
-  const dataHorizontalNav = isLoadingUser ? (
-    ""
-  ) : isErrorUser ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <HorizontalNavPublicUser user={user} />
-  );
-
   return (
     <>
 
-      {dataHorizontalNav}
+      {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         {/* <div className="max-w-7xl mx-auto"> */}
