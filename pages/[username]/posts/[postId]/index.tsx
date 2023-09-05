@@ -28,7 +28,7 @@ const PostsShowUserPublic = () => {
     data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
+  } = GetOnePostAPI({ postSlug, likeUserId: userVisiter?.id });
 
   const dataTablePosts =
     isLoadingPost || isLoadingUser ? (
@@ -59,7 +59,7 @@ const PostsShowUserPublic = () => {
             </div>
           </div>
 
-          {user?.id ? <PublicListLastPosts post={post} userId={user?.id} likeUserId={userVisiter?.id} /> : null}
+          {user?.id ? <PublicListLastPosts post={post} userId={user?.id} /> : null}
 
         </div>
       </div>

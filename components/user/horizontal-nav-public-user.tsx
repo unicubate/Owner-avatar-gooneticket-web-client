@@ -95,6 +95,7 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                   </Link>
                 );
               })}
+
             </nav>
           </div>
         </div>

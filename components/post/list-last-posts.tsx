@@ -152,10 +152,6 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
               </Link>
             ) : null}
 
-            {/* <p className="text-sm font-bold text-gray-900">
-              Voici donc les 3 prochains sujets prévus sur
-              Patreon
-            </p> */}
             <div className="flex mt-2 items-center text-gray-500">
               <button className="text-lg font-bold text-gray-500">
                 <MdFavoriteBorder />

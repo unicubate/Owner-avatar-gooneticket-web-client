@@ -79,6 +79,7 @@ const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput
+              ref={ref}
               onClick={() => fetchNextPage()}
               shape="default"
               type="button"

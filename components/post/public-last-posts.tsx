@@ -14,10 +14,9 @@ import { PostModel } from "@/types/post";
 type Props = {
   post?: PostModel
   userId: string;
-  likeUserId?: string;
 };
 
-const PublicLastPosts: React.FC<Props> = ({ userId, post, likeUserId }) => {
+const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
 
   const {
     isLoading: isLoadingPosts,
@@ -30,7 +29,6 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post, likeUserId }) => {
     take: 4,
     sort: "DESC",
     userId: userId,
-    likeUserId: likeUserId,
     typeIds: ['ARTICLE', 'AUDIO']
   });
 
@@ -75,7 +73,7 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post, likeUserId }) => {
 
                 </ul>
               </div>
-              {userId || post?.userId ? (
+              {post && userId || post?.userId ? (
                 <div className="mt-6 text-center justify-center mx-auto">
                   <div className="sm:mt-0">
                     <ButtonInput

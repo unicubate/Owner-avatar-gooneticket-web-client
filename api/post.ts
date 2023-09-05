@@ -215,13 +215,12 @@ export const GetOnePostAPI = (payload: {
   likeUserId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["post", payload],
+    queryKey: ["post", { ...payload }],
     queryFn: async () =>
       await makeApiCall({
         action: "getOnePost",
         queryParams: payload,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -255,7 +254,6 @@ export const GetInfinitePostsAPI = (payload: {
   likeUserId?: string;
   typeIds?: any;
 }) => {
-  console.log("payload ========>", payload);
   return useInfiniteQuery({
     queryKey: ["posts", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
