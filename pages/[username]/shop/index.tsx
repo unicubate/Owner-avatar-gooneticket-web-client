@@ -17,7 +17,7 @@ const ShopUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+  } = GetOneUserPublicAPI({ username});
 
   return (
     <>

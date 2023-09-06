@@ -259,7 +259,6 @@ export const GetInfinitePostsAPI = (payload: {
         page: pageParam,
       }),
     keepPreviousData: true,
-    refetchOnWindowFocus: true,
   });
 };
 
@@ -287,6 +286,5 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
         sort: sort,
       }),
     keepPreviousData: true,
-    refetchOnWindowFocus: true,
   });
 };

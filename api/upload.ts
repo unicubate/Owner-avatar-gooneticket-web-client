@@ -21,3 +21,14 @@ export const getOneFileUploadProductAPI = (fileName: string) =>
   fileName
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/products/${fileName}`
     : null;
+
+export const downloadOneFileUploadAPI = ({
+  fileName,
+  folder,
+}: {
+  fileName: string;
+  folder: "posts" | "galleries" | "products";
+}) =>
+  fileName && folder
+    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/download/${folder}/${fileName}`
+    : null;

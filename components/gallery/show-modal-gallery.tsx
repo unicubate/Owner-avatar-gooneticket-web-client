@@ -11,6 +11,10 @@ import { getOneFileGalleryAPI } from "@/api/post";
 import ListComments from "../comment/list-comments";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { useAuth } from "../util/session/context-user";
+import { formateDMYHH } from "@/utils";
+import { PostModel } from "@/types/post";
+import { useRouter } from "next/router";
+import { downloadOneFileUploadAPI } from "@/api/upload";
 
 const { Dragger } = Upload;
 
@@ -19,7 +23,7 @@ type Props = {
   openModal: boolean;
   setOpenModal: any;
   commentTake?: number;
-  item?: any;
+  item?: PostModel;
 };
 
 const ShowModalGallery: React.FC<Props> = ({
@@ -28,7 +32,13 @@ const ShowModalGallery: React.FC<Props> = ({
   openModal,
   item,
 }) => {
+  const router = useRouter();
   const user = useAuth() as any;
+
+  const downloadItem = (item: any) => {
+    console.log('item ======>', item)
+    location.replace(`localhost:4700/api/v1/uploads/download/20230906i0cI573Q.jpeg`);
+  }
 
   return (
     <>
@@ -60,7 +70,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
-                        28 août 2023
+                        {formateDMYHH(item?.createdAt as Date)}
                       </p>
                     </div>
 
@@ -75,12 +85,15 @@ const ShowModalGallery: React.FC<Props> = ({
                     >
                       <IoShareOutline className="w-5 h-5" />
                     </button>
-                    <button
-                      title="Download"
-                      className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
-                    >
-                      <FiDownload className="w-5 h-5" />
-                    </button>
+                    {item?.allowDownload && item?.image && (
+                      <button
+                        title="Download"
+                        onClick={() => { router.push(`${downloadOneFileUploadAPI({ folder: 'posts', fileName: item?.image })}`) }}
+                        className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                      >
+                        <FiDownload className="w-5 h-5" />
+                      </button>
+                    )}
                     <button
                       title="Close"
                       onClick={() => setOpenModal(false)}
@@ -131,7 +144,7 @@ const ShowModalGallery: React.FC<Props> = ({
                       <Link
                         title="Edit"
                         href={`/posts/${item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                          }/edit?type=${item?.type.toLocaleLowerCase()}`}
                         className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                       >
                         <MdOutlineModeEdit className="w-5 h-5" />
