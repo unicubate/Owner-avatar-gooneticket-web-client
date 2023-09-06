@@ -120,7 +120,6 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
 export const GetOneUserPublicAPI = (payload: {
   userId?: string;
   username?: string;
-  followerId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["user", { ...payload }],

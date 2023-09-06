@@ -85,7 +85,6 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     take: 1,
     sort: "DESC",
     commentId: String(item?.id),
-    likeUserId: user?.id,
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
@@ -102,7 +101,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
           item={item}
           key={index}
           index={index}
-          likeUserId={user?.id}
+          userId={user?.id}
         />
       ))
   );

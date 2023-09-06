@@ -8,7 +8,6 @@ import PublicListLastPosts from '@/components/post/public-last-posts';
 import { LoadingOutlined } from "@ant-design/icons";
 
 const PostsUserPublic = () => {
-  const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -16,7 +15,7 @@ const PostsUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+  } = GetOneUserPublicAPI({ username });
 
 
   const dataTablePosts = isLoadingUser ? (
@@ -30,7 +29,7 @@ const PostsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicPosts userId={user?.id} likeUserId={userVisiter?.id} />
+    <PublicPosts userId={user?.id} />
   );
 
   return (

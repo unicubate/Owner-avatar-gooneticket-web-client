@@ -10,10 +10,9 @@ import ListPublicGallery from "./list-public-gallery";
 
 type Props = {
   userId: string;
-  likeUserId?: string;
 };
 
-const PublicGallery: React.FC<Props> = ({ userId, likeUserId }) => {
+const PublicGallery: React.FC<Props> = ({ userId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -27,7 +26,6 @@ const PublicGallery: React.FC<Props> = ({ userId, likeUserId }) => {
     take: 10,
     sort: "DESC",
     userId: userId,
-    likeUserId: likeUserId,
     typeIds: ['GALLERY'],
     queryKey: ['gallery-posts', "infinite"]
   });

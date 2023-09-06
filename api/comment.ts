@@ -224,7 +224,6 @@ export const getCommentsRepliesAPI = async (
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
   postId: string;
-  likeUserId: string;
   sort: SortModel;
 }) => {
   return useInfiniteQuery({
@@ -242,7 +241,6 @@ export const GetInfiniteCommentsAPI = (payload: {
 export const GetInfiniteCommentsRepliesAPI = (payload: {
   take: number;
   sort: SortModel;
-  likeUserId: string;
   commentId: string;
 }) => {
   return useInfiniteQuery({

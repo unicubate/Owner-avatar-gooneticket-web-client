@@ -7,7 +7,6 @@ import { LoadingOutlined } from "@ant-design/icons";
 import PublicGallery from "@/components/gallery/public-gallery";
 
 const GalleryUserPublic = () => {
-  const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -15,7 +14,7 @@ const GalleryUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+  } = GetOneUserPublicAPI({ username });
 
   const dataTablePosts = isLoadingUser ? (
     <Spin
@@ -28,7 +27,7 @@ const GalleryUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicGallery userId={user?.id} likeUserId={userVisiter?.id} />
+    <PublicGallery userId={user?.id} />
   );
 
   return (

@@ -26,7 +26,7 @@ const PostShow = () => {
     data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug, likeUserId: user?.id });
+  } = GetOnePostAPI({ postSlug });
 
   const dataTablePosts = isLoadingPost ? (
     <Spin
@@ -83,7 +83,7 @@ const PostShow = () => {
                                 <div className="flex flex-col justify-between flex-1 ml-5">
                                   <div className="flex-1">
                                     <p className="text-sm font-bold text-gray-900">
-                                    Voici donc les 3 prochains sujets prévus sur Patreon
+                                      Voici donc les 3 prochains sujets prévus sur Patreon
                                     </p>
                                     <div className="flex mt-4 items-center text-gray-500">
                                       <CreateOrUpdateFormLike

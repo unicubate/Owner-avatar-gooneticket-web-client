@@ -7,7 +7,6 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { useAuth } from "@/components/util/session/context-user";
 
 const ProfilePublic = () => {
-  const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -15,7 +14,7 @@ const ProfilePublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+  } = GetOneUserPublicAPI({ username });
 
   return (
     <>

@@ -13,7 +13,6 @@ import { GetOneUserPublicAPI } from "@/api/user";
 import PublicListLastPosts from "@/components/post/public-last-posts";
 
 const PostsShowUserPublic = () => {
-  const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
   const postSlug = String(query?.postId);
@@ -22,13 +21,13 @@ const PostsShowUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username, followerId: userVisiter?.id });
+  } = GetOneUserPublicAPI({ username });
 
   const {
     data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug, likeUserId: userVisiter?.id });
+  } = GetOnePostAPI({ postSlug });
 
   const dataTablePosts =
     isLoadingPost || isLoadingUser ? (

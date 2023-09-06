@@ -7,8 +7,7 @@ import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { useAuth } from "../util/session/context-user";
 
 
-const ListComments: React.FC<{ take: number, postId: string }> = ({take, postId }) => {
-  const user = useAuth() as any;
+const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId }) => {
 
   const {
     isLoading: isLoadingComments,
@@ -21,7 +20,6 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({take, postId 
     take: take,
     sort: "DESC",
     postId: postId,
-    likeUserId: user?.id
   });
 
   const dataTableComments = isLoadingComments ? (
@@ -40,8 +38,8 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({take, postId 
 
   return (
     <>
-      {user?.id ? <CreateOrUpdateFormComment postId={postId} /> : null}
-      
+      <CreateOrUpdateFormComment postId={postId} />
+
       <ul className="mt-8 divide-y divide-gray-200 -my-9">
 
         {dataTableComments}

@@ -200,7 +200,6 @@ export const GetOnePostAPI = (payload: {
   type?: string;
   userId?: string;
   postSlug?: string;
-  likeUserId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["post", { ...payload }],
@@ -209,7 +208,7 @@ export const GetOnePostAPI = (payload: {
         action: "getOnePost",
         queryParams: payload,
       }),
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 
   return { data: data?.data as PostModel, isError, isLoading, status };
@@ -229,7 +228,6 @@ export const getPostsAPI = async (
   payload: {
     userId: string;
     type?: PostType;
-    likeUserId?: string;
     typeIds?: string[];
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
@@ -244,11 +242,10 @@ export const GetInfinitePostsAPI = (payload: {
   take: number;
   sort: SortModel;
   type?: PostType;
-  likeUserId?: string;
   typeIds?: string[];
   queryKey: string[];
 }) => {
-  const { userId, take, sort, type, likeUserId, typeIds, queryKey } = payload;
+  const { userId, take, sort, type, typeIds, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -258,11 +255,11 @@ export const GetInfinitePostsAPI = (payload: {
         take,
         sort,
         type,
-        likeUserId,
         typeIds,
         page: pageParam,
       }),
     keepPreviousData: true,
+    refetchOnWindowFocus: true,
   });
 };
 
@@ -290,5 +287,6 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
         sort: sort,
       }),
     keepPreviousData: true,
+    refetchOnWindowFocus: true,
   });
 };
