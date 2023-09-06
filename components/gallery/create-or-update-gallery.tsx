@@ -168,7 +168,7 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
                                     maxCount={1}
                                     className="upload-list-inline"
                                     onChange={onChange}
-                                    accept=".png,.jpg"
+                                    accept=".png,.jpg,.jpeg"
                                   >
                                     <Button icon={<UploadOutlined />}>
                                       Click to Upload

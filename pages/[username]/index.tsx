@@ -1,8 +1,4 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import { Image, Spin } from "antd";
-import { ButtonInput } from "@/components/templates/button-input";
-import { GetInfinitePostsAPI } from "@/api/post";
-import ListFollowPosts from "@/components/post/list-follow-posts";
+import { Image } from "antd";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import { BiComment } from "react-icons/bi";
 import { GetOneUserPublicAPI } from "@/api/user";

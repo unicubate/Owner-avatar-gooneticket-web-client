@@ -19,6 +19,7 @@ import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
+import { PiLockKey } from "react-icons/pi";
 
 type Props = {
   item?: PostModel;
@@ -96,8 +97,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 width="100%"
                 height="100%"
                 preview={false}
-                //src={`${getOneFileGalleryAPI(String(item?.image))}`}
-                src={item?.image}
+                src={`${getOneFileGalleryAPI(String(item?.image))}`}
+                // src={item?.image}
                 alt={item?.title}
               />
             </div>
@@ -113,26 +114,25 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           <p className="mt-4 text-sm font-normal text-gray-600">
-            <HtmlParser html={String(item?.description)} />
+            <HtmlParser html={String(item?.description ?? "")} />
           </p>
 
           <div className="flex mt-4 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-3.5 text-lg font-bold">
+            <button className="ml-2 text-lg font-bold">
               <BiComment />
             </button>
-            <span className="ml-1.5 font-normal text-sm">
+            <span className="ml-2 font-normal text-sm">
               {item?.totalComment ?? 0}
             </span>
             {user?.id === item?.userId ? (
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                  className="ml-3 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
+                  href={`/posts/${item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-5 h-5" />
                 </Link>
@@ -146,7 +146,17 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 </button>
               </>
             ) : null}
+
+
+            <button className="ml-auto text-lg font-bold">
+              <PiLockKey />
+            </button>
+            <span className="ml-2 text-sm font-normal">
+              Locked
+            </span>
           </div>
+
+
 
           <ListComments postId={String(item?.id)} take={commentTake} />
         </div>

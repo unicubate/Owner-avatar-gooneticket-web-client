@@ -177,18 +177,6 @@ export const DeleteOnePostAPI = ({
   return result;
 };
 
-export const getPostsAPI = async (
-  payload: {
-    userId: string;
-    type?: PostType;
-  } & PaginationRequest
-): Promise<{ data: ResponsePostModel }> => {
-  return await makeApiCall({
-    action: "getPosts",
-    queryParams: payload,
-  });
-};
-
 export const getCategoriesAPI = async (payload?: {
   userId: string;
 }): Promise<{ data: ResponsePostModel }> => {
@@ -237,11 +225,16 @@ export const getOneFileGalleryAPI = (fileName: string) =>
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/posts/gallery/${fileName}`
     : null;
 
-export const getFollowsPostsAPI = async (
-  payload: PaginationRequest
+export const getPostsAPI = async (
+  payload: {
+    userId: string;
+    type?: PostType;
+    likeUserId?: string;
+    typeIds?: string[];
+  } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
-    action: "getFollowsPosts",
+    action: "getPosts",
     queryParams: payload,
   });
 };
@@ -252,17 +245,33 @@ export const GetInfinitePostsAPI = (payload: {
   sort: SortModel;
   type?: PostType;
   likeUserId?: string;
-  typeIds?: any;
+  typeIds?: string[];
+  queryKey: string[];
 }) => {
+  const { userId, take, sort, type, likeUserId, typeIds, queryKey } = payload;
   return useInfiniteQuery({
-    queryKey: ["posts", "infinite"],
+    queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getPostsAPI({
-        ...payload,
+        userId,
+        take,
+        sort,
+        type,
+        likeUserId,
+        typeIds,
         page: pageParam,
       }),
     keepPreviousData: true,
+  });
+};
+
+export const getFollowsPostsAPI = async (
+  payload: PaginationRequest
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getFollowsPosts",
+    queryParams: payload,
   });
 };
 

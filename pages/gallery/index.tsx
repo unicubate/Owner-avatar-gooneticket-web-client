@@ -27,6 +27,7 @@ const Gallery = () => {
     take: 6,
     sort: "DESC",
     type: "GALLERY",
+    queryKey: ['gallery-posts', "infinite"]
   });
 
   useEffect(() => {

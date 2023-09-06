@@ -1,13 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
-import { Image, Spin } from "antd";
+import React from "react";
+import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
-import { useInView } from "react-intersection-observer";
-import ListPublicPosts from "./list-public-posts";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { BiComment } from "react-icons/bi";
 import ListLastPosts from "./list-last-posts";
 import { PostModel } from "@/types/post";
 
@@ -29,7 +25,8 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
     take: 4,
     sort: "DESC",
     userId: userId,
-    typeIds: ['ARTICLE', 'AUDIO']
+    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
+    queryKey: ['last-posts', "infinite"]
   });
 
 
@@ -59,37 +56,35 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
 
 
       <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
-        <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-400/60">
-          <div className="overflow-hidden rounded ">
-            <div className="px-4 py-6 sm:p-6 lg:p-8">
-              <h3 className="font-bold text-gray-700"> Latest Posts </h3>
+        <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+          <div className="px-4 py-6 sm:p-6 lg:p-8">
+            <h3 className="font-bold text-gray-700"> Latest Posts </h3>
 
-              <div className="flow-root mt-8">
-                <ul className="divide-y divide-gray-200 -my-7">
-
-
-                  {dataTablePosts}
+            <div className="flow-root mt-8">
+              <ul className="divide-y divide-gray-200 -my-7">
 
 
-                </ul>
-              </div>
-              {post && userId || post?.userId ? (
-                <div className="mt-6 text-center justify-center mx-auto">
-                  <div className="sm:mt-0">
-                    <ButtonInput
-                      shape="default"
-                      type="button"
-                      size="huge"
-                      loading={false}
-                      color="indigo"
-                      minW="fit"
-                    >
-                      Support
-                    </ButtonInput>
-                  </div>
-                </div>
-              ) : null}
+                {dataTablePosts}
+
+
+              </ul>
             </div>
+            {post && userId || post?.userId ? (
+              <div className="mt-6 text-center justify-center mx-auto">
+                <div className="sm:mt-0">
+                  <ButtonInput
+                    shape="default"
+                    type="button"
+                    size="huge"
+                    loading={false}
+                    color="indigo"
+                    minW="fit"
+                  >
+                    Support
+                  </ButtonInput>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

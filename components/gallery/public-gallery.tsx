@@ -5,14 +5,15 @@ import { GetInfinitePostsAPI } from "@/api/post";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
-import ListPublicPosts from "./list-public-posts";
+import ListPublicGallery from "./list-public-gallery";
+
 
 type Props = {
   userId: string;
   likeUserId?: string;
 };
 
-const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
+const PublicGallery: React.FC<Props> = ({ userId, likeUserId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -27,8 +28,8 @@ const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
     sort: "DESC",
     userId: userId,
     likeUserId: likeUserId,
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['posts', "infinite"]
+    typeIds: ['GALLERY'],
+    queryKey: ['gallery-posts', "infinite"]
   });
 
   useEffect(() => {
@@ -69,7 +70,7 @@ const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
     dataPosts.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPublicPosts item={item} key={index} commentTake={2} />
+        <ListPublicGallery item={item} key={index} commentTake={10} />
       ))
   );
 
@@ -77,7 +78,7 @@ const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
     <>
       {dataTablePosts}
 
-      <div className="mt-6 text-center justify-center mx-auto">
+      <div className="mt-4 text-center justify-center mx-auto">
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput
@@ -99,4 +100,4 @@ const PublicPosts: React.FC<Props> = ({ userId, likeUserId }) => {
   );
 };
 
-export default PublicPosts;
+export default PublicGallery;

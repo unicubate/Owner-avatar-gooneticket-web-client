@@ -153,20 +153,20 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
             ) : null}
 
             <div className="flex mt-2 items-center text-gray-500">
-              <button className="text-lg font-bold text-gray-500">
+              <button className="text-lg font-bold">
                 <MdFavoriteBorder />
               </button>
               <span className="ml-1.5 font-normal text-sm">
                 {item?.totalLike ?? 0}
               </span>
 
-              <button className="ml-3.5 text-lg font-bold text-gray-500">
+              <button className="ml-3.5 text-lg font-bold">
                 <BiComment />
               </button>
               <span className="ml-1.5 font-normal text-sm">
                 {item?.totalComment ?? 0}
               </span>
-              <span className="ml-7 font-normal text-sm">
+              <span className="ml-auto font-normal text-sm">
                 {formateDMYHH(item?.createdAt as Date)}
               </span>
             </div>

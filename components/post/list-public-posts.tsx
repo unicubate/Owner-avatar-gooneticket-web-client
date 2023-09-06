@@ -121,10 +121,10 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
           <div className="flex mt-4 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-3.5 text-lg font-bold">
+            <button className="ml-2 text-lg font-bold">
               <BiComment />
             </button>
-            <span className="ml-1.5 font-normal text-sm">
+            <span className="ml-2 font-normal text-sm">
               {item?.totalComment ?? 0}
             </span>
           </div>
