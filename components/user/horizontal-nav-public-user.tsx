@@ -38,6 +38,10 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
       title: "Shop",
       href: `/${username}/shop`,
     },
+    {
+      title: "Commissions",
+      href: `/${username}/commissions`,
+    },
   ]);
 
   return (

@@ -18,6 +18,7 @@ import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
 import { PostModel } from "@/types/post";
 import { truncateInput } from "@/utils/utils";
 import { ReadMore } from "@/utils/read-more";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 
 type Props = {
   item?: PostModel;
@@ -28,8 +29,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -81,17 +82,17 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
             {item?.title ? (
               <p className="mt-2 text-sm font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={5} />
+                <ReadMore html={String(item?.title ?? "")} value={30} />
               </p>
             ) : null}
             <p className="mt-2 text-sm font-medium text-gray-500">
               <FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}
             </p>
             <p className="mt-2 text-sm font-medium text-gray-500">
-              <LikeOutlined /> 0
+              <LikeOutlined /> {item?.totalLike ?? 0}
             </p>
             <p className="mt-2 text-sm font-medium text-gray-500">
-              <CommentOutlined /> 0
+              <CommentOutlined /> {item?.totalComment ?? 0}
             </p>
             <p className="mt-2 text-sm font-medium text-gray-500">
               <FundOutlined /> {item?.whoCanSee}
@@ -104,32 +105,22 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                                                                         </div> */}
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
-            <Tooltip placement="bottomRight" title={"View"}>
-              <Button
-                type="text"
-                shape="circle"
-                icon={<EyeOutlined />}
-                size="small"
-              />
-            </Tooltip>
             <Tooltip placement="bottomRight" title={"Edit"}>
-              <Button
-                type="link"
+              <button
                 onClick={() => setOpenModal(true)}
-                shape="circle"
-                icon={<EditOutlined />}
-                size="small"
-              />
+                className="ml-2 text-lg text-gray-600 hover:text-indigo-400"
+              >
+                <MdOutlineModeEdit />
+              </button>
             </Tooltip>
+
             <Tooltip placement="bottomRight" title={"Delete"}>
-              <Button
-                type="link"
+              <button
                 onClick={() => deleteItem(item)}
-                danger
-                shape="circle"
-                icon={<DeleteOutlined />}
-                size="small"
-              />
+                className="ml-2 text-lg text-gray-600 hover:text-red-400"
+              >
+                <MdDeleteOutline />
+              </button>
             </Tooltip>
           </div>
         </div>

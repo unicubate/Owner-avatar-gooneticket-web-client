@@ -9,7 +9,7 @@ import { useAuth } from "@/components/util/session/context-user";
 import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
 
-const ShopUserPublic = () => {
+const CommissionsUserPublic = () => {
   const userVisiter = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
@@ -50,4 +50,4 @@ const ShopUserPublic = () => {
   );
 };
 
-export default ShopUserPublic;
+export default CommissionsUserPublic;

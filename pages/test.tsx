@@ -41,6 +41,12 @@ import dayjs from "dayjs";
 import { SwitchInput } from "@/components/util/form/switch-input";
 import type { RcFile } from "antd/es/upload";
 import { LayoutSite } from "@/components/layout-site";
+import { Slate, Editable, withReact } from 'slate-react';
+import { createEditor } from 'slate';
+import { Editor } from 'react-draft-wysiwyg'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
 
 const { Option } = Select;
 
@@ -111,6 +117,16 @@ export default function Home() {
     console.log("payload =======>", payload);
   };
 
+
+  const editor = withReact(createEditor());
+
+  const initialValue = [
+    {
+      type: 'paragraph',
+      children: [{ text: 'A line of text in a paragraph.' }],
+    },
+  ]
+
   return (
     <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
       {/* <div className="space-y-3 lg:mx-0">
@@ -127,6 +143,21 @@ export default function Home() {
             alt=""
           />
         </div>
+
+        <Controller
+          name="content"
+          control={control}
+          defaultValue="" // Vous pouvez définir une valeur par défaut ici
+          render={({ field }) => (
+            <ReactQuill
+              {...field}
+              theme="snow" // Vous pouvez personnaliser le thème ici
+              modules={{
+                toolbar: false, // Masquer la barre d'outils pour le rendre similaire à un textarea
+              }}
+            />
+          )}
+        />
 
         <Result
           status="success"
@@ -263,6 +294,18 @@ export default function Home() {
               errors={errors}
             />
           </div>
+
+          
+
+          {/* <Controller
+            name="editorContent"
+            control={control}
+            render={({ field }) => (
+              <Slate editor={editor} initialValue={initialValue} onChange={field.onChange}>
+                <Editable />
+              </Slate>
+            )}
+          /> */}
 
           <div className="mb-4">
             <Controller

@@ -2,13 +2,14 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/templates/button-input";
 import { useEffect, useState } from "react";
-import { Input } from "antd";
+import { Input, Spin } from "antd";
 import { EmptyData } from "@/components/templates/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 import ListGallery from "@/components/gallery/list-gallery";
 import { useAuth } from "@/components/util/session/context-user";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { useInView } from "react-intersection-observer";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const Gallery = () => {
   const { ref, inView } = useInView();
@@ -53,7 +54,13 @@ const Gallery = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableGallery = isLoadingGallery ? (
-    <strong>Loading...</strong>
+    <Spin
+      tip="Loading"
+      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+      size="large"
+    >
+      <div className="content" />
+    </Spin>
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
@@ -81,7 +88,7 @@ const Gallery = () => {
 
         <div className="flex flex-col flex-1">
           <main>
-            <div className="max-w-3xl mx-auto py-6">
+            <div className="max-w-6xl mx-auto py-6">
               {/* <div className="px-4 mx-auto sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Gallery</h1>

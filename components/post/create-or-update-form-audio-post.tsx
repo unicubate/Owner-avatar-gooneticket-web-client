@@ -105,7 +105,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
-                  {post?.id ? "Update" : "Create a New"} Audio
+                  {post?.id ? "Update" : "Create a new"} audio
                 </h2>
 
                 <div className="mt-4">

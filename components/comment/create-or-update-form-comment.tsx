@@ -7,9 +7,10 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { Avatar, Button, Upload } from "antd";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
-import { TextAreaInput } from "../util/form";
+import { ReactQuillInput, TextAreaInput } from "../util/form";
 import { useAuth } from "../util/session/context-user";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -107,14 +108,21 @@ const CreateOrUpdateFormComment: React.FC<{
               alt=""
             />
           </div>
-          <TextAreaInput
+          <TextareaReactQuillInput
+            control={control}
+            name="description"
+            placeholder="Participate in the conversation"
+            errors={errors}
+            className='h-auto'
+          />
+          {/* <TextAreaInput
             row={1}
             required={true}
             control={control}
             name="description"
             placeholder="Participate in the conversation"
             errors={errors}
-          />
+          /> */}
 
           {openModal ? (
             <div className="flex justify-between items-center">

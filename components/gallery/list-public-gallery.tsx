@@ -10,6 +10,7 @@ import { useAuth } from "../util/session/context-user";
 import { PiLockKey } from "react-icons/pi";
 import { ShowModalGallery } from "./show-modal-gallery";
 import { ReadMore } from "@/utils/read-more";
+import { ButtonInput } from "../templates/button-input";
 
 type Props = {
   item?: PostModel;

@@ -244,6 +244,28 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Commissions route */
+  getCommissions: {
+    endpoint: `${baseUrl}/commissions`,
+    method: GET,
+  },
+  getOneCommission: {
+    endpoint: `${baseUrl}/commissions/view`,
+    method: GET,
+  },
+  createOneCommission: {
+    endpoint: `${baseUrl}/commissions`,
+    method: POST,
+  },
+  updateOneCommission: {
+    endpoint: `${baseUrl}/commissions/:commissionId`,
+    method: PUT,
+  },
+  deleteOneCommission: {
+    endpoint: `${baseUrl}/commissions/:commissionId`,
+    method: DELETE,
+  },
+
   /****************** Posts route */
   createOnePostGallery: {
     endpoint: `${baseUrl}/posts/galleries`,

@@ -15,6 +15,7 @@ import { TfiGallery } from "react-icons/tfi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { BsGift, BsShop } from "react-icons/bs";
 import { TbUsersGroup } from "react-icons/tb";
+import { RiShakeHandsLine } from "react-icons/ri";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useState } from "react";
 
@@ -79,6 +80,11 @@ const SETTINGS_ITEMS = [
     icon: <BsShop className={classIcon} />,
   },
   {
+    title: "Commissions",
+    href: "/commissions",
+    icon: <RiShakeHandsLine className={classIcon} />,
+  },
+  {
     title: "Integrations",
     href: "integrations",
     icon: <BiCodeCurly className={classIcon} />,
@@ -135,7 +141,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                  className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                     isActive
                       ? `text-white bg-${user?.profile?.color}-600`
                       : "hover:bg-gray-200 text-gray-900"
@@ -162,7 +168,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
                         ? `text-white bg-${user?.profile?.color}-600`
                         : "hover:bg-gray-200 text-gray-900"
@@ -197,7 +203,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
                         ? `text-white bg-${user?.profile?.color}-600`
                         : "hover:bg-gray-200 text-gray-900"
@@ -224,7 +230,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
                         ? `text-white bg-${user?.profile?.color}-600`
                         : "hover:bg-gray-200 text-gray-900"
@@ -240,7 +246,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               <a
                 href="#"
                 title=""
-                className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 rounded-lg hover:bg-gray-200 group"
+                className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 text-gray-900 rounded-lg hover:bg-gray-200 group"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 mr-4"

@@ -112,7 +112,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ postId, post }) => {
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
-                  {post?.id ? "Update" : "Create a New"} Gallery
+                  {post?.id ? "Update" : "Create a new"} gallery
                 </h2>
 
                 <div className="p-2 flex-auto justify-center">
@@ -145,7 +145,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ postId, post }) => {
                                 maxCount={1}
                                 className="upload-list-inline"
                                 onChange={onChange}
-                                accept=".png,.jpg"
+                                accept=".png,.jpg,.jpeg"
                               >
                                 <Button icon={<UploadOutlined />}>
                                   Click to Upload

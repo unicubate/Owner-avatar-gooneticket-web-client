@@ -44,11 +44,42 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataPosts.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListLastPosts item={item} key={index} />
-      ))
+    <>
+      <div className="px-4 py-6 sm:p-6 lg:p-8">
+        <h3 className="font-bold text-gray-700"> Latest Posts </h3>
+
+        <div className="flow-root mt-8">
+          <ul className="divide-y divide-gray-200 -my-7">
+
+
+            {dataPosts.pages
+              .flatMap((page: any) => page?.data?.value)
+              .map((item, index) => (
+                <ListLastPosts item={item} key={index} />
+              ))}
+
+
+          </ul>
+        </div>
+        {userId || post?.userId ? (
+          <div className="mt-6 text-center justify-center mx-auto">
+            <div className="sm:mt-0">
+              <ButtonInput
+                shape="default"
+                type="button"
+                size="huge"
+                loading={false}
+                color="indigo"
+                minW="fit"
+              >
+                Support
+              </ButtonInput>
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+    </>
   );
 
   return (
@@ -57,35 +88,9 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
 
       <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
         <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-          <div className="px-4 py-6 sm:p-6 lg:p-8">
-            <h3 className="font-bold text-gray-700"> Latest Posts </h3>
 
-            <div className="flow-root mt-8">
-              <ul className="divide-y divide-gray-200 -my-7">
+          {dataTablePosts}
 
-
-                {dataTablePosts}
-
-
-              </ul>
-            </div>
-            {post && userId || post?.userId ? (
-              <div className="mt-6 text-center justify-center mx-auto">
-                <div className="sm:mt-0">
-                  <ButtonInput
-                    shape="default"
-                    type="button"
-                    size="huge"
-                    loading={false}
-                    color="indigo"
-                    minW="fit"
-                  >
-                    Support
-                  </ButtonInput>
-                </div>
-              </div>
-            ) : null}
-          </div>
         </div>
       </div>
     </>

@@ -21,6 +21,7 @@ import {
   CreateOrUpdateOnePostGalleryAPI,
   getOneFileGalleryAPI,
 } from "@/api/post";
+import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 
 const { Dragger } = Upload;
 
@@ -230,13 +231,13 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
                         />
                       </div>
                       <div className="mb-2">
-                        <TextAreaInput
-                          row={4}
+                        <TextareaReactQuillInput
                           control={control}
-                          label="Description"
                           name="description"
+                          label="Description"
                           placeholder="Description"
                           errors={errors}
+                          className='h-36'
                         />
                       </div>
                     </div>
