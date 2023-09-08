@@ -20,7 +20,7 @@ export type ProductModel = {
   urlMedia: string;
   priceNoDiscount: string;
   description: string;
-  messageAfterPurchase: string;
+  messageAfterPayment: string;
   moreDescription: string;
   isChooseQuantity: boolean;
   isLimitSlot: boolean;
@@ -57,7 +57,7 @@ export type ProductFormModel = {
   isChooseQuantity: boolean;
   urlMedia: string;
   price: number;
-  messageAfterPurchase: string;
+  messageAfterPayment: string;
   description: string;
   discountId: string;
   limitSlot: number;

@@ -86,7 +86,7 @@ const ButtonInput: React.FC<Props> = ({
         }
       >
         {loading ? (
-          <Spin indicator={antIcon} className="mr-2" />
+          <Spin indicator={antIcon} className="mr-2 h-3 w-3" />
         ) : (
           <>
             {icon ? <span className="mr-1">{icon}</span> : null}

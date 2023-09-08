@@ -97,27 +97,32 @@ const Commissions = () => {
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <HorizontalNavCommission />
 
-                <div className="mt-8 border border-indigo-300 rounded-lg bg-indigo-50">
-                  <div className="px-4 py-5 sm:p-6">
+                <div className="mt-8 px-3 py-2 border-gray-200 border bg-white rounded-lg">
+                  <div className="px-2 py-3 sm:p-2">
                     <div className="md:flex md:items-center md:justify-between">
-                      {/* <Image
-                        className="flex-shrink-0 object-cover w-16 h-16 rounded-lg"
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png"
-                        alt=""
-                      /> */}
-                      <div className="flex-1 max-w-xs mt-4 md:mt-0 md:ml-6">
-                        <p className="text-base font-bold text-gray-900">
-                          Open
+
+                      <div className="flex-1 max-w-xs mt-4 md:mt-0">
+                        <p className="text-base font-bold text-gray-600">
+                          Commissions Open
                         </p>
+                        {/* <p className="mt-1 text-sm font-medium text-gray-500">Commissions are currently active. Your fans can request them from your page.</p> */}
+                        <p className="mt-1 text-sm font-medium text-gray-500">Your commissions are currently private and are not available for booking.</p>
+                        
                       </div>
 
                       <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
-                        <button
+                        <ButtonInput
+                          // onClick={() =>
+                          //   router.push(`${`/commissions/create`}`)
+                          // }
+                          shape="default"
                           type="button"
-                          className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500 md:order-last"
+                          size="large"
+                          loading={false}
+                          color={"indigo"}
                         >
                           Open
-                        </button>
+                        </ButtonInput>
                       </div>
                     </div>
                   </div>

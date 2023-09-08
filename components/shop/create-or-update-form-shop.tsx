@@ -43,7 +43,7 @@ const schema = yup.object({
   limitSlot: yup.number().nullable(),
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
-  messageAfterPurchase: yup.string().nullable(),
+  messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
   discountId: yup.string().when("isDiscount", (isDiscount, schema) => {
     if (isDiscount[0] === true) return schema.required("discount required");
@@ -93,7 +93,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "isChooseQuantity",
         "enableDiscount",
         "discountId",
-        "messageAfterPurchase",
+        "messageAfterPayment",
       ];
       fields?.forEach((field: any) => setValue(field, product[field]));
     }
@@ -303,7 +303,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                   row={3}
                   control={control}
                   label="Confirmation message"
-                  name="messageAfterPurchase"
+                  name="messageAfterPayment"
                   placeholder="Success page confirmation"
                   errors={errors}
                 />

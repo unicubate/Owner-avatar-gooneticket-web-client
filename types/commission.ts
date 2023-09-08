@@ -12,7 +12,7 @@ export type CommissionModel = {
   urlMedia: string;
   price: string;
   description: string;
-  messageAfterPurchase: string;
+  messageAfterPayment: string;
   status: string;
   currencyId: string;
   userId: string;
@@ -46,4 +46,5 @@ export type CommissionFormModel = {
   newFileLists: any;
   imageList: any;
   newImageLists: any;
+  messageAfterPayment?: string;
 };

@@ -34,6 +34,10 @@ export const CreateOrUpdateOneCommissionAPI = ({
       data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
       data.append("limitSlot", `${payload.limitSlot ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
+      data.append(
+        "messageAfterPayment",
+        `${payload.messageAfterPayment ?? ""}`
+      );
 
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {

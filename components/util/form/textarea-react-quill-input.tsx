@@ -41,11 +41,12 @@ const TextareaReactQuillInput: React.FC<Props> = ({
 
   return (
     <>
-      <label
+      {label ? <label
         className="block text-gray-700 text-sm font-bold mb-2"
         htmlFor={name}>
         {label}
-      </label>
+      </label> : null}
+
       <Controller
         name={name}
         control={control}

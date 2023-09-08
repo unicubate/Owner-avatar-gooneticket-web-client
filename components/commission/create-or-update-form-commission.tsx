@@ -36,7 +36,7 @@ const schema = yup.object({
   title: yup.string().required(),
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
-  messageAfterPurchase: yup.string().nullable(),
+  messageAfterPayment: yup.string().nullable(),
   description: yup.string().min(10, "Minimum 10 symbols").required(),
   limitSlot: yup.number().when("isLimitSlot", (isLimitSlot, schema) => {
     if (isLimitSlot[0] === true)
@@ -78,7 +78,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         "isLimitSlot",
         "limitSlot",
         "description",
-        "messageAfterPurchase",
+        "messageAfterPayment",
       ];
       fields?.forEach((field: any) => setValue(field, commission[field]));
     }
@@ -151,8 +151,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               {commission?.id ? "Update" : "Create a new"} commission
             </h2>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+              <div className="mb-2">
                 <TextInput
                   label="Name*"
                   control={control}
@@ -164,7 +164,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
               <div className="mb-2">
                 <NumberInput
                   control={control}
@@ -179,7 +179,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
               <div className="mb-4">
                 <Controller
                   name="attachmentImages"
@@ -210,8 +210,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+              <div className="mb-2">
                 <TextareaReactQuillInput
                   control={control}
                   name="description"
@@ -226,8 +226,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+              <div className="mb-2">
                 <TextInput
                   label="Embed Media (optional)"
                   control={control}
@@ -242,12 +242,12 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
+            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+              <div className="mb-2">
                 <TextareaReactQuillInput
                   control={control}
-                  name="messageAfterPurchase"
-                  label="Confirmation message"
+                  name="messageAfterPayment"
+                  label="Thank you message or delivery instructions (optional)"
                   placeholder="Success page confirmation"
                   errors={errors}
                   className=""
@@ -259,7 +259,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
             </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-4">
+              <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   Advanced settings
                 </label>
@@ -338,38 +338,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     <SwitchInput
                       control={control}
                       name="allowChooseInventory"
-                      label=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-900">
-                      {" "}
-                      Allow buyer to choose a quantity{" "}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-500">
-                      Your supporters will be able to select the desired
-                      quantity of this item. You will receive payment based on
-                      the quantity they choose multiplied by your set price.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                  <button
-                    type="button"
-                    title=""
-                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                  >
-                    {" "}
-                  </button>
-                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                    <SwitchInput
-                      control={control}
-                      name="isChooseQuantity"
                       label=""
                     />
                   </div>

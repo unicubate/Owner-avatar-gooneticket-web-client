@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Tooltip } from "antd";
+import { Avatar, Spin, Tooltip } from "antd";
 import {
-  FieldTimeOutlined,
+  FieldTimeOutlined, LoadingOutlined,
 } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
@@ -13,6 +13,8 @@ import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { getOneFileCommissionAPI } from "@/api/commision";
 import { useRouter } from "next/router";
+import { GetUploadsAPI } from "@/api/upload";
+import ListCarouselUpload from "../shop/list-carousel-upload";
 
 type Props = {
   item?: CommissionModel;
@@ -61,6 +63,18 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     });
   };
 
+  const {
+    status,
+    data: dataImages,
+  } = GetUploadsAPI({
+    commissionId: item?.id,
+    uploadType: "image",
+  });
+
+  if(status === 'loading'){
+    <p>loading...</p>
+  }
+
   return (
     <>
       <div key={index} className="py-5 divide-gray-200">
@@ -69,7 +83,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             <Avatar
               size={150}
               shape="square"
-              src={getOneFileCommissionAPI(String(item?.image))}
+              src={getOneFileCommissionAPI(String(dataImages?.data[0]?.path))}
               alt={item?.title}
             />
           </div>
@@ -80,14 +94,15 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                 <ReadMore html={String(item?.title ?? "")} value={50} />
               </p>
             ) : null}
-            <p className="mt-4 text-sm font-medium text-gray-500">
-              <FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}
-            </p>
             {item?.price ? (
-              <p className="mt-4 text-sm font-bold text-gray-600">
+              <p className="mt-4 text-sm font-medium text-gray-600">
                 {item?.price} {item?.currency?.symbol}
               </p>
             ) : null}
+
+            <p className="mt-4 text-sm font-medium text-gray-500">
+              {formateDateDayjs(item?.createdAt as Date)}
+            </p>
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">

@@ -38,8 +38,8 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
       data.append("isChooseQuantity", `${payload.isChooseQuantity}`);
       data.append(
-        "messageAfterPurchase",
-        `${payload.messageAfterPurchase ?? ""}`
+        "messageAfterPayment",
+        `${payload.messageAfterPayment ?? ""}`
       );
       data.append("enableDiscount", `${payload.enableDiscount ?? ""}`);
       data.append("discountId", `${payload.discountId ?? ""}`);

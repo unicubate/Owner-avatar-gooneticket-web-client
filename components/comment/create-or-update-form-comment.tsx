@@ -115,14 +115,6 @@ const CreateOrUpdateFormComment: React.FC<{
             errors={errors}
             className='h-auto'
           />
-          {/* <TextAreaInput
-            row={1}
-            required={true}
-            control={control}
-            name="description"
-            placeholder="Participate in the conversation"
-            errors={errors}
-          /> */}
 
           {openModal ? (
             <div className="flex justify-between items-center">
