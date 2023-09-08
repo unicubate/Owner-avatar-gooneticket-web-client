@@ -40,7 +40,7 @@ const NumberInput: React.FC<Props> = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <InputNumber
             size="large"
             id={name}

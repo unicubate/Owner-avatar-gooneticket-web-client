@@ -35,7 +35,7 @@ const SelectMultipleSearchInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <Select
             showSearch
             size="large"

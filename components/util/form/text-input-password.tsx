@@ -39,7 +39,7 @@ const TextInputPassword: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <Password
             size="large"
             type={type}

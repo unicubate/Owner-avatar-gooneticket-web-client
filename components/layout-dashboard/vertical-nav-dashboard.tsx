@@ -46,20 +46,20 @@ const MONETIZE_ITEMS: NavbarProps[] = [
 ];
 
 const SUPPORT_ITEMS = [
-  {
-    title: "Payments History",
-    href: "/payments-history",
-    icon: <FiList className={classIcon} />,
-  },
+  // {
+  //   title: "Payments History",
+  //   href: "/payments-history",
+  //   icon: <FiList className={classIcon} />,
+  // },
+  // {
+  //   title: "My Supporters",
+  //   href: "/supporters",
+  //   icon: <TbUsersGroup className={classIcon} />,
+  // },
   {
     title: "Messages",
     href: "/messages",
     icon: <BiMessageRoundedDots className={classIcon} />,
-  },
-  {
-    title: "My Supporters",
-    href: "/supporters",
-    icon: <TbUsersGroup className={classIcon} />,
   },
   {
     title: "Posts",
@@ -85,14 +85,14 @@ const SETTINGS_ITEMS = [
     icon: <RiShakeHandsLine className={classIcon} />,
   },
   {
-    title: "Integrations",
-    href: "integrations",
-    icon: <BiCodeCurly className={classIcon} />,
-  },
-  {
     title: "Settings",
     href: "/settings",
     icon: <BiCog className={classIcon} />,
+  },
+  {
+    title: "Integrations",
+    href: "integrations",
+    icon: <BiCodeCurly className={classIcon} />,
   },
 ];
 

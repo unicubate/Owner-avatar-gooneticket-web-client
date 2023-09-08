@@ -35,7 +35,7 @@ const SelectInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <Select
             size="large"
             style={{ width: "100%" }}

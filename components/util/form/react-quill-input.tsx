@@ -93,7 +93,7 @@ const ReactQuillInput: React.FC<Props> = ({
         rules={{
           required: "Please enter post description"
         }}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <DynamicReactQuill
             {...field}
             theme="snow"

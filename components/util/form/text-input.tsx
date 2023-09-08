@@ -40,7 +40,7 @@ const TextInput: React.FC<Props> = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <Input
             size="large"
             type={type}

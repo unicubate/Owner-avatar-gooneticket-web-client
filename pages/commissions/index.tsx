@@ -31,7 +31,7 @@ const Commissions = () => {
     userId: userStorage?.id,
     take: 6,
     sort: "DESC",
-    queryKey: ['commissions', "infinite"]
+    queryKey: ["commissions", "infinite"],
   });
 
   useEffect(() => {
@@ -95,8 +95,33 @@ const Commissions = () => {
               </div> */}
 
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-
                 <HorizontalNavCommission />
+
+                <div className="mt-8 border border-indigo-300 rounded-lg bg-indigo-50">
+                  <div className="px-4 py-5 sm:p-6">
+                    <div className="md:flex md:items-center md:justify-between">
+                      {/* <Image
+                        className="flex-shrink-0 object-cover w-16 h-16 rounded-lg"
+                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png"
+                        alt=""
+                      /> */}
+                      <div className="flex-1 max-w-xs mt-4 md:mt-0 md:ml-6">
+                        <p className="text-base font-bold text-gray-900">
+                          Open
+                        </p>
+                      </div>
+
+                      <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
+                        <button
+                          type="button"
+                          className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500 md:order-last"
+                        >
+                          Open
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <div className="flow-root">
                   <div className="mt-8 overflow-hidden bg-white border border-gray-200">
@@ -104,7 +129,9 @@ const Commissions = () => {
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
-                            onClick={() => router.push(`${`/commissions/create`}`)}
+                            onClick={() =>
+                              router.push(`${`/commissions/create`}`)
+                            }
                             shape="default"
                             type="button"
                             size="large"

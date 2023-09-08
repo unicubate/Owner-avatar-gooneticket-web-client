@@ -29,7 +29,7 @@ const DateInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <DatePicker
             picker="date"
             size="large"

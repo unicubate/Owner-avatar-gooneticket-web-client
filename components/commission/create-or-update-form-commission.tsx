@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Button,
-  Checkbox,
   Select,
   Upload,
   UploadFile,
@@ -12,8 +10,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
   NumberInput,
-  ReactQuillInput,
-  TextAreaInput,
   TextInput,
 } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
@@ -21,12 +17,9 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
-import { GetAllDiscountsAPI } from "@/api/discount";
-import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
-import Link from "next/link";
 import { CommissionFormModel } from "@/types/commission";
 import { CreateOrUpdateOneCommissionAPI } from "@/api/commision";
 import { useRouter } from "next/router";
@@ -44,9 +37,10 @@ const schema = yup.object({
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
   messageAfterPurchase: yup.string().nullable(),
-  description: yup.string().nullable(),
+  description: yup.string().min(10, "Minimum 10 symbols").required(),
   limitSlot: yup.number().when("isLimitSlot", (isLimitSlot, schema) => {
-    if (isLimitSlot[0] === true) return schema.min(1).required("discount required");
+    if (isLimitSlot[0] === true)
+      return schema.min(1).required("discount required");
     return schema.nullable();
   }),
 });
@@ -224,7 +218,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   label="Description"
                   placeholder="Write description"
                   errors={errors}
-                  className=''
+                  className=""
                 />
                 <span className="text-sm font-medium text-gray-600">
                   {`Describe in detail what buyers will receive when they make a purchase.`}
@@ -256,7 +250,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   label="Confirmation message"
                   placeholder="Success page confirmation"
                   errors={errors}
-                  className=''
+                  className=""
                 />
                 <span className="text-sm font-medium text-gray-600">
                   {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
@@ -273,8 +267,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
             </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-
-
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">

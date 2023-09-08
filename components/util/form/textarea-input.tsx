@@ -37,7 +37,7 @@ const TextAreaInput: React.FC<Props> = ({
         name={name}
         control={control}
         defaultValue={defaultValue}
-        render={({ field }) => (
+        render={({ field: { ref, ...field } }) => (
           <TextArea
             size="large"
             id={name}
