@@ -21,7 +21,7 @@ const EmptyData: React.FC<Props> = ({
                         imageStyle={{ height: 100 }}
                         description={
                             <>
-                                <div className="font-bold text-xl">{title}</div>
+                                <div className="font-bold text-lg text-gray-600">{title}</div>
                                 <span className="font-medium">{description}</span>
                             </>
                         }

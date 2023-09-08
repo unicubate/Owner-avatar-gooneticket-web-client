@@ -151,14 +151,10 @@ export const GetOneCommissionAPI = (payload: {
   return { data: data?.data as CommissionModel, isError, isLoading, status };
 };
 
-export const getOneFileCommissionAPI = (fileName: string) =>
-  fileName
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/commissions/file/${fileName}`
-    : null;
-
 export const getCommissionsAPI = async (
   payload: {
     userId: string;
+    status?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseCommissionModel }> => {
   return await makeApiCall({
@@ -169,11 +165,12 @@ export const getCommissionsAPI = async (
 
 export const GetInfiniteCommissionsAPI = (payload: {
   userId: string;
+  status?: string;
   take: number;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userId, take, sort, queryKey } = payload;
+  const { userId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -182,6 +179,7 @@ export const GetInfiniteCommissionsAPI = (payload: {
         userId,
         take,
         sort,
+        status: status?.toUpperCase(),
         page: pageParam,
       }),
     keepPreviousData: true,

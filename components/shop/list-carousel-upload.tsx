@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { Carousel, Image } from "antd";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   uploads: UploadModel[];
@@ -31,14 +32,14 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
           pauseOnHover={true}
           draggable
         >
-          {uploads?.length > 0 &&
+          {uploads && uploads?.length > 0 &&
             uploads?.map((item: any, index: number) => (
               <div key={index}>
                 <Image
+                  preview={false}
                   className="object-cover w-full h-full"
                   style={contentStyle}
-                  src={item?.url}
-                  //src={`${getOneFileUploadProductAPI(item?.path)}`}
+                  src={`${viewOneFileUploadAPI({ folder: 'products', fileName: item?.path })}`}
                   alt=""
                 />
               </div>

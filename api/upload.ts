@@ -17,9 +17,15 @@ export const GetUploadsAPI = (payload: {
   });
 };
 
-export const getOneFileUploadProductAPI = (fileName: string) =>
+export const viewOneFileUploadAPI = ({
+  fileName,
+  folder,
+}: {
+  fileName: string;
+  folder: "posts" | "galleries" | "products" | "commissions";
+}) =>
   fileName
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/products/${fileName}`
+    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/view/${folder}/${fileName}`
     : null;
 
 export const downloadOneFileUploadAPI = ({
@@ -27,7 +33,7 @@ export const downloadOneFileUploadAPI = ({
   folder,
 }: {
   fileName: string;
-  folder: "posts" | "galleries" | "products";
+  folder: "posts" | "galleries" | "products" | "commissions";
 }) =>
   fileName && folder
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/download/${folder}/${fileName}`

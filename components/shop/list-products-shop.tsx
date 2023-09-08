@@ -13,14 +13,14 @@ import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "../shop/list-carousel-upload";
+import ListCarouselUpload from "./list-carousel-upload";
 
 type Props = {
   item?: CommissionModel;
   index: number;
 };
 
-const ListCommissions: React.FC<Props> = ({ item, index }) => {
+const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -70,7 +70,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     uploadType: "image",
   });
 
-  if (status === 'loading') {
+  if(status === 'loading'){
     <p>loading...</p>
   }
 
@@ -79,12 +79,12 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
       <div key={index} className="py-5 divide-gray-200">
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
-            <Avatar
+            {/* <Avatar
               size={150}
               shape="square"
-              src={viewOneFileUploadAPI({ folder: 'commissions', fileName: String(dataImages?.data[0]?.path) })}
+              src={viewOneFileUploadAPI(String(dataImages?.data[0]?.path))}
               alt={item?.title}
-            />
+            /> */}
           </div>
 
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
@@ -129,4 +129,4 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   );
 };
 
-export default ListCommissions;
+export default ListProductsShop;

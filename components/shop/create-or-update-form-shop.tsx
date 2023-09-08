@@ -29,6 +29,7 @@ import { CreateOrUpdateOneProductAPI } from "@/api/product";
 import { GetAllDiscountsAPI } from "@/api/discount";
 import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const { Option } = Select;
 
@@ -56,6 +57,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   uploadImages,
   uploadFiles,
 }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -533,7 +535,9 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </ButtonInput>
             </div>
             <div className="flex items-center mt-4 mb-4 space-x-4">
-              <ButtonCancelInput shape="default" size="large" loading={loading}>
+              <ButtonCancelInput shape="default" size="large"
+                loading={loading}
+                onClick={() => router.back()}>
                 Cancel
               </ButtonCancelInput>
               <ButtonInput

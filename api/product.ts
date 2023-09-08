@@ -1,10 +1,8 @@
 import {
-  PostFormModel,
-  PostModel,
-  PostType,
-  ResponsePostModel,
-} from "@/types/post";
-import { ProductFormModel, ProductModel } from "@/types/product";
+  ProductFormModel,
+  ProductModel,
+  ResponseProductModel,
+} from "@/types/product";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
@@ -116,9 +114,44 @@ export const GetOneProductAPI = (payload: {
         action: "getOneProduct",
         queryParams: { productId, userId, productSlug },
       }),
-    staleTime: 60_000,
+    // staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
   return { data: data?.data as ProductModel, isError, isLoading, status };
+};
+
+export const getProductsAPI = async (
+  payload: {
+    userId: string;
+    status?: string;
+  } & PaginationRequest
+): Promise<{ data: ResponseProductModel }> => {
+  return await makeApiCall({
+    action: "getProducts",
+    queryParams: payload,
+  });
+};
+
+export const GetInfiniteProductsAPI = (payload: {
+  userId: string;
+  take: number;
+  status?: string;
+  sort: SortModel;
+  queryKey: string[];
+}) => {
+  const { userId, take, sort, status, queryKey } = payload;
+  return useInfiniteQuery({
+    queryKey: queryKey,
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getProductsAPI({
+        userId,
+        take,
+        sort,
+        status: status?.toUpperCase(),
+        page: pageParam,
+      }),
+    keepPreviousData: true,
+  });
 };

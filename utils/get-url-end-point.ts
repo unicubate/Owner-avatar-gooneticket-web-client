@@ -230,6 +230,10 @@ export const apiEndpoints: ClientApiMethods = {
     method: PUT,
   },
   /****************** Products route */
+  getProducts: {
+    endpoint: `${baseUrl}/products`,
+    method: GET,
+  },
   createOneProduct: {
     endpoint: `${baseUrl}/products`,
     method: POST,
