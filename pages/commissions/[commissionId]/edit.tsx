@@ -1,24 +1,34 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api/product";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
+import { GetOneCommissionAPI } from "@/api/commision";
+import { GetUploadsAPI } from "@/api/upload";
 
 const ShopEdit = () => {
   const user = useAuth() as any;
   const { query } = useRouter();
-  const productId = String(query?.productId);
+  const commissionId = String(query?.commissionId);
 
-  const { data: commission, isError: isErrorCommission, isLoading: isLoadingCommission } = GetOneProductAPI({
-    productId,
+  const { data: commission, isError: isErrorCommission, isLoading: isLoadingCommission } = GetOneCommissionAPI({
+    commissionId,
     userId: user?.id,
   });
 
+  const {
+    isLoading: isLoadingImageUploads,
+    isError: isErrorImageUploads,
+    data: dataImageUploads,
+  } = GetUploadsAPI({
+    commissionId: commissionId,
+    uploadType: 'image'
+  });
+
   const dataTableCommission =
-    isLoadingCommission ? (
+    isLoadingImageUploads || isErrorCommission ? (
       <Spin
         tip="Loading"
         indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
@@ -26,11 +36,12 @@ const ShopEdit = () => {
       >
         <div className="content" />
       </Spin>
-    ) : isErrorCommission ? (
+    ) : isErrorImageUploads ? (
       <strong>Error find data please try again...</strong>
     ) : (
       <CreateOrUpdateFormCommission
         commission={commission}
+        uploadImages={dataImageUploads?.data}
       />
     );
 

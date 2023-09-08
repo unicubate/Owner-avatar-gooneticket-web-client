@@ -1,8 +1,9 @@
 import { createOnUploadPostAPI } from "@/api/post";
 import dynamic from "next/dynamic";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { Control, Controller } from "react-hook-form";
 import ReactQuill, { ReactQuillProps } from 'react-quill';
+import 'react-quill/dist/quill.bubble.css'
 
 interface QuillWrapperProps extends ReactQuillProps {
   forwardedRef?: React.Ref<ReactQuill>;
@@ -40,10 +41,9 @@ const TextareaReactQuillInput: React.FC<Props> = ({
 
   return (
     <>
-    <label
+      <label
         className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor={name}
-      >
+        htmlFor={name}>
         {label}
       </label>
       <Controller
@@ -59,7 +59,7 @@ const TextareaReactQuillInput: React.FC<Props> = ({
             theme="snow"
             placeholder={placeholder}
             modules={{ toolbar: false }}
-            className={`w-full ${className} px-auto py-auto border-none rounded-lg focus:outline-none focus:ring focus:border-blue-300`}
+            className={`w-full ${className} px-full py-full border-none rounded-lg focus:outline-none focus:ring focus:border-blue-300`}
           />
         )}
       />

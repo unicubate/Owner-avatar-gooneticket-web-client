@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Avatar,
   Button,
   Checkbox,
   Select,
@@ -8,12 +7,6 @@ import {
   UploadFile,
   UploadProps,
 } from "antd";
-import {
-  UpdateOneProfileAPI,
-  getOneFileProfileAPI,
-  getOneProfileAPI,
-} from "@/api/profile";
-import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -24,7 +17,6 @@ import {
   TextInput,
 } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
-import { ProfileFormModel, arrayColors } from "@/types/profile.type";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -34,7 +26,6 @@ import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { ProductFormModel } from "@/types/product";
 import { CreateOrUpdateOneProductAPI } from "@/api/product";
-import { SelectSearchInput } from "../util/form/select-search-input";
 import { GetAllDiscountsAPI } from "@/api/discount";
 import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
 import Link from "next/link";

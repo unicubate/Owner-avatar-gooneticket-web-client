@@ -1,14 +1,83 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Image, Input } from "antd";
+import { Image, Input, Spin } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/templates/button-input";
 import { useRouter } from "next/router";
 import { HorizontalNavCommission } from "@/components/commission/horizontal-nav-commission";
+import { LoadingOutlined } from "@ant-design/icons";
+import { EmptyData } from "@/components/templates/empty-data";
+import ListCommissions from "@/components/commission/list-commissions";
+import { useInView } from "react-intersection-observer";
+import { useAuth } from "@/components/util/session/context-user";
+import { useEffect, useState } from "react";
+import { GetInfiniteCommissionsAPI } from "@/api/commision";
 
 const Commissions = () => {
   const router = useRouter();
+  const { ref, inView } = useInView();
+  const { userStorage } = useAuth() as any;
+  const [openModal, setOpenModal] = useState(false);
+
+  const {
+    isLoading: isLoadingGallery,
+    isError: isErrorGallery,
+    data: dataGallery,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfiniteCommissionsAPI({
+    userId: userStorage?.id,
+    take: 6,
+    sort: "DESC",
+    queryKey: ['commissions', "infinite"]
+  });
+
+  useEffect(() => {
+    let fetching = false;
+    if (inView) {
+      fetchNextPage();
+    }
+    const onScroll = async (event: any) => {
+      const { scrollHeight, scrollTop, clientHeight } =
+        event.target.scrollingElement;
+
+      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+        fetching = true;
+        if (hasNextPage) await fetchNextPage();
+        fetching = false;
+      }
+    };
+
+    document.addEventListener("scroll", onScroll);
+    return () => {
+      document.removeEventListener("scroll", onScroll);
+    };
+  }, [fetchNextPage, hasNextPage, inView]);
+
+  const dataTableCommissions = isLoadingGallery ? (
+    <Spin
+      tip="Loading"
+      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+      size="large"
+    >
+      <div className="content" />
+    </Spin>
+  ) : isErrorGallery ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+    <EmptyData
+      title="Add your first file commissions"
+      description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
+    />
+  ) : (
+    dataGallery.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListCommissions item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
@@ -51,7 +120,7 @@ const Commissions = () => {
                       </div>
 
                       <div className="divide-y divide-gray-200">
-                        {/* {dataTableGallery} */}
+                        {dataTableCommissions}
                       </div>
                     </div>
 

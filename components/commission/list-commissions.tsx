@@ -2,30 +2,25 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Button, Tooltip } from "antd";
+import { Avatar, Tooltip } from "antd";
 import {
-  CommentOutlined,
-  DeleteOutlined,
-  EditOutlined,
-  EyeOutlined,
   FieldTimeOutlined,
-  FundOutlined,
-  LikeOutlined,
 } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateGallery } from "./create-or-update-gallery";
 import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
-import { PostModel } from "@/types/post";
-import { truncateInput } from "@/utils/utils";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { CommissionModel } from "@/types/commission";
+import { getOneFileCommissionAPI } from "@/api/commision";
+import { useRouter } from "next/router";
 
 type Props = {
-  item?: PostModel;
+  item?: CommissionModel;
   index: number;
 };
 
-const ListGallery: React.FC<Props> = ({ item, index }) => {
+const ListCommissions: React.FC<Props> = ({ item, index }) => {
+  const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
@@ -74,40 +69,31 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             <Avatar
               size={150}
               shape="square"
-              src={getOneFileGalleryAPI(String(item?.image))}
+              src={getOneFileCommissionAPI(String(item?.image))}
               alt={item?.title}
             />
           </div>
 
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
             {item?.title ? (
-              <p className="mt-2 text-sm font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={30} />
+              <p className="text-sm font-bold text-gray-600">
+                <ReadMore html={String(item?.title ?? "")} value={50} />
               </p>
             ) : null}
-            <p className="mt-2 text-sm font-medium text-gray-500">
+            <p className="mt-4 text-sm font-medium text-gray-500">
               <FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}
             </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <LikeOutlined /> {item?.totalLike ?? 0}
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <CommentOutlined /> {item?.totalComment ?? 0}
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <FundOutlined /> {item?.whoCanSee}
-            </p>
+            {item?.price ? (
+              <p className="mt-4 text-sm font-bold text-gray-600">
+                {item?.price} {item?.currency?.symbol}
+              </p>
+            ) : null}
           </div>
-
-          {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                            <p className="text-sm font-medium text-gray-500">200 <LikeOutlined /></p>
-                                                                            <p className="mt-20 text-sm font-medium text-gray-500">150 <CommentOutlined /></p>
-                                                                        </div> */}
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => setOpenModal(true)}
+                onClick={() => router.push(`/commissions/${item?.id}/edit`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
@@ -125,16 +111,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
         </div>
       </div>
-
-      {openModal && (
-        <CreateOrUpdateGallery
-          post={item}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-        />
-      )}
     </>
   );
 };
 
-export default ListGallery;
+export default ListCommissions;

@@ -57,9 +57,9 @@ export const CreateOrUpdateOneProductAPI = ({
 
       if (productId) {
         const result = await makeApiCall({
-          action: "updateOneUploadProduct",
+          action: "updateOneUpload",
           body: { newImageLists, newFileLists },
-          urlParams: { productId },
+          queryParams: { productId },
         });
 
         if (result) {
@@ -109,7 +109,7 @@ export const GetOneProductAPI = (payload: {
   userId?: string;
 }) => {
   const { productId, userId, productSlug } = payload;
-  const { data, isError, isLoading, status } =  useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["product", productId, userId, productSlug],
     queryFn: async () =>
       await makeApiCall({

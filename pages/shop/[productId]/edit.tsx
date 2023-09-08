@@ -7,7 +7,7 @@ import { ButtonInput } from "@/components/templates/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
-import { GetUploadsProductsAPI } from "@/api/upload";
+import { GetUploadsAPI } from "@/api/upload";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
@@ -26,8 +26,8 @@ const ShopEdit = () => {
     isLoading: isLoadingFileUploads,
     isError: isErrorFileUploads,
     data: dataFileUploads,
-  } = GetUploadsProductsAPI({
-    productId: product?.id,
+  } = GetUploadsAPI({
+    productId: productId,
     uploadType: 'file'
   });
 
@@ -35,8 +35,8 @@ const ShopEdit = () => {
     isLoading: isLoadingImageUploads,
     isError: isErrorImageUploads,
     data: dataImageUploads,
-  } = GetUploadsProductsAPI({
-    productId: product?.id,
+  } = GetUploadsAPI({
+    productId: productId,
     uploadType: 'image'
   });
 

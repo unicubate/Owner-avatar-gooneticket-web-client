@@ -30,24 +30,23 @@ import Link from "next/link";
 import { CommissionFormModel } from "@/types/commission";
 import { CreateOrUpdateOneCommissionAPI } from "@/api/commision";
 import { useRouter } from "next/router";
+import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 
 const { Option } = Select;
 
 type Props = {
   commission?: any;
   uploadImages?: any;
-  uploadFiles?: any;
 };
 
 const schema = yup.object({
   title: yup.string().required(),
-  limitSlot: yup.number().nullable(),
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
   messageAfterPurchase: yup.string().nullable(),
   description: yup.string().nullable(),
-  discountId: yup.string().when("isDiscount", (isDiscount, schema) => {
-    if (isDiscount[0] === true) return schema.required("discount required");
+  limitSlot: yup.number().when("isLimitSlot", (isLimitSlot, schema) => {
+    if (isLimitSlot[0] === true) return schema.min(1).required("discount required");
     return schema.nullable();
   }),
 });
@@ -55,7 +54,6 @@ const schema = yup.object({
 const CreateOrUpdateFormCommission: React.FC<Props> = ({
   commission,
   uploadImages,
-  uploadFiles,
 }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -63,7 +61,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     undefined
   );
 
-  const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
 
   const {
@@ -77,10 +74,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     mode: "onChange",
   });
   const watchIsLimitSlot = watch("isLimitSlot", false);
-  const watchEnableDiscount = watch("enableDiscount", false);
-
-  const { data: dataDiscounts } = GetAllDiscountsAPI();
-  const discounts: any = dataDiscounts?.data;
 
   useEffect(() => {
     if (commission) {
@@ -91,10 +84,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         "isLimitSlot",
         "limitSlot",
         "description",
-        "moreDescription",
-        "isChooseQuantity",
-        "enableDiscount",
-        "discountId",
         "messageAfterPurchase",
       ];
       fields?.forEach((field: any) => setValue(field, commission[field]));
@@ -115,11 +104,21 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
   const onSubmit: SubmitHandler<CommissionFormModel> = async (
     data: CommissionFormModel
   ) => {
+    let newImageLists: any = [];
     setLoading(true);
     setHasErrors(undefined);
     try {
+      imageList
+        .filter((file: any) => file?.status === "success")
+        .forEach((file: any) => {
+          newImageLists.push(file);
+        });
 
-      const payload = { ...data };
+      const payload = {
+        ...data,
+        newImageLists,
+        imageList,
+      };
       await saveMutation.mutateAsync({
         ...payload,
         commissionId: commission?.id,
@@ -145,6 +144,9 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     }
   };
 
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
 
   return (
     <>
@@ -183,25 +185,29 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mb-4">
                 <Controller
-                  name="attachment"
+                  name="attachmentImages"
                   control={control}
                   render={({ field: { onChange } }) => (
                     <>
                       <div className="text-center justify-center mx-auto">
                         <Upload
-                          name="attachment"
-                          listType="picture"
-                          maxCount={1}
-                          className="upload-list-inline"
-                          onChange={onChange}
+                          multiple
+                          name="attachmentImages"
+                          listType="picture-card"
+                          fileList={imageList}
+                          onChange={handleImageChange}
                           accept=".png,.jpg,.jpeg"
+                          maxCount={10}
                         >
-                          <Button icon={<UploadOutlined />}>
-                            Click to Upload
-                          </Button>
+                          {imageList.length >= 10 ? null : (
+                            <div>
+                              <PlusOutlined />
+                              <div style={{ marginTop: 8 }}>Upload</div>
+                            </div>
+                          )}
                         </Upload>
                       </div>
                     </>
@@ -212,12 +218,13 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
-                <ReactQuillInput
+                <TextareaReactQuillInput
                   control={control}
-                  label="Description*"
                   name="description"
+                  label="Description"
                   placeholder="Write description"
                   errors={errors}
+                  className=''
                 />
                 <span className="text-sm font-medium text-gray-600">
                   {`Describe in detail what buyers will receive when they make a purchase.`}
@@ -243,13 +250,13 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">
-                <TextAreaInput
-                  row={3}
+                <TextareaReactQuillInput
                   control={control}
-                  label="Confirmation message"
                   name="messageAfterPurchase"
+                  label="Confirmation message"
                   placeholder="Success page confirmation"
                   errors={errors}
+                  className=''
                 />
                 <span className="text-sm font-medium text-gray-600">
                   {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}

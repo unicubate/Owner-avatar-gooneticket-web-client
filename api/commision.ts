@@ -26,28 +26,42 @@ export const CreateOrUpdateOneCommissionAPI = ({
     async (
       payload: CommissionFormModel & { commissionId?: string }
     ): Promise<any> => {
-      const { commissionId } = payload;
+      const { commissionId, newImageLists } = payload;
       let data = new FormData();
       data.append("title", `${payload.title ?? ""}`);
       data.append("price", `${payload.price ?? ""}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
+      data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
+      data.append("limitSlot", `${payload.limitSlot ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
 
-      payload?.attachment?.fileList?.length > 0 &&
-        payload?.attachment?.fileList?.forEach((file: any) => {
-          data.append("attachment", file?.originFileObj as RcFile);
+      payload?.imageList?.length > 0 &&
+        payload?.imageList?.forEach((file: any) => {
+          data.append("attachmentImages", file?.originFileObj as RcFile);
         });
 
-      return commissionId
-        ? await makeApiCall({
+      if (commissionId) {
+        const result = await makeApiCall({
+          action: "updateOneUpload",
+          body: { newImageLists },
+          queryParams: { commissionId, uploadType: "IMAGE" },
+        });
+
+        if (result) {
+          await makeApiCall({
             action: "updateOneCommission",
             body: data,
             urlParams: { commissionId },
-          })
-        : await makeApiCall({
-            action: "createOneCommission",
-            body: data,
           });
+        }
+
+        return "Ok";
+      } else {
+        return await makeApiCall({
+          action: "createOneCommission",
+          body: data,
+        });
+      }
     },
     {
       onSettled: async () => {
@@ -117,7 +131,7 @@ export const DeleteOneCommissionAPI = ({
 };
 
 export const GetOneCommissionAPI = (payload: {
-  CommissionId?: string;
+  commissionId?: string;
   userId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({

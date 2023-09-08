@@ -133,6 +133,7 @@ const Gallery = () => {
                       <div className="mt-4 text-center justify-center mx-auto">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
+                            ref={ref}
                             onClick={() => fetchNextPage()}
                             shape="default"
                             type="button"

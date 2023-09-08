@@ -1,17 +1,17 @@
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { useQuery } from "@tanstack/react-query";
 
-export const GetUploadsProductsAPI = (payload: {
+export const GetUploadsAPI = (payload: {
   productId?: string;
+  commissionId?: string;
   uploadType?: "image" | "file";
 }) => {
-  const { productId, uploadType } = payload;
   return useQuery({
-    queryKey: ["uploads", productId, uploadType],
+    queryKey: ["uploads", { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: "getUploadsProducts",
-        queryParams: { productId, uploadType },
+        action: "getUploads",
+        queryParams: payload,
       }),
     refetchOnWindowFocus: false,
   });

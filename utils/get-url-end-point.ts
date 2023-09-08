@@ -221,15 +221,14 @@ export const apiEndpoints: ClientApiMethods = {
   },
 
   /****************** Uploads route */
-  getUploadsProducts: {
-    endpoint: `${baseUrl}/uploads/products`,
+  getUploads: {
+    endpoint: `${baseUrl}/uploads`,
     method: GET,
   },
-  updateOneUploadProduct: {
-    endpoint: `${baseUrl}/uploads/products/:productId`,
+  updateOneUpload: {
+    endpoint: `${baseUrl}/uploads/update`,
     method: PUT,
   },
-
   /****************** Products route */
   createOneProduct: {
     endpoint: `${baseUrl}/products`,
