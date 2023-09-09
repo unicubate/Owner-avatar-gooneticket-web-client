@@ -22,6 +22,7 @@ import { useState } from "react";
 export type NavbarProps = {
   title: string;
   href: string;
+  status?: boolean;
   description?: string;
   icon?: any;
 };

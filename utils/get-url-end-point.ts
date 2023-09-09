@@ -125,6 +125,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/users/update/profile/:profileId`,
     method: PUT,
   },
+  updateEnableProfile: {
+    endpoint: `${baseUrl}/users/update/enable/:profileId`,
+    method: PUT,
+  },
   getOneProfile: {
     endpoint: `${baseUrl}/users/profile/show/:profileId`,
     method: GET,

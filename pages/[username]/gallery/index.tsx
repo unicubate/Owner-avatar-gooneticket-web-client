@@ -8,7 +8,7 @@ import PublicGallery from "@/components/gallery/public-gallery";
 import { LoadingFile } from "@/components/templates/loading-file";
 
 const GalleryUserPublic = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const username = String(query?.username);
 
   const {
@@ -25,6 +25,9 @@ const GalleryUserPublic = () => {
     <PublicGallery userId={user?.id} />
   );
 
+  if (user?.profile?.enableGallery === false) {
+    push(`${`/${username}`}`);
+  }
   return (
     <>
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}

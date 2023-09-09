@@ -19,6 +19,9 @@ export type ProfileFormModel = {
   image: string;
   color: string;
   url: string;
+  enableCommission: boolean;
+  enableShop: boolean;
+  enableGallery: boolean;
 };
 
 export type NextStepProfileFormModel = {

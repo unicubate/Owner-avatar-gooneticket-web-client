@@ -1,18 +1,12 @@
-import { Button, Image, Spin } from "antd";
-import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
-import { BiCartAdd, BiComment } from "react-icons/bi";
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
-import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/session/context-user";
-import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/templates/loading-file";
 
 const CommissionsUserPublic = () => {
-  const userVisiter = useAuth() as any;
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const username = String(query?.username);
 
   const {
@@ -30,6 +24,9 @@ const CommissionsUserPublic = () => {
     <PublicShop userId={user?.id} />
   );
 
+  if (user?.profile?.enableCommission === false) {
+    push(`${`/${username}`}`);
+  }
   return (
     <>
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}

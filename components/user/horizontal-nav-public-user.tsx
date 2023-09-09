@@ -20,26 +20,32 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
   const [navigation] = useState<NavbarProps[]>([
     {
       title: "Home",
+      status: true,
       href: `/${username}`,
     },
     {
       title: "Gallery",
+      status: user?.profile?.enableGallery,
       href: `/${username}/gallery`,
     },
     {
       title: "Memberships",
+      status: true,
       href: `/${username}/memberships`,
     },
     {
       title: "Posts",
+      status: true,
       href: `/${username}/posts`,
     },
     {
       title: "Shop",
+      status: user?.profile?.enableShop,
       href: `/${username}/shop`,
     },
     {
       title: "Commissions",
+      status: user?.profile?.enableCommission,
       href: `/${username}/commissions`,
     },
   ]);
@@ -85,7 +91,7 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
         <div className="w-full pb-1 overflow-x-auto">
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px space-x-10">
-              {navigation.map((item: any, index: number) => {
+              {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
                 const isActive = pathname.startsWith(item.href);
                 return (
                   <Link

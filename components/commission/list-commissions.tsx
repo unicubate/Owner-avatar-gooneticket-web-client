@@ -143,5 +143,4 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     </>
   );
 };
-
-export default ListCommissions;
+export { ListCommissions };

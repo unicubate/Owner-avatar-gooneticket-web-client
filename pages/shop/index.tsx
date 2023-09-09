@@ -12,12 +12,12 @@ import { useInView } from "react-intersection-observer";
 import { GetInfiniteProductsAPI } from "@/api/product";
 import { EmptyData } from "@/components/templates/empty-data";
 import ListProductsShop from "@/components/shop/list-products-shop";
+import { EnableShop } from "@/components/shop/enable-shop";
 
 const Shops = () => {
   const router = useRouter();
   const { ref, inView } = useInView();
-  const { userStorage } = useAuth() as any;
-  const [openModal, setOpenModal] = useState(false);
+  const { userStorage, profile } = useAuth() as any;
 
   const {
     isLoading: isLoadingGallery,
@@ -84,49 +84,11 @@ const Shops = () => {
         <div className="flex-1">
           <main>
             <div className="max-w-6xl mx-auto py-6">
-              {/* <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Shops</h1>
-                  <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
-                    Sell digital or physical items with a Un-Pot Shop!
-                  </p>
-                </div>
-              </div> */}
 
               <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 <HorizontalNavShop />
 
-                <div className="mt-8 px-3 py-2 border-gray-200 border bg-white rounded-lg">
-                  <div className="px-2 py-3 sm:p-2">
-                    <div className="md:flex md:items-center md:justify-between">
-
-                      <div className="flex-1 max-w-xs md:mt-0">
-                        <p className="text-base font-bold text-gray-600">
-                          Shop Open
-                        </p>
-                        {/* <p className="mt-1 text-sm font-medium text-gray-500">Shop are currently active. Your fans can request them from your page.</p> */}
-                        <p className="mt-1 text-sm font-medium text-gray-500">Your shop are currently private and are not available for booking.</p>
-
-                      </div>
-
-                      <div className="flex items-center justify-start mt-4 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
-                        <ButtonInput
-                          // onClick={() =>
-                          //   router.push(`${`/commissions/create`}`)
-                          // }
-                          shape="default"
-                          type="button"
-                          size="large"
-                          loading={false}
-                          color={"indigo"}
-                        >
-                          Open
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
+                {profile?.id ? <EnableShop profile={profile} /> : null}
 
                 <div className="flow-root">
                   <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">

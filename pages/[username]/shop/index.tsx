@@ -12,7 +12,7 @@ import { LoadingFile } from "@/components/templates/loading-file";
 
 const ShopUserPublic = () => {
   const userVisiter = useAuth() as any;
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const username = String(query?.username);
 
   const {
@@ -30,6 +30,9 @@ const ShopUserPublic = () => {
     <PublicShop userId={user?.id} />
   );
 
+  if (user?.profile?.enableShop === false) {
+    push(`${`/${username}`}`);
+  }
   return (
     <>
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}

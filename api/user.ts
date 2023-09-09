@@ -1,3 +1,4 @@
+import { ProfileFormModel } from "@/types/profile.type";
 import {
   UserLoginFormModel,
   UserRegisterFormModel,
@@ -55,6 +56,55 @@ export const resendCodeAPI = async (payload: {
     action: "resendCode",
     urlParams: { userId },
   });
+};
+
+export const UpdateEnableProfileAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ["user"];
+  const queryClient = useQueryClient();
+  const result = useMutation(
+    async (payload: {
+      profileId: string;
+      enableCommission?: boolean;
+      enableShop?: boolean;
+      enableGallery?: boolean;
+    }): Promise<{ data: UserModel }> => {
+      const { enableCommission, enableShop, enableGallery, profileId } =
+        payload;
+      return await makeApiCall({
+        action: "updateEnableProfile",
+        urlParams: { profileId },
+        queryParams: { enableCommission, enableShop, enableGallery },
+      });
+    },
+    {
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onError: async (error: any) => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onError) {
+          onError(error);
+        }
+      },
+    }
+  );
+
+  return result;
 };
 
 export const ValidCodeAPI = ({

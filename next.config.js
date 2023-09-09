@@ -2,9 +2,14 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
   experimental: {
-     transpilePackages: ["ui"],
+    transpilePackages: ["ui"],
   },
-  
+
+  i18n: {
+    locales: ['en', 'fr'], // Langues prises en charge
+    defaultLocale: 'en', // Langue par défaut
+  },
+
   env: {
     NAME_SITE: process.env.NEXT_PUBLIC_NAME_SITE,
     QUERY_DEV_TOOLS: process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS,

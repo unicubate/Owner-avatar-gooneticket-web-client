@@ -11,10 +11,11 @@ import { GetInfinitePostsAPI } from "@/api/post";
 import { useInView } from "react-intersection-observer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LoadingFile } from "@/components/templates/loading-file";
+import { EnableGallery } from "@/components/gallery/enable-gallery";
 
 const Gallery = () => {
   const { ref, inView } = useInView();
-  const { userStorage } = useAuth() as any;
+  const { userStorage, profile } = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
 
   const {
@@ -94,6 +95,8 @@ const Gallery = () => {
               </div> */}
 
               <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+                
+                {profile?.id ? <EnableGallery profile={profile} /> : null}
                 {/* <HorizontalNavDonation /> */}
 
                   <div className="flow-root">
