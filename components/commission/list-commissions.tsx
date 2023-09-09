@@ -14,6 +14,8 @@ import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 import ListCarouselUpload from "../shop/list-carousel-upload";
+import { BiMoney } from "react-icons/bi";
+import { AiOutlineCalendar } from "react-icons/ai";
 
 type Props = {
   item?: CommissionModel;
@@ -93,15 +95,27 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                 <ReadMore html={String(item?.title ?? "")} value={50} />
               </p>
             ) : null}
-            {item?.price ? (
-              <p className="mt-4 text-sm font-medium text-gray-600">
-                {item?.price} {item?.currency?.symbol}
-              </p>
-            ) : null}
 
-            <p className="mt-4 text-sm font-medium text-gray-500">
-              {formateDateDayjs(item?.createdAt as Date)}
-            </p>
+            <div className="flex mt-10 items-center">
+              {item?.price ? (
+                <>
+                  <button className="text-lg font-normal">
+                    <BiMoney />
+                  </button>
+                  <span className="ml-2 font-normal text-sm">
+                    {item?.price} {item?.currency?.symbol}
+                  </span>
+                </>
+              ) : null}
+              <button className="ml-2 text-lg font-normal">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+
+            </div>
+
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">

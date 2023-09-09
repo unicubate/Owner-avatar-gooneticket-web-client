@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 import ListCarouselUpload from "./list-carousel-upload";
 import { BiMoney } from "react-icons/bi";
-import { BsCalendar } from "react-icons/bs";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { AiOutlineCalendar } from "react-icons/ai";
 
 type Props = {
@@ -83,7 +83,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
-              size={90}
+              size={100}
               shape="square"
               src={viewOneFileUploadAPI({ folder: 'products', fileName: String(dataImages?.data[0]?.path) })}
               alt={item?.title}
@@ -107,11 +107,6 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             </p> */}
 
             <div className="flex mt-10 items-center">
-            {/* {item?.price ? (
-              <p className="text-sm font-medium text-gray-600">
-                {item?.price} {item?.currency?.symbol}
-              </p>
-            ) : null} */}
 
               <button className="text-lg font-normal">
                 <BiMoney />
@@ -125,19 +120,6 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               <span className="ml-2 font-normal text-sm">
               {formateDateDayjs(item?.createdAt as Date)}
               </span>
-
-              {/* <button className="ml-2 text-lg font-bold">
-                <BiComment />
-              </button>
-              <span className="ml-2 font-normal text-sm">
-              {item?.totalComment ?? 0}
-              </span>
-              <button className="ml-2 text-lg font-bold">
-                <TfiWorld />
-              </button>
-              <span className="ml-2 font-normal text-sm">
-                {item?.whoCanSee}
-              </span> */}
 
             </div>
           </div>

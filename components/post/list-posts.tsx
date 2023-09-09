@@ -15,6 +15,7 @@ import { PiLockKey } from "react-icons/pi";
 import { PostModel } from "@/types/post";
 import Link from "next/link";
 import { TfiWorld } from "react-icons/tfi";
+import { AiOutlineCalendar } from "react-icons/ai";
 
 type Props = {
   item?: PostModel;
@@ -95,12 +96,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
               </p>
             ) : null}
 
-            <p className="mt-4 text-sm font-medium text-gray-500">
-              {formateDateDayjs(item?.createdAt as Date)}
-            </p>
-
-
-            <div className="flex mt-4 items-center">
+            <div className="flex mt-10 items-center">
 
               <button className="text-lg font-normal">
                 <MdFavoriteBorder />
@@ -113,8 +109,16 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
                 <BiComment />
               </button>
               <span className="ml-2 font-normal text-sm">
-              {item?.totalComment ?? 0}
+                {item?.totalComment ?? 0}
               </span>
+
+              <button className="ml-2 text-lg font-normal">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+              
               <button className="ml-2 text-lg font-bold">
                 <TfiWorld />
               </button>
@@ -130,7 +134,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/posts/${item?.id
-                }/edit?type=${item?.type.toLocaleLowerCase()}`)}
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />

@@ -18,7 +18,10 @@ import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
 import { PostModel } from "@/types/post";
 import { truncateInput } from "@/utils/utils";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
+import { BiComment } from "react-icons/bi";
+import { AiOutlineCalendar } from "react-icons/ai";
+import { TfiWorld } from "react-icons/tfi";
 
 type Props = {
   item?: PostModel;
@@ -80,31 +83,47 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-            {item?.title ? (
-              <p className="mt-2 text-sm font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={30} />
+            {/* {item?.title ? (
+              <p className="mt-2 text-lg font-bold text-gray-600">
+                <ReadMore html={String(item?.title ?? "")} value={50} />
               </p>
-            ) : null}
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <FieldTimeOutlined /> {formateDateDayjs(item?.createdAt as Date)}
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <LikeOutlined /> {item?.totalLike ?? 0}
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <CommentOutlined /> {item?.totalComment ?? 0}
-            </p>
-            <p className="mt-2 text-sm font-medium text-gray-500">
-              <FundOutlined /> {item?.whoCanSee}
-            </p>
+            ) : null} */}
+
+            <div className="flex mt-10 items-center">
+
+              <button className="text-lg font-normal">
+                <MdFavoriteBorder />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {item?.totalLike ?? 0}
+              </span>
+
+              <button className="ml-1.5 text-lg font-bold">
+                <BiComment />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {item?.totalComment ?? 0}
+              </span>
+
+              {/* <button className="ml-2 text-lg font-normal">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+
+              <button className="ml-2 text-lg font-bold">
+                <TfiWorld />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {item?.whoCanSee}
+              </span> */}
+
+            </div>
           </div>
 
-          {/* <div className="flex-1 min-w-0 ml-4 cursor-pointer">
-                                                                            <p className="text-sm font-medium text-gray-500">200 <LikeOutlined /></p>
-                                                                            <p className="mt-20 text-sm font-medium text-gray-500">150 <CommentOutlined /></p>
-                                                                        </div> */}
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
+          {/* <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => setOpenModal(true)}
@@ -122,7 +141,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 <MdDeleteOutline />
               </button>
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       </div>
 
