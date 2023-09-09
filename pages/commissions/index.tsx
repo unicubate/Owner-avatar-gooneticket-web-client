@@ -94,14 +94,14 @@ const Commissions = () => {
                 </div>
               </div> */}
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 <HorizontalNavCommission />
 
                 <div className="mt-8 px-3 py-2 border-gray-200 border bg-white rounded-lg">
                   <div className="px-2 py-3 sm:p-2">
                     <div className="md:flex md:items-center md:justify-between">
 
-                      <div className="flex-1 max-w-xs mt-4 md:mt-0">
+                      <div className="flex-1 max-w-xs md:mt-0">
                         <p className="text-base font-bold text-gray-600">
                           Commissions Open
                         </p>
@@ -110,7 +110,7 @@ const Commissions = () => {
 
                       </div>
 
-                      <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
+                      <div className="flex items-center justify-start mt-4 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
                         <ButtonInput
                           // onClick={() =>
                           //   router.push(`${`/commissions/create`}`)
@@ -129,7 +129,7 @@ const Commissions = () => {
                 </div>
 
                 <div className="flow-root">
-                  <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
                     <div className="px-4 py-8">
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">

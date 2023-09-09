@@ -62,6 +62,7 @@ const ShopView = () => {
     isError: isErrorImages,
     data: dataImages,
   } = GetUploadsAPI({
+    userId: product?.userId,
     productId: product?.id,
     uploadType: "image",
   });

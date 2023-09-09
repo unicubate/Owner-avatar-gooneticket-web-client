@@ -83,20 +83,11 @@ const Posts = () => {
         <div className="flex flex-col flex-1">
           <main>
             <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
-                <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Articles</h1>
-                  <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
-                    Post public post or make exclusive to you supporters or
-                    members
-                  </p>
-                </div>
-              </div>
 
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 <HorizontalNavCreatePost />
 
-                <div className="mt-4 px-3 py-2 bg-white border border-gray-200 rounded-lg">
+                <div className="mt-8 px-3 py-2 bg-white border border-gray-200 rounded-lg">
                   <nav className="flex flex-wrap gap-4">
                     <a
                       href="#"
@@ -126,13 +117,14 @@ const Posts = () => {
 
 
                 <div className="flow-root">
-                  <div className="mt-4 overflow-hidden bg-white border border-gray-200">
+                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
                     <div className="px-4 py-8">
+
+
                       <div className="divide-y divide-gray-200">
-
                         {dataTablePosts}
-
                       </div>
+
                     </div>
                   </div>
                   {hasNextPage && (

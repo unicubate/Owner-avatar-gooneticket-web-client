@@ -93,14 +93,14 @@ const Shops = () => {
                 </div>
               </div> */}
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 <HorizontalNavShop />
 
                 <div className="mt-8 px-3 py-2 border-gray-200 border bg-white rounded-lg">
                   <div className="px-2 py-3 sm:p-2">
                     <div className="md:flex md:items-center md:justify-between">
 
-                      <div className="flex-1 max-w-xs mt-4 md:mt-0">
+                      <div className="flex-1 max-w-xs md:mt-0">
                         <p className="text-base font-bold text-gray-600">
                           Shop Open
                         </p>
@@ -109,7 +109,7 @@ const Shops = () => {
 
                       </div>
 
-                      <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
+                      <div className="flex items-center justify-start mt-4 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
                         <ButtonInput
                           // onClick={() =>
                           //   router.push(`${`/commissions/create`}`)
@@ -126,97 +126,30 @@ const Shops = () => {
                     </div>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 gap-4 px-8 mt-12 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-0">
-                  <div className="overflow-hidden bg-white border border-gray-200 rounded-lg cursor-pointer">
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <img
-                          className="object-cover w-16 h-16 rounded-full shrink-0"
-                          src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-1.png"
-                          alt=""
-                        />
-                        <div className="flex-1 ml-4">
-                          <p className="text-base font-bold text-gray-900">
-                            Albert Flores
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="overflow-hidden bg-white border border-gray-200 rounded-lg cursor-pointer">
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <img
-                          className="object-cover w-16 h-16 rounded-full shrink-0"
-                          src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-2.png"
-                          alt=""
-                        />
-                        <div className="flex-1 ml-4">
-                          <p className="text-base font-bold text-gray-900">
-                            Ralph Edwards
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <img
-                          className="object-cover w-16 h-16 rounded-full shrink-0"
-                          src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-3.png"
-                          alt=""
-                        />
-                        <div className="flex-1 ml-4">
-                          <p className="text-base font-bold text-gray-900">
-                            Theresa Webb
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="p-4">
-                      <div className="flex items-center">
-                        <img
-                          className="object-cover w-16 h-16 rounded-full shrink-0"
-                          src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-4.png"
-                          alt=""
-                        />
-                        <div className="flex-1 ml-4">
-                          <p className="text-base font-bold text-gray-900">
-                            Jane Cooper
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
 
                 <div className="flow-root">
-                  <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
                     <div className="px-4 py-8">
-                      {/* <div className="sm:flex sm:items-center sm:justify-between">
+                      <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
-                            onClick={() => router.push(`${`/shop/create`}`)}
+                            onClick={() =>
+                              router.push(`${`/shop/create`}`)
+                            }
                             shape="default"
                             type="button"
                             size="large"
                             loading={false}
                             color={"indigo"}
                           >
-                            Create Product
+                            Create product
                           </ButtonInput>
                         </div>
                         <div className="mt-4 sm:mt-0">
                           <Input placeholder="Search product" />
                         </div>
-                      </div> */}
+                      </div>
 
                       <div className="divide-y divide-gray-200">
                         {dataTableProducts}

@@ -24,6 +24,7 @@ const ShopEdit = () => {
     isError: isErrorImageUploads,
     data: dataImageUploads,
   } = GetUploadsAPI({
+    userId: userStorage?.id,
     commissionId: commissionId,
     uploadType: 'image'
   });

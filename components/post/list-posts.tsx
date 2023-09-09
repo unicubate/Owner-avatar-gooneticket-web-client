@@ -68,6 +68,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
     status,
     data: dataImages,
   } = GetUploadsAPI({
+    userId: item?.userId,
     commissionId: item?.id,
     uploadType: "image",
   });

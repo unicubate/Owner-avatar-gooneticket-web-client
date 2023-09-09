@@ -10,13 +10,13 @@ import { useAuth } from "@/components/util/session/context-user";
 import { LoadingFile } from "@/components/templates/loading-file";
 
 const ShopEdit = () => {
-  const user = useAuth() as any;
+  const { userStorage } = useAuth() as any;
   const { query } = useRouter();
   const productId = String(query?.productId);
 
   const { data: product, isError: isErrorProduct } = GetOneProductAPI({
     productId,
-    userId: user?.id,
+    userId: userStorage?.id,
   });
 
   const {
@@ -24,6 +24,7 @@ const ShopEdit = () => {
     isError: isErrorFileUploads,
     data: dataFileUploads,
   } = GetUploadsAPI({
+    userId: userStorage?.id,
     productId: productId,
     uploadType: 'file'
   });
@@ -33,6 +34,7 @@ const ShopEdit = () => {
     isError: isErrorImageUploads,
     data: dataImageUploads,
   } = GetUploadsAPI({
+    userId: userStorage?.id,
     productId: productId,
     uploadType: 'image'
   });

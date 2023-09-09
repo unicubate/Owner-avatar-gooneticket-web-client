@@ -93,12 +93,11 @@ const Gallery = () => {
                 </div>
               </div> */}
 
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 {/* <HorizontalNavDonation /> */}
 
-                <div className="border-gray-200 lg:order-1 lg:col-span-10">
                   <div className="flow-root">
-                    <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+                    <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
                       <div className="px-4 py-8">
                         <div className="sm:flex sm:items-center sm:justify-between">
                           <div className="mt-4 sm:mt-0">
@@ -143,7 +142,6 @@ const Gallery = () => {
                       </div>
                     )}
                   </div>
-                </div>
               </div>
             </div>
           </main>
