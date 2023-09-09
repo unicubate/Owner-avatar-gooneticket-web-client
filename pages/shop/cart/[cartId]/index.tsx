@@ -8,7 +8,6 @@ import { ButtonInput } from "@/components/templates/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
-import { GetUploadsProductsAPI } from "@/api/upload";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import ListCarouselUpload from "@/components/shop/list-carousel-upload";
@@ -25,6 +24,8 @@ import { GetAllCountiesAPI } from "@/api/profile";
 import { SelectSearchInput } from "@/components/util/form/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
 import { MdDeleteOutline } from "react-icons/md";
+import { LoadingFile } from "@/components/templates/loading-file";
+import { GetUploadsAPI } from "@/api/upload";
 
 const schema = yup.object({
   firstName: yup.string().nullable(),
@@ -60,19 +61,13 @@ const ShopView = () => {
     isLoading: isLoadingImages,
     isError: isErrorImages,
     data: dataImages,
-  } = GetUploadsProductsAPI({
+  } = GetUploadsAPI({
     productId: product?.id,
     uploadType: "image",
   });
 
   const dataTableImages = isLoadingImages ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorProduct || isErrorImages ? (
     <strong>Error find data please try again...</strong>
   ) : (

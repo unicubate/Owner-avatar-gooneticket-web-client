@@ -10,6 +10,7 @@ import { useAuth } from "@/components/util/session/context-user";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { useInView } from "react-intersection-observer";
 import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const Gallery = () => {
   const { ref, inView } = useInView();
@@ -54,13 +55,7 @@ const Gallery = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableGallery = isLoadingGallery ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (

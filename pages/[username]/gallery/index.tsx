@@ -5,6 +5,7 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { useAuth } from "@/components/util/session/context-user";
 import { LoadingOutlined } from "@ant-design/icons";
 import PublicGallery from "@/components/gallery/public-gallery";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const GalleryUserPublic = () => {
   const { query } = useRouter();
@@ -17,13 +18,7 @@ const GalleryUserPublic = () => {
   } = GetOneUserPublicAPI({ username });
 
   const dataTablePosts = isLoadingUser ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
@@ -34,7 +29,7 @@ const GalleryUserPublic = () => {
     <>
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
-     
+
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
 

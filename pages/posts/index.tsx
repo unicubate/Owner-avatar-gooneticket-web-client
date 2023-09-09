@@ -28,6 +28,7 @@ const Posts = () => {
     userId: userStorage?.id,
     take: 2,
     sort: "DESC",
+    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ["posts", "infinite"],
   });
 

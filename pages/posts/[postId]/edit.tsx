@@ -1,10 +1,7 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
-import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
-import { ButtonInput } from "@/components/templates/button-input";
 import { GetOnePostAPI } from "@/api/post";
 import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
@@ -14,7 +11,7 @@ import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 
 const PostsCreate = () => {
-  const user = useAuth() as any;
+  const { userStorage } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);
@@ -25,7 +22,7 @@ const PostsCreate = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
     postId,
-    userId: user?.id,
+    userId: userStorage?.id,
     type: String(type),
   });
 

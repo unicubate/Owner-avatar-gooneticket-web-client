@@ -11,6 +11,7 @@ import ListPublicPostsComments from "@/components/post/list-public-posts-comment
 import { ButtonInput } from "@/components/templates/button-input";
 import { GetOneUserPublicAPI } from "@/api/user";
 import PublicListLastPosts from "@/components/post/public-last-posts";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const PostsShowUserPublic = () => {
   const { query } = useRouter();
@@ -31,13 +32,7 @@ const PostsShowUserPublic = () => {
 
   const dataTablePosts =
     isLoadingPost || isLoadingUser ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
+      <LoadingFile />
     ) : isErrorPost || isErrorUser ? (
       <strong>Error find data please try again...</strong>
     ) : (

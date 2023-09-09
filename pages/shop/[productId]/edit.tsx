@@ -1,16 +1,13 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Image, Input } from "antd";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { ButtonInput } from "@/components/templates/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
 import { GetUploadsAPI } from "@/api/upload";
-import { Alert, Space, Spin } from "antd";
+import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const ShopEdit = () => {
   const user = useAuth() as any;
@@ -42,13 +39,7 @@ const ShopEdit = () => {
 
   const dataTableProduct =
     isLoadingImageUploads ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
+      <LoadingFile />
     ) : isErrorFileUploads || isErrorImageUploads || isErrorProduct ? (
       <strong>Error find data please try again...</strong>
     ) : (

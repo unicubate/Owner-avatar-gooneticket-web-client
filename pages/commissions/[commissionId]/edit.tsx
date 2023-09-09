@@ -7,15 +7,16 @@ import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
 import { GetOneCommissionAPI } from "@/api/commision";
 import { GetUploadsAPI } from "@/api/upload";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const ShopEdit = () => {
-  const user = useAuth() as any;
+  const { userStorage } = useAuth() as any;
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
 
   const { data: commission, isError: isErrorCommission, isLoading: isLoadingCommission } = GetOneCommissionAPI({
     commissionId,
-    userId: user?.id,
+    userId: userStorage?.id,
   });
 
   const {
@@ -29,13 +30,7 @@ const ShopEdit = () => {
 
   const dataTableCommission =
     isLoadingImageUploads || isErrorCommission ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
+      <LoadingFile />
     ) : isErrorImageUploads ? (
       <strong>Error find data please try again...</strong>
     ) : (

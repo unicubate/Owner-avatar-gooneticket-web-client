@@ -8,6 +8,7 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { useAuth } from "@/components/util/session/context-user";
 import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const ShopUserPublic = () => {
   const userVisiter = useAuth() as any;
@@ -22,13 +23,7 @@ const ShopUserPublic = () => {
 
 
   const dataTableProducts = isLoadingUser ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (

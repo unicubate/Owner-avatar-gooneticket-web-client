@@ -95,6 +95,12 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 {item?.totalComment ?? 0}
               </span>
 
+              <button className="ml-1.5 tex-sm text-gray-700">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
 
               <button className="ml-1.5 tex-sm text-gray-700">
                 <TfiWorld />
@@ -103,13 +109,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 {item?.whoCanSee}
               </span>
               
-              <button className="ml-1.5 tex-sm text-gray-700">
-                <AiOutlineCalendar />
-              </button>
-              <span className="ml-1.5 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
-
 
             </div>
           </div>
