@@ -14,6 +14,9 @@ import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 import ListCarouselUpload from "./list-carousel-upload";
+import { BiMoney } from "react-icons/bi";
+import { BsCalendar } from "react-icons/bs";
+import { AiOutlineCalendar } from "react-icons/ai";
 
 type Props = {
   item?: CommissionModel;
@@ -66,11 +69,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
     status,
     data: dataImages,
   } = GetUploadsAPI({
-    commissionId: item?.id,
+    productId: item?.id,
     uploadType: "image",
   });
 
-  if(status === 'loading'){
+  if (status === 'loading') {
     <p>loading...</p>
   }
 
@@ -79,35 +82,70 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
       <div key={index} className="py-5 divide-gray-200">
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
-            {/* <Avatar
-              size={150}
+            <Avatar
+              size={90}
               shape="square"
-              src={viewOneFileUploadAPI(String(dataImages?.data[0]?.path))}
+              src={viewOneFileUploadAPI({ folder: 'products', fileName: String(dataImages?.data[0]?.path) })}
               alt={item?.title}
-            /> */}
+            />
           </div>
 
-          <div className="flex-1 min-w-0 ml-4 cursor-pointer">
+          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
             {item?.title ? (
-              <p className="text-sm font-bold text-gray-600">
+              <p className="text-lg font-bold text-gray-600">
                 <ReadMore html={String(item?.title ?? "")} value={50} />
               </p>
             ) : null}
-            {item?.price ? (
+            {/* {item?.price ? (
               <p className="mt-4 text-sm font-medium text-gray-600">
                 {item?.price} {item?.currency?.symbol}
               </p>
-            ) : null}
+            ) : null} */}
 
-            <p className="mt-4 text-sm font-medium text-gray-500">
+            {/* <p className="mt-4 text-sm font-medium text-gray-500">
               {formateDateDayjs(item?.createdAt as Date)}
-            </p>
+            </p> */}
+
+            <div className="flex mt-10 items-center">
+            {/* {item?.price ? (
+              <p className="text-sm font-medium text-gray-600">
+                {item?.price} {item?.currency?.symbol}
+              </p>
+            ) : null} */}
+
+              <button className="text-lg font-normal">
+                <BiMoney />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+              {item?.price} {item?.currency?.symbol}
+              </span>
+              <button className="ml-2 text-lg font-normal">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+              {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+
+              {/* <button className="ml-2 text-lg font-bold">
+                <BiComment />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+              {item?.totalComment ?? 0}
+              </span>
+              <button className="ml-2 text-lg font-bold">
+                <TfiWorld />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {item?.whoCanSee}
+              </span> */}
+
+            </div>
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => router.push(`/commissions/${item?.id}/edit`)}
+                onClick={() => router.push(`/shop/${item?.id}/edit`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />

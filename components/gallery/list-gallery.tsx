@@ -72,7 +72,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
-              size={150}
+              size={100}
               shape="square"
               src={getOneFileGalleryAPI(String(item?.image))}
               alt={item?.title}

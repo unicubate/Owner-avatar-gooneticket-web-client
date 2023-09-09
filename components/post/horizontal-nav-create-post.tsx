@@ -35,7 +35,7 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-3 sm:gap-8 xl:gap-12">
+      <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-3 xl:grid-cols-3 sm:gap-8 xl:gap-12">
         {navigation.map((item: any, index: number) => {
           return (
             <div

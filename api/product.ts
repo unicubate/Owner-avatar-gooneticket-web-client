@@ -33,8 +33,8 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("price", `${payload.price ?? ""}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
       data.append("limitSlot", `${payload.limitSlot ?? ""}`);
-      data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
-      data.append("isChooseQuantity", `${payload.isChooseQuantity}`);
+      data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
+      data.append("enableChooseQuantity", `${payload.enableChooseQuantity}`);
       data.append(
         "messageAfterPayment",
         `${payload.messageAfterPayment ?? ""}`

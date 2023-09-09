@@ -2,25 +2,26 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Spin, Tooltip } from "antd";
-import {
-  FieldTimeOutlined, LoadingOutlined,
-} from "@ant-design/icons";
+import { Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
+import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdDeleteOutline, MdFavoriteBorder, MdOutlineFavorite, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "../shop/list-carousel-upload";
+import { GetUploadsAPI } from "@/api/upload";
+import { BiComment } from "react-icons/bi";
+import { PiLockKey } from "react-icons/pi";
+import { PostModel } from "@/types/post";
+import Link from "next/link";
+import { TfiWorld } from "react-icons/tfi";
 
 type Props = {
-  item?: CommissionModel;
+  item?: PostModel;
   index: number;
 };
 
-const ListCommissions: React.FC<Props> = ({ item, index }) => {
+const ListPosts: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -78,36 +79,58 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     <>
       <div key={index} className="py-5 divide-gray-200">
         <div className="flex items-center">
-          <div className="relative flex-shrink-0 cursor-pointer">
+          {/* <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
               size={100}
               shape="square"
               src={viewOneFileUploadAPI({ folder: 'commissions', fileName: String(dataImages?.data[0]?.path) })}
               alt={item?.title}
             />
-          </div>
+          </div> */}
 
-          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
+          <div className="flex-1 min-w-0 cursor-pointer">
             {item?.title ? (
               <p className="text-lg font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={50} />
-              </p>
-            ) : null}
-            {item?.price ? (
-              <p className="mt-4 text-sm font-medium text-gray-600">
-                {item?.price} {item?.currency?.symbol}
+                <ReadMore html={String(item?.title ?? "")} value={100} />
               </p>
             ) : null}
 
             <p className="mt-4 text-sm font-medium text-gray-500">
               {formateDateDayjs(item?.createdAt as Date)}
             </p>
+
+
+            <div className="flex mt-4 items-center">
+
+              <button className="text-lg font-normal">
+                <MdFavoriteBorder />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {item?.totalLike ?? 0}
+              </span>
+
+              <button className="ml-2 text-lg font-bold">
+                <BiComment />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+              {item?.totalComment ?? 0}
+              </span>
+              <button className="ml-2 text-lg font-bold">
+                <TfiWorld />
+              </button>
+              <span className="ml-2 font-normal text-sm">
+                {item?.whoCanSee}
+              </span>
+
+            </div>
+
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => router.push(`/commissions/${item?.id}/edit`)}
+                onClick={() => router.push(`/posts/${item?.id
+                }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
@@ -129,4 +152,4 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   );
 };
 
-export default ListCommissions;
+export default ListPosts;

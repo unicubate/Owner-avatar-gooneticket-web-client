@@ -31,7 +31,7 @@ export const CreateOrUpdateOneCommissionAPI = ({
       data.append("title", `${payload.title ?? ""}`);
       data.append("price", `${payload.price ?? ""}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
-      data.append("isLimitSlot", `${payload.isLimitSlot ?? ""}`);
+      data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
       data.append("limitSlot", `${payload.limitSlot ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
       data.append(

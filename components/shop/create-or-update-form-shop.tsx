@@ -41,13 +41,17 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  limitSlot: yup.number().nullable(),
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
-  discountId: yup.string().when("isDiscount", (isDiscount, schema) => {
-    if (isDiscount[0] === true) return schema.required("discount required");
+  limitSlot: yup.number().when("enableLimitSlot", (enableLimitSlot, schema) => {
+    if (enableLimitSlot[0] === true)
+      return schema.min(1).required("limit slots required");
+    return schema.nullable();
+  }),
+  discountId: yup.string().when("enableDiscount", (enableDiscount, schema) => {
+    if (enableDiscount[0] === true) return schema.required("discount required");
     return schema.nullable();
   }),
 });
@@ -76,7 +80,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const watchIsLimitSlot = watch("isLimitSlot", false);
+  const watchEnableLimitSlot = watch("enableLimitSlot", false);
   const watchEnableDiscount = watch("enableDiscount", false);
 
   const { data: dataDiscounts } = GetAllDiscountsAPI();
@@ -88,11 +92,11 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "title",
         "price",
         "urlMedia",
-        "isLimitSlot",
+        "enableLimitSlot",
         "limitSlot",
         "description",
         "moreDescription",
-        "isChooseQuantity",
+        "enableChooseQuantity",
         "enableDiscount",
         "discountId",
         "messageAfterPayment",
@@ -218,6 +222,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                     <>
                       <div className="text-center justify-center mx-auto">
                         <Upload
+                          multiple
                           name="attachmentImages"
                           listType="picture-card"
                           fileList={imageList}
@@ -401,13 +406,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
-                      name="isLimitSlot"
+                      name="enableLimitSlot"
                       label=""
                     />
                   </div>
                 </div>
               </div>
-              {watchIsLimitSlot ? (
+              {watchEnableLimitSlot ? (
                 <div className="mb-1">
                   <NumberInput
                     control={control}
@@ -478,7 +483,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
-                      name="isChooseQuantity"
+                      name="enableChooseQuantity"
                       label=""
                     />
                   </div>

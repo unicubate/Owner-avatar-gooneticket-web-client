@@ -107,7 +107,7 @@ const Commissions = () => {
                         </p>
                         {/* <p className="mt-1 text-sm font-medium text-gray-500">Commissions are currently active. Your fans can request them from your page.</p> */}
                         <p className="mt-1 text-sm font-medium text-gray-500">Your commissions are currently private and are not available for booking.</p>
-                        
+
                       </div>
 
                       <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
@@ -130,7 +130,7 @@ const Commissions = () => {
 
                 <div className="flow-root">
                   <div className="mt-8 overflow-hidden bg-white border border-gray-200">
-                    <div className="px-4 py-5">
+                    <div className="px-4 py-8">
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
@@ -155,8 +155,27 @@ const Commissions = () => {
                         {dataTableCommissions}
                       </div>
                     </div>
-
                   </div>
+                  
+                  {hasNextPage && (
+                    <div className="mt-4 text-center justify-center mx-auto">
+                      <div className="mt-4 sm:mt-0">
+                        <ButtonInput
+                          ref={ref}
+                          onClick={() => fetchNextPage()}
+                          shape="default"
+                          type="button"
+                          size="large"
+                          loading={isFetchingNextPage ? true : false}
+                          color={"indigo"}
+                          minW="fit"
+                        >
+                          Load More
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               </div>
 

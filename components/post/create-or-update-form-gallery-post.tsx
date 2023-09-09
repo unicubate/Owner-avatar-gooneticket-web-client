@@ -18,6 +18,7 @@ import { Alert, Avatar, Button, Checkbox, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
+import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 
 type Props = {
   postId?: string;
@@ -204,13 +205,13 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ postId, post }) => {
                     />
                   </div>
                   <div className="mb-2">
-                    <TextAreaInput
-                      row={4}
+                    <TextareaReactQuillInput
                       control={control}
-                      label="Description"
                       name="description"
-                      placeholder="Description"
+                      label="Description (optional)"
+                      placeholder="description"
                       errors={errors}
+                      className="h-36"
                     />
                   </div>
                 </div>

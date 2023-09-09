@@ -39,8 +39,8 @@ export type CommissionFormModel = {
   image: string;
   price?: string;
   urlMedia: string;
-  isLimitSlot: boolean;
-  limitSlot: string;
+  limitSlot: number;
+  enableLimitSlot: boolean;
   allowDownload: string;
   attachment: any;
   newFileLists: any;

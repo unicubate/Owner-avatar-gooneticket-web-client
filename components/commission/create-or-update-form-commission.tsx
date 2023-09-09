@@ -38,9 +38,9 @@ const schema = yup.object({
   price: yup.number().required(),
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().min(10, "Minimum 10 symbols").required(),
-  limitSlot: yup.number().when("isLimitSlot", (isLimitSlot, schema) => {
-    if (isLimitSlot[0] === true)
-      return schema.min(1).required("discount required");
+  limitSlot: yup.number().when("enableLimitSlot", (enableLimitSlot, schema) => {
+    if (enableLimitSlot[0] === true)
+      return schema.min(1).required("limit slots required");
     return schema.nullable();
   }),
 });
@@ -67,7 +67,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const watchIsLimitSlot = watch("isLimitSlot", false);
+  const watchEnableLimitSlot = watch("enableLimitSlot", false);
 
   useEffect(() => {
     if (commission) {
@@ -75,7 +75,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         "title",
         "price",
         "urlMedia",
-        "isLimitSlot",
+        "enableLimitSlot",
         "limitSlot",
         "description",
         "messageAfterPayment",
@@ -292,13 +292,13 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
                     <SwitchInput
                       control={control}
-                      name="isLimitSlot"
+                      name="enableLimitSlot"
                       label=""
                     />
                   </div>
                 </div>
               </div>
-              {watchIsLimitSlot ? (
+              {watchEnableLimitSlot ? (
                 <div className="mb-1">
                   <NumberInput
                     control={control}

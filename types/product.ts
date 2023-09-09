@@ -22,8 +22,8 @@ export type ProductModel = {
   description: string;
   messageAfterPayment: string;
   moreDescription: string;
-  isChooseQuantity: boolean;
-  isLimitSlot: boolean;
+  enableChooseQuantity: boolean;
+  enableLimitSlot: boolean;
   enableDiscount: boolean;
   limitSlot: string;
   status: string;
@@ -54,15 +54,15 @@ export type ProductModel = {
 
 export type ProductFormModel = {
   title: string;
-  isChooseQuantity: boolean;
+  enableChooseQuantity: boolean;
   urlMedia: string;
   price: number;
   messageAfterPayment: string;
   description: string;
   discountId: string;
-  limitSlot: number;
-  isLimitSlot: boolean;
   enableDiscount: boolean;
+  limitSlot: number;
+  enableLimitSlot: boolean;
   attachments: any;
   attachment: any;
   fileList: any;

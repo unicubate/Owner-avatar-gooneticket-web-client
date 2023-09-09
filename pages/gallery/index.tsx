@@ -104,7 +104,7 @@ const Gallery = () => {
                 <div className="border-gray-200 lg:order-1 lg:col-span-10">
                   <div className="flow-root">
                     <div className="mt-8 overflow-hidden bg-white border border-gray-200">
-                      <div className="px-4 py-5">
+                      <div className="px-4 py-8">
                         <div className="sm:flex sm:items-center sm:justify-between">
                           <div className="mt-4 sm:mt-0">
                             <ButtonInput
