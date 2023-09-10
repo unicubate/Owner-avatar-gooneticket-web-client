@@ -1,18 +1,18 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Image, Input, Spin } from "antd";
+import { Input, Spin } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/templates/button-input";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth } from "@/components/util/session/context-user";
 import { useInView } from "react-intersection-observer";
 import { GetInfiniteProductsAPI } from "@/api/product";
 import { EmptyData } from "@/components/templates/empty-data";
 import ListProductsShop from "@/components/shop/list-products-shop";
 import { EnableShop } from "@/components/shop/enable-shop";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const Shops = () => {
   const router = useRouter();
@@ -56,13 +56,7 @@ const Shops = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableProducts = isLoadingGallery ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
@@ -101,7 +95,7 @@ const Shops = () => {
                             }
                             shape="default"
                             type="button"
-                            size="large"
+                            size="normal"
                             loading={false}
                             color={"indigo"}
                           >

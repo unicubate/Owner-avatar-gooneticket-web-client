@@ -4,9 +4,10 @@ import DOMPurify from "dompurify";
 
 interface HtmlParserProps {
   html: string;
+  value?: number;
 }
 
-const HtmlParser: React.FC<HtmlParserProps> = ({ html }) => {
+const HtmlParser: React.FC<HtmlParserProps> = ({ html, value }) => {
   const options: HTMLReactParserOptions = {
     replace: (node: any) => {
       if (node.name === "a") {
@@ -22,7 +23,7 @@ const HtmlParser: React.FC<HtmlParserProps> = ({ html }) => {
     },
   };
 
-  const cleanHtmlString = linkifyHtml(html, {
+  const cleanHtmlString = linkifyHtml(value ? html.slice(0, value) : html, {
     className: {
       url: "text-blue-500 hover:underline",
     },

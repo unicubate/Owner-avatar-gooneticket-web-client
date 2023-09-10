@@ -250,6 +250,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/products/view`,
     method: GET,
   },
+  deleteOneProduct: {
+    endpoint: `${baseUrl}/products/:productId`,
+    method: DELETE,
+  },
 
   /****************** Commissions route */
   getCommissions: {

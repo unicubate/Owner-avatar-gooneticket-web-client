@@ -61,7 +61,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   uploadImages,
   uploadFiles,
 }) => {
-  const router = useRouter();
+  const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -147,6 +147,9 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         ...payload,
         productId: product?.id,
       });
+      if (!product?.id) {
+        push(`/shop`)
+      }
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -542,7 +545,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             <div className="flex items-center mt-4 mb-4 space-x-4">
               <ButtonCancelInput shape="default" size="large"
                 loading={loading}
-                onClick={() => router.back()}>
+                onClick={() => back()}>
                 Cancel
               </ButtonCancelInput>
               <ButtonInput

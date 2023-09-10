@@ -21,6 +21,8 @@ import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
 import { ProductModel } from "@/types/product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
+import { ReadMore } from "@/utils/read-more";
+import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   item?: ProductModel;
@@ -30,32 +32,62 @@ type Props = {
 const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
   const userVisiter = useAuth() as any;
   const router = useRouter();
+
+  const {
+    status,
+    data: dataImages,
+  } = GetUploadsAPI({
+    userId: item?.userId,
+    productId: item?.id,
+    uploadType: "image",
+  });
+
+  if (status === 'loading') {
+    <p>loading...</p>
+  }
   return (
     <>
       <div key={item?.id} className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-200 rounded-md hover:shadow-xl">
-        <Image
-          preview={false}
-          className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-          src="https://picsum.photos/seed/UGlAfLt/640/480"
-          alt=""
-        />
+        {dataImages?.data.length > 0 ?
+          <Image
+            preview={false}
+            height={200}
+            width="100%"
+            className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
+            src={viewOneFileUploadAPI({ folder: 'products', fileName: String(dataImages?.data[0]?.path) }) as string}
+            alt=""
+          /> : null}
 
-        <div className="flex flex-col flex-1 p-4">
+
+        <div className="flex flex-col flex-1 p-3">
           <div className="flex items-center flex-shrink-0">
-            <p className="text-2xl font-bold text-gray-900">$56.93</p>
-            <p className="text-lg text-gray-400 font-bold ml-1">
-              {" "}
-              <del> $79.49 </del>
+
+            <p className="text-2xl font-bold text-gray-900">
+              {item?.priceDiscount ?? ""}
             </p>
+            <p className="text-lg font-bold text-gray-900">
+              {item?.currency?.symbol ?? ""}
+            </p>
+
+            {item?.enableDiscount ? (
+              <>
+                <p className="ml-2 text-lg font-bold text-gray-400">
+                  <del> {item?.price ?? ""} </del>
+                </p>
+                <p className="text-lg font-bold text-gray-400">
+                  <del> {item?.currency?.symbol ?? ""} </del>
+                </p>
+              </>
+            ) : null}
           </div>
-          <h3 className="text-sm sm:text-base font-bold text-gray-900 mt-2.5 flex-1 hover:text-blue-600 transition-all duratin-200">
-            <a href="#" title="">
-              {" "}
-              Columbia Mens Bahama Vent PFG Boat Shoe{" "}
-            </a>
+
+          <h3 className="text-sm sm:text-base font-bold text-gray-900 mt-2 flex-1 hover:text-blue-600 transition-all duratin-200">
+            <Link href={`/shop/${item?.slug}`} title={item?.title}>
+              <ReadMore html={String(item?.title ?? "")} value={60} />
+            </Link>
           </h3>
-          <p className="mt-2 text-base font-normal text-gray-600 font-pj">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+          <p className="mt-2 text-base font-normal text-gray-600">
+            <HtmlParser html={String(item?.description ?? "")} value={60} />
           </p>
           <div className="sm:flex flex-col sm:items-end sm:justify-between">
             <div className="mt-2">

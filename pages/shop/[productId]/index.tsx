@@ -19,6 +19,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -53,13 +54,7 @@ const ShopView = () => {
 
   const dataTableImages =
     isLoadingImages && isLoadingProduct ? (
-      <Spin
-        tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-        size="large"
-      >
-        <div className="content" />
-      </Spin>
+      <LoadingFile />
     ) : isErrorProduct || isErrorImages ? (
       <strong>Error find data please try again...</strong>
     ) : (

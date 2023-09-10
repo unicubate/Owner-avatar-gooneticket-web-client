@@ -20,7 +20,7 @@ export const CreateOrUpdateOneProductAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["product"];
+  const queryKey = ["products"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (
@@ -75,6 +75,49 @@ export const CreateOrUpdateOneProductAPI = ({
           body: data,
         });
       }
+    },
+    {
+      onSettled: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onSuccess: async () => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onSuccess) {
+          onSuccess();
+        }
+      },
+      onError: async (error: any) => {
+        await queryClient.invalidateQueries({ queryKey });
+        if (onError) {
+          onError(error);
+        }
+      },
+    }
+  );
+
+  return result;
+};
+
+export const DeleteOneProductAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ["products"];
+  const queryClient = useQueryClient();
+  const result = useMutation(
+    async (payload: { productId: string }): Promise<any> => {
+      const { productId } = payload;
+
+      return await makeApiCall({
+        action: "deleteOneProduct",
+        urlParams: { productId },
+      });
     },
     {
       onSettled: async () => {

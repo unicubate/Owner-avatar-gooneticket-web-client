@@ -2,24 +2,20 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Spin, Tooltip } from "antd";
-import {
-  FieldTimeOutlined, LoadingOutlined,
-} from "@ant-design/icons";
+import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
+import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import { CommissionModel } from "@/types/commission";
+import { MdDeleteOutline, MdOutlineModeEdit, MdOutlineRemoveRedEye } from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "./list-carousel-upload";
 import { BiMoney } from "react-icons/bi";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { ProductModel } from "@/types/product";
+import { DeleteOneProductAPI } from "@/api/product";
 
 type Props = {
-  item?: CommissionModel;
+  item?: ProductModel;
   index: number;
 };
 
@@ -27,7 +23,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const saveMutation = DeleteOnePostAPI({
+  const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => { },
     onError: (error?: any) => { },
   });
@@ -46,9 +42,9 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ postId: item?.id });
+          await saveMutation({ productId: item?.id });
           AlertSuccessNotification({
-            text: "Image deleted successfully",
+            text: "Product deleted successfully",
             className: "info",
             gravity: "top",
             position: "center",
@@ -112,20 +108,37 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               <button className="text-lg font-normal">
                 <BiMoney />
               </button>
-              <span className="ml-2 font-normal text-sm">
-              {item?.price} {item?.currency?.symbol}
+              <span className="ml-2 text-sm font-bold">
+                {item?.priceDiscount} {item?.currency?.symbol}
               </span>
+
+              {item?.enableDiscount ? (
+                <span className="ml-2 text-sm font-normal text-gray-500">
+                  <del>{item?.price} {item?.currency?.symbol}</del>
+                </span>
+              ) : null}
+
+
               <button className="ml-2 text-lg font-normal">
                 <AiOutlineCalendar />
               </button>
-              <span className="ml-2 font-normal text-sm">
-              {formateDateDayjs(item?.createdAt as Date)}
+              <span className="ml-2 text-sm font-normal">
+                {formateDateDayjs(item?.createdAt as Date)}
               </span>
 
             </div>
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
+            <Tooltip placement="bottomRight" title={"View"}>
+              <button
+                onClick={() => router.push(`/shop/${item?.id}/edit`)}
+                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+              >
+                <MdOutlineRemoveRedEye />
+              </button>
+            </Tooltip>
+
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
