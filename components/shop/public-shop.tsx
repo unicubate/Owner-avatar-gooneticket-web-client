@@ -6,6 +6,8 @@ import { LoadingOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicShop from "./list-public-shop";
+import { GetInfiniteProductsAPI } from "@/api/product";
+import { LoadingFile } from "../templates/loading-file";
 
 type Props = {
   userId: string;
@@ -21,12 +23,12 @@ const PublicShop: React.FC<Props> = ({ userId }) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfinitePostsAPI({
+  } = GetInfiniteProductsAPI({
     take: 10,
     sort: "DESC",
     userId: userId,
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['posts', "infinite"]
+    status: 'ACTIVE',
+    queryKey: ['products', "infinite"]
   });
 
   useEffect(() => {
@@ -52,13 +54,7 @@ const PublicShop: React.FC<Props> = ({ userId }) => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableProducts = isLoadingPosts ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorPosts ? (
     <strong>Error find data please try again...</strong>
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (

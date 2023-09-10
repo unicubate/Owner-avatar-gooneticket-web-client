@@ -27,6 +27,7 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     take: 10,
     sort: "DESC",
     userId: userId,
+    status: 'ACTIVE',
     typeIds: ['GALLERY'],
     queryKey: ['gallery-posts', "infinite"]
   });

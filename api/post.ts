@@ -228,6 +228,7 @@ export const getPostsAPI = async (
   payload: {
     userId: string;
     type?: PostType;
+    status?: string;
     typeIds?: string[];
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
@@ -240,12 +241,13 @@ export const getPostsAPI = async (
 export const GetInfinitePostsAPI = (payload: {
   userId: string;
   take: number;
+  status?: string;
   sort: SortModel;
   type?: PostType;
   typeIds?: string[];
   queryKey: string[];
 }) => {
-  const { userId, take, sort, type, typeIds, queryKey } = payload;
+  const { userId, take, sort, status, type, typeIds, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -256,6 +258,7 @@ export const GetInfinitePostsAPI = (payload: {
         sort,
         type,
         typeIds,
+        status: status?.toUpperCase(),
         page: pageParam,
       }),
     keepPreviousData: true,

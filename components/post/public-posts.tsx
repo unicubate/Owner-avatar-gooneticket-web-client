@@ -6,6 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicPosts from "./list-public-posts";
+import { LoadingFile } from "../templates/loading-file";
 
 type Props = {
   userId: string;
@@ -25,6 +26,7 @@ const PublicPosts: React.FC<Props> = ({ userId }) => {
     take: 10,
     sort: "DESC",
     userId: userId,
+    status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['posts', "infinite"]
   });
@@ -52,13 +54,7 @@ const PublicPosts: React.FC<Props> = ({ userId }) => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTablePosts = isLoadingPosts ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorPosts ? (
     <strong>Error find data please try again...</strong>
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
