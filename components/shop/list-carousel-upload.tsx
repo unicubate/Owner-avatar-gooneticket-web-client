@@ -38,7 +38,7 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads, folder }) => {
                 <Image
                   height="350px"
                   width="100%"
-                  preview={false}
+                  preview={true}
                   className="object-cover w-full h-full"
                   style={contentStyle}
                   src={`${viewOneFileUploadAPI({
