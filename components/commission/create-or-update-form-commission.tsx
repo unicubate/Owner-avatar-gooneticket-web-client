@@ -21,7 +21,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { CommissionFormModel } from "@/types/commission";
-import { CreateOrUpdateOneCommissionAPI } from "@/api/commision";
+import { CreateOrUpdateOneCommissionAPI } from "@/api/commission";
 import { useRouter } from "next/router";
 import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 

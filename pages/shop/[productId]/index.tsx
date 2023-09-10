@@ -63,7 +63,7 @@ const ShopView = () => {
     ) : isErrorProduct || isErrorImages ? (
       <strong>Error find data please try again...</strong>
     ) : (
-      <ListCarouselUpload uploads={dataImages?.data} />
+      <ListCarouselUpload uploads={dataImages?.data} folder="products" />
     );
 
   return (

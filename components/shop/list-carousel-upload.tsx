@@ -2,12 +2,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef } from "react";
 import { Carousel, Image } from "antd";
-import { UploadModel } from "@/types/upload";
+import { UploadFolderType, UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   uploads: UploadModel[];
+  folder: UploadFolderType;
 };
 
 const contentStyle: React.CSSProperties = {
@@ -18,7 +19,7 @@ const contentStyle: React.CSSProperties = {
   background: "#364d79",
 };
 
-const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
+const ListCarouselUpload: React.FC<Props> = ({ uploads, folder }) => {
   const ref = useRef();
 
   return (
@@ -39,7 +40,7 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads }) => {
                   preview={false}
                   className="object-cover w-full h-full"
                   style={contentStyle}
-                  src={`${viewOneFileUploadAPI({ folder: 'products', fileName: item?.path })}`}
+                  src={`${viewOneFileUploadAPI({ folder: folder, fileName: item?.path })}`}
                   alt=""
                 />
               </div>

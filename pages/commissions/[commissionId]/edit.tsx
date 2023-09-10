@@ -5,7 +5,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
-import { GetOneCommissionAPI } from "@/api/commision";
+import { GetOneCommissionAPI } from "@/api/commission";
 import { GetUploadsAPI } from "@/api/upload";
 import { LoadingFile } from "@/components/templates/loading-file";
 

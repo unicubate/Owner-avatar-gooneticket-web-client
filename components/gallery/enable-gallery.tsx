@@ -12,7 +12,7 @@ type Props = {
 };
 
 const EnableGallery: React.FC<Props> = ({ profile }) => {
-  const [isOpen, setIsOpen] = useState(profile?.enableShop)
+  const [isOpen, setIsOpen] = useState(profile?.enableGallery)
 
 
   // Create or Update data

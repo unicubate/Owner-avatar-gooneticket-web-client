@@ -1,9 +1,8 @@
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/session/context-user";
-import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/templates/loading-file";
+import { PublicCommissions } from "@/components/commission/public-commissions";
 
 const CommissionsUserPublic = () => {
   const { query, push } = useRouter();
@@ -16,12 +15,12 @@ const CommissionsUserPublic = () => {
   } = GetOneUserPublicAPI({ username });
 
 
-  const dataTableProducts = isLoadingUser ? (
+  const publicCommissions = isLoadingUser ? (
     <LoadingFile />
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicShop userId={user?.id} />
+    <PublicCommissions userId={user?.id} />
   );
 
   if (user?.profile?.enableCommission === false) {
@@ -32,10 +31,14 @@ const CommissionsUserPublic = () => {
       {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
-
-          {dataTableProducts}
-
+        <div className="max-w-2xl mx-auto py-6">
+          <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
+            <div className="flow-root">
+              <div className="mt-4 mx-auto sm:px-6 md:px-8">
+                {publicCommissions}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

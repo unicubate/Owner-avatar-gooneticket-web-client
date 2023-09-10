@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { Spin } from "antd";
+import { Button, Image, Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api/post";
-import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
-import ListPublicGallery from "./list-public-gallery";
+import { GetInfiniteCommissionsAPI } from "@/api/commission";
+import ListPublicCommissions from "./list-public-commissions";
 import { LoadingFile } from "../templates/loading-file";
 
 
@@ -13,7 +14,7 @@ type Props = {
   userId: string;
 };
 
-const PublicGallery: React.FC<Props> = ({ userId }) => {
+const PublicCommissions: React.FC<Props> = ({ userId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -23,12 +24,12 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfinitePostsAPI({
+  } = GetInfiniteCommissionsAPI({
     take: 10,
     sort: "DESC",
     userId: userId,
-    typeIds: ['GALLERY'],
-    queryKey: ['gallery-posts', "infinite"]
+    status: 'ACTIVE',
+    queryKey: ['commissions', "infinite"]
   });
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTablePosts = isLoadingPosts ? (
+  const dataTableCommissions = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
     <strong>Error find data please try again...</strong>
@@ -63,15 +64,15 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     dataPosts.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPublicGallery item={item} key={index} commentTake={10} />
+        <ListPublicCommissions item={item} key={index} />
       ))
   );
 
   return (
     <>
-      {dataTablePosts}
+      {dataTableCommissions}
 
-      <div className="mt-4 text-center justify-center mx-auto">
+      <div className="mt-6 text-center justify-center mx-auto">
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput
@@ -93,4 +94,4 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
   );
 };
 
-export default PublicGallery;
+export { PublicCommissions };

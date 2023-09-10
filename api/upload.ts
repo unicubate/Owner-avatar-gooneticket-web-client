@@ -1,3 +1,4 @@
+import { UploadFolderType } from "@/types/upload";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { useQuery } from "@tanstack/react-query";
 
@@ -23,7 +24,7 @@ export const viewOneFileUploadAPI = ({
   folder,
 }: {
   fileName: string;
-  folder: "posts" | "galleries" | "products" | "commissions";
+  folder: UploadFolderType;
 }) =>
   fileName
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/view/${folder}/${fileName}`
@@ -34,7 +35,7 @@ export const downloadOneFileUploadAPI = ({
   folder,
 }: {
   fileName: string;
-  folder: "posts" | "galleries" | "products" | "commissions";
+  folder: UploadFolderType;
 }) =>
   fileName && folder
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/download/${folder}/${fileName}`

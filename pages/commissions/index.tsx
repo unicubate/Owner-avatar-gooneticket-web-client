@@ -10,8 +10,9 @@ import { ListCommissions } from "@/components/commission/list-commissions";
 import { useInView } from "react-intersection-observer";
 import { useAuth } from "@/components/util/session/context-user";
 import { useEffect, useState } from "react";
-import { GetInfiniteCommissionsAPI } from "@/api/commision";
+import { GetInfiniteCommissionsAPI } from "@/api/commission";
 import { EnableCommission } from "@/components/commission/enable-commission";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const Commissions = () => {
   const router = useRouter();
@@ -55,13 +56,7 @@ const Commissions = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableCommissions = isLoadingGallery ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (

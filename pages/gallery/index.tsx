@@ -108,7 +108,7 @@ const Gallery = () => {
                               onClick={() => setOpenModal(true)}
                               shape="default"
                               type="button"
-                              size="large"
+                              size="normal"
                               loading={false}
                               color={"indigo"}
                             >
