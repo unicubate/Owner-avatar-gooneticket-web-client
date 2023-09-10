@@ -1,8 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { Button, Image, Spin } from "antd";
-import { GetInfinitePostsAPI } from "@/api/post";
-import { LoadingOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicShop from "./list-public-shop";

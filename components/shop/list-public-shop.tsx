@@ -79,6 +79,10 @@ const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
                 </p>
               </>
             ) : null}
+
+            <p className="ml-auto text-lg font-bold">
+              <Button shape="circle" icon={<ShoppingCartOutlined />} />
+            </p>
           </div>
 
           <h3 className="text-sm sm:text-base font-bold text-gray-900 mt-2 flex-1 hover:text-blue-600 transition-all duratin-200">
@@ -89,11 +93,11 @@ const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
           <p className="mt-2 text-base font-normal text-gray-600">
             <HtmlParser html={String(item?.description ?? "")} value={60} />
           </p>
-          <div className="sm:flex flex-col sm:items-end sm:justify-between">
+          {/* <div className="sm:flex flex-col sm:items-end sm:justify-between">
             <div className="mt-2">
               <Button shape="circle" icon={<ShoppingCartOutlined />} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
