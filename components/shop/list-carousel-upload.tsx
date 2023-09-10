@@ -1,4 +1,4 @@
-"use client"
+"use client";
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useRef } from "react";
 import { Carousel, Image } from "antd";
@@ -12,8 +12,6 @@ type Props = {
 };
 
 const contentStyle: React.CSSProperties = {
-  height: "100%",
-  width: "100%",
   lineHeight: "50px",
   textAlign: "center",
   background: "#364d79",
@@ -33,14 +31,20 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads, folder }) => {
           pauseOnHover={true}
           draggable
         >
-          {uploads && uploads?.length > 0 &&
+          {uploads &&
+            uploads?.length > 0 &&
             uploads?.map((item: any, index: number) => (
               <div key={index}>
                 <Image
+                  height="350px"
+                  width="100%"
                   preview={false}
                   className="object-cover w-full h-full"
                   style={contentStyle}
-                  src={`${viewOneFileUploadAPI({ folder: folder, fileName: item?.path })}`}
+                  src={`${viewOneFileUploadAPI({
+                    folder: folder,
+                    fileName: item?.path,
+                  })}`}
                   alt=""
                 />
               </div>
