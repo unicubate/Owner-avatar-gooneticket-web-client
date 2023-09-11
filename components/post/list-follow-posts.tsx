@@ -21,6 +21,7 @@ import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
 import { GetUploadsAPI, downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import ListCarouselUpload from "../shop/list-carousel-upload";
 
 type Props = {
   item?: PostModel;
@@ -87,25 +88,16 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               <ReactPlayer
                 className="mr-auto"
                 url={item?.urlMedia}
+                height="350px"
                 width="100%"
-                height="400px"
                 controls
               />
             </div>
           ) : null}
 
           {item?.uploadsImage?.length > 0 ? (
-            <div className="mt-2">
-              <Image
-                height="400px"
-                width="100%"
-                preview={false}
-                src={`${viewOneFileUploadAPI({
-                  folder: 'posts',
-                  fileName: String(item?.uploadsImage[0]?.path)
-                })}`}
-                alt={item?.title}
-              />
+            <div className="mt-2 text-center justify-center mx-auto">
+              <ListCarouselUpload uploads={item?.uploadsImage} folder="posts" preview={false} />
             </div>
           ) : null}
 

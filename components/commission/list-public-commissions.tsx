@@ -69,7 +69,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
           </p>
 
           <div className="mt-2 text-center justify-center mx-auto">
-            <ListCarouselUpload uploads={dataImages?.data} folder="commissions" />
+            <ListCarouselUpload uploads={dataImages?.data} folder="commissions" preview={false} />
           </div>
 
           <div className="mt-6 text-center justify-center mx-auto">
