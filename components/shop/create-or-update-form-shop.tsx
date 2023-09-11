@@ -138,10 +138,10 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
 
       const payload = {
         ...data,
-        newImageLists,
         imageList,
         newFileLists,
         fileList,
+        newImageLists,
       };
       await saveMutation.mutateAsync({
         ...payload,

@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const GetUploadsAPI = (payload: {
   userId?: string;
+  postId?: string;
   productId?: string;
   commissionId?: string;
   uploadType?: "image" | "file";

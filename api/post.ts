@@ -85,30 +85,47 @@ export const CreateOrUpdateOnePostAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation(
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
-      const { postId } = payload;
+      const { postId, newImageLists, newFileLists } = payload;
       let data = new FormData();
       data.append("type", `${payload.type ?? ""}`);
       data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
-      data.append("categories", `${payload.categories ?? ""}`);
+      data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
       data.append("description", `${payload.description ?? ""}`);
 
-      payload?.attachment?.fileList?.length > 0 &&
-        payload?.attachment?.fileList?.forEach((file: any) => {
-          data.append("attachment", file?.originFileObj as RcFile);
+      payload?.fileList?.length > 0 &&
+        payload?.fileList?.forEach((file: any) => {
+          data.append("attachmentFiles", file?.originFileObj as RcFile);
         });
 
-      return postId
-        ? await makeApiCall({
+      payload?.imageList?.length > 0 &&
+        payload?.imageList?.forEach((file: any) => {
+          data.append("attachmentImages", file?.originFileObj as RcFile);
+        });
+
+      if (postId) {
+        const result = await makeApiCall({
+          action: "updateOneUpload",
+          body: { newImageLists, newFileLists },
+          queryParams: { postId },
+        });
+
+        if (result) {
+          await makeApiCall({
             action: "updateOnePost",
             body: data,
             urlParams: { postId },
-          })
-        : await makeApiCall({
-            action: "createOnePost",
-            body: data,
           });
+        }
+
+        return "Ok";
+      } else {
+        return await makeApiCall({
+          action: "createOnePost",
+          body: data,
+        });
+      }
     },
     {
       onSettled: async () => {

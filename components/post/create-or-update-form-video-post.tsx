@@ -31,7 +31,7 @@ const schema = yup.object({
 });
 
 const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
-  const router = useRouter();
+  const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -76,6 +76,9 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
         ...newPayload,
         postId: post?.id,
       });
+      if (!post?.id) {
+        push(`/posts`);
+      }
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -108,6 +111,17 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                   {post?.id ? "Update" : "Create a New"} Video
                 </h2>
 
+                <div className="mt-2">
+                  <TextInput
+                    control={control}
+                    label="Title"
+                    type="text"
+                    name="title"
+                    required
+                    placeholder="Title"
+                    errors={errors}
+                  />
+                </div>
                 <div className="mt-4">
                   <TextInput
                     control={control}
@@ -122,17 +136,6 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                 <span className="text-sm font-medium text-gray-400">
                   {`Add a url to an external platform. Currently supported platforms are DailyMotion, Facebook, Giphy, Instagram, MixCloud, SoundCloud, Spotify, TikTok, Twitch, Twitter, Vimeo and YouTube.`}
                 </span>
-                <div className="mt-2">
-                  <TextInput
-                    control={control}
-                    label="Title"
-                    type="text"
-                    name="title"
-                    required
-                    placeholder="Title"
-                    errors={errors}
-                  />
-                </div>
 
                 {post?.image ? (
                   <div className="mt-4 text-center space-x-2">
@@ -220,7 +223,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                     shape="default"
                     size="large"
                     loading={loading}
-                    onClick={() => router.back()}
+                    onClick={() => back()}
                   >
                     Cancel
                   </ButtonCancelInput>

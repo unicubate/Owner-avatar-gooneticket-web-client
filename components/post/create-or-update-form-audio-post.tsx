@@ -4,39 +4,54 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
   ReactQuillInput,
-  TextAreaInput,
   TextInput,
-  TextInputPassword,
 } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import { SelectSearchInput } from "../util/form/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI, getOneFilePostAPI } from "@/api/post";
-import { Avatar, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import { CreateOrUpdateOnePostAPI } from "@/api/post";
+import { Button, Upload, UploadFile, UploadProps } from "antd";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
+import { SwitchInput } from "../util/form/switch-input";
+import { filterImageAndFile } from "@/utils/utils";
 
 type Props = {
   postId?: string;
+  uploadFiles?: any;
+  uploadImages?: any;
   post?: any;
 };
 
 const schema = yup.object({
   title: yup.string().required(),
-  urlMedia: yup.string().url().required(),
-  description: yup.string().nullable(),
+  // urlMedia: yup.string().url().required(),
+  description: yup.string().min(10, "Minimum 10 symbols").required(),
+  urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
+    if (enableUrlMedia[0] === true)
+      return yup.string().url().required("url is a required field");
+    return schema.nullable();
+  }),
 });
 
-const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
+const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
+  postId,
+  post,
+  uploadFiles,
+  uploadImages,
+}) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
+  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
   const {
+    watch,
     control,
     setValue,
     handleSubmit,
@@ -46,9 +61,18 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
     mode: "onChange",
   });
 
+  const watchEnableUrlMedia = watch("enableUrlMedia", false);
+
   useEffect(() => {
     if (post) {
-      const fields = ["title", "urlMedia", "description", "whoCanSee", "type"];
+      const fields = [
+        "title",
+        "urlMedia",
+        "description",
+        "whoCanSee",
+        "type",
+        "enableUrlMedia",
+      ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
   }, [post, postId, setValue]);
@@ -66,16 +90,29 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    payload: PostFormModel
+    data: PostFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-    const newPayload: PostFormModel = { ...payload, type: 'AUDIO' }
     try {
+      const { newFileLists, newImageLists } = filterImageAndFile({
+        fileList,
+        imageList,
+      });
+      const payload = {
+        ...data,
+        fileList,
+        newFileLists,
+        imageList,
+        newImageLists,
+      };
+
       await saveMutation.mutateAsync({
-        ...newPayload,
+        ...payload,
+        type: "AUDIO",
         postId: post?.id,
       });
+
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -97,6 +134,14 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
     }
   };
 
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
+
+  const handleFileChange: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }) => setFileList(newFileList);
+
   return (
     <>
       <div className="border-gray-200 mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -107,21 +152,39 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
                 <h2 className="text-base font-bold text-gray-900">
                   {post?.id ? "Update" : "Create a new"} audio
                 </h2>
-
-                <div className="mt-4">
-                  <TextInput
-                    control={control}
-                    label="Url audio"
-                    type="text"
-                    name="urlMedia"
-                    required
-                    placeholder="e.g. https://youtube.com/watch?v=abc123"
-                    errors={errors}
-                  />
+                <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+                  <div className="mb-4">
+                    <Controller
+                      name="attachmentImages"
+                      control={control}
+                      render={({ field: { onChange } }) => (
+                        <>
+                          <div className="text-center justify-center mx-auto">
+                            <Upload
+                              multiple
+                              name="attachmentImages"
+                              listType="picture-card"
+                              fileList={imageList}
+                              onChange={handleImageChange}
+                              accept=".png,.jpg,.jpeg"
+                              maxCount={1}
+                            >
+                              {imageList.length >= 1 ? null : (
+                                <div>
+                                  <PlusOutlined />
+                                  <div style={{ marginTop: 8 }}>
+                                    Upload cover
+                                  </div>
+                                </div>
+                              )}
+                            </Upload>
+                          </div>
+                        </>
+                      )}
+                    />
+                  </div>
                 </div>
-                <span className="text-sm font-medium text-gray-400">
-                  {`Add a url to an external platform. Currently supported platforms are DailyMotion, Facebook, Giphy, Instagram, MixCloud, SoundCloud, Spotify, TikTok, Twitch, Twitter, Vimeo and YouTube.`}
-                </span>
+
                 <div className="mt-2">
                   <TextInput
                     control={control}
@@ -134,40 +197,84 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({ postId, post }) => {
                   />
                 </div>
 
-                {post?.image ? (
-                  <div className="mt-4 text-center space-x-2">
-                    <Avatar
-                      size={200}
-                      shape="square"
-                      src={getOneFilePostAPI(String(post?.image))}
-                      alt={post?.title}
-                    />
-                  </div>
-                ) : null}
-
                 <div className="mt-4">
-                  <Controller
-                    name="attachment"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <>
-                        <div className="text-center justify-center mx-auto">
-                          <Upload
-                            name="attachment"
-                            listType="picture"
-                            maxCount={1}
-                            className="upload-list-inline"
-                            onChange={onChange}
-                            accept=".png,.jpg,.jpeg"
-                          >
-                            <Button icon={<UploadOutlined />}>
-                              Click to Upload
-                            </Button>
-                          </Upload>
-                        </div>
-                      </>
-                    )}
-                  />
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex items-center flex-1 min-w-0">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-gray-900">
+                          Upload audio
+                        </p>
+
+                        {!watchEnableUrlMedia ? (
+                          <p className="mt-1 text-sm font-medium text-gray-500">
+                            You have a URL to an external platform.
+                          </p>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                      <button
+                        type="button"
+                        title=""
+                        className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                      >
+                        {" "}
+                      </button>
+                      <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                        <SwitchInput
+                          control={control}
+                          name="enableUrlMedia"
+                          label=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {watchEnableUrlMedia ? (
+                    <>
+                      <div className="mt-2">
+                        <TextInput
+                          control={control}
+                          label=""
+                          type="text"
+                          name="urlMedia"
+                          placeholder="e.g. https://youtube.com/watch?v=abc123"
+                          errors={errors}
+                        />
+                      </div>
+                      <span className="text-sm font-medium text-gray-400">
+                        {`Add a url to an external platform. Currently supported platforms are DailyMotion, Facebook, Giphy, Instagram, MixCloud, SoundCloud, Spotify, TikTok, Twitch, Twitter, Vimeo and YouTube.`}
+                      </span>
+                    </>
+                  ) : (
+                    <div className="mt-4">
+                      <Controller
+                        name="attachment"
+                        control={control}
+                        render={({ field: { onChange } }) => (
+                          <>
+                            <div className="text-center justify-center mx-auto">
+                              <Upload
+                                name="attachmentFiles"
+                                listType="picture"
+                                className="upload-list-inline"
+                                fileList={fileList}
+                                onChange={handleFileChange}
+                                maxCount={1}
+                                accept=".mp3"
+                              >
+                                {fileList.length >= 1 ? null : (
+                                  <Button icon={<UploadOutlined />}>
+                                    Upload audio
+                                  </Button>
+                                )}
+                              </Upload>
+                            </div>
+                          </>
+                        )}
+                      />
+                    </div>
+                  )}
                 </div>
 
                 <div className="mt-4">

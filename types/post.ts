@@ -49,8 +49,12 @@ export type PostFormModel = {
   image: string;
   urlMedia: string;
   allowDownload: string;
+  enableUrlMedia: string;
   isLike: number;
   type: PostType;
   attachment: any;
-  categories: any;
+  imageList: any;
+  newImageLists: any
+  fileList: any;
+  newFileLists: any;
 };

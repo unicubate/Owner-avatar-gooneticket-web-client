@@ -78,7 +78,7 @@ const Home = () => {
 
 
                                 {hasNextPage && (
-                                    <div className="mt-6 text-center justify-center mx-auto">
+                                    <div className="mt-4 text-center justify-center mx-auto">
                                         <div className="sm:mt-0">
                                             <ButtonInput
                                                 onClick={() => fetchNextPage()}

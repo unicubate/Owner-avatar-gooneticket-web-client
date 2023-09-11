@@ -9,6 +9,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
+import { LoadingFile } from "@/components/templates/loading-file";
+import { GetUploadsAPI } from "@/api/upload";
 
 const PostsCreate = () => {
   const { userStorage } = useAuth() as any;
@@ -26,35 +28,55 @@ const PostsCreate = () => {
     type: String(type),
   });
 
-  const dataTablePost = isLoadingPost ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
-  ) : isErrorPost ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <>
-      {post?.id && type === "gallery" ? (
-        <CreateOrUpdateFormGalleryPost post={post} postId={postId} />
-      ) : null}
+  const {
+    isLoading: isLoadingFileUploads,
+    isError: isErrorFileUploads,
+    data: dataFileUploads,
+  } = GetUploadsAPI({
+    userId: userStorage?.id,
+    postId: postId,
+    uploadType: "file",
+  });
 
-      {post?.id && type === "article" ? (
-        <CreateOrUpdateFormPost post={post} postId={postId} />
-      ) : null}
+  const {
+    isLoading: isLoadingImageUploads,
+    isError: isErrorImageUploads,
+    data: dataImageUploads,
+  } = GetUploadsAPI({
+    userId: userStorage?.id,
+    postId: postId,
+    uploadType: "image",
+  });
 
-      {post?.id && type === "audio" ? (
-        <CreateOrUpdateFormAudioPost post={post} postId={postId} />
-      ) : null}
+  const dataTablePost =
+    isLoadingImageUploads || isLoadingFileUploads || isLoadingPost ? (
+      <LoadingFile />
+    ) : isErrorFileUploads || isErrorImageUploads || isErrorPost ? (
+      <strong>Error find data please try again...</strong>
+    ) : (
+      <>
+        {post?.id && type === "gallery" ? (
+          <CreateOrUpdateFormGalleryPost post={post} postId={postId} />
+        ) : null}
 
-      {post?.id && type === "video" ? (
-        <CreateOrUpdateFormVideoPost post={post} postId={postId} />
-      ) : null}
-    </>
-  );
+        {post?.id && type === "article" ? (
+          <CreateOrUpdateFormPost post={post} postId={postId} />
+        ) : null}
+
+        {post?.id && type === "audio" ? (
+          <CreateOrUpdateFormAudioPost
+            post={post}
+            postId={postId}
+            uploadFiles={dataFileUploads?.data}
+            uploadImages={dataImageUploads?.data}
+          />
+        ) : null}
+
+        {post?.id && type === "video" ? (
+          <CreateOrUpdateFormVideoPost post={post} postId={postId} />
+        ) : null}
+      </>
+    );
 
   return (
     <>
