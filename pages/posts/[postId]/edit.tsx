@@ -28,52 +28,59 @@ const PostsCreate = () => {
     type: String(type),
   });
 
-  const {
-    isLoading: isLoadingFileUploads,
-    isError: isErrorFileUploads,
-    data: dataFileUploads,
-  } = GetUploadsAPI({
-    userId: userStorage?.id,
-    postId: postId,
-    uploadType: "file",
-  });
+  // const {
+  //   isLoading: isLoadingFileUploads,
+  //   isError: isErrorFileUploads,
+  //   data: dataFileUploads,
+  // } = GetUploadsAPI({
+  //   userId: userStorage?.id,
+  //   postId: postId,
+  //   uploadType: "file",
+  // });
 
-  const {
-    isLoading: isLoadingImageUploads,
-    isError: isErrorImageUploads,
-    data: dataImageUploads,
-  } = GetUploadsAPI({
-    userId: userStorage?.id,
-    postId: postId,
-    uploadType: "image",
-  });
+  // const {
+  //   isLoading: isLoadingImageUploads,
+  //   isError: isErrorImageUploads,
+  //   data: dataImageUploads,
+  // } = GetUploadsAPI({
+  //   userId: userStorage?.id,
+  //   postId: postId,
+  //   uploadType: "image",
+  // });
 
-  const dataTablePost =
-    isLoadingImageUploads || isLoadingFileUploads || isLoadingPost ? (
+  const dataTablePost = isLoadingPost ? (
       <LoadingFile />
-    ) : isErrorFileUploads || isErrorImageUploads || isErrorPost ? (
+    ) : isErrorPost ? (
       <strong>Error find data please try again...</strong>
     ) : (
       <>
         {post?.id && type === "gallery" ? (
-          <CreateOrUpdateFormGalleryPost post={post} postId={postId} />
+          <CreateOrUpdateFormGalleryPost
+            uploadImages={post?.uploadsImage}
+            post={post} postId={postId} />
         ) : null}
 
         {post?.id && type === "article" ? (
-          <CreateOrUpdateFormPost post={post} postId={postId} />
+          <CreateOrUpdateFormPost
+            uploadImages={post?.uploadsImage}
+            post={post} postId={postId}
+          />
         ) : null}
 
         {post?.id && type === "audio" ? (
           <CreateOrUpdateFormAudioPost
             post={post}
             postId={postId}
-            uploadFiles={dataFileUploads?.data}
-            uploadImages={dataImageUploads?.data}
+            uploadFiles={post?.uploadsFile}
+            uploadImages={post?.uploadsImage}
           />
         ) : null}
 
         {post?.id && type === "video" ? (
-          <CreateOrUpdateFormVideoPost post={post} postId={postId} />
+          <CreateOrUpdateFormVideoPost
+            uploadImages={post?.uploadsImage}
+            post={post} postId={postId}
+          />
         ) : null}
       </>
     );

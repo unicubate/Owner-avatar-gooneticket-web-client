@@ -12,6 +12,7 @@ import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icon
 import { BiComment } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TfiWorld } from "react-icons/tfi";
+import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   item?: PostModel;
@@ -59,17 +60,20 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     });
   };
 
+
   return (
     <>
       <div key={index} className="py-5 divide-gray-200">
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
+            {item?.uploadsImage?.length > 0 ? 
             <Avatar
               size={100}
               shape="square"
-              src={getOneFileGalleryAPI(String(item?.image))}
+              src={viewOneFileUploadAPI({ folder: 'posts', fileName: String(item?.uploadsImage[0]?.path) })}
               alt={item?.title}
-            />
+            /> : null}
+
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
@@ -108,7 +112,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
               </span>
-              
+
 
             </div>
           </div>
@@ -141,6 +145,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           post={item}
           openModal={openModal}
           setOpenModal={setOpenModal}
+          uploadImages={item?.uploadsImage}
         />
       )}
     </>

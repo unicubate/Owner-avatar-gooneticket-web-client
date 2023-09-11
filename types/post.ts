@@ -22,10 +22,11 @@ export type PostModel = {
   whoCanSee: string;
   type: PostType;
   allowDownload: true;
-  image: string;
   description: string;
   totalComment: number;
   totalLike: number;
+  uploadsImage: any;
+  uploadsFile: any;
   profile: {
     color: string;
     email: string;
@@ -54,7 +55,7 @@ export type PostFormModel = {
   type: PostType;
   attachment: any;
   imageList: any;
-  newImageLists: any
+  newImageLists: any;
   fileList: any;
   newFileLists: any;
 };

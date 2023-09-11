@@ -4,35 +4,37 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
   ReactQuillInput,
-  TextAreaInput,
   TextInput,
-  TextInputPassword,
 } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import { SelectSearchInput } from "../util/form/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI, getOneFilePostAPI } from "@/api/post";
-import { Avatar, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
-import Link from "next/link";
+import { CreateOrUpdateOnePostAPI } from "@/api/post";
+import { Upload, UploadFile, UploadProps } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
+import { filterImageAndFile } from "@/utils/utils";
 
 type Props = {
+  uploadImages?: any;
   postId?: string;
   post?: any;
 };
 
 const schema = yup.object({
   title: yup.string().required(),
+  whoCanSee: yup.string().required("Who can see this post"),
+  description: yup.string().min(10, "Minimum 10 symbols").required(),
   urlMedia: yup.string().url().required(),
-  description: yup.string().nullable(),
 });
 
-const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
+const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages }) => {
   const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
@@ -66,14 +68,23 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    payload: PostFormModel
+    data: PostFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-    const newPayload: PostFormModel = { ...payload, type: "VIDEO" };
     try {
+      const { newImageLists } = filterImageAndFile({
+        imageList,
+      });
+      const payload = {
+        ...data,
+        imageList,
+        newImageLists,
+      };
+
       await saveMutation.mutateAsync({
-        ...newPayload,
+        ...payload,
+        type: "VIDEO",
         postId: post?.id,
       });
       if (!post?.id) {
@@ -100,6 +111,10 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
     }
   };
 
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
+
   return (
     <>
       <div className="border-gray-200 mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -110,6 +125,38 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                 <h2 className="text-base font-bold text-gray-900">
                   {post?.id ? "Update" : "Create a New"} Video
                 </h2>
+
+
+                <div className="mt-2">
+                  <Controller
+                    name="attachmentImages"
+                    control={control}
+                    render={({ field: { onChange } }) => (
+                      <>
+                        <div className="text-center justify-center mx-auto">
+                          <Upload
+                            multiple
+                            name="attachmentImages"
+                            listType="picture-card"
+                            fileList={imageList}
+                            onChange={handleImageChange}
+                            accept=".png,.jpg,.jpeg"
+                            maxCount={1}
+                          >
+                            {imageList.length >= 1 ? null : (
+                              <div>
+                                <PlusOutlined />
+                                <div style={{ marginTop: 8 }}>
+                                  Upload cover
+                                </div>
+                              </div>
+                            )}
+                          </Upload>
+                        </div>
+                      </>
+                    )}
+                  />
+                </div>
 
                 <div className="mt-2">
                   <TextInput
@@ -136,42 +183,6 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post }) => {
                 <span className="text-sm font-medium text-gray-400">
                   {`Add a url to an external platform. Currently supported platforms are DailyMotion, Facebook, Giphy, Instagram, MixCloud, SoundCloud, Spotify, TikTok, Twitch, Twitter, Vimeo and YouTube.`}
                 </span>
-
-                {post?.image ? (
-                  <div className="mt-4 text-center space-x-2">
-                    <Avatar
-                      size={200}
-                      shape="square"
-                      src={getOneFilePostAPI(String(post?.image))}
-                      alt={post?.title}
-                    />
-                  </div>
-                ) : null}
-
-                <div className="mt-4">
-                  <Controller
-                    name="attachment"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <>
-                        <div className="text-center justify-center mx-auto">
-                          <Upload
-                            name="attachment"
-                            listType="picture"
-                            maxCount={1}
-                            className="upload-list-inline"
-                            onChange={onChange}
-                            accept=".png,.jpg,.jpeg"
-                          >
-                            <Button icon={<UploadOutlined />}>
-                              Click to Upload
-                            </Button>
-                          </Upload>
-                        </div>
-                      </>
-                    )}
-                  />
-                </div>
 
                 <div className="mt-4">
                   <SelectSearchInput

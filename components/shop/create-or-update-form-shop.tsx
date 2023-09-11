@@ -30,6 +30,7 @@ import { GetAllDiscountsAPI } from "@/api/discount";
 import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { filterImageAndFile } from "@/utils/utils";
 
 const { Option } = Select;
 
@@ -119,22 +120,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   const onSubmit: SubmitHandler<ProductFormModel> = async (
     data: ProductFormModel
   ) => {
-    let newFileLists: any = [];
-    let newImageLists: any = [];
     setLoading(true);
     setHasErrors(undefined);
     try {
-      imageList
-        .filter((file: any) => file?.status === "success")
-        .forEach((file: any) => {
-          newImageLists.push(file);
-        });
-
-      fileList
-        .filter((file: any) => file?.status === "success")
-        .forEach((file: any) => {
-          newFileLists.push(file);
-        });
+      const { newFileLists, newImageLists } = filterImageAndFile({
+        fileList,
+        imageList,
+      });
 
       const payload = {
         ...data,

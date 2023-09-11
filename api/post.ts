@@ -21,10 +21,11 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["posts"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
-      const { postId } = payload;
+      const { postId, newImageLists } = payload;
 
       let data = new FormData();
       data.append("title", payload.title ?? "");
@@ -33,37 +34,54 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
       data.append("type", payload.type ?? "");
       data.append("allowDownload", `${payload.allowDownload}`);
 
-      payload?.attachment?.fileList?.length > 0 &&
-        payload?.attachment?.fileList?.forEach((file: any) => {
-          data.append("attachment", file?.originFileObj as RcFile);
+      payload?.fileList?.length > 0 &&
+        payload?.fileList?.forEach((file: any) => {
+          data.append("attachmentFiles", file?.originFileObj as RcFile);
         });
 
-      return postId
-        ? await makeApiCall({
+      payload?.imageList?.length > 0 &&
+        payload?.imageList?.forEach((file: any) => {
+          data.append("attachmentImages", file?.originFileObj as RcFile);
+        });
+
+      if (postId) {
+        const result = await makeApiCall({
+          action: "updateOneUpload",
+          body: { newImageLists },
+          queryParams: { postId },
+        });
+
+        if (result) {
+          await makeApiCall({
             action: "updateOnePost",
-            body: payload,
-            urlParams: { postId },
-          })
-        : await makeApiCall({
-            action: "createOnePostGallery",
             body: data,
+            urlParams: { postId },
           });
+        }
+
+        return "Ok";
+      } else {
+        return await makeApiCall({
+          action: "createOnePostGallery",
+          body: data,
+        });
+      }
     },
     {
       onSettled: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onSuccess: async () => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onSuccess) {
           onSuccess();
         }
       },
       onError: async (error: any) => {
-        await queryClient.invalidateQueries();
+        await queryClient.invalidateQueries({ queryKey });
         if (onError) {
           onError(error);
         }

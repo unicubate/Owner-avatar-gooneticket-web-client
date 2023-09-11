@@ -15,6 +15,7 @@ import { FiDownload } from "react-icons/fi";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const PostShow = () => {
   const user = useAuth() as any;
@@ -29,13 +30,7 @@ const PostShow = () => {
   } = GetOnePostAPI({ postSlug });
 
   const dataTablePosts = isLoadingPost ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorPost ? (
     <strong>Error find data please try again...</strong>
   ) : (

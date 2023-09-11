@@ -1,11 +1,9 @@
-import { Spin } from "antd";
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/session/context-user";
 import PublicListLastPosts from '@/components/post/public-last-posts';
-import { LoadingOutlined } from "@ant-design/icons";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const PostsUserPublic = () => {
   const { query } = useRouter();
@@ -19,13 +17,7 @@ const PostsUserPublic = () => {
 
 
   const dataTablePosts = isLoadingUser ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (

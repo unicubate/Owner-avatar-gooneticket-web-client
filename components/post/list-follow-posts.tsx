@@ -20,7 +20,7 @@ import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
-import { downloadOneFileUploadAPI } from "@/api/upload";
+import { GetUploadsAPI, downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   item?: PostModel;
@@ -30,6 +30,7 @@ type Props = {
 const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
   const user = useAuth() as any;
   const router = useRouter();
+
   return (
     <>
       <div
@@ -69,10 +70,10 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               >
                 <IoShareOutline className="w-5 h-5" />
               </button>
-              {item?.allowDownload && item?.image && (
+              {item?.allowDownload && (
                 <button
                   title="Download"
-                  onClick={() => { router.push(`${downloadOneFileUploadAPI({ folder: 'posts', fileName: item?.image })}`) }}
+                  onClick={() => { router.push(`${downloadOneFileUploadAPI({ folder: 'posts', fileName: item?.uploadsImage[0]?.path })}`) }}
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
                   <FiDownload className="w-5 h-5" />
@@ -93,13 +94,16 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {item?.image ? (
+          {item?.uploadsImage?.length > 0 ? (
             <div className="mt-2">
               <Image
+                height="400px"
                 width="100%"
-                height="100%"
                 preview={false}
-                src={`${getOneFileGalleryAPI(String(item?.image))}`}
+                src={`${viewOneFileUploadAPI({
+                  folder: 'posts',
+                  fileName: String(item?.uploadsImage[0]?.path)
+                })}`}
                 alt={item?.title}
               />
             </div>

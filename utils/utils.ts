@@ -29,23 +29,22 @@ export const truncateInput = (input: string, value: number) => {
   return input?.length > value ? `${input.substring(0, value)}...` : input;
 };
 
-
 export const filterImageAndFile = (options: {
-  imageList: UploadFile[];
-  fileList: UploadFile[];
+  imageList?: UploadFile[];
+  fileList?: UploadFile[];
 }) => {
   let newFileLists: any = [];
   let newImageLists: any = [];
   const { imageList, fileList } = options;
-  
+
   imageList
-    .filter((file: any) => file?.status === "success")
+    ?.filter((file: any) => file?.status === "success")
     .forEach((file: any) => {
       newImageLists.push(file);
     });
 
   fileList
-    .filter((file: any) => file?.status === "success")
+    ?.filter((file: any) => file?.status === "success")
     .forEach((file: any) => {
       newFileLists.push(file);
     });

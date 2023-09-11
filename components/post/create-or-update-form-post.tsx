@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { ReactQuillInput, TextInput, TextInputPassword } from "../util/form";
+import { ReactQuillInput, TextInput } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import { SelectSearchInput } from "../util/form/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
@@ -10,16 +10,16 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import {
   CreateOrUpdateOnePostAPI,
   getCategoriesAPI,
-  getOneFilePostAPI,
 } from "@/api/post";
-import { Avatar, Button, Upload } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Upload, UploadFile, UploadProps } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { SelectMultipleSearchInput } from "../util/form/select-multiple-search-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
+import { filterImageAndFile } from "@/utils/utils";
 
 type Props = {
+  uploadImages?: any;
   postId?: string;
   post?: any;
 };
@@ -30,9 +30,11 @@ const schema = yup.object({
   categories: yup.array().optional(),
 });
 
-const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
+const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post, uploadImages }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
@@ -82,14 +84,22 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    payload: PostFormModel
+    data: PostFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
-    const newPayload: PostFormModel = { ...payload, type: 'ARTICLE' }
     try {
+      const { newImageLists } = filterImageAndFile({
+        imageList,
+      });
+      const payload = {
+        ...data,
+        imageList,
+        newImageLists,
+      };
       await saveMutation.mutateAsync({
-        ...newPayload,
+        ...payload,
+        type: 'ARTICLE',
         postId: post?.id,
       });
       setHasErrors(false);
@@ -113,6 +123,10 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
     }
   };
 
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
+
   return (
     <>
       <div className="border-gray-200 mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -120,50 +134,42 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
           <div className="flow-root">
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
-              <h2 className="text-base font-bold text-gray-900">
+                <h2 className="text-base font-bold text-gray-900">
                   {post?.id ? "Update" : "Create a new"} article
                 </h2>
 
-                {post?.image ? (
-                  <div className="mt-2 text-center space-x-2">
-                    <Avatar
-                      size={200}
-                      shape="square"
-                      src={getOneFilePostAPI(String(post?.image))}
-                      alt={post?.title}
-                    />
-                  </div>
-                ) : null}
 
-                <div className="mt-2">
+                <div className="mt-4">
                   <Controller
-                    name="attachment"
+                    name="attachmentImages"
                     control={control}
                     render={({ field: { onChange } }) => (
                       <>
                         <div className="text-center justify-center mx-auto">
                           <Upload
-                            name="attachment"
-                            listType="picture"
+                            multiple
+                            name="attachmentImages"
+                            listType="picture-card"
+                            fileList={imageList}
+                            onChange={handleImageChange}
+                            accept=".png,.jpg,.jpeg"
                             maxCount={1}
-                            className="upload-list-inline"
-                            onChange={onChange}
-                            accept=".mp3"
                           >
-                            <Button icon={<UploadOutlined />}>
-                              Click to Upload
-                            </Button>
+                            {imageList.length >= 1 ? null : (
+                              <div>
+                                <PlusOutlined />
+                                <div style={{ marginTop: 8 }}>
+                                  Upload cover
+                                </div>
+                              </div>
+                            )}
                           </Upload>
                         </div>
                       </>
                     )}
                   />
-                  {/* {errors?.attachment && (
-                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                                            {errors?.attachment?.message}
-                                        </span>
-                                    )} */}
                 </div>
+
 
                 <div className="mt-2">
                   <TextInput
@@ -177,36 +183,18 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post }) => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-                  <div className="mt-2">
-                    <SelectSearchInput
-                      firstOptionName="Choose who can see this post?"
-                      label="Who can see this post?"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select who can see this post?"
-                      valueType="text"
-                      name="whoCanSee"
-                      dataItem={arrayWhoCanSees}
-                    />
-                  </div>
 
-                  <div className="mt-2">
-                    <SelectMultipleSearchInput
-                      mode="multiple"
-                      label="Categories"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select categories"
-                      name="categories"
-                      dataItem={categories}
-                    />
-                    <div className="flex flex-col justify-between items-end">
-                      <Button shape="default" type="link">
-                        New Category
-                      </Button>
-                    </div>
-                  </div>
+                <div className="mt-2">
+                  <SelectSearchInput
+                    firstOptionName="Choose who can see this post?"
+                    label="Who can see this post?"
+                    control={control}
+                    errors={errors}
+                    placeholder="Select who can see this post?"
+                    valueType="text"
+                    name="whoCanSee"
+                    dataItem={arrayWhoCanSees}
+                  />
                 </div>
 
                 <div className="mt-2">

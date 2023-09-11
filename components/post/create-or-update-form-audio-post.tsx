@@ -27,7 +27,7 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  // urlMedia: yup.string().url().required(),
+  whoCanSee: yup.string().required("Who can see this post"),
   description: yup.string().min(10, "Minimum 10 symbols").required(),
   urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
     if (enableUrlMedia[0] === true)
@@ -152,37 +152,35 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                 <h2 className="text-base font-bold text-gray-900">
                   {post?.id ? "Update" : "Create a new"} audio
                 </h2>
-                <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-                  <div className="mb-4">
-                    <Controller
-                      name="attachmentImages"
-                      control={control}
-                      render={({ field: { onChange } }) => (
-                        <>
-                          <div className="text-center justify-center mx-auto">
-                            <Upload
-                              multiple
-                              name="attachmentImages"
-                              listType="picture-card"
-                              fileList={imageList}
-                              onChange={handleImageChange}
-                              accept=".png,.jpg,.jpeg"
-                              maxCount={1}
-                            >
-                              {imageList.length >= 1 ? null : (
-                                <div>
-                                  <PlusOutlined />
-                                  <div style={{ marginTop: 8 }}>
-                                    Upload cover
-                                  </div>
+                <div className="mt-4">
+                  <Controller
+                    name="attachmentImages"
+                    control={control}
+                    render={({ field: { onChange } }) => (
+                      <>
+                        <div className="text-center justify-center mx-auto">
+                          <Upload
+                            multiple
+                            name="attachmentImages"
+                            listType="picture-card"
+                            fileList={imageList}
+                            onChange={handleImageChange}
+                            accept=".png,.jpg,.jpeg"
+                            maxCount={1}
+                          >
+                            {imageList.length >= 1 ? null : (
+                              <div>
+                                <PlusOutlined />
+                                <div style={{ marginTop: 8 }}>
+                                  Upload cover
                                 </div>
-                              )}
-                            </Upload>
-                          </div>
-                        </>
-                      )}
-                    />
-                  </div>
+                              </div>
+                            )}
+                          </Upload>
+                        </div>
+                      </>
+                    )}
+                  />
                 </div>
 
                 <div className="mt-2">

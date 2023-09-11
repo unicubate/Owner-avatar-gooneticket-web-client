@@ -1,15 +1,13 @@
-import { NumberInput, TextAreaInput, TextInput } from "../util/form";
+import { TextInput } from "../util/form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import {
   CloseOutlined,
-  InboxOutlined,
   PlusOutlined,
-  UploadOutlined,
 } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
-import { Alert, Avatar, Button, Checkbox, Upload, UploadFile } from "antd";
+import { Alert, Avatar, Checkbox, Upload, UploadFile, UploadProps } from "antd";
 import { useEffect, useState } from "react";
 import { SelectSearchInput } from "../util/form/select-search-input";
 import {
@@ -19,9 +17,10 @@ import {
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import {
   CreateOrUpdateOnePostGalleryAPI,
-  getOneFileGalleryAPI,
 } from "@/api/post";
 import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
+import { filterImageAndFile } from "@/utils/utils";
+import { viewOneFileUploadAPI } from "@/api/upload";
 
 const { Dragger } = Upload;
 
@@ -35,15 +34,19 @@ const schema = yup.object({
 type Props = {
   openModal: boolean;
   setOpenModal: any;
+  uploadImages?: any;
   post?: any;
 };
 
 const CreateOrUpdateGallery: React.FC<Props> = ({
   openModal,
   setOpenModal,
+  uploadImages,
   post,
 }) => {
   const [loading, setLoading] = useState(false);
+
+  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
@@ -83,11 +86,21 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    payload: PostFormModel
+    data: PostFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
+
+      const { newImageLists } = filterImageAndFile({
+        imageList,
+      });
+      const payload = {
+        ...data,
+        imageList,
+        newImageLists,
+      };
+
       await saveMutation.mutateAsync({
         ...payload,
         postId: post?.id,
@@ -114,6 +127,10 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
       });
     }
   };
+
+  const handleImageChange: UploadProps["onChange"] = ({
+    fileList: newImageList,
+  }) => setImageList(newImageList);
 
   return (
     <>
@@ -146,34 +163,40 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
                         </div>
                       ) : null}
 
-                      {post?.image ? (
+                      {uploadImages?.length > 0 ? (
                         <div className="mt-2 text-center space-x-2">
                           <Avatar
                             size={200}
                             shape="square"
-                            src={getOneFileGalleryAPI(String(post?.image))}
+                            src={viewOneFileUploadAPI({ folder: 'posts', fileName: String(uploadImages[0]?.path) })}
                             alt={post?.title}
                           />
                         </div>
                       ) : (
-                        <div className="mb-4">
+                        <div className="mt-2">
                           <Controller
-                            name="attachment"
+                            name="attachmentImages"
                             control={control}
-                            render={({ field: { onChange } }) => (
+                            render={({ }) => (
                               <>
                                 <div className="text-center justify-center mx-auto">
                                   <Upload
-                                    name="attachment"
-                                    listType="picture"
-                                    maxCount={1}
-                                    className="upload-list-inline"
-                                    onChange={onChange}
+                                    multiple
+                                    name="attachmentImages"
+                                    listType="picture-card"
+                                    fileList={imageList}
+                                    onChange={handleImageChange}
                                     accept=".png,.jpg,.jpeg"
+                                    maxCount={1}
                                   >
-                                    <Button icon={<UploadOutlined />}>
-                                      Click to Upload
-                                    </Button>
+                                    {imageList.length >= 1 ? null : (
+                                      <div>
+                                        <PlusOutlined />
+                                        <div style={{ marginTop: 8 }}>
+                                          Upload cover
+                                        </div>
+                                      </div>
+                                    )}
                                   </Upload>
                                 </div>
                               </>
