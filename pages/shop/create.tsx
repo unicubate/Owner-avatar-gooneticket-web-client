@@ -9,7 +9,7 @@ import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-
 const ShopCreate = () => {
   return (
     <>
-      <LayoutDashboard title={"Articles"}>
+      <LayoutDashboard title={"Articles create"}>
         <div className="flex-1">
           <main>
             <div className="max-w-4xl mx-auto py-6">

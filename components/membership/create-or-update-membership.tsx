@@ -4,6 +4,10 @@ import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CloseOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../templates/button-input";
+import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { useState } from "react";
+import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
+import { useRouter } from "next/router";
 
 const schema = yup.object({
   amount: yup.number().required(),
@@ -11,13 +15,19 @@ const schema = yup.object({
   description: yup.string().optional(),
 });
 
-const CreateOrUpdateDonation: React.FC<{
-  showModal: boolean;
-  setShowModal: any;
-}> = ({ showModal, setShowModal }) => {
+const CreateOrUpdateFormDonation: React.FC<{
+  membership: any;
+}> = ({ membership }) => {
+  const { push, back } = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+    undefined
+  );
+
   const {
+    watch,
     control,
-    register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<any>({
@@ -38,73 +48,98 @@ const CreateOrUpdateDonation: React.FC<{
 
   return (
     <>
-      {showModal ? (
-        <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-          <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white">
-            <button
-              className="bg-transparent border-0 text-black float-right"
-              onClick={() => setShowModal(false)}
-            >
-              <span className="text-black opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
-                <CloseOutlined />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+          <div className="px-4 py-5">
+            <h2 className="text-base font-bold text-gray-900">
+              Create a new membership
+            </h2>
+
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <div className="mt-2">
+                <TextInput
+                  control={control}
+                  label="Title"
+                  type="text"
+                  name="title"
+                  required
+                  placeholder="Title levels"
+                  errors={errors}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <div className="mb-2">
+                <NumberInput
+                  control={control}
+                  label="Price"
+                  type="number"
+                  name="price"
+                  placeholder="Price product"
+                  errors={errors}
+                  required
+                  prefix={"€"}
+                />
+              </div>
+            </div>
+
+
+
+            <div className="mt-2">
+              <TextareaReactQuillInput
+                control={control}
+                label="Description"
+                name="description"
+                placeholder="Write description"
+                className="h-40"
+                errors={errors}
+              />
+              <span className="text-sm font-medium text-gray-400">
+                {`This will help your audience decide whether to join your membership. Describe in your own words what you're offering them`}
               </span>
-            </button>
-            <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-              <div className="p-2 flex-auto justify-center">
-                {/* <div className="font-regular text-center relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-                                    Error message save to de db je me demande ou je suis merde
-                                </div> */}
-                <div className="mb-4">
-                  <NumberInput
-                    control={control}
-                    label="Amount"
-                    type="number"
-                    name="amount"
-                    placeholder="Amount donation"
-                    errors={errors}
-                    required
-                    prefix={"€"}
-                  />
-                </div>
-                <div className="mb-4">
-                  <TextInput
-                    control={control}
-                    label="Title"
-                    type="text"
-                    name="title"
-                    placeholder="Title donation"
-                    errors={errors}
-                  />
-                </div>
-                <div className="mb-4">
-                  <TextAreaInput
-                    row={3}
-                    control={control}
-                    label="Description"
-                    name="description"
-                    placeholder="Description donation"
-                    errors={errors}
-                  />
-                </div>
-              </div>
-              <div className="mt-2 text-center space-x-2">
-                <ButtonInput
-                  shape="default"
-                  type="submit"
-                  size="normal"
-                  loading={false}
-                  color={"indigo"}
-                >
-                  Save
-                </ButtonInput>
-              </div>
-            </form>
+            </div>
+            <div className="mt-2">
+              <TextareaReactQuillInput
+                control={control}
+                label="Welcome note"
+                name="messageWelcome"
+                placeholder="Write description"
+                className="h-40"
+                defaultValue={
+                  "Thank you for the support! 🎉 "
+                }
+                errors={errors}
+              />
+              <span className="text-sm font-medium text-gray-400">
+                {`This will be visible after the payment and in the welcome email. Make it personal, and include any links to rewards you'd like to share with them`}
+              </span>
+            </div>
+
+
+
+            <div className="flex items-center mt-4 mb-4 space-x-4">
+              <ButtonCancelInput shape="default" size="large"
+                loading={loading}
+                onClick={() => back()}>
+                Cancel
+              </ButtonCancelInput>
+              <ButtonInput
+                minW="fit"
+                shape="default"
+                type="submit"
+                size="large"
+                loading={false}
+                color="indigo"
+              >
+                Save and Publish
+              </ButtonInput>
+            </div>
           </div>
         </div>
-      ) : null}
+      </form>
     </>
   );
 };
 
-export { CreateOrUpdateDonation };
+export { CreateOrUpdateFormDonation };
