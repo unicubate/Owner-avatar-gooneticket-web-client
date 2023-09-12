@@ -5,12 +5,9 @@ import { useRouter } from "next/router";
 import { GetOnePostAPI } from "@/api/post";
 import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
-import { LoadingOutlined } from "@ant-design/icons";
-import { Spin } from "antd";
 import { useAuth } from "@/components/util/session/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 import { LoadingFile } from "@/components/templates/loading-file";
-import { GetUploadsAPI } from "@/api/upload";
 
 const PostsCreate = () => {
   const { userStorage } = useAuth() as any;
@@ -27,26 +24,6 @@ const PostsCreate = () => {
     userId: userStorage?.id,
     type: String(type),
   });
-
-  // const {
-  //   isLoading: isLoadingFileUploads,
-  //   isError: isErrorFileUploads,
-  //   data: dataFileUploads,
-  // } = GetUploadsAPI({
-  //   userId: userStorage?.id,
-  //   postId: postId,
-  //   uploadType: "file",
-  // });
-
-  // const {
-  //   isLoading: isLoadingImageUploads,
-  //   isError: isErrorImageUploads,
-  //   data: dataImageUploads,
-  // } = GetUploadsAPI({
-  //   userId: userStorage?.id,
-  //   postId: postId,
-  //   uploadType: "image",
-  // });
 
   const dataTablePost = isLoadingPost ? (
       <LoadingFile />

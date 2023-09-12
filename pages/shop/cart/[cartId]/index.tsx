@@ -63,7 +63,8 @@ const ShopView = () => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: product?.userId,
-    productId: product?.id,
+    model: "PRODUCT",
+    uploadableId: product?.id,
     uploadType: "image",
   });
 
@@ -72,7 +73,11 @@ const ShopView = () => {
   ) : isErrorProduct || isErrorImages ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <ListCarouselUpload uploads={dataImages?.data} />
+    <ListCarouselUpload
+      uploads={dataImages?.data}
+      preview={false}
+      folder="products"
+    />
   );
 
   const onSubmit: SubmitHandler<any> = async (payload: any) => {

@@ -21,6 +21,8 @@ export type CommissionModel = {
     name: string;
     symbol: string;
   };
+  uploadsImage: any;
+  uploadsFile: any;
   profile: {
     color: string;
     email: string;

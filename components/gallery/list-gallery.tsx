@@ -8,11 +8,15 @@ import { CreateOrUpdateGallery } from "./create-or-update-gallery";
 import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
 import { PostModel } from "@/types/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdFavoriteBorder,
+  MdOutlineModeEdit,
+} from "react-icons/md";
 import { BiComment } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TfiWorld } from "react-icons/tfi";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {
   item?: PostModel;
@@ -23,8 +27,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -60,20 +64,22 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-
   return (
     <>
       <div key={index} className="py-5 divide-gray-200">
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
-            {item?.uploadsImage?.length > 0 ? 
-            <Avatar
-              size={100}
-              shape="square"
-              src={viewOneFileUploadAPI({ folder: 'posts', fileName: String(item?.uploadsImage[0]?.path) })}
-              alt={item?.title}
-            /> : null}
-
+            {item?.uploadsImage?.length > 0 ? (
+              <Avatar
+                size={100}
+                shape="square"
+                src={viewOneFileUploadAPI({
+                  folder: "posts",
+                  fileName: String(item?.uploadsImage[0]?.path),
+                })}
+                alt={item?.title}
+              />
+            ) : null}
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
@@ -84,7 +90,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             ) : null}
 
             <div className="flex mt-10 items-center">
-
               <button className="tex-sm text-gray-700">
                 <MdFavoriteBorder />
               </button>
@@ -112,11 +117,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
               </span>
-
-
             </div>
           </div>
-
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>

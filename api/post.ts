@@ -21,7 +21,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["posts"];
+  const queryKey = ["gallery-posts"];
   const queryClient = useQueryClient();
   const result = useMutation(
     async (payload: PostFormModel & { postId?: string }): Promise<any> => {
@@ -126,7 +126,7 @@ export const CreateOrUpdateOnePostAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
-          queryParams: { postId },
+          queryParams: { uploadableId: postId, model: 'POST' },
         });
 
         if (result) {

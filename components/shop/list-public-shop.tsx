@@ -38,7 +38,8 @@ const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: item?.userId,
-    productId: item?.id,
+    model: "PRODUCT",
+    uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 

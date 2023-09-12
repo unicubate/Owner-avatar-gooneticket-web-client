@@ -42,6 +42,8 @@ export type ProductModel = {
     username: string;
     firstName: string;
   };
+  uploadsImage: any;
+  uploadsFile: any;
   discount: {
     isValid: boolean;
     percent: number;

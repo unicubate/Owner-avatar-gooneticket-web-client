@@ -66,7 +66,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: item?.userId,
-    productId: item?.id,
+    model: "PRODUCT",
+    uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 

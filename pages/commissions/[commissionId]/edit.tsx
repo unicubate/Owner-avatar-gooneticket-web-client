@@ -14,7 +14,11 @@ const ShopEdit = () => {
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
 
-  const { data: commission, isError: isErrorCommission, isLoading: isLoadingCommission } = GetOneCommissionAPI({
+  const {
+    data: commission,
+    isError: isErrorCommission,
+    isLoading: isLoadingCommission,
+  } = GetOneCommissionAPI({
     commissionId,
     userId: userStorage?.id,
   });
@@ -24,9 +28,10 @@ const ShopEdit = () => {
     isError: isErrorImageUploads,
     data: dataImageUploads,
   } = GetUploadsAPI({
+    uploadType: "image",
+    model: "commission",
     userId: userStorage?.id,
-    commissionId: commissionId,
-    uploadType: 'image'
+    uploadableId: commissionId,
   });
 
   const dataTableCommission =
@@ -48,9 +53,7 @@ const ShopEdit = () => {
           <main>
             <div className="max-w-4xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-
                 {dataTableCommission}
-
               </div>
             </div>
           </main>

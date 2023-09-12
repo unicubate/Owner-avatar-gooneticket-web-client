@@ -3,9 +3,6 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
-import { GetUploadsAPI } from "@/api/upload";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
 import { LoadingFile } from "@/components/templates/loading-file";
 
@@ -14,40 +11,23 @@ const ShopEdit = () => {
   const { query } = useRouter();
   const productId = String(query?.productId);
 
-  const { data: product, isError: isErrorProduct } = GetOneProductAPI({
+  const {
+    data: product,
+    isError: isErrorProduct,
+    isLoading: isLoadingProduct,
+  } = GetOneProductAPI({
     productId,
     userId: userStorage?.id,
   });
 
-  const {
-    isLoading: isLoadingFileUploads,
-    isError: isErrorFileUploads,
-    data: dataFileUploads,
-  } = GetUploadsAPI({
-    userId: userStorage?.id,
-    productId: productId,
-    uploadType: 'file'
-  });
-
-  const {
-    isLoading: isLoadingImageUploads,
-    isError: isErrorImageUploads,
-    data: dataImageUploads,
-  } = GetUploadsAPI({
-    userId: userStorage?.id,
-    productId: productId,
-    uploadType: 'image'
-  });
-
-  const dataTableProduct =
-    isLoadingImageUploads ? (
+  const dataTableProduct = isLoadingProduct ? (
       <LoadingFile />
-    ) : isErrorFileUploads || isErrorImageUploads || isErrorProduct ? (
+    ) : isErrorProduct ? (
       <strong>Error find data please try again...</strong>
     ) : (
       <CreateOrUpdateFormShop
-        uploadFiles={dataFileUploads?.data}
-        uploadImages={dataImageUploads?.data}
+        uploadFiles={product?.uploadsFile}
+        uploadImages={product?.uploadsImage }
         product={product}
       />
     );

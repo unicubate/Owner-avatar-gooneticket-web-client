@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Spin, Tooltip } from "antd";
-import {
-  FieldTimeOutlined, LoadingOutlined,
-} from "@ant-design/icons";
+import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
@@ -27,8 +25,8 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -64,17 +62,15 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const {
-    status,
-    data: dataImages,
-  } = GetUploadsAPI({
+  const { status, data: dataImages } = GetUploadsAPI({
     userId: item?.userId,
-    commissionId: item?.id,
+    model: "COMMISSION",
+    uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 
-  if (status === 'loading') {
-    <p>loading...</p>
+  if (status === "loading") {
+    <p>loading...</p>;
   }
 
   return (
@@ -85,7 +81,10 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             <Avatar
               size={100}
               shape="square"
-              src={viewOneFileUploadAPI({ folder: 'commissions', fileName: String(dataImages?.data[0]?.path) })}
+              src={viewOneFileUploadAPI({
+                folder: "commissions",
+                fileName: String(dataImages?.data[0]?.path),
+              })}
               alt={item?.title}
             />
           </div>
@@ -114,9 +113,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               <span className="ml-2 font-normal text-sm">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
-
             </div>
-
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">

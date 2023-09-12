@@ -48,7 +48,8 @@ const ShopView = () => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: product?.userId,
-    productId: product?.id,
+    model: "PRODUCT",
+    uploadableId: product?.id,
     uploadType: "image",
   });
 

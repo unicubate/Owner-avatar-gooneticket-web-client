@@ -37,7 +37,7 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads, folder, preview }) => {
             uploads?.map((item: any, index: number) => (
               <div key={index}>
                 <Image
-                  height="350px"
+                  height="400px"
                   width="100%"
                   preview={preview}
                   className="object-cover w-full h-full"

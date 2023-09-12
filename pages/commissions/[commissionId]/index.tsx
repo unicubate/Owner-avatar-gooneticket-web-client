@@ -47,7 +47,8 @@ const ShopView = () => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: product?.userId,
-    productId: product?.id,
+    model: "PRODUCT",
+    uploadableId: product?.id,
     uploadType: "image",
   });
 
@@ -63,7 +64,11 @@ const ShopView = () => {
     ) : isErrorProduct || isErrorImages ? (
       <strong>Error find data please try again...</strong>
     ) : (
-      <ListCarouselUpload uploads={dataImages?.data} />
+      <ListCarouselUpload
+        uploads={dataImages?.data}
+        preview={false}
+        folder="products"
+      />
     );
 
   return (
@@ -160,11 +165,7 @@ const ShopView = () => {
               <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
-                    <Button
-                      shape="default"
-                      size="large"
-                      loading={false}
-                    >
+                    <Button shape="default" size="large" loading={false}>
                       <svg
                         className="w-5 h-5"
                         xmlns="http://www.w3.org/2000/svg"
@@ -181,13 +182,12 @@ const ShopView = () => {
                       </svg>
                     </Button>
 
-                    <span className="text-base font-semibold text-gray-900"> 1 </span>
+                    <span className="text-base font-semibold text-gray-900">
+                      {" "}
+                      1{" "}
+                    </span>
 
-                    <Button
-                      shape="default"
-                      size="large"
-                      loading={false}
-                    >
+                    <Button shape="default" size="large" loading={false}>
                       <svg
                         className="w-5 h-5"
                         xmlns="http://www.w3.org/2000/svg"

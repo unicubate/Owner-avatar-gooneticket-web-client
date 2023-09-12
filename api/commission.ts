@@ -48,7 +48,7 @@ export const CreateOrUpdateOneCommissionAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists },
-          queryParams: { commissionId, uploadType: "IMAGE" },
+          queryParams: { uploadableId: commissionId, model: "COMMISSION" },
         });
 
         if (result) {

@@ -38,7 +38,8 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
     data: dataImages,
   } = GetUploadsAPI({
     userId: item?.userId,
-    commissionId: item?.id,
+    model: "COMMISSION",
+    uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 

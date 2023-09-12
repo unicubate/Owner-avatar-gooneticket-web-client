@@ -57,7 +57,7 @@ export const CreateOrUpdateOneProductAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
-          queryParams: { productId },
+          queryParams: { uploadableId: productId, model: 'PRODUCT' },
         });
 
         if (result) {
