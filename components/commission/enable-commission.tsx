@@ -64,7 +64,7 @@ const EnableCommission: React.FC<Props> = ({ profile }) => {
                 loading={false}
                 color={isOpen ? "indigo" : "red"}
               >
-                {isOpen ? "Open" : "Close"}
+                {isOpen ? "Close" : "Open"}
               </ButtonInput>
             </div>
           </div>

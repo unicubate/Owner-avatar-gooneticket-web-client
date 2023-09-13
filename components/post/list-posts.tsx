@@ -6,16 +6,14 @@ import { Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdFavoriteBorder, MdOutlineFavorite, MdOutlineModeEdit } from "react-icons/md";
-import { CommissionModel } from "@/types/commission";
+import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetUploadsAPI } from "@/api/upload";
 import { BiComment } from "react-icons/bi";
-import { PiLockKey } from "react-icons/pi";
+import { LiaDnaSolid } from "react-icons/lia";
 import { PostModel } from "@/types/post";
-import Link from "next/link";
-import { TfiWorld } from "react-icons/tfi";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { TbWorld } from "react-icons/tb";
 
 type Props = {
   item?: PostModel;
@@ -100,32 +98,38 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
 
             <div className="flex mt-10 items-center">
 
-              <button className="text-lg font-normal">
+              <span className="text-lg font-normal">
                 <MdFavoriteBorder />
-              </button>
-              <span className="ml-2 font-normal text-sm">
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
                 {item?.totalLike ?? 0}
               </span>
 
-              <button className="ml-2 text-lg font-bold">
+              <span className="ml-1.5 text-lg font-bold">
                 <BiComment />
-              </button>
-              <span className="ml-2 font-normal text-sm">
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
                 {item?.totalComment ?? 0}
               </span>
 
-              <button className="ml-2 text-lg font-normal">
+              <span className="ml-1.5 text-lg font-normal">
                 <AiOutlineCalendar />
-              </button>
-              <span className="ml-2 font-normal text-sm">
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
               
-              <button className="ml-2 text-lg font-bold">
-                <TfiWorld />
-              </button>
-              <span className="ml-2 font-normal text-sm">
+              <span className="ml-1.5 text-lg font-bold">
+                <TbWorld />
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
+              </span>
+              <span className="ml-1.5 text-lg font-bold">
+                <LiaDnaSolid />
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
+                {item?.type}
               </span>
 
             </div>

@@ -10,7 +10,7 @@ interface Props {
   placeholder?: string;
   autoComplete?: "on" | "off";
   required?: boolean;
-  defaultValue?: number;
+  defaultValue?: string | number;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;
 }
@@ -30,11 +30,14 @@ const NumberInput: React.FC<Props> = ({
 }) => {
   return (
     <>
-      {label ? <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}

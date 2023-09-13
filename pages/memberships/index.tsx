@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/session/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { ButtonInput } from "@/components/templates/button-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateOrUpdateDonation } from "@/components/donation/create-or-update-donation";
 import { CopyOutlined, DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Empty, Input } from "antd";
@@ -10,13 +10,70 @@ import { arrayMemberships } from "@/components/mock";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
 import { EmptyData } from "@/components/templates/empty-data";
 import { useRouter } from "next/router";
+import { LoadingFile } from "@/components/templates/loading-file";
+import { ListMemberships } from "@/components/membership/list-memberships";
+import { useAuth } from "@/components/util/session/context-user";
+import { useInView } from "react-intersection-observer";
+import { GetInfiniteMembershipsAPI } from "@/api/membership";
 
 
 const Memberships = () => {
     const router = useRouter();
-    const [membershipsArrays] = useState(arrayMemberships)
-    const [showModal, setShowModal] = useState(false);
-
+    const { ref, inView } = useInView();
+    const { userStorage, profile } = useAuth() as any;
+  
+    const {
+      isLoading: isLoadingMembership,
+      isError: isErrorMembership,
+      data: dataGallery,
+      isFetchingNextPage,
+      hasNextPage,
+      fetchNextPage,
+    } = GetInfiniteMembershipsAPI({
+      userId: userStorage?.id,
+      take: 6,
+      sort: "DESC",
+      queryKey: ["memberships", "infinite"],
+    });
+  
+    useEffect(() => {
+      let fetching = false;
+      if (inView) {
+        fetchNextPage();
+      }
+      const onScroll = async (event: any) => {
+        const { scrollHeight, scrollTop, clientHeight } =
+          event.target.scrollingElement;
+  
+        if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+          fetching = true;
+          if (hasNextPage) await fetchNextPage();
+          fetching = false;
+        }
+      };
+  
+      document.addEventListener("scroll", onScroll);
+      return () => {
+        document.removeEventListener("scroll", onScroll);
+      };
+    }, [fetchNextPage, hasNextPage, inView]);
+  
+    const dataTableMemberships = isLoadingMembership ? (
+      <LoadingFile />
+    ) : isErrorMembership ? (
+      <strong>Error find data please try again...</strong>
+    ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+      <EmptyData
+        title="Add your first listing to get started"
+        description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
+      />
+    ) : (
+      dataGallery.pages
+        .flatMap((page: any) => page?.data?.value)
+        .map((item, index) => (
+          <ListMemberships item={item} key={index} index={index} />
+        ))
+    );
 
     return (
         <>
@@ -56,12 +113,12 @@ const Memberships = () => {
                                             </div>
 
                                             <div className="divide-y divide-gray-200">
-                                                {/* {dataTableProducts} */}
+                                                {dataTableMemberships}
                                             </div>
                                         </div>
                                     </div>
 
-                                    {/* {hasNextPage && (
+                                    {hasNextPage && (
                                         <div className="mt-4 text-center justify-center mx-auto">
                                             <div className="mt-4 sm:mt-0">
                                                 <ButtonInput
@@ -78,7 +135,7 @@ const Memberships = () => {
                                                 </ButtonInput>
                                             </div>
                                         </div>
-                                    )} */}
+                                    )}
                                 </div>
                             </div>
                         </div>

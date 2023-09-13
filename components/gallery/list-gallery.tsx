@@ -15,8 +15,10 @@ import {
 } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
-import { TfiWorld } from "react-icons/tfi";
-import { viewOneFileUploadAPI } from "@/api/upload";
+import { downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { FiDownload } from "react-icons/fi";
+import { TbWorld } from "react-icons/tb";
+import { useRouter } from "next/router";
 
 type Props = {
   item?: PostModel;
@@ -24,6 +26,7 @@ type Props = {
 };
 
 const ListGallery: React.FC<Props> = ({ item, index }) => {
+  const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
@@ -112,11 +115,31 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               </span>
 
               <button className="ml-1.5 tex-sm text-gray-700">
-                <TfiWorld />
+                <TbWorld />
               </button>
               <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
               </span>
+
+              {item?.allowDownload && (
+                <>
+                  <button
+                    onClick={() => {
+                      router.push(
+                        `${downloadOneFileUploadAPI({
+                          folder: "posts",
+                          fileName: String(item?.uploadsImage[0]?.path),
+                        })}`
+                      );
+                    }}
+                    title="Download"
+                    className="ml-1.5 tex-sm text-gray-700"
+                  >
+                    <FiDownload />
+                  </button>
+                  <span className="ml-1.5 font-normal text-sm">Download</span>
+                </>
+              )}
             </div>
           </div>
 

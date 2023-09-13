@@ -28,8 +28,7 @@ const HtmlParser: React.FC<HtmlParserProps> = ({ html, value }) => {
       url: "text-blue-500 hover:underline",
     },
   });
-
-  return parse(cleanHtmlString, options);
+  return <span className="ql-editor">{parse(cleanHtmlString, options)}</span>;
 };
 
 export { HtmlParser };

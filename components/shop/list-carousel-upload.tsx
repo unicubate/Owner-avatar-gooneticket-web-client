@@ -9,7 +9,10 @@ import { viewOneFileUploadAPI } from "@/api/upload";
 type Props = {
   uploads: UploadModel[];
   folder: UploadFolderType;
-  preview: boolean
+  preview: boolean;
+  className?: string;
+  height?: string | number;
+  width?: string | number;
 };
 
 const contentStyle: React.CSSProperties = {
@@ -18,7 +21,14 @@ const contentStyle: React.CSSProperties = {
   background: "#364d79",
 };
 
-const ListCarouselUpload: React.FC<Props> = ({ uploads, folder, preview }) => {
+const ListCarouselUpload: React.FC<Props> = ({
+  uploads,
+  folder,
+  preview,
+  className = "object-cover w-full h-full",
+  height = "400px",
+  width = "100%",
+}) => {
   const ref = useRef();
 
   return (
@@ -37,10 +47,10 @@ const ListCarouselUpload: React.FC<Props> = ({ uploads, folder, preview }) => {
             uploads?.map((item: any, index: number) => (
               <div key={index}>
                 <Image
-                  height="400px"
-                  width="100%"
+                  width={width}
+                  height={height}
+                  className={className}
                   preview={preview}
-                  className="object-cover w-full h-full"
                   style={contentStyle}
                   src={`${viewOneFileUploadAPI({
                     folder: folder,

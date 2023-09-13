@@ -20,7 +20,11 @@ import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
-import { GetUploadsAPI, downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import {
+  GetUploadsAPI,
+  downloadOneFileUploadAPI,
+  viewOneFileUploadAPI,
+} from "@/api/upload";
 import ListCarouselUpload from "../shop/list-carousel-upload";
 
 type Props = {
@@ -74,7 +78,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               {item?.allowDownload && (
                 <button
                   title="Download"
-                  onClick={() => { router.push(`${downloadOneFileUploadAPI({ folder: 'posts', fileName: item?.uploadsImage[0]?.path })}`) }}
+                  onClick={() => {
+                    router.push(
+                      `${downloadOneFileUploadAPI({
+                        folder: "posts",
+                        fileName: item?.uploadsImage[0]?.path,
+                      })}`
+                    );
+                  }}
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
                   <FiDownload className="w-5 h-5" />
@@ -97,7 +108,11 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
 
           {item?.uploadsImage?.length > 0 ? (
             <div className="mt-2 text-center justify-center mx-auto">
-              <ListCarouselUpload uploads={item?.uploadsImage} folder="posts" preview={false} />
+              <ListCarouselUpload
+                uploads={item?.uploadsImage}
+                folder="posts"
+                preview={false}
+              />
             </div>
           ) : null}
 
@@ -109,7 +124,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               {item?.title ?? ""}
             </Link>
           ) : null}
-
           <p className="mt-4 text-sm font-normal text-gray-600">
             <HtmlParser html={String(item?.description ?? "")} />
           </p>
@@ -127,8 +141,9 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-5 h-5" />
@@ -144,16 +159,11 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               </>
             ) : null}
 
-
             <button className="ml-auto text-lg font-bold">
               <PiLockKey />
             </button>
-            <span className="ml-2 text-sm font-normal">
-              Locked
-            </span>
+            <span className="ml-2 text-sm font-normal">Locked</span>
           </div>
-
-
 
           <ListComments postId={String(item?.id)} take={commentTake} />
         </div>

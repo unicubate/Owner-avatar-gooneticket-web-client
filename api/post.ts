@@ -48,7 +48,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists },
-          queryParams: { postId },
+          queryParams: { uploadableId: postId, model: "POST" },
         });
 
         if (result) {

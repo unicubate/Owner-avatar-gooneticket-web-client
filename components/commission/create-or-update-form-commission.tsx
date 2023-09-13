@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  Upload,
-  UploadFile,
-  UploadProps,
-} from "antd";
+import { Select, Upload, UploadFile, UploadProps } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  NumberInput,
-  TextInput,
-} from "../util/form";
+import { NumberInput, TextInput } from "../util/form";
 import { ButtonInput } from "../templates/button-input";
 import {
   AlertDangerNotification,
@@ -49,6 +41,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
   commission,
   uploadImages,
 }) => {
+  const { push, back } = useRouter();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
@@ -125,6 +118,9 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         className: "info",
         position: "center",
       });
+      if (!commission?.id) {
+        push(`/memberships`);
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -150,7 +146,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
             <h2 className="text-base font-bold text-gray-900">
               {commission?.id ? "Update" : "Create a new"} commission
             </h2>
-
             <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
               <div className="mb-2">
                 <TextInput
@@ -362,7 +357,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                 loading={loading}
                 color="indigo"
               >
-                Publish
+                Save and Publish
               </ButtonInput>
             </div>
           </div>

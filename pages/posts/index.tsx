@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { EmptyData } from "@/components/templates/empty-data";
 import ListPosts from "@/components/post/list-posts";
 import { ButtonInput } from "@/components/templates/button-input";
+import { LoadingFile } from "@/components/templates/loading-file";
 
 const Posts = () => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const Posts = () => {
     fetchNextPage,
   } = GetInfinitePostsAPI({
     userId: userStorage?.id,
-    take: 2,
+    take: 10,
     sort: "DESC",
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ["posts", "infinite"],
@@ -55,13 +56,7 @@ const Posts = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTablePosts = isLoadingGallery ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <LoadingFile />
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (

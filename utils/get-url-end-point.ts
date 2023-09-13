@@ -277,6 +277,28 @@ export const apiEndpoints: ClientApiMethods = {
     method: DELETE,
   },
 
+  /****************** Memberships route */
+  getMemberships: {
+    endpoint: `${baseUrl}/memberships`,
+    method: GET,
+  },
+  getOneMembership: {
+    endpoint: `${baseUrl}/memberships/view`,
+    method: GET,
+  },
+  createOneMembership: {
+    endpoint: `${baseUrl}/memberships`,
+    method: POST,
+  },
+  updateOneMembership: {
+    endpoint: `${baseUrl}/memberships/:membershipId`,
+    method: PUT,
+  },
+  deleteOneMembership: {
+    endpoint: `${baseUrl}/memberships/:membershipId`,
+    method: DELETE,
+  },
+
   /****************** Posts route */
   createOnePostGallery: {
     endpoint: `${baseUrl}/posts/galleries`,

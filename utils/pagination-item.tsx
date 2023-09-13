@@ -10,6 +10,19 @@ interface Props {
 
 export type SortModel = 'ASC' | 'DESC'
 
+export type ModelType =
+  | 'ORGANIZATION'
+  | 'CAMPAIGN'
+  | 'DONATION'
+  | 'PRODUCT'
+  | 'COMMISSION'
+  | 'MEMBERSHIP'
+  | 'GIFT'
+  | 'HELP'
+  | 'POST'
+  | 'GALLERY'
+  | 'COMMENT';
+
 export type PaginationRequest = {
     search?: string
     sort: SortModel

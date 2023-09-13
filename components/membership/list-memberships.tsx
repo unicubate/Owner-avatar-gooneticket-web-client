@@ -2,25 +2,23 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Spin, Tooltip } from "antd";
-import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
+import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
+import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "../shop/list-carousel-upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { MembershipModel } from "@/types/membership";
 
 type Props = {
-  item?: CommissionModel;
+  item?: MembershipModel;
   index: number;
 };
 
-const ListCommissions: React.FC<Props> = ({ item, index }) => {
+const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
@@ -63,10 +61,10 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   };
 
   const { status, data: dataImages } = GetUploadsAPI({
-    userId: item?.userId,
-    model: "COMMISSION",
-    uploadableId: `${item?.id}`,
     uploadType: "image",
+    model: "membership",
+    userId: item?.userId,
+    uploadableId: String(item?.id),
   });
 
   if (status === "loading") {
@@ -82,7 +80,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               size={100}
               shape="square"
               src={viewOneFileUploadAPI({
-                folder: "commissions",
+                folder: "memberships",
                 fileName: String(dataImages?.data[0]?.path),
               })}
               alt={item?.title}
@@ -97,20 +95,33 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             ) : null}
 
             <div className="flex mt-10 items-center">
-              {item?.price ? (
+              {item?.pricePerMonthly ? (
                 <>
-                  <span className="text-lg font-normal">
+                  <button className="text-lg font-normal">
                     <BiMoney />
+                  </button>
+                  <span className="ml-1.5 font-normal text-sm">
+                    {item?.pricePerMonthly} {item?.currency?.symbol}
                   </span>
-                  <span className="ml-2 font-normal text-sm">
-                    {item?.price} {item?.currency?.symbol}
-                  </span>
+                  <span className="ml-1.5 font-normal text-sm">per month</span>
                 </>
               ) : null}
-              <span className="ml-2 text-lg font-normal">
+
+              {item?.pricePerYearly ? (
+                <>
+                  <button className="ml-1.5 text-lg font-normal">
+                    <BiMoney />
+                  </button>
+                  <span className="ml-1.5 font-normal text-sm">
+                    {item?.pricePerYearly} {item?.currency?.symbol}
+                  </span>
+                  <span className="ml-1.5 font-normal text-sm">per year</span>
+                </>
+              ) : null}
+              <button className="ml-1.5 text-lg font-normal">
                 <AiOutlineCalendar />
-              </span>
-              <span className="ml-2 font-normal text-sm">
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
@@ -119,7 +130,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => router.push(`/commissions/${item?.id}/edit`)}
+                onClick={() => router.push(`/memberships/${item?.id}/edit`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
@@ -140,4 +151,4 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     </>
   );
 };
-export { ListCommissions };
+export { ListMemberships };
