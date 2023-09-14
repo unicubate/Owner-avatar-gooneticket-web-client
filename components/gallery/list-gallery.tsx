@@ -15,7 +15,7 @@ import {
 } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
-import { downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { GetUploadsAPI, downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
 import { FiDownload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
 import { useRouter } from "next/router";
@@ -67,6 +67,20 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     });
   };
 
+  const {
+    status,
+    data: uploads,
+  } = GetUploadsAPI({
+    uploadType: "image",
+    model: "post",
+    userId: item?.userId,
+    uploadableId: String(item?.id),
+  });
+
+  if(status === "loading"){
+    <strong>loading...</strong>
+  }
+
   return (
     <>
       <div key={index} className="py-5 divide-gray-200">
@@ -78,7 +92,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 shape="square"
                 src={viewOneFileUploadAPI({
                   folder: "posts",
-                  fileName: String(item?.uploadsImage[0]?.path),
+                  fileName: String(uploads?.data[0]?.path),
                 })}
                 alt={item?.title}
               />
@@ -124,14 +138,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               {item?.allowDownload && (
                 <>
                   <button
-                    onClick={() => {
-                      router.push(
-                        `${downloadOneFileUploadAPI({
-                          folder: "posts",
-                          fileName: String(item?.uploadsImage[0]?.path),
-                        })}`
-                      );
-                    }}
                     title="Download"
                     className="ml-1.5 tex-sm text-gray-700"
                   >
@@ -170,7 +176,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           post={item}
           openModal={openModal}
           setOpenModal={setOpenModal}
-          uploadImages={item?.uploadsImage}
+          uploadImages={uploads.data}
         />
       )}
     </>

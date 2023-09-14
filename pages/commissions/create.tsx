@@ -1,10 +1,5 @@
 import { PrivateComponent } from "@/components/util/session/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Image, Input } from "antd";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { ButtonInput } from "@/components/templates/button-input";
-import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
 
 const CommissionsCreate = () => {
