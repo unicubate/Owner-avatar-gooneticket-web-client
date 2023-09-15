@@ -87,7 +87,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
               </p>
             </div>
           </div>
-          <p className="mt-2 text-sm font-normal text-gray-600">
+          <p className="mt-1 text-sm font-normal text-gray-600">
             <HtmlParser html={String(item?.description)} />
           </p>
 

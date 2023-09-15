@@ -1,20 +1,11 @@
 import LayoutDashboard from "@/components/layout-dashboard";
-import { GetOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
-import { PostModel } from "@/types/post";
+import { GetOnePostAPI } from "@/api/post";
 import { useRouter } from "next/router";
-import { Avatar, Image, Spin } from "antd";
-import ListComments from "@/components/comment/list-comments";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { Image } from "antd";
 import { BiComment } from "react-icons/bi";
-import { IoShareOutline } from "react-icons/io5";
-import { HtmlParser } from "@/utils/html-parser";
-import { formateDMYHH } from "@/utils";
-import ReactPlayer from "react-player";
 import { useAuth } from "@/components/util/session/context-user";
-import { FiDownload } from "react-icons/fi";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import ListFollowPosts from "@/components/post/list-follow-posts";
-import { LoadingOutlined } from "@ant-design/icons";
 import { LoadingFile } from "@/components/templates/loading-file";
 
 const PostShow = () => {

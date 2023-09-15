@@ -15,10 +15,15 @@ import {
 } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
-import { GetUploadsAPI, downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import {
+  GetUploadsAPI,
+  downloadOneFileUploadAPI,
+  viewOneFileUploadAPI,
+} from "@/api/upload";
 import { FiDownload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
 import { useRouter } from "next/router";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 type Props = {
   item?: PostModel;
@@ -67,18 +72,15 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const {
-    status,
-    data: uploads,
-  } = GetUploadsAPI({
+  const { status, data: uploads } = GetUploadsAPI({
     uploadType: "image",
     model: "post",
     userId: item?.userId,
     uploadableId: String(item?.id),
   });
 
-  if(status === "loading"){
-    <strong>loading...</strong>
+  if (status === "loading") {
+    <strong>loading...</strong>;
   }
 
   return (
@@ -100,13 +102,24 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            {item?.title ? (
-              <p className="mt-2 text-lg font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={50} />
-              </p>
-            ) : null}
+            <div className="flex items-center">
+              <button className="tex-sm text-gray-700">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+            </div>
 
-            <div className="flex mt-10 items-center">
+            <div className="flex mt-2 items-center">
+              {item?.title ? (
+                <p className="mt-2 text-lg font-bold text-gray-600">
+                  <ReadMore html={String(item?.title ?? "")} value={50} />
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex mt-4 items-center">
               <button className="tex-sm text-gray-700">
                 <MdFavoriteBorder />
               </button>
@@ -122,14 +135,11 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               </span>
 
               <button className="ml-1.5 tex-sm text-gray-700">
-                <AiOutlineCalendar />
-              </button>
-              <span className="ml-1.5 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
-
-              <button className="ml-1.5 tex-sm text-gray-700">
-                <TbWorld />
+                {item?.whoCanSee === "PUBLIC" ? (
+                  <TbWorld />
+                ) : (
+                  <HiOutlineLockClosed />
+                )}
               </button>
               <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
@@ -152,7 +162,9 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => setOpenModal(true)}
+                onClick={() => router.push(`/posts/${
+                  item?.id
+                }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                 className="ml-1 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />

@@ -82,17 +82,9 @@ const Gallery = () => {
           />
         ) : null}
 
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
-              {/* <div className="px-4 mx-auto sm:px-6 md:px-8">
-                <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Gallery</h1>
-                  <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
-                    Creer plusieur image et partager avec vos contact
-                  </p>
-                </div>
-              </div> */}
 
               <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 

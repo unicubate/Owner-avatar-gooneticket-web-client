@@ -90,13 +90,24 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            {item?.title ? (
-              <p className="text-lg font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={50} />
-              </p>
-            ) : null}
+            <div className="flex items-center">
+              <button className="tex-sm text-gray-700">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+            </div>
 
-            <div className="flex mt-10 items-center">
+            <div className="flex mt-2 items-center">
+              {item?.title ? (
+                <p className="text-lg font-bold text-gray-600">
+                  <ReadMore html={String(item?.title ?? "")} value={50} />
+                </p>
+              ) : null}
+            </div>
+
+            <div className="flex mt-4 items-center">
               {item?.price ? (
                 <>
                   <span className="text-lg font-normal">
@@ -107,12 +118,6 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                   </span>
                 </>
               ) : null}
-              <span className="ml-2 text-lg font-normal">
-                <AiOutlineCalendar />
-              </span>
-              <span className="ml-2 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
             </div>
           </div>
 

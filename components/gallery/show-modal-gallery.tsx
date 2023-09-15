@@ -1,25 +1,22 @@
-import { Avatar, Button, Image, Upload } from "antd";
+import { Avatar, Upload } from "antd";
 import { BiComment } from "react-icons/bi";
 import { FiDownload } from "react-icons/fi";
-import {
-  MdFavoriteBorder,
-  MdOutlineModeEdit,
-  MdDeleteOutline,
-} from "react-icons/md";
-import { PiLockKey } from "react-icons/pi";
+import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoShareOutline } from "react-icons/io5";
 import Link from "next/link";
 import { HtmlParser } from "@/utils/html-parser";
-import { getOneFileGalleryAPI } from "@/api/post";
 import ListComments from "../comment/list-comments";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { useAuth } from "../util/session/context-user";
 import { formateDMYHH } from "@/utils";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
-import { downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { downloadOneFileUploadAPI } from "@/api/upload";
 import ListCarouselUpload from "../shop/list-carousel-upload";
+import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
+import { PiLockKey } from "react-icons/pi";
+import { ButtonInput } from "../templates/button-input";
 
 const { Dragger } = Upload;
 
@@ -38,13 +35,6 @@ const ShowModalGallery: React.FC<Props> = ({
 }) => {
   const router = useRouter();
   const user = useAuth() as any;
-
-  const downloadItem = (item: any) => {
-    console.log("item ======>", item);
-    location.replace(
-      `localhost:4700/api/v1/uploads/download/20230906i0cI573Q.jpeg`
-    );
-  };
 
   return (
     <>
@@ -109,8 +99,8 @@ const ShowModalGallery: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="flex-auto overflow-y-auto relative p-4">
-                  <div className="mt-2">
+                <div className="flex-auto overflow-y-auto p-4">
+                  <div className="group relative mt-2">
                     {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
                       <ListCarouselUpload
                         uploads={item?.uploadsImage}
@@ -121,10 +111,40 @@ const ShowModalGallery: React.FC<Props> = ({
                         className={`${
                           item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                            ? "blur-lg"
+                            ? "blur-3xl"
                             : ""
                         }`}
                       />
+                    ) : null}
+
+                    {item?.whoCanSee === "MEMBERSHIP" &&
+                    item?.isValidSubscribe !== 1 ? (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-center text-white">
+                          <button className="font-bold">
+                            <PiLockKey className="w-7 h-7" />
+                          </button>
+                          <p className="text-sm font-bold">
+                            {" "}
+                            This post is for members only.{" "}
+                          </p>
+
+                          <ButtonInput
+                            className="mt-2"
+                            shape="default"
+                            type="button"
+                            size="normal"
+                            loading={false}
+                            color="red"
+                          >
+                            Join now
+                          </ButtonInput>
+
+                          <p className="mt-2 text-sm font-medium">
+                            Already a member? Log in
+                          </p>
+                        </div>
+                      </div>
                     ) : null}
                   </div>
 
@@ -167,10 +187,24 @@ const ShowModalGallery: React.FC<Props> = ({
                       </>
                     ) : null}
 
-                    <button className="ml-auto text-lg font-bold">
-                      <PiLockKey />
-                    </button>
-                    <span className="ml-2 text-sm font-normal">Locked</span>
+                    {item?.whoCanSee === "MEMBERSHIP" &&
+                    item?.isValidSubscribe !== 1 ? (
+                      <>
+                        <button className="ml-auto text-lg font-bold">
+                          <HiOutlineLockClosed />
+                        </button>
+                        <span className="ml-2 text-sm font-normal">Locked</span>
+                      </>
+                    ) : (
+                      <>
+                        <button className="ml-auto text-lg font-bold">
+                          <HiOutlineLockOpen />
+                        </button>
+                        <span className="ml-2 text-sm font-normal">
+                          Unlocked
+                        </span>
+                      </>
+                    )}
                   </div>
 
                   <ListComments

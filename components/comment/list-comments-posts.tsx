@@ -129,7 +129,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                   </p>
                 </div>
               </div>
-              <p className="mt-2 text-sm font-normal text-gray-600">
+              <p className="mt-1 text-sm font-normal text-gray-600">
                 <HtmlParser html={String(item?.description)} />
               </p>
               <div className="flex mt-2 items-center">

@@ -48,7 +48,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
 
       {hasNextPage ? (
         <>
-          <div className="mt-6 flex flex-col justify-between items-center">
+          <div className="mt-4 flex flex-col justify-between items-center">
             {isFetchingNextPage ? null :
               <button
                 disabled={isFetchingNextPage ? true : false}

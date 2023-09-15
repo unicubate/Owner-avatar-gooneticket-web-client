@@ -19,7 +19,7 @@ const Followers = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteFollowersAPI({
-    take: 3,
+    take: 10,
     sort: "DESC",
   });
 
@@ -62,20 +62,15 @@ const Followers = () => {
   return (
     <>
       <LayoutDashboard title={"Followers"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex-1 bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
-                <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Followers</h1>
-                </div>
-              </div>
-
+             
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <HorizontalNavSetting />
 
-                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
-                  <div className="flow-root">
+                <div className="flow-root">
+                  <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
                     <div className="overflow-hidden bg-white border border-gray-200">
                       <div className="px-4 py-5">
                         <div className="sm:flex sm:items-center sm:justify-between">
@@ -107,7 +102,6 @@ const Followers = () => {
                       </div>
                     )}
 
-                    {/* </div> */}
                   </div>
                 </div>
               </div>

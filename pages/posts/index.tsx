@@ -75,7 +75,7 @@ const Posts = () => {
   return (
     <>
       <LayoutDashboard title={"Posts"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
 

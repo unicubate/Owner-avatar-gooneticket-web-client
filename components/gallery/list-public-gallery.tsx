@@ -1,18 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { Image } from "antd";
 import { PostModel } from "@/types/post";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { useAuth } from "../util/session/context-user";
 import { PiLockKey } from "react-icons/pi";
 import { ShowModalGallery } from "./show-modal-gallery";
 import { ReadMore } from "@/utils/read-more";
 import { ButtonInput } from "../templates/button-input";
-import { viewOneFileUploadAPI } from "@/api/upload";
 import ListCarouselUpload from "../shop/list-carousel-upload";
+import { HiOutlineLockClosed } from "react-icons/hi2";
+import { HiOutlineLockOpen } from "react-icons/hi";
 
 type Props = {
   item?: PostModel;
@@ -23,7 +22,6 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
   const [openModal, setOpenModal] = useState(false);
   const userVisiter = useAuth() as any;
 
-  console.log("item?.isValidSubscribe =======>", item?.isValidSubscribe);
   return (
     <>
       <div className="group relative" key={item?.id}>
@@ -41,7 +39,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
               height={250}
               className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${
                 item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                  ? "blur-lg"
+                  ? "blur-3xl"
                   : ""
               }`}
             />
@@ -91,9 +89,18 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
           <span className="ml-auto text-sm font-normal">
             {formateDMYHH(item?.createdAt as Date)}
           </span>
-          <button className="ml-1.5 text-lg font-bold">
+          {/* <button className="ml-1.5 text-lg font-bold">
             <PiLockKey />
-          </button>
+          </button> */}
+          {item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1 ? (
+            <button title="Locked" className="ml-1.5 text-lg font-bold">
+              <HiOutlineLockClosed />
+            </button>
+          ) : (
+            <button title="Unlocked" className="ml-1.5 text-lg font-bold">
+              <HiOutlineLockOpen />
+            </button>
+          )}
         </div>
       </div>
 

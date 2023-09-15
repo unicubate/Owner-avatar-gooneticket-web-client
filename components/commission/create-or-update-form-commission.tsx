@@ -119,7 +119,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         position: "center",
       });
       if (!commission?.id) {
-        push(`/memberships`);
+        push(`/commissions`);
       }
     } catch (error: any) {
       setHasErrors(true);

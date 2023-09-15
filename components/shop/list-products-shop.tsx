@@ -6,7 +6,11 @@ import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit, MdOutlineRemoveRedEye } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdOutlineModeEdit,
+  MdOutlineRemoveRedEye,
+} from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 import { BiMoney } from "react-icons/bi";
@@ -24,8 +28,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -61,18 +65,15 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const {
-    status,
-    data: dataImages,
-  } = GetUploadsAPI({
+  const { status, data: dataImages } = GetUploadsAPI({
     userId: item?.userId,
     model: "PRODUCT",
     uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 
-  if (status === 'loading') {
-    <p>loading...</p>
+  if (status === "loading") {
+    <p>loading...</p>;
   }
 
   return (
@@ -83,17 +84,30 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             <Avatar
               size={100}
               shape="square"
-              src={viewOneFileUploadAPI({ folder: 'products', fileName: String(dataImages?.data[0]?.path) })}
+              src={viewOneFileUploadAPI({
+                folder: "products",
+                fileName: String(dataImages?.data[0]?.path),
+              })}
               alt={item?.title}
             />
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            {item?.title ? (
-              <p className="text-lg font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={50} />
-              </p>
-            ) : null}
+            <div className="flex items-center">
+              <button className="tex-sm text-gray-700">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+            </div>
+            <div className="flex mt-4 items-center">
+              {item?.title ? (
+                <p className="text-lg font-bold text-gray-600">
+                  <ReadMore html={String(item?.title ?? "")} value={50} />
+                </p>
+              ) : null}
+            </div>
             {/* {item?.price ? (
               <p className="mt-4 text-sm font-medium text-gray-600">
                 {item?.price} {item?.currency?.symbol}
@@ -104,8 +118,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               {formateDateDayjs(item?.createdAt as Date)}
             </p> */}
 
-            <div className="flex mt-10 items-center">
-
+            <div className="flex mt-4 items-center">
               <button className="text-lg font-normal">
                 <BiMoney />
               </button>
@@ -115,17 +128,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
 
               {item?.enableDiscount ? (
                 <span className="ml-2 text-sm font-normal text-gray-500">
-                  <del>{item?.price} {item?.currency?.symbol}</del>
+                  <del>
+                    {item?.price} {item?.currency?.symbol}
+                  </del>
                 </span>
               ) : null}
-
-
-              <button className="ml-2 text-lg font-normal">
-                <AiOutlineCalendar />
-              </button>
-              <span className="ml-2 text-sm font-normal">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
 
             </div>
           </div>

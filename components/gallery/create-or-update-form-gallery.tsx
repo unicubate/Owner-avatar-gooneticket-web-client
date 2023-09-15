@@ -17,6 +17,8 @@ import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input
 import { filterImageAndFile } from "@/utils/utils";
 import { viewOneFileUploadAPI } from "@/api/upload";
 import { SwitchInput } from "../util/form/switch-input";
+import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { useRouter } from "next/router";
 
 const schema = yup.object({
   title: yup.string().optional(),
@@ -31,6 +33,7 @@ type Props = {
 };
 
 const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -236,18 +239,27 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
               className="h-36"
             />
           </div>
-        </div>
 
-        <div className="mt-4">
-          <ButtonInput
-            shape="default"
-            type="submit"
-            size="large"
-            loading={loading}
-            color="indigo"
-          >
-            Save and Publish
-          </ButtonInput>
+          <div className="flex items-center mt-4 space-x-4">
+            <ButtonCancelInput
+              shape="default"
+              size="large"
+              loading={loading}
+              onClick={() => router.back()}
+            >
+              Cancel
+            </ButtonCancelInput>
+            <ButtonInput
+              minW="fit"
+              shape="default"
+              type="submit"
+              size="large"
+              loading={false}
+              color="indigo"
+            >
+              Save and Publish
+            </ButtonInput>
+          </div>
         </div>
       </form>
     </>

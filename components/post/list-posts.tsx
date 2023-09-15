@@ -6,7 +6,11 @@ import { Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdFavoriteBorder, MdOutlineModeEdit } from "react-icons/md";
+import {
+  MdDeleteOutline,
+  MdFavoriteBorder,
+  MdOutlineModeEdit,
+} from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetUploadsAPI } from "@/api/upload";
 import { BiComment } from "react-icons/bi";
@@ -14,6 +18,7 @@ import { LiaDnaSolid } from "react-icons/lia";
 import { PostModel } from "@/types/post";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 type Props = {
   item?: PostModel;
@@ -25,8 +30,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -62,18 +67,15 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const {
-    status,
-    data: dataImages,
-  } = GetUploadsAPI({
+  const { status, data: dataImages } = GetUploadsAPI({
     userId: item?.userId,
     model: "COMMISSION",
     uploadableId: `${item?.id}`,
     uploadType: "image",
   });
 
-  if (status === 'loading') {
-    <p>loading...</p>
+  if (status === "loading") {
+    <p>loading...</p>;
   }
 
   return (
@@ -90,14 +92,24 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
           </div> */}
 
           <div className="flex-1 min-w-0 cursor-pointer">
-            {item?.title ? (
-              <p className="text-lg font-bold text-gray-600">
-                <ReadMore html={String(item?.title ?? "")} value={100} />
-              </p>
-            ) : null}
+            <div className="flex items-center">
+              <button className="tex-sm text-gray-700">
+                <AiOutlineCalendar />
+              </button>
+              <span className="ml-1.5 font-normal text-sm">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+            </div>
 
-            <div className="flex mt-10 items-center">
+            <div className="flex mt-4 items-center">
+              {item?.title ? (
+                <p className="text-lg font-bold text-gray-600">
+                  <ReadMore html={String(item?.title ?? "")} value={100} />
+                </p>
+              ) : null}
+            </div>
 
+            <div className="flex mt-4 items-center">
               <span className="text-lg font-normal">
                 <MdFavoriteBorder />
               </span>
@@ -112,15 +124,12 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
                 {item?.totalComment ?? 0}
               </span>
 
-              <span className="ml-1.5 text-lg font-normal">
-                <AiOutlineCalendar />
-              </span>
-              <span className="ml-1.5 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
-              
               <span className="ml-1.5 text-lg font-bold">
-                <TbWorld />
+                {item?.whoCanSee === "PUBLIC" ? (
+                  <TbWorld />
+                ) : (
+                  <HiOutlineLockClosed />
+                )}
               </span>
               <span className="ml-1.5 font-normal text-sm">
                 {item?.whoCanSee}
@@ -128,19 +137,20 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
               <span className="ml-1.5 text-lg font-bold">
                 <LiaDnaSolid />
               </span>
-              <span className="ml-1.5 font-normal text-sm">
-                {item?.type}
-              </span>
-
+              <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
             </div>
-
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => router.push(`/posts/${item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`)}
+                onClick={() =>
+                  router.push(
+                    `/posts/${
+                      item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`
+                  )
+                }
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />

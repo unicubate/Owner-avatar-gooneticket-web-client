@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ButtonInput } from "../templates/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { Avatar, Button, Upload } from "antd";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
-import { ReactQuillInput, TextAreaInput } from "../util/form";
 import { useAuth } from "../util/session/context-user";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 
 const schema = yup.object({
-  description: yup.string().required(),
+  description: yup.string().min(7).required(),
 });
 
 const CreateOrUpdateFormComment: React.FC<{
@@ -100,14 +98,14 @@ const CreateOrUpdateFormComment: React.FC<{
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-8 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
-          <div className="flex items-start">
+          {/* <div className="flex items-start">
             <Avatar
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-8 h-10"
               src={user?.profile?.image}
               alt=""
             />
-          </div>
+          </div> */}
           <TextareaReactQuillInput
             control={control}
             name="description"
@@ -129,7 +127,7 @@ const CreateOrUpdateFormComment: React.FC<{
             </div>
           ) : null}
 
-          {watchDescription.length >= 1 && (
+          {watchDescription.length >= 7 && (
             <div className="sm:flex flex-col sm:items-end sm:justify-between">
               <ButtonInput
                 shape="default"
