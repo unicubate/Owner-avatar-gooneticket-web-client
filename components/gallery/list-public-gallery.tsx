@@ -23,6 +23,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
   const [openModal, setOpenModal] = useState(false);
   const userVisiter = useAuth() as any;
 
+  console.log("item?.isValidSubscribe =======>", item?.isValidSubscribe);
   return (
     <>
       <div className="group relative" key={item?.id}>
@@ -38,30 +39,38 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
               folder="posts"
               preview={false}
               height={250}
-              // className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 blur-lg`}
-              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110`}
+              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${
+                item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+                  ? "blur-lg"
+                  : ""
+              }`}
             />
           ) : null}
 
-          {/* <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center text-white">
-              <button className="font-bold">
-                <PiLockKey className="w-7 h-7" />
-              </button>
-              <p className="text-sm font-bold"> This post is for members only. </p>
+          {item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1 ? (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center text-white">
+                <button className="font-bold">
+                  <PiLockKey className="w-7 h-7" />
+                </button>
+                <p className="text-sm font-bold">
+                  {" "}
+                  This post is for members only.{" "}
+                </p>
 
-              <ButtonInput
-                className="mt-2"
-                shape="default"
-                type="button"
-                size="normal"
-                loading={false}
-                color="red"
-              >
-                Join now
-              </ButtonInput>
+                <ButtonInput
+                  className="mt-2"
+                  shape="default"
+                  type="button"
+                  size="normal"
+                  loading={false}
+                  color="red"
+                >
+                  Join now
+                </ButtonInput>
+              </div>
             </div>
-          </div> */}
+          ) : null}
         </a>
 
         <div className="flex flex-col flex-1">

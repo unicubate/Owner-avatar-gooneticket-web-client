@@ -7,6 +7,8 @@ export const arrayWhoCanSees = [
 
 export type PostType = "AUDIO" | "VIDEO" | "ARTICLE" | "GALLERY";
 
+export type WhoCanSeeType = "PUBLIC" | "MEMBERSHIP";
+
 export type ResponsePostModel = {
   value: Array<PostModel>;
 } & PaginationResponse;
@@ -19,7 +21,7 @@ export type PostModel = {
   urlMedia: string;
   status: boolean;
   title: string;
-  whoCanSee: string;
+  whoCanSee: WhoCanSeeType;
   type: PostType;
   allowDownload: true;
   description: string;
@@ -27,6 +29,7 @@ export type PostModel = {
   totalLike: number;
   uploadsImage: any;
   uploadsFile: any;
+  isValidSubscribe: number;
   profile: {
     color: string;
     email: string;

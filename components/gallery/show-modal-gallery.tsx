@@ -19,6 +19,7 @@ import { formateDMYHH } from "@/utils";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
 import { downloadOneFileUploadAPI, viewOneFileUploadAPI } from "@/api/upload";
+import ListCarouselUpload from "../shop/list-carousel-upload";
 
 const { Dragger } = Upload;
 
@@ -110,15 +111,21 @@ const ShowModalGallery: React.FC<Props> = ({
 
                 <div className="flex-auto overflow-y-auto relative p-4">
                   <div className="mt-2">
-                    <Image
-                      width="100%"
-                      preview={false}
-                      src={`${viewOneFileUploadAPI({
-                        folder: "posts",
-                        fileName: item?.uploadsImage[0]?.path,
-                      })}`}
-                      alt={item?.title}
-                    />
+                    {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
+                      <ListCarouselUpload
+                        uploads={item?.uploadsImage}
+                        folder="posts"
+                        preview={false}
+                        height="100%"
+                        alt={item?.title}
+                        className={`${
+                          item?.whoCanSee === "MEMBERSHIP" &&
+                          item?.isValidSubscribe !== 1
+                            ? "blur-lg"
+                            : ""
+                        }`}
+                      />
+                    ) : null}
                   </div>
 
                   <p className="mt-4 text-lg font-bold text-gray-900 cursor-pointer">

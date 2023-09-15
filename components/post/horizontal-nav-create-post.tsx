@@ -1,7 +1,4 @@
-import { usePathname } from "next/navigation";
 import React, { useState } from "react";
-import Link from "next/link";
-import { useAuth } from "../util/session/context-user";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { BiDetail } from "react-icons/bi";
 import { LuFileAudio2 } from "react-icons/lu";

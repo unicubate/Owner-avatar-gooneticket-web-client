@@ -23,13 +23,13 @@ import { ButtonInput } from "@/components/templates/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
-  username: yup
-    .string()
-    .trim("The username name cannot include leading and trailing spaces")
-    .strict(true)
-    .min(1, "The username name needs to be at least 1 char")
-    .max(512, "The username name cannot exceed 512 char")
-    .required(),
+  // username: yup
+  //   .string()
+  //   .trim("The username name cannot include leading and trailing spaces")
+  //   .strict(true)
+  //   .min(1, "The username name needs to be at least 1 char")
+  //   .max(512, "The username name cannot exceed 512 char")
+  //   .required(),
   url: yup.string().url().optional(),
   birthday: yup.date().required(),
   currencyId: yup.string().uuid().required(),

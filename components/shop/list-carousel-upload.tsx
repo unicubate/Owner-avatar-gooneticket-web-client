@@ -11,6 +11,7 @@ type Props = {
   folder: UploadFolderType;
   preview: boolean;
   className?: string;
+  alt?: string;
   height?: string | number;
   width?: string | number;
 };
@@ -25,6 +26,7 @@ const ListCarouselUpload: React.FC<Props> = ({
   uploads,
   folder,
   preview,
+  alt,
   className = "object-cover w-full h-full",
   height = "400px",
   width = "100%",
@@ -56,7 +58,7 @@ const ListCarouselUpload: React.FC<Props> = ({
                     folder: folder,
                     fileName: item?.path,
                   })}`}
-                  alt=""
+                  alt={alt}
                 />
               </div>
             ))}

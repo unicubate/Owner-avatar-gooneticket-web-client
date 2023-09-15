@@ -1,18 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Image } from "antd";
+import { Avatar } from "antd";
 import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
-import { getOneFileGalleryAPI } from "@/api/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
@@ -21,9 +19,7 @@ import { useAuth } from "../util/session/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
 import {
-  GetUploadsAPI,
   downloadOneFileUploadAPI,
-  viewOneFileUploadAPI,
 } from "@/api/upload";
 import ListCarouselUpload from "../shop/list-carousel-upload";
 

@@ -65,7 +65,7 @@ const EnableShop: React.FC<Props> = ({ profile }) => {
                 loading={false}
                 color={isOpen ? "indigo" : "red"}
               >
-                {isOpen ? "Close" : "Open"}
+                {isOpen ? "Open" : "Close"}
               </ButtonInput>
             </div>
           </div>
