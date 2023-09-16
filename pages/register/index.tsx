@@ -62,12 +62,11 @@ const Register = () => {
       });
       setHasErrors(false);
       setLoading(false);
-      localStorage.setItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken)
-      );
-      router.push(`${`/register/${user?.id}/setting-profile`}`);
-      window.location.reload();
+      // localStorage.setItem(
+      //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+      //   JSON.stringify(user?.accessToken)
+      // );
+      router.push(`${`/login`}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

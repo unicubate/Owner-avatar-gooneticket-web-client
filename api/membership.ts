@@ -1,4 +1,4 @@
-import { MembershipFormModel } from "@/types/membership";
+import { MembershipFormModel, MembershipModel } from "@/types/membership";
 import {
   PostFormModel,
   PostModel,
@@ -146,7 +146,7 @@ export const GetOneMembershipAPI = (payload: {
     refetchOnWindowFocus: true,
   });
 
-  return { data: data?.data as PostModel, isError, isLoading, status };
+  return { data: data?.data as MembershipModel, isError, isLoading, status };
 };
 
 export const getMembershipsAPI = async (

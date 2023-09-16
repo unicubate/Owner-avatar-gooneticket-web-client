@@ -103,6 +103,7 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
         gravity: "top",
         position: "center",
       });
+      router.back();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -254,7 +255,7 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
               shape="default"
               type="submit"
               size="large"
-              loading={false}
+              loading={loading}
               color="indigo"
             >
               Save and Publish

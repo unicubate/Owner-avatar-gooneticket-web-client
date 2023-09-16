@@ -114,7 +114,7 @@ export const GetAllCurrenciesAPI = (search?: string) => {
 };
 
 export const GetAllCountiesAPI = (search?: string) => {
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["countries"],
     queryFn: async () =>
       await makeApiCall({
@@ -124,6 +124,8 @@ export const GetAllCountiesAPI = (search?: string) => {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as any, isError, isLoading, status };
 };
 
 export const getOneFileProfileAPI = (fileName: string) =>

@@ -11,7 +11,7 @@ import { GetUploadsAPI } from "@/api/upload";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useAuth } from "@/components/util/session/context-user";
-import ListCarouselUpload from "@/components/shop/list-carousel-upload";
+import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
@@ -59,7 +59,11 @@ const ShopView = () => {
     ) : isErrorProduct || isErrorImages ? (
       <strong>Error find data please try again...</strong>
     ) : (
-      <ListCarouselUpload uploads={dataImages?.data} folder="products"  preview={true}/>
+      <ListCarouselUpload
+        uploads={dataImages?.data}
+        folder="products"
+        preview={true}
+      />
     );
 
   return (
@@ -156,11 +160,7 @@ const ShopView = () => {
               <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
-                    <Button
-                      shape="default"
-                      size="large"
-                      loading={false}
-                    >
+                    <Button shape="default" size="large" loading={false}>
                       <svg
                         className="w-5 h-5"
                         xmlns="http://www.w3.org/2000/svg"
@@ -177,13 +177,12 @@ const ShopView = () => {
                       </svg>
                     </Button>
 
-                    <span className="text-base font-semibold text-gray-900"> 1 </span>
+                    <span className="text-base font-semibold text-gray-900">
+                      {" "}
+                      1{" "}
+                    </span>
 
-                    <Button
-                      shape="default"
-                      size="large"
-                      loading={false}
-                    >
+                    <Button shape="default" size="large" loading={false}>
                       <svg
                         className="w-5 h-5"
                         xmlns="http://www.w3.org/2000/svg"

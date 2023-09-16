@@ -11,7 +11,6 @@ import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "../shop/list-carousel-upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 

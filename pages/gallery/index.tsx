@@ -12,8 +12,10 @@ import { useInView } from "react-intersection-observer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LoadingFile } from "@/components/templates/loading-file";
 import { EnableGallery } from "@/components/gallery/enable-gallery";
+import { useRouter } from "next/router";
 
 const Gallery = () => {
+  const router = useRouter();
   const { ref, inView } = useInView();
   const { userStorage, profile } = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
@@ -75,12 +77,12 @@ const Gallery = () => {
   return (
     <>
       <LayoutDashboard title={"Gallery"}>
-        {openModal ? (
+        {/* {openModal ? (
           <CreateOrUpdateGallery
             openModal={openModal}
             setOpenModal={setOpenModal}
           />
-        ) : null}
+        ) : null} */}
 
         <div className="flex flex-col flex-1 bg-gray-100">
           <main>
@@ -97,7 +99,7 @@ const Gallery = () => {
                         <div className="sm:flex sm:items-center sm:justify-between">
                           <div className="mt-4 sm:mt-0">
                             <ButtonInput
-                              onClick={() => setOpenModal(true)}
+                              onClick={() => router.push(`/posts/create?type=gallery`)}
                               shape="default"
                               type="button"
                               size="normal"

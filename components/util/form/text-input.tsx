@@ -12,7 +12,7 @@ interface Props {
   required?: boolean;
   defaultValue?: string;
   suffix?: React.ReactNode;
-  prefix?:  React.ReactNode;
+  prefix?: React.ReactNode;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -30,17 +30,21 @@ const TextInput: React.FC<Props> = ({
 }) => {
   return (
     <>
-     {label ? <label
-        className="block text-gray-700 text-sm font-bold mb-2"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <Input
+            className={`${errors?.[name]?.message ? "border-red-500" : ""}`}
             size="large"
             type={type}
             id={name}

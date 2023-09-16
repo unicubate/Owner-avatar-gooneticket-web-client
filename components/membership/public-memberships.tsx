@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { GetInfinitePostsAPI } from "@/api/post";
 import { ButtonInput } from "../templates/button-input";
 import { useInView } from "react-intersection-observer";
-import { ListPublicGallery } from "./list-public-gallery";
+import { GetInfiniteMembershipsAPI } from "@/api/membership";
+import {ListPublicMemberships} from "./list-public-memberships";
 import { LoadingFile } from "../templates/loading-file";
+
 
 type Props = {
   userId: string;
 };
 
-const PublicGallery: React.FC<Props> = ({ userId }) => {
+const PublicMemberships: React.FC<Props> = ({ userId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -20,13 +21,12 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfinitePostsAPI({
+  } = GetInfiniteMembershipsAPI({
     take: 10,
     sort: "DESC",
     userId: userId,
-    status: "ACTIVE",
-    typeIds: ["GALLERY"],
-    queryKey: ["gallery-posts", "infinite"],
+    status: 'ACTIVE',
+    queryKey: ['memberships', "infinite"]
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTablePosts = isLoadingPosts ? (
+  const dataTableMemberships = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
     <strong>Error find data please try again...</strong>
@@ -61,15 +61,15 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
     dataPosts.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPublicGallery item={item} key={index} commentTake={10} />
+        <ListPublicMemberships item={item} key={index} />
       ))
   );
 
   return (
     <>
-      {dataTablePosts}
+      {dataTableMemberships}
 
-      <div className="mt-4 text-center justify-center mx-auto">
+      <div className="mt-6 text-center justify-center mx-auto">
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput
@@ -91,4 +91,4 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
   );
 };
 
-export default PublicGallery;
+export { PublicMemberships };

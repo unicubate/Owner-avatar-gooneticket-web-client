@@ -9,7 +9,7 @@ import { PiLockKey } from "react-icons/pi";
 import { ShowModalGallery } from "./show-modal-gallery";
 import { ReadMore } from "@/utils/read-more";
 import { ButtonInput } from "../templates/button-input";
-import ListCarouselUpload from "../shop/list-carousel-upload";
+import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed } from "react-icons/hi2";
 import { HiOutlineLockOpen } from "react-icons/hi";
 
@@ -116,4 +116,4 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
   );
 };
 
-export default ListPublicGallery;
+export { ListPublicGallery };

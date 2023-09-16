@@ -76,4 +76,4 @@ const ListCarouselUpload: React.FC<Props> = ({
   );
 };
 
-export default ListCarouselUpload;
+export { ListCarouselUpload };

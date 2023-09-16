@@ -13,7 +13,7 @@ import { formateDMYHH } from "@/utils";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
 import { downloadOneFileUploadAPI } from "@/api/upload";
-import ListCarouselUpload from "../shop/list-carousel-upload";
+import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { PiLockKey } from "react-icons/pi";
 import { ButtonInput } from "../templates/button-input";

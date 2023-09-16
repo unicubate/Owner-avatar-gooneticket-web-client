@@ -14,6 +14,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { MembershipFormModel } from "@/types/membership";
 
 const schema = yup.object({
+  pricePerYearly: yup.number().min(1).required(),
   pricePerMonthly: yup.number().min(1).required(),
   title: yup.string().required(),
   description: yup.string().min(10).required(),
@@ -157,6 +158,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                   name="pricePerYearly"
                   placeholder="Price per year"
                   errors={errors}
+                  required
                   prefix={"€"}
                 />
               </div>

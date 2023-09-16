@@ -4,8 +4,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import Link from "next/link";
 import { ProductModel } from "@/types/product";
 import { ButtonInput } from "../templates/button-input";
-import ListCarouselUpload from "../shop/list-carousel-upload";
-import { Button, Tag } from "antd";
+import { ListCarouselUpload } from "../shop/list-carousel-upload";
 
 type Props = {
   item?: ProductModel;
@@ -46,7 +45,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
           <div className="text-sm font-normal text-gray-600">
             <HtmlParser html={String(item?.description)} />
           </div>
-          <div className="text-center justify-center mx-auto">
+          <div className="mt-4 text-center justify-center mx-auto">
             <ListCarouselUpload
               uploads={item?.uploadsImage}
               folder="commissions"

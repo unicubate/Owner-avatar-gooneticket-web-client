@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import ListCarouselUpload from "@/components/shop/list-carousel-upload";
+import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { formateDMYHH } from "@/utils";
@@ -54,8 +54,7 @@ const ShopView = () => {
     productSlug,
   });
 
-  const { data: dataCountries } = GetAllCountiesAPI();
-  const countries: any = dataCountries?.data;
+  const { data: countries } = GetAllCountiesAPI();
 
   const {
     isLoading: isLoadingImages,

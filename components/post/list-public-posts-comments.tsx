@@ -92,7 +92,7 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {item?.image ? (
+          {/* {item?.image ? (
             <div className="mt-2">
               <Image
                 width="100%"
@@ -102,7 +102,7 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
                 alt={item?.title}
               />
             </div>
-          ) : null}
+          ) : null} */}
 
           {item?.id ? (
             <Link
