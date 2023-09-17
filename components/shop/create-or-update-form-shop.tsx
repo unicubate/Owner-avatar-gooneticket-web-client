@@ -31,6 +31,8 @@ import { SelectDiscountSearchInput } from "../discount/select-discount-search-in
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
+import { ListCarouselUpload } from "./list-carousel-upload";
+import { useAuth } from "../util/session/context-user";
 
 const { Option } = Select;
 
@@ -62,6 +64,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   uploadImages,
   uploadFiles,
 }) => {
+  const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
@@ -174,42 +177,29 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+        <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold text-gray-900">
               Create a New Product
             </h2>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextInput
-                  label="Name"
-                  control={control}
-                  type="text"
-                  name="title"
-                  placeholder="Name product"
-                  errors={errors}
-                />
-              </div>
+
+
+
+
+            <div className="mt-2">
+              <TextInput
+                label="Name"
+                control={control}
+                type="text"
+                name="title"
+                placeholder="Name product"
+                errors={errors}
+              />
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mb-2">
-                <NumberInput
-                  control={control}
-                  label="Price"
-                  type="number"
-                  name="price"
-                  placeholder="Price product"
-                  errors={errors}
-                  required
-                  prefix={"€"}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mb-4">
+            <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <div className="mt-4">
                 <Controller
                   name="attachmentImages"
                   control={control}
@@ -239,88 +229,91 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <ReactQuillInput
-                  control={control}
-                  label="Description"
-                  name="description"
-                  placeholder="Write description"
-                  errors={errors}
-                />
-                <span className="text-sm font-medium text-gray-600">
-                  {`Provide a full description of the item that you are selling.`}
-                </span>
-              </div>
+            <div className="mb-2">
+              <NumberInput
+                control={control}
+                label="Price"
+                type="number"
+                name="price"
+                placeholder="Price product"
+                errors={errors}
+                required
+                prefix={profile?.currency?.code}
+              />
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextInput
-                  label="Embed Media (optional)"
-                  control={control}
-                  type="text"
-                  name="urlMedia"
-                  placeholder="e.g. https://youtube.com/watch?v=abc123"
-                  errors={errors}
-                />
-                <span className="text-sm font-medium text-gray-600">
-                  {`Add a preview video, audio or other content to showcase your product to potential buyers`}
-                </span>
-              </div>
+            <div className="mt-2">
+              <ReactQuillInput
+                control={control}
+                label="Description"
+                name="description"
+                placeholder="Write description"
+                errors={errors}
+              />
+              <span className="text-sm font-medium text-gray-600">
+                {`Provide a full description of the item that you are selling.`}
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <Controller
-                  name="attachmentFiles"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="justify-center mx-auto">
-                        <Upload
-                          multiple
-                          name="attachmentFiles"
-                          listType="picture"
-                          className="upload-list-inline"
-                          fileList={fileList}
-                          onChange={handleFileChange}
-                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
-                        >
-                          <Button icon={<UploadOutlined />}>Upload File</Button>
-                        </Upload>
-                      </div>
-                    </>
-                  )}
-                />
-                <span className="text-sm font-medium text-gray-600">
-                  {`Upload file for this product`}
-                </span>
-              </div>
+            <div className="mt-2">
+              <TextInput
+                label="Embed Media (optional)"
+                control={control}
+                type="text"
+                name="urlMedia"
+                placeholder="e.g. https://youtube.com/watch?v=abc123"
+                errors={errors}
+              />
+              <span className="text-sm font-medium text-gray-600">
+                {`Add a preview video, audio or other content to showcase your product to potential buyers`}
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextAreaInput
-                  row={3}
-                  control={control}
-                  label="Confirmation message"
-                  name="messageAfterPayment"
-                  placeholder="Success page confirmation"
-                  errors={errors}
-                />
-                <span className="text-sm font-medium text-gray-600">
-                  {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
-                </span>
-              </div>
+            <div className="mt-2">
+              <Controller
+                name="attachmentFiles"
+                control={control}
+                render={({ field: { onChange } }) => (
+                  <>
+                    <div className="justify-center mx-auto">
+                      <Upload
+                        multiple
+                        name="attachmentFiles"
+                        listType="picture"
+                        className="upload-list-inline"
+                        fileList={fileList}
+                        onChange={handleFileChange}
+                        accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
+                      >
+                        <Button icon={<UploadOutlined />}>Upload File</Button>
+                      </Upload>
+                    </div>
+                  </>
+                )}
+              />
+              <span className="text-sm font-medium text-gray-600">
+                {`Upload file for this product`}
+              </span>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
-                  Advanced settings
-                </label>
-              </div>
+            <div className="mt-2">
+              <TextAreaInput
+                row={3}
+                control={control}
+                label="Confirmation message"
+                name="messageAfterPayment"
+                placeholder="Success page confirmation"
+                errors={errors}
+              />
+              <span className="text-sm font-medium text-gray-600">
+                {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
+              </span>
+            </div>
+
+            <div className="mt-2">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Advanced settings
+              </label>
             </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">

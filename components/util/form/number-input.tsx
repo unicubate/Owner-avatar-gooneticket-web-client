@@ -53,7 +53,7 @@ const NumberInput: React.FC<Props> = ({
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}
-            prefix={prefix}
+            prefix={<strong>{prefix}</strong>}
             min={1}
             {...field}
           />

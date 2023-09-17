@@ -33,7 +33,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
     <>
       <div
         key={item?.id}
-        className="grid mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
+        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
       >
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
@@ -105,6 +105,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 uploads={item?.uploadsImage}
                 folder="posts"
                 preview={false}
+                height="100%"
                 className={`${
                   item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1

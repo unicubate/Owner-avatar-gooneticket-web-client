@@ -55,7 +55,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             <div className="sm:mt-0">
               <ButtonInput
                 onClick={() => {
-                  router.push(`/memberships/${item?.id}/cart`);
+                  router.push(`/memberships/${item?.id}/checkout`);
                 }}
                 shape="default"
                 type="button"

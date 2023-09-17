@@ -19,6 +19,7 @@ import { viewOneFileUploadAPI } from "@/api/upload";
 import { SwitchInput } from "../util/form/switch-input";
 import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
+import { ListCarouselUpload } from "../shop/list-carousel-upload";
 
 const schema = yup.object({
   title: yup.string().optional(),
@@ -133,46 +134,44 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
 
           {uploadImages?.length > 0 ? (
             <div className="mt-2 text-center space-x-2">
-              <Avatar
-                size={200}
-                shape="square"
-                src={viewOneFileUploadAPI({
-                  folder: "posts",
-                  fileName: String(uploadImages[0]?.path),
-                })}
-                alt={post?.title}
+              <ListCarouselUpload
+                uploads={post?.uploadsImage}
+                folder="posts"
+                preview={false}
+                height="300px"
+                width="100%"
               />
             </div>
-          ) : (
-            <div className="mb-4">
-              <Controller
-                name="attachmentImages"
-                control={control}
-                render={({}) => (
-                  <>
-                    <div className="text-center justify-center mx-auto">
-                      <Upload
-                        multiple
-                        name="attachmentImages"
-                        listType="picture-card"
-                        fileList={imageList}
-                        onChange={handleImageChange}
-                        accept=".png,.jpg,.jpeg"
-                        maxCount={1}
-                      >
-                        {imageList.length >= 1 ? null : (
-                          <div>
-                            <PlusOutlined />
-                            <div style={{ marginTop: 8 }}>Upload cover</div>
-                          </div>
-                        )}
-                      </Upload>
-                    </div>
-                  </>
-                )}
-              />
-            </div>
-          )}
+          ) : null}
+
+          <div className="mb-4">
+            <Controller
+              name="attachmentImages"
+              control={control}
+              render={({ }) => (
+                <>
+                  <div className="text-center justify-center mx-auto">
+                    <Upload
+                      multiple
+                      name="attachmentImages"
+                      listType="picture-card"
+                      fileList={imageList}
+                      onChange={handleImageChange}
+                      accept=".png,.jpg,.jpeg"
+                      maxCount={10}
+                    >
+                      {imageList.length >= 10 ? null : (
+                        <div>
+                          <PlusOutlined />
+                          <div style={{ marginTop: 8 }}>Upload cover</div>
+                        </div>
+                      )}
+                    </Upload>
+                  </div>
+                </>
+              )}
+            />
+          </div>
 
           <div className="mt-4">
             <TextInput

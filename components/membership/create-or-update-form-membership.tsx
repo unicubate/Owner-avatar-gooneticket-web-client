@@ -12,6 +12,7 @@ import { Upload, UploadFile, UploadProps } from "antd";
 import { CreateOrUpdateOneMembershipAPI } from "@/api/membership";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { MembershipFormModel } from "@/types/membership";
+import { useAuth } from "../util/session/context-user";
 
 const schema = yup.object({
   pricePerYearly: yup.number().min(1).required(),
@@ -24,6 +25,7 @@ const CreateOrUpdateFormMembership: React.FC<{
   membership?: any;
   uploadImages?: any;
 }> = ({ membership, uploadImages }) => {
+  const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -144,7 +146,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                   placeholder="Price per month"
                   errors={errors}
                   required
-                  prefix={"€"}
+                  prefix={profile?.currency?.code}
                 />
                 <span className="text-sm font-medium text-gray-400">
                   {`Set your minimum price per month. Supporters can choose to pay more`}
@@ -153,13 +155,13 @@ const CreateOrUpdateFormMembership: React.FC<{
               <div className="mt-2">
                 <NumberInput
                   control={control}
-                  label="Price per year(optional)"
+                  label="Price per year"
                   type="number"
                   name="pricePerYearly"
                   placeholder="Price per year"
                   errors={errors}
                   required
-                  prefix={"€"}
+                  prefix={profile?.currency?.code}
                 />
               </div>
             </div>
@@ -168,7 +170,7 @@ const CreateOrUpdateFormMembership: React.FC<{
               <Controller
                 name="attachmentImages"
                 control={control}
-                render={({}) => (
+                render={({ }) => (
                   <>
                     <div className="text-center justify-center mx-auto">
                       <Upload

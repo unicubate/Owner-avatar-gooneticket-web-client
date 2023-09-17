@@ -31,7 +31,7 @@ const PostShow = () => {
   return (
     <>
       <LayoutDashboard title={"Home"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 bg-gray-100">
           <main>
             <div className="max-w-7xl mx-auto py-6">
               <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl">

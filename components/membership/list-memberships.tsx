@@ -12,6 +12,7 @@ import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { MembershipModel } from "@/types/membership";
+import { DeleteOneMembershipAPI } from "@/api/membership";
 
 type Props = {
   item?: MembershipModel;
@@ -22,7 +23,7 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const saveMutation = DeleteOnePostAPI({
+  const saveMutation = DeleteOneMembershipAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
@@ -41,9 +42,9 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ postId: item?.id });
+          await saveMutation.mutateAsync({ membershipId: item?.id });
           AlertSuccessNotification({
-            text: "Image deleted successfully",
+            text: "Data deleted successfully",
             className: "info",
             gravity: "top",
             position: "center",

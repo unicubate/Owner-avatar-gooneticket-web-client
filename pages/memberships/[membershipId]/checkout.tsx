@@ -25,7 +25,7 @@ const schema = yup.object({
   // firstName: yup.string().nullable(),
 });
 
-const CartView = () => {
+const CheckoutView = () => {
   const { userStorage } = useAuth() as any;
   const router = useRouter();
   const { query } = useRouter();
@@ -111,11 +111,10 @@ const CartView = () => {
                             {item?.pricePerMonthly ? (
                               <div className="mt-2">
                                 <div
-                                  className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
-                                    errors?.amount
+                                  className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
                                       ? "border-red-500"
                                       : "border-gray-200"
-                                  } rounded-md hover:bg-gray-50`}
+                                    } rounded-md hover:bg-gray-50`}
                                 >
                                   <div className="px-2 py-2 sm:p-4">
                                     <div className="flex items-center">
@@ -148,11 +147,10 @@ const CartView = () => {
                             {item?.pricePerYearly ? (
                               <div className="mt-2">
                                 <div
-                                  className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
-                                    errors?.amount
+                                  className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
                                       ? "border-red-500"
                                       : "border-gray-200"
-                                  } rounded-md hover:bg-gray-50`}
+                                    } rounded-md hover:bg-gray-50`}
                                 >
                                   <div className="px-2 py-2 sm:p-4">
                                     <div className="flex items-center">
@@ -206,15 +204,15 @@ const CartView = () => {
                             </div>
                           )}
 
-                          <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                          {/* <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex items-center flex-1 min-w-0">
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-bold text-gray-900">
                                   {`I'd prefer not to give my address right now `}
                                 </p>
-                                {/* <p className="mt-1 text-sm font-medium text-gray-500">
+                                <p className="mt-1 text-sm font-medium text-gray-500">
                                   {`If you don't provide an address, the creator may not be able to send you physical benefits.`}
-                                </p> */}
+                                </p>
                               </div>
                             </div>
 
@@ -342,29 +340,32 @@ const CartView = () => {
                                 />
                               </div>
                             </>
-                          ) : null}
+                          ) : null} */}
 
-                          <div className="mt-6">
-                            <ButtonInput
-                              shape="default"
-                              type="submit"
-                              size="large"
-                              loading={loading}
-                              color={"indigo"}
-                            >
-                              Card Pay
-                            </ButtonInput>
-                          </div>
+
 
                           {item?.id ? (
-                            <CreateBillingPayPal
-                              data={{
-                                membershipId,
-                                userId: userStorage?.id,
-                                amount: newAmount,
-                                currency: item?.currency?.code,
-                              }}
-                            />
+                            <>
+                              <div className="mt-6">
+                                <ButtonInput
+                                  shape="default"
+                                  type="submit"
+                                  size="large"
+                                  loading={loading}
+                                  color={"indigo"}
+                                >
+                                  Card Pay
+                                </ButtonInput>
+                              </div>
+                              <CreateBillingPayPal
+                                data={{
+                                  membershipId,
+                                  userId: userStorage?.id,
+                                  amount: newAmount,
+                                  currency: item?.currency?.code,
+                                }}
+                              />
+                            </>
                           ) : null}
                         </form>
                       </div>
@@ -397,4 +398,4 @@ const CartView = () => {
   );
 };
 
-export default CartView;
+export default CheckoutView;

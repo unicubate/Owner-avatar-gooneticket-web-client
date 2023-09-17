@@ -218,7 +218,7 @@ export const getCommentsRepliesAPI = async (
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
   const queyParams = queryString.stringify(payload);
-  return dyaxios.get(`/comments/replies?${queyParams}`);
+  return await dyaxios.get(`/comments/replies?${queyParams}`);
 };
 
 export const GetInfiniteCommentsAPI = (payload: {

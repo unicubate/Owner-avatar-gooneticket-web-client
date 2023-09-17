@@ -56,8 +56,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   const { data: dataCurrencies } = GetAllCurrenciesAPI();
   const currencies: any = dataCurrencies?.data;
 
-  const { data: dataCountries } = GetAllCountiesAPI();
-  const countries: any = dataCountries?.data;
+  const { data: countries } = GetAllCountiesAPI();
 
   const fetchOneProfile = async () =>
     await getOneProfileAPI({ profileId: profileId });
