@@ -299,6 +299,12 @@ export const apiEndpoints: ClientApiMethods = {
     method: DELETE,
   },
 
+  /****************** Payments route */
+  createOnePaymentsPaypalSubscribe: {
+    endpoint: `${baseUrl}/payments/paypal/subscribe`,
+    method: POST,
+  },
+
   /****************** Posts route */
   createOnePostGallery: {
     endpoint: `${baseUrl}/posts/galleries`,

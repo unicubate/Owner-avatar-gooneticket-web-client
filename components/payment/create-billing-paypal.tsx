@@ -1,41 +1,38 @@
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { CreateOnPaymentAPI } from "@/api/payment";
 // import { CreatePaypalBillingMutation, PayPalPayFormRequest } from '../../core/_moduls';
 // import { useNavigate } from 'react-router-dom';
 
 type Props = { data?: any };
 const CreateBillingPayPal: React.FC<Props> = ({ data }) => {
   const { currency, amount, membershipId, userId } = data;
-
   const [hasErrors, setHasErrors] = useState<any>(undefined);
-  // const selectChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   const value = e.target.value;
-  //   setAmount(value);
-  // };
 
-  // const saveMutation = CreatePaypalBillingMutation({
-  //   onSuccess: (result: any) => {
-  //     setHasErrors(false);
-  //     if (result?.token) { navigate(`/account/billing/success?token=${result?.token}`, { replace: true }) }
-  //   },
-  //   onError: (error?: any) => {
-  //     setHasErrors(true);
-  //     setHasErrors(error.response.data.message);
-  //   }
-  // });
+  const { mutateAsync: saveMutation } = CreateOnPaymentAPI({
+    onSuccess: (result?: any) => {
+      setHasErrors(false);
+      // if (result?.token) { navigate(`/account/billing/success?token=${result?.token}`, { replace: true }) }
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
 
   const handleApprove = (order: any) => {
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(undefined);
     const data = {
-      amount: Number(amountPalpal?.value),
+      amount: { value: Number(amountPalpal?.value), month: amount?.month },
       currency: amountPalpal?.currency_code,
     };
-    console.log("amountPalpal =====>", amountPalpal);
-    // const payload: PayPalPayFormRequest = { ...data, paymentMethod: 'PAYPAL-PAY' }
-    // saveMutation.mutateAsync(payload)
+    saveMutation({
+      ...data,
+      membershipId,
+      userId,
+      paymentMethod: "PAYPAL-SUBSCRIBE",
+    });
   };
 
   const createOrder = (data: any, actions: any) => {
