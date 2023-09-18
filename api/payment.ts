@@ -1,5 +1,4 @@
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export type PaymentModel = "PAYPAL-SUBSCRIBE" | "STRIPE-SUBSCRIBE";
 

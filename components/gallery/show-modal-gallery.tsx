@@ -15,8 +15,7 @@ import { useRouter } from "next/router";
 import { downloadOneFileUploadAPI } from "@/api/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import { PiLockKey } from "react-icons/pi";
-import { ButtonInput } from "../templates/button-input";
+import { WhoCanSeeItem } from "../templates/who-can-see-item";
 
 const { Dragger } = Upload;
 
@@ -119,32 +118,7 @@ const ShowModalGallery: React.FC<Props> = ({
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
                     item?.isValidSubscribe !== 1 ? (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="text-center text-white">
-                          <button className="font-bold">
-                            <PiLockKey className="w-7 h-7" />
-                          </button>
-                          <p className="text-sm font-bold">
-                            {" "}
-                            This post is for members only.{" "}
-                          </p>
-
-                          <ButtonInput
-                            className="mt-2"
-                            shape="default"
-                            type="button"
-                            size="normal"
-                            loading={false}
-                            color="red"
-                          >
-                            Join now
-                          </ButtonInput>
-
-                          <p className="mt-2 text-sm font-medium">
-                            Already a member? Log in
-                          </p>
-                        </div>
-                      </div>
+                      <WhoCanSeeItem username={item?.profile?.username} />
                     ) : null}
                   </div>
 

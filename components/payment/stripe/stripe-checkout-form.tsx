@@ -5,6 +5,7 @@ import { CreateOnPaymentPI } from "@/api/payment";
 import { ButtonInput } from "@/components/templates/button-input";
 import { StripeProps } from "./create-subscribe-stripe";
 import { AlertDangerNotification } from "@/utils";
+import { useRouter } from "next/router";
 
 const containerStyles = {
   border: "1px solid #d3d3d3",
@@ -39,6 +40,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({
   paymentModel,
   billingDetails,
 }) => {
+  const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
@@ -70,13 +72,15 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({
         return;
       }
 
-      await CreateOnPaymentPI({
+      const { data: response } = await CreateOnPaymentPI({
         data: { ...data, paymentMethod },
         paymentModel,
       });
 
       setHasErrors(false);
       setLoading(false);
+      
+      push(`/transactions/success?token=${response?.token}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -88,30 +92,6 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({
         position: "center",
       });
     }
-    // setTimeout(async () => {
-    //   const paymentMethodReq: any = await stripe.createPaymentMethod({
-    //     type: "card",
-    //     card: elements.getElement("card"),
-    //     billing_details: billingDetails,
-    //   });
-
-    //   if (paymentMethodReq?.error) {
-    //     setCheckoutError(paymentMethodReq?.error.message);
-    //     setLoading(false);
-    //     return;
-    //   }
-
-    //   const infoPaymentMethod = paymentMethodReq?.paymentMethod;
-    //   console.log("item ======>", paymentMethodReq);
-    //   // const payload: StripePayFormRequest = { infoPaymentMethod, ...data };
-    //   await saveMutation({
-    //     ...data,
-
-    //     membershipId: "",
-    //     userId: "",
-    //     paymentModel,
-    //   });
-    // }, 1000);
   };
 
   return (

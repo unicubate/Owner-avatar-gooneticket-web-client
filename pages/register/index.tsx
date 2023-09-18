@@ -82,7 +82,7 @@ const Register = () => {
 
   return (
     <LayoutSite title="Log In">
-      <div className="w-full max-w-sm p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
         <div className="flex justify-center mx-auto">
           <img
             className="w-auto h-7 sm:h-8"

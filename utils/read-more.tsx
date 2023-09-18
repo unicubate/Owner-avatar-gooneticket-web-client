@@ -19,7 +19,7 @@ const ReadMore: React.FC<HtmlParserProps> = ({ html, value }) => {
           onClick={toggleReadMore}
           className="text-sm text-blue-600 cursor-pointer"
         >
-          {isReadMore ? "...read more" : " show less"}
+          {isReadMore ? "...read more" : ""}
         </span>
       )}
     </>

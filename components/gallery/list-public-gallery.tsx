@@ -60,7 +60,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
                   className="mt-2"
                   shape="default"
                   type="button"
-                  size="normal"
+                  size="large"
                   loading={false}
                   color="red"
                 >

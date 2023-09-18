@@ -1,9 +1,6 @@
-import { Spin } from "antd";
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/session/context-user";
-import { LoadingOutlined } from "@ant-design/icons";
 import PublicGallery from "@/components/gallery/public-gallery";
 import { LoadingFile } from "@/components/templates/loading-file";
 

@@ -12,8 +12,8 @@ import { LoadingFile } from "@/components/templates/loading-file";
 import { useAuth } from "@/components/util/session/context-user";
 import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscribe-stripe";
 import { TextInput } from "@/components/util/form";
-import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
 import { ButtonInput } from "@/components/templates/button-input";
+import ContentLoader from "react-content-loader";
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -54,10 +54,10 @@ const CheckoutView = () => {
           <div className="overflow-hidden bg-white shadow rounded-xl">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
               <div className="flow-root">
-                <ul className="divide-y divide-gray-200 -my-7">
-                  <li className="flex py-7">
-                    <div className="overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                      <div className="p-8 sm:py-7 sm:px-8">
+                <div className="overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                  <div className="p-8 sm:py-7 sm:px-8">
+                    {item?.id ? (
+                      <>
                         <div className="flex mt-2 items-center">
                           {item?.id ? (
                             <p className="text-lg font-bold text-gray-900 cursor-pointer">
@@ -174,7 +174,7 @@ const CheckoutView = () => {
                           ) : null}
                         </div>
 
-                        {item?.id ? (
+                        {userStorage?.id ? (
                           <>
                             {isCardPay ? (
                               <>
@@ -213,16 +213,18 @@ const CheckoutView = () => {
                                 />
                               </>
                             ) : (
-                              <ButtonInput
-                                onClick={() => setIsCardPay(true)}
-                                shape="default"
-                                type="button"
-                                size="large"
-                                color="indigo"
-                                loading={false}
-                              >
-                                Card Pay
-                              </ButtonInput>
+                              <>
+                                <ButtonInput
+                                  onClick={() => setIsCardPay(true)}
+                                  shape="default"
+                                  type="button"
+                                  size="large"
+                                  color="indigo"
+                                  loading={false}
+                                >
+                                  Card Pay
+                                </ButtonInput>
+                              </>
                             )}
 
                             <CreateSubscribePayPal
@@ -235,25 +237,21 @@ const CheckoutView = () => {
                               }}
                             />
                           </>
-                        ) : null}
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+                        ): null}
+                      </>
+                    ) : 
+                    <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
+                      <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
+                      <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
+                      <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
+                      <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
+                      <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
+                    </ContentLoader>}
+                  </div>
+                </div>
               </div>
 
               <div className="mt-4 text-center">
-                {/* <ButtonInput
-                    minW="fit"
-                    shape="default"
-                    type="button"
-                    size="large"
-                    loading={false}
-                    color={"indigo"}
-                  >
-                    Continue to Payment
-                  </ButtonInput> */}
-
                 <p className="mt-4 text-sm font-normal text-gray-500">
                   All the taxes will be calculated while checkout
                 </p>

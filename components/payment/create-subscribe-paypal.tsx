@@ -3,9 +3,11 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { CreateOnPaymentPI } from "@/api/payment";
 import { PaymentModel } from "../../api/payment";
 import { AlertDangerNotification } from "@/utils";
+import { useRouter } from "next/router";
 
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
+  const { push } = useRouter();
   const { currency, amount, membershipId, userId } = data;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
@@ -18,10 +20,12 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
     };
 
     try {
-      await CreateOnPaymentPI({
-        data,
+      const { data: response } = await CreateOnPaymentPI({
+        data: { ...data },
         paymentModel,
       });
+      
+      push(`/transactions/success?token=${response?.token}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
