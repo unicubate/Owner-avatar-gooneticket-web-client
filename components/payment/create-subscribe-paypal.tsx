@@ -1,38 +1,37 @@
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { CreateOnPaymentAPI } from "@/api/payment";
-// import { CreatePaypalBillingMutation, PayPalPayFormRequest } from '../../core/_moduls';
-// import { useNavigate } from 'react-router-dom';
+import { CreateOnPaymentPI } from "@/api/payment";
+import { PaymentModel } from "../../api/payment";
+import { AlertDangerNotification } from "@/utils";
 
-type Props = { data?: any };
-const CreateBillingPayPal: React.FC<Props> = ({ data }) => {
+type Props = { data?: any; paymentModel: PaymentModel };
+const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { currency, amount, membershipId, userId } = data;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
-  const { mutateAsync: saveMutation } = CreateOnPaymentAPI({
-    onSuccess: (result?: any) => {
-      setHasErrors(false);
-      // if (result?.token) { navigate(`/account/billing/success?token=${result?.token}`, { replace: true }) }
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
-
-  const handleApprove = (order: any) => {
+  const handleApprove = async (order: any) => {
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(undefined);
     const data = {
       amount: { value: Number(amountPalpal?.value), month: amount?.month },
       currency: amountPalpal?.currency_code,
     };
-    saveMutation({
-      ...data,
-      membershipId,
-      userId,
-      paymentMethod: "PAYPAL-SUBSCRIBE",
-    });
+
+    try {
+      await CreateOnPaymentPI({
+        data,
+        paymentModel,
+      });
+    } catch (error: any) {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+        gravity: "top",
+        className: "info",
+        position: "center",
+      });
+    }
   };
 
   const createOrder = (data: any, actions: any) => {
@@ -49,18 +48,17 @@ const CreateBillingPayPal: React.FC<Props> = ({ data }) => {
     });
   };
 
-  console.log("data =====>", data);
   return (
     <>
       <div className="mt-4">
-        {/* {hasErrors && (
+        {hasErrors && (
           <div className="text-center alert alert-danger">
             <div className="d-flex flex-column">
               <h4 className="mb-1 text-danger">Error</h4>
               <span>{hasErrors}</span>
             </div>
           </div>
-        )} */}
+        )}
         <PayPalScriptProvider
           options={{
             clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
@@ -99,4 +97,4 @@ const CreateBillingPayPal: React.FC<Props> = ({ data }) => {
     </>
   );
 };
-export { CreateBillingPayPal };
+export { CreateSubscribePayPal };

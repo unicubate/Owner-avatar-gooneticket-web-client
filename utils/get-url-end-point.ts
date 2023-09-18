@@ -304,6 +304,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/payments/paypal/subscribe`,
     method: POST,
   },
+  createOnePaymentsStripeSubscribe: {
+    endpoint: `${baseUrl}/payments/stripe/subscribe`,
+    method: POST,
+  },
 
   /****************** Posts route */
   createOnePostGallery: {
