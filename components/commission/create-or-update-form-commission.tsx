@@ -3,19 +3,19 @@ import { Select, Upload, UploadFile, UploadProps } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NumberInput, TextInput } from "../util/form";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { PlusOutlined } from "@ant-design/icons";
-import { SwitchInput } from "../util/form/switch-input";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { SwitchInput } from "../ui/switch-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { CommissionFormModel } from "@/types/commission";
 import { CreateOrUpdateOneCommissionAPI } from "@/api/commission";
 import { useRouter } from "next/router";
-import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
+import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
+import { TextInput, NumberInput } from "../ui";
 
 const { Option } = Select;
 

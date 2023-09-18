@@ -1,14 +1,13 @@
-import { DateInput, NumberInput, TextAreaInput, TextInput } from "../util/form";
+import { DateInput, NumberInput, TextAreaInput, TextInput } from "../ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CloseOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../templates/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { useEffect, useState } from "react";
 import { DiscountFormModel } from "@/types/discount";
 import { CreateOrUpdateOneDiscountAPI } from "@/api/discount";
-import { SwitchInput } from "../util/form/switch-input";
+import { SwitchInput, ButtonInput } from "../ui";
 
 const schema = yup.object({
   percent: yup.number().required(),

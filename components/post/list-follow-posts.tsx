@@ -12,12 +12,12 @@ import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-lik
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
 import { downloadOneFileUploadAPI } from "@/api/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 
 type Props = {

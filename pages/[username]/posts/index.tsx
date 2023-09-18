@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import PublicListLastPosts from '@/components/post/public-last-posts';
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostsUserPublic = () => {
   const { query } = useRouter();

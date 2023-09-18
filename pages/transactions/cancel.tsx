@@ -4,7 +4,7 @@ import { BiComment } from "react-icons/bi";
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 
 const TransactionCancel = () => {
   const { query } = useRouter();

@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import {
   AppstoreOutlined,
   CopyOutlined,

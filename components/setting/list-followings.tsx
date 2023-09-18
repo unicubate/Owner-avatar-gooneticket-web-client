@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Fragment, useState } from "react";
 import { Avatar } from "antd";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { FollowModel } from "@/types/follow";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";

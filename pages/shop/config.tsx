@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { Input, Skeleton } from "antd";
 import { useState } from "react";
@@ -6,7 +6,7 @@ import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import {
   PlusOutlined,
 } from "@ant-design/icons";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import ListDiscounts from "@/components/discount/list-discounts";
 import { GetInfiniteDiscountsAPI } from "@/api/discount";
 import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { Avatar, Button, Upload } from "antd";
 import { CommentFormModel } from "@/types/comment";
@@ -10,9 +10,8 @@ import {
   CreateOrUpdateOneCommentAPI,
   CreateOrUpdateOneCommentReplyAPI,
 } from "@/api/comment";
-import { TextAreaInput } from "../util/form";
-import { useAuth } from "../util/session/context-user";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { useAuth } from "../util/context-user";
+import { ButtonCancelInput, TextAreaInput } from "../ui";
 
 const schema = yup.object({
   description: yup.string().required(),

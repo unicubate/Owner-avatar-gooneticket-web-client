@@ -1,5 +1,5 @@
 import { Avatar, Button } from "antd";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
 import { GetUploadsAPI } from "@/api/upload";

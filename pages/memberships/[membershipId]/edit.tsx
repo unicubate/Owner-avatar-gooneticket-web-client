@@ -1,8 +1,8 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
-import { useAuth } from "@/components/util/session/context-user";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { useAuth } from "@/components/util/context-user";
+import { LoadingFile } from "@/components/ui/loading-file";
 import { GetOneMembershipAPI } from "@/api/membership";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { GetUploadsAPI } from "@/api/upload";

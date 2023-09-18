@@ -1,9 +1,9 @@
-import { NumberInput, TextAreaInput, TextInput } from "../util/form";
+import { NumberInput, TextAreaInput, TextInput } from "../ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CloseOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 
 const schema = yup.object({
   amount: yup.number().required(),

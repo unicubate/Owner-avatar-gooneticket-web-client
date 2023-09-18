@@ -3,7 +3,7 @@ import React from "react";
 import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { LoadingOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import ListLastPosts from "./list-last-posts";
 import { PostModel } from "@/types/post";
 

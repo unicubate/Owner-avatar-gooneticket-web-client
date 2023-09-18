@@ -1,7 +1,7 @@
 import { Result } from "antd";
 import { useRouter } from "next/router";
-import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
+import { ButtonInput } from "@/components/ui/button-input";
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { ReactQuillInput, TextInput } from "../util/form";
-import { ButtonInput } from "../templates/button-input";
-import { SelectSearchInput } from "../util/form/select-search-input";
+import { ReactQuillInput, TextInput } from "../ui";
+import { ButtonInput } from "../ui/button-input";
+import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import {
@@ -14,7 +14,7 @@ import {
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useQuery } from "@tanstack/react-query";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 

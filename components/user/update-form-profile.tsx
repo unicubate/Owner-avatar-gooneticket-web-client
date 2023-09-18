@@ -11,9 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { SelectSearchInput } from "../util/form/select-search-input";
-import { DateInput, TextAreaInput, TextInput } from "../util/form";
-import { ButtonInput } from "../templates/button-input";
+import { SelectSearchInput } from "../ui/select-search-input";
+import { DateInput, TextAreaInput, TextInput } from "../ui";
+import { ButtonInput } from "../ui/button-input";
 import { ProfileFormModel, arrayColors } from "@/types/profile.type";
 import {
   AlertDangerNotification,

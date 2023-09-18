@@ -1,14 +1,14 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { useRouter } from "next/router";
 import { Avatar } from "antd";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { HtmlParser } from "@/utils/html-parser";
 import { ReadMore } from "@/utils/read-more";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 
 const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {

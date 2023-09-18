@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { usePathname } from "next/navigation";
 import LayoutDashboard from "@/components/layout-dashboard";

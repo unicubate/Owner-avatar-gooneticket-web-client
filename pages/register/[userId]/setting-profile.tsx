@@ -7,10 +7,10 @@ import {
   DateInput,
   TextAreaInput,
   TextInput,
-} from "@/components/util/form";
+} from "@/components/ui";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
@@ -18,8 +18,8 @@ import {
 } from "@/api/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
 import { GetOneUserPublicAPI, resendCodeAPI } from "@/api/user";
-import { SelectSearchInput } from "@/components/util/form/select-search-input";
-import { ButtonInput } from "@/components/templates/button-input";
+import { SelectSearchInput } from "@/components/ui/select-search-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({

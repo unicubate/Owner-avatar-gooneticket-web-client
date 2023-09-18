@@ -17,7 +17,7 @@ import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-lik
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 import Link from "next/link";
 
 type Props = {

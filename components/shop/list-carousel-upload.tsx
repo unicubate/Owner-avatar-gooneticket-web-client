@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { Carousel, Image } from "antd";
 import { UploadFolderType, UploadModel } from "@/types/upload";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api/upload";
 
 type Props = {

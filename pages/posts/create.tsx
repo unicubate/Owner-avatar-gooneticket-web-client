@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
 import { useRouter } from "next/router";

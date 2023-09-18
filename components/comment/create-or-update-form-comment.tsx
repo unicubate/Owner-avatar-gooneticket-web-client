@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { ButtonInput } from "../templates/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
-import { useAuth } from "../util/session/context-user";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
-import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
+import { useAuth } from "../util/context-user";
+import { ButtonCancelInput, ButtonInput, TextareaReactQuillInput } from "../ui";
 
 const schema = yup.object({
   description: yup.string().min(7).required(),

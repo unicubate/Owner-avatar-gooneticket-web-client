@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInputPassword } from "@/components/util/form";
+import { TextInputPassword } from "@/components/ui";
 import { UserResetPasswordFormModel } from "@/types/user.type";
 import {
   AlertDangerNotification,
@@ -13,8 +13,8 @@ import {
 } from "@/utils/alert-notification";
 import { resetPasswordAPI } from "../../../api/user";
 import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/session/public-component";
-import { ButtonInput } from "@/components/templates/button-input";
+import { PublicComponent } from "@/components/util/public-component";
+import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({

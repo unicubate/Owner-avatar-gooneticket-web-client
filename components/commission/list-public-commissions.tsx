@@ -3,7 +3,7 @@ import React from "react";
 import { HtmlParser } from "@/utils/html-parser";
 import Link from "next/link";
 import { ProductModel } from "@/types/product";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 
 type Props = {

@@ -5,15 +5,15 @@ import * as yup from "yup";
 import {
   ReactQuillInput,
   TextInput,
-} from "../util/form";
-import { ButtonInput } from "../templates/button-input";
-import { SelectSearchInput } from "../util/form/select-search-input";
+} from "../ui";
+import { ButtonInput } from "../ui/button-input";
+import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api/post";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 

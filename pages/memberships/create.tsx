@@ -1,7 +1,7 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 
 
 const MembershipsLevelCreate = () => {

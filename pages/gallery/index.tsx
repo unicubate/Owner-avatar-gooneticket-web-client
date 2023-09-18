@@ -1,16 +1,16 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { useEffect, useState } from "react";
 import { Input, Spin } from "antd";
-import { EmptyData } from "@/components/templates/empty-data";
+import { EmptyData } from "@/components/ui/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 import ListGallery from "@/components/gallery/list-gallery";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { useInView } from "react-intersection-observer";
 import { LoadingOutlined } from "@ant-design/icons";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 import { EnableGallery } from "@/components/gallery/enable-gallery";
 import { useRouter } from "next/router";
 

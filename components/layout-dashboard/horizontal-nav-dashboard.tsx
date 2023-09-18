@@ -4,7 +4,7 @@ import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
 import { Avatar, Button, Image } from "antd";
 import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken } from "../util/session/context-user";
+import { getCurrentUserFormToken } from "../util/context-user";
 import { useState } from "react";
 
 export type NavbarProps = {

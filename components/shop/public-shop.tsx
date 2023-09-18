@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicShop from "./list-public-shop";
 import { GetInfiniteProductsAPI } from "@/api/product";
-import { LoadingFile } from "../templates/loading-file";
+import { LoadingFile } from "../ui/loading-file";
 
 type Props = {
   userId: string;

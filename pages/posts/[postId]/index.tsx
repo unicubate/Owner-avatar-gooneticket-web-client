@@ -3,10 +3,10 @@ import { GetOnePostAPI } from "@/api/post";
 import { useRouter } from "next/router";
 import { Image } from "antd";
 import { BiComment } from "react-icons/bi";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import ListFollowPosts from "@/components/post/list-follow-posts";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostShow = () => {
   const user = useAuth() as any;

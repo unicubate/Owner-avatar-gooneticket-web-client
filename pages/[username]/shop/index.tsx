@@ -5,10 +5,10 @@ import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const ShopUserPublic = () => {
   const userVisiter = useAuth() as any;

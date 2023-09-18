@@ -8,12 +8,12 @@ import { GetAllCountiesAPI } from "@/api/profile";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateSubscribePayPal } from "@/components/payment/create-subscribe-paypal";
-import { LoadingFile } from "@/components/templates/loading-file";
-import { useAuth } from "@/components/util/session/context-user";
+import { LoadingFile } from "@/components/ui/loading-file";
+import { useAuth } from "@/components/util/context-user";
 import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscribe-stripe";
-import { TextInput } from "@/components/util/form";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
+import { TextInput } from "@/components/ui/text-input";
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);

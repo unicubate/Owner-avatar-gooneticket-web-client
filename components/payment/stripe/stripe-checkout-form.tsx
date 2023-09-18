@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { useForm } from "react-hook-form";
 import { CreateOnPaymentPI } from "@/api/payment";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { StripeProps } from "./create-subscribe-stripe";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";

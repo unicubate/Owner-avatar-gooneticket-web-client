@@ -13,7 +13,7 @@ import { GetOneUserPrivateAPI } from "@/api/user";
 import jwt_decode from "jwt-decode";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 type AuthContextProps = {
   user: UserModel | undefined;

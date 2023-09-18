@@ -6,12 +6,12 @@ import { BiComment } from "react-icons/bi";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { PostModel } from "@/types/post";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import ListPublicPostsComments from "@/components/post/list-public-posts-comments";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { GetOneUserPublicAPI } from "@/api/user";
 import PublicListLastPosts from "@/components/post/public-last-posts";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostsShowUserPublic = () => {
   const { query } = useRouter();

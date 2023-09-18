@@ -1,25 +1,22 @@
-import { TextInput } from "../util/form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { Alert, Avatar, Checkbox, Upload, UploadFile, UploadProps } from "antd";
 import { useEffect, useState } from "react";
-import { SelectSearchInput } from "../util/form/select-search-input";
+import { SelectSearchInput } from "../ui/select-search-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { CreateOrUpdateOnePostGalleryAPI } from "@/api/post";
-import { TextareaReactQuillInput } from "../util/form/textarea-react-quill-input";
 import { filterImageAndFile } from "@/utils/utils";
 import { viewOneFileUploadAPI } from "@/api/upload";
-import { SwitchInput } from "../util/form/switch-input";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
+import { ButtonCancelInput, SwitchInput, TextInput, TextareaReactQuillInput } from "../ui";
 
 const schema = yup.object({
   title: yup.string().optional(),

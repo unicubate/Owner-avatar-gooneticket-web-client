@@ -2,7 +2,7 @@ import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import PublicGallery from "@/components/gallery/public-gallery";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const GalleryUserPublic = () => {
   const { query, push } = useRouter();

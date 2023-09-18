@@ -1,9 +1,9 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Skeleton } from "antd";
 import { useInView } from "react-intersection-observer";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { GetInfiniteFollowingsAPI } from "@/api/follow";
 import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";

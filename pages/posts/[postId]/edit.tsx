@@ -1,13 +1,13 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
 import { useRouter } from "next/router";
 import { GetOnePostAPI } from "@/api/post";
 import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostsCreate = () => {
   const { userStorage } = useAuth() as any;

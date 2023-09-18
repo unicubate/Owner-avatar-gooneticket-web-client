@@ -1,18 +1,18 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { Input, Spin } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { useRouter } from "next/router";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { useInView } from "react-intersection-observer";
 import { GetInfiniteProductsAPI } from "@/api/product";
-import { EmptyData } from "@/components/templates/empty-data";
+import { EmptyData } from "@/components/ui/empty-data";
 import ListProductsShop from "@/components/shop/list-products-shop";
 import { EnableShop } from "@/components/shop/enable-shop";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const Shops = () => {
   const router = useRouter();

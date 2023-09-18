@@ -15,15 +15,15 @@ import {
   ReactQuillInput,
   TextAreaInput,
   TextInput,
-} from "../util/form";
-import { ButtonInput } from "../templates/button-input";
+} from "../ui";
+import { ButtonInput } from "../ui/button-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { SwitchInput } from "../util/form/switch-input";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
+import { SwitchInput } from "../ui/switch-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { ProductFormModel } from "@/types/product";
 import { CreateOrUpdateOneProductAPI } from "@/api/product";
 import { GetAllDiscountsAPI } from "@/api/discount";
@@ -32,7 +32,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { ListCarouselUpload } from "./list-carousel-upload";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 
 const { Option } = Select;
 

@@ -1,11 +1,7 @@
 import React, { useState } from "react";
-import * as yup from "yup";
-import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
-import { BiComment, BiUserCheck } from "react-icons/bi";
-import { CreateOrUpdateOneLikeAPI } from "@/api/like";
 import { AlertDangerNotification } from "@/utils";
-import { ButtonCancelInput } from "../templates/button-cancel-input";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonCancelInput } from "../ui/button-cancel-input";
+import { ButtonInput } from "../ui/button-input";
 import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
 import Swal from "sweetalert2";
 

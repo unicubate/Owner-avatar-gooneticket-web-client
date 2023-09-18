@@ -4,16 +4,16 @@ import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput } from "@/components/util/form";
 import { UserForgotPasswordFormModel } from "@/types/user.type";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { passwordResetUserAPI } from "../../api/user";
-import { PublicComponent } from "@/components/util/session/public-component";
-import { ButtonInput } from "@/components/templates/button-input";
+import { PublicComponent } from "@/components/util/public-component";
+import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
+import { TextInput } from "@/components/ui/text-input";
 
 const schema = yup.object({
   email: yup

@@ -3,7 +3,7 @@ import React, { Fragment, useState } from "react";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { FollowModel } from "@/types/follow";
 import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
 

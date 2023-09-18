@@ -3,7 +3,7 @@ import { HeaderHorizontalNavDashboard } from "./header-horizontal-nav-dashboard"
 import { HeaderVerticalNavDashboard } from "./header-vertical-nav-dashboard";
 import { useContext, useState } from "react";
 import { Button, Drawer } from "antd";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 
 interface IProps {
   title: string;

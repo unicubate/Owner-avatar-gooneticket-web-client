@@ -1,7 +1,7 @@
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react'
 import Link from 'next/link';
-import { useAuth } from '../util/session/context-user';
+import { useAuth } from '../util/context-user';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 

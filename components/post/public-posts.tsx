@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { LoadingOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicPosts from "./list-public-posts";
-import { LoadingFile } from "../templates/loading-file";
+import { LoadingFile } from "../ui/loading-file";
 
 type Props = {
   userId: string;

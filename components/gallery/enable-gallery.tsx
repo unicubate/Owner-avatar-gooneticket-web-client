@@ -2,9 +2,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { AlertDangerNotification } from "@/utils";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { UpdateEnableProfileAPI } from "@/api/user";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 
 
 type Props = {

@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { LoadingOutlined } from "@ant-design/icons";
 import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
@@ -6,12 +6,12 @@ import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api/post";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { useEffect, useState } from "react";
-import { EmptyData } from "@/components/templates/empty-data";
+import { EmptyData } from "@/components/ui/empty-data";
 import ListPosts from "@/components/post/list-posts";
-import { ButtonInput } from "@/components/templates/button-input";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { ButtonInput } from "@/components/ui/button-input";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const Posts = () => {
   const router = useRouter();

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { HtmlParser } from "@/utils/html-parser";
-import { ButtonInput } from "../templates/button-input";
+import { ButtonInput } from "../ui/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { MembershipModel } from "@/types/membership";
 import { useRouter } from "next/router";

@@ -1,10 +1,10 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
-import { useAuth } from "@/components/util/session/context-user";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { useAuth } from "@/components/util/context-user";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const ShopEdit = () => {
   const { userStorage } = useAuth() as any;

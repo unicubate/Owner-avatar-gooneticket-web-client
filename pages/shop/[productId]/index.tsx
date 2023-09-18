@@ -1,25 +1,25 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { Avatar, Button, Carousel, Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
 import { GetUploadsAPI } from "@/api/upload";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
-import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
+import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
 import { formateDMYHH } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",

@@ -1,13 +1,13 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useAuth } from "@/components/util/session/context-user";
+import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
 import { GetOneCommissionAPI } from "@/api/commission";
 import { GetUploadsAPI } from "@/api/upload";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 
 const ShopEdit = () => {
   const { userStorage } = useAuth() as any;

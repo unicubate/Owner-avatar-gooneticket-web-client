@@ -8,14 +8,14 @@ import Link from "next/link";
 import { HtmlParser } from "@/utils/html-parser";
 import ListComments from "../comment/list-comments";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { useAuth } from "../util/session/context-user";
+import { useAuth } from "../util/context-user";
 import { formateDMYHH } from "@/utils";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
 import { downloadOneFileUploadAPI } from "@/api/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import { WhoCanSeeItem } from "../templates/who-can-see-item";
+import { WhoCanSeeItem } from "../ui/who-can-see-item";
 
 const { Dragger } = Upload;
 

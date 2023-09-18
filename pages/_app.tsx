@@ -13,7 +13,7 @@ import {
   Hydrate,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { ContextUserProvider } from "@/components/util/session/context-user";
+import { ContextUserProvider } from "@/components/util/context-user";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {

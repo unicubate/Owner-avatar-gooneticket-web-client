@@ -1,7 +1,7 @@
 import { GetOneUserPublicAPI } from "@/api/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { LoadingFile } from "@/components/templates/loading-file";
+import { LoadingFile } from "@/components/ui/loading-file";
 import { PublicCommissions } from "@/components/commission/public-commissions";
 
 const CommissionsUserPublic = () => {

@@ -1,10 +1,10 @@
 "use client";
 
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { Avatar, Carousel, Image, Input } from "antd";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api/product";
@@ -12,19 +12,18 @@ import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
-import { ButtonCancelInput } from "@/components/templates/button-cancel-input";
+import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
 import { formateDMYHH } from "@/utils";
 import Link from "next/link";
 import { useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput } from "@/components/util/form";
+import { TextInput, LoadingFile } from "@/components/ui";
 import { GetAllCountiesAPI } from "@/api/profile";
-import { SelectSearchInput } from "@/components/util/form/select-search-input";
+import { SelectSearchInput } from "@/components/ui/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
 import { MdDeleteOutline } from "react-icons/md";
-import { LoadingFile } from "@/components/templates/loading-file";
 import { GetUploadsAPI } from "@/api/upload";
 
 const schema = yup.object({

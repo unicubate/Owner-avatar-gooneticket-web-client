@@ -5,7 +5,7 @@ import { Alert, Button, Checkbox, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput, TextInputPassword } from "@/components/util/form";
+import { TextInput, TextInputPassword } from "@/components/ui";
 import { UserRegisterFormModel } from "@/types/user.type";
 import { loginUserAPI, registerUserAPI } from "../../api/user";
 import {
@@ -13,8 +13,8 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/session/public-component";
-import { ButtonInput } from "@/components/templates/button-input";
+import { PublicComponent } from "@/components/util/public-component";
+import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({

@@ -1,4 +1,4 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import {
   AppstoreOutlined,
   CopyOutlined,
@@ -17,8 +17,8 @@ import { useState } from "react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextAreaInput, TextInput } from "@/components/util/form";
-import { PublicComponent } from "@/components/util/session/public-component";
+import { TextAreaInput, TextInput } from "@/components/ui";
+import { PublicComponent } from "@/components/util/public-component";
 
 const schema = yup.object({
   email: yup

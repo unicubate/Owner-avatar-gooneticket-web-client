@@ -1,7 +1,7 @@
-import { PrivateComponent } from "@/components/util/session/private-component";
+import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
-import { ButtonInput } from "@/components/templates/button-input";
+import { ButtonInput } from "@/components/ui/button-input";
 import { useState } from "react";
 import { CreateOrUpdateDonation } from "@/components/donation/create-or-update-donation";
 import { CopyOutlined, DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";

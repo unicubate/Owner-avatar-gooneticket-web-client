@@ -36,9 +36,9 @@ import {
   TextInputPassword,
   TextAreaInput,
   SelectInput,
-} from "@/components/util/form";
+} from "@/components/ui";
 import dayjs from "dayjs";
-import { SwitchInput } from "@/components/util/form/switch-input";
+import { SwitchInput } from "@/components/ui/switch-input";
 import type { RcFile } from "antd/es/upload";
 import { LayoutSite } from "@/components/layout-site";
 import { Slate, Editable, withReact } from 'slate-react';
