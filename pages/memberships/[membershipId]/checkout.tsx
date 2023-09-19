@@ -14,6 +14,18 @@ import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscr
 import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
 import { TextInput } from "@/components/ui/text-input";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object({
+  email: yup
+    .string()
+    .email("Wrong email format")
+    .min(3, "Minimum 3 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required(),
+});
+
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -30,6 +42,7 @@ const CheckoutView = () => {
     register,
     formState: { errors },
   } = useForm<any>({
+    resolver: yupResolver(schema),
     mode: "onChange",
   });
   const watchAmount = watch("amount", "");
@@ -85,11 +98,10 @@ const CheckoutView = () => {
                           {item?.pricePerMonthly ? (
                             <div className="mt-2">
                               <div
-                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
-                                  errors?.amount
+                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
                                     ? "border-red-500"
                                     : "border-gray-200"
-                                } rounded-md hover:bg-gray-50`}
+                                  } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
                                   <div className="flex items-center">
@@ -122,11 +134,10 @@ const CheckoutView = () => {
                           {item?.pricePerYearly ? (
                             <div className="mt-2">
                               <div
-                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
-                                  errors?.amount
+                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
                                     ? "border-red-500"
                                     : "border-gray-200"
-                                } rounded-md hover:bg-gray-50`}
+                                  } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
                                   <div className="flex items-center">
@@ -178,32 +189,8 @@ const CheckoutView = () => {
                           <>
                             {isCardPay ? (
                               <>
-                                <div className="mt-2">
-                                  <TextInput
-                                    label="Full name"
-                                    control={control}
-                                    type="text"
-                                    name="fullName"
-                                    placeholder="Full name"
-                                    errors={errors}
-                                  />
-                                </div>
-                                <div className="mt-2">
-                                  <TextInput
-                                    label="Email"
-                                    control={control}
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                    errors={errors}
-                                  />
-                                </div>
                                 <CreateSubscribeStripe
                                   paymentModel="STRIPE-SUBSCRIBE"
-                                  billingDetails={{
-                                    email: watchEmail,
-                                    name: watchFullName,
-                                  }}
                                   data={{
                                     membershipId,
                                     userId: userStorage?.id,
@@ -214,16 +201,18 @@ const CheckoutView = () => {
                               </>
                             ) : (
                               <>
-                                <ButtonInput
-                                  onClick={() => setIsCardPay(true)}
-                                  shape="default"
-                                  type="button"
-                                  size="large"
-                                  color="indigo"
-                                  loading={false}
-                                >
-                                  Card Pay
-                                </ButtonInput>
+                                <div className="mt-2">
+                                  <ButtonInput
+                                    onClick={() => setIsCardPay(true)}
+                                    shape="default"
+                                    type="button"
+                                    size="large"
+                                    color="indigo"
+                                    loading={false}
+                                  >
+                                    Card Pay
+                                  </ButtonInput>
+                                </div>
                               </>
                             )}
 
@@ -237,16 +226,16 @@ const CheckoutView = () => {
                               }}
                             />
                           </>
-                        ): null}
+                        ) : null}
                       </>
-                    ) : 
-                    <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
-                      <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
-                      <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
-                      <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
-                      <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
-                      <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
-                    </ContentLoader>}
+                    ) :
+                      <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
+                        <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
+                        <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
+                        <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
+                        <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
+                        <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
+                      </ContentLoader>}
                   </div>
                 </div>
               </div>

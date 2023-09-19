@@ -10,24 +10,11 @@ const stripeTestPromise = loadStripe(
 export type StripeProps = {
   data?: any;
   paymentModel: PaymentModel;
-  billingDetails: {
-    name: string;
-    email: string;
-    phone?: string;
-    address?: {
-      city?: string;
-      line1?: string;
-      state?: string;
-      country?: string;
-      postal_code?: string;
-    };
-  };
 };
 
 const CreateSubscribeStripe: React.FC<StripeProps> = ({
   data,
   paymentModel,
-  billingDetails,
 }) => {
   return (
     <>
@@ -36,7 +23,6 @@ const CreateSubscribeStripe: React.FC<StripeProps> = ({
           <StripeCheckoutForm
             paymentModel={paymentModel}
             data={data}
-            billingDetails={billingDetails}
           />
         </Elements>
       </div>
