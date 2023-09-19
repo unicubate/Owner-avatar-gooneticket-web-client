@@ -10,12 +10,7 @@ import {
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  NumberInput,
-  ReactQuillInput,
-  TextAreaInput,
-  TextInput,
-} from "../ui";
+import { NumberInput, ReactQuillInput, TextAreaInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import {
   AlertDangerNotification,
@@ -53,6 +48,14 @@ const schema = yup.object({
       return schema.min(1).required("limit slots required");
     return schema.nullable();
   }),
+  urlRedirect: yup
+    .string()
+    .url()
+    .when("enableUrlRedirect", (enableUrlRedirect, schema) => {
+      if (enableUrlRedirect[0] === true)
+        return schema.min(1).required("url redirect required");
+      return schema.nullable();
+    }),
   discountId: yup.string().when("enableDiscount", (enableDiscount, schema) => {
     if (enableDiscount[0] === true) return schema.required("discount required");
     return schema.nullable();
@@ -86,6 +89,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   });
   const watchEnableLimitSlot = watch("enableLimitSlot", false);
   const watchEnableDiscount = watch("enableDiscount", false);
+  const watchEnableUrlRedirect = watch("enableUrlRedirect", false);
 
   const { data: dataDiscounts } = GetAllDiscountsAPI();
   const discounts: any = dataDiscounts?.data;
@@ -101,6 +105,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "description",
         "moreDescription",
         "enableChooseQuantity",
+        "urlRedirect",
+        "enableUrlRedirect",
         "enableDiscount",
         "discountId",
         "messageAfterPayment",
@@ -143,7 +149,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         productId: product?.id,
       });
       if (!product?.id) {
-        push(`/shop`)
+        push(`/shop`);
       }
       setHasErrors(false);
       setLoading(false);
@@ -182,10 +188,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             <h2 className="text-base font-bold text-gray-900">
               Create a New Product
             </h2>
-
-
-
-
 
             <div className="mt-2">
               <TextInput
@@ -250,7 +252,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 placeholder="Write description"
                 errors={errors}
               />
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-sm font-medium text-gray-400">
                 {`Provide a full description of the item that you are selling.`}
               </span>
             </div>
@@ -264,36 +266,84 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 placeholder="e.g. https://youtube.com/watch?v=abc123"
                 errors={errors}
               />
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-sm font-medium text-gray-400">
                 {`Add a preview video, audio or other content to showcase your product to potential buyers`}
               </span>
             </div>
 
-            <div className="mt-2">
-              <Controller
-                name="attachmentFiles"
-                control={control}
-                render={({ field: { onChange } }) => (
-                  <>
-                    <div className="justify-center mx-auto">
-                      <Upload
-                        multiple
-                        name="attachmentFiles"
-                        listType="picture"
-                        className="upload-list-inline"
-                        fileList={fileList}
-                        onChange={handleFileChange}
-                        accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
-                      >
-                        <Button icon={<UploadOutlined />}>Upload File</Button>
-                      </Upload>
-                    </div>
-                  </>
-                )}
-              />
-              <span className="text-sm font-medium text-gray-600">
-                {`Upload file for this product`}
-              </span>
+            <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Assets
+              </label>
+              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                <div className="flex items-center flex-1 min-w-0">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-bold text-gray-900">
+                      {watchEnableUrlRedirect
+                        ? `Upload File`
+                        : ` Redirect buyer to URL`}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Choose which action to perform after purchase
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                  <button
+                    type="button"
+                    title=""
+                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                  >
+                    {" "}
+                  </button>
+                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                    <SwitchInput
+                      control={control}
+                      name="enableUrlRedirect"
+                      label=""
+                    />
+                  </div>
+                </div>
+              </div>
+              {watchEnableUrlRedirect ? (
+                <div className="mt-2">
+                  <TextInput
+                    label="Redirect URL"
+                    control={control}
+                    type="text"
+                    name="urlRedirect"
+                    placeholder="URL to redirect your to buyers after purchase"
+                    errors={errors}
+                  />
+                  <span className="text-sm font-medium text-gray-400">
+                    {`Provide a publicly available link to the content you are selling.
+                      e.g. a Google Drive url, a YouTube video or a Zoom invite.`}
+                  </span>
+                </div>
+              ) : (
+                <Controller
+                  name="attachmentFiles"
+                  control={control}
+                  render={({ field: { onChange } }) => (
+                    <>
+                      <div className="text-center justify-center mx-auto">
+                        <Upload
+                          multiple
+                          name="attachmentFiles"
+                          listType="picture"
+                          className="upload-list-inline"
+                          fileList={fileList}
+                          onChange={handleFileChange}
+                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
+                        >
+                          <Button icon={<UploadOutlined />}>Upload File</Button>
+                        </Upload>
+                      </div>
+                    </>
+                  )}
+                />
+              )}
             </div>
 
             <div className="mt-2">
@@ -305,7 +355,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 placeholder="Success page confirmation"
                 errors={errors}
               />
-              <span className="text-sm font-medium text-gray-600">
+              <span className="text-sm font-medium text-gray-400">
                 {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
               </span>
             </div>
@@ -479,7 +529,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            {/* <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-4">
                 <Controller
                   name="confirm"
@@ -508,13 +558,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                     </>
                   )}
                 />
-                {/* {errors?.confirm && (
-              <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                {errors?.confirm?.message}
-              </span>
-            )} */}
+                {errors?.confirm && (
+                  <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                    {errors?.confirm?.message}
+                  </span>
+                )}
               </div>
-            </div>
+            </div> */}
 
             <div className="mt-4">
               <ButtonInput
@@ -528,9 +578,12 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </ButtonInput>
             </div>
             <div className="flex items-center mt-4 mb-4 space-x-4">
-              <ButtonCancelInput shape="default" size="large"
+              <ButtonCancelInput
+                shape="default"
+                size="large"
                 loading={loading}
-                onClick={() => back()}>
+                onClick={() => back()}
+              >
                 Cancel
               </ButtonCancelInput>
               <ButtonInput

@@ -17,6 +17,7 @@ import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { ProductModel } from "@/types/product";
 import { DeleteOneProductAPI } from "@/api/product";
+import { formatePrice } from "@/utils";
 
 type Props = {
   item?: ProductModel;
@@ -123,17 +124,24 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 <BiMoney />
               </button>
               <span className="ml-2 text-sm font-bold">
-                {item?.priceDiscount} {item?.currency?.symbol}
+                {formatePrice({
+                  value: Number(item?.priceDiscount),
+                  isDivide: false,
+                })}{" "}
+                {item?.currency?.symbol}
               </span>
 
               {item?.enableDiscount ? (
                 <span className="ml-2 text-sm font-normal text-gray-500">
                   <del>
-                    {item?.price} {item?.currency?.symbol}
+                    {formatePrice({
+                      value: Number(item?.price),
+                      isDivide: false,
+                    })}{" "}
+                    {item?.currency?.symbol}
                   </del>
                 </span>
               ) : null}
-
             </div>
           </div>
 

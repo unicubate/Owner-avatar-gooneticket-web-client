@@ -36,6 +36,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
       >
         <div className="p-8 sm:py-7 sm:px-8">
+          
           <div className="flex items-center">
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
@@ -143,21 +144,23 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           {item?.id ? (
-            <Link
-              href={`/posts/${item?.slug}`}
-              className="mt-2 text-lg font-bold text-gray-900 cursor-pointer"
-            >
-              {item?.title ?? ""}
-            </Link>
+            <div className="mt-2 text-lg">
+              <Link
+                href={`/posts/${item?.slug}`}
+                className="font-bold text-gray-900 cursor-pointer"
+              >
+                {item?.title ?? ""}
+              </Link>
+            </div>
           ) : null}
 
-          <div className="mt-2 text-sm font-normal text-gray-600 ">
+          <div className="text-sm font-normal text-gray-600 ">
             <span className="ql-editor">
               <HtmlParser html={String(item?.description ?? "")} />
             </span>
           </div>
 
-          <div className="flex mt-2 items-center">
+          <div className="flex items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-2 text-lg font-bold">

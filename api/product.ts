@@ -34,6 +34,8 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
       data.append("limitSlot", `${payload.limitSlot ?? ""}`);
       data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
+      data.append("urlRedirect", `${payload.urlRedirect ?? ""}`);
+      data.append("enableUrlRedirect", `${payload.enableUrlRedirect ?? ""}`);
       data.append("enableChooseQuantity", `${payload.enableChooseQuantity}`);
       data.append(
         "messageAfterPayment",

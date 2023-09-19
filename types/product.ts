@@ -65,6 +65,8 @@ export type ProductFormModel = {
   enableDiscount: boolean;
   limitSlot: number;
   enableLimitSlot: boolean;
+  urlRedirect: string;
+  enableUrlRedirect: boolean;
   attachments: any;
   attachment: any;
   fileList: any;

@@ -14,12 +14,13 @@ import { useAuth } from "@/components/util/context-user";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
-import { formateDMYHH } from "@/utils";
+import { formateDMYHH, formatePrice } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { ProductModel } from "@/types/product";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
 import { LoadingFile } from "@/components/ui/loading-file";
+import ReactPlayer from "react-player";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -79,28 +80,11 @@ const ShopView = () => {
                       onClick={() =>
                         router.push(`/${product?.profile?.username}/shop`)
                       }
-                      className="relative flex-shrink-0 cursor-pointer"
-                    >
-                      <Avatar
-                        size={40}
-                        className="object-cover w-10 h-10 rounded-full"
-                        src={product?.profile?.image}
-                        alt={`${product?.profile?.firstName} ${product?.profile?.lastName}`}
-                      />
-                    </div>
-
-                    <div
-                      onClick={() =>
-                        router.push(`/${product?.profile?.username}/shop`)
-                      }
-                      className="ml-4 cursor-pointer"
+                      className="cursor-pointer"
                     >
                       <p className="text-sm font-bold text-gray-900">
                         {product?.profile?.firstName ?? ""}{" "}
                         {product?.profile?.lastName ?? ""}
-                      </p>
-                      <p className="mt-1 text-sm font-medium text-gray-500">
-                        {formateDMYHH(product?.createdAt as Date)}
                       </p>
                     </div>
 
@@ -113,6 +97,18 @@ const ShopView = () => {
                   </div>
 
                   {dataTableImages}
+
+                  {product?.urlMedia ? (
+                    <div className="mt-2 mx-auto">
+                      <ReactPlayer
+                        className="mr-auto"
+                        url={product?.urlMedia}
+                        height="350px"
+                        width="100%"
+                        controls
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -124,7 +120,10 @@ const ShopView = () => {
 
               <div className="flex items-center mt-4">
                 <p className="text-4xl font-bold text-gray-900">
-                  {product?.priceDiscount ?? ""}
+                  {formatePrice({
+                    value: Number(product?.priceDiscount),
+                    isDivide: false,
+                  }) ?? ""}
                 </p>
                 <p className="text-lg font-bold text-gray-900">
                   {product?.currency?.symbol ?? ""}
@@ -132,7 +131,13 @@ const ShopView = () => {
                 {product?.enableDiscount ? (
                   <>
                     <p className="ml-3 text-2xl font-bold text-gray-500">
-                      <del> {product?.price ?? ""} </del>
+                      <del>
+                        {" "}
+                        {formatePrice({
+                          value: Number(product?.price),
+                          isDivide: false,
+                        }) ?? ""}{" "}
+                      </del>
                     </p>
                     <p className="text-lg font-bold text-gray-500">
                       <del> {product?.currency?.symbol ?? ""} </del>

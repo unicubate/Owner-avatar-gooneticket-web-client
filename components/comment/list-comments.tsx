@@ -40,7 +40,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
     <>
       <CreateOrUpdateFormComment postId={postId} />
 
-      <ul className="mt-8 divide-y divide-gray-200 -my-9">
+      <ul className="mt-4 divide-y divide-gray-200 -my-9">
 
         {dataTableComments}
 

@@ -47,10 +47,7 @@ const CARD_OPTIONS: any = {
   },
 };
 
-const StripeCheckoutForm: React.FC<StripeProps> = ({
-  data,
-  paymentModel,
-}) => {
+const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
   const [loading, setLoading] = useState<boolean>(false);
@@ -75,10 +72,9 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({
   }
 
   const onSubmit = async (payload: any) => {
-    const { email, fullName } = payload
+    const { email, fullName } = payload;
     setLoading(true);
     setHasErrors(true);
-
 
     try {
       const paymentMethodReq: any = await stripe.createPaymentMethod({
@@ -145,10 +141,12 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({
         <div style={containerStyles}>
           <CardElement options={CARD_OPTIONS} />
         </div>
+        {checkoutError ? (
+          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+            {checkoutError}
+          </span>
+        ) : null}
       </div>
-      {checkoutError ? (
-        <div className="text-sm my-4 text-red-500">{checkoutError}</div>
-      ) : null}
       <div className="mt-4">
         <ButtonInput
           shape="default"
