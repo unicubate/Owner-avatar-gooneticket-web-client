@@ -47,6 +47,50 @@ export const arrayGallery = [
   },
 ];
 
+export const arrayTransactions = [
+  {
+    name: "Jane Cooper",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Admin",
+    createdAt: "6 days ago",
+    amount: 326,
+    email: "jane.cooper@example.com",
+    image: "https://bit.ly/33HnjK0",
+  },
+  {
+    name: "John Doe",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: "Tester",
+    createdAt: "7 days ago",
+    amount: 20,
+    email: "john.doe@example.com",
+    image: "https://bit.ly/3I9nL2D",
+  },
+  {
+    name: "Veronica Lodge",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: " Software Engineer",
+    createdAt: "8 days ago",
+    amount: 2,
+    email: "veronica.lodge@example.com",
+    image: "https://bit.ly/3vaOTe1",
+  },
+  {
+    name: "Omega Test",
+    title: "Regional Paradigm Technician",
+    department: "Optimization",
+    role: " Software Engineer",
+    createdAt: "10 days ago",
+    amount: 1,
+    email: "omega.lodge@example.com",
+    image: "https://bit.ly/3I9nL2D",
+  },
+];
+
+
 export const arrayPeoples = [
   {
     name: "Jane Cooper",
