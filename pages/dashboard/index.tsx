@@ -1,37 +1,139 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { usePathname } from "next/navigation";
 import LayoutDashboard from "@/components/layout-dashboard";
+import { IoShareOutline } from "react-icons/io5";
+import { Avatar, Button } from "antd";
+import { BiCog } from "react-icons/bi";
+import Link from "next/link";
+import { ButtonCancelInput, ButtonInput } from "@/components/ui";
 
 const Dashboard = () => {
-  const pathname = usePathname();
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
-
-    console.log("payload =======>", payload);
-  };
-  console.log("pathname =======>", pathname);
   return (
     <>
       <LayoutDashboard title={"Dashboard"}>
+        <div className="flex-1 bg-gray-100">
+          <main>
+            <div className="max-w-6xl mx-auto py-6">
+              {/* <div className="px-4 mx-auto sm:px-6 md:px-8">
+                <div className="md:items-center md:flex">
+                  <p className="text-base font-bold text-gray-900">
+                    Hey Mariana -
+                  </p>
+                  <p className="mt-1 text-base font-medium text-gray-500 md:mt-0 md:ml-2">
+                    heres whats happening with your store today
+                  </p>
+                </div>
+              </div> */}
+              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+                <div className="px-3 py-2 border-gray-200 border bg-white rounded-lg">
+                  <div className="flex items-center">
+                    <div className="relative flex-shrink-0 cursor-pointer">
+                      <Avatar
+                        size={60}
+                        className="object-cover w-10 h-10 rounded-full"
+                        src="https://picsum.photos/seed/6JySCJv/640/480"
+                        alt="Boclair Temgoua"
+                      />
+                    </div>
 
-            <div className="flex flex-col flex-1 overflow-x-hidden">
-                
-                <main>
-                    <div className="py-6">
-                        <div className="px-4 mx-auto sm:px-6 md:px-8">
-                            <div className="md:items-center md:flex">
-                                <p className="text-base font-bold text-gray-900">Hey Mariana -</p>
-                                <p className="mt-1 text-base font-medium text-gray-500 md:mt-0 md:ml-2">heres whats happening with your store today</p>
-                            </div>
-                        </div>
+                    <div className="ml-4 cursor-pointer">
+                      <p className="text-xl font-bold text-gray-900">
+                        Boclair Temgoua
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-500">
+                        {process.env.NEXT_PUBLIC_SITE}/bokino
+                      </p>
+                    </div>
 
-                        <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                    <div className="ml-auto">
+                      <button
+                        title="Share"
+                        className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                      >
+                        <IoShareOutline className="w-5 h-5" />
+                      </button>
+                      <button
+                        title="Download"
+                        className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                      >
+                        <BiCog className="w-5 h-5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center mt-3">
+                    <Link href="/settings/subscribes">
+                      <span className="text-lg font-bold">10</span>
+                      <span className="ml-2 font-normal text-sm">
+                        Subscribes
+                      </span>
+                    </Link>
+
+                    <Link href="/settings/followers">
+                      <span className="ml-4 text-lg font-bold">500</span>
+                      <span className="ml-2 font-normal text-sm">
+                        Followers
+                      </span>
+                    </Link>
+
+                    <Link href="/settings/followings">
+                      <span className="ml-4 text-lg font-bold">10</span>
+                      <span className="ml-2 font-normal text-sm">
+                        Following
+                      </span>
+                    </Link>
+                  </div>
+
+                  <div className="flex items-center mt-3">
+                    <p className="text-4xl font-bold">67.985.439,00 $</p>
+                    <div className="ml-auto">
+                      <div className="flex items-center space-x-4">
+                        <Button shape="default" size="large" loading={false}>
+                          <strong>Last 30 days</strong>
+                        </Button>
+                        <ButtonInput
+                          minW="fit"
+                          shape="default"
+                          type="button"
+                          size="normal"
+                          loading={false}
+                          color="red"
+                        >
+                          Withdraw
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center mt-3">
+                    <Link href="/settings/subscribes">
+                      <span className="text-sm font-bold">1.780,00 $</span>
+                      <span className="ml-1 font-normal text-sm">
+                        Membership
+                      </span>
+                    </Link>
+
+                    <Link href="/settings/followers">
+                      <span className="ml-2 text-sm font-bold">0 $</span>
+                      <span className="ml-1 font-normal text-sm">
+                        Commission
+                      </span>
+                    </Link>
+
+                    <Link href="/settings/followings">
+                      <span className="ml-2 text-sm font-bold">0 $</span>
+                      <span className="ml-1 font-normal text-sm">
+                        Donations
+                      </span>
+                    </Link>
+                    <Link href="/settings/followings">
+                      <span className="ml-2 text-sm font-bold">0 $</span>
+                      <span className="ml-1 font-normal text-sm">Gifts</span>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                             <div className="space-y-5 sm:space-y-6">
                                 <div className="grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
                                     <div className="bg-white border border-gray-200 rounded-xl">
@@ -426,12 +528,10 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </main>
-                
+                        </div> */}
             </div>
-
+          </main>
+        </div>
       </LayoutDashboard>
     </>
   );

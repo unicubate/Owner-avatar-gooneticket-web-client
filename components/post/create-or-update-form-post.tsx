@@ -105,7 +105,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({ postId, post, uploadImages })
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Image save successfully",
+        text: "Article save successfully",
         className: "info",
         gravity: "top",
         position: "center",

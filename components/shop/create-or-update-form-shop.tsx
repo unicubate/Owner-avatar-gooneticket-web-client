@@ -10,7 +10,13 @@ import {
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { NumberInput, ReactQuillInput, TextAreaInput, TextInput } from "../ui";
+import {
+  NumberInput,
+  ReactQuillInput,
+  SelectSearchInput,
+  TextAreaInput,
+  TextInput,
+} from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import {
   AlertDangerNotification,
@@ -19,7 +25,11 @@ import {
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../ui/switch-input";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
-import { ProductFormModel } from "@/types/product";
+import {
+  ProductFormModel,
+  arrayProductTypes,
+  arrayWhoCanSees,
+} from "@/types/product";
 import { CreateOrUpdateOneProductAPI } from "@/api/product";
 import { GetAllDiscountsAPI } from "@/api/discount";
 import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
@@ -89,6 +99,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   });
   const watchEnableLimitSlot = watch("enableLimitSlot", false);
   const watchEnableDiscount = watch("enableDiscount", false);
+  const watchProductType = watch("productType", "PHYSICAL");
   const watchEnableUrlRedirect = watch("enableUrlRedirect", false);
 
   const { data: dataDiscounts } = GetAllDiscountsAPI();
@@ -100,6 +111,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         "title",
         "price",
         "urlMedia",
+        "whoCanSee",
+        "productType",
         "enableLimitSlot",
         "limitSlot",
         "description",
@@ -200,6 +213,19 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               />
             </div>
 
+            <div className="mt-4">
+              <SelectSearchInput
+                firstOptionName="Choose type product selling?"
+                label="Type product selling"
+                control={control}
+                errors={errors}
+                placeholder="Select type product selling..."
+                valueType="text"
+                name="productType"
+                dataItem={arrayProductTypes}
+              />
+            </div>
+
             <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-4">
                 <Controller
@@ -271,80 +297,85 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </span>
             </div>
 
-            <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Assets
-              </label>
-              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-gray-900">
-                      {watchEnableUrlRedirect
-                        ? `Upload File`
-                        : ` Redirect buyer to URL`}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-500">
-                      Choose which action to perform after purchase
-                    </p>
+            {watchProductType === "DIGITAL" ? (
+              <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
+                <label className="block text-gray-700 text-sm font-bold mb-2">
+                  Assets
+                </label>
+                <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                  <div className="flex items-center flex-1 min-w-0">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-gray-900">
+                        {watchEnableUrlRedirect
+                          ? `Upload File`
+                          : ` Redirect buyer to URL`}
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-500">
+                        Choose which action to perform after purchase
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                    <button
+                      type="button"
+                      title=""
+                      className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                    >
+                      {" "}
+                    </button>
+                    <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                      <SwitchInput
+                        control={control}
+                        name="enableUrlRedirect"
+                        label=""
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                  <button
-                    type="button"
-                    title=""
-                    className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                  >
-                    {" "}
-                  </button>
-                  <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                    <SwitchInput
+                {watchEnableUrlRedirect ? (
+                  <div className="mt-2">
+                    <TextInput
+                      label="Redirect URL"
                       control={control}
-                      name="enableUrlRedirect"
-                      label=""
+                      type="text"
+                      name="urlRedirect"
+                      placeholder="URL to redirect your to buyers after purchase"
+                      errors={errors}
                     />
-                  </div>
-                </div>
-              </div>
-              {watchEnableUrlRedirect ? (
-                <div className="mt-2">
-                  <TextInput
-                    label="Redirect URL"
-                    control={control}
-                    type="text"
-                    name="urlRedirect"
-                    placeholder="URL to redirect your to buyers after purchase"
-                    errors={errors}
-                  />
-                  <span className="text-sm font-medium text-gray-400">
-                    {`Provide a publicly available link to the content you are selling.
+                    <span className="text-sm font-medium text-gray-400">
+                      {`Provide a publicly available link to the content you are selling.
                       e.g. a Google Drive url, a YouTube video or a Zoom invite.`}
-                  </span>
-                </div>
-              ) : (
-                <Controller
-                  name="attachmentFiles"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="text-center justify-center mx-auto">
-                        <Upload
-                          multiple
-                          name="attachmentFiles"
-                          listType="picture"
-                          className="upload-list-inline"
-                          fileList={fileList}
-                          onChange={handleFileChange}
-                          accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
-                        >
-                          <Button icon={<UploadOutlined />}>Upload File</Button>
-                        </Upload>
-                      </div>
-                    </>
-                  )}
-                />
-              )}
-            </div>
+                    </span>
+                  </div>
+                ) : (
+                  <Controller
+                    name="attachmentFiles"
+                    control={control}
+                    render={({ field: { onChange } }) => (
+                      <>
+                        <div className="text-center justify-center mx-auto">
+                          <Upload
+                            multiple
+                            name="attachmentFiles"
+                            listType="picture"
+                            className="upload-list-inline"
+                            fileList={fileList}
+                            onChange={handleFileChange}
+                            accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
+                          >
+                            <Button icon={<UploadOutlined />}>
+                              Upload File
+                            </Button>
+                          </Upload>
+                        </div>
+                      </>
+                    )}
+                  />
+                )}
+              </div>
+            ) : null}
 
             <div className="mt-2">
               <TextAreaInput
@@ -360,7 +391,20 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </span>
             </div>
 
-            <div className="mt-2">
+            <div className="mt-4">
+              <SelectSearchInput
+                firstOptionName="Choose who can see or buy this product?"
+                label="Who can buy this product?"
+                control={control}
+                errors={errors}
+                placeholder="Select who can see or buy this product?"
+                valueType="text"
+                name="whoCanSee"
+                dataItem={arrayWhoCanSees}
+              />
+            </div>
+
+            <div className="mt-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Advanced settings
               </label>

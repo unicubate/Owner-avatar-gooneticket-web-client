@@ -6,6 +6,13 @@ export const arrayWhoCanSees = [
   { id: "2", name: "MEMBERSHIP" },
 ];
 
+export const arrayProductTypes = [
+  { id: "1", name: "PHYSICAL" },
+  { id: "2", name: "DIGITAL" },
+];
+
+export type ProductType = 'DIGITAL' | 'PHYSICAL';
+
 export type ResponseProductModel = {
   value: Array<ProductModel>;
 } & PaginationResponse;
@@ -18,6 +25,7 @@ export type ProductModel = {
   slug: string;
   sku: string;
   urlMedia: string;
+  productType: ProductType;
   priceNoDiscount: string;
   description: string;
   messageAfterPayment: string;
@@ -62,6 +70,8 @@ export type ProductFormModel = {
   messageAfterPayment: string;
   description: string;
   discountId: string;
+  whoCanSee: string;
+  productType: ProductType;
   enableDiscount: boolean;
   limitSlot: number;
   enableLimitSlot: boolean;

@@ -121,7 +121,7 @@ const ShopView = () => {
               <div className="flex items-center mt-4">
                 <p className="text-4xl font-bold text-gray-900">
                   {formatePrice({
-                    value: Number(product?.priceDiscount),
+                    value: Number(product?.priceDiscount ?? 0),
                     isDivide: false,
                   }) ?? ""}
                 </p>
@@ -134,7 +134,7 @@ const ShopView = () => {
                       <del>
                         {" "}
                         {formatePrice({
-                          value: Number(product?.price),
+                          value: Number(product?.price ?? 0),
                           isDivide: false,
                         }) ?? ""}{" "}
                       </del>
