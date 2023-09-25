@@ -4,6 +4,7 @@ import { ConfigProvider } from "antd";
 import { NextIntlProvider } from "next-intl";
 import { ThemeProvider } from "next-themes";
 import "react-quill/dist/quill.snow.css";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "toastify-js/src/toastify.css";
 import "animate.css";
 
