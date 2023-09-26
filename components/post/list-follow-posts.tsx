@@ -105,7 +105,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
 
           {["AUDIO"].includes(item?.type as PostType) &&
           item?.uploadsFile?.length > 0 ? (
-            <div className="mt-2 text-center">
+            <div className="mt-4 text-center">
               <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" />
             </div>
           ) : null}
@@ -141,7 +141,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                       className="mt-2"
                       shape="default"
                       type="button"
-                      size="normal"
+                      size="large"
                       loading={false}
                       color="red"
                     >
@@ -219,7 +219,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             )}
           </div>
 
-          {/* <ListComments postId={String(item?.id)} take={commentTake} /> */}
+          <ListComments postId={String(item?.id)} take={commentTake} />
         </div>
       </div>
     </>
