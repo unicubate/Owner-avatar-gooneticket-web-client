@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Avatar } from "antd";
-import { PostModel } from "@/types/post";
+import { PostModel, PostType } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
@@ -19,6 +19,10 @@ import { downloadOneFileUploadAPI } from "@/api/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { ButtonInput } from "../ui/button-input";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
+import ContentLoader from "react-content-loader";
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
+import { AudioPlayerInput } from "../ui/audio-player-Input";
 
 type Props = {
   item?: PostModel;
@@ -36,7 +40,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
       >
         <div className="p-8 sm:py-7 sm:px-8">
-          
           <div className="flex items-center">
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
@@ -88,7 +91,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           </div>
 
-          {item?.urlMedia && ["VIDEO", "AUDIO"].includes(item?.type) ? (
+          {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
             <div className="mt-2 mx-auto">
               <ReactPlayer
                 className="mr-auto"
@@ -97,6 +100,13 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 width="100%"
                 controls
               />
+            </div>
+          ) : null}
+
+          {["AUDIO"].includes(item?.type as PostType) &&
+          item?.uploadsFile?.length > 0 ? (
+            <div className="mt-2 text-center">
+              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" />
             </div>
           ) : null}
 
@@ -209,7 +219,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             )}
           </div>
 
-          <ListComments postId={String(item?.id)} take={commentTake} />
+          {/* <ListComments postId={String(item?.id)} take={commentTake} /> */}
         </div>
       </div>
     </>

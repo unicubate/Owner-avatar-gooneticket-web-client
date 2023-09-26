@@ -6,6 +6,7 @@ import { UploadFolderType, UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api/upload";
 import { Carousel as ResponsiveCarousel } from "react-responsive-carousel";
+import ContentLoader from "react-content-loader";
 
 type Props = {
   uploads: UploadModel[];
@@ -34,28 +35,41 @@ const ListCarouselUpload: React.FC<Props> = ({
 }) => {
   const ref = useRef();
 
+  const urlImage = (item: any) => {
+    viewOneFileUploadAPI({
+      folder: folder,
+      fileName: item?.path,
+    })
+  }
+  
   return (
     <>
       <ResponsiveCarousel
         autoFocus={true}
-        autoPlay={false}
+        autoPlay={true}
         showIndicators={false}
       >
         {uploads &&
           uploads.map((item: any, index: number) => (
             <div key={index}>
-              <Image
-                width={width}
-                height={height}
-                className={className}
-                preview={preview}
-                style={contentStyle}
-                src={`${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: item?.path,
-                })}`}
-                alt={alt}
-              />
+              {item?.path ? (
+                <Image
+                  width={width}
+                  height={height}
+                  className={className}
+                  preview={preview}
+                  style={contentStyle}
+                  src={`${viewOneFileUploadAPI({
+                    folder: folder,
+                    fileName: item?.path,
+                  })}`}
+                  alt={alt}
+                />
+              ) : (
+                <ContentLoader height="100%" width="100%" viewBox="0 0 700 400">
+                  <rect x="1" y="2" rx="2" ry="2" width="100%" height="100%" />
+                </ContentLoader>
+              )}
             </div>
           ))}
       </ResponsiveCarousel>

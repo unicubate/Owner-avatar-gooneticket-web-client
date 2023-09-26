@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  ReactQuillInput,
-  TextInput,
-} from "../ui";
+import { ReactQuillInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
@@ -17,6 +14,7 @@ import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { SwitchInput } from "../ui/switch-input";
 import { filterImageAndFile } from "@/utils/utils";
+import { AudioPlayerInput } from "../ui/audio-player-Input";
 
 type Props = {
   postId?: string;
@@ -171,9 +169,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                             {imageList.length >= 1 ? null : (
                               <div>
                                 <PlusOutlined />
-                                <div style={{ marginTop: 8 }}>
-                                  Upload cover
-                                </div>
+                                <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>
                             )}
                           </Upload>
@@ -228,6 +224,16 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                       </div>
                     </div>
                   </div>
+
+                  {uploadFiles?.length > 0 ? (
+                    <div className="mt-2 text-center">
+                      <AudioPlayerInput
+                        uploads={post?.uploadsFile}
+                        folder="posts"
+                      />
+                    </div>
+                  ) : null}
+
                   {watchEnableUrlMedia ? (
                     <>
                       <div className="mt-2">
@@ -245,33 +251,35 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                       </span>
                     </>
                   ) : (
-                    <div className="mt-4">
-                      <Controller
-                        name="attachment"
-                        control={control}
-                        render={({ field: { onChange } }) => (
-                          <>
-                            <div className="text-center justify-center mx-auto">
-                              <Upload
-                                name="attachmentFiles"
-                                listType="picture"
-                                className="upload-list-inline"
-                                fileList={fileList}
-                                onChange={handleFileChange}
-                                maxCount={1}
-                                accept=".mp3"
-                              >
-                                {fileList.length >= 1 ? null : (
-                                  <Button icon={<UploadOutlined />}>
-                                    Upload audio
-                                  </Button>
-                                )}
-                              </Upload>
-                            </div>
-                          </>
-                        )}
-                      />
-                    </div>
+                    <>
+                      <div className="mt-4">
+                        <Controller
+                          name="attachment"
+                          control={control}
+                          render={({ field: { onChange } }) => (
+                            <>
+                              <div className="text-center justify-center mx-auto">
+                                <Upload
+                                  name="attachmentFiles"
+                                  listType="picture"
+                                  className="upload-list-inline"
+                                  fileList={fileList}
+                                  onChange={handleFileChange}
+                                  maxCount={1}
+                                  accept=".mp3"
+                                >
+                                  {fileList.length >= 1 ? null : (
+                                    <Button icon={<UploadOutlined />}>
+                                      Upload audio
+                                    </Button>
+                                  )}
+                                </Upload>
+                              </div>
+                            </>
+                          )}
+                        />
+                      </div>
+                    </>
                   )}
                 </div>
 
