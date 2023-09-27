@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { ReactQuillInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api/post";
 import { Button, Upload, UploadFile, UploadProps } from "antd";
@@ -15,6 +15,10 @@ import { useRouter } from "next/router";
 import { SwitchInput } from "../ui/switch-input";
 import { filterImageAndFile } from "@/utils/utils";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
+import Link from "next/link";
+import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
+import { GetAllMembershipsAPI } from "@/api/membership";
+import { useAuth } from "../util/context-user";
 
 type Props = {
   postId?: string;
@@ -32,6 +36,11 @@ const schema = yup.object({
       return yup.string().url().required("url is a required field");
     return schema.nullable();
   }),
+  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
+    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
+      return yup.string().uuid().required("membership is a required field");
+    return schema.nullable();
+  }),
 });
 
 const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
@@ -40,6 +49,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   uploadFiles,
   uploadImages,
 }) => {
+  const { userStorage, profile } = useAuth() as any;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -60,6 +70,15 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   });
 
   const watchEnableUrlMedia = watch("enableUrlMedia", false);
+  const watchWhoCanSee = watch("whoCanSee", null);
+
+  const { data: memberships } = GetAllMembershipsAPI({
+    userId: userStorage?.id,
+    take: 100,
+    page: 0,
+    sort: "DESC",
+    queryKey: ["memberships"],
+  });
 
   useEffect(() => {
     if (post) {
@@ -69,6 +88,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
+        "membershipId",
         "enableUrlMedia",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -296,38 +316,28 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                   />
                 </div>
 
-                {/* <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-                  <div className="mt-2">
-                    <SelectSearchInput
-                      firstOptionName="Choose who can see this post?"
-                      label="Who can see this post?"
+                {watchWhoCanSee === "MEMBERSHIP" ? (
+                  <div className="mt-4">
+                    <SelectMembershipSearchInput
+                      firstOptionName="Choose memberships?"
+                      label="Memberships"
                       control={control}
                       errors={errors}
-                      placeholder="Select who can see this post?"
-                      valueType="text"
-                      name="whoCanSee"
-                      dataItem={arrayWhoCanSees}
+                      placeholder="Select memberships?"
+                      name="membershipId"
+                      dataItem={memberships?.value}
                     />
-                  </div>
-
-                  <div className="mt-2">
-                    <SelectSearchInput
-                      firstOptionName="Choose categories"
-                      label="Categories"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select categories"
-                      valueType="text"
-                      name="whoCanSee"
-                      dataItem={arrayWhoCanSees}
-                    />
-                    <div className="flex flex-col justify-between items-end">
-                      <Button shape="default" type="link">
-                        New Category
-                      </Button>
+                    <div className="flex justify-between items-center">
+                      <label className="block text-sm mb-2 dark:text-white"></label>
+                      <Link
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        href="/memberships/levels"
+                      >
+                        Create membership
+                      </Link>
                     </div>
                   </div>
-                </div> */}
+                ) : null}
 
                 <div className="mt-4">
                   <ReactQuillInput

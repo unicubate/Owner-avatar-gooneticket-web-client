@@ -10,19 +10,33 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
 import { CreateOrUpdateOnePostGalleryAPI } from "@/api/post";
 import { filterImageAndFile } from "@/utils/utils";
 import { viewOneFileUploadAPI } from "@/api/upload";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { ButtonCancelInput, SwitchInput, TextInput, TextareaReactQuillInput } from "../ui";
+import {
+  ButtonCancelInput,
+  SwitchInput,
+  TextInput,
+  TextareaReactQuillInput,
+} from "../ui";
+import { useAuth } from "../util/context-user";
+import { GetAllMembershipsAPI } from "@/api/membership";
+import Link from "next/link";
+import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 
 const schema = yup.object({
   title: yup.string().optional(),
   description: yup.string().optional(),
   whoCanSee: yup.string().required("who can see is a required field"),
   allowDownload: yup.string().optional(),
+  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
+    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
+      return yup.string().uuid().required("membership is a required field");
+    return schema.nullable();
+  }),
 });
 
 type Props = {
@@ -31,6 +45,7 @@ type Props = {
 };
 
 const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
+  const { userStorage, profile } = useAuth() as any;
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -39,6 +54,7 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
     undefined
   );
   const {
+    watch,
     control,
     setValue,
     handleSubmit,
@@ -46,6 +62,14 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
   } = useForm<any>({
     resolver: yupResolver(schema),
     mode: "onChange",
+  });
+  const watchWhoCanSee = watch("whoCanSee", null);
+  const { data: memberships } = GetAllMembershipsAPI({
+    userId: userStorage?.id,
+    take: 100,
+    page: 0,
+    sort: "DESC",
+    queryKey: ["memberships"],
   });
 
   useEffect(() => {
@@ -55,6 +79,7 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
         "description",
         "whoCanSee",
         "type",
+        "membershipId",
         "allowDownload",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -145,7 +170,7 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
             <Controller
               name="attachmentImages"
               control={control}
-              render={({ }) => (
+              render={({}) => (
                 <>
                   <div className="text-center justify-center mx-auto">
                     <Upload
@@ -192,6 +217,29 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
               dataItem={arrayWhoCanSees}
             />
           </div>
+
+          {watchWhoCanSee === "MEMBERSHIP" ? (
+            <div className="mt-4">
+              <SelectMembershipSearchInput
+                firstOptionName="Choose memberships?"
+                label="Memberships"
+                control={control}
+                errors={errors}
+                placeholder="Select memberships?"
+                name="membershipId"
+                dataItem={memberships?.value}
+              />
+              <div className="flex justify-between items-center">
+                <label className="block text-sm mb-2 dark:text-white"></label>
+                <Link
+                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                  href="/memberships/levels"
+                >
+                  Create membership
+                </Link>
+              </div>
+            </div>
+          ) : null}
 
           <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
             <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">

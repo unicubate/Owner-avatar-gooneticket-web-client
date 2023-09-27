@@ -31,6 +31,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
       data.append("title", payload.title ?? "");
       data.append("description", payload.description ?? "");
       data.append("whoCanSee", `${payload.whoCanSee}`);
+      data.append("membershipId", `${payload.membershipId}`);
       data.append("type", payload.type ?? "");
       data.append("allowDownload", `${payload.allowDownload}`);
 
@@ -108,6 +109,7 @@ export const CreateOrUpdateOnePostAPI = ({
       data.append("type", `${payload.type ?? ""}`);
       data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
+      data.append("membershipId", `${payload.membershipId}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
       data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
       data.append("description", `${payload.description ?? ""}`);

@@ -192,14 +192,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 >
                   <MdOutlineModeEdit className="w-5 h-5" />
                 </Link>
-
-                <button
-                  // onClick={() => deleteItem(item)}
-                  title="Delete"
-                  className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
-                >
-                  <MdDeleteOutline className="w-5 h-5" />
-                </button>
               </>
             ) : null}
 

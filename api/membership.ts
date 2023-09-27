@@ -14,6 +14,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { RcFile } from "antd/es/upload";
+import { ResponseMembershipModel } from "../types/membership";
 
 export const CreateOrUpdateOneMembershipAPI = ({
   onSuccess,
@@ -150,14 +151,38 @@ export const GetOneMembershipAPI = (payload: {
 };
 
 export const getMembershipsAPI = async (
-  payload: {
+  payload?: {
     userId: string;
   } & PaginationRequest
-): Promise<{ data: ResponsePostModel }> => {
+): Promise<{ data: ResponseMembershipModel }> => {
   return await makeApiCall({
     action: "getMemberships",
     queryParams: payload,
   });
+};
+
+export const GetAllMembershipsAPI = (payload: {
+  userId: string;
+  take: number;
+  page: number;
+  status?: string;
+  sort: SortModel;
+  queryKey: string[];
+}) => {
+  const { userId, take, sort, queryKey,page } = payload;
+  const { data, isError, isLoading, status } = useQuery({
+    queryKey: queryKey,
+    queryFn: async () =>
+      await getMembershipsAPI({
+        userId,
+        take: take,
+        sort: sort,
+        page: page,
+      }),
+    refetchOnWindowFocus: false,
+  });
+
+  return { data: data?.data, isError, isLoading, status };
 };
 
 export const GetInfiniteMembershipsAPI = (payload: {

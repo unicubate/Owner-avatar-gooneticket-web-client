@@ -8,7 +8,7 @@ import {
 } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api/post";
 import { Upload, UploadFile, UploadProps } from "antd";
@@ -16,6 +16,10 @@ import { PlusOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
+import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
+import Link from "next/link";
+import { useAuth } from "../util/context-user";
+import { GetAllMembershipsAPI } from "@/api/membership";
 
 type Props = {
   uploadImages?: any;
@@ -28,9 +32,15 @@ const schema = yup.object({
   whoCanSee: yup.string().required("Who can see this post"),
   description: yup.string().min(10, "Minimum 10 symbols").required(),
   urlMedia: yup.string().url().required(),
+  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
+    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
+      return yup.string().uuid().required("membership is a required field");
+    return schema.nullable();
+  }),
 });
 
 const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages }) => {
+  const { userStorage } = useAuth() as any;
   const { push, back } = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -39,6 +49,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
     undefined
   );
   const {
+    watch,
     control,
     setValue,
     handleSubmit,
@@ -46,6 +57,15 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
   } = useForm<any>({
     resolver: yupResolver(schema),
     mode: "onChange",
+  });
+
+  const watchWhoCanSee = watch("whoCanSee", null);
+  const { data: memberships } = GetAllMembershipsAPI({
+    userId: userStorage?.id,
+    take: 100,
+    page: 0,
+    sort: "DESC",
+    queryKey: ["memberships"],
   });
 
   useEffect(() => {
@@ -196,6 +216,28 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
                     dataItem={arrayWhoCanSees}
                   />
                 </div>
+                {watchWhoCanSee === "MEMBERSHIP" ? (
+                  <div className="mt-4">
+                    <SelectMembershipSearchInput
+                      firstOptionName="Choose memberships?"
+                      label="Memberships"
+                      control={control}
+                      errors={errors}
+                      placeholder="Select memberships?"
+                      name="membershipId"
+                      dataItem={memberships?.value}
+                    />
+                    <div className="flex justify-between items-center">
+                      <label className="block text-sm mb-2 dark:text-white"></label>
+                      <Link
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        href="/memberships/levels"
+                      >
+                        Create membership
+                      </Link>
+                    </div>
+                  </div>
+                ) : null}
 
                 <div className="mt-4">
                   <ReactQuillInput
