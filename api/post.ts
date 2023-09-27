@@ -286,7 +286,7 @@ export const GetInfinitePostsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       await getPostsAPI({
         userId,
         take,
@@ -317,7 +317,7 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["posts-follows", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       await getFollowsPostsAPI({
         take: take,
         page: pageParam,

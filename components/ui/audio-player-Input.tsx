@@ -1,7 +1,7 @@
 import { viewOneFileUploadAPI } from "@/api/upload";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { RightOutlined } from "@ant-design/icons";
-import { useRef } from "react";
+import { Fragment, useRef } from "react";
 import ReactH5AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 
@@ -17,7 +17,7 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder }) => {
     <>
       {uploads &&
         uploads.map((item: any, index: number) => (
-          <div key={index}>
+          <Fragment key={index}>
             <ReactH5AudioPlayer
               autoPlay={false}
               autoPlayAfterSrcChange={false}
@@ -27,6 +27,10 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder }) => {
               })}`}
               layout="stacked-reverse"
               timeFormat="auto"
+              progressJumpSteps={{
+                backward: 15000,
+                forward: 15000,
+              }}
               customIcons={{
                 play: (
                   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -68,9 +72,9 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder }) => {
               customAdditionalControls={[]}
               className="rounded-lg"
               ref={player}
-              style={{ backgroundColor: 'transparent' }}
+              style={{ backgroundColor: "transparent" }}
             />
-          </div>
+          </Fragment>
         ))}
     </>
   );

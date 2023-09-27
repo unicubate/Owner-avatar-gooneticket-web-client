@@ -1,6 +1,6 @@
 "use client";
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Carousel, Image } from "antd";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
@@ -35,44 +35,37 @@ const ListCarouselUpload: React.FC<Props> = ({
 }) => {
   const ref = useRef();
 
-  const urlImage = (item: any) => {
-    viewOneFileUploadAPI({
-      folder: folder,
-      fileName: item?.path,
-    })
-  }
-  
   return (
     <>
-      <ResponsiveCarousel
-        autoFocus={true}
-        autoPlay={true}
-        showIndicators={false}
+      <Carousel
+        autoplay
+        dots={true}
+        effect={"fade"}
+        dotPosition={"bottom"}
+        pauseOnDotsHover={true}
+        pauseOnHover={true}
+        style={contentStyle}
+        responsive={[{ breakpoint: 1050, settings: "unslick" }]}
       >
         {uploads &&
-          uploads.map((item: any, index: number) => (
-            <div key={index}>
-              {item?.path ? (
-                <Image
-                  width={width}
-                  height={height}
-                  className={className}
-                  preview={preview}
-                  style={contentStyle}
-                  src={`${viewOneFileUploadAPI({
-                    folder: folder,
-                    fileName: item?.path,
-                  })}`}
-                  alt={alt}
-                />
-              ) : (
-                <ContentLoader height="100%" width="100%" viewBox="0 0 700 400">
-                  <rect x="1" y="2" rx="2" ry="2" width="100%" height="100%" />
-                </ContentLoader>
-              )}
-            </div>
+          uploads?.length > 0 &&
+          uploads?.map((item: any, index: number) => (
+            <Fragment key={index}>
+              <Image
+                width={width}
+                height={height}
+                className={className}
+                preview={preview}
+                style={contentStyle}
+                src={`${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: item?.path,
+                })}`}
+                alt={alt}
+              />
+            </Fragment>
           ))}
-      </ResponsiveCarousel>
+      </Carousel>
     </>
   );
 };

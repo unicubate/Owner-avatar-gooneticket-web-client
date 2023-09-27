@@ -103,13 +103,6 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {["AUDIO"].includes(item?.type as PostType) &&
-          item?.uploadsFile?.length > 0 ? (
-            <div className="mt-4 text-center">
-              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" />
-            </div>
-          ) : null}
-
           {item?.uploadsImage?.length > 0 ? (
             <div className="group relative mt-2 text-center justify-center mx-auto">
               <ListCarouselUpload
@@ -153,6 +146,13 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
+          {["AUDIO"].includes(item?.type as PostType) &&
+          item?.uploadsFile?.length > 0 ? (
+            <div className="mt-2 text-center">
+              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" />
+            </div>
+          ) : null}
+
           {item?.id ? (
             <div className="mt-2 text-lg">
               <Link
@@ -164,13 +164,15 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          <div className="text-sm font-normal text-gray-600 ">
-            <span className="ql-editor">
-              <HtmlParser html={String(item?.description ?? "")} />
-            </span>
-          </div>
+          {/* {item?.description ? (
+            <div className="text-sm font-normal text-gray-600 ">
+              <span className="ql-editor">
+                <HtmlParser html={String(item?.description ?? "")} />
+              </span>
+            </div>
+          ) : null} */}
 
-          <div className="flex items-center">
+          <div className="flex mt-2 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-2 text-lg font-bold">

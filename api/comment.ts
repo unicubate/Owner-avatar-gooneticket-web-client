@@ -229,7 +229,7 @@ export const GetInfiniteCommentsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["comments", "infinite", { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       await getCommentsAPI({
         ...payload,
         page: pageParam,
@@ -246,7 +246,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["comments-replies", "infinite", { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 1 }) =>
+    queryFn: async ({ pageParam = 0 }) =>
       await getCommentsRepliesAPI({
         ...payload,
         page: pageParam,
