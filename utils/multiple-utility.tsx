@@ -11,8 +11,8 @@ export const formatePrice = (options: {
   return (
     <>
       {!isNaN(numberCal) && String(numberCal).includes(".")
-        ? numberCal.toLocaleString()
-        : `${numberCal.toLocaleString()},00`}{" "}
+        ? numberCal.toLocaleString("IT")
+        : `${numberCal.toLocaleString("IT")},00`}{" "}
     </>
   );
 };

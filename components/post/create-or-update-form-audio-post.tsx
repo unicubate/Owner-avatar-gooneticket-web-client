@@ -19,6 +19,7 @@ import Link from "next/link";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import { GetAllMembershipsAPI } from "@/api/membership";
 import { useAuth } from "../util/context-user";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
   postId?: string;
@@ -51,23 +52,20 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 }) => {
   const { userStorage, profile } = useAuth() as any;
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
+
   const {
     watch,
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const watchEnableUrlMedia = watch("enableUrlMedia", false);
   const watchWhoCanSee = watch("whoCanSee", null);

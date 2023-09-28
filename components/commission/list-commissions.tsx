@@ -4,7 +4,7 @@ import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Spin, Tooltip } from "antd";
 import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
 import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
@@ -24,8 +24,8 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -113,7 +113,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                     <BiMoney />
                   </span>
                   <span className="ml-2 font-normal text-sm">
-                    {item?.price} {item?.currency?.symbol}
+                    {formatePrice({ value: Number(item?.price), isDivide: false })} {item?.currency?.symbol}
                   </span>
                 </>
               ) : null}

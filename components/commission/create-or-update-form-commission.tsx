@@ -16,6 +16,8 @@ import { CreateOrUpdateOneCommissionAPI } from "@/api/commission";
 import { useRouter } from "next/router";
 import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
 import { TextInput, NumberInput } from "../ui";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { useAuth } from "../util/context-user";
 
 const { Option } = Select;
 
@@ -41,12 +43,9 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
   commission,
   uploadImages,
 }) => {
+  const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
 
@@ -55,11 +54,13 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
+
   const watchEnableLimitSlot = watch("enableLimitSlot", false);
 
   useEffect(() => {
@@ -169,7 +170,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   placeholder="0"
                   errors={errors}
                   required
-                  prefix={"€"}
+                  prefix={profile?.currency?.code}
                 />
               </div>
             </div>

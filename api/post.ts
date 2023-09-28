@@ -109,7 +109,7 @@ export const CreateOrUpdateOnePostAPI = ({
       data.append("type", `${payload.type ?? ""}`);
       data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
-      data.append("membershipId", `${payload.membershipId}`);
+      data.append("membershipId", `${payload.membershipId ?? ""}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
       data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
       data.append("description", `${payload.description ?? ""}`);
@@ -128,7 +128,7 @@ export const CreateOrUpdateOnePostAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
-          queryParams: { uploadableId: postId, model: 'POST' },
+          queryParams: { uploadableId: postId, model: "POST" },
         });
 
         if (result) {

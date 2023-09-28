@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
 import { DeleteOnePostAPI } from "@/api/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
@@ -24,8 +24,8 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOneMembershipAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -113,7 +113,10 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
                     <BiMoney />
                   </button>
                   <span className="ml-1.5 font-normal text-sm">
-                    {item?.pricePerMonthly} {item?.currency?.symbol}
+                    {formatePrice({
+                      value: Number(item?.pricePerMonthly),
+                      isDivide: false,
+                    })} {item?.currency?.symbol}
                   </span>
                   <span className="ml-1.5 font-normal text-sm">per month</span>
                 </>
@@ -125,7 +128,10 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
                     <BiMoney />
                   </button>
                   <span className="ml-1.5 font-normal text-sm">
-                    {item?.pricePerYearly} {item?.currency?.symbol}
+                    {formatePrice({
+                      value: Number(item?.pricePerYearly),
+                      isDivide: false,
+                    })} {item?.currency?.symbol}
                   </span>
                   <span className="ml-1.5 font-normal text-sm">per year</span>
                 </>

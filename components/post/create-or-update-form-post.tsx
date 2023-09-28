@@ -18,6 +18,7 @@ import { useAuth } from "../util/context-user";
 import { GetAllMembershipsAPI } from "@/api/membership";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import Link from "next/link";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
   uploadImages?: any;
@@ -43,22 +44,19 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
 }) => {
   const { userStorage } = useAuth() as any;
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
     watch,
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({

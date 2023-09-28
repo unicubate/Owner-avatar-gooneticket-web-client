@@ -38,6 +38,7 @@ import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { ListCarouselUpload } from "./list-carousel-upload";
 import { useAuth } from "../util/context-user";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 const { Option } = Select;
 
@@ -79,10 +80,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
 }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
 
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -92,11 +89,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
+
   const watchEnableLimitSlot = watch("enableLimitSlot", false);
   const watchEnableDiscount = watch("enableDiscount", false);
   const watchProductType = watch("productType", "PHYSICAL");

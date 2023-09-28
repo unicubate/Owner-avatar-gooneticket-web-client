@@ -20,6 +20,7 @@ import { SelectMembershipSearchInput } from "../membership/select-membership-sea
 import Link from "next/link";
 import { useAuth } from "../util/context-user";
 import { GetAllMembershipsAPI } from "@/api/membership";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
   uploadImages?: any;
@@ -42,22 +43,19 @@ const schema = yup.object({
 const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages }) => {
   const { userStorage } = useAuth() as any;
   const { push, back } = useRouter();
-  const [loading, setLoading] = useState(false);
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
     watch,
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({

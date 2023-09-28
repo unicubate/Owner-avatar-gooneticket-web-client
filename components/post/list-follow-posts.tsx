@@ -5,9 +5,8 @@ import { PostModel, PostType } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
-import { useRouter } from "next/router";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
@@ -19,10 +18,9 @@ import { downloadOneFileUploadAPI } from "@/api/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { ButtonInput } from "../ui/button-input";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import ContentLoader from "react-content-loader";
-import AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
+import { useRouter } from "next/router";
 
 type Props = {
   item?: PostModel;
@@ -110,16 +108,15 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 folder="posts"
                 preview={false}
                 height="100%"
-                className={`${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-3xl"
-                    : ""
-                }`}
+                  ? "blur-3xl"
+                  : ""
+                  }`}
               />
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
+                item?.isValidSubscribe !== 1 ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white">
                     <button className="font-bold">
@@ -146,14 +143,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {["AUDIO"].includes(item?.type as PostType) &&
-          item?.uploadsFile?.length > 0 ? (
-            <div className="mt-2 text-center">
-              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" />
+          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) &&
+            item?.uploadsFile?.length > 0 ? (
+            <div className="mt-2 text-center justify-center mx-auto">
+              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" post={item} />
             </div>
           ) : null}
 
-          {item?.id ? (
+          {item?.title ? (
             <div className="mt-2 text-lg">
               <Link
                 href={`/posts/${item?.slug}`}
@@ -164,13 +161,13 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {/* {item?.description ? (
+          {item?.description ? (
             <div className="text-sm font-normal text-gray-600 ">
               <span className="ql-editor">
                 <HtmlParser html={String(item?.description ?? "")} />
               </span>
             </div>
-          ) : null} */}
+          ) : null}
 
           <div className="flex mt-2 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
@@ -185,9 +182,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-5 h-5" />
@@ -196,7 +192,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             ) : null}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-            item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-lg font-bold">
                   <HiOutlineLockClosed />
