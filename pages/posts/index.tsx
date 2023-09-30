@@ -3,7 +3,7 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { LoadingOutlined } from "@ant-design/icons";
 import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 import { Spin } from "antd";
-import { GetInfinitePostsAPI } from "@/api/post";
+import { GetInfinitePostsAPI } from "@/api-site/post";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import { useAuth } from "@/components/util/context-user";

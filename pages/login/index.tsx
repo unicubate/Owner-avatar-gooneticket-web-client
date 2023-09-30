@@ -6,7 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { UserLoginFormModel } from "@/types/user.type";
-import { loginUserAPI, resendCodeAPI } from "../../api/user";
+import { loginUserAPI, resendCodeAPI } from "../../api-site/user";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";

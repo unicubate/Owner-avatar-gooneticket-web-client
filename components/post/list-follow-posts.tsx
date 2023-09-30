@@ -14,7 +14,7 @@ import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { PiLockKey } from "react-icons/pi";
-import { downloadOneFileUploadAPI } from "@/api/upload";
+import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { ButtonInput } from "../ui/button-input";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";

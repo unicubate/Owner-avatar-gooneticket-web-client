@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import * as yup from "yup";
 import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
-import { CreateOrUpdateOneLikeAPI } from "@/api/like";
+import { CreateOrUpdateOneLikeAPI } from "@/api-site/like";
 import { AlertDangerNotification } from "@/utils";
 
 const CreateOrUpdateFormLike: React.FC<{

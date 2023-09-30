@@ -4,7 +4,7 @@ import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { DeleteOnePostAPI } from "@/api/post";
+import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import {
   MdDeleteOutline,
@@ -12,7 +12,7 @@ import {
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { useRouter } from "next/router";
-import { GetUploadsAPI } from "@/api/upload";
+import { GetUploadsAPI } from "@/api-site/upload";
 import { BiComment } from "react-icons/bi";
 import { LiaDnaSolid } from "react-icons/lia";
 import { PostModel } from "@/types/post";

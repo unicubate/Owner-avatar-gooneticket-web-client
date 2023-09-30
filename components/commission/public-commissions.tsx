@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
-import { GetInfiniteCommissionsAPI } from "@/api/commission";
+import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
 import ListPublicCommissions from "./list-public-commissions";
 import { LoadingFile } from "../ui/loading-file";
 

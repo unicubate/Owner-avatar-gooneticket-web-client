@@ -12,7 +12,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../ui/switch-input";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { CommissionFormModel } from "@/types/commission";
-import { CreateOrUpdateOneCommissionAPI } from "@/api/commission";
+import { CreateOrUpdateOneCommissionAPI } from "@/api-site/commission";
 import { useRouter } from "next/router";
 import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
 import { TextInput, NumberInput } from "../ui";

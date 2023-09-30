@@ -12,7 +12,7 @@ import { useAuth } from "../util/context-user";
 import { formateDMYHH } from "@/utils";
 import { PostModel } from "@/types/post";
 import { useRouter } from "next/router";
-import { downloadOneFileUploadAPI } from "@/api/upload";
+import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { WhoCanSeeItem } from "../ui/who-can-see-item";

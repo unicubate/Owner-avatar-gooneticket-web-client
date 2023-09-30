@@ -1,5 +1,5 @@
 import LayoutDashboard from "@/components/layout-dashboard";
-import { GetOnePostAPI } from "@/api/post";
+import { GetOnePostAPI } from "@/api-site/post";
 import { useRouter } from "next/router";
 import { Image } from "antd";
 import { BiComment } from "react-icons/bi";

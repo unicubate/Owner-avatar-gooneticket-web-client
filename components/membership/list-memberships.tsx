@@ -4,15 +4,15 @@ import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
-import { DeleteOnePostAPI } from "@/api/post";
+import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { useRouter } from "next/router";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { MembershipModel } from "@/types/membership";
-import { DeleteOneMembershipAPI } from "@/api/membership";
+import { DeleteOneMembershipAPI } from "@/api-site/membership";
 
 type Props = {
   item?: MembershipModel;

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Spin } from "antd";
-import { GetInfinitePostsAPI } from "@/api/post";
+import { GetInfinitePostsAPI } from "@/api-site/post";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui/button-input";
 import ListLastPosts from "./list-last-posts";

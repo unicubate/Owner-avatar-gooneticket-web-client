@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { GetInfinitePostsAPI } from "@/api/post";
+import { GetInfinitePostsAPI } from "@/api-site/post";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import { ListPublicGallery } from "./list-public-gallery";

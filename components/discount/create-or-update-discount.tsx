@@ -6,7 +6,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { useEffect, useState } from "react";
 import { DiscountFormModel } from "@/types/discount";
-import { CreateOrUpdateOneDiscountAPI } from "@/api/discount";
+import { CreateOrUpdateOneDiscountAPI } from "@/api-site/discount";
 import { SwitchInput, ButtonInput } from "../ui";
 
 const schema = yup.object({

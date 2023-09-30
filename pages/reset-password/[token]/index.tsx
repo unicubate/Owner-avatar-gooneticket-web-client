@@ -11,7 +11,7 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { resetPasswordAPI } from "../../../api/user";
+import { resetPasswordAPI } from "../../../api-site/user";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";
 import { ButtonInput } from "@/components/ui/button-input";

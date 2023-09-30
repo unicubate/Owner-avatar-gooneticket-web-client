@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateGallery } from "./create-or-update-gallery";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
+import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api-site/post";
 import { PostModel } from "@/types/post";
 import { ReadMore } from "@/utils/read-more";
 import {
@@ -19,7 +19,7 @@ import {
   GetUploadsAPI,
   downloadOneFileUploadAPI,
   viewOneFileUploadAPI,
-} from "@/api/upload";
+} from "@/api-site/upload";
 import { FiDownload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
 import { useRouter } from "next/router";

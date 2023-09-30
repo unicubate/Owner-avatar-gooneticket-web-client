@@ -4,7 +4,7 @@ import React, { Fragment, useRef, useState } from "react";
 import { Carousel, Image } from "antd";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
-import { viewOneFileUploadAPI } from "@/api/upload";
+import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { Carousel as ResponsiveCarousel } from "react-responsive-carousel";
 import ContentLoader from "react-content-loader";
 

@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/ui/button-input";
-import { GetInfiniteFollowsPostsAPI } from "@/api/post";
+import { GetInfiniteFollowsPostsAPI } from "@/api-site/post";
 import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 

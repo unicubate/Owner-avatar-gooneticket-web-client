@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { CreateOnPaymentPI } from "@/api/payment";
-import { PaymentModel } from "../../api/payment";
+import { CreateOnPaymentPI } from "@/api-site/payment";
+import { PaymentModel } from "../../api-site/payment";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";
 

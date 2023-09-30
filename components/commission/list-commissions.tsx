@@ -5,12 +5,12 @@ import Swal from "sweetalert2";
 import { Avatar, Spin, Tooltip } from "antd";
 import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api/post";
+import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 

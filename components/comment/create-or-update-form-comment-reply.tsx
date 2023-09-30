@@ -9,7 +9,7 @@ import { CommentFormModel } from "@/types/comment";
 import {
   CreateOrUpdateOneCommentAPI,
   CreateOrUpdateOneCommentReplyAPI,
-} from "@/api/comment";
+} from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
 import { ButtonCancelInput, TextAreaInput } from "../ui";
 

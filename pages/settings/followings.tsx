@@ -4,7 +4,7 @@ import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-settin
 import { Skeleton } from "antd";
 import { useInView } from "react-intersection-observer";
 import { ButtonInput } from "@/components/ui/button-input";
-import { GetInfiniteFollowingsAPI } from "@/api/follow";
+import { GetInfiniteFollowingsAPI } from "@/api-site/follow";
 import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";
 

@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Avatar } from "antd";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
-import { DeleteOneCommentReplyAPI } from "@/api/comment";
+import { DeleteOneCommentReplyAPI } from "@/api-site/comment";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,

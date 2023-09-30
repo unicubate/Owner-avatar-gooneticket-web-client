@@ -1,4 +1,4 @@
-import { viewOneFileUploadAPI } from "@/api/upload";
+import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { PostModel } from "@/types/post";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { RightOutlined } from "@ant-design/icons";

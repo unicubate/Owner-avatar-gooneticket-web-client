@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
-import { GetInfiniteMembershipsAPI } from "@/api/membership";
+import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
 import {ListPublicMemberships} from "./list-public-memberships";
 import { LoadingFile } from "../ui/loading-file";
 

@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
 import { useRouter } from "next/router";
-import { GetOnePostAPI } from "@/api/post";
+import { GetOnePostAPI } from "@/api-site/post";
 import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { useAuth } from "@/components/util/context-user";

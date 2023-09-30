@@ -2,7 +2,7 @@
 import React from "react";
 import { Skeleton } from "antd";
 import ListCommentsPosts from "./list-comments-posts";
-import { GetInfiniteCommentsAPI } from "@/api/comment";
+import { GetInfiniteCommentsAPI } from "@/api-site/comment";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { useAuth } from "../util/context-user";
 

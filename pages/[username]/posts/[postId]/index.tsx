@@ -1,6 +1,6 @@
 import { LoadingOutlined } from "@ant-design/icons";
 import { Image, Spin } from "antd";
-import { GetOnePostAPI } from "@/api/post";
+import { GetOnePostAPI } from "@/api-site/post";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import { BiComment } from "react-icons/bi";
 import { useRouter } from "next/router";
@@ -9,7 +9,7 @@ import { PostModel } from "@/types/post";
 import { useAuth } from "@/components/util/context-user";
 import ListPublicPostsComments from "@/components/post/list-public-posts-comments";
 import { ButtonInput } from "@/components/ui/button-input";
-import { GetOneUserPublicAPI } from "@/api/user";
+import { GetOneUserPublicAPI } from "@/api-site/user";
 import PublicListLastPosts from "@/components/post/public-last-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 

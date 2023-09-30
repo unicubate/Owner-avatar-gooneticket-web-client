@@ -3,9 +3,9 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { useAuth } from "@/components/util/context-user";
 import { LoadingFile } from "@/components/ui/loading-file";
-import { GetOneMembershipAPI } from "@/api/membership";
+import { GetOneMembershipAPI } from "@/api-site/membership";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
-import { GetUploadsAPI } from "@/api/upload";
+import { GetUploadsAPI } from "@/api-site/upload";
 
 const ShopEdit = () => {
   const { userStorage } = useAuth() as any;

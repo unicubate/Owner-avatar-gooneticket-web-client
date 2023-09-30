@@ -9,7 +9,7 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { passwordResetUserAPI } from "../../api/user";
+import { passwordResetUserAPI } from "../../api-site/user";
 import { PublicComponent } from "@/components/util/public-component";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";

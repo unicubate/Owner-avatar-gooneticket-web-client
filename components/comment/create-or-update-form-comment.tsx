@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CommentFormModel } from "@/types/comment";
-import { CreateOrUpdateOneCommentAPI } from "@/api/comment";
+import { CreateOrUpdateOneCommentAPI } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
 import { ButtonCancelInput, ButtonInput, TextareaReactQuillInput } from "../ui";
 import { Avatar } from "antd";

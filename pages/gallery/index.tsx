@@ -7,7 +7,7 @@ import { EmptyData } from "@/components/ui/empty-data";
 import { CreateOrUpdateGallery } from "@/components/gallery/create-or-update-gallery";
 import ListGallery from "@/components/gallery/list-gallery";
 import { useAuth } from "@/components/util/context-user";
-import { GetInfinitePostsAPI } from "@/api/post";
+import { GetInfinitePostsAPI } from "@/api-site/post";
 import { useInView } from "react-intersection-observer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LoadingFile } from "@/components/ui/loading-file";

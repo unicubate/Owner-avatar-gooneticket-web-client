@@ -10,7 +10,7 @@ import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI } from "@/api/post";
+import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
@@ -19,7 +19,7 @@ import { filterImageAndFile } from "@/utils/utils";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import Link from "next/link";
 import { useAuth } from "../util/context-user";
-import { GetAllMembershipsAPI } from "@/api/membership";
+import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {

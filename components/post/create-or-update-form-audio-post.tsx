@@ -7,7 +7,7 @@ import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI } from "@/api/post";
+import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Button, Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
@@ -17,7 +17,7 @@ import { filterImageAndFile } from "@/utils/utils";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
 import Link from "next/link";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
-import { GetAllMembershipsAPI } from "@/api/membership";
+import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 

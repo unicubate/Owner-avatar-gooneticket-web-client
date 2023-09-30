@@ -30,8 +30,8 @@ import {
   arrayProductTypes,
   arrayWhoCanSees,
 } from "@/types/product";
-import { CreateOrUpdateOneProductAPI } from "@/api/product";
-import { GetAllDiscountsAPI } from "@/api/discount";
+import { CreateOrUpdateOneProductAPI } from "@/api-site/product";
+import { GetAllDiscountsAPI } from "@/api-site/discount";
 import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
 import Link from "next/link";
 import { useRouter } from "next/router";

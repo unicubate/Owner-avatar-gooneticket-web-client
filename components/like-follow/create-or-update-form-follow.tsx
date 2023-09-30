@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { AlertDangerNotification } from "@/utils";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { ButtonInput } from "../ui/button-input";
-import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
+import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 import Swal from "sweetalert2";
 
 const CreateOrUpdateFormFollow: React.FC<{

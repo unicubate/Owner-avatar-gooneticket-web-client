@@ -9,7 +9,7 @@ import {
 } from "react";
 import { UserModel } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
-import { GetOneUserPrivateAPI } from "@/api/user";
+import { GetOneUserPrivateAPI } from "@/api-site/user";
 import jwt_decode from "jwt-decode";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";

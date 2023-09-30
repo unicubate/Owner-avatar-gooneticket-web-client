@@ -12,7 +12,7 @@ import {
 } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
-import { getOneFileGalleryAPI } from "@/api/post";
+import { getOneFileGalleryAPI } from "@/api-site/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
@@ -22,7 +22,7 @@ import Link from "next/link";
 import { ProductModel } from "@/types/product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { ReadMore } from "@/utils/read-more";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api/upload";
+import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
 
 type Props = {
   item?: ProductModel;

@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput, TextInputPassword } from "@/components/ui";
 import { UserRegisterFormModel } from "@/types/user.type";
-import { loginUserAPI, registerUserAPI } from "../../api/user";
+import { loginUserAPI, registerUserAPI } from "../../api-site/user";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,

@@ -8,7 +8,7 @@ import { CommentModel } from "@/types/comment";
 import {
   DeleteOneCommentAPI,
   GetInfiniteCommentsRepliesAPI,
-} from "@/api/comment";
+} from "@/api-site/comment";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,

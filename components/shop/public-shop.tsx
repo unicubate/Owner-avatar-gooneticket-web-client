@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicShop from "./list-public-shop";
-import { GetInfiniteProductsAPI } from "@/api/product";
+import { GetInfiniteProductsAPI } from "@/api-site/product";
 import { LoadingFile } from "../ui/loading-file";
 
 type Props = {

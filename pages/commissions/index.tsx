@@ -10,7 +10,7 @@ import { ListCommissions } from "@/components/commission/list-commissions";
 import { useInView } from "react-intersection-observer";
 import { useAuth } from "@/components/util/context-user";
 import { useEffect, useState } from "react";
-import { GetInfiniteCommissionsAPI } from "@/api/commission";
+import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
 import { EnableCommission } from "@/components/commission/enable-commission";
 import { LoadingFile } from "@/components/ui/loading-file";
 

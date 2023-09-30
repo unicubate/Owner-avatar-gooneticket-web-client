@@ -6,7 +6,7 @@ import {
   UpdateOneProfileAPI,
   getOneFileProfileAPI,
   getOneProfileAPI,
-} from "@/api/profile";
+} from "@/api-site/profile";
 import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";

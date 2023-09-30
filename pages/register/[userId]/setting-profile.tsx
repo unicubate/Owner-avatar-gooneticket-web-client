@@ -15,9 +15,9 @@ import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
-} from "@/api/profile";
+} from "@/api-site/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
-import { GetOneUserPublicAPI, resendCodeAPI } from "@/api/user";
+import { GetOneUserPublicAPI, resendCodeAPI } from "@/api-site/user";
 import { SelectSearchInput } from "@/components/ui/select-search-input";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";

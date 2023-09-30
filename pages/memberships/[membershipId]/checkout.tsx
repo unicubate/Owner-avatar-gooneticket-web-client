@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/router";
-import { GetOneMembershipAPI } from "@/api/membership";
+import { GetOneMembershipAPI } from "@/api-site/membership";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { GetAllCountiesAPI } from "@/api/profile";
+import { GetAllCountiesAPI } from "@/api-site/profile";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateSubscribePayPal } from "@/components/payment/create-subscribe-paypal";

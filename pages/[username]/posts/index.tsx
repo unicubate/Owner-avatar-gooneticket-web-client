@@ -1,4 +1,4 @@
-import { GetOneUserPublicAPI } from "@/api/user";
+import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
 import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";

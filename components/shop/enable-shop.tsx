@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { AlertDangerNotification } from "@/utils";
 import { ButtonInput } from "../ui/button-input";
-import { UpdateEnableProfileAPI } from "@/api/user";
+import { UpdateEnableProfileAPI } from "@/api-site/user";
 import { useAuth } from "../util/context-user";
 
 

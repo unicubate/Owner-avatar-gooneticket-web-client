@@ -11,9 +11,9 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
-import { CreateOrUpdateOnePostGalleryAPI } from "@/api/post";
+import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
 import { filterImageAndFile } from "@/utils/utils";
-import { viewOneFileUploadAPI } from "@/api/upload";
+import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import {
@@ -23,7 +23,7 @@ import {
   TextareaReactQuillInput,
 } from "../ui";
 import { useAuth } from "../util/context-user";
-import { GetAllMembershipsAPI } from "@/api/membership";
+import { GetAllMembershipsAPI } from "@/api-site/membership";
 import Link from "next/link";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import { useReactHookForm } from "../hooks/use-react-hook-form";

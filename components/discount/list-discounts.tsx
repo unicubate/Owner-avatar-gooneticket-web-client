@@ -12,7 +12,7 @@ import {
   formateDMYHH,
 } from "@/utils";
 import Swal from "sweetalert2";
-import { DeleteOneDiscountAPI } from "@/api/discount";
+import { DeleteOneDiscountAPI } from "@/api-site/discount";
 import { Tag } from "antd";
 
 const ListDiscounts: React.FC<{ item: any; index: number }> = ({

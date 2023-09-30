@@ -8,7 +8,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import { useAuth } from "@/components/util/context-user";
 import { useInView } from "react-intersection-observer";
-import { GetInfiniteProductsAPI } from "@/api/product";
+import { GetInfiniteProductsAPI } from "@/api-site/product";
 import { EmptyData } from "@/components/ui/empty-data";
 import ListProductsShop from "@/components/shop/list-products-shop";
 import { EnableShop } from "@/components/shop/enable-shop";

@@ -1,8 +1,8 @@
 import { Avatar, Button } from "antd";
 import { ButtonInput } from "@/components/ui/button-input";
 import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api/product";
-import { GetUploadsAPI } from "@/api/upload";
+import { GetOneProductAPI } from "@/api-site/product";
+import { GetUploadsAPI } from "@/api-site/upload";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";

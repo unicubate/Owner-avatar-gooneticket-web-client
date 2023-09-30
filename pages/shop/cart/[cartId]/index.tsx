@@ -7,7 +7,7 @@ import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { ButtonInput } from "@/components/ui/button-input";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api/product";
+import { GetOneProductAPI } from "@/api-site/product";
 import { Alert, Space, Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
@@ -20,11 +20,11 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput, LoadingFile } from "@/components/ui";
-import { GetAllCountiesAPI } from "@/api/profile";
+import { GetAllCountiesAPI } from "@/api-site/profile";
 import { SelectSearchInput } from "@/components/ui/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
 import { MdDeleteOutline } from "react-icons/md";
-import { GetUploadsAPI } from "@/api/upload";
+import { GetUploadsAPI } from "@/api-site/upload";
 
 const schema = yup.object({
   firstName: yup.string().nullable(),

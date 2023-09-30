@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
 import { useRouter } from "next/router";
 import { Upload, UploadFile, UploadProps } from "antd";
-import { CreateOrUpdateOneMembershipAPI } from "@/api/membership";
+import { CreateOrUpdateOneMembershipAPI } from "@/api-site/membership";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { MembershipFormModel } from "@/types/membership";
 import { useAuth } from "../util/context-user";

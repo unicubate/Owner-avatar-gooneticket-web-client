@@ -10,7 +10,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { ListMemberships } from "@/components/membership/list-memberships";
 import { useAuth } from "@/components/util/context-user";
 import { useInView } from "react-intersection-observer";
-import { GetInfiniteMembershipsAPI } from "@/api/membership";
+import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
 import { arrayDonation, arrayTransactions } from "@/components/mock";
 import { CopyOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { formatePrice } from "@/utils";

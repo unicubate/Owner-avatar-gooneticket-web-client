@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { ButtonInput } from "../ui/button-input";
 import { FollowModel } from "@/types/follow";
-import { CreateOrDeleteOneFollowerAPI } from "@/api/follow";
+import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 
 type Props = {
   item?: FollowModel;

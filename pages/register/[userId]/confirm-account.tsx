@@ -18,7 +18,7 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { resendCodeAPI, ValidCodeAPI } from "@/api/user";
+import { resendCodeAPI, ValidCodeAPI } from "@/api-site/user";
 import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/private-component";
 import { useAuth } from "@/components/util/context-user";
