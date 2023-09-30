@@ -64,9 +64,9 @@ const Login = () => {
         JSON.stringify(user?.accessToken)
       );
       router.push(`${`/dashboard`}`);
-      window.location.reload();
       setHasErrors(false);
       setLoading(false);
+      window.location.reload();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
