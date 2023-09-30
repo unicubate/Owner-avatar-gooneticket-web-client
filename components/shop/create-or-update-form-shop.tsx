@@ -49,6 +49,18 @@ type Props = {
 };
 
 const schema = yup.object({
+  // attachmentImages: yup.mixed()
+  //   .required('Please upload an image'),
+  // .test(
+  //   'fileSize',
+  //   'File size must be less than 2MB',
+  //   (value) => value && value[0].size <= 2 * 1024 * 1024
+  // )
+  // .test(
+  //   'fileType',
+  //   'Only image files are allowed',
+  //   (value) => value && value[0].type.startsWith('image/')
+  // ),
   title: yup.string().required(),
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),

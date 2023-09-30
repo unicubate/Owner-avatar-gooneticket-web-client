@@ -29,8 +29,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -105,19 +105,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             <div className="flex mt-4 items-center">
               {item?.title ? (
                 <p className="text-lg font-bold text-gray-600">
-                  <ReadMore html={String(item?.title ?? "")} value={50} />
+                  <ReadMore html={String(item?.title ?? "")} value={100} />
                 </p>
               ) : null}
             </div>
-            {/* {item?.price ? (
-              <p className="mt-4 text-sm font-medium text-gray-600">
-                {item?.price} {item?.currency?.symbol}
-              </p>
-            ) : null} */}
 
-            {/* <p className="mt-4 text-sm font-medium text-gray-500">
-              {formateDateDayjs(item?.createdAt as Date)}
-            </p> */}
 
             <div className="flex mt-4 items-center">
               <button className="text-lg font-normal">
@@ -125,7 +117,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               </button>
               <span className="ml-2 text-sm font-bold">
                 {formatePrice({
-                  value: Number(item?.priceDiscount),
+                  value: Number(item?.priceDiscount ?? 0),
                   isDivide: false,
                 })}{" "}
                 {item?.currency?.symbol}
@@ -135,7 +127,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 <span className="ml-2 text-sm font-normal text-gray-500">
                   <del>
                     {formatePrice({
-                      value: Number(item?.price),
+                      value: Number(item?.price ?? 0),
                       isDivide: false,
                     })}{" "}
                     {item?.currency?.symbol}

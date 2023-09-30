@@ -16,6 +16,7 @@ type Props = {
   alt?: string;
   height?: string | number;
   width?: string | number;
+  autoplay?: boolean;
 };
 
 const contentStyle: React.CSSProperties = {
@@ -32,13 +33,14 @@ const ListCarouselUpload: React.FC<Props> = ({
   className = "object-cover w-full h-full",
   height = "400px",
   width = "100%",
+  autoplay = false,
 }) => {
   const ref = useRef();
 
   return (
     <>
       <Carousel
-        autoplay
+        autoplay={autoplay}
         dots={true}
         effect={"fade"}
         dotPosition={"bottom"}
