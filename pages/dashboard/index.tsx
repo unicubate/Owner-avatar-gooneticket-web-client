@@ -10,10 +10,14 @@ import { formatePrice } from "@/utils";
 import { BiCog, BiDotsHorizontal } from "react-icons/bi";
 import Link from "next/link";
 import { IoShareOutline } from "react-icons/io5";
+import { useAuth } from "@/components/util/context-user";
 
 const Dashboard = () => {
+  const user = useAuth() as any;
   const router = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
+
+  console.log('user ========>', user)
 
   return (
     <>
@@ -30,16 +34,16 @@ const Dashboard = () => {
                           size={60}
                           className="object-cover w-10 h-10 rounded-full"
                           src="https://picsum.photos/seed/6JySCJv/640/480"
-                          alt="Boclair Temgoua"
+                          alt={`${user?.profile?.firstName ?? ''} ${user?.profile?.lastName ?? ''}`}
                         />
                       </div>
 
                       <div className="ml-4 cursor-pointer">
                         <p className="text-xl font-bold text-gray-900">
-                          Boclair Temgoua
+                          {user?.profile?.firstName ?? ''} {user?.profile?.lastName ?? ''}
                         </p>
                         <p className="mt-1 text-sm font-medium text-gray-500">
-                          {process.env.NEXT_PUBLIC_SITE}/bokino
+                          {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ''}
                         </p>
                       </div>
 
@@ -61,21 +65,21 @@ const Dashboard = () => {
 
                     <div className="flex items-center mt-3">
                       <Link href="/settings/subscribes">
-                        <span className="text-lg font-bold">10</span>
+                        <span className="text-lg font-bold">{user?.totalSubscribe ?? 0}</span>
                         <span className="ml-2 font-normal text-sm">
                           Subscribes
                         </span>
                       </Link>
 
                       <Link href="/settings/followers">
-                        <span className="ml-4 text-lg font-bold">500</span>
+                        <span className="ml-4 text-lg font-bold">{user?.totalFollower ?? 0}</span>
                         <span className="ml-2 font-normal text-sm">
                           Followers
                         </span>
                       </Link>
 
                       <Link href="/settings/followings">
-                        <span className="ml-4 text-lg font-bold">10</span>
+                        <span className="ml-4 text-lg font-bold">{user?.totalFollowing ?? 0}</span>
                         <span className="ml-2 font-normal text-sm">
                           Following
                         </span>
@@ -83,7 +87,10 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center mt-3">
-                      <p className="text-3xl font-bold">0,00 $</p>
+                      <p className="text-3xl font-bold">{formatePrice({
+                        value: Number(Number(user?.wallet?.amount ?? 0) * Number(user?.profile?.currency?.amount ?? 0)),
+                        isDivide: false,
+                      }) ?? ""} {user?.profile?.currency?.code ?? 0}</p>
                     </div>
                   </div>
 
@@ -281,7 +288,7 @@ const Dashboard = () => {
                               Membership
                             </h3>
                             <p className="mt-3 text-sm text-gray-600">
-                            Monthly membership for your biggest fans.
+                              Monthly membership for your biggest fans.
                             </p>
                           </div>
                         </div>
@@ -370,7 +377,7 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                     </div>
                   </div>
                 </div>
