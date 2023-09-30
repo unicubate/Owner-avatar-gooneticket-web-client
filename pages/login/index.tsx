@@ -48,21 +48,23 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      if (user?.nextStep === "SETTING_PROFILE") {
-        router.push(`${`/register/${user?.id}/setting-profile`}`);
-      } else if (user?.nextStep === "SETTING_INTEREST") {
-        router.push(`${`/register/${user?.id}/setting-interest`}`);
-      } else if (user?.nextStep === "CONFIRM_EMAIL") {
-        await resendCodeAPI({ userId: user?.id });
-        router.push(`${`/register/${user?.id}/confirm-account`}`);
-      } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-        router.push(`${`/dashboard`}`);
-        window.location.reload();
-      }
+      // if (user?.nextStep === "SETTING_PROFILE") {
+      //   router.push(`${`/register/${user?.id}/setting-profile`}`);
+      // } else if (user?.nextStep === "SETTING_INTEREST") {
+      //   router.push(`${`/register/${user?.id}/setting-interest`}`);
+      // } else if (user?.nextStep === "CONFIRM_EMAIL") {
+      //   await resendCodeAPI({ userId: user?.id });
+      //   router.push(`${`/register/${user?.id}/confirm-account`}`);
+      // } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
+      //   router.push(`${`/dashboard`}`);
+      //   window.location.reload();
+      // }
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         JSON.stringify(user?.accessToken)
       );
+      router.push(`${`/dashboard`}`);
+      window.location.reload();
       setHasErrors(false);
       setLoading(false);
     } catch (error: any) {
