@@ -31,7 +31,7 @@ type Props = {
 const schema = yup.object({
   title: yup.string().required(),
   whoCanSee: yup.string().required("Who can see this post"),
-  description: yup.string().min(10, "Minimum 10 symbols").required(),
+  description: yup.string().optional(),
   urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
     if (enableUrlMedia[0] === true)
       return yup.string().url().required("url is a required field");
@@ -137,6 +137,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
+      router.push(`/posts`)
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
