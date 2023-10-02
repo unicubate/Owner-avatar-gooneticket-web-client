@@ -21,6 +21,7 @@ import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
 import { LoadingFile } from "@/components/ui/loading-file";
 import ReactPlayer from "react-player";
+import { ImageGalleryShopList } from "@/components/shop/image-gallery-shop-list";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -54,18 +55,17 @@ const ShopView = () => {
     uploadType: "image",
   });
 
-  const dataTableImages =
-    isLoadingImages && isLoadingProduct ? (
-      <LoadingFile />
-    ) : isErrorProduct || isErrorImages ? (
-      <strong>Error find data please try again...</strong>
-    ) : (
-      <ListCarouselUpload
-        uploads={dataImages?.data}
-        folder="products"
-        preview={true}
-      />
-    );
+  const dataTableImages = isLoadingImages ? (
+    <LoadingFile />
+  ) : isErrorImages ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <ImageGalleryShopList
+      uploads={product?.uploadsImage}
+      folder="products"
+      preview={false}
+    />
+  );
 
   return (
     <>
@@ -162,7 +162,7 @@ const ShopView = () => {
                 <li>Quality control by JC</li>
               </ul>
 
-              <div className="mt-6 space-y-5">
+              {/* <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
                     <Button shape="default" size="large" loading={false}>
@@ -205,7 +205,7 @@ const ShopView = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center mt-6 space-x-4">
                 <ButtonInput

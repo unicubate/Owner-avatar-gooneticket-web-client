@@ -12,4 +12,5 @@ export type UploadModel = {
   status: string;
   url: string;
   productId: string;
+  path: string;
 };
