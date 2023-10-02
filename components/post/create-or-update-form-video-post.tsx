@@ -31,7 +31,7 @@ type Props = {
 const schema = yup.object({
   title: yup.string().required(),
   whoCanSee: yup.string().required("Who can see this post"),
-  description: yup.string().min(10, "Minimum 10 symbols").required(),
+  description: yup.string().optional(),
   urlMedia: yup.string().url().required(),
   membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
     if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
@@ -105,9 +105,6 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
         type: "VIDEO",
         postId: post?.id,
       });
-      if (!post?.id) {
-        push(`/posts`);
-      }
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
@@ -116,6 +113,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
         gravity: "top",
         position: "center",
       });
+      push(`/posts`)
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

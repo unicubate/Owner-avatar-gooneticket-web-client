@@ -29,16 +29,16 @@ export type NavbarProps = {
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
 const MONETIZE_ITEMS: NavbarProps[] = [
-  {
-    title: "Donations",
-    href: "/donations",
-    icon: <MdOutlineFavoriteBorder className={classIcon} />,
-  },
-  {
-    title: "Gift",
-    href: "/gifts",
-    icon: <BsGift className={classIcon} />,
-  },
+  // {
+  //   title: "Donations",
+  //   href: "/donations",
+  //   icon: <MdOutlineFavoriteBorder className={classIcon} />,
+  // },
+  // {
+  //   title: "Gift",
+  //   href: "/gifts",
+  //   icon: <BsGift className={classIcon} />,
+  // },
   {
     title: "Memberships",
     href: "/memberships",
@@ -57,11 +57,11 @@ const SUPPORT_ITEMS = [
   //   href: "/supporters",
   //   icon: <TbUsersGroup className={classIcon} />,
   // },
-  {
-    title: "Messages",
-    href: "/messages",
-    icon: <BiMessageRoundedDots className={classIcon} />,
-  },
+  // {
+  //   title: "Messages",
+  //   href: "/messages",
+  //   icon: <BiMessageRoundedDots className={classIcon} />,
+  // },
   {
     title: "Posts",
     href: "/posts",
@@ -90,11 +90,11 @@ const SETTINGS_ITEMS = [
     href: "/settings",
     icon: <BiCog className={classIcon} />,
   },
-  {
-    title: "Integrations",
-    href: "integrations",
-    icon: <BiCodeCurly className={classIcon} />,
-  },
+  // {
+  //   title: "Integrations",
+  //   href: "integrations",
+  //   icon: <BiCodeCurly className={classIcon} />,
+  // },
 ];
 
 interface Props {
