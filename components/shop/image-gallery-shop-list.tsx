@@ -99,25 +99,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
                 </div>
               </button>
 
-              <button type="button" className="flex-1">
-                <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-4.png"
-                    alt=""
-                  />
-                </div>
-              </button>
-
-              <button type="button" className="flex-1">
-                <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-5.png"
-                    alt=""
-                  />
-                </div>
-              </button> */}
+             */}
             </div>
           </div>
         </div>
