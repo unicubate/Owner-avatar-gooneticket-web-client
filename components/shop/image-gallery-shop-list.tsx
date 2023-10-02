@@ -98,7 +98,6 @@ const ImageGalleryShopList: React.FC<Props> = ({
                   />
                 </div>
               </button>
-
              */}
             </div>
           </div>
