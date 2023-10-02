@@ -38,7 +38,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
       <div className="lg:col-span-3 lg:row-end-1">
         <div className="lg:flex lg:items-start">
           <div className="lg:order-2 lg:ml-5">
-            <div className="overflow-hidden border-2 border-transparent rounded-lg">
+            <div className="overflow-hidden border-2 border-transparent rounded-sm">
               <Image
                 width={width}
                 height={height}
@@ -64,7 +64,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
                     key={index}
                     onClick={() => setSelectedImage(item?.path)}
                   >
-                    <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
+                    <div className="overflow-hidden border-2 border-transparent rounded-sm aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
                       <Image
                         width={width}
                         height={height}
