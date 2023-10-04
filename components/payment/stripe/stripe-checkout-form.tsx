@@ -9,8 +9,14 @@ import { useRouter } from "next/router";
 import { TextInput } from "@/components/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { generateLongUUID } from "@/utils/generate-random";
 
 const schema = yup.object({
+  fullName: yup
+    .string()
+    .min(3, "Minimum 3 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required("full name is a required field"),
   email: yup
     .string()
     .email("Wrong email format")
@@ -52,12 +58,10 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const [checkoutError, setCheckoutError] = useState();
   const [loading, setLoading] = useState<boolean>(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    false
   );
   const {
-    watch,
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<any>({
@@ -74,9 +78,10 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const onSubmit = async (payload: any) => {
     const { email, fullName } = payload;
     setLoading(true);
-    setHasErrors(true);
+    setHasErrors(false);
 
     try {
+      const newReference = generateLongUUID(30);
       const paymentMethodReq: any = await stripe.createPaymentMethod({
         type: "card",
         card: elements.getElement("card"),
@@ -93,15 +98,15 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         return;
       }
 
-      const { data: response } = await CreateOnPaymentPI({
-        data: { ...data, paymentMethod },
+      await CreateOnPaymentPI({
+        data: { ...data, reference: newReference, paymentMethod },
         paymentModel,
       });
 
       setHasErrors(false);
       setLoading(false);
 
-      push(`/transactions/success?token=${response?.token}`);
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -117,6 +122,18 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {hasErrors ? (
+        <div className="rounded-lg bg-red-600">
+          <div className="p-3">
+            <div className="flex items-start justify-between md:items-center">
+              <div className="flex-1 md:flex md:items-center md:justify-between">
+                <p className="text-sm font-medium text-white">{hasErrors}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       <div className="mt-2">
         <TextInput
           label="Full name"

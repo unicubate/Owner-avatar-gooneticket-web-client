@@ -11,13 +11,17 @@ import { BiCog, BiDotsHorizontal } from "react-icons/bi";
 import Link from "next/link";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
+import { truncateInput } from "@/utils/utils";
+import { ReadMore } from "@/utils/read-more";
+import Transactions from "../memberships/transactions";
+import { RecentTransactions } from "@/components/transaction/recent-transactions";
 
 const Dashboard = () => {
   const user = useAuth() as any;
   const router = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
 
-  console.log('user ========>', user)
+  console.log("user ========>", user);
 
   return (
     <>
@@ -34,16 +38,19 @@ const Dashboard = () => {
                           size={60}
                           className="object-cover w-10 h-10 rounded-full"
                           src="https://picsum.photos/seed/6JySCJv/640/480"
-                          alt={`${user?.profile?.firstName ?? ''} ${user?.profile?.lastName ?? ''}`}
+                          alt={`${user?.profile?.firstName ?? ""} ${
+                            user?.profile?.lastName ?? ""
+                          }`}
                         />
                       </div>
 
                       <div className="ml-4 cursor-pointer">
                         <p className="text-xl font-bold text-gray-900">
-                          {user?.profile?.firstName ?? ''} {user?.profile?.lastName ?? ''}
+                          {user?.profile?.firstName ?? ""}{" "}
+                          {user?.profile?.lastName ?? ""}
                         </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ''}
+                        <p className="mt-1 text-sm font-medium text-gray-600">
+                          {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ""}
                         </p>
                       </div>
 
@@ -65,21 +72,27 @@ const Dashboard = () => {
 
                     <div className="flex items-center mt-3">
                       <Link href="/settings/subscribes">
-                        <span className="text-lg font-bold">{user?.totalSubscribe ?? 0}</span>
+                        <span className="text-lg font-bold">
+                          {user?.totalSubscribe ?? 0}
+                        </span>
                         <span className="ml-2 font-normal text-sm">
                           Subscribes
                         </span>
                       </Link>
 
                       <Link href="/settings/followers">
-                        <span className="ml-4 text-lg font-bold">{user?.totalFollower ?? 0}</span>
+                        <span className="ml-4 text-lg font-bold">
+                          {user?.totalFollower ?? 0}
+                        </span>
                         <span className="ml-2 font-normal text-sm">
                           Followers
                         </span>
                       </Link>
 
                       <Link href="/settings/followings">
-                        <span className="ml-4 text-lg font-bold">{user?.totalFollowing ?? 0}</span>
+                        <span className="ml-4 text-lg font-bold">
+                          {user?.totalFollowing ?? 0}
+                        </span>
                         <span className="ml-2 font-normal text-sm">
                           Following
                         </span>
@@ -87,10 +100,16 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center mt-3">
-                      <p className="text-3xl font-bold">{formatePrice({
-                        value: Number(Number(user?.wallet?.amount ?? 0) * Number(user?.profile?.currency?.amount ?? 0)),
-                        isDivide: false,
-                      }) ?? ""} {user?.profile?.currency?.code ?? 0}</p>
+                      <p className="text-3xl font-bold">
+                        {formatePrice({
+                          value: Number(
+                            Number(user?.wallet?.amount ?? 0) *
+                              Number(user?.profile?.currency?.amount ?? 0)
+                          ),
+                          isDivide: true,
+                        }) ?? ""}{" "}
+                        {user?.profile?.currency?.code ?? 0}
+                      </p>
                     </div>
                   </div>
 
@@ -124,7 +143,7 @@ const Dashboard = () => {
                         </p>
                         <div className="flex items-center justify-between mt-3">
                           <p className="text-xl font-bold text-gray-900">
-                            1.780,00 $
+                            1.780,00 EUR
                           </p>
                         </div>
                       </div>
@@ -137,7 +156,7 @@ const Dashboard = () => {
                         </p>
                         <div className="flex items-center justify-between mt-3">
                           <p className="text-xl font-bold text-gray-900">
-                            23.780,00 $
+                            23.780,00 EUR
                           </p>
                         </div>
                       </div>
@@ -150,7 +169,7 @@ const Dashboard = () => {
                         </p>
                         <div className="flex items-center justify-between mt-3">
                           <p className="text-xl font-bold text-gray-900">
-                            234.780,00 $
+                            234.780,00 EUR
                           </p>
                         </div>
                       </div>
@@ -163,107 +182,17 @@ const Dashboard = () => {
                         </p>
                         <div className="flex items-center justify-between mt-3">
                           <p className="text-xl font-bold text-gray-900">
-                            102.780,00 $
+                            102.780,00 EUR
                           </p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="mt-4 px-4 py-4 overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="flex items-center">
-                      <p className="text-lg font-bold">Recent transactions</p>
-                    </div>
-
-                    <div className="divide-y divide-gray-200">
-                      {donationsArrays.length > 0 ? (
-                        <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
-                          <tbody className="divide-y divide-gray-200">
-                            {donationsArrays.map((item: any, index) => (
-                              <tr key={index}>
-                                <td className="py-4 text-sm font-bold text-gray-900">
-                                  <div className="flex items-center flex-1 min-w-0">
-                                    <Avatar
-                                      size={50}
-                                      src={item?.image}
-                                      alt=""
-                                    />
-                                    <div className="flex-1 min-w-0 ml-4">
-                                      <p className="text-sm font-bold text-gray-900">
-                                        {item?.name}
-                                      </p>
-                                      <p className="mt-1 text-sm font-medium text-gray-500 truncate">
-                                        {item?.email}
-                                      </p>
-                                      <p className="lg:hidden mt-1 text-sm font-medium text-gray-500 truncate">
-                                        {item?.createdAt}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  {/* <div className="inline-flex items-center">
-                                    {donation?.title}
-                                  </div>
-                                  <div className="space-y-1 pt-2">
-                                    <p className="text-sm font-medium text-gray-500">
-                                      temgoua2013@gmail.com
-                                    </p>
-                                  </div> */}
-                                </td>
-
-                                {/* <td className="py-4 text-sm font-bold text-right text-gray-900 lg:table-cell">
-                                  {item?.amount}&nbsp;€ 
-                                </td>
-
-                                <td className="py-8 text-sm font-medium text-right text-gray-900 lg:table-cell">
-                                  18 sept. 2023
-                                </td> */}
-
-                                <td className="hidden text-sm text-right font-bold text-gray-900 lg:table-cell">
-                                  {formatePrice({
-                                    value: item?.amount || 0,
-                                    isDivide: false,
-                                  })}
-                                  &nbsp;Fcfa
-                                </td>
-
-                                <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
-                                  {item?.createdAt}
-                                </td>
-
-                                <td className="py-4 text-sm font-medium text-right text-gray-400">
-                                  <Button
-                                    type="text"
-                                    shape="circle"
-                                    icon={
-                                      <BiDotsHorizontal className="w-5 h-5" />
-                                    }
-                                    size="small"
-                                  />
-                                  <div className="mt-1 lg:hidden pt-1">
-                                    <p className="inline-flex text-sm font-bold text-gray-900">
-                                      {item?.amount}&nbsp;Fcfa
-                                    </p>
-                                    {/* <div className="inline-flex items-center justify-end mt-1">
-                                      07 January, 2022
-                                    </div> */}
-                                  </div>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      ) : (
-                        <EmptyData
-                          title="Add your first donation to get started"
-                          description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
-                        />
-                      )}
-                    </div>
-                  </div>
+                  {user?.id ? <RecentTransactions userId={user?.profile?.userId} /> : null}
 
                   <div className="py-4 mt-4 bg-white sm:py-4 lg:py-10">
                     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-
                       <div className="grid grid-cols-1 mt-6 text-center border border-gray-200 sm:grid-cols-2 lg:grid-cols-4">
                         <div className="relative transition-all duration-300 bg-white hover:shadow-xl hover:z-10">
                           <div className="px-4 py-8">
@@ -377,7 +306,6 @@ const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>

@@ -112,7 +112,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                   <span className="text-lg font-normal">
                     <BiMoney />
                   </span>
-                  <span className="ml-2 font-normal text-sm">
+                  <span className="ml-2 text-sm font-bold">
                     {formatePrice({ value: Number(item?.price), isDivide: false })} {item?.currency?.symbol}
                   </span>
                 </>

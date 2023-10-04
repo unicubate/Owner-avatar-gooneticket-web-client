@@ -4,6 +4,7 @@ import { CreateOnPaymentPI } from "@/api-site/payment";
 import { PaymentModel } from "../../api-site/payment";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";
+import { generateLongUUID } from "@/utils/generate-random";
 
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
@@ -12,20 +13,24 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
   const handleApprove = async (order: any) => {
+    const newReference = generateLongUUID(30);
     const amountPalpal = order?.purchase_units[0]?.amount;
-    setHasErrors(undefined);
-    const data = {
+    setHasErrors(false);
+    const payload = {
+      membershipId,
+      userId,
+      reference: newReference,
       amount: { value: Number(amountPalpal?.value), month: amount?.month },
       currency: amountPalpal?.currency_code,
     };
 
     try {
-      const { data: response } = await CreateOnPaymentPI({
-        data: { ...data },
+      await CreateOnPaymentPI({
+        data: payload,
         paymentModel,
       });
-      
-      push(`/transactions/success?token=${response?.token}`);
+
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -55,14 +60,17 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
   return (
     <>
       <div className="mt-4">
-        {hasErrors && (
-          <div className="text-center alert alert-danger">
-            <div className="d-flex flex-column">
-              <h4 className="mb-1 text-danger">Error</h4>
-              <span>{hasErrors}</span>
+        {hasErrors ? (
+          <div className="rounded-lg bg-red-600">
+            <div className="p-3">
+              <div className="flex items-start justify-between md:items-center">
+                <div className="flex-1 md:flex md:items-center md:justify-between">
+                  <p className="text-sm font-medium text-white">{hasErrors}</p>
+                </div>
+              </div>
             </div>
           </div>
-        )}
+        ) : null}
         <PayPalScriptProvider
           options={{
             clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,

@@ -3,7 +3,11 @@ import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
-import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formatePrice,
+} from "@/utils";
 import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
@@ -24,8 +28,8 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOneMembershipAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -112,13 +116,14 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
                   <button className="text-lg font-normal">
                     <BiMoney />
                   </button>
-                  <span className="ml-1.5 font-normal text-sm">
+                  <span className="ml-1.5 text-sm font-bold">
                     {formatePrice({
                       value: Number(item?.pricePerMonthly),
                       isDivide: false,
-                    })} {item?.currency?.symbol}
+                    })}{" "}
+                    {item?.currency?.symbol}
                   </span>
-                  <span className="ml-1.5 font-normal text-sm">per month</span>
+                  <span className="ml-1.5 font-bold text-sm">per month</span>
                 </>
               ) : null}
 
@@ -127,13 +132,14 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
                   <button className="ml-1.5 text-lg font-normal">
                     <BiMoney />
                   </button>
-                  <span className="ml-1.5 font-normal text-sm">
+                  <span className="ml-1.5 font-bold text-sm">
                     {formatePrice({
                       value: Number(item?.pricePerYearly),
                       isDivide: false,
-                    })} {item?.currency?.symbol}
+                    })}{" "}
+                    {item?.currency?.symbol}
                   </span>
-                  <span className="ml-1.5 font-normal text-sm">per year</span>
+                  <span className="ml-1.5 font-bold text-sm">per year</span>
                 </>
               ) : null}
             </div>

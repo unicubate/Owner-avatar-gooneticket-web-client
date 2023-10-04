@@ -133,6 +133,13 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/users/profile/show/:profileId`,
     method: GET,
   },
+
+  /****************** Transaction route */
+  getTransactions: {
+    endpoint: `${baseUrl}/transactions`,
+    method: GET,
+  },
+
   /****************** Currency or Countries route */
   getAllCurrencies: {
     endpoint: `${baseUrl}/currencies`,

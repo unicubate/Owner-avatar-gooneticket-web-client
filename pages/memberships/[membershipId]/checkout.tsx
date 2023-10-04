@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 import { GetOneMembershipAPI } from "@/api-site/membership";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { GetAllCountiesAPI } from "@/api-site/profile";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateSubscribePayPal } from "@/components/payment/create-subscribe-paypal";
@@ -13,18 +12,6 @@ import { useAuth } from "@/components/util/context-user";
 import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscribe-stripe";
 import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
-import { TextInput } from "@/components/ui/text-input";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
-    .required(),
-});
 
 
 const CheckoutView = () => {
@@ -32,23 +19,13 @@ const CheckoutView = () => {
   const { userStorage } = useAuth() as any;
   const { query } = useRouter();
   const membershipId = String(query?.membershipId);
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    false
-  );
   const {
     watch,
     control,
     register,
     formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+  } = useForm();
   const watchAmount = watch("amount", "");
-  const watchEmail = watch("email", "");
-  const watchFullName = watch("fullName", "");
-  const { data: countries } = GetAllCountiesAPI();
   const { status, data: item } = GetOneMembershipAPI({
     membershipId,
   });
