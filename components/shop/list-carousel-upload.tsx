@@ -7,6 +7,12 @@ import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { Carousel as ResponsiveCarousel } from "react-responsive-carousel";
 import ContentLoader from "react-content-loader";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/pagination";
+// import required modules
+import { Pagination } from "swiper/modules";
 
 type Props = {
   uploads: UploadModel[];
@@ -22,7 +28,7 @@ type Props = {
 const contentStyle: React.CSSProperties = {
   lineHeight: "50px",
   textAlign: "center",
-  background: "#364d79",
+  // background: "#364d79",
 };
 
 const ListCarouselUpload: React.FC<Props> = ({
@@ -39,7 +45,41 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      <Carousel
+      <Swiper
+        // pagination={true}
+        // modules={[Pagination]}
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={true}
+        history={{
+          key: "slide",
+        }}
+        pagination={{ clickable: true }}
+        modules={[Pagination]}
+        style={contentStyle}
+      >
+        {/* <SwiperSlide>Slide 1</SwiperSlide> */}
+        {uploads &&
+          uploads?.length > 0 &&
+          uploads?.map((item: any, index: number) => (
+            <SwiperSlide key={index}>
+              <Image
+                loading="lazy"
+                width={width}
+                height={height}
+                className={className}
+                preview={preview}
+                style={contentStyle}
+                src={`${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: item?.path,
+                })}`}
+                alt={alt}
+              />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+      {/* <Carousel
         autoplay={autoplay}
         dots={true}
         effect={"fade"}
@@ -67,7 +107,7 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </Fragment>
           ))}
-      </Carousel>
+      </Carousel> */}
     </>
   );
 };
