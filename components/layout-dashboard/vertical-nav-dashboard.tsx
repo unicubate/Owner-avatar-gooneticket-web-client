@@ -44,6 +44,16 @@ const MONETIZE_ITEMS: NavbarProps[] = [
     href: "/memberships",
     icon: <BiLockOpen className={classIcon} />,
   },
+  {
+    title: "Commissions",
+    href: "/commissions",
+    icon: <RiShakeHandsLine className={classIcon} />,
+  },
+  {
+    title: "Shop",
+    href: "/shop",
+    icon: <BsShop className={classIcon} />,
+  },
 ];
 
 const SUPPORT_ITEMS = [
@@ -75,16 +85,6 @@ const SUPPORT_ITEMS = [
 ];
 
 const SETTINGS_ITEMS = [
-  {
-    title: "Shop",
-    href: "/shop",
-    icon: <BsShop className={classIcon} />,
-  },
-  {
-    title: "Commissions",
-    href: "/commissions",
-    icon: <RiShakeHandsLine className={classIcon} />,
-  },
   {
     title: "Settings",
     href: "/settings",
