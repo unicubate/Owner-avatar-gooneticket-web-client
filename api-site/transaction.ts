@@ -21,6 +21,7 @@ export const getTransactionsAPI = async (
   payload: {
     userReceiveId: string;
     status?: string;
+    model?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseTransactionModel }> => {
   return await makeApiCall({
@@ -30,18 +31,20 @@ export const getTransactionsAPI = async (
 };
 
 export const GetInfiniteTransactionsAPI = (payload: {
+  model?: string,
   userReceiveId: string;
   take: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userReceiveId, take, sort, status, queryKey } = payload;
+  const { model,userReceiveId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getTransactionsAPI({
+        model,
         userReceiveId,
         take,
         sort,

@@ -8,9 +8,10 @@ import { ListTransactions } from "./list-transactions";
 
 type Props = {
   userId: string;
+  model?: string
 };
 
-const RecentTransactions: React.FC<Props> = ({ userId }) => {
+const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -21,6 +22,7 @@ const RecentTransactions: React.FC<Props> = ({ userId }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
+    model: model?.toLocaleUpperCase(),
     userReceiveId: userId,
     take: 10,
     sort: "DESC",

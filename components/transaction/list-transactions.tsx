@@ -34,12 +34,17 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
         </td>
+        
         <td className="hidden text-sm text-right font-bold text-gray-900 lg:table-cell">
           {formatePrice({
             value: Number(item?.amount ?? 0),
             isDivide: true,
           })}
           &nbsp;{item?.currency}
+        </td>
+
+        <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
+          {item?.description ?? ""}
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">

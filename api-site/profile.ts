@@ -101,7 +101,7 @@ export const getOneProfileAPI = async (payload: {
 
 
 export const GetAllCurrenciesAPI = (search?: string) => {
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["currencies"],
     queryFn: async () =>
       await makeApiCall({
@@ -111,6 +111,8 @@ export const GetAllCurrenciesAPI = (search?: string) => {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as any, isError, isLoading, status };
 };
 
 export const GetAllCountiesAPI = (search?: string) => {

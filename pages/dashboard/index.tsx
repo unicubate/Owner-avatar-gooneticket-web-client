@@ -21,8 +21,6 @@ const Dashboard = () => {
   const router = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
 
-  console.log("user ========>", user);
-
   return (
     <>
       <LayoutDashboard title={"Dashboard"}>

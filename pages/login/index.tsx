@@ -49,24 +49,22 @@ const Login = () => {
     try {
       const { data: user } = await loginUserAPI({ email, password });
       // if (user?.nextStep === "SETTING_PROFILE") {
-      //   router.push(`${`/register/${user?.id}/setting-profile`}`);
+      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
       // } else if (user?.nextStep === "SETTING_INTEREST") {
-      //   router.push(`${`/register/${user?.id}/setting-interest`}`);
+      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-interest`;
       // } else if (user?.nextStep === "CONFIRM_EMAIL") {
       //   await resendCodeAPI({ userId: user?.id });
-      //   router.push(`${`/register/${user?.id}/confirm-account`}`);
+      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/confirm-account`;
       // } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-      //   router.push(`${`/dashboard`}`);
-      //   window.location.reload();
+      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
       // }
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         JSON.stringify(user?.accessToken)
       );
-      router.push(`${`/dashboard`}`);
       setHasErrors(false);
       setLoading(false);
-      window.location.reload();
+      window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

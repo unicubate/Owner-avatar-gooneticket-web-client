@@ -3,11 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import {
-  DateInput,
-  TextAreaInput,
-  TextInput,
-} from "@/components/ui";
+import { DateInput, TextAreaInput, TextInput } from "@/components/ui";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PrivateComponent } from "@/components/util/private-component";
@@ -23,15 +19,15 @@ import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
-  // username: yup
-  //   .string()
-  //   .trim("The username name cannot include leading and trailing spaces")
-  //   .strict(true)
-  //   .min(1, "The username name needs to be at least 1 char")
-  //   .max(512, "The username name cannot exceed 512 char")
-  //   .required(),
+  username: yup
+    .string()
+    .trim("The username name cannot include leading and trailing spaces")
+    .strict(true)
+    .min(1, "The username name needs to be at least 1 char")
+    .max(512, "The username name cannot exceed 512 char")
+    .required(),
   url: yup.string().url().optional(),
-  birthday: yup.date().required(),
+  birthday: yup.date().max(new Date()).required(),
   currencyId: yup.string().uuid().required(),
   countryId: yup.string().uuid().required(),
 });
@@ -55,19 +51,13 @@ const SettingProfile = () => {
     mode: "onChange",
   });
 
-  const { data: dataCurrencies } = GetAllCurrenciesAPI();
-  const currencies: any = dataCurrencies?.data;
-
-  const { data: dataCountries } = GetAllCountiesAPI();
-  const countries: any = dataCountries?.data;
-
-  const { data } = GetOneUserPublicAPI({ userId })
-  const user: any = data?.data;
+  const { data: currencies } = GetAllCurrenciesAPI();
+  const { data: countries } = GetAllCountiesAPI();
+  const { data: user } = GetOneUserPublicAPI({ userId });
 
   if (user?.nextStep === "CONFIRM_EMAIL") {
-    router.push(`${`/register/${userId}/confirm-account`}`);
+    window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/confirm-account`;
   }
-
 
   useEffect(() => {
     if (user) {
@@ -138,20 +128,17 @@ const SettingProfile = () => {
             </div>
           )}
 
-          {user?.username ? (
-            <div className="mb-4">
-              <TextInput
-                control={control}
-                label="What do you want your link to be"
-                type="text"
-                name="username"
-                placeholder="username"
-                errors={errors}
-                prefix={"unpot.com/"}
-              />
-            </div>
-          ) : null}
-
+          <div className="mb-4">
+            <TextInput
+              control={control}
+              label="What do you want your link to be"
+              type="text"
+              name="username"
+              placeholder="username"
+              errors={errors}
+              prefix={"unpot.com/"}
+            />
+          </div>
           <div className="mb-4">
             <SelectSearchInput
               firstOptionName="Currency"
@@ -211,8 +198,13 @@ const SettingProfile = () => {
           </div>
 
           <div className="mt-6">
-
-            <ButtonInput shape="default" type="submit" size="large" loading={loading} color={'indigo'}>
+            <ButtonInput
+              shape="default"
+              type="submit"
+              size="large"
+              loading={loading}
+              color={"indigo"}
+            >
               Continue
             </ButtonInput>
           </div>

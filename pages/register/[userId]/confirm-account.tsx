@@ -49,11 +49,11 @@ const ConfirmAccount = () => {
   });
 
   if (user?.nextStep === "SETTING_PROFILE") {
-    router.push(`${`/register/${userId}/setting-profile`}`);
+    window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
   } else if (user?.nextStep === "SETTING_INTEREST") {
-    router.push(`${`/register/${userId}/setting-interest`}`);
+    window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-interest`;
   } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-    router.push(`${`/${user?.username}`}`);
+    window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
   }
 
   const saveMutation = ValidCodeAPI({
@@ -154,7 +154,13 @@ const ConfirmAccount = () => {
           </div>
 
           <div className="mt-6">
-            <ButtonInput shape="default" type="submit" size="large" loading={loading} color={'indigo'}>
+            <ButtonInput
+              shape="default"
+              type="submit"
+              size="large"
+              loading={loading}
+              color={"indigo"}
+            >
               Continue
             </ButtonInput>
           </div>

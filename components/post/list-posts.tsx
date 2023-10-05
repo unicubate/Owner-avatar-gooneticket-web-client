@@ -50,7 +50,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
         try {
           await saveMutation.mutateAsync({ postId: item?.id });
           AlertSuccessNotification({
-            text: "Image deleted successfully",
+            text: "Post deleted successfully",
             className: "info",
             gravity: "top",
             position: "center",
