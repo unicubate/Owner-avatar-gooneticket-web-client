@@ -107,7 +107,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 uploads={item?.uploadsImage}
                 folder="posts"
                 preview={false}
-                height={500}
+                height={400}
                 className={`object-cover ${
                   item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
