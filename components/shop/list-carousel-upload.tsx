@@ -45,9 +45,31 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      <Swiper
-        // pagination={true}
-        // modules={[Pagination]}
+      <ResponsiveCarousel
+        // autoFocus={true}
+        showArrows={true}
+        autoPlay={false}
+        showIndicators={true}
+      >
+        {uploads &&
+          uploads.map((item: any, index: number) => (
+            <div key={index}>
+              <Image
+                width={width}
+                height={height}
+                className={className}
+                preview={preview}
+                style={contentStyle}
+                src={`${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: item?.path,
+                })}`}
+                alt={alt}
+              />
+            </div>
+          ))}
+      </ResponsiveCarousel>
+      {/* <Swiper
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
@@ -58,7 +80,6 @@ const ListCarouselUpload: React.FC<Props> = ({
         modules={[Pagination]}
         style={contentStyle}
       >
-        {/* <SwiperSlide>Slide 1</SwiperSlide> */}
         {uploads &&
           uploads?.length > 0 &&
           uploads?.map((item: any, index: number) => (
@@ -78,7 +99,7 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </SwiperSlide>
           ))}
-      </Swiper>
+      </Swiper> */}
       {/* <Carousel
         autoplay={autoplay}
         dots={true}

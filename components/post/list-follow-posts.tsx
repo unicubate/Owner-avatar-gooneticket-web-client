@@ -107,16 +107,17 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 uploads={item?.uploadsImage}
                 folder="posts"
                 preview={false}
-                height="100%"
-                className={`${item?.whoCanSee === "MEMBERSHIP" &&
+                height={500}
+                className={`object-cover ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-3xl"
-                  : ""
-                  }`}
+                    ? "blur-3xl"
+                    : ""
+                }`}
               />
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white">
                     <button className="font-bold">
@@ -143,10 +144,15 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) &&
-            item?.uploadsFile?.length > 0 ? (
+          {item?.whoCanSee &&
+          ["AUDIO"].includes(item?.type as PostType) &&
+          item?.uploadsFile?.length > 0 ? (
             <div className="mt-2 text-center justify-center mx-auto">
-              <AudioPlayerInput uploads={item?.uploadsFile} folder="posts" post={item} />
+              <AudioPlayerInput
+                uploads={item?.uploadsFile}
+                folder="posts"
+                post={item}
+              />
             </div>
           ) : null}
 
@@ -182,8 +188,9 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-5 h-5" />
@@ -192,7 +199,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             ) : null}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
+            item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-lg font-bold">
                   <HiOutlineLockClosed />
