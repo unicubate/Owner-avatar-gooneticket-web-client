@@ -100,13 +100,13 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
                   onClick={() => editItem(item)}
                   className="ml-3.5 font-bold"
                 >
-                  <MdOutlineModeEdit />
+                  <MdOutlineModeEdit className="w-5 h-5" />
                 </button>
                 <button
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 font-bold"
                 >
-                  <MdDeleteOutline />
+                  <MdDeleteOutline className="w-5 h-5" />
                 </button>
               </>
             ) : null}

@@ -94,7 +94,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 shape="square"
                 src={viewOneFileUploadAPI({
                   folder: "posts",
-                  fileName: String(uploads?.data[0]?.path),
+                  fileName: String(uploads?.[0]?.path),
                 })}
                 alt={item?.title}
               />
@@ -188,7 +188,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           post={item}
           openModal={openModal}
           setOpenModal={setOpenModal}
-          uploadImages={uploads.data}
+          uploadImages={uploads}
         />
       )}
     </>

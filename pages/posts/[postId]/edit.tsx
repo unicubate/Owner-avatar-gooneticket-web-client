@@ -8,6 +8,7 @@ import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-
 import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { GetUploadsAPI } from '../../../api-site/upload';
 
 const PostsCreate = () => {
   const { userStorage } = useAuth() as any;
@@ -25,46 +26,69 @@ const PostsCreate = () => {
     type: String(type),
   });
 
-  const dataTablePost = isLoadingPost ? (
-      <LoadingFile />
-    ) : isErrorPost ? (
-      <strong>Error find data please try again...</strong>
-    ) : (
-      <>
-        {post?.id && type === "gallery" ? (
-          <CreateOrUpdateFormGalleryPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId} />
-        ) : null}
 
-        {post?.id && type === "article" ? (
-          <CreateOrUpdateFormPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId}
-          />
-        ) : null}
+  const {
+    isError: isErrorImages,
+    isLoading: isLoadingImages,
+    data: dataImages
+  } = GetUploadsAPI({
+    userId: userStorage?.userId,
+    model: "POST",
+    uploadableId: postId,
+    uploadType: "image",
+  });
 
-        {post?.id && type === "audio" ? (
-          <CreateOrUpdateFormAudioPost
-            post={post}
-            postId={postId}
-            uploadFiles={post?.uploadsFile}
-            uploadImages={post?.uploadsImage}
-          />
-        ) : null}
+  const {
+    isError: isErrorFiles,
+    isLoading: isLoadingFiles,
+    data: uploadsFiles
+  } = GetUploadsAPI({
+    userId: userStorage?.userId,
+    model: "POST",
+    uploadableId: postId,
+    uploadType: "file",
+  });
 
-        {post?.id && type === "video" ? (
-          <CreateOrUpdateFormVideoPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId}
-          />
-        ) : null}
-      </>
-    );
+  const dataTablePost = isLoadingPost || isLoadingImages || isLoadingFiles ? (
+    <LoadingFile />
+  ) : isErrorPost || isErrorImages || isErrorFiles ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <>
+      {post?.id && type === "gallery" ? (
+        <CreateOrUpdateFormGalleryPost
+          uploadImages={dataImages}
+          post={post} postId={postId} />
+      ) : null}
+
+      {post?.id && type === "article" ? (
+        <CreateOrUpdateFormPost
+          uploadImages={dataImages}
+          post={post} postId={postId}
+        />
+      ) : null}
+
+      {post?.id && type === "audio" ? (
+        <CreateOrUpdateFormAudioPost
+          post={post}
+          postId={postId}
+          uploadFiles={uploadsFiles}
+          uploadImages={dataImages}
+        />
+      ) : null}
+
+      {post?.id && type === "video" ? (
+        <CreateOrUpdateFormVideoPost
+          uploadImages={dataImages}
+          post={post} postId={postId}
+        />
+      ) : null}
+    </>
+  );
 
   return (
     <>
-      <LayoutDashboard title={`${post?.title ?? ""}`}>
+      <LayoutDashboard title={`${post?.title || "Post"}`}>
         <div className="flex-1 bg-gray-100">
           <main>
             <div className="max-w-4xl mx-auto py-6">

@@ -29,7 +29,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
           title={item?.title}
           href={void 0}
           onClick={() => setOpenModal(true)}
-          className="block overflow-hidden aspect-w-16 aspect-h-9 rounded-xl"
+          className="block overflow-hidden aspect-w-16 aspect-h-9"
         >
           {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
             <ListCarouselUpload
@@ -71,16 +71,16 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
         </a>
 
-        <div className="flex flex-col flex-1">
+        {/* <div className="flex flex-col flex-1">
           <p className="mt-2 text-base font-bold text-gray-600">
             <ReadMore html={String(item?.title ?? "")} value={45} />{" "}
           </p>
-        </div>
+        </div> */}
 
-        <div className="flex mt-2 items-center text-gray-500">
+        <div className="flex items-center text-gray-500">
           <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-          <button className="ml-3.5 text-lg font-bold">
+          <button className="ml-3.5 text-2xl font-bold">
             <BiComment />
           </button>
           <span className="ml-1.5 font-normal text-sm">
@@ -89,15 +89,12 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
           <span className="ml-auto text-sm font-normal">
             {formateDMYHH(item?.createdAt as Date)}
           </span>
-          {/* <button className="ml-1.5 text-lg font-bold">
-            <PiLockKey />
-          </button> */}
           {item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1 ? (
-            <button title="Locked" className="ml-1.5 text-lg font-bold">
+            <button title="Locked" className="ml-1.5 text-2xl font-bold">
               <HiOutlineLockClosed />
             </button>
           ) : (
-            <button title="Unlocked" className="ml-1.5 text-lg font-bold">
+            <button title="Unlocked" className="ml-1.5 text-2xl font-bold">
               <HiOutlineLockOpen />
             </button>
           )}
@@ -108,7 +105,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
         <ShowModalGallery
           openModal={openModal}
           setOpenModal={setOpenModal}
-          item={item}
+          post={item}
           commentTake={commentTake}
         />
       ) : null}

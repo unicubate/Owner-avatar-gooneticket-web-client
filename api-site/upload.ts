@@ -18,7 +18,7 @@ export const GetUploadsAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data, isError, isLoading, status };
+  return { data: data?.data, isError, isLoading, status };
 };
 
 export const viewOneFileUploadAPI = ({

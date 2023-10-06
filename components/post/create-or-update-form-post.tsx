@@ -130,6 +130,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
+      router.push(`/posts`)
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

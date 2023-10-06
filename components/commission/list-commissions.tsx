@@ -82,7 +82,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               shape="square"
               src={viewOneFileUploadAPI({
                 folder: "commissions",
-                fileName: String(dataImages?.data[0]?.path),
+                fileName: String(dataImages?.[0]?.path),
               })}
               alt={item?.title}
             />

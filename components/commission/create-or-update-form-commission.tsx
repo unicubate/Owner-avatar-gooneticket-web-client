@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Select, Upload, UploadFile, UploadProps } from "antd";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { ButtonInput } from "../ui/button-input";
 import {

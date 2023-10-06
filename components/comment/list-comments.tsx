@@ -23,7 +23,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
   });
 
   const dataTableComments = isLoadingComments ? (
-    <Skeleton loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
+    <Skeleton className="py-4" loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
   ) : isErrorComments ? (
     <strong>Error find data please try again...</strong>
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (

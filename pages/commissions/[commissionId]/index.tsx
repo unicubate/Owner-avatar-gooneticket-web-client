@@ -11,14 +11,6 @@ import { HtmlParser } from "@/utils/html-parser";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
 
-const contentStyle: React.CSSProperties = {
-  height: "100%",
-  width: "100%",
-  lineHeight: "50px",
-  textAlign: "center",
-  background: "#364d79",
-};
-
 const ShopView = () => {
   const router = useRouter();
   const { query } = useRouter();
@@ -56,7 +48,7 @@ const ShopView = () => {
       <strong>Error find data please try again...</strong>
     ) : (
       <ListCarouselUpload
-        uploads={dataImages?.data}
+        uploads={dataImages}
         preview={false}
         folder="products"
       />

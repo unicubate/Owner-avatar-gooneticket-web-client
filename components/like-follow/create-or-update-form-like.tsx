@@ -41,10 +41,10 @@ const CreateOrUpdateFormLike: React.FC<{
   return (
     <>
       {item?.isLike && isLike || like ?
-        <button onClick={() => { likeItem(item), setLike(false) }} className="text-lg text-indigo-600">
+        <button onClick={() => { likeItem(item), setLike(false) }} className="text-2xl text-indigo-600">
           <MdOutlineFavorite />
         </button> :
-        <button onClick={() => { likeItem(item), setLike(true) }} className="text-lg">
+        <button onClick={() => { likeItem(item), setLike(true) }} className="text-2xl">
           <MdFavoriteBorder />
         </button>
       }

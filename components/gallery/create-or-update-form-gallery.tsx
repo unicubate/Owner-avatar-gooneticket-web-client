@@ -179,9 +179,9 @@ const CreateOrUpdateFormGallery: React.FC<Props> = ({ uploadImages, post }) => {
                       fileList={imageList}
                       onChange={handleImageChange}
                       accept=".png,.jpg,.jpeg"
-                      maxCount={10}
+                      maxCount={1}
                     >
-                      {imageList.length >= 10 ? null : (
+                      {imageList.length >= 1 ? null : (
                         <div>
                           <PlusOutlined />
                           <div style={{ marginTop: 8 }}>Upload cover</div>

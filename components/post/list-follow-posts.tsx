@@ -178,7 +178,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           <div className="flex mt-2 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-2 text-lg font-bold">
+            <button className="ml-2 text-2xl font-bold">
               <BiComment />
             </button>
             <span className="ml-2 font-normal text-sm">
@@ -193,7 +193,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                   }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
-                  <MdOutlineModeEdit className="w-5 h-5" />
+                  <MdOutlineModeEdit className="w-6 h-6" />
                 </Link>
               </>
             ) : null}
@@ -201,14 +201,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             {item?.whoCanSee === "MEMBERSHIP" &&
             item?.isValidSubscribe !== 1 ? (
               <>
-                <button className="ml-auto text-lg font-bold">
+                <button className="ml-auto text-2xl font-bold">
                   <HiOutlineLockClosed />
                 </button>
                 <span className="ml-2 text-sm font-normal">Locked</span>
               </>
             ) : (
               <>
-                <button className="ml-auto text-lg font-bold">
+                <button className="ml-auto text-2xl font-bold">
                   <HiOutlineLockOpen />
                 </button>
                 <span className="ml-2 text-sm font-normal">Unlocked</span>

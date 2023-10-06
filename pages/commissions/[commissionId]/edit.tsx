@@ -42,13 +42,13 @@ const ShopEdit = () => {
     ) : (
       <CreateOrUpdateFormCommission
         commission={commission}
-        uploadImages={dataImageUploads?.data}
+        uploadImages={dataImageUploads}
       />
     );
 
   return (
     <>
-      <LayoutDashboard title={`${commission?.title ?? ""}`}>
+      <LayoutDashboard title={`${commission?.title || "Commission"}`}>
         <div className="flex-1 bg-gray-100">
           <main>
             <div className="max-w-4xl mx-auto py-6">

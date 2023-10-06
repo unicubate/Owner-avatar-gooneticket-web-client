@@ -49,7 +49,7 @@ const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
   return (
     <>
       <div key={item?.id} className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-200 rounded-md hover:shadow-xl">
-        {dataImages?.data.length > 0 ?
+        {dataImages.length > 0 ?
           <Image
             preview={false}
             height={200}

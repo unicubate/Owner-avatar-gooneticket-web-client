@@ -49,7 +49,8 @@ const ListCarouselUpload: React.FC<Props> = ({
         // autoFocus={true}
         showArrows={true}
         autoPlay={false}
-        showIndicators={true}
+        showStatus={uploads?.length > 1 ? true : false}
+        showIndicators={uploads?.length > 1 ? true : false}
       >
         {uploads &&
           uploads.map((item: any, index: number) => (

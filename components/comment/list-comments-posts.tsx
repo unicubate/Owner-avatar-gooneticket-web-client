@@ -140,7 +140,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
                     }}
-                    className="ml-3.5 text-lg"
+                    className="ml-3.5 text-2xl"
                   >
                     <BsReplyAll />
                   </button>
@@ -152,13 +152,13 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                       onClick={() => editItem(item)}
                       className="ml-3.5 font-bold"
                     >
-                      <MdOutlineModeEdit />
+                      <MdOutlineModeEdit className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => deleteItem(item)}
                       className="ml-3.5 font-bold"
                     >
-                      <MdDeleteOutline />
+                      <MdDeleteOutline className="w-5 h-5" />
                     </button>
                   </>
                 ) : null}

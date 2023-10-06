@@ -41,17 +41,11 @@ body {
     rgb(var(--background-start-rgb));
 } 
 
-.wysiwyg-comment-editor {
-  /* border: 1px solid #ccc; */
-  padding: 8px;
-  font-size: 15px;
-  line-height: 1.5;
-  min-height: 15px;
-  resize: vertical; /* Permet de redimensionner verticalement comme un textarea */
-  width: 100%;
-  border-radius: 8px;
-  box-sizing: border-box;
+.quill > .ql-container > .ql-editor.ql-blank::before{
+  font-style: normal; 
 }
+
+
 
 /* .rhap_container {
   background-color: #44bbbd;

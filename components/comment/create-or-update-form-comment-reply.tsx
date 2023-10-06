@@ -110,7 +110,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
           </div>
           <div className="mt-2">
             <TextAreaInput
-              row={1}
+              row={1.2}
               control={control}
               name="description"
               placeholder="Participate in the conversation"

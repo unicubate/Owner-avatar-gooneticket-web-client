@@ -16,25 +16,32 @@ import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { WhoCanSeeItem } from "../ui/who-can-see-item";
-
-const { Dragger } = Upload;
+import { GetOnePostAPI } from "@/api-site/post";
 
 type Props = {
   openModal: boolean;
   setOpenModal: any;
   commentTake?: number;
-  item?: PostModel;
+  post?: PostModel;
 };
 
 const ShowModalGallery: React.FC<Props> = ({
   setOpenModal,
   commentTake,
   openModal,
-  item,
+  post,
 }) => {
   const router = useRouter();
   const user = useAuth() as any;
 
+  const {
+    status,
+    data: item,
+  } = GetOnePostAPI({ postId: post?.id });
+
+  if(status === 'loading'){
+    <strong>Loading...</strong>
+  }
   return (
     <>
       {openModal ? (
@@ -70,7 +77,7 @@ const ShowModalGallery: React.FC<Props> = ({
                       title="Share"
                       className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                     >
-                      <IoShareOutline className="w-5 h-5" />
+                      <IoShareOutline className="w-6 h-6" />
                     </button>
                     {item?.allowDownload && (
                       <button
@@ -85,7 +92,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         }}
                         className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                       >
-                        <FiDownload className="w-5 h-5" />
+                        <FiDownload className="w-6 h-6" />
                       </button>
                     )}
                     <button
@@ -93,7 +100,7 @@ const ShowModalGallery: React.FC<Props> = ({
                       onClick={() => setOpenModal(false)}
                       className="ml-2 text-gray-900 hover:text-gray-900 focus:ring-gray-900"
                     >
-                      <AiOutlineClose className="w-5 h-5" />
+                      <AiOutlineClose className="w-6 h-6" />
                     </button>
                   </div>
                 </div>
@@ -107,32 +114,35 @@ const ShowModalGallery: React.FC<Props> = ({
                         preview={false}
                         height="100%"
                         alt={item?.title}
-                        className={`${
-                          item?.whoCanSee === "MEMBERSHIP" &&
+                        className={`${item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                            ? "blur-3xl"
-                            : ""
-                        }`}
+                          ? "blur-3xl"
+                          : ""
+                          }`}
                       />
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                    item?.isValidSubscribe !== 1 ? (
+                      item?.isValidSubscribe !== 1 ? (
                       <WhoCanSeeItem username={item?.profile?.username} />
                     ) : null}
                   </div>
 
-                  <p className="mt-4 text-lg font-bold text-gray-900 cursor-pointer">
-                    {item?.title ?? ""}
-                  </p>
-                  <p className="mt-2 text-sm font-normal text-gray-600">
-                    <HtmlParser html={String(item?.description ?? "")} />
-                  </p>
+                  {item?.title ?
+                    <p className="mt-4 text-lg font-bold text-gray-900 cursor-pointer">
+                      {item?.title ?? ""}
+                    </p> : null}
+
+                  {item?.description ?
+                    <p className="mt-2 text-sm font-normal text-gray-600">
+                      <HtmlParser html={String(item?.description ?? "")} />
+                    </p> : null}
+
 
                   <div className="flex mt-4 items-center">
                     <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-                    <button className="ml-2 text-lg font-bold">
+                    <button className="ml-2 text-2xl font-bold">
                       <BiComment />
                     </button>
                     <span className="ml-2 font-normal text-sm">
@@ -143,12 +153,11 @@ const ShowModalGallery: React.FC<Props> = ({
                       <>
                         <Link
                           title="Edit"
-                          href={`/posts/${
-                            item?.id
-                          }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                          href={`/posts/${item?.id
+                            }/edit?type=${item?.type.toLocaleLowerCase()}`}
                           className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                         >
-                          <MdOutlineModeEdit className="w-5 h-5" />
+                          <MdOutlineModeEdit className="w-6 h-6" />
                         </Link>
 
                         <button
@@ -156,22 +165,22 @@ const ShowModalGallery: React.FC<Props> = ({
                           title="Delete"
                           className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                         >
-                          <MdDeleteOutline className="w-5 h-5" />
+                          <MdDeleteOutline className="w-6 h-6" />
                         </button>
                       </>
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                    item?.isValidSubscribe !== 1 ? (
+                      item?.isValidSubscribe !== 1 ? (
                       <>
-                        <button className="ml-auto text-lg font-bold">
+                        <button className="ml-auto text-2xl font-bold">
                           <HiOutlineLockClosed />
                         </button>
                         <span className="ml-2 text-sm font-normal">Locked</span>
                       </>
                     ) : (
                       <>
-                        <button className="ml-auto text-lg font-bold">
+                        <button className="ml-auto text-2xl font-bold">
                           <HiOutlineLockOpen />
                         </button>
                         <span className="ml-2 text-sm font-normal">

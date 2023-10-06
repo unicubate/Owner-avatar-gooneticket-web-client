@@ -56,7 +56,7 @@ const ShopView = () => {
       <strong>Error find data please try again...</strong>
     ) : (
       <ListCarouselUpload
-        uploads={dataImages?.data}
+        uploads={dataImages}
         preview={false}
         folder="products"
       />

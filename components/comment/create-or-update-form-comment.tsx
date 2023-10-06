@@ -97,14 +97,14 @@ const CreateOrUpdateFormComment: React.FC<{
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-4 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
-          <div className="flex items-start">
+          {/* <div className="flex items-start">
             <Avatar
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-8 h-10"
               src={user?.profile?.image}
               alt=""
             />
-          </div>
+          </div> */}
           <TextareaReactQuillInput
             control={control}
             name="description"
