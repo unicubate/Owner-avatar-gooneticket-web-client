@@ -17,27 +17,6 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
   const player = useRef(null);
 
 
-  const play = (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M4.504 12.008a7.5 7.5 0 1 0 15 0 7.5 7.5 0 0 0-15 0zm-1.5 0a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"
-      ></path>
-      <path d="M9.5 8.982c0-.37.383-.601.691-.418l5.076 3.018a.49.49 0 0 1 0 .835l-5.076 3.019c-.308.183-.691-.048-.691-.418V8.982z"></path>
-    </svg>
-  )
-
-  const pause = (
-    <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
-      <path
-        clip-rule="evenodd"
-        d="M8 4c0 2.21-1.79 4-4 4S0 6.21 0 4s1.79-4 4-4 4 1.79 4 4zM2.63 5.37h.912V2.63H2.63v2.74zm1.828 0h.913V2.63h-.913v2.74z"
-        data-fill="1"
-        fill-rule="evenodd"
-      ></path>
-    </svg>
-  )
   return (
     <>
       {uploads &&
@@ -57,8 +36,26 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
                 forward: 15000,
               }}
               customIcons={{
-                play: play,
-                pause: pause,
+                play: (
+                  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M4.504 12.008a7.5 7.5 0 1 0 15 0 7.5 7.5 0 0 0-15 0zm-1.5 0a9 9 0 1 0 18 0 9 9 0 0 0-18 0z"
+                    ></path>
+                    <path d="M9.5 8.982c0-.37.383-.601.691-.418l5.076 3.018a.49.49 0 0 1 0 .835l-5.076 3.019c-.308.183-.691-.048-.691-.418V8.982z"></path>
+                  </svg>
+                ),
+                pause: (
+                  <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      clip-rule="evenodd"
+                      d="M8 4c0 2.21-1.79 4-4 4S0 6.21 0 4s1.79-4 4-4 4 1.79 4 4zM2.63 5.37h.912V2.63H2.63v2.74zm1.828 0h.913V2.63h-.913v2.74z"
+                      data-fill="1"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                ),
                 rewind: (
                   <>
                     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -81,23 +78,23 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
               }}
               customVolumeControls={[]}
               customAdditionalControls={[]}
-              className="rounded-lg"
+              className="relative rounded-lg"
               ref={player}
               style={{ boxShadow: "none", background: "transparent", }}
-              // header={
-              //   <>
-              //     {post?.whoCanSee === "MEMBERSHIP" &&
-              //       post?.isValidSubscribe !== 1 ? <button className={`font-bold`}>
-              //       <PiLockKey className="w-7 h-7" />
-              //     </button> : null}
-              //   </>
-              // }
-              // footer={
-              //   <>
-              //     <span className={`${post?.whoCanSee === "MEMBERSHIP" &&
-              //       post?.isValidSubscribe !== 1 ? "absolute inset-0" : ""}`} />
-              //   </>
-              // }
+              header={
+                <>
+                  {post?.whoCanSee === "MEMBERSHIP" &&
+                    post?.isValidSubscribe !== 1 ? <button className={`font-bold`}>
+                    <PiLockKey className="w-7 h-7" />
+                  </button> : null}
+                </>
+              }
+              footer={
+                <>
+                  <span className={`${post?.whoCanSee === "MEMBERSHIP" &&
+                    post?.isValidSubscribe !== 1 ? "absolute inset-0" : ""}`} />
+                </>
+              }
             />
 
 

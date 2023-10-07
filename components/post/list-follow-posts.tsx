@@ -21,6 +21,7 @@ import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
 import { useRouter } from "next/router";
+import { WhoCanSeeItem } from "../ui";
 
 type Props = {
   item?: PostModel;
@@ -108,46 +109,24 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-3xl"
-                    : ""
-                }`}
+                  ? "blur-3xl"
+                  : ""
+                  }`}
               />
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <button className="font-bold">
-                      <PiLockKey className="w-7 h-7" />
-                    </button>
-                    <p className="text-sm font-bold">
-                      {" "}
-                      This post is for members only.{" "}
-                    </p>
-
-                    <ButtonInput
-                      className="mt-2"
-                      shape="default"
-                      type="button"
-                      size="large"
-                      loading={false}
-                      color="red"
-                    >
-                      Join now
-                    </ButtonInput>
-                  </div>
-                </div>
+                item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem username={item?.profile?.username} />
               ) : null}
             </div>
           ) : null}
 
           {item?.whoCanSee &&
-          ["AUDIO"].includes(item?.type as PostType) &&
-          item?.uploadsFile?.length > 0 ? (
-            <div className="mt-2 text-center justify-center mx-auto">
+            ["AUDIO"].includes(item?.type as PostType) &&
+            item?.uploadsFile?.length > 0 ? (
+            <div className="text-center justify-center mx-auto">
               <AudioPlayerInput
                 uploads={item?.uploadsFile}
                 folder="posts"
@@ -188,9 +167,8 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
@@ -199,7 +177,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             ) : null}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-            item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl font-bold">
                   <HiOutlineLockClosed />
