@@ -1,28 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Button, Image } from "antd";
-import { PostModel } from "@/types/post";
-import ListComments from "../comment/list-comments";
-import { formateDMYHH } from "@/utils";
-import { BiComment } from "react-icons/bi";
-import {
-  MdDeleteOutline,
-  MdFavoriteBorder,
-  MdOutlineModeEdit,
-} from "react-icons/md";
-import ReactPlayer from "react-player";
-import { useRouter } from "next/router";
-import { getOneFileGalleryAPI } from "@/api-site/post";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
+import { Button, Image } from "antd";
 import { HtmlParser } from "@/utils/html-parser";
-import { IoShareOutline } from "react-icons/io5";
-import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { ProductModel } from "@/types/product";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { ReadMore } from "@/utils/read-more";
-import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
+import { viewOneFileUploadAPI } from "@/api-site/upload";
 
 type Props = {
   item?: ProductModel;
@@ -30,32 +14,17 @@ type Props = {
 };
 
 const ListPublicShop: React.FC<Props> = ({ item, commentTake }) => {
-  const userVisiter = useAuth() as any;
-  const router = useRouter();
 
-  const {
-    status,
-    data: dataImages,
-  } = GetUploadsAPI({
-    userId: item?.userId,
-    model: "PRODUCT",
-    uploadableId: `${item?.id}`,
-    uploadType: "image",
-  });
-
-  if (status === 'loading') {
-    <p>loading...</p>
-  }
   return (
     <>
       <div key={item?.id} className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-200 rounded-md hover:shadow-xl">
-        {dataImages.length > 0 ?
+        {item?.uploadsImage.length > 0 ?
           <Image
             preview={false}
             height={200}
             width="100%"
             className="object-cover w-full h-full transition-all duration-300 group-hover:scale-125"
-            src={viewOneFileUploadAPI({ folder: 'products', fileName: String(dataImages?.data[0]?.path) }) as string}
+            src={viewOneFileUploadAPI({ folder: 'products', fileName: String(item?.uploadsImage?.[0]?.path) }) as string}
             alt=""
           /> : null}
 
