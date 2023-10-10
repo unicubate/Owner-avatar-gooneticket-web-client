@@ -90,8 +90,14 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           </div>
 
+
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
-            <div className="mt-2 mx-auto">
+            <div className={`mt-1 mx-auto 
+            ${item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1
+                ? "blur-xl"
+                : ""
+              }`}>
               <ReactPlayer
                 className="mr-auto"
                 url={item?.urlMedia}
@@ -147,10 +153,21 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           {item?.description ? (
-            <div className="text-sm font-normal text-gray-600 ">
-              <span className="ql-editor">
-                <HtmlParser html={String(item?.description ?? "")} />
+            <div className={`text-sm font-normal text-gray-600 group relative`}>
+              <span className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1
+                ? "blur-lg"
+                : ""
+                }`}>
+                <HtmlParser html={String(item?.description ?? "")} value={item?.isValidSubscribe !== 1
+                  ? 600
+                  : 0} />
               </span>
+
+              {item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem username={item?.profile?.username} />
+              ) : null}
             </div>
           ) : null}
 

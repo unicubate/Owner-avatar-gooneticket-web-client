@@ -68,7 +68,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
 
   useEffect(() => {
     if (post) {
-      const fields = ["title", "urlMedia", "description", "whoCanSee", "type"];
+      const fields = ["title", "urlMedia", "description", "whoCanSee", "type", "membershipId"];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
   }, [post, postId, setValue]);

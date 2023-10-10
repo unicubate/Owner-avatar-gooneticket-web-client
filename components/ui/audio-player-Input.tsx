@@ -96,8 +96,6 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
                 </>
               }
             />
-
-
           </Fragment>
         ))}
 
