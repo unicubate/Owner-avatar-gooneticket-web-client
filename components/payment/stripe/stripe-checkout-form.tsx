@@ -134,9 +134,8 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         </div>
       ) : null}
 
-      <div className="mt-2">
+      <div className="mt-4">
         <TextInput
-          label="Full name"
           control={control}
           type="text"
           name="fullName"
@@ -144,9 +143,8 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
           errors={errors}
         />
       </div>
-      <div className="mt-2">
+      <div className="mt-4">
         <TextInput
-          label="Email"
           control={control}
           type="email"
           name="email"
