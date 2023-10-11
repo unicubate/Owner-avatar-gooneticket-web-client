@@ -211,7 +211,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             )}
           </div>
 
-          {/* <ListComments postId={String(item?.id)} take={commentTake} /> */}
+          <ListComments postId={String(item?.id)} take={commentTake} />
         </div>
       </div>
     </>
