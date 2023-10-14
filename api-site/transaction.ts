@@ -1,21 +1,7 @@
-import { ProfileFormModel } from "@/types/profile.type";
 import { ResponseTransactionModel } from "@/types/transaction";
-import {
-  UserLoginFormModel,
-  UserRegisterFormModel,
-  UserForgotPasswordFormModel,
-  UserResetPasswordFormModel,
-  UserModel,
-  NextStep,
-} from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const getTransactionsAPI = async (
   payload: {
@@ -31,14 +17,14 @@ export const getTransactionsAPI = async (
 };
 
 export const GetInfiniteTransactionsAPI = (payload: {
-  model?: string,
+  model?: string;
   userReceiveId: string;
   take: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { model,userReceiveId, take, sort, status, queryKey } = payload;
+  const { model, userReceiveId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
