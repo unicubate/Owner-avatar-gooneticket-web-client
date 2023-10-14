@@ -53,8 +53,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
     mode: "onChange",
   });
 
-  const { data: dataCurrencies } = GetAllCurrenciesAPI();
-  const currencies: any = dataCurrencies?.data;
+  const { data: currencies } = GetAllCurrenciesAPI();
 
   const { data: countries } = GetAllCountiesAPI();
 
