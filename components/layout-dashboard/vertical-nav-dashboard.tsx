@@ -18,6 +18,7 @@ import { TbUsersGroup } from "react-icons/tb";
 import { RiShakeHandsLine } from "react-icons/ri";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 export type NavbarProps = {
   title: string;
@@ -102,6 +103,7 @@ interface Props {
 }
 
 const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
+  const router = useRouter();
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
@@ -129,6 +131,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
   const [monetizeItems] = useState<NavbarProps[]>(MONETIZE_ITEMS);
   const [supportItems] = useState<NavbarProps[]>(SUPPORT_ITEMS);
   const [settingItems] = useState<NavbarProps[]>(SETTINGS_ITEMS);
+
+  const logoutUser = () => {
+    localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+    router.push(`${`/`}`);
+  }
 
   return (
     <>
@@ -245,8 +252,9 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               })}
 
               <a
-                href="#"
-                title=""
+              href={void (0)}
+              title=""
+              onClick={() => logoutUser()}
                 className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 text-gray-900 rounded-lg hover:bg-gray-200 group"
               >
                 <svg
