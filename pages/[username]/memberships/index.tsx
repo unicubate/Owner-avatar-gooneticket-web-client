@@ -19,7 +19,7 @@ const MembershipsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicMemberships userId={user?.id} />
+    <PublicMemberships organizationId={user?.organizationId} />
   );
 
   return (

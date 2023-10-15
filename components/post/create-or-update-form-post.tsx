@@ -68,7 +68,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     queryKey: ["memberships"],
   });
 
-  const fetchCategories = async () => await getCategoriesAPI({ userId: "" });
+  const fetchCategories = async () => await getCategoriesAPI({ organizationId: "" });
   const { data: dataCategories } = useQuery(
     ["categories"],
     () => fetchCategories(),

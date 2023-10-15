@@ -21,7 +21,7 @@ const PostsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicPosts userId={user?.id} />
+    <PublicPosts organizationId={user?.organizationId} />
   );
 
   return (
@@ -40,7 +40,7 @@ const PostsUserPublic = () => {
             </div>
           </div>
 
-          {user?.id ? <PublicListLastPosts userId={user?.id} /> : null}
+          {user?.id ? <PublicListLastPosts organizationId={user?.organizationId} /> : null}
 
         </div>
 

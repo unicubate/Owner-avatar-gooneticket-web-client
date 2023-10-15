@@ -7,10 +7,10 @@ import { ListPublicGallery } from "./list-public-gallery";
 import { LoadingFile } from "../ui/loading-file";
 
 type Props = {
-  userId: string;
+  organizationId: string;
 };
 
-const PublicGallery: React.FC<Props> = ({ userId }) => {
+const PublicGallery: React.FC<Props> = ({ organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -23,7 +23,7 @@ const PublicGallery: React.FC<Props> = ({ userId }) => {
   } = GetInfinitePostsAPI({
     take: 10,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     status: "ACTIVE",
     typeIds: ["GALLERY"],
     queryKey: ["gallery-posts", "infinite"],

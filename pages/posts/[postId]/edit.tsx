@@ -10,7 +10,7 @@ import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-updat
 import { LoadingFile } from "@/components/ui/loading-file";
 import { GetUploadsAPI } from '../../../api-site/upload';
 
-const PostsCreate = () => {
+const PostsEdit = () => {
   const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
@@ -108,4 +108,4 @@ const PostsCreate = () => {
   );
 };
 
-export default PrivateComponent(PostsCreate);
+export default PrivateComponent(PostsEdit);

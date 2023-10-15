@@ -19,7 +19,7 @@ const GalleryUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicGallery userId={user?.id} />
+    <PublicGallery organizationId={user?.organizationId} />
   );
 
   if (user?.profile?.enableGallery === false) {

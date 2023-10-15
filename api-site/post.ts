@@ -215,7 +215,7 @@ export const DeleteOnePostAPI = ({
 };
 
 export const getCategoriesAPI = async (payload?: {
-  userId: string;
+  organizationId: string;
 }): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
     action: "getCategories",

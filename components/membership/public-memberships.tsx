@@ -3,15 +3,15 @@ import React, { useEffect } from "react";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
-import {ListPublicMemberships} from "./list-public-memberships";
+import { ListPublicMemberships } from "./list-public-memberships";
 import { LoadingFile } from "../ui/loading-file";
 
 
 type Props = {
-  userId: string;
+  organizationId: string;
 };
 
-const PublicMemberships: React.FC<Props> = ({ userId }) => {
+const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -24,7 +24,7 @@ const PublicMemberships: React.FC<Props> = ({ userId }) => {
   } = GetInfiniteMembershipsAPI({
     take: 10,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     status: 'ACTIVE',
     queryKey: ['memberships', "infinite"]
   });

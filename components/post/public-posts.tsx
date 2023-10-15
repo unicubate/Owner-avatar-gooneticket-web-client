@@ -9,10 +9,10 @@ import ListPublicPosts from "./list-public-posts";
 import { LoadingFile } from "../ui/loading-file";
 
 type Props = {
-  userId: string;
+  organizationId: string;
 };
 
-const PublicPosts: React.FC<Props> = ({ userId }) => {
+const PublicPosts: React.FC<Props> = ({ organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -25,7 +25,7 @@ const PublicPosts: React.FC<Props> = ({ userId }) => {
   } = GetInfinitePostsAPI({
     take: 10,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['posts', "infinite"]

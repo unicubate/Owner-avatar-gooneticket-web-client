@@ -20,7 +20,7 @@ const CommissionsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicCommissions userId={user?.id} />
+    <PublicCommissions organizationId={user?.organizationId} />
   );
 
   if (user?.profile?.enableCommission === false) {

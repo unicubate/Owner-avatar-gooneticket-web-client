@@ -8,10 +8,10 @@ import { LoadingFile } from "../ui/loading-file";
 
 
 type Props = {
-  userId: string;
+  organizationId: string;
 };
 
-const PublicCommissions: React.FC<Props> = ({ userId }) => {
+const PublicCommissions: React.FC<Props> = ({ organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -24,7 +24,7 @@ const PublicCommissions: React.FC<Props> = ({ userId }) => {
   } = GetInfiniteCommissionsAPI({
     take: 10,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     status: 'ACTIVE',
     queryKey: ['commissions', "infinite"]
   });

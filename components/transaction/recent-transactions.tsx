@@ -3,14 +3,14 @@ import React, { useEffect } from "react";
 import { ButtonInput, LoadingFile } from "../ui";
 import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
 import { ListTransactions } from "./list-transactions";
 
 type Props = {
   model?: string
+  organizationId?: string;
 };
 
-const RecentTransactions: React.FC<Props> = ({ model }) => {
+const RecentTransactions: React.FC<Props> = ({ model, organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -21,6 +21,7 @@ const RecentTransactions: React.FC<Props> = ({ model }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
+    organizationId,
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: "DESC",

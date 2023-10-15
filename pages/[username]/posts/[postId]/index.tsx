@@ -53,7 +53,7 @@ const PostsShowUserPublic = () => {
             </div>
           </div>
 
-          {user?.id ? <PublicListLastPosts post={post} userId={user?.id} /> : null}
+          {user?.id ? <PublicListLastPosts post={post} organizationId={user?.organizationId} /> : null}
 
         </div>
       </div>

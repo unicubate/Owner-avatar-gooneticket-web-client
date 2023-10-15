@@ -26,10 +26,10 @@ const Memberships = () => {
                 <HorizontalNavMembership />
 
                 <div className="flow-root">
-                  {user?.id ? (
+                  {user?.organizationId ? (
                     <RecentTransactions
                       model="MEMBERSHIP"
-                      userId={user?.profile?.userId}
+                      organizationId={user?.organizationId}
                     />
                   ) : null}
                 </div>

@@ -27,7 +27,7 @@ const ShopUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicShop userId={user?.id} />
+    <PublicShop organizationId={user?.organizationId} />
   );
 
   if (user?.profile?.enableShop === false) {

@@ -9,10 +9,10 @@ import { PostModel } from "@/types/post";
 
 type Props = {
   post?: PostModel
-  userId: string;
+  organizationId: string;
 };
 
-const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
+const PublicLastPosts: React.FC<Props> = ({ organizationId, post }) => {
 
   const {
     isLoading: isLoadingPosts,
@@ -24,7 +24,7 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
   } = GetInfinitePostsAPI({
     take: 4,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['last-posts', "infinite"]
   });
@@ -61,7 +61,7 @@ const PublicLastPosts: React.FC<Props> = ({ userId, post }) => {
 
           </ul>
         </div>
-        {userId || post?.userId ? (
+        {organizationId || post?.organizationId ? (
           <div className="mt-6 text-center justify-center mx-auto">
             <div className="sm:mt-0">
               <ButtonInput

@@ -7,10 +7,10 @@ import { GetInfiniteProductsAPI } from "@/api-site/product";
 import { LoadingFile } from "../ui/loading-file";
 
 type Props = {
-  userId: string;
+  organizationId: string;
 };
 
-const PublicShop: React.FC<Props> = ({ userId }) => {
+const PublicShop: React.FC<Props> = ({ organizationId }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -23,7 +23,7 @@ const PublicShop: React.FC<Props> = ({ userId }) => {
   } = GetInfiniteProductsAPI({
     take: 10,
     sort: "DESC",
-    userId: userId,
+    organizationId,
     status: 'ACTIVE',
     queryKey: ['products', "infinite"]
   });
