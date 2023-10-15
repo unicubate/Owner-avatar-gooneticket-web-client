@@ -23,6 +23,7 @@ import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
+  organizationId: string;
   uploadImages?: any;
   postId?: string;
   post?: any;
@@ -40,8 +41,7 @@ const schema = yup.object({
   }),
 });
 
-const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages }) => {
-  const { userStorage } = useAuth() as any;
+const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages, organizationId }) => {
   const { push, back } = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -59,7 +59,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
 
   const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({
-    userId: userStorage?.id,
+    organizationId,
     take: 100,
     page: 0,
     sort: "DESC",

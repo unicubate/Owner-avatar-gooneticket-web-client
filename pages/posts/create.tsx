@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
+import { useAuth } from "@/components/util/context-user";
 
 const PostsCreate = () => {
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
 
@@ -17,13 +19,13 @@ const PostsCreate = () => {
           <main>
             <div className="max-w-4xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                {type === "article" ? <CreateOrUpdateFormPost /> : null}
+                {organizationId && type === "article" ? <CreateOrUpdateFormPost organizationId={organizationId} /> : null}
 
-                {type === "audio" ? <CreateOrUpdateFormAudioPost /> : null}
+                {organizationId && type === "audio" ? <CreateOrUpdateFormAudioPost organizationId={organizationId} /> : null}
 
-                {type === "video" ? <CreateOrUpdateFormVideoPost /> : null}
+                {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
 
-                {type === "gallery" ? <CreateOrUpdateFormGalleryPost /> : null}
+                {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} /> : null}
               </div>
             </div>
           </main>

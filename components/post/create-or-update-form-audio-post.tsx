@@ -26,6 +26,7 @@ type Props = {
   uploadFiles?: any;
   uploadImages?: any;
   post?: any;
+  organizationId: string;
 };
 
 const schema = yup.object({
@@ -47,6 +48,7 @@ const schema = yup.object({
 const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   postId,
   post,
+  organizationId,
   uploadFiles,
   uploadImages,
 }) => {
@@ -71,7 +73,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   const watchWhoCanSee = watch("whoCanSee", null);
 
   const { data: memberships } = GetAllMembershipsAPI({
-    userId: userStorage?.id,
+    organizationId,
     take: 100,
     page: 0,
     sort: "DESC",

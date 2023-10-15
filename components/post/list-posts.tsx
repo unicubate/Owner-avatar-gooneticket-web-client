@@ -30,8 +30,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -146,8 +146,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
               <button
                 onClick={() =>
                   router.push(
-                    `/posts/${
-                      item?.id
+                    `/posts/${item?.id
                     }/edit?type=${item?.type.toLocaleLowerCase()}`
                   )
                 }
@@ -172,4 +171,4 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   );
 };
 
-export default ListPosts;
+export { ListPosts };

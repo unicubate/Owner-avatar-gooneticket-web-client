@@ -171,4 +171,4 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   );
 };
 
-export default ListProductsShop;
+export { ListProductsShop };

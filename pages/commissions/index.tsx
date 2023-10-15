@@ -3,7 +3,7 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavCommission } from "@/components/commission/horizontal-nav-commission";
 import { useAuth } from "@/components/util/context-user";
 import { EnableCommission } from "@/components/commission/enable-commission";
-import { ListTableCommissions } from "@/components/commission/list-table-commissions";
+import { TableCommissions } from "@/components/commission/table-commissions";
 
 const Commissions = () => {
   const { organizationId, profile } = useAuth() as any;
@@ -26,7 +26,7 @@ const Commissions = () => {
 
                 <div className="flow-root">
 
-                  {organizationId ? <ListTableCommissions organizationId={organizationId} /> : null}
+                  {organizationId ? <TableCommissions organizationId={organizationId} /> : null}
 
                 </div>
               </div>

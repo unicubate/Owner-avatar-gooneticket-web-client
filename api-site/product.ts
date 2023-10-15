@@ -46,7 +46,6 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("discountId", `${payload.discountId ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee ?? ""}`);
-      
 
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
@@ -62,7 +61,7 @@ export const CreateOrUpdateOneProductAPI = ({
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
-          queryParams: { uploadableId: productId, model: 'PRODUCT' },
+          queryParams: { uploadableId: productId, model: "PRODUCT" },
         });
 
         if (result) {
@@ -152,15 +151,15 @@ export const DeleteOneProductAPI = ({
 export const GetOneProductAPI = (payload: {
   productId?: string;
   productSlug?: string;
-  userId?: string;
+  organizationId?: string;
 }) => {
-  const { productId, userId, productSlug } = payload;
+  const { productId, organizationId, productSlug } = payload;
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["product", payload],
     queryFn: async () =>
       await makeApiCall({
         action: "getOneProduct",
-        queryParams: { productId, userId, productSlug },
+        queryParams: { productId, organizationId, productSlug },
       }),
     // staleTime: 60_000,
     refetchOnWindowFocus: false,
@@ -171,7 +170,7 @@ export const GetOneProductAPI = (payload: {
 
 export const getProductsAPI = async (
   payload: {
-    userId: string;
+    organizationId: string;
     status?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseProductModel }> => {
@@ -182,19 +181,19 @@ export const getProductsAPI = async (
 };
 
 export const GetInfiniteProductsAPI = (payload: {
-  userId: string;
+  organizationId: string;
   take: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userId, take, sort, status, queryKey } = payload;
+  const { organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getProductsAPI({
-        userId,
+        organizationId,
         take,
         sort,
         status: status?.toUpperCase(),

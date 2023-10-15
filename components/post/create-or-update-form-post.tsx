@@ -21,6 +21,7 @@ import Link from "next/link";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
+  organizationId: string;
   uploadImages?: any;
   postId?: string;
   post?: any;
@@ -41,6 +42,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
   postId,
   post,
   uploadImages,
+  organizationId,
 }) => {
   const { userStorage } = useAuth() as any;
   const router = useRouter();
@@ -60,7 +62,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
 
   const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({
-    userId: userStorage?.id,
+    organizationId,
     take: 100,
     page: 0,
     sort: "DESC",

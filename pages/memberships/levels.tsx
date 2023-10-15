@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
 import { useAuth } from "@/components/util/context-user";
-import { ListTableMemberships } from "@/components/membership/list-table-memberships";
+import { TableMemberships } from "@/components/membership/table-memberships";
 
 const MembershipsLevels = () => {
   const { organizationId } = useAuth() as any;
@@ -18,7 +18,7 @@ const MembershipsLevels = () => {
 
                 <div className="flow-root">
 
-                  {organizationId ? <ListTableMemberships organizationId={organizationId} /> : null}
+                  {organizationId ? <TableMemberships organizationId={organizationId} /> : null}
 
                 </div>
               </div>

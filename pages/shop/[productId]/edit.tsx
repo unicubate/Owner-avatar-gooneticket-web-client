@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
 import { useAuth } from "@/components/util/context-user";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { GetUploadsAPI } from "@/api-site/upload";
 
 const ShopEdit = () => {
-  const { userStorage } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const productId = String(query?.productId);
 
@@ -17,20 +18,42 @@ const ShopEdit = () => {
     isLoading: isLoadingProduct,
   } = GetOneProductAPI({
     productId,
-    userId: userStorage?.id,
+    organizationId,
   });
 
-  const dataTableProduct = isLoadingProduct ? (
-      <LoadingFile />
-    ) : isErrorProduct ? (
-      <strong>Error find data please try again...</strong>
-    ) : (
-      <CreateOrUpdateFormShop
-        uploadFiles={product?.uploadsFile}
-        uploadImages={product?.uploadsImage }
-        product={product}
-      />
-    );
+  const {
+    isLoading: isLoadingImageUploads,
+    isError: isErrorImageUploads,
+    data: dataImageUploads,
+  } = GetUploadsAPI({
+    uploadType: "image",
+    model: "product",
+    organizationId: organizationId,
+    uploadableId: productId,
+  });
+
+  const {
+    isLoading: isLoadingFileUploads,
+    isError: isErrorFileUploads,
+    data: dataFileUploads,
+  } = GetUploadsAPI({
+    uploadType: "file",
+    model: "product",
+    organizationId: organizationId,
+    uploadableId: productId,
+  });
+
+  const dataTableProduct = isLoadingFileUploads || isLoadingImageUploads || isLoadingProduct ? (
+    <LoadingFile />
+  ) : isErrorFileUploads || isErrorImageUploads || isErrorProduct ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <CreateOrUpdateFormShop
+      uploadFiles={dataFileUploads}
+      uploadImages={dataImageUploads}
+      product={product}
+    />
+  );
 
   return (
     <>

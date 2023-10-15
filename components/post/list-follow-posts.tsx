@@ -22,6 +22,7 @@ import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
 import { useRouter } from "next/router";
 import { WhoCanSeeItem } from "../ui";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   item?: PostModel;
@@ -44,17 +45,12 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
               onClick={() => router.push(`/${item?.profile?.username}`)}
               className="relative flex-shrink-0 cursor-pointer"
             >
-              <Avatar
-                size={40}
-                className="object-cover w-10 h-10 rounded-full"
-                src={item?.profile?.image}
-                alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-              />
+              <AvatarComponent size={50} className="object-cover w-10 h-10 rounded-full" profile={item?.profile} />
             </div>
 
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
-              className="ml-4 cursor-pointer"
+              className="ml-3 cursor-pointer"
             >
               <p className="text-sm font-bold text-gray-900">
                 {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}

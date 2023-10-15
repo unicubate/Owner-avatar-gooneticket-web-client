@@ -1,20 +1,22 @@
-import { Input } from "antd";
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ButtonInput } from "@/components/ui/button-input";
-import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Input } from "antd";
 import { EmptyData } from "@/components/ui/empty-data";
-import { ListCommissions } from "@/components/commission/list-commissions";
+import ListGallery from "@/components/gallery/list-gallery";
+import { GetInfinitePostsAPI } from "@/api-site/post";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
-import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { useRouter } from "next/router";
 
 type Props = {
   organizationId: string;
 };
 
-const ListTableCommissions: React.FC<Props> = ({ organizationId }) => {
+const TableGallery: React.FC<Props> = ({ organizationId }) => {
   const router = useRouter();
   const { ref, inView } = useInView();
+  const [openModal, setOpenModal] = useState(false);
 
   const {
     isLoading: isLoadingGallery,
@@ -23,11 +25,12 @@ const ListTableCommissions: React.FC<Props> = ({ organizationId }) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteCommissionsAPI({
+  } = GetInfinitePostsAPI({
     organizationId,
-    take: 10,
+    take: 6,
     sort: "DESC",
-    queryKey: ["commissions", "infinite"],
+    type: "GALLERY",
+    queryKey: ['gallery-posts', "infinite"]
   });
 
   useEffect(() => {
@@ -52,55 +55,49 @@ const ListTableCommissions: React.FC<Props> = ({ organizationId }) => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTableCommissions = isLoadingGallery ? (
+  const dataTableGallery = isLoadingGallery ? (
     <LoadingFile />
   ) : isErrorGallery ? (
     <strong>Error find data please try again...</strong>
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      title="Add your first listing to get started"
-      description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
+      title="Add your first file gallery"
+      description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
     />
   ) : (
     dataGallery.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommissions item={item} key={index} index={index} />
+        <ListGallery item={item} key={index} index={index} />
       ))
   );
-
-
   return (
     <>
-
       <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-4 sm:mt-0">
               <ButtonInput
-                onClick={() =>
-                  router.push(`${`/commissions/create`}`)
-                }
+                onClick={() => router.push(`/posts/create?type=gallery`)}
                 shape="default"
                 type="button"
                 size="normal"
                 loading={false}
                 color={"indigo"}
               >
-                Create Commission
+                Create File
               </ButtonInput>
             </div>
             <div className="mt-4 sm:mt-0">
-              <Input placeholder="Search commission" />
+              <Input placeholder="Search file" />
             </div>
           </div>
 
           <div className="divide-y divide-gray-200">
-            {dataTableCommissions}
+            {dataTableGallery}
           </div>
         </div>
       </div>
-
 
       {hasNextPage && (
         <div className="mt-4 text-center justify-center mx-auto">
@@ -123,4 +120,5 @@ const ListTableCommissions: React.FC<Props> = ({ organizationId }) => {
     </>
   );
 };
-export { ListTableCommissions };
+
+export { TableGallery };

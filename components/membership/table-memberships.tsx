@@ -11,7 +11,7 @@ type Props = {
   organizationId: string;
 };
 
-const ListTableMemberships: React.FC<Props> = ({ organizationId }) => {
+const TableMemberships: React.FC<Props> = ({ organizationId }) => {
   const router = useRouter();
   const { ref, inView } = useInView();
 
@@ -119,4 +119,4 @@ const ListTableMemberships: React.FC<Props> = ({ organizationId }) => {
     </>
   );
 };
-export { ListTableMemberships };
+export { TableMemberships };

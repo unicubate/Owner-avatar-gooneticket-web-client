@@ -55,32 +55,37 @@ const PostsCreate = () => {
     <strong>Error find data please try again...</strong>
   ) : (
     <>
-      {post?.id && type === "gallery" ? (
+      {organizationId && post?.id && type === "gallery" ? (
         <CreateOrUpdateFormGalleryPost
           uploadImages={dataImages}
-          post={post} postId={postId} />
+          post={post}
+          postId={postId}
+          organizationId={organizationId} />
       ) : null}
 
-      {post?.id && type === "article" ? (
+      {organizationId && post?.id && type === "article" ? (
         <CreateOrUpdateFormPost
           uploadImages={dataImages}
           post={post} postId={postId}
+          organizationId={organizationId}
         />
       ) : null}
 
-      {post?.id && type === "audio" ? (
+      {organizationId && post?.id && type === "audio" ? (
         <CreateOrUpdateFormAudioPost
           post={post}
           postId={postId}
           uploadFiles={uploadsFiles}
           uploadImages={dataImages}
+          organizationId={organizationId}
         />
       ) : null}
 
-      {post?.id && type === "video" ? (
+      {organizationId && post?.id && type === "video" ? (
         <CreateOrUpdateFormVideoPost
           uploadImages={dataImages}
           post={post} postId={postId}
+          organizationId={organizationId}
         />
       ) : null}
     </>
