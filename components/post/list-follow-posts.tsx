@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar } from "antd";
 import { PostModel, PostType } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
@@ -13,10 +12,8 @@ import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/context-user";
 import Link from "next/link";
-import { PiLockKey } from "react-icons/pi";
 import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { ButtonInput } from "../ui/button-input";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
