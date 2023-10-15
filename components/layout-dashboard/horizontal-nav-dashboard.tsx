@@ -141,7 +141,8 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
             <div className="flex items-center justify-end">
 
               <div className="flex items-center space-x-6 sm:ml-5">
-                <div className="relative">
+
+                {/* <div className="relative">
                   <button
                     type="button"
                     className="p-1 text-gray-700 transition-all duration-200 bg-white rounded-full hover:text-gray-900 focus:outline-none hover:bg-gray-100"
@@ -191,16 +192,11 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                     {" "}
                     6{" "}
                   </span>
-                </div>
+                </div> */}
                 <button
                   type="button"
                   className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                 >
-                  {/* <Avatar
-                    className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                    src={user?.profile?.image}
-                    alt=""
-                  /> */}
                   <AvatarComponent
                     profile={user?.profile}
                     className="object-cover bg-gray-300 rounded-full w-9 h-9"
