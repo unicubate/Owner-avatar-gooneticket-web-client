@@ -52,7 +52,6 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   uploadFiles,
   uploadImages,
 }) => {
-  const { userStorage, profile } = useAuth() as any;
   const router = useRouter();
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);

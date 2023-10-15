@@ -21,7 +21,6 @@ import {
   TextInput,
   TextareaReactQuillInput,
 } from "../ui";
-import { useAuth } from "../util/context-user";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import Link from "next/link";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";

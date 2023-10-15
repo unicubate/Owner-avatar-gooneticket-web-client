@@ -30,7 +30,7 @@ const PostsCreate = () => {
   const {
     isError: isErrorImages,
     isLoading: isLoadingImages,
-    data: dataImages
+    data: uploadImages
   } = GetUploadsAPI({
     organizationId,
     model: "POST",
@@ -57,7 +57,7 @@ const PostsCreate = () => {
     <>
       {organizationId && post?.id && type === "gallery" ? (
         <CreateOrUpdateFormGalleryPost
-          uploadImages={dataImages}
+          uploadImages={uploadImages}
           post={post}
           postId={postId}
           organizationId={organizationId} />
@@ -65,7 +65,7 @@ const PostsCreate = () => {
 
       {organizationId && post?.id && type === "article" ? (
         <CreateOrUpdateFormPost
-          uploadImages={dataImages}
+          uploadImages={uploadImages}
           post={post} postId={postId}
           organizationId={organizationId}
         />
@@ -76,14 +76,14 @@ const PostsCreate = () => {
           post={post}
           postId={postId}
           uploadFiles={uploadsFiles}
-          uploadImages={dataImages}
+          uploadImages={uploadImages}
           organizationId={organizationId}
         />
       ) : null}
 
       {organizationId && post?.id && type === "video" ? (
         <CreateOrUpdateFormVideoPost
-          uploadImages={dataImages}
+          uploadImages={uploadImages}
           post={post} postId={postId}
           organizationId={organizationId}
         />

@@ -24,35 +24,40 @@ const ShopEdit = () => {
   const {
     isLoading: isLoadingImageUploads,
     isError: isErrorImageUploads,
-    data: dataImageUploads,
+    data: uploadImages,
   } = GetUploadsAPI({
-    uploadType: "image",
-    model: "product",
-    organizationId: organizationId,
+    organizationId,
+    model: "PRODUCT",
     uploadableId: productId,
+    uploadType: "image",
   });
 
   const {
     isLoading: isLoadingFileUploads,
     isError: isErrorFileUploads,
-    data: dataFileUploads,
+    data: uploadsFiles,
   } = GetUploadsAPI({
-    uploadType: "file",
-    model: "product",
-    organizationId: organizationId,
+    organizationId,
+    model: "PRODUCT",
     uploadableId: productId,
+    uploadType: "file",
   });
 
-  const dataTableProduct = isLoadingFileUploads || isLoadingImageUploads || isLoadingProduct ? (
+  const dataTableProduct = isLoadingProduct || isLoadingFileUploads || isLoadingImageUploads ? (
     <LoadingFile />
-  ) : isErrorFileUploads || isErrorImageUploads || isErrorProduct ? (
+  ) : isErrorProduct || isErrorFileUploads || isErrorImageUploads ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <CreateOrUpdateFormShop
-      uploadFiles={dataFileUploads}
-      uploadImages={dataImageUploads}
-      product={product}
-    />
+    <>
+      {organizationId && product?.id ? (
+        <CreateOrUpdateFormShop
+          uploadFiles={uploadsFiles}
+          uploadImages={uploadImages}
+          product={product}
+        />
+      ) : null}
+
+    </>
   );
 
   return (

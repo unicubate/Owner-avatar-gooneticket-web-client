@@ -44,7 +44,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
   uploadImages,
   organizationId,
 }) => {
-  const { userStorage } = useAuth() as any;
   const router = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);

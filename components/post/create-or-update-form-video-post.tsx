@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import {
   ReactQuillInput,
@@ -18,7 +17,6 @@ import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import Link from "next/link";
-import { useAuth } from "../util/context-user";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 

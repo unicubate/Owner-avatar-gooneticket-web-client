@@ -36,7 +36,6 @@ import { SelectDiscountSearchInput } from "../discount/select-discount-search-in
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
-import { ListCarouselUpload } from "./list-carousel-upload";
 import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
