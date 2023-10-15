@@ -9,6 +9,7 @@ export type MembershipModel = {
   id: string;
   title: string;
   status: string;
+  organizationId: string;
   description: string;
   pricePerMonthly: number;
   pricePerYearly: number;

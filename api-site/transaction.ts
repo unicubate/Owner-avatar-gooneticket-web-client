@@ -5,7 +5,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 export const getTransactionsAPI = async (
   payload: {
-    userReceiveId: string;
+    organizationId?: string;
     status?: string;
     model?: string;
   } & PaginationRequest
@@ -17,23 +17,23 @@ export const getTransactionsAPI = async (
 };
 
 export const GetInfiniteTransactionsAPI = (payload: {
+  organizationId?: string;
   model?: string;
-  userReceiveId: string;
   take: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { model, userReceiveId, take, sort, status, queryKey } = payload;
+  const { model, organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getTransactionsAPI({
         model,
-        userReceiveId,
         take,
         sort,
+        organizationId,
         status: status?.toUpperCase(),
         page: pageParam,
       }),

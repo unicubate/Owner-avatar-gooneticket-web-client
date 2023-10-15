@@ -75,7 +75,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
   const { status, data: uploads } = GetUploadsAPI({
     uploadType: "image",
     model: "post",
-    userId: item?.userId,
+    organizationId: item?.organizationId,
     uploadableId: String(item?.id),
   });
 

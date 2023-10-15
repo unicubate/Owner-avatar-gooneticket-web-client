@@ -181,7 +181,7 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {user?.id ? <RecentTransactions userId={user?.profile?.userId} /> : null}
+                  {user?.id ? <RecentTransactions /> : null}
 
                   <div className="py-4 mt-4 bg-white sm:py-4 lg:py-10">
                     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

@@ -11,7 +11,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { GetUploadsAPI } from '../../../api-site/upload';
 
 const PostsCreate = () => {
-  const { userStorage } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);
@@ -22,7 +22,7 @@ const PostsCreate = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
     postId,
-    userId: userStorage?.id,
+    organizationId,
     type: String(type),
   });
 
@@ -32,7 +32,7 @@ const PostsCreate = () => {
     isLoading: isLoadingImages,
     data: dataImages
   } = GetUploadsAPI({
-    userId: userStorage?.userId,
+    organizationId,
     model: "POST",
     uploadableId: postId,
     uploadType: "image",
@@ -43,7 +43,7 @@ const PostsCreate = () => {
     isLoading: isLoadingFiles,
     data: uploadsFiles
   } = GetUploadsAPI({
-    userId: userStorage?.userId,
+    organizationId,
     model: "POST",
     uploadableId: postId,
     uploadType: "file",

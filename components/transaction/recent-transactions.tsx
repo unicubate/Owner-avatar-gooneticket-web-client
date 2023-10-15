@@ -7,11 +7,10 @@ import { useRouter } from "next/router";
 import { ListTransactions } from "./list-transactions";
 
 type Props = {
-  userId: string;
   model?: string
 };
 
-const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
+const RecentTransactions: React.FC<Props> = ({ model }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -23,7 +22,6 @@ const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
     model: model?.toLocaleUpperCase(),
-    userReceiveId: userId,
     take: 10,
     sort: "DESC",
     queryKey: ["transactions", "infinite"],

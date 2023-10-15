@@ -21,6 +21,7 @@ export type PostModel = {
   urlMedia: string;
   status: boolean;
   title: string;
+  organizationId: string;
   whoCanSee: WhoCanSeeType;
   type: PostType;
   allowDownload: true;

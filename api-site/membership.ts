@@ -135,7 +135,7 @@ export const DeleteOneMembershipAPI = ({
 
 export const GetOneMembershipAPI = (payload: {
   membershipId?: string;
-  userId?: string;
+  organizationId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["membership", { ...payload }],
@@ -152,7 +152,7 @@ export const GetOneMembershipAPI = (payload: {
 
 export const getMembershipsAPI = async (
   payload?: {
-    userId: string;
+    organizationId: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseMembershipModel }> => {
   return await makeApiCall({
@@ -162,19 +162,19 @@ export const getMembershipsAPI = async (
 };
 
 export const GetAllMembershipsAPI = (payload: {
-  userId: string;
+  organizationId: string;
   take: number;
   page: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userId, take, sort, queryKey,page } = payload;
+  const { organizationId, take, sort, queryKey, page } = payload;
   const { data, isError, isLoading, status } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await getMembershipsAPI({
-        userId,
+        organizationId,
         take: take,
         sort: sort,
         page: page,
@@ -186,19 +186,19 @@ export const GetAllMembershipsAPI = (payload: {
 };
 
 export const GetInfiniteMembershipsAPI = (payload: {
-  userId: string;
+  organizationId: string;
   take: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userId, take, sort, queryKey } = payload;
+  const { organizationId, take, sort, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getMembershipsAPI({
-        userId,
+        organizationId,
         take,
         sort,
         page: pageParam,

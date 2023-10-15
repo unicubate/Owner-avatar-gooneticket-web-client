@@ -1,22 +1,13 @@
 "use client";
 
-import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
-import { Avatar, Carousel, Image, Input } from "antd";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
+import { Image } from "antd";
 import { ButtonInput } from "@/components/ui/button-input";
-import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
-import { Alert, Space, Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
-import { UploadModel } from "@/types/upload";
-import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
-import { formateDMYHH } from "@/utils";
 import Link from "next/link";
 import { useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { TextInput, LoadingFile } from "@/components/ui";
@@ -60,7 +51,7 @@ const ShopView = () => {
     isError: isErrorImages,
     data: dataImages,
   } = GetUploadsAPI({
-    userId: product?.userId,
+    organizationId: product?.organizationId,
     model: "PRODUCT",
     uploadableId: product?.id,
     uploadType: "image",

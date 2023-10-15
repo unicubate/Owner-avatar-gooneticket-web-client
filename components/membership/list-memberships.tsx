@@ -68,7 +68,7 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const { status, data: dataImages } = GetUploadsAPI({
     uploadType: "image",
     model: "membership",
-    userId: item?.userId,
+    organizationId: item?.organizationId,
     uploadableId: String(item?.id),
   });
 

@@ -11,7 +11,7 @@ export const arrayProductTypes = [
   { id: "2", name: "DIGITAL" },
 ];
 
-export type ProductType = 'DIGITAL' | 'PHYSICAL';
+export type ProductType = "DIGITAL" | "PHYSICAL";
 
 export type ResponseProductModel = {
   value: Array<ProductModel>;
@@ -24,6 +24,7 @@ export type ProductModel = {
   subTitle: string;
   slug: string;
   sku: string;
+  organizationId: string;
   urlMedia: string;
   productType: ProductType;
   priceNoDiscount: string;

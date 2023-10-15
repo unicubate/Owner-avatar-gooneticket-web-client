@@ -101,12 +101,12 @@ export const DeleteOneCommissionAPI = ({
 } = {}) => {
   const queryClient = useQueryClient();
   const result = useMutation(
-    async (payload: { CommissionId: string }): Promise<any> => {
-      const { CommissionId } = payload;
+    async (payload: { commissionId: string }): Promise<any> => {
+      const { commissionId } = payload;
 
       return await makeApiCall({
         action: "deleteOneCommission",
-        urlParams: { CommissionId },
+        urlParams: { commissionId },
       });
     },
     {
@@ -136,7 +136,7 @@ export const DeleteOneCommissionAPI = ({
 
 export const GetOneCommissionAPI = (payload: {
   commissionId?: string;
-  userId?: string;
+  organizationId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["commission", { ...payload }],
@@ -153,7 +153,7 @@ export const GetOneCommissionAPI = (payload: {
 
 export const getCommissionsAPI = async (
   payload: {
-    userId: string;
+    organizationId: string;
     status?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseCommissionModel }> => {
@@ -164,19 +164,19 @@ export const getCommissionsAPI = async (
 };
 
 export const GetInfiniteCommissionsAPI = (payload: {
-  userId: string;
+  organizationId: string;
   status?: string;
   take: number;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { userId, take, sort, status, queryKey } = payload;
+  const { organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getCommissionsAPI({
-        userId,
+        organizationId,
         take,
         sort,
         status: status?.toUpperCase(),

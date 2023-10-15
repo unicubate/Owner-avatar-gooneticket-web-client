@@ -8,7 +8,7 @@ import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-
 import { GetUploadsAPI } from "@/api-site/upload";
 
 const ShopEdit = () => {
-  const { userStorage } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const membershipId = String(query?.membershipId);
 
@@ -18,7 +18,7 @@ const ShopEdit = () => {
     isLoading: isLoadingMembership,
   } = GetOneMembershipAPI({
     membershipId,
-    userId: userStorage?.id,
+    organizationId: organizationId,
   });
 
   const {
@@ -28,7 +28,7 @@ const ShopEdit = () => {
   } = GetUploadsAPI({
     uploadType: "image",
     model: "membership",
-    userId: userStorage?.id,
+    organizationId: organizationId,
     uploadableId: membershipId,
   });
 

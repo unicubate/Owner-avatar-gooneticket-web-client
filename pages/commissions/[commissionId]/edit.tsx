@@ -10,7 +10,7 @@ import { GetUploadsAPI } from "@/api-site/upload";
 import { LoadingFile } from "@/components/ui/loading-file";
 
 const ShopEdit = () => {
-  const { userStorage } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
 
@@ -20,7 +20,7 @@ const ShopEdit = () => {
     isLoading: isLoadingCommission,
   } = GetOneCommissionAPI({
     commissionId,
-    userId: userStorage?.id,
+    organizationId,
   });
 
   const {
@@ -30,7 +30,7 @@ const ShopEdit = () => {
   } = GetUploadsAPI({
     uploadType: "image",
     model: "commission",
-    userId: userStorage?.id,
+    organizationId,
     uploadableId: commissionId,
   });
 

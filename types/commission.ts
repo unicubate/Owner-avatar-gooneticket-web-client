@@ -11,6 +11,7 @@ export type CommissionModel = {
   image: string;
   urlMedia: string;
   price: string;
+  organizationId: string;
   description: string;
   messageAfterPayment: string;
   status: string;

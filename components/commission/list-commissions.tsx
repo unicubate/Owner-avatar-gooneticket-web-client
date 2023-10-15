@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
 import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
+import { DeleteOneCommissionAPI } from "@/api-site/commission";
 
 type Props = {
   item?: CommissionModel;
@@ -23,7 +24,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const saveMutation = DeleteOnePostAPI({
+  const saveMutation = DeleteOneCommissionAPI({
     onSuccess: () => { },
     onError: (error?: any) => { },
   });
@@ -42,9 +43,9 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ postId: item?.id });
+          await saveMutation.mutateAsync({ commissionId: item?.id });
           AlertSuccessNotification({
-            text: "Image deleted successfully",
+            text: "Commission deleted successfully",
             className: "info",
             gravity: "top",
             position: "center",
@@ -62,7 +63,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
   };
 
   const { status, data: dataImages } = GetUploadsAPI({
-    userId: item?.userId,
+    organizationId: item?.organizationId,
     model: "COMMISSION",
     uploadableId: `${item?.id}`,
     uploadType: "image",

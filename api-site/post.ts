@@ -235,7 +235,7 @@ export const createOnUploadPostAPI = async (
 export const GetOnePostAPI = (payload: {
   postId?: string;
   type?: string;
-  userId?: string;
+  organizationId?: string;
   postSlug?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
