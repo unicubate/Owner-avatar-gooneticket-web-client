@@ -9,7 +9,8 @@ import { generateLongUUID } from "@/utils/generate-random";
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { push } = useRouter();
-  const { currency, amount, membershipId, userId } = data;
+  const { amount, membershipId, userId } = data;
+  const currency = amount?.currency
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
   const handleApprove = async (order: any) => {
@@ -20,8 +21,11 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
       membershipId,
       userId,
       reference: newReference,
-      amount: { value: Number(amountPalpal?.value), month: amount?.month },
-      currency: amountPalpal?.currency_code,
+      amount: {
+        currency: amountPalpal?.currency_code,
+        value: Number(amountPalpal?.value),
+        month: amount?.month,
+      },
     };
 
     try {
@@ -97,7 +101,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
                 const name = details?.payer?.name?.given_name;
                 return handleApprove(details);
               }}
-              onCancel={() => {}}
+              onCancel={() => { }}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);

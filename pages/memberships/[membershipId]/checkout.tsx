@@ -12,6 +12,7 @@ import { useAuth } from "@/components/util/context-user";
 import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscribe-stripe";
 import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
+import { formatePrice } from "@/utils";
 
 
 const CheckoutView = () => {
@@ -31,7 +32,11 @@ const CheckoutView = () => {
   });
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
-    : { value: item?.pricePerMonthly, month: 1 };
+    : {
+      currency: item?.currency?.code,
+      value: item?.pricePerMonthly,
+      month: 1,
+    };
 
   if (status === "loading") {
     <LoadingFile />;
@@ -76,8 +81,8 @@ const CheckoutView = () => {
                             <div className="mt-2">
                               <div
                                 className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
-                                    ? "border-red-500"
-                                    : "border-gray-200"
+                                  ? "border-red-500"
+                                  : "border-gray-200"
                                   } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
@@ -88,6 +93,7 @@ const CheckoutView = () => {
                                       id="amount"
                                       defaultChecked
                                       value={JSON.stringify({
+                                        currency: item?.currency?.code,
                                         value: item?.pricePerMonthly,
                                         month: 1,
                                       })}
@@ -112,8 +118,8 @@ const CheckoutView = () => {
                             <div className="mt-2">
                               <div
                                 className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
-                                    ? "border-red-500"
-                                    : "border-gray-200"
+                                  ? "border-red-500"
+                                  : "border-gray-200"
                                   } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
@@ -123,6 +129,7 @@ const CheckoutView = () => {
                                       {...register("amount")}
                                       id="amount"
                                       value={JSON.stringify({
+                                        currency: item?.currency?.code,
                                         value: item?.pricePerYearly,
                                         month: 12,
                                       })}
@@ -153,7 +160,10 @@ const CheckoutView = () => {
                           {newAmount?.value ? (
                             <>
                               <p className="ml-auto text-2xl font-bold text-gray-900">
-                                {newAmount?.value}
+                                {formatePrice({
+                                  value: Number(newAmount?.value),
+                                  isDivide: false,
+                                }) ?? ""}
                               </p>
                               <p className="ml-0.5 text-2xl font-bold text-gray-900">
                                 {item?.currency?.symbol}
@@ -172,7 +182,6 @@ const CheckoutView = () => {
                                     membershipId,
                                     userId: userStorage?.id,
                                     amount: newAmount,
-                                    currency: item?.currency?.code,
                                   }}
                                 />
                               </>
@@ -198,8 +207,7 @@ const CheckoutView = () => {
                               data={{
                                 membershipId,
                                 userId: userStorage?.id,
-                                amount: newAmount,
-                                currency: item?.currency?.code,
+                                amount: newAmount
                               }}
                             />
                           </>
