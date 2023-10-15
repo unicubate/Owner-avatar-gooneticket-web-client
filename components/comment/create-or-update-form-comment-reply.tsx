@@ -100,14 +100,14 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-4 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
-          <div className="flex items-start">
+          {/* <div className="flex items-start">
             <Avatar
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
               src="https://picsum.photos/seed/NLHCIy/640/480"
               alt=""
             />
-          </div>
+          </div> */}
           <div className="mt-2">
             <TextAreaInput
               row={1.2}

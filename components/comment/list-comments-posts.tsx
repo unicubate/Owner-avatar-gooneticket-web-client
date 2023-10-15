@@ -21,6 +21,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { BsReplyAll } from "react-icons/bs";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   item?: CommentModel;
@@ -111,14 +112,11 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
       <li key={index} className="py-4">
         {!openModal ? (
           <div className="flex items-start">
-            <Avatar
-              size={40}
+            <AvatarComponent size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              src={item?.profile?.image}
-              alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-            />
+              profile={item?.profile} />
 
-            <div className="ml-4">
+            <div className="ml-3">
               <div className="flex items-center space-x-px">
                 <div className="flex items-center">
                   <p className="text-sm font-bold text-gray-900">

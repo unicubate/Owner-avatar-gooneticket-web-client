@@ -13,6 +13,7 @@ import {
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   item?: CommentModel;
@@ -28,8 +29,8 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
   };
 
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -68,14 +69,11 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
   return (
     <>
       <div key={index} className="flex items-start mt-4">
-        <Avatar
-          size={40}
+        <AvatarComponent size={40}
           className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-          src={item?.profile?.image}
-          alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-        />
+          profile={item?.profile} />
 
-        <div className="ml-4">
+        <div className="ml-3">
           <div className="flex items-center space-x-px">
             <div className="flex items-center">
               <p className="text-sm font-bold text-gray-900">
