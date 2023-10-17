@@ -37,11 +37,11 @@ const Dashboard = () => {
                       </div>
 
                       <div className="ml-4 cursor-pointer">
-                        <p className="text-xl font-bold text-gray-900">
+                        <p className="text-xl font-bold dark:text-gray-900">
                           {user?.profile?.firstName ?? ""}{" "}
                           {user?.profile?.lastName ?? ""}
                         </p>
-                        <p className="mt-1 text-sm font-medium text-gray-600">
+                        <p className="mt-1 text-sm font-medium dark:text-gray-600">
                           {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ""}
                         </p>
                       </div>
@@ -62,7 +62,7 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center mt-3">
+                    <div className="flex items-center mt-3 dark:text-gray-900">
                       <Link href="/settings/subscribes">
                         <span className="text-lg font-bold">
                           {user?.totalSubscribe ?? 0}
@@ -91,7 +91,7 @@ const Dashboard = () => {
                       </Link>
                     </div>
 
-                    <div className="flex items-center mt-3">
+                    <div className="flex items-center mt-3 dark:text-gray-900">
                       <p className="text-3xl font-bold">
                         {formatePrice({
                           value: Number(

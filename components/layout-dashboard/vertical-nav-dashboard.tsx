@@ -164,7 +164,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </nav>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest dark:text-gray-400 uppercase">
               Monetize
             </p>
 
@@ -178,8 +178,8 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     title={item?.title}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 text-gray-900"
+                        ? `dark:text-white bg-${user?.profile?.color}-600`
+                        : "dark:hover:bg-gray-200 text-gray-900"
                     } `}
                   >
                     {item?.icon}
@@ -200,7 +200,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest dark:text-gray-400 uppercase">
               Support
             </p>
             <nav className="flex-1 mt-4 space-y-1">
@@ -213,8 +213,8 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     title={item?.title}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 text-gray-900"
+                        ? `dark:text-white bg-${user?.profile?.color}-600`
+                        : "dark:hover:bg-gray-200 text-gray-900"
                     } `}
                   >
                     {item?.icon}
@@ -227,7 +227,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest dark:text-gray-400 uppercase">
               Settings
             </p>
             <nav className="flex-1 mt-4 space-y-1">
@@ -240,8 +240,8 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     title={item?.title}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 text-gray-900"
+                        ? `dark:text-white bg-${user?.profile?.color}-600`
+                        : "dark:hover:bg-gray-200 text-gray-900"
                     } `}
                   >
                     {item?.icon}
@@ -255,7 +255,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               href={void (0)}
               title=""
               onClick={() => logoutUser()}
-                className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 text-gray-900 rounded-lg hover:bg-gray-200 group cursor-pointer"
+                className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 dark:text-gray-900 rounded-lg dark:hover:bg-gray-200 group cursor-pointer"
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 mr-4"

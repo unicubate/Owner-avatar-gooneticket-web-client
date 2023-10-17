@@ -66,7 +66,7 @@ const RecentTransactions: React.FC<Props> = ({ model, organizationId }) => {
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white border border-gray-200 rounded-lg">
+      <div className="mt-4 px-4 py-4 overflow-hidden dark:bg-white border dark:border-gray-200 rounded-lg">
         <div className="flex items-center">
           <p className="text-lg font-bold">Recent transactions</p>
         </div>

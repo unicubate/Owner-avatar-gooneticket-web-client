@@ -30,7 +30,7 @@ const TextInputPassword: React.FC<Props> = ({
   return (
     <>
      {label ? <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block dark:text-gray-700 text-sm font-bold mb-2"
         htmlFor={name}>
         {label}
       </label> : null}
@@ -55,7 +55,7 @@ const TextInputPassword: React.FC<Props> = ({
         )}
       />
       {errors?.[name] && (
-        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+        <span className="flex items-center font-medium tracking-wide dark:text-red-500 text-xs mt-1 ml-1">
           {errors?.[name]?.message}
         </span>
       )}

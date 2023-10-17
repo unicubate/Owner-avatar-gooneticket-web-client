@@ -81,7 +81,7 @@ const Login = () => {
   return (
     <>
       <LayoutSite title="Log In">
-        <div className="w-full max-w-sm p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
+        <div className="w-full max-w-sm p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-white rounded-lg shadow-md">
           <div className="flex justify-center mx-auto">
             <img
               className="w-auto h-7 sm:h-8"
@@ -97,7 +97,7 @@ const Login = () => {
 
           <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
-              <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
+              <div className="relative mb-4 block w-full rounded-lg dark:bg-red-500 p-4 text-base leading-5 dark:text-white opacity-100">
                 {hasErrors}
               </div>
             )}
@@ -125,10 +125,10 @@ const Login = () => {
               <div className="flex justify-between items-center">
                 <label
                   htmlFor="password"
-                  className="block text-sm mb-2 dark:text-white"
+                  className="block text-sm mb-2 dark:dark:text-white"
                 ></label>
                 <Link
-                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                  className="text-sm dark:text-blue-600 decoration-2 hover:underline font-medium"
                   href="/forgot-password"
                 >
                   Forgot password?
@@ -151,7 +151,7 @@ const Login = () => {
 
           <div className="flex items-center justify-between mt-4">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-            <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
+            <p className="text-xs text-center dark:text-gray-500 uppercase dark:dark:text-gray-400">
               or login with Social Media
             </p>
 
@@ -160,7 +160,7 @@ const Login = () => {
 
           <a
             href="#"
-            className="flex items-center justify-center mt-4 px-6 py-3 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center mt-4 px-6 py-3 dark:text-gray-600 transition-colors duration-300 transform border rounded-lg dark:hover:bg-gray-50"
           >
             <svg className="w-6 h-6 mx-2" viewBox="0 0 40 40">
               <path
@@ -186,7 +186,7 @@ const Login = () => {
 
           <a
             href="#"
-            className="flex items-center justify-center mt-4 px-6 py-3 text-gray-600 transition-colors duration-300 transform border rounded-lg hover:bg-gray-50"
+            className="flex items-center justify-center mt-4 px-6 py-3 dark:text-gray-600 transition-colors duration-300 transform border rounded-lg dark:hover:bg-gray-50"
           >
             <svg className="w-6 h-6 mx-2" viewBox="0 0 16 16">
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
@@ -196,7 +196,7 @@ const Login = () => {
           </a>
 
           <Link href="/register">
-            <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
+            <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer dark:hover:text-blue-600">
               {" "}
               New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
             </p>
