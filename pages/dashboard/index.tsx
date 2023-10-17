@@ -25,12 +25,12 @@ const Dashboard = () => {
   return (
     <>
       <LayoutDashboard title={"Dashboard"}>
-        <div className="flex-1 bg-gray-100">
+        <div className="flex-1 dark:bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
               <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
                 <div className="flow-root">
-                  <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
+                  <div className="px-3 py-2 dark:bg-white border dark:border-gray-200 rounded-lg">
                     <div className="flex items-center">
                       <div className="relative flex-shrink-0 cursor-pointer">
                         <AvatarComponent size={60} profile={user?.profile} />

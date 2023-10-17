@@ -45,14 +45,14 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white border-[1px] border-gray-300 sticky top-0 z-20">
+      <header className="dark:bg-white border-[1px] dark:border-gray-300 sticky top-0 z-20">
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
               <button
                 onClick={showDrawer}
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-lg hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex items-center justify-center p-2 dark:text-gray-400 dark:bg-white rounded-lg dark:hover:text-gray-500 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600"
               >
                 <svg
                   className="w-6 h-6"
