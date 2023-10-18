@@ -57,7 +57,7 @@ const RecentTransactions: React.FC<Props> = ({ model, organizationId }) => {
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataGallery.pages
+    dataGallery?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListTransactions item={item} key={index} index={index} />

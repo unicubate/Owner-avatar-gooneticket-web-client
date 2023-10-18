@@ -19,15 +19,12 @@ export const CreateOrUpdateOneCommentAPI = ({
 } = {}) => {
   const queryKey = ["comments"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
-      payload: CommentFormModel & {
-        postId: string;
-        commentId: string;
-      }
-    ): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
+      payload: CommentFormModel & { postId: string; commentId: string }
+    ) => {
       const { postId, commentId } = payload;
-
       return commentId
         ? await makeApiCall({
             action: "updateOneComment",
@@ -39,27 +36,25 @@ export const CreateOrUpdateOneCommentAPI = ({
             body: { ...payload, postId },
           });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: (error, variables, context) => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -73,12 +68,12 @@ export const CreateOrUpdateOneCommentReplyAPI = ({
 } = {}) => {
   const queryKey = ["comments-replies"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
       payload: CommentFormModel & { parentId: string; commentId: string }
-    ): Promise<any> => {
+    ) => {
       const { parentId, commentId } = payload;
-
       return commentId
         ? await makeApiCall({
             action: "updateOneComment",
@@ -90,27 +85,25 @@ export const CreateOrUpdateOneCommentReplyAPI = ({
             body: { ...payload, parentId },
           });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error, variables, context) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -124,36 +117,34 @@ export const DeleteOneCommentReplyAPI = ({
 } = {}) => {
   const queryKey = ["comments-replies"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { commentId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { commentId: string }) => {
       const { commentId } = payload;
-
       return await makeApiCall({
         action: "deleteOneComment",
         urlParams: { commentId },
       });
     },
-    {
-      onSettled: async (action) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async (action) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error, variables, context) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -167,36 +158,34 @@ export const DeleteOneCommentAPI = ({
 } = {}) => {
   const queryKey = ["comments"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { commentId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { commentId: string }) => {
       const { commentId } = payload;
-
       return await makeApiCall({
         action: "deleteOneComment",
         urlParams: { commentId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -234,7 +223,7 @@ export const GetInfiniteCommentsAPI = (payload: {
         ...payload,
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };
 
@@ -251,6 +240,6 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
         ...payload,
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

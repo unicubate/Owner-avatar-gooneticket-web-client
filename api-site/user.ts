@@ -67,8 +67,9 @@ export const UpdateEnableProfileAPI = ({
 } = {}) => {
   const queryKey = ["user"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: {
       profileId: string;
       enableCommission?: boolean;
       enableShop?: boolean;
@@ -82,27 +83,25 @@ export const UpdateEnableProfileAPI = ({
         queryParams: { enableCommission, enableShop, enableGallery },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -114,9 +113,11 @@ export const ValidCodeAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["user"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: {
       code: string;
       nextStep: NextStep;
     }): Promise<{ data: UserModel }> => {
@@ -125,28 +126,26 @@ export const ValidCodeAPI = ({
         body: payload,
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
-
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+  
   return result;
 };
 

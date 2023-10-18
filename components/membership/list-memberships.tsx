@@ -72,7 +72,7 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
     uploadableId: String(item?.id),
   });
 
-  if (status === "loading") {
+  if (status === "pending") {
     <p>loading...</p>;
   }
 

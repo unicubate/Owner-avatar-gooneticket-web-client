@@ -10,14 +10,14 @@ export const CreateOrUpdateOneLikeAPI = ({
 } = {}) => {
   const queryKey = ["likes"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: {
       likeableId: string;
       type: string;
       isLike: boolean;
-    }): Promise<any> => {
+    }) => {
       const { likeableId, type, isLike } = payload;
-
       return !isLike
         ? await makeApiCall({
             action: "createOneLike",
@@ -28,27 +28,25 @@ export const CreateOrUpdateOneLikeAPI = ({
             urlParams: { likeableId, type },
           });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };

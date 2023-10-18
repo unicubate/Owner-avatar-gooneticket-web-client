@@ -17,14 +17,10 @@ export const CreateOrUpdateOneDiscountAPI = ({
 } = {}) => {
   const queryKey = ["discounts"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
-      payload: DiscountFormModel & {
-        discountId: string;
-      }
-    ): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: DiscountFormModel & { discountId: string }) => {
       const { discountId } = payload;
-
       return discountId
         ? await makeApiCall({
             action: "updateOneDiscount",
@@ -36,27 +32,25 @@ export const CreateOrUpdateOneDiscountAPI = ({
             body: { ...payload },
           });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -70,36 +64,34 @@ export const DeleteOneDiscountAPI = ({
 } = {}) => {
   const queryKey = ["discounts"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { discountId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { discountId: string }) => {
       const { discountId } = payload;
-
       return await makeApiCall({
         action: "deleteOneDiscount",
         urlParams: { discountId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -126,7 +118,6 @@ export const GetAllDiscountsAPI = (search?: string) => {
   });
 };
 
-
 export const GetInfiniteDiscountsAPI = (payload: {
   search?: string;
   take: number;
@@ -144,6 +135,6 @@ export const GetInfiniteDiscountsAPI = (payload: {
         sort: sort,
       }),
     staleTime: 60_000,
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

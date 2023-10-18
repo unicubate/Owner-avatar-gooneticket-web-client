@@ -52,7 +52,7 @@ const PublicLastPosts: React.FC<Props> = ({ organizationId, post }) => {
           <ul className="divide-y divide-gray-200 -my-7">
 
 
-            {dataPosts.pages
+            {dataPosts?.pages
               .flatMap((page: any) => page?.data?.value)
               .map((item, index) => (
                 <ListLastPosts item={item} key={index} />

@@ -7,25 +7,28 @@ import { AlertDangerNotification } from "@/utils";
 
 const CreateOrUpdateFormLike: React.FC<{
   item?: any;
-  typeLike: 'POST' | 'COMMENT'
+  typeLike: "POST" | "COMMENT";
 }> = ({ item, typeLike }) => {
-  const [like, setLike] = useState(false)
-  const [isLike, setIsLike] = useState(item?.isLike)
-  const [totalLike, setTotalLike] = useState(item?.totalLike ?? 0)
-
+  const [like, setLike] = useState(false);
+  const [isLike, setIsLike] = useState(item?.isLike);
+  const [totalLike, setTotalLike] = useState(item?.totalLike ?? 0);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOneLikeAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneLikeAPI({
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const likeItem = async (item: any) => {
-    setIsLike((lk: boolean) => !lk)
-    isLike ? setTotalLike((lk: number) => --lk) : setTotalLike((lk: number) => ++lk)
+    setIsLike((lk: boolean) => !lk);
+    isLike
+      ? setTotalLike((lk: number) => --lk)
+      : setTotalLike((lk: number) => ++lk);
     try {
-      await saveMutation.mutateAsync({
-        likeableId: item?.id, type: typeLike, isLike
+      await saveMutation({
+        likeableId: item?.id,
+        type: typeLike,
+        isLike,
       });
     } catch (error: any) {
       AlertDangerNotification({
@@ -35,23 +38,31 @@ const CreateOrUpdateFormLike: React.FC<{
         position: "center",
       });
     }
-
-  }
+  };
 
   return (
     <>
-      {item?.isLike && isLike || like ?
-        <button onClick={() => { likeItem(item), setLike(false) }} className="text-2xl text-indigo-600">
+      {(item?.isLike && isLike) || like ? (
+        <button
+          onClick={() => {
+            likeItem(item), setLike(false);
+          }}
+          className="text-2xl text-indigo-600"
+        >
           <MdOutlineFavorite />
-        </button> :
-        <button onClick={() => { likeItem(item), setLike(true) }} className="text-2xl">
+        </button>
+      ) : (
+        <button
+          onClick={() => {
+            likeItem(item), setLike(true);
+          }}
+          className="text-2xl"
+        >
           <MdFavoriteBorder />
         </button>
-      }
+      )}
 
-      <span className="ml-1.5 font-normal text-sm">
-        {totalLike}
-      </span>
+      <span className="ml-1.5 font-normal text-sm">{totalLike}</span>
     </>
   );
 };

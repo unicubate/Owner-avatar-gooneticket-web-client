@@ -65,7 +65,7 @@ const TableGallery: React.FC<Props> = ({ organizationId }) => {
       description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
     />
   ) : (
-    dataGallery.pages
+    dataGallery?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListGallery item={item} key={index} index={index} />

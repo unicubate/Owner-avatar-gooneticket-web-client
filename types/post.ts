@@ -47,20 +47,20 @@ export type PostModel = {
 };
 
 export type PostFormModel = {
-  description: string;
-  title: string;
-  whoCanSee: string;
-  userId: string;
-  image: string;
-  urlMedia: string;
-  membershipId: string;
-  allowDownload: string;
-  enableUrlMedia: string;
-  isLike: number;
-  type: PostType;
-  attachment: any;
-  imageList: any;
-  newImageLists: any;
-  fileList: any;
-  newFileLists: any;
+  description?: string;
+  title?: string;
+  whoCanSee?: string;
+  userId?: string;
+  image?: string;
+  urlMedia?: string;
+  membershipId?: string;
+  allowDownload?: string;
+  enableUrlMedia?: string;
+  isLike?: number;
+  type?: PostType;
+  attachment?: any;
+  imageList?: any;
+  newImageLists?: any;
+  fileList?: any;
+  newFileLists?: any;
 };

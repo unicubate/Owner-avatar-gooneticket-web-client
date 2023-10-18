@@ -69,7 +69,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     uploadType: "image",
   });
 
-  if (status === "loading") {
+  if (status === "pending") {
     <p>loading...</p>;
   }
 

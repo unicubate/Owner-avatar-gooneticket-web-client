@@ -60,7 +60,7 @@ const PublicPosts: React.FC<Props> = ({ organizationId }) => {
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataPosts.pages
+    dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListPublicPosts item={item} key={index} commentTake={2} />

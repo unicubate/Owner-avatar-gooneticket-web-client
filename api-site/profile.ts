@@ -14,36 +14,36 @@ export const UpdateOneProfileNextStepAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["user"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: NextStepProfileFormModel): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: NextStepProfileFormModel): Promise<any> => {
       return await makeApiCall({
         action: "updateOneProfileNextStep",
         body: payload,
         urlParams: { userId: payload?.userId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -55,48 +55,55 @@ export const UpdateOneProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["user"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: ProfileFormModel & { profileId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
+      payload: ProfileFormModel & { profileId: string }
+    ): Promise<any> => {
       return await makeApiCall({
         action: "updateOneProfile",
         body: payload,
         urlParams: { profileId: payload?.profileId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
 
-export const getOneProfileAPI = async (payload: {
-  profileId: string;
-}): Promise<{ data: ProfileModel }> => {
+export const GetOneProfileAPI = (payload: { profileId: string }) => {
   const { profileId } = payload;
-  return await makeApiCall({
-    action: "getOneProfile",
-    urlParams: { profileId },
+  const { data, isError, isLoading, status } = useQuery({
+    queryKey: ["profile", { ...payload }],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOneProfile",
+        urlParams: { profileId },
+      }),
+    refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as ProfileModel | any, isError, isLoading, status };
 };
 
 

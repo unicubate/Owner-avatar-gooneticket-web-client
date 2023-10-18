@@ -29,7 +29,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataComments.pages
+    dataComments?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListCommentsPosts item={item} key={index} index={index} />

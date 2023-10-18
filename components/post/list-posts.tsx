@@ -29,9 +29,9 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState<boolean>(false);
 
-  const saveMutation = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+  const { mutateAsync: saveMutation } = DeleteOnePostAPI({
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -48,7 +48,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ postId: item?.id });
+          await saveMutation({ postId: item?.id });
           AlertSuccessNotification({
             text: "Post deleted successfully",
             className: "info",
@@ -74,7 +74,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
     uploadType: "image",
   });
 
-  if (status === "loading") {
+  if (status === "pending") {
     <p>loading...</p>;
   }
 
@@ -146,7 +146,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
               <button
                 onClick={() =>
                   router.push(
-                    `/posts/${item?.id
+                    `/posts/${
+                      item?.id
                     }/edit?type=${item?.type.toLocaleLowerCase()}`
                   )
                 }

@@ -38,7 +38,7 @@ const CheckoutView = () => {
       month: 1,
     };
 
-  if (status === "loading") {
+  if (status === "pending") {
     <LoadingFile />;
   }
 

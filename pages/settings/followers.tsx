@@ -30,7 +30,7 @@ const Followers = () => {
   ) : dataFollowers?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataFollowers.pages
+    dataFollowers?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListFollowers item={item} key={index} index={index} />

@@ -35,8 +35,8 @@ export const GetInfiniteTransactionsAPI = (payload: {
         sort,
         organizationId,
         status: status?.toUpperCase(),
-        page: pageParam,
+        page: Number(pageParam),
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

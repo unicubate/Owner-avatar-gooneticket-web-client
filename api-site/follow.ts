@@ -14,14 +14,15 @@ export const CreateOrDeleteOneFollowerAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["follows"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: {
       followerId?: string;
       action: "DELETE" | "CREATE";
-    }): Promise<any> => {
+    }) => {
       const { followerId, action } = payload;
-
       if (action === "DELETE") {
         return await makeApiCall({
           action: "deleteOneFollowers",
@@ -29,7 +30,6 @@ export const CreateOrDeleteOneFollowerAPI = ({
           urlParams: { followerId },
         });
       }
-
       if (action === "CREATE") {
         return await makeApiCall({
           action: "createOneFollowers",
@@ -38,27 +38,25 @@ export const CreateOrDeleteOneFollowerAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -116,7 +114,7 @@ export const GetInfiniteFollowersAPI = (payload: {
         sort: sort,
       }),
     staleTime: 60_000,
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };
 
@@ -135,6 +133,6 @@ export const GetInfiniteFollowingsAPI = (payload: {
         sort: sort,
       }),
     staleTime: 60_000,
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

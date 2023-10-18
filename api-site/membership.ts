@@ -1,10 +1,4 @@
 import { MembershipFormModel, MembershipModel } from "@/types/membership";
-import {
-  PostFormModel,
-  PostModel,
-  PostType,
-  ResponsePostModel,
-} from "@/types/post";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
@@ -25,10 +19,11 @@ export const CreateOrUpdateOneMembershipAPI = ({
 } = {}) => {
   const queryKey = ["memberships"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
       payload: MembershipFormModel & { membershipId?: string }
-    ): Promise<any> => {
+    ) => {
       const { membershipId, newImageLists } = payload;
       let data = new FormData();
       data.append("title", `${payload.title ?? ""}`);
@@ -36,19 +31,16 @@ export const CreateOrUpdateOneMembershipAPI = ({
       data.append("pricePerMonthly", `${payload.pricePerMonthly ?? ""}`);
       data.append("pricePerYearly", `${payload.pricePerYearly ?? ""}`);
       data.append("messageWelcome", `${payload.messageWelcome ?? ""}`);
-
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
           data.append("attachmentImages", file?.originFileObj as RcFile);
         });
-
       if (membershipId) {
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists },
           queryParams: { uploadableId: membershipId, model: "MEMBERSHIP" },
         });
-
         if (result) {
           await makeApiCall({
             action: "updateOneMembership",
@@ -56,7 +48,6 @@ export const CreateOrUpdateOneMembershipAPI = ({
             urlParams: { membershipId },
           });
         }
-
         return "Ok";
       } else {
         return await makeApiCall({
@@ -65,27 +56,25 @@ export const CreateOrUpdateOneMembershipAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -99,36 +88,34 @@ export const DeleteOneMembershipAPI = ({
 } = {}) => {
   const queryKey = ["memberships"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { membershipId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { membershipId: string }) => {
       const { membershipId } = payload;
-
       return await makeApiCall({
         action: "deleteOneMembership",
         urlParams: { membershipId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -203,6 +190,6 @@ export const GetInfiniteMembershipsAPI = (payload: {
         sort,
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

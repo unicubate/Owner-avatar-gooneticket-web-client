@@ -61,7 +61,7 @@ const TableMemberships: React.FC<Props> = ({ organizationId }) => {
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
   ) : (
-    dataGallery.pages
+    dataGallery?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListMemberships item={item} key={index} index={index} />

@@ -23,10 +23,12 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
 } = {}) => {
   const queryKey = ["gallery-posts"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: PostFormModel & { postId?: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
+      payload: PostFormModel & { postId?: string }
+    ): Promise<any> => {
       const { postId, newImageLists } = payload;
-
       let data = new FormData();
       data.append("title", payload.title ?? "");
       data.append("description", payload.description ?? "");
@@ -60,7 +62,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
           });
         }
 
-        return "Ok";
+        return "ok";
       } else {
         return await makeApiCall({
           action: "createOnePostGallery",
@@ -68,27 +70,25 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -102,8 +102,11 @@ export const CreateOrUpdateOnePostAPI = ({
 } = {}) => {
   const queryKey = ["posts"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: PostFormModel & { postId?: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
+      payload: PostFormModel & { postId?: string }
+    ): Promise<any> => {
       const { postId, newImageLists, newFileLists } = payload;
       let data = new FormData();
       data.append("type", `${payload.type ?? ""}`);
@@ -147,27 +150,25 @@ export const CreateOrUpdateOnePostAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -179,37 +180,36 @@ export const DeleteOnePostAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["posts"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { postId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { postId: string }) => {
       const { postId } = payload;
-
       return await makeApiCall({
         action: "deleteOnePost",
         urlParams: { postId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -297,9 +297,9 @@ export const GetInfinitePostsAPI = (payload: {
         type,
         typeIds,
         status: status?.toUpperCase(),
-        page: pageParam,
+        page: Number(pageParam),
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };
 
@@ -323,9 +323,9 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
     queryFn: async ({ pageParam = 0 }) =>
       await getFollowsPostsAPI({
         take: take,
-        page: pageParam,
+        page: Number(pageParam),
         sort: sort,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

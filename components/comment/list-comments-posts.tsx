@@ -95,7 +95,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataComments.pages
+    dataComments?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListCommentsRepliesPosts

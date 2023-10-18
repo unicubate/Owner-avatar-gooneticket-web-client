@@ -68,16 +68,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     queryKey: ["memberships"],
   });
 
-  const fetchCategories = async () => await getCategoriesAPI({ organizationId: "" });
-  const { data: dataCategories } = useQuery(
-    ["categories"],
-    () => fetchCategories(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const categories: any = dataCategories?.data;
-
   useEffect(() => {
     if (post) {
       const fields = [

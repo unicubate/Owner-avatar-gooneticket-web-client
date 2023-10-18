@@ -51,7 +51,7 @@ const Followings = () => {
   ) : dataFollowings?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataFollowings.pages
+    dataFollowings?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListFollowings item={item} key={index} index={index} />

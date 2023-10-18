@@ -3,11 +3,10 @@ import { Avatar, Button, Select, Space, Upload } from "antd";
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
+  GetOneProfileAPI,
   UpdateOneProfileAPI,
   getOneFileProfileAPI,
-  getOneProfileAPI,
 } from "@/api-site/profile";
-import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -57,17 +56,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
 
   const { data: countries } = GetAllCountiesAPI();
 
-  const fetchOneProfile = async () =>
-    await getOneProfileAPI({ profileId: profileId });
-  const { data: profileItem } = useQuery(
-    ["profile", profileId],
-    () => fetchOneProfile(),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(profileId),
-    }
-  );
-  const profile: any = profileItem?.data;
+  const { data: profile, status } = GetOneProfileAPI({ profileId });
 
   useEffect(() => {
     if (profile) {
@@ -284,20 +273,20 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                       <>
                         {colors?.length > 0
                           ? colors?.map((item: any, index: number) => (
-                            <Option
-                              key={index}
-                              value={item?.name}
-                              name={item?.name}
-                            >
-                              <Space>
-                                <span
-                                  className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}
-                                >
-                                  {item?.name}
-                                </span>
-                              </Space>
-                            </Option>
-                          ))
+                              <Option
+                                key={index}
+                                value={item?.name}
+                                name={item?.name}
+                              >
+                                <Space>
+                                  <span
+                                    className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}
+                                  >
+                                    {item?.name}
+                                  </span>
+                                </Space>
+                              </Option>
+                            ))
                           : null}
                       </>
                     </Select>

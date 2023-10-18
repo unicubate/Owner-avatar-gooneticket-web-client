@@ -79,7 +79,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     uploadableId: String(item?.id),
   });
 
-  if (status === "loading") {
+  if (status === "pending") {
     <strong>loading...</strong>;
   }
 

@@ -56,7 +56,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     },
     onError: (error?: any) => {
       setHasErrors(true);
-      setHasErrors(error.response.data.message);
+      setHasErrors(error?.response?.data?.message);
     },
   });
 

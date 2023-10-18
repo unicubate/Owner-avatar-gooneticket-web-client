@@ -3,7 +3,6 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Button } from "antd";
 import { useAuth } from "@/components/util/context-user";
-import { getOneProfileAPI } from "../../api-site/profile";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";

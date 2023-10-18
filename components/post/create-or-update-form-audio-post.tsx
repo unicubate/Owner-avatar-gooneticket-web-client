@@ -95,7 +95,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   }, [post, postId, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOnePostAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOnePostAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -124,7 +124,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         newImageLists,
       };
 
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
         type: "AUDIO",
         postId: post?.id,
@@ -138,7 +138,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      router.push(`/posts`)
+      router.push(`/posts`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

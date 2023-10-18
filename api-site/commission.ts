@@ -22,10 +22,11 @@ export const CreateOrUpdateOneCommissionAPI = ({
 } = {}) => {
   const queryKey = ["commissions"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
       payload: CommissionFormModel & { commissionId?: string }
-    ): Promise<any> => {
+    ) => {
       const { commissionId, newImageLists } = payload;
       let data = new FormData();
       data.append("title", `${payload.title ?? ""}`);
@@ -59,7 +60,7 @@ export const CreateOrUpdateOneCommissionAPI = ({
           });
         }
 
-        return "Ok";
+        return "ok";
       } else {
         return await makeApiCall({
           action: "createOneCommission",
@@ -67,27 +68,25 @@ export const CreateOrUpdateOneCommissionAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -99,37 +98,36 @@ export const DeleteOneCommissionAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
+  const queryKey = ["commissions"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { commissionId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { commissionId: string }) => {
       const { commissionId } = payload;
-
       return await makeApiCall({
         action: "deleteOneCommission",
         urlParams: { commissionId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries();
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries();
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -182,6 +180,6 @@ export const GetInfiniteCommissionsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

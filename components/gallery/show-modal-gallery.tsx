@@ -39,7 +39,7 @@ const ShowModalGallery: React.FC<Props> = ({
     data: item,
   } = GetOnePostAPI({ postId: post?.id });
 
-  if(status === 'loading'){
+  if(status === 'pending'){
     <strong>Loading...</strong>
   }
   return (

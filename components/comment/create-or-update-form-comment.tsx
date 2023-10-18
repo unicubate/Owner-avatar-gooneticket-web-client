@@ -52,7 +52,7 @@ const CreateOrUpdateFormComment: React.FC<{
     },
     onError: (error?: any) => {
       setHasErrors(true);
-      setHasErrors(error.response.data.message);
+      setHasErrors(error?.response?.data?.message);
     },
   });
 
@@ -64,7 +64,7 @@ const CreateOrUpdateFormComment: React.FC<{
     try {
       await saveMutation({
         ...payload,
-        postId: postId,
+        postId: '93993',
         commentId: comment?.id,
       });
       if (comment) {
@@ -83,9 +83,9 @@ const CreateOrUpdateFormComment: React.FC<{
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
-      setHasErrors(error.response.data.message);
+      setHasErrors(error?.response?.data?.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        text: `${error?.response?.data?.message}`,
         gravity: "top",
         className: "info",
         position: "center",

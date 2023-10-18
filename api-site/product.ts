@@ -22,12 +22,12 @@ export const CreateOrUpdateOneProductAPI = ({
 } = {}) => {
   const queryKey = ["products"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (
       payload: ProductFormModel & { productId?: string }
     ): Promise<any> => {
       const { productId, newImageLists, newFileLists } = payload;
-
       let data = new FormData();
       data.append("title", `${payload.title ?? ""}`);
       data.append("price", `${payload.price ?? ""}`);
@@ -46,24 +46,20 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("discountId", `${payload.discountId ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee ?? ""}`);
-
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
           data.append("attachmentImages", file?.originFileObj as RcFile);
         });
-
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
           data.append("attachmentFiles", file?.originFileObj as RcFile);
         });
-
       if (productId) {
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
           queryParams: { uploadableId: productId, model: "PRODUCT" },
         });
-
         if (result) {
           await makeApiCall({
             action: "updateOneProduct",
@@ -71,7 +67,6 @@ export const CreateOrUpdateOneProductAPI = ({
             urlParams: { productId },
           });
         }
-
         return "Ok";
       } else {
         return await makeApiCall({
@@ -80,27 +75,25 @@ export const CreateOrUpdateOneProductAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -114,8 +107,9 @@ export const DeleteOneProductAPI = ({
 } = {}) => {
   const queryKey = ["products"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { productId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { productId: string }): Promise<any> => {
       const { productId } = payload;
 
       return await makeApiCall({
@@ -123,27 +117,25 @@ export const DeleteOneProductAPI = ({
         urlParams: { productId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -199,6 +191,6 @@ export const GetInfiniteProductsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };
