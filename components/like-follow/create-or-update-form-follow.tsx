@@ -18,12 +18,12 @@ const CreateOrUpdateFormFollow: React.FC<{
   // Create or Update data
   const saveMutation = CreateOrDeleteOneFollowerAPI({
     onSuccess: () => {
-      // setHasErrors(false);
-      // setLoading(false);
+      setHasErrors(false);
+      setLoading(false);
     },
     onError: (error?: any) => {
-      // setHasErrors(true);
-      // setHasErrors(error.response.data.message);
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
     },
   });
 
@@ -54,7 +54,7 @@ const CreateOrUpdateFormFollow: React.FC<{
                   });
                   setHasErrors(false);
                   setLoading(false);
-                  setIsFollow((lk: boolean) => !lk)
+                  setIsFollow((lk: boolean) => !lk);
                 } catch (error: any) {
                   setHasErrors(true);
                   setLoading(false);
