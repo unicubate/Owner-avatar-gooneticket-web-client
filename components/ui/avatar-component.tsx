@@ -1,9 +1,10 @@
 import { capitalizeOneFirstLetter } from "@/utils/utils";
 import { Avatar } from "antd";
+import { ScreenSizeMap } from "antd/es/_util/responsiveObserver";
 
 interface Props {
   profile: any;
-  size?: number
+  size?: number | ScreenSizeMap
   className?: string
 }
 

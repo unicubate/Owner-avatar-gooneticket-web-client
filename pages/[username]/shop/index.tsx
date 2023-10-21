@@ -9,6 +9,7 @@ import { useAuth } from "@/components/util/context-user";
 import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 
 const ShopUserPublic = () => {
   const userVisiter = useAuth() as any;
@@ -27,7 +28,7 @@ const ShopUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicShop organizationId={user?.organizationId} />
+    <>{user?.id ? <PublicShop organizationId={user?.organizationId} /> : null}</>
   );
 
   if (user?.profile?.enableShop === false) {
@@ -35,15 +36,24 @@ const ShopUserPublic = () => {
   }
   return (
     <>
-      {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+      <LayoutUserPublicSite
+        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
+        user={user}>
 
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 
-          {dataTableProducts}
+          {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
+
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+
+              {dataTableProducts}
+
+            </div>
+          </div>
         </div>
-      </div>
+      </LayoutUserPublicSite>
     </>
   );
 };

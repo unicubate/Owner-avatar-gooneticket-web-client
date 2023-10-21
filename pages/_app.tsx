@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
 
             {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-              <ReactQueryDevtools initialIsOpen={false} />
+              <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
             )}
           </ContextUserProvider>
         </ConfigProvider>

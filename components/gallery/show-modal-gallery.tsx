@@ -17,6 +17,7 @@ import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { WhoCanSeeItem } from "../ui/who-can-see-item";
 import { GetOnePostAPI } from "@/api-site/post";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   openModal: boolean;
@@ -39,7 +40,7 @@ const ShowModalGallery: React.FC<Props> = ({
     data: item,
   } = GetOnePostAPI({ postId: post?.id });
 
-  if(status === 'pending'){
+  if (status === 'pending') {
     <strong>Loading...</strong>
   }
   return (
@@ -53,12 +54,7 @@ const ShowModalGallery: React.FC<Props> = ({
                 <div className="flex flex-shrink-0 items-center justify-between p-4 border-gray-200 rounded-t-md">
                   <div className="flex items-center">
                     <div className="relative flex-shrink-0 cursor-pointer">
-                      <Avatar
-                        size={40}
-                        className="object-cover w-10 h-10 rounded-full"
-                        src={item?.profile?.image}
-                        alt={`${item?.profile?.firstName} ${item?.profile?.lastName}`}
-                      />
+                      <AvatarComponent size={50} className="object-cover w-10 h-10 rounded-full" profile={item?.profile} />
                     </div>
 
                     <div className="ml-2 cursor-pointer">

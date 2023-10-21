@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { PublicCommissions } from "@/components/commission/public-commissions";
+import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 
 const CommissionsUserPublic = () => {
   const { query, push } = useRouter();
@@ -20,7 +21,7 @@ const CommissionsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicCommissions organizationId={user?.organizationId} />
+    <>{user?.id ? <PublicCommissions organizationId={user?.organizationId} /> : null}</>
   );
 
   if (user?.profile?.enableCommission === false) {
@@ -28,19 +29,46 @@ const CommissionsUserPublic = () => {
   }
   return (
     <>
-      {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+      <LayoutUserPublicSite
+        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
+        user={user}>
 
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="max-w-2xl mx-auto py-6">
-          <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
-            <div className="flow-root">
-              <div className="mt-4 mx-auto sm:px-6 md:px-8">
-                {publicCommissions}
+        <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+
+          {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+
+
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div className="max-w-2xl mx-auto py-6">
+              <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
+                <div className="flow-root">
+                  <div className="mx-auto sm:px-6 md:px-8">
+
+                    {publicCommissions}
+
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        {/* {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          <div className="max-w-2xl mx-auto py-6">
+            <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
+              <div className="flow-root">
+                <div className="mt-4 mx-auto sm:px-6 md:px-8">
+                  {publicCommissions}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> */}
+
+      </LayoutUserPublicSite>
+
     </>
   );
 };
