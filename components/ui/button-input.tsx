@@ -9,8 +9,8 @@ interface SizeInterface {
 const sizeType: SizeInterface = {
   huge: "5",
   large: "4",
-  normal: "3",
-  medium: "2",
+  normal: "3.5",
+  medium: "2.5",
   small: "0.2",
 };
 

@@ -82,7 +82,7 @@ const CreateOrUpdateFormFollow: React.FC<{
       {(item?.isFollow && isFollow) || follow ? (
         <ButtonInput
           shape="default"
-          size="normal"
+          size="huge"
           type="button"
           color="red"
           loading={false}
@@ -95,7 +95,7 @@ const CreateOrUpdateFormFollow: React.FC<{
       ) : (
         <ButtonCancelInput
           shape="default"
-          size="normal"
+          size="huge"
           loading={false}
           onClick={() => {
             followItem(item), setFollow(true);

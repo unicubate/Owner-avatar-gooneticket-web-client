@@ -9,8 +9,8 @@ interface SizeInterface {
 const sizeType: SizeInterface = {
   huge: "5",
   large: "4",
-  normal: "2.5",
-  medium: "0.5",
+  normal: "3.5",
+  medium: "2.5",
   small: "0.2",
 };
 
@@ -19,6 +19,7 @@ interface Props {
   size?: "large" | "medium" | "normal" | "small" | "huge";
   loading: boolean;
   children: React.ReactNode;
+  icon?: React.ReactNode;
   shape?: "round" | "default";
   minW?: "fit" | "full";
   onClick?: () => void;
@@ -28,6 +29,7 @@ const ButtonCancelInput: React.FC<Props> = ({
   ref,
   size,
   loading,
+  icon,
   children,
   onClick,
   minW,
@@ -68,6 +70,7 @@ const ButtonCancelInput: React.FC<Props> = ({
         hover:text-gray-900"
         `}
       >
+        {icon ? <span className="mr-1">{icon}</span> : null}
         {children}
       </button>
     </>

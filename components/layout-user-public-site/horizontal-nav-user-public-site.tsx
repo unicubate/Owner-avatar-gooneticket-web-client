@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BiHomeCircle, BiSearch, BiBookContent } from "react-icons/bi";
+import { BiHomeCircle, BiSearch, BiBookContent, BiCoffeeTogo } from "react-icons/bi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
 import { Avatar, Button, Image } from "antd";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import { AvatarComponent } from "../ui/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
+import { ButtonInput } from "../ui";
 
 
 interface Props {
@@ -162,24 +163,40 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                     </div>
                 </div> */}
 
-              <div className="flex items-center space-x-6 sm:ml-5">
-                {userVisiter?.id !== user?.id && (
-                  <div className="sm:ml-auto sm:mt-0">
+
+              {/* <div className="relative">
+                
+
+              </div> */}
+
+              <div className="flex items-center space-x-2 sm:ml-5">
+                {userVisiter?.id !== user?.id ? (
+                  <>
+                    <ButtonInput
+                      shape="default"
+                      size="normal"
+                      type="button"
+                      color="indigo"
+                      loading={false}
+                      icon={<BiCoffeeTogo className="h-6 w-6"/>}
+                    >
+                      Donate
+                    </ButtonInput>
                     <CreateOrUpdateFormFollow item={user} />
-                  </div>
-                )}
-                <button
-                  type="button"
-                  className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                >
-                  <AvatarComponent
-                    profile={user?.profile}
-                    className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                  />
-                  <p className="ml-1 text-sm font-bold text-gray-900">
-                    {user?.profile?.firstName} {user?.profile?.lastName}
-                  </p>
-                </button>
+                  </>
+                ) :
+                  <button
+                    type="button"
+                    className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                  >
+                    <AvatarComponent
+                      profile={user?.profile}
+                      className="object-cover bg-gray-300 rounded-full w-9 h-9"
+                    />
+                    <p className="ml-1 text-sm font-bold text-gray-900">
+                      {user?.profile?.firstName} {user?.profile?.lastName}
+                    </p>
+                  </button>}
               </div>
             </div>
           </div>
