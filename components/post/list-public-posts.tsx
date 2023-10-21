@@ -1,24 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Image } from "antd";
 import { PostModel } from "@/types/post";
-import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import {
   MdDeleteOutline,
-  MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
-import { getOneFileGalleryAPI } from "@/api-site/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/context-user";
 import Link from "next/link";
+import { ListCarouselUpload } from "../shop/list-carousel-upload";
+import { WhoCanSeeItem } from "../ui";
 
 type Props = {
   item?: PostModel;
@@ -93,17 +91,26 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {/* {item?.image ? (
-            <div className="mt-2">
-              <Image
-                width="100%"
-                height="100%"
+          {item?.uploadsImage?.length > 0 ? (
+            <div className="group relative mt-2 text-center justify-center mx-auto">
+              <ListCarouselUpload
+                uploads={item?.uploadsImage}
+                folder="posts"
                 preview={false}
-                src={`${getOneFileGalleryAPI(String(item?.image))}`}
-                alt={item?.title}
+                height={400}
+                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.isValidSubscribe !== 1
+                  ? "blur-3xl"
+                  : ""
+                  }`}
               />
+
+              {item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem username={item?.profile?.username} />
+              ) : null}
             </div>
-          ) : null} */}
+          ) : null}
 
           {item?.id ? (
             <Link
@@ -114,9 +121,24 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             </Link>
           ) : null}
 
-          <p className="mt-4 text-sm font-normal text-gray-600">
-            <HtmlParser html={String(item?.description)} />
-          </p>
+          {item?.description ? (
+            <div className={`text-sm font-normal text-gray-600 group relative`}>
+              <span className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1
+                ? "blur-lg"
+                : ""
+                }`}>
+                <HtmlParser html={String(item?.description ?? "")} value={item?.isValidSubscribe !== 1
+                  ? 600
+                  : 0} />
+              </span>
+
+              {item?.whoCanSee === "MEMBERSHIP" &&
+                item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem username={item?.profile?.username} />
+              ) : null}
+            </div>
+          ) : null}
 
           <div className="flex mt-4 items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />

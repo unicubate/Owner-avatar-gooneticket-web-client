@@ -1,12 +1,7 @@
-import { Button, Image, Spin } from "antd";
-import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
-import { BiCartAdd, BiComment } from "react-icons/bi";
 import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
-import PublicPosts from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/context-user";
-import { LoadingOutlined, SearchOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
@@ -46,10 +41,12 @@ const ShopUserPublic = () => {
 
 
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="max-w-full mx-auto py-6">
+              <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
 
-              {dataTableProducts}
+                {dataTableProducts}
 
+              </div>
             </div>
           </div>
         </div>

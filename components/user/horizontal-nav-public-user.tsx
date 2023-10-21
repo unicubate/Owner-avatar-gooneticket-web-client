@@ -58,9 +58,8 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
             {" "}
           </p>
 
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          {/* <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="w-full pb-1 overflow-x-auto">
-              {/* <div className="border-b border-gray-200"> */}
               <nav className="flex -mb-px space-x-10">
                 {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
                   const isActive = pathname.startsWith(item.href);
@@ -82,9 +81,8 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                 })}
 
               </nav>
-              {/* </div> */}
             </div>
-          </div>
+          </div> */}
 
         </div>
 

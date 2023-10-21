@@ -7,6 +7,7 @@ import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import ListPublicPosts from "./list-public-posts";
 import { LoadingFile } from "../ui/loading-file";
+import ListFollowPosts from "./list-follow-posts";
 
 type Props = {
   organizationId: string;
@@ -63,7 +64,7 @@ const PublicPosts: React.FC<Props> = ({ organizationId }) => {
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPublicPosts item={item} key={index} commentTake={2} />
+        <ListFollowPosts item={item} key={index} commentTake={2} />
       ))
   );
 
@@ -93,4 +94,4 @@ const PublicPosts: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default PublicPosts;
+export { PublicPosts };

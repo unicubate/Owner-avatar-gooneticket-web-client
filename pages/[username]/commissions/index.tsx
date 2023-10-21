@@ -39,7 +39,7 @@ const CommissionsUserPublic = () => {
 
 
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <div className="max-w-2xl mx-auto py-6">
+            <div className="max-w-full mx-auto py-6">
               <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
                 <div className="flow-root">
                   <div className="mx-auto sm:px-6 md:px-8">

@@ -64,7 +64,7 @@ const CreateOrUpdateFormComment: React.FC<{
     try {
       await saveMutation({
         ...payload,
-        postId: '93993',
+        postId: postId,
         commentId: comment?.id,
       });
       if (comment) {
