@@ -4,6 +4,7 @@ import {
   PostType,
   ResponsePostModel,
 } from "@/types/post";
+import { UserVisitorModel } from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
@@ -263,6 +264,7 @@ export const getOneFileGalleryAPI = (fileName: string) =>
 
 export const getPostsAPI = async (
   payload: {
+    userVisitorId: string;
     organizationId: string;
     type?: PostType;
     status?: string;
@@ -276,7 +278,7 @@ export const getPostsAPI = async (
 };
 
 export const GetInfinitePostsAPI = (payload: {
-  organizationId: string;
+  userVisitor: UserVisitorModel;
   take: number;
   status?: string;
   sort: SortModel;
@@ -284,14 +286,14 @@ export const GetInfinitePostsAPI = (payload: {
   typeIds?: string[];
   queryKey: string[];
 }) => {
-  const { organizationId, take, sort, status, type, typeIds, queryKey } =
-    payload;
+  const { userVisitor, take, sort, status, type, typeIds, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getPostsAPI({
-        organizationId,
+        userVisitorId: userVisitor?.id,
+        organizationId: userVisitor?.organizationId,
         take,
         sort,
         type,

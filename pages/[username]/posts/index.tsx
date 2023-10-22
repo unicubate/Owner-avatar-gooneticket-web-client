@@ -1,12 +1,14 @@
 import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
-import {PublicPosts} from "@/components/post/public-posts";
+import { PublicPosts } from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import PublicListLastPosts from '@/components/post/public-last-posts';
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
+import { useAuth } from "@/components/util/context-user";
 
 const PostsUserPublic = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -14,7 +16,7 @@ const PostsUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
 
   const dataTablePosts = isLoadingUser ? (
@@ -22,7 +24,7 @@ const PostsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <PublicPosts organizationId={user?.organizationId} />
+    <PublicPosts userVisitor={{ id: userVisiter?.id, organizationId: user?.organizationId, }} />
   );
 
   return (
@@ -45,7 +47,7 @@ const PostsUserPublic = () => {
               </div>
             </div>
 
-            {user?.id ? <PublicListLastPosts organizationId={user?.organizationId} /> : null}
+            {user?.id ? <PublicListLastPosts userVisitor={user?.organizationId} /> : null}
           </div>
         </div>
       </LayoutUserPublicSite>

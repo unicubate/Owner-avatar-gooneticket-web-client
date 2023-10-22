@@ -145,7 +145,7 @@ export const ValidCodeAPI = ({
       }
     },
   });
-  
+
   return result;
 };
 
@@ -168,6 +168,7 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
 
 export const GetOneUserPublicAPI = (payload: {
   userId?: string;
+  userVisitorId?: string;
   username?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({

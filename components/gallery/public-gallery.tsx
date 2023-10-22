@@ -5,12 +5,13 @@ import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import { ListPublicGallery } from "./list-public-gallery";
 import { LoadingFile } from "../ui/loading-file";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
-  organizationId: string;
+  userVisitor: UserVisitorModel;
 };
 
-const PublicGallery: React.FC<Props> = ({ organizationId }) => {
+const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -23,7 +24,7 @@ const PublicGallery: React.FC<Props> = ({ organizationId }) => {
   } = GetInfinitePostsAPI({
     take: 10,
     sort: "DESC",
-    organizationId,
+    userVisitor,
     status: "ACTIVE",
     typeIds: ["GALLERY"],
     queryKey: ["gallery-posts", "infinite"],

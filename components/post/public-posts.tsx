@@ -8,12 +8,13 @@ import { useInView } from "react-intersection-observer";
 import ListPublicPosts from "./list-public-posts";
 import { LoadingFile } from "../ui/loading-file";
 import ListFollowPosts from "./list-follow-posts";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
-  organizationId: string;
+  userVisitor: UserVisitorModel;
 };
 
-const PublicPosts: React.FC<Props> = ({ organizationId }) => {
+const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -26,7 +27,7 @@ const PublicPosts: React.FC<Props> = ({ organizationId }) => {
   } = GetInfinitePostsAPI({
     take: 10,
     sort: "DESC",
-    organizationId,
+    userVisitor,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['posts', "infinite"]

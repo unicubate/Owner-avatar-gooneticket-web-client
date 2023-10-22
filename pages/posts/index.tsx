@@ -5,9 +5,7 @@ import { useAuth } from "@/components/util/context-user";
 import { TablePosts } from "@/components/post/table-posts";
 
 const Posts = () => {
-  const { organizationId } = useAuth() as any;
-
-
+  const { userStorage: userVisiter } = useAuth() as any;
 
   return (
     <>
@@ -50,7 +48,10 @@ const Posts = () => {
 
                 <div className="flow-root">
 
-                  {organizationId ? <TablePosts organizationId={organizationId} /> : null}
+                  {userVisiter?.organizationId ? <TablePosts userVisitor={{
+                    id: userVisiter?.id,
+                    organizationId: userVisiter?.organizationId
+                  }} /> : null}
 
                 </div>
 

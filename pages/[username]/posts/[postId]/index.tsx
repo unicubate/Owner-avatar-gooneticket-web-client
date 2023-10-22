@@ -14,6 +14,7 @@ import PublicListLastPosts from "@/components/post/public-last-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostsShowUserPublic = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query } = useRouter();
   const username = String(query?.username);
   const postSlug = String(query?.postId);
@@ -53,7 +54,7 @@ const PostsShowUserPublic = () => {
             </div>
           </div>
 
-          {user?.id ? <PublicListLastPosts post={post} organizationId={user?.organizationId} /> : null}
+          {user?.id ? <PublicListLastPosts post={post} userVisitor={{ id: userVisiter?.id, organizationId: user?.organizationId, }} /> : null}
 
         </div>
       </div>

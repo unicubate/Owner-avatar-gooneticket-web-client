@@ -8,6 +8,7 @@ import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   item?: FollowModel;
@@ -36,9 +37,8 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   const followerItem = async (item: any) => {
     Swal.fire({
       title: "Unfollowing?",
-      text: `Are you sure you want to unfollow ${
-        item?.profile?.firstName ?? ""
-      } ${item?.profile?.lastName ?? ""}`,
+      text: `Are you sure you want to unfollow ${item?.profile?.firstName ?? ""
+        } ${item?.profile?.lastName ?? ""}`,
       confirmButtonText: "Yes, Unfollow",
       cancelButtonText: "No, Cancel",
       confirmButtonColor: "#dc3545",
@@ -88,10 +88,9 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
               onClick={() => router.push(`/${item?.profile?.username}`)}
               className="relative flex-shrink-0 cursor-pointer"
             >
-              <Avatar
-                size="large"
-                src={item?.profile?.image}
-                alt={item?.profile?.firstName}
+              <AvatarComponent
+                size={50}
+                profile={item?.profile}
               />
             </div>
 

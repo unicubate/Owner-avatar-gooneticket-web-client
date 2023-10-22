@@ -5,8 +5,7 @@ import { EnableGallery } from "@/components/gallery/enable-gallery";
 import { TableGallery } from "@/components/gallery/table-gallery";
 
 const Gallery = () => {
-
-  const { organizationId, profile } = useAuth() as any;
+  const { organizationId, profile, userStorage: userVisiter } = useAuth() as any;
 
   return (
     <>
@@ -24,7 +23,7 @@ const Gallery = () => {
 
                 <div className="flow-root">
 
-                  {organizationId ? <TableGallery organizationId={organizationId} /> : null}
+                  {organizationId ? <TableGallery userVisitor={{ id: userVisiter?.id, organizationId }} /> : null}
 
                 </div>
               </div>

@@ -21,7 +21,7 @@ const schema = yup.object({
 
 
 const ProfilePublic = () => {
-  const userVisiter = useAuth() as any;
+  const { userStorage: userVisiter } = useAuth() as any;
   const initialPrice = 3
   const initialCurrency = 'EUR'
   const [increment, setIncrement] = useState(1)
@@ -45,7 +45,7 @@ const ProfilePublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
 
   console.log('watchInitialPrice =======>', watchInitialPrice * increment)
@@ -59,7 +59,7 @@ const ProfilePublic = () => {
 
 
           {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
-          
+
 
 
         </div>

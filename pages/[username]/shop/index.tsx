@@ -7,7 +7,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 
 const ShopUserPublic = () => {
-  const userVisiter = useAuth() as any;
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
@@ -15,7 +15,7 @@ const ShopUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
 
   const dataTableProducts = isLoadingUser ? (

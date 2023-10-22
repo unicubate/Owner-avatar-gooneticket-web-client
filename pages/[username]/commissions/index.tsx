@@ -4,8 +4,10 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { LoadingFile } from "@/components/ui/loading-file";
 import { PublicCommissions } from "@/components/commission/public-commissions";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
+import { useAuth } from "@/components/util/context-user";
 
 const CommissionsUserPublic = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
@@ -13,7 +15,7 @@ const CommissionsUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
 
   const publicCommissions = isLoadingUser ? (

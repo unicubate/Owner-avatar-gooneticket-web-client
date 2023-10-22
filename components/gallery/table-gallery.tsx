@@ -8,12 +8,13 @@ import { GetInfinitePostsAPI } from "@/api-site/post";
 import { useInView } from "react-intersection-observer";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { useRouter } from "next/router";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
-  organizationId: string;
+  userVisitor: UserVisitorModel;
 };
 
-const TableGallery: React.FC<Props> = ({ organizationId }) => {
+const TableGallery: React.FC<Props> = ({ userVisitor }) => {
   const router = useRouter();
   const { ref, inView } = useInView();
   const [openModal, setOpenModal] = useState(false);
@@ -26,7 +27,7 @@ const TableGallery: React.FC<Props> = ({ organizationId }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    organizationId,
+    userVisitor,
     take: 6,
     sort: "DESC",
     type: "GALLERY",

@@ -6,12 +6,13 @@ import { EmptyData } from "@/components/ui/empty-data";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { ListPosts } from '@/components/post/list-posts';
 import { ButtonInput } from "../ui";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
-  organizationId: string;
+  userVisitor: UserVisitorModel;
 };
 
-const TablePosts: React.FC<Props> = ({ organizationId }) => {
+const TablePosts: React.FC<Props> = ({ userVisitor }) => {
   const router = useRouter();
   const { ref, inView } = useInView();
 
@@ -23,7 +24,7 @@ const TablePosts: React.FC<Props> = ({ organizationId }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    organizationId,
+    userVisitor,
     take: 10,
     sort: "DESC",
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],

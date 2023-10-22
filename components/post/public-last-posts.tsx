@@ -6,13 +6,14 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui/button-input";
 import ListLastPosts from "./list-last-posts";
 import { PostModel } from "@/types/post";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
   post?: PostModel
-  organizationId: string;
+  userVisitor: UserVisitorModel;
 };
 
-const PublicLastPosts: React.FC<Props> = ({ organizationId, post }) => {
+const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
 
   const {
     isLoading: isLoadingPosts,
@@ -24,7 +25,7 @@ const PublicLastPosts: React.FC<Props> = ({ organizationId, post }) => {
   } = GetInfinitePostsAPI({
     take: 4,
     sort: "DESC",
-    organizationId,
+    userVisitor,
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['last-posts', "infinite"]
   });
@@ -61,7 +62,7 @@ const PublicLastPosts: React.FC<Props> = ({ organizationId, post }) => {
 
           </ul>
         </div>
-        {organizationId || post?.organizationId ? (
+        {userVisitor?.organizationId || post?.organizationId ? (
           <div className="mt-6 text-center justify-center mx-auto">
             <div className="sm:mt-0">
               <ButtonInput

@@ -6,6 +6,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { ButtonInput } from "../ui/button-input";
 import { FollowModel } from "@/types/follow";
 import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
+import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
   item?: FollowModel;
@@ -67,13 +68,12 @@ const ListFollowers: React.FC<Props> = ({ item, index }) => {
         <hr className="mt-4 border-gray-200" />
         <div className="py-5">
           <div className="flex items-center">
-          <Link href={`/${item?.profile?.username}`}
+            <Link href={`/${item?.profile?.username}`}
               className="relative flex-shrink-0 cursor-pointer"
             >
-              <Avatar
-                size="large"
-                src={item?.profile?.image}
-                alt={item?.profile?.firstName}
+              <AvatarComponent
+                size={50}
+                profile={item?.profile}
               />
             </Link>
 

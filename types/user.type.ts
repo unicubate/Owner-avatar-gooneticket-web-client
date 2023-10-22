@@ -47,6 +47,10 @@ export type UserModel = {
   token: string;
 };
 
+export type UserVisitorModel = {
+  organizationId: string;
+  id: string;
+};
 username: "bokin-1659";
 export type UserForgotPasswordFormModel = {
   email: string;

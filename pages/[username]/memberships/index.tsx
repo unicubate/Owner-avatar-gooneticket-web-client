@@ -4,8 +4,10 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { LoadingFile } from "@/components/ui/loading-file";
 import { PublicMemberships } from "@/components/membership/public-memberships";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
+import { useAuth } from "@/components/util/context-user";
 
 const MembershipsUserPublic = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
@@ -13,7 +15,7 @@ const MembershipsUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
   const publicMemberships = isLoadingUser ? (
     <LoadingFile />

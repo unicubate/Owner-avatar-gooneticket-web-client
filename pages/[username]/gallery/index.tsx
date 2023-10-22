@@ -4,8 +4,10 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import PublicGallery from "@/components/gallery/public-gallery";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
+import { useAuth } from "@/components/util/context-user";
 
 const GalleryUserPublic = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
@@ -13,14 +15,14 @@ const GalleryUserPublic = () => {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({ username });
+  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
 
   const dataTablePosts = isLoadingUser ? (
     <LoadingFile />
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <> {user?.id ? <PublicGallery organizationId={user?.organizationId} /> : null} </>
+    <> {user?.id ? <PublicGallery userVisitor={{ id: userVisiter?.id, organizationId: user?.organizationId, }} /> : null} </>
   );
 
   if (user?.profile?.enableGallery === false) {
