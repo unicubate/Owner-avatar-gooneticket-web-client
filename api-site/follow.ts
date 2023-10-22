@@ -107,14 +107,14 @@ export const GetInfiniteFollowersAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["followers", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getFollowersAPI({
         take: take,
         page: pageParam,
         sort: sort,
       }),
     staleTime: 60_000,
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };
 
@@ -126,13 +126,13 @@ export const GetInfiniteFollowingsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["followings", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getFollowingsAPI({
         take: take,
         page: pageParam,
         sort: sort,
       }),
     staleTime: 60_000,
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };

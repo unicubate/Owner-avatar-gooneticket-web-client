@@ -127,7 +127,7 @@ export const GetInfiniteDiscountsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: ["discounts", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getDiscountsAPI({
         search: search,
         take: take,
@@ -135,6 +135,6 @@ export const GetInfiniteDiscountsAPI = (payload: {
         sort: sort,
       }),
     staleTime: 60_000,
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };

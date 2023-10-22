@@ -172,7 +172,7 @@ export const GetInfiniteCommissionsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getCommissionsAPI({
         organizationId,
         take,
@@ -180,6 +180,6 @@ export const GetInfiniteCommissionsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };

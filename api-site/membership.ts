@@ -183,13 +183,13 @@ export const GetInfiniteMembershipsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getMembershipsAPI({
         organizationId,
         take,
         sort,
         page: pageParam,
       }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };

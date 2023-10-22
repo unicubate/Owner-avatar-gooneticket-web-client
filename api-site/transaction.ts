@@ -28,7 +28,7 @@ export const GetInfiniteTransactionsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getTransactionsAPI({
         model,
         take,
@@ -37,6 +37,6 @@ export const GetInfiniteTransactionsAPI = (payload: {
         status: status?.toUpperCase(),
         page: Number(pageParam),
       }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };
