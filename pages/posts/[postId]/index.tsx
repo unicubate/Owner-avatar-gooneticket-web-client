@@ -9,7 +9,7 @@ import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostShow = () => {
-  const user = useAuth() as any;
+  const { userVisiter } = useAuth() as any;
   const router = useRouter();
   const { query } = useRouter();
   const postSlug = String(query?.postId);
@@ -25,7 +25,11 @@ const PostShow = () => {
   ) : isErrorPost ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <ListFollowPosts item={post} commentTake={10} />
+    <ListFollowPosts item={post} commentTake={10}
+      userVisitor={{
+        id: userVisiter?.id,
+        organizationId: userVisiter?.organizationId
+      }} />
   );
 
   return (

@@ -7,7 +7,7 @@ import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { useAuth } from "../util/context-user";
 
 
-const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId }) => {
+const ListComments: React.FC<{ take: number, postId: string, userVisitorId: string }> = ({ take, postId, userVisitorId }) => {
 
   const {
     isLoading: isLoadingComments,
@@ -20,6 +20,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
     take: take,
     sort: "DESC",
     postId: postId,
+    userVisitorId,
   });
 
   const dataTableComments = isLoadingComments ? (
@@ -32,7 +33,7 @@ const ListComments: React.FC<{ take: number, postId: string }> = ({ take, postId
     dataComments?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListCommentsPosts item={item} key={index} index={index} />
+        <ListCommentsPosts item={item} key={index} index={index} userVisitorId={userVisitorId} />
       ))
   );
 

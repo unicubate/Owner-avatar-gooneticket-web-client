@@ -203,6 +203,7 @@ export const getCommentsAPI = async (
 
 export const getCommentsRepliesAPI = async (
   payload: {
+    userVisitorId: string;
     commentId: string;
   } & PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
@@ -213,6 +214,7 @@ export const getCommentsRepliesAPI = async (
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
   postId: string;
+  userVisitorId: string;
   sort: SortModel;
 }) => {
   return useInfiniteQuery({
@@ -231,6 +233,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   take: number;
   sort: SortModel;
   commentId: string;
+  userVisitorId: string;
 }) => {
   return useInfiniteQuery({
     queryKey: ["comments-replies", "infinite", { ...payload }],

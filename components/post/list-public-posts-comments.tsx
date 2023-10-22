@@ -18,14 +18,15 @@ import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
   item?: PostModel;
   commentTake: number;
+  userVisitor: UserVisitorModel;
 };
 
-const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
-  const userVisiter = useAuth() as any;
+const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
   const router = useRouter();
   return (
     <>
@@ -57,9 +58,9 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
                 </button>
               ) : null}
 
-              {userVisiter?.id === item?.userId ? (
+              {userVisitor?.id === item?.userId ? (
                 <>
-                   <button
+                  <button
                     onClick={() => router.push(`/posts/${item?.id
                       }/edit?type=${item?.type.toLocaleLowerCase()}`)}
                     title="Edit"
@@ -128,7 +129,11 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
             </span>
           </div>
 
-          <ListComments postId={String(item?.id)} take={commentTake} />
+          <ListComments
+            postId={String(item?.id)}
+            take={commentTake}
+            userVisitorId={userVisitor?.id}
+          />
         </div>
       </div>
     </>

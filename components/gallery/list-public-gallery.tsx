@@ -4,23 +4,22 @@ import { PostModel } from "@/types/post";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { useAuth } from "../util/context-user";
 import { PiLockKey } from "react-icons/pi";
 import { ShowModalGallery } from "./show-modal-gallery";
-import { ReadMore } from "@/utils/read-more";
 import { ButtonInput } from "../ui/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed } from "react-icons/hi2";
 import { HiOutlineLockOpen } from "react-icons/hi";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
   item?: PostModel;
   commentTake: number;
+  userVisitor: UserVisitorModel;
 };
 
-const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
+const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
   const [openModal, setOpenModal] = useState(false);
-  const userVisiter = useAuth() as any;
 
   return (
     <>
@@ -37,11 +36,10 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
               folder="posts"
               preview={false}
               height={250}
-              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${
-                item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
                   ? "blur-3xl"
                   : ""
-              }`}
+                }`}
             />
           ) : null}
 
@@ -106,6 +104,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake }) => {
           openModal={openModal}
           setOpenModal={setOpenModal}
           post={item}
+          userVisitorId={userVisitor?.id}
           commentTake={commentTake}
         />
       ) : null}

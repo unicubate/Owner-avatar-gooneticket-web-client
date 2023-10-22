@@ -4,8 +4,10 @@ import { ButtonInput } from "@/components/ui/button-input";
 import { GetInfiniteFollowsPostsAPI } from "@/api-site/post";
 import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { useAuth } from "@/components/util/context-user";
 
 const Home = () => {
+    const { userStorage: userVisiter } = useAuth() as any;
     const {
         isLoading: isLoadingPosts,
         isError: isErrorPosts,
@@ -28,7 +30,15 @@ const Home = () => {
         dataPosts?.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item, index) => (
-                <ListFollowPosts item={item} key={index} commentTake={2} />
+                <ListFollowPosts
+                    item={item}
+                    key={index}
+                    commentTake={2}
+                    userVisitor={{
+                        id: userVisiter?.id,
+                        organizationId: userVisiter?.organizationId
+                    }}
+                />
             ))
     );
 
@@ -40,7 +50,7 @@ const Home = () => {
                     <main>
                         <div className="max-w-3xl mx-auto py-6">
                             <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                                
+
                                 {dataTablePosts}
 
 

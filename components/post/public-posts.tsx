@@ -65,7 +65,7 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListFollowPosts item={item} key={index} commentTake={2} />
+        <ListFollowPosts item={item} key={index} commentTake={2} userVisitor={userVisitor} />
       ))
   );
 

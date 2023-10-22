@@ -37,7 +37,12 @@ const PostsShowUserPublic = () => {
     ) : isErrorPost || isErrorUser ? (
       <strong>Error find data please try again...</strong>
     ) : (
-      <ListPublicPostsComments item={post} commentTake={10} />
+      <ListPublicPostsComments
+        userVisitor={{
+          id: userVisiter?.id,
+          organizationId: userVisiter?.organizationId
+        }}
+        item={post} commentTake={10} />
     );
   return (
     <>

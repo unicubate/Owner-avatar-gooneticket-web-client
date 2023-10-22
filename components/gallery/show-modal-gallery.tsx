@@ -24,6 +24,7 @@ type Props = {
   setOpenModal: any;
   commentTake?: number;
   post?: PostModel;
+  userVisitorId: string;
 };
 
 const ShowModalGallery: React.FC<Props> = ({
@@ -31,6 +32,7 @@ const ShowModalGallery: React.FC<Props> = ({
   commentTake,
   openModal,
   post,
+  userVisitorId,
 }) => {
   const router = useRouter();
   const user = useAuth() as any;
@@ -189,6 +191,7 @@ const ShowModalGallery: React.FC<Props> = ({
                   <ListComments
                     postId={String(item?.id)}
                     take={Number(commentTake)}
+                    userVisitorId={userVisitorId}
                   />
                 </div>
               </div>

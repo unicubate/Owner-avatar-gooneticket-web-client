@@ -24,11 +24,12 @@ import { BsReplyAll } from "react-icons/bs";
 import { AvatarComponent } from "../ui/avatar-component";
 
 type Props = {
+  userVisitorId: string;
   item?: CommentModel;
   index?: number;
 };
 
-const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
+const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -86,6 +87,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
     take: 1,
     sort: "DESC",
     commentId: String(item?.id),
+    userVisitorId,
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (

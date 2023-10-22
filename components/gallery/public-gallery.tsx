@@ -62,7 +62,14 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPublicGallery item={item} key={index} commentTake={10} />
+        <>
+          <ListPublicGallery
+            userVisitor={userVisitor}
+            item={item}
+            key={index}
+            commentTake={10}
+          />
+        </>
       ))
   );
 

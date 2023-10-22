@@ -20,14 +20,15 @@ import { AudioPlayerInput } from "../ui/audio-player-Input";
 import { useRouter } from "next/router";
 import { WhoCanSeeItem } from "../ui";
 import { AvatarComponent } from "../ui/avatar-component";
+import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
   item?: PostModel;
   commentTake: number;
+  userVisitor: UserVisitorModel;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
-  const user = useAuth() as any;
+const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
   const router = useRouter();
 
   return (
@@ -173,7 +174,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             <span className="ml-2 font-normal text-sm">
               {item?.totalComment ?? 0}
             </span>
-            {user?.id === item?.userId ? (
+            {userVisitor?.id === item?.userId ? (
               <>
                 <Link
                   title="Edit"
@@ -204,7 +205,11 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake }) => {
             )}
           </div>
 
-          <ListComments postId={String(item?.id)} take={commentTake} />
+          <ListComments
+            userVisitorId={userVisitor?.id}
+            postId={String(item?.id)}
+            take={commentTake}
+          />
         </div>
       </div>
     </>
