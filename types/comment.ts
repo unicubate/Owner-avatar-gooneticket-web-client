@@ -12,6 +12,7 @@ export type CommentModel = {
   productId: string;
   userId: string;
   profile: {
+    username: string;
     color: string;
     email: string;
     image: string;

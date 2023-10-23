@@ -14,6 +14,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { AvatarComponent } from "../ui/avatar-component";
+import Link from "next/link";
 
 type Props = {
   item?: CommentModel;
@@ -76,10 +77,10 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
         <div className="ml-3">
           <div className="flex items-center space-x-px">
             <div className="flex items-center">
-              <p className="text-sm font-bold text-gray-900">
+              <Link href={`/${item?.profile?.username}`} className="text-sm font-bold text-gray-900">
                 {" "}
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
-              </p>
+              </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
                 {formateFromNow(item?.createdAt as Date)}
               </p>

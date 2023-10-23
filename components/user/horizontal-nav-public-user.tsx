@@ -47,18 +47,28 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
 
   return (
     <>
-        <div className="text-center">
-          <AvatarComponent
-            size={{ xs: 50, sm: 50, md: 60, lg: 64, xl: 80, xxl: 100 }}
-            profile={user?.profile}
-          />
+      <div className="text-center">
+        <AvatarComponent
+          size={{ xs: 50, sm: 50, md: 60, lg: 64, xl: 80, xxl: 100 }}
+          profile={user?.profile}
+        />
 
-          <p className="mt-6 text-lg font-semibold text-black">
-            {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}
-            {" "}
+        <p className="mt-6 text-lg font-semibold text-black">
+          {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}{" "}
+        </p>
+        <p className="mt-2 text-sm font-normal">
+          <span>{user?.totalFollower ?? 0} Follower</span>
+          <span className="ml-2">{user?.totalFollowing ?? 0} Following</span>
+        </p>
+
+        {user?.totalSubscribe > 0 ? (
+          <p className="mt-2 text-sm font-normal">
+            {user?.totalSubscribe}{" "}
+            {user?.totalSubscribe > 1 ? "supporters" : "supporter"}
           </p>
+        ) : null}
 
-          {/* <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        {/* <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="w-full pb-1 overflow-x-auto">
               <nav className="flex -mb-px space-x-10">
                 {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
@@ -83,10 +93,7 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
               </nav>
             </div>
           </div> */}
-
-        </div>
-
-
+      </div>
     </>
   );
 };

@@ -22,6 +22,7 @@ import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-lik
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { BsReplyAll } from "react-icons/bs";
 import { AvatarComponent } from "../ui/avatar-component";
+import Link from "next/link";
 
 type Props = {
   userVisitorId: string;
@@ -39,8 +40,8 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
   };
 
   const { mutateAsync: saveMutation } = DeleteOneCommentAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -114,16 +115,18 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
       <li key={index} className="py-4">
         {!openModal ? (
           <div className="flex items-start">
-            <AvatarComponent size={40}
+            <AvatarComponent
+              size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              profile={item?.profile} />
+              profile={item?.profile}
+            />
 
             <div className="ml-3">
               <div className="flex items-center space-x-px">
                 <div className="flex items-center">
-                  <p className="text-sm font-bold text-gray-900">
+                  <Link href={`/${item?.profile?.username}`} className="text-sm font-bold text-gray-900">
                     {item?.profile?.firstName} {item?.profile?.lastName}{" "}
-                  </p>
+                  </Link>
                   <p className="ml-3.5 text-sm font-normal text-gray-500">
                     {formateFromNow(item?.createdAt as Date)}
                   </p>
