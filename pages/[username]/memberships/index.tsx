@@ -22,29 +22,35 @@ const MembershipsUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <>{user?.id ? <PublicMemberships organizationId={user?.organizationId} /> : null}</>
+    <>
+      {user?.id ? (
+        <PublicMemberships organizationId={user?.organizationId} />
+      ) : null}
+    </>
   );
 
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
-        user={user}>
+        title={`${user?.profile?.firstName ?? ""} ${
+          user?.profile?.lastName ?? ""
+        }`}
+        user={user}
+      >
         <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-
           {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
-
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-2xl">
             <div className="max-w-full mx-auto py-6">
-              <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-2 sm:mt-12 sm:grid-cols-2 lg:grid-cols-2">
-
-                {publicMemberships}
-
+              <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
+                <div className="flow-root">
+                  <div className="mx-auto sm:px-6 md:px-8">
+                    {publicMemberships}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </LayoutUserPublicSite>
     </>

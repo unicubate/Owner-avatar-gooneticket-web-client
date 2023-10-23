@@ -74,7 +74,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
-    page: 0,
+    page: 1,
     sort: "DESC",
     queryKey: ["memberships"],
   });

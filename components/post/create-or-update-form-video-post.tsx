@@ -59,7 +59,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
-    page: 0,
+    page: 1,
     sort: "DESC",
     queryKey: ["memberships"],
   });

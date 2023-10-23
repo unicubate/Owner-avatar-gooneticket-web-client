@@ -41,7 +41,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
 
           <div className="flex mt-2 items-end justify-center space-x-1">
             <div className="flex items-start">
-              <p className="text-4xl font-medium tracking-tight">
+              <p className="text-5xl font-medium tracking-tight">
                 {item?.pricePerMonthly}
               </p>
               <span className="text-xl font-medium text-black">

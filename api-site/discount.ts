@@ -6,7 +6,11 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { DiscountFormModel, ResponseDiscountModel } from "@/types/discount";
+import {
+  DiscountFormModel,
+  DiscountModel,
+  ResponseDiscountModel,
+} from "@/types/discount";
 
 export const CreateOrUpdateOneDiscountAPI = ({
   onSuccess,
@@ -106,7 +110,7 @@ export const getDiscountsAPI = async (
 };
 
 export const GetAllDiscountsAPI = (search?: string) => {
-  return useQuery({
+  const { data, isError, isLoading, status } = useQuery({
     queryKey: ["discounts"],
     queryFn: async () =>
       await makeApiCall({
@@ -116,6 +120,8 @@ export const GetAllDiscountsAPI = (search?: string) => {
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
+
+  return { data: data?.data as DiscountModel, isError, isLoading, status };
 };
 
 export const GetInfiniteDiscountsAPI = (payload: {

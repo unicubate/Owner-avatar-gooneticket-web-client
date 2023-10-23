@@ -65,7 +65,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ uploadImages, post, or
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
-    page: 0,
+    page: 1,
     sort: "DESC",
     queryKey: ["memberships"],
   });

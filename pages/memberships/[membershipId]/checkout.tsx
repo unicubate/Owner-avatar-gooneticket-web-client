@@ -13,6 +13,7 @@ import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscr
 import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
 import { formatePrice } from "@/utils";
+import { PrivateComponent } from "@/components/util/private-component";
 
 
 const CheckoutView = () => {
@@ -237,5 +238,4 @@ const CheckoutView = () => {
     </>
   );
 };
-
-export default CheckoutView;
+export default PrivateComponent(CheckoutView);

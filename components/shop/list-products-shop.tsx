@@ -18,6 +18,9 @@ import { AiOutlineCalendar } from "react-icons/ai";
 import { ProductModel } from "@/types/product";
 import { DeleteOneProductAPI } from "@/api-site/product";
 import { formatePrice } from "@/utils";
+import { LiaDnaSolid } from "react-icons/lia";
+import { HiOutlineLockClosed } from "react-icons/hi";
+import { TbWorld } from "react-icons/tb";
 
 type Props = {
   item?: ProductModel;
@@ -29,8 +32,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -110,12 +113,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-
             <div className="flex mt-4 items-center">
               <button className="text-lg font-normal">
                 <BiMoney />
               </button>
-              <span className="ml-2 text-sm font-bold">
+              <span className="ml-1.5 text-sm font-bold">
                 {formatePrice({
                   value: Number(item?.priceDiscount ?? 0),
                   isDivide: false,
@@ -124,7 +126,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               </span>
 
               {item?.enableDiscount ? (
-                <span className="ml-2 text-sm font-normal text-gray-500">
+                <span className="ml-1.5 text-sm font-normal text-gray-500">
                   <del>
                     {formatePrice({
                       value: Number(item?.price ?? 0),
@@ -134,6 +136,24 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                   </del>
                 </span>
               ) : null}
+
+              <span className="ml-1.5 text-lg font-bold">
+                {item?.whoCanSee === "PUBLIC" ? (
+                  <TbWorld />
+                ) : (
+                  <HiOutlineLockClosed />
+                )}
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
+                {item?.whoCanSee}
+              </span>
+
+              <span className="ml-1.5 text-lg font-bold">
+                <LiaDnaSolid />
+              </span>
+              <span className="ml-1.5 font-normal text-sm">
+                {item?.productType}
+              </span>
             </div>
           </div>
 

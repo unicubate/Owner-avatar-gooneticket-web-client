@@ -2,10 +2,7 @@
  * others
  */
 
-export const formatePrice = (options: {
-  value: number;
-  isDivide: boolean;
-}) => {
+export const formatePrice = (options: { value: number; isDivide: boolean }) => {
   const { value, isDivide } = options;
   const numberCal = isDivide ? value / 100 : value;
   return (

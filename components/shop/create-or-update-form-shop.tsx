@@ -102,9 +102,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   const watchProductType = watch("productType", "PHYSICAL");
   const watchEnableUrlRedirect = watch("enableUrlRedirect", false);
 
-  const { data: dataDiscounts } = GetAllDiscountsAPI();
-  const discounts: any = dataDiscounts?.data;
-
+  const { data: discounts } = GetAllDiscountsAPI();
+  
   useEffect(() => {
     if (product) {
       const fields = [

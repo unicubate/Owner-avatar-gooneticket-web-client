@@ -24,6 +24,7 @@ export type ProductModel = {
   subTitle: string;
   slug: string;
   sku: string;
+  whoCanSee: string;
   organizationId: string;
   urlMedia: string;
   productType: ProductType;
