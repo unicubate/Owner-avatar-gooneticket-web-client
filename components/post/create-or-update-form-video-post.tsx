@@ -158,12 +158,12 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <div>
+                              <>
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>
                                   Upload cover
                                 </div>
-                              </div>
+                              </>
                             )}
                           </Upload>
                         </div>

@@ -196,15 +196,13 @@ const SettingDonations = () => {
 
                     <div className="px-4 py-5 sm:p-6">
                       <div className="sm:flex sm:items-center sm:justify-between">
-                        <div>
-                          <p className="text-base font-bold text-gray-900">
-                            Price per pot
-                          </p>
-                          <p className="mt-1 text-sm font-medium text-gray-500">
-                            Change the default price of a pot to an amount of
-                            your choice.
-                          </p>
-                        </div>
+                        <p className="text-base font-bold text-gray-900">
+                          Price per pot
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Change the default price of a pot to an amount of your
+                          choice.
+                        </p>
 
                         {/* <div className="mt-4 sm:mt-0">
                                                 <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>
@@ -236,16 +234,14 @@ const SettingDonations = () => {
 
                     <div className="px-4 py-5 sm:p-6">
                       <div className="sm:flex sm:items-center sm:justify-between">
-                        <div>
-                          <p className="text-base font-bold text-gray-900">
-                            Thank you message
-                          </p>
-                          <p className="mt-1 text-sm font-medium text-gray-500">
-                            This will be visible after the payment and in the
-                            receipt email. Write a personable thank you message,
-                            and include any rewards if you like.
-                          </p>
-                        </div>
+                        <p className="text-base font-bold text-gray-900">
+                          Thank you message
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          This will be visible after the payment and in the
+                          receipt email. Write a personable thank you message,
+                          and include any rewards if you like.
+                        </p>
 
                         {/* <div className="mt-4 sm:mt-0">
                                                 <ButtonInput onClick={() => setShowModal(true)} shape="default" type="button" size="normal" loading={false} color={user?.profile?.color}>

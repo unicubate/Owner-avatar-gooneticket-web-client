@@ -170,7 +170,7 @@ const CreateOrUpdateFormMembership: React.FC<{
               <Controller
                 name="attachmentImages"
                 control={control}
-                render={({ }) => (
+                render={({}) => (
                   <>
                     <div className="text-center justify-center mx-auto">
                       <Upload
@@ -182,10 +182,10 @@ const CreateOrUpdateFormMembership: React.FC<{
                         maxCount={1}
                       >
                         {imageList.length >= 1 ? null : (
-                          <div>
+                          <>
                             <PlusOutlined />
                             <div style={{ marginTop: 8 }}>Upload cover</div>
-                          </div>
+                          </>
                         )}
                       </Upload>
                     </div>

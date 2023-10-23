@@ -45,7 +45,12 @@ type Props = {
   organizationId: string;
 };
 
-const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ uploadImages, post, organizationId, postId }) => {
+const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
+  uploadImages,
+  post,
+  organizationId,
+  postId,
+}) => {
   const router = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -176,7 +181,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ uploadImages, post, or
                     <Controller
                       name="attachmentImages"
                       control={control}
-                      render={({ }) => (
+                      render={({}) => (
                         <>
                           <div className="text-center justify-center mx-auto">
                             <Upload
@@ -189,10 +194,12 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({ uploadImages, post, or
                               maxCount={1}
                             >
                               {imageList.length >= 1 ? null : (
-                                <div>
+                                <>
                                   <PlusOutlined />
-                                  <div style={{ marginTop: 8 }}>Upload cover</div>
-                                </div>
+                                  <div style={{ marginTop: 8 }}>
+                                    Upload cover
+                                  </div>
+                                </>
                               )}
                             </Upload>
                           </div>

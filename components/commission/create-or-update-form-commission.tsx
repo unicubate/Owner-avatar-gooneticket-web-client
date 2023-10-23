@@ -192,10 +192,10 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                           maxCount={10}
                         >
                           {imageList.length >= 10 ? null : (
-                            <div>
+                            <>
                               <PlusOutlined />
                               <div style={{ marginTop: 8 }}>Upload</div>
-                            </div>
+                            </>
                           )}
                         </Upload>
                       </div>

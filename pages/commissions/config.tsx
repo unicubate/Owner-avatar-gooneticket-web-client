@@ -3,9 +3,7 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { Input, Skeleton } from "antd";
 import { useState } from "react";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import {
-  PlusOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "@/components/ui/button-input";
 import ListDiscounts from "@/components/discount/list-discounts";
 import { GetInfiniteDiscountsAPI } from "@/api-site/discount";
@@ -13,7 +11,7 @@ import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-d
 import { useDebounce } from "@/utils";
 
 const Configs = () => {
-  const [filter, setFilter] = useState<string>('')
+  const [filter, setFilter] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
 
   const debouncedFilter = useDebounce(filter, 500);
@@ -76,15 +74,13 @@ const Configs = () => {
                 <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
                   <div className="px-4 py-5 sm:p-6">
                     <div className="sm:flex sm:items-center sm:justify-between">
-                      <div>
-                        <p className="text-base font-bold text-gray-900">
-                          Discounts Setup
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Discount your shop or commissions for promotions or
-                          membership benefits.
-                        </p>
-                      </div>
+                      <p className="text-base font-bold text-gray-900">
+                        Discounts Setup
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-500">
+                        Discount your shop or commissions for promotions or
+                        membership benefits.
+                      </p>
                     </div>
 
                     <div className="mt-4 sm:flex sm:items-center sm:justify-between">
@@ -139,7 +135,6 @@ const Configs = () => {
                             </div>
                           </>
                         ) : null}
-
                       </div>
                     </div>
                   </div>

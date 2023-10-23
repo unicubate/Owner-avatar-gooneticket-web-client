@@ -36,10 +36,8 @@ const TransactionsDonations = () => {
                                 <HorizontalNavDonation />
 
                                 <div className="mt-8 sm:flex sm:items-center sm:justify-between">
-                                    <div>
-                                        <p className="text-base font-bold text-gray-900">Subscription Plan: <span className="text-indigo-600">Standard</span></p>
-                                        <p className="mt-1 text-sm font-medium text-gray-500">Monthly Plan</p>
-                                    </div>
+                                    <p className="text-base font-bold text-gray-900">Subscription Plan: <span className="text-indigo-600">Standard</span></p>
+                                    <p className="mt-1 text-sm font-medium text-gray-500">Monthly Plan</p>
 
                                     <div className="mt-4 sm:mt-0">
                                         <button

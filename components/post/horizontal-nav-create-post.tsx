@@ -43,14 +43,14 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
               <div className="p-6 lg:px-10 lg:py-8">
                 <div className="flex items-center justify-start space-x-3">
                   {item?.icon}
-                  <div>
+                  <>
                     <h3 className="text-sm font-bold text-gray-900 sm:text-base lg:text-lg">
                       {item?.title}
                     </h3>
                     <p className="mt-2 text-sm font-medium text-gray-500">
                       {item?.description}
                     </p>
-                  </div>
+                  </>
                 </div>
               </div>
             </div>

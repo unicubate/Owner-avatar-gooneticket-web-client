@@ -121,7 +121,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      router.push(`/posts`)
+      router.push(`/posts`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -167,10 +167,10 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <div>
+                              <>
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
-                              </div>
+                              </>
                             )}
                           </Upload>
                         </div>
