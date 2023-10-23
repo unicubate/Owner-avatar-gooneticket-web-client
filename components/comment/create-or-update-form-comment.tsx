@@ -8,18 +8,20 @@ import { CreateOrUpdateOneCommentAPI } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
 import { ButtonCancelInput, ButtonInput, TextareaReactQuillInput } from "../ui";
 import { Avatar } from "antd";
+import { AvatarComponent } from "../ui/avatar-component";
 
 const schema = yup.object({
   description: yup.string().min(7).required(),
 });
 
 const CreateOrUpdateFormComment: React.FC<{
-  postId: string;
+  productId?: string;
+  postId?: string;
   comment?: any;
   setOpenModal?: any;
   openModal?: boolean;
-}> = ({ postId, comment, openModal, setOpenModal }) => {
-  const user = useAuth() as any;
+}> = ({ postId, productId, comment, openModal, setOpenModal }) => {
+  const {profile} = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -64,7 +66,8 @@ const CreateOrUpdateFormComment: React.FC<{
     try {
       await saveMutation({
         ...payload,
-        postId: postId,
+        postId: postId ?? "",
+        productId: productId ?? "",
         commentId: comment?.id,
       });
       if (comment) {
@@ -97,20 +100,25 @@ const CreateOrUpdateFormComment: React.FC<{
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-4 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
-          {/* <div className="flex items-start">
-            <Avatar
+          <div className="flex items-start">
+            {/* <Avatar
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-8 h-10"
               src={user?.profile?.image}
               alt=""
-            />
-          </div> */}
+            /> */}
+            {/* <AvatarComponent
+              size={40}
+              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+              profile={profile?.profile}
+            /> */}
+          </div>
           <TextareaReactQuillInput
             control={control}
             name="description"
             placeholder="Participate in the conversation"
             errors={errors}
-            className='h-auto'
+            className="h-auto"
           />
 
           {openModal ? (

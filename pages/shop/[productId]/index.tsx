@@ -8,6 +8,9 @@ import { MdOutlineDiscount } from "react-icons/md";
 import { LoadingFile } from "@/components/ui/loading-file";
 import ReactPlayer from "react-player";
 import { ImageGalleryShopList } from "@/components/shop/image-gallery-shop-list";
+import ListComments from "@/components/comment/list-comments";
+import { useAuth } from "@/components/util/context-user";
+import { AvatarComponent } from "@/components/ui/avatar-component";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -18,29 +21,22 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ShopView = () => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
-  const {
-    isLoading: isLoadingProduct,
-    data: product,
-    isError: isErrorProduct,
-  } = GetOneProductAPI({
+  const { status, data: product } = GetOneProductAPI({
     productSlug,
   });
 
-  const dataTableImages = isLoadingProduct ? (
-    <LoadingFile />
-  ) : isErrorProduct ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <ImageGalleryShopList
-      uploads={product?.uploadsImage}
-      folder="products"
-      preview={false}
-    />
-  );
+  if (status === "pending") {
+    <LoadingFile />;
+  }
+
+  if (status === "error") {
+    <strong>Error find data please try again...</strong>;
+  }
 
   return (
     <>
@@ -51,11 +47,16 @@ const ShopView = () => {
               <div className="lg:flex lg:items-start">
                 <div className="overflow-hidden border-2 border-transparent rounded-lg">
                   <div className="mb-2 flex items-center">
+                    <AvatarComponent
+                      size={40}
+                      className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+                      profile={product?.profile}
+                    />
                     <div
                       onClick={() =>
                         router.push(`/${product?.profile?.username}/shop`)
                       }
-                      className="cursor-pointer"
+                      className="ml-2 cursor-pointer"
                     >
                       <p className="text-sm font-bold text-gray-900">
                         {product?.profile?.firstName ?? ""}{" "}
@@ -71,7 +72,13 @@ const ShopView = () => {
                     </div>
                   </div>
 
-                  {dataTableImages}
+                  {product?.uploadsImage.length > 0 && (
+                    <ImageGalleryShopList
+                      uploads={product?.uploadsImage}
+                      folder="products"
+                      preview={false}
+                    />
+                  )}
 
                   {product?.urlMedia ? (
                     <div className="mt-2 mx-auto">
@@ -100,7 +107,7 @@ const ShopView = () => {
                     isDivide: false,
                   }) ?? ""}
                 </p>
-                <p className="text-lg font-bold text-gray-900">
+                <p className="text-xl font-bold text-gray-900">
                   {product?.currency?.symbol ?? ""}
                 </p>
                 {product?.enableDiscount ? (
@@ -114,7 +121,7 @@ const ShopView = () => {
                         }) ?? ""}{" "}
                       </del>
                     </p>
-                    <p className="text-lg font-bold text-gray-500">
+                    <p className="text-xl font-bold text-gray-500">
                       <del> {product?.currency?.symbol ?? ""} </del>
                     </p>
                   </>
@@ -128,14 +135,14 @@ const ShopView = () => {
                 </div>
               ) : null}
 
-              <h2 className="mt-4 text-base font-bold text-gray-900">
+              {/* <h2 className="mt-4 text-base font-bold text-gray-900">
                 Features
               </h2>
               <ul className="mt-4 space-y-3 text-base font-medium text-gray-600 list-disc list-inside">
                 <li>Made with full cotton</li>
                 <li>Slim fit for any body</li>
                 <li>Quality control by JC</li>
-              </ul>
+              </ul> */}
 
               {/* <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
@@ -195,7 +202,7 @@ const ShopView = () => {
                 </ButtonInput>
               </div>
 
-              <ul className="mt-8 space-y-3">
+              {/* <ul className="mt-8 space-y-3">
                 <li className="flex items-center text-sm font-medium text-gray-500">
                   <svg
                     className="w-5 h-5 mr-2.5 text-gray-400"
@@ -249,17 +256,30 @@ const ShopView = () => {
                   </svg>
                   Made by the Professionals
                 </li>
-              </ul>
+              </ul> */}
+
+              <h2 className="mt-2 text-xl font-bold text-gray-900">
+                Description
+              </h2>
+
+              <p className="mt-4 text-base text-gray-600">
+                <HtmlParser html={String(product?.description)} />
+              </p>
             </div>
 
             <div className="lg:col-span-3">
-              <h2 className="mb-2 text-base font-bold text-gray-900">
+              <ListComments
+                productId={String(product?.id)}
+                take={10}
+                userVisitorId={userVisiter?.id}
+              />
+              {/* <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>
 
               <p className="text-base text-gray-600">
                 <HtmlParser html={String(product?.description)} />
-              </p>
+              </p> */}
 
               {/* <div className="border-b border-gray-200">
                 <nav className="flex -mb-px space-x-8 sm:space-x-14">
@@ -293,208 +313,6 @@ const ShopView = () => {
                     Support{" "}
                   </a>
                 </nav>
-              </div> */}
-
-              {/* <div className="flow-root mt-8 sm:mt-12">
-                <ul className="divide-y divide-gray-100 -my-9">
-                  <li className="py-8">
-                    <div className="flex items-start">
-                      <img
-                        className="flex-shrink-0 rounded-full w-11 h-11"
-                        src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/avatar-1.png"
-                        alt=""
-                      />
-
-                      <div className="ml-6">
-                        <div className="flex items-center space-x-px">
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </div>
-                        <p className="mt-5 text-base font-normal leading-7 text-gray-900">
-                          You made it so simple. My new site is so much faster
-                          and easier to work with than my old site. I just
-                          choose the page, make the changes.
-                        </p>
-                        <p className="mt-5 text-sm font-bold text-gray-900">
-                          Kristin Watson
-                        </p>
-                        <p className="mt-1 text-sm font-normal text-gray-500">
-                          March 14, 2021
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="py-8">
-                    <div className="flex items-start">
-                      <img
-                        className="flex-shrink-0 rounded-full w-11 h-11"
-                        src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/avatar-2.png"
-                        alt=""
-                      />
-
-                      <div className="ml-6">
-                        <div className="flex items-center space-x-px">
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </div>
-                        <p className="mt-5 text-base font-normal leading-7 text-gray-900">
-                          You made it so simple. My new site is so much faster
-                          and easier to work with than my old site. I just
-                          choose the page, make the changes.
-                        </p>
-                        <p className="mt-5 text-sm font-bold text-gray-900">
-                          Jenny Wilson
-                        </p>
-                        <p className="mt-1 text-sm font-normal text-gray-500">
-                          January 28, 2021
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-
-                  <li className="py-8">
-                    <div className="flex items-start">
-                      <img
-                        className="flex-shrink-0 rounded-full w-11 h-11"
-                        src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/avatar-3.png"
-                        alt=""
-                      />
-
-                      <div className="ml-6">
-                        <div className="flex items-center space-x-px">
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-amber-500"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                          <svg
-                            className="w-6 h-6 text-gray-300"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        </div>
-                        <p className="mt-5 text-base font-normal leading-7 text-gray-900">
-                          You made it so simple. My new site is so much faster
-                          and easier to work with than my old site. I just
-                          choose the page, make the changes.
-                        </p>
-                        <p className="mt-5 text-sm font-bold text-gray-900">
-                          Bessie Cooper
-                        </p>
-                        <p className="mt-1 text-sm font-normal text-gray-500">
-                          January 11, 2021
-                        </p>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
               </div> */}
 
               {/* <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">

@@ -9,6 +9,7 @@ export type CommentModel = {
   id: string;
   description: string;
   postId: string;
+  productId: string;
   userId: string;
   profile: {
     color: string;
@@ -24,5 +25,6 @@ export type CommentModel = {
 export type CommentFormModel = {
   description: string;
   postId: string;
+  productId: string;
   userId: string;
 };

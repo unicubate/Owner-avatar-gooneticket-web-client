@@ -31,7 +31,9 @@ const ImageGalleryShopList: React.FC<Props> = ({
   width = "100%",
   autoplay = false,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(uploads?.[0]?.path);
+  const [selectedImage, setSelectedImage] = useState<string>(
+    uploads?.[0]?.path
+  );
 
   return (
     <>
@@ -41,9 +43,9 @@ const ImageGalleryShopList: React.FC<Props> = ({
             <div className="overflow-hidden border-2 border-transparent rounded-sm">
               <Image
                 width={width}
-                height={height}
+                height={400}
                 className={className}
-                preview={preview}
+                preview={true}
                 src={`${viewOneFileUploadAPI({
                   folder: folder,
                   fileName: selectedImage,
@@ -67,7 +69,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
                     <div className="overflow-hidden border-2 border-transparent rounded-sm aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
                       <Image
                         width={width}
-                        height={height}
+                        height={100}
                         className={className}
                         preview={preview}
                         src={`${viewOneFileUploadAPI({
@@ -79,26 +81,6 @@ const ImageGalleryShopList: React.FC<Props> = ({
                     </div>
                   </button>
                 ))}
-              {/* <button type="button" className="flex-1">
-                <div className="overflow-hidden border-2 border-gray-900 rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-2.png"
-                    alt=""
-                  />
-                </div>
-              </button>
-
-              <button type="button" className="flex-1">
-                <div className="overflow-hidden border-2 border-transparent rounded-lg aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
-                  <img
-                    className="object-cover w-full h-full"
-                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/product-details/2/product-3.png"
-                    alt=""
-                  />
-                </div>
-              </button>
-             */}
             </div>
           </div>
         </div>

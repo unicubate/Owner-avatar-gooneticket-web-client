@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
-import {
-  ReactQuillInput,
-  TextInput,
-} from "../ui";
+import { ReactQuillInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
 import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
@@ -39,7 +36,12 @@ const schema = yup.object({
   }),
 });
 
-const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImages, organizationId }) => {
+const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
+  postId,
+  post,
+  uploadImages,
+  organizationId,
+}) => {
   const { push, back } = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -66,7 +68,14 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
 
   useEffect(() => {
     if (post) {
-      const fields = ["title", "urlMedia", "description", "whoCanSee", "type", "membershipId"];
+      const fields = [
+        "title",
+        "urlMedia",
+        "description",
+        "whoCanSee",
+        "type",
+        "membershipId",
+      ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
   }, [post, postId, setValue]);
@@ -111,7 +120,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
         gravity: "top",
         position: "center",
       });
-      push(`/posts`)
+      push(`/posts`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -140,7 +149,6 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
                   {post?.id ? "Update" : "Create a New"} Video
                 </h2>
 
-
                 <div className="mt-2">
                   <Controller
                     name="attachmentImages"
@@ -158,12 +166,10 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({ postId, post, uploadImag
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <>
+                              <div className="text-center">
                                 <PlusOutlined />
-                                <div style={{ marginTop: 8 }}>
-                                  Upload cover
-                                </div>
-                              </>
+                                <div style={{ marginTop: 8 }}>Upload cover</div>
+                              </div>
                             )}
                           </Upload>
                         </div>

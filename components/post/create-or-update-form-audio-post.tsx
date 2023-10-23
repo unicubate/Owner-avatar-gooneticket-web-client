@@ -187,10 +187,10 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <>
+                              <div className="text-center">
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
-                              </>
+                              </div>
                             )}
                           </Upload>
                         </div>

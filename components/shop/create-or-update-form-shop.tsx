@@ -243,10 +243,10 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                           maxCount={10}
                         >
                           {imageList.length >= 10 ? null : (
-                            <>
+                            <div className="text-center">
                               <PlusOutlined />
                               <div style={{ marginTop: 8 }}>Upload</div>
-                            </>
+                            </div>
                           )}
                         </Upload>
                       </div>

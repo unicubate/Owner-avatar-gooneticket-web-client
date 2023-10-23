@@ -21,10 +21,8 @@ export const CreateOrUpdateOneCommentAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (
-      payload: CommentFormModel & { postId: string; commentId: string }
-    ) => {
-      const { postId, commentId } = payload;
+    mutationFn: async (payload: CommentFormModel & { commentId: string }) => {
+      const { commentId } = payload;
       return commentId
         ? await makeApiCall({
             action: "updateOneComment",
@@ -33,10 +31,10 @@ export const CreateOrUpdateOneCommentAPI = ({
           })
         : await makeApiCall({
             action: "createOneComment",
-            body: { ...payload, postId },
+            body: { ...payload },
           });
     },
-    onError: (error, variables, context) => {
+    onError: (error) => {
       queryClient.invalidateQueries({ queryKey });
       if (onError) {
         onError(error);
@@ -214,6 +212,7 @@ export const getCommentsRepliesAPI = async (
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
   postId: string;
+  productId?: string;
   userVisitorId: string;
   sort: SortModel;
 }) => {
