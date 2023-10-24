@@ -17,6 +17,7 @@ import { BiMoney } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { MembershipModel } from "@/types/membership";
 import { DeleteOneMembershipAPI } from "@/api-site/membership";
+import { convertToPluralMonth } from "@/utils/utils";
 
 type Props = {
   item?: MembershipModel;
@@ -28,8 +29,8 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOneMembershipAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -111,37 +112,23 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="flex mt-4 items-center">
-              {item?.pricePerMonthly ? (
+              {item?.price ? (
                 <>
                   <button className="text-lg font-normal">
                     <BiMoney />
                   </button>
                   <span className="ml-1.5 text-sm font-bold">
                     {formatePrice({
-                      value: Number(item?.pricePerMonthly),
+                      value: Number(item?.price),
                       isDivide: false,
                     })}{" "}
                     {item?.currency?.symbol}
                   </span>
-                  <span className="ml-1.5 font-bold text-sm">per month</span>
+                  <span className="ml-1.5 font-bold text-sm">per {convertToPluralMonth(Number(item?.month))}</span>
                 </>
               ) : null}
 
-              {item?.pricePerYearly ? (
-                <>
-                  <button className="ml-1.5 text-lg font-normal">
-                    <BiMoney />
-                  </button>
-                  <span className="ml-1.5 font-bold text-sm">
-                    {formatePrice({
-                      value: Number(item?.pricePerYearly),
-                      isDivide: false,
-                    })}{" "}
-                    {item?.currency?.symbol}
-                  </span>
-                  <span className="ml-1.5 font-bold text-sm">per year</span>
-                </>
-              ) : null}
+
             </div>
           </div>
 

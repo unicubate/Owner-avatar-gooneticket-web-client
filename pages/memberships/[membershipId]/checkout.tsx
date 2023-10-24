@@ -14,12 +14,15 @@ import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
 import { formatePrice } from "@/utils";
 import { PrivateComponent } from "@/components/util/private-component";
+import { convertToPluralMonth } from "@/utils/utils";
+import { LayoutSite } from "@/components/layout-site";
+import { AvatarComponent } from "@/components/ui/avatar-component";
 
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage } = useAuth() as any;
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const membershipId = String(query?.membershipId);
   const {
     watch,
@@ -45,39 +48,66 @@ const CheckoutView = () => {
 
   return (
     <>
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="max-w-xl mx-auto mt-8 md:mt-12">
-          <div className="overflow-hidden bg-white shadow rounded-xl">
-            <div className="px-4 py-6 sm:px-8 sm:py-10">
-              <div className="flow-root">
-                <div className="overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                  <div className="p-8 sm:py-7 sm:px-8">
-                    {item?.id ? (
-                      <>
-                        <div className="flex mt-2 items-center">
-                          {item?.id ? (
-                            <p className="text-lg font-bold text-gray-900 cursor-pointer">
-                              {item?.title ?? ""}
-                            </p>
-                          ) : null}
-                        </div>
+      <LayoutSite title={`${item?.title ?? ''}`}>
 
-                        {item?.uploadsImage?.length > 0 ? (
-                          <div className="mt-4 text-center justify-center mx-auto">
-                            <ListCarouselUpload
-                              uploads={item?.uploadsImage}
-                              folder="memberships"
-                              preview={false}
-                              height={200}
-                            />
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          <div className="max-w-xl mx-auto mt-8 md:mt-12">
+            <div className="overflow-hidden bg-white shadow rounded-xl">
+              <div className="px-4 py-6 sm:px-8 sm:py-10">
+                <div className="mb-2 flex items-center">
+                  <AvatarComponent
+                    size={40}
+                    className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+                    profile={item?.profile}
+                  />
+                  <div
+                    onClick={() =>
+                      push(`/${item?.profile?.username}/memberships`)
+                    }
+                    className="ml-2 cursor-pointer"
+                  >
+                    <p className="text-sm font-bold text-gray-900">
+                      {item?.profile?.firstName ?? ""}{" "}
+                      {item?.profile?.lastName ?? ""}
+                    </p>
+                  </div>
+
+                  <div className="ml-auto">
+                    <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
+                      {" "}
+                      Membership{" "}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flow-root">
+                  <div className="overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                    <div className="p-8 sm:py-7 sm:px-8">
+                      {item?.id ? (
+                        <>
+                          <div className="flex mt-2 items-center">
+                            {item?.id ? (
+                              <p className="text-lg font-bold text-gray-900 cursor-pointer">
+                                {item?.title ?? ""}
+                              </p>
+                            ) : null}
                           </div>
-                        ) : null}
 
-                        <div className="mt-4 text-sm font-normal text-gray-600">
-                          <HtmlParser html={String(item?.description)} />
-                        </div>
+                          {item?.uploadsImage?.length > 0 ? (
+                            <div className="mt-4 text-center justify-center mx-auto">
+                              <ListCarouselUpload
+                                uploads={item?.uploadsImage}
+                                folder="memberships"
+                                preview={false}
+                                height={200}
+                              />
+                            </div>
+                          ) : null}
 
-                        <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                          <div className="mt-4 text-sm font-normal text-gray-600">
+                            <HtmlParser html={String(item?.description)} />
+                          </div>
+
                           {item?.price ? (
                             <div className="mt-2">
                               <div
@@ -103,7 +133,7 @@ const CheckoutView = () => {
                                     <label className="ml-2 mr-auto">
                                       <p className="text-xl font-semibold text-black">
                                         {item?.price}
-                                        {item?.currency?.symbol}/month
+                                        {item?.currency?.symbol} / {convertToPluralMonth(Number(item?.month))}
                                       </p>
                                       <p className="text-sm text-gray-600">
                                         monthly billing
@@ -114,91 +144,96 @@ const CheckoutView = () => {
                               </div>
                             </div>
                           ) : null}
-                        </div>
 
-                        <hr className="border-gray-200 mt-4" />
+                          {/* <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                         
+                        </div> */}
 
-                        <div className="flex items-center justify-between mt-6">
-                          <p className="text-3xl font-bold text-gray-900">
-                            Total
-                          </p>
-                          {newAmount?.value ? (
+                          <hr className="border-gray-200 mt-4" />
+
+                          <div className="flex items-center justify-between mt-6">
+                            <p className="text-3xl font-bold text-gray-900">
+                              Total
+                            </p>
+                            {newAmount?.value ? (
+                              <>
+                                <p className="ml-auto text-2xl font-bold text-gray-900">
+                                  {formatePrice({
+                                    value: Number(newAmount?.value),
+                                    isDivide: false,
+                                  }) ?? ""}
+                                </p>
+                                <p className="ml-0.5 text-2xl font-bold text-gray-900">
+                                  {item?.currency?.symbol}
+                                </p>
+                              </>
+                            ) : null}
+                          </div>
+
+                          {userStorage?.id ? (
                             <>
-                              <p className="ml-auto text-2xl font-bold text-gray-900">
-                                {formatePrice({
-                                  value: Number(newAmount?.value),
-                                  isDivide: false,
-                                }) ?? ""}
-                              </p>
-                              <p className="ml-0.5 text-2xl font-bold text-gray-900">
-                                {item?.currency?.symbol}
-                              </p>
+                              {isCardPay ? (
+                                <>
+                                  <CreateSubscribeStripe
+                                    paymentModel="STRIPE-SUBSCRIBE"
+                                    data={{
+                                      membershipId,
+                                      userId: userStorage?.id,
+                                      amount: newAmount,
+                                    }}
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <div className="mt-2">
+                                    <ButtonInput
+                                      onClick={() => setIsCardPay(true)}
+                                      shape="default"
+                                      type="button"
+                                      size="large"
+                                      color="indigo"
+                                      loading={false}
+                                    >
+                                      Card Pay
+                                    </ButtonInput>
+                                  </div>
+                                </>
+                              )}
+
+                              <CreateSubscribePayPal
+                                paymentModel="PAYPAL-SUBSCRIBE"
+                                data={{
+                                  membershipId,
+                                  userId: userStorage?.id,
+                                  amount: newAmount
+                                }}
+                              />
                             </>
                           ) : null}
-                        </div>
-
-                        {userStorage?.id ? (
-                          <>
-                            {isCardPay ? (
-                              <>
-                                <CreateSubscribeStripe
-                                  paymentModel="STRIPE-SUBSCRIBE"
-                                  data={{
-                                    membershipId,
-                                    userId: userStorage?.id,
-                                    amount: newAmount,
-                                  }}
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <div className="mt-2">
-                                  <ButtonInput
-                                    onClick={() => setIsCardPay(true)}
-                                    shape="default"
-                                    type="button"
-                                    size="large"
-                                    color="indigo"
-                                    loading={false}
-                                  >
-                                    Card Pay
-                                  </ButtonInput>
-                                </div>
-                              </>
-                            )}
-
-                            <CreateSubscribePayPal
-                              paymentModel="PAYPAL-SUBSCRIBE"
-                              data={{
-                                membershipId,
-                                userId: userStorage?.id,
-                                amount: newAmount
-                              }}
-                            />
-                          </>
-                        ) : null}
-                      </>
-                    ) :
-                      <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
-                        <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
-                        <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
-                        <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
-                        <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
-                        <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
-                      </ContentLoader>}
+                        </>
+                      ) :
+                        <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
+                          <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
+                          <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
+                          <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
+                          <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
+                          <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
+                        </ContentLoader>}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="mt-4 text-center">
-                <p className="mt-4 text-sm font-normal text-gray-500">
-                  All the taxes will be calculated while checkout
-                </p>
+                <div className="mt-4 text-center">
+                  <p className="mt-4 text-sm font-normal text-gray-500">
+                    All the taxes will be calculated while checkout
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+      </LayoutSite>
     </>
   );
 };

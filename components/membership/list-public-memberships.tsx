@@ -5,6 +5,7 @@ import { ButtonInput } from "../ui/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { MembershipModel } from "@/types/membership";
 import { useRouter } from "next/router";
+import { convertToPluralMonth } from "@/utils/utils";
 
 type Props = {
   item?: MembershipModel;
@@ -48,7 +49,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
                 {item?.currency?.symbol}
               </span>
             </div>
-            <span className="ml-0.5 text-lg text-gray-600"> / {item?.month ?? 0} {Number(item?.month) > 1 ? `${item?.month} months` : `${item?.month} month`} </span>
+            <span className="ml-0.5 text-lg text-black"> / {convertToPluralMonth(Number(item?.month))} </span>
           </div>
 
           <div className="mt-4 text-center justify-center mx-auto">
