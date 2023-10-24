@@ -11,8 +11,8 @@ export type MembershipModel = {
   status: string;
   organizationId: string;
   description: string;
-  pricePerMonthly: number;
-  pricePerYearly: number;
+  month: number;
+  price: number;
   messageWelcome: string;
   currencyId: string;
   userId: string;
@@ -27,8 +27,8 @@ export type MembershipModel = {
 export type MembershipFormModel = {
   title: string;
   description: string;
-  pricePerMonthly: number;
-  pricePerYearly: number;
+  month: number;
+  price: number;
   messageWelcome: string;
   attachment: any;
   imageList: any;

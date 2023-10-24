@@ -15,9 +15,9 @@ import { MembershipFormModel } from "@/types/membership";
 import { useAuth } from "../util/context-user";
 
 const schema = yup.object({
-  pricePerYearly: yup.number().min(1).required(),
-  pricePerMonthly: yup.number().min(1).required(),
   title: yup.string().required(),
+  price: yup.number().min(1).required(),
+  month: yup.number().min(1).required(),
   description: yup.string().min(10).required(),
 });
 
@@ -48,8 +48,8 @@ const CreateOrUpdateFormMembership: React.FC<{
       const fields = [
         "title",
         "messageWelcome",
-        "pricePerMonthly",
-        "pricePerYearly",
+        "price",
+        "month",
         "description",
       ];
       fields?.forEach((field: any) => setValue(field, membership[field]));
@@ -140,28 +140,27 @@ const CreateOrUpdateFormMembership: React.FC<{
               <div className="mt-2">
                 <NumberInput
                   control={control}
-                  label="Price per month*"
+                  label="Price*"
                   type="number"
-                  name="pricePerMonthly"
-                  placeholder="Price per month"
+                  name="price"
+                  placeholder="Price subscribe"
                   errors={errors}
                   required
                   prefix={profile?.currency?.code}
                 />
                 <span className="text-sm font-medium text-gray-400">
-                  {`Set your minimum price per month. Supporters can choose to pay more`}
+                  {`Set your minimum price  month. Supporters can choose to pay more`}
                 </span>
               </div>
               <div className="mt-2">
                 <NumberInput
                   control={control}
-                  label="Price per year"
+                  label="Month*"
                   type="number"
-                  name="pricePerYearly"
-                  placeholder="Price per year"
+                  name="month"
+                  placeholder="Month subscribe"
                   errors={errors}
                   required
-                  prefix={profile?.currency?.code}
                 />
               </div>
             </div>
@@ -170,7 +169,7 @@ const CreateOrUpdateFormMembership: React.FC<{
               <Controller
                 name="attachmentImages"
                 control={control}
-                render={({}) => (
+                render={({ }) => (
                   <>
                     <div className="text-center justify-center mx-auto">
                       <Upload

@@ -19,6 +19,12 @@ export const capitalizeFirstLetter = (value: string): string => {
   return valueLower.charAt(0).toUpperCase() + valueLower.slice(1);
 };
 
+// export const convertToPluralString = (value: number, input: string): string => {
+//   const valueLower = String(value).toLowerCase();
+
+//   return Number(value) > 1 ? `${value} months` : `${item?.month} month`
+// };
+
 /** Fix date */
 export const capitalizeOneFirstLetter = (a: string, b?: string) => {
   const fistLetter = capitalizeName(a).substring(0, 1).toUpperCase();

@@ -42,13 +42,13 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
           <div className="flex mt-2 items-end justify-center space-x-1">
             <div className="flex items-start">
               <p className="text-5xl font-medium tracking-tight">
-                {item?.pricePerMonthly}
+                {item?.price}
               </p>
               <span className="text-xl font-medium text-black">
                 {item?.currency?.symbol}
               </span>
             </div>
-            <span className="ml-0.5 text-lg text-gray-600"> / month </span>
+            <span className="ml-0.5 text-lg text-gray-600"> / {item?.month ?? 0} {Number(item?.month) > 1 ? `${item?.month} months` : `${item?.month} month`} </span>
           </div>
 
           <div className="mt-4 text-center justify-center mx-auto">

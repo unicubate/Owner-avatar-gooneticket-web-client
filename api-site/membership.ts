@@ -27,9 +27,9 @@ export const CreateOrUpdateOneMembershipAPI = ({
       const { membershipId, newImageLists } = payload;
       let data = new FormData();
       data.append("title", `${payload.title ?? ""}`);
+      data.append("month", `${payload.month ?? ""}`);
+      data.append("price", `${payload.price ?? ""}`);
       data.append("description", `${payload.description ?? ""}`);
-      data.append("pricePerMonthly", `${payload.pricePerMonthly ?? ""}`);
-      data.append("pricePerYearly", `${payload.pricePerYearly ?? ""}`);
       data.append("messageWelcome", `${payload.messageWelcome ?? ""}`);
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {

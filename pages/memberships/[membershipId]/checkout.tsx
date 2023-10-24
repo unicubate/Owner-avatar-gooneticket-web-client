@@ -35,8 +35,8 @@ const CheckoutView = () => {
     ? JSON.parse(watchAmount)
     : {
       currency: item?.currency?.code,
-      value: item?.pricePerMonthly,
-      month: 1,
+      value: item?.price,
+      month: item?.month,
     };
 
   if (status === "pending") {
@@ -78,7 +78,7 @@ const CheckoutView = () => {
                         </div>
 
                         <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-                          {item?.pricePerMonthly ? (
+                          {item?.price ? (
                             <div className="mt-2">
                               <div
                                 className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
@@ -95,54 +95,18 @@ const CheckoutView = () => {
                                       defaultChecked
                                       value={JSON.stringify({
                                         currency: item?.currency?.code,
-                                        value: item?.pricePerMonthly,
-                                        month: 1,
+                                        value: item?.price,
+                                        month: item?.month,
                                       })}
                                       className="w-5 h-5 text-blue-600 border-gray-500 rounded-full"
                                     />
                                     <label className="ml-2 mr-auto">
                                       <p className="text-xl font-semibold text-black">
-                                        {item?.pricePerMonthly}
+                                        {item?.price}
                                         {item?.currency?.symbol}/month
                                       </p>
                                       <p className="text-sm text-gray-600">
                                         monthly billing
-                                      </p>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : null}
-
-                          {item?.pricePerYearly ? (
-                            <div className="mt-2">
-                              <div
-                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
-                                  ? "border-red-500"
-                                  : "border-gray-200"
-                                  } rounded-md hover:bg-gray-50`}
-                              >
-                                <div className="px-2 py-2 sm:p-4">
-                                  <div className="flex items-center">
-                                    <input
-                                      type="radio"
-                                      {...register("amount")}
-                                      id="amount"
-                                      value={JSON.stringify({
-                                        currency: item?.currency?.code,
-                                        value: item?.pricePerYearly,
-                                        month: 12,
-                                      })}
-                                      className="w-5 h-5 text-blue-600 border-gray-500 rounded-full"
-                                    />
-                                    <label className="ml-2 mr-auto">
-                                      <p className="text-xl font-semibold text-black">
-                                        {item?.pricePerYearly}
-                                        {item?.currency?.symbol}/year
-                                      </p>
-                                      <p className="text-sm text-gray-600">
-                                        billed in a year
                                       </p>
                                     </label>
                                   </div>
