@@ -30,11 +30,11 @@ export type NavbarProps = {
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
 const MONETIZE_ITEMS: NavbarProps[] = [
-  // {
-  //   title: "Donations",
-  //   href: "/donations",
-  //   icon: <MdOutlineFavoriteBorder className={classIcon} />,
-  // },
+  {
+    title: "Donations",
+    href: "/donations",
+    icon: <MdOutlineFavoriteBorder className={classIcon} />,
+  },
   // {
   //   title: "Gift",
   //   href: "/gifts",

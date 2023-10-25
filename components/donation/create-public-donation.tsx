@@ -6,6 +6,7 @@ import { BiCoffeeTogo } from "react-icons/bi";
 import { useAuth } from "../util/context-user";
 import { CreatePaymentStripe } from "../payment/stripe/create-payment-stripe";
 import { CreatePaymentPayPal } from "../payment/create-payment-paypal";
+import { AvatarCoffeeComponent } from "../ui";
 const { TextArea } = Input;
 
 const CreatePublicDonation: React.FC<{
@@ -56,14 +57,16 @@ const CreatePublicDonation: React.FC<{
 
                 <div className="flex items-center justify-between mt-6">
                   <p className="text-xl font-bold text-gray-900">
-                    <BiCoffeeTogo className="h-12 w-12 text-indigo" />
+                    <BiCoffeeTogo
+                      className={`h-14 w-14 text-${user?.profile?.color}-500`}
+                    />
                   </p>
                   <div className="ml-auto flex items-center justify-end space-x-8 border border-gray-100 rounded-md">
                     <ButtonInput
                       shape="default"
                       size="normal"
                       type="button"
-                      color="indigo"
+                      color={user?.profile?.color}
                       loading={false}
                       disabled={increment === 1 ? true : false}
                       onClick={() => setIncrement((lk) => lk - 1)}
@@ -92,7 +95,7 @@ const CreatePublicDonation: React.FC<{
                       shape="default"
                       size="normal"
                       type="button"
-                      color="indigo"
+                      color={user?.profile?.color}
                       loading={false}
                       onClick={() => setIncrement((lk) => lk + 1)}
                     >
@@ -177,7 +180,7 @@ const CreatePublicDonation: React.FC<{
                             shape="default"
                             type="button"
                             size="large"
-                            color="indigo"
+                            color={user?.profile?.color}
                             loading={false}
                           >
                             Card Pay

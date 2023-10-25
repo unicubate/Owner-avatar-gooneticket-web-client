@@ -6,7 +6,7 @@ import { BiDotsHorizontal } from "react-icons/bi";
 import { TransactionModel } from "@/types/transaction";
 import { formateFromNow, formatePrice } from "@/utils";
 import { capitalizeOneFirstLetter } from "@/utils/utils";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
 
 type Props = {
   item?: TransactionModel;
@@ -19,10 +19,17 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
       <tr key={index}>
         <td className="py-4 text-sm font-bold text-gray-900">
           <div className="flex items-center flex-1 min-w-0">
-            <AvatarComponent size={50} profile={item?.profileSend} />
+            {item?.profileSend?.id ? (
+              <AvatarComponent size={50} profile={item?.profileSend} />
+            ) : (
+              <AvatarCoffeeComponent size={50} color={item?.color} />
+            )}
+
             <div className="flex-1 min-w-0 ml-4">
               <p className="text-sm font-bold text-gray-900">
-                {item?.profileSend?.firstName} {item?.profileSend?.lastName}
+                {item?.profileSend?.id
+                  ? `${item?.profileSend?.firstName} ${item?.profileSend?.lastName}`
+                  : item?.fullName}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 hidden sm:table-cell">
                 {item?.profileSend?.email}
@@ -36,7 +43,6 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
         </td>
-
 
         <td className="text-sm text-left font-bold text-gray-900">
           {item?.model}

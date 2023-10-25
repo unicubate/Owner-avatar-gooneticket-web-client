@@ -2,6 +2,8 @@ export * from "./button-cancel-input";
 export * from "./button-input";
 export * from "./date-input";
 export * from "./empty-data";
+export * from "./avatar-coffee-component";
+export * from "./avatar-component";
 export * from "./loading-file";
 export * from "./number-input";
 export * from "./react-quill-input";

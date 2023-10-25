@@ -15,7 +15,7 @@ const AvatarComponent: React.FC<Props> = ({ profile, size, className }) => {
       <Avatar className={className} size={size} src={profile?.image}
         alt={`${profile?.firstName ?? ""} ${profile?.lastName ?? ""
           }`} /> :
-      <Avatar className={className} size={size} style={{ backgroundColor: '#fde4', color: `${profile?.color}` }}>
+      <Avatar className={className} size={size} style={{ backgroundColor: '#fde7', color: `${profile?.color}` }}>
         {capitalizeOneFirstLetter(String(profile?.firstName), String(profile?.lastName))}
       </Avatar>}
     </>

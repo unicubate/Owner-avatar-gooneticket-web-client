@@ -23,6 +23,9 @@ export type TransactionModel = {
   userSendId: string;
   userReceiveId: string;
   userId: string;
+  email: string;
+  color: string;
+  fullName: string;
   gift: {
     id: string;
     title: string;
