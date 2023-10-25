@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
 import { useRouter } from "next/router";
 import { GetOnePostAPI } from "@/api-site/post";

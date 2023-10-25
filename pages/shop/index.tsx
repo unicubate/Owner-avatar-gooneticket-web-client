@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { useAuth } from "@/components/util/context-user";
 import { EnableShop } from "@/components/shop/enable-shop";

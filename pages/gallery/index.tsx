@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useAuth } from "@/components/util/context-user";
 import { EnableGallery } from "@/components/gallery/enable-gallery";
 import { TableGallery } from "@/components/gallery/table-gallery";

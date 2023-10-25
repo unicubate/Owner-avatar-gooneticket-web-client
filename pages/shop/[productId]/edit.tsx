@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";

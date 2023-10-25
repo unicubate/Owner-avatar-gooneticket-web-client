@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Skeleton } from "antd";
 import { useInView } from "react-intersection-observer";

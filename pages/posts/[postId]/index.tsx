@@ -1,4 +1,4 @@
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { GetOnePostAPI } from "@/api-site/post";
 import { useRouter } from "next/router";
 import { Image } from "antd";

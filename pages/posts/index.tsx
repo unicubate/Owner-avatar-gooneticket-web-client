@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavCreatePost } from "@/components/post/horizontal-nav-create-post";
 import { useAuth } from "@/components/util/context-user";
 import { ButtonInput, EmptyData, LoadingFile } from "@/components/ui";

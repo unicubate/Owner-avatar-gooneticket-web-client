@@ -93,7 +93,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
                   : actions?.resolve();
               }}
               disabled={false}
-              style={{ layout: "horizontal", label: "paypal", color: "gold" }}
+              style={{ layout: "horizontal", label: "paypal", color: "white" }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource={undefined}
               createOrder={(data, actions) => createOrder(data, actions)}

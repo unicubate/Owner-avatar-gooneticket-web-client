@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
 
 const CommissionsCreate = () => {

@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { useAuth } from "@/components/util/context-user";
 

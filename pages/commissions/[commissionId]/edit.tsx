@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";

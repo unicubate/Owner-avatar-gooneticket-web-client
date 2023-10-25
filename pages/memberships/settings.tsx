@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useAuth } from "@/components/util/context-user";
 import { useState } from "react";
 import { ButtonInput } from "@/components/ui/button-input";

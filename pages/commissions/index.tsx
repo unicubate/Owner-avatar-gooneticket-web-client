@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavCommission } from "@/components/commission/horizontal-nav-commission";
 import { useAuth } from "@/components/util/context-user";
 import { EnableCommission } from "@/components/commission/enable-commission";

@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { useAuth } from "@/components/util/context-user";
 import { LoadingFile } from "@/components/ui/loading-file";

@@ -1,6 +1,6 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 
 

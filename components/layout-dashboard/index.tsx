@@ -24,8 +24,6 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         <HeaderHorizontalNavDashboard user={user} />
 
         <div className="flex flex-1">
-          
-          
           {user?.id ? <HeaderVerticalNavDashboard user={user} /> : null}
 
           {children}
@@ -35,4 +33,4 @@ const LayoutDashboard = ({ children, title }: IProps) => {
   );
 };
 
-export default LayoutDashboard;
+export { LayoutDashboard };

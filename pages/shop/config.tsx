@@ -1,5 +1,5 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
+import { LayoutDashboard } from "@/components/layout-dashboard";
 import { Input, Skeleton } from "antd";
 import { useState } from "react";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
