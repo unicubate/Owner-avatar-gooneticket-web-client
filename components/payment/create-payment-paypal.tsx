@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 import { generateLongUUID } from "@/utils/generate-random";
 
 type Props = { data?: any; paymentModel: PaymentModel };
-const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
+const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { push } = useRouter();
-  const { amount, membershipId, userId } = data;
+  const { amount, membershipId, userId, organizationId } = data;
   const currency = amount?.currency
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
@@ -20,6 +20,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
     const payload = {
       membershipId,
       userId,
+      organizationId,
       reference: newReference,
       amount: {
         currency: amountPalpal?.currency_code,
@@ -92,7 +93,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
                   : actions?.resolve();
               }}
               disabled={false}
-              style={{ layout: "horizontal", label: "paypal", color: "white" }}
+              style={{ layout: "horizontal", label: "paypal", color: "gold" }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource={undefined}
               createOrder={(data, actions) => createOrder(data, actions)}
@@ -113,4 +114,4 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
     </>
   );
 };
-export { CreateSubscribePayPal };
+export { CreatePaymentPayPal };

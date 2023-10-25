@@ -12,7 +12,7 @@ export type StripeProps = {
   paymentModel: PaymentModel;
 };
 
-const CreateSubscribeStripe: React.FC<StripeProps> = ({
+const CreatePaymentStripe: React.FC<StripeProps> = ({
   data,
   paymentModel,
 }) => {
@@ -29,4 +29,4 @@ const CreateSubscribeStripe: React.FC<StripeProps> = ({
     </>
   );
 };
-export { CreateSubscribeStripe };
+export { CreatePaymentStripe };

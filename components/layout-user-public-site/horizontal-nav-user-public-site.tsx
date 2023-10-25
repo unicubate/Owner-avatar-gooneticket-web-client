@@ -10,6 +10,7 @@ import { AvatarComponent } from "../ui/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 import { ButtonInput } from "../ui";
+import { CreatePublicDonation } from "../donation/create-public-donation";
 
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
 }
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
+  const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const router = useRouter();
   const pathname = usePathname();
@@ -178,6 +180,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                       type="button"
                       color={user?.profile?.color}
                       loading={false}
+                      onClick={() => setOpenModal(true)}
                       icon={<BiCoffeeTogo className="h-6 w-6" />}
                     >
                       Donate
@@ -202,6 +205,14 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
           </div>
         </div>
       </header>
+
+      {openModal ? (
+        <CreatePublicDonation
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          user={user}
+        />
+      ) : null}
     </>
   );
 };

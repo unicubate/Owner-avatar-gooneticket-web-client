@@ -22,6 +22,7 @@ const shapeType: SizeInterface = {
 interface Props {
   ref?: (node?: Element | null) => void;
   className?: string;
+  disabled?: boolean;
   size?: "large" | "medium" | "normal" | "small" | "huge"
   loading: boolean;
   children: React.ReactNode;
@@ -45,6 +46,7 @@ const ButtonInput: React.FC<Props> = ({
   className,
   onClick,
   minW,
+  disabled,
 }) => {
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 15, color: "#ffff" }} spin />
@@ -55,7 +57,7 @@ const ButtonInput: React.FC<Props> = ({
         ref={ref}
         type={loading ? "button" : type}
         onClick={onClick}
-        disabled={loading ? true : false}
+        disabled={loading || disabled ? true : false}
         className={
           className +
           `
@@ -74,14 +76,14 @@ const ButtonInput: React.FC<Props> = ({
            text-white 
            transition-all 
            duration-200 
-           bg-${loading ? "blue" : color}-${loading ? "200" : "600"}
+           bg-${loading || disabled ? "blue" : color}-${loading || disabled ? "200" : "600"}
            border-1
            border-transparent
            focus:outline-none 
            focus:ring-2 
            focus:ring-offset-2 
            focus:ring-${color}-500
-           hover:bg-${color}-${loading ? "200" : "700"}
+           hover:bg-${color}-${loading || disabled ? "200" : "700"}
         `
         }
       >

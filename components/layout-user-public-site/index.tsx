@@ -9,7 +9,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-const LayoutUserPublicSite: React.FC<IProps> = ({ children, title ,user}) => {
+const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
   // const user = useAuth() as any;
 
   return (

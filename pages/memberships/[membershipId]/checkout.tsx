@@ -6,10 +6,10 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { HtmlParser } from "@/utils/html-parser";
-import { CreateSubscribePayPal } from "@/components/payment/create-subscribe-paypal";
+import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
-import { CreateSubscribeStripe } from "@/components/payment/stripe/create-subscribe-stripe";
+import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
 import { ButtonInput } from "@/components/ui/button-input";
 import ContentLoader from "react-content-loader";
 import { formatePrice } from "@/utils";
@@ -163,7 +163,7 @@ const CheckoutView = () => {
                                     isDivide: false,
                                   }) ?? ""}
                                 </p>
-                                <p className="ml-0.5 text-2xl font-bold text-gray-900">
+                                <p className="ml-1 text-2xl font-bold text-gray-900">
                                   {item?.currency?.symbol}
                                 </p>
                               </>
@@ -174,10 +174,11 @@ const CheckoutView = () => {
                             <>
                               {isCardPay ? (
                                 <>
-                                  <CreateSubscribeStripe
+                                  <CreatePaymentStripe
                                     paymentModel="STRIPE-SUBSCRIBE"
                                     data={{
                                       membershipId,
+                                      organizationId: item?.organizationId,
                                       userId: userStorage?.id,
                                       amount: newAmount,
                                     }}
@@ -200,10 +201,11 @@ const CheckoutView = () => {
                                 </>
                               )}
 
-                              <CreateSubscribePayPal
+                              <CreatePaymentPayPal
                                 paymentModel="PAYPAL-SUBSCRIBE"
                                 data={{
                                   membershipId,
+                                  organizationId: item?.organizationId,
                                   userId: userStorage?.id,
                                   amount: newAmount
                                 }}
