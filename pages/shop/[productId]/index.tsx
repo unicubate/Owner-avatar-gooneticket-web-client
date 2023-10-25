@@ -11,6 +11,7 @@ import { ImageGalleryShopList } from "@/components/shop/image-gallery-shop-list"
 import ListComments from "@/components/comment/list-comments";
 import { useAuth } from "@/components/util/context-user";
 import { AvatarComponent } from "@/components/ui/avatar-component";
+import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -64,21 +65,32 @@ const ShopView = () => {
                       </p>
                     </div>
 
-                    <div className="ml-auto">
-                      <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
+                    <div onClick={() =>
+                      router.push(`/${product?.profile?.username}/shop`)
+                    } className="ml-auto">
+                      <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900 cursor-pointer">
                         {" "}
-                        Private{" "}
+                        View shop
                       </p>
                     </div>
                   </div>
 
-                  {product?.uploadsImage.length > 0 && (
+                  {product?.uploadsImage && product?.uploadsImage.length > 0 ? (
+                    <ListCarouselUpload
+                      uploads={product?.uploadsImage}
+                      folder="products"
+                      preview={false}
+                      className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110`}
+                    />
+                  ) : null}
+
+                  {/* {product?.uploadsImage.length > 0 && (
                     <ImageGalleryShopList
                       uploads={product?.uploadsImage}
                       folder="products"
                       preview={false}
                     />
-                  )}
+                  )} */}
 
                   {product?.urlMedia ? (
                     <div className="mt-2 mx-auto">
@@ -107,7 +119,7 @@ const ShopView = () => {
                     isDivide: false,
                   }) ?? ""}
                 </p>
-                <p className="text-xl font-bold text-gray-900">
+                <p className="text-2xl font-bold text-gray-900">
                   {product?.currency?.symbol ?? ""}
                 </p>
                 {product?.enableDiscount ? (
@@ -121,7 +133,7 @@ const ShopView = () => {
                         }) ?? ""}{" "}
                       </del>
                     </p>
-                    <p className="text-xl font-bold text-gray-500">
+                    <p className="text-2xl font-bold text-gray-500">
                       <del> {product?.currency?.symbol ?? ""} </del>
                     </p>
                   </>
@@ -268,11 +280,13 @@ const ShopView = () => {
             </div>
 
             <div className="lg:col-span-3">
-              <ListComments
-                productId={String(product?.id)}
-                take={10}
-                userVisitorId={userVisiter?.id}
-              />
+              {product?.id ?
+                <ListComments
+                  productId={String(product?.id)}
+                  take={10}
+                  userVisitorId={userVisiter?.id}
+                /> : null}
+
               {/* <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>

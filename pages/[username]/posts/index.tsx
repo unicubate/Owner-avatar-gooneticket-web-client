@@ -73,6 +73,7 @@ const PostsUserPublic = () => {
             {user?.id ? <PublicListLastPosts userVisitor={user?.organizationId} /> : null}
           </div> */}
           </div>
+          
         </div>
       </LayoutUserPublicSite>
     </>

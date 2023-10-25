@@ -176,9 +176,9 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                       shape="default"
                       size="normal"
                       type="button"
-                      color="indigo"
+                      color={user?.profile?.color}
                       loading={false}
-                      icon={<BiCoffeeTogo className="h-6 w-6"/>}
+                      icon={<BiCoffeeTogo className="h-6 w-6" />}
                     >
                       Donate
                     </ButtonInput>

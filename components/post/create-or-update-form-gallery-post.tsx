@@ -177,36 +177,39 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     </div>
                   ) : null}
 
-                  <div className="mb-4">
-                    <Controller
-                      name="attachmentImages"
-                      control={control}
-                      render={({}) => (
-                        <>
-                          <div className="text-center justify-center mx-auto">
-                            <Upload
-                              multiple
-                              name="attachmentImages"
-                              listType="picture-card"
-                              fileList={imageList}
-                              onChange={handleImageChange}
-                              accept=".png,.jpg,.jpeg"
-                              maxCount={1}
-                            >
-                              {imageList.length >= 1 ? null : (
-                                <div className="text-center">
-                                  <PlusOutlined />
-                                  <div style={{ marginTop: 8 }}>
-                                    Upload cover
+                  {!postId ?
+                    <div className="mb-4">
+                      <Controller
+                        name="attachmentImages"
+                        control={control}
+                        render={({ }) => (
+                          <>
+                            <div className="text-center justify-center mx-auto">
+                              <Upload
+                                multiple
+                                name="attachmentImages"
+                                listType="picture-card"
+                                fileList={imageList}
+                                onChange={handleImageChange}
+                                accept=".png,.jpg,.jpeg"
+                                maxCount={10}
+                              >
+                                {imageList.length >= 10 ? null : (
+                                  <div className="text-center">
+                                    <PlusOutlined />
+                                    <div style={{ marginTop: 8 }}>
+                                      Upload cover
+                                    </div>
                                   </div>
-                                </div>
-                              )}
-                            </Upload>
-                          </div>
-                        </>
-                      )}
-                    />
-                  </div>
+                                )}
+                              </Upload>
+                            </div>
+                          </>
+                        )}
+                      />
+                    </div>
+                    : null}
+
 
                   <div className="mt-4">
                     <TextInput
