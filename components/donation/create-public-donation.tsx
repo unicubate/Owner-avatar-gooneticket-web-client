@@ -8,23 +8,20 @@ import { CreatePaymentStripe } from "../payment/stripe/create-payment-stripe";
 import { CreatePaymentPayPal } from "../payment/create-payment-paypal";
 const { TextArea } = Input;
 
-
 const CreatePublicDonation: React.FC<{
   user?: any;
   openModal: boolean;
   setOpenModal: any;
 }> = ({ openModal, setOpenModal, user }) => {
   const { userStorage: userVisitor } = useAuth() as any;
-  const initialPrice = "3"
-  const initialCurrency = user?.profile?.currency?.code
-  const [increment, setIncrement] = useState(1)
+  const initialPrice = "3";
+  const initialCurrency = user?.profile?.currency?.code;
+  const [increment, setIncrement] = useState(1);
   const [price, setPrice] = useState(initialPrice);
   const [description, setDescription] = useState("");
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
 
-
-
-  const newValuePrice: number = Number(price) * increment
+  const newValuePrice: number = Number(price) * increment;
   const newAmount = {
     potTotal: increment,
     value: newValuePrice,
@@ -32,8 +29,8 @@ const CreatePublicDonation: React.FC<{
     currency: initialCurrency,
   };
 
-  console.log('newAmount =======>', newAmount)
-  console.log('user =======>', user)
+  console.log("newAmount =======>", newAmount);
+  console.log("user =======>", user);
   return (
     <>
       {openModal ? (
@@ -69,7 +66,7 @@ const CreatePublicDonation: React.FC<{
                       color="indigo"
                       loading={false}
                       disabled={increment === 1 ? true : false}
-                      onClick={() => setIncrement(lk => lk - 1)}
+                      onClick={() => setIncrement((lk) => lk - 1)}
                     >
                       <svg
                         className="w-5 h-5"
@@ -97,7 +94,7 @@ const CreatePublicDonation: React.FC<{
                       type="button"
                       color="indigo"
                       loading={false}
-                      onClick={() => setIncrement(lk => lk + 1)}
+                      onClick={() => setIncrement((lk) => lk + 1)}
                     >
                       <svg
                         className="w-5 h-5"
@@ -128,7 +125,7 @@ const CreatePublicDonation: React.FC<{
                     prefix={<strong>{initialCurrency}</strong>}
                     min={1}
                     value={newValuePrice}
-                    onChange={e => setPrice(e?.target.value)}
+                    onChange={(e) => setPrice(e?.target.value)}
                   />
                 </div>
 
@@ -138,16 +135,13 @@ const CreatePublicDonation: React.FC<{
                     name="message"
                     placeholder="Your message (optional)"
                     value={description}
-                    onChange={e => setDescription(e.target.value)}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </div>
 
-
-                {newValuePrice > 0 ?
+                {newValuePrice > 0 ? (
                   <div className="flex items-center justify-between mt-6">
-                    <p className="text-2xl font-bold text-gray-900">
-                      Donate
-                    </p>
+                    <p className="text-2xl font-bold text-gray-900">Donate</p>
                     {newAmount?.value ? (
                       <>
                         <p className="ml-auto text-xl font-bold text-gray-900">
@@ -159,11 +153,9 @@ const CreatePublicDonation: React.FC<{
                       </>
                     ) : null}
                   </div>
-                  : null}
+                ) : null}
 
-
-
-                {userVisitor?.id && newValuePrice > 0 ? (
+                {newValuePrice > 0 ? (
                   <>
                     {isCardPay ? (
                       <>
@@ -173,7 +165,7 @@ const CreatePublicDonation: React.FC<{
                             userId: userVisitor?.id,
                             organizationId: user?.organizationId,
                             amount: newAmount,
-                            description: description
+                            description: description,
                           }}
                         />
                       </>
@@ -200,14 +192,12 @@ const CreatePublicDonation: React.FC<{
                         userId: userVisitor?.id,
                         organizationId: user?.organizationId,
                         amount: newAmount,
-                        description: description
+                        description: description,
                       }}
                     />
                   </>
                 ) : null}
               </div>
-
-
             </div>
           </div>
         </div>
