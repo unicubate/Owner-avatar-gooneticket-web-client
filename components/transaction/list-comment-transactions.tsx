@@ -101,7 +101,7 @@ const ListCommentTransactions: React.FC<{
                 onClick={() => fetchNextPage()}
                 className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
               >
-                View more comments
+                View more
               </button>
             )}
           </div>
