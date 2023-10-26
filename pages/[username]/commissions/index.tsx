@@ -54,7 +54,7 @@ const CommissionsUserPublic = () => {
             </div>
           </div>
         </div>
-
+        
       </LayoutUserPublicSite>
 
     </>

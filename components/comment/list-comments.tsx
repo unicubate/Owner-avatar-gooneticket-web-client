@@ -5,13 +5,25 @@ import ListCommentsPosts from "./list-comments-posts";
 import { GetInfiniteCommentsAPI } from "@/api-site/comment";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { CommentModel } from "@/types/comment";
+import { ModelType } from "@/utils/pagination-item";
 
 const ListComments: React.FC<{
   take: number;
+  model: ModelType;
+  organizationId: string;
+  modelIds: ModelType[];
   postId?: string;
   productId?: string;
   userVisitorId: string;
-}> = ({ take, postId, productId, userVisitorId }) => {
+}> = ({
+  take,
+  model,
+  modelIds,
+  organizationId,
+  postId,
+  productId,
+  userVisitorId,
+}) => {
   const {
     isLoading: isLoadingComments,
     isError: isErrorComments,
@@ -22,6 +34,7 @@ const ListComments: React.FC<{
   } = GetInfiniteCommentsAPI({
     take: take,
     sort: "DESC",
+    modelIds,
     postId: postId ?? "",
     productId: productId ?? "",
     userVisitorId,
@@ -45,8 +58,11 @@ const ListComments: React.FC<{
           <ListCommentsPosts
             item={item}
             key={index}
+            model={model}
             index={index}
+            organizationId={organizationId}
             userVisitorId={userVisitorId}
+            modelIds={modelIds}
           />
         ))}
       </Fragment>
@@ -55,9 +71,14 @@ const ListComments: React.FC<{
 
   return (
     <>
-      <CreateOrUpdateFormComment postId={postId} productId={productId} />
+      <CreateOrUpdateFormComment
+        postId={postId}
+        organizationId={organizationId}
+        productId={productId}
+        model={model}
+      />
 
-      <ul className="mt-4 divide-y divide-gray-200 -my-9">
+      <ul className="mt-4 divide-y divide-gray-200 my-2">
         {dataTableComments}
       </ul>
 

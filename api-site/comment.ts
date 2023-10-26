@@ -3,7 +3,11 @@ import queryString from "query-string";
 import { PostModel, PostType, ResponsePostModel } from "@/types/post";
 import dyaxios from "@/utils/dyaxios";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import {
+  ModelType,
+  PaginationRequest,
+  SortModel,
+} from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
   useMutation,
@@ -189,9 +193,7 @@ export const DeleteOneCommentAPI = ({
 };
 
 export const getCommentsAPI = async (
-  payload: {
-    postId: string;
-  } & PaginationRequest
+  payload: PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
     action: "getComments",
@@ -200,10 +202,7 @@ export const getCommentsAPI = async (
 };
 
 export const getCommentsRepliesAPI = async (
-  payload: {
-    userVisitorId: string;
-    commentId: string;
-  } & PaginationRequest
+  payload: PaginationRequest
 ): Promise<{ data: ResponsePostModel }> => {
   const queyParams = queryString.stringify(payload);
   return await dyaxios.get(`/comments/replies?${queyParams}`);
@@ -211,9 +210,11 @@ export const getCommentsRepliesAPI = async (
 
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
-  postId: string;
+  postId?: string;
+  modelIds: ModelType[];
   productId?: string;
-  userVisitorId: string;
+  organizationId?: string;
+  userVisitorId?: string;
   sort: SortModel;
 }) => {
   return useInfiniteQuery({
@@ -232,6 +233,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   take: number;
   sort: SortModel;
   commentId: string;
+  modelIds: ModelType[];
   userVisitorId: string;
 }) => {
   return useInfiniteQuery({

@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api-site/post";
-import { LoadingOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
-import ListPublicPosts from "./list-public-posts";
 import { LoadingFile } from "../ui/loading-file";
 import ListFollowPosts from "./list-follow-posts";
 import { UserVisitorModel } from "@/types/user.type";

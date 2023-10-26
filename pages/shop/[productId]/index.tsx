@@ -65,9 +65,12 @@ const ShopView = () => {
                       </p>
                     </div>
 
-                    <div onClick={() =>
-                      router.push(`/${product?.profile?.username}/shop`)
-                    } className="ml-auto">
+                    <div
+                      onClick={() =>
+                        router.push(`/${product?.profile?.username}/shop`)
+                      }
+                      className="ml-auto"
+                    >
                       <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900 cursor-pointer">
                         {" "}
                         View shop
@@ -280,12 +283,16 @@ const ShopView = () => {
             </div>
 
             <div className="lg:col-span-3">
-              {product?.id ?
+              {product?.id ? (
                 <ListComments
+                  model="PRODUCT"
+                  modelIds={["PRODUCT"]}
                   productId={String(product?.id)}
                   take={10}
+                  organizationId={userVisiter?.organizationId}
                   userVisitorId={userVisiter?.id}
-                /> : null}
+                />
+              ) : null}
 
               {/* <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description

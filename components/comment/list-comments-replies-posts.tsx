@@ -15,14 +15,21 @@ import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
+import { ModelType } from "@/utils/pagination-item";
 
 type Props = {
+  model: ModelType;
   item?: CommentModel;
   index?: number;
   userId: string;
 };
 
-const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
+const ListCommentsRepliesPosts: React.FC<Props> = ({
+  item,
+  model,
+  userId,
+  index,
+}) => {
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
@@ -30,8 +37,8 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
   };
 
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -70,14 +77,19 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
   return (
     <>
       <div key={index} className="flex items-start mt-4">
-        <AvatarComponent size={40}
+        <AvatarComponent
+          size={40}
           className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-          profile={item?.profile} />
+          profile={item?.profile}
+        />
 
         <div className="ml-3">
           <div className="flex items-center space-x-px">
             <div className="flex items-center">
-              <Link href={`/${item?.profile?.username}`} className="text-sm font-bold text-gray-900">
+              <Link
+                href={`/${item?.profile?.username}`}
+                className="text-sm font-bold text-gray-900"
+              >
                 {" "}
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
               </Link>
@@ -117,6 +129,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
         <CreateOrUpdateFormCommentReply
           parentId={String(item?.id)}
           comment={item}
+          model={model}
           openModalReply={openModalReply}
           setOpenModalReply={setOpenModalReply}
         />

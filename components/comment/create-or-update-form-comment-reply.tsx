@@ -12,6 +12,7 @@ import {
 } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
 import { ButtonCancelInput, TextAreaInput } from "../ui";
+import { ModelType } from "@/utils/pagination-item";
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -20,9 +21,10 @@ const schema = yup.object({
 const CreateOrUpdateFormCommentReply: React.FC<{
   parentId: string;
   comment?: any;
+  model: ModelType;
   setOpenModalReply?: any;
   openModalReply?: boolean;
-}> = ({ parentId, comment, openModalReply, setOpenModalReply }) => {
+}> = ({ parentId, model, comment, openModalReply, setOpenModalReply }) => {
   const user = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
@@ -68,6 +70,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     try {
       await saveMutation({
         ...payload,
+        model: model,
         commentId: comment?.id,
         parentId: parentId,
       });

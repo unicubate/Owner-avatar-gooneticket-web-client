@@ -10,10 +10,12 @@ type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { push } = useRouter();
   const { amount, membershipId, userId, organizationId } = data;
-  const currency = amount?.currency
+  const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
-  const handleApprove = async (order: any) => {
+  const handleApprove = async (options: { order: any }) => {
+    const { order } = options;
+    const name = order?.payer?.name?.given_name;
     const newReference = generateLongUUID(30);
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(false);
@@ -23,6 +25,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
       organizationId,
       reference: newReference,
       amount: {
+        description: amount?.description,
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),
         month: amount?.month,
@@ -52,7 +55,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
     return actions?.order?.create({
       purchase_units: [
         {
-          description: "Payment amount balance",
+          description: "Payment balance",
           amount: {
             currency_code: currency,
             value: Number(amount?.value),
@@ -93,16 +96,15 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
                   : actions?.resolve();
               }}
               disabled={false}
-              style={{ layout: "horizontal", label: "paypal", color: "white" }}
+              style={{ layout: "horizontal", label: "paypal", color: "blue" }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource={undefined}
               createOrder={(data, actions) => createOrder(data, actions)}
               onApprove={async (data, action) => {
                 const details = await action?.order?.capture();
-                const name = details?.payer?.name?.given_name;
-                return handleApprove(details);
+                return handleApprove({ order: details });
               }}
-              onCancel={() => { }}
+              onCancel={() => {}}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);

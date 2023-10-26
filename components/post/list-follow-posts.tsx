@@ -28,7 +28,11 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
+const ListFollowPosts: React.FC<Props> = ({
+  item,
+  commentTake,
+  userVisitor,
+}) => {
   const router = useRouter();
 
   return (
@@ -43,7 +47,11 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
               onClick={() => router.push(`/${item?.profile?.username}`)}
               className="relative flex-shrink-0 cursor-pointer"
             >
-              <AvatarComponent size={50} className="object-cover w-10 h-10 rounded-full" profile={item?.profile} />
+              <AvatarComponent
+                size={50}
+                className="object-cover w-10 h-10 rounded-full"
+                profile={item?.profile}
+              />
             </div>
 
             <div
@@ -84,14 +92,15 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
             </div>
           </div>
 
-
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
-            <div className={`mt-1 mx-auto 
-            ${item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1
+            <div
+              className={`mt-1 mx-auto 
+            ${
+              item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
                 ? "blur-xl"
                 : ""
-              }`}>
+            }`}
+            >
               <ReactPlayer
                 className="mr-auto"
                 url={item?.urlMedia}
@@ -109,23 +118,24 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-3xl"
-                  : ""
-                  }`}
+                    ? "blur-3xl"
+                    : ""
+                }`}
               />
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
                 <WhoCanSeeItem username={item?.profile?.username} />
               ) : null}
             </div>
           ) : null}
 
           {item?.whoCanSee &&
-            ["AUDIO"].includes(item?.type as PostType) &&
-            item?.uploadsFile?.length > 0 ? (
+          ["AUDIO"].includes(item?.type as PostType) &&
+          item?.uploadsFile?.length > 0 ? (
             <div className="text-center justify-center mx-auto">
               <AudioPlayerInput
                 uploads={item?.uploadsFile}
@@ -148,18 +158,22 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
 
           {item?.description ? (
             <div className={`text-sm font-normal text-gray-600 group relative`}>
-              <span className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1
-                ? "blur-lg"
-                : ""
-                }`}>
-                <HtmlParser html={String(item?.description ?? "")} value={item?.isValidSubscribe !== 1
-                  ? 600
-                  : 0} />
+              <span
+                className={`ql-editor ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.isValidSubscribe !== 1
+                    ? "blur-lg"
+                    : ""
+                }`}
+              >
+                <HtmlParser
+                  html={String(item?.description ?? "")}
+                  value={item?.isValidSubscribe !== 1 ? 600 : 0}
+                />
               </span>
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
                 <WhoCanSeeItem username={item?.profile?.username} />
               ) : null}
             </div>
@@ -178,8 +192,9 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
@@ -188,7 +203,7 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
             ) : null}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
+            item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl font-bold">
                   <HiOutlineLockClosed />
@@ -206,7 +221,10 @@ const ListFollowPosts: React.FC<Props> = ({ item, commentTake, userVisitor }) =>
           </div>
 
           <ListComments
+            model="POST"
+            modelIds={["POST"]}
             userVisitorId={userVisitor?.id}
+            organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}
           />

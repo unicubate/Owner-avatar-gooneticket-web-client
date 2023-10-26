@@ -10,7 +10,7 @@ import { AvatarComponent } from "../ui/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 import { ButtonInput } from "../ui";
-import { CreatePublicDonation } from "../donation/create-public-donation";
+import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
 
 
 interface Props {
@@ -207,7 +207,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
       </header>
 
       {openModal ? (
-        <CreatePublicDonation
+        <CreateModalPublicDonation
           openModal={openModal}
           setOpenModal={setOpenModal}
           user={user}

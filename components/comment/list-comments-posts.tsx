@@ -23,14 +23,25 @@ import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-
 import { BsReplyAll } from "react-icons/bs";
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
+import { ModelType } from "@/utils/pagination-item";
 
 type Props = {
+  organizationId: string;
+  model: ModelType;
+  modelIds: ModelType[];
   userVisitorId: string;
   item?: CommentModel;
   index?: number;
 };
 
-const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
+const ListCommentsPosts: React.FC<Props> = ({
+  model,
+  item,
+  modelIds,
+  userVisitorId,
+  organizationId,
+  index,
+}) => {
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -87,6 +98,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
   } = GetInfiniteCommentsRepliesAPI({
     take: 1,
     sort: "DESC",
+    modelIds,
     commentId: String(item?.id),
     userVisitorId,
   });
@@ -102,6 +114,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListCommentsRepliesPosts
+          model={model}
           item={item}
           key={index}
           index={index}
@@ -124,7 +137,10 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
             <div className="ml-3">
               <div className="flex items-center space-x-px">
                 <div className="flex items-center">
-                  <Link href={`/${item?.profile?.username}`} className="text-sm font-bold text-gray-900">
+                  <Link
+                    href={`/${item?.profile?.username}`}
+                    className="text-sm font-bold text-gray-900"
+                  >
                     {item?.profile?.firstName} {item?.profile?.lastName}{" "}
                   </Link>
                   <p className="ml-3.5 text-sm font-normal text-gray-500">
@@ -168,6 +184,7 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
               </div>
               {openModalReply ? (
                 <CreateOrUpdateFormCommentReply
+                  model={model}
                   parentId={String(item?.id)}
                   openModalReply={openModalReply}
                   setOpenModalReply={setOpenModalReply}
@@ -199,6 +216,8 @@ const ListCommentsPosts: React.FC<Props> = ({ item, userVisitorId, index }) => {
 
         {openModal ? (
           <CreateOrUpdateFormComment
+            model={model}
+            organizationId={organizationId}
             postId={String(item?.postId)}
             comment={item}
             openModal={openModal}

@@ -9,19 +9,30 @@ import { useAuth } from "../util/context-user";
 import { ButtonCancelInput, ButtonInput, TextareaReactQuillInput } from "../ui";
 import { Avatar } from "antd";
 import { AvatarComponent } from "../ui/avatar-component";
+import { ModelType } from "@/utils/pagination-item";
 
 const schema = yup.object({
   description: yup.string().min(7).required(),
 });
 
 const CreateOrUpdateFormComment: React.FC<{
+  organizationId: string;
   productId?: string;
   postId?: string;
   comment?: any;
+  model: ModelType;
   setOpenModal?: any;
   openModal?: boolean;
-}> = ({ postId, productId, comment, openModal, setOpenModal }) => {
-  const {profile} = useAuth() as any;
+}> = ({
+  postId,
+  organizationId,
+  model,
+  productId,
+  comment,
+  openModal,
+  setOpenModal,
+}) => {
+  const { profile } = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -66,9 +77,11 @@ const CreateOrUpdateFormComment: React.FC<{
     try {
       await saveMutation({
         ...payload,
+        model: model ?? "",
         postId: postId ?? "",
         productId: productId ?? "",
         commentId: comment?.id,
+        organizationId: organizationId,
       });
       if (comment) {
         setOpenModal((lk: boolean) => !lk);

@@ -37,13 +37,10 @@ const ShowModalGallery: React.FC<Props> = ({
   const router = useRouter();
   const user = useAuth() as any;
 
-  const {
-    status,
-    data: item,
-  } = GetOnePostAPI({ postId: post?.id });
+  const { status, data: item } = GetOnePostAPI({ postId: post?.id });
 
-  if (status === 'pending') {
-    <strong>Loading...</strong>
+  if (status === "pending") {
+    <strong>Loading...</strong>;
   }
   return (
     <>
@@ -56,7 +53,11 @@ const ShowModalGallery: React.FC<Props> = ({
                 <div className="flex flex-shrink-0 items-center justify-between p-4 border-gray-200 rounded-t-md">
                   <div className="flex items-center">
                     <div className="relative flex-shrink-0 cursor-pointer">
-                      <AvatarComponent size={50} className="object-cover w-10 h-10 rounded-full" profile={item?.profile} />
+                      <AvatarComponent
+                        size={50}
+                        className="object-cover w-10 h-10 rounded-full"
+                        profile={item?.profile}
+                      />
                     </div>
 
                     <div className="ml-2 cursor-pointer">
@@ -112,30 +113,32 @@ const ShowModalGallery: React.FC<Props> = ({
                         preview={false}
                         height="100%"
                         alt={item?.title}
-                        className={`${item?.whoCanSee === "MEMBERSHIP" &&
+                        className={`${
+                          item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                          ? "blur-3xl"
-                          : ""
-                          }`}
+                            ? "blur-3xl"
+                            : ""
+                        }`}
                       />
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                      item?.isValidSubscribe !== 1 ? (
+                    item?.isValidSubscribe !== 1 ? (
                       <WhoCanSeeItem username={item?.profile?.username} />
                     ) : null}
                   </div>
 
-                  {item?.title ?
+                  {item?.title ? (
                     <p className="mt-4 text-lg font-bold text-gray-900 cursor-pointer">
                       {item?.title ?? ""}
-                    </p> : null}
+                    </p>
+                  ) : null}
 
-                  {item?.description ?
+                  {item?.description ? (
                     <p className="mt-2 text-sm font-normal text-gray-600">
                       <HtmlParser html={String(item?.description ?? "")} />
-                    </p> : null}
-
+                    </p>
+                  ) : null}
 
                   <div className="flex mt-4 items-center">
                     <CreateOrUpdateFormLike typeLike="POST" item={item} />
@@ -151,8 +154,9 @@ const ShowModalGallery: React.FC<Props> = ({
                       <>
                         <Link
                           title="Edit"
-                          href={`/posts/${item?.id
-                            }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                          href={`/posts/${
+                            item?.id
+                          }/edit?type=${item?.type.toLocaleLowerCase()}`}
                           className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                         >
                           <MdOutlineModeEdit className="w-6 h-6" />
@@ -169,7 +173,7 @@ const ShowModalGallery: React.FC<Props> = ({
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                      item?.isValidSubscribe !== 1 ? (
+                    item?.isValidSubscribe !== 1 ? (
                       <>
                         <button className="ml-auto text-2xl font-bold">
                           <HiOutlineLockClosed />
@@ -189,6 +193,8 @@ const ShowModalGallery: React.FC<Props> = ({
                   </div>
 
                   <ListComments
+                    model="POST"
+                    modelIds={["POST"]}
                     postId={String(item?.id)}
                     take={Number(commentTake)}
                     userVisitorId={userVisitorId}
