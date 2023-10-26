@@ -5,10 +5,7 @@ import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import {
-  MdDeleteOutline,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { getOneFileGalleryAPI } from "@/api-site/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
@@ -26,7 +23,11 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
+const ListPublicPostsComments: React.FC<Props> = ({
+  item,
+  commentTake,
+  userVisitor,
+}) => {
   const router = useRouter();
   return (
     <>
@@ -61,8 +62,13 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake, userVisit
               {userVisitor?.id === item?.userId ? (
                 <>
                   <button
-                    onClick={() => router.push(`/posts/${item?.id
-                      }/edit?type=${item?.type.toLocaleLowerCase()}`)}
+                    onClick={() =>
+                      router.push(
+                        `/posts/${
+                          item?.id
+                        }/edit?type=${item?.type.toLocaleLowerCase()}`
+                      )
+                    }
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
@@ -130,6 +136,9 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake, userVisit
           </div>
 
           <ListComments
+            model="POST"
+            modelIds={["POST"]}
+            organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}
             userVisitorId={userVisitor?.id}
