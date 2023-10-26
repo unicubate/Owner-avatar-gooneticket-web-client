@@ -197,6 +197,7 @@ const ShowModalGallery: React.FC<Props> = ({
                     modelIds={["POST"]}
                     postId={String(item?.id)}
                     take={Number(commentTake)}
+                    organizationId={item?.organizationId}
                     userVisitorId={userVisitorId}
                   />
                 </div>
