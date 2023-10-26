@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import Swal from "sweetalert2";
-import { Avatar } from "antd";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdDeleteOutline } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentReplyAPI } from "@/api-site/comment";
 import {
@@ -11,8 +10,6 @@ import {
   formateFromNow,
 } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
-import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
@@ -21,21 +18,15 @@ type Props = {
   model: ModelType;
   item?: CommentModel;
   index?: number;
-  userId?: string;
+  organizationId: string;
 };
 
-const ListCommentsRepliesPosts: React.FC<Props> = ({
+const ListCommentsRepliesTransactions: React.FC<Props> = ({
   item,
   model,
-  userId,
   index,
+  organizationId,
 }) => {
-  const [openModalReply, setOpenModalReply] = useState(false);
-
-  const editItem = (item: any) => {
-    setOpenModalReply(true);
-  };
-
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
@@ -103,16 +94,9 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
           </p>
 
           <div className="flex mt-2 items-center">
-            <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-            {userId === item?.userId ? (
+            {organizationId === item?.organizationId ? (
               <>
-                <button
-                  onClick={() => editItem(item)}
-                  className="ml-3.5 font-bold"
-                >
-                  <MdOutlineModeEdit className="w-5 h-5" />
-                </button>
                 <button
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 font-bold"
@@ -124,18 +108,8 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
           </div>
         </div>
       </div>
-
-      {openModalReply ? (
-        <CreateOrUpdateFormCommentReply
-          parentId={String(item?.id)}
-          comment={item}
-          model={model}
-          openModalReply={openModalReply}
-          setOpenModalReply={setOpenModalReply}
-        />
-      ) : null}
     </>
   );
 };
 
-export default ListCommentsRepliesPosts;
+export { ListCommentsRepliesTransactions };

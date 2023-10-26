@@ -6,7 +6,7 @@ import { useState } from "react";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateFormPublicDonation } from "@/components/donation/create-form-public-donation";
-import { ListCommentTransactions } from "@/components/transaction/list-comment-transactions";
+import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
 import { LoadingFile } from "@/components/ui";
 import ContentLoader, { BulletList } from "react-content-loader";
 
@@ -46,7 +46,7 @@ const ProfilePublic = () => {
                     <div className="flow-root">
                       <div className="mx-auto sm:px-6 md:px-8">
                         {user?.profile?.description && (
-                          <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                          <div className="mt-2 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
                             <div className="p-8 sm:py-4 sm:px-4">
                               <div className="flex items-center">
                                 <div
@@ -79,7 +79,9 @@ const ProfilePublic = () => {
 
                         <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
                           <div className="p-6 sm:py-4 sm:px-4">
-                            <ListCommentTransactions
+                            <RecentCommentTransactions
+                              model="DONATION"
+                              modelIds={["DONATION"]}
                               organizationId={userVisiter?.organizationId}
                             />
                           </div>

@@ -154,7 +154,7 @@ const ListCommentsPosts: React.FC<Props> = ({
               <div className="flex mt-2 items-center">
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-                {user?.id ? (
+                {!openModalReply && user?.id ? (
                   <button
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
@@ -183,12 +183,14 @@ const ListCommentsPosts: React.FC<Props> = ({
                 ) : null}
               </div>
               {openModalReply ? (
-                <CreateOrUpdateFormCommentReply
-                  model={model}
-                  parentId={String(item?.id)}
-                  openModalReply={openModalReply}
-                  setOpenModalReply={setOpenModalReply}
-                />
+                <div className="ml-10">
+                  <CreateOrUpdateFormCommentReply
+                    model={model}
+                    parentId={String(item?.id)}
+                    openModalReply={openModalReply}
+                    setOpenModalReply={setOpenModalReply}
+                  />
+                </div>
               ) : null}
 
               {/* Replies comments */}

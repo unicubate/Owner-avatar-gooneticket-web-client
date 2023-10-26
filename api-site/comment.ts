@@ -234,7 +234,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   sort: SortModel;
   commentId: string;
   modelIds: ModelType[];
-  userVisitorId: string;
+  userVisitorId?: string;
 }) => {
   return useInfiniteQuery({
     queryKey: ["comments-replies", "infinite", { ...payload }],
