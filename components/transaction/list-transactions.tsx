@@ -7,6 +7,7 @@ import { TransactionModel } from "@/types/transaction";
 import { formateFromNow, formatePrice } from "@/utils";
 import { capitalizeOneFirstLetter } from "@/utils/utils";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
+import { SerialPrice } from "../ui/serial-price";
 
 type Props = {
   item?: TransactionModel;
@@ -49,15 +50,15 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         </td>
 
         <td className="hidden text-sm text-right font-bold text-gray-900 lg:table-cell">
-          {formatePrice({
-            value: Number(item?.amount ?? 0),
-            isDivide: true,
-          })}
-          &nbsp;{item?.currency}
+          <SerialPrice
+            className="text-sm"
+            value={Number(item?.amount)}
+            currency={{ code: String(item?.currency) }}
+          />
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
-          {item?.description ?? ""}
+          <ReadMore html={`${item?.description ?? ""}`} value={20} />
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
@@ -73,11 +74,11 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
           />
           <div className="mt-1 lg:hidden pt-1">
             <p className="inline-flex text-sm font-bold text-gray-900">
-              {formatePrice({
-                value: Number(item?.amount ?? 0),
-                isDivide: true,
-              })}
-              &nbsp;{item?.currency}
+              <SerialPrice
+                className="text-sm"
+                value={Number(item?.amount)}
+                currency={{ code: String(item?.currency) }}
+              />
             </p>
             {/* <div className="inline-flex items-center justify-end mt-1">
                                       07 January, 2022

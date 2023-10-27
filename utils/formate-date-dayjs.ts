@@ -18,12 +18,14 @@ export const formateDateDayjs = (date: Date) => {
 };
 
 export const getMonthFormatDays = (date: Date) => {
-  const currentMouth = dayjs(date).locale("fr").format("MMM");
+  const currentMouth = dayjs(date).locale(localized).format("MMM");
   return currentMouth;
 };
 
+export const getDays = (date: Date) => dayjs(date).format("DD");
+
 export const formateDaysMonthYearFormatDays = (date: Date) => {
-  const currentMouth = dayjs(date).locale("fr").format("DD MMM YYYY");
+  const currentMouth = dayjs(date).locale(localized).format("DD MMM YYYY");
   return currentMouth;
 };
 

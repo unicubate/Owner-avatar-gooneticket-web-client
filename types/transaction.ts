@@ -8,6 +8,18 @@ export type ResponseTransactionModel = {
   value: Array<TransactionModel>;
 } & PaginationResponse;
 
+export type ResponseStatisticsTransactionModel =
+  Array<StatisticTransactionModel>;
+
+export type StatisticTransactionModel = {
+  model: ModelType;
+  organizationId: string;
+  statistic: {
+    count: number;
+    amount: number;
+  };
+};
+
 export type TransactionModel = {
   id: string;
   createdAt: Date;

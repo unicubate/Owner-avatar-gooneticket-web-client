@@ -139,6 +139,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/transactions`,
     method: GET,
   },
+  getStatisticsTransactions: {
+    endpoint: `${baseUrl}/transactions/statistics`,
+    method: GET,
+  },
 
   /****************** Currency or Countries route */
   getAllCurrencies: {
