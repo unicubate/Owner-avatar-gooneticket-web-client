@@ -1,3 +1,5 @@
+import { ColorType, ProfileModel } from "./profile.type";
+
 export type NextStep =
   | "SETTING_PROFILE"
   | "SETTING_INTEREST"
@@ -31,17 +33,21 @@ export type UserModel = {
   createdAt: Date;
   email: string;
   id: string;
-  organizationInUtilizationId: string;
+  organizationId: string;
   profileId: string;
-  profile: {
-    color: string;
-    countryId: string;
-    fullName: string;
-    id: string;
-    image: string;
-    url: string;
-    userId: string;
+  donation: {
+    amount: number;
+    count: number;
   };
+  membership: {
+    amount: number;
+    count: number;
+  };
+  product: {
+    amount: number;
+    count: number;
+  };
+  profile: ProfileModel;
   refreshToken: string;
   nextStep: NextStep;
   token: string;

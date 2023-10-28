@@ -18,6 +18,7 @@ interface Props {
   ref?: (node?: Element | null) => void;
   size?: "large" | "medium" | "normal" | "small" | "huge";
   loading: boolean;
+  disabled?: boolean;
   children: React.ReactNode;
   icon?: React.ReactNode;
   shape?: "round" | "default";
@@ -33,9 +34,10 @@ const ButtonCancelInput: React.FC<Props> = ({
   children,
   onClick,
   minW,
+  disabled,
 }) => {
   const antIcon = (
-    <LoadingOutlined style={{ fontSize: 24, color: "#ffff" }} spin />
+    <LoadingOutlined style={{ fontSize: 15, color: "blue" }} spin />
   );
   return (
     <>
@@ -43,7 +45,7 @@ const ButtonCancelInput: React.FC<Props> = ({
         ref={ref}
         type="button"
         onClick={onClick}
-        disabled={loading ? true : false}
+        disabled={loading || disabled ? true : false}
         className={`
         inline-flex
         items-center
@@ -55,7 +57,7 @@ const ButtonCancelInput: React.FC<Props> = ({
         text-sm 
         font-semibold 
         leading-3 
-        text-gray-600 
+        dark:text-gray-600 
         transition-all 
         duration-200 
         bg-white 
@@ -65,9 +67,8 @@ const ButtonCancelInput: React.FC<Props> = ({
         focus:outline-none 
         focus:ring-2 
         focus:ring-offset-2 
-        focus:ring-gray-400 
-        hover:bg-gray-50 
-        hover:text-gray-900"
+        focus:ring-gray-200 
+        hover:bg-gray-200
         `}
       >
         {icon ? <span className="mr-1">{icon}</span> : null}

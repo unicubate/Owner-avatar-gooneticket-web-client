@@ -35,16 +35,24 @@ export type NextStepProfileFormModel = {
 
 export type ProfileModel = {
   id: string;
+  color: ColorType;
+  firstName: string;
+  lastName: string;
+  countryId: string;
   fullName: string;
-  createdAt: Date;
-  phone: Date;
-  firstAddress: string;
-  secondAddress: string;
-  birthday: string;
-  currencyId: string;
   image: string;
-  color: string;
   url: string;
+  userId: string;
+  description: string;
+  enableCommission: boolean;
+  enableShop: boolean;
+  enableGallery: boolean;
+  currency: {
+    code: string;
+    name: string;
+    amount: number;
+    symbol: string;
+  };
 };
 
 export type CurrencyModel = {

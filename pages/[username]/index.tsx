@@ -12,9 +12,6 @@ import ContentLoader, { BulletList } from "react-content-loader";
 
 const ProfilePublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
-  const initialPrice = 3;
-  const initialCurrency = "EUR";
-  const [increment, setIncrement] = useState(1);
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -77,15 +74,17 @@ const ProfilePublic = () => {
                           </div>
                         ) : null}
 
-                        <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                          <div className="p-6 sm:py-4 sm:px-4">
-                            <RecentCommentTransactions
-                              model="DONATION"
-                              modelIds={["DONATION"]}
-                              organizationId={userVisiter?.organizationId}
-                            />
+                        {user?.donation?.count > 0 ? (
+                          <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                            <div className="p-6 sm:py-4 sm:px-4">
+                              <RecentCommentTransactions
+                                model="DONATION"
+                                modelIds={["DONATION"]}
+                                organizationId={userVisiter?.organizationId}
+                              />
+                            </div>
                           </div>
-                        </div>
+                        ) : null}
                       </div>
                     </div>
                   </div>

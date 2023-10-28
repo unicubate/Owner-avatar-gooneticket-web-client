@@ -183,7 +183,7 @@ export const GetOneUserPublicAPI = (payload: {
   });
 
   return {
-    data: data?.data as UserModel | any,
+    data: data?.data as UserModel,
     isError,
     isLoading,
     status,

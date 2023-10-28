@@ -5,11 +5,11 @@ import { BiCoffeeTogo } from "react-icons/bi";
 import { useAuth } from "../util/context-user";
 import { CreatePaymentStripe } from "../payment/stripe/create-payment-stripe";
 import { CreatePaymentPayPal } from "../payment/create-payment-paypal";
-import { useForm } from "react-hook-form";
+import { UserModel } from "@/types/user.type";
 const { TextArea } = Input;
 
 const CreateFormPublicDonation: React.FC<{
-  user: any;
+  user: UserModel;
 }> = ({ user }) => {
   const { userStorage: userVisitor } = useAuth() as any;
   const initialPrice = "3";

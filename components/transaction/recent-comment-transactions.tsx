@@ -5,6 +5,7 @@ import { CommentModel } from "@/types/comment";
 import { GetInfiniteCommentsAPI } from "@/api-site/comment";
 import { ListCommentTransactions } from "../comment/list-comments-transactions";
 import { ModelType } from "@/utils/pagination-item";
+import { ButtonInput } from "../ui";
 
 const RecentCommentTransactions: React.FC<{
   organizationId?: string;
@@ -63,16 +64,21 @@ const RecentCommentTransactions: React.FC<{
 
       {hasNextPage ? (
         <>
-          <div className="mt-4 flex flex-col justify-between items-center">
-            {isFetchingNextPage ? null : (
-              <button
-                disabled={isFetchingNextPage ? true : false}
+          <div className="mt-2 text-center justify-center mx-auto">
+            <div className="sm:mt-0">
+              <ButtonInput
+                shape="default"
+                type="button"
+                size="large"
                 onClick={() => fetchNextPage()}
-                className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                loading={isFetchingNextPage ? true : false}
+                color={"gray"}
+                defaultColor="gray"
+                minW="fit"
               >
-                View more
-              </button>
-            )}
+                Load More
+              </ButtonInput>
+            </div>
           </div>
         </>
       ) : null}

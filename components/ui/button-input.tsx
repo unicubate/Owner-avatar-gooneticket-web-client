@@ -29,6 +29,7 @@ interface Props {
   icon?: React.ReactNode;
   type: "button" | "submit";
   color: ColorType;
+  defaultColor?: "blue" | "gray"
   shape?: "round" | "default";
   minW?: "fit" | "full";
   onClick?: () => void;
@@ -40,6 +41,7 @@ const ButtonInput: React.FC<Props> = ({
   size,
   shape,
   color,
+  defaultColor = "blue",
   icon,
   loading,
   children,
@@ -76,7 +78,7 @@ const ButtonInput: React.FC<Props> = ({
            dark:text-white 
            transition-all 
            duration-200 
-           bg-${loading || disabled ? "blue" : color}-${loading || disabled ? "200" : "600"}
+           bg-${loading || disabled ? defaultColor : color}-${loading || disabled ? "200" : "600"}
            border-1
            border-transparent
            focus:outline-none 

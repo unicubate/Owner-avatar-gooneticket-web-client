@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { MdDeleteOutline } from "react-icons/md";
 import { CommentModel } from "@/types/comment";

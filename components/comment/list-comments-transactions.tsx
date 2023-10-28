@@ -4,16 +4,12 @@ import { CommentModel } from "@/types/comment";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
 import Link from "next/link";
 import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
   formateFromNow,
 } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { BsReplyAll } from "react-icons/bs";
 import { CreateOrUpdateFormCommentReply } from "../comment/create-or-update-form-comment-reply";
-import Swal from "sweetalert2";
 import {
-  DeleteOneCommentAPI,
   GetInfiniteCommentsRepliesAPI,
 } from "@/api-site/comment";
 import { Skeleton } from "antd";
@@ -27,50 +23,7 @@ const ListCommentTransactions: React.FC<{
   index: number;
   organizationId?: string;
 }> = ({ model, modelIds, item, organizationId, index }) => {
-  const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
-
-  const editItem = (item: any) => {
-    setOpenModal(true);
-  };
-
-  const { mutateAsync: saveMutation } = DeleteOneCommentAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
-  });
-
-  const deleteItem = (item: any) => {
-    Swal.fire({
-      title: "Delete?",
-      text: "Are you sure you want to delete this?",
-      confirmButtonText: "Yes, Deleted",
-      cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#dc3545",
-      cancelButtonColor: "#6f42c1",
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        try {
-          await saveMutation({ commentId: item?.id });
-          AlertSuccessNotification({
-            text: "Comment deleted successfully",
-            className: "info",
-            gravity: "top",
-            position: "center",
-          });
-        } catch (error: any) {
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-            gravity: "top",
-            className: "info",
-            position: "center",
-          });
-        }
-      }
-    });
-  };
 
   const {
     isLoading: isLoadingComments,
@@ -110,9 +63,9 @@ const ListCommentTransactions: React.FC<{
       <li key={index} className="py-4">
         <div className="flex items-start">
           {item?.profile?.username ? (
-            <AvatarComponent size={50} profile={item?.profile} />
+            <AvatarComponent size={45} profile={item?.profile} />
           ) : (
-            <AvatarCoffeeComponent size={50} color={item?.color} />
+            <AvatarCoffeeComponent size={45} color={item?.color} />
           )}
 
           <div className="ml-3">
@@ -155,7 +108,7 @@ const ListCommentTransactions: React.FC<{
                 </>
               ) : null}
             </div>
-            
+
             {dataTableCommentsReplies}
 
             {hasNextPage ? (

@@ -9,12 +9,11 @@ import { PostModel } from "@/types/post";
 import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {
-  post?: PostModel
+  post?: PostModel;
   userVisitor: UserVisitorModel;
 };
 
 const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
-
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -26,11 +25,9 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
     take: 4,
     sort: "DESC",
     userVisitor,
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['last-posts', "infinite"]
+    typeIds: ["ARTICLE", "AUDIO", "VIDEO"],
+    queryKey: ["last-posts", "infinite"],
   });
-
-
 
   const dataTablePosts = isLoadingPosts ? (
     <Spin
@@ -51,15 +48,11 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
 
         <div className="flow-root mt-8">
           <ul className="divide-y divide-gray-200 -my-7">
-
-
             {dataPosts?.pages
               .flatMap((page: any) => page?.data?.value)
-              .map((item, index) => (
+              .map((item: PostModel, index) => (
                 <ListLastPosts item={item} key={index} />
               ))}
-
-
           </ul>
         </div>
         {userVisitor?.organizationId || post?.organizationId ? (
@@ -79,19 +72,14 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
           </div>
         ) : null}
       </div>
-
     </>
   );
 
   return (
     <>
-
-
       <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
         <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-
           {dataTablePosts}
-
         </div>
       </div>
     </>
