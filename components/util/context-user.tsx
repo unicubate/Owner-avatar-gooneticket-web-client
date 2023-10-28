@@ -8,12 +8,8 @@ import {
   ReactNode,
 } from "react";
 import { UserModel } from "@/types/user.type";
-import { useQuery } from "@tanstack/react-query";
 import { GetOneUserPrivateAPI } from "@/api-site/user";
-import jwt_decode from "jwt-decode";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { jwtDecode } from "jwt-decode";
 
 type AuthContextProps = {
   user: UserModel | undefined;
@@ -26,11 +22,11 @@ export const getCurrentUserFormToken = () => {
   const token =
     typeof window !== "undefined"
       ? window.localStorage.getItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-      )
+          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+        )
       : null;
   if (token !== null) {
-    const user: any = jwt_decode(token);
+    const user: any = jwtDecode(token);
     return user;
   } else {
     return;
@@ -38,10 +34,10 @@ export const getCurrentUserFormToken = () => {
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => { },
-  setCurrentUser: () => { },
+  saveAuth: () => {},
+  setCurrentUser: () => {},
   user: undefined,
-  logout: () => { },
+  logout: () => {},
 };
 
 const AuthContext = createContext<AuthContextProps>(
@@ -55,7 +51,7 @@ const useAuth = () => {
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
 
-  const { status, data: user } = GetOneUserPrivateAPI({
+  const { data: user } = GetOneUserPrivateAPI({
     userId: userStorage?.id,
   });
 
@@ -65,10 +61,6 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
       String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
     );
   };
-
-  if (status === "pending") {
-    return "";
-  }
 
   return (
     <AuthContext.Provider value={{ ...user, userStorage, logout }}>
