@@ -9,7 +9,8 @@ import { generateLongUUID } from "@/utils/generate-random";
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { push } = useRouter();
-  const { amount, membershipId, userId, organizationId } = data;
+  const { amount, membershipId, userSendId, userReceiveId, organizationId } =
+    data;
   const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
@@ -21,7 +22,8 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
     setHasErrors(false);
     const payload = {
       membershipId,
-      userId,
+      userSendId,
+      userReceiveId,
       organizationId,
       reference: newReference,
       amount: {
@@ -96,7 +98,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
                   : actions?.resolve();
               }}
               disabled={false}
-              style={{ layout: "horizontal", label: "paypal", color: "blue" }}
+              style={{height: 45, layout: "horizontal", label: "paypal", color: "blue" }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource={undefined}
               createOrder={(data, actions) => createOrder(data, actions)}

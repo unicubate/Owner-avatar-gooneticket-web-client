@@ -18,10 +18,9 @@ import { convertToPluralMonth } from "@/utils/utils";
 import { LayoutSite } from "@/components/layout-site";
 import { AvatarComponent } from "@/components/ui/avatar-component";
 
-
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage } = useAuth() as any;
+  const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
   const membershipId = String(query?.membershipId);
   const {
@@ -37,10 +36,10 @@ const CheckoutView = () => {
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
     : {
-      currency: item?.currency?.code,
-      value: item?.price,
-      month: item?.month,
-    };
+        currency: item?.currency?.code,
+        value: item?.price,
+        month: item?.month,
+      };
 
   if (status === "pending") {
     <LoadingFile />;
@@ -48,8 +47,7 @@ const CheckoutView = () => {
 
   return (
     <>
-      <LayoutSite title={`${item?.title ?? ''}`}>
-
+      <LayoutSite title={`${item?.title ?? ""}`}>
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="max-w-xl mx-auto mt-8 md:mt-12">
             <div className="overflow-hidden bg-white shadow rounded-xl">
@@ -111,10 +109,11 @@ const CheckoutView = () => {
                           {item?.price ? (
                             <div className="mt-2">
                               <div
-                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
-                                  ? "border-red-500"
-                                  : "border-gray-200"
-                                  } rounded-md hover:bg-gray-50`}
+                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
+                                  errors?.amount
+                                    ? "border-red-500"
+                                    : "border-gray-200"
+                                } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
                                   <div className="flex items-center">
@@ -133,7 +132,10 @@ const CheckoutView = () => {
                                     <label className="ml-2 mr-auto">
                                       <p className="text-xl font-semibold text-black">
                                         {item?.price}
-                                        {item?.currency?.symbol} / {convertToPluralMonth(Number(item?.month))}
+                                        {item?.currency?.symbol} /{" "}
+                                        {convertToPluralMonth(
+                                          Number(item?.month)
+                                        )}
                                       </p>
                                       <p className="text-sm text-gray-600">
                                         monthly billing
@@ -170,7 +172,7 @@ const CheckoutView = () => {
                             ) : null}
                           </div>
 
-                          {userStorage?.id ? (
+                          {userVisitor?.id ? (
                             <>
                               {isCardPay ? (
                                 <>
@@ -178,9 +180,10 @@ const CheckoutView = () => {
                                     paymentModel="STRIPE-SUBSCRIBE"
                                     data={{
                                       membershipId,
-                                      organizationId: item?.organizationId,
-                                      userId: userStorage?.id,
                                       amount: newAmount,
+                                      userReceiveId: item?.userId,
+                                      userSendId: userVisitor?.id,
+                                      organizationId: item?.organizationId,
                                     }}
                                   />
                                 </>
@@ -205,22 +208,63 @@ const CheckoutView = () => {
                                 paymentModel="PAYPAL-SUBSCRIBE"
                                 data={{
                                   membershipId,
+                                  amount: newAmount,
+                                  userReceiveId: item?.userId,
+                                  userSendId: userVisitor?.id,
                                   organizationId: item?.organizationId,
-                                  userId: userStorage?.id,
-                                  amount: newAmount
                                 }}
                               />
                             </>
                           ) : null}
                         </>
-                      ) :
-                        <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
-                          <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
-                          <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
-                          <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
-                          <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
-                          <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
-                        </ContentLoader>}
+                      ) : (
+                        <ContentLoader
+                          height="500"
+                          width="100%"
+                          viewBox="0 0 265 230"
+                        >
+                          <rect
+                            x="15"
+                            y="25"
+                            rx="2"
+                            ry="2"
+                            width="350"
+                            height="15"
+                          />
+                          <rect
+                            x="15"
+                            y="50"
+                            rx="2"
+                            ry="2"
+                            width="350"
+                            height="100"
+                          />
+                          <rect
+                            x="15"
+                            y="160"
+                            rx="2"
+                            ry="2"
+                            width="130"
+                            height="40"
+                          />
+                          <rect
+                            x="150"
+                            y="160"
+                            rx="2"
+                            ry="2"
+                            width="150"
+                            height="40"
+                          />
+                          <rect
+                            x="15"
+                            y="210"
+                            rx="2"
+                            ry="2"
+                            width="350"
+                            height="40"
+                          />
+                        </ContentLoader>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -234,7 +278,6 @@ const CheckoutView = () => {
             </div>
           </div>
         </div>
-
       </LayoutSite>
     </>
   );

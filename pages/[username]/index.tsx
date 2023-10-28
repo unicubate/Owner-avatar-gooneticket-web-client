@@ -75,15 +75,12 @@ const ProfilePublic = () => {
                         ) : null}
 
                         {user?.donation?.count > 0 ? (
-                          <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                            <div className="p-6 sm:py-4 sm:px-4">
-                              <RecentCommentTransactions
-                                model="DONATION"
-                                modelIds={["DONATION"]}
-                                organizationId={userVisiter?.organizationId}
-                              />
-                            </div>
-                          </div>
+                          <RecentCommentTransactions
+                            model="DONATION"
+                            modelIds={["DONATION"]}
+                            organizationId={user?.organizationId}
+                            userReceiveId={user?.id}
+                          />
                         ) : null}
                       </div>
                     </div>

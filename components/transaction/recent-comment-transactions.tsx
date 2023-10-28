@@ -8,10 +8,11 @@ import { ModelType } from "@/utils/pagination-item";
 import { ButtonInput } from "../ui";
 
 const RecentCommentTransactions: React.FC<{
+  userReceiveId: string;
   organizationId?: string;
   modelIds: ModelType[];
   model: ModelType;
-}> = ({ organizationId, modelIds, model }) => {
+}> = ({ organizationId, modelIds, userReceiveId, model }) => {
   const {
     isLoading: isLoadingComments,
     isError: isErrorComments,
@@ -24,6 +25,7 @@ const RecentCommentTransactions: React.FC<{
     sort: "DESC",
     modelIds: ["DONATION"],
     organizationId,
+    userReceiveId,
   });
 
   const dataTableTransactions = isLoadingComments ? (
@@ -54,13 +56,17 @@ const RecentCommentTransactions: React.FC<{
 
   return (
     <>
-      <div className="flex items-center">
-        <p className="text-lg font-bold">Supporters</p>
-      </div>
+      <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+        <div className="p-6 sm:py-4 sm:px-4">
+          <div className="flex items-center">
+            <p className="text-lg font-bold">Supporters</p>
+          </div>
 
-      <ul className="mt-4 divide-y divide-gray-200 my-2">
-        {dataTableTransactions}
-      </ul>
+          <ul className="mt-4 divide-y divide-gray-200 my-2">
+            {dataTableTransactions}
+          </ul>
+        </div>
+      </div>
 
       {hasNextPage ? (
         <>

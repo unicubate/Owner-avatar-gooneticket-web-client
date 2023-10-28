@@ -143,9 +143,10 @@ const CreateFormPublicDonation: React.FC<{
                 <CreatePaymentStripe
                   paymentModel="STRIPE-DONATION"
                   data={{
-                    userId: userVisitor?.id,
-                    organizationId: user?.organizationId,
                     amount: newAmount,
+                    userReceiveId: user?.id,
+                    userSendId: userVisitor?.id,
+                    organizationId: user?.organizationId,
                   }}
                 />
               </>
@@ -169,9 +170,10 @@ const CreateFormPublicDonation: React.FC<{
             <CreatePaymentPayPal
               paymentModel="PAYPAL-DONATION"
               data={{
-                userId: userVisitor?.id,
-                organizationId: user?.organizationId,
                 amount: newAmount,
+                userReceiveId: user?.id,
+                userSendId: userVisitor?.id,
+                organizationId: user?.organizationId,
               }}
             />
           </>

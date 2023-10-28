@@ -211,6 +211,7 @@ export const getCommentsRepliesAPI = async (
 export const GetInfiniteCommentsAPI = (payload: {
   take: number;
   postId?: string;
+  userReceiveId?: string;
   modelIds: ModelType[];
   productId?: string;
   organizationId?: string;
