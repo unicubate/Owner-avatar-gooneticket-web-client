@@ -15,14 +15,12 @@ const SerialPrice: React.FC<Props> = ({
 }) => {
     return (
         <>
-
-
-            <p className={className}>
+            <span className={className}>
                 {formatePrice({
                     value: currency?.amount ? Number(value || 0) * Number(currency?.amount || 0) : Number(value || 0),
                     isDivide: true,
                 }) ?? ""}&nbsp;{currency?.code ?? "USD"}
-            </p>
+            </span>
         </>
     );
 };

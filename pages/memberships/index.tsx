@@ -1,20 +1,36 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
-import { useState } from "react";
-import { Avatar, Button } from "antd";
+import { Button } from "antd";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
-import { EmptyData } from "@/components/ui/empty-data";
 import { useRouter } from "next/router";
-import { arrayTransactions } from "@/components/mock";
-import { formatePrice } from "@/utils";
-import { BiDotsHorizontal } from "react-icons/bi";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { useAuth } from "@/components/util/context-user";
+import { SerialPrice } from "@/components/ui/serial-price";
+import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
+import { useState } from "react";
+import { ButtonCancelInput } from "@/components/ui";
 
 const Memberships = () => {
-  const { organizationId } = useAuth() as any;
+  const user = useAuth() as any;
+  const [dayCount, setDayCount] = useState(30)
   const router = useRouter();
-  const [donationsArrays] = useState(arrayTransactions || []);
+
+  const {
+    data: transactions,
+    isError,
+    isPending,
+    error,
+  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
+
+  if (isPending) {
+    return ""
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+
+  const transaction = transactions?.find((item) => item.model === "MEMBERSHIP")
 
   return (
     <>
@@ -26,7 +42,21 @@ const Memberships = () => {
                 <HorizontalNavMembership />
 
                 <div className="flow-root">
-                  <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  <div className="flex items-center mt-4">
+                    <div className="ml-auto">
+                      <div className="flex items-center space-x-4">
+                        <ButtonCancelInput
+                          shape="default"
+                          size="normal"
+                          loading={false}
+                        >
+                          Last {dayCount} days
+                        </ButtonCancelInput>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
                     <div className="bg-white border border-gray-200 rounded-xl">
                       <div className="px-5 py-4">
                         <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -34,46 +64,61 @@ const Memberships = () => {
                         </p>
                         <div className="flex items-center justify-between mt-3">
                           <p className="text-xl font-bold text-gray-900">
-                            1347829
+                            {transaction?.statistic?.count ?? 0}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-white border border-gray-200 rounded-xl">
+                      <div className="px-5 py-4">
+                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                          Last {dayCount} days
+                        </p>
+                        <div className="flex items-center justify-between mt-3">
+                          <p className="text-xl font-bold text-gray-900">
+                            <SerialPrice
+                              className="text-xl font-bold text-gray-900"
+                              value={Number(transaction?.statistic?.amount)}
+                              currency={{
+                                code: user?.profile?.currency?.code,
+                                amount: String(user?.profile?.currency?.amount)
+                              }}
+                            />
                           </p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="bg-white border border-gray-200 rounded-xl">
-                      <div className="px-5 py-4">
-                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                          Last 30 days
-                        </p>
-                        <div className="flex items-center justify-between mt-3">
-                          <p className="text-xl font-bold text-gray-900">
-                            780,00 EUR
+                    {user?.organizationId ?
+                      <div className="bg-white border border-gray-200 rounded-xl">
+                        <div className="px-5 py-4">
+                          <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                            All-time
                           </p>
+                          <div className="flex items-center justify-between mt-3">
+                            <p className="text-xl font-bold text-gray-900">
+                              <SerialPrice
+                                className="text-xl font-bold text-gray-900"
+                                value={Number(user?.membership?.amount)}
+                                currency={{
+                                  code: user?.profile?.currency?.code,
+                                  amount: String(user?.profile?.currency?.amount)
+                                }}
+                              />
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    </div>
+                      </div> : null}
 
-                    <div className="bg-white border border-gray-200 rounded-xl">
-                      <div className="px-5 py-4">
-                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                          All-time
-                        </p>
-                        <div className="flex items-center justify-between mt-3">
-                          <p className="text-xl font-bold text-gray-900">
-                            2.780,00 EUR
-                          </p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
 
-                  {organizationId ? (
+                  {user?.organizationId ? (
                     <RecentTransactions
                       model="MEMBERSHIP"
-                      organizationId={organizationId}
+                      organizationId={user?.organizationId}
                     />
                   ) : null}
-                  
+
                 </div>
               </div>
             </div>

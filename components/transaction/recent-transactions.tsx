@@ -7,10 +7,11 @@ import { ListTransactions } from "./list-transactions";
 
 type Props = {
   model?: string
+  days?: number
   organizationId?: string;
 };
 
-const RecentTransactions: React.FC<Props> = ({ model, organizationId }) => {
+const RecentTransactions: React.FC<Props> = ({ model, organizationId, days }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -25,6 +26,7 @@ const RecentTransactions: React.FC<Props> = ({ model, organizationId }) => {
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: "DESC",
+    days: days,
     queryKey: ["transactions", "infinite"],
   });
 

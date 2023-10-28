@@ -14,6 +14,7 @@ import {
 
 export const getTransactionsAPI = async (
   payload: {
+    days?: number;
     organizationId?: string;
     status?: string;
     model?: string;
@@ -27,13 +28,15 @@ export const getTransactionsAPI = async (
 
 export const GetStatisticsTransactionsAPI = (payload: {
   queryKey: string[];
+  days?: number;
 }) => {
-  const { queryKey } = payload;
+  const { queryKey, days } = payload;
   const { data, isError, isLoading, status, isPending, error } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await makeApiCall({
         action: "getStatisticsTransactions",
+        queryParams: { days },
       }),
   });
 
@@ -51,11 +54,12 @@ export const GetInfiniteTransactionsAPI = (payload: {
   organizationId?: string;
   model?: string;
   take: number;
+  days?: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { model, organizationId, take, sort, status, queryKey } = payload;
+  const { model, days, organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -64,6 +68,7 @@ export const GetInfiniteTransactionsAPI = (payload: {
         model,
         take,
         sort,
+        days,
         organizationId,
         status: status?.toUpperCase(),
         page: Number(pageParam),

@@ -36,7 +36,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
                 {item?.profileSend?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 sm:hidden">
-                <ReadMore html={`${item?.profileSend?.email}`} value={10} />
+                <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
               <p className="lg:hidden mt-1 text-sm font-medium text-gray-500">
                 {formateFromNow(item?.createdAt as Date)}
@@ -45,8 +45,8 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
           </div>
         </td>
 
-        <td className="text-sm text-left font-bold text-gray-900">
-          {item?.model}
+        <td className="hidden text-sm text-left font-medium text-gray-900 lg:table-cell">
+          {item?.model.toLocaleLowerCase()}
         </td>
 
         <td className="hidden text-sm text-right font-bold text-gray-900 lg:table-cell">
@@ -57,9 +57,9 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
           />
         </td>
 
-        <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
+        {/* <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
           <ReadMore html={`${item?.description ?? ""}`} value={20} />
-        </td>
+        </td> */}
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date)}
@@ -80,6 +80,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
                 currency={{ code: String(item?.currency) }}
               />
             </p>
+            
             {/* <div className="inline-flex items-center justify-end mt-1">
                                       07 January, 2022
                                     </div> */}

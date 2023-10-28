@@ -2,26 +2,24 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { useState } from "react";
-import { arrayDonation } from "@/components/mock";
-import Swal from "sweetalert2";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { useAuth } from "@/components/util/context-user";
-import { getDays } from "@/utils";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { LoadingFile } from "@/components/ui";
+import { ButtonCancelInput } from "@/components/ui";
 
 const Donations = () => {
   const user = useAuth() as any;
+  const [dayCount, setDayCount] = useState(30)
   const {
     data: transactions,
     isError,
     isPending,
     error,
-  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"] })
+  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
 
   if (isPending) {
-    return <LoadingFile />
+    return ""
   }
 
   if (isError) {
@@ -29,7 +27,7 @@ const Donations = () => {
   }
 
   const transaction = transactions?.find((item) => item.model === "DONATION")
-  console.log('transaction ==========>', transaction)
+
   return (
     <>
       <LayoutDashboard title={"Donations"}>
@@ -40,14 +38,62 @@ const Donations = () => {
                 <HorizontalNavDonation />
 
                 <div className="flow-root">
+
+                  <div className="flex items-center mt-4">
+                    <div className="ml-auto">
+                      <div className="flex items-center space-x-4">
+                        <ButtonCancelInput
+                          shape="default"
+                          size="normal"
+                          loading={false}
+                        >
+                          Last {dayCount} days
+                        </ButtonCancelInput>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
+
+                    <div className="bg-white border border-gray-200 rounded-xl">
+                      <div className="px-5 py-4">
+                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                          Donator
+                        </p>
+                        <div className="flex items-center justify-between mt-3">
+                          <p className="text-xl font-bold text-gray-900">
+                            {transaction?.statistic?.count ?? 0}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div className="bg-white border border-gray-200 rounded-xl">
+                      <div className="px-5 py-4">
+                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                          Last {dayCount} days
+                        </p>
+                        <div className="flex items-center justify-between mt-3">
+                          <p className="text-xl font-bold text-gray-900">
+                            <SerialPrice
+                              className="text-xl font-bold text-gray-900"
+                              value={Number(transaction?.statistic?.amount)}
+                              currency={{
+                                code: user?.profile?.currency?.code,
+                                amount: String(user?.profile?.currency?.amount)
+                              }}
+                            />
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
                     {user?.organizationId ?
                       <div className="bg-white border border-gray-200 rounded-xl">
                         <div className="px-5 py-4">
                           <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                            This Month
-                            {/* Last {getDays(new Date())} days */}
+                            All-time
                           </p>
                           <div className="flex items-center justify-between mt-3">
                             <p className="text-xl font-bold text-gray-900">
@@ -64,39 +110,6 @@ const Donations = () => {
                         </div>
                       </div> : null}
 
-                    {transaction?.organizationId ?
-                      <>
-                        <div className="bg-white border border-gray-200 rounded-xl">
-                          <div className="px-5 py-4">
-                            <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                              All-time
-                            </p>
-                            <div className="flex items-center justify-between mt-3">
-                              <SerialPrice
-                                className="text-xl font-bold text-gray-900"
-                                value={Number(transaction?.statistic?.amount)}
-                                currency={{
-                                  code: user?.profile?.currency?.code,
-                                  amount: String(user?.profile?.currency?.amount)
-                                }}
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="bg-white border border-gray-200 rounded-xl">
-                          <div className="px-5 py-4">
-                            <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                              Supporter
-                            </p>
-                            <div className="flex items-center justify-between mt-3">
-                              <p className="text-xl font-bold text-gray-900">
-                                {transaction?.statistic?.count ?? 0}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </>
-                      : null}
                   </div>
 
                   {user?.organizationId ? (

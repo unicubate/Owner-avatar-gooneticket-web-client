@@ -151,7 +151,7 @@ export const ValidCodeAPI = ({
 
 export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
   const { userId } = payload;
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, isPending } = useQuery({
     queryKey: ["user", userId],
     queryFn: async () =>
       await makeApiCall({
@@ -163,7 +163,7 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
     enabled: Boolean(userId),
   });
 
-  return { data: data?.data as any, isError, isLoading, status };
+  return { data: data?.data as any, isError, isLoading, status, isPending };
 };
 
 export const GetOneUserPublicAPI = (payload: {
@@ -171,7 +171,7 @@ export const GetOneUserPublicAPI = (payload: {
   userVisitorId?: string;
   username?: string;
 }) => {
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, isPending } = useQuery({
     queryKey: ["user", { ...payload }],
     queryFn: async () =>
       await makeApiCall({
@@ -182,5 +182,11 @@ export const GetOneUserPublicAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as UserModel | any, isError, isLoading, status };
+  return {
+    data: data?.data as UserModel | any,
+    isError,
+    isLoading,
+    status,
+    isPending,
+  };
 };

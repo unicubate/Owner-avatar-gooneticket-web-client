@@ -17,11 +17,32 @@ import Transactions from "../memberships/transactions";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { AvatarComponent } from "@/components/ui/avatar-component";
 import { SerialPrice } from "@/components/ui/serial-price";
+import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
+import { ButtonCancelInput } from "@/components/ui";
 
 const Dashboard = () => {
+  const [dayCount, setDayCount] = useState(30)
   const user = useAuth() as any;
-  const router = useRouter();
-  const [donationsArrays] = useState(arrayTransactions || []);
+
+  const {
+    data: transactions,
+    isError,
+    isPending,
+    error,
+  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
+
+  if (isPending) {
+    return ""
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>
+  }
+
+  const transactionDonation = transactions?.find((item) => item.model === "DONATION")
+  const transactionMembership = transactions?.find((item) => item.model === "MEMBERSHIP")
+  const transactionProduct = transactions?.find((item) => item.model === "PRODUCT")
+
 
   return (
     <>
@@ -48,18 +69,16 @@ const Dashboard = () => {
                       </div>
 
                       <div className="ml-auto">
-                        <button
-                          title="Share"
-                          className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                        <ButtonInput
+                          minW="fit"
+                          shape="default"
+                          type="button"
+                          size="normal"
+                          loading={false}
+                          color="red"
                         >
-                          <IoShareOutline className="w-5 h-5" />
-                        </button>
-                        <button
-                          title="Download"
-                          className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
-                        >
-                          <BiCog className="w-5 h-5" />
-                        </button>
+                          Withdraw
+                        </ButtonInput>
                       </div>
                     </div>
 
@@ -107,22 +126,18 @@ const Dashboard = () => {
                   <div className="flex items-center mt-4">
                     <div className="ml-auto">
                       <div className="flex items-center space-x-4">
-                        <Button shape="default" size="large" loading={false}>
+                        {/* <Button shape="default" size="large" loading={false}>
                           <span className="font-bold text-gray-900">
-                            {/* Last {getDays(new Date())} days */}
-                            This Month
+                            Last {dayCount} days
                           </span>
-                        </Button>
-                        <ButtonInput
-                          minW="fit"
+                        </Button> */}
+                        <ButtonCancelInput
                           shape="default"
-                          type="button"
                           size="normal"
                           loading={false}
-                          color="red"
                         >
-                          Withdraw
-                        </ButtonInput>
+                          Last {dayCount} days
+                        </ButtonCancelInput>
                       </div>
                     </div>
                   </div>
@@ -136,7 +151,7 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(user?.membership?.amount)}
+                            value={Number(transactionMembership?.statistic?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
                               amount: String(user?.profile?.currency?.amount)
@@ -146,19 +161,6 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    {/* <div className="bg-white border border-gray-200 rounded-xl">
-                      <div className="px-5 py-4">
-                        <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                          Commissions
-                        </p>
-                        <div className="flex items-center justify-between mt-3">
-                          <p className="text-xl font-bold text-gray-900">
-                            23.780,00 EUR
-                          </p>
-                        </div>
-                      </div>
-                    </div> */}
-
                     <div className="bg-white border border-gray-200 rounded-xl">
                       <div className="px-5 py-4">
                         <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -167,7 +169,7 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(user?.donation?.amount)}
+                            value={Number(transactionDonation?.statistic?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
                               amount: String(user?.profile?.currency?.amount)
@@ -185,7 +187,7 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(user?.product?.amount)}
+                            value={Number(transactionProduct?.statistic?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
                               amount: String(user?.profile?.currency?.amount)
@@ -196,7 +198,7 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-                  {user?.id ? <RecentTransactions /> : null}
+                  {user?.id ? <RecentTransactions days={dayCount} /> : null}
 
                   <div className="py-4 mt-4 bg-white sm:py-4 lg:py-10">
                     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

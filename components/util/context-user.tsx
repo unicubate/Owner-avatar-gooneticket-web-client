@@ -26,8 +26,8 @@ export const getCurrentUserFormToken = () => {
   const token =
     typeof window !== "undefined"
       ? window.localStorage.getItem(
-          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-        )
+        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+      )
       : null;
   if (token !== null) {
     const user: any = jwt_decode(token);
@@ -38,10 +38,10 @@ export const getCurrentUserFormToken = () => {
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => {},
-  setCurrentUser: () => {},
+  saveAuth: () => { },
+  setCurrentUser: () => { },
   user: undefined,
-  logout: () => {},
+  logout: () => { },
 };
 
 const AuthContext = createContext<AuthContextProps>(
@@ -67,7 +67,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   };
 
   if (status === "pending") {
-    <LoadingFile />;
+    return "";
   }
 
   return (
