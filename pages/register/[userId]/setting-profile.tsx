@@ -53,7 +53,7 @@ const SettingProfile = () => {
 
   const { data: currencies } = GetAllCurrenciesAPI();
   const { data: countries } = GetAllCountiesAPI();
-  const { data: user } = GetOneUserPublicAPI({ userId });
+  const { data: user } = GetOneUserPublicAPI({ userId }) as any;
 
   if (user?.nextStep === "CONFIRM_EMAIL") {
     window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/confirm-account`;
