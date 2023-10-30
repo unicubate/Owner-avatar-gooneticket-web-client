@@ -2,11 +2,11 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { useState } from "react";
-import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { useAuth } from "@/components/util/context-user";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { ButtonCancelInput } from "@/components/ui";
+import { TableTransactions } from "@/components/transaction/table-transactions";
 
 const Donations = () => {
   const user = useAuth() as any;
@@ -113,7 +113,7 @@ const Donations = () => {
                   </div>
 
                   {user?.organizationId ? (
-                    <RecentTransactions
+                    <TableTransactions
                       model="DONATION"
                       organizationId={user?.organizationId}
                     />

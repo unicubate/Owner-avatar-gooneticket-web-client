@@ -11,11 +11,12 @@ type Props = {
   organizationId?: string;
 };
 
-const RecentTransactions: React.FC<Props> = ({
+const TableTransactions: React.FC<Props> = ({
   model,
   organizationId,
   days,
 }) => {
+  const { ref, inView } = useInView();
 
   const {
     isLoading: isLoadingTransaction,
@@ -29,8 +30,30 @@ const RecentTransactions: React.FC<Props> = ({
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: "DESC",
-    queryKey: ["recent-transactions", "infinite"],
+    queryKey: ["transactions", "infinite"],
   });
+
+  // useEffect(() => {
+  //   let fetching = false;
+  //   if (inView) {
+  //     fetchNextPage();
+  //   }
+  //   const onScroll = async (event: any) => {
+  //     const { scrollHeight, scrollTop, clientHeight } =
+  //       event.target.scrollingElement;
+
+  //     if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+  //       fetching = true;
+  //       if (hasNextPage) await fetchNextPage();
+  //       fetching = false;
+  //     }
+  //   };
+
+  //   document.addEventListener("scroll", onScroll);
+  //   return () => {
+  //     document.removeEventListener("scroll", onScroll);
+  //   };
+  // }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableTransactions = isLoadingTransaction ? (
     <LoadingFile />
@@ -60,8 +83,27 @@ const RecentTransactions: React.FC<Props> = ({
           </table>
         </div>
       </div>
+
+      {hasNextPage && (
+        <div className="mt-2 text-center justify-center mx-auto">
+          <div className="sm:mt-0">
+            <ButtonInput
+              ref={ref}
+              onClick={() => fetchNextPage()}
+              shape="default"
+              type="button"
+              size="large"
+              loading={isFetchingNextPage ? true : false}
+              color={"indigo"}
+              minW="fit"
+            >
+              Load More
+            </ButtonInput>
+          </div>
+        </div>
+      )}
     </>
   );
 };
 
-export { RecentTransactions };
+export { TableTransactions };

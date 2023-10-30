@@ -39,6 +39,12 @@ export type UserModel = {
     amount: number;
     count: number;
   };
+  donationUser: {
+    id: string;
+    userId: string;
+    description: string;
+    price: number;
+  };
   membership: {
     amount: number;
     count: number;

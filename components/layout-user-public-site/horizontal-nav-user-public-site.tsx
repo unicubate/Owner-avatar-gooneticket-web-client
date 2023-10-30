@@ -1,5 +1,10 @@
 import Link from "next/link";
-import { BiHomeCircle, BiSearch, BiBookContent, BiCoffeeTogo } from "react-icons/bi";
+import {
+  BiHomeCircle,
+  BiSearch,
+  BiBookContent,
+  BiCoffeeTogo,
+} from "react-icons/bi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
 import { Avatar, Button, Image } from "antd";
@@ -11,7 +16,6 @@ import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 import { ButtonInput } from "../ui";
 import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
-
 
 interface Props {
   user?: any;
@@ -128,25 +132,27 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
               <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
                 <nav className="flex -mb-px space-x-10">
-                  {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
-                    const isActive = pathname.startsWith(item.href);
-                    return (
-                      <Link
-                        key={index}
-                        href={`${item?.href}`}
-                        title={item?.title}
-                        className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
-                          ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                          : `border-transparent text-gray-500 hover:border-gray-300`
+                  {navigation
+                    .filter((item) => item?.status === true)
+                    .map((item: any, index: number) => {
+                      const isActive = pathname.startsWith(item.href);
+                      return (
+                        <Link
+                          key={index}
+                          href={`${item?.href}`}
+                          title={item?.title}
+                          className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                            isActive
+                              ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                              : `border-transparent text-gray-500 hover:border-gray-300`
                           } `}
-                      >
-                        {item?.icon}
+                        >
+                          {item?.icon}
 
-                        {item?.title}
-                      </Link>
-                    );
-                  })}
-
+                          {item?.title}
+                        </Link>
+                      );
+                    })}
                 </nav>
               </div>
             </div>
@@ -164,7 +170,6 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                         <input type="search" name="" id="" className="block w-full py-2 pl-10 border-gray-300 rounded-lg focus:ring-indigo-600 focus:border-indigo-600 sm:text-sm" placeholder="Search here" />
                     </div>
                 </div> */}
-
 
               {/* <div className="relative">
                 
@@ -187,19 +192,22 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                     </ButtonInput>
                     <CreateOrUpdateFormFollow item={user} />
                   </>
-                ) :
-                  <button
-                    type="button"
-                    className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                  >
-                    <AvatarComponent
-                      profile={user?.profile}
-                      className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                    />
-                    <p className="ml-1 text-sm font-bold text-gray-900">
-                      {user?.profile?.firstName} {user?.profile?.lastName}
-                    </p>
-                  </button>}
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                    >
+                      <AvatarComponent
+                        profile={user?.profile}
+                        className="object-cover bg-gray-300 rounded-full w-9 h-9"
+                      />
+                      <p className="ml-1 text-sm font-bold text-gray-900">
+                        {user?.profile?.firstName} {user?.profile?.lastName}
+                      </p>
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -235,6 +235,16 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Donations route */
+  getOneDonation: {
+    endpoint: `${baseUrl}/donations/show/:donationId`,
+    method: GET,
+  },
+  updateOneDonation: {
+    endpoint: `${baseUrl}/donations/:donationId`,
+    method: PUT,
+  },
+
   /****************** Uploads route */
   getUploads: {
     endpoint: `${baseUrl}/uploads`,

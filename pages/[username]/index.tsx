@@ -2,13 +2,12 @@ import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { useAuth } from "@/components/util/context-user";
-import { useState } from "react";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateFormPublicDonation } from "@/components/donation/create-form-public-donation";
 import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
 import { LoadingFile } from "@/components/ui";
-import ContentLoader, { BulletList } from "react-content-loader";
+import ContentLoader from "react-content-loader";
 
 const ProfilePublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -22,6 +21,10 @@ const ProfilePublic = () => {
 
   if (status === "pending") {
     <LoadingFile />;
+  }
+
+  if (status === "error") {
+    <strong>Error find data please try again...</strong>;
   }
 
   return (
@@ -62,17 +65,15 @@ const ProfilePublic = () => {
                           </div>
                         )}
 
-                        {username && user?.id !== userVisiter?.id ? (
-                          <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                            <div className="p-6 sm:py-4 sm:px-4">
-                              <div className="flex items-center">
-                                {user?.id ? (
-                                  <CreateFormPublicDonation user={user} />
-                                ) : null}
-                              </div>
+                        <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                          <div className="p-6 sm:py-4 sm:px-4">
+                            <div className="flex items-center">
+                              {user?.id ? (
+                                <CreateFormPublicDonation user={user} />
+                              ) : null}
                             </div>
                           </div>
-                        ) : null}
+                        </div>
 
                         {user?.donation?.count > 0 ? (
                           <RecentCommentTransactions

@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Button } from "antd";
+import { Button } from "antd";
 import { ReadMore } from "@/utils/read-more";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { TransactionModel } from "@/types/transaction";
-import { formateFromNow, formatePrice } from "@/utils";
-import { capitalizeOneFirstLetter } from "@/utils/utils";
+import { formateFromNow } from "@/utils";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
 import { SerialPrice } from "../ui/serial-price";
 

@@ -12,7 +12,7 @@ const CreateFormPublicDonation: React.FC<{
   user: UserModel;
 }> = ({ user }) => {
   const { userStorage: userVisitor } = useAuth() as any;
-  const initialPrice = "3";
+  const initialPrice = String(user?.donationUser?.price || 0);
   const initialCurrency = user?.profile?.currency?.code;
   const [increment, setIncrement] = useState(1);
   const [price, setPrice] = useState(initialPrice);

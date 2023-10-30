@@ -6,15 +6,17 @@ import { EnableShop } from "@/components/shop/enable-shop";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/router";
 import { GetInfiniteProductsAPI } from "@/api-site/product";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { ButtonInput, EmptyData, LoadingFile } from "@/components/ui";
 import { ListProductsShop } from "@/components/shop/list-products-shop";
 import { Input } from "antd";
 import { ProductModel } from "@/types/product";
+import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 
 const Shops = () => {
   const { userVisiter, profile } = useAuth() as any;
   const router = useRouter();
+  const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
 
   const {
@@ -71,6 +73,23 @@ const Shops = () => {
       </Fragment>
     ))
   );
+
+  // const {
+  //   data: transactions,
+  //   isError,
+  //   isPending,
+  //   error,
+  // } = GetStatisticsTransactionsAPI({
+  //   queryKey: ["statistics-transactions"],
+  //   days: dayCount,
+  // });
+  // if (isPending) {
+  //   return "";
+  // }
+  // if (isError) {
+  //   return <span>Error: {error.message}</span>;
+  // }
+  // const transaction = transactions?.find((item) => item.model === "PRODUCT");
 
   return (
     <>

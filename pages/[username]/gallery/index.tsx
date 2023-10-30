@@ -22,7 +22,17 @@ const GalleryUserPublic = () => {
   ) : isErrorUser ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <> {user?.id ? <PublicGallery userVisitor={{ id: userVisiter?.id, organizationId: user?.organizationId, }} /> : null} </>
+    <>
+      {" "}
+      {user?.id ? (
+        <PublicGallery
+          userVisitor={{
+            id: userVisiter?.id,
+            organizationId: user?.organizationId,
+          }}
+        />
+      ) : null}{" "}
+    </>
   );
 
   if (user?.profile?.enableGallery === false) {
@@ -31,25 +41,24 @@ const GalleryUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
-        user={user}>
+        title={`${user?.profile?.firstName ?? ""} ${
+          user?.profile?.lastName ?? ""
+        }`}
+        user={user}
+      >
+        <div className="flex flex-col flex-1 bg-gray-100">
+          <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+            {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
-        <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-
-          {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
-
-
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <div className="max-w-full mx-auto py-6">
-              <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
-
-                {dataTablePosts}
-
+            <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+              <div className="max-w-full mx-auto py-6">
+                <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+                  {dataTablePosts}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </div>2
       </LayoutUserPublicSite>
     </>
   );

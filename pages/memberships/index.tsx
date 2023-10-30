@@ -3,12 +3,12 @@ import { LayoutDashboard } from "@/components/layout-dashboard";
 import { Button } from "antd";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
 import { useRouter } from "next/router";
-import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { useAuth } from "@/components/util/context-user";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { useState } from "react";
 import { ButtonCancelInput } from "@/components/ui";
+import { TableTransactions } from "@/components/transaction/table-transactions";
 
 const Memberships = () => {
   const user = useAuth() as any;
@@ -113,7 +113,7 @@ const Memberships = () => {
                   </div>
 
                   {user?.organizationId ? (
-                    <RecentTransactions
+                    <TableTransactions
                       model="MEMBERSHIP"
                       organizationId={user?.organizationId}
                     />

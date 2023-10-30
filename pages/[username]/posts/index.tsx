@@ -2,7 +2,6 @@ import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
 import { PublicPosts } from "@/components/post/public-posts";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import PublicListLastPosts from '@/components/post/public-last-posts';
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";

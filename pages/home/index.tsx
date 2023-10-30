@@ -7,78 +7,74 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
 
 const Home = () => {
-    const { userStorage: userVisiter } = useAuth() as any;
-    const {
-        isLoading: isLoadingPosts,
-        isError: isErrorPosts,
-        data: dataPosts,
-        isFetchingNextPage,
-        hasNextPage,
-        fetchNextPage,
-    } = GetInfiniteFollowsPostsAPI({
-        take: 6,
-        sort: "DESC",
-    });
+  const { userStorage: userVisiter } = useAuth() as any;
+  const {
+    isLoading: isLoadingPosts,
+    isError: isErrorPosts,
+    data: dataPosts,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfiniteFollowsPostsAPI({
+    take: 6,
+    sort: "DESC",
+  });
 
-    const dataTablePosts = isLoadingPosts ? (
-        <LoadingFile />
-    ) : isErrorPosts ? (
-        <strong>Error find data please try again...</strong>
-    ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-        ""
-    ) : (
-        dataPosts?.pages
-            .flatMap((page: any) => page?.data?.value)
-            .map((item, index) => (
-                <ListFollowPosts
-                    item={item}
-                    key={index}
-                    commentTake={2}
-                    userVisitor={{
-                        id: userVisiter?.id,
-                        organizationId: userVisiter?.organizationId
-                    }}
-                />
-            ))
-    );
+  const dataTablePosts = isLoadingPosts ? (
+    <LoadingFile />
+  ) : isErrorPosts ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
+    ""
+  ) : (
+    dataPosts?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListFollowPosts
+          item={item}
+          key={index}
+          commentTake={2}
+          userVisitor={{
+            id: userVisiter?.id,
+            organizationId: userVisiter?.organizationId,
+          }}
+        />
+      ))
+  );
 
+  return (
+    <>
+      <LayoutDashboard title={"Home"}>
+        <div className="flex flex-col flex-1 bg-gray-100">
+          <main>
+            <div className="max-w-3xl mx-auto py-6">
+              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                {dataTablePosts}
 
-    return (
-        <>
-            <LayoutDashboard title={"Home"}>
-                <div className="flex flex-col flex-1 bg-gray-100">
-                    <main>
-                        <div className="max-w-3xl mx-auto py-6">
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-
-                                {dataTablePosts}
-
-
-                                {hasNextPage && (
-                                    <div className="mt-4 text-center justify-center mx-auto">
-                                        <div className="sm:mt-0">
-                                            <ButtonInput
-                                                onClick={() => fetchNextPage()}
-                                                shape="default"
-                                                type="button"
-                                                size="large"
-                                                loading={isFetchingNextPage ? true : false}
-                                                color={"indigo"}
-                                                minW="fit"
-                                            >
-                                                Load More
-                                            </ButtonInput>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-
-                        </div>
-                    </main>
-                </div>
-            </LayoutDashboard>
-        </>
-    );
+                {hasNextPage && (
+                  <div className="mt-4 text-center justify-center mx-auto">
+                    <div className="sm:mt-0">
+                      <ButtonInput
+                        onClick={() => fetchNextPage()}
+                        shape="default"
+                        type="button"
+                        size="large"
+                        loading={isFetchingNextPage ? true : false}
+                        color={"indigo"}
+                        minW="fit"
+                      >
+                        Load More
+                      </ButtonInput>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </main>
+        </div>
+      </LayoutDashboard>
+    </>
+  );
 };
 
 export default PrivateComponent(Home);

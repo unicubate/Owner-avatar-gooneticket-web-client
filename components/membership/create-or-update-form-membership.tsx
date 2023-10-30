@@ -13,6 +13,7 @@ import { CreateOrUpdateOneMembershipAPI } from "@/api-site/membership";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { MembershipFormModel } from "@/types/membership";
 import { useAuth } from "../util/context-user";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 const schema = yup.object({
   title: yup.string().required(),
@@ -27,21 +28,18 @@ const CreateOrUpdateFormMembership: React.FC<{
 }> = ({ membership, uploadImages }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
-  const [loading, setLoading] = useState(false);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
     watch,
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   useEffect(() => {
     if (membership) {

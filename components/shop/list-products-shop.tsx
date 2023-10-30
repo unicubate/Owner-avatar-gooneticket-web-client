@@ -2,12 +2,14 @@
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
-import { Avatar, Tooltip } from "antd";
+import { Avatar, Switch, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import {
   MdDeleteOutline,
+  MdOutlineCheckBox,
+  MdOutlineCheckBoxOutlineBlank,
   MdOutlineModeEdit,
   MdOutlineRemoveRedEye,
 } from "react-icons/md";
@@ -158,15 +160,24 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-sm font-medium text-right text-gray-900">
-            <Tooltip placement="bottomRight" title={"View"}>
+            {/* <Tooltip placement="bottomRight" title={"View"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineRemoveRedEye />
               </button>
-            </Tooltip>
+            </Tooltip> */}
+            
 
+            {/* <Tooltip placement="bottomRight" title={"Deactivate"}>
+              <button
+                // onClick={() => router.push(`/shop/${item?.id}/edit`)}
+                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+              >
+                <Switch size="small" defaultChecked />
+              </button>
+            </Tooltip> */}
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}

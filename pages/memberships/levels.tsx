@@ -78,7 +78,6 @@ const MembershipsLevels = () => {
                 <HorizontalNavMembership />
 
                 <div className="flow-root">
-
                   <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
                     <div className="px-4 py-8">
                       <div className="sm:flex sm:items-center sm:justify-between">
@@ -125,7 +124,6 @@ const MembershipsLevels = () => {
                       </div>
                     </div>
                   )}
-
                 </div>
               </div>
             </div>
