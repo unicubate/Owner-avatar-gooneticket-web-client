@@ -54,22 +54,20 @@ const ListCarouselUpload: React.FC<Props> = ({
       >
         {uploads &&
           uploads.map((item: any, index: number) => (
-            <>
-              <SwiperSlide key={index}>
-                <Image
-                  width={width}
-                  height={height}
-                  className={className}
-                  preview={preview}
-                  style={contentStyle}
-                  src={`${viewOneFileUploadAPI({
-                    folder: folder,
-                    fileName: item?.path,
-                  })}`}
-                  alt={alt}
-                />
-              </SwiperSlide>
-            </>
+            <Fragment key={index}>
+              <Image
+                width={width}
+                height={height}
+                className={className}
+                preview={preview}
+                style={contentStyle}
+                src={`${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: item?.path,
+                })}`}
+                alt={alt}
+              />
+            </Fragment>
           ))}
       </ResponsiveCarousel>
       {/* <Swiper
