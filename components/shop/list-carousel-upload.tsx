@@ -35,7 +35,7 @@ const ListCarouselUpload: React.FC<Props> = ({
   folder,
   preview,
   alt,
-  className = "object-cover w-full h-full",
+  className = "",
   height = "100%",
   width = "100%",
   autoplay = false,

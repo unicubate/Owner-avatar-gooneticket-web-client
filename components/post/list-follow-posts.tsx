@@ -18,7 +18,7 @@ import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
 import { useRouter } from "next/router";
-import { WhoCanSeeItem } from "../ui";
+import { ButtonInput, WhoCanSeeItem } from "../ui";
 import { AvatarComponent } from "../ui/avatar-component";
 import { UserVisitorModel } from "@/types/user.type";
 
@@ -67,7 +67,21 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
 
             <div className="ml-auto">
-              <button
+              <div className="flex items-center space-x-2 sm:ml-5">
+                {item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.isValidSubscribe !== 1 ? (
+                  <ButtonInput
+                    onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
+                    shape="default"
+                    type="button"
+                    size="large"
+                    loading={false}
+                    color="red"
+                  >
+                    Join membership now
+                  </ButtonInput>
+                ) : null}
+                <button
                 title="Share"
                 className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
               >
@@ -89,17 +103,17 @@ const ListFollowPosts: React.FC<Props> = ({
                   <FiDownload className="w-5 h-5" />
                 </button>
               )}
+              </div>
             </div>
           </div>
 
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
             <div
               className={`mt-1 mx-auto 
-            ${
-              item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                ? "blur-xl"
-                : ""
-            }`}
+            ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+                  ? "blur-xl"
+                  : ""
+                }`}
             >
               <ReactPlayer
                 className="mr-auto"
@@ -118,24 +132,18 @@ const ListFollowPosts: React.FC<Props> = ({
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-3xl"
-                    : ""
-                }`}
+                  ? "blur-2xl"
+                  : ""
+                  }`}
               />
-
-              {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
-                <WhoCanSeeItem username={item?.profile?.username} />
-              ) : null}
             </div>
           ) : null}
 
           {item?.whoCanSee &&
-          ["AUDIO"].includes(item?.type as PostType) &&
-          item?.uploadsFile?.length > 0 ? (
+            ["AUDIO"].includes(item?.type as PostType) &&
+            item?.uploadsFile?.length > 0 ? (
             <div className="text-center justify-center mx-auto">
               <AudioPlayerInput
                 uploads={item?.uploadsFile}
@@ -159,23 +167,17 @@ const ListFollowPosts: React.FC<Props> = ({
           {item?.description ? (
             <div className={`text-sm font-normal text-gray-600 group relative`}>
               <span
-                className={`ql-editor ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-lg"
-                    : ""
-                }`}
+                  ? "blur-lg"
+                  : ""
+                  }`}
               >
                 <HtmlParser
                   html={String(item?.description ?? "")}
                   value={item?.isValidSubscribe !== 1 ? 600 : 0}
                 />
               </span>
-
-              {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
-                <WhoCanSeeItem username={item?.profile?.username} />
-              ) : null}
             </div>
           ) : null}
 
@@ -192,9 +194,8 @@ const ListFollowPosts: React.FC<Props> = ({
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
@@ -203,7 +204,7 @@ const ListFollowPosts: React.FC<Props> = ({
             ) : null}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-            item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl font-bold">
                   <HiOutlineLockClosed />

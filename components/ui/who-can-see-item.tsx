@@ -7,7 +7,7 @@ interface Props {
 }
 
 const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
-  const {push} = useRouter();
+  const { push } = useRouter();
 
   return (
     <>
@@ -16,10 +16,10 @@ const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
           <button className="font-bold">
             <PiLockKey className="w-7 h-7" />
           </button>
-          <p className="text-sm font-bold"> This post is for members only. </p>
+          <p className="text-sm font-bold text-gray-900"> This post is for members only. </p>
 
           <ButtonInput
-          onClick={() => push(`/${username}/memberships`)}
+            onClick={() => push(`/${username}/memberships`)}
             className="mt-2"
             shape="default"
             type="button"

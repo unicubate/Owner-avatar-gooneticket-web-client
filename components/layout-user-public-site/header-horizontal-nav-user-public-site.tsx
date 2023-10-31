@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Drawer } from "antd";
 import { HorizontalNavUserPublicSite } from "./horizontal-nav-user-public-site";
+import { VerticalNavUserPublicSite } from "./vertical-nav-user-public-site";
 
 interface Props {
   user?: any;
@@ -27,7 +28,7 @@ const HeaderHorizontalNavUserPublicSite: React.FC<Props> = ({ user }) => {
         open={open}
       >
         <div className="flex flex-col pt-5 overflow-y-auto">
-          {/* <VerticalNavDashboard user={user} /> */}
+          <VerticalNavUserPublicSite user={user} />
         </div>
       </Drawer>
     </>

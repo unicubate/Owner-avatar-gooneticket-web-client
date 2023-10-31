@@ -21,7 +21,7 @@ const RecentCommentTransactions: React.FC<{
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteCommentsAPI({
-    take: 6,
+    take: 10,
     sort: "DESC",
     modelIds: ["DONATION"],
     organizationId,
@@ -78,8 +78,8 @@ const RecentCommentTransactions: React.FC<{
                 size="large"
                 onClick={() => fetchNextPage()}
                 loading={isFetchingNextPage ? true : false}
-                color={"gray"}
-                defaultColor="gray"
+                color="indigo"
+                defaultColor="indigo"
                 minW="fit"
               >
                 Load More

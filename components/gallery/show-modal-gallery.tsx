@@ -1,4 +1,4 @@
-import { Avatar, Upload } from "antd";
+import { Avatar, Button, Upload } from "antd";
 import { BiComment } from "react-icons/bi";
 import { FiDownload } from "react-icons/fi";
 import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
@@ -18,6 +18,7 @@ import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { WhoCanSeeItem } from "../ui/who-can-see-item";
 import { GetOnePostAPI } from "@/api-site/post";
 import { AvatarComponent } from "../ui/avatar-component";
+import { ButtonInput } from "../ui";
 
 type Props = {
   openModal: boolean;
@@ -72,35 +73,53 @@ const ShowModalGallery: React.FC<Props> = ({
                   </div>
 
                   <div className="ml-auto">
-                    <button
-                      title="Share"
-                      className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
-                    >
-                      <IoShareOutline className="w-6 h-6" />
-                    </button>
-                    {item?.allowDownload && (
+
+                    <div className="flex items-center space-x-2 sm:ml-5">
+                      {item?.whoCanSee === "MEMBERSHIP" &&
+                        item?.isValidSubscribe !== 1 ? (
+                        <ButtonInput
+                          onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
+                          shape="default"
+                          type="button"
+                          size="large"
+                          loading={false}
+                          color="red"
+                        >
+                          Join membership now
+                        </ButtonInput>
+                      ) : null}
+
+                      
                       <button
-                        title="Download"
-                        onClick={() => {
-                          router.push(
-                            `${downloadOneFileUploadAPI({
-                              folder: "posts",
-                              fileName: item?.uploadsImage[0]?.path,
-                            })}`
-                          );
-                        }}
+                        title="Share"
                         className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                       >
-                        <FiDownload className="w-6 h-6" />
+                        <IoShareOutline className="w-6 h-6" />
                       </button>
-                    )}
-                    <button
-                      title="Close"
-                      onClick={() => setOpenModal(false)}
-                      className="ml-2 text-gray-900 hover:text-gray-900 focus:ring-gray-900"
-                    >
-                      <AiOutlineClose className="w-6 h-6" />
-                    </button>
+                      {item?.allowDownload && (
+                        <button
+                          title="Download"
+                          onClick={() => {
+                            router.push(
+                              `${downloadOneFileUploadAPI({
+                                folder: "posts",
+                                fileName: item?.uploadsImage[0]?.path,
+                              })}`
+                            );
+                          }}
+                          className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                        >
+                          <FiDownload className="w-6 h-6" />
+                        </button>
+                      )}
+                      <button
+                        title="Close"
+                        onClick={() => setOpenModal(false)}
+                        className="ml-2 text-gray-900 hover:text-gray-900 focus:ring-gray-900"
+                      >
+                        <AiOutlineClose className="w-6 h-6" />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -113,19 +132,18 @@ const ShowModalGallery: React.FC<Props> = ({
                         preview={false}
                         height="100%"
                         alt={item?.title}
-                        className={`${
-                          item?.whoCanSee === "MEMBERSHIP" &&
+                        className={`${item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                            ? "blur-3xl"
-                            : ""
-                        }`}
+                          ? "blur-3xl"
+                          : ""
+                          }`}
                       />
                     ) : null}
 
-                    {item?.whoCanSee === "MEMBERSHIP" &&
+                    {/* {item?.whoCanSee === "MEMBERSHIP" &&
                     item?.isValidSubscribe !== 1 ? (
                       <WhoCanSeeItem username={item?.profile?.username} />
-                    ) : null}
+                    ) : null} */}
                   </div>
 
                   {item?.title ? (
@@ -154,9 +172,8 @@ const ShowModalGallery: React.FC<Props> = ({
                       <>
                         <Link
                           title="Edit"
-                          href={`/posts/${
-                            item?.id
-                          }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                          href={`/posts/${item?.id
+                            }/edit?type=${item?.type.toLocaleLowerCase()}`}
                           className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                         >
                           <MdOutlineModeEdit className="w-6 h-6" />
@@ -173,7 +190,7 @@ const ShowModalGallery: React.FC<Props> = ({
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                    item?.isValidSubscribe !== 1 ? (
+                      item?.isValidSubscribe !== 1 ? (
                       <>
                         <button className="ml-auto text-2xl font-bold">
                           <HiOutlineLockClosed />

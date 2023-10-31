@@ -33,6 +33,7 @@ export type UserModel = {
   createdAt: Date;
   email: string;
   id: string;
+  username: string;
   organizationId: string;
   profileId: string;
   donation: {

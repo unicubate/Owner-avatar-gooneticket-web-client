@@ -43,7 +43,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
             />
           ) : null}
 
-          {item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1 ? (
+          {/* {item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1 ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center text-white">
                 <button className="font-bold">
@@ -66,7 +66,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
                 </ButtonInput>
               </div>
             </div>
-          ) : null}
+          ) : null} */}
         </a>
 
         {/* <div className="flex flex-col flex-1">
