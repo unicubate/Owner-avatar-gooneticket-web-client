@@ -81,15 +81,16 @@ const ShowModalGallery: React.FC<Props> = ({
                           onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
                           shape="default"
                           type="button"
-                          size="large"
+                          size="normal"
                           loading={false}
                           color="red"
+                          icon={<HiOutlineLockClosed className="w-5 h-5" />}
                         >
-                          Join membership now
+                          <span className="ml-1 font-bold">Join membership</span>
                         </ButtonInput>
                       ) : null}
 
-                      
+
                       <button
                         title="Share"
                         className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"

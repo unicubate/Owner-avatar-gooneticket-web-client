@@ -3,20 +3,17 @@ import { usePathname } from "next/navigation";
 import {
   BiHomeCircle,
   BiSearch,
-  BiMessageRoundedDots,
   BiDetail,
   BiCog,
   BiWallet,
   BiLockOpen,
   BiBookContent,
+  BiShoppingBag,
+  BiImage,
+  BiHeart,
+  BiLayout,
 } from "react-icons/bi";
-import { FiList } from "react-icons/fi";
-import { TfiGallery } from "react-icons/tfi";
-import { VscOpenPreview } from "react-icons/vsc";
-import { BsGift, BsShop } from "react-icons/bs";
-import { TbUsersGroup } from "react-icons/tb";
 import { RiShakeHandsLine } from "react-icons/ri";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -33,7 +30,7 @@ const MONETIZE_ITEMS: NavbarProps[] = [
   {
     title: "Donations",
     href: "/donations",
-    icon: <MdOutlineFavoriteBorder className={classIcon} />,
+    icon: <BiHeart className={classIcon} />,
   },
   // {
   //   title: "Gift",
@@ -53,26 +50,11 @@ const MONETIZE_ITEMS: NavbarProps[] = [
   {
     title: "Shop",
     href: "/shop",
-    icon: <BsShop className={classIcon} />,
+    icon: <BiShoppingBag className={classIcon} />,
   },
 ];
 
 const SUPPORT_ITEMS = [
-  // {
-  //   title: "Payments History",
-  //   href: "/payments-history",
-  //   icon: <FiList className={classIcon} />,
-  // },
-  // {
-  //   title: "My Supporters",
-  //   href: "/supporters",
-  //   icon: <TbUsersGroup className={classIcon} />,
-  // },
-  // {
-  //   title: "Messages",
-  //   href: "/messages",
-  //   icon: <BiMessageRoundedDots className={classIcon} />,
-  // },
   {
     title: "Posts",
     href: "/posts",
@@ -81,7 +63,7 @@ const SUPPORT_ITEMS = [
   {
     title: "Gallery",
     href: "/gallery",
-    icon: <TfiGallery className={classIcon} />,
+    icon: <BiImage className={classIcon} />,
   },
 ];
 
@@ -119,7 +101,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
     {
       title: "Your Page",
       href: `/${user?.username}`,
-      icon: <VscOpenPreview className={classIcon} />,
+      icon: <BiLayout className={classIcon} />,
     },
     {
       title: "Feed",

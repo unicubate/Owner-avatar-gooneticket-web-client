@@ -2,23 +2,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BiHomeCircle,
-  BiSearch,
-  BiMessageRoundedDots,
   BiDetail,
-  BiCog,
-  BiCodeCurly,
   BiLockOpen,
-  BiBookContent,
+  BiImage,
+  BiShoppingBag,
 } from "react-icons/bi";
-import { FiList } from "react-icons/fi";
-import { TfiGallery } from "react-icons/tfi";
-import { VscOpenPreview } from "react-icons/vsc";
-import { BsGift, BsShop } from "react-icons/bs";
-import { TbUsersGroup } from "react-icons/tb";
 import { RiShakeHandsLine } from "react-icons/ri";
-import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { useState } from "react";
-import { useRouter } from "next/router";
 import { UserModel } from "@/types/user.type";
 
 export type NavbarProps = {
@@ -29,7 +19,6 @@ export type NavbarProps = {
   icon?: any;
 };
 const classIcon = "flex-shrink-0 w-6 h-6 mr-4";
-
 
 interface Props {
   user?: UserModel;
@@ -48,7 +37,7 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
       title: "Gallery",
       status: user?.profile?.enableGallery,
       href: `/${user?.username}/gallery`,
-      icon: <TfiGallery className={classIcon} />,
+      icon: <BiImage className={classIcon} />,
     },
     {
       title: "Memberships",
@@ -66,7 +55,7 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
       title: "Shop",
       status: user?.profile?.enableShop,
       href: `/${user?.username}/shop`,
-      icon: <BsShop className={classIcon} />,
+      icon: <BiShoppingBag className={classIcon} />,
     },
     {
       title: "Commissions",
