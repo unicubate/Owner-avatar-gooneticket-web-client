@@ -9,8 +9,8 @@ import { Carousel as ResponsiveCarousel } from "react-responsive-carousel";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/pagination';
 // import required modules
 import { Navigation, Pagination } from 'swiper/modules';
 
@@ -45,7 +45,7 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      <ResponsiveCarousel
+      {/* <ResponsiveCarousel
         // autoFocus={true}
         showArrows={true}
         autoPlay={false}
@@ -69,8 +69,8 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </Fragment>
           ))}
-      </ResponsiveCarousel>
-      {/* <Swiper
+      </ResponsiveCarousel> */}
+      <Swiper
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
@@ -80,8 +80,6 @@ const ListCarouselUpload: React.FC<Props> = ({
         pagination={{ clickable: true }}
         modules={[Pagination]}
         style={contentStyle}
-        
-        
       >
         {uploads &&
           uploads?.length > 0 &&
@@ -102,7 +100,7 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </SwiperSlide>
           ))}
-      </Swiper> */}
+      </Swiper>
       {/* <Carousel
         autoplay={autoplay}
         dots={true}
