@@ -100,7 +100,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                 height={400}
                 className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-3xl"
+                  ? "blur-xl"
                   : ""
                   }`}
               />

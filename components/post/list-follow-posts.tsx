@@ -134,7 +134,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 height={400}
                 className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-2xl"
+                  ? "blur-xl"
                   : ""
                   }`}
               />

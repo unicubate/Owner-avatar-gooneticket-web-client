@@ -37,7 +37,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
               preview={false}
               height={250}
               className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                  ? "blur-3xl"
+                  ? "blur-xl"
                   : ""
                 }`}
             />

@@ -134,7 +134,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         alt={item?.title}
                         className={`${item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                          ? "blur-3xl"
+                          ? "blur-xl"
                           : ""
                           }`}
                       />
