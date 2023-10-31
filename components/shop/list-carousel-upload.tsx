@@ -57,7 +57,6 @@ const ListCarouselUpload: React.FC<Props> = ({
             <>
               <SwiperSlide key={index}>
                 <Image
-                  loading="lazy"
                   width={width}
                   height={height}
                   className={className}
