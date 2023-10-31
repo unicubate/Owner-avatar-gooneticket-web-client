@@ -45,7 +45,7 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      {/* <ResponsiveCarousel
+      <ResponsiveCarousel
         // autoFocus={true}
         showArrows={true}
         autoPlay={false}
@@ -54,23 +54,26 @@ const ListCarouselUpload: React.FC<Props> = ({
       >
         {uploads &&
           uploads.map((item: any, index: number) => (
-            <div key={index}>
-              <Image
-                width={width}
-                height={height}
-                className={className}
-                preview={preview}
-                style={contentStyle}
-                src={`${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: item?.path,
-                })}`}
-                alt={alt}
-              />
-            </div>
+            <>
+              <SwiperSlide key={index}>
+                <Image
+                  loading="lazy"
+                  width={width}
+                  height={height}
+                  className={className}
+                  preview={preview}
+                  style={contentStyle}
+                  src={`${viewOneFileUploadAPI({
+                    folder: folder,
+                    fileName: item?.path,
+                  })}`}
+                  alt={alt}
+                />
+              </SwiperSlide>
+            </>
           ))}
-      </ResponsiveCarousel> */}
-      <Swiper
+      </ResponsiveCarousel>
+      {/* <Swiper
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
@@ -80,6 +83,8 @@ const ListCarouselUpload: React.FC<Props> = ({
         pagination={{ clickable: true }}
         modules={[Pagination]}
         style={contentStyle}
+        
+        
       >
         {uploads &&
           uploads?.length > 0 &&
@@ -100,7 +105,7 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </SwiperSlide>
           ))}
-      </Swiper>
+      </Swiper> */}
       {/* <Carousel
         autoplay={autoplay}
         dots={true}
