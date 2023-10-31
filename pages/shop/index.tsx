@@ -14,7 +14,7 @@ import { ProductModel } from "@/types/product";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 
 const Shops = () => {
-  const { userVisiter, profile } = useAuth() as any;
+  const { userStorage: user, profile } = useAuth() as any;
   const router = useRouter();
   const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
@@ -27,7 +27,7 @@ const Shops = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteProductsAPI({
-    organizationId: userVisiter?.organizationId,
+    organizationId: user?.organizationId,
     take: 10,
     sort: "DESC",
     queryKey: ["products", "infinite"],

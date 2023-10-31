@@ -6,6 +6,8 @@ import { GetOneProductAPI } from "@/api-site/product";
 import { useAuth } from "@/components/util/context-user";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { GetUploadsAPI } from "@/api-site/upload";
+import { Button, Result } from "antd";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -43,22 +45,26 @@ const ShopEdit = () => {
     uploadType: "file",
   });
 
-  const dataTableProduct = isLoadingProduct || isLoadingFileUploads || isLoadingImageUploads ? (
-    <LoadingFile />
-  ) : isErrorProduct || isErrorFileUploads || isErrorImageUploads ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <>
-      {organizationId && product?.id ? (
-        <CreateOrUpdateFormShop
-          uploadFiles={uploadsFiles}
-          uploadImages={uploadImages}
-          product={product}
-        />
-      ) : null}
-
-    </>
-  );
+  const dataTableProduct =
+    isLoadingProduct || isLoadingFileUploads || isLoadingImageUploads ? (
+      <LoadingFile />
+    ) : isErrorProduct || isErrorFileUploads || isErrorImageUploads ? (
+      <ErrorFile
+        status="error"
+        title="404"
+        description="Error find data please try again..."
+      />
+    ) : (
+      <>
+        {organizationId && product?.id ? (
+          <CreateOrUpdateFormShop
+            uploadFiles={uploadsFiles}
+            uploadImages={uploadImages}
+            product={product}
+          />
+        ) : null}
+      </>
+    );
 
   return (
     <>

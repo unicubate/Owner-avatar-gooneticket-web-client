@@ -4,6 +4,7 @@ import { ButtonInput, EmptyData, LoadingFile } from "../ui";
 import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
 import { ListTransactions } from "./list-transactions";
+import { Input } from "antd";
 
 type Props = {
   model?: string;
@@ -75,6 +76,15 @@ const TableTransactions: React.FC<Props> = ({
   return (
     <>
       <div className="mt-4 px-4 py-4 overflow-hidden dark:bg-white border dark:border-gray-200 rounded-lg">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="mt-4 sm:mt-0">
+            <p className="text-lg font-bold">Recent transactions</p>
+          </div>
+          <div className="mt-4 sm:mt-0">
+            <Input placeholder="Search by name or email" />
+          </div>
+        </div>
+
         <div className="divide-y divide-gray-200">
           <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
             <tbody className="divide-y divide-gray-200">

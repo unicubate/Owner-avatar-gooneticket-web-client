@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { Input } from "antd";
 
 const MembershipsLevels = () => {
-  const { organizationId } = useAuth() as any;
+  const { userStorage: user } = useAuth() as any;
   const router = useRouter();
   const { ref, inView } = useInView();
 
@@ -23,7 +23,7 @@ const MembershipsLevels = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteMembershipsAPI({
-    organizationId: organizationId,
+    organizationId: user?.organizationId,
     take: 10,
     sort: "DESC",
     queryKey: ["memberships", "infinite"],

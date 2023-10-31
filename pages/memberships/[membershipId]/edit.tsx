@@ -6,6 +6,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { GetOneMembershipAPI } from "@/api-site/membership";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { GetUploadsAPI } from "@/api-site/upload";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -32,16 +33,21 @@ const ShopEdit = () => {
     uploadableId: membershipId,
   });
 
-  const dataTableMembership = isLoadingImageUploads || isLoadingMembership ? (
-    <LoadingFile />
-  ) : isErrorImageUploads || isErrorMembership ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <CreateOrUpdateFormMembership
-      membership={membership}
-      uploadImages={dataImageUploads}
-    />
-  );
+  const dataTableMembership =
+    isLoadingImageUploads || isLoadingMembership ? (
+      <LoadingFile />
+    ) : isErrorImageUploads || isErrorMembership ? (
+      <ErrorFile
+        status="error"
+        title="404"
+        description="Error find data please try again..."
+      />
+    ) : (
+      <CreateOrUpdateFormMembership
+        membership={membership}
+        uploadImages={dataImageUploads}
+      />
+    );
 
   return (
     <>

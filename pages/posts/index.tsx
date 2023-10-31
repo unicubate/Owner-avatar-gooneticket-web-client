@@ -10,7 +10,7 @@ import { GetInfinitePostsAPI } from "@/api-site/post";
 import { PostModel } from "@/types/post";
 
 const Posts = () => {
-  const { userStorage: userVisiter } = useAuth() as any;
+  const { userStorage: user } = useAuth() as any;
   const { ref, inView } = useInView();
 
   const {
@@ -22,8 +22,8 @@ const Posts = () => {
     fetchNextPage,
   } = GetInfinitePostsAPI({
     userVisitor: {
-      id: userVisiter?.id,
-      organizationId: userVisiter?.organizationId,
+      id: user?.id,
+      organizationId: user?.organizationId,
     },
     take: 10,
     sort: "DESC",

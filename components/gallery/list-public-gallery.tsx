@@ -75,7 +75,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
           </p>
         </div> */}
 
-        <div className="flex items-center text-gray-500">
+        {/* <div className="flex items-center text-gray-500">
           <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
           <button className="ml-3.5 text-2xl font-bold">
@@ -96,7 +96,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
               <HiOutlineLockOpen />
             </button>
           )}
-        </div>
+        </div> */}
       </div>
 
       {openModal ? (

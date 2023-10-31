@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 // import required modules
-import { Pagination } from "swiper/modules";
+import { Navigation, Pagination } from 'swiper/modules';
 
 type Props = {
   uploads: UploadModel[];
@@ -37,7 +37,7 @@ const ListCarouselUpload: React.FC<Props> = ({
   preview,
   alt,
   className = "object-cover w-full h-full",
-  height = "400px",
+  height = "100%",
   width = "100%",
   autoplay = false,
 }) => {
@@ -45,7 +45,7 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      <ResponsiveCarousel
+      {/* <ResponsiveCarousel
         // autoFocus={true}
         showArrows={true}
         autoPlay={false}
@@ -69,8 +69,8 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </div>
           ))}
-      </ResponsiveCarousel>
-      {/* <Swiper
+      </ResponsiveCarousel> */}
+      <Swiper
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
@@ -100,7 +100,7 @@ const ListCarouselUpload: React.FC<Props> = ({
               />
             </SwiperSlide>
           ))}
-      </Swiper> */}
+      </Swiper>
       {/* <Carousel
         autoplay={autoplay}
         dots={true}

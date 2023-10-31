@@ -6,7 +6,7 @@ import {
   BiMessageRoundedDots,
   BiDetail,
   BiCog,
-  BiCodeCurly,
+  BiWallet,
   BiLockOpen,
   BiBookContent,
 } from "react-icons/bi";
@@ -90,6 +90,11 @@ const SETTINGS_ITEMS = [
     title: "Settings",
     href: "/settings",
     icon: <BiCog className={classIcon} />,
+  },
+  {
+    title: "Payouts",
+    href: "/payout-settings",
+    icon: <BiWallet className={classIcon} />,
   },
   // {
   //   title: "Integrations",

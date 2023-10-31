@@ -7,7 +7,8 @@ import { EmptyData } from "@/components/ui/empty-data";
 import { useRouter } from "next/router";
 import { arrayTransactions } from "@/components/mock";
 import { formatePrice, getDays } from "@/utils";
-import { BiCog, BiDotsHorizontal } from "react-icons/bi";
+import { BiCog, BiDotsHorizontal, BiLockOpen } from "react-icons/bi";
+import { CiGift, CiShop, CiUnlock, CiWallet } from "react-icons/ci";
 import Link from "next/link";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
@@ -21,7 +22,7 @@ import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { ButtonCancelInput } from "@/components/ui";
 
 const Dashboard = () => {
-  const [dayCount, setDayCount] = useState(30)
+  const [dayCount, setDayCount] = useState(30);
   const user = useAuth() as any;
 
   const {
@@ -29,20 +30,28 @@ const Dashboard = () => {
     isError,
     isPending,
     error,
-  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
+  } = GetStatisticsTransactionsAPI({
+    queryKey: ["statistics-transactions"],
+    days: dayCount,
+  });
 
   if (isPending) {
-    return ""
+    return "";
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>
+    return <span>Error: {error.message}</span>;
   }
 
-  const transactionDonation = transactions?.find((item) => item.model === "DONATION")
-  const transactionMembership = transactions?.find((item) => item.model === "MEMBERSHIP")
-  const transactionProduct = transactions?.find((item) => item.model === "PRODUCT")
-
+  const transactionDonation = transactions?.find(
+    (item) => item.model === "DONATION"
+  );
+  const transactionMembership = transactions?.find(
+    (item) => item.model === "MEMBERSHIP"
+  );
+  const transactionProduct = transactions?.find(
+    (item) => item.model === "PRODUCT"
+  );
 
   return (
     <>
@@ -117,7 +126,7 @@ const Dashboard = () => {
                         value={Number(user?.wallet?.amount)}
                         currency={{
                           code: user?.profile?.currency?.code,
-                          amount: String(user?.profile?.currency?.amount)
+                          amount: String(user?.profile?.currency?.amount),
                         }}
                       />
                     </div>
@@ -151,10 +160,12 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(transactionMembership?.statistic?.amount)}
+                            value={Number(
+                              transactionMembership?.statistic?.amount
+                            )}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(user?.profile?.currency?.amount)
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </div>
@@ -169,10 +180,12 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(transactionDonation?.statistic?.amount)}
+                            value={Number(
+                              transactionDonation?.statistic?.amount
+                            )}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(user?.profile?.currency?.amount)
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </div>
@@ -187,10 +200,12 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mt-3">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900"
-                            value={Number(transactionProduct?.statistic?.amount)}
+                            value={Number(
+                              transactionProduct?.statistic?.amount
+                            )}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(user?.profile?.currency?.amount)
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </div>
@@ -202,115 +217,51 @@ const Dashboard = () => {
 
                   <div className="py-4 mt-4 bg-white sm:py-4 lg:py-10">
                     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                      <div className="grid grid-cols-1 mt-6 text-center border border-gray-200 sm:grid-cols-2 lg:grid-cols-4">
-                        <div className="relative transition-all duration-300 bg-white hover:shadow-xl hover:z-10">
-                          <div className="px-4 py-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 mx-auto bg-gray-400 rounded-full">
-                              <svg
-                                className="w-6 h-6 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"
-                                />
-                              </svg>
-                            </div>
-                            <h3 className="text-base font-bold text-gray-900 mt-7">
+                      <div className="grid max-w-2xl grid-cols-1 mx-auto sm:grid-cols-2 xl:max-w-none xl:grid-cols-4 gap-x-8 gap-y-8 sm:gap-y-12">
+                        <div className="flex items-center">
+                          <CiWallet className="flex-shrink-0 text-gray-900 w-14 h-14" />
+                          <div className="ml-4">
+                            <h3 className="text-base font-bold text-gray-900">
+                              Secured Payments
+                            </h3>
+                            <p className="mt-1 text-sm font-normal text-gray-600">
+                              Make payment with ease
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center">
+                          <CiShop className="flex-shrink-0 text-gray-900 w-14 h-14" />
+                          <div className="ml-4">
+                            <h3 className="text-base font-bold text-gray-900">
+                              Shop for Anyone
+                            </h3>
+                            <p className="mt-1 text-sm font-normal text-gray-600">
+                              You can shop for any category
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="flex items-center">
+                          <CiUnlock className="flex-shrink-0 text-gray-900 w-14 h-14" />
+                          <div className="ml-4">
+                            <h3 className="text-base font-bold text-gray-900">
                               Membership
                             </h3>
-                            <p className="mt-3 text-sm text-gray-600">
+                            <p className="mt-1 text-sm font-normal text-gray-600">
                               Monthly membership for your biggest fans.
                             </p>
                           </div>
                         </div>
 
-                        <div className="relative transition-all duration-300 bg-white border-t border-gray-200 sm:border-t-0 sm:border-l hover:shadow-xl hover:z-10">
-                          <div className="px-4 py-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 mx-auto bg-gray-400 rounded-full">
-                              <svg
-                                className="w-6 h-6 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-                                />
-                              </svg>
-                            </div>
-                            <h3 className="text-base font-bold text-gray-900 mt-7">
-                              Send Gifts Easily
+                        <div className="flex items-center">
+                          <CiGift className="flex-shrink-0 text-gray-900 w-14 h-14" />
+                          <div className="ml-4">
+                            <h3 className="text-base font-bold text-gray-900">
+                              Quality Products
                             </h3>
-                            <p className="mt-3 text-sm text-gray-600">
-                              Lorem ipsum dolor sit amet, consectetur adipis
-                              elit. Sit enim nec proin.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="relative transition-all duration-300 bg-white border-t border-gray-200 lg:border-l lg:border-t-0 hover:shadow-xl hover:z-10">
-                          <div className="px-4 py-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 mx-auto bg-gray-400 rounded-full">
-                              <svg
-                                className="w-6 h-6 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                                />
-                              </svg>
-                            </div>
-                            <h3 className="text-base font-bold text-gray-900 mt-7">
-                              Secured Payments
-                            </h3>
-                            <p className="mt-3 text-sm text-gray-600">
-                              Lorem ipsum dolor sit amet, consectetur adipis
-                              elit. Sit enim nec proin.
-                            </p>
-                          </div>
-                        </div>
-
-                        <div className="relative transition-all duration-300 bg-white border-t border-gray-200 sm:border-l lg:border-t-0 hover:shadow-xl hover:z-10">
-                          <div className="px-4 py-8">
-                            <div className="inline-flex items-center justify-center w-12 h-12 mx-auto bg-gray-400 rounded-full">
-                              <svg
-                                className="w-6 h-6 text-white"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                                />
-                              </svg>
-                            </div>
-                            <h3 className="text-base font-bold text-gray-900 mt-7">
-                              High Quality Materials
-                            </h3>
-                            <p className="mt-3 text-sm text-gray-600">
-                              Lorem ipsum dolor sit amet, consectetur adipis
-                              elit. Sit enim nec proin.
+                            <p className="mt-1 text-sm font-normal text-gray-600">
+                              Made with highest care
                             </p>
                           </div>
                         </div>

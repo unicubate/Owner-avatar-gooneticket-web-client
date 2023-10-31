@@ -307,7 +307,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
               <div className="mt-2">
                 <SelectSearchInput
-                  label="Currency"
+                  label="Payment currency"
                   firstOptionName="Currency"
                   valueType="key"
                   control={control}
@@ -316,6 +316,9 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   name="currencyId"
                   dataItem={currencies}
                 />
+                 <span className="text-sm font-medium text-gray-400">
+                  {`Your supporters will pay in this currency.`}
+                </span>
               </div>
             </div>
 
