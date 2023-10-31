@@ -12,7 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 // import required modules
-import { Navigation, Pagination } from 'swiper/modules';
+import { Zoom, Pagination } from 'swiper/modules';
 
 type Props = {
   uploads: UploadModel[];
@@ -71,6 +71,7 @@ const ListCarouselUpload: React.FC<Props> = ({
           ))}
       </ResponsiveCarousel> */}
       <Swiper
+        zoom={true}
         spaceBetween={50}
         slidesPerView={1}
         navigation={true}
@@ -78,15 +79,24 @@ const ListCarouselUpload: React.FC<Props> = ({
           key: "slide",
         }}
         pagination={{ clickable: true }}
-        modules={[Pagination]}
+        modules={[Pagination, Zoom]}
         style={contentStyle}
+        breakpoints={{
+          320: {
+            slidesPerView: 'auto',
+            spaceBetween: 8,
+          },
+          // 640: {
+          //   slidesPerView: 1,
+          //   spaceBetween: 16,
+          // }
+        }}
       >
         {uploads &&
           uploads?.length > 0 &&
           uploads?.map((item: any, index: number) => (
             <SwiperSlide key={index}>
               <Image
-                loading="lazy"
                 width={width}
                 height={height}
                 className={className}
