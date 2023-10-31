@@ -5,6 +5,7 @@ import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const PostsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -21,7 +22,11 @@ const PostsUserPublic = () => {
   const dataTablePosts = isLoadingUser ? (
     <LoadingFile />
   ) : isErrorUser ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : (
     <PublicPosts userVisitor={{ id: userVisiter?.id, organizationId: user?.organizationId, }} />
   );
@@ -72,7 +77,7 @@ const PostsUserPublic = () => {
             {user?.id ? <PublicListLastPosts userVisitor={user?.organizationId} /> : null}
           </div> */}
           </div>
-          
+
         </div>
       </LayoutUserPublicSite>
     </>

@@ -5,6 +5,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { PublicCommissions } from "@/components/commission/public-commissions";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const CommissionsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -21,7 +22,11 @@ const CommissionsUserPublic = () => {
   const publicCommissions = isLoadingUser ? (
     <LoadingFile />
   ) : isErrorUser ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : (
     <>{user?.id ? <PublicCommissions organizationId={user?.organizationId} /> : null}</>
   );
@@ -54,7 +59,7 @@ const CommissionsUserPublic = () => {
             </div>
           </div>
         </div>
-        
+
       </LayoutUserPublicSite>
 
     </>

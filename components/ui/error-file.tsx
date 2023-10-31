@@ -14,16 +14,18 @@ const ErrorFile: React.FC<Props> = ({
   status,
   title,
   description,
-  className = "relative",
+  className = "relative mx-auto justify-center",
 }) => {
   return (
     <>
       <div className={className}>
-        <Result
-          status={status}
-          title={title}
-          subTitle={description}
-        />
+        <div className="left-0 right-0 top-0 grid place-items-center">
+          <Result
+            status={status}
+            title={title}
+            subTitle={description}
+          />
+        </div>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { useAuth } from "@/components/util/context-user";
 import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const ShopUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -20,7 +21,11 @@ const ShopUserPublic = () => {
   const dataTableProducts = isLoadingUser ? (
     <LoadingFile />
   ) : isErrorUser ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : (
     <>
       {user?.id ? <PublicShop organizationId={user?.organizationId} /> : null}
@@ -33,9 +38,8 @@ const ShopUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
-        }`}
+        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+          }`}
         user={user}
       >
         <div className="flex flex-col flex-1 bg-gray-100">
