@@ -5,7 +5,6 @@ import { Carousel, Image } from "antd";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
-import { Carousel as ResponsiveCarousel } from "react-responsive-carousel";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -45,31 +44,6 @@ const ListCarouselUpload: React.FC<Props> = ({
 
   return (
     <>
-      {/* <ResponsiveCarousel
-        // autoFocus={true}
-        showArrows={true}
-        autoPlay={false}
-        showStatus={uploads?.length > 1 ? true : false}
-        showIndicators={uploads?.length > 1 ? true : false}
-      >
-        {uploads &&
-          uploads.map((item: any, index: number) => (
-            <Fragment key={index}>
-              <Image
-                width={width}
-                height={height}
-                className={className}
-                preview={preview}
-                style={contentStyle}
-                src={`${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: item?.path,
-                })}`}
-                alt={alt}
-              />
-            </Fragment>
-          ))}
-      </ResponsiveCarousel> */}
       <Swiper
         zoom={true}
         spaceBetween={50}

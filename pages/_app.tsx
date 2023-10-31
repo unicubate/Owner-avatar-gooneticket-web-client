@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import { ConfigProvider } from "antd";
 import { ThemeProvider } from "next-themes";
 import "react-quill/dist/quill.snow.css";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "toastify-js/src/toastify.css";
 import "animate.css";
 
