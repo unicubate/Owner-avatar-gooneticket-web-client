@@ -5,7 +5,7 @@ import { Image } from "antd";
 import { BiComment } from "react-icons/bi";
 import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
-import ListFollowPosts from "@/components/post/list-follow-posts";
+import { ListFollowPosts } from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { ErrorFile } from "@/components/ui/error-file";
 import { AvatarComponent } from "@/components/ui";

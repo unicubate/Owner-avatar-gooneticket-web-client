@@ -4,7 +4,7 @@ import { GetInfinitePostsAPI } from "@/api-site/post";
 import { ButtonInput } from "../ui/button-input";
 import { useInView } from "react-intersection-observer";
 import { LoadingFile } from "../ui/loading-file";
-import ListFollowPosts from "./list-follow-posts";
+import { ListFollowPosts } from "./list-follow-posts";
 import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {

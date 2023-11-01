@@ -236,4 +236,4 @@ const ListFollowPosts: React.FC<Props> = ({
   );
 };
 
-export default ListFollowPosts;
+export { ListFollowPosts };

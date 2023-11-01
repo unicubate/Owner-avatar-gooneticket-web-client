@@ -1,18 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Image } from "antd";
 import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
-import { getOneFileGalleryAPI } from "@/api-site/post";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { UserVisitorModel } from "@/types/user.type";
@@ -64,8 +61,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
                   <button
                     onClick={() =>
                       router.push(
-                        `/posts/${
-                          item?.id
+                        `/posts/${item?.id
                         }/edit?type=${item?.type.toLocaleLowerCase()}`
                       )
                     }
@@ -141,7 +137,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
             organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}
-            userVisitorId={userVisitor?.id}
+            userVisitorId={userVisitor?.id ?? ''}
           />
         </div>
       </div>
@@ -149,4 +145,4 @@ const ListPublicPostsComments: React.FC<Props> = ({
   );
 };
 
-export default ListPublicPostsComments;
+export { ListPublicPostsComments };
