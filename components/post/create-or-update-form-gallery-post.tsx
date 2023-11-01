@@ -1,16 +1,15 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui/button-input";
-import { Alert, Avatar, Checkbox, Upload, UploadFile, UploadProps } from "antd";
+import { Alert, Upload, UploadFile, UploadProps } from "antd";
 import { useEffect, useState } from "react";
 import { SelectSearchInput } from "../ui/select-search-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
 import { filterImageAndFile } from "@/utils/utils";
 import { useRouter } from "next/router";
@@ -22,8 +21,6 @@ import {
   TextareaReactQuillInput,
 } from "../ui";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
-import Link from "next/link";
-import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 const schema = yup.object({
@@ -31,11 +28,6 @@ const schema = yup.object({
   description: yup.string().optional(),
   whoCanSee: yup.string().required("who can see is a required field"),
   allowDownload: yup.string().optional(),
-  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
-    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
-      return yup.string().uuid().required("membership is a required field");
-    return schema.nullable();
-  }),
 });
 
 type Props = {
@@ -66,7 +58,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
@@ -82,7 +73,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
-        "membershipId",
         "allowDownload",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -233,29 +223,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       dataItem={arrayWhoCanSees}
                     />
                   </div>
-
-                  {watchWhoCanSee === "MEMBERSHIP" ? (
-                    <div className="mt-4">
-                      <SelectMembershipSearchInput
-                        firstOptionName="Choose memberships?"
-                        label="Memberships"
-                        control={control}
-                        errors={errors}
-                        placeholder="Select memberships?"
-                        name="membershipId"
-                        dataItem={memberships?.value}
-                      />
-                      <div className="flex justify-between items-center">
-                        <label className="block text-sm mb-2 dark:text-white"></label>
-                        <Link
-                          className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                          href="/memberships/levels"
-                        >
-                          Create membership
-                        </Link>
-                      </div>
-                    </div>
-                  ) : null}
 
                   <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { ReactQuillInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
-import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Button, Upload, UploadFile, UploadProps } from "antd";
@@ -15,10 +14,7 @@ import { useRouter } from "next/router";
 import { SwitchInput } from "../ui/switch-input";
 import { filterImageAndFile } from "@/utils/utils";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
-import Link from "next/link";
-import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
-import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
@@ -36,11 +32,6 @@ const schema = yup.object({
   urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
     if (enableUrlMedia[0] === true)
       return yup.string().url().required("url is a required field");
-    return schema.nullable();
-  }),
-  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
-    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
-      return yup.string().uuid().required("membership is a required field");
     return schema.nullable();
   }),
 });
@@ -69,7 +60,6 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const watchEnableUrlMedia = watch("enableUrlMedia", false);
-  const watchWhoCanSee = watch("whoCanSee", null);
 
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
@@ -87,7 +77,6 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
-        "membershipId",
         "enableUrlMedia",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -315,29 +304,6 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     dataItem={arrayWhoCanSees}
                   />
                 </div>
-
-                {watchWhoCanSee === "MEMBERSHIP" ? (
-                  <div className="mt-4">
-                    <SelectMembershipSearchInput
-                      firstOptionName="Choose memberships?"
-                      label="Memberships"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select memberships?"
-                      name="membershipId"
-                      dataItem={memberships?.value}
-                    />
-                    <div className="flex justify-between items-center">
-                      <label className="block text-sm mb-2 dark:text-white"></label>
-                      <Link
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                        href="/memberships/levels"
-                      >
-                        Create membership
-                      </Link>
-                    </div>
-                  </div>
-                ) : null}
 
                 <div className="mt-4">
                   <ReactQuillInput

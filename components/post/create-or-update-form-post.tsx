@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { ReactQuillInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { SelectSearchInput } from "../ui/select-search-input";
-import { PostFormModel, WhoCanSeeType, arrayWhoCanSees } from "@/types/post";
+import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI, getCategoriesAPI } from "@/api-site/post";
+import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
-import { useAuth } from "../util/context-user";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
-import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
-import Link from "next/link";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 type Props = {
@@ -31,11 +26,6 @@ const schema = yup.object({
   title: yup.string().required(),
   description: yup.string().min(10, "minimum 3 symbols").required(),
   categories: yup.array().optional(),
-  membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
-    if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
-      return yup.string().uuid().required("membership is a required field");
-    return schema.nullable();
-  }),
 });
 
 const CreateOrUpdateFormPost: React.FC<Props> = ({
@@ -59,7 +49,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchWhoCanSee = watch("whoCanSee", null);
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
@@ -75,7 +64,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
-        "membershipId",
         "categories",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -203,29 +191,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     dataItem={arrayWhoCanSees}
                   />
                 </div>
-
-                {watchWhoCanSee === "MEMBERSHIP" ? (
-                  <div className="mt-4">
-                    <SelectMembershipSearchInput
-                      firstOptionName="Choose memberships?"
-                      label="Memberships"
-                      control={control}
-                      errors={errors}
-                      placeholder="Select memberships?"
-                      name="membershipId"
-                      dataItem={memberships?.value}
-                    />
-                    <div className="flex justify-between items-center">
-                      <label className="block text-sm mb-2 dark:text-white"></label>
-                      <Link
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                        href="/memberships/levels"
-                      >
-                        Create membership
-                      </Link>
-                    </div>
-                  </div>
-                ) : null}
 
                 <div className="mt-2">
                   <ReactQuillInput

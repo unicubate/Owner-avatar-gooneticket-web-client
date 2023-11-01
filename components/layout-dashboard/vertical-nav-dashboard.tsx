@@ -12,6 +12,8 @@ import {
   BiImage,
   BiHeart,
   BiLayout,
+  BiStore,
+  BiStoreAlt,
 } from "react-icons/bi";
 import { RiShakeHandsLine } from "react-icons/ri";
 import { useState } from "react";
@@ -50,7 +52,7 @@ const MONETIZE_ITEMS: NavbarProps[] = [
   {
     title: "Shop",
     href: "/shop",
-    icon: <BiShoppingBag className={classIcon} />,
+    icon: <BiStoreAlt className={classIcon} />,
   },
 ];
 

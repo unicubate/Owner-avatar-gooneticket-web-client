@@ -6,6 +6,8 @@ import {
   BiLockOpen,
   BiImage,
   BiShoppingBag,
+  BiStoreAlt,
+  BiStore,
 } from "react-icons/bi";
 import { RiShakeHandsLine } from "react-icons/ri";
 import { useState } from "react";
@@ -55,7 +57,7 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
       title: "Shop",
       status: user?.profile?.enableShop,
       href: `/${user?.username}/shop`,
-      icon: <BiShoppingBag className={classIcon} />,
+      icon: <BiStoreAlt className={classIcon} />,
     },
     {
       title: "Commissions",

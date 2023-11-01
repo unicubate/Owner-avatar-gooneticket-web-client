@@ -53,7 +53,6 @@ export type PostFormModel = {
   userId?: string;
   image?: string;
   urlMedia?: string;
-  membershipId?: string;
   allowDownload?: string;
   enableUrlMedia?: string;
   isLike?: number;

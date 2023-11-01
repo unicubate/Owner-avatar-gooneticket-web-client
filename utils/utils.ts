@@ -20,7 +20,7 @@ export const capitalizeFirstLetter = (value: string): string => {
 };
 
 export const convertToPluralMonth = (value: number): string =>
-  Number(value) > 1 ? `${value} months` : `${value} month`;
+  Number(value) > 1 ? `${value} months` : `month`;
 
 /** Fix date */
 export const capitalizeOneFirstLetter = (a: string, b?: string) => {

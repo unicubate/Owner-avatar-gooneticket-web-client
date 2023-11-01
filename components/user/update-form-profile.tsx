@@ -30,10 +30,10 @@ type Props = {
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  url: yup.string().url().optional(),
+  url: yup.string().url().nullable(),
   birthday: yup.date().max(new Date()).required(),
-  currencyId: yup.string().uuid().required(),
-  countryId: yup.string().uuid().required(),
+  currencyId: yup.string().uuid().required("currency is a required field"),
+  countryId: yup.string().uuid().required("country is a required field"),
 });
 
 const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
@@ -224,7 +224,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <TextInput
                   label="First address"
@@ -245,9 +245,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   errors={errors}
                 />
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   Color
@@ -293,6 +290,9 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   )}
                 />
               </div>
+            </div>
+
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <SelectSearchInput
                   label="Counties"
@@ -316,7 +316,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   name="currencyId"
                   dataItem={currencies}
                 />
-                 <span className="text-sm font-medium text-gray-400">
+                <span className="text-sm font-medium text-gray-400">
                   {`Your supporters will pay in this currency.`}
                 </span>
               </div>
@@ -335,18 +335,16 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="sm:flex flex-col sm:items-end sm:justify-between">
-              <div className="mt-4">
-                <ButtonInput
-                  shape="default"
-                  type="submit"
-                  size="large"
-                  loading={loading}
-                  color={user?.profile?.color}
-                >
-                  Save changes
-                </ButtonInput>
-              </div>
+            <div className="flex items-center mt-4 mb-2 space-x-4">
+              <ButtonInput
+                shape="default"
+                type="submit"
+                size="large"
+                loading={loading}
+                color="indigo"
+              >
+                Save changes
+              </ButtonInput>
             </div>
           </div>
         </div>
