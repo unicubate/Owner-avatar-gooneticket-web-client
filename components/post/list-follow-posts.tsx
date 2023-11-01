@@ -3,7 +3,7 @@ import React from "react";
 import { PostModel, PostType } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
-import { BiComment } from "react-icons/bi";
+import { BiComment, BiConversation } from "react-icons/bi";
 import { MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
@@ -186,7 +186,7 @@ const ListFollowPosts: React.FC<Props> = ({
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-2 text-2xl font-bold">
-              <BiComment />
+              <BiConversation />
             </button>
             <span className="ml-2 font-normal text-sm">
               {item?.totalComment ?? 0}
@@ -225,7 +225,7 @@ const ListFollowPosts: React.FC<Props> = ({
           <ListComments
             model="POST"
             modelIds={["POST"]}
-            userVisitorId={userVisitor?.id}
+            userVisitorId={userVisitor?.id ?? ""}
             organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}

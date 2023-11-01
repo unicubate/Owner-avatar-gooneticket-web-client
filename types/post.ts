@@ -38,6 +38,7 @@ export type PostModel = {
     username: string;
     userId: string;
     fullName: string;
+    description: string;
     enableShop: boolean;
     galleryShop: boolean;
     enableCommission: boolean;

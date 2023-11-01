@@ -1,5 +1,5 @@
 import { Avatar, Button, Upload } from "antd";
-import { BiComment } from "react-icons/bi";
+import { BiComment, BiConversation } from "react-icons/bi";
 import { FiDownload } from "react-icons/fi";
 import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
@@ -163,7 +163,7 @@ const ShowModalGallery: React.FC<Props> = ({
                     <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
                     <button className="ml-2 text-2xl font-bold">
-                      <BiComment />
+                      <BiConversation />
                     </button>
                     <span className="ml-2 font-normal text-sm">
                       {item?.totalComment ?? 0}

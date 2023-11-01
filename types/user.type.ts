@@ -62,7 +62,7 @@ export type UserModel = {
 
 export type UserVisitorModel = {
   organizationId: string;
-  id: string;
+  id?: string;
 };
 username: "bokin-1659";
 export type UserForgotPasswordFormModel = {

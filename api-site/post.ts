@@ -262,7 +262,7 @@ export const getOneFileGalleryAPI = (fileName: string) =>
 
 export const getPostsAPI = async (
   payload: {
-    userVisitorId: string;
+    userVisitorId?: string;
     organizationId: string;
     type?: PostType;
     status?: string;

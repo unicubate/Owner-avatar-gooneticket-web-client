@@ -7,6 +7,10 @@ import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { ErrorFile } from "@/components/ui/error-file";
+import { AvatarComponent } from "@/components/ui";
+import PublicListLastPosts from '@/components/post/public-last-posts';
+import { HtmlParser } from "@/utils/html-parser";
 
 const PostShow = () => {
   const { userVisiter } = useAuth() as any;
@@ -23,9 +27,15 @@ const PostShow = () => {
   const dataTablePosts = isLoadingPost ? (
     <LoadingFile />
   ) : isErrorPost ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : (
-    <ListFollowPosts item={post} commentTake={10}
+    <ListFollowPosts
+      item={post}
+      commentTake={4}
       userVisitor={{
         id: userVisiter?.id,
         organizationId: userVisiter?.organizationId
@@ -40,6 +50,7 @@ const PostShow = () => {
             <div className="max-w-7xl mx-auto py-6">
               <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl">
                 <div className="grid grid-cols-1 mt-2 lg:grid-cols-5 lg:items-start xl:grid-cols-6 gap-y-10 lg:gap-x-12 xl:gap-x-16">
+
                   <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       <div className="mx-auto sm:px-6 md:px-8">
@@ -49,133 +60,38 @@ const PostShow = () => {
                   </div>
 
                   <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
-                    <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-400/60">
-                      <div className="overflow-hidden rounded ">
-                        <div className="px-4 py-6 sm:p-6 lg:p-8">
-                          <h3 className="font-bold text-gray-700">
-                            {" "}
-                            Latest Posts{" "}
-                          </h3>
+                    <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                      <div className="px-4 py-6 sm:p-6 lg:p-8">
+                        <div className="text-center">
+                          <AvatarComponent
+                            size={{ xs: 50, sm: 50, md: 60, lg: 64, xl: 80, xxl: 100 }}
+                            profile={post?.profile}
+                          />
+                          <p className="mt-4 text-lg font-semibold text-black">
+                            {post?.profile?.firstName ?? ""} {post?.profile?.lastName ?? ""}{" "}
+                          </p>
+                          <p className="mt-2 text-sm font-normal">
+                            <span className={`ql-editor`}>
+                              <HtmlParser
+                                html={String(
+                                  post?.profile?.description ?? ""
+                                )}
+                              />
+                            </span>
+                          </p>
 
-                          <div className="flow-root mt-8">
-                            <ul className="divide-y divide-gray-200 -my-7">
-                              <li className="flex items-stretch justify-between space-x-2 py-7">
-                                <div className="flex-shrink-0">
-                                  <Image
-                                    height={65}
-                                    preview={false}
-                                    className="object-cover w-16 h-16 rounded-lg"
-                                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-1.png"
-                                    alt=""
-                                  />
-                                </div>
 
-                                <div className="flex flex-col justify-between flex-1 ml-5">
-                                  <div className="flex-1">
-                                    <p className="text-sm font-bold text-gray-900">
-                                      Voici donc les 3 prochains sujets prévus sur Patreon
-                                    </p>
-                                    <div className="flex mt-4 items-center text-gray-500">
-                                      <CreateOrUpdateFormLike
-                                        typeLike="POST"
-                                        item={[]}
-                                      />
-
-                                      <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                        <BiComment />
-                                      </button>
-                                      <span className="ml-1.5 font-normal text-sm">
-                                        20
-                                      </span>
-                                      <span className="ml-7 font-normal text-sm">
-                                        01 sept. 2023
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-
-                              <li className="flex items-stretch justify-between space-x-2 py-7">
-                                <div className="flex-shrink-0">
-                                  <Image
-                                    height={65}
-                                    preview={false}
-                                    className="object-cover w-16 h-16 rounded-lg"
-                                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-2.png"
-                                    alt=""
-                                  />
-                                </div>
-
-                                <div className="flex flex-col justify-between flex-1 ml-5">
-                                  <div className="flex-1">
-                                    <p className="text-sm font-bold text-gray-900">
-                                      Voici donc les 3 prochains sujets prévus
-                                      sur Patreon
-                                    </p>
-                                    <div className="flex mt-4 items-center text-gray-500">
-                                      <CreateOrUpdateFormLike
-                                        typeLike="POST"
-                                        item={[]}
-                                      />
-
-                                      <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                        <BiComment />
-                                      </button>
-                                      <span className="ml-1.5 font-normal text-sm">
-                                        19
-                                      </span>
-                                      <span className="ml-7 font-normal text-sm">
-                                        16 jui. 2023
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-
-                              <li className="flex items-stretch justify-between space-x-2 py-7">
-                                <div className="flex-shrink-0">
-                                  <Image
-                                    height={65}
-                                    preview={false}
-                                    className="object-cover w-16 h-16 rounded-lg"
-                                    src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/checkout/1/product-2.png"
-                                    alt=""
-                                  />
-                                </div>
-
-                                <div className="flex flex-col justify-between flex-1 ml-5">
-                                  <div className="flex-1">
-                                    <p className="text-sm font-bold text-gray-900">
-                                      Voici donc les 3 prochains sujets prévus
-                                      sur Patreon
-                                    </p>
-
-                                    {/* <p className="mt-1 text-sm font-medium text-gray-500">
-                              01 sept. 2023
-                            </p> */}
-                                    <div className="flex mt-2 items-center text-gray-500">
-                                      <CreateOrUpdateFormLike
-                                        typeLike="POST"
-                                        item={[]}
-                                      />
-
-                                      <button className="ml-3.5 text-lg font-bold text-gray-500">
-                                        <BiComment />
-                                      </button>
-                                      <span className="ml-1.5 font-normal text-sm">
-                                        599
-                                      </span>
-                                      <span className="ml-7 font-normal text-sm">
-                                        04 jui. 2023
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                      {post?.organizationId ?
+                        <PublicListLastPosts
+                          post={post}
+                          userVisitor={{ organizationId: post?.organizationId }}
+                        /> : null}
+
+
                     </div>
                   </div>
                 </div>
