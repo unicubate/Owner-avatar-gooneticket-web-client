@@ -9,7 +9,6 @@ import {
 } from "@/utils/alert-notification";
 import { PlusOutlined } from "@ant-design/icons";
 import { SwitchInput } from "../ui/switch-input";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { CommissionFormModel } from "@/types/commission";
 import { CreateOrUpdateOneCommissionAPI } from "@/api-site/commission";
 import { useRouter } from "next/router";
@@ -341,14 +340,16 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
             </div>
 
             <div className="flex items-center mt-4 mb-4 space-x-4">
-              <ButtonCancelInput
+              <ButtonInput
+                status="cancel"
+                type="button"
                 shape="default"
-                size="large"
+                size="normal"
                 loading={loading}
                 onClick={() => router.back()}
               >
                 Cancel
-              </ButtonCancelInput>
+              </ButtonInput>
               <ButtonInput
                 minW="fit"
                 shape="default"

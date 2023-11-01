@@ -3,9 +3,7 @@ import { LayoutDashboard } from "@/components/layout-dashboard";
 import { Input, Skeleton } from "antd";
 import { useState } from "react";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import {
-  PlusOutlined,
-} from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "@/components/ui/button-input";
 import ListDiscounts from "@/components/discount/list-discounts";
 import { GetInfiniteDiscountsAPI } from "@/api-site/discount";
@@ -13,7 +11,7 @@ import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-d
 import { useDebounce } from "@/utils";
 
 const Configs = () => {
-  const [filter, setFilter] = useState<string>('')
+  const [filter, setFilter] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
 
   const debouncedFilter = useDebounce(filter, 500);
@@ -54,7 +52,6 @@ const Configs = () => {
         <div className="flex-1 bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
-
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <HorizontalNavShop />
 
@@ -72,7 +69,7 @@ const Configs = () => {
                       </div>
                     </div>
 
-                    <div className="mt-4 sm:flex sm:items-center sm:justify-between">
+                    {/* <div className="mt-4 sm:flex sm:items-center sm:justify-between">
                       <div className="mt-4 sm:mt-0">
                         <ButtonInput
                           onClick={() => setShowModal(true)}
@@ -95,6 +92,22 @@ const Configs = () => {
                             >
                           ) => setFilter(e.target.value)}
                         />
+                      </div>
+                    </div> */}
+
+                    <div className="sm:flex flex-col sm:items-start sm:justify-between">
+                      <div className="mt-2">
+                        <ButtonInput
+                          onClick={() => setShowModal(true)}
+                          shape="default"
+                          type="button"
+                          size="normal"
+                          loading={false}
+                          color={"indigo"}
+                          icon={<PlusOutlined />}
+                        >
+                          Create discount
+                        </ButtonInput>
                       </div>
                     </div>
 
@@ -124,14 +137,10 @@ const Configs = () => {
                             </div>
                           </>
                         ) : null}
-
                       </div>
                     </div>
                   </div>
                 </div>
-
-                
-
               </div>
             </div>
           </main>

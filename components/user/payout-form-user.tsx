@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { GetOneUserPrivateAPI } from "@/api-site/user";
+import { PlusOutlined } from "@ant-design/icons";
 
 type Props = {
   userId: string;
@@ -15,7 +16,7 @@ const schema = yup.object({
   username: yup.string().required(),
 });
 
-const UpdateFormUser: React.FC<Props> = ({ userId }) => {
+const PayoutFormUser: React.FC<Props> = ({ userId }) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
@@ -55,11 +56,27 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="overflow-hidden bg-white border border-gray-200">
           <div className="px-4 py-5">
-            <h2 className="text-base font-bold text-gray-900">
-              {" "}
-              Personal Info{" "}
-            </h2>
-            
+            <div className="flex items-center mb-4 space-x-4">
+              <ButtonInput
+                // onClick={() => setShowModal(true)}
+                shape="default"
+                type="button"
+                size="normal"
+                loading={false}
+                color={"indigo"}
+              >
+                Create payment card
+              </ButtonInput>
+              <ButtonInput
+                status="cancel"
+                type="button"
+                shape="default"
+                size="normal"
+                loading={false}
+              >
+                Create payment PayPal
+              </ButtonInput>
+            </div>
 
             <div className="grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6">
               <div className="mt-2">
@@ -86,7 +103,6 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
                 Save changes
               </ButtonInput>
             </div>
-
           </div>
         </div>
       </form>
@@ -94,4 +110,4 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
   );
 };
 
-export { UpdateFormUser };
+export { PayoutFormUser };

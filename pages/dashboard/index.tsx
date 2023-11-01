@@ -2,24 +2,13 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/ui/button-input";
 import { useState } from "react";
-import { Avatar, Button } from "antd";
-import { EmptyData } from "@/components/ui/empty-data";
-import { useRouter } from "next/router";
-import { arrayTransactions } from "@/components/mock";
-import { formatePrice, getDays } from "@/utils";
-import { BiCog, BiDotsHorizontal, BiLockOpen } from "react-icons/bi";
 import { CiGift, CiShop, CiUnlock, CiWallet } from "react-icons/ci";
 import Link from "next/link";
-import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
-import { capitalizeOneFirstLetter, truncateInput } from "@/utils/utils";
-import { ReadMore } from "@/utils/read-more";
-import Transactions from "../memberships/transactions";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { AvatarComponent } from "@/components/ui/avatar-component";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { ButtonCancelInput } from "@/components/ui";
 
 const Dashboard = () => {
   const [dayCount, setDayCount] = useState(30);
@@ -140,13 +129,15 @@ const Dashboard = () => {
                             Last {dayCount} days
                           </span>
                         </Button> */}
-                        <ButtonCancelInput
+                        <ButtonInput
+                          status="cancel"
+                          type="button"
                           shape="default"
                           size="normal"
                           loading={false}
                         >
                           Last {dayCount} days
-                        </ButtonCancelInput>
+                        </ButtonInput>
                       </div>
                     </div>
                   </div>

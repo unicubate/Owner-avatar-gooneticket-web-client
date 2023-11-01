@@ -9,7 +9,6 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { SelectMembershipSearchInput } from "../membership/select-membership-search-input";
@@ -272,14 +271,16 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
                   </ButtonInput>
                 </div>
                 <div className="flex items-center mt-4 mb-4 space-x-4">
-                  <ButtonCancelInput
+                  <ButtonInput
+                    status="cancel"
+                    type="button"
                     shape="default"
-                    size="large"
+                    size="normal"
                     loading={loading}
                     onClick={() => back()}
                   >
                     Cancel
-                  </ButtonCancelInput>
+                  </ButtonInput>
                   <ButtonInput
                     minW="fit"
                     shape="default"

@@ -11,11 +11,7 @@ import {
   CreateOrUpdateOneCommentReplyAPI,
 } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
-import {
-  ButtonCancelInput,
-  TextAreaInput,
-  TextareaReactQuillInput,
-} from "../ui";
+import { TextAreaInput, TextareaReactQuillInput } from "../ui";
 import { ModelType } from "@/utils/pagination-item";
 
 const schema = yup.object({
@@ -125,14 +121,16 @@ const CreateOrUpdateFormCommentReply: React.FC<{
 
           {openModalReply ? (
             <div className="flex justify-between items-center">
-              <ButtonCancelInput
+              <ButtonInput
+                status="cancel"
+                type="button"
                 shape="default"
-                size="large"
+                size="normal"
                 onClick={() => setOpenModalReply(false)}
                 loading={false}
               >
                 Cancel
-              </ButtonCancelInput>
+              </ButtonInput>
             </div>
           ) : null}
 

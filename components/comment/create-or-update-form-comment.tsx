@@ -6,7 +6,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
-import { ButtonCancelInput, ButtonInput, TextareaReactQuillInput } from "../ui";
+import { ButtonInput, TextareaReactQuillInput } from "../ui";
 import { Avatar } from "antd";
 import { AvatarComponent } from "../ui/avatar-component";
 import { ModelType } from "@/utils/pagination-item";
@@ -136,14 +136,16 @@ const CreateOrUpdateFormComment: React.FC<{
 
           {openModal ? (
             <div className="flex justify-between items-center">
-              <ButtonCancelInput
+              <ButtonInput
+                status="cancel"
+                type="button"
                 shape="default"
-                size="large"
+                size="normal"
                 onClick={() => setOpenModal(false)}
                 loading={false}
               >
                 Cancel
-              </ButtonCancelInput>
+              </ButtonInput>
             </div>
           ) : null}
 

@@ -213,14 +213,16 @@ const CreateOrUpdateDiscount: React.FC<{
                 </ButtonInput>
               </div>
               {/* <div className="flex items-center mt-2 space-x-4">
-                <ButtonCancelInput
-                  shape="default"
-                  size="large"
+                <ButtonInput
+                status="cancel"
+                type="button"
+                shape="default"
+                size="normal"
                   loading={loading}
                   onClick={() => setShowModal(false)}
                 >
                   Cancel
-                </ButtonCancelInput>
+                </ButtonInput>
                 <ButtonInput
                   minW="fit"
                   shape="default"

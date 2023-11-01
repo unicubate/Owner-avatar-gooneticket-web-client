@@ -25,6 +25,10 @@ const HorizontalNavSetting: React.FC = () => {
       href: "/settings/billing",
     },
     {
+      title: "Payout",
+      href: "/payout-settings",
+    },
+    {
       title: "Notifications",
       href: "/settings/notifications",
     },
@@ -47,7 +51,7 @@ const HorizontalNavSetting: React.FC = () => {
       <div className="px-3 py-2 border-gray-200 border bg-white rounded-lg">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
-            const isActive = pathname.startsWith(item.href);
+            const isActive = pathname === item.href;
             return (
               <Link
                 key={index}

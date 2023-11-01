@@ -7,12 +7,12 @@ import { useAuth } from "@/components/util/context-user";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { useState } from "react";
-import { ButtonCancelInput } from "@/components/ui";
+import { ButtonInput } from "@/components/ui";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 
 const Memberships = () => {
   const user = useAuth() as any;
-  const [dayCount, setDayCount] = useState(30)
+  const [dayCount, setDayCount] = useState(30);
   const router = useRouter();
 
   const {
@@ -20,17 +20,20 @@ const Memberships = () => {
     isError,
     isPending,
     error,
-  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
+  } = GetStatisticsTransactionsAPI({
+    queryKey: ["statistics-transactions"],
+    days: dayCount,
+  });
 
   if (isPending) {
-    return ""
+    return "";
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>
+    return <span>Error: {error.message}</span>;
   }
 
-  const transaction = transactions?.find((item) => item.model === "MEMBERSHIP")
+  const transaction = transactions?.find((item) => item.model === "MEMBERSHIP");
 
   return (
     <>
@@ -45,13 +48,15 @@ const Memberships = () => {
                   <div className="flex items-center mt-4">
                     <div className="ml-auto">
                       <div className="flex items-center space-x-4">
-                        <ButtonCancelInput
+                        <ButtonInput
+                          status="cancel"
+                          type="button"
                           shape="default"
                           size="normal"
                           loading={false}
                         >
                           Last {dayCount} days
-                        </ButtonCancelInput>
+                        </ButtonInput>
                       </div>
                     </div>
                   </div>
@@ -81,7 +86,7 @@ const Memberships = () => {
                               value={Number(transaction?.statistic?.amount)}
                               currency={{
                                 code: user?.profile?.currency?.code,
-                                amount: String(user?.profile?.currency?.amount)
+                                amount: String(user?.profile?.currency?.amount),
                               }}
                             />
                           </p>
@@ -89,7 +94,7 @@ const Memberships = () => {
                       </div>
                     </div>
 
-                    {user?.organizationId ?
+                    {user?.organizationId ? (
                       <div className="bg-white border border-gray-200 rounded-xl">
                         <div className="px-5 py-4">
                           <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -102,14 +107,16 @@ const Memberships = () => {
                                 value={Number(user?.membership?.amount)}
                                 currency={{
                                   code: user?.profile?.currency?.code,
-                                  amount: String(user?.profile?.currency?.amount)
+                                  amount: String(
+                                    user?.profile?.currency?.amount
+                                  ),
                                 }}
                               />
                             </p>
                           </div>
                         </div>
-                      </div> : null}
-
+                      </div>
+                    ) : null}
                   </div>
 
                   {user?.organizationId ? (
@@ -118,7 +125,6 @@ const Memberships = () => {
                       organizationId={user?.organizationId}
                     />
                   ) : null}
-
                 </div>
               </div>
             </div>

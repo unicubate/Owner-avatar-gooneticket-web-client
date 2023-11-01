@@ -15,7 +15,6 @@ import { filterImageAndFile } from "@/utils/utils";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import {
-  ButtonCancelInput,
   SwitchInput,
   TextInput,
   TextareaReactQuillInput,
@@ -167,12 +166,12 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     </div>
                   ) : null}
 
-                  {!postId ?
+                  {!postId ? (
                     <div className="mb-4">
                       <Controller
                         name="attachmentImages"
                         control={control}
-                        render={({ }) => (
+                        render={({}) => (
                           <>
                             <div className="text-center justify-center mx-auto">
                               <Upload
@@ -198,8 +197,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                         )}
                       />
                     </div>
-                    : null}
-
+                  ) : null}
 
                   <div className="mt-4">
                     <TextInput
@@ -269,14 +267,16 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                   </div>
 
                   <div className="flex items-center mt-4 space-x-4">
-                    <ButtonCancelInput
+                    <ButtonInput
+                      status="cancel"
+                      type="button"
                       shape="default"
-                      size="large"
+                      size="normal"
                       loading={loading}
                       onClick={() => router.back()}
                     >
                       Cancel
-                    </ButtonCancelInput>
+                    </ButtonInput>
                     <ButtonInput
                       minW="fit"
                       shape="default"

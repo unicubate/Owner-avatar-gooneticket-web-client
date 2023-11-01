@@ -16,6 +16,7 @@ const CreateFormPublicDonation: React.FC<{
   const initialCurrency = user?.profile?.currency?.code;
   const [increment, setIncrement] = useState(1);
   const [price, setPrice] = useState(initialPrice);
+  const [fullName, setFullName] = useState("");
   const [description, setDescription] = useState("");
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
 
@@ -23,6 +24,7 @@ const CreateFormPublicDonation: React.FC<{
   const newAmount = {
     potTotal: increment,
     value: newValuePrice,
+    fullName: fullName,
     description: description,
     currency: initialCurrency,
   };
@@ -42,8 +44,7 @@ const CreateFormPublicDonation: React.FC<{
               shape="default"
               size="normal"
               type="button"
-              color={user?.profile?.color}
-              loading={false}
+              color={`${user?.profile?.color}`}
               disabled={increment === 1 ? true : false}
               onClick={() => setIncrement((lk) => lk - 1)}
             >
@@ -71,7 +72,7 @@ const CreateFormPublicDonation: React.FC<{
               shape="default"
               size="normal"
               type="button"
-              color={user?.profile?.color}
+              color={`${user?.profile?.color}`}
               loading={false}
               onClick={() => setIncrement((lk) => lk + 1)}
             >
@@ -106,6 +107,20 @@ const CreateFormPublicDonation: React.FC<{
             min={1}
             value={newValuePrice}
             onChange={(e) => setPrice(e?.target.value)}
+          />
+        </div>
+
+        <div className="mt-4">
+          <Input
+            size="large"
+            id="fullName"
+            required={true}
+            style={{ width: "100%" }}
+            type="text"
+            name="fullName"
+            placeholder={`Full name or nickname`}
+            value={fullName}
+            onChange={(e) => setFullName(e?.target.value)}
           />
         </div>
 
@@ -158,7 +173,7 @@ const CreateFormPublicDonation: React.FC<{
                     shape="default"
                     type="button"
                     size="large"
-                    color={user?.profile?.color}
+                    color="indigo"
                     loading={false}
                   >
                     Card Pay

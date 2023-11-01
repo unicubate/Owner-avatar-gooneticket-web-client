@@ -75,11 +75,6 @@ const SETTINGS_ITEMS = [
     href: "/settings",
     icon: <BiCog className={classIcon} />,
   },
-  {
-    title: "Payouts",
-    href: "/payout-settings",
-    icon: <BiWallet className={classIcon} />,
-  },
   // {
   //   title: "Integrations",
   //   href: "integrations",

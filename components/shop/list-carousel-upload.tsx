@@ -3,7 +3,6 @@
 import React, { Fragment, useRef, useState } from "react";
 import { Carousel, Image } from "antd";
 import { UploadFolderType, UploadModel } from "@/types/upload";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";

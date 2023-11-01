@@ -341,7 +341,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                 type="submit"
                 size="large"
                 loading={loading}
-                color="indigo"
+                color={`indigo`}
               >
                 Save changes
               </ButtonInput>

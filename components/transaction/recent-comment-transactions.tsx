@@ -79,7 +79,6 @@ const RecentCommentTransactions: React.FC<{
                 onClick={() => fetchNextPage()}
                 loading={isFetchingNextPage ? true : false}
                 color="indigo"
-                defaultColor="indigo"
                 minW="fit"
               >
                 Load More

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AlertDangerNotification } from "@/utils";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { ButtonInput } from "../ui/button-input";
 import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 import Swal from "sweetalert2";
@@ -32,40 +31,40 @@ const CreateOrUpdateFormFollow: React.FC<{
       {
         isFollow
           ? Swal.fire({
-            title: "Unfollowing?",
-            text: `Are you sure you want to unfollow ${item?.profile?.firstName ?? ""
+              title: "Unfollowing?",
+              text: `Are you sure you want to unfollow ${
+                item?.profile?.firstName ?? ""
               } ${item?.profile?.lastName ?? ""}`,
-            confirmButtonText: "Yes, Unfollow",
-            cancelButtonText: "No, Cancel",
-            confirmButtonColor: "#dc3545",
-            cancelButtonColor: "#6f42c1",
-            showCancelButton: true,
-            reverseButtons: true,
-          }).then(async (result) => {
-            if (result.value) {
-              //Envoyer la requet au serve
-              setLoading(true);
-              setHasErrors(undefined);
-              try {
-                await saveMutation({
-                  followerId: item?.profile?.userId,
-                  action: "DELETE",
-                });
-                setHasErrors(false);
-                setLoading(false);
-                setIsFollow((lk: boolean) => !lk);
-              } catch (error: any) {
-                setHasErrors(true);
-                setLoading(false);
-                setHasErrors(error.response.data.message);
+              confirmButtonText: "Yes, Unfollow",
+              cancelButtonText: "No, Cancel",
+              confirmButtonColor: "#dc3545",
+              cancelButtonColor: "#6f42c1",
+              showCancelButton: true,
+              reverseButtons: true,
+            }).then(async (result) => {
+              if (result.value) {
+                //Envoyer la requet au serve
+                setLoading(true);
+                setHasErrors(undefined);
+                try {
+                  await saveMutation({
+                    followerId: item?.profile?.userId,
+                    action: "DELETE",
+                  });
+                  setHasErrors(false);
+                  setLoading(false);
+                  setIsFollow((lk: boolean) => !lk);
+                } catch (error: any) {
+                  setHasErrors(true);
+                  setLoading(false);
+                  setHasErrors(error.response.data.message);
+                }
               }
-            }
-          })
-          :
-          await saveMutation({
-            followerId: item?.id,
-            action: "CREATE",
-          });
+            })
+          : await saveMutation({
+              followerId: item?.id,
+              action: "CREATE",
+            });
       }
     } catch (error: any) {
       AlertDangerNotification({
@@ -80,16 +79,18 @@ const CreateOrUpdateFormFollow: React.FC<{
   return (
     <>
       {(item?.isFollow && isFollow) || follow ? (
-        <ButtonCancelInput
+        <ButtonInput
+          status="cancel"
+          type="button"
           shape="default"
-          size="huge"
+          size="normal"
           loading={false}
           onClick={() => {
             followItem(item);
           }}
         >
           UnFollow
-        </ButtonCancelInput>
+        </ButtonInput>
       ) : (
         <ButtonInput
           shape="default"

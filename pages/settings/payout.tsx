@@ -6,9 +6,9 @@ import { useAuth } from "@/components/util/context-user";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
-import { HorizontalNavPayoutSetting } from "@/components/payout-setting/horizontal-nav-payout-setting";
+import { PayoutFormUser } from "@/components/user/payout-form-user";
 
-const PayoutSettings = () => {
+const SettingsPayout = () => {
   const user = useAuth() as any;
 
   return (
@@ -16,13 +16,13 @@ const PayoutSettings = () => {
       <LayoutDashboard title={"Settings"}>
         <div className="flex-1 bg-gray-100">
           <main>
-            <div className="max-w-6xl mx-auto py-6">
+            <div className="max-w-4xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                <HorizontalNavPayoutSetting />
+                <HorizontalNavSetting />
 
                 <div className="flow-root">
                   <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
-                  
+                    {user?.id ? <PayoutFormUser userId={user?.id} /> : null}
 
                     {/* {user?.profileId ? (
                       <UpdateFormProfile
@@ -46,4 +46,4 @@ const PayoutSettings = () => {
   );
 };
 
-export default PrivateComponent(PayoutSettings);
+export default PrivateComponent(SettingsPayout);

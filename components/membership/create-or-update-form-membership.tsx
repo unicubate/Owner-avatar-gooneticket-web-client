@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui/button-input";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useEffect, useState } from "react";
 import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
 import { useRouter } from "next/router";
@@ -167,7 +166,7 @@ const CreateOrUpdateFormMembership: React.FC<{
               <Controller
                 name="attachmentImages"
                 control={control}
-                render={({ }) => (
+                render={({}) => (
                   <>
                     <div className="text-center justify-center mx-auto">
                       <Upload
@@ -217,14 +216,16 @@ const CreateOrUpdateFormMembership: React.FC<{
             </div>
 
             <div className="flex items-center mt-4 mb-4 space-x-4">
-              <ButtonCancelInput
+              <ButtonInput
+                status="cancel"
+                type="button"
                 shape="default"
-                size="large"
+                size="normal"
                 loading={loading}
                 onClick={() => back()}
               >
                 Cancel
-              </ButtonCancelInput>
+              </ButtonInput>
               <ButtonInput
                 minW="fit"
                 shape="default"

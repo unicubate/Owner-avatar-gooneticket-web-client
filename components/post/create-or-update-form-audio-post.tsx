@@ -9,7 +9,6 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
 import { Button, Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { SwitchInput } from "../ui/switch-input";
 import { filterImageAndFile } from "@/utils/utils";
@@ -330,14 +329,16 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                   </ButtonInput>
                 </div>
                 <div className="flex items-center mt-4 mb-4 space-x-4">
-                  <ButtonCancelInput
+                  <ButtonInput
+                    status="cancel"
+                    type="button"
                     shape="default"
-                    size="large"
+                    size="normal"
                     loading={loading}
                     onClick={() => router.back()}
                   >
                     Cancel
-                  </ButtonCancelInput>
+                  </ButtonInput>
                   <ButtonInput
                     minW="fit"
                     shape="default"

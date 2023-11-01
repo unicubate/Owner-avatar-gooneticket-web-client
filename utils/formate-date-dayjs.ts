@@ -1,12 +1,12 @@
 import dayjs from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
-require(`dayjs/locale/fr`);
+require(`dayjs/locale/en`);
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
-dayjs.locale(`fr`);
+dayjs.locale(`en`);
 
-const localized = "fr";
+const localized = "en";
 export const formateDateDayjs = (date: Date) => {
   const todaysDate = new Date();
   const dateInit = dayjs(date);
@@ -41,9 +41,8 @@ export const formateDDMMYYYY = (date: Date) => {
   return date ? dayjs(date).format("DD/MM/YYYY") : null;
 };
 
-export const formateFromNow = (date: Date) => {
-  return date ? dayjs(date).locale(localized).fromNow() : null;
-};
+export const formateFromNow = (date: Date) =>
+  dayjs(date).locale(localized).fromNow();
 
 export const subtractYears = (numOfYears: number, date: Date) => {
   const dateSub = new Date(date.getTime());

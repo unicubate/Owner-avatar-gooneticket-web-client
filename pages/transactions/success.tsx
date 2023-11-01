@@ -1,6 +1,5 @@
 import { Result } from "antd";
 import { useRouter } from "next/router";
-import { ButtonCancelInput } from "@/components/ui/button-cancel-input";
 import { ButtonInput } from "@/components/ui/button-input";
 
 const TransactionSuccess = () => {
@@ -17,14 +16,16 @@ const TransactionSuccess = () => {
           extra={[
             <>
               <div className="flex items-center space-x-4">
-                <ButtonCancelInput
+                <ButtonInput
+                  status="cancel"
+                  type="button"
                   shape="default"
-                  size="large"
+                  size="normal"
                   loading={false}
                   onClick={() => back()}
                 >
                   By Again
-                </ButtonCancelInput>
+                </ButtonInput>
                 <ButtonInput
                   minW="fit"
                   shape="default"

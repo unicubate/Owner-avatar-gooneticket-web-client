@@ -5,28 +5,31 @@ import { useState } from "react";
 import { useAuth } from "@/components/util/context-user";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { ButtonCancelInput } from "@/components/ui";
+import { ButtonInput } from "@/components/ui";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 
 const Donations = () => {
   const user = useAuth() as any;
-  const [dayCount, setDayCount] = useState(30)
+  const [dayCount, setDayCount] = useState(30);
   const {
     data: transactions,
     isError,
     isPending,
     error,
-  } = GetStatisticsTransactionsAPI({ queryKey: ["statistics-transactions"], days: dayCount })
+  } = GetStatisticsTransactionsAPI({
+    queryKey: ["statistics-transactions"],
+    days: dayCount,
+  });
 
   if (isPending) {
-    return ""
+    return "";
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>
+    return <span>Error: {error.message}</span>;
   }
 
-  const transaction = transactions?.find((item) => item.model === "DONATION")
+  const transaction = transactions?.find((item) => item.model === "DONATION");
 
   return (
     <>
@@ -38,23 +41,23 @@ const Donations = () => {
                 <HorizontalNavDonation />
 
                 <div className="flow-root">
-
                   <div className="flex items-center mt-4">
                     <div className="ml-auto">
                       <div className="flex items-center space-x-4">
-                        <ButtonCancelInput
+                        <ButtonInput
+                          status="cancel"
+                          type="button"
                           shape="default"
                           size="normal"
                           loading={false}
                         >
                           Last {dayCount} days
-                        </ButtonCancelInput>
+                        </ButtonInput>
                       </div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-
                     <div className="bg-white border border-gray-200 rounded-xl">
                       <div className="px-5 py-4">
                         <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -68,7 +71,6 @@ const Donations = () => {
                       </div>
                     </div>
 
-
                     <div className="bg-white border border-gray-200 rounded-xl">
                       <div className="px-5 py-4">
                         <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -81,7 +83,7 @@ const Donations = () => {
                               value={Number(transaction?.statistic?.amount)}
                               currency={{
                                 code: user?.profile?.currency?.code,
-                                amount: String(user?.profile?.currency?.amount)
+                                amount: String(user?.profile?.currency?.amount),
                               }}
                             />
                           </p>
@@ -89,7 +91,7 @@ const Donations = () => {
                       </div>
                     </div>
 
-                    {user?.organizationId ?
+                    {user?.organizationId ? (
                       <div className="bg-white border border-gray-200 rounded-xl">
                         <div className="px-5 py-4">
                           <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
@@ -102,14 +104,16 @@ const Donations = () => {
                                 value={Number(user?.donation?.amount)}
                                 currency={{
                                   code: user?.profile?.currency?.code,
-                                  amount: String(user?.profile?.currency?.amount)
+                                  amount: String(
+                                    user?.profile?.currency?.amount
+                                  ),
                                 }}
                               />
                             </p>
                           </div>
                         </div>
-                      </div> : null}
-
+                      </div>
+                    ) : null}
                   </div>
 
                   {user?.organizationId ? (
