@@ -3,18 +3,16 @@ import React from "react";
 import { Spin } from "antd";
 import { GetInfinitePostsAPI } from "@/api-site/post";
 import { LoadingOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui/button-input";
 import { ListLastPosts } from "./list-last-posts";
 import { PostModel } from "@/types/post";
 import { UserVisitorModel } from "@/types/user.type";
 import { ErrorFile } from "../ui/error-file";
 
 type Props = {
-  post?: PostModel;
   userVisitor: UserVisitorModel;
 };
 
-const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
+const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -23,13 +21,13 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 10,
+    take: 6,
     sort: "DESC",
     userVisitor,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['last-posts', "infinite"]
-    
+
   });
 
   const dataTablePosts = isLoadingPosts ? (
@@ -74,4 +72,4 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor, post }) => {
   );
 };
 
-export default PublicLastPosts;
+export { PublicLastPosts };

@@ -1,20 +1,17 @@
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { GetOnePostAPI } from "@/api-site/post";
 import { useRouter } from "next/router";
-import { Image } from "antd";
-import { BiComment } from "react-icons/bi";
 import { useAuth } from "@/components/util/context-user";
-import { CreateOrUpdateFormLike } from "@/components/like-follow/create-or-update-form-like";
 import { ListFollowPosts } from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { ErrorFile } from "@/components/ui/error-file";
 import { AvatarComponent } from "@/components/ui";
-import PublicListLastPosts from '@/components/post/public-last-posts';
 import { HtmlParser } from "@/utils/html-parser";
+import { PublicLastPosts } from "@/components/post/public-last-posts";
+import { GetOneUserPublicAPI } from "@/api-site/user";
 
 const PostShow = () => {
-  const { userVisiter } = useAuth() as any;
-  const router = useRouter();
+  const { userStorage: userVisiter } = useAuth() as any;
   const { query } = useRouter();
   const postSlug = String(query?.postId);
 
@@ -24,9 +21,18 @@ const PostShow = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({ postSlug });
 
-  const dataTablePosts = isLoadingPost ? (
+  const {
+    isLoading: isLoadingUser,
+    isError: isErrorUser,
+    data: user,
+  } = GetOneUserPublicAPI({
+    username: post?.profile?.username,
+    userVisitorId: userVisiter?.id
+  });
+
+  const dataTablePosts = isLoadingPost || isLoadingUser ? (
     <LoadingFile />
-  ) : isErrorPost ? (
+  ) : isErrorPost || isErrorUser ? (
     <ErrorFile
       status="error"
       title="404"
@@ -79,16 +85,16 @@ const PostShow = () => {
                               />
                             </span>
                           </p>
-
-
                         </div>
                       </div>
                     </div>
                     <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                      {post?.organizationId ?
-                        <PublicListLastPosts
-                          post={post}
-                          userVisitor={{ organizationId: post?.organizationId }}
+                      {user?.organizationId ?
+                        <PublicLastPosts
+                          userVisitor={{
+                            id: userVisiter?.id,
+                            organizationId: user?.organizationId,
+                          }}
                         /> : null}
 
 

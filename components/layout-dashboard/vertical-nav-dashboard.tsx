@@ -133,7 +133,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
         <div className="space-y-4">
           <nav className="flex-1 space-y-1">
             {navigationItems.map((item: any, index: number) => {
-              const isActive = pathname.startsWith(item.href);
+              const isActive = pathname?.startsWith(item.href);
               return (
                 <Link
                   key={index}
@@ -159,7 +159,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 
             <nav className="flex-1 mt-4 space-y-1">
               {monetizeItems.map((item: any, index: number) => {
-                const isActive = pathname.startsWith(item.href);
+                const isActive = pathname?.startsWith(item.href);
                 return (
                   <Link
                     key={index}
@@ -193,7 +193,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
             </p>
             <nav className="flex-1 mt-4 space-y-1">
               {supportItems.map((item: any, index: number) => {
-                const isActive = pathname.startsWith(item.href);
+                const isActive = pathname?.startsWith(item.href);
                 return (
                   <Link
                     key={index}
@@ -219,7 +219,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
             </p>
             <nav className="flex-1 mt-4 space-y-1">
               {settingItems.map((item: any, index: number) => {
-                const isActive = pathname.startsWith(item.href);
+                const isActive = pathname?.startsWith(item.href);
                 return (
                   <Link
                     key={index}
