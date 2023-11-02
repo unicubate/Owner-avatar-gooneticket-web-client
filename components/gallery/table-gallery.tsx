@@ -9,6 +9,8 @@ import { useInView } from "react-intersection-observer";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { useRouter } from "next/router";
 import { UserVisitorModel } from "@/types/user.type";
+import { BiImage } from "react-icons/bi";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -31,7 +33,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
     take: 6,
     sort: "DESC",
     type: "GALLERY",
-    queryKey: ['gallery-posts', "infinite"]
+    queryKey: ["gallery-posts", "infinite"],
   });
 
   useEffect(() => {
@@ -59,9 +61,14 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
   const dataTableGallery = isLoadingGallery ? (
     <LoadingFile />
   ) : isErrorGallery ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
+      image={<BiImage className="h-10 w-10" />}
       title="Add your first file gallery"
       description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
     />
@@ -94,9 +101,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
             </div>
           </div>
 
-          <div className="divide-y divide-gray-200">
-            {dataTableGallery}
-          </div>
+          <div className="divide-y divide-gray-200">{dataTableGallery}</div>
         </div>
       </div>
 

@@ -8,6 +8,8 @@ import { useInView } from "react-intersection-observer";
 import { Fragment, useEffect } from "react";
 import { GetInfinitePostsAPI } from "@/api-site/post";
 import { PostModel } from "@/types/post";
+import { BiDetail } from "react-icons/bi";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const Posts = () => {
   const { userStorage: user } = useAuth() as any;
@@ -56,9 +58,14 @@ const Posts = () => {
   const dataTablePosts = isLoadingPost ? (
     <LoadingFile />
   ) : isErrorPost ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataPost?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
+      image={<BiDetail className="h-10 w-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

@@ -11,7 +11,8 @@ import { ButtonInput, EmptyData, LoadingFile } from "@/components/ui";
 import { ListProductsShop } from "@/components/shop/list-products-shop";
 import { Input } from "antd";
 import { ProductModel } from "@/types/product";
-import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
+import { ErrorFile } from "@/components/ui/error-file";
+import { BiStoreAlt } from "react-icons/bi";
 
 const Shops = () => {
   const { userStorage: user, profile } = useAuth() as any;
@@ -58,9 +59,14 @@ const Shops = () => {
   const dataTableProducts = isLoadingProduct ? (
     <LoadingFile />
   ) : isErrorProduct ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataProduct?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
+      image={<BiStoreAlt className="h-10 w-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

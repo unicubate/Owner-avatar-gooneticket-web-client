@@ -9,6 +9,8 @@ import { useInView } from "react-intersection-observer";
 import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
 import { useEffect } from "react";
 import { Input } from "antd";
+import { ErrorFile } from "@/components/ui/error-file";
+import { BiLockOpen } from "react-icons/bi";
 
 const MembershipsLevels = () => {
   const { userStorage: user } = useAuth() as any;
@@ -54,9 +56,14 @@ const MembershipsLevels = () => {
   const dataTableMemberships = isLoadingMembership ? (
     <LoadingFile />
   ) : isErrorMembership ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
+      image={<BiLockOpen className="h-10 w-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

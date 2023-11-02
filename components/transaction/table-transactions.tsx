@@ -5,6 +5,8 @@ import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
 import { ListTransactions } from "./list-transactions";
 import { Input } from "antd";
+import { ErrorFile } from "../ui/error-file";
+import { GrTransaction } from "react-icons/gr";
 
 type Props = {
   model?: string;
@@ -59,9 +61,14 @@ const TableTransactions: React.FC<Props> = ({
   const dataTableTransactions = isLoadingTransaction ? (
     <LoadingFile />
   ) : isErrorTransaction ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
+      image={<GrTransaction className="h-10 w-10" />}
       title="You don't have any supporters yet"
       description={`Share your page with your audience to get started.`}
     />
