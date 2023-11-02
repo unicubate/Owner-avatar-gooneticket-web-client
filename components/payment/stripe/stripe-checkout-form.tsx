@@ -10,8 +10,14 @@ import { TextInput } from "@/components/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { generateLongUUID } from "@/utils/generate-random";
+import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
 
 const schema = yup.object({
+  fullName: yup
+    .string()
+    .min(3, "Minimum 3 symbols")
+    .max(50, "Maximum 50 symbols")
+    .required(),
   email: yup
     .string()
     .email("Wrong email format")
@@ -51,18 +57,15 @@ const CARD_OPTIONS: any = {
 const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
-  const [loading, setLoading] = useState<boolean>(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    false
-  );
   const {
     control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
   const stripe = useStripe();
   const elements: any = useElements();
 
@@ -128,7 +131,16 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
           </div>
         </div>
       ) : null}
-      
+
+      <div className="mt-4">
+        <TextInput
+          control={control}
+          type="text"
+          name="fullName"
+          placeholder="Full name or nickname"
+          errors={errors}
+        />
+      </div>
       <div className="mt-4">
         <TextInput
           control={control}

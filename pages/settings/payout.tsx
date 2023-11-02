@@ -16,13 +16,13 @@ const SettingsPayout = () => {
       <LayoutDashboard title={"Settings"}>
         <div className="flex-1 bg-gray-100">
           <main>
-            <div className="max-w-4xl mx-auto py-6">
+            <div className="max-w-6xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
                 <HorizontalNavSetting />
 
                 <div className="flow-root">
                   <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
-                    {user?.id ? <PayoutFormUser userId={user?.id} /> : null}
+                    {user?.id ? <PayoutFormUser /> : null}
 
                     {/* {user?.profileId ? (
                       <UpdateFormProfile
@@ -36,7 +36,6 @@ const SettingsPayout = () => {
                     ) : null} */}
                   </div>
                 </div>
-
               </div>
             </div>
           </main>

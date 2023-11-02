@@ -5,7 +5,7 @@ import { useState } from "react";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "@/components/ui/button-input";
-import ListDiscounts from "@/components/discount/list-discounts";
+import { ListDiscounts } from "@/components/discount/list-discounts";
 import { GetInfiniteDiscountsAPI } from "@/api-site/discount";
 import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";
 import { useDebounce } from "@/utils";

@@ -31,6 +31,7 @@
     "antd": "^5.10.3",
     "autoprefixer": "10.4.16",
     "axios": "^1.6.0",
+    "card-validator": "^8.1.1",
     "dayjs": "^1.11.10",
     "dompurify": "^3.0.6",
     "draft-js": "^0.11.7",

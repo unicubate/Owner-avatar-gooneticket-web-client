@@ -5,6 +5,8 @@ interface Props {
   control: Control<any>;
   label?: string;
   name: string;
+  min?: number;
+  max?: number;
   type: "text" | "email" | "password" | "url";
   errors: { [key: string]: any };
   placeholder?: string;
@@ -18,6 +20,8 @@ interface Props {
 const TextInput: React.FC<Props> = ({
   control,
   prefix,
+  max,
+  min,
   label = "",
   type,
   name,
@@ -54,6 +58,8 @@ const TextInput: React.FC<Props> = ({
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}
             prefix={prefix}
+            min={min}
+            max={max}
             {...field}
           />
         )}

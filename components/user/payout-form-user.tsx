@@ -1,111 +1,100 @@
-import React, { useEffect, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { TextInput } from "../ui";
+import React, { useState } from "react";
 import { ButtonInput } from "../ui/button-input";
-import { GetOneUserPrivateAPI } from "@/api-site/user";
-import { PlusOutlined } from "@ant-design/icons";
+import { CreatePaymentFormCardUser } from "./create-payment-form-card-user";
+import { Skeleton } from "antd";
+import { GetInfinitePaymentsAPI } from "@/api-site/payment";
+import { ListPayments } from "../payment/list-payments";
+import { PaymentItemModel } from "@/types/payment";
 
-type Props = {
-  userId: string;
-};
+const PayoutFormUser: React.FC = () => {
+  const [showCardModal, setShowCardModal] = useState(false);
 
-const schema = yup.object({
-  username: yup.string().required(),
-});
-
-const PayoutFormUser: React.FC<Props> = ({ userId }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
-    control,
-    setValue,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
+    isLoading: isLoadingPayments,
+    isError: isErrorPayments,
+    data: dataPayments,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfinitePaymentsAPI({
+    take: 10,
+    sort: "DESC",
   });
 
-  const { data: user } = GetOneUserPrivateAPI({ userId });
-
-  useEffect(() => {
-    if (user) {
-      const fields = ["username"];
-      fields?.forEach((field: any) => setValue(field, user[field]));
-    }
-  }, [user, userId, setValue]);
-
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
-
-    console.log("payload =======>", payload);
-  };
+  const dataTablePayments = isLoadingPayments ? (
+    <Skeleton
+      className="mt-4"
+      loading={isLoadingPayments}
+      paragraph={{ rows: 1 }}
+    />
+  ) : isErrorPayments ? (
+    <strong>Error find data please try again...</strong>
+  ) : dataPayments?.pages[0]?.data?.total <= 0 ? (
+    ""
+  ) : (
+    dataPayments?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item: PaymentItemModel, index: number) => (
+        <ListPayments item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="overflow-hidden bg-white border border-gray-200">
-          <div className="px-4 py-5">
-            <div className="flex items-center mb-4 space-x-4">
-              <ButtonInput
-                // onClick={() => setShowModal(true)}
-                shape="default"
-                type="button"
-                size="normal"
-                loading={false}
-                color={"indigo"}
-              >
-                Create payment card
-              </ButtonInput>
-              <ButtonInput
-                status="cancel"
-                type="button"
-                shape="default"
-                size="normal"
-                loading={false}
-              >
-                Create payment PayPal
-              </ButtonInput>
-            </div>
+      <div className="overflow-hidden bg-white border border-gray-200">
+        <div className="px-4 py-5">
+          <div className="flex items-center mb-4 space-x-4">
+            <ButtonInput
+              onClick={() => setShowCardModal(true)}
+              shape="default"
+              type="button"
+              size="normal"
+              loading={false}
+              color={"indigo"}
+            >
+              Add Payment
+            </ButtonInput>
+            <ButtonInput
+              status="cancel"
+              type="button"
+              shape="default"
+              size="normal"
+              loading={false}
+            >
+              Add PayPal
+            </ButtonInput>
+          </div>
 
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextInput
-                  control={control}
-                  label="Username"
-                  type="text"
-                  name="username"
-                  placeholder="username"
-                  errors={errors}
-                  prefix={`${process.env.NEXT_PUBLIC_SITE}/`}
-                />
-              </div>
-            </div>
+          <div className="flow-root mt-8">
+            <div className="-my-5 divide-y divide-gray-100">
+              {dataTablePayments}
 
-            <div className="flex items-center mt-4 mb-2 space-x-4">
-              <ButtonInput
-                shape="default"
-                type="submit"
-                size="large"
-                loading={loading}
-                color="indigo"
-              >
-                Save changes
-              </ButtonInput>
+              {hasNextPage ? (
+                <>
+                  <div className="mb-3 flex flex-col justify-between items-center">
+                    {isFetchingNextPage ? null : (
+                      <button
+                        disabled={isFetchingNextPage ? true : false}
+                        onClick={() => fetchNextPage()}
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      >
+                        View more
+                      </button>
+                    )}
+                  </div>
+                </>
+              ) : null}
             </div>
           </div>
         </div>
-      </form>
+      </div>
+
+      {showCardModal ? (
+        <CreatePaymentFormCardUser
+          showModal={showCardModal}
+          setShowModal={setShowCardModal}
+        />
+      ) : null}
     </>
   );
 };

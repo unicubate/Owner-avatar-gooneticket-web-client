@@ -1,8 +1,12 @@
+import { ResponsePostModel } from "@/types/post";
 import { makeApiCall } from "@/utils/get-url-end-point";
+import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export type PaymentModel =
   | "PAYPAL-DONATION"
   | "STRIPE-DONATION"
+  | "PAYMENT-CREATE"
   | "PAYPAL-SUBSCRIBE"
   | "STRIPE-SUBSCRIBE";
 
@@ -39,4 +43,38 @@ export const CreateOnPaymentPI = async (payload: {
       body: { paymentModel, ...data },
     });
   }
+
+  if (paymentModel === "PAYMENT-CREATE") {
+    return await makeApiCall({
+      action: "createOnePaymentsCreate",
+      body: { paymentModel, ...data },
+    });
+  }
+};
+
+export const getPaymentsAPI = async (
+  payload: PaginationRequest
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: "getPayments",
+    queryParams: payload,
+  });
+};
+
+export const GetInfinitePaymentsAPI = (payload: {
+  take: number;
+  sort: SortModel;
+}) => {
+  const { take, sort } = payload;
+  return useInfiniteQuery({
+    queryKey: ["payments", "infinite"],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await getPaymentsAPI({
+        take: take,
+        page: Number(pageParam),
+        sort: sort,
+      }),
+    initialPageParam: 1,
+  });
 };

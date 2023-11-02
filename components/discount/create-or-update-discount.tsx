@@ -207,7 +207,7 @@ const CreateOrUpdateDiscount: React.FC<{
                   type="submit"
                   size="large"
                   loading={loading}
-                  color={"indigo"}
+                  color="indigo"
                 >
                   Save
                 </ButtonInput>

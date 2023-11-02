@@ -1,10 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import {
-  MdDeleteOutline,
-  MdOutlineIosShare,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CreateOrUpdateDiscount } from "./create-or-update-discount";
 import {
   AlertDangerNotification,
@@ -67,7 +63,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
             <p className="text-sm font-bold text-gray-900">
               {item?.percent}% Off Commissions
             </p>
-            <p className="mt-1 text-sm font-medium text-gray-500">
+            <p className="mt-1 ml-2 text-sm font-medium text-gray-500">
               {item?.code}
             </p>
           </>
@@ -122,4 +118,4 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   );
 };
 
-export default ListDiscounts;
+export { ListDiscounts };

@@ -36,6 +36,11 @@ export const truncateInput = (input: string, value: number) => {
   return input?.length > value ? `${input.substring(0, value)}...` : input;
 };
 
+export const truncateInputCard = (input: string, value: number) => {
+  return input?.length > value ? `${input.substring(0, value)} XXXX XXXX` : input;
+};
+
+
 export const filterImageAndFile = (options: {
   imageList?: UploadFile[];
   fileList?: UploadFile[];

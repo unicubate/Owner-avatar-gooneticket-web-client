@@ -321,6 +321,10 @@ export const apiEndpoints: ClientApiMethods = {
   },
 
   /****************** Payments route */
+  getPayments: {
+    endpoint: `${baseUrl}/payments`,
+    method: GET,
+  },
   createOnePaymentsPaypalSubscribe: {
     endpoint: `${baseUrl}/payments/paypal/subscribe`,
     method: POST,
@@ -335,6 +339,10 @@ export const apiEndpoints: ClientApiMethods = {
   },
   createOnePaymentsStripeDonation: {
     endpoint: `${baseUrl}/payments/stripe/donation`,
+    method: POST,
+  },
+  createOnePaymentsCreate: {
+    endpoint: `${baseUrl}/payments/create`,
     method: POST,
   },
 

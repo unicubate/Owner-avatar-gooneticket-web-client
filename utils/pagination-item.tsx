@@ -11,7 +11,7 @@ interface Props {
 
 export type SortModel = "ASC" | "DESC";
 
-export type PaymentType = "CARD" | "PAYPAL";
+export type PaymentType = "CARD" | "PAYPAL" | "PHONE";
 
 export type ModelType =
   | "ORGANIZATION"

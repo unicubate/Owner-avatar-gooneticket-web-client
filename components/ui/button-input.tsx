@@ -51,7 +51,7 @@ const ButtonInput: React.FC<Props> = ({
   status = "default",
 }) => {
   const antIcon = (
-    <LoadingOutlined style={{ fontSize: 15, color: "#ffff" }} spin />
+    <LoadingOutlined style={{ fontSize: 18, color: "#ffff" }} spin />
   );
 
   return (
@@ -80,9 +80,7 @@ const ButtonInput: React.FC<Props> = ({
        dark:text-white 
        transition-all 
        duration-200 
-       bg-${loading || disabled ? color : color}-${
-              loading || disabled ? "200" : "600"
-            }
+       bg-${loading || disabled ? color : color}-600
        border-1
        border-transparent
        focus:outline-none 

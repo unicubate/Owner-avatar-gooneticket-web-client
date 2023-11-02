@@ -16,7 +16,6 @@ const CreateFormPublicDonation: React.FC<{
   const initialCurrency = user?.profile?.currency?.code;
   const [increment, setIncrement] = useState(1);
   const [price, setPrice] = useState(initialPrice);
-  const [fullName, setFullName] = useState("");
   const [description, setDescription] = useState("");
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
 
@@ -24,7 +23,6 @@ const CreateFormPublicDonation: React.FC<{
   const newAmount = {
     potTotal: increment,
     value: newValuePrice,
-    fullName: fullName,
     description: description,
     currency: initialCurrency,
   };
@@ -107,20 +105,6 @@ const CreateFormPublicDonation: React.FC<{
             min={1}
             value={newValuePrice}
             onChange={(e) => setPrice(e?.target.value)}
-          />
-        </div>
-
-        <div className="mt-4">
-          <Input
-            size="large"
-            id="fullName"
-            required={true}
-            style={{ width: "100%" }}
-            type="text"
-            name="fullName"
-            placeholder={`Full name or nickname`}
-            value={fullName}
-            onChange={(e) => setFullName(e?.target.value)}
           />
         </div>
 
