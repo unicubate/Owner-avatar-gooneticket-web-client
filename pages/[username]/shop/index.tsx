@@ -43,7 +43,7 @@ const ShopUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+        title={`Shop - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
           }`}
         user={user}
       >

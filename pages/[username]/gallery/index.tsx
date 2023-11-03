@@ -47,7 +47,7 @@ const GalleryUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+        title={`Galleries - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
           }`}
         user={user}
       >

@@ -38,7 +38,7 @@ const CommissionsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
+        title={`Commissions - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""}`}
         user={user}>
 
         <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

@@ -38,7 +38,7 @@ const MembershipsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+        title={`Memberships - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
           }`}
         user={user}
       >
