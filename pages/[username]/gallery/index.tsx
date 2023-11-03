@@ -6,6 +6,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
+import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 
 const GalleryUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -56,6 +57,9 @@ const GalleryUserPublic = () => {
 
             <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
               <div className="max-w-full mx-auto py-6">
+
+                <SubHorizontalNavPublicUser user={user} />
+
                 <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-1 lg:grid-cols-3">
                   {dataTablePosts}
                 </div>

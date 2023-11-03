@@ -8,6 +8,7 @@ import { CreateFormPublicDonation } from "@/components/donation/create-form-publ
 import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
 import { LoadingFile } from "@/components/ui";
 import ContentLoader from "react-content-loader";
+import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 
 const ProfilePublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -30,9 +31,8 @@ const ProfilePublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
-        }`}
+        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+          }`}
         user={user}
       >
         {user?.id ? (
@@ -42,6 +42,9 @@ const ProfilePublic = () => {
 
               <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-full mx-auto py-6">
+
+                  <SubHorizontalNavPublicUser user={user} />
+
                   <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       <div className="mx-auto sm:px-6 md:px-8">

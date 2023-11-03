@@ -6,6 +6,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
+import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 
 const PostsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -45,6 +46,9 @@ const PostsUserPublic = () => {
 
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="max-w-full mx-auto py-6">
+
+                <SubHorizontalNavPublicUser user={user} />
+
                 <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
                   <div className="flow-root">
                     <div className="mx-auto sm:px-6 md:px-8">

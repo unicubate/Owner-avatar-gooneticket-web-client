@@ -58,6 +58,9 @@ export type UserModel = {
   refreshToken: string;
   nextStep: NextStep;
   token: string;
+  totalFollower: number;
+  totalSubscribe: number;
+  totalFollowing: number;
 };
 
 export type UserVisitorModel = {
