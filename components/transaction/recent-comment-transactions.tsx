@@ -6,6 +6,7 @@ import { GetInfiniteCommentsAPI } from "@/api-site/comment";
 import { ListCommentTransactions } from "../comment/list-comments-transactions";
 import { ModelType } from "@/utils/pagination-item";
 import { ButtonInput } from "../ui";
+import { ErrorFile } from "../ui/error-file";
 
 const RecentCommentTransactions: React.FC<{
   userReceiveId: string;
@@ -36,7 +37,11 @@ const RecentCommentTransactions: React.FC<{
       paragraph={{ rows: 1 }}
     />
   ) : isErrorComments ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (

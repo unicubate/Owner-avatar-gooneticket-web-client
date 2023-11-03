@@ -69,7 +69,7 @@ const TableTransactions: React.FC<Props> = ({
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<GrTransaction className="h-10 w-10" />}
-      title="You don't have any supporters yet"
+      title="You don't have any transaction"
       description={`Share your page with your audience to get started.`}
     />
   ) : (

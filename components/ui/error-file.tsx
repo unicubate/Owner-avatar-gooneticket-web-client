@@ -22,8 +22,8 @@ const ErrorFile: React.FC<Props> = ({
         <div className="left-0 right-0 top-0 grid place-items-center">
           <Result
             status={status}
-            title={title}
-            subTitle={description}
+            title={<p className="text-4xl font-bold dark:text-gray-900">{title}</p>}
+            subTitle={<span className="font-bold dark:text-gray-900">{description}</span>}
           />
         </div>
       </div>

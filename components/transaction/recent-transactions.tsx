@@ -4,6 +4,8 @@ import { ButtonInput, EmptyData, LoadingFile } from "../ui";
 import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
 import { ListTransactions } from "./list-transactions";
+import { GrTransaction } from "react-icons/gr";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   model?: string;
@@ -16,7 +18,6 @@ const RecentTransactions: React.FC<Props> = ({
   organizationId,
   days,
 }) => {
-
   const {
     isLoading: isLoadingTransaction,
     isError: isErrorTransaction,
@@ -35,10 +36,15 @@ const RecentTransactions: React.FC<Props> = ({
   const dataTableTransactions = isLoadingTransaction ? (
     <LoadingFile />
   ) : isErrorTransaction ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      title="You don't have any supporters yet"
+      image={<GrTransaction className="h-10 w-10" />}
+      title="You don't have any transaction"
       description={`Share your page with your audience to get started.`}
     />
   ) : (
