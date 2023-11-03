@@ -12,6 +12,7 @@ import { HtmlParser } from "@/utils/html-parser";
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
+import { useAuth } from "../util/context-user";
 
 type Props = {
   model: ModelType;
@@ -26,6 +27,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
   index,
   userReceiveId,
 }) => {
+  const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
@@ -94,7 +96,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
 
           <div className="flex mt-2 items-center">
 
-            {userReceiveId === item?.userReceiveId ? (
+            {userVisitor?.id === item?.userReceiveId ? (
               <>
                 <button
                   onClick={() => deleteItem(item)}

@@ -15,6 +15,7 @@ import {
 import { Skeleton } from "antd";
 import { ModelType } from "@/utils/pagination-item";
 import { ListCommentsRepliesTransactions } from "./list-comments-replies-transactions";
+import { useAuth } from "../util/context-user";
 
 const ListCommentTransactions: React.FC<{
   item: CommentModel;
@@ -23,6 +24,7 @@ const ListCommentTransactions: React.FC<{
   index: number;
   userReceiveId?: string;
 }> = ({ model, modelIds, item, userReceiveId, index }) => {
+  const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const {
@@ -95,7 +97,7 @@ const ListCommentTransactions: React.FC<{
 
             <div className="flex items-center">
               {/* Replies comments */}
-              {!openModalReply && userReceiveId === item?.userReceiveId ? (
+              {!openModalReply && userVisiter?.id === item?.userReceiveId ? (
                 <>
                   <button
                     onClick={() => {
