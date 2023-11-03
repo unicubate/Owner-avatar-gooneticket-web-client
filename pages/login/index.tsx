@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Link from "next/link";
-import { Alert, Button, Input } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -9,7 +8,6 @@ import { UserLoginFormModel } from "@/types/user.type";
 import {
   loginGoogleUserAPI,
   loginUserAPI,
-  resendCodeAPI,
 } from "../../api-site/user";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
@@ -19,10 +17,8 @@ import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui";
 import {
   GoogleOAuthProvider,
   GoogleLogin,
-  useGoogleOneTapLogin,
 } from "@react-oauth/google";
 
-import axios from "axios";
 
 const schema = yup.object({
   email: yup
