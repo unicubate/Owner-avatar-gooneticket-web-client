@@ -58,7 +58,7 @@ const GalleryUserPublic = () => {
             <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
               <div className="max-w-full mx-auto py-6">
 
-                <SubHorizontalNavPublicUser user={user} />
+                {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
                 <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-1 lg:grid-cols-3">
                   {dataTablePosts}

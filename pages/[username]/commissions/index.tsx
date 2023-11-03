@@ -49,7 +49,7 @@ const CommissionsUserPublic = () => {
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-full mx-auto py-6">
 
-            <SubHorizontalNavPublicUser user={user} />
+              {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
               <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
                 <div className="flow-root">
