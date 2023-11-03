@@ -1,9 +1,8 @@
 import { NextStep } from "./user.type";
 
-export type ColorType = "gray" | "indigo" | "red" | "sky";
+export type ColorType = "indigo" | "red" | "sky";
 
 export const arrayColors = [
-  { id: "1", name: "gray" },
   { id: "2", name: "indigo" },
   { id: "3", name: "red" },
   // { id: "4", name: "green" },
