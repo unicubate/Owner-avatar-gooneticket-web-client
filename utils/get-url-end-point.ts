@@ -87,6 +87,14 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/login`,
     method: POST,
   },
+  loginGoogleUser: {
+    endpoint: `${baseUrl}/login-google-auth`,
+    method: POST,
+  },
+  registerGoogleUser: {
+    endpoint: `${baseUrl}/register-google-auth`,
+    method: POST,
+  },
   registerUser: {
     endpoint: `${baseUrl}/register`,
     method: POST,

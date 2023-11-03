@@ -19,6 +19,25 @@ export const loginUserAPI = async (
   });
 };
 
+export const loginGoogleUserAPI = async (payload: {
+  token: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: "loginGoogleUser",
+    body: payload,
+  });
+};
+
+export const registerGoogleUserAPI = async (payload: {
+  token: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: "registerGoogleUser",
+    body: payload,
+  });
+};
+
+
 export const passwordResetUserAPI = async (
   payload: UserForgotPasswordFormModel
 ): Promise<{ data: UserModel }> => {
