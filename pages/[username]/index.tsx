@@ -79,7 +79,6 @@ const ProfilePublic = () => {
                           <RecentCommentTransactions
                             model="DONATION"
                             modelIds={["DONATION"]}
-                            organizationId={user?.organizationId}
                             userReceiveId={user?.id}
                           />
                         ) : null}

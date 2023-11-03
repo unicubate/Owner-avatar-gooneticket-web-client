@@ -21,8 +21,8 @@ const ListCommentTransactions: React.FC<{
   model: ModelType;
   modelIds: ModelType[];
   index: number;
-  organizationId?: string;
-}> = ({ model, modelIds, item, organizationId, index }) => {
+  userReceiveId?: string;
+}> = ({ model, modelIds, item, userReceiveId, index }) => {
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const {
@@ -54,7 +54,7 @@ const ListCommentTransactions: React.FC<{
           item={item}
           key={index}
           index={index}
-          organizationId={String(organizationId)}
+          userReceiveId={String(userReceiveId)}
         />
       ))
   );
@@ -95,7 +95,7 @@ const ListCommentTransactions: React.FC<{
 
             <div className="flex items-center">
               {/* Replies comments */}
-              {!openModalReply && organizationId === item?.organizationId ? (
+              {!openModalReply && userReceiveId === item?.userReceiveId ? (
                 <>
                   <button
                     onClick={() => {

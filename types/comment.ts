@@ -14,7 +14,7 @@ export type CommentModel = {
   color: string;
   fullName: string;
   email: string;
-  organizationId: string;
+  userReceiveId: string;
   profile: {
     username: string;
     color: string;

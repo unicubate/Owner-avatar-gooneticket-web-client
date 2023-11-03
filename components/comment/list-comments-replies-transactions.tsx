@@ -17,14 +17,14 @@ type Props = {
   model: ModelType;
   item?: CommentModel;
   index?: number;
-  organizationId: string;
+  userReceiveId: string;
 };
 
 const ListCommentsRepliesTransactions: React.FC<Props> = ({
   item,
   model,
   index,
-  organizationId,
+  userReceiveId,
 }) => {
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
@@ -94,7 +94,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
 
           <div className="flex mt-2 items-center">
 
-            {organizationId === item?.organizationId ? (
+            {userReceiveId === item?.userReceiveId ? (
               <>
                 <button
                   onClick={() => deleteItem(item)}

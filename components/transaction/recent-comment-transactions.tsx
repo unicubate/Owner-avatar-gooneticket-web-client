@@ -10,10 +10,9 @@ import { ErrorFile } from "../ui/error-file";
 
 const RecentCommentTransactions: React.FC<{
   userReceiveId: string;
-  organizationId?: string;
   modelIds: ModelType[];
   model: ModelType;
-}> = ({ organizationId, modelIds, userReceiveId, model }) => {
+}> = ({  modelIds, userReceiveId, model }) => {
   const {
     isLoading: isLoadingComments,
     isError: isErrorComments,
@@ -25,7 +24,6 @@ const RecentCommentTransactions: React.FC<{
     take: 10,
     sort: "DESC",
     modelIds: ["DONATION"],
-    organizationId,
     userReceiveId,
   });
 
@@ -54,7 +52,7 @@ const RecentCommentTransactions: React.FC<{
           index={index}
           model={model}
           modelIds={modelIds}
-          organizationId={organizationId}
+          userReceiveId={userReceiveId}
         />
       ))
   );
