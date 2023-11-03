@@ -95,7 +95,7 @@ const CreateOrUpdateFormMembership: React.FC<{
         className: "info",
         position: "center",
       });
-      // push(`/memberships/levels`);
+      push(`/memberships/levels`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

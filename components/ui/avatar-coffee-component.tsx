@@ -19,7 +19,7 @@ const AvatarCoffeeComponent: React.FC<Props> = ({
       <Avatar
         className={className}
         size={size}
-        style={{ backgroundColor: "#fde2", color: `${color}` }}
+        style={{ backgroundColor: "#fde7", color: `${color}` }}
       >
         <BiCoffeeTogo className={`${className} text-${color}-400`} />
       </Avatar>

@@ -11,7 +11,7 @@ import { PublicLastPosts } from "@/components/post/public-last-posts";
 import { GetOneUserPublicAPI } from "@/api-site/user";
 
 const PostShow = () => {
-  const { userStorage: userVisiter } = useAuth() as any;
+  const { userStorage: userVisitor } = useAuth() as any;
   const { query } = useRouter();
   const postSlug = String(query?.postId);
 
@@ -19,16 +19,13 @@ const PostShow = () => {
     data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug });
+  } = GetOnePostAPI({ postSlug, userVisitorId: userVisitor?.id });
 
   const {
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user,
-  } = GetOneUserPublicAPI({
-    username: post?.profile?.username,
-    userVisitorId: userVisiter?.id
-  });
+  } = GetOneUserPublicAPI({ username: post?.profile?.username, userVisitorId: userVisitor?.id });
 
   const dataTablePosts = isLoadingPost || isLoadingUser ? (
     <LoadingFile />
@@ -39,18 +36,23 @@ const PostShow = () => {
       description="Error find data please try again..."
     />
   ) : (
-    <ListFollowPosts
-      item={post}
-      commentTake={4}
-      userVisitor={{
-        id: userVisiter?.id,
-        organizationId: userVisiter?.organizationId
-      }} />
+    <>
+      {" "}
+      {post?.id && user?.id ? (
+        <ListFollowPosts
+          item={post}
+          commentTake={10}
+          userVisitor={{
+            id: userVisitor?.id,
+            organizationId: user?.organizationId,
+          }} />
+      ) : null}{" "}
+    </>
   );
 
   return (
     <>
-      <LayoutDashboard title={"Home"}>
+      <LayoutDashboard title={post?.title ?? ""}>
         <div className="flex flex-col flex-1 bg-gray-100">
           <main>
             <div className="max-w-7xl mx-auto py-6">
@@ -92,7 +94,7 @@ const PostShow = () => {
                       {user?.organizationId ?
                         <PublicLastPosts
                           userVisitor={{
-                            id: userVisiter?.id,
+                            id: userVisitor?.id,
                             organizationId: user?.organizationId,
                           }}
                         /> : null}

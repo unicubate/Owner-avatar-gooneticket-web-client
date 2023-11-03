@@ -2,9 +2,9 @@ import Link from "next/link";
 import { BiHomeCircle, BiSearch, BiBookContent } from "react-icons/bi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
-import { Avatar, Button, Image } from "antd";
+import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
 import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken } from "../util/context-user";
+import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
 import { useState } from "react";
 import { AvatarComponent } from "../ui/avatar-component";
 
@@ -14,6 +14,25 @@ export type NavbarProps = {
   description?: string;
   icon?: any;
 };
+
+const items: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (<Link href="/dashboard">Dashboard</Link>),
+  },
+  {
+    key: '2',
+    label: (
+      <a href={void (0)}
+        title=""
+        onClick={() => logoutUser()}
+      >
+        Logout
+      </a>
+    ),
+  },
+];
+
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
@@ -95,15 +114,12 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
-                        isActive
-                          ? `text-${
-                              user?.profile?.color ?? "indigo"
-                            }-600 border-${
-                              user?.profile?.color ?? "indigo"
-                            }-600`
+                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
+                          ? `text-${user?.profile?.color ?? "indigo"
+                          }-600 border-${user?.profile?.color ?? "indigo"
+                          }-600`
                           : "text-gray-700 hover:border-gray-300 hover:text-gray-900"
-                      } `}
+                        } `}
                     >
                       {item?.icon}
 
@@ -157,18 +173,21 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
 
               <div className="flex items-center space-x-6 sm:ml-5">
                 {user?.profile ? (
-                  <button
-                    type="button"
-                    className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                  >
-                    <AvatarComponent
-                      profile={user?.profile}
-                      className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                    />
-                    <p className="ml-1 text-sm font-bold text-gray-900">
-                      {user?.profile?.firstName} {user?.profile?.lastName}
-                    </p>
-                  </button>
+                  <>
+                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                      <button
+                        type="button"
+                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                        <AvatarComponent
+                          profile={user?.profile}
+                          className="object-cover bg-gray-300 rounded-full w-9 h-9"
+                        />
+                        <p className="ml-1 text-sm font-bold text-gray-900">
+                          {user?.profile?.firstName} {user?.profile?.lastName}
+                        </p>
+                      </button>
+                    </Dropdown>
+                  </>
                 ) : (
                   <>
                     <div className="relative">

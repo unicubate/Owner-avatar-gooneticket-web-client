@@ -76,7 +76,7 @@ const ListFollowPosts: React.FC<Props> = ({
                     type="button"
                     size="normal"
                     loading={false}
-                    color="red"
+                    color={String(item?.profile?.color) as any}
                     icon={<HiOutlineLockClosed className="w-5 h-5" />}
                   >
                     <span className="ml-1 font-bold">Join membership</span>

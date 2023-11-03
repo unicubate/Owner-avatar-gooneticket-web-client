@@ -38,11 +38,12 @@ const ShowModalGallery: React.FC<Props> = ({
   const router = useRouter();
   const user = useAuth() as any;
 
-  const { status, data: item } = GetOnePostAPI({ postId: post?.id });
+  const { status, data: item } = GetOnePostAPI({ postId: post?.id, userVisitorId });
 
   if (status === "pending") {
     <strong>Loading...</strong>;
   }
+  
   return (
     <>
       {openModal ? (

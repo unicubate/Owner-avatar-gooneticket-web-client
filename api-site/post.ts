@@ -236,6 +236,7 @@ export const GetOnePostAPI = (payload: {
   type?: string;
   organizationId?: string;
   postSlug?: string;
+  userVisitorId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["post", { ...payload }],

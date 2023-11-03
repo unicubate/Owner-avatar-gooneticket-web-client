@@ -17,6 +17,7 @@ const ProfilePublic = () => {
   const username = String(query?.username);
 
   const {
+    status,
     isLoading: isLoadingUser,
     isError: isErrorUser,
     data: user
@@ -28,11 +29,7 @@ const ProfilePublic = () => {
 
 
   const dataTableIndex = isLoadingUser ? (
-    <ContentLoader height="500" width="100%" viewBox="0 0 265 200">
-      <rect x="4" y="20" rx="2" ry="2" width="350" height="20" />
-      <rect x="4" y="45" rx="2" ry="2" width="350" height="20" />
-      <rect x="4" y="70" rx="2" ry="2" width="350" height="50" />
-    </ContentLoader>
+    <LoadingFile />
   ) : isErrorUser ? (
     <ErrorFile
       status="error"
@@ -86,8 +83,16 @@ const ProfilePublic = () => {
                         <div className="p-6 sm:py-4 sm:px-4">
                           <div className="flex items-center">
 
+                            {status === "error" && (
+                              <ErrorFile
+                                status="error"
+                                title="404"
+                                description="Error find data please try again..."
+                              />
+                            )}
 
-                            {dataTableIndex}
+
+                            {user?.id ? <CreateFormPublicDonation user={user} /> : null}
 
                           </div>
                         </div>
