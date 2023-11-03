@@ -18,6 +18,7 @@ import {
 import { RiShakeHandsLine } from "react-icons/ri";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { logoutUser } from "../util/context-user";
 
 export type NavbarProps = {
   title: string;
@@ -116,11 +117,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
   const [supportItems] = useState<NavbarProps[]>(SUPPORT_ITEMS);
   const [settingItems] = useState<NavbarProps[]>(SETTINGS_ITEMS);
 
-  const logoutUser = () => {
-    localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-    router.push(`${`/`}`);
-    window.location.reload()
-  }
+
 
   return (
     <>

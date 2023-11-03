@@ -18,12 +18,17 @@ type AuthContextProps = {
   logout: () => void;
 };
 
+export const logoutUser = () => {
+  localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+  window.location.reload()
+}
+
 export const getCurrentUserFormToken = () => {
   const token =
     typeof window !== "undefined"
       ? window.localStorage.getItem(
-          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-        )
+        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+      )
       : null;
   if (token !== null) {
     const user: any = jwtDecode(token);
@@ -34,10 +39,10 @@ export const getCurrentUserFormToken = () => {
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => {},
-  setCurrentUser: () => {},
+  saveAuth: () => { },
+  setCurrentUser: () => { },
   user: undefined,
-  logout: () => {},
+  logout: () => { },
 };
 
 const AuthContext = createContext<AuthContextProps>(
@@ -55,12 +60,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
     userId: userStorage?.id,
   });
 
-  const logout = () => {
-    setUserStorage(undefined);
-    window.localStorage.removeItem(
-      String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-    );
-  };
+  const logout = () => logoutUser();
 
   return (
     <AuthContext.Provider value={{ ...user, userStorage, logout }}>

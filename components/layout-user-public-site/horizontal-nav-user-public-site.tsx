@@ -7,9 +7,9 @@ import {
 } from "react-icons/bi";
 import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
-import { Avatar, Button, Image } from "antd";
+import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
 import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken, useAuth } from "../util/context-user";
+import { getCurrentUserFormToken, logoutUser, useAuth } from "../util/context-user";
 import { useState } from "react";
 import { AvatarComponent } from "../ui/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
@@ -24,7 +24,23 @@ interface Props {
   showDrawer?: () => void;
 }
 
-
+const items: MenuProps['items'] = [
+  {
+    key: '1',
+    label: (<Link href="/dashboard">Dashboard</Link>),
+  },
+  {
+    key: '2',
+    label: (
+      <a href={void (0)}
+        title=""
+        onClick={() => logoutUser()}
+      >
+        Logout
+      </a>
+    ),
+  },
+];
 
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
@@ -141,18 +157,17 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   </>
                 ) : (
                   <>
-                    <button
-                      type="button"
-                      className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                    >
-                      <AvatarComponent
-                        profile={user?.profile}
-                        className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                      />
-                      <p className="ml-1 text-sm font-bold text-gray-900">
-                        {user?.profile?.firstName} {user?.profile?.lastName}
-                      </p>
-                    </button>
+                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                      <button type="button"  className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                        <AvatarComponent
+                          profile={user?.profile}
+                          className="object-cover bg-gray-300 rounded-full w-9 h-9"
+                        />
+                        <p className="ml-1 text-sm font-bold text-gray-900">
+                          {user?.profile?.firstName} {user?.profile?.lastName}
+                        </p>
+                      </button>
+                    </Dropdown>
                   </>
                 )}
               </div>
