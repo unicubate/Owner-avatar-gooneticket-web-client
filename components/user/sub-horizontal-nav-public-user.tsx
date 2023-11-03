@@ -49,7 +49,7 @@ const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => 
     <>
 
       <div className="border-b border-gray-200">
-        <nav className="flex flex-wrap  justify-center space-x-8">
+        <nav className="flex flex-wrap justify-center space-x-8">
           {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
             const isActive = pathname === item.href;
             return (
