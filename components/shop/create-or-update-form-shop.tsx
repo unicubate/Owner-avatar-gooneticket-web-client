@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Checkbox,
   Select,
   Upload,
   UploadFile,
   UploadProps,
 } from "antd";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
 import {
   NumberInput,
@@ -102,7 +100,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   const watchEnableUrlRedirect = watch("enableUrlRedirect", false);
 
   const { data: discounts } = GetAllDiscountsAPI();
-  
+
   useEffect(() => {
     if (product) {
       const fields = [
@@ -362,10 +360,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             fileList={fileList}
                             onChange={handleFileChange}
                             accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
+                            maxCount={10}
                           >
-                            <Button icon={<UploadOutlined />}>
-                              Upload File
-                            </Button>
+                            {fileList.length >= 10 ? null : (
+                              <Button icon={<UploadOutlined />}>
+                                Upload File
+                              </Button>
+                            )}
                           </Upload>
                         </div>
                       </>
