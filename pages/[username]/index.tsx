@@ -8,6 +8,7 @@ import { CreateFormPublicDonation } from "@/components/donation/create-form-publ
 import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
 import { LoadingFile } from "@/components/ui";
 import ContentLoader from "react-content-loader";
+import Skeleton from "react-loading-skeleton";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 import { ErrorFile } from "@/components/ui/error-file";
 
@@ -18,27 +19,12 @@ const ProfilePublic = () => {
 
   const {
     status,
-    isLoading: isLoadingUser,
-    isError: isErrorUser,
     data: user
   } = GetOneUserPublicAPI({
     username,
     userVisitorId: userVisiter?.id,
   });
 
-
-
-  const dataTableIndex = isLoadingUser ? (
-    <LoadingFile />
-  ) : isErrorUser ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
-  ) : (
-    <CreateFormPublicDonation user={user} />
-  );
 
   return (
     <>
@@ -79,24 +65,36 @@ const ProfilePublic = () => {
                         </div>
                       )}
 
-                      <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                        <div className="p-6 sm:py-4 sm:px-4">
-                          <div className="flex items-center">
 
-                            {status === "error" && (
-                              <ErrorFile
-                                status="error"
-                                title="404"
-                                description="Error find data please try again..."
-                              />
-                            )}
+                      {status === "pending" && (
+                        <>
+                          <Skeleton height={30} width="100%" />
+                          <Skeleton height={100} width="100%" className="mt-4" />
+                          <Skeleton height={30} width="100%" className="mt-8" />
+                          <Skeleton height={30} width="100%" className="mt-2" />
+                        </>
+                      )}
+
+                      {status === "error" && (
+                        <ErrorFile
+                          status="error"
+                          title="404"
+                          description="Error find data please try again..."
+                        />
+                      )}
 
 
-                            {user?.id ? <CreateFormPublicDonation user={user} /> : null}
+                      {user?.donation?.count > 0 ? (
+                        <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+                          <div className="p-6 sm:py-4 sm:px-4">
+                            <div className="flex items-center">
 
+                              {user?.id ? <CreateFormPublicDonation user={user} /> : null}
+
+                            </div>
                           </div>
                         </div>
-                      </div>
+                      ) : null}
 
                       {user?.donation?.count > 0 ? (
                         <RecentCommentTransactions
