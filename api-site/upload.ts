@@ -29,7 +29,7 @@ export const viewOneFileUploadAPI = ({
   folder: UploadFolderType;
 }) =>
   fileName
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/view/${folder}/${fileName}`
+    ? `${process.env.NEXT_PUBLIC_AWS_CLOUD_FRONT_URL}/${folder}/${fileName}`
     : null;
 
 export const downloadOneFileUploadAPI = ({

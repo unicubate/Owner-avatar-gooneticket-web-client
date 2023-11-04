@@ -24,6 +24,7 @@ import { BsReplyAll } from "react-icons/bs";
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   organizationId: string;
@@ -96,7 +97,7 @@ const ListCommentsPosts: React.FC<Props> = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteCommentsRepliesAPI({
-    take: 1,
+    take: 2,
     sort: "DESC",
     modelIds,
     commentId: String(item?.id),
@@ -106,7 +107,11 @@ const ListCommentsPosts: React.FC<Props> = ({
   const dataTableCommentsReplies = isLoadingComments ? (
     <Skeleton loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
   ) : isErrorComments ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again"
+    />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
@@ -182,51 +187,40 @@ const ListCommentsPosts: React.FC<Props> = ({
                   </>
                 ) : null}
               </div>
-              {/* {openModalReply ? (
-                <div className="ml-10">
-                  <CreateOrUpdateFormCommentReply
-                    model={model}
-                    parentId={String(item?.id)}
-                    openModalReply={openModalReply}
-                    setOpenModalReply={setOpenModalReply}
-                  />
-                </div>
-              ) : null} */}
-
-
-
-              {dataTableCommentsReplies}
-
-              {hasNextPage ? (
-                <>
-                  <div className="mt-6 flex flex-col justify-between items-center">
-                    {isFetchingNextPage ? null : (
-                      <button
-                        disabled={isFetchingNextPage ? true : false}
-                        onClick={() => fetchNextPage()}
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                      >
-                        View more response
-                      </button>
-                    )}
-                  </div>
-                </>
-              ) : null}
             </div>
           </div>
         ) : null}
 
         {/* Replies comments */}
-        {openModalReply ? (
-          <div className="ml-10">
+        <div className="ml-16">
+          {openModalReply ? (
             <CreateOrUpdateFormCommentReply
               model={model}
               parentId={String(item?.id)}
               openModalReply={openModalReply}
               setOpenModalReply={setOpenModalReply}
             />
-          </div>
-        ) : null}
+          ) : null}
+
+
+          {dataTableCommentsReplies}
+
+          {hasNextPage ? (
+            <>
+              <div className="mt-6 flex flex-col justify-between items-center">
+                {isFetchingNextPage ? null : (
+                  <button
+                    disabled={isFetchingNextPage ? true : false}
+                    onClick={() => fetchNextPage()}
+                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                  >
+                    View more response
+                  </button>
+                )}
+              </div>
+            </>
+          ) : null}
+        </div>
 
         {/* Comments */}
         {openModal ? (

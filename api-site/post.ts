@@ -251,16 +251,6 @@ export const GetOnePostAPI = (payload: {
   return { data: data?.data as PostModel, isError, isLoading, status };
 };
 
-export const getOneFilePostAPI = (fileName: string) =>
-  fileName
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/posts/file/${fileName}`
-    : null;
-
-export const getOneFileGalleryAPI = (fileName: string) =>
-  fileName
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/posts/gallery/${fileName}`
-    : null;
-
 export const getPostsAPI = async (
   payload: {
     userVisitorId?: string;

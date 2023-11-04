@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import { Avatar, Spin, Tooltip } from "antd";
 import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";

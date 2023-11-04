@@ -95,18 +95,6 @@ const ListPublicPostsComments: React.FC<Props> = ({
             </div>
           ) : null}
 
-          {/* {item?.image ? (
-            <div className="mt-2">
-              <Image
-                width="100%"
-                height="100%"
-                preview={false}
-                src={`${getOneFileGalleryAPI(String(item?.image))}`}
-                alt={item?.title}
-              />
-            </div>
-          ) : null} */}
-
           {item?.id ? (
             <Link
               href={`/${item?.profile?.username}/posts/${item?.slug}`}

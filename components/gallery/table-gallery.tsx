@@ -30,10 +30,10 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
     fetchNextPage,
   } = GetInfinitePostsAPI({
     userVisitor,
-    take: 6,
+    take: 10,
     sort: "DESC",
-    type: "GALLERY",
-    queryKey: ["gallery-posts", "infinite"],
+    typeIds: ["GALLERY"],
+    queryKey: ["posts", "infinite"],
   });
 
   useEffect(() => {

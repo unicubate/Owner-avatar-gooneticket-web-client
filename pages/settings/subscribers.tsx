@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { GetInfiniteFollowersAPI } from "@/api-site/follow";
 import ListFollowers from "@/components/setting/list-followers";
 import { useInView } from "react-intersection-observer";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const Subscribers = () => {
   const { ref, inView } = useInView();
@@ -23,10 +24,14 @@ const Subscribers = () => {
     sort: "DESC",
   });
 
-  const dataTableFollowers = isLoadingFollowers ? (
+  const dataTableSubscribers = isLoadingFollowers ? (
     <Skeleton loading={isLoadingFollowers} avatar paragraph={{ rows: 1 }} />
   ) : isErrorFollowers ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataFollowers?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
@@ -78,7 +83,8 @@ const Subscribers = () => {
                           </p>
                         </div>
 
-                        {dataTableFollowers}
+                        {dataTableSubscribers}
+
                       </div>
                     </div>
 

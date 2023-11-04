@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateGallery } from "./create-or-update-gallery";
-import { DeleteOnePostAPI, getOneFileGalleryAPI } from "@/api-site/post";
+import { DeleteOnePostAPI } from "@/api-site/post";
 import { PostModel } from "@/types/post";
 import { ReadMore } from "@/utils/read-more";
 import {
