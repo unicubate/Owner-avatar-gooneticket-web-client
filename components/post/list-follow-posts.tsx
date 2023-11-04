@@ -74,9 +74,9 @@ const ListFollowPosts: React.FC<Props> = ({
                     onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
                     shape="default"
                     type="button"
-                    size="normal"
+                    size="medium"
                     loading={false}
-                    color={String(item?.profile?.color) as any}
+                    color={item?.profile?.color as any}
                     icon={<HiOutlineLockClosed className="w-5 h-5" />}
                   >
                     <span className="ml-1 font-bold">Join membership</span>

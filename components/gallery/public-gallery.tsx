@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { ListPublicGallery } from "./list-public-gallery";
 import { LoadingFile } from "../ui/loading-file";
 import { UserVisitorModel } from "@/types/user.type";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -55,7 +56,11 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
