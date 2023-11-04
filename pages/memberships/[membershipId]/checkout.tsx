@@ -11,12 +11,12 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
 import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
 import { ButtonInput } from "@/components/ui/button-input";
-import ContentLoader from "react-content-loader";
 import { formatePrice } from "@/utils";
 import { PrivateComponent } from "@/components/util/private-component";
 import { convertToPluralMonth } from "@/utils/utils";
 import { LayoutSite } from "@/components/layout-site";
 import { AvatarComponent } from "@/components/ui/avatar-component";
+import Skeleton from "react-loading-skeleton";
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -36,10 +36,10 @@ const CheckoutView = () => {
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
     : {
-        currency: item?.currency?.code,
-        value: item?.price,
-        month: item?.month,
-      };
+      currency: item?.currency?.code,
+      value: item?.price,
+      month: item?.month,
+    };
 
   if (status === "pending") {
     <LoadingFile />;
@@ -48,7 +48,7 @@ const CheckoutView = () => {
   return (
     <>
       <LayoutSite title={`${item?.title ?? ""}`}>
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl">
           <div className="max-w-xl mx-auto mt-8 md:mt-12">
             <div className="overflow-hidden bg-white shadow rounded-xl">
               <div className="px-4 py-6 sm:px-8 sm:py-10">
@@ -109,11 +109,10 @@ const CheckoutView = () => {
                           {item?.price ? (
                             <div className="mt-2">
                               <div
-                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${
-                                  errors?.amount
-                                    ? "border-red-500"
-                                    : "border-gray-200"
-                                } rounded-md hover:bg-gray-50`}
+                                className={`overflow-hidden transition-all duration-200 bg-white border-2 ${errors?.amount
+                                  ? "border-red-500"
+                                  : "border-gray-200"
+                                  } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="px-2 py-2 sm:p-4">
                                   <div className="flex items-center">
@@ -218,52 +217,13 @@ const CheckoutView = () => {
                           ) : null}
                         </>
                       ) : (
-                        <ContentLoader
-                          height="500"
-                          width="100%"
-                          viewBox="0 0 265 230"
-                        >
-                          <rect
-                            x="15"
-                            y="25"
-                            rx="2"
-                            ry="2"
-                            width="350"
-                            height="15"
-                          />
-                          <rect
-                            x="15"
-                            y="50"
-                            rx="2"
-                            ry="2"
-                            width="350"
-                            height="100"
-                          />
-                          <rect
-                            x="15"
-                            y="160"
-                            rx="2"
-                            ry="2"
-                            width="130"
-                            height="40"
-                          />
-                          <rect
-                            x="150"
-                            y="160"
-                            rx="2"
-                            ry="2"
-                            width="150"
-                            height="40"
-                          />
-                          <rect
-                            x="15"
-                            y="210"
-                            rx="2"
-                            ry="2"
-                            width="350"
-                            height="40"
-                          />
-                        </ContentLoader>
+                        <>
+                          <Skeleton height={200} width={400} />
+                          <Skeleton height={70} width={400} className="mt-4" />
+                          <Skeleton height={20} width={400} className="mt-4" />
+                          <Skeleton height={40} width={400} className="mt-6" />
+                          <Skeleton height={40} width={400} className="mt-2" />
+                        </>
                       )}
                     </div>
                   </div>

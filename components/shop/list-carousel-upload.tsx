@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 // import required modules
 import { Zoom, Pagination } from 'swiper/modules';
+import Skeleton from "react-loading-skeleton";
 
 type Props = {
   uploads: UploadModel[];
@@ -68,20 +69,22 @@ const ListCarouselUpload: React.FC<Props> = ({
         {uploads &&
           uploads?.length > 0 &&
           uploads?.map((item: any, index: number) => (
-            <SwiperSlide key={index}>
-              <Image
-                width={width}
-                height={height}
-                className={className}
-                preview={preview}
-                style={contentStyle}
-                src={`${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: item?.path,
-                })}`}
-                alt={alt}
-              />
-            </SwiperSlide>
+            <>
+              <SwiperSlide key={index}>
+                <Image
+                  width={width}
+                  height={height}
+                  className={className}
+                  preview={preview}
+                  style={contentStyle}
+                  src={`${viewOneFileUploadAPI({
+                    folder: folder,
+                    fileName: item?.path,
+                  })}`}
+                  alt={alt}
+                />
+              </SwiperSlide>
+            </>
           ))}
       </Swiper>
       {/* <Carousel

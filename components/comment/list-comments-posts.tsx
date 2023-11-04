@@ -51,8 +51,8 @@ const ListCommentsPosts: React.FC<Props> = ({
   };
 
   const { mutateAsync: saveMutation } = DeleteOneCommentAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -182,7 +182,7 @@ const ListCommentsPosts: React.FC<Props> = ({
                   </>
                 ) : null}
               </div>
-              {openModalReply ? (
+              {/* {openModalReply ? (
                 <div className="ml-10">
                   <CreateOrUpdateFormCommentReply
                     model={model}
@@ -191,9 +191,9 @@ const ListCommentsPosts: React.FC<Props> = ({
                     setOpenModalReply={setOpenModalReply}
                   />
                 </div>
-              ) : null}
+              ) : null} */}
 
-              {/* Replies comments */}
+
 
               {dataTableCommentsReplies}
 
@@ -216,6 +216,19 @@ const ListCommentsPosts: React.FC<Props> = ({
           </div>
         ) : null}
 
+        {/* Replies comments */}
+        {openModalReply ? (
+          <div className="ml-10">
+            <CreateOrUpdateFormCommentReply
+              model={model}
+              parentId={String(item?.id)}
+              openModalReply={openModalReply}
+              setOpenModalReply={setOpenModalReply}
+            />
+          </div>
+        ) : null}
+
+        {/* Comments */}
         {openModal ? (
           <CreateOrUpdateFormComment
             model={model}

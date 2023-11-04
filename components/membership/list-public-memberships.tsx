@@ -40,6 +40,8 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             </div>
           ) : null}
 
+
+
           <div className="flex mt-2 items-end justify-center space-x-1">
             <div className="flex items-start">
               <p className="text-5xl font-medium tracking-tight">

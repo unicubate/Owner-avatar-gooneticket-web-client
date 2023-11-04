@@ -25,7 +25,7 @@ const MembershipsUserPublic = () => {
     <ErrorFile
       status="error"
       title="404"
-      description="Error find data please try again..."
+      description="Error find data please try again"
     />
   ) : (
     <>

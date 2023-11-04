@@ -4,6 +4,7 @@ import { ConfigProvider } from "antd";
 import { ThemeProvider } from "next-themes";
 import "react-quill/dist/quill.snow.css";
 import "toastify-js/src/toastify.css";
+import 'react-loading-skeleton/dist/skeleton.css'
 import "animate.css";
 
 import {
