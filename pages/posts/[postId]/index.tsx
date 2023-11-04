@@ -68,6 +68,7 @@ const PostShow = () => {
                   </div>
 
                   <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
+
                     <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
                       <div className="px-4 py-6 sm:p-6 lg:p-8">
                         <div className="text-center">
@@ -90,17 +91,17 @@ const PostShow = () => {
                         </div>
                       </div>
                     </div>
+
                     <div className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
-                      {user?.organizationId ?
+                      {post?.id && user?.organizationId ?
                         <PublicLastPosts
                           userVisitor={{
                             id: userVisitor?.id,
-                            organizationId: user?.organizationId,
+                            organizationId: post?.organizationId,
                           }}
                         /> : null}
-
-
                     </div>
+                    
                   </div>
                 </div>
               </div>
