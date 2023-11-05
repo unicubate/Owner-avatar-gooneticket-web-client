@@ -39,7 +39,7 @@ const ListFollowPosts: React.FC<Props> = ({
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
+        className="mt-8 overflow-hidden bg-white dark:bg-black rounded-lg"
       >
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
@@ -49,7 +49,6 @@ const ListFollowPosts: React.FC<Props> = ({
             >
               <AvatarComponent
                 size={50}
-                className="object-cover w-10 h-10 rounded-full"
                 profile={item?.profile}
               />
             </div>
@@ -58,7 +57,7 @@ const ListFollowPosts: React.FC<Props> = ({
               onClick={() => router.push(`/${item?.profile?.username}`)}
               className="ml-3 cursor-pointer"
             >
-              <p className="text-sm font-bold text-gray-900">
+              <p className="text-sm font-bold text-black dark:text-white">
                 {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
@@ -84,7 +83,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 ) : null}
                 <button
                   title="Share"
-                  className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                  className="ml-2 text-gray-600 dark:text-white hover:text-gray-900 focus:ring-gray-900"
                 >
                   <IoShareOutline className="w-5 h-5" />
                 </button>
@@ -158,7 +157,7 @@ const ListFollowPosts: React.FC<Props> = ({
             <div className="mt-2 text-lg">
               <Link
                 href={`/posts/${item?.slug}`}
-                className="font-bold text-gray-900 cursor-pointer"
+                className="font-bold text-gray-900 dark:text-white cursor-pointer"
               >
                 {item?.title ?? ""}
               </Link>
@@ -166,7 +165,7 @@ const ListFollowPosts: React.FC<Props> = ({
           ) : null}
 
           {item?.description ? (
-            <div className={`text-sm font-normal text-gray-600 group relative`}>
+            <div className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}>
               <span
                 className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
@@ -182,13 +181,13 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-          <div className="flex mt-2 items-center">
+          <div className="flex mt-2 items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-2 text-2xl font-bold">
+            <button className="ml-2 text-2xl">
               <BiConversation />
             </button>
-            <span className="ml-2 font-normal text-sm">
+            <span className="ml-2 text-sm">
               {item?.totalComment ?? 0}
             </span>
             {userVisitor?.id === item?.userId ? (
@@ -197,7 +196,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   title="Edit"
                   href={`/posts/${item?.id
                     }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                  className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
+                  className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
                 </Link>
@@ -207,17 +206,17 @@ const ListFollowPosts: React.FC<Props> = ({
             {item?.whoCanSee === "MEMBERSHIP" &&
               item?.isValidSubscribe !== 1 ? (
               <>
-                <button className="ml-auto text-2xl font-bold">
+                <button className="ml-auto text-2xl">
                   <HiOutlineLockClosed />
                 </button>
-                <span className="ml-2 text-sm font-normal">Locked</span>
+                <span className="ml-2 text-sm">Locked</span>
               </>
             ) : (
               <>
-                <button className="ml-auto text-2xl font-bold">
+                <button className="ml-auto text-2xl">
                   <HiOutlineLockOpen />
                 </button>
-                <span className="ml-2 text-sm font-normal">Unlocked</span>
+                <span className="ml-2 text-sm">Unlocked</span>
               </>
             )}
           </div>

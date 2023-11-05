@@ -71,7 +71,6 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
       <div key={index} className="flex items-start mt-4">
         <AvatarComponent
           size={40}
-          className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
           profile={item?.profile}
         />
 
@@ -80,7 +79,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
             <div className="flex items-center">
               <Link
                 href={`/${item?.profile?.username}`}
-                className="text-sm font-bold text-gray-900"
+                className="text-sm font-bold"
               >
                 {" "}
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
@@ -90,17 +89,17 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
               </p>
             </div>
           </div>
-          <p className="mt-1 text-sm font-normal text-gray-600">
+          <p className="mt-1 text-sm font-normal text-gray-600 dark:text-gray-300">
             <HtmlParser html={String(item?.description)} />
           </p>
 
-          <div className="flex mt-2 items-center">
+          <div className="flex mt-2 items-center font-medium text-gray-600">
 
             {userVisitor?.id === item?.userReceiveId ? (
               <>
                 <button
                   onClick={() => deleteItem(item)}
-                  className="ml-3.5 font-bold"
+                  className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                 >
                   <MdDeleteOutline className="w-5 h-5" />
                 </button>

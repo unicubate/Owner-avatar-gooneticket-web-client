@@ -34,8 +34,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -84,7 +84,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="py-5 divide-gray-200">
+      <div key={index} className="py-5">
         <div className="flex items-center">
           <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
@@ -99,8 +99,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            <div className="flex items-center">
-              <button className="tex-sm text-gray-700">
+            <div className="flex items-center text-gray-600">
+              <button className="tex-sm">
                 <AiOutlineCalendar />
               </button>
               <span className="ml-1.5 font-normal text-sm">
@@ -109,17 +109,17 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             </div>
             <div className="flex mt-4 items-center">
               {item?.title ? (
-                <p className="text-lg font-bold text-gray-600">
+                <p className="text-lg font-bold text-gray-600 dark:text-white">
                   <ReadMore html={String(item?.title ?? "")} value={100} />
                 </p>
               ) : null}
             </div>
 
-            <div className="flex mt-4 items-center">
-              <button className="text-lg font-normal">
+            <div className="flex mt-4 items-center font-medium text-gray-600">
+              <button className="text-lg">
                 <BiMoney />
               </button>
-              <span className="ml-1.5 text-sm font-bold">
+              <span className="ml-1.5 text-sm">
                 {formatePrice({
                   value: Number(item?.priceDiscount ?? 0),
                   isDivide: false,
@@ -128,7 +128,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               </span>
 
               {item?.enableDiscount ? (
-                <span className="ml-1.5 text-sm font-normal text-gray-500">
+                <span className="ml-1.5 text-sm">
                   <del>
                     {formatePrice({
                       value: Number(item?.price ?? 0),
@@ -139,27 +139,27 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 </span>
               ) : null}
 
-              <span className="ml-1.5 text-lg font-bold">
+              <span className="ml-1.5 text-lg">
                 {item?.whoCanSee === "PUBLIC" ? (
                   <TbWorld />
                 ) : (
                   <HiOutlineLockClosed />
                 )}
               </span>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.whoCanSee}
               </span>
 
-              <span className="ml-1.5 text-lg font-bold">
+              <span className="ml-1.5 text-lg">
                 <LiaDnaSolid />
               </span>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.productType}
               </span>
             </div>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
+          <div className="py-4 text-sm font-medium text-right text-gray-600">
             {/* <Tooltip placement="bottomRight" title={"View"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
@@ -168,7 +168,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 <MdOutlineRemoveRedEye />
               </button>
             </Tooltip> */}
-            
+
 
             {/* <Tooltip placement="bottomRight" title={"Deactivate"}>
               <button
@@ -181,7 +181,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+                className="ml-2 text-lg text-gray-600  hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
               </button>

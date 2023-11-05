@@ -33,6 +33,7 @@ type Props = {
   postId?: string;
   uploadImages?: any;
   post?: any;
+  theme: string;
   organizationId: string;
 };
 
@@ -41,6 +42,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   post,
   organizationId,
   postId,
+  theme,
 }) => {
   const router = useRouter();
 
@@ -138,12 +140,12 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
 
   return (
     <>
-      <div className="border-gray-200 mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
+      <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white border border-gray-200">
+            <div className={`overflow-hidden ${theme === "light" ? "bg-white" : ""} border border-gray-200`}>
               <div className="px-4 py-5">
-                <h2 className="text-base font-bold text-gray-900">
+                <h2 className="text-black dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} gallery
                 </h2>
 
@@ -171,7 +173,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       <Controller
                         name="attachmentImages"
                         control={control}
-                        render={({}) => (
+                        render={({ }) => (
                           <>
                             <div className="text-center justify-center mx-auto">
                               <Upload
@@ -186,8 +188,8 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                                 {imageList.length >= 10 ? null : (
                                   <div className="text-center">
                                     <PlusOutlined />
-                                    <div style={{ marginTop: 8 }}>
-                                      Upload cover
+                                    <div style={{ marginTop: 8}}>
+                                      Upload image
                                     </div>
                                   </div>
                                 )}
@@ -226,11 +228,11 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex items-center flex-1 min-w-0">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-gray-900">
+                          <p className="text-sm font-bold">
                             {" "}
                             Allow download{" "}
                           </p>
-                          <p className="mt-1 text-sm font-medium text-gray-500">
+                          <p className="mt-1 text-sm font-medium">
                             allow everyone to download in original quality file
                           </p>
                         </div>
@@ -240,7 +242,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                         <button
                           type="button"
                           title=""
-                          className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
+                          className="text-sm font-medium transition-all duration-200"
                         >
                           {" "}
                         </button>

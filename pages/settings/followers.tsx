@@ -1,7 +1,7 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Skeleton } from "antd";
+import { Input, Skeleton } from "antd";
 import { ButtonInput } from "@/components/ui/button-input";
 import { useEffect } from "react";
 import { GetInfiniteFollowersAPI } from "@/api-site/follow";
@@ -62,51 +62,55 @@ const Followers = () => {
   return (
     <>
       <LayoutDashboard title={"Followers"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-             
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                <HorizontalNavSetting />
 
-                <div className="flow-root">
-                  <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
-                    <div className="overflow-hidden bg-white border border-gray-200">
-                      <div className="px-4 py-5">
-                        <div className="sm:flex sm:items-center sm:justify-between">
-                          <p className="text-base font-bold text-gray-900">
-                            Followers
-                          </p>
-                        </div>
+        <div className="max-w-6xl mx-auto py-6">
 
-                        {dataTableFollowers}
-                      </div>
+          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+            <HorizontalNavSetting />
+
+            <div className="flow-root">
+              <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="px-4 py-8">
+
+                  <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="mt-4 sm:mt-0">
+                      Followers
                     </div>
+                    <div className="mt-4 sm:mt-0">
+                      <Input placeholder="Search by email, name" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                    </div>
+                  </div>
 
-                    {hasNextPage && (
-                      <div className="mt-4 text-center justify-center mx-auto">
-                        <div className="sm:mt-0">
-                          <ButtonInput
-                            ref={ref}
-                            onClick={() => fetchNextPage()}
-                            shape="default"
-                            type="button"
-                            size="large"
-                            loading={isFetchingNextPage ? true : false}
-                            color={"indigo"}
-                            minW="fit"
-                          >
-                            Load More
-                          </ButtonInput>
-                        </div>
-                      </div>
-                    )}
+
+                  <div className="divide-y divide-gray-200 dark:divide-gray-800">
+
+                    {dataTableFollowers}
 
                   </div>
                 </div>
+
+                {hasNextPage && (
+                  <div className="mt-4 text-center justify-center mx-auto">
+                    <div className="sm:mt-0">
+                      <ButtonInput
+                        ref={ref}
+                        onClick={() => fetchNextPage()}
+                        shape="default"
+                        type="button"
+                        size="large"
+                        loading={isFetchingNextPage ? true : false}
+                        color={"indigo"}
+                        minW="fit"
+                      >
+                        Load More
+                      </ButtonInput>
+                    </div>
+                  </div>
+                )}
+
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

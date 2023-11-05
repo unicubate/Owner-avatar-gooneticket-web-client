@@ -49,7 +49,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
   ) : (
     <>
       <div className="flow-root mt-8">
-        <ul className="divide-y divide-gray-200 -my-7">
+        <ul className="divide-y divide-gray-200 dark:divide-gray-800 -my-7">
           {dataPosts?.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item: PostModel, index) => (
@@ -63,7 +63,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
   return (
     <>
       <div className="px-4 py-6 sm:p-6 lg:p-8">
-        <h3 className="font-bold text-gray-700">
+        <h3 className="font-bold text-black dark:text-white">
           Latest Posts
         </h3>
         {dataTablePosts}

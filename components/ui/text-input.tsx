@@ -36,7 +36,7 @@ const TextInput: React.FC<Props> = ({
     <>
       {label ? (
         <label
-          className="block dark:text-gray-700 text-sm font-bold mb-2"
+          className="block text-black dark:text-white text-sm font-bold mb-2"
           htmlFor={name}
         >
           {label}
@@ -48,7 +48,7 @@ const TextInput: React.FC<Props> = ({
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <Input
-            className={`${errors?.[name]?.message ? "dark:border-red-500" : ""}`}
+            className={`dark:bg-black dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
             size="large"
             type={type}
             id={name}

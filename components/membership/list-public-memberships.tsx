@@ -18,12 +18,12 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
+        className="mt-8 overflow-hidden bg-white dark:bg-black shadow-xl shadow-gray-600/15"
       >
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
             {item?.id ? (
-              <p className="text-lg font-bold text-gray-900 cursor-pointer">
+              <p className="text-lg font-bold text-gray-900 dark:text-white cursor-pointer">
                 {item?.title ?? ""}
               </p>
             ) : null}
@@ -47,11 +47,11 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
               <p className="text-5xl font-medium tracking-tight">
                 {item?.price}
               </p>
-              <span className="text-xl font-medium text-black">
+              <span className="text-xl font-medium text-black dark:text-white">
                 {item?.currency?.symbol}
               </span>
             </div>
-            <span className="ml-0.5 text-lg text-black"> / {convertToPluralMonth(Number(item?.month))} </span>
+            <span className="ml-0.5 text-lg text-black dark:text-white"> / {convertToPluralMonth(Number(item?.month))} </span>
           </div>
 
           <div className="mt-4 text-center justify-center mx-auto">
@@ -72,7 +72,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             </div>
           </div>
 
-          <div className="mt-4 text-sm font-normal text-gray-600">
+          <div className="mt-4 text-sm font-normal text-gray-600 dark:text-gray-300">
             <HtmlParser html={String(item?.description)} />
           </div>
         </div>

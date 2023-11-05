@@ -56,13 +56,13 @@ const CreateOrUpdateFormLike: React.FC<{
           onClick={() => {
             likeItem(item), setLike(true);
           }}
-          className="text-2xl"
+          className="text-2xl hover:text-indigo-600 focus:ring-indigo-600"
         >
           <MdFavoriteBorder />
         </button>
       )}
 
-      <span className="ml-1.5 font-normal text-sm">{totalLike}</span>
+      <span className="ml-1.5 text-sm">{totalLike}</span>
     </>
   );
 };

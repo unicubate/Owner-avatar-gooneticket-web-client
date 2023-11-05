@@ -51,18 +51,16 @@ const GalleryUserPublic = () => {
           }`}
         user={user}
       >
-        <div className="flex flex-col flex-1 bg-gray-100">
-          <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
+        <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
-            <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-              <div className="max-w-full mx-auto py-6">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+            <div className="max-w-full mx-auto py-6">
 
-                {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
+              {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
-                <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-1 lg:grid-cols-3">
-                  {dataTablePosts}
-                </div>
+              <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-1 lg:grid-cols-3">
+                {dataTablePosts}
               </div>
             </div>
           </div>

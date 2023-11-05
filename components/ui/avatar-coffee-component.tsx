@@ -16,13 +16,7 @@ const AvatarCoffeeComponent: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Avatar
-        className={className}
-        size={size}
-        style={{ backgroundColor: "#fde7", color: `${color}` }}
-      >
-        <BiCoffeeTogo className={`${className} text-${color}-400`} />
-      </Avatar>
+      <BiCoffeeTogo className={`${className} text-${color}-400`} />
     </>
   );
 };

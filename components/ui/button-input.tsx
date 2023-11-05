@@ -77,7 +77,7 @@ const ButtonInput: React.FC<Props> = ({
        font-semibold 
        leading-3
        text-center  
-       dark:text-white 
+       text-white 
        transition-all 
        duration-200 
        bg-${loading || disabled ? color : color}-600
@@ -117,12 +117,15 @@ const ButtonInput: React.FC<Props> = ({
         text-sm 
         font-semibold 
         leading-3 
-        dark:text-gray-600 
+       text-gray-600 
+        dark:text-white
         transition-all 
         duration-200 
         bg-white 
+        dark:bg-black
         border 
-        border-gray-300 
+        border-gray-200
+        dark:border-gray-800
         rounded-md 
         focus:outline-none 
         focus:ring-2 

@@ -48,7 +48,7 @@ const HorizontalNavSetting: React.FC = () => {
 
   return (
     <>
-      <div className="px-3 py-2 border-gray-200 border bg-white rounded-lg">
+      <div className="px-3 py-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -59,8 +59,8 @@ const HorizontalNavSetting: React.FC = () => {
                 title={item.title}
                 className={`inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg group whitespace-nowrap ${
                   isActive
-                    ? `bg-gray-100 text-${profile?.color}-500`
-                    : `text-gray-500 bg-transparent hover:text-${profile?.color}-500 hover:bg-gray-100 group`
+                  ? `text-white bg-${profile?.color}-600`
+                  : `hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white`
                 } `}
               >
                 {item?.icon}

@@ -81,7 +81,6 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   return (
     <>
       <Fragment key={index}>
-        <hr className="mt-4 border-gray-200" />
         <div className="py-5">
           <div className="flex items-center">
             <div
@@ -89,7 +88,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
               className="relative flex-shrink-0 cursor-pointer"
             >
               <AvatarComponent
-                size={50}
+                size={40}
                 profile={item?.profile}
               />
             </div>
@@ -98,7 +97,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
               href={`/${item?.profile?.username}`}
               className="flex-1 min-w-0 ml-4 cursor-pointer"
             >
-              <p className="text-sm font-bold text-gray-900">
+              <p className="text-sm font-bold text-black dark:text-white">
                 {item?.profile?.firstName} {item?.profile?.lastName}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">

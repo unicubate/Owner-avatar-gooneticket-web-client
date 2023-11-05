@@ -10,23 +10,19 @@ const Gallery = () => {
   return (
     <>
       <LayoutDashboard title={"Gallery"}>
-        <div className="flex flex-col flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
-                {profile?.id ? <EnableGallery profile={profile} /> : null}
-                {/* <HorizontalNavDonation /> */}
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+            {profile?.id ? <EnableGallery profile={profile} /> : null}
+            {/* <HorizontalNavDonation /> */}
 
-                <div className="flow-root">
-                  {organizationId ? (
-                    <TableGallery
-                      userVisitor={{ id: user?.id, organizationId }}
-                    />
-                  ) : null}
-                </div>
-              </div>
+            <div className="flow-root">
+              {organizationId ? (
+                <TableGallery
+                  userVisitor={{ id: user?.id, organizationId }}
+                />
+              ) : null}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

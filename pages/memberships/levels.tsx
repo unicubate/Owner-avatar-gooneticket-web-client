@@ -78,63 +78,60 @@ const MembershipsLevels = () => {
   return (
     <>
       <LayoutDashboard title={"Memberships"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
-                <HorizontalNavMembership />
 
-                <div className="flow-root">
-                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="px-4 py-8">
-                      <div className="sm:flex sm:items-center sm:justify-between">
-                        <div className="mt-4 sm:mt-0">
-                          <ButtonInput
-                            onClick={() =>
-                              router.push(`${`/memberships/create`}`)
-                            }
-                            shape="default"
-                            type="button"
-                            size="normal"
-                            loading={false}
-                            color={"indigo"}
-                          >
-                            Create level
-                          </ButtonInput>
-                        </div>
-                        <div className="mt-4 sm:mt-0">
-                          <Input placeholder="Search product" />
-                        </div>
-                      </div>
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+            <HorizontalNavMembership />
 
-                      <div className="divide-y divide-gray-200">
-                        {dataTableMemberships}
-                      </div>
+            <div className="flow-root">
+              <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="px-4 py-8">
+                  <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="mt-4 sm:mt-0">
+                      <ButtonInput
+                        onClick={() =>
+                          router.push(`${`/memberships/create`}`)
+                        }
+                        shape="default"
+                        type="button"
+                        size="normal"
+                        loading={false}
+                        color={"indigo"}
+                      >
+                        Create level
+                      </ButtonInput>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <Input placeholder="Search product" />
                     </div>
                   </div>
 
-                  {hasNextPage && (
-                    <div className="mt-4 text-center justify-center mx-auto">
-                      <div className="mt-4 sm:mt-0">
-                        <ButtonInput
-                          ref={ref}
-                          onClick={() => fetchNextPage()}
-                          shape="default"
-                          type="button"
-                          size="large"
-                          loading={isFetchingNextPage ? true : false}
-                          color={"indigo"}
-                          minW="fit"
-                        >
-                          Load More
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  )}
+                  <div className="divide-y divide-gray-200 dark:divide-gray-800">
+                    {dataTableMemberships}
+                  </div>
                 </div>
               </div>
+
+              {hasNextPage && (
+                <div className="mt-4 text-center justify-center mx-auto">
+                  <div className="mt-4 sm:mt-0">
+                    <ButtonInput
+                      ref={ref}
+                      onClick={() => fetchNextPage()}
+                      shape="default"
+                      type="button"
+                      size="large"
+                      loading={isFetchingNextPage ? true : false}
+                      color={"indigo"}
+                      minW="fit"
+                    >
+                      Load More
+                    </ButtonInput>
+                  </div>
+                </div>
+              )}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

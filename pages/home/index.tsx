@@ -5,6 +5,7 @@ import { GetInfiniteFollowsPostsAPI } from "@/api-site/post";
 import { ListFollowPosts } from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
+import { ErrorFile } from "@/components/ui/error-file";
 
 const Home = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -23,7 +24,11 @@ const Home = () => {
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again"
+    />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
@@ -45,32 +50,29 @@ const Home = () => {
   return (
     <>
       <LayoutDashboard title={"Home"}>
-        <div className="flex flex-col flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-3xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                {dataTablePosts}
+        <div className="max-w-3xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+            
+            {dataTablePosts}
 
-                {hasNextPage && (
-                  <div className="mt-4 text-center justify-center mx-auto">
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        onClick={() => fetchNextPage()}
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={isFetchingNextPage ? true : false}
-                        color={"indigo"}
-                        minW="fit"
-                      >
-                        Load More
-                      </ButtonInput>
-                    </div>
-                  </div>
-                )}
+            {hasNextPage && (
+              <div className="mt-4 text-center justify-center mx-auto">
+                <div className="sm:mt-0">
+                  <ButtonInput
+                    onClick={() => fetchNextPage()}
+                    shape="default"
+                    type="button"
+                    size="large"
+                    loading={isFetchingNextPage ? true : false}
+                    color={"indigo"}
+                    minW="fit"
+                  >
+                    Load More
+                  </ButtonInput>
+                </div>
               </div>
-            </div>
-          </main>
+            )}
+          </div>
         </div>
       </LayoutDashboard>
     </>

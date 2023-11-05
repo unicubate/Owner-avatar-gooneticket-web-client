@@ -28,7 +28,7 @@ const TextAreaInput: React.FC<Props> = ({
   return (
     <>
       {label ? <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="block text-black dark:text-white text-sm font-bold mb-2"
         htmlFor={name}>
         {label}
       </label> : null}
@@ -38,6 +38,7 @@ const TextAreaInput: React.FC<Props> = ({
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <TextArea
+            className={`dark:bg-black dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
             size="large"
             id={name}
             maxLength={6000}

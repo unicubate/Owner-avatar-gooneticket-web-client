@@ -7,7 +7,7 @@ import { GetOneDonationAPI } from "@/api-site/donation";
 
 const SettingDonations = () => {
   const user = useAuth() as any;
-  
+
   const {
     data: donation,
     isError: isErrorDonation,
@@ -19,18 +19,14 @@ const SettingDonations = () => {
   return (
     <>
       <LayoutDashboard title={"Donations settings"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
-                <HorizontalNavDonation />
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+            <HorizontalNavDonation />
 
-                <div className="flow-root">
-                  {donation?.id ? <UpdateFormDonation donation={donation} /> : null}
-                </div>
-              </div>
+            <div className="flow-root">
+              {donation?.id ? <UpdateFormDonation donation={donation} /> : null}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

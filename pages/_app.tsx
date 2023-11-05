@@ -1,7 +1,6 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { ConfigProvider } from "antd";
-import { ThemeProvider } from "next-themes";
 import "react-quill/dist/quill.snow.css";
 import "toastify-js/src/toastify.css";
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -14,22 +13,26 @@ import {
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ContextUserProvider } from "@/components/util/context-user";
+import { ThemeProvider } from "@/components/util/theme-provider";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={pageProps.dehydratedState}>
-        <ConfigProvider>
-          <ContextUserProvider>
-            <Component {...pageProps} />
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+      <QueryClientProvider client={queryClient}>
 
-            {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-              <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
-            )}
-          </ContextUserProvider>
-        </ConfigProvider>
-      </HydrationBoundary>
-    </QueryClientProvider>
+        <HydrationBoundary state={pageProps.dehydratedState}>
+          <ConfigProvider>
+            <ContextUserProvider>
+              <Component {...pageProps} />
+
+              {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
+                <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
+              )}
+            </ContextUserProvider>
+          </ConfigProvider>
+        </HydrationBoundary>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }

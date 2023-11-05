@@ -82,14 +82,14 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white border-[1px] border-gray-300 sticky top-0 z-20">
+      <header className="bg-white dark:bg-black border-gray-300 sticky top-0 z-20">
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
               <button
                 onClick={showDrawer}
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-lg hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex items-center justify-center p-2 text-gray-400 dark:text-white bg-white dark:bg-black rounded-lg dark:hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600"
               >
                 <svg
                   className="w-6 h-6"
@@ -124,7 +124,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                           title={item?.title}
                           className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
                             ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                            : `border-transparent text-gray-500 hover:border-gray-300`
+                            : `border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300`
                             } `}
                         >
                           {item?.icon}
@@ -160,10 +160,10 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                     <Dropdown menu={{ items }} placement="bottomRight" arrow>
                       <button type="button"  className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
                         <AvatarComponent
+                          className="w-9 h-9"
                           profile={user?.profile}
-                          className="object-cover bg-gray-300 rounded-full w-9 h-9"
                         />
-                        <p className="ml-1 text-sm font-bold text-gray-900">
+                        <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
                           {user?.profile?.firstName} {user?.profile?.lastName}
                         </p>
                       </button>

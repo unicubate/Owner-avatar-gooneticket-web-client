@@ -49,27 +49,26 @@ const Configs = () => {
   return (
     <>
       <LayoutDashboard title={"Gifts"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                <HorizontalNavShop />
 
-                <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
-                  <div className="px-4 py-5 sm:p-6">
-                    <div className="sm:flex sm:items-center sm:justify-between">
-                      <div>
-                        <p className="text-base font-bold text-gray-900">
-                          Discounts Setup
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Discount your shop or commissions for promotions or
-                          membership benefits.
-                        </p>
-                      </div>
-                    </div>
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+            <HorizontalNavShop />
 
-                    {/* <div className="mt-4 sm:flex sm:items-center sm:justify-between">
+            <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <div className="sm:flex sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-base font-bold text-gray-900 dark:text-white">
+                      Discounts Setup
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Discount your shop or commissions for promotions or
+                      membership benefits.
+                    </p>
+                  </div>
+                </div>
+
+                {/* <div className="mt-4 sm:flex sm:items-center sm:justify-between">
                       <div className="mt-4 sm:mt-0">
                         <ButtonInput
                           onClick={() => setShowModal(true)}
@@ -95,55 +94,53 @@ const Configs = () => {
                       </div>
                     </div> */}
 
-                    <div className="sm:flex flex-col sm:items-start sm:justify-between">
-                      <div className="mt-2">
-                        <ButtonInput
-                          onClick={() => setShowModal(true)}
-                          shape="default"
-                          type="button"
-                          size="normal"
-                          loading={false}
-                          color={"indigo"}
-                          icon={<PlusOutlined />}
-                        >
-                          Create discount
-                        </ButtonInput>
-                      </div>
-                    </div>
+                <div className="sm:flex flex-col sm:items-start sm:justify-between">
+                  <div className="mt-2">
+                    <ButtonInput
+                      onClick={() => setShowModal(true)}
+                      shape="default"
+                      type="button"
+                      size="normal"
+                      loading={false}
+                      color={"indigo"}
+                      icon={<PlusOutlined />}
+                    >
+                      Create discount
+                    </ButtonInput>
+                  </div>
+                </div>
 
-                    <div className="flow-root mt-8">
-                      <div className="-my-5 divide-y divide-gray-100">
-                        {showModal ? (
-                          <CreateOrUpdateDiscount
-                            showModal={showModal}
-                            setShowModal={setShowModal}
-                          />
-                        ) : null}
+                <div className="flow-root mt-8">
+                  <div className="-my-5 divide-y divide-gray-100">
+                    {showModal ? (
+                      <CreateOrUpdateDiscount
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                      />
+                    ) : null}
 
-                        {dataTableDiscounts}
+                    {dataTableDiscounts}
 
-                        {hasNextPage ? (
-                          <>
-                            <div className="mb-3 flex flex-col justify-between items-center">
-                              {isFetchingNextPage ? null : (
-                                <button
-                                  disabled={isFetchingNextPage ? true : false}
-                                  onClick={() => fetchNextPage()}
-                                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
-                                >
-                                  View more
-                                </button>
-                              )}
-                            </div>
-                          </>
-                        ) : null}
-                      </div>
-                    </div>
+                    {hasNextPage ? (
+                      <>
+                        <div className="mb-3 flex flex-col justify-between items-center">
+                          {isFetchingNextPage ? null : (
+                            <button
+                              disabled={isFetchingNextPage ? true : false}
+                              onClick={() => fetchNextPage()}
+                              className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                            >
+                              View more
+                            </button>
+                          )}
+                        </div>
+                      </>
+                    ) : null}
                   </div>
                 </div>
               </div>
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

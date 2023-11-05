@@ -59,13 +59,13 @@ const RecentCommentTransactions: React.FC<{
 
   return (
     <>
-      <div className="mt-4 overflow-hidden bg-white shadow-2xl shadow-gray-300/60">
+      <div className="mt-4 overflow-hidden bg-white dark:bg-black shadow-xl shadow-gray-600/15">
         <div className="p-6 sm:py-4 sm:px-4">
           <div className="flex items-center">
             <p className="text-lg font-bold">Supporters</p>
           </div>
 
-          <ul className="mt-4 divide-y divide-gray-200 my-2">
+          <ul className="mt-4 divide-y divide-gray-200 dark:divide-gray-800 my-2">
             {dataTableTransactions}
           </ul>
         </div>

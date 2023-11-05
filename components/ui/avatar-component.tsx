@@ -9,14 +9,18 @@ interface Props {
   className?: string
 }
 
-const AvatarComponent: React.FC<Props> = ({ profile, size, className }) => {
+const AvatarComponent: React.FC<Props> = ({
+  profile,
+  size,
+  className
+}) => {
 
   return (
     <Link href={`/${profile?.username}`}>{profile?.image ?
-      <Avatar className={className} size={size} src={profile?.image}
+      <Avatar className={`${className} bg-${profile?.color}-500 rounded-full`} size={size} src={profile?.image}
         alt={`${profile?.firstName ?? ""} ${profile?.lastName ?? ""
           }`} /> :
-      <Avatar className={className} size={size} style={{ backgroundColor: '#fde7', color: `${profile?.color}` }}>
+      <Avatar className={`${className} bg-${profile?.color}-500 rounded-full`} size={size}>
         {capitalizeOneFirstLetter(String(profile?.firstName), String(profile?.lastName))}
       </Avatar>}
     </Link>

@@ -116,9 +116,9 @@ const CreateOrUpdateFormMembership: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white border border-gray-200">
+        <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
           <div className="px-4 py-5">
-            <h2 className="text-base font-bold text-gray-900">
+            <h2 className="text-base font-bold text-black dark:text-white">
               Create a new membership
             </h2>
 

@@ -48,7 +48,7 @@ const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => 
   return (
     <>
 
-      <div className="border-b border-gray-200">
+      <div className="border-b border-gray-200 dark:border-gray-700">
         <nav className="flex flex-wrap justify-center space-x-8">
           {navigation.filter((item) => item?.status === true).map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -59,7 +59,7 @@ const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => 
                 title={item.title}
                 className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
                   ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                  : `border-transparent text-gray-500 hover:border-gray-300`
+                  : `border-transparent text-gray-500 dark:text-gray-500 hover:border-${user?.profile?.color}-300`
                   } `}
               >
                 {item?.icon}

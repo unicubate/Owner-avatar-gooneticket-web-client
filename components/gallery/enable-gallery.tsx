@@ -41,12 +41,12 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
 
   return (
     <>
-      <div className={`mt-8 border rounded-lg bg-${isOpen ? 'indigo-50' : 'red-100'} border-${isOpen ? 'indigo-300' : 'red-500'} `}>
+      <div className={`mt-8 border rounded-lg ${isOpen ? 'bg-indigo-50 dark:bg-indigo-100' : 'bg-red-100'} border-${isOpen ? 'indigo-300' : 'red-500'} `}>
         <div className="px-4 py-5 sm:p-3">
           <div className="md:flex md:items-center md:justify-between">
             <div className="flex-1 max-w-xs md:mt-0">
               <p className="text-base font-bold text-gray-600">
-                Gallery  {isOpen ? "Open" : "Close"}
+                Shop  {isOpen ? "Open" : "Close"}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {isOpen ?
@@ -65,7 +65,7 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
                 loading={false}
                 color={isOpen ? "indigo" : "red"}
               >
-                {isOpen ? "Open" : "Close"}
+                {isOpen ? "click to close" : "Click to open"}
               </ButtonInput>
             </div>
           </div>

@@ -102,8 +102,8 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            <div className="flex items-center">
-              <button className="tex-sm text-gray-700">
+            <div className="flex items-center text-gray-600">
+              <button className="tex-sm">
                 <AiOutlineCalendar />
               </button>
               <span className="ml-1.5 font-normal text-sm">
@@ -113,35 +113,35 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
 
             <div className="flex mt-2 items-center">
               {item?.title ? (
-                <p className="mt-2 text-lg font-bold text-gray-600">
+                <p className="mt-2 text-lg font-bold">
                   <ReadMore html={String(item?.title ?? "")} value={100} />
                 </p>
               ) : null}
             </div>
 
-            <div className="flex mt-4 items-center">
-              <button className="tex-sm text-gray-700">
+            <div className="flex mt-4 items-center font-medium text-gray-600">
+              <button className="tex-sm">
                 <MdFavoriteBorder />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.totalLike ?? 0}
               </span>
 
-              <button className="ml-1.5 tex-sm text-gray-700">
+              <button className="ml-1.5 tex-sm">
                 <BiComment />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.totalComment ?? 0}
               </span>
 
-              <button className="ml-1.5 tex-sm text-gray-700">
+              <button className="ml-1.5 tex-sm">
                 {item?.whoCanSee === "PUBLIC" ? (
                   <TbWorld />
                 ) : (
                   <HiOutlineLockClosed />
                 )}
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.whoCanSee}
               </span>
 
@@ -149,7 +149,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 <>
                   <button
                     title="Download"
-                    className="ml-1.5 tex-sm text-gray-700"
+                    className="ml-1.5 tex-sm"
                   >
                     <FiDownload />
                   </button>
@@ -159,13 +159,13 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
+          <div className="py-4 text-sm font-medium text-right">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/posts/${
                   item?.id
                 }/edit?type=${item?.type.toLocaleLowerCase()}`)}
-                className="ml-1 text-lg text-gray-600 hover:text-indigo-600"
+                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
               </button>
@@ -174,7 +174,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             <Tooltip placement="bottomRight" title={"Delete"}>
               <button
                 onClick={() => deleteItem(item)}
-                className="ml-1 text-lg text-gray-600 hover:text-red-600"
+                className="ml-2 text-lg text-gray-600 hover:text-red-600"
               >
                 <MdDeleteOutline />
               </button>

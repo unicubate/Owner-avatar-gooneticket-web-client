@@ -29,8 +29,8 @@ const TextInputPassword: React.FC<Props> = ({
   const [passwordVisible, setPasswordVisible] = useState(false);
   return (
     <>
-     {label ? <label
-        className="block dark:text-gray-700 text-sm font-bold mb-2"
+      {label ? <label
+        className="block text-sm font-bold mb-2"
         htmlFor={name}>
         {label}
       </label> : null}
@@ -39,6 +39,7 @@ const TextInputPassword: React.FC<Props> = ({
         control={control}
         render={({ field: { ref, ...field } }) => (
           <Password
+            className={`dark:bg-black dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
             size="large"
             type={type}
             id={name}

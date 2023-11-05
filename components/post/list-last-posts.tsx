@@ -40,27 +40,27 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
             {item?.id ? (
               <Link
                 href={`/posts/${item?.slug}`}
-                className="text-sm font-bold text-gray-900 cursor-pointer"
+                className="text-sm font-bold text-black dark:text-white cursor-pointer"
               >
                 {item?.title ?? ""}
               </Link>
             ) : null}
 
-            <div className="flex mt-2 items-center text-gray-500">
-              <button className="text-lg font-bold">
+            <div className="flex mt-2 items-center font-medium text-gray-600">
+              <button className="text-lg">
                 <MdFavoriteBorder />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.totalLike ?? 0}
               </span>
 
-              <button className="ml-3.5 text-lg font-bold">
+              <button className="ml-3.5 text-lg">
                 <BiConversation />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm">
                 {item?.totalComment ?? 0}
               </span>
-              <span className="ml-auto font-normal text-sm">
+              <span className="ml-auto text-sm">
                 {formateDMYHH(item?.createdAt as Date)}
               </span>
             </div>

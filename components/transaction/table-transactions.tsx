@@ -7,6 +7,7 @@ import { ListTransactions } from "./list-transactions";
 import { Input } from "antd";
 import { ErrorFile } from "../ui/error-file";
 import { GrTransaction } from "react-icons/gr";
+import { BiTransfer } from "react-icons/bi";
 
 type Props = {
   model?: string;
@@ -68,7 +69,7 @@ const TableTransactions: React.FC<Props> = ({
     />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<GrTransaction className="h-10 w-10" />}
+      image={<BiTransfer className="h-10 w-10" />}
       title="You don't have any transaction"
       description={`Share your page with your audience to get started.`}
     />
@@ -82,23 +83,21 @@ const TableTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden dark:bg-white border dark:border-gray-200 rounded-lg">
+      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
             <p className="text-lg font-bold">Recent transactions</p>
           </div>
           <div className="mt-4 sm:mt-0">
-            <Input placeholder="Search by name or email" />
+            <Input placeholder="Search by name or email"  className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
           </div>
         </div>
 
-        <div className="divide-y divide-gray-200">
-          <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
-            <tbody className="divide-y divide-gray-200">
-              {dataTableTransactions}
-            </tbody>
-          </table>
-        </div>
+        <table className="min-w-full mt-4 lg:divide-y">
+          <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
+            {dataTableTransactions}
+          </tbody>
+        </table>
       </div>
 
       {hasNextPage && (

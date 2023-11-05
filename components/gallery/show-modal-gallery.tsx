@@ -49,21 +49,20 @@ const ShowModalGallery: React.FC<Props> = ({
       {openModal ? (
         <>
           <div className="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto">
-            <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
+            <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover ">
               <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-              <div className="w-full overflow-hidden border-none max-w-3xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white overflow-x-hidden max-h-full flex flex-col pointer-events-auto bg-clip-padding outline-none text-current">
+              <div className="w-full overflow-hidden border-none max-w-3xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-black overflow-x-hidden max-h-full flex flex-col pointer-events-auto bg-clip-padding outline-none text-current">
                 <div className="flex flex-shrink-0 items-center justify-between p-4 border-gray-200 rounded-t-md">
                   <div className="flex items-center">
                     <div className="relative flex-shrink-0 cursor-pointer">
                       <AvatarComponent
                         size={50}
-                        className="object-cover w-10 h-10 rounded-full"
                         profile={item?.profile}
                       />
                     </div>
 
                     <div className="ml-2 cursor-pointer">
-                      <p className="text-sm font-bold text-gray-900">
+                      <p className="text-sm font-bold text-black dark:text-white">
                         {item?.profile?.firstName ?? ""}{" "}
                         {item?.profile?.lastName ?? ""}
                       </p>
@@ -160,10 +159,10 @@ const ShowModalGallery: React.FC<Props> = ({
                     </p>
                   ) : null}
 
-                  <div className="flex mt-4 items-center">
+                  <div className="flex mt-4 items-center font-medium text-gray-600">
                     <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-                    <button className="ml-2 text-2xl font-bold">
+                    <button className="ml-2 text-2xl">
                       <BiConversation />
                     </button>
                     <span className="ml-2 font-normal text-sm">
@@ -181,30 +180,30 @@ const ShowModalGallery: React.FC<Props> = ({
                           <MdOutlineModeEdit className="w-6 h-6" />
                         </Link>
 
-                        <button
+                        {/* <button
                           // onClick={() => deleteItem(item)}
                           title="Delete"
                           className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                         >
                           <MdDeleteOutline className="w-6 h-6" />
-                        </button>
+                        </button> */}
                       </>
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
                       item?.isValidSubscribe !== 1 ? (
                       <>
-                        <button className="ml-auto text-2xl font-bold">
+                        <button className="ml-auto text-2xl">
                           <HiOutlineLockClosed />
                         </button>
-                        <span className="ml-2 text-sm font-normal">Locked</span>
+                        <span className="ml-2 text-sm">Locked</span>
                       </>
                     ) : (
                       <>
-                        <button className="ml-auto text-2xl font-bold">
+                        <button className="ml-auto text-2xl">
                           <HiOutlineLockOpen />
                         </button>
-                        <span className="ml-2 text-sm font-normal">
+                        <span className="ml-2 text-sm">
                           Unlocked
                         </span>
                       </>

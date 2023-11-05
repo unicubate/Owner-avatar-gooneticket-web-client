@@ -10,6 +10,7 @@ import {
 import { UserModel } from "@/types/user.type";
 import { GetOneUserPrivateAPI } from "@/api-site/user";
 import { jwtDecode } from "jwt-decode";
+import { useTheme } from "next-themes";
 
 type AuthContextProps = {
   user: UserModel | undefined;
@@ -38,6 +39,19 @@ export const getCurrentUserFormToken = () => {
   }
 };
 
+export const getThemeLocalStorage = () => {
+  const theme =
+    typeof window !== "undefined"
+      ? window.localStorage.getItem('theme')
+      : null;
+  if (theme !== null) {
+    return theme;
+  } else {
+    return;
+  }
+};
+
+
 const initAuthContextPropsState = {
   saveAuth: () => { },
   setCurrentUser: () => { },
@@ -54,6 +68,7 @@ const useAuth = () => {
 };
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
+  const { theme } = useTheme()
   const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
 
   const { data: user } = GetOneUserPrivateAPI({
@@ -63,7 +78,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const logout = () => logoutUser();
 
   return (
-    <AuthContext.Provider value={{ ...user, userStorage, logout }}>
+    <AuthContext.Provider value={{ ...user, userStorage, theme, logout }}>
       {children}
     </AuthContext.Provider>
   );

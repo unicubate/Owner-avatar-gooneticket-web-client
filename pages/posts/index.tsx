@@ -81,71 +81,68 @@ const Posts = () => {
   return (
     <>
       <LayoutDashboard title={"Posts"}>
-        <div className="flex flex-col flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
-                <HorizontalNavCreatePost />
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
 
-                <div className="mt-8 px-3 py-2 bg-white border border-gray-200 rounded-lg">
-                  <nav className="flex flex-wrap gap-4">
-                    <a
-                      href="#"
-                      className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
-                    >
-                      {" "}
-                      Publisher{" "}
-                    </a>
+            <HorizontalNavCreatePost />
 
-                    <a
-                      href="#"
-                      className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
-                    >
-                      {" "}
-                      Drafter{" "}
-                    </a>
+            <div className={`mt-8 px-3 py-2 bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg`}>
+              <nav className="flex flex-wrap gap-4">
+                <a
+                  href="#"
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                >
+                  {" "}
+                  Publisher{" "}
+                </a>
 
-                    <a
-                      href="#"
-                      className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
-                    >
-                      {" "}
-                      Scheduled{" "}
-                    </a>
-                  </nav>
-                </div>
+                <a
+                  href="#"
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                >
+                  {" "}
+                  Drafter{" "}
+                </a>
 
-                <div className="flow-root">
-                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="px-4 py-8">
-                      <div className="divide-y divide-gray-200">
-                        {dataTablePosts}
-                      </div>
-                    </div>
+                <a
+                  href="#"
+                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                >
+                  {" "}
+                  Scheduled{" "}
+                </a>
+              </nav>
+            </div>
+
+            <div className="flow-root">
+              <div className={`mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg`}>
+                <div className="px-4 py-8">
+                  <div className="divide-y divide-gray-200 dark:divide-gray-800">
+                    {dataTablePosts}
                   </div>
-
-                  {hasNextPage && (
-                    <div className="mt-4 text-center justify-center mx-auto">
-                      <div className="mt-4 sm:mt-0">
-                        <ButtonInput
-                          ref={ref}
-                          onClick={() => fetchNextPage()}
-                          shape="default"
-                          type="button"
-                          size="large"
-                          loading={isFetchingNextPage ? true : false}
-                          color={"indigo"}
-                          minW="fit"
-                        >
-                          Load More
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
+
+              {hasNextPage && (
+                <div className="mt-4 text-center justify-center mx-auto">
+                  <div className="mt-4 sm:mt-0">
+                    <ButtonInput
+                      ref={ref}
+                      onClick={() => fetchNextPage()}
+                      shape="default"
+                      type="button"
+                      size="large"
+                      loading={isFetchingNextPage ? true : false}
+                      color={"indigo"}
+                      minW="fit"
+                    >
+                      Load More
+                    </ButtonInput>
+                  </div>
+                </div>
+              )}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

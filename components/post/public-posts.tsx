@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { LoadingFile } from "../ui/loading-file";
 import { ListFollowPosts } from "./list-follow-posts";
 import { UserVisitorModel } from "@/types/user.type";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -55,14 +56,18 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again"
+    />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListFollowPosts item={item} key={index} commentTake={2} userVisitor={userVisitor} />
+        <ListFollowPosts item={item} key={index} commentTake={4} userVisitor={userVisitor} />
       ))
   );
 

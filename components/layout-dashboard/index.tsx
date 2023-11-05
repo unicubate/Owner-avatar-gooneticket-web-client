@@ -4,6 +4,8 @@ import { HeaderVerticalNavDashboard } from "./header-vertical-nav-dashboard";
 import { useContext, useState } from "react";
 import { Button, Drawer } from "antd";
 import { useAuth } from "../util/context-user";
+import { ThemeProvider } from "../util/theme-provider";
+import { useTheme } from "next-themes";
 
 interface IProps {
   title: string;
@@ -11,7 +13,9 @@ interface IProps {
 }
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  const user = useAuth() as any;
+  const { profile, username, theme } = useAuth() as any;
+  const user = { profile, username }
+
   return (
     <>
       <Head>
@@ -20,13 +24,28 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         </title>
       </Head>
 
+
       <div className="flex flex-col">
         <HeaderHorizontalNavDashboard user={user} />
 
         <div className="flex flex-1">
-          {user?.id ? <HeaderVerticalNavDashboard user={user} /> : null}
 
-          {children}
+          {profile?.id ? <HeaderVerticalNavDashboard user={user} /> : null}
+
+          <div className={`flex flex-col flex-1 bg-gray-100 dark:bg-stone-800`}>
+            <main>
+              {children}
+            </main>
+          </div>
+
+          {/* {profile?.id && theme ?
+            <div className={`flex flex-col flex-1 ${theme === "light" ? "bg-gray-100" : ""}`}>
+              <main>
+                {children}
+              </main>
+            </div>
+            : null} */}
+
         </div>
       </div>
     </>

@@ -81,12 +81,12 @@ const ListCommentTransactions: React.FC<{
                 {item?.profile?.username ? (
                   <Link
                     href={`/${item?.profile?.username}`}
-                    className="text-sm font-bold text-gray-900"
+                    className="text-sm font-bold text-black dark:text-white"
                   >
                     {item?.profile?.firstName} {item?.profile?.lastName}
                   </Link>
                 ) : (
-                  <span className="text-sm font-bold text-gray-900">
+                  <span className="text-sm font-bold text-black dark:text-white">
                     {item?.fullName}
                   </span>
                 )}
@@ -96,11 +96,11 @@ const ListCommentTransactions: React.FC<{
                 </p>
               </div>
             </div>
-            <p className="mt-1 text-sm font-normal text-gray-600">
+            <p className="mt-1 text-sm font-normal text-gray-600 dark:text-gray-300">
               <HtmlParser html={String(item?.description ?? "")} />
             </p>
 
-            <div className="flex items-center">
+            <div className="flex items-center font-medium text-gray-600">
               {/* Replies comments */}
               {!openModalReply && userVisiter?.id === item?.userReceiveId ? (
                 <>
@@ -108,7 +108,7 @@ const ListCommentTransactions: React.FC<{
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
                     }}
-                    className="ml-3.5 text-2xl"
+                    className="ml-3.5 text-2xl hover:text-green-400 focus:ring-green-400"
                   >
                     <BsReplyAll />
                   </button>

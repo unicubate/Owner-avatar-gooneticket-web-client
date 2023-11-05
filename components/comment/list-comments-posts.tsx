@@ -135,7 +135,6 @@ const ListCommentsPosts: React.FC<Props> = ({
           <div className="flex items-start">
             <AvatarComponent
               size={40}
-              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
               profile={item?.profile}
             />
 
@@ -144,7 +143,7 @@ const ListCommentsPosts: React.FC<Props> = ({
                 <div className="flex items-center">
                   <Link
                     href={`/${item?.profile?.username}`}
-                    className="text-sm font-bold text-gray-900"
+                    className="text-sm font-bold text-black dark:text-white"
                   >
                     {item?.profile?.firstName} {item?.profile?.lastName}{" "}
                   </Link>
@@ -153,10 +152,10 @@ const ListCommentsPosts: React.FC<Props> = ({
                   </p>
                 </div>
               </div>
-              <p className="mt-1 text-sm font-normal text-gray-600">
-                <HtmlParser html={String(item?.description)} />
+              <p className="mt-1 text-sm font-normal text-gray-600 dark:text-gray-300">
+                <HtmlParser html={String(item?.description ?? "")} />
               </p>
-              <div className="flex mt-2 items-center">
+              <div className="flex mt-2 items-center font-medium text-gray-600">
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
                 {!openModalReply && user?.id ? (
@@ -164,7 +163,7 @@ const ListCommentsPosts: React.FC<Props> = ({
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
                     }}
-                    className="ml-3.5 text-2xl"
+                    className="ml-3.5 text-2xl hover:text-green-400 focus:ring-green-400"
                   >
                     <BsReplyAll />
                   </button>
@@ -174,13 +173,13 @@ const ListCommentsPosts: React.FC<Props> = ({
                   <>
                     <button
                       onClick={() => editItem(item)}
-                      className="ml-3.5 font-bold"
+                      className="ml-3.5 hover:text-indigo-400 focus:ring-indigo-400"
                     >
                       <MdOutlineModeEdit className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => deleteItem(item)}
-                      className="ml-3.5 font-bold"
+                      className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                     >
                       <MdDeleteOutline className="w-5 h-5" />
                     </button>

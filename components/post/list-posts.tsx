@@ -30,8 +30,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
+    onSuccess: () => { },
+    onError: (error?: any) => { },
   });
 
   const deleteItem = (item: any) => {
@@ -80,9 +80,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="py-5 divide-gray-200">
-        <div className="flex items-center">
-          {/* <div className="relative flex-shrink-0 cursor-pointer">
+      <div className="flex py-5 items-center">
+        {/* <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
               size={100}
               shape="square"
@@ -91,81 +90,79 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             />
           </div> */}
 
-          <div className="flex-1 min-w-0 cursor-pointer">
-            <div className="flex items-center">
-              <button className="tex-sm text-gray-700">
-                <AiOutlineCalendar />
-              </button>
-              <span className="ml-1.5 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
-            </div>
-
-            <div className="flex mt-4 items-center">
-              {item?.title ? (
-                <p className="text-lg font-bold text-gray-600">
-                  <ReadMore html={String(item?.title ?? "")} value={100} />
-                </p>
-              ) : null}
-            </div>
-
-            <div className="flex mt-4 items-center">
-              <span className="text-lg font-normal">
-                <MdFavoriteBorder />
-              </span>
-              <span className="ml-1.5 font-normal text-sm">
-                {item?.totalLike ?? 0}
-              </span>
-
-              <span className="ml-1.5 text-lg font-bold">
-                <BiComment />
-              </span>
-              <span className="ml-1.5 font-normal text-sm">
-                {item?.totalComment ?? 0}
-              </span>
-
-              <span className="ml-1.5 text-lg font-bold">
-                {item?.whoCanSee === "PUBLIC" ? (
-                  <TbWorld />
-                ) : (
-                  <HiOutlineLockClosed />
-                )}
-              </span>
-              <span className="ml-1.5 font-normal text-sm">
-                {item?.whoCanSee}
-              </span>
-              <span className="ml-1.5 text-lg font-bold">
-                <LiaDnaSolid />
-              </span>
-              <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
-            </div>
+        <div className="flex-1 min-w-0 cursor-pointer">
+          <div className="flex items-center text-gray-600">
+            <button className="tex-sm">
+              <AiOutlineCalendar />
+            </button>
+            <span className="ml-1.5 text-sm font-normal">
+              {formateDateDayjs(item?.createdAt as Date)}
+            </span>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
-            <Tooltip placement="bottomRight" title={"Edit"}>
-              <button
-                onClick={() =>
-                  router.push(
-                    `/posts/${
-                      item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`
-                  )
-                }
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
-              >
-                <MdOutlineModeEdit />
-              </button>
-            </Tooltip>
-
-            <Tooltip placement="bottomRight" title={"Delete"}>
-              <button
-                onClick={() => deleteItem(item)}
-                className="ml-2 text-lg text-gray-600 hover:text-red-600"
-              >
-                <MdDeleteOutline />
-              </button>
-            </Tooltip>
+          <div className="flex mt-4 items-center">
+            {item?.title ? (
+              <p className="text-lg font-bold">
+                <ReadMore html={String(item?.title ?? "")} value={100} />
+              </p>
+            ) : null}
           </div>
+
+          <div className="flex mt-4 items-center font-medium text-gray-600">
+            <span className="text-lg font-normal">
+              <MdFavoriteBorder />
+            </span>
+            <span className="ml-1.5 text-sm">
+              {item?.totalLike ?? 0}
+            </span>
+
+            <span className="ml-1.5 text-lg">
+              <BiComment />
+            </span>
+            <span className="ml-1.5 text-sm">
+              {item?.totalComment ?? 0}
+            </span>
+
+            <span className="ml-1.5 text-lg">
+              {item?.whoCanSee === "PUBLIC" ? (
+                <TbWorld />
+              ) : (
+                <HiOutlineLockClosed />
+              )}
+            </span>
+            <span className="ml-1.5 font-normal text-sm">
+              {item?.whoCanSee}
+            </span>
+            <span className="ml-1.5 text-lg">
+              <LiaDnaSolid />
+            </span>
+            <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
+          </div>
+        </div>
+
+        <div className="py-4 text-sm font-medium text-right">
+          <Tooltip placement="bottomRight" title={"Edit"}>
+            <button
+              onClick={() =>
+                router.push(
+                  `/posts/${item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`
+                )
+              }
+              className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+            >
+              <MdOutlineModeEdit />
+            </button>
+          </Tooltip>
+
+          <Tooltip placement="bottomRight" title={"Delete"}>
+            <button
+              onClick={() => deleteItem(item)}
+              className="ml-2 text-lg text-gray-600 hover:text-red-600"
+            >
+              <MdDeleteOutline />
+            </button>
+          </Tooltip>
         </div>
       </div>
     </>

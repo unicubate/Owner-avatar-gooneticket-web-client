@@ -8,27 +8,23 @@ import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-updat
 import { useAuth } from "@/components/util/context-user";
 
 const PostsCreate = () => {
-  const { organizationId } = useAuth() as any;
+  const { organizationId, theme } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
 
   return (
     <>
       <LayoutDashboard title={"Posts create"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-4xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                {organizationId && type === "article" ? <CreateOrUpdateFormPost organizationId={organizationId} /> : null}
+        <div className="max-w-4xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+            {organizationId && type === "article" ? <CreateOrUpdateFormPost organizationId={organizationId} /> : null}
 
-                {organizationId && type === "audio" ? <CreateOrUpdateFormAudioPost organizationId={organizationId} /> : null}
+            {organizationId && type === "audio" ? <CreateOrUpdateFormAudioPost organizationId={organizationId} /> : null}
 
-                {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
+            {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
 
-                {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} /> : null}
-              </div>
-            </div>
-          </main>
+            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} theme={theme} /> : null}
+          </div>
         </div>
       </LayoutDashboard>
     </>

@@ -100,63 +100,59 @@ const Shops = () => {
   return (
     <>
       <LayoutDashboard title={"Shop"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
-                <HorizontalNavShop />
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+            <HorizontalNavShop />
 
-                {profile?.id ? <EnableShop profile={profile} /> : null}
+            {profile?.id ? <EnableShop profile={profile} /> : null}
 
-                <div className="flow-root">
-                  <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="px-4 py-8">
-                      <div className="sm:flex sm:items-center sm:justify-between">
-                        <div className="mt-4 sm:mt-0">
-                          <ButtonInput
-                            onClick={() => router.push(`${`/shop/create`}`)}
-                            shape="default"
-                            type="button"
-                            size="normal"
-                            loading={false}
-                            color={"indigo"}
-                          >
-                            Create product
-                          </ButtonInput>
-                        </div>
-                        <div className="mt-4 sm:mt-0">
-                          <Input placeholder="Search product" />
-                        </div>
-                      </div>
-
-                      <div className="divide-y divide-gray-200">
-                        {dataTableProducts}
-                      </div>
+            <div className="flow-root">
+              <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="px-4 py-8">
+                  <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="mt-4 sm:mt-0">
+                      <ButtonInput
+                        onClick={() => router.push(`${`/shop/create`}`)}
+                        shape="default"
+                        type="button"
+                        size="normal"
+                        loading={false}
+                        color={"indigo"}
+                      >
+                        Create product
+                      </ButtonInput>
+                    </div>
+                    <div className="mt-4 sm:mt-0">
+                      <Input placeholder="Search product" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
                     </div>
                   </div>
 
-                  {hasNextPage && (
-                    <div className="mt-4 text-center justify-center mx-auto">
-                      <div className="mt-4 sm:mt-0">
-                        <ButtonInput
-                          ref={ref}
-                          onClick={() => fetchNextPage()}
-                          shape="default"
-                          type="button"
-                          size="large"
-                          loading={isFetchingNextPage ? true : false}
-                          color={"indigo"}
-                          minW="fit"
-                        >
-                          Load More
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  )}
+                  <div className="divide-y divide-gray-200 dark:divide-gray-800">
+                    {dataTableProducts}
+                  </div>
                 </div>
               </div>
+
+              {hasNextPage && (
+                <div className="mt-4 text-center justify-center mx-auto">
+                  <div className="mt-4 sm:mt-0">
+                    <ButtonInput
+                      ref={ref}
+                      onClick={() => fetchNextPage()}
+                      shape="default"
+                      type="button"
+                      size="large"
+                      loading={isFetchingNextPage ? true : false}
+                      color={"indigo"}
+                      minW="fit"
+                    >
+                      Load More
+                    </ButtonInput>
+                  </div>
+                </div>
+              )}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

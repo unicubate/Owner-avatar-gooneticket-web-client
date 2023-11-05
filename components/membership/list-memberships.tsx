@@ -79,78 +79,76 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="py-5 divide-gray-200">
-        <div className="flex items-center">
-          <div className="relative flex-shrink-0 cursor-pointer">
-            <Avatar
-              size={100}
-              shape="square"
-              src={viewOneFileUploadAPI({
-                folder: "memberships",
-                fileName: String(dataImages?.[0]?.path),
-              })}
-              alt={item?.title}
-            />
+      <div className="flex py-5 items-center">
+        <div className="relative flex-shrink-0 cursor-pointer">
+          <Avatar
+            size={100}
+            shape="square"
+            src={viewOneFileUploadAPI({
+              folder: "memberships",
+              fileName: String(dataImages?.[0]?.path),
+            })}
+            alt={item?.title}
+          />
+        </div>
+
+        <div className="flex-1 min-w-0 ml-3 cursor-pointer">
+          <div className="flex items-center">
+            <button className="tex-sm text-gray-700">
+              <AiOutlineCalendar />
+            </button>
+            <span className="ml-1.5 font-normal text-sm">
+              {formateDateDayjs(item?.createdAt as Date)}
+            </span>
           </div>
 
-          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
-            <div className="flex items-center">
-              <button className="tex-sm text-gray-700">
-                <AiOutlineCalendar />
-              </button>
-              <span className="ml-1.5 font-normal text-sm">
-                {formateDateDayjs(item?.createdAt as Date)}
-              </span>
-            </div>
-
-            <div className="flex mt-2 items-center">
-              {item?.title ? (
-                <p className="text-lg font-bold text-gray-600">
-                  <ReadMore html={String(item?.title ?? "")} value={50} />
-                </p>
-              ) : null}
-            </div>
-
-            <div className="flex mt-4 items-center">
-              {item?.price ? (
-                <>
-                  <button className="text-lg font-normal">
-                    <BiMoney />
-                  </button>
-                  <span className="ml-1.5 text-sm font-bold">
-                    {formatePrice({
-                      value: Number(item?.price),
-                      isDivide: false,
-                    })}{" "}
-                    {item?.currency?.symbol}
-                  </span>
-                  <span className="ml-1.5 font-bold text-sm">per {convertToPluralMonth(Number(item?.month))}</span>
-                </>
-              ) : null}
-
-
-            </div>
+          <div className="flex mt-2 items-center">
+            {item?.title ? (
+              <p className="text-lg font-bold text-gray-600">
+                <ReadMore html={String(item?.title ?? "")} value={50} />
+              </p>
+            ) : null}
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
-            <Tooltip placement="bottomRight" title={"Edit"}>
-              <button
-                onClick={() => router.push(`/memberships/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
-              >
-                <MdOutlineModeEdit />
-              </button>
-            </Tooltip>
+          <div className="flex mt-4 items-center">
+            {item?.price ? (
+              <>
+                <button className="text-lg font-normal">
+                  <BiMoney />
+                </button>
+                <span className="ml-1.5 text-sm font-bold">
+                  {formatePrice({
+                    value: Number(item?.price),
+                    isDivide: false,
+                  })}{" "}
+                  {item?.currency?.symbol}
+                </span>
+                <span className="ml-1.5 font-bold text-sm">per {convertToPluralMonth(Number(item?.month))}</span>
+              </>
+            ) : null}
 
-            <Tooltip placement="bottomRight" title={"Delete"}>
-              <button
-                onClick={() => deleteItem(item)}
-                className="ml-2 text-lg text-gray-600 hover:text-red-600"
-              >
-                <MdDeleteOutline />
-              </button>
-            </Tooltip>
+
           </div>
+        </div>
+
+        <div className="py-4 text-sm font-medium text-right text-gray-900">
+          <Tooltip placement="bottomRight" title={"Edit"}>
+            <button
+              onClick={() => router.push(`/memberships/${item?.id}/edit`)}
+              className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+            >
+              <MdOutlineModeEdit />
+            </button>
+          </Tooltip>
+
+          <Tooltip placement="bottomRight" title={"Delete"}>
+            <button
+              onClick={() => deleteItem(item)}
+              className="ml-2 text-lg text-gray-600 hover:text-red-600"
+            >
+              <MdDeleteOutline />
+            </button>
+          </Tooltip>
         </div>
       </div>
     </>

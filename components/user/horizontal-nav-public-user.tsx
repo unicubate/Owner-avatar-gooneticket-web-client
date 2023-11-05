@@ -12,16 +12,16 @@ const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
           profile={user?.profile}
         />
 
-        <p className="mt-6 text-lg font-semibold text-black">
+        <p className="mt-6 text-lg font-bold text-black dark:text-white">
           {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}{" "}
         </p>
-        <p className="mt-2 text-sm font-normal">
+        <p className="mt-2 text-sm font-medium text-gray-500">
           <span>{user?.totalFollower ?? 0} Follower</span>
           <span className="ml-2">{user?.totalFollowing ?? 0} Following</span>
         </p>
 
         {user?.totalSubscribe > 0 ? (
-          <p className="mt-2 text-sm font-normal">
+          <p className="mt-2 text-sm font-medium text-gray-500">
             {user?.totalSubscribe}{" "}
             {user?.totalSubscribe > 1 ? "supporters" : "supporter"}
           </p>

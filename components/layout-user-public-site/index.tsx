@@ -10,6 +10,7 @@ interface IProps {
 }
 
 const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
+  const { theme } = useAuth() as any;
   // const user = useAuth() as any;
 
   return (
@@ -24,7 +25,13 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
       <HeaderHorizontalNavUserPublicSite user={user} />
 
       <main>
-        <div className="mx-auto lg:flex mb-10">{children}</div>
+        <div className="mx-auto lg:flex mb-10">
+          {user?.profile?.id && theme ?
+            <div className={`flex flex-col flex-1 bg-gray-100 dark:bg-stone-800`}>
+              {children}
+            </div>
+            : null}
+        </div>
       </main>
       {/* </div> */}
     </>

@@ -37,7 +37,7 @@ const CreateFormPublicDonation: React.FC<{
               className={`h-14 w-14 text-${user?.profile?.color}-500`}
             />
           </p>
-          <div className="ml-auto flex items-center justify-end space-x-8 border border-gray-100 rounded-md">
+          <div className="ml-auto flex items-center justify-end space-x-8 border border-gray-200 rounded-md">
             <ButtonInput
               shape="default"
               size="normal"
@@ -62,7 +62,7 @@ const CreateFormPublicDonation: React.FC<{
               </svg>
             </ButtonInput>
 
-            <span className="text-base font-semibold text-gray-900">
+            <span className="text-base font-semibold text-black dark:text-white">
               {increment}
             </span>
 
@@ -121,13 +121,13 @@ const CreateFormPublicDonation: React.FC<{
 
         {newValuePrice > 0 ? (
           <div className="flex items-center justify-between mt-6">
-            <p className="text-2xl font-bold text-gray-900">Donate</p>
+            <p className="text-2xl font-bold text-black dark:text-white">Donate</p>
             {newAmount?.value ? (
               <>
-                <p className="ml-auto text-xl font-bold text-gray-900">
+                <p className="ml-auto text-xl font-bold text-black dark:text-white">
                   {newAmount?.value ?? ""}
                 </p>
-                <p className="ml-1 text-xl font-bold text-gray-900">
+                <p className="ml-1 text-xl font-bold text-black dark:text-white">
                   {initialCurrency}
                 </p>
               </>
