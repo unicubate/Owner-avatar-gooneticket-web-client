@@ -33,7 +33,6 @@ type Props = {
   postId?: string;
   uploadImages?: any;
   post?: any;
-  theme: string;
   organizationId: string;
 };
 
@@ -42,7 +41,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   post,
   organizationId,
   postId,
-  theme,
 }) => {
   const router = useRouter();
 
@@ -143,7 +141,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className={`overflow-hidden ${theme === "light" ? "bg-white" : ""} border border-gray-200`}>
+            <div className={`overflow-hidden bg-white border border-gray-200`}>
               <div className="px-4 py-5">
                 <h2 className="text-black dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} gallery
