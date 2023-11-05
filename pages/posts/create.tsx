@@ -8,7 +8,7 @@ import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-updat
 import { useAuth } from "@/components/util/context-user";
 
 const PostsCreate = () => {
-  const { organizationId, theme } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
 
@@ -23,7 +23,7 @@ const PostsCreate = () => {
 
             {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
 
-            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} theme={theme} /> : null}
+            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} /> : null}
           </div>
         </div>
       </LayoutDashboard>
