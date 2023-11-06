@@ -88,7 +88,7 @@ const Login = () => {
   return (
     <>
       <LayoutSite title="Log In">
-        <div className="w-full max-w-sm p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-white rounded-lg shadow-md">
+      
           <div className="flex justify-center mx-auto">
             <img
               className="w-auto h-7 sm:h-8"
@@ -204,7 +204,7 @@ const Login = () => {
               New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
             </p>
           </Link>
-        </div>
+        
       </LayoutSite>
     </>
   );

@@ -21,7 +21,7 @@ type AuthContextProps = {
 
 export const logoutUser = () => {
   localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-  window.location.reload()
+  window.location.href = `${process.env.NEXT_PUBLIC_SITE}`;
 }
 
 export const getCurrentUserFormToken = () => {

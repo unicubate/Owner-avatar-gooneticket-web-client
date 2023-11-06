@@ -87,173 +87,171 @@ const Register = () => {
 
   return (
     <LayoutSite title="Log In">
-      <div className="w-full max-w-md p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
-        <div className="flex justify-center mx-auto">
-          <img
-            className="w-auto h-7 sm:h-8"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
-          />
-        </div>
-        <div className="flex justify-center mx-auto">
-          <h6 className="mt-3 text-xl text-center font-bold">
-            {`Sign up. It's free!`}
-          </h6>
-        </div>
-
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-          {hasErrors && (
-            <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-              {hasErrors}
-            </div>
-          )}
-
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="First Name"
-              type="text"
-              name="firstName"
-              placeholder="Full Name"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="Last Name"
-              type="text"
-              name="lastName"
-              placeholder="Full Name"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="Email"
-              type="text"
-              name="email"
-              placeholder="Email Address"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mb-4">
-            <TextInputPassword
-              control={control}
-              label="Password"
-              type="password"
-              name="password"
-              placeholder="Password"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mb-4">
-            <Controller
-              name="confirm"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <>
-                  <div className="flex items-center">
-                    <div className="flex">
-                      <Checkbox checked={value} onChange={onChange} />
-                    </div>
-                    <div className="ml-3">
-                      <label
-                        htmlFor="remember-me"
-                        className="text-sm text-gray-700 font-bold"
-                      >
-                        I accept the{" "}
-                        <Link
-                          className="text-sm text-blue-600 hover:underline"
-                          href="/forgot-password"
-                        >
-                          terms
-                        </Link>{" "}
-                        &{" "}
-                        <Link
-                          className="text-sm text-blue-600 hover:underline"
-                          href="/forgot-password"
-                        >
-                          privacy policy
-                        </Link>
-                      </label>
-                    </div>
-                  </div>
-                </>
-              )}
-            />
-            {errors?.confirm && (
-              <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                {errors?.confirm?.message}
-              </span>
-            )}
-          </div>
-
-          <div className="mt-6">
-            <ButtonInput
-              shape="default"
-              type="submit"
-              size="large"
-              loading={loading}
-              color={"indigo"}
-            >
-              Create account
-            </ButtonInput>
-          </div>
-        </form>
-
-        <div className="flex items-center justify-between mt-4 mb-4">
-          <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-          <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
-            or login with Social Media
-          </p>
-
-          <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
-        </div>
-
-        <GoogleOAuthProvider
-          clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-        >
-          <GoogleLogin
-            size="large"
-            width={400}
-            useOneTap
-            onSuccess={async (credentialResponse) => {
-              try {
-                await registerGoogleUserAPI({
-                  token: String(credentialResponse.credential),
-                });
-                setHasErrors(false);
-                router.push(`${`/login`}`);
-              } catch (error: any) {
-                setHasErrors(true);
-                setHasErrors(error.response.data.message);
-                AlertDangerNotification({
-                  text: "An error has occurred.",
-                  gravity: "top",
-                  className: "info",
-                  position: "center",
-                });
-              }
-            }}
-            onError={() => {
-              console.log("Login Failed");
-            }}
-          />
-        </GoogleOAuthProvider>
-
-        <Link href="/login">
-          <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
-            {" "}
-            Already have an account? Log in here
-          </p>
-        </Link>
+      <div className="flex justify-center mx-auto">
+        <img
+          className="w-auto h-7 sm:h-8"
+          src="https://merakiui.com/images/logo.svg"
+          alt=""
+        />
       </div>
+      <div className="flex justify-center mx-auto">
+        <h6 className="mt-3 text-xl text-center font-bold">
+          {`Sign up. It's free!`}
+        </h6>
+      </div>
+
+      <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        {hasErrors && (
+          <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
+            {hasErrors}
+          </div>
+        )}
+
+        <div className="mb-4">
+          <TextInput
+            control={control}
+            label="First Name"
+            type="text"
+            name="firstName"
+            placeholder="Full Name"
+            errors={errors}
+          />
+        </div>
+
+        <div className="mb-4">
+          <TextInput
+            control={control}
+            label="Last Name"
+            type="text"
+            name="lastName"
+            placeholder="Full Name"
+            errors={errors}
+          />
+        </div>
+
+        <div className="mb-4">
+          <TextInput
+            control={control}
+            label="Email"
+            type="text"
+            name="email"
+            placeholder="Email Address"
+            errors={errors}
+          />
+        </div>
+
+        <div className="mb-4">
+          <TextInputPassword
+            control={control}
+            label="Password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            errors={errors}
+          />
+        </div>
+
+        <div className="mb-4">
+          <Controller
+            name="confirm"
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <>
+                <div className="flex items-center">
+                  <div className="flex">
+                    <Checkbox checked={value} onChange={onChange} />
+                  </div>
+                  <div className="ml-3">
+                    <label
+                      htmlFor="remember-me"
+                      className="text-sm text-gray-700 font-bold"
+                    >
+                      I accept the{" "}
+                      <Link
+                        className="text-sm text-blue-600 hover:underline"
+                        href="/forgot-password"
+                      >
+                        terms
+                      </Link>{" "}
+                      &{" "}
+                      <Link
+                        className="text-sm text-blue-600 hover:underline"
+                        href="/forgot-password"
+                      >
+                        privacy policy
+                      </Link>
+                    </label>
+                  </div>
+                </div>
+              </>
+            )}
+          />
+          {errors?.confirm && (
+            <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+              {errors?.confirm?.message}
+            </span>
+          )}
+        </div>
+
+        <div className="mt-6">
+          <ButtonInput
+            shape="default"
+            type="submit"
+            size="large"
+            loading={loading}
+            color={"indigo"}
+          >
+            Create account
+          </ButtonInput>
+        </div>
+      </form>
+
+      <div className="flex items-center justify-between mt-4 mb-4">
+        <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+        <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
+          or login with Social Media
+        </p>
+
+        <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
+      </div>
+
+      <GoogleOAuthProvider
+        clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+      >
+        <GoogleLogin
+          size="large"
+          width={400}
+          useOneTap
+          onSuccess={async (credentialResponse) => {
+            try {
+              await registerGoogleUserAPI({
+                token: String(credentialResponse.credential),
+              });
+              setHasErrors(false);
+              router.push(`${`/login`}`);
+            } catch (error: any) {
+              setHasErrors(true);
+              setHasErrors(error.response.data.message);
+              AlertDangerNotification({
+                text: "An error has occurred.",
+                gravity: "top",
+                className: "info",
+                position: "center",
+              });
+            }
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+      </GoogleOAuthProvider>
+
+      <Link href="/login">
+        <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
+          {" "}
+          Already have an account? Log in here
+        </p>
+      </Link>
     </LayoutSite>
   );
 };

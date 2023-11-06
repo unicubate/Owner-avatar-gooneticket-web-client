@@ -64,14 +64,14 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white border-[1px] border-gray-300 sticky top-0 z-20">
+      <header className="bg-white dark:bg-black border-gray-300 sticky top-0 z-20">
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
               <button
                 onClick={showDrawer}
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-gray-400 bg-white rounded-lg hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                className="inline-flex items-center justify-center p-2 text-gray-400 dark:text-white bg-white dark:bg-black rounded-lg dark:hover:text-gray-500 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600"
               >
                 <svg
                   className="w-6 h-6"
@@ -115,10 +115,10 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       href={`${item.href}`}
                       title={item?.title}
                       className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
-                          ? `text-${user?.profile?.color ?? "indigo"
-                          }-600 border-${user?.profile?.color ?? "indigo"
-                          }-600`
-                          : "text-gray-700 hover:border-gray-300 hover:text-gray-900"
+                        ? `text-${user?.profile?.color ?? "indigo"
+                        }-600 border-${user?.profile?.color ?? "indigo"
+                        }-600`
+                        : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
                         } `}
                     >
                       {item?.icon}

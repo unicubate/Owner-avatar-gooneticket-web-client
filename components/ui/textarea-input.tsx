@@ -38,7 +38,7 @@ const TextAreaInput: React.FC<Props> = ({
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <TextArea
-            className={`dark:bg-black dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
+            className={`dark:bg-black dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
             size="large"
             id={name}
             maxLength={6000}

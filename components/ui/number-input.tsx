@@ -48,7 +48,9 @@ const NumberInput: React.FC<Props> = ({
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <InputNumber
-            className={`dark:bg-black dark:placeholder-gray-500 dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
+            className={`bg-white text-black placeholder-gray-500 border-gray-300 dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800 ${
+              errors?.[name]?.message ? "border-red-500" : ""
+            }`}
             size="large"
             id={name}
             required={required}

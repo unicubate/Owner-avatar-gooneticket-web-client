@@ -46,7 +46,7 @@ const SelectInput: React.FC<Props> = ({
             {dataItem?.length > 0 ? (
               dataItem?.map((item: any, index: number) => (
                 <Option
-                  className="block text-black dark:text-white text-sm font-bold mb-2"
+                  
                   value={optionType === "currency" ? item?.code : item?.id}
                   key={index}
                 >

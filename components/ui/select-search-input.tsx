@@ -48,6 +48,7 @@ const SelectSearchInput: React.FC<Props> = ({
               (option?.name ?? "").toLowerCase().includes(input.toLowerCase())
             }
             {...field}
+            className={`dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800`}
           >
             <>
               {dataItem?.length > 0
