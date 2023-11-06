@@ -16,7 +16,7 @@ const AvatarCoffeeComponent: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <BiCoffeeTogo className={`${className} text-${color}-400`} />
+      <BiCoffeeTogo className={`${className} text-indigo-400`} />
     </>
   );
 };

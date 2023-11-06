@@ -22,11 +22,7 @@ const LayoutSite: React.FC<IProps> = ({ children, title }) => {
 
       {/* <div className="min-h-screen space-y-5"> */}
       <HeaderHorizontalNavSite user={user} />
-      <Main>
-        <div className="w-full max-w-lg p-6 m-auto mt-10 md:mt-16 mx-auto bg-gray-100 dark:bg-zinc-800 rounded-lg shadow-md">
-          {children}
-        </div>
-      </Main>
+      <Main>{children}</Main>
       {/* </div> */}
     </>
   );

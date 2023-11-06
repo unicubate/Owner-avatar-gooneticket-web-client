@@ -70,44 +70,40 @@ const ForgotPassword = () => {
   };
 
   return (
-    <LayoutSite title="Forgot you password">
-      {/* <div className="relative max-w-md mx-auto mt-10 md:mt-16"> */}
-        <div className="w-full max-w-md p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
-          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-            <h6 className="text-xl text-center font-bold">Forgot password?</h6>
+    <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-black rounded-lg shadow-md">
+      <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <h6 className="text-xl text-center font-bold">Forgot password?</h6>
 
-            <div className="mt-4">
-              <TextInput
-                control={control}
-                label="Email"
-                type="text"
-                name="email"
-                placeholder="Email Address"
-                errors={errors}
-              />
-            </div>
-
-            <div className="mt-6">
-              <ButtonInput
-                shape="default"
-                type="submit"
-                size="large"
-                loading={loading}
-                color={"indigo"}
-              >
-                Request Password Reset
-              </ButtonInput>
-            </div>
-          </form>
-
-          <Link href="/login">
-            <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
-              Already have an account? Log in here
-            </p>
-          </Link>
+        <div className="mt-4">
+          <TextInput
+            control={control}
+            label="Email"
+            type="text"
+            name="email"
+            placeholder="Email Address"
+            errors={errors}
+          />
         </div>
-      {/* </div> */}
-    </LayoutSite>
+
+        <div className="mt-6">
+          <ButtonInput
+            shape="default"
+            type="submit"
+            size="large"
+            loading={loading}
+            color={"indigo"}
+          >
+            Request Password Reset
+          </ButtonInput>
+        </div>
+      </form>
+
+      <Link href="/login">
+        <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
+          Already have an account? Log in here
+        </p>
+      </Link>
+    </div>
   );
 };
 

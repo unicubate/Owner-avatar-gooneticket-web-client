@@ -76,56 +76,60 @@ const ResetPassword = () => {
   };
 
   return (
-    <LayoutSite title="Forgot you password">
-      <div className="w-full max-w-sm p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
-        <div className="flex justify-center mx-auto">
-          <img
-            className="w-auto h-7 sm:h-8"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
+    <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-black rounded-lg shadow-md">
+      <div className="flex justify-center mx-auto">
+        <img
+          className="w-auto h-7 sm:h-8"
+          src="https://merakiui.com/images/logo.svg"
+          alt=""
+        />
+      </div>
+      <div className="flex justify-center mx-auto">
+        <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
+      </div>
+
+      <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <div className="mb-4">
+          <TextInputPassword
+            control={control}
+            label="Password"
+            type="password"
+            name="newPassword"
+            placeholder="Password"
+            errors={errors}
           />
         </div>
-        <div className="flex justify-center mx-auto">
-          <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
+
+        <div className="mb-4">
+          <TextInputPassword
+            control={control}
+            label="Confirm Password"
+            type="password"
+            name="passwordConfirm"
+            placeholder="Confirm Password"
+            errors={errors}
+          />
         </div>
 
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="mb-4">
-            <TextInputPassword
-              control={control}
-              label="Password"
-              type="password"
-              name="newPassword"
-              placeholder="Password"
-              errors={errors}
-            />
-          </div>
+        <div className="mt-6">
+          <ButtonInput
+            shape="default"
+            type="submit"
+            size="large"
+            loading={loading}
+            color={"indigo"}
+          >
+            Log In
+          </ButtonInput>
+        </div>
+      </form>
 
-          <div className="mb-4">
-            <TextInputPassword
-              control={control}
-              label="Confirm Password"
-              type="password"
-              name="passwordConfirm"
-              placeholder="Confirm Password"
-              errors={errors}
-            />
-          </div>
-
-          <div className="mt-6">
-            <ButtonInput shape="default" type="submit" size="large" loading={loading} color={'indigo'}>
-              Log In
-            </ButtonInput>
-          </div>
-        </form>
-
-        {/* <Link href="/login">
+      {/* <Link href="/login">
           <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
             Already have an account? Log in here
           </p>
         </Link> */}
-      </div>
-    </LayoutSite>
+    </div>
   );
 };
 
