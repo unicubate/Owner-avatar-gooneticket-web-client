@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar, Skeleton } from "antd";
 import { BiComment } from "react-icons/bi";
@@ -25,6 +25,7 @@ import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
 import { ErrorFile } from "../ui/error-file";
+import { useInView } from "react-intersection-observer";
 
 type Props = {
   organizationId: string;
@@ -43,6 +44,7 @@ const ListCommentsPosts: React.FC<Props> = ({
   organizationId,
   index,
 }) => {
+  const { ref, inView } = useInView();
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -127,6 +129,12 @@ const ListCommentsPosts: React.FC<Props> = ({
         />
       ))
   );
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage]);
 
   return (
     <>

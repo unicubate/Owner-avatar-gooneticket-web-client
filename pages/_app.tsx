@@ -18,8 +18,8 @@ const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
 
         <HydrationBoundary state={pageProps.dehydratedState}>
           <ConfigProvider>
@@ -32,7 +32,8 @@ export default function App({ Component, pageProps }: AppProps) {
             </ContextUserProvider>
           </ConfigProvider>
         </HydrationBoundary>
-      </QueryClientProvider>
-    </ThemeProvider>
+        
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

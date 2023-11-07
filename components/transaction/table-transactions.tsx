@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonInput, EmptyData, LoadingFile } from "../ui";
 import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
 import { ListTransactions } from "./list-transactions";
 import { Input } from "antd";
 import { ErrorFile } from "../ui/error-file";
-import { GrTransaction } from "react-icons/gr";
 import { BiTransfer } from "react-icons/bi";
+import { ModelType } from "@/utils/pagination-item";
+import { SearchInput } from "../ui/SearchInput";
+import { useDebounce } from "@/utils";
 
 type Props = {
-  model?: string;
+  model?: ModelType;
   days?: number;
   organizationId?: string;
 };
@@ -21,7 +23,9 @@ const TableTransactions: React.FC<Props> = ({
   days,
 }) => {
   const { ref, inView } = useInView();
+  const [filter, setFilter] = useState<string>('')
 
+  const debounceFilter = useDebounce(filter, 500);
   const {
     isLoading: isLoadingTransaction,
     isError: isErrorTransaction,
@@ -30,6 +34,7 @@ const TableTransactions: React.FC<Props> = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
+    search: debounceFilter,
     organizationId,
     model: model?.toLocaleUpperCase(),
     take: 10,
@@ -37,27 +42,11 @@ const TableTransactions: React.FC<Props> = ({
     queryKey: ["transactions", "infinite"],
   });
 
-  // useEffect(() => {
-  //   let fetching = false;
-  //   if (inView) {
-  //     fetchNextPage();
-  //   }
-  //   const onScroll = async (event: any) => {
-  //     const { scrollHeight, scrollTop, clientHeight } =
-  //       event.target.scrollingElement;
-
-  //     if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-  //       fetching = true;
-  //       if (hasNextPage) await fetchNextPage();
-  //       fetching = false;
-  //     }
-  //   };
-
-  //   document.addEventListener("scroll", onScroll);
-  //   return () => {
-  //     document.removeEventListener("scroll", onScroll);
-  //   };
-  // }, [fetchNextPage, hasNextPage, inView]);
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage]);
 
   const dataTableTransactions = isLoadingTransaction ? (
     <LoadingFile />
@@ -89,7 +78,9 @@ const TableTransactions: React.FC<Props> = ({
             <p className="text-lg font-bold">Recent transactions</p>
           </div>
           <div className="mt-4 sm:mt-0">
-            <Input placeholder="Search by name or email"  className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+            <SearchInput placeholder="Search by name or email"
+              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setFilter(e.target.value)}
+            />
           </div>
         </div>
 
@@ -118,6 +109,28 @@ const TableTransactions: React.FC<Props> = ({
           </div>
         </div>
       )}
+
+      {/* <div className="flex items-center mt-2 mb-4 space-x-4">
+        <ButtonInput
+          status="cancel"
+          type="button"
+          shape="default"
+          size="normal"
+          loading={false}
+        // onClick={() => back()}
+        >
+          Preview
+        </ButtonInput>
+        <ButtonInput
+          status="cancel"
+          type="button"
+          shape="default"
+          size="normal"
+          loading={false}
+        >
+          Next
+        </ButtonInput>
+      </div> */}
     </>
   );
 };

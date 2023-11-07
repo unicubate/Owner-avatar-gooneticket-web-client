@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Skeleton } from "antd";
 import { CommentModel } from "@/types/comment";
 import { GetInfiniteCommentsAPI } from "@/api-site/comment";
@@ -7,12 +7,15 @@ import { ListCommentTransactions } from "../comment/list-comments-transactions";
 import { ModelType } from "@/utils/pagination-item";
 import { ButtonInput } from "../ui";
 import { ErrorFile } from "../ui/error-file";
+import { useInView } from "react-intersection-observer";
 
 const RecentCommentTransactions: React.FC<{
   userReceiveId: string;
   modelIds: ModelType[];
   model: ModelType;
-}> = ({  modelIds, userReceiveId, model }) => {
+}> = ({ modelIds, userReceiveId, model }) => {
+  const { ref, inView } = useInView();
+
   const {
     isLoading: isLoadingComments,
     isError: isErrorComments,
@@ -26,6 +29,12 @@ const RecentCommentTransactions: React.FC<{
     modelIds: ["DONATION"],
     userReceiveId,
   });
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage]);
 
   const dataTableTransactions = isLoadingComments ? (
     <Skeleton
@@ -76,6 +85,7 @@ const RecentCommentTransactions: React.FC<{
           <div className="mt-2 text-center justify-center mx-auto">
             <div className="sm:mt-0">
               <ButtonInput
+                ref={ref}
                 shape="default"
                 type="button"
                 size="large"

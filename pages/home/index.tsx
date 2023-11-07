@@ -6,8 +6,11 @@ import { ListFollowPosts } from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
 
 const Home = () => {
+  const { ref, inView } = useInView();
   const { userStorage: userVisiter } = useAuth() as any;
   const {
     isLoading: isLoadingPosts,
@@ -20,6 +23,12 @@ const Home = () => {
     take: 6,
     sort: "DESC",
   });
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage]);
 
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
@@ -52,13 +61,14 @@ const Home = () => {
       <LayoutDashboard title={"Home"}>
         <div className="max-w-3xl mx-auto py-6">
           <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-            
+
             {dataTablePosts}
 
             {hasNextPage && (
               <div className="mt-4 text-center justify-center mx-auto">
                 <div className="sm:mt-0">
                   <ButtonInput
+                    ref={ref}
                     onClick={() => fetchNextPage()}
                     shape="default"
                     type="button"

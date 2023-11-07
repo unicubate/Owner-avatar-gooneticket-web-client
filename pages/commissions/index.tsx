@@ -13,26 +13,20 @@ const Commissions = () => {
   return (
     <>
       <LayoutDashboard title={"Commissions"}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="max-w-6xl mx-auto py-6">
+        <div className="max-w-6xl mx-auto py-6">
+          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
 
+            <HorizontalNavCommission />
 
-              <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+            {profile?.id ? <EnableCommission profile={profile} /> : null}
 
-                <HorizontalNavCommission />
+            <div className="flow-root">
 
-                {profile?.id ? <EnableCommission profile={profile} /> : null}
-
-                <div className="flow-root">
-
-                  {organizationId ? <TableCommissions organizationId={organizationId} /> : null}
-
-                </div>
-              </div>
+              {organizationId ? <TableCommissions organizationId={organizationId} /> : null}
 
             </div>
-          </main>
+          </div>
+
         </div>
       </LayoutDashboard>
     </>

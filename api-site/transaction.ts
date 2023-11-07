@@ -14,6 +14,7 @@ import {
 
 export const getTransactionsAPI = async (
   payload: {
+    search?: string;
     days?: number;
     organizationId?: string;
     status?: string;
@@ -29,8 +30,9 @@ export const getTransactionsAPI = async (
 export const GetStatisticsTransactionsAPI = (payload: {
   queryKey: string[];
   days?: number;
+  isEnabled?: boolean;
 }) => {
-  const { queryKey, days } = payload;
+  const { queryKey, days, isEnabled } = payload;
   const { data, isError, isLoading, status, isPending, error } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
@@ -53,15 +55,19 @@ export const GetStatisticsTransactionsAPI = (payload: {
 export const GetInfiniteTransactionsAPI = (payload: {
   organizationId?: string;
   model?: string;
+  search?: string;
   take: number;
   days?: number;
   status?: string;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { model, days, organizationId, take, sort, status, queryKey } = payload;
+  const { model, days, organizationId, search, take, sort, status, queryKey } =
+    payload;
+  console.log("search ==============================>", search);
   return useInfiniteQuery({
     queryKey: queryKey,
+    initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getTransactionsAPI({
@@ -70,9 +76,9 @@ export const GetInfiniteTransactionsAPI = (payload: {
         sort,
         days,
         organizationId,
+        search: search,
         status: status?.toUpperCase(),
         page: Number(pageParam),
       }),
-    initialPageParam: 1,
   });
 };

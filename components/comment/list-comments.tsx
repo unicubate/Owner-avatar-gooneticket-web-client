@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Skeleton } from "antd";
 import ListCommentsPosts from "./list-comments-posts";
 import { GetInfiniteCommentsAPI } from "@/api-site/comment";
@@ -7,6 +7,7 @@ import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { CommentModel } from "@/types/comment";
 import { ModelType } from "@/utils/pagination-item";
 import { ErrorFile } from "../ui/error-file";
+import { useInView } from "react-intersection-observer";
 
 const ListComments: React.FC<{
   take: number;
@@ -25,6 +26,7 @@ const ListComments: React.FC<{
   productId,
   userVisitorId,
 }) => {
+    const { ref, inView } = useInView();
     const {
       isLoading: isLoadingComments,
       isError: isErrorComments,
@@ -40,6 +42,12 @@ const ListComments: React.FC<{
       productId: productId ?? "",
       userVisitorId,
     });
+
+    useEffect(() => {
+      if (inView && hasNextPage) {
+        fetchNextPage();
+      }
+    }, [inView, fetchNextPage, hasNextPage]);
 
     const dataTableComments = isLoadingComments ? (
       <Skeleton
@@ -92,6 +100,7 @@ const ListComments: React.FC<{
             <div className="mt-4 flex flex-col justify-between items-center">
               {isFetchingNextPage ? null : (
                 <button
+                  ref={ref}
                   disabled={isFetchingNextPage ? true : false}
                   onClick={() => fetchNextPage()}
                   className="text-sm text-blue-600 decoration-2 hover:underline font-medium"

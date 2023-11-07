@@ -53,7 +53,7 @@ const MONETIZE_ITEMS: NavbarProps[] = [
   },
   {
     title: "Shop",
-    href: "/shop",
+    href: "/shop/orders",
     icon: <BiStoreAlt className={classIcon} />,
   },
 ];

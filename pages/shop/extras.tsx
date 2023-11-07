@@ -14,7 +14,7 @@ import { ProductModel } from "@/types/product";
 import { ErrorFile } from "@/components/ui/error-file";
 import { BiStoreAlt } from "react-icons/bi";
 
-const Shops = () => {
+const ShopsExtras = () => {
   const { userStorage: user, profile } = useAuth() as any;
   const router = useRouter();
   const [dayCount, setDayCount] = useState(30);
@@ -80,23 +80,6 @@ const Shops = () => {
     ))
   );
 
-  // const {
-  //   data: transactions,
-  //   isError,
-  //   isPending,
-  //   error,
-  // } = GetStatisticsTransactionsAPI({
-  //   queryKey: ["statistics-transactions"],
-  //   days: dayCount,
-  // });
-  // if (isPending) {
-  //   return "";
-  // }
-  // if (isError) {
-  //   return <span>Error: {error.message}</span>;
-  // }
-  // const transaction = transactions?.find((item) => item.model === "PRODUCT");
-
   return (
     <>
       <LayoutDashboard title={"Shop"}>
@@ -159,4 +142,4 @@ const Shops = () => {
   );
 };
 
-export default PrivateComponent(Shops);
+export default PrivateComponent(ShopsExtras);

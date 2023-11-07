@@ -9,8 +9,12 @@ const HorizontalNavShop: React.FC = () => {
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Home",
-      href: "/shop",
+      title: "Orders",
+      href: "/shop/orders",
+    },
+    {
+      title: "Extras",
+      href: "/shop/extras",
     },
     {
       title: "Configurations",
