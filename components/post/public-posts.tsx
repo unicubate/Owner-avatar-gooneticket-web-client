@@ -23,7 +23,7 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 10,
+    take: 20,
     sort: "DESC",
     userVisitor,
     status: 'ACTIVE',
@@ -31,27 +31,27 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
     queryKey: ['posts', "infinite"]
   });
 
-  useEffect(() => {
-    let fetching = false;
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-    const onScroll = async (event: any) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement;
+  // useEffect(() => {
+  //   let fetching = false;
+  //   if (inView && hasNextPage) {
+  //     fetchNextPage();
+  //   }
+  //   const onScroll = async (event: any) => {
+  //     const { scrollHeight, scrollTop, clientHeight } =
+  //       event.target.scrollingElement;
 
-      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-        fetching = false;
-      }
-    };
+  //     if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+  //       fetching = true;
+  //       if (hasNextPage) await fetchNextPage();
+  //       fetching = false;
+  //     }
+  //   };
 
-    document.addEventListener("scroll", onScroll);
-    return () => {
-      document.removeEventListener("scroll", onScroll);
-    };
-  }, [fetchNextPage, hasNextPage, inView]);
+  //   document.addEventListener("scroll", onScroll);
+  //   return () => {
+  //     document.removeEventListener("scroll", onScroll);
+  //   };
+  // }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
@@ -67,7 +67,7 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListFollowPosts item={item} key={index} commentTake={4} userVisitor={userVisitor} />
+        <ListFollowPosts item={item} key={index} commentTake={2} userVisitor={userVisitor} />
       ))
   );
 

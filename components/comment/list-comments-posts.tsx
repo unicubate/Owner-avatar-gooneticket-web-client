@@ -44,7 +44,6 @@ const ListCommentsPosts: React.FC<Props> = ({
   organizationId,
   index,
 }) => {
-  const { ref, inView } = useInView();
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -129,12 +128,6 @@ const ListCommentsPosts: React.FC<Props> = ({
         />
       ))
   );
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-  }, [inView, fetchNextPage, hasNextPage]);
 
   return (
     <>
