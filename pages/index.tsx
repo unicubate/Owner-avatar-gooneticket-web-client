@@ -47,13 +47,6 @@ export default function Home() {
                 </svg>
                 <span className="text-xs font-medium text-gray-900 sm:text-sm"> It’s free, and takes less than a minute. </span>
               </li>
-
-              {/* <li className="flex items-center">
-        <svg className="w-5 h-5 mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
-        </svg>
-        <span className="text-xs font-medium text-gray-900 sm:text-sm"> Join other 1600+ Devs </span>
-      </li> */}
             </ul>
           </div>
         </div>
