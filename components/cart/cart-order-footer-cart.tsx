@@ -43,7 +43,7 @@ const CartOrderFooterCart: React.FC<{
                     </div>
 
                     <p className="ml-3 text-xl font-bold text-gray-900 dark:text-white">
-                      {carts?.summary?.totalPrice} EUR
+                      {carts?.summary?.totalPrice} {user?.profile?.currency?.symbol}
                     </p>
 
                     <div className="flex pl-8 ml-auto">
