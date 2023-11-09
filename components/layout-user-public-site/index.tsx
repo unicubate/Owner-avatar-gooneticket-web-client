@@ -2,9 +2,10 @@ import Head from "next/head";
 import { getCurrentUserFormToken, useAuth } from "../util/context-user";
 import { HeaderHorizontalNavUserPublicSite } from "./header-horizontal-nav-user-public-site";
 import { useState } from "react";
+import { UserModel } from "@/types/user.type";
 
 interface IProps {
-  user: any;
+  user: UserModel;
   title: string;
   children: React.ReactNode;
 }

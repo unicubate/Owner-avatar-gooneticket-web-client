@@ -152,6 +152,28 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Cart route */
+  getCarts: {
+    endpoint: `${baseUrl}/carts`,
+    method: GET,
+  },
+  getOneCartOrder: {
+    endpoint: `${baseUrl}/cart-orders/view`,
+    method: GET,
+  },
+  createOneCart: {
+    endpoint: `${baseUrl}/carts`,
+    method: POST,
+  },
+  updateOneCart: {
+    endpoint: `${baseUrl}/carts/:cartId`,
+    method: PUT,
+  },
+  deleteOneCart: {
+    endpoint: `${baseUrl}/carts/:cartId`,
+    method: DELETE,
+  },
+
   /****************** Currency or Countries route */
   getAllCurrencies: {
     endpoint: `${baseUrl}/currencies`,

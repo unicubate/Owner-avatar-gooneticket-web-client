@@ -83,7 +83,7 @@ const CreateOrUpdateFormFollow: React.FC<{
           status="cancel"
           type="button"
           shape="default"
-          size="normal"
+          size="huge"
           loading={false}
           onClick={() => {
             followItem(item);

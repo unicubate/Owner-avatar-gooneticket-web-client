@@ -24,8 +24,8 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
     take: 10,
     sort: "DESC",
     organizationId,
-    status: 'ACTIVE',
-    queryKey: ['products', "infinite"]
+    status: "ACTIVE",
+    queryKey: ["products", "infinite"],
   });
 
   useEffect(() => {
@@ -59,9 +59,7 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
   ) : (
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListPublicShop item={item} key={index} commentTake={2} />
-      ))
+      .map((item, index) => <ListPublicShop item={item} key={index} />)
   );
 
   return (

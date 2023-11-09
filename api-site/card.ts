@@ -1,0 +1,127 @@
+import { makeApiCall } from "@/utils/get-url-end-point";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { CardModel, CartFormModel, CardOrderModel } from "@/types/card";
+
+export const CreateOrUpdateOneCartAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ["carts", "cart-order"];
+  const queryClient = useQueryClient();
+  const result = useMutation({
+    // mutationKey: queryKey,
+    mutationFn: async (payload: CartFormModel & { catId?: string }) => {
+      const { catId } = payload;
+      return catId
+        ? await makeApiCall({
+            action: "updateOneCart",
+            body: payload,
+            urlParams: { catId },
+          })
+        : await makeApiCall({
+            action: "createOneCart",
+            body: { ...payload },
+          });
+    },
+    onError: (error) => {
+      queryClient.invalidateQueries();
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries();
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+
+  return result;
+};
+
+export const DeleteOneCartAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ["carts", "cart-order"];
+  const queryClient = useQueryClient();
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { cardId: string }) => {
+      const { cardId } = payload;
+      return await makeApiCall({
+        action: "deleteOneCart",
+        urlParams: { cardId },
+      });
+    },
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+
+  return result;
+};
+
+export const GetCartsAPI = (payload: {
+  organizationId?: string;
+  ipLocation?: string;
+  userId: string;
+  cartOrderId?: string;
+}) => {
+  const { data, isError, isLoading, status } = useQuery({
+    queryKey: ["carts", { ...payload }],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getCarts",
+        queryParams: payload,
+      }),
+    refetchOnWindowFocus: false,
+  });
+
+  return { data: data?.data as CardModel, isError, isLoading, status };
+};
+
+export const GetOneCartOrderAPI = (payload: {
+  organizationId: string;
+  cartOrderId?: string;
+}) => {
+  const { data, isError, isLoading, status } = useQuery({
+    queryKey: ["cart-order", { ...payload }],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOneCartOrder",
+        queryParams: payload,
+      }),
+    refetchOnWindowFocus: false,
+  });
+
+  return { data: data?.data as CardOrderModel, isError, isLoading, status };
+};

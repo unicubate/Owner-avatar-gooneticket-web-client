@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { DiscountFormModel } from "@/types/discount";
 import { CreateOrUpdateOneDiscountAPI } from "@/api-site/discount";
 import { SwitchInput, ButtonInput } from "../ui";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 const schema = yup.object({
   percent: yup.number().required(),
@@ -20,20 +21,18 @@ const CreateOrUpdateDiscount: React.FC<{
   setShowModal: any;
   discount?: any;
 }> = ({ showModal, setShowModal, discount }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
     watch,
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
+
   const watchEnableExpiredAt = watch("enableExpiredAt", false);
 
   useEffect(() => {
@@ -100,24 +99,24 @@ const CreateOrUpdateDiscount: React.FC<{
       {showModal ? (
         <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
           <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white">
+          <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-black">
             <button
               className="bg-transparent border-0 text-black float-right"
               onClick={() => setShowModal(false)}
             >
-              <span className="text-black opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
+              <span className="text-black dark:text-white opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
                 <CloseOutlined />
               </span>
             </button>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="p-2 flex-auto justify-center">
                 {hasErrors && (
-                  <div className="py-6 bg-white">
+                  <div className="py-6 bg-white dark:bg-black">
                     <div className="bg-red-100 rounded-lg">
                       <div className="p-3">
                         <div className="flex items-center justify-between">
                           <p className="ml-3 text-sm font-medium text-red-500">
-                            {hasErrors}
+                           tette
                           </p>
                         </div>
                       </div>
@@ -161,31 +160,20 @@ const CreateOrUpdateDiscount: React.FC<{
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex items-center flex-1 min-w-0">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-gray-900">
+                          <p className="text-sm font-bold text-black dark:text-white">
                             Set Expiry
                           </p>
-                          <p className="mt-1 text-sm font-medium text-gray-500">
+                          <p className="mt-1 text-sm font-medium text-gray-900">
                             Setting expired date
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                        <button
-                          type="button"
-                          title=""
-                          className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                        >
-                          {" "}
-                        </button>
-                        <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                          <SwitchInput
-                            control={control}
-                            name="enableExpiredAt"
-                            label=""
-                          />
-                        </div>
-                      </div>
+                      <SwitchInput
+                        control={control}
+                        name="enableExpiredAt"
+                        label=""
+                      />
                     </div>
                     {watchEnableExpiredAt ? (
                       <div className="mb-1">

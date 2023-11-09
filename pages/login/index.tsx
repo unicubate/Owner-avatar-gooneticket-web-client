@@ -12,6 +12,7 @@ import { PublicComponent } from "@/components/util/public-component";
 import { LayoutSite } from "@/components/layout-site";
 import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
 
 const schema = yup.object({
   email: yup
@@ -25,19 +26,17 @@ const schema = yup.object({
 
 const Login = () => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
   const {
+    watch,
     control,
-    register,
+    setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserLoginFormModel>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
     payload: UserLoginFormModel

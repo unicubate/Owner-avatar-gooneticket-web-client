@@ -17,20 +17,17 @@ const ProfilePublic = () => {
   const { query } = useRouter();
   const username = String(query?.username);
 
-  const {
-    status,
-    data: user
-  } = GetOneUserPublicAPI({
+  const { status, data: user } = GetOneUserPublicAPI({
     username,
     userVisitorId: userVisiter?.id,
   });
 
-
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
-          }`}
+        title={`${user?.profile?.firstName ?? ""} ${
+          user?.profile?.lastName ?? ""
+        }`}
         user={user}
       >
         <div className="mt-4 px-4 max-w-full sm:px-6 lg:px-8">
@@ -38,7 +35,6 @@ const ProfilePublic = () => {
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-full mx-auto py-6">
-
               {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
               <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
@@ -64,31 +60,12 @@ const ProfilePublic = () => {
                       </div>
                     )}
 
-
-                    {status === "pending" && (
-                      <>
-                        <Skeleton height={30} width="100%" />
-                        <Skeleton height={100} width="100%" className="mt-4" />
-                        <Skeleton height={30} width="100%" className="mt-8" />
-                        <Skeleton height={30} width="100%" className="mt-2" />
-                      </>
-                    )}
-
-                    {status === "error" && (
-                      <ErrorFile
-                        status="error"
-                        title="404"
-                        description="Error find data please try again..."
-                      />
-                    )}
-
-
                     <div className="mt-4 overflow-hidden bg-white dark:bg-black rounded-lg shadow-xl shadow-gray-600/15">
                       <div className="p-6 sm:py-4 sm:px-4">
                         <div className="flex items-center">
-
-                          {user?.id ? <CreateFormPublicDonation user={user} /> : null}
-
+                          {user?.id ? (
+                            <CreateFormPublicDonation user={user} />
+                          ) : null}
                         </div>
                       </div>
                     </div>
@@ -107,6 +84,16 @@ const ProfilePublic = () => {
           </div>
         </div>
       </LayoutUserPublicSite>
+
+      {status === "pending" ? <LoadingFile /> : null}
+
+      {status === "error" ? (
+        <ErrorFile
+          status="error"
+          title="404"
+          description="Error find data please try again"
+        />
+      ) : null}
     </>
   );
 };

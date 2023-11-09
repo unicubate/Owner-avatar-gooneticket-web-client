@@ -11,40 +11,34 @@ import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav
 import { Badge } from "antd";
 import { BiCart } from "react-icons/bi";
 import { ButtonInput } from "@/components/ui";
+import { GetOneCartOrderAPI } from "@/api-site/card";
+import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
 
 const ShopUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
-  const {
-    isLoading: isLoadingUser,
-    isError: isErrorUser,
-    data: user,
-  } = GetOneUserPublicAPI({ username, userVisitorId: userVisiter?.id });
+  const { status: statusUser, data: user } = GetOneUserPublicAPI({
+    username,
+    userVisitorId: userVisiter?.id,
+  });
 
-  const dataTableProducts = isLoadingUser ? (
-    <LoadingFile />
-  ) : isErrorUser ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
-  ) : (
-    <>
-      {user?.id ? <PublicShop organizationId={user?.organizationId} /> : null}
-    </>
-  );
+  const { status, data: cartOrder } = GetOneCartOrderAPI({
+    organizationId: user?.organizationId,
+  });
+
 
   if (user?.profile?.enableShop === false) {
     push(`${`/${username}`}`);
   }
+
   return (
     <>
       <LayoutUserPublicSite
-        title={`Shop - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
-          }`}
+        title={`Shop - ${user?.profile?.firstName ?? ""} ${
+          user?.profile?.lastName ?? ""
+        }`}
         user={user}
       >
         <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -52,44 +46,29 @@ const ShopUserPublic = () => {
 
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-full mx-auto py-6">
-
               {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
-
               <div className="py-2 grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
-                {dataTableProducts}
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-
-        <div className="flex fixed bottom-0 w-full items-center justify-center mb-16 py-2 z-20">
-          <div className="relative w-full max-w-md overflow-hidden bg-white dark:bg-black rounded-lg shadow-lg">
-            <div className="px-3 pt-3 pb-4">
-              <div className="flex items-center justify-between">
-                <BiCart className="h-10 w-10 bg-white dark:bg-black" />
-                <p className="ml-3 text-xl font-bold text-gray-900 dark:text-white">10 EUR</p>
-
-                <div className="flex pl-8 ml-auto">
-                  <ButtonInput
-                    shape="default"
-                    type="button"
-                    size="large"
-                    loading={false}
-                    color="indigo"
-                    minW="fit"
-                  >
-                    Checkout
-                  </ButtonInput>
-                </div>
+                {user?.id ? (
+                  <PublicShop organizationId={user?.organizationId} />
+                ) : null}
               </div>
             </div>
           </div>
         </div>
 
+        {user?.id && cartOrder?.id ? <CartOrderFooterCart user={user} cartOrder={cartOrder} /> : null}
       </LayoutUserPublicSite>
+
+      {statusUser === "pending" ? <LoadingFile /> : null}
+
+      {statusUser === "error" ? (
+        <ErrorFile
+          status="error"
+          title="404"
+          description="Error find data please try again"
+        />
+      ) : null}
     </>
   );
 };

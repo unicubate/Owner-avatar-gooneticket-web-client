@@ -117,7 +117,7 @@ const ButtonInput: React.FC<Props> = ({
         text-sm 
         font-semibold 
         leading-3 
-       text-gray-600 
+        text-gray-600 
         dark:text-white
         transition-all 
         duration-200 
