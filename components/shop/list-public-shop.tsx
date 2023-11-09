@@ -75,7 +75,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
                 fileName: String(item?.uploadsImage?.[0]?.path),
               }) as string
             }
-            alt=""
+            alt={item?.title}
           />
         ) : null}
 
@@ -84,7 +84,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
             <p className="text-2xl text-gray-900 dark:text-white">
               {item?.priceDiscount ?? ""}
             </p>
-            <p className="text-lg  text-gray-900 dark:text-white">
+            <p className="ml-1 text-xl  text-gray-900 dark:text-white">
               {item?.currency?.symbol ?? ""}
             </p>
 
@@ -93,7 +93,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
                 <p className="ml-2 text-lg text-gray-400 dark:text-white">
                   <del> {item?.price ?? ""} </del>
                 </p>
-                <p className="text-lg text-gray-400 dark:text-white">
+                <p className="ml-1 text-lg text-gray-400 dark:text-white">
                   <del> {item?.currency?.symbol ?? ""} </del>
                 </p>
               </>
@@ -113,7 +113,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
               onClick={() => {
                 addToCart(item);
               }}
-              className="ml-auto text-gray-700 transition-all duration-200 bg-white dark:bg-black rounded-full hover:text-gray-900 dark:hover:text-white"
+              className="ml-auto text-gray-700 transition-all duration-200 bg-white dark:bg-black rounded-full hover:text-blue-600"
             >
               <BiCart className="h-10 w-10 bg-white dark:bg-black" />
             </button>
