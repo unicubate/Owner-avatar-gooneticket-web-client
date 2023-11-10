@@ -8,7 +8,9 @@ export type PaymentModel =
   | "STRIPE-DONATION"
   | "PAYMENT-CREATE"
   | "PAYPAL-SUBSCRIBE"
-  | "STRIPE-SUBSCRIBE";
+  | "STRIPE-SUBSCRIBE"
+  | "PAYPAL-SHOP"
+  | "STRIPE-SHOP";
 
 export const CreateOnPaymentPI = async (payload: {
   data: any;
@@ -40,6 +42,13 @@ export const CreateOnPaymentPI = async (payload: {
   if (paymentModel === "STRIPE-DONATION") {
     return await makeApiCall({
       action: "createOnePaymentsStripeDonation",
+      body: { paymentModel, ...data },
+    });
+  }
+
+  if (paymentModel === "PAYPAL-SHOP") {
+    return await makeApiCall({
+      action: "createOnePaymentsPaypalShop",
       body: { paymentModel, ...data },
     });
   }

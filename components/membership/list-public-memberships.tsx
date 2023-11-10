@@ -1,17 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useState } from "react";
 import { HtmlParser } from "@/utils/html-parser";
 import { ButtonInput } from "../ui/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { MembershipModel } from "@/types/membership";
 import { useRouter } from "next/router";
 import { convertToPluralMonth } from "@/utils/utils";
+import { useAuth } from "../util/context-user";
+import { LoginModal } from "../auth-modal/login-modal";
 
 type Props = {
   item?: MembershipModel;
 };
 
 const ListPublicMemberships: React.FC<Props> = ({ item }) => {
+  const { userStorage } = useAuth() as any;
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
   return (
@@ -40,8 +44,6 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             </div>
           ) : null}
 
-
-
           <div className="flex mt-2 items-end justify-center space-x-1">
             <div className="flex items-start">
               <p className="text-5xl font-medium tracking-tight">
@@ -51,24 +53,43 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
                 {item?.currency?.symbol}
               </span>
             </div>
-            <span className="ml-0.5 text-lg text-black dark:text-white"> / {convertToPluralMonth(Number(item?.month))} </span>
+            <span className="ml-0.5 text-lg text-black dark:text-white">
+              {" "}
+              per {convertToPluralMonth(Number(item?.month))}{" "}
+            </span>
           </div>
 
           <div className="mt-4 text-center justify-center mx-auto">
             <div className="sm:mt-0">
-              <ButtonInput
-                onClick={() => {
-                  router.push(`/memberships/${item?.id}/checkout`);
-                }}
-                shape="default"
-                type="button"
-                size="large"
-                loading={false}
-                color={"indigo"}
-                minW="fit"
-              >
-                Join
-              </ButtonInput>
+              {userStorage?.id ? (
+                <ButtonInput
+                  onClick={() => {
+                    router.push(`/memberships/${item?.id}/checkout`);
+                  }}
+                  shape="default"
+                  type="button"
+                  size="large"
+                  loading={false}
+                  color={"indigo"}
+                  minW="fit"
+                >
+                  Join
+                </ButtonInput>
+              ) : (
+                <ButtonInput
+                  onClick={() => {
+                    setShowModal(true);
+                  }}
+                  shape="default"
+                  type="button"
+                  size="large"
+                  loading={false}
+                  color={"indigo"}
+                  minW="fit"
+                >
+                  Join
+                </ButtonInput>
+              )}
             </div>
           </div>
 
@@ -77,6 +98,8 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
           </div>
         </div>
       </div>
+
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

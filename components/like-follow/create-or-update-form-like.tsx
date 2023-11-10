@@ -4,11 +4,15 @@ import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
 import { BiComment } from "react-icons/bi";
 import { CreateOrUpdateOneLikeAPI } from "@/api-site/like";
 import { AlertDangerNotification } from "@/utils";
+import { useAuth } from "../util/context-user";
+import { LoginModal } from "../auth-modal/login-modal";
 
 const CreateOrUpdateFormLike: React.FC<{
   item?: any;
   typeLike: "POST" | "COMMENT";
 }> = ({ item, typeLike }) => {
+  const { userStorage } = useAuth() as any;
+  const [showModal, setShowModal] = useState(false);
   const [like, setLike] = useState(false);
   const [isLike, setIsLike] = useState(item?.isLike);
   const [totalLike, setTotalLike] = useState(item?.totalLike ?? 0);
@@ -42,19 +46,32 @@ const CreateOrUpdateFormLike: React.FC<{
 
   return (
     <>
-      {(item?.isLike && isLike) || like ? (
-        <button
-          onClick={() => {
-            likeItem(item), setLike(false);
-          }}
-          className="text-2xl text-indigo-600"
-        >
-          <MdOutlineFavorite />
-        </button>
+      {userStorage?.id ? (
+        <>
+          {(item?.isLike && isLike) || like ? (
+            <button
+              onClick={() => {
+                likeItem(item), setLike(false);
+              }}
+              className="text-2xl text-indigo-600"
+            >
+              <MdOutlineFavorite />
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                likeItem(item), setLike(true);
+              }}
+              className="text-2xl hover:text-indigo-600 focus:ring-indigo-600"
+            >
+              <MdFavoriteBorder />
+            </button>
+          )}
+        </>
       ) : (
         <button
           onClick={() => {
-            likeItem(item), setLike(true);
+            setShowModal(true);
           }}
           className="text-2xl hover:text-indigo-600 focus:ring-indigo-600"
         >
@@ -63,6 +80,7 @@ const CreateOrUpdateFormLike: React.FC<{
       )}
 
       <span className="ml-1.5 text-sm">{totalLike}</span>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

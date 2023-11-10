@@ -352,7 +352,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             maxCount={10}
                           >
                             {fileList.length >= 10 ? null : (
-                              <Button className="text-center text-black" icon={<UploadOutlined />}>
+                              <Button className="text-center text-black dark:text-white" icon={<UploadOutlined />}>
                                 Upload File
                               </Button>
                             )}

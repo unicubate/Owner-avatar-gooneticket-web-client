@@ -78,10 +78,10 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
-            <div className="mt-4 sm:mt-0">
+            <div className="mt-2 sm:mt-0">
               <ButtonInput
                 onClick={() => router.push(`${`/commissions/create`}`)}
                 shape="default"
@@ -93,7 +93,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
                 Create Commission
               </ButtonInput>
             </div>
-            <div className="mt-4 sm:mt-0">
+            <div className="mt-2 sm:mt-0">
               <Input placeholder="Search by title" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
             </div>
           </div>

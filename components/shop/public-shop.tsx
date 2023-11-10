@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 import ListPublicShop from "./list-public-shop";
 import { GetInfiniteProductsAPI } from "@/api-site/product";
 import { LoadingFile } from "../ui/loading-file";
+import { ErrorFile } from "../ui/error-file";
 
 type Props = {
   organizationId: string;
@@ -53,7 +54,11 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
   const dataTableProducts = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again"
+    />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (

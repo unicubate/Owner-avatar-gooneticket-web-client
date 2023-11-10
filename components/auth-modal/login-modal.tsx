@@ -50,7 +50,6 @@ const LoginModal: React.FC<{
       setHasErrors(false);
       setLoading(false);
       location.reload();
-      // window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -118,7 +117,7 @@ const LoginModal: React.FC<{
                     className="block text-sm mb-2 dark:dark:text-white"
                   ></label>
                   <Link
-                    className="text-sm dark:text-blue-600 decoration-2 hover:underline font-medium"
+                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                     href="/forgot-password"
                   >
                     Forgot password?

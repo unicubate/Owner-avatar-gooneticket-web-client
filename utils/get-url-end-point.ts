@@ -371,6 +371,10 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/payments/stripe/donation`,
     method: POST,
   },
+  createOnePaymentsPaypalShop: {
+    endpoint: `${baseUrl}/payments/paypal/shop`,
+    method: POST,
+  },
   createOnePaymentsCreate: {
     endpoint: `${baseUrl}/payments/create`,
     method: POST,

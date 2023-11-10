@@ -150,12 +150,12 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 
   return (
     <>
-      <div className="border-gray-200 mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
+      <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white border border-gray-200">
+            <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5">
-                <h2 className="text-base font-bold text-gray-900">
+                <h2 className="text-black dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} audio
                 </h2>
                 <div className="mt-4">
@@ -175,7 +175,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <div className="text-center">
+                              <div className="text-center text-black dark:text-white">
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>
@@ -203,7 +203,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                   <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                     <div className="flex items-center flex-1 min-w-0">
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-bold text-gray-900">
+                        <p className="text-sm font-bold text-black dark:text-white">
                           Upload audio
                         </p>
 
@@ -215,22 +215,11 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                      <button
-                        type="button"
-                        title=""
-                        className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
-                      >
-                        {" "}
-                      </button>
-                      <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                        <SwitchInput
-                          control={control}
-                          name="enableUrlMedia"
-                          label=""
-                        />
-                      </div>
-                    </div>
+                    <SwitchInput
+                      control={control}
+                      name="enableUrlMedia"
+                      label=""
+                    />
                   </div>
 
                   {uploadFiles?.length > 0 ? (
@@ -277,7 +266,10 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                                   accept=".mp3"
                                 >
                                   {fileList.length >= 1 ? null : (
-                                    <Button icon={<UploadOutlined />}>
+                                    <Button
+                                      className="text-center text-black dark:text-white"
+                                      icon={<UploadOutlined />}
+                                    >
                                       Upload audio
                                     </Button>
                                   )}

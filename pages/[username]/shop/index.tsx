@@ -6,12 +6,8 @@ import PublicShop from "@/components/shop/public-shop";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { ErrorFile } from "@/components/ui/error-file";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { Badge } from "antd";
-import { BiCart } from "react-icons/bi";
-import { ButtonInput } from "@/components/ui";
-import { GetOneCartOrderAPI } from "@/api-site/card";
+import { GetOneCartOrderAPI } from "@/api-site/cart";
 import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
 
 const ShopUserPublic = () => {

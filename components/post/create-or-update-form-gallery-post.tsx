@@ -14,11 +14,7 @@ import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
 import { filterImageAndFile } from "@/utils/utils";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import {
-  SwitchInput,
-  TextInput,
-  TextareaReactQuillInput,
-} from "../ui";
+import { SwitchInput, TextInput, TextareaReactQuillInput } from "../ui";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
@@ -141,7 +137,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className={`overflow-hidden bg-white border border-gray-200`}>
+            <div className={`overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg`}>
               <div className="px-4 py-5">
                 <h2 className="text-black dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} gallery
@@ -171,7 +167,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       <Controller
                         name="attachmentImages"
                         control={control}
-                        render={({ }) => (
+                        render={({}) => (
                           <>
                             <div className="text-center justify-center mx-auto">
                               <Upload
@@ -184,9 +180,9 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                                 maxCount={10}
                               >
                                 {imageList.length >= 10 ? null : (
-                                  <div className="text-center">
+                                  <div className="text-center text-black dark:text-white">
                                     <PlusOutlined />
-                                    <div style={{ marginTop: 8}}>
+                                    <div style={{ marginTop: 8 }}>
                                       Upload image
                                     </div>
                                   </div>
@@ -226,32 +222,18 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex items-center flex-1 min-w-0">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold">
-                            {" "}
-                            Allow download{" "}
-                          </p>
+                          <p className="text-sm font-bold"> Allow download </p>
                           <p className="mt-1 text-sm font-medium">
                             allow everyone to download in original quality file
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
-                        <button
-                          type="button"
-                          title=""
-                          className="text-sm font-medium transition-all duration-200"
-                        >
-                          {" "}
-                        </button>
-                        <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
-                          <SwitchInput
-                            control={control}
-                            name="allowDownload"
-                            label=""
-                          />
-                        </div>
-                      </div>
+                      <SwitchInput
+                        control={control}
+                        name="allowDownload"
+                        label=""
+                      />
                     </div>
                   </div>
 

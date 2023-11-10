@@ -1,6 +1,6 @@
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CardModel, CartFormModel, CardOrderModel } from "@/types/card";
+import { CartModel, CartFormModel, CartOrderModel } from "@/types/cart";
 
 export const CreateOrUpdateOneCartAPI = ({
   onSuccess,
@@ -56,15 +56,17 @@ export const DeleteOneCartAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["carts", "cart-order"];
+  const queryKey = ["carts"];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: { cardId: string }) => {
-      const { cardId } = payload;
+    mutationFn: async (payload: { cartId: string }) => {
+      const { cartId } = payload;
+
+      console.log('cardId ================>',cartId)
       return await makeApiCall({
         action: "deleteOneCart",
-        urlParams: { cardId },
+        urlParams: { cartId },
       });
     },
     onError: async (error) => {
@@ -106,7 +108,7 @@ export const GetCartsAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as CardModel, isError, isLoading, status };
+  return { data: data?.data as CartModel, isError, isLoading, status };
 };
 
 export const GetOneCartOrderAPI = (payload: {
@@ -123,5 +125,5 @@ export const GetOneCartOrderAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as CardOrderModel, isError, isLoading, status };
+  return { data: data?.data as CartOrderModel, isError, isLoading, status };
 };

@@ -10,6 +10,8 @@ import { ButtonInput, TextareaReactQuillInput } from "../ui";
 import { Avatar } from "antd";
 import { AvatarComponent } from "../ui/avatar-component";
 import { ModelType } from "@/utils/pagination-item";
+import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { LoginModal } from "../auth-modal/login-modal";
 
 const schema = yup.object({
   description: yup.string().min(7).required(),
@@ -32,22 +34,21 @@ const CreateOrUpdateFormComment: React.FC<{
   openModal,
   setOpenModal,
 }) => {
-  const { profile } = useAuth() as any;
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
+  const [showModal, setShowModal] = useState(false);
+  const { profile, userStorage } = useAuth() as any;
   const {
-    watch,
     reset,
-    control,
     setValue,
+    watch,
+    control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
+
   const watchDescription = watch("description", "");
 
   useEffect(() => {
@@ -149,21 +150,39 @@ const CreateOrUpdateFormComment: React.FC<{
             </div>
           ) : null}
 
-          {watchDescription.length >= 7 && (
-            <div className="sm:flex flex-col sm:items-end sm:justify-between">
+          <div className="sm:flex flex-col sm:items-end sm:justify-between">
+            {userStorage?.id ? (
+              <>
+                {watchDescription.length >= 7 && (
+                  <ButtonInput
+                    shape="default"
+                    type="submit"
+                    size="large"
+                    loading={loading}
+                    color={"indigo"}
+                  >
+                    Save
+                  </ButtonInput>
+                )}
+              </>
+            ) : (
               <ButtonInput
+                onClick={() => {
+                  setShowModal(true);
+                }}
                 shape="default"
-                type="submit"
+                type="button"
                 size="large"
                 loading={loading}
                 color={"indigo"}
               >
                 Save
               </ButtonInput>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </form>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

@@ -13,7 +13,7 @@ import {
   AlertSuccessNotification,
   makeApiCall,
 } from "@/utils";
-import { CreateOrUpdateOneCartAPI } from "@/api-site/card";
+import { CreateOrUpdateOneCartAPI } from "@/api-site/cart";
 import { useMutation } from "@tanstack/react-query";
 import { LoginModal } from "../auth-modal/login-modal";
 import { useAuth } from "../util/context-user";

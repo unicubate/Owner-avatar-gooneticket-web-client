@@ -3,14 +3,16 @@ import React from "react";
 import { BiCart } from "react-icons/bi";
 import { ButtonInput } from "../ui";
 import { UserModel } from "@/types/user.type";
-import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/card";
+import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/cart";
 import { ErrorFile } from "../ui/error-file";
-import { CardOrderModel } from "@/types/card";
+import { CartOrderModel } from "@/types/cart";
+import { useRouter } from "next/router";
 
 const CartOrderFooterCart: React.FC<{
   user: UserModel;
-  cartOrder: CardOrderModel;
+  cartOrder: CartOrderModel;
 }> = ({ user, cartOrder }) => {
+  const { push } = useRouter();
   const {
     isLoading: isLoadingCart,
     isError: isErrorCart,
@@ -54,6 +56,7 @@ const CartOrderFooterCart: React.FC<{
                         loading={false}
                         color="indigo"
                         minW="fit"
+                        onClick={() => push(`/${user?.username}/summary/${cartOrder?.id}`) }
                       >
                         Checkout
                       </ButtonInput>

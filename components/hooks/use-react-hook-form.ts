@@ -9,6 +9,7 @@ const useReactHookForm = (options: { schema: any }) => {
   );
   const { schema } = options;
   const {
+    reset,
     watch,
     control,
     setValue,
@@ -20,6 +21,7 @@ const useReactHookForm = (options: { schema: any }) => {
   });
 
   return {
+    reset,
     watch,
     control,
     setValue,
