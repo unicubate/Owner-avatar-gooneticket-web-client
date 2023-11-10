@@ -11,13 +11,13 @@ import { GetOneCartOrderAPI } from "@/api-site/cart";
 import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
 
 const ShopUserPublic = () => {
-  const { userStorage: userVisiter } = useAuth() as any;
+  const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
   const { status: statusUser, data: user } = GetOneUserPublicAPI({
     username,
-    userVisitorId: userVisiter?.id,
+    userVisitorId: userVisitor?.id,
   });
 
   const { status, data: cartOrder } = GetOneCartOrderAPI({

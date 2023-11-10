@@ -146,7 +146,7 @@ export const GetOneProductAPI = (payload: {
   organizationId?: string;
 }) => {
   const { productId, organizationId, productSlug } = payload;
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, isPending, status } = useQuery({
     queryKey: ["product", payload],
     queryFn: async () =>
       await makeApiCall({
@@ -157,7 +157,13 @@ export const GetOneProductAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as ProductModel, isError, isLoading, status };
+  return {
+    data: data?.data as ProductModel,
+    isError,
+    isPending,
+    isLoading,
+    status,
+  };
 };
 
 export const getProductsAPI = async (

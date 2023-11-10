@@ -80,7 +80,7 @@ const Summary = () => {
           </span>
         </div>
 
-        <div className="max-w-2xl mx-auto mt-10 md:mt-12">
+        <div className="max-w-xl mx-auto mt-10 md:mt-12">
           <div className="flex py-2 justify-between mt-2 items-center">
             <label className="block text-sm mb-2 dark:text-white"></label>
             <Link

@@ -39,7 +39,7 @@ const CartOrderFooterCart: React.FC<{
                       >
                         <BiCart className="h-10 w-10 bg-white dark:bg-black" />
                       </button>
-                      <span className="inline-flex items-center px-1.5 absolute -top-px -right-1 py-0.5 rounded-full text-xs font-semibold bg-indigo-600 text-white">
+                      <span className="inline-flex items-center px-1.5 absolute -top-px -right-1 py-0.5 rounded-full text-xs font-semibold bg-red-600 text-white">
                       {carts?.summary?.totalQuantity}
                       </span>
                     </div>

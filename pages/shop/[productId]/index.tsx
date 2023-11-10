@@ -1,7 +1,7 @@
 import { ButtonInput } from "@/components/ui/button-input";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
-import { formatePrice } from "@/utils";
+import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
@@ -12,6 +12,12 @@ import ListComments from "@/components/comment/list-comments";
 import { useAuth } from "@/components/util/context-user";
 import { AvatarComponent } from "@/components/ui/avatar-component";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
+import { GetOneUserPublicAPI } from "@/api-site/user";
+import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from "@/api-site/cart";
+import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
+import { ErrorFile } from "@/components/ui/error-file";
+import { useState } from "react";
+import { LoginModal } from "@/components/auth-modal/login-modal";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -22,26 +28,77 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ShopView = () => {
-  const { userStorage: userVisiter } = useAuth() as any;
+  const { userStorage: userVisitor } = useAuth() as any;
+  const [showModal, setShowModal] = useState(false);
   const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
-  const { status, data: product } = GetOneProductAPI({
+  const {
+    isError: isErrorProduct,
+    isPending: isPendingProduct,
+    data: product,
+  } = GetOneProductAPI({
     productSlug,
   });
 
-  if (status === "pending") {
-    <LoadingFile />;
-  }
+  const {
+    isError: isErrorUser,
+    isPending: isPendingUser,
+    data: user,
+  } = GetOneUserPublicAPI({
+    username: product?.profile?.username,
+    userVisitorId: userVisitor?.id,
+  });
 
-  if (status === "error") {
-    <strong>Error find data please try again...</strong>;
-  }
+  const { data: cartOrder } = GetOneCartOrderAPI({
+    organizationId: user?.organizationId,
+  });
 
-  return (
-    <>
-      <LayoutSite title={`${product?.title ?? ""}`}>
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
+    onSuccess: () => {},
+    onError: (error?: any) => {},
+  });
+
+  const addToCart = async (itemCard: any) => {
+    try {
+      if (userVisitor?.id) {
+        await saveMutation({
+          quantity: 1,
+          productId: itemCard?.id,
+          organizationId: itemCard?.organizationId,
+        });
+        AlertSuccessNotification({
+          text: `Product add to cart successfully`,
+          gravity: "top",
+          className: "info",
+          position: "center",
+        });
+      } else {
+        setShowModal(true);
+      }
+    } catch (error: any) {
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+        gravity: "top",
+        className: "info",
+        position: "center",
+      });
+    }
+  };
+
+
+  const dataProduct =
+    isPendingProduct || isPendingUser ? (
+      <LoadingFile />
+    ) : isErrorProduct || isErrorUser ? (
+      <ErrorFile
+        status="error"
+        title="404"
+        description="Error find data please try again"
+      />
+    ) : (
+      <>
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
             <div className="lg:col-span-3 lg:row-end-1">
@@ -212,6 +269,9 @@ const ShopView = () => {
                   size="huge"
                   loading={false}
                   color={product?.profile?.color}
+                  onClick={() => {
+                    addToCart(product);
+                  }}
                 >
                   Add to cart
                 </ButtonInput>
@@ -289,8 +349,8 @@ const ShopView = () => {
                   modelIds={["PRODUCT"]}
                   productId={String(product?.id)}
                   take={10}
-                  organizationId={userVisiter?.organizationId}
-                  userVisitorId={userVisiter?.id}
+                  organizationId={userVisitor?.organizationId}
+                  userVisitorId={userVisitor?.id}
                 />
               ) : null}
 
@@ -361,7 +421,18 @@ const ShopView = () => {
             </div>
           </div>
         </div>
-      </LayoutSite>
+
+        {user?.id && cartOrder?.id ? (
+          <CartOrderFooterCart user={user} cartOrder={cartOrder} />
+        ) : null}
+        
+        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      </>
+    );
+
+  return (
+    <>
+      <LayoutSite title={`${product?.title ?? ""}`}>{dataProduct}</LayoutSite>
     </>
   );
 };

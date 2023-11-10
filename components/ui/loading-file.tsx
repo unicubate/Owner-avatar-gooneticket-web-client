@@ -11,18 +11,20 @@ interface Props {
 const LoadingFile: React.FC<Props> = ({
   title,
   description,
-  className = "relative",
+  className = "relative mx-auto justify-center",
 }) => {
   return (
     <>
       <div className={className}>
-        <Spin
-          tip="Loading"
-          indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-          size="large"
-        >
-          <div className="content" />
-        </Spin>
+        <div className="mt-10 left-0 right-0 top-0 grid place-items-center">
+          <Spin
+            tip="Loading"
+            indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+            size="large"
+          >
+            <div className="content" />
+          </Spin>
+        </div>
       </div>
     </>
   );
