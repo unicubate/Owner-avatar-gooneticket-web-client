@@ -10,7 +10,7 @@ const HorizontalNavShop: React.FC = () => {
   const [navigation] = useState<NavbarProps[]>([
     {
       title: "Orders",
-      href: "/shop/orders",
+      href: "/shop",
     },
     {
       title: "Extras",

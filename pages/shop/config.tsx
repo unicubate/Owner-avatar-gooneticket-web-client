@@ -48,7 +48,7 @@ const Configs = () => {
 
   const dataTableDiscounts = isLoadingDiscounts ? (
     <Skeleton
-      className="mt-4"
+      className="mt-2 py-2"
       loading={isLoadingDiscounts}
       paragraph={{ rows: 1 }}
     />
@@ -70,7 +70,7 @@ const Configs = () => {
 
   const dataTableCategories = isLoadingCategories ? (
     <Skeleton
-      className="mt-4"
+      className="mt-2 py-2"
       loading={isLoadingCategories}
       paragraph={{ rows: 1 }}
     />
@@ -92,7 +92,7 @@ const Configs = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Gifts"}>
+      <LayoutDashboard title={"Setting"}>
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
             <HorizontalNavShop />
@@ -136,28 +136,28 @@ const Configs = () => {
                     ) : null}
 
                     {dataTableCategories}
-
-                    {hasNextPageCategories && (
-                      <div className="mt-2 py-2 text-center justify-center mx-auto">
-                        <div className="sm:mt-0">
-                          <ButtonInput
-                            onClick={() => fetchNextPageCategories()}
-                            shape="default"
-                            type="button"
-                            size="large"
-                            loading={isFetchingNextPageCategories ? true : false}
-                            color={"indigo"}
-                            minW="fit"
-                          >
-                            Load More
-                          </ButtonInput>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
             </div>
+
+            {hasNextPageCategories && (
+              <div className="mt-2 text-center justify-center mx-auto">
+                <div className="sm:mt-0">
+                  <ButtonInput
+                    onClick={() => fetchNextPageCategories()}
+                    shape="default"
+                    type="button"
+                    size="large"
+                    loading={isFetchingNextPageCategories ? true : false}
+                    color={"indigo"}
+                    minW="fit"
+                  >
+                    Load More
+                  </ButtonInput>
+                </div>
+              </div>
+            )}
 
             <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5 sm:p-6">
@@ -225,28 +225,28 @@ const Configs = () => {
                     ) : null}
 
                     {dataTableDiscounts}
-
-                    {hasNextPage && (
-                      <div className="mt-2 py-2 text-center justify-center mx-auto">
-                        <div className="sm:mt-0">
-                          <ButtonInput
-                            onClick={() => fetchNextPage()}
-                            shape="default"
-                            type="button"
-                            size="large"
-                            loading={isFetchingNextPage ? true : false}
-                            color={"indigo"}
-                            minW="fit"
-                          >
-                            Load More
-                          </ButtonInput>
-                        </div>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
             </div>
+
+            {hasNextPage && (
+              <div className="mt-2 text-center justify-center mx-auto">
+                <div className="sm:mt-0">
+                  <ButtonInput
+                    onClick={() => fetchNextPage()}
+                    shape="default"
+                    type="button"
+                    size="large"
+                    loading={isFetchingNextPage ? true : false}
+                    color={"indigo"}
+                    minW="fit"
+                  >
+                    Load More
+                  </ButtonInput>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </LayoutDashboard>

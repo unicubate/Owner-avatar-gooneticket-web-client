@@ -8,7 +8,7 @@ import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 
-const ShopsOrders = () => {
+const ShopsIndex = () => {
   const user = useAuth() as any;
   const [dayCount, setDayCount] = useState(30);
   const [openDrop, setOpenDrop] = useState(false);
@@ -158,4 +158,4 @@ const ShopsOrders = () => {
   );
 };
 
-export default PrivateComponent(ShopsOrders);
+export default PrivateComponent(ShopsIndex);

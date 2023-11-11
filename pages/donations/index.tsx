@@ -11,7 +11,7 @@ import { useDebounce } from "@/utils";
 
 const Donations = () => {
   const user = useAuth() as any;
-  const [days, setDays] = useState(2);
+  const [days, setDays] = useState(30);
   const [openDrop, setOpenDrop] = useState(false);
 
 

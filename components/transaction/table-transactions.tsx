@@ -4,7 +4,6 @@ import { ButtonInput, EmptyData, LoadingFile } from "../ui";
 import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
 import { useInView } from "react-intersection-observer";
 import { ListTransactions } from "./list-transactions";
-import { Input } from "antd";
 import { ErrorFile } from "../ui/error-file";
 import { BiTransfer } from "react-icons/bi";
 import { ModelType } from "@/utils/pagination-item";
