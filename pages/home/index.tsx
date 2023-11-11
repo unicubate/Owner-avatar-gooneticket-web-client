@@ -1,3 +1,5 @@
+"use client"
+
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { ButtonInput } from "@/components/ui/button-input";
@@ -7,7 +9,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 const Home = () => {
   const { ref, inView } = useInView();
@@ -20,7 +22,7 @@ const Home = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteFollowsPostsAPI({
-    take: 6,
+    take: 10,
     sort: "DESC",
   });
 
@@ -62,10 +64,10 @@ const Home = () => {
         <div className="max-w-3xl mx-auto py-6">
           <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
 
-            {dataTablePosts}
+          {dataTablePosts}
 
             {hasNextPage && (
-              <div className="mt-4 text-center justify-center mx-auto">
+              <div className="mt-2 py-2 text-center justify-center mx-auto">
                 <div className="sm:mt-0">
                   <ButtonInput
                     ref={ref}
