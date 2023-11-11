@@ -27,6 +27,7 @@ export type ModelType =
   | "COMMENT";
 
 export type PaginationRequest = {
+  isPaginate?: "true" | "false"
   search?: string;
   sort: SortModel;
   page: number;

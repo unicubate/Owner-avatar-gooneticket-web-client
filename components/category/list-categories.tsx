@@ -1,23 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import { CreateOrUpdateDiscount } from "./create-or-update-discount";
+import { CreateOrUpdateCategory } from "./create-or-update-category";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateDMYHH,
 } from "@/utils";
 import Swal from "sweetalert2";
-import { DeleteOneDiscountAPI } from "@/api-site/discount";
-import { Tag, Tooltip } from "antd";
+import { DeleteOneCategoryAPI } from "@/api-site/category";
+import { Tooltip } from "antd";
 
-const ListDiscounts: React.FC<{ item: any; index: number }> = ({
+const ListCategories: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const saveMutation = DeleteOneDiscountAPI({
+  const saveMutation = DeleteOneCategoryAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
@@ -36,9 +36,9 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          await saveMutation.mutateAsync({ discountId: item?.id });
+          await saveMutation.mutateAsync({ categoryId: item?.id });
           AlertSuccessNotification({
-            text: "Discount deleted successfully",
+            text: "Category deleted successfully",
             className: "info",
             gravity: "top",
             position: "center",
@@ -59,34 +59,15 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
     <>
       <div key={index} className="py-4">
         <div className="flex items-center">
-          <>
-            <p className="text-sm font-bold text-gray-900">
-              {item?.percent}% Off Commissions
-            </p>
-            <p className="mt-1 ml-2 text-sm font-medium text-gray-500">
-              {item?.code}
-            </p>
-          </>
+          <p className="text-sm font-bold text-gray-900">{item?.name}</p>
 
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium text-gray-500">
-              {item?.enableExpiredAt
-                ? `Ends Midnight ${formateDMYHH(item?.expiredAt)}`
-                : `Never Expires `}
+              {formateDMYHH(item?.createdAt)}
             </p>
           </div>
 
           <div className="ml-auto">
-            <button className="text-lg ml-2 font-bold transition-all duration-200">
-              <Tag
-                bordered={false}
-                className="ml-2"
-                color={`${item.isValid ? "success" : "error"}`}
-              >
-                {item.isValid ? "Valid" : "Invalid"}
-              </Tag>
-            </button>
-
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => setShowModal(true)}
@@ -109,14 +90,14 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
       </div>
 
       {showModal ? (
-        <CreateOrUpdateDiscount
+        <CreateOrUpdateCategory
           showModal={showModal}
           setShowModal={setShowModal}
-          discount={item}
+          category={item}
         />
       ) : null}
     </>
   );
 };
 
-export { ListDiscounts };
+export { ListCategories };

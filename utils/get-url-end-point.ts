@@ -264,6 +264,18 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/categories`,
     method: GET,
   },
+  createOneCategory: {
+    endpoint: `${baseUrl}/categories`,
+    method: POST,
+  },
+  updateOneCategory: {
+    endpoint: `${baseUrl}/categories/:categoryId`,
+    method: PUT,
+  },
+  deleteOneCategory: {
+    endpoint: `${baseUrl}/categories/:categoryId`,
+    method: DELETE,
+  },
 
   /****************** Donations route */
   getOneDonation: {

@@ -1,26 +1,24 @@
-import { DateInput, NumberInput, TextAreaInput, TextInput } from "../ui";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { TextAreaInput, TextInput } from "../ui";
 import * as yup from "yup";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import { CloseOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { useEffect, useState } from "react";
-import { DiscountFormModel } from "@/types/discount";
-import { CreateOrUpdateOneDiscountAPI } from "@/api-site/discount";
-import { SwitchInput, ButtonInput } from "../ui";
+import { useEffect } from "react";
+import { ButtonInput } from "../ui";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { CreateOrUpdateOneCategoryAPI } from "@/api-site/category";
+import { CategoryFormModel } from "@/types/category";
 
 const schema = yup.object({
-  percent: yup.number().required(),
-  code: yup.string().required(),
-  expiredAt: yup.date().min(new Date()).nullable(),
+  name: yup.string().required(),
+  description: yup.string().nullable().optional(),
 });
 
-const CreateOrUpdateDiscount: React.FC<{
+const CreateOrUpdateCategory: React.FC<{
   showModal: boolean;
   setShowModal: any;
-  discount?: any;
-}> = ({ showModal, setShowModal, discount }) => {
+  category?: any;
+}> = ({ showModal, setShowModal, category }) => {
   const {
     watch,
     control,
@@ -33,25 +31,15 @@ const CreateOrUpdateDiscount: React.FC<{
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchEnableExpiredAt = watch("enableExpiredAt", false);
-
   useEffect(() => {
-    if (discount) {
-      const fields = [
-        "code",
-        "description",
-        "percent",
-        "isActive",
-        "enableExpiredAt",
-        "isExpired",
-        "startedAt",
-      ];
-      fields?.forEach((field: any) => setValue(field, discount[field]));
+    if (category) {
+      const fields = ["name", "description"];
+      fields?.forEach((field: any) => setValue(field, category[field]));
     }
-  }, [discount, setValue]);
+  }, [category, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOneDiscountAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneCategoryAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -62,20 +50,20 @@ const CreateOrUpdateDiscount: React.FC<{
     },
   });
 
-  const onSubmit: SubmitHandler<DiscountFormModel> = async (
-    payload: DiscountFormModel
+  const onSubmit: SubmitHandler<CategoryFormModel> = async (
+    payload: CategoryFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
-        discountId: discount?.id,
+        categoryId: category?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Discount save successfully",
+        text: "Category save successfully",
         className: "info",
         gravity: "top",
         position: "center",
@@ -116,7 +104,7 @@ const CreateOrUpdateDiscount: React.FC<{
                       <div className="p-3">
                         <div className="flex items-center justify-between">
                           <p className="ml-3 text-sm font-medium text-red-500">
-                           {hasErrors}
+                            {hasErrors}
                           </p>
                         </div>
                       </div>
@@ -125,22 +113,11 @@ const CreateOrUpdateDiscount: React.FC<{
                 )}
 
                 <div className="mb-4">
-                  <NumberInput
-                    control={control}
-                    label="Percentage discount "
-                    type="number"
-                    name="percent"
-                    placeholder="Percentage"
-                    errors={errors}
-                    required
-                  />
-                </div>
-                <div className="mb-4">
                   <TextInput
                     control={control}
                     label="Name"
                     type="text"
-                    name="code"
+                    name="name"
                     placeholder="Name donation"
                     errors={errors}
                   />
@@ -155,41 +132,8 @@ const CreateOrUpdateDiscount: React.FC<{
                     errors={errors}
                   />
                 </div>
-                <div className="mb-2">
-                  <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-                    <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                      <div className="flex items-center flex-1 min-w-0">
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-black dark:text-white">
-                            Set Expiry
-                          </p>
-                          <p className="mt-1 text-sm font-medium text-gray-900">
-                            Setting expired date
-                          </p>
-                        </div>
-                      </div>
-
-                      <SwitchInput
-                        control={control}
-                        name="enableExpiredAt"
-                        label=""
-                      />
-                    </div>
-                    {watchEnableExpiredAt ? (
-                      <div className="mb-1">
-                        <DateInput
-                          label="Expired date"
-                          control={control}
-                          placeholder="12/01/2023"
-                          name="expiredAt"
-                          errors={errors}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
               </div>
-              <div className="mt-2 text-center space-x-2">
+              {/* <div className="mt-2 text-center space-x-2">
                 <ButtonInput
                   shape="default"
                   type="submit"
@@ -199,14 +143,14 @@ const CreateOrUpdateDiscount: React.FC<{
                 >
                   Save
                 </ButtonInput>
-              </div>
-              {/* <div className="flex items-center mt-2 space-x-4">
+              </div> */}
+              <div className="flex items-center mt-2 space-x-4">
                 <ButtonInput
-                status="cancel"
-                type="button"
-                shape="default"
-                size="normal"
-                  loading={loading}
+                  status="cancel"
+                  type="button"
+                  shape="default"
+                  size="normal"
+                  loading={false}
                   onClick={() => setShowModal(false)}
                 >
                   Cancel
@@ -216,12 +160,12 @@ const CreateOrUpdateDiscount: React.FC<{
                   shape="default"
                   type="submit"
                   size="large"
-                  loading={false}
+                  loading={loading}
                   color="indigo"
                 >
                   Save
                 </ButtonInput>
-              </div> */}
+              </div>
             </form>
           </div>
         </div>
@@ -230,4 +174,4 @@ const CreateOrUpdateDiscount: React.FC<{
   );
 };
 
-export { CreateOrUpdateDiscount };
+export { CreateOrUpdateCategory };

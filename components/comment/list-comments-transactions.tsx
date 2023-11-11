@@ -72,7 +72,7 @@ const ListCommentTransactions: React.FC<{
           {item?.profile?.username ? (
             <AvatarComponent size={45} profile={item?.profile} />
           ) : (
-            <AvatarCoffeeComponent size={45} color={item?.color} />
+            <AvatarCoffeeComponent size={45} color={item?.profile?.color ?? 'indigo'} />
           )}
 
           <div className="ml-3">
