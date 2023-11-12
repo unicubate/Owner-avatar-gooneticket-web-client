@@ -8,6 +8,7 @@ import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { ButtonInput } from "@/components/ui";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 import { useDebounce } from "@/utils";
+import { GetStaticPropsContext } from "next";
 
 const Donations = () => {
   const user = useAuth() as any;
@@ -165,3 +166,11 @@ const Donations = () => {
 };
 
 export default PrivateComponent(Donations);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

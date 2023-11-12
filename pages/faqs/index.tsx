@@ -2,6 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
 import { LayoutSite } from "@/components/layout-site";
+import { GetStaticPropsContext } from "next";
 
 const faqs = [
   {
@@ -295,3 +296,11 @@ const Faqs = () => {
 };
 
 export default Faqs;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

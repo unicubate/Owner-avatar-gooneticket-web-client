@@ -2,6 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { useAuth } from "@/components/util/context-user";
+import { GetStaticPropsContext } from "next";
 
 
 const MembershipsLevelCreate = () => {
@@ -19,3 +20,11 @@ const MembershipsLevelCreate = () => {
 };
 
 export default PrivateComponent(MembershipsLevelCreate);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

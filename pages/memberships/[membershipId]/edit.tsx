@@ -7,6 +7,7 @@ import { GetOneMembershipAPI } from "@/api-site/membership";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { GetUploadsAPI } from "@/api-site/upload";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -63,3 +64,11 @@ const ShopEdit = () => {
 };
 
 export default PrivateComponent(ShopEdit);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

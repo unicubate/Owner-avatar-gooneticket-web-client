@@ -9,6 +9,7 @@ import { RecentTransactions } from "@/components/transaction/recent-transactions
 import { AvatarComponent } from "@/components/ui/avatar-component";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
+import { GetStaticPropsContext } from "next";
 
 const Dashboard = () => {
   const [dayCount, setDayCount] = useState(30);
@@ -45,7 +46,6 @@ const Dashboard = () => {
   return (
     <>
       <LayoutDashboard title={"Dashboard"}>
-
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
             <div className="flow-root">
@@ -84,27 +84,21 @@ const Dashboard = () => {
                     <span className="text-lg font-bold">
                       {user?.totalSubscribe ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">
-                      Subscribes
-                    </span>
+                    <span className="ml-2 font-normal text-sm">Subscribes</span>
                   </Link>
 
                   <Link href="/settings/followers">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollower ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">
-                      Followers
-                    </span>
+                    <span className="ml-2 font-normal text-sm">Followers</span>
                   </Link>
 
                   <Link href="/settings/followings">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollowing ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">
-                      Following
-                    </span>
+                    <span className="ml-2 font-normal text-sm">Following</span>
                   </Link>
                 </div>
 
@@ -150,9 +144,7 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
-                        value={Number(
-                          transactionMembership?.statistic?.amount
-                        )}
+                        value={Number(transactionMembership?.statistic?.amount)}
                         currency={{
                           code: user?.profile?.currency?.code,
                           amount: String(user?.profile?.currency?.amount),
@@ -170,9 +162,7 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
-                        value={Number(
-                          transactionDonation?.statistic?.amount
-                        )}
+                        value={Number(transactionDonation?.statistic?.amount)}
                         currency={{
                           code: user?.profile?.currency?.code,
                           amount: String(user?.profile?.currency?.amount),
@@ -190,9 +180,7 @@ const Dashboard = () => {
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
-                        value={Number(
-                          transactionProduct?.statistic?.amount
-                        )}
+                        value={Number(transactionProduct?.statistic?.amount)}
                         currency={{
                           code: user?.profile?.currency?.code,
                           amount: String(user?.profile?.currency?.amount),
@@ -267,3 +255,11 @@ const Dashboard = () => {
 };
 
 export default PrivateComponent(Dashboard);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

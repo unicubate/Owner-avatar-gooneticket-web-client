@@ -13,6 +13,7 @@ import { LayoutSite } from "@/components/layout-site";
 import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   email: yup
@@ -201,3 +202,11 @@ const Login = () => {
 };
 
 export default PublicComponent(Login);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

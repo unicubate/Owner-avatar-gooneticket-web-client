@@ -10,6 +10,7 @@ import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
 import { useInView } from "react-intersection-observer";
 import { Suspense, useEffect } from "react";
+import { GetStaticPropsContext } from "next";
 
 const Home = () => {
   const { ref, inView } = useInView();
@@ -92,3 +93,11 @@ const Home = () => {
 };
 
 export default PrivateComponent(Home);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

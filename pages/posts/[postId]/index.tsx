@@ -9,6 +9,7 @@ import { AvatarComponent } from "@/components/ui";
 import { HtmlParser } from "@/utils/html-parser";
 import { PublicLastPosts } from "@/components/post/public-last-posts";
 import { GetOneUserPublicAPI } from "@/api-site/user";
+import { GetStaticPropsContext } from "next";
 
 const PostShow = () => {
   const { userStorage: userVisitor } = useAuth() as any;
@@ -110,3 +111,11 @@ const PostShow = () => {
 };
 
 export default PostShow;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

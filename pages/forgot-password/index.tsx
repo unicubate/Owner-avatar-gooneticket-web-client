@@ -14,6 +14,7 @@ import { PublicComponent } from "@/components/util/public-component";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 import { TextInput } from "@/components/ui/text-input";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   email: yup
@@ -108,3 +109,11 @@ const ForgotPassword = () => {
 };
 
 export default PublicComponent(ForgotPassword);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

@@ -10,6 +10,7 @@ import { GetInfinitePostsAPI } from "@/api-site/post";
 import { PostModel } from "@/types/post";
 import { BiDetail } from "react-icons/bi";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const Posts = () => {
   const { userStorage: user } = useAuth() as any;
@@ -150,3 +151,11 @@ const Posts = () => {
 };
 
 export default PrivateComponent(Posts);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

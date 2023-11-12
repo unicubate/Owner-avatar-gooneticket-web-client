@@ -7,6 +7,7 @@ import { ButtonInput } from "@/components/ui";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { TableTransactions } from "@/components/transaction/table-transactions";
+import { GetStaticPropsContext } from "next";
 
 const ShopsIndex = () => {
   const user = useAuth() as any;
@@ -159,3 +160,11 @@ const ShopsIndex = () => {
 };
 
 export default PrivateComponent(ShopsIndex);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

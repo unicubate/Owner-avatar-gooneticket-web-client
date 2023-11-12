@@ -17,6 +17,7 @@ import { convertToPluralMonth } from "@/utils/utils";
 import { LayoutSite } from "@/components/layout-site";
 import { AvatarComponent } from "@/components/ui/avatar-component";
 import Skeleton from "react-loading-skeleton";
+import { GetStaticPropsContext } from "next";
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -243,3 +244,11 @@ const CheckoutView = () => {
   );
 };
 export default PrivateComponent(CheckoutView);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

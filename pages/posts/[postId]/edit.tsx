@@ -10,6 +10,7 @@ import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-updat
 import { LoadingFile } from "@/components/ui/loading-file";
 import { GetUploadsAPI } from "../../../api-site/upload";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const PostsEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -113,3 +114,11 @@ const PostsEdit = () => {
 };
 
 export default PrivateComponent(PostsEdit);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

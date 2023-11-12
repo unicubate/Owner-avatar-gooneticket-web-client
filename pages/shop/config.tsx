@@ -13,6 +13,7 @@ import { CreateOrUpdateCategory } from "@/components/category/create-or-update-c
 import { ListCategories } from "@/components/category/list-categories";
 import { ErrorFile } from "@/components/ui/error-file";
 import { GetInfiniteCategoriesAPI } from "@/api-site/category";
+import { GetStaticPropsContext } from "next";
 
 const Configs = () => {
   const [filter, setFilter] = useState<string>("");
@@ -255,3 +256,11 @@ const Configs = () => {
 };
 
 export default PrivateComponent(Configs);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

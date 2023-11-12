@@ -20,6 +20,8 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { logoutUser } from "../util/context-user";
 import { ThemeToggle } from "../ui/theme-toggle";
+import { GetStaticPropsContext } from "next";
+import { useTranslations } from "next-intl";
 
 export type NavbarProps = {
   title: string;
@@ -89,16 +91,18 @@ interface Props {
 }
 
 const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
+  
   const router = useRouter();
+  const t = useTranslations('dashboard_vertical_menu');
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
-      title: "Home",
+      title: `${t('home')}`,
       href: "/dashboard",
       icon: <BiHomeCircle className={classIcon} />,
     },
     {
-      title: "Your Page",
+      title: `${t('your_page')}`,
       href: `/${user?.username}`,
       icon: <BiLayout className={classIcon} />,
     },
@@ -276,3 +280,5 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 };
 
 export { VerticalNavDashboard };
+
+

@@ -4,6 +4,7 @@ import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-dona
 import { UpdateFormDonation } from "@/components/donation/update-form-donation";
 import { useAuth } from "@/components/util/context-user";
 import { GetOneDonationAPI } from "@/api-site/donation";
+import { GetStaticPropsContext } from "next";
 
 const SettingDonations = () => {
   const user = useAuth() as any;
@@ -34,3 +35,11 @@ const SettingDonations = () => {
 };
 
 export default PrivateComponent(SettingDonations);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

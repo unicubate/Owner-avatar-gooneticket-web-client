@@ -1,0 +1,13 @@
+{
+  "dashboard_vertical_menu": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "your_page": "Page",
+    "feed": "Uctualiter"
+  },
+
+  "home_page": {
+    "title": "Tout ce dont vous avez besoin pour gagner de l'argent en faisant ce que vous aimez",
+    "subTitle": "Acceptez les dons. Commencez une adhésion. Vendez tout ce que vous voulez. C'est plus facile que vous ne le pensez."
+  }
+}

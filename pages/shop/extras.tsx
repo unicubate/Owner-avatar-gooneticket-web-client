@@ -13,6 +13,7 @@ import { Input } from "antd";
 import { ProductModel } from "@/types/product";
 import { ErrorFile } from "@/components/ui/error-file";
 import { BiStoreAlt } from "react-icons/bi";
+import { GetStaticPropsContext } from "next";
 
 const ShopsExtras = () => {
   const { userStorage: user, profile } = useAuth() as any;
@@ -143,3 +144,11 @@ const ShopsExtras = () => {
 };
 
 export default PrivateComponent(ShopsExtras);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

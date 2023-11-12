@@ -8,6 +8,7 @@ import { LoadingFile } from "@/components/ui/loading-file";
 import { GetUploadsAPI } from "@/api-site/upload";
 import { Button, Result } from "antd";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -85,3 +86,11 @@ const ShopEdit = () => {
 };
 
 export default PrivateComponent(ShopEdit);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

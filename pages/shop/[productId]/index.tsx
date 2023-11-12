@@ -18,6 +18,7 @@ import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
 import { ErrorFile } from "@/components/ui/error-file";
 import { useState } from "react";
 import { LoginModal } from "@/components/auth-modal/login-modal";
+import { GetStaticPropsContext } from "next";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -438,3 +439,11 @@ const ShopView = () => {
 };
 
 export default ShopView;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

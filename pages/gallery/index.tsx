@@ -3,6 +3,7 @@ import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useAuth } from "@/components/util/context-user";
 import { EnableGallery } from "@/components/gallery/enable-gallery";
 import { TableGallery } from "@/components/gallery/table-gallery";
+import { GetStaticPropsContext } from "next";
 
 const Gallery = () => {
   const { organizationId, profile, userStorage: user } = useAuth() as any;
@@ -30,3 +31,11 @@ const Gallery = () => {
 };
 
 export default PrivateComponent(Gallery);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

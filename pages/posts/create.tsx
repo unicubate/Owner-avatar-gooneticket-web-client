@@ -6,6 +6,7 @@ import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 import { useAuth } from "@/components/util/context-user";
+import { GetStaticPropsContext } from "next";
 
 const PostsCreate = () => {
   const { organizationId } = useAuth() as any;
@@ -32,3 +33,11 @@ const PostsCreate = () => {
 };
 
 export default PrivateComponent(PostsCreate);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

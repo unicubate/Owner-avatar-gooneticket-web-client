@@ -3,6 +3,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { LayoutSite } from "@/components/layout-site";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   searchInput: yup.string().optional(),
@@ -718,3 +719,11 @@ const Explore = () => {
 };
 
 export default Explore;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

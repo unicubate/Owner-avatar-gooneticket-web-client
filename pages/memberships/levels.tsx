@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { Input } from "antd";
 import { ErrorFile } from "@/components/ui/error-file";
 import { BiLockOpen } from "react-icons/bi";
+import { GetStaticPropsContext } from "next";
 
 const MembershipsLevels = () => {
   const { userStorage: user } = useAuth() as any;
@@ -139,3 +140,11 @@ const MembershipsLevels = () => {
 };
 
 export default PrivateComponent(MembershipsLevels);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

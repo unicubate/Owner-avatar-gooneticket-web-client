@@ -10,6 +10,7 @@ import * as yup from "yup";
 import { Radio } from "antd";
 import { SwitchInput } from "@/components/ui/switch-input";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   email: yup
@@ -330,3 +331,11 @@ const SettingDonations = () => {
 };
 
 export default PrivateComponent(SettingDonations);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

@@ -1,0 +1,13 @@
+{
+  "dashboard_vertical_menu": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "your_page": "Your Page",
+    "feed": "Feed"
+  },
+
+  "home_page": {
+    "title": "Everything you need to make money doing what you love",
+    "subTitle": "Accept donations. Start a membership. Sell anything you like. It’s easier than you think."
+  }
+}

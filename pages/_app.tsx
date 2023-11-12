@@ -15,6 +15,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ContextUserProvider } from "@/components/util/context-user";
 import { ThemeProvider } from "@/components/util/theme-provider";
 import { LoadingFile } from "@/components/ui";
+import { createTranslator, NextIntlClientProvider } from "next-intl";
+
 import { Suspense } from "react";
 const queryClient = new QueryClient();
 
@@ -23,20 +25,22 @@ export default function App({ Component, pageProps }: AppProps) {
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<LoadingFile />}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <HydrationBoundary state={pageProps.dehydratedState}>
-            <ConfigProvider>
-              <ContextUserProvider>
-                <Component {...pageProps} />
+          <NextIntlClientProvider locale={"en"} messages={pageProps.messages}>
+            <HydrationBoundary state={pageProps.dehydratedState}>
+              <ConfigProvider>
+                <ContextUserProvider>
+                  <Component {...pageProps} />
 
-                {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-                  <ReactQueryDevtools
-                    buttonPosition="bottom-left"
-                    initialIsOpen={false}
-                  />
-                )}
-              </ContextUserProvider>
-            </ConfigProvider>
-          </HydrationBoundary>
+                  {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
+                    <ReactQueryDevtools
+                      buttonPosition="bottom-left"
+                      initialIsOpen={false}
+                    />
+                  )}
+                </ContextUserProvider>
+              </ConfigProvider>
+            </HydrationBoundary>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </Suspense>
     </QueryClientProvider>

@@ -10,6 +10,7 @@ import { formateDMYHH } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
+import { GetStaticPropsContext } from "next";
 
 const contentStyle: React.CSSProperties = {
   height: "100%",
@@ -544,3 +545,11 @@ const ShopView = () => {
 };
 
 export default ShopView;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

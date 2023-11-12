@@ -9,6 +9,7 @@ import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { useState } from "react";
 import { ButtonInput } from "@/components/ui";
 import { TableTransactions } from "@/components/transaction/table-transactions";
+import { GetStaticPropsContext } from "next";
 
 const Memberships = () => {
   const user = useAuth() as any;
@@ -133,3 +134,11 @@ const Memberships = () => {
 };
 
 export default PrivateComponent(Memberships);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}
