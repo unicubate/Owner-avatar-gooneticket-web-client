@@ -83,7 +83,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 ) : null}
                 <button
                   title="Share"
-                  className="ml-2 text-gray-600 dark:text-white hover:text-gray-900 focus:ring-gray-900"
+                  className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
                   <IoShareOutline className="w-5 h-5" />
                 </button>
