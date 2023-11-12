@@ -108,7 +108,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      router.push(`/posts`);
+      router.back();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -201,7 +201,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                   />
                 </div>
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <ButtonInput
                     shape="default"
                     type="submit"
@@ -211,7 +211,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                   >
                     Save and Publish
                   </ButtonInput>
-                </div>
+                </div> */}
                 <div className="flex items-center mt-4 mb-4 space-x-4">
                   <ButtonInput
                     status="cancel"
@@ -224,14 +224,13 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
                     shape="default"
                     type="submit"
                     size="large"
-                    loading={false}
+                    loading={loading}
                     color="indigo"
                   >
-                    Save as Draft
+                    Save and Publish
                   </ButtonInput>
                 </div>
               </div>

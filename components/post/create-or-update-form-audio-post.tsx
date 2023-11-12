@@ -28,6 +28,7 @@ const schema = yup.object({
   title: yup.string().required(),
   whoCanSee: yup.string().required("Who can see this post"),
   description: yup.string().optional(),
+  allowDownload: yup.string().optional(),
   urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
     if (enableUrlMedia[0] === true)
       return yup.string().url().required("url is a required field");
@@ -76,6 +77,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
+        "allowDownload",
         "enableUrlMedia",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -126,7 +128,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      router.push(`/posts`);
+      router.back();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -279,6 +281,24 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                           )}
                         />
                       </div>
+                      <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                        <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                          <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-bold text-black dark:text-white"> Allow download </p>
+                              <p className="mt-1 text-sm font-medium text-gray-500">
+                                allow everyone to download in original quality file
+                              </p>
+                            </div>
+                          </div>
+
+                          <SwitchInput
+                            control={control}
+                            name="allowDownload"
+                            label=""
+                          />
+                        </div>
+                      </div>
                     </>
                   )}
                 </div>
@@ -309,7 +329,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                   </span>
                 </div>
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <ButtonInput
                     shape="default"
                     type="submit"
@@ -319,7 +339,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                   >
                     Save and Publish
                   </ButtonInput>
-                </div>
+                </div> */}
                 <div className="flex items-center mt-4 mb-4 space-x-4">
                   <ButtonInput
                     status="cancel"
@@ -332,14 +352,13 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
                     shape="default"
                     type="submit"
                     size="large"
-                    loading={false}
+                    loading={loading}
                     color="indigo"
                   >
-                    Save as Draft
+                    Save and Publish
                   </ButtonInput>
                 </div>
               </div>

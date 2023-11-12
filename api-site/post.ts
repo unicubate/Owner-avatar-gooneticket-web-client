@@ -113,6 +113,7 @@ export const CreateOrUpdateOnePostAPI = ({
       data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
+      data.append("allowDownload", `${payload.allowDownload ?? ""}`);
       data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
       data.append("description", `${payload.description ?? ""}`);
 

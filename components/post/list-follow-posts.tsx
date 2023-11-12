@@ -87,7 +87,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 >
                   <IoShareOutline className="w-5 h-5" />
                 </button>
-                {item?.allowDownload && (
+                {/* {item?.allowDownload && (
                   <button
                     title="Download"
                     onClick={() => {
@@ -102,7 +102,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   >
                     <FiDownload className="w-5 h-5" />
                   </button>
-                )}
+                )} */}
               </div>
             </div>
           </div>
@@ -202,6 +202,27 @@ const ListFollowPosts: React.FC<Props> = ({
                 </Link>
               </>
             ) : null}
+            {item?.allowDownload && (
+              <>
+                <button
+                  title="Download"
+                  onClick={() => {
+                    router.push(
+                      `${downloadOneFileUploadAPI({
+                        folder: "posts",
+                        fileName: item.type === "AUDIO" ? item?.uploadsFile[0]?.path : item?.uploadsImage[0]?.path,
+                      })}`
+                    );
+                  }}
+                  className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                >
+                  <FiDownload className="w-5 h-5" />
+                </button>
+              </>
+            )}
+
+
+
 
             {item?.whoCanSee === "MEMBERSHIP" &&
               item?.isValidSubscribe !== 1 ? (
