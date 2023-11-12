@@ -57,7 +57,8 @@ body {
 } 
 
 .quill > .ql-container > .ql-editor.ql-blank::before{
-  font-style: normal; 
+  font-style: normal;
+  color: #6b7380;
 }
 
 

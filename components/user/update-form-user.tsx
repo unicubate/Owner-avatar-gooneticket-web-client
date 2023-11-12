@@ -55,7 +55,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
           <div className="px-4 py-5">
-            <h2 className="text-base font-bold text-gray-900">
+            <h2 className="text-base font-bold">
               {" "}
               Personal Info{" "}
             </h2>

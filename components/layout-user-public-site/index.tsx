@@ -28,7 +28,7 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
       <main>
         <div className="mx-auto lg:flex mb-10">
           {user?.profile?.id && theme ?
-            <div className={`flex flex-col flex-1 bg-gray-100 dark:bg-zinc-800`}>
+            <div className={`flex flex-col flex-1 bg-gray-100 dark:dark:bg-[#232325]`}>
               {children}
             </div>
             : null}

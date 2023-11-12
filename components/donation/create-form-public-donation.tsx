@@ -105,6 +105,7 @@ const CreateFormPublicDonation: React.FC<{
             min={1}
             value={newValuePrice}
             onChange={(e) => setPrice(e?.target.value)}
+            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800`}
           />
         </div>
 
@@ -116,6 +117,7 @@ const CreateFormPublicDonation: React.FC<{
             placeholder="Your message (optional)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800`}
           />
         </div>
 
