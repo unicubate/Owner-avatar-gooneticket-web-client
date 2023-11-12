@@ -111,11 +111,3 @@ const PostShow = () => {
 };
 
 export default PostShow;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../../lang/${locale}.json`)).default,
-    },
-  };
-}
