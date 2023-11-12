@@ -67,7 +67,7 @@ const Followings = () => {
             <HorizontalNavSetting />
 
             <div className="flow-root">
-              <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                 <div className="px-4 py-8">
 
                   <div className="sm:flex sm:items-center sm:justify-between">
@@ -75,7 +75,7 @@ const Followings = () => {
                       Followings
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input placeholder="Search by email, name" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                      <Input placeholder="Search by email, name" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
                     </div>
                   </div>
 

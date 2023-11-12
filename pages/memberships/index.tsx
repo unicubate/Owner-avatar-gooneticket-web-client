@@ -61,7 +61,7 @@ const Memberships = () => {
               </div>
 
               <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Supporter
@@ -73,7 +73,7 @@ const Memberships = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Last {dayCount} days
@@ -94,7 +94,7 @@ const Memberships = () => {
                 </div>
 
                 {user?.organizationId ? (
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                     <div className="px-5 py-4">
                       <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                         All-time

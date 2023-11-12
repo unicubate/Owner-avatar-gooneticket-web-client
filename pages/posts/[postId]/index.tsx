@@ -67,7 +67,7 @@ const PostShow = () => {
 
               <div className="lg:sticky lg:order-2 lg:top-6 lg:col-span-2">
 
-                <div className="mt-8 overflow-hidden bg-white dark:bg-black rounded-lg">
+                <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg">
                   <div className="px-4 py-6 sm:p-6 lg:p-8">
                     <div className="text-center">
                       <AvatarComponent
@@ -90,7 +90,7 @@ const PostShow = () => {
                   </div>
                 </div>
 
-                <div className="mt-8 overflow-hidden bg-white dark:bg-black rounded-lg">
+                <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg">
                   {post?.id && user?.organizationId ?
                     <PublicLastPosts
                       userVisitor={{

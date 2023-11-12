@@ -67,7 +67,7 @@ const ShopsIndex = () => {
 
                       {/* {openDrop && (
                         <div className="relative mt-2 w-full z-10">
-                          <div className="border-gray-300 dark:border-gray-800 bg-white dark:bg-black shadow border rounded-lg w-full block text-sm px-4 py-2 space-y-2">
+                          <div className="border-gray-300 dark:border-gray-800 bg-white dark:bg-[#121212] shadow border rounded-lg w-full block text-sm px-4 py-2 space-y-2">
 
                             <ul className="flex flex-col">
                               <li onClick={() => { handleDaysChange(30), setOpenDrop(false) }} className="w-full rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" >Last 30 days</li>
@@ -85,7 +85,7 @@ const ShopsIndex = () => {
               </div>
 
               <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Orders
@@ -98,7 +98,7 @@ const ShopsIndex = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Last {dayCount} days
@@ -119,7 +119,7 @@ const ShopsIndex = () => {
                 </div>
 
                 {user?.organizationId ? (
-                  <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                  <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                     <div className="px-5 py-4">
                       <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                         All-time

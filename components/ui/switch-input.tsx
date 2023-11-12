@@ -34,7 +34,7 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
                   duration-200 
                   ease-in-out 
                   bg-white 
-                  dark:bg-black 
+                  dark:bg-[#121212] 
                   border 
                   border-gray-200 
                   dark:border-gray-800  

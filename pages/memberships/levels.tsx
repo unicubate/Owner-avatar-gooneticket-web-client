@@ -84,7 +84,7 @@ const MembershipsLevels = () => {
             <HorizontalNavMembership />
 
             <div className="flow-root">
-              <div className="mt-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-4 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                 <div className="px-4 py-8">
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">
@@ -102,7 +102,7 @@ const MembershipsLevels = () => {
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                    <Input placeholder="Search by title" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                    <Input placeholder="Search by title" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
                     </div>
                   </div>
 

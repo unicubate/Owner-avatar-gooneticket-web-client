@@ -71,7 +71,7 @@ const TableTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
             <p className="text-lg font-bold">Recent transactions</p>

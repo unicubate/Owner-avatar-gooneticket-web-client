@@ -26,7 +26,7 @@ const HeaderHorizontalNavUserPublicSite: React.FC<Props> = ({ user }) => {
         closable={true}
         onClose={onClose}
         open={open}
-        className="bg-white dark:bg-black"
+        className="bg-white dark:bg-[#121212]"
       >
         <div className="flex flex-col pt-5 overflow-y-auto">
           <VerticalNavUserPublicSite user={user} />

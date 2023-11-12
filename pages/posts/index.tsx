@@ -86,7 +86,7 @@ const Posts = () => {
 
             <HorizontalNavCreatePost />
 
-            <div className={`mt-8 px-3 py-2 bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg`}>
+            <div className={`mt-8 px-3 py-2 bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}>
               <nav className="flex flex-wrap gap-4">
                 <a
                   href="#"
@@ -115,7 +115,7 @@ const Posts = () => {
             </div>
 
             <div className="flow-root">
-              <div className={`mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg`}>
+              <div className={`mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg`}>
                 <div className="px-4 py-8">
                   <div className="divide-y divide-gray-200 dark:divide-gray-800">
                     {dataTablePosts}

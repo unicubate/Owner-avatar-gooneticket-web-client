@@ -81,7 +81,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
   );
   return (
     <>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-4 sm:mt-0">
@@ -97,7 +97,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
               </ButtonInput>
             </div>
             <div className="mt-4 sm:mt-0">
-              <Input placeholder="Search file" className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+              <Input placeholder="Search file" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
             </div>
           </div>
 

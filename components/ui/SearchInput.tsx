@@ -17,7 +17,7 @@ export const SearchInput: React.FC<Props> = ({
                 type='text'
                 onChange={onChange}
                 placeholder={placeholder}
-                className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
         </>
     );
 };

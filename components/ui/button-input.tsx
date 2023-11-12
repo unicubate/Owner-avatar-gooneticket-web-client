@@ -122,7 +122,7 @@ const ButtonInput: React.FC<Props> = ({
         transition-all 
         duration-200 
         bg-white 
-        dark:bg-black
+        dark:bg-[#121212]
         border 
         border-gray-200
         dark:border-gray-800

@@ -61,7 +61,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="flex flex-col overflow-hidden transition-all duration-300 bg-white dark:bg-black rounded-lg shadow-xl shadow-gray-600/15"
+        className="flex flex-col overflow-hidden transition-all duration-300 bg-white dark:bg-[#121212] rounded-lg shadow-xl shadow-gray-600/15"
       >
         {item?.uploadsImage.length > 0 ? (
           <Image
@@ -113,9 +113,9 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
               onClick={() => {
                 addToCart(item);
               }}
-              className="ml-auto text-gray-700 transition-all duration-200 bg-white dark:bg-black rounded-full hover:text-blue-600"
+              className="ml-auto text-gray-700 transition-all duration-200 bg-white dark:bg-[#121212] rounded-full hover:text-blue-600"
             >
-              <BiCart className="h-10 w-10 bg-white dark:bg-black" />
+              <BiCart className="h-10 w-10 bg-white dark:bg-[#121212]" />
             </button>
           </div>
 

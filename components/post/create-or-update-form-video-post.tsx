@@ -140,7 +140,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
                   {post?.id ? "Update" : "Create a New"} Video

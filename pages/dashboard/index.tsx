@@ -49,7 +49,7 @@ const Dashboard = () => {
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="px-3 py-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="px-3 py-2 bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                 <div className="flex items-center">
                   <div className="relative flex-shrink-0 cursor-pointer">
                     <AvatarComponent size={60} profile={user?.profile} />
@@ -142,7 +142,7 @@ const Dashboard = () => {
               </div>
 
               <div className="grid grid-cols-1 gap-5 mt-4 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Membership
@@ -162,7 +162,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Donations
@@ -182,7 +182,7 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
                       Shop
@@ -205,7 +205,7 @@ const Dashboard = () => {
 
               {user?.id ? <RecentTransactions days={dayCount} /> : null}
 
-              <div className="py-4 mt-4 bg-white dark:bg-black sm:py-4 lg:py-10 rounded-lg">
+              <div className="py-4 mt-4 bg-white dark:bg-[#121212] sm:py-4 lg:py-10 rounded-lg">
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                   <div className="grid max-w-2xl grid-cols-1 mx-auto sm:grid-cols-2 xl:max-w-none xl:grid-cols-4 gap-x-8 gap-y-8 sm:gap-y-12">
                     <div className="flex items-center">

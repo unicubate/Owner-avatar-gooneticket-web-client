@@ -39,7 +39,7 @@ const ListFollowPosts: React.FC<Props> = ({
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white dark:bg-black rounded-lg"
+        className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg"
       >
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">

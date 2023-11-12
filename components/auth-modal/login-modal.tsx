@@ -68,7 +68,7 @@ const LoginModal: React.FC<{
       {showModal ? (
         <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
           <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-sm p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-black">
+          <div className="w-full  max-w-sm p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-[#121212]">
             <button
               className="bg-transparent border-0 text-black float-right"
               onClick={() => setShowModal(false)}

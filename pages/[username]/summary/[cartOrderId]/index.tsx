@@ -90,7 +90,7 @@ const Summary = () => {
               Continue Shopping
             </Link>
           </div>
-          <div className="overflow-hidden bg-white dark:bg-black shadow rounded-xl">
+          <div className="overflow-hidden bg-white dark:bg-[#121212] shadow rounded-xl">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
               <div className="flow-root">
                 <ul className="divide-y divide-gray-200 dark:divide-gray-800">

@@ -38,7 +38,7 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
               }}
               customIcons={{
                 play: (
-                  <button className="bg-white dark:bg-black">
+                  <button className="bg-white dark:bg-[#121212]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 21 21"
@@ -60,7 +60,7 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
                 ),
                 pause: (
                   <>
-                    <button className="bg-white dark:bg-black">
+                    <button className="bg-white dark:bg-[#121212]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 8 8"
@@ -80,7 +80,7 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
                 ),
                 rewind: (
                   <>
-                    <button className="bg-white dark:bg-black">
+                    <button className="bg-white dark:bg-[#121212]">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
@@ -124,7 +124,7 @@ const AudioPlayerInput: React.FC<Props> = ({ uploads, folder, post }) => {
                 <>
                   {post?.whoCanSee === "MEMBERSHIP" &&
                     post?.isValidSubscribe !== 1 ? <button className={`font-bold`}>
-                    <PiLockKey className="w-7 h-7" />
+                    <PiLockKey className="w-8 h-8" />
                   </button> : null}
                 </>
               }

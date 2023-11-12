@@ -97,7 +97,7 @@ const Configs = () => {
           <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
             <HorizontalNavShop />
 
-            <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5 sm:p-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-2 sm:mt-0">
@@ -116,7 +116,7 @@ const Configs = () => {
                   <div className="mt-2 sm:mt-0">
                     <Input
                       placeholder="Search name"
-                      className="dark:bg-black dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                      className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
                       onChange={(
                         e: React.ChangeEvent<
                           HTMLInputElement | HTMLTextAreaElement
@@ -159,7 +159,7 @@ const Configs = () => {
               </div>
             )}
 
-            <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5 sm:p-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div>

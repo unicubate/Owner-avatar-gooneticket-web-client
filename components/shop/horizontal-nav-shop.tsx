@@ -24,7 +24,7 @@ const HorizontalNavShop: React.FC = () => {
 
   return (
     <>
-      <div className="px-3 py-2 bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="px-3 py-2 bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;

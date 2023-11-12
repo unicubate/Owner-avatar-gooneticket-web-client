@@ -38,7 +38,7 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
             <div
               key={index}
               onClick={() => router.push(item?.href)}
-              className="bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-xl hover:-translate-y-1 cursor-pointer"
+              className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-xl hover:-translate-y-1 cursor-pointer"
             >
               <div className="p-6 lg:px-10 lg:py-8">
                 <div className="flex items-center justify-start space-x-3">

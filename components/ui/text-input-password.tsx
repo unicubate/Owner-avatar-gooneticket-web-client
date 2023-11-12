@@ -39,7 +39,7 @@ const TextInputPassword: React.FC<Props> = ({
         control={control}
         render={({ field: { ref, ...field } }) => (
           <Password
-            className={`dark:bg-black dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${
+            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${
               errors?.[name]?.message ? "border-red-500" : ""
             }`}
             size="large"

@@ -58,7 +58,7 @@ const RecentTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-black border dark:border-gray-800 rounded-lg">
+      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-[#121212] border dark:border-gray-800 rounded-lg">
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
           <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
             <tbody className="divide-y divide-gray-200 dark:divide-gray-800">

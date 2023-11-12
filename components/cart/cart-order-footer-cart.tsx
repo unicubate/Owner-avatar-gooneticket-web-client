@@ -27,7 +27,7 @@ const CartOrderFooterCart: React.FC<{
     <>
       {carts?.summary?.totalQuantity && (
         <div className="flex fixed bottom-0 w-full items-center justify-center mb-16 py-2 z-20">
-          <div className="relative w-full max-w-md overflow-hidden bg-white dark:bg-black rounded-lg shadow-lg">
+          <div className="relative w-full max-w-md overflow-hidden bg-white dark:bg-[#121212] rounded-lg shadow-lg">
             <div className="px-3 pt-3 pb-4">
               <div className="flex items-center justify-between">
                 {carts?.cartItems.length > 0 ? (
@@ -35,9 +35,9 @@ const CartOrderFooterCart: React.FC<{
                     <div className="relative">
                       <button
                         type="button"
-                        className="text-gray-700 transition-all duration-200 bg-white dark:bg-black rounded-full hover:text-gray-900 dark:hover:text-white"
+                        className="text-gray-700 transition-all duration-200 bg-white dark:bg-[#121212] rounded-full hover:text-gray-900 dark:hover:text-white"
                       >
-                        <BiCart className="h-10 w-10 bg-white dark:bg-black" />
+                        <BiCart className="h-10 w-10 bg-white dark:bg-[#121212]" />
                       </button>
                       <span className="inline-flex items-center px-1.5 absolute -top-px -right-1 py-0.5 rounded-full text-xs font-semibold bg-red-600 text-white">
                       {carts?.summary?.totalQuantity}

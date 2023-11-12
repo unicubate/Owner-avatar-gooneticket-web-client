@@ -89,7 +89,7 @@ const UpdateFormDonation: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
           <div className="px-4 py-5">
             <div className="mt-2">
               <NumberInput
