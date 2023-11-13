@@ -11,6 +11,7 @@ import ContentLoader from "react-content-loader";
 import Skeleton from "react-loading-skeleton";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const ProfilePublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -99,3 +100,20 @@ const ProfilePublic = () => {
 };
 
 export default ProfilePublic;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

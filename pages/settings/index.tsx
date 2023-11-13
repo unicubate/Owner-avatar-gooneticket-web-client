@@ -6,6 +6,7 @@ import { useAuth } from "@/components/util/context-user";
 import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
+import { GetStaticPropsContext } from "next";
 
 const Settings = () => {
   const user = useAuth() as any;
@@ -42,3 +43,14 @@ const Settings = () => {
 };
 
 export default PrivateComponent(Settings);
+
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

@@ -19,6 +19,7 @@ import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal"
 import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
 import { useState } from "react";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
+import { GetStaticPropsContext } from "next";
 
 const Summary = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -185,3 +186,20 @@ const Summary = () => {
 };
 
 export default PrivateComponent(Summary);
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

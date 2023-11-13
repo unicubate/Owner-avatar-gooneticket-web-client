@@ -15,19 +15,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ContextUserProvider } from "@/components/util/context-user";
 import { ThemeProvider } from "@/components/util/theme-provider";
 import { LoadingFile } from "@/components/ui";
-import { createTranslator, NextIntlClientProvider } from "next-intl";
+import { NextIntlClientProvider } from "next-intl";
 
 import { Suspense } from "react";
-import { GetStaticPropsContext } from "next";
 const queryClient = new QueryClient();
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../lang/${locale}.json`)).default,
-    },
-  };
-}
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

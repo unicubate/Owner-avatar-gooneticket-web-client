@@ -4,6 +4,7 @@ import { HorizontalNavCommission } from "@/components/commission/horizontal-nav-
 import { useAuth } from "@/components/util/context-user";
 import { EnableCommission } from "@/components/commission/enable-commission";
 import { TableCommissions } from "@/components/commission/table-commissions";
+import { GetStaticPropsContext } from "next";
 
 const Commissions = () => {
   const { organizationId, profile } = useAuth() as any;
@@ -34,3 +35,11 @@ const Commissions = () => {
 };
 
 export default PrivateComponent(Commissions);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

@@ -16,6 +16,7 @@ import { SelectSearchInput } from "@/components/ui/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
 import { MdDeleteOutline } from "react-icons/md";
 import { GetUploadsAPI } from "@/api-site/upload";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   firstName: yup.string().nullable(),
@@ -318,3 +319,20 @@ const ShopView = () => {
 };
 
 export default ShopView;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ import { ErrorFile } from "@/components/ui/error-file";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 import { GetOneCartOrderAPI } from "@/api-site/cart";
 import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
+import { GetStaticPropsContext } from "next";
 
 const ShopUserPublic = () => {
   const { userStorage: userVisitor } = useAuth() as any;
@@ -70,3 +71,20 @@ const ShopUserPublic = () => {
 };
 
 export default ShopUserPublic;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

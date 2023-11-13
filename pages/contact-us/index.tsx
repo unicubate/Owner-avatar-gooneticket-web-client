@@ -1,6 +1,7 @@
 import { LayoutSite } from "@/components/layout-site";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
+import { GetStaticPropsContext } from "next";
 
 export default function ContactUs() {
   const onFinish = (values: any) => {
@@ -198,4 +199,14 @@ export default function ContactUs() {
       </LayoutSite>
     </>
   );
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
 }

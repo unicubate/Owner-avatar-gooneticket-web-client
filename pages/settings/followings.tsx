@@ -7,6 +7,7 @@ import { ButtonInput } from "@/components/ui/button-input";
 import { GetInfiniteFollowingsAPI } from "@/api-site/follow";
 import ListFollowings from "../../components/setting/list-followings";
 import { useEffect } from "react";
+import { GetStaticPropsContext } from "next";
 
 const Followings = () => {
   const { ref, inView } = useInView();
@@ -116,3 +117,13 @@ const Followings = () => {
 };
 
 export default PrivateComponent(Followings);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

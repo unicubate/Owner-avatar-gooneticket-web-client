@@ -1,6 +1,7 @@
 import { Result } from "antd";
 import { useRouter } from "next/router";
 import { ButtonInput } from "@/components/ui/button-input";
+import { GetStaticPropsContext } from "next";
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
@@ -49,3 +50,13 @@ const TransactionSuccess = () => {
 };
 
 export default TransactionSuccess;
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
+import { GetStaticPropsContext } from "next";
 
 const CommissionsCreate = () => {
   return (
@@ -23,3 +24,11 @@ const CommissionsCreate = () => {
 };
 
 export default PrivateComponent(CommissionsCreate);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: (await import(`../../lang/${locale}.json`)).default,
+    },
+  };
+}

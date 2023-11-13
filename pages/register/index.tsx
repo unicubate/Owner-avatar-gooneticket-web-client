@@ -21,6 +21,7 @@ import { PublicComponent } from "@/components/util/public-component";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   email: yup
@@ -256,3 +257,14 @@ const Register = () => {
   );
 };
 export default PublicComponent(Register);
+
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

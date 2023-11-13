@@ -7,6 +7,7 @@ import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
 import { ErrorFile } from "@/components/ui/error-file";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
+import { GetStaticPropsContext } from "next";
 
 const CommissionsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -71,3 +72,20 @@ const CommissionsUserPublic = () => {
 };
 
 export default CommissionsUserPublic;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

@@ -8,6 +8,7 @@ import { GetInfiniteFollowersAPI } from "@/api-site/follow";
 import ListFollowers from "@/components/setting/list-followers";
 import { useInView } from "react-intersection-observer";
 import { ErrorFile } from "@/components/ui/error-file";
+import { GetStaticPropsContext } from "next";
 
 const Subscribers = () => {
   const { ref, inView } = useInView();
@@ -121,3 +122,13 @@ const Subscribers = () => {
 };
 
 export default PrivateComponent(Subscribers);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

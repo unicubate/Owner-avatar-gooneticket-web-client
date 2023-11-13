@@ -16,6 +16,7 @@ import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
+import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({
   newPassword: yup.string().min(8, "Minimum 8 symbols").required(),
@@ -134,3 +135,20 @@ const ResetPassword = () => {
 };
 
 export default PublicComponent(ResetPassword);
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true
+  }
+}
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

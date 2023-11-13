@@ -335,7 +335,9 @@ export default PrivateComponent(SettingDonations);
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../lang/${locale}.json`)).default,
-    },
-  };
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
 }
