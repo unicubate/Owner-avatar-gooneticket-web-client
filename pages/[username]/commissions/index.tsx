@@ -36,10 +36,7 @@ const CommissionsUserPublic = () => {
     </>
   );
 
-  if (
-    user?.profile?.enableCommission === false &&
-    user?.commission?.count < 1
-  ) {
+  if (user?.profile?.enableCommission === false && !user?.commission?.count) {
     push(`${`/${username}`}`);
   }
   return (
