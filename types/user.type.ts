@@ -54,6 +54,15 @@ export type UserModel = {
     amount: number;
     count: number;
   };
+  commission: {
+    count: number;
+  };
+  post: {
+    count: number;
+  };
+  gallery: {
+    count: number;
+  };
   profile: ProfileModel;
   refreshToken: string;
   nextStep: NextStep;

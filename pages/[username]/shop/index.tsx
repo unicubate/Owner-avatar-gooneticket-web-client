@@ -25,8 +25,7 @@ const ShopUserPublic = () => {
     organizationId: user?.organizationId,
   });
 
-
-  if (user?.profile?.enableShop === false) {
+  if (user?.profile?.enableShop === false && user?.product?.count >= 1) {
     push(`${`/${username}`}`);
   }
 
@@ -54,7 +53,9 @@ const ShopUserPublic = () => {
           </div>
         </div>
 
-        {user?.id && cartOrder?.id ? <CartOrderFooterCart user={user} cartOrder={cartOrder} /> : null}
+        {user?.id && cartOrder?.id ? (
+          <CartOrderFooterCart user={user} cartOrder={cartOrder} />
+        ) : null}
       </LayoutUserPublicSite>
 
       {statusUser === "pending" ? <LoadingFile /> : null}
@@ -75,8 +76,8 @@ export default ShopUserPublic;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -84,7 +85,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

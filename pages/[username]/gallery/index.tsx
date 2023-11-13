@@ -19,7 +19,7 @@ const GalleryUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (user?.profile?.enableGallery === false) {
+  if (user?.profile?.enableGallery === false && user?.gallery?.count >= 1) {
     push(`${`/${username}`}`);
   }
   return (
@@ -70,8 +70,8 @@ export default GalleryUserPublic;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -79,7 +79,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

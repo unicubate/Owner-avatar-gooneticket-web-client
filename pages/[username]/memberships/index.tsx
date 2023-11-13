@@ -19,6 +19,10 @@ const MembershipsUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
+  if (user?.membership?.count >= 1) {
+    push(`${`/${username}`}`);
+  }
+
   return (
     <>
       <LayoutUserPublicSite

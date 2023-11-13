@@ -11,13 +11,17 @@ import { GetStaticPropsContext } from "next";
 
 const PostsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const username = String(query?.username);
 
   const { status, data: user } = GetOneUserPublicAPI({
     username,
     userVisitorId: userVisiter?.id,
   });
+
+  if (user?.post?.count >= 1) {
+    push(`${`/${username}`}`);
+  }
 
   return (
     <>
@@ -71,8 +75,8 @@ export default PostsUserPublic;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -80,7 +84,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

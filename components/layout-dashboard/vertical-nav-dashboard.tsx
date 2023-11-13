@@ -28,6 +28,7 @@ export type NavbarProps = {
   href: string;
   status?: boolean;
   description?: string;
+  count?: number;
   icon?: any;
 };
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
