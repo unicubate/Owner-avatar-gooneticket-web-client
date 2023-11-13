@@ -19,7 +19,7 @@ const MembershipsUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (user?.membership?.count >= 1) {
+  if (user?.membership?.count < 1) {
     push(`${`/${username}`}`);
   }
 

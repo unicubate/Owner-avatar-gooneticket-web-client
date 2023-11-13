@@ -25,7 +25,7 @@ const ShopUserPublic = () => {
     organizationId: user?.organizationId,
   });
 
-  if (user?.profile?.enableShop === false && user?.product?.count >= 1) {
+  if (user?.profile?.enableShop === false && user?.product?.count < 1) {
     push(`${`/${username}`}`);
   }
 

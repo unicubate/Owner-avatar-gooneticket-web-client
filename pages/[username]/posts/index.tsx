@@ -19,7 +19,7 @@ const PostsUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (user?.post?.count >= 1) {
+  if (user?.post?.count < 1) {
     push(`${`/${username}`}`);
   }
 
