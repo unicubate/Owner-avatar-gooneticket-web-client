@@ -1,9 +1,17 @@
 {
-  "dashboard_vertical_menu": {
+  "menu": {
     "dashboard": "Dashboard",
-    "home": "Home",
+    "home": "Accueil",
+    "gallery": "Gallerie",
+    "posts": "Postes",
+    "memberships": "Adhésions",
+    "donations": "Dons",
     "your_page": "Page",
-    "feed": "Uctualiter"
+    "shop": "Boutique",
+    "commissions": "Commissions",
+    "feed": "Uctualiter",
+    "settings": "Paramètre",
+    "logout": "Déconnexion"
   },
 
   "home_page": {

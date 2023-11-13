@@ -33,82 +33,27 @@ export type NavbarProps = {
 };
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
-const MONETIZE_ITEMS: NavbarProps[] = [
-  {
-    title: "Donations",
-    href: "/donations",
-    icon: <BiHeart className={classIcon} />,
-  },
-  // {
-  //   title: "Gift",
-  //   href: "/gifts",
-  //   icon: <BsGift className={classIcon} />,
-  // },
-  {
-    title: "Memberships",
-    href: "/memberships",
-    icon: <BiLockOpen className={classIcon} />,
-  },
-  {
-    title: "Commissions",
-    href: "/commissions",
-    icon: <RiShakeHandsLine className={classIcon} />,
-  },
-  {
-    title: "Shop",
-    href: "/shop",
-    icon: <BiStoreAlt className={classIcon} />,
-  },
-];
-
-const SUPPORT_ITEMS = [
-  {
-    title: "Posts",
-    href: "/posts",
-    icon: <BiDetail className={classIcon} />,
-  },
-  {
-    title: "Gallery",
-    href: "/gallery",
-    icon: <BiImage className={classIcon} />,
-  },
-];
-
-const SETTINGS_ITEMS = [
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: <BiCog className={classIcon} />,
-  },
-  // {
-  //   title: "Integrations",
-  //   href: "integrations",
-  //   icon: <BiCodeCurly className={classIcon} />,
-  // },
-];
-
 interface Props {
   user?: any;
 }
 
 const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
-  
   const router = useRouter();
-  const t = useTranslations('dashboard_vertical_menu');
+  const t = useTranslations("menu");
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
-      title: `${t('home')}`,
+      title: `${t("home")}`,
       href: "/dashboard",
       icon: <BiHomeCircle className={classIcon} />,
     },
     {
-      title: `${t('your_page')}`,
+      title: `${t("your_page")}`,
       href: `/${user?.username}`,
       icon: <BiLayout className={classIcon} />,
     },
     {
-      title: "Feed",
+      title: `${t("feed")}`,
       href: "/home",
       icon: <BiBookContent className={classIcon} />,
     },
@@ -119,11 +64,47 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
     },
   ]);
 
-  const [monetizeItems] = useState<NavbarProps[]>(MONETIZE_ITEMS);
-  const [supportItems] = useState<NavbarProps[]>(SUPPORT_ITEMS);
-  const [settingItems] = useState<NavbarProps[]>(SETTINGS_ITEMS);
-
-
+  const [monetizeItems] = useState<NavbarProps[]>([
+    {
+      title: `${t("donations")}`,
+      href: "/donations",
+      icon: <BiHeart className={classIcon} />,
+    },
+    {
+      title: `${t("memberships")}`,
+      href: "/memberships",
+      icon: <BiLockOpen className={classIcon} />,
+    },
+    {
+      title: `${t("commissions")}`,
+      href: "/commissions",
+      icon: <RiShakeHandsLine className={classIcon} />,
+    },
+    {
+      title: `${t("shop")}`,
+      href: "/shop",
+      icon: <BiStoreAlt className={classIcon} />,
+    },
+  ]);
+  const [supportItems] = useState<NavbarProps[]>([
+    {
+      title: `${t("posts")}`,
+      href: "/posts",
+      icon: <BiDetail className={classIcon} />,
+    },
+    {
+      title: `${t("gallery")}`,
+      href: "/gallery",
+      icon: <BiImage className={classIcon} />,
+    },
+  ]);
+  const [settingItems] = useState<NavbarProps[]>([
+    {
+      title:  `${t("settings")}`,
+      href: "/settings",
+      icon: <BiCog className={classIcon} />,
+    },
+  ]);
 
   return (
     <>
@@ -138,10 +119,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                    ? `text-white bg-${user?.profile?.color}-600`
-                    : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
-                    } `}
+                  className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    isActive
+                      ? `text-white bg-${user?.profile?.color}-600`
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                  } `}
                 >
                   {item?.icon}
 
@@ -164,10 +146,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
-                      } `}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                    } `}
                   >
                     {item?.icon}
 
@@ -198,10 +181,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
-                      } `}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                    } `}
                   >
                     {item?.icon}
 
@@ -224,10 +208,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
-                      } `}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                      isActive
+                        ? `text-white bg-${user?.profile?.color}-600`
+                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                    } `}
                   >
                     {item?.icon}
 
@@ -251,7 +236,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   </Link> */}
 
               <a
-                href={void (0)}
+                href={void 0}
                 title=""
                 onClick={() => logoutUser()}
                 className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 dark:text-white text-gray-900 rounded-lg dark:hover:bg-gray-200 group cursor-pointer"
@@ -270,7 +255,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                   />
                 </svg>
-                Logout
+                {t("logout")}
               </a>
             </nav>
           </>
@@ -281,5 +266,3 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 };
 
 export { VerticalNavDashboard };
-
-

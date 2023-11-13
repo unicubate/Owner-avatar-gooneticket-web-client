@@ -1,9 +1,17 @@
 {
-  "dashboard_vertical_menu": {
+  "menu": {
     "dashboard": "Dashboard",
     "home": "Home",
+    "gallery": "Gallery",
+    "posts": "Pots",
+    "memberships": "Memberships",
+    "donations": "Donations",
     "your_page": "Your Page",
-    "feed": "Feed"
+    "shop": "Shop",
+    "commissions": "Commissions",
+    "feed": "Feed",
+    "settings": "settings",
+    "logout": "Logout"
   },
 
   "home_page": {

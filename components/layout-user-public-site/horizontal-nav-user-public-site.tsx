@@ -1,15 +1,8 @@
 import Link from "next/link";
-import {
-  BiHomeCircle,
-  BiSearch,
-  BiBookContent,
-  BiCoffeeTogo,
-} from "react-icons/bi";
-import { VscOpenPreview } from "react-icons/vsc";
-import { useRouter } from "next/router";
-import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
+import { BiCoffeeTogo } from "react-icons/bi";
+import { Dropdown, MenuProps } from "antd";
 import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken, logoutUser, useAuth } from "../util/context-user";
+import { logoutUser, useAuth } from "../util/context-user";
 import { useState } from "react";
 import { AvatarComponent } from "../ui/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
@@ -18,65 +11,71 @@ import { ButtonInput } from "../ui";
 import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
 import { UserModel } from "@/types/user.type";
 import { ColorType } from "@/types/profile.type";
+import { navigationPublicUser } from "./index";
+import { useTranslations } from "next-intl";
 
 interface Props {
   user?: UserModel;
   showDrawer?: () => void;
 }
 
-const items: MenuProps['items'] = [
+const items: MenuProps["items"] = [
   {
-    key: '1',
-    label: (<Link href="/dashboard">Dashboard</Link>),
+    key: "1",
+    label: <Link href="/dashboard">Dashboard</Link>,
   },
   {
-    key: '2',
+    key: "2",
     label: (
-      <a href={void (0)}
-        title=""
-        onClick={() => logoutUser()}
-      >
+      <a href={void 0} title="" onClick={() => logoutUser()}>
         Logout
       </a>
     ),
   },
 ];
 
-
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
+  const t = useTranslations("menu");
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
+  const username = user?.username;
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Home",
+      title: `${t("home")}`,
       status: true,
-      href: `/${user?.username}`,
+      count: 1,
+      href: `/${username}`,
     },
     {
-      title: "Gallery",
+      title: `${t("gallery")}`,
       status: user?.profile?.enableGallery,
-      href: `/${user?.username}/gallery`,
+      count: user?.gallery?.count,
+      href: `/${username}/gallery`,
     },
     {
-      title: "Memberships",
+      title: `${t("memberships")}`,
       status: true,
-      href: `/${user?.username}/memberships`,
+      count: user?.membership?.count,
+      href: `/${username}/memberships`,
     },
     {
-      title: "Posts",
+      title: `${t("posts")}`,
       status: true,
-      href: `/${user?.username}/posts`,
+      count: user?.post?.count,
+      href: `/${username}/posts`,
     },
     {
-      title: "Shop",
+      title: `${t("shop")}`,
       status: user?.profile?.enableShop,
-      href: `/${user?.username}/shop`,
+      count: user?.product?.count,
+      href: `/${username}/shop`,
     },
     {
-      title: "Commissions",
+      title: `${t("commissions")}`,
       status: user?.profile?.enableCommission,
-      href: `/${user?.username}/commissions`,
+      count: user?.commission?.count,
+      href: `/${username}/commissions`,
     },
   ]);
 
@@ -109,11 +108,13 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex ml-6 mr-auto xl:ml-0">
-
               <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
                 <nav className="flex -mb-px space-x-10">
                   {navigation
-                    .filter((item) => item?.status === true)
+                    .filter(
+                      (item) =>
+                        item?.status === true && Number(item?.count) >= 1
+                    )
                     .map((item: any, index: number) => {
                       const isActive = pathname === item.href;
                       // const isActive = pathname.startsWith(item.href);
@@ -122,10 +123,11 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                           key={index}
                           href={`${item?.href}`}
                           title={item?.title}
-                          className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${isActive
-                            ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                            : `border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300`
-                            } `}
+                          className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                            isActive
+                              ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                              : `border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300`
+                          } `}
                         >
                           {item?.icon}
 
@@ -138,7 +140,6 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex items-center justify-end">
-
               <div className="flex items-center space-x-2 sm:ml-5">
                 {userVisiter?.id !== user?.id ? (
                   <>
@@ -158,7 +159,10 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                 ) : (
                   <>
                     <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                      <button type="button"  className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                      <button
+                        type="button"
+                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                      >
                         <AvatarComponent
                           className="w-9 h-9"
                           profile={user?.profile}

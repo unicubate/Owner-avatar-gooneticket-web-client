@@ -1,52 +1,52 @@
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
-import { useAuth } from "../util/context-user";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { useRouter } from "next/router";
-import { AvatarComponent } from "../ui/avatar-component";
 import { UserModel } from "@/types/user.type";
+import { navigationPublicUser } from "../layout-user-public-site";
+import { useTranslations } from "next-intl";
 
 const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
   user,
 }) => {
+  const t = useTranslations("menu");
   const { query } = useRouter();
   const username = String(query?.username);
-
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Home",
+      title: `${t("home")}`,
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: "Gallery",
+      title: `${t("gallery")}`,
       status: user?.profile?.enableGallery,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: "Memberships",
+      title: `${t("memberships")}`,
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: "Posts",
+      title: `${t("posts")}`,
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: "Shop",
+      title: `${t("shop")}`,
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: "Commissions",
+      title: `${t("commissions")}`,
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,
