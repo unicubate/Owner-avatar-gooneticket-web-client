@@ -13,7 +13,7 @@ import { ErrorFile } from "@/components/ui/error-file";
 import { GetStaticPropsContext } from "next";
 
 const PostsEdit = () => {
-  const { organizationId } = useAuth() as any;
+  const { userStorage: userVisitor } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);
@@ -24,7 +24,7 @@ const PostsEdit = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
     postId,
-    organizationId,
+    organizationId: userVisitor?.organizationId,
     type: String(type),
   });
 
@@ -33,7 +33,7 @@ const PostsEdit = () => {
     isLoading: isLoadingImages,
     data: uploadImages,
   } = GetUploadsAPI({
-    organizationId,
+    organizationId: post?.organizationId,
     model: "POST",
     uploadableId: postId,
     uploadType: "image",
@@ -44,7 +44,7 @@ const PostsEdit = () => {
     isLoading: isLoadingFiles,
     data: uploadsFiles,
   } = GetUploadsAPI({
-    organizationId,
+    organizationId: post?.organizationId,
     model: "POST",
     uploadableId: postId,
     uploadType: "file",
@@ -61,40 +61,40 @@ const PostsEdit = () => {
       />
     ) : (
       <>
-        {organizationId && post?.id && type === "gallery" ? (
+        {userVisitor?.organizationId && post?.id && type === "gallery" ? (
           <CreateOrUpdateFormGalleryPost
             uploadImages={uploadImages}
             post={post}
             postId={postId}
-            organizationId={organizationId}
+            organizationId={post?.organizationId}
           />
         ) : null}
 
-        {organizationId && post?.id && type === "article" ? (
+        {post?.id && type === "article" ? (
           <CreateOrUpdateFormPost
             uploadImages={uploadImages}
             post={post}
             postId={postId}
-            organizationId={organizationId}
+            organizationId={post?.organizationId}
           />
         ) : null}
 
-        {organizationId && post?.id && type === "audio" ? (
+        {post?.id && type === "audio" ? (
           <CreateOrUpdateFormAudioPost
             post={post}
             postId={postId}
             uploadFiles={uploadsFiles}
             uploadImages={uploadImages}
-            organizationId={organizationId}
+            organizationId={post?.organizationId}
           />
         ) : null}
 
-        {organizationId && post?.id && type === "video" ? (
+        {post?.id && type === "video" ? (
           <CreateOrUpdateFormVideoPost
             uploadImages={uploadImages}
             post={post}
             postId={postId}
-            organizationId={organizationId}
+            organizationId={post?.organizationId}
           />
         ) : null}
       </>

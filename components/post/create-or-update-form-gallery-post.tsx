@@ -150,7 +150,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     </div>
                   ) : null}
 
-                  {uploadImages?.length > 0 ? (
+                  {post?.id && uploadImages?.length > 0 ? (
                     <div className="mt-2 text-center space-x-2">
                       <ListCarouselUpload
                         uploads={post?.uploadsImage}

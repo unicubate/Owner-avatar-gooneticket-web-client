@@ -12,7 +12,6 @@ import {
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { useRouter } from "next/router";
-import { GetUploadsAPI } from "@/api-site/upload";
 import { BiComment } from "react-icons/bi";
 import { LiaDnaSolid } from "react-icons/lia";
 import { PostModel } from "@/types/post";
@@ -67,20 +66,9 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const { status, data: dataImages } = GetUploadsAPI({
-    organizationId: item?.organizationId,
-    model: "COMMISSION",
-    uploadableId: `${item?.id}`,
-    uploadType: "image",
-  });
-
-  if (status === "pending") {
-    <p>loading...</p>;
-  }
-
   return (
     <>
-      <div className="flex py-5 items-center">
+      <div key={index} className="flex py-5 items-center">
         {/* <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
               size={100}

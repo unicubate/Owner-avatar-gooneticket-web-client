@@ -72,17 +72,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
     });
   };
 
-  const { status, data: uploads } = GetUploadsAPI({
-    uploadType: "image",
-    model: "post",
-    organizationId: item?.organizationId,
-    uploadableId: String(item?.id),
-  });
-
-  if (status === "pending") {
-    <strong>loading...</strong>;
-  }
-
   return (
     <>
       <div key={index} className="py-5 divide-gray-200">
@@ -94,7 +83,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 shape="square"
                 src={viewOneFileUploadAPI({
                   folder: "posts",
-                  fileName: String(uploads?.[0]?.path),
+                  fileName: String(item?.uploadsImage?.[0]?.path),
                 })}
                 alt={item?.title}
               />
@@ -182,15 +171,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
         </div>
       </div>
-
-      {openModal && (
-        <CreateOrUpdateGallery
-          post={item}
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          uploadImages={uploads}
-        />
-      )}
     </>
   );
 };
