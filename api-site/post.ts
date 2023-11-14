@@ -246,6 +246,7 @@ export const GetOnePostAPI = (payload: {
         action: "getOnePost",
         queryParams: payload,
       }),
+    enabled: !!payload,
     refetchOnWindowFocus: true,
   });
 

@@ -19,20 +19,16 @@ const PostsUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (!user?.post?.count) {
-    push(`${`/${username}`}`);
-  }
 
   return (
     <>
       <LayoutUserPublicSite
-        title={`Posts - ${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
-        }`}
+        title={`Posts - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
+          }`}
         user={user}
       >
         <div className="mt-4 px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          
+
           {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

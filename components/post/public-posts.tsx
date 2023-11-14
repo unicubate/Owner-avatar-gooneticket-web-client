@@ -13,7 +13,7 @@ type Props = {
 };
 
 const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
-  const { ref, inView } = useInView();
+  // const { ref, inView } = useInView();
 
   const {
     isLoading: isLoadingPosts,
@@ -79,7 +79,7 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput
-              ref={ref}
+              // ref={ref}
               onClick={() => fetchNextPage()}
               shape="default"
               type="button"

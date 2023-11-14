@@ -37,7 +37,6 @@ export const registerGoogleUserAPI = async (payload: {
   });
 };
 
-
 export const passwordResetUserAPI = async (
   payload: UserForgotPasswordFormModel
 ): Promise<{ data: UserModel }> => {
