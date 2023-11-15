@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
-import { BiDetail } from "react-icons/bi";
-import { LuFileAudio2 } from "react-icons/lu";
-import { PiFileVideoLight } from "react-icons/pi";
 import { useRouter } from "next/router";
+import { IconTypePost } from "@/utils/icon-type-post";
 
 const classIcon = "flex-shrink-0 w-10 h-10 text-gray-600 md:w-12 md:h-12";
 
@@ -14,25 +12,25 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
       title: "Write a post",
       href: `/posts/create?type=article`,
       description: `983 Available Posts`,
-      icon: <BiDetail className={classIcon} />,
+      icon: <IconTypePost type="ARTICLE" className={classIcon} />,
     },
     {
       title: "Audio post",
       href: `/posts/create?type=audio`,
       description: `142 Available Audio Posts`,
-      icon: <LuFileAudio2 className={classIcon} />,
+      icon: <IconTypePost type="AUDIO" className={classIcon} />,
     },
     {
       title: "Video post",
       href: `/posts/create?type=video`,
       description: `142 Available Videos Posts`,
-      icon: <PiFileVideoLight className={classIcon} />,
+      icon: <IconTypePost type="VIDEO" className={classIcon} />,
     },
   ]);
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-3 xl:grid-cols-3 sm:gap-8 xl:gap-12">
+      <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-1 xl:grid-cols-3 sm:gap-8 xl:gap-12">
         {navigation.map((item: any, index: number) => {
           return (
             <div

@@ -14,10 +14,11 @@ import {
 import { useRouter } from "next/router";
 import { BiComment } from "react-icons/bi";
 import { LiaDnaSolid } from "react-icons/lia";
-import { PostModel } from "@/types/post";
+import { PostModel, PostType } from "@/types/post";
 import { AiOutlineCalendar } from "react-icons/ai";
 import { TbWorld } from "react-icons/tb";
 import { HiOutlineLockClosed } from "react-icons/hi";
+import { IconTypePost } from "@/utils/icon-type-post";
 
 type Props = {
   item?: PostModel;
@@ -29,8 +30,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -100,16 +101,12 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             <span className="text-lg font-normal">
               <MdFavoriteBorder />
             </span>
-            <span className="ml-1.5 text-sm">
-              {item?.totalLike ?? 0}
-            </span>
+            <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
             <span className="ml-1.5 text-lg">
               <BiComment />
             </span>
-            <span className="ml-1.5 text-sm">
-              {item?.totalComment ?? 0}
-            </span>
+            <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
 
             <span className="ml-1.5 text-lg">
               {item?.whoCanSee === "PUBLIC" ? (
@@ -122,7 +119,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
               {item?.whoCanSee}
             </span>
             <span className="ml-1.5 text-lg">
-              <LiaDnaSolid />
+              <IconTypePost type={item?.type as PostType} />
             </span>
             <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
           </div>
@@ -133,7 +130,8 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             <button
               onClick={() =>
                 router.push(
-                  `/posts/${item?.id
+                  `/posts/${
+                    item?.id
                   }/edit?type=${item?.type.toLocaleLowerCase()}`
                 )
               }

@@ -47,10 +47,7 @@ const ListFollowPosts: React.FC<Props> = ({
               onClick={() => router.push(`/${item?.profile?.username}`)}
               className="relative flex-shrink-0 cursor-pointer"
             >
-              <AvatarComponent
-                size={50}
-                profile={item?.profile}
-              />
+              <AvatarComponent size={50} profile={item?.profile} />
             </div>
 
             <div
@@ -68,9 +65,11 @@ const ListFollowPosts: React.FC<Props> = ({
             <div className="ml-auto">
               <div className="flex items-center space-x-2 sm:ml-5">
                 {item?.whoCanSee === "MEMBERSHIP" &&
-                  item?.isValidSubscribe !== 1 ? (
+                item?.isValidSubscribe !== 1 ? (
                   <ButtonInput
-                    onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
+                    onClick={() =>
+                      router.push(`/${item?.profile?.username}/memberships`)
+                    }
                     shape="default"
                     type="button"
                     size="medium"
@@ -110,10 +109,11 @@ const ListFollowPosts: React.FC<Props> = ({
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
             <div
               className={`mt-1 mx-auto 
-            ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                }`}
+            ${
+              item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+                ? "blur-xl"
+                : ""
+            }`}
             >
               <ReactPlayer
                 className="mr-auto"
@@ -132,23 +132,23 @@ const ListFollowPosts: React.FC<Props> = ({
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                  }`}
+                    ? "blur-xl"
+                    : ""
+                }`}
               />
             </div>
           ) : null}
 
-          {item?.whoCanSee &&
-            ["AUDIO"].includes(item?.type as PostType) &&
-            item?.uploadsFile?.length > 0 ? (
+          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
             <div className="text-center justify-center mx-auto">
               <AudioPlayerInput
+                urlMedia={item?.urlMedia}
+                enableUrlMedia={item?.enableUrlMedia}
                 uploads={item?.uploadsFile}
                 folder="posts"
-                post={item}
               />
             </div>
           ) : null}
@@ -165,13 +165,16 @@ const ListFollowPosts: React.FC<Props> = ({
           ) : null}
 
           {item?.description ? (
-            <div className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}>
+            <div
+              className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}
+            >
               <span
-                className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`ql-editor ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-lg"
-                  : ""
-                  }`}
+                    ? "blur-lg"
+                    : ""
+                }`}
               >
                 <HtmlParser
                   html={String(item?.description ?? "")}
@@ -187,15 +190,14 @@ const ListFollowPosts: React.FC<Props> = ({
             <button className="ml-2 text-2xl">
               <BiConversation />
             </button>
-            <span className="ml-2 text-sm">
-              {item?.totalComment ?? 0}
-            </span>
+            <span className="ml-2 text-sm">{item?.totalComment ?? 0}</span>
             {userVisitor?.id === item?.userId ? (
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
@@ -210,7 +212,10 @@ const ListFollowPosts: React.FC<Props> = ({
                     router.push(
                       `${downloadOneFileUploadAPI({
                         folder: "posts",
-                        fileName: item.type === "AUDIO" ? item?.uploadsFile[0]?.path : item?.uploadsImage[0]?.path,
+                        fileName:
+                          item.type === "AUDIO"
+                            ? item?.uploadsFile[0]?.path
+                            : item?.uploadsImage[0]?.path,
                       })}`
                     );
                   }}
@@ -221,11 +226,8 @@ const ListFollowPosts: React.FC<Props> = ({
               </>
             )}
 
-
-
-
             {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
+            item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl">
                   <HiOutlineLockClosed />

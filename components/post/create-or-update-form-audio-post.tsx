@@ -224,14 +224,14 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     />
                   </div>
 
-                  {uploadFiles?.length > 0 ? (
-                    <div className="mt-2 text-center">
-                      <AudioPlayerInput
-                        uploads={post?.uploadsFile}
-                        folder="posts"
-                      />
-                    </div>
-                  ) : null}
+                  <div className="mt-2 text-center">
+                    <AudioPlayerInput
+                      urlMedia={post?.urlMedia}
+                      enableUrlMedia={post?.enableUrlMedia}
+                      uploads={post?.uploadsFile}
+                      folder="posts"
+                    />
+                  </div>
 
                   {watchEnableUrlMedia ? (
                     <>
@@ -285,9 +285,13 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                         <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                           <div className="flex items-center flex-1 min-w-0">
                             <div className="flex-1 min-w-0">
-                              <p className="text-sm font-bold text-black dark:text-white"> Allow download </p>
+                              <p className="text-sm font-bold text-black dark:text-white">
+                                {" "}
+                                Allow download{" "}
+                              </p>
                               <p className="mt-1 text-sm font-medium text-gray-500">
-                                allow everyone to download in original quality file
+                                allow everyone to download in original quality
+                                file
                               </p>
                             </div>
                           </div>

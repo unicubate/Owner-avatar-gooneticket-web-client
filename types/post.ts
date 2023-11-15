@@ -31,6 +31,7 @@ export type PostModel = {
   uploadsImage: any;
   uploadsFile: any;
   isValidSubscribe: number;
+  enableUrlMedia: boolean;
   profile: {
     color: string;
     email: string;
