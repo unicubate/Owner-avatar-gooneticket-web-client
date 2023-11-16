@@ -16,6 +16,7 @@ import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-lik
 import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
+import { useRouter } from "next/router";
 
 type Props = {
   model: ModelType;
@@ -30,6 +31,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
   userId,
   index,
 }) => {
+  const { locale } = useRouter();
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
@@ -77,10 +79,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
   return (
     <>
       <div key={index} className="flex items-start mt-4">
-        <AvatarComponent
-          size={40}
-          profile={item?.profile}
-        />
+        <AvatarComponent size={40} profile={item?.profile} />
 
         <div className="ml-3">
           <div className="flex items-center space-x-px">
@@ -93,7 +92,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
               </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {formateFromNow(item?.createdAt as Date)}
+                {formateFromNow(item?.createdAt as Date, locale as string)}
               </p>
             </div>
           </div>

@@ -3,10 +3,7 @@ import React from "react";
 import { PostModel } from "@/types/post";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import {
-  MdDeleteOutline,
-  MdOutlineModeEdit,
-} from "react-icons/md";
+import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
@@ -24,8 +21,8 @@ type Props = {
 };
 
 const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
+  const { locale, push } = useRouter();
   const userVisiter = useAuth() as any;
-  const router = useRouter();
   return (
     <>
       <div
@@ -36,7 +33,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
           <div className="flex items-center">
             <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
-                {formateDMYHH(item?.createdAt as Date)}
+                {formateDMYHH(item?.createdAt as Date, locale as string)}
               </p>
             </div>
 
@@ -59,8 +56,13 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
               {userVisiter?.id === item?.userId ? (
                 <>
                   <button
-                    onClick={() => router.push(`/posts/${item?.id
-                      }/edit?type=${item?.type.toLocaleLowerCase()}`)}
+                    onClick={() =>
+                      push(
+                        `/posts/${
+                          item?.id
+                        }/edit?type=${item?.type.toLocaleLowerCase()}`
+                      )
+                    }
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
@@ -98,16 +100,17 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                  }`}
+                    ? "blur-xl"
+                    : ""
+                }`}
               />
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
-                <WhoCanSeeItem username={item?.profile?.username} />
+              item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem profile={item?.profile} />
               ) : null}
             </div>
           ) : null}
@@ -123,19 +126,23 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
 
           {item?.description ? (
             <div className={`text-sm font-normal text-gray-600 group relative`}>
-              <span className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1
-                ? "blur-lg"
-                : ""
-                }`}>
-                <HtmlParser html={String(item?.description ?? "")} value={item?.isValidSubscribe !== 1
-                  ? 600
-                  : 0} />
+              <span
+                className={`ql-editor ${
+                  item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.isValidSubscribe !== 1
+                    ? "blur-lg"
+                    : ""
+                }`}
+              >
+                <HtmlParser
+                  html={String(item?.description ?? "")}
+                  value={item?.isValidSubscribe !== 1 ? 600 : 0}
+                />
               </span>
 
               {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
-                <WhoCanSeeItem username={item?.profile?.username} />
+              item?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem profile={item?.profile} />
               ) : null}
             </div>
           ) : null}

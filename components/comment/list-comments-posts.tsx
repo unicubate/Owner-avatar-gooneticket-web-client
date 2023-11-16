@@ -26,6 +26,7 @@ import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
 import { ErrorFile } from "../ui/error-file";
 import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/router";
 
 type Props = {
   organizationId: string;
@@ -44,6 +45,7 @@ const ListCommentsPosts: React.FC<Props> = ({
   organizationId,
   index,
 }) => {
+  const { locale } = useRouter();
   const user = useAuth() as any;
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -53,8 +55,8 @@ const ListCommentsPosts: React.FC<Props> = ({
   };
 
   const { mutateAsync: saveMutation } = DeleteOneCommentAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
@@ -134,10 +136,7 @@ const ListCommentsPosts: React.FC<Props> = ({
       <li key={index} className="py-4">
         {!openModal ? (
           <div className="flex items-start">
-            <AvatarComponent
-              size={40}
-              profile={item?.profile}
-            />
+            <AvatarComponent size={40} profile={item?.profile} />
 
             <div className="ml-3">
               <div className="flex items-center space-x-px">
@@ -149,7 +148,7 @@ const ListCommentsPosts: React.FC<Props> = ({
                     {item?.profile?.firstName} {item?.profile?.lastName}{" "}
                   </Link>
                   <p className="ml-3.5 text-sm font-normal text-gray-500">
-                    {formateFromNow(item?.createdAt as Date)}
+                    {formateFromNow(item?.createdAt as Date, locale as string)}
                   </p>
                 </div>
               </div>
@@ -201,7 +200,6 @@ const ListCommentsPosts: React.FC<Props> = ({
               setOpenModalReply={setOpenModalReply}
             />
           ) : null}
-
 
           {dataTableCommentsReplies}
 

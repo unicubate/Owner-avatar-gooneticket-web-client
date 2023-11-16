@@ -13,6 +13,7 @@ import { AvatarComponent } from "../ui/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
 import { useAuth } from "../util/context-user";
+import { useRouter } from "next/router";
 
 type Props = {
   model: ModelType;
@@ -27,6 +28,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
   index,
   userReceiveId,
 }) => {
+  const { locale } = useRouter();
   const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
@@ -85,7 +87,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
                 {item?.profile?.firstName} {item?.profile?.lastName}{" "}
               </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {formateFromNow(item?.createdAt as Date)}
+                {formateFromNow(item?.createdAt as Date, locale as string)}
               </p>
             </div>
           </div>

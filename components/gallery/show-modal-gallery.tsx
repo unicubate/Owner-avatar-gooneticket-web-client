@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import { WhoCanSeeItem } from "../ui/who-can-see-item";
 import { GetOnePostAPI } from "@/api-site/post";
 import { AvatarComponent } from "../ui/avatar-component";
 import { ButtonInput } from "../ui";
@@ -35,7 +34,7 @@ const ShowModalGallery: React.FC<Props> = ({
   post,
   userVisitorId,
 }) => {
-  const router = useRouter();
+  const { locale, push } = useRouter();
   const user = useAuth() as any;
 
   const { status, data: item } = GetOnePostAPI({
@@ -67,7 +66,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         {item?.profile?.lastName ?? ""}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
-                        {formateDMYHH(item?.createdAt as Date)}
+                        {formateDMYHH(item?.createdAt as Date, String(locale))}
                       </p>
                     </div>
                   </div>
@@ -78,9 +77,7 @@ const ShowModalGallery: React.FC<Props> = ({
                       item?.isValidSubscribe !== 1 ? (
                         <ButtonInput
                           onClick={() =>
-                            router.push(
-                              `/${item?.profile?.username}/memberships`
-                            )
+                            push(`/${item?.profile?.username}/memberships`)
                           }
                           shape="default"
                           type="button"
@@ -105,7 +102,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         <button
                           title="Download"
                           onClick={() => {
-                            router.push(
+                            push(
                               `${downloadOneFileUploadAPI({
                                 folder: "posts",
                                 fileName: item?.uploadsImage[0]?.path,
@@ -146,7 +143,6 @@ const ShowModalGallery: React.FC<Props> = ({
                         }`}
                       />
                     ) : null}
-                    
                   </div>
 
                   {item?.title ? (

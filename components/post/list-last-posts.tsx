@@ -8,12 +8,14 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
+import { useRouter } from "next/router";
 
 type Props = {
   item?: PostModel;
 };
 
 const ListLastPosts: React.FC<Props> = ({ item }) => {
+  const { locale } = useRouter();
   return (
     <>
       <li key={item?.id} className="flex items-stretch justify-between space-x-2 py-7">
@@ -61,7 +63,7 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
                 {item?.totalComment ?? 0}
               </span>
               <span className="ml-auto text-sm">
-                {formateDMYHH(item?.createdAt as Date)}
+                {formateDMYHH(item?.createdAt as Date, locale as string)}
               </span>
             </div>
           </div>

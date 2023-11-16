@@ -17,11 +17,13 @@ import { PaymentItemModel } from "@/types/payment";
 import { GoCreditCard } from "react-icons/go";
 import { FcSmartphoneTablet } from "react-icons/fc";
 import { truncateInputCard } from "@/utils/utils";
+import { useRouter } from "next/router";
 
 const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
   item,
   index,
 }) => {
+  const { locale } = useRouter();
   // const saveMutation = DeleteOneDiscountAPI({
   //   onSuccess: () => {},
   //   onError: (error?: any) => {},

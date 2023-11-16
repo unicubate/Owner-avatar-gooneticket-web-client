@@ -10,11 +10,13 @@ import {
 import Swal from "sweetalert2";
 import { DeleteOneDiscountAPI } from "@/api-site/discount";
 import { Tag, Tooltip } from "antd";
+import { useRouter } from "next/router";
 
 const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
+  const { locale } = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const saveMutation = DeleteOneDiscountAPI({
@@ -71,7 +73,10 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium text-gray-500">
               {item?.enableExpiredAt
-                ? `Ends Midnight ${formateDMYHH(item?.expiredAt)}`
+                ? `Ends Midnight ${formateDMYHH(
+                    item?.expiredAt,
+                    String(locale)
+                  )}`
                 : `Never Expires `}
             </p>
           </div>

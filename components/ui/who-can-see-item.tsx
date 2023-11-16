@@ -4,10 +4,10 @@ import { useRouter } from "next/router";
 import { HiOutlineLockClosed } from "react-icons/hi";
 
 interface Props {
-  username: string;
+  profile: { color: string; username: string };
 }
 
-const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
+const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
   const { push } = useRouter();
 
   return (
@@ -17,16 +17,19 @@ const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
           <button className="font-bold">
             <HiOutlineLockClosed className="w-7 h-7" />
           </button>
-          <p className="text-sm font-bold text-white"> This post is for members only. </p>
+          <p className="text-sm font-bold text-white">
+            {" "}
+            This post is for members only.{" "}
+          </p>
 
           <ButtonInput
-            onClick={() => push(`/${username}/memberships`)}
+            onClick={() => push(`/${profile?.username}/memberships`)}
             className="mt-2"
             shape="default"
             type="button"
             size="medium"
             loading={false}
-            color="indigo"
+            color={profile?.color as any}
             icon={<HiOutlineLockClosed className="w-5 h-5" />}
           >
             Join now

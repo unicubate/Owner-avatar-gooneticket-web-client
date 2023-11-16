@@ -3,20 +3,17 @@ import React, { useState } from "react";
 import { CommentModel } from "@/types/comment";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
 import Link from "next/link";
-import {
-  formateFromNow,
-} from "@/utils";
+import { formateFromNow } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { BsReplyAll } from "react-icons/bs";
 import { CreateOrUpdateFormCommentReply } from "../comment/create-or-update-form-comment-reply";
-import {
-  GetInfiniteCommentsRepliesAPI,
-} from "@/api-site/comment";
+import { GetInfiniteCommentsRepliesAPI } from "@/api-site/comment";
 import { Skeleton } from "antd";
 import { ModelType } from "@/utils/pagination-item";
 import { ListCommentsRepliesTransactions } from "./list-comments-replies-transactions";
 import { useAuth } from "../util/context-user";
 import { ErrorFile } from "../ui/error-file";
+import { useRouter } from "next/router";
 
 const ListCommentTransactions: React.FC<{
   item: CommentModel;
@@ -25,6 +22,7 @@ const ListCommentTransactions: React.FC<{
   index: number;
   userReceiveId?: string;
 }> = ({ model, modelIds, item, userReceiveId, index }) => {
+  const { locale } = useRouter();
   const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
 
@@ -72,7 +70,10 @@ const ListCommentTransactions: React.FC<{
           {item?.profile?.username ? (
             <AvatarComponent size={45} profile={item?.profile} />
           ) : (
-            <AvatarCoffeeComponent size={45} color={item?.profile?.color ?? 'indigo'} />
+            <AvatarCoffeeComponent
+              size={45}
+              color={item?.profile?.color ?? "indigo"}
+            />
           )}
 
           <div className="ml-3">
@@ -92,7 +93,7 @@ const ListCommentTransactions: React.FC<{
                 )}
 
                 <p className="ml-3.5 text-sm font-normal text-gray-500">
-                  {formateFromNow(item?.createdAt as Date)}
+                  {formateFromNow(item?.createdAt as Date, locale as string)}
                 </p>
               </div>
             </div>
@@ -117,7 +118,6 @@ const ListCommentTransactions: React.FC<{
             </div>
           </div>
         </div>
-
 
         {/* Replies comments */}
         <div className="ml-16">

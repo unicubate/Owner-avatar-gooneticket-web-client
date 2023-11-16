@@ -18,14 +18,19 @@ import { LoadingFile } from "@/components/ui";
 import { NextIntlClientProvider } from "next-intl";
 
 import { Suspense } from "react";
+import { useRouter } from "next/router";
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
   return (
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<LoadingFile />}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <NextIntlClientProvider locale={"en"} messages={pageProps.messages}>
+          <NextIntlClientProvider
+            locale={router.locale}
+            messages={pageProps.messages}
+          >
             <HydrationBoundary state={pageProps.dehydratedState}>
               <ConfigProvider>
                 <ContextUserProvider>

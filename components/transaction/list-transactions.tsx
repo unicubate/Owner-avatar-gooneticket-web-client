@@ -7,6 +7,7 @@ import { TransactionModel } from "@/types/transaction";
 import { formateFromNow } from "@/utils";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
 import { SerialPrice } from "../ui/serial-price";
+import { useRouter } from "next/router";
 
 type Props = {
   item?: TransactionModel;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 const ListTransactions: React.FC<Props> = ({ item, index }) => {
+  const { locale } = useRouter();
   return (
     <>
       <tr key={index}>
@@ -38,7 +40,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
                 <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
               <p className="lg:hidden mt-1 text-sm font-medium text-gray-500">
-                {formateFromNow(item?.createdAt as Date)}
+                {formateFromNow(item?.createdAt as Date, locale as string)}
               </p>
             </div>
           </div>
@@ -61,7 +63,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         </td> */}
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date)}
+          {formateFromNow(item?.createdAt as Date, locale as string)}
         </td>
 
         <td className="py-4 text-sm font-medium text-right">
@@ -79,7 +81,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
                 currency={{ code: String(item?.currency) }}
               />
             </p>
-            
+
             {/* <div className="inline-flex items-center justify-end mt-1">
                                       07 January, 2022
                                     </div> */}

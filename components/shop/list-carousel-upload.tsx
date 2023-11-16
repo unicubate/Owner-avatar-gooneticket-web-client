@@ -91,7 +91,7 @@ const ListCarouselUpload: React.FC<Props> = ({
 
                 {post?.whoCanSee === "MEMBERSHIP" &&
                 post?.isValidSubscribe !== 1 ? (
-                  <WhoCanSeeItem username={post?.profile?.username} />
+                  <WhoCanSeeItem profile={post?.profile} />
                 ) : null}
               </SwiperSlide>
             </>

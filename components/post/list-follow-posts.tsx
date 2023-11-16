@@ -18,7 +18,7 @@ import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
 import { useRouter } from "next/router";
-import { ButtonInput, WhoCanSeeItem } from "../ui";
+import { ButtonInput } from "../ui";
 import { AvatarComponent } from "../ui/avatar-component";
 import { UserVisitorModel } from "@/types/user.type";
 
@@ -33,7 +33,7 @@ const ListFollowPosts: React.FC<Props> = ({
   commentTake,
   userVisitor,
 }) => {
-  const router = useRouter();
+  const { locale, push } = useRouter();
 
   return (
     <>
@@ -44,21 +44,21 @@ const ListFollowPosts: React.FC<Props> = ({
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
             <div
-              onClick={() => router.push(`/${item?.profile?.username}`)}
+              onClick={() => push(`/${item?.profile?.username}`)}
               className="relative flex-shrink-0 cursor-pointer"
             >
               <AvatarComponent size={50} profile={item?.profile} />
             </div>
 
             <div
-              onClick={() => router.push(`/${item?.profile?.username}`)}
+              onClick={() => push(`/${item?.profile?.username}`)}
               className="ml-3 cursor-pointer"
             >
               <p className="text-sm font-bold text-black dark:text-white">
                 {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
-                {formateDMYHH(item?.createdAt as Date)}
+                {formateDMYHH(item?.createdAt as Date, locale as string)}
               </p>
             </div>
 
@@ -68,7 +68,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 item?.isValidSubscribe !== 1 ? (
                   <ButtonInput
                     onClick={() =>
-                      router.push(`/${item?.profile?.username}/memberships`)
+                      push(`/${item?.profile?.username}/memberships`)
                     }
                     shape="default"
                     type="button"
@@ -211,7 +211,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 <button
                   title="Download"
                   onClick={() => {
-                    router.push(
+                    push(
                       `${downloadOneFileUploadAPI({
                         folder: "posts",
                         fileName:
