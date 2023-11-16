@@ -10,11 +10,13 @@ import {
 import Swal from "sweetalert2";
 import { DeleteOneCategoryAPI } from "@/api-site/category";
 import { Tooltip } from "antd";
+import { useRouter } from "next/router";
 
 const ListCategories: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
+  const { locale } = useRouter();
   const [showModal, setShowModal] = useState(false);
 
   const saveMutation = DeleteOneCategoryAPI({
@@ -63,7 +65,7 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
 
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium text-gray-500">
-              {formateDMYHH(item?.createdAt)}
+              {formateDMYHH(item?.createdAt as Date, locale as string)}
             </p>
           </div>
 
