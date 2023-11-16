@@ -12,13 +12,6 @@ import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
 import { GetStaticPropsContext } from "next";
 
-const contentStyle: React.CSSProperties = {
-  height: "100%",
-  width: "100%",
-  lineHeight: "50px",
-  textAlign: "center",
-  background: "#364d79",
-};
 
 const ShopView = () => {
   const { locale, push } = useRouter();
