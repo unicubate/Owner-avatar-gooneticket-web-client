@@ -72,9 +72,9 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
               <p className="ml-2 text-lg font-bold text-gray-900">
                 {truncateInputCard(item?.cardNumber, 8)}
               </p>
-              <p className="ml-2 text-sm font-medium text-gray-900 hidden sm:table-cell">
+              {/* <p className="ml-2 text-sm font-medium text-gray-900 hidden sm:table-cell">
                 {item?.cardExpMonth}/{item?.cardExpYear}
-              </p>
+              </p> */}
             </>
           ) : null}
 
@@ -107,6 +107,21 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
           </div> */}
 
           <div className="ml-auto">
+            <button className="text-lg ml-2 font-bold transition-all duration-200">
+              <Tag
+                bordered={false}
+                className="ml-2"
+                color={`${
+                  Number(item.cardExpYear) >= new Date().getFullYear()
+                    ? "success"
+                    : "error"
+                }`}
+              >
+                {Number(item.cardExpYear) >= new Date().getFullYear()
+                  ? "Valid"
+                  : "Invalid"}
+              </Tag>
+            </button>
             <button className="text-sm font-medium text-gray-500">
               {item?.action}
             </button>

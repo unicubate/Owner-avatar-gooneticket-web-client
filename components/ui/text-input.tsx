@@ -13,6 +13,7 @@ interface Props {
   autoComplete?: "on" | "off";
   required?: boolean;
   defaultValue?: string;
+  pattern?: string;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;
 }
@@ -26,6 +27,7 @@ const TextInput: React.FC<Props> = ({
   type,
   name,
   errors,
+  pattern,
   placeholder = "",
   defaultValue,
   autoComplete,
@@ -52,6 +54,7 @@ const TextInput: React.FC<Props> = ({
             size="large"
             type={type}
             id={name}
+            pattern={pattern}
             suffix={suffix}
             required={required}
             placeholder={placeholder}

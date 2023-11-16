@@ -20,16 +20,16 @@ type AuthContextProps = {
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+  localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
   window.location.href = `${process.env.NEXT_PUBLIC_SITE}`;
-}
+};
 
 export const getCurrentUserFormToken = () => {
   const token =
     typeof window !== "undefined"
       ? window.localStorage.getItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-      )
+          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+        )
       : null;
   if (token !== null) {
     const user: any = jwtDecode(token);
@@ -39,11 +39,24 @@ export const getCurrentUserFormToken = () => {
   }
 };
 
+export const getTokenToLocalStorage = () => {
+  const user =
+    typeof window !== "undefined"
+      ? JSON.parse(
+          String(
+            localStorage.getItem(
+              String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+            )
+          )
+        )
+      : null;
+      
+  return user;
+};
+
 export const getThemeLocalStorage = () => {
   const theme =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem('theme')
-      : null;
+    typeof window !== "undefined" ? window.localStorage.getItem("theme") : null;
   if (theme !== null) {
     return theme;
   } else {
@@ -51,12 +64,11 @@ export const getThemeLocalStorage = () => {
   }
 };
 
-
 const initAuthContextPropsState = {
-  saveAuth: () => { },
-  setCurrentUser: () => { },
+  saveAuth: () => {},
+  setCurrentUser: () => {},
   user: undefined,
-  logout: () => { },
+  logout: () => {},
 };
 
 const AuthContext = createContext<AuthContextProps>(
@@ -68,7 +80,7 @@ const useAuth = () => {
 };
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
   const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
 
   const { data: user } = GetOneUserPrivateAPI({

@@ -7,11 +7,14 @@ import { viewOneFileUploadAPI } from "@/api-site/upload";
 import ContentLoader from "react-content-loader";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import 'swiper/css';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/pagination";
 // import required modules
-import { Zoom, Pagination } from 'swiper/modules';
+import { Zoom, Pagination } from "swiper/modules";
 import Skeleton from "react-loading-skeleton";
+import { ButtonInput, WhoCanSeeItem } from "../ui";
+import { PiLockKey } from "react-icons/pi";
+import { PostModel } from "@/types/post";
 
 type Props = {
   uploads: UploadModel[];
@@ -19,6 +22,7 @@ type Props = {
   preview: boolean;
   className?: string;
   alt?: string;
+  post?: PostModel;
   height?: string | number;
   width?: string | number;
   autoplay?: boolean;
@@ -35,6 +39,7 @@ const ListCarouselUpload: React.FC<Props> = ({
   folder,
   preview,
   alt,
+  post,
   className = "",
   height = "100%",
   width = "100%",
@@ -57,7 +62,7 @@ const ListCarouselUpload: React.FC<Props> = ({
         style={contentStyle}
         breakpoints={{
           320: {
-            slidesPerView: 'auto',
+            slidesPerView: "auto",
             spaceBetween: 8,
           },
           // 640: {
@@ -83,6 +88,11 @@ const ListCarouselUpload: React.FC<Props> = ({
                   })}`}
                   alt={alt}
                 />
+
+                {post?.whoCanSee === "MEMBERSHIP" &&
+                post?.isValidSubscribe !== 1 ? (
+                  <WhoCanSeeItem username={post?.profile?.username} />
+                ) : null}
               </SwiperSlide>
             </>
           ))}

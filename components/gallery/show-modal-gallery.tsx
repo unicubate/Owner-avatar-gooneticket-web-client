@@ -38,12 +38,15 @@ const ShowModalGallery: React.FC<Props> = ({
   const router = useRouter();
   const user = useAuth() as any;
 
-  const { status, data: item } = GetOnePostAPI({ postId: post?.id, userVisitorId });
+  const { status, data: item } = GetOnePostAPI({
+    postId: post?.id,
+    userVisitorId,
+  });
 
   if (status === "pending") {
     <strong>Loading...</strong>;
   }
-  
+
   return (
     <>
       {openModal ? (
@@ -55,10 +58,7 @@ const ShowModalGallery: React.FC<Props> = ({
                 <div className="flex flex-shrink-0 items-center justify-between p-4 border-gray-200 rounded-t-md">
                   <div className="flex items-center">
                     <div className="relative flex-shrink-0 cursor-pointer">
-                      <AvatarComponent
-                        size={50}
-                        profile={item?.profile}
-                      />
+                      <AvatarComponent size={50} profile={item?.profile} />
                     </div>
 
                     <div className="ml-2 cursor-pointer">
@@ -73,12 +73,15 @@ const ShowModalGallery: React.FC<Props> = ({
                   </div>
 
                   <div className="ml-auto">
-
                     <div className="flex items-center space-x-2 sm:ml-5">
                       {item?.whoCanSee === "MEMBERSHIP" &&
-                        item?.isValidSubscribe !== 1 ? (
+                      item?.isValidSubscribe !== 1 ? (
                         <ButtonInput
-                          onClick={() => router.push(`/${item?.profile?.username}/memberships`)}
+                          onClick={() =>
+                            router.push(
+                              `/${item?.profile?.username}/memberships`
+                            )
+                          }
                           shape="default"
                           type="button"
                           size="medium"
@@ -86,10 +89,11 @@ const ShowModalGallery: React.FC<Props> = ({
                           color={item?.profile?.color as any}
                           icon={<HiOutlineLockClosed className="w-5 h-5" />}
                         >
-                          <span className="ml-1 font-bold">Join membership</span>
+                          <span className="ml-1 font-bold">
+                            Join membership
+                          </span>
                         </ButtonInput>
                       ) : null}
-
 
                       <button
                         title="Share"
@@ -128,23 +132,21 @@ const ShowModalGallery: React.FC<Props> = ({
                   <div className="group relative mt-2">
                     {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
                       <ListCarouselUpload
+                        post={item}
                         uploads={item?.uploadsImage}
                         folder="posts"
                         preview={false}
                         height="100%"
                         alt={item?.title}
-                        className={`${item?.whoCanSee === "MEMBERSHIP" &&
+                        className={`${
+                          item?.whoCanSee === "MEMBERSHIP" &&
                           item?.isValidSubscribe !== 1
-                          ? "blur-xl"
-                          : ""
-                          }`}
+                            ? "blur-xl"
+                            : ""
+                        }`}
                       />
                     ) : null}
-
-                    {/* {item?.whoCanSee === "MEMBERSHIP" &&
-                    item?.isValidSubscribe !== 1 ? (
-                      <WhoCanSeeItem username={item?.profile?.username} />
-                    ) : null} */}
+                    
                   </div>
 
                   {item?.title ? (
@@ -173,8 +175,9 @@ const ShowModalGallery: React.FC<Props> = ({
                       <>
                         <Link
                           title="Edit"
-                          href={`/posts/${item?.id
-                            }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                          href={`/posts/${
+                            item?.id
+                          }/edit?type=${item?.type.toLocaleLowerCase()}`}
                           className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                         >
                           <MdOutlineModeEdit className="w-6 h-6" />
@@ -191,7 +194,7 @@ const ShowModalGallery: React.FC<Props> = ({
                     ) : null}
 
                     {item?.whoCanSee === "MEMBERSHIP" &&
-                      item?.isValidSubscribe !== 1 ? (
+                    item?.isValidSubscribe !== 1 ? (
                       <>
                         <button className="ml-auto text-2xl">
                           <HiOutlineLockClosed />
@@ -203,9 +206,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         <button className="ml-auto text-2xl">
                           <HiOutlineLockOpen />
                         </button>
-                        <span className="ml-2 text-sm">
-                          Unlocked
-                        </span>
+                        <span className="ml-2 text-sm">Unlocked</span>
                       </>
                     )}
                   </div>

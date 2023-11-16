@@ -1,4 +1,5 @@
 import {
+  GetOnPostQueryModel,
   PostFormModel,
   PostModel,
   PostType,
@@ -232,20 +233,20 @@ export const createOnUploadPostAPI = async (
   });
 };
 
-export const GetOnePostAPI = (payload: {
-  postId?: string;
-  type?: string;
-  organizationId?: string;
-  postSlug?: string;
-  userVisitorId?: string;
-}) => {
+export const getOnePostAPI = async (
+  payload: GetOnPostQueryModel
+): Promise<{ data: PostModel }> => {
+  return await makeApiCall({
+    action: "getOnePost",
+    queryParams: payload,
+  });
+};
+
+
+export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["post", { ...payload }],
-    queryFn: async () =>
-      await makeApiCall({
-        action: "getOnePost",
-        queryParams: payload,
-      }),
+    queryFn: async () => await getOnePostAPI({ ...payload }),
     enabled: !!payload,
     refetchOnWindowFocus: true,
   });

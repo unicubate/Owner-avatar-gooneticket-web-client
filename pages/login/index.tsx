@@ -81,13 +81,13 @@ const Login = () => {
   return (
     <>
       <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-[#121212] rounded-lg shadow-md">
-        <div className="flex justify-center mx-auto">
+        {/* <div className="flex justify-center mx-auto">
           <img
             className="w-auto h-7 sm:h-8"
             src="https://merakiui.com/images/logo.svg"
             alt=""
           />
-        </div>
+        </div> */}
         <div className="flex justify-center mx-auto">
           <h6 className="mt-3 text-xl text-center font-bold">
             {`Log in to your account`}
@@ -126,7 +126,7 @@ const Login = () => {
                 className="block text-sm mb-2 dark:dark:text-white"
               ></label>
               <Link
-                className="text-sm dark:text-blue-600 decoration-2 hover:underline font-medium"
+                className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
                 href="/forgot-password"
               >
                 Forgot password?

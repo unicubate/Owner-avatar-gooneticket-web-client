@@ -12,6 +12,7 @@ interface Props {
   placeholder?: string;
   autoComplete?: "on" | "off";
   required?: boolean;
+  pattern?: string;
   defaultValue?: string | number;
   suffix?: React.ReactNode;
   prefix?: React.ReactNode;
@@ -26,6 +27,7 @@ const NumberInput: React.FC<Props> = ({
   label = "",
   type,
   name,
+  pattern,
   errors,
   required,
   placeholder = "",
@@ -57,6 +59,7 @@ const NumberInput: React.FC<Props> = ({
             suffix={suffix}
             style={{ width: "100%" }}
             type={type}
+            pattern={pattern}
             placeholder={placeholder}
             autoComplete={autoComplete}
             status={errors?.[name]?.message ? "error" : ""}

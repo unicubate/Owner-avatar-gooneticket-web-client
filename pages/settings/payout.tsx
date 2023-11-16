@@ -7,6 +7,7 @@ import { UpdateFormProfile } from "@/components/user/update-form-profile";
 import { UpdateFormPassword } from "@/components/user/update-form-password";
 import { UpdateFormUser } from "@/components/user/update-form-user";
 import { PayoutFormUser } from "@/components/user/payout-form-user";
+import { GetStaticPropsContext } from 'next';
 
 const SettingsPayout = () => {
   const user = useAuth() as any;
@@ -46,3 +47,13 @@ const SettingsPayout = () => {
 };
 
 export default PrivateComponent(SettingsPayout);
+
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
+  return {
+    props: {
+      messages: {
+        ...(await import(`/lang/${locale}.json`)).default,
+      }
+    }
+  }
+}

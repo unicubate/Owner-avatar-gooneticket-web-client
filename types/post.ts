@@ -65,3 +65,11 @@ export type PostFormModel = {
   fileList?: any;
   newFileLists?: any;
 };
+
+export type GetOnPostQueryModel = {
+  postId?: string;
+  type?: string;
+  organizationId?: string;
+  postSlug?: string;
+  userVisitorId?: string;
+};

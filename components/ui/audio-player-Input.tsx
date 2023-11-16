@@ -4,6 +4,7 @@ import { UploadFolderType, UploadModel } from "@/types/upload";
 import { useRef } from "react";
 import ReactH5AudioPlayer from "react-h5-audio-player";
 import "react-h5-audio-player/lib/styles.css";
+import { HiOutlineLockClosed } from "react-icons/hi";
 import { PiLockKey } from "react-icons/pi";
 
 interface Props {
@@ -123,8 +124,8 @@ const AudioPlayerInput: React.FC<Props> = ({
           <>
             {post?.whoCanSee === "MEMBERSHIP" &&
             post?.isValidSubscribe !== 1 ? (
-              <button className={`font-bold`}>
-                <PiLockKey className="w-8 h-8" />
+              <button className={`font-normal`}>
+                <HiOutlineLockClosed className="w-8 h-8" />
               </button>
             ) : null}
           </>

@@ -1,80 +1,59 @@
-import { NumberInput, SelectSearchInput, TextInput } from "../ui";
+import { SelectSearchInput, TextInput } from "../ui";
 import * as yup from "yup";
-import { SubmitHandler } from "react-hook-form";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { ButtonInput } from "../ui";
-import valid from "card-validator";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { PaymentCardFormModel, arrayTypePayments } from "@/types/payment";
-import { CreateOnPaymentPI } from "@/api-site/payment";
 
-const yearNumber = new Date().getFullYear();
+import "react-credit-cards-2/dist/es/styles-compiled.css";
+import { useCreditCardValidator, images } from "react-creditcard-validator";
+
+import { FormEvent, useState } from "react";
+import { CreateOnPaymentPI } from "@/api-site/payment";
+import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+
 const schema = yup.object({
   type: yup.string().required("choose payment type"),
-  cardExpMonth: yup.string().when("type", (type, schema) => {
-    if (type[0] === "CARD")
-      return yup.number().min(1).max(12).required("month is a required field");
-    return schema.nullable();
-  }),
-  cardExpYear: yup.string().when("type", (type, schema) => {
-    if (type[0] === "CARD")
-      return yup
-        .number()
-        .min(
-          Number(yearNumber),
-          `year must be greater than or equal to ${yearNumber}`
-        )
-        .required("year is a required field");
-    return schema.nullable();
-  }),
-  cardNumber: yup.string().when("type", (type, schema) => {
-    if (type[0] === "CARD")
-      return yup
-        .string()
-        .test(
-          "Card Test",
-          "Invalid Card Number",
-          (value) => valid.number(value).isValid
-        )
-        .required("card number is a required field");
-    return schema.nullable();
-  }),
-  cardCvc: yup.string().when("type", (type, schema) => {
-    if (type[0] === "CARD")
-      return yup
-        .string()
-        .min(3, "cvc must be at least 3 characters")
-        .max(3)
-        .required("cvc is a required field");
-    return schema.nullable();
-  }),
-
-  phone: yup.string().when("type", (type, schema) => {
-    if (type[0] === "PHONE")
-      return yup.string().required("phone number is a required field");
-    return schema.nullable();
-  }),
 });
 
 const CreatePaymentFormCardUser: React.FC<{
   showModal: boolean;
   setShowModal: any;
 }> = ({ showModal, setShowModal }) => {
-  const {
-    watch,
-    control,
-    handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+  const [loading, setLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+    undefined
+  );
+  const { watch, control, errors } = useReactHookForm({
+    schema,
+  });
   const watchType = watch("type", "");
 
-  const onSubmit: SubmitHandler<PaymentCardFormModel> = async (
-    payload: PaymentCardFormModel
-  ) => {
+  function expDateValidate(month: string, year: string) {
+    if (Number(year) > 2070) {
+      return "Expiry Date Year cannot be greater than 2035";
+    }
+    return;
+  }
+  const [cardstate, setcardState] = useState({ fullName: "" });
+
+  const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { cardNumber, cvc, expiryDate } = cardstate as any;
+    const strExpirySplit = expiryDate.split(" ").join("");
+    const strExpiryLength = Number(strExpirySplit.length);
+    const monthDate = strExpirySplit.substring(2, 0);
+    const yearDate = strExpirySplit.substring(
+      strExpiryLength,
+      strExpiryLength - 2
+    );
+
+    const payload: PaymentCardFormModel = {
+      cardNumber: cardNumber,
+      cardExpMonth: Number(`${monthDate}`),
+      cardExpYear: Number(`20${yearDate}`),
+      type: "CARD",
+      cardCvc: cvc,
+    };
     setLoading(true);
     setHasErrors(undefined);
     try {
@@ -82,7 +61,6 @@ const CreatePaymentFormCardUser: React.FC<{
         data: { ...payload },
         paymentModel: "PAYMENT-CREATE",
       });
-
       AlertSuccessNotification({
         text: "Card save successfully",
         className: "info",
@@ -104,19 +82,25 @@ const CreatePaymentFormCardUser: React.FC<{
     }
   };
 
+  const {
+    getCardNumberProps,
+    getCardImageProps,
+    getCVCProps,
+    getExpiryDateProps,
+    meta: { erroredInputs },
+  } = useCreditCardValidator({ expiryDateValidator: expDateValidate });
+
   return (
     <>
       {showModal ? (
         <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
           <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-2xl p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <h2 className="p-2 text-base font-bold text-gray-900">
-                Add your payment
-              </h2>
+          <div className="w-full  max-w-2xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-[#121212]">
+            <form onSubmit={handleUserPageSubmit}>
+              <h2 className="p-2 text-base font-bold">Add your payment</h2>
               <div className="p-2 flex-auto justify-center">
                 {hasErrors && (
-                  <div className="relative mb-4 block w-full rounded-lg dark:bg-red-500 p-4 text-base leading-5 dark:text-white opacity-100">
+                  <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
                     {hasErrors}
                   </div>
                 )}
@@ -135,58 +119,88 @@ const CreatePaymentFormCardUser: React.FC<{
 
                 {watchType === "CARD" ? (
                   <>
-                    <div className="mt-4">
-                      <TextInput
-                        control={control}
+                    <div className="relative mt-4">
+                      <input
                         type="text"
-                        name="fullName"
+                        className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
+                          erroredInputs?.cvc ? "border-red-500" : ""
+                        }`}
+                        required
                         placeholder="Full name"
-                        errors={errors}
+                        name="fullName"
+                        onChange={(e) =>
+                          setcardState({
+                            ...cardstate,
+                            [e.target.name]: e.target.value,
+                          })
+                        }
                       />
                     </div>
-
-                    <div className="mt-4">
-                      <TextInput
-                        control={control}
-                        type="text"
-                        name="cardNumber"
-                        placeholder="Card number"
-                        errors={errors}
+                    <div className="relative mt-4">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                        <svg {...getCardImageProps({ images })} />
+                      </div>
+                      <input
+                        className={`border block w-full px-3 py-2.5 pl-12 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
+                          erroredInputs?.cardNumber ? "border-red-500" : ""
+                        }`}
+                        required
+                        {...getCardNumberProps({
+                          onChange: (e) =>
+                            setcardState({
+                              ...cardstate,
+                              [e.target.name]: e.target.value,
+                            }),
+                        })}
                       />
+                      {erroredInputs?.cardNumber && (
+                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                          {erroredInputs?.cardNumber}
+                        </span>
+                      )}
                     </div>
 
-                    <div className="grid grid-cols-2 mt-4 sm:grid-cols-3 gap-x-6">
+                    <div className="grid grid-cols-2 mt-4 sm:grid-cols-2 gap-x-6">
                       <div className="mb-2">
-                        <NumberInput
-                          min={1}
-                          max={12}
-                          control={control}
-                          type="number"
-                          name="cardExpMonth"
-                          placeholder="MM"
-                          errors={errors}
+                        <input
+                          className={`border block w-full px-3 py-2.5 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-50 focus:border-indigo-50 sm:text-sm caret-indigo-50 ${
+                            erroredInputs?.expiryDate ? "border-red-500" : ""
+                          }`}
+                          required
+                          {...getExpiryDateProps({
+                            onChange: (e) =>
+                              setcardState({
+                                ...cardstate,
+                                [e.target.name]: e.target.value,
+                              }),
+                          })}
                         />
+                        {erroredInputs?.expiryDate && (
+                          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                            {erroredInputs?.expiryDate}
+                          </span>
+                        )}
                       </div>
+
                       <div className="mb-2">
-                        <NumberInput
-                          min={yearNumber}
-                          control={control}
-                          type="number"
-                          name="cardExpYear"
-                          placeholder="YYYY"
-                          errors={errors}
+                        <input
+                          className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
+                            erroredInputs?.cvc ? "border-red-500" : ""
+                          }`}
+                          required
+                          {...getCVCProps({
+                            onChange: (e) =>
+                              setcardState({
+                                ...cardstate,
+                                [e.target.name]: e.target.value,
+                              }),
+                          })}
                         />
-                      </div>
-                      <div className="mb-2">
-                        <TextInput
-                          min={3}
-                          max={3}
-                          control={control}
-                          type="text"
-                          name="cardCvc"
-                          placeholder="CVC"
-                          errors={errors}
-                        />
+                        {erroredInputs?.cvc && (
+                          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                            {erroredInputs?.cvc}
+                          </span>
+                        )}
                       </div>
                     </div>
                   </>

@@ -1,25 +1,19 @@
 import { useRouter } from "next/router";
-import { ComponentType, useEffect } from "react";
+import { ComponentType, useEffect, useState } from "react";
+import { getTokenToLocalStorage } from "./context-user";
 
 const PrivateComponent = (Component: ComponentType) => {
+  const userToken = getTokenToLocalStorage();
   return function ProtectedRoute({ ...props }) {
     const router = useRouter();
-    const user =
-      typeof window !== "undefined"
-        ? JSON.parse(
-            String(
-              localStorage.getItem(
-                String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-              )
-            )
-          )
-        : null;
-    const userIsAuthenticated = user !== null;
+
+    const userIsAuthenticated = userToken !== null;
 
     useEffect(() => {
       if (!userIsAuthenticated) {
         router.push("/login");
       }
+      
     }, [userIsAuthenticated, router]);
 
     return <Component {...props} />;

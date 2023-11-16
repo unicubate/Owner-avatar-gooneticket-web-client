@@ -128,6 +128,7 @@ const ListFollowPosts: React.FC<Props> = ({
           {item?.uploadsImage?.length > 0 ? (
             <div className="group relative mt-2 text-center justify-center mx-auto">
               <ListCarouselUpload
+                post={item}
                 uploads={item?.uploadsImage}
                 folder="posts"
                 preview={false}
@@ -145,6 +146,7 @@ const ListFollowPosts: React.FC<Props> = ({
           {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
             <div className="text-center justify-center mx-auto">
               <AudioPlayerInput
+                post={item}
                 urlMedia={item?.urlMedia}
                 enableUrlMedia={item?.enableUrlMedia}
                 uploads={item?.uploadsFile}

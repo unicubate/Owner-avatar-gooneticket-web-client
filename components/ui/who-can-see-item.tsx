@@ -1,9 +1,10 @@
 import { ButtonInput } from "./button-input";
 import { PiLockKey } from "react-icons/pi";
 import { useRouter } from "next/router";
+import { HiOutlineLockClosed } from "react-icons/hi";
 
 interface Props {
-  username?: string;
+  username: string;
 }
 
 const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
@@ -12,20 +13,21 @@ const WhoCanSeeItem: React.FC<Props> = ({ username }) => {
   return (
     <>
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center text-black dark:text-white">
+        <div className="text-center text-white">
           <button className="font-bold">
-            <PiLockKey className="w-7 h-7" />
+            <HiOutlineLockClosed className="w-7 h-7" />
           </button>
-          <p className="text-sm font-bold text-black dark:text-white"> This post is for members only. </p>
+          <p className="text-sm font-bold text-white"> This post is for members only. </p>
 
           <ButtonInput
             onClick={() => push(`/${username}/memberships`)}
             className="mt-2"
             shape="default"
             type="button"
-            size="large"
+            size="medium"
             loading={false}
-            color="red"
+            color="indigo"
+            icon={<HiOutlineLockClosed className="w-5 h-5" />}
           >
             Join now
           </ButtonInput>

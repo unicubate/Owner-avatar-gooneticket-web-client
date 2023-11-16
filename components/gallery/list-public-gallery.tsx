@@ -11,7 +11,11 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) => {
+const ListPublicGallery: React.FC<Props> = ({
+  item,
+  commentTake,
+  userVisitor,
+}) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -25,14 +29,16 @@ const ListPublicGallery: React.FC<Props> = ({ item, commentTake, userVisitor }) 
         >
           {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
             <ListCarouselUpload
+              post={item}
               uploads={item?.uploadsImage}
               folder="posts"
               preview={false}
               height={250}
-              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                ? "blur-xl"
-                : ""
-                }`}
+              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${
+                item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+                  ? "blur-xl"
+                  : ""
+              }`}
             />
           ) : null}
         </a>

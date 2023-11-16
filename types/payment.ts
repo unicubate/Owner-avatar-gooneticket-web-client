@@ -8,7 +8,7 @@ export const arrayTypePayments = [
 ];
 
 export type PaymentCardFormModel = {
-  fullName: string;
+  fullName?: string;
   cardNumber: string;
   cardExpMonth: number;
   cardExpYear: number;
