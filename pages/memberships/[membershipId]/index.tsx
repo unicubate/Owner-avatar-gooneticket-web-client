@@ -21,7 +21,7 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ShopView = () => {
-  const router = useRouter();
+  const { locale, push } = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
 
@@ -74,7 +74,7 @@ const ShopView = () => {
                   <div className="mb-2 flex items-center">
                     <div
                       onClick={() =>
-                        router.push(`/${product?.profile?.username}/shop`)
+                        push(`/${product?.profile?.username}/shop`)
                       }
                       className="relative flex-shrink-0 cursor-pointer"
                     >
@@ -88,7 +88,7 @@ const ShopView = () => {
 
                     <div
                       onClick={() =>
-                        router.push(`/${product?.profile?.username}/shop`)
+                        push(`/${product?.profile?.username}/shop`)
                       }
                       className="ml-4 cursor-pointer"
                     >
@@ -97,7 +97,10 @@ const ShopView = () => {
                         {product?.profile?.lastName ?? ""}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
-                        {formateDMYHH(product?.createdAt as Date)}
+                        {formateDMYHH(
+                          product?.createdAt as Date,
+                          locale as string
+                        )}
                       </p>
                     </div>
 
@@ -549,8 +552,8 @@ export default ShopView;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -558,7 +561,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

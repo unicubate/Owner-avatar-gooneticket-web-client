@@ -25,7 +25,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
   commentTake,
   userVisitor,
 }) => {
-  const router = useRouter();
+  const { push, locale } = useRouter();
   return (
     <>
       <div
@@ -36,7 +36,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
           <div className="flex items-center">
             <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
-                {formateDMYHH(item?.createdAt as Date)}
+                {formateDMYHH(item?.createdAt as Date, locale as string)}
               </p>
             </div>
 
@@ -60,8 +60,9 @@ const ListPublicPostsComments: React.FC<Props> = ({
                 <>
                   <button
                     onClick={() =>
-                      router.push(
-                        `/posts/${item?.id
+                      push(
+                        `/posts/${
+                          item?.id
                         }/edit?type=${item?.type.toLocaleLowerCase()}`
                       )
                     }
@@ -125,7 +126,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
             organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}
-            userVisitorId={userVisitor?.id ?? ''}
+            userVisitorId={userVisitor?.id ?? ""}
           />
         </div>
       </div>
