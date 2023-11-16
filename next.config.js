@@ -6,7 +6,7 @@ module.exports = {
   },
 
   i18n: {
-    locales: ['en', 'fr', 'it'], // Langues prises en charge
+    locales: ['en', 'fr'], // Langues prises en charge
     defaultLocale: 'en', // Langue par défaut
   },
 
