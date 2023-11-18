@@ -95,7 +95,7 @@ const Login = () => {
         </div>
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
-            <div className="relative mb-4 block w-full rounded-lg dark:bg-red-500 p-4 text-base leading-5 dark:text-white opacity-100">
+            <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
               {hasErrors}
             </div>
           )}

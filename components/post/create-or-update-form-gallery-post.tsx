@@ -17,6 +17,8 @@ import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { SwitchInput, TextInput, TextareaReactQuillInput } from "../ui";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { GetAllCategoriesAPI } from "@/api-site/category";
+import Link from "next/link";
 
 const schema = yup.object({
   title: yup.string().optional(),
@@ -53,12 +55,12 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const { data: memberships } = GetAllMembershipsAPI({
+  const { data: categories } = GetAllCategoriesAPI({
+    isPaginate: "false",
     organizationId,
-    take: 100,
-    page: 1,
     sort: "DESC",
-    queryKey: ["memberships"],
+    take: 100,
+    queryKey: ["categories"],
   });
 
   useEffect(() => {
@@ -68,6 +70,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
+        "categoryId",
         "allowDownload",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -137,7 +140,9 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className={`overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}>
+            <div
+              className={`overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}
+            >
               <div className="px-4 py-5">
                 <h2 className="text-black dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} gallery
@@ -218,11 +223,40 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     />
                   </div>
 
+                  <div className="mt-4">
+                    <SelectSearchInput
+                      firstOptionName="Choose category post"
+                      label="Category post"
+                      control={control}
+                      errors={errors}
+                      placeholder="Select category post"
+                      valueType="key"
+                      name="categoryId"
+                      allowClear={true}
+                      dataItem={categories}
+                    />
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm font-medium text-gray-400">
+                        {`Categories makes it easy to browse your posts.`}
+                      </span>
+                      <label className="block text-sm mb-2 dark:text-white"></label>
+                      <Link
+                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        href="/shop/config"
+                      >
+                        Setting category
+                      </Link>
+                    </div>
+                  </div>
+
                   <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex items-center flex-1 min-w-0">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-black dark:text-white"> Allow download </p>
+                          <p className="text-sm font-bold text-black dark:text-white">
+                            {" "}
+                            Allow download{" "}
+                          </p>
                           <p className="mt-1 text-sm font-medium text-gray-500">
                             allow everyone to download in original quality file
                           </p>

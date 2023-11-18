@@ -3,10 +3,14 @@ import { AlertDangerNotification } from "@/utils";
 import { ButtonInput } from "../ui/button-input";
 import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 import Swal from "sweetalert2";
+import { LoginModal } from "../auth-modal/login-modal";
+import { useAuth } from "../util/context-user";
 
 const CreateOrUpdateFormFollow: React.FC<{
   item?: any;
 }> = ({ item }) => {
+  const { userStorage } = useAuth() as any;
+  const [showModal, setShowModal] = useState(false);
   const [follow, setFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(item?.isFollow);
   const [loading, setLoading] = useState(false);
@@ -78,33 +82,52 @@ const CreateOrUpdateFormFollow: React.FC<{
 
   return (
     <>
-      {(item?.isFollow && isFollow) || follow ? (
-        <ButtonInput
-          status="cancel"
-          type="button"
-          shape="default"
-          size="huge"
-          loading={false}
-          onClick={() => {
-            followItem(item);
-          }}
-        >
-          UnFollow
-        </ButtonInput>
+      {userStorage?.id ? (
+        <>
+          {(item?.isFollow && isFollow) || follow ? (
+            <ButtonInput
+              status="cancel"
+              type="button"
+              shape="default"
+              size="normal"
+              loading={false}
+              onClick={() => {
+                followItem(item);
+              }}
+            >
+              UnFollow
+            </ButtonInput>
+          ) : (
+            <ButtonInput
+              shape="default"
+              size="normal"
+              type="button"
+              color="red"
+              loading={false}
+              onClick={() => {
+                followItem(item), setFollow(true);
+              }}
+            >
+              Follow
+            </ButtonInput>
+          )}
+        </>
       ) : (
         <ButtonInput
           shape="default"
-          size="huge"
+          size="normal"
           type="button"
           color="red"
           loading={false}
           onClick={() => {
-            followItem(item), setFollow(true);
+            setShowModal(true);
           }}
         >
           Follow
         </ButtonInput>
       )}
+
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </>
   );
 };

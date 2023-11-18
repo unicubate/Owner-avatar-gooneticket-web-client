@@ -1,5 +1,5 @@
 import { UploadFolderType, UploadModel } from "@/types/upload";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { useQuery } from "@tanstack/react-query";
 
 export const GetUploadsAPI = (payload: {

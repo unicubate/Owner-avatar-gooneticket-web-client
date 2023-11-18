@@ -145,12 +145,12 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   <>
                     <ButtonInput
                       shape="default"
-                      size="normal"
+                      size="medium"
                       type="button"
                       color={user?.profile?.color as ColorType}
                       loading={false}
                       onClick={() => setOpenModal(true)}
-                      icon={<BiCoffeeTogo className="h-6 w-6" />}
+                      icon={<BiCoffeeTogo className="h-5 w-5" />}
                     >
                       Donate
                     </ButtonInput>

@@ -1,29 +1,28 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+"use client"
+
 import React, { useState } from "react";
 import { formateDateDayjs } from "../../utils/formate-date-dayjs";
 import Swal from "sweetalert2";
 import { Avatar, Tooltip } from "antd";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateGallery } from "./create-or-update-gallery";
 import { DeleteOnePostAPI } from "@/api-site/post";
-import { PostModel } from "@/types/post";
+import { PostModel, PostType } from "@/types/post";
 import { ReadMore } from "@/utils/read-more";
 import {
   MdDeleteOutline,
   MdFavoriteBorder,
   MdOutlineModeEdit,
 } from "react-icons/md";
-import { BiComment } from "react-icons/bi";
+import { BiComment, BiConversation } from "react-icons/bi";
 import { AiOutlineCalendar } from "react-icons/ai";
 import {
-  GetUploadsAPI,
-  downloadOneFileUploadAPI,
   viewOneFileUploadAPI,
 } from "@/api-site/upload";
 import { FiDownload } from "react-icons/fi";
 import { TbWorld } from "react-icons/tb";
 import { useRouter } from "next/router";
 import { HiOutlineLockClosed } from "react-icons/hi";
+import { IconTypePost } from "@/utils/icon-type-post";
 
 type Props = {
   item?: PostModel;
@@ -112,16 +111,12 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               <button className="tex-sm">
                 <MdFavoriteBorder />
               </button>
-              <span className="ml-1.5 text-sm">
-                {item?.totalLike ?? 0}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
               <button className="ml-1.5 tex-sm">
-                <BiComment />
+                <BiConversation />
               </button>
-              <span className="ml-1.5 text-sm">
-                {item?.totalComment ?? 0}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
 
               <button className="ml-1.5 tex-sm">
                 {item?.whoCanSee === "PUBLIC" ? (
@@ -130,30 +125,33 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                   <HiOutlineLockClosed />
                 )}
               </button>
-              <span className="ml-1.5 text-sm">
-                {item?.whoCanSee}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
 
               {item?.allowDownload && (
                 <>
-                  <button
-                    title="Download"
-                    className="ml-1.5 tex-sm"
-                  >
+                  <button title="Download" className="ml-1.5 tex-sm">
                     <FiDownload />
                   </button>
                   <span className="ml-1.5 font-normal text-sm">Download</span>
                 </>
               )}
+              <span className="ml-1.5 text-sm">
+                <IconTypePost type={item?.type as PostType} />
+              </span>
+              <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
             </div>
           </div>
 
           <div className="py-4 text-sm font-medium text-right">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
-                onClick={() => router.push(`/posts/${
-                  item?.id
-                }/edit?type=${item?.type.toLocaleLowerCase()}`)}
+                onClick={() =>
+                  router.push(
+                    `/posts/${
+                      item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`
+                  )
+                }
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />

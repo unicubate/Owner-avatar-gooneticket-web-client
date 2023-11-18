@@ -38,10 +38,17 @@ export type ProductModel = {
   limitSlot: string;
   status: string;
   userId: string;
+  categoryId: string;
   currency: {
     code: string;
     name: string;
     symbol: string;
+  };
+  category: {
+    id: string;
+    name: string;
+    slug: string;
+    color: string;
   };
   profile: {
     color: ColorType;
@@ -73,6 +80,7 @@ export type ProductFormModel = {
   description: string;
   discountId: string;
   whoCanSee: string;
+  categoryId: string;
   productType: ProductType;
   enableDiscount: boolean;
   limitSlot: number;

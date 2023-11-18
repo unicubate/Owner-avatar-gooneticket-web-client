@@ -2,7 +2,7 @@ import { CommentFormModel } from "@/types/comment";
 import queryString from "query-string";
 import { PostModel, PostType, ResponsePostModel } from "@/types/post";
 import dyaxios from "@/utils/dyaxios";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import {
   ModelType,
   PaginationRequest,

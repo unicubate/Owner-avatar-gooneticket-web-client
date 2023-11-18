@@ -1,5 +1,5 @@
 import { ResponseFollowModel } from "@/types/follow";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,

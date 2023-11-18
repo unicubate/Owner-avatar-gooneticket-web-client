@@ -3,7 +3,7 @@ import {
   ResponseTransactionModel,
   StatisticTransactionModel,
 } from "@/types/transaction";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
@@ -14,9 +14,7 @@ import {
 
 export const getTransactionsAPI = async (
   payload: {
-    search?: string;
     days?: number;
-    organizationId?: string;
     status?: string;
     model?: string;
   } & PaginationRequest
@@ -64,7 +62,6 @@ export const GetInfiniteTransactionsAPI = (payload: {
 }) => {
   const { model, days, organizationId, search, take, sort, status, queryKey } =
     payload;
-  console.log("search ==============================>", search);
   return useInfiniteQuery({
     queryKey: queryKey,
     initialPageParam: 1,

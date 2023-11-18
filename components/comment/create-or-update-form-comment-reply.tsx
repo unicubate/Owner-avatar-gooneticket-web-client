@@ -119,7 +119,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
             className="h-auto"
           />
 
-          {openModalReply ? (
+          {/* {openModalReply ? (
             <div className="flex justify-between items-center">
               <ButtonInput
                 status="cancel"
@@ -132,7 +132,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
                 Cancel
               </ButtonInput>
             </div>
-          ) : null}
+          ) : null} */}
 
           {watchDescription.length >= 1 && (
             <div className="sm:flex flex-col sm:items-end sm:justify-between">

@@ -12,7 +12,7 @@ import {
   MdOutlineModeEdit,
 } from "react-icons/md";
 import { useRouter } from "next/router";
-import { BiComment } from "react-icons/bi";
+import { BiComment, BiConversation } from "react-icons/bi";
 import { LiaDnaSolid } from "react-icons/lia";
 import { PostModel, PostType } from "@/types/post";
 import { AiOutlineCalendar } from "react-icons/ai";
@@ -103,12 +103,12 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             </span>
             <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
-            <span className="ml-1.5 text-lg">
-              <BiComment />
+            <span className="ml-1.5 text-sm">
+              <BiConversation />
             </span>
             <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
 
-            <span className="ml-1.5 text-lg">
+            <span className="ml-1.5 text-sm">
               {item?.whoCanSee === "PUBLIC" ? (
                 <TbWorld />
               ) : (
@@ -118,7 +118,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             <span className="ml-1.5 font-normal text-sm">
               {item?.whoCanSee}
             </span>
-            <span className="ml-1.5 text-lg">
+            <span className="ml-1.5 text-sm">
               <IconTypePost type={item?.type as PostType} />
             </span>
             <span className="ml-1.5 font-normal text-sm">{item?.type}</span>

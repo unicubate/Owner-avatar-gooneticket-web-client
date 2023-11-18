@@ -14,8 +14,10 @@ import { ListCategories } from "@/components/category/list-categories";
 import { ErrorFile } from "@/components/ui/error-file";
 import { GetInfiniteCategoriesAPI } from "@/api-site/category";
 import { GetStaticPropsContext } from "next";
+import { useAuth } from "@/components/util/context-user";
 
 const Configs = () => {
+  const { userStorage: user } = useAuth() as any;
   const [filter, setFilter] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
@@ -32,6 +34,7 @@ const Configs = () => {
     search: debouncedFilter,
     take: 10,
     sort: "DESC",
+    organizationId: user?.organizationId,
   });
 
   const {
@@ -45,6 +48,7 @@ const Configs = () => {
     take: 10,
     sort: "DESC",
     isPaginate: "true",
+    organizationId: user?.organizationId,
   });
 
   const dataTableDiscounts = isLoadingDiscounts ? (

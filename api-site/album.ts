@@ -7,32 +7,31 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import {
-  CategoryFormModel,
-  CategoryModel,
-  ResponseCategoryModel,
-} from "@/types/category";
+  AlbumFormModel,
+  ResponseAlbumModel,
+} from "@/types/album";
 
-export const CreateOrUpdateOneCategoryAPI = ({
+export const CreateOrUpdateOneAlbumAPI = ({
   onSuccess,
   onError,
 }: {
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["categories"];
+  const queryKey = ["albums"];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: CategoryFormModel & { categoryId: string }) => {
-      const { categoryId } = payload;
-      return categoryId
+    mutationFn: async (payload: AlbumFormModel & { AlbumId: string }) => {
+      const { AlbumId } = payload;
+      return AlbumId
         ? await makeApiCall({
-            action: "updateOneCategory",
+            action: "updateOneAlbum",
             body: payload,
-            urlParams: { categoryId },
+            urlParams: { AlbumId },
           })
         : await makeApiCall({
-            action: "createOneCategory",
+            action: "createOneAlbum",
             body: { ...payload },
           });
     },
@@ -59,22 +58,22 @@ export const CreateOrUpdateOneCategoryAPI = ({
   return result;
 };
 
-export const DeleteOneCategoryAPI = ({
+export const DeleteOneAlbumAPI = ({
   onSuccess,
   onError,
 }: {
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["categories"];
+  const queryKey = ["albums"];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: { categoryId: string }) => {
-      const { categoryId } = payload;
+    mutationFn: async (payload: { AlbumId: string }) => {
+      const { AlbumId } = payload;
       return await makeApiCall({
-        action: "deleteOneCategory",
-        urlParams: { categoryId },
+        action: "deleteOneAlbum",
+        urlParams: { AlbumId },
       });
     },
     onError: async (error) => {
@@ -100,16 +99,16 @@ export const DeleteOneCategoryAPI = ({
   return result;
 };
 
-export const getCategoriesAPI = async (
+export const getAlbumsAPI = async (
   payload: PaginationRequest
-): Promise<{ data: ResponseCategoryModel }> => {
+): Promise<{ data: ResponseAlbumModel }> => {
   return await makeApiCall({
-    action: "getCategories",
+    action: "getAlbums",
     queryParams: payload,
   });
 };
 
-export const GetAllCategoriesAPI = (payload: {
+export const GetAllAlbumsAPI = (payload: {
   organizationId: string;
   isPaginate: "true" | "false";
   take: number;
@@ -120,7 +119,7 @@ export const GetAllCategoriesAPI = (payload: {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
-      await getCategoriesAPI({
+      await getAlbumsAPI({
         organizationId: organizationId,
         isPaginate: isPaginate,
         sort: sort,
@@ -132,7 +131,7 @@ export const GetAllCategoriesAPI = (payload: {
   return { data: data?.data, isError, isLoading, status };
 };
 
-export const GetInfiniteCategoriesAPI = (payload: {
+export const GetInfiniteAlbumsAPI = (payload: {
   organizationId: string;
   isPaginate: "true" | "false";
   search?: string;
@@ -141,10 +140,10 @@ export const GetInfiniteCategoriesAPI = (payload: {
 }) => {
   const { take, organizationId, sort, search, isPaginate } = payload;
   return useInfiniteQuery({
-    queryKey: ["categories", "infinite"],
+    queryKey: ["albums", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
-      await getCategoriesAPI({
+      await getAlbumsAPI({
         organizationId: organizationId,
         isPaginate: isPaginate,
         search: search,

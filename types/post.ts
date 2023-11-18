@@ -32,6 +32,12 @@ export type PostModel = {
   uploadsFile: any;
   isValidSubscribe: number;
   enableUrlMedia: boolean;
+  category: {
+    id: string;
+    name: string;
+    slug: string;
+    color: string;
+  };
   profile: {
     color: string;
     email: string;
@@ -57,6 +63,8 @@ export type PostFormModel = {
   urlMedia?: string;
   allowDownload?: string;
   enableUrlMedia?: string;
+  categoryId?: string;
+  albumId?: string;
   isLike?: number;
   type?: PostType;
   attachment?: any;
