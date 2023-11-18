@@ -125,7 +125,7 @@ export const GetAllDiscountsAPI = (search?: string) => {
 };
 
 export const GetInfiniteDiscountsAPI = (payload: {
-  organizationId: string,
+  organizationId?: string,
   search?: string;
   take: number;
   sort: SortModel;
