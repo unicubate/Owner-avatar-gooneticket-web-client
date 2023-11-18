@@ -1,0 +1,52 @@
+{
+  "page_title": "About us",
+
+  "intro": {
+    "title": "ABOUT <blue>RECROWD</blue>",
+    "subtitle": "<bold>Real Estate Crowdfunding</bold> within everyone's reach",
+    "cta": "WHAT IS CROWDFUNDING"
+  },
+
+  "why-recrowd": {
+    "title": "WHY RECROWD",
+    "description": "<bold>Recrowd</bold> was created to offer savers an alternative way to invest their savings, innovating and simplifying the investment process, through <bold>lending crowdfunding</bold> and using an easy-to-understand asset such as real estate.",
+    "our_platform": "Our platform gives the opportunity to invest in real estate even to those who do not have large capitals, it also provides a fast and secure solution for raising funds and easily managing the bureaucratic processes related to real estate projects.",
+    "cta_1": "INVEST NOW",
+    "cta_2": "ABOUT US"
+  },
+
+  "makes-the-difference": {
+    "title": "A REALITY THAT MAKES THE\n<blue>DIFFERENCE</blue>",
+    "description": "Experiencing digital firsthand and making real estate investments, we have understood the need to make this practice accessible and understandable to everyone and at the same time to develop a new alternative finance channel for companies.\n\n< bold>Recrowd unlike other platforms, does not offer only one type of project, but has created 3 types of project, different in terms of risk, investment, duration and ROI, to enhance and protect the capital of any investor.</bold>" ,
+
+    "project_categories_title": "PROJECT CATEGORIES",
+    "categories": {
+      "relax_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec placerat velit. In ultrices mollis felis, ut pretium justo interdum sit amet. Ut pharetra ante eu nibh elementum, sit amet convallis urna condimentum. Nunc dolor massa, volutpat vitae lobortis in, lacinia eget odio. Aenean dictum fringilla augue, ut commodo ipsum aliquam aliquam.",
+      "relax_cta": "VIEW RELAX PROJECTS",
+    
+      "exclusive_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec placerat velit. In ultrices mollis felis, ut pretium justo interdum sit amet. Ut pharetra ante eu nibh elementum, sit amet convallis urna condimentum. Nunc dolor massa, volutpat vitae lobortis in, lacinia eget odio. Aenean dictum fringilla augue, ut commodo ipsum aliquam aliquam.",
+      "exclusive_cta": "VIEW EXCLUSIVE PROJECTS",
+    
+      "elite_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec placerat velit. In ultrices mollis felis, ut pretium justo interdum sit amet. Ut pharetra ante eu nibh elementum, sit amet convallis urna condimentum. Nunc dolor massa, volutpat vitae lobortis in, lacinia eget odio. Aenean dictum fringilla augue, ut commodo ipsum aliquam aliquam.",
+      "elite_cta": "VIEW ELITE PROJECTS"
+    },
+
+    "gamechanging_investments": "“We want to radically change real estate investments by offering a fast and secure solution to raise capital and simplify the investment process”"  
+  },
+
+  "team-and-vision": {
+    "title": "TEAM AND VISION",
+    "description": "“We have combined twenty years of experience in the real estate sector with the young digital minds of the new millennium”",
+    "co_founder_descr": "Development of the project part and control over all proposers and projects presented on the platform."
+  },
+
+  "our-partners": {
+    "title": "OUR PARTNERS",
+    "prize_title": "We were awarded in 2019 among the 8 innovative start-ups in Milan by SpeedMiup, the Bocconi University incubator.",
+    "prize_descr": "Speed Mi Up is an initiative that is part of the Agreement to support Employment and Entrepreneurship signed by the Chamber of Commerce of Milan and the Municipality of Milan. The Speed Mi Up consortium, made up of the Chamber of Commerce of Milan and Bocconi University, takes care of its realization."
+  },
+
+  "investors-reviews": {
+    "title": "INVESTORS REVIEWS"
+  }
+}

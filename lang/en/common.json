@@ -1,0 +1,76 @@
+{
+  "platformNotification": "",
+
+  "header": {
+    "projects": "INVEST",
+    "fund": "FUND",
+    "about_us": "ABOUT US",
+    "contact_us": "CONTACT US",
+    "info": "INFO",
+    "news": "BLOG",
+    "faqs": "FAQs",
+    "insights": "INSIGHTS",
+    "raise": "RAISE",
+    "proponents": "PROPONENTS",
+
+    "login": "LOG-IN",
+    "sign_up": "SIGN-UP",
+
+    "no_undread_notifications": "no undread notifications",
+    "view_all": "view all",
+    "delete": "delete"
+  },
+  "footer": {
+    "lemonway_disclaimer": "The payment process is secured by Lemonway, an online payment institution. Recrowd is a payment agent authorized by the Lemonway Payment Institute with ACPR No. 2019071202",
+
+    "info": "INFO",
+    "news": "Our Blog",
+    "faqs": "FAQs",
+    "insights": "Insights",
+    "raise": "Raise",
+    "proponents": "Proponents",
+
+    "navigation": "NAVIGATION",
+    "home": "Homepage",
+    "projects": "Invest",
+    "about_us": "About Us",
+    "contact_us": "Contact Us",
+
+    "policies": "POLICIES",
+    "cookie_policy": "Cookie Policy",
+    "privacy_policy": "Privacy Policy",
+    "investor_contract": "Investor Services Agreement",
+    "terms_and_conditions_lemonway": "Lemonway Terms and Conditions",
+
+    "legal_disclaimer_1": "RECROWD S.R.L is registered in the refgafi under number 82641 by the French Prudential Supervisory and Resolution Authority (“ACPR”) as a Partner and Payment Agent of Lemonway, an authorized payment institution located at rue du Sentier,8 75002 Paris with the following link: https://www.regafi.fr",
+    "legal_disclaimer_2": "Recrowd does not offer financial advice relating to the proposed activities, the information presented is of a general nature and does not constitute specific advice. There is a risk of total or partial loss of the capital with which the investment was made, the risk of illiquidity of the latter and of not receiving the expected return.",
+    "legals": "Registered office Via B. Quaranta 40, Milano 20139  -  Tel. 3516391730  -  VAT 10183800969  -  Share Capital 642.365,52€"
+  },
+  "2fa": {
+    "verify_code": "Verify code",
+    "we_sent_an_email": "We have sent an OTP code to your email for two-factor verification.",
+
+    "check_your_auth_app": "Check Your 2FA App",
+    "check_your_auth_app_desc": "Please verify the two-factor authentication app on your mobile device for the OTP code.",
+
+    "i_havent_received": "I haven't received the email",
+
+    "back": "< back",
+    "submit": "submit"
+  },
+  "blurred": {
+    "sensitive_data_notice": "This section contains sensitive data.",
+    "show_sensitive_data": "SHOW",
+    "finish_registration": "Profile not completed. Please, finish the <bold>registration</bold>.",
+    "registration": "GO TO REGISTRATION"
+  },
+  "show_more": "SHOW MORE",
+  "show_less": "SHOW LESS",
+
+  "next": "next >",
+  "prev": "< prev",
+
+  "continue_to_read": "continue to read",
+
+  "i_understood": "I UNDERSTOOD"
+}

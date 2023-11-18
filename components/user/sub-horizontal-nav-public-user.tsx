@@ -10,7 +10,7 @@ import { useTranslations } from "next-intl";
 const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
   user,
 }) => {
-  const t = useTranslations();
+  const t = useTranslations('menu-site');
   const { query } = useRouter();
   const username = String(query?.username);
   const pathname = usePathname();

@@ -1,0 +1,36 @@
+{
+  "page_title": "Contact Us",
+
+  "title": "Contact Customer Support",
+
+  "email_contact": "EMAIL*",
+  "customer_support_response": "*Customer Support response time may vary depending on the gravity of the request, in any case it will be within 2 business days",
+  "phone_contact": "PHONE",
+  "customer_support": "Customer Support",
+
+  "faqs": "If you need help also check out the <link>FAQs</link>.",
+  "how_it_works": "For information can you also check <link>how it works</link>.",
+
+  "contact_form_title": "Contact form",
+
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "email": "Email",
+  "phone": "Phone",
+  "request_type": "Request type",
+  "message": "Message",
+  "i_agree_to_the_treatment": "I agree to the treatment of my personal information",
+
+  "i_have_a_file": "I have a file I want to attach",
+  "attachment_label": "attachment",
+
+  "contactOptions": {
+    "registrationInfo": "Registration Info",
+    "genericInfo": "Generic Info",
+    "projectsInfo": "Projects Info",
+    "walletInfo": "Wallet Info",
+    "documentsInfo": "Documents Info",
+    "taxesInfo": "Taxes Info",
+    "accountDeletion": "Account Deletion"
+  }
+}

@@ -34,7 +34,7 @@ const AudioPlayerInput: React.FC<Props> = ({
             ? urlMedia
             : `${viewOneFileUploadAPI({
                 folder: folder,
-                fileName: uploads[0]?.path,
+                fileName: uploads[0]?.path ?? "",
               })}`
         }
         // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/posts/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"

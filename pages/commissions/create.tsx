@@ -11,9 +11,7 @@ const CommissionsCreate = () => {
           <main>
             <div className="max-w-4xl mx-auto py-6">
               <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-
                 <CreateOrUpdateFormCommission />
-
               </div>
             </div>
           </main>
@@ -28,7 +26,9 @@ export default PrivateComponent(CommissionsCreate);
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
-      messages: (await import(`../../lang/${locale}.json`)).default,
+      messages: {
+        ...(await import(`/lang/${locale}/index.json`)).default,
+      },
     },
   };
 }

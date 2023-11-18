@@ -1,0 +1,343 @@
+{
+  "loading": {
+    "section": "Loading..."
+  },
+  "tr": {
+    "dashboard": "DASHBOARD",
+    "wallet": "WALLET",
+    "statistics": "STATISTICS",
+    "transfers": "TRANSFERS",
+    "transactions": "TRANSACTIONS",
+    "investments": "INVESTMENTS",
+    "calendar": "CALENDAR",
+    "notifications": "NOTIFICATIONS",
+    "promotions": "PROMOTIONS",
+    "documentation": "DOCUMENTATION",
+    "settings": "SETTINGS",
+    "data": "PERSONAL DATA",
+    "documents": "DOCUMENTS",
+    "aml": "AML",
+    "security": "SECURITY",
+    "privacy": "PRIVACY"
+  },
+  "legacy": {
+    "title": "title",
+    "description": "description"
+  },
+  "dashboard": {
+    "section": "DASHBOARD",
+    "name_placeholder": "user",
+    "title": "Hello, {name}",
+    "subtitle": "Welcome back to your personal area",
+    "last_transactions": "LAST TRANSACTIONS",
+    "go_to_transactions": "view your transactions >",
+
+    "find_in_dashboard": "Cerca in dashboard",
+    "no_results": "No results."
+  },
+  "account": {
+    "section": "ACCOUNT"
+  },
+  "statistics": {
+    "section": "STATISTICS"
+  },
+  "transactions": {
+    "section": "TRANSACTIONS",
+    "title": "your Transactions",
+    "filter_by": "FILTER BY: ",
+    "search_transactions": "Search transactions",
+    "date": "DATE",
+    "type": "TYPE",
+    "amount": "AMOUNT",
+    "sent": "OUTGOING",
+    "received": "INCOMING",
+    "empty": "There are no transactions at the moment."
+  },
+  "recharge and withdraw": {
+    "section": "RECHARGE AND WITHDRAW",
+    "title": "Recharge and Withdraw",
+    "available_balance": "AVAILABLE BALANCE",
+    "transfer_balance": "TRANSFER BALANCE",
+    "view_your_account": "view your Account >",
+    "change_button": "change >",
+    "operation_time_1": "The operation may require <bold>24-48 working hours</bold> before being processed.",
+    "recharge_your_account": "RECHARGE YOUR ACCOUNT",
+    "paybybank_label": "PayByBank",
+    "insert_amount": "INSERT/SELECT AMOUNT (MAX 15k)",
+    "amount_label": "Amount",
+    "bank_label": "Bank",
+    "banktransfer_label": "Bank transfer",
+    "operation_time_2": "Both the operations may require <bold>24-48 working hours</bold> before being processed.",
+    "account_owner_label": "Account owner",
+    "domicile_label": "Domicile",
+    "iban_label": "IBAN",
+    "bic_label": "BIC",
+    "reason_label": "Reason",
+    "warning_message_1": "• remember to insert the <bold>reason</bold>",
+    "warning_message_2": "• the transfer must come from the account owner",
+    "pending-verification": "The IBAN Certification is under verification.",
+    "failed-verification": "The IBAN Certification has failed the verification, try again.",
+    "wallet_warning_profile": "Profile not completed. Please finish the <bold>registration</bold>.",
+    "wallet_warning_documents": "Awaiting documents validation for account verification. Check <bold>Documents</bold> section.",
+    "documents_and_iban": "GO TO DOCUMENTS",
+    "registration": "GO TO REGISTRATION"
+  },
+  "investments": {
+    "section": "INVESTMENTS",
+    "title": "your Investments",
+
+    "project_history_details": "PROJECT HISTORY",
+    "active_investments": "ACTIVE INVESTMENTS",
+    "projects_funded": "FUNDED",
+    "projects_closed": "CLOSED",
+    "average_yield": "AVERAGE YIELD",
+    "view_your_account": "view your account >",
+
+    "view_project_page": "view project page >",
+    "show_details": "SHOW DETAILS",
+
+    "events_and_comunications": "EVENTS AND COMUNICATIONS",
+
+    "invested_capital": "invested",
+    "annual_yield": "yield",
+    "expire_date": "expire",
+
+    "investment_details": "INVESTMENT DETAILS",
+    "investment_date": "investment date",
+    "return_date": "return date",
+
+    "see-rates": "See rates",
+    "hide-rates": "Hide rates",
+
+    "n": "N°",
+    "date": "Date",
+    "amount": "Amount",
+    "net-tax": "Net Tax",
+    
+    "investment_contract": "Investment contract",
+
+    "status_projects": {
+      "search_filter": "Search project",
+      "ongoing": "ON-GOING",
+      "closed": "CONCLUDED"
+    },
+
+    "no-investments": "No investments.",
+
+    "show-table": "Show Table",
+
+    "rate-table-project": "Project",
+    "rate-table-rateNumber": "N. rate",
+    "rate-table-interest": "Interest",
+    "rate-table-principal": "Principal",
+    "rate-table-proroga": "Extension",
+    "rate-table-mora": "Arrears",
+    "rate-table-ritenuta": "Withholding",
+    "rate-table-dueDate": "Due date",
+    "rate-table-delayDays": "Delay days",
+    "rate-table-status": "Status",
+
+    "download-csv": "Download CSV"
+  },
+  "calendar": {
+    "section": "CALENDAR",
+    "title": "Calendar",
+    "from": "From",
+    "to": "To",
+    "search": "Search events",
+    "overdue": "Overdue",
+    "completed": "Done",
+    "no-events": "No events available"
+  },
+  "documentation": {
+    "section": "DOCUMENTATION",
+    "title": "your Documentation",
+    "from": "From",
+    "to": "To",
+    "search": "Search documentation",
+    "missing-documentation": "Missing documentation."
+  },
+  "promotions": {
+    "section": "PROMOTIONS",
+    "title": "your Promotions",
+    "active_promo_details": "ACTIVE PROMO DETAILS",
+    "your_balance": "YOUR BALANCE",
+    "contacts": "CONTACTS",
+    "activations": "ACTIVATIONS",
+    "expiration": "EXPIRATION",
+    "promo_is_expiring": "Expires: <bold>{date}</bold>",
+    "promo_expired": "Expired: <bold>{date}</bold>",
+    "view_your_account": "view your account >",
+    "sharing_code": "YOUR PROMO CODE TO SHARE",
+    "sharing_code_desc_active": "Invite a friend to Recrowd using the code shown, you will both receive <bold>€{amount} as a gift</bold>* upon full registration/investment.",
+    "sharing_code_desc_not_active": "There are currently no active promotions on your account, but more will be coming soon!",
+    "read_terms_and_conditions": "*read terms and conditions",
+    "filter_by_status": "FILTER BY STATUS: ",
+    "ongoing": "ONGOING",
+    "concluded": "CONCLUDED",
+    "no_vouchers": "No vouchers available."
+  },
+  "account settings": {
+    "section": "ACCOUNT SETTINGS"
+  },
+  "aml": {
+    "title": "Anti money laundering",
+
+    "AML_module": "AML Module",
+    "anti_money_laundering": "(anti money laundering module)",
+
+    "select_working_activity": "Select your working activity",
+    "working_activity": "Working activity",
+
+    "select_classification": "Select your classification",
+    "classification": "Classification",
+
+    "select_your_income_source": "Select your income source",
+    "income_source": "Income source",
+
+    "high_risk_sector": "Is yours an high risk sector?",
+    "personal_political_position": "I confirm I have never held a public office",
+    "family_political_position": "I confirm none of my family members ever held a public office",
+    "confirm_investment_holder": "I confirm I will be the owner of my investments"
+  },
+  "personal data": {
+    "section": "PERSONAL DATA",
+    "title": "Personal Data",
+    "general_info_title": "GENERAL INFORMATION",
+    "general_info_title_company": "GENERAL INFORMATION AND LEGAL",
+    "birth_data": "BIRTH DATA",
+    "company_data": "COMPANY DATA",
+    "fiscal_residence_title": "FISCAL RESIDENCE",
+    "firstName": "Name*",
+    "lastName": "Surname*",
+    "birthDate": "Birthdate private investor**",
+    "fiscalCode": "Fiscal code private investor**",
+    "countryBirth": "Country private investor**", 
+    "nationality": "Nationality*",
+    "cityBirth": "Birth city*",
+    "provinceBirth": "Birth province*",
+    "countryResidence": "Residence country private investor**",
+    "cityResidence": "City private investor**",
+    "provinceResidence": "Province private investor**",
+    "address": "Address private investor**",
+    "zipCode": "ZIP Code private investor**",
+    "gender": "Genre*",
+    "name": "Business Name*",
+    "vatNumber": "VAT*",
+    "description": "Description*",
+    "phoneCompany": "Phone*",
+    "websiteUrl": "Website Url",
+    "mandatory_data": "** Mandatory data in case of registration as an investor",
+    "personal_data_treatment": "personal data treatment >"
+  },
+  "privacy and security": {
+    "section": "PRIVACY AND SECURITY",
+    "title": "Privacy and Security",
+    "contact_information": "CONTACT INFORMATION",
+    "email": "E-mail private investor*",
+    "phone": "Phone private investor*",
+    "password_and_security": "PASSWORD AND SECURITY",
+    "password": "Current password",
+    "new_password": "New password",
+    "repeat_password": "Repeat password",
+    "auth_2fa_title": "TWO-FACTOR AUTHENTICATION (2FA)",
+    "auth_2fa_not_active": "<bold>Two-factor verification</bold> is <blue>not turned on.</blue>",
+    "auth_2fa_not_active_descr": "Enable it to protect your profile information, you will receive a <bold>code</bold> to the <bold>e-mail</bold> address you indicated.",
+    "auth_2fa_active": "<bold>Two-factor verification</bold> is <blue>turned on.</blue>",
+    "auth_2fa_active_descr": "You will receive a <bold>code</bold> to the <bold>e-mail</bold> address indicated by you to proceed with the actions on your profile.",
+    "auth_2fa_active_assistance": "To disable the Two-factor Authentication, contact the <link>client support</link>.",
+    "auth_2fa_confirm_descr_1": "Open your 2-factor authentication app and scan the QR code below",
+    "auth_2fa_confirm_descr_2": "After that confirm the token from the app",
+    "token": "Token"
+  },
+  "documents and iban": {
+    "section": "DOCUMENTS AND IBAN",
+    "title": "your Documents",
+    "iban_cashout_title": "IBAN FOR CASH-OUT",
+    "holder": "Holder",
+    "ibanCode": "IBAN",
+    "i_have_a_joint": "I have a joint bank account",
+    "bank_cert": "Bank certificate",
+    "id_verification": "ID Verification",
+    "upload_new_doc": "Upload new\ndocument",
+    "reupload": "Reupload",
+
+    "upload_date": "Upload date:",
+    "expire_date": "Expire date:",
+    "status": "Status:",
+    "doc_type": "Document type:",
+
+    "pending": "Pending",
+    "accepted": "Accepted",
+    "rejected": "Rejected",
+
+    "unknown": "Unknown",
+    "id_card": "Identity Card",
+    "proof_address": "Proof Address",
+    "iban": "IBAN Certificate",
+    "passport_eu": "Passport EU",
+    "passport_ext": "Passport Ext",
+    "residence": "Residence Certificate",
+    "driving_license": "Driving license",
+    "id": "ID",
+    "registration_report": "Registration report"
+  },
+  "consent and privacy": {
+    "section": "CONSENT AND PRIVACY",
+    "title": "Consent and Privacy",
+    "conditions_title": "CONDITIONS AND CONTRACTS",
+    "conditions_consentTandC": "Ho preso visione dell'Informativa sul trattamento dei dati personali",
+    "conditions_privacyLemonway": "Presto il consenso all’invio di newsletter",
+    "conditions_TCLemonway": "Presto il consenso all’invio di comunicazioni commerciali sui servizi offerti dalla piattaforma",
+    "conditions_TCInvestors": "Ho preso visione delle condizioni generali per l'investitore",
+    "newsletter_title": "NEWSLETTERS AND SERVICE COMMUNICATIONS",
+    "newsletter_newProject": "New Projects",
+    "newsletter_directPresentation": "Presentation Directs",
+    "newsletter_openingProject": "Project Openings",
+    "newsletter_insightProject": "Project Insights",
+    "newsletter_updateProject": "Project Updates",
+    "newsletter_eventWebinar": "Events and Webinar",
+    "save_changes": "SAVE CHANGES",
+    "feedback_success": "Dati aggiornati con successo!",
+    "feedback_error": "An error has occurred. Retry."
+  },
+  "notifications": {
+    "section": "NOTIFICATIONS",
+    "title": "Notifications and Updates",
+    "tab_0": "UNREAD",
+    "tab_1": "READ",
+    "tab_2": "ALL",
+    "empty_0": "There are no unread notifications at the moment.",
+    "empty_1": "There are no read notifications at the moment.",
+    "empty_2": "There are no notifications at the moment."
+  },
+
+  "feedback": {
+    "success": {
+      "title": "Operation done!",
+      "description": "The operation may take from 24-48 business hours to be processed. Otherwise contact support."
+    },
+    "warning": {
+      "title": "Operation cancelled!",
+      "description": "The operation was canceled by the bank's platform. Return to the dashboard or try the operation again."
+    },
+    "error": {
+      "title": "Oops!",
+      "description": "Something went wrong on the bank's platform. Return to the dashboard or try the operation again."
+    },
+    "buttons": {
+      "dashboard": "Dashboard",
+      "recharge and withdraw": "Recharge and Withdraw"
+    }
+  },
+
+  "next": "NEXT",
+  "save": "SAVE",
+  "confirm": "CONFIRM",
+  "back": "BACK",
+  "logout": "< logout",
+  "cancel": "CANCEL",
+  "change": "CHANGE",
+  "enable": "ENABLE",
+  "disable": "DISABLE"
+}

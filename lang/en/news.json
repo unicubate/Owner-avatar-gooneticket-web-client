@@ -1,0 +1,16 @@
+{
+  "page_title": "Blog",
+
+  "intro": {
+    "title": "BLOG"
+  },
+
+  "all-articles": {
+    "title": "ALL THE ARTICLES",
+
+    "search_filter": "Search article",
+
+    "discover-more": "DISCOVER MORE",
+    "show-more": "SHOW MORE"
+  }
+}

@@ -35,7 +35,7 @@ const items: MenuProps["items"] = [
 ];
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
-  const t = useTranslations();
+  const t = useTranslations('menu-site');
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
