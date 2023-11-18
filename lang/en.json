@@ -1,19 +1,16 @@
 {
-  "menu": {
-    "dashboard": "Dashboard",
-    "home": "Home",
-    "gallery": "Gallery",
-    "posts": "Pots",
-    "memberships": "Memberships",
-    "donations": "Donations",
-    "your_page": "Your Page",
-    "shop": "Shop",
-    "commissions": "Commissions",
-    "feed": "Feed",
-    "settings": "settings",
-    "logout": "Logout"
-  },
-
+  "dashboard": "Dashboard",
+  "home": "Home",
+  "gallery": "Gallery",
+  "posts": "Pots",
+  "memberships": "Memberships",
+  "donations": "Donations",
+  "your_page": "Your Page",
+  "shop": "Shop",
+  "commissions": "Commissions",
+  "feed": "Feed",
+  "settings": "settings",
+  "logout": "Logout",
   "home_page": {
     "title": "Everything you need to make money doing what you love",
     "subTitle": "Accept donations. Start a membership. Sell anything you like. It’s easier than you think."

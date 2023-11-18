@@ -3,7 +3,6 @@ import { getCurrentUserFormToken, useAuth } from "../util/context-user";
 import { HeaderHorizontalNavUserPublicSite } from "./header-horizontal-nav-user-public-site";
 import { useState } from "react";
 import { UserModel } from "@/types/user.type";
-import { useTranslations } from "next-intl";
 
 interface IProps {
   user: UserModel;
