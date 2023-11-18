@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { GetAllCategoriesAPI } from "@/api-site/category";
+import Link from "next/link";
 
 type Props = {
   organizationId: string;
@@ -48,12 +50,12 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const { data: memberships } = GetAllMembershipsAPI({
+  const { data: categories } = GetAllCategoriesAPI({
+    isPaginate: "false",
     organizationId,
-    take: 100,
-    page: 1,
     sort: "DESC",
-    queryKey: ["memberships"],
+    take: 100,
+    queryKey: ["categories"],
   });
 
   useEffect(() => {
@@ -63,6 +65,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
+        "categoryId",
         "categories",
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
@@ -189,6 +192,32 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     name="whoCanSee"
                     dataItem={arrayWhoCanSees}
                   />
+                </div>
+
+                <div className="mt-4">
+                  <SelectSearchInput
+                    firstOptionName="Choose category post"
+                    label="Category post"
+                    control={control}
+                    errors={errors}
+                    placeholder="Select category post"
+                    valueType="key"
+                    name="categoryId"
+                    allowClear={true}
+                    dataItem={categories}
+                  />
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-gray-400">
+                      {`Categories makes it easy to browse your posts.`}
+                    </span>
+                    <label className="block text-sm mb-2 dark:text-white"></label>
+                    <Link
+                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      href="/shop/config"
+                    >
+                      Setting category
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="mt-2">

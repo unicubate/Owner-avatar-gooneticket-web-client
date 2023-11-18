@@ -3,7 +3,7 @@ import {
   ProductModel,
   ResponseProductModel,
 } from "@/types/product";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
@@ -36,6 +36,7 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
       data.append("urlRedirect", `${payload.urlRedirect ?? ""}`);
       data.append("productType", `${payload.productType ?? ""}`);
+       data.append("categoryId", `${payload.categoryId ?? ""}`);
       data.append("enableUrlRedirect", `${payload.enableUrlRedirect ?? ""}`);
       data.append("enableChooseQuantity", `${payload.enableChooseQuantity}`);
       data.append(

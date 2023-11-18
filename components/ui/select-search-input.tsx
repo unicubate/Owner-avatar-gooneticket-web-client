@@ -13,6 +13,7 @@ interface Props {
   firstOptionName: string;
   valueType: "key" | "text";
   icon?: React.ReactNode;
+  allowClear?: boolean;
 }
 
 const SelectSearchInput: React.FC<Props> = ({
@@ -24,21 +25,24 @@ const SelectSearchInput: React.FC<Props> = ({
   placeholder = "",
   valueType,
   icon,
+  allowClear,
   firstOptionName = "",
 }) => {
   return (
     <>
-      {label ? <label
-        className="block text-sm font-bold mb-2"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label className="block text-sm font-bold mb-2" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}
         render={({ field: { ref, ...field } }) => (
           <Select
+            allowClear={allowClear}
             showSearch
+            loading={false}
             size="large"
             style={{ width: "100%" }}
             id={name}
@@ -53,7 +57,11 @@ const SelectSearchInput: React.FC<Props> = ({
             <>
               {dataItem?.length > 0
                 ? dataItem?.map((item: any, index: number) => (
-                    <Option key={index} value={valueType === "key" ? item?.id : item?.name} name={item?.name}>
+                    <Option
+                      key={index}
+                      value={valueType === "key" ? item?.id : item?.name}
+                      name={item?.name}
+                    >
                       <Space>
                         {icon}
 

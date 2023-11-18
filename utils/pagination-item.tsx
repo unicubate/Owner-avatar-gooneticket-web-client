@@ -27,11 +27,12 @@ export type ModelType =
   | "COMMENT";
 
 export type PaginationRequest = {
+  organizationId?: string;
   isPaginate?: "true" | "false"
   search?: string;
   sort: SortModel;
-  page: number;
-  take: number;
+  page?: number;
+  take?: number;
 };
 
 export type PaginationResponse = {

@@ -81,7 +81,7 @@ const useAuth = () => {
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { theme } = useTheme();
-  const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
+  const [userStorage, setUserStorage] = useState(() => getCurrentUserFormToken());
 
   const { data: user } = GetOneUserPrivateAPI({
     userId: userStorage?.id,

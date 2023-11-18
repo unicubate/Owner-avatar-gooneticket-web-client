@@ -1,5 +1,5 @@
 import { MembershipFormModel, MembershipModel } from "@/types/membership";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
@@ -138,9 +138,7 @@ export const GetOneMembershipAPI = (payload: {
 };
 
 export const getMembershipsAPI = async (
-  payload?: {
-    organizationId: string;
-  } & PaginationRequest
+  payload?: PaginationRequest
 ): Promise<{ data: ResponseMembershipModel }> => {
   return await makeApiCall({
     action: "getMemberships",

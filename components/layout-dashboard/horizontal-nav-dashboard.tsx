@@ -72,7 +72,6 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex ml-6 mr-auto xl:ml-0">
-
               <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
                 {NAVIGATION_ITEMS.map((item: any, index: number) => {
                   const isActive = pathname === item.href;
@@ -81,12 +80,15 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
-                        ? `text-${user?.profile?.color ?? "indigo"
-                        }-600 border-${user?.profile?.color ?? "indigo"
-                        }-600`
-                        : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
-                        } `}
+                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
+                        isActive
+                          ? `text-${
+                              user?.profile?.color ?? "indigo"
+                            }-600 border-${
+                              user?.profile?.color ?? "indigo"
+                            }-600`
+                          : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
+                      } `}
                     >
                       {item?.icon}
 
@@ -98,7 +100,6 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex items-center justify-end">
-
               <div className="flex items-center space-x-6 sm:ml-5">
                 {user?.profile ? (
                   <button
@@ -113,32 +114,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                       {user?.profile?.firstName} {user?.profile?.lastName}
                     </p>
                   </button>
-                ) : (
-                  <>
-                    <div className="relative">
-                      <Button
-                        onClick={() => {
-                          router.push(`${`/login`}`);
-                        }}
-                        size="middle"
-                      >
-                        Log In
-                      </Button>
-                    </div>
-                    <div className="relative">
-                      <Button
-                        onClick={() => {
-                          router.push(`${`/register`}`);
-                        }}
-                        size="middle"
-                        type="primary"
-                        danger
-                      >
-                        Sign Up
-                      </Button>
-                    </div>
-                  </>
-                )}
+                ) : null}
               </div>
             </div>
           </div>

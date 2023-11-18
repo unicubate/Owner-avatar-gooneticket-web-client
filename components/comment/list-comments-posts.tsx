@@ -158,7 +158,7 @@ const ListCommentsPosts: React.FC<Props> = ({
               <div className="flex mt-2 items-center font-medium text-gray-600">
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-                {!openModalReply && user?.id ? (
+                {user?.id ? (
                   <button
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);

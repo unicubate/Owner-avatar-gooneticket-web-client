@@ -19,7 +19,7 @@ const GalleryUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (user?.profile?.enableGallery === false && !user?.gallery?.count) {
+  if (user?.profile?.enableGallery === false) {
     push(`${`/${username}`}`);
   }
   return (

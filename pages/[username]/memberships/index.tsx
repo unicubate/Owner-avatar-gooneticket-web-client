@@ -19,10 +19,6 @@ const MembershipsUserPublic = () => {
     userVisitorId: userVisiter?.id,
   });
 
-  if (!user?.membership?.count) {
-    push(`${`/${username}`}`);
-  }
-
   return (
     <>
       <LayoutUserPublicSite

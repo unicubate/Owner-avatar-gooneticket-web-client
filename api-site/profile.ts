@@ -4,7 +4,7 @@ import {
   ProfileFormModel,
   ProfileModel,
 } from "@/types/profile.type";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const UpdateOneProfileNextStepAPI = ({

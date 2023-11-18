@@ -1,4 +1,4 @@
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CartModel, CartFormModel, CartOrderModel } from "@/types/cart";
 

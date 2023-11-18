@@ -3,7 +3,7 @@ import {
   CommissionModel,
   ResponseCommissionModel,
 } from "@/types/commission";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
@@ -151,7 +151,6 @@ export const GetOneCommissionAPI = (payload: {
 
 export const getCommissionsAPI = async (
   payload: {
-    organizationId: string;
     status?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseCommissionModel }> => {

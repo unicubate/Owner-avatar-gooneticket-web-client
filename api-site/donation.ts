@@ -1,5 +1,5 @@
 import { DonationFormModel, DonationModel } from "@/types/donation";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import {
   useMutation,
   useQuery,

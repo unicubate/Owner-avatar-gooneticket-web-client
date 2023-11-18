@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
 import { useState } from "react";
 import { AvatarComponent } from "../ui/avatar-component";
+import { ButtonInput } from "../ui";
 
 export type NavbarProps = {
   title: string;
@@ -15,24 +16,20 @@ export type NavbarProps = {
   icon?: any;
 };
 
-const items: MenuProps['items'] = [
+const items: MenuProps["items"] = [
   {
-    key: '1',
-    label: (<Link href="/dashboard">Dashboard</Link>),
+    key: "1",
+    label: <Link href="/dashboard">Dashboard</Link>,
   },
   {
-    key: '2',
+    key: "2",
     label: (
-      <a href={void (0)}
-        title=""
-        onClick={() => logoutUser()}
-      >
+      <a href={void 0} title="" onClick={() => logoutUser()}>
         Logout
       </a>
     ),
   },
 ];
-
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
@@ -114,12 +111,15 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
-                        ? `text-${user?.profile?.color ?? "indigo"
-                        }-600 border-${user?.profile?.color ?? "indigo"
-                        }-600`
-                        : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
-                        } `}
+                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
+                        isActive
+                          ? `text-${
+                              user?.profile?.color ?? "indigo"
+                            }-600 border-${
+                              user?.profile?.color ?? "indigo"
+                            }-600`
+                          : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
+                      } `}
                     >
                       {item?.icon}
 
@@ -177,7 +177,8 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                     <Dropdown menu={{ items }} placement="bottomRight" arrow>
                       <button
                         type="button"
-                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600">
+                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                      >
                         <AvatarComponent
                           profile={user?.profile}
                           className="object-cover bg-gray-300 rounded-full w-9 h-9"
@@ -190,7 +191,7 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                   </>
                 ) : (
                   <>
-                    <div className="relative">
+                    {/* <div className="relative">
                       <Button
                         onClick={() => {
                           router.push(`${`/login`}`);
@@ -211,6 +212,34 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       >
                         Sign Up
                       </Button>
+                    </div> */}
+                    <div className="relative">
+                      <ButtonInput
+                        status="cancel"
+                        type="button"
+                        shape="default"
+                        size="normal"
+                        loading={false}
+                        onClick={() => {
+                          router.push(`${`/login`}`);
+                        }}
+                      >
+                        Log In
+                      </ButtonInput>
+                    </div>
+                    <div className="relative">
+                      <ButtonInput
+                        shape="default"
+                        size="normal"
+                        type="button"
+                        color="indigo"
+                        loading={false}
+                        onClick={() => {
+                          router.push(`${`/register`}`);
+                        }}
+                      >
+                        Sign Up
+                      </ButtonInput>
                     </div>
                   </>
                 )}

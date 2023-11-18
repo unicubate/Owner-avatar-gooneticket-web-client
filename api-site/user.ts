@@ -7,7 +7,7 @@ import {
   UserModel,
   NextStep,
 } from "@/types/user.type";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const loginUserAPI = async (

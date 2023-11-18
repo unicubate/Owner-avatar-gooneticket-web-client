@@ -1,5 +1,5 @@
 import { ResponsePostModel } from "@/types/post";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import { useInfiniteQuery } from "@tanstack/react-query";
 

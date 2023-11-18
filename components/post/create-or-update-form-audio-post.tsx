@@ -13,8 +13,9 @@ import { useRouter } from "next/router";
 import { SwitchInput } from "../ui/switch-input";
 import { filterImageAndFile } from "@/utils/utils";
 import { AudioPlayerInput } from "../ui/audio-player-Input";
-import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { GetAllCategoriesAPI } from "@/api-site/category";
+import Link from "next/link";
 
 type Props = {
   postId?: string;
@@ -43,7 +44,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   uploadFiles,
   uploadImages,
 }) => {
-  const router = useRouter();
+  const { back } = useRouter();
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
 
@@ -61,12 +62,12 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 
   const watchEnableUrlMedia = watch("enableUrlMedia", false);
 
-  const { data: memberships } = GetAllMembershipsAPI({
+  const { data: categories } = GetAllCategoriesAPI({
+    isPaginate: "false",
     organizationId,
-    take: 100,
-    page: 1,
     sort: "DESC",
-    queryKey: ["memberships"],
+    take: 100,
+    queryKey: ["categories"],
   });
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         "description",
         "whoCanSee",
         "type",
+        "categoryId",
         "allowDownload",
         "enableUrlMedia",
       ];
@@ -128,7 +130,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      router.back();
+      back();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -321,6 +323,32 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4">
+                  <SelectSearchInput
+                    firstOptionName="Choose category post"
+                    label="Category post"
+                    control={control}
+                    errors={errors}
+                    placeholder="Select category post"
+                    valueType="key"
+                    name="categoryId"
+                    allowClear={true}
+                    dataItem={categories}
+                  />
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm font-medium text-gray-400">
+                      {`Categories makes it easy to browse your posts.`}
+                    </span>
+                    <label className="block text-sm mb-2 dark:text-white"></label>
+                    <Link
+                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      href="/shop/config"
+                    >
+                      Setting category
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="mt-4">
                   <ReactQuillInput
                     control={control}
                     label="Description"
@@ -351,7 +379,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     shape="default"
                     size="normal"
                     loading={loading}
-                    onClick={() => router.back()}
+                    onClick={() => back()}
                   >
                     Cancel
                   </ButtonInput>

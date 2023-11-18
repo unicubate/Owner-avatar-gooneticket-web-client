@@ -6,7 +6,7 @@ import {
   ResponsePostModel,
 } from "@/types/post";
 import { UserVisitorModel } from "@/types/user.type";
-import { makeApiCall } from "@/utils/get-url-end-point";
+import { makeApiCall } from "@/utils/end-point";
 import { PaginationRequest, SortModel } from "@/utils/pagination-item";
 import {
   useInfiniteQuery,
@@ -36,6 +36,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
       data.append("description", payload.description ?? "");
       data.append("whoCanSee", `${payload.whoCanSee}`);
       data.append("type", payload.type ?? "");
+      data.append("categoryId", payload.categoryId ?? "");
       data.append("allowDownload", `${payload.allowDownload}`);
 
       payload?.fileList?.length > 0 &&
@@ -114,6 +115,8 @@ export const CreateOrUpdateOnePostAPI = ({
       data.append("title", `${payload.title ?? ""}`);
       data.append("whoCanSee", `${payload.whoCanSee}`);
       data.append("urlMedia", `${payload.urlMedia ?? ""}`);
+      data.append("categoryId", `${payload.categoryId ?? ""}`);
+      data.append("albumId", `${payload.albumId ?? ""}`);
       data.append("allowDownload", `${payload.allowDownload ?? ""}`);
       data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
       data.append("description", `${payload.description ?? ""}`);
@@ -242,7 +245,6 @@ export const getOnePostAPI = async (
   });
 };
 
-
 export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
   const { data, isError, isLoading, status } = useQuery({
     queryKey: ["post", { ...payload }],
@@ -256,8 +258,8 @@ export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
 
 export const getPostsAPI = async (
   payload: {
+    albumId?: string; 
     userVisitorId?: string;
-    organizationId: string;
     type?: PostType;
     status?: string;
     typeIds?: string[];
@@ -270,6 +272,7 @@ export const getPostsAPI = async (
 };
 
 export const GetInfinitePostsAPI = (payload: {
+  albumId?: string;
   userVisitor: UserVisitorModel;
   take: number;
   status?: string;
@@ -278,7 +281,8 @@ export const GetInfinitePostsAPI = (payload: {
   typeIds?: string[];
   queryKey: string[];
 }) => {
-  const { userVisitor, take, sort, status, type, typeIds, queryKey } = payload;
+  const { userVisitor, albumId, take, sort, status, type, typeIds, queryKey } =
+    payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -290,6 +294,7 @@ export const GetInfinitePostsAPI = (payload: {
         sort,
         type,
         typeIds,
+        albumId,
         status: status?.toUpperCase(),
         page: Number(pageParam),
       }),
