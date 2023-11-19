@@ -10,8 +10,10 @@ import { AvatarComponent } from "@/components/ui/avatar-component";
 import { SerialPrice } from "@/components/ui/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { GetStaticPropsContext } from "next";
+import { useTranslations } from "next-intl";
 
 const Dashboard = () => {
+  const t = useTranslations();
   const [dayCount, setDayCount] = useState(30);
   const user = useAuth() as any;
 
@@ -129,7 +131,7 @@ const Dashboard = () => {
                       size="normal"
                       loading={false}
                     >
-                      Last {dayCount} days
+                      {t('last_time_days', { day: dayCount })}
                     </ButtonInput>
                   </div>
                 </div>
@@ -139,7 +141,7 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Membership
+                      {t('memberships')}
                     </p>
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
@@ -157,7 +159,7 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Donations
+                      {t('donations')}
                     </p>
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
@@ -175,7 +177,7 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Shop
+                      {t('shop')}
                     </p>
                     <div className="flex items-center justify-between mt-3">
                       <SerialPrice
@@ -261,6 +263,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
+        ...(await import(`/lang/${locale}/common.json`)).default,
       }
     }
   }

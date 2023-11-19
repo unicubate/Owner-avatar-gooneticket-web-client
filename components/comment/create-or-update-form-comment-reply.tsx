@@ -125,7 +125,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
                 status="cancel"
                 type="button"
                 shape="default"
-                size="normal"
+                size="large"
                 onClick={() => setOpenModalReply(false)}
                 loading={false}
               >

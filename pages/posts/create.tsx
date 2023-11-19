@@ -7,6 +7,7 @@ import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 import { useAuth } from "@/components/util/context-user";
 import { GetStaticPropsContext } from "next";
+import { CreateOrUpdateFormAlbumPost } from "@/components/post/create-or-update-form-album-post";
 
 const PostsCreate = () => {
   const { organizationId } = useAuth() as any;
@@ -25,6 +26,8 @@ const PostsCreate = () => {
             {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
 
             {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} /> : null}
+
+            {organizationId && type === "album" ? <CreateOrUpdateFormAlbumPost organizationId={organizationId} /> : null}
           </div>
         </div>
       </LayoutDashboard>

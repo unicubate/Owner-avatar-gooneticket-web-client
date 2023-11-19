@@ -17,7 +17,7 @@ type Props = {
 };
 
 const TableGallery: React.FC<Props> = ({ userVisitor }) => {
-  const router = useRouter();
+  const { push, back } = useRouter();
   const { ref, inView } = useInView();
   const [openModal, setOpenModal] = useState(false);
 
@@ -85,16 +85,33 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-4 sm:mt-0">
-              <ButtonInput
-                onClick={() => router.push(`/posts/create?type=gallery`)}
-                shape="default"
-                type="button"
-                size="normal"
-                loading={false}
-                color={"indigo"}
-              >
-                Create File
-              </ButtonInput>
+              <div className="flex items-center space-x-4">
+                <div className="relative">
+                  <ButtonInput
+                    minW="fit"
+                    shape="default"
+                    type="button"
+                    size="normal"
+                    loading={false}
+                    color="indigo"
+                    onClick={() => push(`/posts/create?type=gallery`)}
+                  >
+                    Add Image
+                  </ButtonInput>
+                </div>
+                <div className="relative">
+                  <ButtonInput
+                    status="cancel"
+                    type="button"
+                    shape="default"
+                    size="normal"
+                    loading={false}
+                    onClick={() => push(`/posts/create?type=album`)}
+                  >
+                    New Album
+                  </ButtonInput>
+                </div>
+              </div>
             </div>
             <div className="mt-4 sm:mt-0">
               <Input placeholder="Search file" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />

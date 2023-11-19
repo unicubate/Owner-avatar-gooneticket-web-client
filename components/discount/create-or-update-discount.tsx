@@ -205,7 +205,7 @@ const CreateOrUpdateDiscount: React.FC<{
                 status="cancel"
                 type="button"
                 shape="default"
-                size="normal"
+                size="large"
                   loading={loading}
                   onClick={() => setShowModal(false)}
                 >

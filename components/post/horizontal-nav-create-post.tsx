@@ -3,7 +3,7 @@ import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { useRouter } from "next/router";
 import { IconTypePost } from "@/utils/icon-type-post";
 
-const classIcon = "flex-shrink-0 w-8 h-8 text-gray-600 md:w-12 md:h-12";
+const classIcon = "flex-shrink-0 w-8 h-8 text-gray-600 md:w-10 md:h-10";
 
 const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
   const router = useRouter();
@@ -22,7 +22,7 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
     },
     {
       title: "Album post",
-      href: `/posts/create?type=audio`,
+      href: `/posts/create?type=album`,
       description: `142 Available Audio Posts`,
       icon: <IconTypePost type="GALLERY" className={classIcon} />,
     },

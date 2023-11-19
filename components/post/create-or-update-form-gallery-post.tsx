@@ -287,7 +287,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       status="cancel"
                       type="button"
                       shape="default"
-                      size="normal"
+                      size="large"
                       loading={loading}
                       onClick={() => router.back()}
                     >

@@ -149,7 +149,7 @@ const CreateOrUpdateCategory: React.FC<{
                   status="cancel"
                   type="button"
                   shape="default"
-                  size="normal"
+                  size="large"
                   loading={false}
                   onClick={() => setShowModal(false)}
                 >

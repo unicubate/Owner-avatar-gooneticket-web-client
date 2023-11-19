@@ -6,10 +6,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import {
-  AlbumFormModel,
-  ResponseAlbumModel,
-} from "@/types/album";
+import { AlbumFormModel, ResponseAlbumModel } from "@/types/album";
 
 export const CreateOrUpdateOneAlbumAPI = ({
   onSuccess,
@@ -22,13 +19,13 @@ export const CreateOrUpdateOneAlbumAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: AlbumFormModel & { AlbumId: string }) => {
-      const { AlbumId } = payload;
-      return AlbumId
+    mutationFn: async (payload: AlbumFormModel & { albumId: string }) => {
+      const { albumId } = payload;
+      return albumId
         ? await makeApiCall({
             action: "updateOneAlbum",
             body: payload,
-            urlParams: { AlbumId },
+            urlParams: { albumId },
           })
         : await makeApiCall({
             action: "createOneAlbum",

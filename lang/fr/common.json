@@ -1,11 +1,11 @@
 {
-  "memberships": "Memberships",
-  "membership": "Membership",
-  "donations": "Donations",
-  "shop": "Shop",
+  "memberships": "Adhésions",
+  "membership": "membership",
+  "donations": "Dons",
+  "shop": "Boutique",
   "followers": "Followers",
-  "recent_transactions": "Recent Transactions",
-  "last_time_days": "Last {day} days",
+  "recent_transactions": "Transactions récentes",
+  "last_time_days": "Dernier {day} jours",
 
   "2fa": {
     "verify_code": "Verify code",
