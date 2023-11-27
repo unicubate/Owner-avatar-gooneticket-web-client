@@ -6,7 +6,9 @@ import { Avatar, Button, Image } from "antd";
 import { usePathname } from "next/navigation";
 import { getCurrentUserFormToken } from "../util/context-user";
 import { useState } from "react";
+import { BiSun, BiMoon } from "react-icons/bi";
 import { AvatarComponent } from "../ui/avatar-component";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 export type NavbarProps = {
   title: string;
@@ -80,15 +82,12 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
-                        isActive
-                          ? `text-${
-                              user?.profile?.color ?? "indigo"
-                            }-600 border-${
-                              user?.profile?.color ?? "indigo"
-                            }-600`
-                          : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
-                      } `}
+                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
+                        ? `text-${user?.profile?.color ?? "indigo"
+                        }-600 border-${user?.profile?.color ?? "indigo"
+                        }-600`
+                        : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
+                        } `}
                     >
                       {item?.icon}
 
@@ -99,22 +98,30 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
               </div>
             </div>
 
+
             <div className="flex items-center justify-end">
               <div className="flex items-center space-x-6 sm:ml-5">
-                {user?.profile ? (
-                  <button
-                    type="button"
-                    className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                  >
-                    <AvatarComponent
-                      className="w-9 h-9"
-                      profile={user?.profile}
-                    />
-                    <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                      {user?.profile?.firstName} {user?.profile?.lastName}
-                    </p>
-                  </button>
-                ) : null}
+
+                <div className="relative">
+                  <ThemeToggle />
+                </div>
+
+                <div className="relative">
+                  {user?.profile ? (
+                    <button
+                      type="button"
+                      className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                    >
+                      <AvatarComponent
+                        className="w-9 h-9"
+                        profile={user?.profile}
+                      />
+                      <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                        {user?.profile?.firstName} {user?.profile?.lastName}
+                      </p>
+                    </button>
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
