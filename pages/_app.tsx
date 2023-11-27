@@ -29,6 +29,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <NextIntlClientProvider
             locale={router.locale}
+            timeZone='Europe/Berlin'
+            now={new Date()}
             messages={pageProps.messages}
           >
             <HydrationBoundary state={pageProps.dehydratedState}>
