@@ -172,77 +172,34 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                 </div> */}
 
               <div className="flex items-center space-x-6 sm:ml-5">
-                {user?.profile ? (
-                  <>
-                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                      <button
-                        type="button"
-                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
-                      >
-                        <AvatarComponent
-                          profile={user?.profile}
-                          className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                        />
-                        <p className="ml-1 text-sm font-bold text-gray-900">
-                          {user?.profile?.firstName} {user?.profile?.lastName}
-                        </p>
-                      </button>
-                    </Dropdown>
-                  </>
-                ) : (
-                  <>
-                    {/* <div className="relative">
-                      <Button
-                        onClick={() => {
-                          router.push(`${`/login`}`);
-                        }}
-                        size="middle"
-                      >
-                        Log In
-                      </Button>
-                    </div>
-                    <div className="relative">
-                      <Button
-                        onClick={() => {
-                          router.push(`${`/register`}`);
-                        }}
-                        size="middle"
-                        type="primary"
-                        danger
-                      >
-                        Sign Up
-                      </Button>
-                    </div> */}
-                    <div className="relative">
-                      <ButtonInput
-                        status="cancel"
-                        type="button"
-                        shape="default"
-                        size="normal"
-                        loading={false}
-                        onClick={() => {
-                          router.push(`${`/login`}`);
-                        }}
-                      >
-                        Log In
-                      </ButtonInput>
-                    </div>
-                    <div className="relative">
-                      <ButtonInput
-                        shape="default"
-                        size="normal"
-                        type="button"
-                        color="indigo"
-                        loading={false}
-                        onClick={() => {
-                          router.push(`${`/register`}`);
-                        }}
-                      >
-                        Sign Up
-                      </ButtonInput>
-                    </div>
-                  </>
-                )}
+                <div className="relative">
+                  <ButtonInput
+                    status="cancel"
+                    type="button"
+                    shape="default"
+                    size="normal"
+                    loading={false}
+                    onClick={() => {
+                      router.push(`${user?.profile ? `/dashboard` : `/login`}`);
+                    }}
+                  >
+                    Log In
+                  </ButtonInput>
+                </div>
+                <div className="relative">
+                  <ButtonInput
+                    shape="default"
+                    size="normal"
+                    type="button"
+                    color="indigo"
+                    loading={false}
+                    onClick={() => {
+                      router.push(`${user?.profile ? `/dashboard` : `/login`}`);
+                    }}
+                  >
+                    Sign Up
+                  </ButtonInput>
+                </div>
               </div>
             </div>
           </div>

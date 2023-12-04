@@ -1,6 +1,6 @@
 import { capitalizeOneFirstLetter } from "@/utils/utils";
 import { Avatar } from "antd";
-import { ScreenSizeMap } from "antd/es/_util/responsiveObserver";
+import type { ScreenSizeMap } from "antd/es/_util/responsiveObserver";
 import { BiCoffeeTogo } from "react-icons/bi";
 
 interface Props {

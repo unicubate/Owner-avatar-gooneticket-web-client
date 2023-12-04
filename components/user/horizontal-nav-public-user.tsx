@@ -1,8 +1,10 @@
 import React from "react";
 import { AvatarComponent } from "../ui/avatar-component";
 import { UserModel } from "@/types/user.type";
+import { useTranslations } from "next-intl";
 
 const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
+  const t = useTranslations();
 
   return (
     <>
@@ -16,17 +18,19 @@ const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
           {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}{" "}
         </p>
         <p className="mt-2 text-sm font-medium text-gray-500">
-          <span>{user?.totalFollower ?? 0} Follower</span>
-          <span className="ml-2">{user?.totalFollowing ?? 0} Following</span>
+          <span>
+            {user?.totalFollower ?? 0} {t("followers")}
+          </span>
+          <span className="ml-2">
+            {user?.totalFollowing ?? 0} {t("followings")}
+          </span>
         </p>
 
         {user?.totalSubscribe > 0 ? (
           <p className="mt-2 text-sm font-medium text-gray-500">
-            {user?.totalSubscribe}{" "}
-            {user?.totalSubscribe > 1 ? "supporters" : "supporter"}
+            {user?.totalSubscribe} {t("subscribes")}
           </p>
         ) : null}
-
       </div>
     </>
   );

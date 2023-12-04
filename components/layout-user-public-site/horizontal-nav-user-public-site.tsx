@@ -13,6 +13,7 @@ import { UserModel } from "@/types/user.type";
 import { ColorType } from "@/types/profile.type";
 import { navigationPublicUser } from "./index";
 import { useTranslations } from "next-intl";
+import { ThemeToggle } from "../ui/theme-toggle";
 
 interface Props {
   user?: UserModel;
@@ -35,7 +36,7 @@ const items: MenuProps["items"] = [
 ];
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
-  const t = useTranslations('menu-site');
+  const t = useTranslations("menu-site");
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
@@ -81,7 +82,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white dark:bg-[#121212] border-gray-300 sticky top-0 z-20">
+      <header className="bg-white dark:bg-[#1c1b22] border-gray-300 sticky top-0 z-20">
         <div className="container px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
@@ -141,39 +142,44 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
             <div className="flex items-center justify-end">
               <div className="flex items-center space-x-2 sm:ml-5">
-                {userVisiter?.id !== user?.id ? (
-                  <>
-                    <ButtonInput
-                      shape="default"
-                      size="medium"
-                      type="button"
-                      color={user?.profile?.color as ColorType}
-                      loading={false}
-                      onClick={() => setOpenModal(true)}
-                      icon={<BiCoffeeTogo className="h-5 w-5" />}
-                    >
-                      Donate
-                    </ButtonInput>
-                    <CreateOrUpdateFormFollow item={user} />
-                  </>
-                ) : (
-                  <>
-                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                      <button
+
+                <div className="relative">
+                  <ThemeToggle />
+                </div>
+
+                  {userVisiter?.id !== user?.id ? (
+                    <>
+                      <ButtonInput
+                        shape="default"
+                        size="medium"
                         type="button"
-                        className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                        color={user?.profile?.color as ColorType}
+                        loading={false}
+                        onClick={() => setOpenModal(true)}
+                        icon={<BiCoffeeTogo className="h-5 w-5" />}
                       >
-                        <AvatarComponent
-                          className="w-9 h-9"
-                          profile={user?.profile}
-                        />
-                        <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                          {user?.profile?.firstName} {user?.profile?.lastName}
-                        </p>
-                      </button>
-                    </Dropdown>
-                  </>
-                )}
+                        Donate
+                      </ButtonInput>
+                      <CreateOrUpdateFormFollow item={user} />
+                    </>
+                  ) : (
+                    <>
+                      <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                        <button
+                          type="button"
+                          className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
+                        >
+                          <AvatarComponent
+                            className="w-9 h-9"
+                            profile={user?.profile}
+                          />
+                          <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                            {user?.profile?.firstName} {user?.profile?.lastName}
+                          </p>
+                        </button>
+                      </Dropdown>
+                    </>
+                  )}
               </div>
             </div>
           </div>

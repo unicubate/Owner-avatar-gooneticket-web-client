@@ -4,12 +4,14 @@
   "donations": "Donations",
   "shop": "Shop",
   "followers": "Followers",
+  "followings": "Followings",
+  "subscribes": "Supporters",
   "recent_transactions": "Recent Transactions",
   "last_time_days": "Last {day} days",
 
   "2fa": {
     "verify_code": "Verify code",
-    "we_sent_an_email": "We have sent an OTP code to your email for two-factor verification.",
+    "we_sent_an_email": "Nous avons envoyé un code OTP à votre e-mail pour une vérification à deux facteurs.",
 
     "check_your_auth_app": "Check Your 2FA App",
     "check_your_auth_app_desc": "Please verify the two-factor authentication app on your mobile device for the OTP code.",

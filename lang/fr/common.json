@@ -3,7 +3,9 @@
   "membership": "membership",
   "donations": "Dons",
   "shop": "Boutique",
-  "followers": "Followers",
+  "followers": "Abonnés",
+  "followings": "Suivis",
+  "subscribes": "Membres",
   "recent_transactions": "Transactions récentes",
   "last_time_days": "Dernier {day} jours",
 

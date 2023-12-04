@@ -10,7 +10,9 @@
     "shop": "Boutique",
     "commissions": "Commissions",
     "feed": "Uctualiter",
-    "settings": "Paramètre",
+    "support": "Soutien",
+    "monetize": "Monétisation",
+    "settings": "Paramètres",
     "logout": "Déconnexion",
     "login": "Connexion",
     "sign_up": "Inscription"

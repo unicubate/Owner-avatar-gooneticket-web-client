@@ -86,21 +86,21 @@ const Dashboard = () => {
                     <span className="text-lg font-bold">
                       {user?.totalSubscribe ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">Subscribes</span>
+                    <span className="ml-2 font-normal text-sm">{t('subscribes')}</span>
                   </Link>
 
                   <Link href="/settings/followers">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollower ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">Followers</span>
+                    <span className="ml-2 font-normal text-sm">{t('followers')}</span>
                   </Link>
 
                   <Link href="/settings/followings">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollowing ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">Following</span>
+                    <span className="ml-2 font-normal text-sm">{t('followings')}</span>
                   </Link>
                 </div>
 

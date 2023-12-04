@@ -79,6 +79,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
+        ...(await import(`/lang/${locale}/common.json`)).default,
       },
     },
   };
