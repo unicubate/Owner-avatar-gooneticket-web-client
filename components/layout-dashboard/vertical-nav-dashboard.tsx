@@ -5,22 +5,17 @@ import {
   BiSearch,
   BiDetail,
   BiCog,
-  BiWallet,
   BiLockOpen,
   BiBookContent,
-  BiShoppingBag,
   BiImage,
   BiHeart,
   BiLayout,
-  BiStore,
   BiStoreAlt,
 } from "react-icons/bi";
 import { RiShakeHandsLine } from "react-icons/ri";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { logoutUser } from "../util/context-user";
-import { ThemeToggle } from "../ui/theme-toggle";
-import { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
 
 export type NavbarProps = {
