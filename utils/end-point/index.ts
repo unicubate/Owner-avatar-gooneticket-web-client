@@ -1,5 +1,5 @@
-import axios from "axios";
-import { GET, POST, DELETE, PUT } from "./consts";
+import axios from 'axios';
+import { GET, POST, DELETE, PUT } from './consts';
 
 export interface ClientApiMethods {
   [key: string]: {
@@ -16,11 +16,11 @@ export type IntegrationApiCall = {
 };
 
 const user =
-  typeof window !== "undefined"
+  typeof window !== 'undefined'
     ? JSON.parse(
         String(
-          localStorage.getItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-        )
+          localStorage.getItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)),
+        ),
       )
     : null;
 
@@ -47,7 +47,7 @@ export const makeApiCall = async ({
 
     //add query params
     if (queryParams) {
-      url += "?";
+      url += '?';
       Object.keys(queryParams).forEach((key: string) => {
         if (queryParams[key]) {
           url += `${key}=${queryParams[key]}&`;
@@ -65,7 +65,7 @@ export const makeApiCall = async ({
     queryParams: queryParams,
   });
 
-  axios.defaults.headers.common["Authorization"] = user ?? {};
+  axios.defaults.headers.common['Authorization'] = user ?? {};
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     withCredentials: true,
@@ -181,15 +181,19 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** Payments route */
   getPayments: GET(`${baseUrl}/payments`),
   createOnePaymentsPaypalSubscribe: POST(
-    `${baseUrl}/payments/paypal/subscribe`
+    `${baseUrl}/payments/paypal/subscribe`,
   ),
   createOnePaymentsStripeSubscribe: POST(
-    `${baseUrl}/payments/stripe/subscribe`
+    `${baseUrl}/payments/stripe/subscribe`,
   ),
   createOnePaymentsPaypalDonation: POST(`${baseUrl}/payments/paypal/donation`),
   createOnePaymentsStripeDonation: POST(`${baseUrl}/payments/stripe/donation`),
   createOnePaymentsPaypalShop: POST(`${baseUrl}/payments/paypal/shop`),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
+  resendVerifyCodeOnePaymentsCreate: POST(
+    `${baseUrl}/payments/resend-code-verify-phone`,
+  ),
+  verifyCodeOnePaymentsCreate: POST(`${baseUrl}/payments/code-verify-phone`),
 
   /****************** Posts route */
   createOnePostGallery: POST(`${baseUrl}/posts/galleries`),

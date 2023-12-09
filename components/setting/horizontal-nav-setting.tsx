@@ -16,22 +16,22 @@ const HorizontalNavSetting: React.FC = () => {
       title: "Payout",
       href: "/settings/payout",
     },
-    {
-      title: "Configurations",
-      href: "/settings/config",
-    },
-    {
-      title: "Billing",
-      href: "/settings/billing",
-    },
-    {
-      title: "Payout",
-      href: "/payout-settings",
-    },
-    {
-      title: "Notifications",
-      href: "/settings/notifications",
-    },
+    // {
+    //   title: "Configurations",
+    //   href: "/settings/config",
+    // },
+    // {
+    //   title: "Billing",
+    //   href: "/settings/billing",
+    // },
+    // {
+    //   title: "Payout",
+    //   href: "/payout-settings",
+    // },
+    // {
+    //   title: "Notifications",
+    //   href: "/settings/notifications",
+    // },
     {
       title: "Subscribers",
       href: "/settings/subscribers",

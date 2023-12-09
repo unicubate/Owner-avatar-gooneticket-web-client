@@ -1,8 +1,5 @@
-import { SelectSearchInput, TextInput } from "../ui";
-import * as yup from "yup";
 import { ButtonInput } from "../ui";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { PaymentCardFormModel, arrayTypePayments } from "@/types/payment";
+import { PaymentCardFormModel } from "@/types/payment";
 
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import { useCreditCardValidator, images } from "react-creditcard-validator";
@@ -10,10 +7,6 @@ import { useCreditCardValidator, images } from "react-creditcard-validator";
 import { FormEvent, useState } from "react";
 import { CreateOnPaymentPI } from "@/api-site/payment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-
-const schema = yup.object({
-  type: yup.string().required("choose payment type"),
-});
 
 const CreatePaymentFormCardUser: React.FC<{
   showModal: boolean;
@@ -23,10 +16,6 @@ const CreatePaymentFormCardUser: React.FC<{
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined
   );
-  const { watch, control, errors } = useReactHookForm({
-    schema,
-  });
-  const watchType = watch("type", "");
 
   function expDateValidate(month: string, year: string) {
     if (Number(year) > 2070) {
@@ -36,17 +25,28 @@ const CreatePaymentFormCardUser: React.FC<{
   }
   const [cardstate, setcardState] = useState({ fullName: "" });
 
+  const { mutateAsync } = CreateOnPaymentPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
+
+
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { cardNumber, cvc, expiryDate } = cardstate as any;
-    const strExpirySplit = expiryDate.split(" ").join("");
-    const strExpiryLength = Number(strExpirySplit.length);
-    const monthDate = strExpirySplit.substring(2, 0);
-    const yearDate = strExpirySplit.substring(
+    const strExpirySplit = expiryDate?.split(" ").join("");
+    const strExpiryLength = Number(strExpirySplit?.length);
+    const monthDate = strExpirySplit?.substring(2, 0);
+    const yearDate = strExpirySplit?.substring(
       strExpiryLength,
       strExpiryLength - 2
     );
-
     const payload: PaymentCardFormModel = {
       cardNumber: cardNumber,
       cardExpMonth: Number(`${monthDate}`),
@@ -57,8 +57,8 @@ const CreatePaymentFormCardUser: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await CreateOnPaymentPI({
-        data: { ...payload },
+      await mutateAsync({
+        data: { ...payload, type: "CARD" },
         paymentModel: "PAYMENT-CREATE",
       });
       AlertSuccessNotification({
@@ -69,6 +69,7 @@ const CreatePaymentFormCardUser: React.FC<{
       });
       setHasErrors(false);
       setLoading(false);
+      setShowModal(false)
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -97,138 +98,93 @@ const CreatePaymentFormCardUser: React.FC<{
           <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
           <div className="w-full  max-w-2xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-[#121212]">
             <form onSubmit={handleUserPageSubmit}>
-              <h2 className="p-2 text-base font-bold">Add your payment</h2>
+              <h2 className="p-2 text-base font-bold">Add your card payment</h2>
               <div className="p-2 flex-auto justify-center">
                 {hasErrors && (
                   <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
                     {hasErrors}
                   </div>
                 )}
-
-                <div className="mt-4">
-                  <SelectSearchInput
-                    firstOptionName="Choose payment method"
-                    control={control}
-                    errors={errors}
-                    placeholder="Select payment type"
-                    valueType="text"
-                    name="type"
-                    dataItem={arrayTypePayments}
+                <div className="relative mt-4">
+                  <input
+                    type="text"
+                    className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${erroredInputs?.cvc ? "border-red-500" : ""
+                      }`}
+                    required
+                    placeholder="Full name"
+                    name="fullName"
+                    onChange={(e) =>
+                      setcardState({
+                        ...cardstate,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
                   />
                 </div>
+                <div className="relative mt-4">
+                  <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                    <svg {...getCardImageProps({ images })} />
+                  </div>
+                  <input
+                    className={`border block w-full px-3 py-2.5 pl-12 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${erroredInputs?.cardNumber ? "border-red-500" : ""
+                      }`}
+                    required
+                    {...getCardNumberProps({
+                      onChange: (e) =>
+                        setcardState({
+                          ...cardstate,
+                          [e.target.name]: e.target.value,
+                        }),
+                    })}
+                  />
+                  {erroredInputs?.cardNumber && (
+                    <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                      {erroredInputs?.cardNumber}
+                    </span>
+                  )}
+                </div>
 
-                {watchType === "CARD" ? (
-                  <>
-                    <div className="relative mt-4">
-                      <input
-                        type="text"
-                        className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
-                          erroredInputs?.cvc ? "border-red-500" : ""
+                <div className="grid grid-cols-2 mt-4 sm:grid-cols-2 gap-x-6">
+                  <div className="mb-2">
+                    <input
+                      className={`border block w-full px-3 py-2.5 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-50 focus:border-indigo-50 sm:text-sm caret-indigo-50 ${erroredInputs?.expiryDate ? "border-red-500" : ""
                         }`}
-                        required
-                        placeholder="Full name"
-                        name="fullName"
-                        onChange={(e) =>
+                      required
+                      {...getExpiryDateProps({
+                        onChange: (e) =>
                           setcardState({
                             ...cardstate,
                             [e.target.name]: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div className="relative mt-4">
-                      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-                        <svg {...getCardImageProps({ images })} />
-                      </div>
-                      <input
-                        className={`border block w-full px-3 py-2.5 pl-12 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
-                          erroredInputs?.cardNumber ? "border-red-500" : ""
+                          }),
+                      })}
+                    />
+                    {erroredInputs?.expiryDate && (
+                      <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                        {erroredInputs?.expiryDate}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="mb-2">
+                    <input
+                      className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${erroredInputs?.cvc ? "border-red-500" : ""
                         }`}
-                        required
-                        {...getCardNumberProps({
-                          onChange: (e) =>
-                            setcardState({
-                              ...cardstate,
-                              [e.target.name]: e.target.value,
-                            }),
-                        })}
-                      />
-                      {erroredInputs?.cardNumber && (
-                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                          {erroredInputs?.cardNumber}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="grid grid-cols-2 mt-4 sm:grid-cols-2 gap-x-6">
-                      <div className="mb-2">
-                        <input
-                          className={`border block w-full px-3 py-2.5 placeholder-gray-500 border-gray-300 rounded-lg focus:ring-indigo-50 focus:border-indigo-50 sm:text-sm caret-indigo-50 ${
-                            erroredInputs?.expiryDate ? "border-red-500" : ""
-                          }`}
-                          required
-                          {...getExpiryDateProps({
-                            onChange: (e) =>
-                              setcardState({
-                                ...cardstate,
-                                [e.target.name]: e.target.value,
-                              }),
-                          })}
-                        />
-                        {erroredInputs?.expiryDate && (
-                          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                            {erroredInputs?.expiryDate}
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="mb-2">
-                        <input
-                          className={`border block w-full px-3 py-2.5 rounded-lg placeholder-gray-500 border-gray-300 focus:ring-indigo-200 focus:border-indigo-200 sm:text-sm caret-indigo-200 ${
-                            erroredInputs?.cvc ? "border-red-500" : ""
-                          }`}
-                          required
-                          {...getCVCProps({
-                            onChange: (e) =>
-                              setcardState({
-                                ...cardstate,
-                                [e.target.name]: e.target.value,
-                              }),
-                          })}
-                        />
-                        {erroredInputs?.cvc && (
-                          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                            {erroredInputs?.cvc}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                ) : null}
-
-                {watchType === "PHONE" ? (
-                  <>
-                    <div className="mt-4">
-                      <TextInput
-                        control={control}
-                        type="text"
-                        name="fullName"
-                        placeholder="Full name"
-                        errors={errors}
-                      />
-                    </div>
-
-                    <div className="mt-4">
-                      <TextInput
-                        control={control}
-                        type="text"
-                        name="phone"
-                        placeholder="Phone number"
-                        errors={errors}
-                      />
-                    </div>
-                  </>
-                ) : null}
+                      required
+                      {...getCVCProps({
+                        onChange: (e) =>
+                          setcardState({
+                            ...cardstate,
+                            [e.target.name]: e.target.value,
+                          }),
+                      })}
+                    />
+                    {erroredInputs?.cvc && (
+                      <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+                        {erroredInputs?.cvc}
+                      </span>
+                    )}
+                  </div>
+                </div>
 
                 <div className="flex items-center mt-4 space-x-4">
                   <ButtonInput

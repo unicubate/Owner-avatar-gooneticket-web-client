@@ -1,10 +1,10 @@
-import { PaymentType } from "@/utils/pagination-item";
+import { PaymentType } from '@/utils/pagination-item';
 
 export type ActionPayment = 'PAYMENT' | 'WITHDRAWING';
 
 export const arrayTypePayments = [
-  { id: "1", name: "CARD" },
-  { id: "2", name: "PHONE" },
+  { id: '1', name: 'CARD' },
+  { id: '2', name: 'PHONE' },
 ];
 
 export type PaymentCardFormModel = {
@@ -25,7 +25,7 @@ export type PaymentItemModel = {
   action: ActionPayment;
   fullName: string;
   phone: string;
-  status: string;
+  status: 'PENDING' | 'ACTIVE' | 'INVALID';
   cardNumber: string;
   cardExpMonth: number;
   cardExpYear: number;

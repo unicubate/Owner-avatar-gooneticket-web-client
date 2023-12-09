@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useForm } from "react-hook-form";
 import { CreateOnPaymentPI } from "@/api-site/payment";
 import { ButtonInput } from "@/components/ui/button-input";
 import { StripeProps } from "./create-payment-stripe";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";
 import { TextInput } from "@/components/ui";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { generateLongUUID } from "@/utils/generate-random";
 import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
@@ -54,6 +52,7 @@ const CARD_OPTIONS: any = {
   },
 };
 
+
 const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
@@ -72,6 +71,17 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   if (!stripe || !elements) {
     return;
   }
+
+  const { mutateAsync } = CreateOnPaymentPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
 
   const onSubmit = async (payload: any) => {
     const { email, fullName } = payload;
@@ -96,7 +106,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         return;
       }
 
-      await CreateOnPaymentPI({
+      await mutateAsync({
         data: { ...data, reference: newReference, paymentMethod },
         paymentModel,
       });

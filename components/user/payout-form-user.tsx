@@ -5,8 +5,10 @@ import { Skeleton } from "antd";
 import { GetInfinitePaymentsAPI } from "@/api-site/payment";
 import { ListPayments } from "../payment/list-payments";
 import { PaymentItemModel } from "@/types/payment";
+import { CreatePaymentPhoneFormCardUser } from "./create-payment-phone-form-card-user";
 
 const PayoutFormUser: React.FC = () => {
+  const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
   const {
@@ -41,18 +43,28 @@ const PayoutFormUser: React.FC = () => {
 
   return (
     <>
-      <div className="overflow-hidden bg-white border border-gray-200">
+      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
         <div className="px-4 py-5">
           <div className="flex items-center mb-4 space-x-4">
             <ButtonInput
-              onClick={() => setShowCardModal(true)}
-              shape="default"
+              status="cancel"
               type="button"
+              shape="default"
               size="normal"
               loading={false}
-              color={"indigo"}
+              onClick={() => setShowPhoneFormModal(true)}
             >
-              Add Payment
+              Add Phone
+            </ButtonInput>
+            <ButtonInput
+              status="cancel"
+              type="button"
+              shape="default"
+              size="normal"
+              loading={false}
+              onClick={() => setShowCardModal(true)}
+            >
+              Add Card
             </ButtonInput>
             <ButtonInput
               status="cancel"
@@ -93,6 +105,13 @@ const PayoutFormUser: React.FC = () => {
         <CreatePaymentFormCardUser
           showModal={showCardModal}
           setShowModal={setShowCardModal}
+        />
+      ) : null}
+
+      {showPhoneFormModal ? (
+        <CreatePaymentPhoneFormCardUser
+          showModal={showPhoneFormModal}
+          setShowModal={setShowPhoneFormModal}
         />
       ) : null}
     </>

@@ -10,7 +10,7 @@
   }
 }
 */
-@layer base{
+@layer base {
   :root {
     --color-primary: 247 147 34;
     --color-text: 33 33 33;
@@ -20,7 +20,7 @@
     --color-error: 254 78 78;
   }
 
-  :root[class~="dark"] {
+  :root[class~='dark'] {
     --color-primary: 247 147 34;
     --color-text: 33 33 33;
     --color-success: 0 200 81;
@@ -29,7 +29,6 @@
     --color-error: 254 78 78;
   }
 }
-
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
@@ -45,7 +44,6 @@
   }
 } */
 
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -54,15 +52,20 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
-} 
+}
 
-.quill > .ql-container > .ql-editor.ql-blank::before{
+.quill > .ql-container > .ql-editor.ql-blank::before {
   font-style: normal;
   color: #6b7380;
 }
 
-
 .rhap_progress-filled,
 .rhap_progress-indicator {
   background-color: #007aff !important;
+}
+
+.PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+  outline: none;
 }
