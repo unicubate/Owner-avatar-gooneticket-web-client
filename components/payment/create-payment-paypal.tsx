@@ -20,6 +20,17 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
+  const { mutateAsync } = CreateOnPaymentPI({
+    onSuccess: () => {
+      setHasErrors(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
+
+
   const handleApprove = async (options: { order: any }) => {
     const { order } = options;
     const name = order?.payer?.name?.given_name;
@@ -42,7 +53,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
     };
 
     try {
-      await CreateOnPaymentPI({
+      await mutateAsync({
         data: payload,
         paymentModel,
       });
@@ -118,7 +129,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
                 const details = await action?.order?.capture();
                 return handleApprove({ order: details });
               }}
-              onCancel={() => {}}
+              onCancel={() => { }}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);
