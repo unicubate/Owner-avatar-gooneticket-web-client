@@ -65,12 +65,6 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const stripe = useStripe();
-  const elements: any = useElements();
-
-  if (!stripe || !elements) {
-    return;
-  }
 
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {
@@ -82,6 +76,12 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       setHasErrors(error.response.data.message);
     },
   });
+
+  const stripe = useStripe();
+  const elements: any = useElements();
+  if (!stripe || !elements) {
+    return;
+  }
 
   const onSubmit = async (payload: any) => {
     const { email, fullName } = payload;
