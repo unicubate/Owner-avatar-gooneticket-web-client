@@ -1,12 +1,12 @@
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { AlbumFormModel, ResponseAlbumModel } from "@/types/album";
+} from '@tanstack/react-query';
+import { AlbumFormModel, ResponseAlbumModel } from '@/types/album';
 
 export const CreateOrUpdateOneAlbumAPI = ({
   onSuccess,
@@ -15,7 +15,7 @@ export const CreateOrUpdateOneAlbumAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["albums"];
+  const queryKey = ['albums'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -23,12 +23,12 @@ export const CreateOrUpdateOneAlbumAPI = ({
       const { albumId } = payload;
       return albumId
         ? await makeApiCall({
-            action: "updateOneAlbum",
+            action: 'updateOneAlbum',
             body: payload,
             urlParams: { albumId },
           })
         : await makeApiCall({
-            action: "createOneAlbum",
+            action: 'createOneAlbum',
             body: { ...payload },
           });
     },
@@ -62,14 +62,14 @@ export const DeleteOneAlbumAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["albums"];
+  const queryKey = ['albums'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { AlbumId: string }) => {
       const { AlbumId } = payload;
       return await makeApiCall({
-        action: "deleteOneAlbum",
+        action: 'deleteOneAlbum',
         urlParams: { AlbumId },
       });
     },
@@ -97,29 +97,31 @@ export const DeleteOneAlbumAPI = ({
 };
 
 export const getAlbumsAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponseAlbumModel }> => {
   return await makeApiCall({
-    action: "getAlbums",
+    action: 'getAlbums',
     queryParams: payload,
   });
 };
 
 export const GetAllAlbumsAPI = (payload: {
   organizationId: string;
-  isPaginate: "true" | "false";
+  isPaginate: 'true' | 'false';
   take: number;
+  page: number;
   sort: SortModel;
   queryKey: string[];
 }) => {
-  const { take, organizationId, isPaginate, sort, queryKey } = payload;
+  const { take, organizationId, isPaginate, sort, page, queryKey } = payload;
   const { data, isError, isLoading, status } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await getAlbumsAPI({
-        organizationId: organizationId,
+        // organizationId: organizationId,
         isPaginate: isPaginate,
         sort: sort,
+        page: page,
         take: take,
       }),
     refetchOnWindowFocus: false,
@@ -130,14 +132,14 @@ export const GetAllAlbumsAPI = (payload: {
 
 export const GetInfiniteAlbumsAPI = (payload: {
   organizationId: string;
-  isPaginate: "true" | "false";
+  isPaginate: 'true' | 'false';
   search?: string;
   take: number;
   sort: SortModel;
 }) => {
   const { take, organizationId, sort, search, isPaginate } = payload;
   return useInfiniteQuery({
-    queryKey: ["albums", "infinite"],
+    queryKey: ['albums', 'infinite'],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getAlbumsAPI({

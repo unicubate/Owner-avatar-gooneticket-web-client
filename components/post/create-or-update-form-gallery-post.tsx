@@ -29,6 +29,7 @@ const schema = yup.object({
 
 type Props = {
   postId?: string;
+  albumId?: string;
   uploadImages?: any;
   post?: any;
   organizationId: string;
@@ -39,6 +40,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   post,
   organizationId,
   postId,
+  albumId,
 }) => {
   const router = useRouter();
 
@@ -78,7 +80,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   }, [post, postId, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOnePostGalleryAPI({
+  const { mutateAsync } = CreateOrUpdateOnePostGalleryAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -104,8 +106,9 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         newImageLists,
       };
 
-      await saveMutation.mutateAsync({
+      await mutateAsync({
         ...payload,
+        albumId,
         postId: post?.id,
         type: "GALLERY",
       });
@@ -172,7 +175,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       <Controller
                         name="attachmentImages"
                         control={control}
-                        render={({}) => (
+                        render={({ }) => (
                           <>
                             <div className="text-center justify-center mx-auto">
                               <Upload

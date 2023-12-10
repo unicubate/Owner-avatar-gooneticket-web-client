@@ -11,12 +11,14 @@ import { useRouter } from "next/router";
 import { UserVisitorModel } from "@/types/user.type";
 import { BiImage } from "react-icons/bi";
 import { ErrorFile } from "../ui/error-file";
+import { queyParamsFunc } from "@/utils/generate-random";
 
 type Props = {
+  albumId?: string;
   userVisitor: UserVisitorModel;
 };
 
-const TableGallery: React.FC<Props> = ({ userVisitor }) => {
+const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
   const [openModal, setOpenModal] = useState(false);
@@ -29,6 +31,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
+    albumId,
     userVisitor,
     take: 10,
     sort: "DESC",
@@ -94,7 +97,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
                     size="normal"
                     loading={false}
                     color="indigo"
-                    onClick={() => push(`/posts/create?type=gallery`)}
+                    onClick={() => push(`/posts/create?${queyParamsFunc({ type: "gallery", albumId })}`)}
                   >
                     Add Image
                   </ButtonInput>
@@ -106,7 +109,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor }) => {
                     shape="default"
                     size="normal"
                     loading={false}
-                    onClick={() => push(`/posts/create?type=album`)}
+                    onClick={() => push(`/posts/create?${queyParamsFunc({ type: "album" })}`)}
                   >
                     New Album
                   </ButtonInput>

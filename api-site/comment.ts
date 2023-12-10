@@ -1,18 +1,18 @@
-import { CommentFormModel } from "@/types/comment";
-import queryString from "query-string";
-import { PostModel, PostType, ResponsePostModel } from "@/types/post";
-import dyaxios from "@/utils/dyaxios";
-import { makeApiCall } from "@/utils/end-point";
+import { CommentFormModel } from '@/types/comment';
+import { ResponsePostModel } from '@/types/post';
+import dyaxios from '@/utils/dyaxios';
+import { makeApiCall } from '@/utils/end-point';
 import {
   ModelType,
   PaginationRequest,
   SortModel,
-} from "@/utils/pagination-item";
+} from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
+import { queyParamsFunc } from '@/utils/generate-random';
 
 export const CreateOrUpdateOneCommentAPI = ({
   onSuccess,
@@ -21,7 +21,7 @@ export const CreateOrUpdateOneCommentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["comments"];
+  const queryKey = ['comments'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -29,12 +29,12 @@ export const CreateOrUpdateOneCommentAPI = ({
       const { commentId } = payload;
       return commentId
         ? await makeApiCall({
-            action: "updateOneComment",
+            action: 'updateOneComment',
             body: payload,
             urlParams: { commentId },
           })
         : await makeApiCall({
-            action: "createOneComment",
+            action: 'createOneComment',
             body: { ...payload },
           });
     },
@@ -68,22 +68,22 @@ export const CreateOrUpdateOneCommentReplyAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["comments-replies"];
+  const queryKey = ['comments-replies'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: CommentFormModel & { parentId: string; commentId: string }
+      payload: CommentFormModel & { parentId: string; commentId: string },
     ) => {
       const { parentId, commentId } = payload;
       return commentId
         ? await makeApiCall({
-            action: "updateOneComment",
+            action: 'updateOneComment',
             body: payload,
             urlParams: { commentId },
           })
         : await makeApiCall({
-            action: "createOneCommentReply",
+            action: 'createOneCommentReply',
             body: { ...payload, parentId },
           });
     },
@@ -117,14 +117,14 @@ export const DeleteOneCommentReplyAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["comments-replies"];
+  const queryKey = ['comments-replies'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { commentId: string }) => {
       const { commentId } = payload;
       return await makeApiCall({
-        action: "deleteOneComment",
+        action: 'deleteOneComment',
         urlParams: { commentId },
       });
     },
@@ -158,14 +158,14 @@ export const DeleteOneCommentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["comments"];
+  const queryKey = ['comments'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { commentId: string }) => {
       const { commentId } = payload;
       return await makeApiCall({
-        action: "deleteOneComment",
+        action: 'deleteOneComment',
         urlParams: { commentId },
       });
     },
@@ -193,18 +193,18 @@ export const DeleteOneCommentAPI = ({
 };
 
 export const getCommentsAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
-    action: "getComments",
+    action: 'getComments',
     queryParams: payload,
   });
 };
 
 export const getCommentsRepliesAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
-  const queyParams = queryString.stringify(payload);
+  const queyParams = queyParamsFunc(payload);
   return await dyaxios.get(`/comments/replies?${queyParams}`);
 };
 
@@ -219,7 +219,7 @@ export const GetInfiniteCommentsAPI = (payload: {
   sort: SortModel;
 }) => {
   return useInfiniteQuery({
-    queryKey: ["comments", "infinite", { ...payload }],
+    queryKey: ['comments', 'infinite', { ...payload }],
     queryFn: async ({ pageParam = 1 }) =>
       await getCommentsAPI({
         ...payload,
@@ -238,7 +238,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   userVisitorId?: string;
 }) => {
   return useInfiniteQuery({
-    queryKey: ["comments-replies", "infinite", { ...payload }],
+    queryKey: ['comments-replies', 'infinite', { ...payload }],
     queryFn: async ({ pageParam = 1 }) =>
       await getCommentsRepliesAPI({
         ...payload,

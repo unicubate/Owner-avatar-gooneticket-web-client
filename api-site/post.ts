@@ -4,17 +4,17 @@ import {
   PostModel,
   PostType,
   ResponsePostModel,
-} from "@/types/post";
-import { UserVisitorModel } from "@/types/user.type";
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+} from '@/types/post';
+import { UserVisitorModel } from '@/types/user.type';
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { RcFile } from "antd/es/upload";
+} from '@tanstack/react-query';
+import { RcFile } from 'antd/es/upload';
 
 export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess,
@@ -23,51 +23,52 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["gallery-posts"];
+  const queryKey = ['gallery-posts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: PostFormModel & { postId?: string }
+      payload: PostFormModel & { postId?: string },
     ): Promise<any> => {
       const { postId, newImageLists } = payload;
       let data = new FormData();
-      data.append("title", payload.title ?? "");
-      data.append("description", payload.description ?? "");
-      data.append("whoCanSee", `${payload.whoCanSee}`);
-      data.append("type", payload.type ?? "");
-      data.append("categoryId", payload.categoryId ?? "");
-      data.append("allowDownload", `${payload.allowDownload}`);
+      data.append('title', payload.title ?? '');
+      data.append('description', payload.description ?? '');
+      data.append('whoCanSee', `${payload.whoCanSee}`);
+      data.append('type', payload.type ?? '');
+      data.append('albumId', payload.albumId ?? '');
+      data.append('categoryId', payload.categoryId ?? '');
+      data.append('allowDownload', `${payload.allowDownload}`);
 
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
-          data.append("attachmentFiles", file?.originFileObj as RcFile);
+          data.append('attachmentFiles', file?.originFileObj as RcFile);
         });
 
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
-          data.append("attachmentImages", file?.originFileObj as RcFile);
+          data.append('attachmentImages', file?.originFileObj as RcFile);
         });
 
       if (postId) {
         const result = await makeApiCall({
-          action: "updateOneUpload",
+          action: 'updateOneUpload',
           body: { newImageLists },
-          queryParams: { uploadableId: postId, model: "POST" },
+          queryParams: { uploadableId: postId, model: 'POST' },
         });
 
         if (result) {
           await makeApiCall({
-            action: "updateOnePost",
+            action: 'updateOnePost',
             body: data,
             urlParams: { postId },
           });
         }
 
-        return "ok";
+        return 'ok';
       } else {
         return await makeApiCall({
-          action: "createOnePostGallery",
+          action: 'createOnePostGallery',
           body: data,
         });
       }
@@ -102,54 +103,54 @@ export const CreateOrUpdateOnePostAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["posts"];
+  const queryKey = ['posts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: PostFormModel & { postId?: string }
+      payload: PostFormModel & { postId?: string },
     ): Promise<any> => {
       const { postId, newImageLists, newFileLists } = payload;
       let data = new FormData();
-      data.append("type", `${payload.type ?? ""}`);
-      data.append("title", `${payload.title ?? ""}`);
-      data.append("whoCanSee", `${payload.whoCanSee}`);
-      data.append("urlMedia", `${payload.urlMedia ?? ""}`);
-      data.append("categoryId", `${payload.categoryId ?? ""}`);
-      data.append("albumId", `${payload.albumId ?? ""}`);
-      data.append("allowDownload", `${payload.allowDownload ?? ""}`);
-      data.append("enableUrlMedia", `${payload.enableUrlMedia}`);
-      data.append("description", `${payload.description ?? ""}`);
+      data.append('type', `${payload.type ?? ''}`);
+      data.append('title', `${payload.title ?? ''}`);
+      data.append('whoCanSee', `${payload.whoCanSee}`);
+      data.append('urlMedia', `${payload.urlMedia ?? ''}`);
+      data.append('categoryId', `${payload.categoryId ?? ''}`);
+      data.append('albumId', `${payload.albumId ?? ''}`);
+      data.append('allowDownload', `${payload.allowDownload ?? ''}`);
+      data.append('enableUrlMedia', `${payload.enableUrlMedia}`);
+      data.append('description', `${payload.description ?? ''}`);
 
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
-          data.append("attachmentFiles", file?.originFileObj as RcFile);
+          data.append('attachmentFiles', file?.originFileObj as RcFile);
         });
 
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
-          data.append("attachmentImages", file?.originFileObj as RcFile);
+          data.append('attachmentImages', file?.originFileObj as RcFile);
         });
 
       if (postId) {
         const result = await makeApiCall({
-          action: "updateOneUpload",
+          action: 'updateOneUpload',
           body: { newImageLists, newFileLists },
-          queryParams: { uploadableId: postId, model: "POST" },
+          queryParams: { uploadableId: postId, model: 'POST' },
         });
 
         if (result) {
           await makeApiCall({
-            action: "updateOnePost",
+            action: 'updateOnePost',
             body: data,
             urlParams: { postId },
           });
         }
 
-        return "Ok";
+        return 'Ok';
       } else {
         return await makeApiCall({
-          action: "createOnePost",
+          action: 'createOnePost',
           body: data,
         });
       }
@@ -184,14 +185,14 @@ export const DeleteOnePostAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["posts"];
+  const queryKey = ['posts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { postId: string }) => {
       const { postId } = payload;
       return await makeApiCall({
-        action: "deleteOnePost",
+        action: 'deleteOnePost',
         urlParams: { postId },
       });
     },
@@ -222,32 +223,32 @@ export const getCategoriesAPI = async (payload?: {
   organizationId: string;
 }): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
-    action: "getCategories",
+    action: 'getCategories',
     queryParams: payload,
   });
 };
 
 export const createOnUploadPostAPI = async (
-  payload: any
+  payload: any,
 ): Promise<{ data: { urlFile: string } }> => {
   return await makeApiCall({
-    action: "createOnUploadPost",
+    action: 'createOnUploadPost',
     body: payload,
   });
 };
 
 export const getOnePostAPI = async (
-  payload: GetOnPostQueryModel
+  payload: GetOnPostQueryModel,
 ): Promise<{ data: PostModel }> => {
   return await makeApiCall({
-    action: "getOnePost",
+    action: 'getOnePost',
     queryParams: payload,
   });
 };
 
 export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["post", { ...payload }],
+    queryKey: ['post', { ...payload }],
     queryFn: async () => await getOnePostAPI({ ...payload }),
     enabled: !!payload,
     refetchOnWindowFocus: true,
@@ -258,15 +259,15 @@ export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
 
 export const getPostsAPI = async (
   payload: {
-    albumId?: string; 
+    albumId?: string;
     userVisitorId?: string;
     type?: PostType;
     status?: string;
     typeIds?: string[];
-  } & PaginationRequest
+  } & PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
-    action: "getPosts",
+    action: 'getPosts',
     queryParams: payload,
   });
 };
@@ -303,10 +304,10 @@ export const GetInfinitePostsAPI = (payload: {
 };
 
 export const getFollowsPostsAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
   return await makeApiCall({
-    action: "getFollowsPosts",
+    action: 'getFollowsPosts',
     queryParams: payload,
   });
 };
@@ -317,7 +318,7 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
 }) => {
   const { take, sort } = payload;
   return useInfiniteQuery({
-    queryKey: ["posts-follows", "infinite", { payload }],
+    queryKey: ['posts-follows', 'infinite', { payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getFollowsPostsAPI({

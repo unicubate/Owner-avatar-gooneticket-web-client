@@ -26,7 +26,7 @@ type Props = {
 const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
   album,
 }) => {
-  const router = useRouter();
+  const { back, push } = useRouter();
   const {
     control,
     setValue,
@@ -63,7 +63,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation({
+      const { data: result } = await saveMutation({
         ...payload,
         albumId: album?.id,
       });
@@ -75,7 +75,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
         gravity: "top",
         position: "center",
       });
-      // setShowModal(false);
+      push(`/posts/create?type=gallery&albumId=${result?.id}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -109,7 +109,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
                       <Alert message={hasErrors} type="error" showIcon />
                     </div>
                   ) : null}
-               
+
 
                   <div className="mt-4">
                     <TextInput
@@ -140,7 +140,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
                       shape="default"
                       size="large"
                       loading={loading}
-                      onClick={() => router.back()}
+                      onClick={() => back()}
                     >
                       Cancel
                     </ButtonInput>

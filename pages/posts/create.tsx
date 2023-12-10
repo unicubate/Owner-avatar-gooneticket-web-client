@@ -12,7 +12,7 @@ import { CreateOrUpdateFormAlbumPost } from "@/components/post/create-or-update-
 const PostsCreate = () => {
   const { organizationId } = useAuth() as any;
   const { query } = useRouter();
-  const { type } = query;
+  const { type, albumId } = query;
 
   return (
     <>
@@ -25,7 +25,7 @@ const PostsCreate = () => {
 
             {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
 
-            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} /> : null}
+            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} albumId={albumId as string} /> : null}
 
             {organizationId && type === "album" ? <CreateOrUpdateFormAlbumPost organizationId={organizationId} /> : null}
           </div>
