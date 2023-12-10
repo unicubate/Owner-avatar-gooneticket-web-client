@@ -6,6 +6,7 @@ import { GetInfinitePaymentsAPI } from "@/api-site/payment";
 import { ListPayments } from "../payment/list-payments";
 import { PaymentItemModel } from "@/types/payment";
 import { CreatePaymentPhoneFormCardUser } from "./create-payment-phone-form-card-user";
+import { ErrorFile } from "../ui/error-file";
 
 const PayoutFormUser: React.FC = () => {
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
@@ -25,12 +26,16 @@ const PayoutFormUser: React.FC = () => {
 
   const dataTablePayments = isLoadingPayments ? (
     <Skeleton
-      className="mt-4"
+      className="mt-2 py-2"
       loading={isLoadingPayments}
       paragraph={{ rows: 1 }}
     />
   ) : isErrorPayments ? (
-    <strong>Error find data please try again...</strong>
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
   ) : dataPayments?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
