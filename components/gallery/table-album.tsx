@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Fragment, useState } from "react";
-import { useInView } from "react-intersection-observer";
-import { LoadingFile } from "@/components/ui/loading-file";
-import { useRouter } from "next/router";
-import { UserVisitorModel } from "@/types/user.type";
-import { ErrorFile } from "../ui/error-file";
-import Link from "next/link";
-import { GetInfiniteAlbumsAPI } from "@/api-site/album";
-import { AlbumModel } from "@/types/album";
+import { Fragment, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/router';
+import { UserVisitorModel } from '@/types/user.type';
+import { ErrorFile } from '../ui/error-file';
+import Link from 'next/link';
+import { GetInfiniteAlbumsAPI } from '@/api-site/album';
+import { AlbumModel } from '@/types/album';
+import ContentLoader from 'react-content-loader';
+import { Avatar } from 'antd';
+import { capitalizeOneFirstLetter } from '@/utils/utils';
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -26,12 +28,14 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
   } = GetInfiniteAlbumsAPI({
     organizationId: userVisitor?.organizationId,
     take: 10,
-    sort: "DESC",
-    isPaginate: "true",
+    sort: 'DESC',
+    isPaginate: 'true',
   });
 
   const dataTableAlbum = isLoadingAlbum ? (
-    <LoadingFile />
+    <ContentLoader width={600} height={65} className="items-center">
+      <rect x="10" y="10" rx="0" ry="0" width="600" height="60" />
+    </ContentLoader>
   ) : isErrorAlbum ? (
     <ErrorFile
       status="error"
@@ -48,14 +52,22 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
           <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
             <div className="p-4">
               <div className="flex items-center">
-
+                <Avatar
+                  shape="square"
+                  className={`bg-gray-500`}
+                  size="large"
+                  alt={`${item?.name ?? ''}`}
+                >
+                  {capitalizeOneFirstLetter(String(item?.name))}
+                </Avatar>
                 <div className="flex-1 ml-4">
                   <Link href={`/gallery/album/${item?.id}`}>
                     <p className="text-base font-bold">{item?.name}</p>
                   </Link>
-                  <p className="mt-1 text-sm font-medium text-gray-500">0 Image</p>
+                  <p className="mt-1 text-sm font-medium text-gray-500">
+                    {item?.totalPost ? `${item?.totalPost} Images` : ''}
+                  </p>
                 </div>
-
               </div>
             </div>
           </div>

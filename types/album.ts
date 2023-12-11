@@ -12,6 +12,7 @@ export type AlbumModel = {
   slug: string;
   userId: string;
   organizationId: string;
+  totalPost?: number;
 };
 
 export type AlbumFormModel = {
