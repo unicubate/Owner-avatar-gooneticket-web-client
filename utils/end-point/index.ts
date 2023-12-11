@@ -194,6 +194,7 @@ export const apiEndpoints: ClientApiMethods = {
     `${baseUrl}/payments/resend-code-verify-phone`,
   ),
   verifyCodeOnePaymentsCreate: POST(`${baseUrl}/payments/code-verify-phone`),
+  deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
 
   /****************** Posts route */
   createOnePostGallery: POST(`${baseUrl}/posts/galleries`),

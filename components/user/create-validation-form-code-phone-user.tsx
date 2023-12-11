@@ -7,9 +7,7 @@ import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 import { CreateOnPaymentPI } from "@/api-site/payment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { PhoneNumberInput } from "../ui";
 import { SubmitHandler } from "react-hook-form";
-import Link from "next/link";
 
 const schema = yup.object({
   code: yup.string().min(5).max(8).required(),

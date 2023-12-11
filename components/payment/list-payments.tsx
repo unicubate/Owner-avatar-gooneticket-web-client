@@ -20,7 +20,7 @@ import { FcSmartphoneTablet } from "react-icons/fc";
 import { truncateInputCard } from "@/utils/utils";
 import { useRouter } from "next/router";
 import { CreateValidationFormCodePhoneUser } from "../user/create-validation-form-code-phone-user";
-import { CreateOnPaymentPI } from "@/api-site/payment";
+import { CreateOnPaymentPI, DeleteOnePaymentAPI } from "@/api-site/payment";
 
 const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
   item,
@@ -33,7 +33,12 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
   //   onError: (error?: any) => {},
   // });
 
-  const { mutateAsync } = CreateOnPaymentPI({
+  const { mutateAsync: createOnMutate } = CreateOnPaymentPI({
+    onSuccess: () => { },
+    onError: (error?: any) => { },
+  });
+
+  const { mutateAsync: deleteOnMutate } = DeleteOnePaymentAPI({
     onSuccess: () => { },
     onError: (error?: any) => { },
   });
@@ -52,13 +57,13 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
       if (result.value) {
         //Envoyer la requet au serve
         try {
-          // await saveMutation.mutateAsync({ discountId: item?.id });
-          // AlertSuccessNotification({
-          //   text: "Discount deleted successfully",
-          //   className: "info",
-          //   gravity: "top",
-          //   position: "center",
-          // });
+          await deleteOnMutate({ paymentId: item?.id });
+          AlertSuccessNotification({
+            text: "Payment deleted successfully",
+            className: "info",
+            gravity: "top",
+            position: "center",
+          });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
@@ -73,7 +78,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
 
   const resendItem = async (item: any) => {
     try {
-      await mutateAsync({
+      await createOnMutate({
         data: { phone: item?.phone, organizationId: item?.organizationId },
         paymentModel: 'RESEND-VERIFY-CODE-PHONE',
       });

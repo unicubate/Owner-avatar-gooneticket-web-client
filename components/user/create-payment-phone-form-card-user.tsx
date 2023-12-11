@@ -102,7 +102,7 @@ const CreatePaymentPhoneFormCardUser: React.FC<{
                   <PhoneNumberInput
                     control={control}
                     name="phone"
-                    placeholder="+ 237 xxx xxx xxx"
+                    placeholder="xxx xxx xxx"
                     errors={errors}
                     required={true}
                   />

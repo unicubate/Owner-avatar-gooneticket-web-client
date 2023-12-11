@@ -111,6 +111,47 @@ export const CreateOnPaymentPI = ({
   return result;
 };
 
+export const DeleteOnePaymentAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ['payments'];
+  const queryClient = useQueryClient();
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { paymentId: string }) => {
+      const { paymentId } = payload;
+      return await makeApiCall({
+        action: 'deleteOnePayment',
+        urlParams: { paymentId },
+      });
+    },
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+
+  return result;
+};
+
 export const getPaymentsAPI = async (
   payload: PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
