@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { Button, Image } from "antd";
+import { Image } from "antd";
 import { HtmlParser } from "@/utils/html-parser";
 import Link from "next/link";
 import { ProductModel } from "@/types/product";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import { ReadMore } from "@/utils/read-more";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { BiCart } from "react-icons/bi";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-  makeApiCall,
 } from "@/utils";
 import { CreateOrUpdateOneCartAPI } from "@/api-site/cart";
-import { useMutation } from "@tanstack/react-query";
 import { LoginModal } from "../auth-modal/login-modal";
 import { useAuth } from "../util/context-user";
 

@@ -69,7 +69,7 @@ const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
                   className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
                     isActive
                       ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                      : `border-transparent text-gray-500 dark:text-gray-500 hover:border-${user?.profile?.color}-300`
+                      : `border-transparent text-gray-500 dark:text-gray-500 hover:border-gray-300`
                   } `}
                 >
                   {item?.icon}
