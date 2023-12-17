@@ -1,31 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { ButtonInput } from "@/components/ui/button-input";
-import { LayoutSite } from "@/components/layout-site";
-import { GetStaticPropsContext } from "next";
-import { useTranslations } from "next-intl";
+import React, { useState } from 'react';
+import { ButtonInput } from '@/components/ui/button-input';
+import { LayoutSite } from '@/components/layout-site';
+import { GetStaticPropsContext } from 'next';
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
-  const t = useTranslations("home_page");
+  const t = useTranslations('home_page');
 
   return (
     <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-10">
-        <div className="absolute inset-0">
+        {/* <div className="absolute inset-0">
           <img
             className="object-cover w-full h-full"
             src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/grid-pattern.png"
             alt=""
           />
-        </div>
+        </div> */}
 
         <div className="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-2xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
-              {t("title")}
+            <h1 className="text-2xl font-bold sm:text-4xl lg:text-5xl">
+              {t('title')}
             </h1>
             <p className="max-w-md mx-auto mt-6 text-base font-normal leading-7 text-gray-500">
-              {t("subTitle")}
+              {t('subTitle')}
             </p>
           </div>
           <div className="max-w-xl mx-auto text-center">
@@ -36,12 +36,12 @@ export default function Home() {
                   name=""
                   id=""
                   placeholder="yourname"
-                  className="block w-full px-4 py-4 text-gray-900 placeholder-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
+                  className="block w-full px-4 py-4 placeholder-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
                 />
 
                 <div className="mt-4 sm:mt-0 sm:absolute sm:inset-y-0 sm:right-0 sm:flex sm:items-center sm:pr-2">
                   <ButtonInput
-                    shape="round"
+                    shape="default"
                     type="button"
                     size="large"
                     loading={false}
@@ -53,25 +53,11 @@ export default function Home() {
               </div>
             </form>
 
-            <ul className="flex items-center justify-center mt-6 space-x-6 sm:space-x-8">
+            <ul className="flex items-center justify-center mt-4 space-x-6 sm:space-x-8">
               <li className="flex items-center">
-                <svg
-                  className="w-5 h-5 mr-2 text-gray-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span className="text-xs font-medium text-gray-900 sm:text-sm">
-                  {" "}
-                  It’s free, and takes less than a minute.{" "}
+                <span className="text-xs font-medium sm:text-sm">
+                  {' '}
+                  It’s free, and takes less than a minute.{' '}
                 </span>
               </li>
             </ul>
@@ -94,14 +80,14 @@ export default function Home() {
                   <div className="flex-1 ml-4 lg:ml-6">
                     <p className="text-xs font-medium text-gray-900 lg:text-sm">
                       <a href="#" title="" className="">
-                        {" "}
-                        Growth{" "}
+                        {' '}
+                        Growth{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
                       <a href="#" title="" className="">
-                        {" "}
-                        How a visual artist redefines success in graphic design{" "}
+                        {' '}
+                        How a visual artist redefines success in graphic design{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -128,14 +114,14 @@ export default function Home() {
                   <div className="flex-1 ml-4 lg:ml-6">
                     <p className="text-xs font-medium text-gray-900 lg:text-sm">
                       <a href="#" title="" className="">
-                        {" "}
-                        Growth{" "}
+                        {' '}
+                        Growth{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
                       <a href="#" title="" className="">
-                        {" "}
-                        How a visual artist redefines success in graphic design{" "}
+                        {' '}
+                        How a visual artist redefines success in graphic design{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -162,14 +148,14 @@ export default function Home() {
                   <div className="flex-1 ml-4 lg:ml-6">
                     <p className="text-xs font-medium text-gray-900 lg:text-sm">
                       <a href="#" title="" className="">
-                        {" "}
-                        Growth{" "}
+                        {' '}
+                        Growth{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
                       <a href="#" title="" className="">
-                        {" "}
-                        How a visual artist redefines success in graphic design{" "}
+                        {' '}
+                        How a visual artist redefines success in graphic design{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -196,14 +182,14 @@ export default function Home() {
                   <div className="flex-1 ml-4 lg:ml-6">
                     <p className="text-xs font-medium text-gray-900 lg:text-sm">
                       <a href="#" title="" className="">
-                        {" "}
-                        Growth{" "}
+                        {' '}
+                        Growth{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
                       <a href="#" title="" className="">
-                        {" "}
-                        How a visual artist redefines success in graphic design{" "}
+                        {' '}
+                        How a visual artist redefines success in graphic design{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -230,14 +216,14 @@ export default function Home() {
                   <div className="flex-1 ml-4 lg:ml-6">
                     <p className="text-xs font-medium text-gray-900 lg:text-sm">
                       <a href="#" title="" className="">
-                        {" "}
-                        Growth{" "}
+                        {' '}
+                        Growth{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
                       <a href="#" title="" className="">
-                        {" "}
-                        How a visual artist redefines success in graphic design{" "}
+                        {' '}
+                        How a visual artist redefines success in graphic design{' '}
                       </a>
                     </p>
                     <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -246,6 +232,67 @@ export default function Home() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+              Clarity helps to grow
+            </h2>
+            <p className="mt-4 text-base font-normal leading-7 text-gray-600 lg:text-lg lg:mt-6 lg:leading-8">
+              Clarity gives you the blocks & components you need to create a
+              truly professional website, landing page or admin panel for your
+              SaaS.
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto mt-12 sm:mt-16">
+            <nav className="flex flex-col items-center justify-center space-y-5 text-center sm:flex-row sm:space-y-0 sm:space-x-10 md:space-x-16">
+              <a
+                href="#"
+                title=""
+                className="pb-2 text-xs font-semibold tracking-widest text-blue-600 uppercase transition-all duration-200 border-b border-blue-600"
+              >
+                {' '}
+                One click analytics{' '}
+              </a>
+
+              <a
+                href="#"
+                title=""
+                className="pb-2 text-xs font-semibold tracking-widest text-gray-400 uppercase transition-all duration-200 border-b border-transparent hover:text-gray-900"
+              >
+                {' '}
+                Create Products{' '}
+              </a>
+
+              <a
+                href="#"
+                title=""
+                className="pb-2 text-xs font-semibold tracking-widest text-gray-400 uppercase transition-all duration-200 border-b border-transparent hover:text-gray-900"
+              >
+                {' '}
+                Sales Alert{' '}
+              </a>
+
+              <a
+                href="#"
+                title=""
+                className="pb-2 text-xs font-semibold tracking-widest text-gray-400 uppercase transition-all duration-200 border-b border-transparent hover:text-gray-900"
+              >
+                {' '}
+                File Storages{' '}
+              </a>
+            </nav>
+
+            <div className="mt-6 sm:mt-8">
+              <img
+                className="w-full shadow-2xl rounded-2xl"
+                src="https://landingfoliocom.imgix.net/store/collection/saasui/images/features/4/dashboard-mockup.svg"
+                alt=""
+              />
             </div>
           </div>
         </div>
@@ -267,7 +314,7 @@ export default function Home() {
         </div>
       </section> */}
 
-      <section className="fixed max-w-2xl p-4 mx-auto bg-white border border-gray-200 md:gap-x-4 left-12 bottom-16 dark:bg-gray-900 md:flex md:items-center dark:border-gray-700 rounded-2xl">
+      {/* <section className="fixed max-w-2xl p-4 mx-auto bg-white border border-gray-200 md:gap-x-4 left-12 bottom-16 dark:bg-gray-900 md:flex md:items-center dark:border-gray-700 rounded-2xl">
         <div className="flex items-center gap-x-4">
           <span className="inline-flex p-2 text-blue-500 rounded-lg shrink-0 dark:bg-gray-800 bg-blue-100/80">
             <svg
@@ -303,7 +350,7 @@ export default function Home() {
             Accept All Cookies
           </button>
         </div>
-      </section>
+      </section> */}
     </LayoutSite>
   );
 }
