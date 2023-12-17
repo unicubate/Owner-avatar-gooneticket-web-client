@@ -138,6 +138,8 @@ const AudioPlayerInput: React.FC<Props> = ({
             </>
           ),
         }}
+        defaultCurrentTime="00:00"
+        defaultDuration="00:00"
         customVolumeControls={[]}
         customAdditionalControls={[]}
         className="relative rounded-lg"
