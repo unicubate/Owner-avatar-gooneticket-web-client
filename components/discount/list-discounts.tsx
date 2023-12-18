@@ -62,16 +62,16 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
       <div key={index} className="py-4">
         <div className="flex items-center">
           <>
-            <p className="text-sm font-bold text-gray-900">
+            <p className="text-sm font-bold">
               {item?.percent}% Off Commissions
             </p>
-            <p className="mt-1 ml-2 text-sm font-medium text-gray-500">
+            <p className="mt-1 ml-2 text-sm font-medium">
               {item?.code}
             </p>
           </>
 
           <div className="ml-auto">
-            <p className="mt-1 text-sm font-medium text-gray-500">
+            <p className="mt-1 text-sm font-medium">
               {item?.enableExpiredAt
                 ? `Ends Midnight ${formateDMYHH(
                     item?.expiredAt,

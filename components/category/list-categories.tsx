@@ -61,10 +61,10 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
     <>
       <div key={index} className="py-4">
         <div className="flex items-center">
-          <p className="text-sm font-bold text-gray-900">{item?.name}</p>
+          <p className="text-sm font-bold">{item?.name}</p>
 
           <div className="ml-auto">
-            <p className="mt-1 text-sm font-medium text-gray-500">
+            <p className="mt-1 text-sm font-medium">
               {formateDMYHH(item?.createdAt as Date, locale as string)}
             </p>
           </div>
