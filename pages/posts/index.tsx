@@ -126,7 +126,9 @@ const Posts = () => {
               >
                 <div className="px-4 py-8">
                   <div className="sm:flex sm:items-center sm:justify-between">
-                    <div className="mt-4 sm:mt-0"></div>
+                    <div className="mt-4 sm:mt-0">
+                      <p className="text-lg font-bold">Posts</p>
+                    </div>
                     <div className="mt-4 sm:mt-0">
                       <Input
                         placeholder="Search by email, name"
