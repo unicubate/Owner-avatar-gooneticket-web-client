@@ -2,16 +2,16 @@ import {
   ProductFormModel,
   ProductModel,
   ResponseProductModel,
-} from "@/types/product";
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+} from '@/types/product';
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { RcFile } from "antd/es/upload";
+} from '@tanstack/react-query';
+import { RcFile } from 'antd/es/upload';
 
 export const CreateOrUpdateOneProductAPI = ({
   onSuccess,
@@ -20,58 +20,58 @@ export const CreateOrUpdateOneProductAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["products"];
+  const queryKey = ['products'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: ProductFormModel & { productId?: string }
+      payload: ProductFormModel & { productId?: string },
     ): Promise<any> => {
       const { productId, newImageLists, newFileLists } = payload;
       let data = new FormData();
-      data.append("title", `${payload.title ?? ""}`);
-      data.append("price", `${payload.price ?? ""}`);
-      data.append("urlMedia", `${payload.urlMedia ?? ""}`);
-      data.append("limitSlot", `${payload.limitSlot ?? ""}`);
-      data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
-      data.append("urlRedirect", `${payload.urlRedirect ?? ""}`);
-      data.append("productType", `${payload.productType ?? ""}`);
-       data.append("categoryId", `${payload.categoryId ?? ""}`);
-      data.append("enableUrlRedirect", `${payload.enableUrlRedirect ?? ""}`);
-      data.append("enableChooseQuantity", `${payload.enableChooseQuantity}`);
+      data.append('title', `${payload.title ?? ''}`);
+      data.append('price', `${payload.price ?? ''}`);
+      data.append('urlMedia', `${payload.urlMedia ?? ''}`);
+      data.append('limitSlot', `${payload.limitSlot ?? ''}`);
+      data.append('enableLimitSlot', `${payload.enableLimitSlot ?? ''}`);
+      data.append('urlRedirect', `${payload.urlRedirect ?? ''}`);
+      data.append('productType', `${payload.productType ?? ''}`);
+      data.append('categoryId', `${payload.categoryId ?? ''}`);
+      data.append('enableUrlRedirect', `${payload.enableUrlRedirect ?? ''}`);
+      data.append('enableChooseQuantity', `${payload.enableChooseQuantity}`);
       data.append(
-        "messageAfterPayment",
-        `${payload.messageAfterPayment ?? ""}`
+        'messageAfterPayment',
+        `${payload.messageAfterPayment ?? ''}`,
       );
-      data.append("enableDiscount", `${payload.enableDiscount ?? ""}`);
-      data.append("discountId", `${payload.discountId ?? ""}`);
-      data.append("description", `${payload.description ?? ""}`);
-      data.append("whoCanSee", `${payload.whoCanSee ?? ""}`);
+      data.append('enableDiscount', `${payload.enableDiscount ?? ''}`);
+      data.append('discountId', `${payload.discountId ?? ''}`);
+      data.append('description', `${payload.description ?? ''}`);
+      data.append('whoCanSee', `${payload.whoCanSee ?? ''}`);
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
-          data.append("attachmentImages", file?.originFileObj as RcFile);
+          data.append('attachmentImages', file?.originFileObj as RcFile);
         });
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
-          data.append("attachmentFiles", file?.originFileObj as RcFile);
+          data.append('attachmentFiles', file?.originFileObj as RcFile);
         });
       if (productId) {
         const result = await makeApiCall({
-          action: "updateOneUpload",
+          action: 'updateOneUpload',
           body: { newImageLists, newFileLists },
-          queryParams: { uploadableId: productId, model: "PRODUCT" },
+          queryParams: { uploadableId: productId, model: 'PRODUCT' },
         });
         if (result) {
           await makeApiCall({
-            action: "updateOneProduct",
+            action: 'updateOneProduct',
             body: data,
             urlParams: { productId },
           });
         }
-        return "Ok";
+        return 'Ok';
       } else {
         return await makeApiCall({
-          action: "createOneProduct",
+          action: 'createOneProduct',
           body: data,
         });
       }
@@ -106,7 +106,7 @@ export const DeleteOneProductAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["products"];
+  const queryKey = ['products'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -114,7 +114,7 @@ export const DeleteOneProductAPI = ({
       const { productId } = payload;
 
       return await makeApiCall({
-        action: "deleteOneProduct",
+        action: 'deleteOneProduct',
         urlParams: { productId },
       });
     },
@@ -148,10 +148,10 @@ export const GetOneProductAPI = (payload: {
 }) => {
   const { productId, organizationId, productSlug } = payload;
   const { data, isError, isLoading, isPending, status } = useQuery({
-    queryKey: ["product", payload],
+    queryKey: ['product', payload],
     queryFn: async () =>
       await makeApiCall({
-        action: "getOneProduct",
+        action: 'getOneProduct',
         queryParams: { productId, organizationId, productSlug },
       }),
     // staleTime: 60_000,
@@ -171,10 +171,10 @@ export const getProductsAPI = async (
   payload: {
     organizationId: string;
     status?: string;
-  } & PaginationRequest
+  } & PaginationRequest,
 ): Promise<{ data: ResponseProductModel }> => {
   return await makeApiCall({
-    action: "getProducts",
+    action: 'getProducts',
     queryParams: payload,
   });
 };
@@ -188,7 +188,7 @@ export const GetInfiniteProductsAPI = (payload: {
 }) => {
   const { organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey: [...queryKey, { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getProductsAPI({

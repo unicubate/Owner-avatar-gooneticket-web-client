@@ -1,16 +1,16 @@
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 import {
   CategoryFormModel,
   CategoryModel,
   ResponseCategoryModel,
-} from "@/types/category";
+} from '@/types/category';
 
 export const CreateOrUpdateOneCategoryAPI = ({
   onSuccess,
@@ -19,7 +19,7 @@ export const CreateOrUpdateOneCategoryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["categories"];
+  const queryKey = ['categories'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -27,12 +27,12 @@ export const CreateOrUpdateOneCategoryAPI = ({
       const { categoryId } = payload;
       return categoryId
         ? await makeApiCall({
-            action: "updateOneCategory",
+            action: 'updateOneCategory',
             body: payload,
             urlParams: { categoryId },
           })
         : await makeApiCall({
-            action: "createOneCategory",
+            action: 'createOneCategory',
             body: { ...payload },
           });
     },
@@ -66,14 +66,14 @@ export const DeleteOneCategoryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["categories"];
+  const queryKey = ['categories'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { categoryId: string }) => {
       const { categoryId } = payload;
       return await makeApiCall({
-        action: "deleteOneCategory",
+        action: 'deleteOneCategory',
         urlParams: { categoryId },
       });
     },
@@ -101,17 +101,17 @@ export const DeleteOneCategoryAPI = ({
 };
 
 export const getCategoriesAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponseCategoryModel }> => {
   return await makeApiCall({
-    action: "getCategories",
+    action: 'getCategories',
     queryParams: payload,
   });
 };
 
 export const GetAllCategoriesAPI = (payload: {
   organizationId: string;
-  isPaginate: "true" | "false";
+  isPaginate: 'true' | 'false';
   take: number;
   sort: SortModel;
   queryKey: string[];
@@ -134,14 +134,14 @@ export const GetAllCategoriesAPI = (payload: {
 
 export const GetInfiniteCategoriesAPI = (payload: {
   organizationId: string;
-  isPaginate: "true" | "false";
+  isPaginate: 'true' | 'false';
   search?: string;
   take: number;
   sort: SortModel;
 }) => {
   const { take, organizationId, sort, search, isPaginate } = payload;
   return useInfiniteQuery({
-    queryKey: ["categories", "infinite"],
+    queryKey: ['categories', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getCategoriesAPI({

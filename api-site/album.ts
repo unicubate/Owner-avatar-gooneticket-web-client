@@ -139,7 +139,7 @@ export const GetInfiniteAlbumsAPI = (payload: {
 }) => {
   const { take, organizationId, sort, search, isPaginate } = payload;
   return useInfiniteQuery({
-    queryKey: ['albums', 'infinite'],
+    queryKey: ['albums', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getAlbumsAPI({

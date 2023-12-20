@@ -2,16 +2,16 @@ import {
   CommissionFormModel,
   CommissionModel,
   ResponseCommissionModel,
-} from "@/types/commission";
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+} from '@/types/commission';
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { RcFile } from "antd/es/upload";
+} from '@tanstack/react-query';
+import { RcFile } from 'antd/es/upload';
 
 export const CreateOrUpdateOneCommissionAPI = ({
   onSuccess,
@@ -20,50 +20,50 @@ export const CreateOrUpdateOneCommissionAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["commissions"];
+  const queryKey = ['commissions'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: CommissionFormModel & { commissionId?: string }
+      payload: CommissionFormModel & { commissionId?: string },
     ) => {
       const { commissionId, newImageLists } = payload;
       let data = new FormData();
-      data.append("title", `${payload.title ?? ""}`);
-      data.append("price", `${payload.price ?? ""}`);
-      data.append("urlMedia", `${payload.urlMedia ?? ""}`);
-      data.append("enableLimitSlot", `${payload.enableLimitSlot ?? ""}`);
-      data.append("limitSlot", `${payload.limitSlot ?? ""}`);
-      data.append("description", `${payload.description ?? ""}`);
+      data.append('title', `${payload.title ?? ''}`);
+      data.append('price', `${payload.price ?? ''}`);
+      data.append('urlMedia', `${payload.urlMedia ?? ''}`);
+      data.append('enableLimitSlot', `${payload.enableLimitSlot ?? ''}`);
+      data.append('limitSlot', `${payload.limitSlot ?? ''}`);
+      data.append('description', `${payload.description ?? ''}`);
       data.append(
-        "messageAfterPayment",
-        `${payload.messageAfterPayment ?? ""}`
+        'messageAfterPayment',
+        `${payload.messageAfterPayment ?? ''}`,
       );
 
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
-          data.append("attachmentImages", file?.originFileObj as RcFile);
+          data.append('attachmentImages', file?.originFileObj as RcFile);
         });
 
       if (commissionId) {
         const result = await makeApiCall({
-          action: "updateOneUpload",
+          action: 'updateOneUpload',
           body: { newImageLists },
-          queryParams: { uploadableId: commissionId, model: "COMMISSION" },
+          queryParams: { uploadableId: commissionId, model: 'COMMISSION' },
         });
 
         if (result) {
           await makeApiCall({
-            action: "updateOneCommission",
+            action: 'updateOneCommission',
             body: data,
             urlParams: { commissionId },
           });
         }
 
-        return "ok";
+        return 'ok';
       } else {
         return await makeApiCall({
-          action: "createOneCommission",
+          action: 'createOneCommission',
           body: data,
         });
       }
@@ -98,14 +98,14 @@ export const DeleteOneCommissionAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["commissions"];
+  const queryKey = ['commissions'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { commissionId: string }) => {
       const { commissionId } = payload;
       return await makeApiCall({
-        action: "deleteOneCommission",
+        action: 'deleteOneCommission',
         urlParams: { commissionId },
       });
     },
@@ -137,10 +137,10 @@ export const GetOneCommissionAPI = (payload: {
   organizationId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["commission", { ...payload }],
+    queryKey: ['commission', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: "getOneCommission",
+        action: 'getOneCommission',
         queryParams: payload,
       }),
     refetchOnWindowFocus: true,
@@ -152,10 +152,10 @@ export const GetOneCommissionAPI = (payload: {
 export const getCommissionsAPI = async (
   payload: {
     status?: string;
-  } & PaginationRequest
+  } & PaginationRequest,
 ): Promise<{ data: ResponseCommissionModel }> => {
   return await makeApiCall({
-    action: "getCommissions",
+    action: 'getCommissions',
     queryParams: payload,
   });
 };
@@ -169,7 +169,7 @@ export const GetInfiniteCommissionsAPI = (payload: {
 }) => {
   const { organizationId, take, sort, status, queryKey } = payload;
   return useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey: [...queryKey, { organizationId, take, sort, status }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getCommissionsAPI({

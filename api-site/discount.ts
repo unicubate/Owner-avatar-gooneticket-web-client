@@ -1,16 +1,16 @@
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
+} from '@tanstack/react-query';
 import {
   DiscountFormModel,
   DiscountModel,
   ResponseDiscountModel,
-} from "@/types/discount";
+} from '@/types/discount';
 
 export const CreateOrUpdateOneDiscountAPI = ({
   onSuccess,
@@ -19,7 +19,7 @@ export const CreateOrUpdateOneDiscountAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["discounts"];
+  const queryKey = ['discounts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -27,12 +27,12 @@ export const CreateOrUpdateOneDiscountAPI = ({
       const { discountId } = payload;
       return discountId
         ? await makeApiCall({
-            action: "updateOneDiscount",
+            action: 'updateOneDiscount',
             body: payload,
             urlParams: { discountId },
           })
         : await makeApiCall({
-            action: "createOneDiscount",
+            action: 'createOneDiscount',
             body: { ...payload },
           });
     },
@@ -66,14 +66,14 @@ export const DeleteOneDiscountAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["discounts"];
+  const queryKey = ['discounts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { discountId: string }) => {
       const { discountId } = payload;
       return await makeApiCall({
-        action: "deleteOneDiscount",
+        action: 'deleteOneDiscount',
         urlParams: { discountId },
       });
     },
@@ -101,20 +101,20 @@ export const DeleteOneDiscountAPI = ({
 };
 
 export const getDiscountsAPI = async (
-  payload: PaginationRequest
+  payload: PaginationRequest,
 ): Promise<{ data: ResponseDiscountModel }> => {
   return await makeApiCall({
-    action: "getDiscounts",
+    action: 'getDiscounts',
     queryParams: payload,
   });
 };
 
 export const GetAllDiscountsAPI = (search?: string) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["discounts"],
+    queryKey: ['discounts'],
     queryFn: async () =>
       await makeApiCall({
-        action: "getDiscountsUser",
+        action: 'getDiscountsUser',
         queryParams: search,
       }),
     staleTime: 60_000,
@@ -125,14 +125,14 @@ export const GetAllDiscountsAPI = (search?: string) => {
 };
 
 export const GetInfiniteDiscountsAPI = (payload: {
-  organizationId?: string,
+  organizationId?: string;
   search?: string;
   take: number;
   sort: SortModel;
 }) => {
   const { take, sort, search } = payload;
   return useInfiniteQuery({
-    queryKey: ["discounts", "infinite"],
+    queryKey: ['discounts', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getDiscountsAPI({

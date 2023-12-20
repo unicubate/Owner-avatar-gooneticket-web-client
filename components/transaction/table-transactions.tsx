@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
-import { ButtonInput, EmptyData, LoadingFile } from "../ui";
-import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
-import { useInView } from "react-intersection-observer";
-import { ListTransactions } from "./list-transactions";
-import { ErrorFile } from "../ui/error-file";
-import { BiTransfer } from "react-icons/bi";
-import { ModelType } from "@/utils/pagination-item";
-import { SearchInput } from "../ui/SearchInput";
-import { useDebounce } from "@/utils";
+import React, { useEffect, useState } from 'react';
+import { ButtonInput, EmptyData, LoadingFile } from '../ui';
+import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
+import { useInView } from 'react-intersection-observer';
+import { ListTransactions } from './list-transactions';
+import { ErrorFile } from '../ui/error-file';
+import { BiTransfer } from 'react-icons/bi';
+import { ModelType } from '@/utils/pagination-item';
+import { SearchInput } from '../ui/SearchInput';
+import { useDebounce } from '@/utils';
+import { Input } from 'antd';
+import { useInputState } from '../hooks/use-input-state';
 
 type Props = {
   model?: ModelType;
@@ -21,10 +23,9 @@ const TableTransactions: React.FC<Props> = ({
   organizationId,
   days,
 }) => {
+  const { search, handleSetSearch } = useInputState();
   const { ref, inView } = useInView();
-  const [filter, setFilter] = useState<string>('')
 
-  const debounceFilter = useDebounce(filter, 500);
   const {
     isLoading: isLoadingTransaction,
     isError: isErrorTransaction,
@@ -33,12 +34,12 @@ const TableTransactions: React.FC<Props> = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
-    search: debounceFilter,
+    search,
     organizationId,
     model: model?.toLocaleUpperCase(),
     take: 10,
-    sort: "DESC",
-    queryKey: ["transactions", "infinite"],
+    sort: 'DESC',
+    queryKey: ['transactions', 'infinite'],
   });
 
   useEffect(() => {
@@ -77,8 +78,10 @@ const TableTransactions: React.FC<Props> = ({
             <p className="text-lg font-bold">Recent transactions</p>
           </div>
           <div className="mt-4 sm:mt-0">
-            <SearchInput placeholder="Search by name or email"
-              onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setFilter(e.target.value)}
+            <Input
+              placeholder="Search by email, name"
+              onChange={handleSetSearch}
+              className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
             />
           </div>
         </div>
@@ -100,7 +103,7 @@ const TableTransactions: React.FC<Props> = ({
               type="button"
               size="large"
               loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
+              color={'indigo'}
               minW="fit"
             >
               Load More

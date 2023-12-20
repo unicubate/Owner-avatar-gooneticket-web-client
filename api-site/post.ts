@@ -281,11 +281,21 @@ export const GetInfinitePostsAPI = (payload: {
   type?: PostType;
   typeIds?: string[];
   queryKey: string[];
+  search?: string;
 }) => {
-  const { userVisitor, albumId, take, sort, status, type, typeIds, queryKey } =
-    payload;
+  const {
+    userVisitor,
+    albumId,
+    take,
+    sort,
+    status,
+    type,
+    typeIds,
+    search,
+    queryKey,
+  } = payload;
   return useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey: [...queryKey, { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getPostsAPI({
@@ -296,9 +306,11 @@ export const GetInfinitePostsAPI = (payload: {
         type,
         typeIds,
         albumId,
+        search,
         status: status?.toUpperCase(),
         page: Number(pageParam),
       }),
+    staleTime: 60_000,
     initialPageParam: 1,
   });
 };
@@ -318,7 +330,7 @@ export const GetInfiniteFollowsPostsAPI = (payload: {
 }) => {
   const { take, sort } = payload;
   return useInfiniteQuery({
-    queryKey: ['posts-follows', 'infinite', { payload }],
+    queryKey: ['posts-follows', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getFollowsPostsAPI({

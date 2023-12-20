@@ -1,14 +1,14 @@
-import { MembershipFormModel, MembershipModel } from "@/types/membership";
-import { makeApiCall } from "@/utils/end-point";
-import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import { MembershipFormModel, MembershipModel } from '@/types/membership';
+import { makeApiCall } from '@/utils/end-point';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
   useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
-} from "@tanstack/react-query";
-import { RcFile } from "antd/es/upload";
-import { ResponseMembershipModel } from "../types/membership";
+} from '@tanstack/react-query';
+import { RcFile } from 'antd/es/upload';
+import { ResponseMembershipModel } from '../types/membership';
 
 export const CreateOrUpdateOneMembershipAPI = ({
   onSuccess,
@@ -17,41 +17,41 @@ export const CreateOrUpdateOneMembershipAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["memberships"];
+  const queryKey = ['memberships'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: MembershipFormModel & { membershipId?: string }
+      payload: MembershipFormModel & { membershipId?: string },
     ) => {
       const { membershipId, newImageLists } = payload;
       let data = new FormData();
-      data.append("title", `${payload.title ?? ""}`);
-      data.append("month", `${payload.month ?? ""}`);
-      data.append("price", `${payload.price ?? ""}`);
-      data.append("description", `${payload.description ?? ""}`);
-      data.append("messageWelcome", `${payload.messageWelcome ?? ""}`);
+      data.append('title', `${payload.title ?? ''}`);
+      data.append('month', `${payload.month ?? ''}`);
+      data.append('price', `${payload.price ?? ''}`);
+      data.append('description', `${payload.description ?? ''}`);
+      data.append('messageWelcome', `${payload.messageWelcome ?? ''}`);
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
-          data.append("attachmentImages", file?.originFileObj as RcFile);
+          data.append('attachmentImages', file?.originFileObj as RcFile);
         });
       if (membershipId) {
         const result = await makeApiCall({
-          action: "updateOneUpload",
+          action: 'updateOneUpload',
           body: { newImageLists },
-          queryParams: { uploadableId: membershipId, model: "MEMBERSHIP" },
+          queryParams: { uploadableId: membershipId, model: 'MEMBERSHIP' },
         });
         if (result) {
           await makeApiCall({
-            action: "updateOneMembership",
+            action: 'updateOneMembership',
             body: data,
             urlParams: { membershipId },
           });
         }
-        return "Ok";
+        return 'Ok';
       } else {
         return await makeApiCall({
-          action: "createOneMembership",
+          action: 'createOneMembership',
           body: data,
         });
       }
@@ -86,14 +86,14 @@ export const DeleteOneMembershipAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["memberships"];
+  const queryKey = ['memberships'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: { membershipId: string }) => {
       const { membershipId } = payload;
       return await makeApiCall({
-        action: "deleteOneMembership",
+        action: 'deleteOneMembership',
         urlParams: { membershipId },
       });
     },
@@ -125,10 +125,10 @@ export const GetOneMembershipAPI = (payload: {
   organizationId?: string;
 }) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["membership", { ...payload }],
+    queryKey: ['membership', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: "getOneMembership",
+        action: 'getOneMembership',
         queryParams: payload,
       }),
     refetchOnWindowFocus: true,
@@ -138,10 +138,10 @@ export const GetOneMembershipAPI = (payload: {
 };
 
 export const getMembershipsAPI = async (
-  payload?: PaginationRequest
+  payload?: PaginationRequest,
 ): Promise<{ data: ResponseMembershipModel }> => {
   return await makeApiCall({
-    action: "getMemberships",
+    action: 'getMemberships',
     queryParams: payload,
   });
 };
@@ -176,16 +176,18 @@ export const GetInfiniteMembershipsAPI = (payload: {
   status?: string;
   sort: SortModel;
   queryKey: string[];
+  search?: string;
 }) => {
-  const { organizationId, take, sort, queryKey } = payload;
+  const { organizationId, take, sort, search, queryKey } = payload;
   return useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey: [...queryKey, { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getMembershipsAPI({
         organizationId,
         take,
         sort,
+        search,
         page: pageParam,
       }),
     initialPageParam: 1,

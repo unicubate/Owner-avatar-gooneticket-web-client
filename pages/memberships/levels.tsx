@@ -1,22 +1,25 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
-import { useAuth } from "@/components/util/context-user";
-import { ButtonInput, EmptyData, LoadingFile } from "@/components/ui";
-import { ListMemberships } from "@/components/membership/list-memberships";
-import { useRouter } from "next/router";
-import { useInView } from "react-intersection-observer";
-import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
-import { useEffect } from "react";
-import { Input } from "antd";
-import { ErrorFile } from "@/components/ui/error-file";
-import { BiLockOpen } from "react-icons/bi";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
+import { useAuth } from '@/components/util/context-user';
+import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui';
+import { ListMemberships } from '@/components/membership/list-memberships';
+import { useRouter } from 'next/router';
+import { useInView } from 'react-intersection-observer';
+import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
+import { useEffect } from 'react';
+import { Input } from 'antd';
+import { ErrorFile } from '@/components/ui/error-file';
+import { BiLockOpen } from 'react-icons/bi';
+import { GetStaticPropsContext } from 'next';
+import { useInputState } from '@/components/hooks/use-input-state';
 
 const MembershipsLevels = () => {
   const { userStorage: user } = useAuth() as any;
   const router = useRouter();
   const { ref, inView } = useInView();
+  const { search, handleSetSearch } = useInputState();
+
 
   const {
     isLoading: isLoadingMembership,
@@ -28,8 +31,9 @@ const MembershipsLevels = () => {
   } = GetInfiniteMembershipsAPI({
     organizationId: user?.organizationId,
     take: 10,
-    sort: "DESC",
-    queryKey: ["memberships", "infinite"],
+    sort: 'DESC',
+    queryKey: ['memberships', 'infinite'],
+    search,
   });
 
   useEffect(() => {
@@ -48,9 +52,9 @@ const MembershipsLevels = () => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
@@ -78,8 +82,7 @@ const MembershipsLevels = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Memberships"}>
-
+      <LayoutDashboard title={'Memberships'}>
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
             <HorizontalNavMembership />
@@ -90,20 +93,22 @@ const MembershipsLevels = () => {
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">
                       <ButtonInput
-                        onClick={() =>
-                          router.push(`${`/memberships/create`}`)
-                        }
+                        onClick={() => router.push(`${`/memberships/create`}`)}
                         shape="default"
                         type="button"
                         size="normal"
                         loading={false}
-                        color={"indigo"}
+                        color={'indigo'}
                       >
                         Create level
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                    <Input placeholder="Search by title" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                      <Input
+                        placeholder="Search by email, name"
+                        onChange={handleSetSearch}
+                        className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                      />
                     </div>
                   </div>
 
@@ -123,7 +128,7 @@ const MembershipsLevels = () => {
                       type="button"
                       size="large"
                       loading={isFetchingNextPage ? true : false}
-                      color={"indigo"}
+                      color={'indigo'}
                       minW="fit"
                     >
                       Load More
@@ -146,7 +151,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }
