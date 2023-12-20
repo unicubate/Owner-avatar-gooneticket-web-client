@@ -1,28 +1,28 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { Input, Skeleton } from "antd";
-import { useState } from "react";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "@/components/ui/button-input";
-import { ListDiscounts } from "@/components/discount/list-discounts";
-import { GetInfiniteDiscountsAPI } from "@/api-site/discount";
-import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";
-import { useDebounce } from "@/utils";
-import { CreateOrUpdateCategory } from "@/components/category/create-or-update-category";
-import { ListCategories } from "@/components/category/list-categories";
-import { ErrorFile } from "@/components/ui/error-file";
-import { GetInfiniteCategoriesAPI } from "@/api-site/category";
-import { GetStaticPropsContext } from "next";
-import { useAuth } from "@/components/util/context-user";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { Input, Skeleton } from 'antd';
+import { useState } from 'react';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { PlusOutlined } from '@ant-design/icons';
+import { ButtonInput } from '@/components/ui/button-input';
+import { ListDiscounts } from '@/components/discount/list-discounts';
+import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
+import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { CreateOrUpdateCategory } from '@/components/category/create-or-update-category';
+import { ListCategories } from '@/components/category/list-categories';
+import { ErrorFile } from '@/components/ui/error-file';
+import { GetInfiniteCategoriesAPI } from '@/api-site/category';
+import { GetStaticPropsContext } from 'next';
+import { useAuth } from '@/components/util/context-user';
+import { useInputState } from '@/components/hooks/use-input-state';
+import { LoadingFile } from '@/components/ui';
 
 const Configs = () => {
+  const { search, handleSetSearch } = useInputState();
   const { userStorage: user } = useAuth() as any;
-  const [filter, setFilter] = useState<string>("");
   const [showModal, setShowModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
 
-  const debouncedFilter = useDebounce(filter, 500);
   const {
     isLoading: isLoadingDiscounts,
     isError: isErrorDiscounts,
@@ -31,9 +31,9 @@ const Configs = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteDiscountsAPI({
-    search: debouncedFilter,
+    search,
     take: 10,
-    sort: "DESC",
+    sort: 'DESC',
     organizationId: user?.organizationId,
   });
 
@@ -45,18 +45,15 @@ const Configs = () => {
     hasNextPage: hasNextPageCategories,
     fetchNextPage: fetchNextPageCategories,
   } = GetInfiniteCategoriesAPI({
+    search,
     take: 10,
-    sort: "DESC",
-    isPaginate: "true",
+    sort: 'DESC',
+    isPaginate: 'true',
     organizationId: user?.organizationId,
   });
 
   const dataTableDiscounts = isLoadingDiscounts ? (
-    <Skeleton
-      className="mt-2 py-2"
-      loading={isLoadingDiscounts}
-      paragraph={{ rows: 1 }}
-    />
+    <LoadingFile />
   ) : isErrorDiscounts ? (
     <ErrorFile
       status="error"
@@ -64,7 +61,7 @@ const Configs = () => {
       description="Error find data please try again..."
     />
   ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataDiscounts?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -74,11 +71,7 @@ const Configs = () => {
   );
 
   const dataTableCategories = isLoadingCategories ? (
-    <Skeleton
-      className="mt-2 py-2"
-      loading={isLoadingCategories}
-      paragraph={{ rows: 1 }}
-    />
+    <LoadingFile />
   ) : isErrorCategories ? (
     <ErrorFile
       status="error"
@@ -86,7 +79,7 @@ const Configs = () => {
       description="Error find data please try again"
     />
   ) : dataCategories?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataCategories?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -97,7 +90,7 @@ const Configs = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Setting"}>
+      <LayoutDashboard title={'Setting'}>
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
             <HorizontalNavShop />
@@ -112,7 +105,7 @@ const Configs = () => {
                       type="button"
                       size="normal"
                       loading={false}
-                      color={"indigo"}
+                      color={'indigo'}
                       icon={<PlusOutlined />}
                     >
                       Create category
@@ -122,11 +115,7 @@ const Configs = () => {
                     <Input
                       placeholder="Search name"
                       className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
-                      onChange={(
-                        e: React.ChangeEvent<
-                          HTMLInputElement | HTMLTextAreaElement
-                        >
-                      ) => setFilter(e.target.value)}
+                      onChange={handleSetSearch}
                     />
                   </div>
                 </div>
@@ -155,7 +144,7 @@ const Configs = () => {
                     type="button"
                     size="large"
                     loading={isFetchingNextPageCategories ? true : false}
-                    color={"indigo"}
+                    color={'indigo'}
                     minW="fit"
                   >
                     Load More
@@ -167,44 +156,28 @@ const Configs = () => {
             <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5 sm:p-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-base font-bold text-gray-900 dark:text-white">
-                      Discounts Setup
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-500">
-                      Discount your shop or commissions for promotions or
-                      membership benefits.
-                    </p>
+                  <div className="mt-4 sm:mt-0">
+                    {/* <p className="text-lg font-bold">Recent transactions</p> */}
+                    <div>
+                      <p className="text-base font-bold text-gray-900 dark:text-white">
+                        Discounts Setup
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-gray-500">
+                        Discount your shop or commissions for promotions or
+                        membership benefits.
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-4 sm:mt-0">
+                    <Input
+                      placeholder="Search by name"
+                      onChange={handleSetSearch}
+                      className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                    />
                   </div>
                 </div>
 
-                {/* <div className="mt-4 sm:flex sm:items-center sm:justify-between">
-                      <div className="mt-4 sm:mt-0">
-                        <ButtonInput
-                          onClick={() => setShowModal(true)}
-                          shape="default"
-                          type="button"
-                          size="normal"
-                          loading={false}
-                          color={"indigo"}
-                          icon={<PlusOutlined />}
-                        >
-                          Create discount
-                        </ButtonInput>
-                      </div>
-                      <div className="mt-4 sm:mt-0">
-                        <Input
-                          placeholder="Search discount"
-                          onChange={(
-                            e: React.ChangeEvent<
-                              HTMLInputElement | HTMLTextAreaElement
-                            >
-                          ) => setFilter(e.target.value)}
-                        />
-                      </div>
-                    </div> */}
-
-                <div className="sm:flex flex-col sm:items-start sm:justify-between">
+                <div className="mt-2 sm:flex flex-col sm:items-start sm:justify-between">
                   <div className="mt-2 sm:mt-0">
                     <ButtonInput
                       onClick={() => setShowModal(true)}
@@ -212,7 +185,7 @@ const Configs = () => {
                       type="button"
                       size="normal"
                       loading={false}
-                      color={"indigo"}
+                      color={'indigo'}
                       icon={<PlusOutlined />}
                     >
                       Create discount
@@ -244,7 +217,7 @@ const Configs = () => {
                     type="button"
                     size="large"
                     loading={isFetchingNextPage ? true : false}
-                    color={"indigo"}
+                    color={'indigo'}
                     minW="fit"
                   >
                     Load More
