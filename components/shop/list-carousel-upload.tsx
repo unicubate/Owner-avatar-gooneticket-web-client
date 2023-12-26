@@ -1,20 +1,20 @@
-"use client";
+'use client';
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useRef, useState } from "react";
-import { Carousel, Image } from "antd";
-import { UploadFolderType, UploadModel } from "@/types/upload";
-import { viewOneFileUploadAPI } from "@/api-site/upload";
-import ContentLoader from "react-content-loader";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { Fragment, useRef, useState } from 'react';
+import { Carousel, Image } from 'antd';
+import { UploadFolderType, UploadModel } from '@/types/upload';
+import { viewOneFileUploadAPI } from '@/api-site/upload';
+import ContentLoader from 'react-content-loader';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/pagination';
 // import required modules
-import { Zoom, Pagination } from "swiper/modules";
-import Skeleton from "react-loading-skeleton";
-import { ButtonInput, WhoCanSeeItem } from "../ui";
-import { PiLockKey } from "react-icons/pi";
-import { PostModel } from "@/types/post";
+import { Zoom, Pagination } from 'swiper/modules';
+import Skeleton from 'react-loading-skeleton';
+import { ButtonInput, WhoCanSeeItem } from '../ui';
+import { PiLockKey } from 'react-icons/pi';
+import { PostModel } from '@/types/post';
 
 type Props = {
   uploads: UploadModel[];
@@ -29,8 +29,8 @@ type Props = {
 };
 
 const contentStyle: React.CSSProperties = {
-  lineHeight: "50px",
-  textAlign: "center",
+  lineHeight: '50px',
+  textAlign: 'center',
   // background: "#364d79",
 };
 
@@ -40,9 +40,9 @@ const ListCarouselUpload: React.FC<Props> = ({
   preview,
   alt,
   post,
-  className = "",
-  height = "100%",
-  width = "100%",
+  className = '',
+  height = '100%',
+  width = '100%',
   autoplay = false,
 }) => {
   const ref = useRef();
@@ -55,14 +55,14 @@ const ListCarouselUpload: React.FC<Props> = ({
         slidesPerView={1}
         navigation={true}
         history={{
-          key: "slide",
+          key: 'slide',
         }}
         pagination={{ clickable: true }}
         modules={[Pagination, Zoom]}
         style={contentStyle}
         breakpoints={{
           320: {
-            slidesPerView: "auto",
+            slidesPerView: 'auto',
             spaceBetween: 8,
           },
           // 640: {
@@ -89,9 +89,9 @@ const ListCarouselUpload: React.FC<Props> = ({
                   alt={alt}
                 />
 
-                {post?.whoCanSee === "MEMBERSHIP" &&
+                {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
                 post?.isValidSubscribe !== 1 ? (
-                  <WhoCanSeeItem profile={post?.profile} />
+                  <WhoCanSeeItem profile={post?.profile as any} />
                 ) : null}
               </SwiperSlide>
             </>

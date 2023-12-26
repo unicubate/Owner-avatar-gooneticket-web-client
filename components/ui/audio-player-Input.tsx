@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import ReactH5AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { HiOutlineLockClosed } from 'react-icons/hi';
-import { PiLockKey } from 'react-icons/pi';
 
 interface Props {
   uploads: UploadModel[];
@@ -30,12 +29,21 @@ const AudioPlayerInput: React.FC<Props> = ({
         autoPlay={false}
         autoPlayAfterSrcChange={false}
         src={
-          enableUrlMedia
-            ? urlMedia
-            : `${viewOneFileUploadAPI({
-                folder: folder,
-                fileName: uploads[0]?.path ?? '',
-              })}`
+          ['MEMBERSHIP'].includes(String(post?.whoCanSee))
+            ? post?.isValidSubscribe === 1
+              ? enableUrlMedia
+                ? urlMedia
+                : `${viewOneFileUploadAPI({
+                    folder: folder,
+                    fileName: uploads[0]?.path ?? '',
+                  })}`
+              : ''
+            : enableUrlMedia
+              ? urlMedia
+              : `${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: uploads[0]?.path ?? '',
+                })}`
         }
         // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/posts/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"
         layout="stacked-reverse"
@@ -147,7 +155,7 @@ const AudioPlayerInput: React.FC<Props> = ({
         style={{ boxShadow: 'none', background: 'transparent' }}
         header={
           <>
-            {post?.whoCanSee === 'MEMBERSHIP' &&
+            {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
             post?.isValidSubscribe !== 1 ? (
               <button className={`font-normal`}>
                 <HiOutlineLockClosed className="w-8 h-8" />
@@ -159,7 +167,8 @@ const AudioPlayerInput: React.FC<Props> = ({
           <>
             <span
               className={`${
-                post?.whoCanSee === 'MEMBERSHIP' && post?.isValidSubscribe !== 1
+                ['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
+                post?.isValidSubscribe !== 1
                   ? 'absolute inset-0'
                   : ''
               }`}

@@ -1,21 +1,23 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { useAuth } from "@/components/util/context-user";
-import { EnableShop } from "@/components/shop/enable-shop";
-import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
-import { GetInfiniteProductsAPI } from "@/api-site/product";
-import { Fragment, useEffect, useState } from "react";
-import { ButtonInput, EmptyData, LoadingFile } from "@/components/ui";
-import { ListProductsShop } from "@/components/shop/list-products-shop";
-import { Input } from "antd";
-import { ProductModel } from "@/types/product";
-import { ErrorFile } from "@/components/ui/error-file";
-import { BiStoreAlt } from "react-icons/bi";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { useAuth } from '@/components/util/context-user';
+import { EnableShop } from '@/components/shop/enable-shop';
+import { useInView } from 'react-intersection-observer';
+import { useRouter } from 'next/router';
+import { GetInfiniteProductsAPI } from '@/api-site/product';
+import { Fragment, useEffect, useState } from 'react';
+import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui';
+import { ListProductsShop } from '@/components/shop/list-products-shop';
+import { Input } from 'antd';
+import { ProductModel } from '@/types/product';
+import { ErrorFile } from '@/components/ui/error-file';
+import { BiStoreAlt } from 'react-icons/bi';
+import { GetStaticPropsContext } from 'next';
+import { useInputState } from '@/components/hooks/use-input-state';
 
 const ShopsExtras = () => {
+  const { search, handleSetSearch } = useInputState();
   const { userStorage: user, profile } = useAuth() as any;
   const router = useRouter();
   const [dayCount, setDayCount] = useState(30);
@@ -29,10 +31,11 @@ const ShopsExtras = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteProductsAPI({
+    search,
     organizationId: user?.organizationId,
     take: 10,
-    sort: "DESC",
-    queryKey: ["products", "infinite"],
+    sort: 'DESC',
+    queryKey: ['products', 'infinite'],
   });
 
   useEffect(() => {
@@ -51,9 +54,9 @@ const ShopsExtras = () => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
@@ -83,7 +86,7 @@ const ShopsExtras = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Shop"}>
+      <LayoutDashboard title={'Shop'}>
         <div className="max-w-6xl mx-auto py-6">
           <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
             <HorizontalNavShop />
@@ -101,13 +104,17 @@ const ShopsExtras = () => {
                         type="button"
                         size="normal"
                         loading={false}
-                        color={"indigo"}
+                        color={'indigo'}
                       >
                         Create product
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input placeholder="Search product" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                      <Input
+                        placeholder="Search by email, name"
+                        onChange={handleSetSearch}
+                        className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                      />{' '}
                     </div>
                   </div>
 
@@ -127,7 +134,7 @@ const ShopsExtras = () => {
                       type="button"
                       size="large"
                       loading={isFetchingNextPage ? true : false}
-                      color={"indigo"}
+                      color={'indigo'}
                       minW="fit"
                     >
                       Load More
@@ -150,7 +157,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

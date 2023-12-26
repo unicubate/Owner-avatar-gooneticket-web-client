@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { CommentModel } from "@/types/comment";
-import { AvatarCoffeeComponent, AvatarComponent } from "../ui";
-import Link from "next/link";
-import { formateFromNow } from "@/utils";
-import { HtmlParser } from "@/utils/html-parser";
-import { BsReplyAll } from "react-icons/bs";
-import { CreateOrUpdateFormCommentReply } from "../comment/create-or-update-form-comment-reply";
-import { GetInfiniteCommentsRepliesAPI } from "@/api-site/comment";
-import { Skeleton } from "antd";
-import { ModelType } from "@/utils/pagination-item";
-import { ListCommentsRepliesTransactions } from "./list-comments-replies-transactions";
-import { useAuth } from "../util/context-user";
-import { ErrorFile } from "../ui/error-file";
-import { useRouter } from "next/router";
+import React, { useState } from 'react';
+import { CommentModel } from '@/types/comment';
+import { AvatarCoffeeComponent, AvatarComponent, LoadingFile } from '../ui';
+import Link from 'next/link';
+import { formateFromNow } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import { BsReplyAll } from 'react-icons/bs';
+import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
+import { GetInfiniteCommentsRepliesAPI } from '@/api-site/comment';
+import { Skeleton } from 'antd';
+import { ModelType } from '@/utils/pagination-item';
+import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
+import { useAuth } from '../util/context-user';
+import { ErrorFile } from '../ui/error-file';
+import { useRouter } from 'next/router';
 
 const ListCommentTransactions: React.FC<{
   item: CommentModel;
@@ -35,13 +35,13 @@ const ListCommentTransactions: React.FC<{
     fetchNextPage,
   } = GetInfiniteCommentsRepliesAPI({
     take: 3,
-    sort: "DESC",
+    sort: 'DESC',
     modelIds: modelIds,
     commentId: String(item?.id),
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
-    <Skeleton loading={isLoadingComments} avatar paragraph={{ rows: 1 }} />
+    <LoadingFile />
   ) : isErrorComments ? (
     <ErrorFile
       status="error"
@@ -49,7 +49,7 @@ const ListCommentTransactions: React.FC<{
       description="Error find data please try again"
     />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataComments?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -72,7 +72,7 @@ const ListCommentTransactions: React.FC<{
           ) : (
             <AvatarCoffeeComponent
               size={45}
-              color={item?.profile?.color ?? "indigo"}
+              color={item?.profile?.color ?? 'indigo'}
             />
           )}
 
@@ -98,7 +98,7 @@ const ListCommentTransactions: React.FC<{
               </div>
             </div>
             <p className="mt-1 text-sm font-normal text-gray-600 dark:text-gray-300">
-              <HtmlParser html={String(item?.description ?? "")} />
+              <HtmlParser html={String(item?.description ?? '')} />
             </p>
 
             <div className="flex items-center font-medium text-gray-600">
