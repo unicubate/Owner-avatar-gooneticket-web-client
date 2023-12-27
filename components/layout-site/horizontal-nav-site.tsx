@@ -194,7 +194,7 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                     color="indigo"
                     loading={false}
                     onClick={() => {
-                      router.push(`${user?.profile ? `/dashboard` : `/login`}`);
+                      router.push(`${user?.profile ? `/dashboard` : `/register`}`);
                     }}
                   >
                     Sign Up
