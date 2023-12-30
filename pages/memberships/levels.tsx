@@ -105,7 +105,7 @@ const MembershipsLevels = () => {
                     </div>
                     <div className="mt-4 sm:mt-0">
                       <Input
-                        placeholder="Search by email, name"
+                        placeholder="Search by name"
                         onChange={handleSetSearch}
                         className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
                       />

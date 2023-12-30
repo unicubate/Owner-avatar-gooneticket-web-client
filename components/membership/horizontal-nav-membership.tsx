@@ -19,10 +19,10 @@ const HorizontalNavMembership: React.FC = () => {
             title: "Levels",
             href: "/memberships/levels",
         },
-        {
-            title: "Settings",
-            href: "/memberships/settings",
-        }
+        // {
+        //     title: "Settings",
+        //     href: "/memberships/settings",
+        // }
     ])
 
 
