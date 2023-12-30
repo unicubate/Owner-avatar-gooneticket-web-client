@@ -150,13 +150,6 @@ const AudioPlayerInput: React.FC<Props> = ({
         defaultDuration="00:00"
         customVolumeControls={[]}
         customAdditionalControls={[]}
-        customProgressBarSection={
-          [
-            RHAP_UI.CURRENT_TIME,
-            RHAP_UI.PROGRESS_BAR,
-            RHAP_UI.CURRENT_LEFT_TIME,
-          ]
-        }
         className="relative rounded-lg"
         ref={player}
         style={{ boxShadow: 'none', background: 'transparent' }}
