@@ -2,7 +2,7 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel } from '@/types/post';
 import { UploadFolderType, UploadModel } from '@/types/upload';
 import { useRef } from 'react';
-import ReactH5AudioPlayer from 'react-h5-audio-player';
+import ReactH5AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { HiOutlineLockClosed } from 'react-icons/hi';
 
@@ -150,6 +150,13 @@ const AudioPlayerInput: React.FC<Props> = ({
         defaultDuration="00:00"
         customVolumeControls={[]}
         customAdditionalControls={[]}
+        customProgressBarSection={
+          [
+            RHAP_UI.CURRENT_TIME,
+            RHAP_UI.PROGRESS_BAR,
+            RHAP_UI.CURRENT_LEFT_TIME,
+          ]
+        }
         className="relative rounded-lg"
         ref={player}
         style={{ boxShadow: 'none', background: 'transparent' }}
