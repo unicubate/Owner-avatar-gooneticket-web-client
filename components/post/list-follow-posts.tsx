@@ -126,7 +126,7 @@ const ListFollowPosts: React.FC<Props> = ({
 
 
 
-          {item?.uploadsImage?.length > 0 && ["VIDEO", 'ARTICLE', 'GALLERY'].includes(item?.type as PostType) ? (
+          {item?.uploadsImage?.length > 0 ? (
             <div className="group relative mt-2 text-center justify-center mx-auto">
               <ListCarouselUpload
                 post={item}
@@ -143,7 +143,7 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-          <div className="flex mt-2 items-center">
+          {/* <div className="flex mt-2 items-center">
             {item?.uploadsImage?.length > 0 && ["AUDIO"].includes(item?.type as PostType) ? (
               <ListCarouselUpload
                 post={item}
@@ -170,7 +170,19 @@ const ListFollowPosts: React.FC<Props> = ({
                 />
               ) : null}
             </div>
-          </div>
+          </div> */}
+
+          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
+            <div className="text-center justify-center mx-auto">
+              <AudioPlayerInput
+                post={item}
+                urlMedia={item?.urlMedia}
+                enableUrlMedia={item?.enableUrlMedia}
+                uploads={item?.uploadsFile}
+                folder="posts"
+              />
+            </div>
+          ) : null}
 
           {item?.title ? (
             <div className="mt-2 text-lg">
