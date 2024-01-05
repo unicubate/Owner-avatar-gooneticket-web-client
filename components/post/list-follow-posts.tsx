@@ -65,7 +65,7 @@ const ListFollowPosts: React.FC<Props> = ({
             <div className="ml-auto">
               <div className="flex items-center space-x-2 sm:ml-5">
                 {item?.whoCanSee === "MEMBERSHIP" &&
-                item?.isValidSubscribe !== 1 ? (
+                  item?.isValidSubscribe !== 1 ? (
                   <ButtonInput
                     onClick={() =>
                       push(`/${item?.profile?.username}/memberships`)
@@ -109,11 +109,10 @@ const ListFollowPosts: React.FC<Props> = ({
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
             <div
               className={`mt-1 mx-auto 
-            ${
-              item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                ? "blur-xl"
-                : ""
-            }`}
+            ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
+                  ? "blur-xl"
+                  : ""
+                }`}
             >
               <ReactPlayer
                 className="mr-auto"
@@ -125,7 +124,9 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-          {item?.uploadsImage?.length > 0 ? (
+
+
+          {item?.uploadsImage?.length > 0 && ["VIDEO", 'ARTICLE', 'GALLERY'].includes(item?.type as PostType) ? (
             <div className="group relative mt-2 text-center justify-center mx-auto">
               <ListCarouselUpload
                 post={item}
@@ -133,27 +134,43 @@ const ListFollowPosts: React.FC<Props> = ({
                 folder="posts"
                 preview={false}
                 height={400}
-                className={`object-cover ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-xl"
-                    : ""
-                }`}
+                  ? "blur-xl"
+                  : ""
+                  }`}
               />
             </div>
           ) : null}
 
-          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
-            <div className="text-center justify-center mx-auto">
-              <AudioPlayerInput
+          <div className="flex mt-2 items-center">
+            {item?.uploadsImage?.length > 0 && ["AUDIO"].includes(item?.type as PostType) ? (
+              <ListCarouselUpload
                 post={item}
-                urlMedia={item?.urlMedia}
-                enableUrlMedia={item?.enableUrlMedia}
-                uploads={item?.uploadsFile}
+                uploads={item?.uploadsImage}
                 folder="posts"
+                preview={false}
+                width={100}
+                height={100}
+                className={`object-cover flex-none rounded-lg bg-slate-100 ${item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.isValidSubscribe !== 1
+                  ? "blur-xl"
+                  : ""
+                  }`}
               />
+            ) : null}
+            <div className="min-w-0 flex-auto space-y-1 font-semibold">
+              {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
+                <AudioPlayerInput
+                  post={item}
+                  urlMedia={item?.urlMedia}
+                  enableUrlMedia={item?.enableUrlMedia}
+                  uploads={item?.uploadsFile}
+                  folder="posts"
+                />
+              ) : null}
             </div>
-          ) : null}
+          </div>
 
           {item?.title ? (
             <div className="mt-2 text-lg">
@@ -171,12 +188,11 @@ const ListFollowPosts: React.FC<Props> = ({
               className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}
             >
               <span
-                className={`ql-editor ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-lg"
-                    : ""
-                }`}
+                  ? "blur-lg"
+                  : ""
+                  }`}
               >
                 <HtmlParser
                   html={String(item?.description ?? "")}
@@ -197,9 +213,8 @@ const ListFollowPosts: React.FC<Props> = ({
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="w-6 h-6" />
@@ -229,7 +244,7 @@ const ListFollowPosts: React.FC<Props> = ({
             )}
 
             {item?.whoCanSee === "MEMBERSHIP" &&
-            item?.isValidSubscribe !== 1 ? (
+              item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl">
                   <HiOutlineLockClosed />

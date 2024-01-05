@@ -87,6 +87,7 @@ const ListCarouselUpload: React.FC<Props> = ({
                     fileName: item?.path,
                   })}`}
                   alt={alt}
+                  loading="lazy"
                 />
 
                 {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
