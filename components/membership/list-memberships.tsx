@@ -10,7 +10,7 @@ import {
 } from "@/utils";
 import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
 import { BiMoney } from "react-icons/bi";
@@ -146,7 +146,7 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
               onClick={() => deleteItem(item)}
               className="ml-2 text-lg text-gray-600 hover:text-red-600"
             >
-              <MdDeleteOutline />
+              <MdOutlineDeleteOutline />
             </button>
           </Tooltip>
         </div>

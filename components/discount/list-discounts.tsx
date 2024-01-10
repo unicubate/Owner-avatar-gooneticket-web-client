@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CreateOrUpdateDiscount } from "./create-or-update-discount";
 import {
   AlertDangerNotification,
@@ -106,7 +106,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
                 onClick={() => deleteItem(item)}
                 className="ml-2 text-lg text-gray-600 hover:text-red-600"
               >
-                <MdDeleteOutline />
+                <MdOutlineDeleteOutline />
               </button>
             </Tooltip>
           </div>

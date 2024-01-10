@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { OneCartModel } from "@/types/cart";
 import { Image } from "antd";
 import { DeleteOneCartAPI } from "@/api-site/cart";
@@ -75,7 +75,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
               onClick={() => deleteItem(item)}
               className="text-gray-600 hover:text-red-400 focus:ring-red-400"
             >
-              <MdDeleteOutline className="w-5 h-5" />
+              <MdOutlineDeleteOutline className="w-5 h-5" />
             </button>
           </div>
         </div>

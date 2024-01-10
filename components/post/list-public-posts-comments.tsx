@@ -4,7 +4,7 @@ import { PostModel } from "@/types/post";
 import ListComments from "../comment/list-comments";
 import { formateDMYHH } from "@/utils";
 import { BiComment } from "react-icons/bi";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
@@ -77,7 +77,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
                     title="Delete"
                     className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                   >
-                    <MdDeleteOutline className="w-5 h-5" />
+                    <MdOutlineDeleteOutline className="w-5 h-5" />
                   </button>
                 </>
               ) : null}

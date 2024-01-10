@@ -14,7 +14,7 @@ import { TextInput, LoadingFile } from "@/components/ui";
 import { GetAllCountiesAPI } from "@/api-site/profile";
 import { SelectSearchInput } from "@/components/ui/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { GetUploadsAPI } from "@/api-site/upload";
 import { GetStaticPropsContext } from "next";
 
@@ -145,7 +145,7 @@ const ShopView = () => {
                             // onClick={() => deleteItem(item)}
                             className="text-gray-400 hover:text-red-400 focus:ring-red-400"
                           >
-                            <MdDeleteOutline className="w-5 h-5" />
+                            <MdOutlineDeleteOutline className="w-5 h-5" />
                           </button>
                         </div>
                       </div>

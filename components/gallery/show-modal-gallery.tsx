@@ -1,7 +1,7 @@
 import { Avatar, Button, Upload } from "antd";
 import { BiComment, BiConversation } from "react-icons/bi";
 import { FiDownload } from "react-icons/fi";
-import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
+import { MdOutlineModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoShareOutline } from "react-icons/io5";
 import Link from "next/link";
@@ -184,7 +184,7 @@ const ShowModalGallery: React.FC<Props> = ({
                           title="Delete"
                           className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                         >
-                          <MdDeleteOutline className="w-6 h-6" />
+                          <MdOutlineDeleteOutline className="w-6 h-6" />
                         </button> */}
                       </>
                     ) : null}

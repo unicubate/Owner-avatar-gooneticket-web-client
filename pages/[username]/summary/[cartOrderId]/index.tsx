@@ -4,7 +4,7 @@ import { Image } from "antd";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { LayoutSite } from "@/components/layout-site";
-import { MdDeleteOutline } from "react-icons/md";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/cart";
 import { useAuth } from "@/components/util/context-user";
 import { GetOneUserPublicAPI } from "@/api-site/user";

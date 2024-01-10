@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import { Avatar } from "antd";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommentModel } from "@/types/comment";
 import { DeleteOneCommentReplyAPI } from "@/api-site/comment";
 import {
@@ -115,7 +115,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                 >
-                  <MdDeleteOutline className="w-5 h-5" />
+                  <MdOutlineDeleteOutline className="w-5 h-5" />
                 </button>
               </>
             ) : null}

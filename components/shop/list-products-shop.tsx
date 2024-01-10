@@ -7,7 +7,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { DeleteOnePostAPI } from "@/api-site/post";
 import { ReadMore } from "@/utils/read-more";
 import {
-  MdDeleteOutline,
+  MdOutlineDeleteOutline,
   MdOutlineCheckBox,
   MdOutlineCheckBoxOutlineBlank,
   MdOutlineModeEdit,
@@ -192,7 +192,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 onClick={() => deleteItem(item)}
                 className="ml-2 text-lg text-gray-600 hover:text-red-600"
               >
-                <MdDeleteOutline />
+                <MdOutlineDeleteOutline />
               </button>
             </Tooltip>
           </div>

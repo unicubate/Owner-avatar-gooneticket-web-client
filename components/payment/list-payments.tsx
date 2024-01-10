@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import {
-  MdDeleteOutline,
+  MdOutlineDeleteOutline,
   MdOutlineMailLock,
   MdOutlineModeEdit,
 } from "react-icons/md";
@@ -216,7 +216,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
                 deleteItem(item);
               }}
               className="ml-2 text-lg text-gray-600 hover:text-red-600"            >
-              <MdDeleteOutline />
+              <MdOutlineDeleteOutline />
             </button>
           </div>
         </div>

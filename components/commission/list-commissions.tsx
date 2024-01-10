@@ -6,7 +6,7 @@ import { Avatar, Spin, Tooltip } from "antd";
 import { FieldTimeOutlined, LoadingOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
 import { ReadMore } from "@/utils/read-more";
-import { MdDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
 import { CommissionModel } from "@/types/commission";
 import { useRouter } from "next/router";
 import { GetUploadsAPI, viewOneFileUploadAPI } from "@/api-site/upload";
@@ -135,7 +135,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                 onClick={() => deleteItem(item)}
                 className="ml-2 text-lg text-gray-600 hover:text-red-600"
               >
-                <MdDeleteOutline />
+                <MdOutlineDeleteOutline />
               </button>
             </Tooltip>
           </div>
