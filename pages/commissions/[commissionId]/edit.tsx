@@ -1,14 +1,13 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { useRouter } from "next/router";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { useAuth } from "@/components/util/context-user";
-import { CreateOrUpdateFormCommission } from "@/components/commission/create-or-update-form-commission";
-import { GetOneCommissionAPI } from "@/api-site/commission";
-import { GetUploadsAPI } from "@/api-site/upload";
-import { LoadingFile } from "@/components/ui/loading-file";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/components/util/context-user';
+import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
+import { GetOneCommissionAPI } from '@/api-site/commission';
+import { GetUploadsAPI } from '@/api-site/upload';
+import { LoadingFile } from '@/components/ui/loading-file';
+import { GetStaticPropsContext } from 'next';
+import { ErrorFile } from '@/components/ui/error-file';
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -25,31 +24,39 @@ const ShopEdit = () => {
   });
 
   const {
-    isLoading: isLoadingImageUploads,
-    isError: isErrorImageUploads,
-    data: dataImageUploads,
+    isError: isErrorImages,
+    isLoading: isLoadingImages,
+    data: uploadImages,
   } = GetUploadsAPI({
-    uploadType: "image",
-    model: "commission",
-    organizationId,
+    organizationId: commission?.organizationId,
+    model: 'COMMISSION',
     uploadableId: commissionId,
+    uploadType: 'image',
   });
 
   const dataTableCommission =
-    isLoadingImageUploads || isErrorCommission ? (
+    isLoadingImages || isLoadingCommission || isErrorCommission ? (
       <LoadingFile />
-    ) : isErrorImageUploads ? (
-      <strong>Error find data please try again...</strong>
-    ) : (
-      <CreateOrUpdateFormCommission
-        commission={commission}
-        uploadImages={dataImageUploads}
+    ) : isErrorImages ? (
+      <ErrorFile
+        status="error"
+        title="404"
+        description="Error find data please try again..."
       />
+    ) : (
+      <>
+        {commission?.id ? (
+          <CreateOrUpdateFormCommission
+            commission={commission}
+            uploadImages={uploadImages}
+          />
+        ) : null}
+      </>
     );
 
   return (
     <>
-      <LayoutDashboard title={`${commission?.title || "Commission"}`}>
+      <LayoutDashboard title={`${commission?.title || 'Commission'}`}>
         <div className="flex-1 bg-gray-100">
           <main>
             <div className="max-w-4xl mx-auto py-6">
@@ -69,8 +76,8 @@ export default PrivateComponent(ShopEdit);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -78,7 +85,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }
