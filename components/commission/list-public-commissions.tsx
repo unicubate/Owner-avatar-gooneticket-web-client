@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { HtmlParser } from "@/utils/html-parser";
-import Link from "next/link";
-import { ProductModel } from "@/types/product";
-import { ButtonInput } from "../ui/button-input";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
+import React from 'react';
+import { HtmlParser } from '@/utils/html-parser';
+import Link from 'next/link';
+import { ProductModel } from '@/types/product';
+import { ButtonInput } from '../ui/button-input';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { formatePrice } from '@/utils';
 
 type Props = {
   item?: ProductModel;
@@ -15,16 +16,16 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
+        className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg"
       >
         <div className="p-8 sm:py-7 sm:px-8">
           <div className="flex items-center">
             {item?.id ? (
               <Link
                 href={`/${item?.profile?.username}/posts/${item?.slug}`}
-                className="text-lg font-bold text-gray-900 cursor-pointer"
+                className="text-lg font-bold dark:text-white cursor-pointer"
               >
-                {item?.title ?? ""}
+                {item?.title ?? ''}
               </Link>
             ) : null}
 
@@ -34,23 +35,24 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                 type="button"
                 size="normal"
                 loading={false}
-                color={"red"}
+                color={item?.profile?.color}
                 minW="fit"
               >
-                200 $
+                {Number(item?.price ?? 0)} {item?.currency?.symbol ?? ''}
               </ButtonInput>
             </div>
           </div>
 
-          <div className="text-sm font-normal text-gray-600">
-            <HtmlParser html={String(item?.description)} />
+          <div className="text-sm font-normal text-gray-600 dark:text-gray-300">
+            <span className={`ql-editor`}>
+              <HtmlParser html={String(item?.description)} />
+            </span>
           </div>
           <div className="mt-4 text-center justify-center mx-auto">
             <ListCarouselUpload
               uploads={item?.uploadsImage}
               folder="commissions"
-              preview={false}
-              height={250}
+              height={400}
             />
           </div>
 
@@ -61,7 +63,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                 type="button"
                 size="large"
                 loading={false}
-                color={"indigo"}
+                color={'indigo'}
                 minW="fit"
               >
                 Request this

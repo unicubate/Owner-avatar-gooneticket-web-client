@@ -19,7 +19,7 @@ import { PostModel } from '@/types/post';
 type Props = {
   uploads: UploadModel[];
   folder: UploadFolderType;
-  preview: boolean;
+  preview?: boolean;
   className?: string;
   alt?: string;
   post?: PostModel;
@@ -37,7 +37,7 @@ const contentStyle: React.CSSProperties = {
 const ListCarouselUpload: React.FC<Props> = ({
   uploads,
   folder,
-  preview,
+  preview = false,
   alt,
   post,
   className = '',
