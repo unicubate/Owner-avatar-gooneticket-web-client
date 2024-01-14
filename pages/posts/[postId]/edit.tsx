@@ -13,7 +13,7 @@ import { ErrorFile } from "@/components/ui/error-file";
 import { GetStaticPropsContext } from "next";
 
 const PostsEdit = () => {
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: user } = useAuth() as any;
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);
@@ -24,7 +24,7 @@ const PostsEdit = () => {
     isLoading: isLoadingPost,
   } = GetOnePostAPI({
     postId,
-    organizationId: userVisitor?.organizationId,
+    organizationId: user?.organizationId,
     type: String(type),
   });
 
@@ -61,7 +61,7 @@ const PostsEdit = () => {
       />
     ) : (
       <>
-        {userVisitor?.organizationId && post?.id && type === "gallery" ? (
+        {user?.organizationId && post?.id && type === "gallery" ? (
           <CreateOrUpdateFormGalleryPost
             uploadImages={uploadImages}
             post={post}

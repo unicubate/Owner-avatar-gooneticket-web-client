@@ -10,7 +10,7 @@ import { GetStaticPropsContext } from 'next';
 import { ErrorFile } from '@/components/ui/error-file';
 
 const ShopEdit = () => {
-  const { organizationId } = useAuth() as any;
+  const { userStorage: user } = useAuth() as any;
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
 
@@ -20,7 +20,7 @@ const ShopEdit = () => {
     isLoading: isLoadingCommission,
   } = GetOneCommissionAPI({
     commissionId,
-    organizationId,
+    organizationId: user?.organizationId,
   });
 
   const {
@@ -45,7 +45,7 @@ const ShopEdit = () => {
       />
     ) : (
       <>
-        {commission?.id ? (
+        {user?.organizationId && commission?.id ? (
           <CreateOrUpdateFormCommission
             commission={commission}
             uploadImages={uploadImages}

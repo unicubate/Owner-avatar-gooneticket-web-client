@@ -77,7 +77,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     }
   }, [commission, setValue]);
 
-  const saveMutation = CreateOrUpdateOneCommissionAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneCommissionAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -100,7 +100,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         imageList,
         newImageLists,
       };
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
         commissionId: commission?.id,
       });
@@ -183,9 +183,9 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                               fileList={imageList}
                               onChange={handleImageChange}
                               accept=".png,.jpg,.jpeg"
-                              maxCount={1}
+                              maxCount={10}
                             >
-                              {imageList.length >= 1 ? null : (
+                              {imageList.length >= 10 ? null : (
                                 <div className="text-center dark:text-white">
                                   <PlusOutlined />
                                   <div style={{ marginTop: 8 }}>
