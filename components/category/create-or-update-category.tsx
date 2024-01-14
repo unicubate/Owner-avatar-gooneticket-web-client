@@ -92,7 +92,7 @@ const CreateOrUpdateCategory: React.FC<{
               className="bg-transparent border-0 text-black float-right"
               onClick={() => setShowModal(false)}
             >
-              <span className="text-black dark:text-white opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
+              <span className="dark:text-white opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
                 <CloseOutlined />
               </span>
             </button>

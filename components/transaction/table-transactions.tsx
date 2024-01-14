@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { ButtonInput, EmptyData, LoadingFile } from '../ui';
 import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
 import { useInView } from 'react-intersection-observer';
@@ -7,8 +7,6 @@ import { ListTransactions } from './list-transactions';
 import { ErrorFile } from '../ui/error-file';
 import { BiTransfer } from 'react-icons/bi';
 import { ModelType } from '@/utils/pagination-item';
-import { SearchInput } from '../ui/SearchInput';
-import { useDebounce } from '@/utils';
 import { Input } from 'antd';
 import { useInputState } from '../hooks/use-input-state';
 

@@ -1,17 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ButtonInput } from "@/components/ui/button-input";
-import { useEffect, useState } from "react";
-import { Input } from "antd";
-import { EmptyData } from "@/components/ui/empty-data";
-import ListGallery from "@/components/gallery/list-gallery";
-import { GetInfinitePostsAPI } from "@/api-site/post";
-import { useInView } from "react-intersection-observer";
-import { LoadingFile } from "@/components/ui/loading-file";
-import { useRouter } from "next/router";
-import { UserVisitorModel } from "@/types/user.type";
-import { BiImage } from "react-icons/bi";
-import { ErrorFile } from "../ui/error-file";
-import { queyParamsFunc } from "@/utils/generate-random";
+import { ButtonInput } from '@/components/ui/button-input';
+import { useEffect, useState } from 'react';
+import { EmptyData } from '@/components/ui/empty-data';
+import ListGallery from '@/components/gallery/list-gallery';
+import { GetInfinitePostsAPI } from '@/api-site/post';
+import { useInView } from 'react-intersection-observer';
+import { LoadingFile } from '@/components/ui/loading-file';
+import { useRouter } from 'next/router';
+import { UserVisitorModel } from '@/types/user.type';
+import { BiImage } from 'react-icons/bi';
+import { ErrorFile } from '../ui/error-file';
+import { queyParamsFunc } from '@/utils/generate-random';
+import { useInputState } from '../hooks/use-input-state';
+import { SearchInput } from '../ui/search-input';
 
 type Props = {
   albumId?: string;
@@ -21,6 +22,7 @@ type Props = {
 const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
+  const { search, handleSetSearch } = useInputState();
   const [openModal, setOpenModal] = useState(false);
 
   const {
@@ -31,12 +33,13 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
+    search,
     albumId,
     userVisitor,
     take: 10,
-    sort: "DESC",
-    typeIds: ["GALLERY"],
-    queryKey: ["posts", "infinite"],
+    sort: 'DESC',
+    typeIds: ['GALLERY'],
+    queryKey: ['posts', 'infinite'],
   });
 
   useEffect(() => {
@@ -55,9 +58,9 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
@@ -97,7 +100,14 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
                     size="normal"
                     loading={false}
                     color="indigo"
-                    onClick={() => push(`/posts/create?${queyParamsFunc({ type: "gallery", albumId })}`)}
+                    onClick={() =>
+                      push(
+                        `/posts/create?${queyParamsFunc({
+                          type: 'gallery',
+                          albumId,
+                        })}`,
+                      )
+                    }
                   >
                     Add Image
                   </ButtonInput>
@@ -109,7 +119,9 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
                     shape="default"
                     size="normal"
                     loading={false}
-                    onClick={() => push(`/posts/create?${queyParamsFunc({ type: "album" })}`)}
+                    onClick={() =>
+                      push(`/posts/create?${queyParamsFunc({ type: 'album' })}`)
+                    }
                   >
                     New Album
                   </ButtonInput>
@@ -117,11 +129,16 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
               </div>
             </div>
             <div className="mt-4 sm:mt-0">
-              <Input placeholder="Search file" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+              <SearchInput
+                placeholder="Search by title"
+                onChange={handleSetSearch}
+              />
             </div>
           </div>
 
-          <div className="divide-y divide-gray-200 dark:divide-gray-800">{dataTableGallery}</div>
+          <div className="divide-y divide-gray-200 dark:divide-gray-800">
+            {dataTableGallery}
+          </div>
         </div>
       </div>
 
@@ -135,7 +152,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
               type="button"
               size="large"
               loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
+              color={'indigo'}
               minW="fit"
             >
               Load More

@@ -73,7 +73,7 @@ const Summary = () => {
     <>
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-center justify-center mt-10">
-          <h1 className="text-2xl font-bold text-black dark:text-white">
+          <h1 className="text-2xl font-bold dark:text-white">
             Shopping Cart
           </h1>
           <span className="px-2 py-1 ml-4 text-xs font-bold tracking-widest uppercase bg-gray-400 dark:bg-gray-800 rounded-full text-gray-50">
@@ -101,18 +101,18 @@ const Summary = () => {
 
               <hr className="border-gray-200 dark:border-gray-800" />
               <div className="flex items-center justify-between mt-6">
-                <p className="text-3xl font-bold text-black dark:text-white">
+                <p className="text-3xl font-bold dark:text-white">
                   Total
                 </p>
                 {newAmount?.value ? (
                   <>
-                    <p className="ml-auto text-xl font-bold text-black dark:text-white">
+                    <p className="ml-auto text-xl font-bold dark:text-white">
                       {formatePrice({
                         value: Number(newAmount?.value),
                         isDivide: false,
                       }) ?? ""}
                     </p>
-                    <p className="ml-1 text-xl font-bold text-black dark:text-white">
+                    <p className="ml-1 text-xl font-bold dark:text-white">
                       {newAmount?.currency}
                     </p>
                   </>

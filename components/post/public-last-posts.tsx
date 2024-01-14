@@ -63,7 +63,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
   return (
     <>
       <div className="px-4 py-6 sm:p-6 lg:p-8">
-        <h3 className="font-bold text-black dark:text-white">
+        <h3 className="font-bold dark:text-white">
           Latest Posts
         </h3>
         {dataTablePosts}

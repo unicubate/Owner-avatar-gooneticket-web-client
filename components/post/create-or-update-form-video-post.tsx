@@ -174,7 +174,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <div className="text-center text-black dark:text-white">
+                              <div className="text-center dark:text-white">
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>

@@ -28,7 +28,7 @@ const TextAreaInput: React.FC<Props> = ({
   return (
     <>
       {label ? <label
-        className="block text-black dark:text-white text-sm font-bold mb-2"
+        className="block dark:text-white text-sm font-bold mb-2"
         htmlFor={name}>
         {label}
       </label> : null}

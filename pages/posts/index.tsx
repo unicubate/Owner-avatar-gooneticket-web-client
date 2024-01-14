@@ -13,6 +13,7 @@ import { ErrorFile } from '@/components/ui/error-file';
 import { GetStaticPropsContext } from 'next';
 import { Input } from 'antd';
 import { useInputState } from '@/components/hooks/use-input-state';
+import { SearchInput } from '../../components/ui/search-input';
 
 const Posts = () => {
   const { userStorage: user } = useAuth() as any;
@@ -130,10 +131,9 @@ const Posts = () => {
                       <p className="text-lg font-bold">Posts</p>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input
+                      <SearchInput
                         placeholder="Search by title"
                         onChange={handleSetSearch}
-                        className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
                       />
                     </div>
                   </div>

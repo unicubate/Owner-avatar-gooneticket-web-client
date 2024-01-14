@@ -136,7 +136,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
           <div className="flow-root">
             <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5">
-                <h2 className="text-black dark:text-white font-bold">
+                <h2 className="dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} article
                 </h2>
 
@@ -157,7 +157,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (
-                              <div className="text-center text-black dark:text-white">
+                              <div className="text-center dark:text-white">
                                 <PlusOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>

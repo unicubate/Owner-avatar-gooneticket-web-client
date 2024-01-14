@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
-import { Avatar, Button, Select, Space, Upload } from "antd";
+import React, { useEffect, useState } from 'react';
+import { Avatar, Button, Select, Space, Upload } from 'antd';
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
   GetOneProfileAPI,
   UpdateOneProfileAPI,
   getOneFileProfileAPI,
-} from "@/api-site/profile";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { SelectSearchInput } from "../ui/select-search-input";
-import { DateInput, TextAreaInput, TextInput } from "../ui";
-import { ButtonInput } from "../ui/button-input";
-import { ProfileFormModel, arrayColors } from "@/types/profile.type";
+} from '@/api-site/profile';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { SelectSearchInput } from '../ui/select-search-input';
+import { DateInput, TextAreaInput, TextInput } from '../ui';
+import { ButtonInput } from '../ui/button-input';
+import { ProfileFormModel, arrayColors } from '@/types/profile.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { UploadOutlined } from "@ant-design/icons";
+} from '@/utils/alert-notification';
+import { UploadOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 
@@ -32,15 +32,15 @@ const schema = yup.object({
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
   birthday: yup.date().max(new Date()).required(),
-  currencyId: yup.string().uuid().required("currency is a required field"),
-  countryId: yup.string().uuid().required("country is a required field"),
+  currencyId: yup.string().uuid().required('currency is a required field'),
+  countryId: yup.string().uuid().required('country is a required field'),
 });
 
 const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   const [colors] = useState(arrayColors);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     control,
@@ -49,7 +49,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { data: currencies } = GetAllCurrenciesAPI();
@@ -61,17 +61,17 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   useEffect(() => {
     if (profile) {
       const fields = [
-        "birthday",
-        "currencyId",
-        "countryId",
-        "url",
-        "phone",
-        "color",
-        "firstName",
-        "lastName",
-        "secondAddress",
-        "firstAddress",
-        "description",
+        'birthday',
+        'currencyId',
+        'countryId',
+        'url',
+        'phone',
+        'color',
+        'firstName',
+        'lastName',
+        'secondAddress',
+        'firstAddress',
+        'description',
       ];
       fields?.forEach((field: any) => setValue(field, profile[field]));
     }
@@ -89,7 +89,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   });
 
   const onSubmit: SubmitHandler<ProfileFormModel> = async (
-    payload: ProfileFormModel
+    payload: ProfileFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -102,9 +102,9 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
       setLoading(false);
       AlertSuccessNotification({
         text: `Information save successfully`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -112,9 +112,9 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "bottom",
-        className: "info",
-        position: "center",
+        gravity: 'bottom',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -122,7 +122,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+        <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold"> Profile </h2>
 
@@ -250,18 +250,18 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   Color
                 </label>
                 <Controller
-                  name={"color"}
+                  name={'color'}
                   control={control}
                   render={({ field }) => (
                     <Select
                       showSearch
                       size="large"
-                      style={{ width: "100%" }}
-                      id={"color"}
-                      placeholder={"Color"}
-                      status={errors?.color?.message ? "error" : ""}
+                      style={{ width: '100%' }}
+                      id={'color'}
+                      placeholder={'Color'}
+                      status={errors?.color?.message ? 'error' : ''}
                       filterOption={(input, option) =>
-                        (option?.name ?? "")
+                        (option?.name ?? '')
                           .toLowerCase()
                           .includes(input.toLowerCase())
                       }
@@ -292,7 +292,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+            {/* <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <SelectSearchInput
                   label="Counties"
@@ -320,6 +320,33 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   {`Your supporters will pay in this currency.`}
                 </span>
               </div>
+            </div> */}
+            <div className="mt-2">
+              <SelectSearchInput
+                label="Counties"
+                firstOptionName="Country"
+                valueType="key"
+                control={control}
+                errors={errors}
+                placeholder="Country"
+                name="countryId"
+                dataItem={countries}
+              />
+            </div>
+            <div className="mt-2">
+              <SelectSearchInput
+                label="Payment currency"
+                firstOptionName="Currency"
+                valueType="key"
+                control={control}
+                errors={errors}
+                placeholder="Currency"
+                name="currencyId"
+                dataItem={currencies}
+              />
+              <span className="text-sm font-medium text-gray-400">
+                {`Your supporters will pay in this currency.`}
+              </span>
             </div>
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">

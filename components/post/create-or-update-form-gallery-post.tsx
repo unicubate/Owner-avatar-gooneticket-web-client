@@ -147,7 +147,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
               className={`overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}
             >
               <div className="px-4 py-5">
-                <h2 className="text-black dark:text-white font-bold">
+                <h2 className="dark:text-white font-bold">
                   {post?.id ? "Update" : "Create a new"} gallery
                 </h2>
 
@@ -188,7 +188,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                                 maxCount={10}
                               >
                                 {imageList.length >= 10 ? null : (
-                                  <div className="text-center text-black dark:text-white">
+                                  <div className="text-center dark:text-white">
                                     <PlusOutlined />
                                     <div style={{ marginTop: 8 }}>
                                       Upload image
@@ -256,7 +256,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex items-center flex-1 min-w-0">
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-black dark:text-white">
+                          <p className="text-sm font-bold dark:text-white">
                             {" "}
                             Allow download{" "}
                           </p>

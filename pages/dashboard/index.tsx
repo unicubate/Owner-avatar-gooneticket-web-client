@@ -58,7 +58,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className="ml-4 cursor-pointer">
-                    <p className="text-xl font-bold text-black dark:text-white">
+                    <p className="text-xl font-bold dark:text-white">
                       {user?.profile?.firstName ?? ""}{" "}
                       {user?.profile?.lastName ?? ""}
                     </p>

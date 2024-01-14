@@ -14,7 +14,7 @@ const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
           profile={user?.profile}
         />
 
-        <p className="mt-6 text-lg font-bold text-black dark:text-white">
+        <p className="mt-6 text-lg font-bold dark:text-white">
           {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}{" "}
         </p>
         <p className="mt-2 text-sm font-medium text-gray-500">

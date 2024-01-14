@@ -42,7 +42,7 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
             {item?.id ? (
               <Link
                 href={`/posts/${item?.slug}`}
-                className="text-sm font-bold text-black dark:text-white cursor-pointer"
+                className="text-sm font-bold dark:text-white cursor-pointer"
               >
                 {item?.title ?? ""}
               </Link>

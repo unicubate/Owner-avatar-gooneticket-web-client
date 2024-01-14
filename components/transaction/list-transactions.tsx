@@ -46,11 +46,11 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
           </div>
         </td>
 
-        <td className="hidden text-sm text-left font-medium text-black dark:text-white lg:table-cell">
+        <td className="hidden text-sm text-left font-medium dark:text-white lg:table-cell">
           {item?.model.toLocaleLowerCase()}
         </td>
 
-        <td className="hidden text-sm text-right font-bold text-black dark:text-white lg:table-cell">
+        <td className="hidden text-sm text-right font-bold dark:text-white lg:table-cell">
           <SerialPrice
             className="text-sm"
             value={Number(item?.amount)}
@@ -74,7 +74,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
             size="small"
           />
           <div className="mt-1 lg:hidden pt-1">
-            <p className="inline-flex text-sm font-bold text-black dark:text-white">
+            <p className="inline-flex text-sm font-bold dark:text-white">
               <SerialPrice
                 className="text-sm"
                 value={Number(item?.amount)}

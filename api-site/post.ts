@@ -14,7 +14,7 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { RcFile } from 'antd/es/upload';
+import type { RcFile } from 'antd/es/upload/interface';
 
 export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess,

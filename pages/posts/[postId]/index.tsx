@@ -79,7 +79,7 @@ const PostShow = () => {
                           size={{xs: 50,sm: 50,md: 60,lg: 64,xl: 80,xxl: 100}}
                           profile={post?.profile}
                         />
-                        <p className="mt-4 text-lg font-bold text-black dark:text-white">
+                        <p className="mt-4 text-lg font-bold dark:text-white">
                           {post?.profile?.firstName ?? ""}{" "}
                           {post?.profile?.lastName ?? ""}{" "}
                         </p>

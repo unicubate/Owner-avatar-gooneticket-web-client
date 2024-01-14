@@ -11,6 +11,7 @@ import { ErrorFile } from "@/components/ui/error-file";
 import { useInView } from "react-intersection-observer";
 import { Suspense, useEffect } from "react";
 import { GetStaticPropsContext } from "next";
+import { FloatButton } from "antd";
 
 const Home = () => {
   const { ref, inView } = useInView();
@@ -67,6 +68,7 @@ const Home = () => {
 
           {dataTablePosts}
 
+          <FloatButton onClick={() => console.log('onClick')} />
             {hasNextPage && (
               <div className="mt-2 py-2 text-center justify-center mx-auto">
                 <div className="sm:mt-0">

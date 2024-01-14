@@ -194,7 +194,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
           <div className="px-4 py-5">
-            <h2 className="text-base font-bold text-black dark:text-white">
+            <h2 className="text-base font-bold dark:text-white">
               Create a New Product
             </h2>
 
@@ -240,7 +240,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                           maxCount={10}
                         >
                           {imageList.length >= 10 ? null : (
-                            <div className="text-center text-black dark:text-white">
+                            <div className="text-center dark:text-white">
                               <PlusOutlined />
                               <div style={{ marginTop: 8 }}>Upload</div>
                             </div>
@@ -352,7 +352,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             maxCount={10}
                           >
                             {fileList.length >= 10 ? null : (
-                              <Button className="text-center text-black dark:text-white" icon={<UploadOutlined />}>
+                              <Button className="text-center dark:text-white" icon={<UploadOutlined />}>
                                 Upload File
                               </Button>
                             )}
@@ -443,7 +443,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-black dark:text-white">
+                    <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Limit slots (optional){" "}
                     </p>
@@ -477,7 +477,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-black dark:text-white">
+                    <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Special price for members{" "}
                     </p>
@@ -497,7 +497,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-black dark:text-white">
+                    <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Allow buyer to choose a quantity{" "}
                     </p>

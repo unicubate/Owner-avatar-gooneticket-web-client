@@ -53,7 +53,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
         <div className="relative flex flex-col justify-between flex-1 ml-5">
           <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
             <div className="pr-9 sm:pr-5">
-              <p className="text-base font-bold text-black dark:text-white">
+              <p className="text-base font-bold dark:text-white">
                 {item?.product?.title ?? ""}
               </p>
               {/* <p className="mt-1.5 text-sm font-medium text-gray-500">Qty: {item?.quantity}</p> */}
@@ -63,7 +63,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="flex items-end justify-between mt-4 sm:justify-end sm:items-start sm:mt-0">
-              <p className="flex-shrink-0 w-20 text-base font-bold text-left text-black dark:text-white sm:text-right sm:ml-8 sm:order-2">
+              <p className="flex-shrink-0 w-20 text-base font-bold text-left dark:text-white sm:text-right sm:ml-8 sm:order-2">
                 {item?.product?.priceDiscount}{" "}
                 {item?.product?.currency?.code ?? ""}
               </p>

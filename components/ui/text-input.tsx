@@ -1,16 +1,17 @@
-import { Input } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { Input } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 
 interface Props {
   control: Control<any>;
   label?: string;
   name: string;
+  className?: string;
   min?: number;
   max?: number;
-  type: "text" | "email" | "password" | "url";
+  type: 'text' | 'email' | 'password' | 'url';
   errors: { [key: string]: any };
   placeholder?: string;
-  autoComplete?: "on" | "off";
+  autoComplete?: 'on' | 'off';
   required?: boolean;
   defaultValue?: string;
   pattern?: string;
@@ -23,12 +24,13 @@ const TextInput: React.FC<Props> = ({
   prefix,
   max,
   min,
-  label = "",
+  label = '',
   type,
   name,
   errors,
   pattern,
-  placeholder = "",
+  className,
+  placeholder = '',
   defaultValue,
   autoComplete,
   required,
@@ -38,7 +40,7 @@ const TextInput: React.FC<Props> = ({
     <>
       {label ? (
         <label
-          className="block text-black dark:text-white text-sm font-bold mb-2"
+          className="block dark:text-white text-sm font-bold mb-2"
           htmlFor={name}
         >
           {label}
@@ -50,7 +52,9 @@ const TextInput: React.FC<Props> = ({
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
           <Input
-            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${errors?.[name]?.message ? "border-red-500" : ""}`}
+            className={`${className} dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800 ${
+              errors?.[name]?.message ? 'border-red-500' : ''
+            }`}
             size="large"
             type={type}
             id={name}
@@ -59,7 +63,7 @@ const TextInput: React.FC<Props> = ({
             required={required}
             placeholder={placeholder}
             autoComplete={autoComplete}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             prefix={prefix}
             min={min}
             max={max}

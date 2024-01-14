@@ -56,7 +56,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           play: (
             <>
               <svg
-                className="w-10 h-10 text-black dark:text-white"
+                className="w-10 h-10 dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"
@@ -73,7 +73,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           pause: (
             <>
               <svg
-                className="w-10 h-10 text-black dark:text-white"
+                className="w-10 h-10 dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"

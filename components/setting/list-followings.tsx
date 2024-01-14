@@ -97,7 +97,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
               href={`/${item?.profile?.username}`}
               className="flex-1 min-w-0 ml-4 cursor-pointer"
             >
-              <p className="text-sm font-bold text-black dark:text-white">
+              <p className="text-sm font-bold dark:text-white">
                 {item?.profile?.firstName} {item?.profile?.lastName}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">

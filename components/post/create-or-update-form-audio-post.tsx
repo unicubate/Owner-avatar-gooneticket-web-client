@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, Controller } from "react-hook-form";
-import * as yup from "yup";
-import { ReactQuillInput, TextInput } from "../ui";
-import { ButtonInput } from "../ui/button-input";
-import { SelectSearchInput } from "../ui/select-search-input";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
-import { Button, Upload, UploadFile, UploadProps } from "antd";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
-import { SwitchInput } from "../ui/switch-input";
-import { filterImageAndFile } from "@/utils/utils";
-import { AudioPlayerInput } from "../ui/audio-player-Input";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { GetAllCategoriesAPI } from "@/api-site/category";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import { SubmitHandler, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { ReactQuillInput, TextInput } from '../ui';
+import { ButtonInput } from '../ui/button-input';
+import { SelectSearchInput } from '../ui/select-search-input';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
+import { Button, Upload, UploadFile, UploadProps } from 'antd';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
+import { SwitchInput } from '../ui/switch-input';
+import { filterImageAndFile } from '@/utils/utils';
+import { AudioPlayerInput } from '../ui/audio-player-Input';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import Link from 'next/link';
+import ImgCrop from 'antd-img-crop';
 
 type Props = {
   postId?: string;
@@ -27,12 +28,12 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  whoCanSee: yup.string().required("Who can see this post"),
+  whoCanSee: yup.string().required('Who can see this post'),
   description: yup.string().optional(),
   allowDownload: yup.string().optional(),
-  urlMedia: yup.string().when("enableUrlMedia", (enableUrlMedia, schema) => {
+  urlMedia: yup.string().when('enableUrlMedia', (enableUrlMedia, schema) => {
     if (enableUrlMedia[0] === true)
-      return yup.string().url().required("url is a required field");
+      return yup.string().url().required('url is a required field');
     return schema.nullable();
   }),
 });
@@ -60,27 +61,27 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchEnableUrlMedia = watch("enableUrlMedia", false);
+  const watchEnableUrlMedia = watch('enableUrlMedia', false);
 
   const { data: categories } = GetAllCategoriesAPI({
-    isPaginate: "false",
+    isPaginate: 'false',
     organizationId,
-    sort: "DESC",
+    sort: 'DESC',
     take: 100,
-    queryKey: ["categories"],
+    queryKey: ['categories'],
   });
 
   useEffect(() => {
     if (post) {
       const fields = [
-        "title",
-        "urlMedia",
-        "description",
-        "whoCanSee",
-        "type",
-        "categoryId",
-        "allowDownload",
-        "enableUrlMedia",
+        'title',
+        'urlMedia',
+        'description',
+        'whoCanSee',
+        'type',
+        'categoryId',
+        'allowDownload',
+        'enableUrlMedia',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -99,7 +100,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    data: PostFormModel
+    data: PostFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -118,17 +119,17 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 
       await saveMutation({
         ...payload,
-        type: "AUDIO",
+        type: 'AUDIO',
         postId: post?.id,
       });
 
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Post save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Post save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       back();
     } catch (error: any) {
@@ -137,18 +138,18 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
-  const handleFileChange: UploadProps["onChange"] = ({
+  const handleFileChange: UploadProps['onChange'] = ({
     fileList: newFileList,
   }) => setFileList(newFileList);
 
@@ -160,7 +161,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
             <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
               <div className="px-4 py-5">
                 <h2 className="text-black dark:text-white font-bold">
-                  {post?.id ? "Update" : "Create a new"} audio
+                  {post?.id ? 'Update' : 'Create a new'} audio
                 </h2>
                 <div className="mt-4">
                   <Controller
@@ -169,22 +170,26 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     render={({ field: { onChange } }) => (
                       <>
                         <div className="text-center justify-center mx-auto">
-                          <Upload
-                            multiple
-                            name="attachmentImages"
-                            listType="picture-card"
-                            fileList={imageList}
-                            onChange={handleImageChange}
-                            accept=".png,.jpg,.jpeg"
-                            maxCount={1}
-                          >
-                            {imageList.length >= 1 ? null : (
-                              <div className="text-center text-black dark:text-white">
-                                <PlusOutlined />
-                                <div style={{ marginTop: 8 }}>Upload cover</div>
-                              </div>
-                            )}
-                          </Upload>
+                          <ImgCrop  rotationSlider>
+                            <Upload
+                              multiple
+                              name="attachmentImages"
+                              listType="picture-card"
+                              fileList={imageList}
+                              onChange={handleImageChange}
+                              accept=".png,.jpg,.jpeg"
+                              maxCount={1}
+                            >
+                              {imageList.length >= 1 ? null : (
+                                <div className="text-center text-black dark:text-white">
+                                  <PlusOutlined />
+                                  <div style={{ marginTop: 8 }}>
+                                    Upload cover
+                                  </div>
+                                </div>
+                              )}
+                            </Upload>
+                          </ImgCrop>
                         </div>
                       </>
                     )}
@@ -290,8 +295,8 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                           <div className="flex items-center flex-1 min-w-0">
                             <div className="flex-1 min-w-0">
                               <p className="text-sm font-bold text-black dark:text-white">
-                                {" "}
-                                Allow download{" "}
+                                {' '}
+                                Allow download{' '}
                               </p>
                               <p className="mt-1 text-sm font-medium text-gray-500">
                                 allow everyone to download in original quality
