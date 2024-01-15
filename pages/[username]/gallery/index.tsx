@@ -37,7 +37,7 @@ const GalleryUserPublic = () => {
             <div className="max-w-full mx-auto py-6">
               {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
-              <div className="grid grid-cols-1 gap-4 px-8 mt-6 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-0">
+              {/* <div className="grid grid-cols-1 gap-4 px-8 mt-6 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-0">
                 
                 <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
                   <div className="p-4">
@@ -93,7 +93,7 @@ const GalleryUserPublic = () => {
                   </div>
                 </div>
 
-              </div>
+              </div> */}
 
               <div className="py-2 grid grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-3 sm:mt-12 sm:grid-cols-1 lg:grid-cols-3">
                 {user?.id && user?.profile.enableGallery ? (
