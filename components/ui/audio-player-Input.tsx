@@ -34,16 +34,16 @@ const AudioPlayerInput: React.FC<Props> = ({
               ? enableUrlMedia
                 ? urlMedia
                 : `${viewOneFileUploadAPI({
-                    folder: folder,
-                    fileName: uploads[0]?.path ?? '',
-                  })}`
+                  folder: folder,
+                  fileName: uploads[0]?.path ?? '',
+                })}`
               : ''
             : enableUrlMedia
               ? urlMedia
               : `${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: uploads[0]?.path ?? '',
-                })}`
+                folder: folder,
+                fileName: uploads[0]?.path ?? '',
+              })}`
         }
         // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/posts/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"
         layout="stacked-reverse"
@@ -56,7 +56,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           play: (
             <>
               <svg
-                className="w-10 h-10 dark:text-white"
+                className="w-10 h-10 text-black dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"
@@ -73,7 +73,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           pause: (
             <>
               <svg
-                className="w-10 h-10 dark:text-white"
+                className="w-10 h-10 text-black dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"
@@ -156,7 +156,7 @@ const AudioPlayerInput: React.FC<Props> = ({
         header={
           <>
             {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-            post?.isValidSubscribe !== 1 ? (
+              post?.isValidSubscribe !== 1 ? (
               <button className={`font-normal`}>
                 <HiOutlineLockClosed className="w-8 h-8" />
               </button>
@@ -166,12 +166,11 @@ const AudioPlayerInput: React.FC<Props> = ({
         footer={
           <>
             <span
-              className={`${
-                ['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-                post?.isValidSubscribe !== 1
+              className={`${['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
+                  post?.isValidSubscribe !== 1
                   ? 'absolute inset-0'
                   : ''
-              }`}
+                }`}
             />
           </>
         }
