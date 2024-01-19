@@ -5,7 +5,7 @@ import { useAuth } from "@/components/util/context-user";
 import { useEffect, useState } from "react";
 import { ButtonInput } from "@/components/ui-setting/ant";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
+import { SerialPrice } from "@/components/ui-setting/serial-price";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 import { GetStaticPropsContext } from "next";
 

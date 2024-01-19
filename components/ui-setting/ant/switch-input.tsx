@@ -1,4 +1,3 @@
-import { CheckOutlined, CloseOutlined, SmileOutlined } from "@ant-design/icons";
 import { Select, Switch } from "antd";
 import { Control, Controller } from "react-hook-form";
 const { Option } = Select;

@@ -1,5 +1,4 @@
-import { ButtonInput } from "./button-input";
-import { PiLockKey } from "react-icons/pi";
+import { ButtonInput } from "./ant/button-input";
 import { useRouter } from "next/router";
 import { HiOutlineLockClosed } from "react-icons/hi";
 

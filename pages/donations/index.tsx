@@ -3,7 +3,7 @@ import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
 import { useEffect, useState } from "react";
 import { useAuth } from "@/components/util/context-user";
-import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
+import { SerialPrice } from "@/components/ui-setting/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { ButtonInput } from "@/components/ui-setting/ant";
 import { TableTransactions } from "@/components/transaction/table-transactions";

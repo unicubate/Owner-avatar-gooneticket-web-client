@@ -13,7 +13,7 @@ import { UserModel } from "@/types/user.type";
 import { ColorType } from "@/types/profile.type";
 import { navigationPublicUser } from "./index";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "../ui-setting/ant/theme-toggle";
+import { ThemeToggle } from "../ui-setting/theme-toggle";
 
 interface Props {
   user?: UserModel;

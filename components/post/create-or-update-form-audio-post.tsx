@@ -12,7 +12,7 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { filterImageAndFile } from '@/utils/utils';
-import { AudioPlayerInput } from '../ui-setting/ant/audio-player-Input';
+import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { GetAllCategoriesAPI } from '@/api-site/category';
 import Link from 'next/link';

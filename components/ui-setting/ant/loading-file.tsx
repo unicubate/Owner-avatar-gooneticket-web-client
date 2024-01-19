@@ -1,4 +1,3 @@
-import { ColorType } from "@/types/profile.type";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Empty, Spin } from "antd";
 

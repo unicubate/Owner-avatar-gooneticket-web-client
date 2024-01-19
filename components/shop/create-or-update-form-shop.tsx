@@ -13,7 +13,6 @@ import {
   ReactQuillInput,
   SelectSearchInput,
   TextAreaInput,
-  TextInput,
 } from "../ui-setting/ant";
 import { ButtonInput } from "../ui-setting/ant/button-input";
 import {
@@ -35,6 +34,7 @@ import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { TextInput } from "../ui-setting/shadcn";
 
 const { Option } = Select;
 

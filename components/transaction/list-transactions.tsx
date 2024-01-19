@@ -6,7 +6,7 @@ import { BiDotsHorizontal } from "react-icons/bi";
 import { TransactionModel } from "@/types/transaction";
 import { formateFromNow } from "@/utils";
 import { AvatarCoffeeComponent, AvatarComponent } from "../ui-setting/ant";
-import { SerialPrice } from "../ui-setting/ant/serial-price";
+import { SerialPrice } from "../ui-setting/serial-price";
 import { useRouter } from "next/router";
 
 type Props = {

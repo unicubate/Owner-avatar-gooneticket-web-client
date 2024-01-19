@@ -4,7 +4,7 @@ import { Button } from "antd";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
 import { useRouter } from "next/router";
 import { useAuth } from "@/components/util/context-user";
-import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
+import { SerialPrice } from "@/components/ui-setting/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { useState } from "react";
 import { ButtonInput } from "@/components/ui-setting/ant";

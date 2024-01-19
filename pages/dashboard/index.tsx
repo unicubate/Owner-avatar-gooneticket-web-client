@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
-import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
+import { SerialPrice } from "@/components/ui-setting/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";
