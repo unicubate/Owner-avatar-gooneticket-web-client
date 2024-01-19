@@ -345,7 +345,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             multiple
                             name="attachmentFiles"
                             listType="picture"
-                            className="upload-list-inline"
+                            className="upload-list-inline dark:text-white"
                             fileList={fileList}
                             onChange={handleFileChange}
                             accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
