@@ -8,10 +8,11 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { TextInput, TextareaReactQuillInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { AlbumFormModel } from "@/types/album";
 import { CreateOrUpdateOneAlbumAPI } from "@/api-site/album";
+import { TextInput } from "../ui-setting/shadcn";
+import { TextareaReactQuillInput } from "../ui-setting";
 
 const schema = yup.object({
   name: yup.string().required(),

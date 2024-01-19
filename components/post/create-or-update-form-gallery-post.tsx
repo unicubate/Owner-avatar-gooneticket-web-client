@@ -14,11 +14,12 @@ import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
 import { filterImageAndFile } from "@/utils/utils";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { SwitchInput, TextInput, TextareaReactQuillInput } from "../ui-setting/ant";
-import { GetAllMembershipsAPI } from "@/api-site/membership";
+import { SwitchInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { GetAllCategoriesAPI } from "@/api-site/category";
 import Link from "next/link";
+import { TextareaReactQuillInput } from "../ui-setting";
+import { TextInput } from "../ui-setting/shadcn";
 
 const schema = yup.object({
   title: yup.string().optional(),

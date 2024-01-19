@@ -12,9 +12,9 @@ import 'swiper/css/pagination';
 // import required modules
 import { Zoom, Pagination } from 'swiper/modules';
 import Skeleton from 'react-loading-skeleton';
-import { ButtonInput, WhoCanSeeItem } from '../ui-setting/ant';
 import { PiLockKey } from 'react-icons/pi';
 import { PostModel } from '@/types/post';
+import { WhoCanSeeItem } from '../ui-setting';
 
 type Props = {
   uploads: UploadModel[];

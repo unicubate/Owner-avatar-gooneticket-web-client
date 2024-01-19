@@ -6,12 +6,13 @@ import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CommentFormModel } from "@/types/comment";
 import { CreateOrUpdateOneCommentAPI } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
-import { ButtonInput, TextareaReactQuillInput } from "../ui-setting/ant";
+import { ButtonInput } from "../ui-setting/ant";
 import { Avatar } from "antd";
 import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { ModelType } from "@/utils/pagination-item";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { LoginModal } from "../auth-modal/login-modal";
+import { TextareaReactQuillInput } from "../ui-setting";
 
 const schema = yup.object({
   description: yup.string().min(7).required(),

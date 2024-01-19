@@ -9,8 +9,8 @@ import {
   CreateOrUpdateOneCommentReplyAPI,
 } from "@/api-site/comment";
 import { useAuth } from "../util/context-user";
-import { TextareaReactQuillInput } from "../ui-setting/ant";
 import { ModelType } from "@/utils/pagination-item";
+import { TextareaReactQuillInput } from "../ui-setting";
 
 const schema = yup.object({
   description: yup.string().required(),

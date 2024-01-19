@@ -12,7 +12,7 @@ import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { CommissionFormModel } from '@/types/commission';
 import { CreateOrUpdateOneCommissionAPI } from '@/api-site/commission';
 import { useRouter } from 'next/router';
-import { TextareaReactQuillInput } from '../ui-setting/textarea-react-quill-input';
+import { TextareaReactQuillInput } from '../ui-setting';
 import { TextInput, NumberInput } from '../ui-setting/ant';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { useAuth } from '../util/context-user';
