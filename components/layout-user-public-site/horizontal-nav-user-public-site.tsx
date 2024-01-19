@@ -4,16 +4,16 @@ import { Dropdown, MenuProps } from "antd";
 import { usePathname } from "next/navigation";
 import { logoutUser, useAuth } from "../util/context-user";
 import { useState } from "react";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
-import { ButtonInput } from "../ui";
+import { ButtonInput } from "../ui-setting/ant";
 import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
 import { UserModel } from "@/types/user.type";
 import { ColorType } from "@/types/profile.type";
 import { navigationPublicUser } from "./index";
 import { useTranslations } from "next-intl";
-import { ThemeToggle } from "../ui/theme-toggle";
+import { ThemeToggle } from "../ui-setting/ant/theme-toggle";
 
 interface Props {
   user?: UserModel;

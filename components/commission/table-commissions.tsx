@@ -1,13 +1,13 @@
 import { Input } from "antd";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { useRouter } from "next/router";
-import { EmptyData } from "@/components/ui/empty-data";
+import { EmptyData } from "@/components/ui-setting/ant/empty-data";
 import { ListCommissions } from "@/components/commission/list-commissions";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
-import { LoadingFile } from "@/components/ui/loading-file";
-import { ErrorFile } from "../ui/error-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
+import { ErrorFile } from "../ui-setting/ant/error-file";
 import { RiShakeHandsLine } from "react-icons/ri";
 
 type Props = {

@@ -2,13 +2,13 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useAuth } from "@/components/util/context-user";
 import { useState } from "react";
-import { ButtonInput } from "@/components/ui/button-input";
-import { TextAreaInput } from "@/components/ui";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
+import { TextAreaInput } from "@/components/ui-setting/ant";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Radio } from "antd";
-import { SwitchInput } from "@/components/ui/switch-input";
+import { SwitchInput } from "@/components/ui-setting/ant/switch-input";
 import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
 import { GetStaticPropsContext } from "next";
 

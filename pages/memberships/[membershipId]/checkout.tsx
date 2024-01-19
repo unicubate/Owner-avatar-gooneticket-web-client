@@ -7,15 +7,15 @@ import { useState } from "react";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { useAuth } from "@/components/util/context-user";
 import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { formatePrice } from "@/utils";
 import { PrivateComponent } from "@/components/util/private-component";
 import { convertToPluralMonth } from "@/utils/utils";
 import { LayoutSite } from "@/components/layout-site";
-import { AvatarComponent } from "@/components/ui/avatar-component";
+import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
 import Skeleton from "react-loading-skeleton";
 import { GetStaticPropsContext } from "next";
 

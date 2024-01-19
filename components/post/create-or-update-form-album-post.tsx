@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import { SubmitHandler } from "react-hook-form";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { Alert } from "antd";
 import { useEffect } from "react";
 import {
@@ -8,7 +8,7 @@ import {
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
-import { TextInput, TextareaReactQuillInput } from "../ui";
+import { TextInput, TextareaReactQuillInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { AlbumFormModel } from "@/types/album";
 import { CreateOrUpdateOneAlbumAPI } from "@/api-site/album";

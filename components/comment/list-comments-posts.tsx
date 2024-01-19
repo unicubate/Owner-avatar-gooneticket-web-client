@@ -21,13 +21,13 @@ import { HtmlParser } from '@/utils/html-parser';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
 import { BsReplyAll } from 'react-icons/bs';
-import { AvatarComponent } from '../ui/avatar-component';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import Link from 'next/link';
 import { ModelType } from '@/utils/pagination-item';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useInView } from 'react-intersection-observer';
 import { useRouter } from 'next/router';
-import { LoadingFile } from '../ui';
+import { LoadingFile } from '../ui-setting/ant';
 
 type Props = {
   organizationId: string;

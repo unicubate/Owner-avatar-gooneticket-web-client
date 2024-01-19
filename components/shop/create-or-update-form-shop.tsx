@@ -14,14 +14,14 @@ import {
   SelectSearchInput,
   TextAreaInput,
   TextInput,
-} from "../ui";
-import { ButtonInput } from "../ui/button-input";
+} from "../ui-setting/ant";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
 import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { SwitchInput } from "../ui/switch-input";
+import { SwitchInput } from "../ui-setting/ant/switch-input";
 import {
   ProductFormModel,
   arrayProductTypes,

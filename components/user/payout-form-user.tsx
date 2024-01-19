@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { CreatePaymentFormCardUser } from "./create-payment-form-card-user";
 import { Skeleton } from "antd";
 import { GetInfinitePaymentsAPI } from "@/api-site/payment";
 import { ListPayments } from "../payment/list-payments";
 import { PaymentItemModel } from "@/types/payment";
 import { CreatePaymentPhoneFormCardUser } from "./create-payment-phone-form-card-user";
-import { ErrorFile } from "../ui/error-file";
+import { ErrorFile } from "../ui-setting/ant/error-file";
 
 const PayoutFormUser: React.FC = () => {
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);

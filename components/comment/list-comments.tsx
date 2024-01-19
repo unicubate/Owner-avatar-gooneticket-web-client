@@ -6,9 +6,9 @@ import { GetInfiniteCommentsAPI } from '@/api-site/comment';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/pagination-item';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useInView } from 'react-intersection-observer';
-import { LoadingFile } from '../ui';
+import { LoadingFile } from '../ui-setting/ant';
 
 const ListComments: React.FC<{
   take: number;

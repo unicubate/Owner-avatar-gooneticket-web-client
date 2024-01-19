@@ -5,7 +5,7 @@ import { Button } from "antd";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInputPassword } from "@/components/ui";
+import { TextInputPassword } from "@/components/ui-setting/ant";
 import { UserResetPasswordFormModel } from "@/types/user.type";
 import {
   AlertDangerNotification,
@@ -14,7 +14,7 @@ import {
 import { resetPasswordAPI } from "../../../api-site/user";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { LayoutSite } from "@/components/layout-site";
 import { GetStaticPropsContext } from "next";
 

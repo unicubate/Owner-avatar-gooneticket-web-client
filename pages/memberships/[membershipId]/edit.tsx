@@ -2,11 +2,11 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { useAuth } from "@/components/util/context-user";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { GetOneMembershipAPI } from "@/api-site/membership";
 import { CreateOrUpdateFormMembership } from "@/components/membership/create-or-update-form-membership";
 import { GetUploadsAPI } from "@/api-site/upload";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { GetStaticPropsContext } from "next";
 
 const ShopEdit = () => {

@@ -2,18 +2,18 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavCreatePost } from '@/components/post/horizontal-nav-create-post';
 import { useAuth } from '@/components/util/context-user';
-import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui';
+import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ListPosts } from '@/components/post/list-posts';
 import { useInView } from 'react-intersection-observer';
 import { Fragment, useEffect } from 'react';
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { PostModel } from '@/types/post';
 import { BiDetail } from 'react-icons/bi';
-import { ErrorFile } from '@/components/ui/error-file';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { Input } from 'antd';
 import { useInputState } from '@/components/hooks/use-input-state';
-import { SearchInput } from '../../components/ui/search-input';
+import { SearchInput } from '../../components/ui-setting/ant/search-input';
 
 const Posts = () => {
   const { userStorage: user } = useAuth() as any;

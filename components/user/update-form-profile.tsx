@@ -10,9 +10,9 @@ import {
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { SelectSearchInput } from '../ui/select-search-input';
-import { DateInput, TextAreaInput, TextInput } from '../ui';
-import { ButtonInput } from '../ui/button-input';
+import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
+import { DateInput, TextAreaInput, TextInput } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting/ant/button-input';
 import { ProfileFormModel, arrayColors } from '@/types/profile.type';
 import {
   AlertDangerNotification,

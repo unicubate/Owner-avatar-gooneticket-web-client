@@ -1,10 +1,10 @@
-import { TextAreaInput, TextInput } from "../ui";
+import { TextAreaInput, TextInput } from "../ui-setting/ant";
 import * as yup from "yup";
 import { SubmitHandler } from "react-hook-form";
 import { CloseOutlined } from "@ant-design/icons";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { useEffect } from "react";
-import { ButtonInput } from "../ui";
+import { ButtonInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { CreateOrUpdateOneCategoryAPI } from "@/api-site/category";
 import { CategoryFormModel } from "@/types/category";

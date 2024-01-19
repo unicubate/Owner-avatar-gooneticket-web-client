@@ -1,4 +1,4 @@
-import { ButtonInput } from "../ui";
+import { ButtonInput } from "../ui-setting/ant";
 import { PaymentCardFormModel } from "@/types/payment";
 
 import "react-credit-cards-2/dist/es/styles-compiled.css";

@@ -1,6 +1,6 @@
-import { TextInput } from "../ui";
+import { TextInput } from "../ui-setting/ant";
 import * as yup from "yup";
-import { ButtonInput } from "../ui";
+import { ButtonInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 import "react-credit-cards-2/dist/es/styles-compiled.css";

@@ -10,7 +10,7 @@ import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";
 import { LayoutSite } from "@/components/layout-site";
-import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui";
+import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui-setting/ant";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
 import { GetStaticPropsContext } from "next";

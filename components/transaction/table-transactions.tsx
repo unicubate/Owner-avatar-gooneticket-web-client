@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
-import { ButtonInput, EmptyData, LoadingFile } from '../ui';
+import { ButtonInput, EmptyData, LoadingFile } from '../ui-setting/ant';
 import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
 import { useInView } from 'react-intersection-observer';
 import { ListTransactions } from './list-transactions';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { BiTransfer } from 'react-icons/bi';
 import { ModelType } from '@/utils/pagination-item';
 import { Input } from 'antd';

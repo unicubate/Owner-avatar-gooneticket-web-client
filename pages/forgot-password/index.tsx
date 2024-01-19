@@ -11,9 +11,9 @@ import {
 } from "@/utils/alert-notification";
 import { passwordResetUserAPI } from "../../api-site/user";
 import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { LayoutSite } from "@/components/layout-site";
-import { TextInput } from "@/components/ui/text-input";
+import { TextInput } from "@/components/ui-setting/ant/text-input";
 import { GetStaticPropsContext } from "next";
 
 const schema = yup.object({

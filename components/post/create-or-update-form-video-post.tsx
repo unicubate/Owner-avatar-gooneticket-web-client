@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { ReactQuillInput, TextInput } from "../ui";
-import { ButtonInput } from "../ui/button-input";
-import { SelectSearchInput } from "../ui/select-search-input";
+import { ReactQuillInput, TextInput } from "../ui-setting/ant";
+import { ButtonInput } from "../ui-setting/ant/button-input";
+import { SelectSearchInput } from "../ui-setting/ant/select-search-input";
 import { PostFormModel, arrayWhoCanSees } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
 import { CreateOrUpdateOnePostAPI } from "@/api-site/post";

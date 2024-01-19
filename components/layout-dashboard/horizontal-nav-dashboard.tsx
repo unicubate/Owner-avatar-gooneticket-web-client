@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { usePathname } from "next/navigation";
-import { AvatarComponent } from "../ui/avatar-component";
-import { ThemeToggle } from "../ui/theme-toggle";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
+import { ThemeToggle } from "../ui-setting/ant/theme-toggle";
 
 export type NavbarProps = {
   title: string;

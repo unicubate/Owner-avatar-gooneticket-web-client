@@ -3,9 +3,9 @@ import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
 import { useAuth } from "@/components/util/context-user";
 import { useEffect, useState } from "react";
-import { ButtonInput } from "@/components/ui";
+import { ButtonInput } from "@/components/ui-setting/ant";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { SerialPrice } from "@/components/ui/serial-price";
+import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
 import { TableTransactions } from "@/components/transaction/table-transactions";
 import { GetStaticPropsContext } from "next";
 

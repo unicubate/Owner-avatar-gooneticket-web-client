@@ -5,7 +5,7 @@ import { Alert, Button, Checkbox, Input } from "antd";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput, TextInputPassword } from "@/components/ui";
+import { TextInput, TextInputPassword } from "@/components/ui-setting/ant";
 import { UserRegisterFormModel } from "@/types/user.type";
 import {
   loginUserAPI,
@@ -18,7 +18,7 @@ import {
 } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { LayoutSite } from "@/components/layout-site";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { GetStaticPropsContext } from "next";

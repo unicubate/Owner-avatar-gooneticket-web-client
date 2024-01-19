@@ -1,13 +1,13 @@
-import { TextInput } from "../ui";
+import { TextInput } from "../ui-setting/ant";
 import * as yup from "yup";
-import { ButtonInput } from "../ui";
+import { ButtonInput } from "../ui-setting/ant";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 import { CreateOnPaymentPI } from "@/api-site/payment";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { PhoneNumberInput } from "../ui";
+import { PhoneNumberInput } from "../ui-setting/ant";
 import { SubmitHandler } from "react-hook-form";
 
 const schema = yup.object({

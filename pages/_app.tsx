@@ -14,7 +14,7 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ContextUserProvider } from "@/components/util/context-user";
 import { ThemeProvider } from "@/components/util/theme-provider";
-import { LoadingFile } from "@/components/ui";
+import { LoadingFile } from "@/components/ui-setting/ant";
 import { NextIntlClientProvider } from "next-intl";
 
 import { Suspense } from "react";

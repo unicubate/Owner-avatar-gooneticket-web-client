@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AlertDangerNotification } from "@/utils";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
 import Swal from "sweetalert2";
 import { LoginModal } from "../auth-modal/login-modal";

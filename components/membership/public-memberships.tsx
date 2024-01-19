@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { useInView } from "react-intersection-observer";
 import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
 import { ListPublicMemberships } from "./list-public-memberships";
-import { LoadingFile } from "../ui/loading-file";
-import { ErrorFile } from "../ui/error-file";
+import { LoadingFile } from "../ui-setting/ant/loading-file";
+import { ErrorFile } from "../ui-setting/ant/error-file";
 
 
 type Props = {

@@ -4,18 +4,18 @@ import { Input, Skeleton } from 'antd';
 import { useState } from 'react';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { PlusOutlined } from '@ant-design/icons';
-import { ButtonInput } from '@/components/ui/button-input';
+import { ButtonInput } from '@/components/ui-setting/ant/button-input';
 import { ListDiscounts } from '@/components/discount/list-discounts';
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
 import { CreateOrUpdateCategory } from '@/components/category/create-or-update-category';
 import { ListCategories } from '@/components/category/list-categories';
-import { ErrorFile } from '@/components/ui/error-file';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetInfiniteCategoriesAPI } from '@/api-site/category';
 import { GetStaticPropsContext } from 'next';
 import { useAuth } from '@/components/util/context-user';
 import { useInputState } from '@/components/hooks/use-input-state';
-import { LoadingFile } from '@/components/ui';
+import { LoadingFile } from '@/components/ui-setting/ant';
 
 const Configs = () => {
   const { search, handleSetSearch } = useInputState();

@@ -9,7 +9,7 @@ import {
   formateFromNow,
 } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
 import { useAuth } from "../util/context-user";

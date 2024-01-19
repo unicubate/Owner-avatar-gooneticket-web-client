@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { TextInput } from '../ui';
-import { ButtonInput } from '../ui/button-input';
+import { TextInput } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting/ant/button-input';
 import { GetOneUserPrivateAPI } from '@/api-site/user';
 
 type Props = {

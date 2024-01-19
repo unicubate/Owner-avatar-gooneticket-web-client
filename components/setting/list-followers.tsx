@@ -3,10 +3,10 @@ import React, { Fragment, useState } from "react";
 import { Avatar } from "antd";
 import Link from "next/link";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { FollowModel } from "@/types/follow";
 import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 
 type Props = {
   item?: FollowModel;

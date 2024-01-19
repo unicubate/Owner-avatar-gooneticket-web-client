@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { HtmlParser } from "@/utils/html-parser";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { MembershipModel } from "@/types/membership";
 import { useRouter } from "next/router";

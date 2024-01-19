@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { CommentModel } from '@/types/comment';
-import { AvatarCoffeeComponent, AvatarComponent, LoadingFile } from '../ui';
+import { AvatarCoffeeComponent, AvatarComponent, LoadingFile } from '../ui-setting/ant';
 import Link from 'next/link';
 import { formateFromNow } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -12,7 +12,7 @@ import { Skeleton } from 'antd';
 import { ModelType } from '@/utils/pagination-item';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
 import { useAuth } from '../util/context-user';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useRouter } from 'next/router';
 
 const ListCommentTransactions: React.FC<{

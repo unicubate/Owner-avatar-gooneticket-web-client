@@ -5,9 +5,9 @@ import { useAuth } from '@/components/util/context-user';
 import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
 import { GetOneCommissionAPI } from '@/api-site/commission';
 import { GetUploadsAPI } from '@/api-site/upload';
-import { LoadingFile } from '@/components/ui/loading-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { GetStaticPropsContext } from 'next';
-import { ErrorFile } from '@/components/ui/error-file';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 
 const ShopEdit = () => {
   const { userStorage: user } = useAuth() as any;

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { CreateOnPaymentPI } from "@/api-site/payment";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { StripeProps } from "./create-payment-stripe";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";
-import { TextInput } from "@/components/ui";
+import { TextInput } from "@/components/ui-setting/ant";
 import * as yup from "yup";
 import { generateLongUUID } from "@/utils/generate-random";
 import { useReactHookForm } from "@/components/hooks/use-react-hook-form";

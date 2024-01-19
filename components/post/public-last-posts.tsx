@@ -6,7 +6,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { ListLastPosts } from "./list-last-posts";
 import { PostModel } from "@/types/post";
 import { UserVisitorModel } from "@/types/user.type";
-import { ErrorFile } from "../ui/error-file";
+import { ErrorFile } from "../ui-setting/ant/error-file";
 
 type Props = {
   userVisitor: UserVisitorModel;

@@ -1,13 +1,13 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { useState } from "react";
 import { CiGift, CiShop, CiUnlock, CiWallet } from "react-icons/ci";
 import Link from "next/link";
 import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
-import { AvatarComponent } from "@/components/ui/avatar-component";
-import { SerialPrice } from "@/components/ui/serial-price";
+import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
+import { SerialPrice } from "@/components/ui-setting/ant/serial-price";
 import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
 import { GetStaticPropsContext } from "next";
 import { useTranslations } from "next-intl";

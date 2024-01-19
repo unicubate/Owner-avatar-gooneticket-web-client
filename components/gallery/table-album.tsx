@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useRouter } from 'next/router';
 import { UserVisitorModel } from '@/types/user.type';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import Link from 'next/link';
 import { GetInfiniteAlbumsAPI } from '@/api-site/album';
 import { AlbumModel } from '@/types/album';

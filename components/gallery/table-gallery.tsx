@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ButtonInput } from '@/components/ui/button-input';
+import { ButtonInput } from '@/components/ui-setting/ant/button-input';
 import { useEffect, useState } from 'react';
-import { EmptyData } from '@/components/ui/empty-data';
+import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import ListGallery from '@/components/gallery/list-gallery';
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { useInView } from 'react-intersection-observer';
-import { LoadingFile } from '@/components/ui/loading-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useRouter } from 'next/router';
 import { UserVisitorModel } from '@/types/user.type';
 import { BiImage } from 'react-icons/bi';
-import { ErrorFile } from '../ui/error-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { queyParamsFunc } from '@/utils/generate-random';
 import { useInputState } from '../hooks/use-input-state';
-import { SearchInput } from '../ui/search-input';
+import { SearchInput } from '../ui-setting/ant/search-input';
 
 type Props = {
   albumId?: string;

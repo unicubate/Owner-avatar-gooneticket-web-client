@@ -13,7 +13,7 @@ import { FiDownload } from "react-icons/fi";
 import { useAuth } from "../util/context-user";
 import Link from "next/link";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { WhoCanSeeItem } from "../ui";
+import { WhoCanSeeItem } from "../ui-setting/ant";
 
 type Props = {
   item?: PostModel;

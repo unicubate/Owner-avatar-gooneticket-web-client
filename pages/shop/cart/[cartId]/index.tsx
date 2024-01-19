@@ -1,7 +1,7 @@
 "use client";
 
 import { Image } from "antd";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
 import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
@@ -10,9 +10,9 @@ import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInput, LoadingFile } from "@/components/ui";
+import { TextInput, LoadingFile } from "@/components/ui-setting/ant";
 import { GetAllCountiesAPI } from "@/api-site/profile";
-import { SelectSearchInput } from "@/components/ui/select-search-input";
+import { SelectSearchInput } from "@/components/ui-setting/ant/select-search-input";
 import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { GetUploadsAPI } from "@/api-site/upload";

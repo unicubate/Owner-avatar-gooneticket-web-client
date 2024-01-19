@@ -2,12 +2,12 @@
 
 import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { GetInfiniteFollowsPostsAPI } from "@/api-site/post";
 import { ListFollowPosts } from "@/components/post/list-follow-posts";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { useAuth } from "@/components/util/context-user";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { useInView } from "react-intersection-observer";
 import { Suspense, useEffect } from "react";
 import { GetStaticPropsContext } from "next";

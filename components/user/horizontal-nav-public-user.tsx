@@ -1,5 +1,5 @@
 import React from "react";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { UserModel } from "@/types/user.type";
 import { useTranslations } from "next-intl";
 

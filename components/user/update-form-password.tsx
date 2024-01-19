@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { TextInputPassword } from "../ui";
-import { ButtonInput } from "../ui/button-input";
+import { TextInputPassword } from "../ui-setting/ant";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 
 type Props = {
   userId: string;

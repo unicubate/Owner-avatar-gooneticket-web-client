@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { useAuth } from "@/components/util/context-user";
-import { SwitchInput } from "@/components/ui/switch-input";
+import { SwitchInput } from "@/components/ui-setting/ant/switch-input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

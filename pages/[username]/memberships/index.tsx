@@ -1,11 +1,11 @@
 import { GetOneUserPublicAPI } from "@/api-site/user";
 import { useRouter } from "next/router";
 import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { PublicMemberships } from "@/components/membership/public-memberships";
 import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { useAuth } from "@/components/util/context-user";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
 import { GetStaticPropsContext } from "next";
 

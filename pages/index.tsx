@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react';
-import { ButtonInput } from '@/components/ui/button-input';
+import { ButtonInput } from '@/components/ui-setting/ant/button-input';
 import { LayoutSite } from '@/components/layout-site';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';

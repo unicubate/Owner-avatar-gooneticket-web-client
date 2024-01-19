@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from "react";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { useInView } from "react-intersection-observer";
 import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
 import ListPublicCommissions from "./list-public-commissions";
-import { LoadingFile } from "../ui/loading-file";
+import { LoadingFile } from "../ui-setting/ant/loading-file";
 
 
 type Props = {

@@ -16,10 +16,10 @@ import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
-import { AudioPlayerInput } from "../ui/audio-player-Input";
+import { AudioPlayerInput } from "../ui-setting/ant/audio-player-Input";
 import { useRouter } from "next/router";
-import { ButtonInput } from "../ui";
-import { AvatarComponent } from "../ui/avatar-component";
+import { ButtonInput } from "../ui-setting/ant";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { UserVisitorModel } from "@/types/user.type";
 
 type Props = {

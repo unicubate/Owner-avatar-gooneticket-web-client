@@ -6,8 +6,8 @@ import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
 import { usePathname } from "next/navigation";
 import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
 import { useState } from "react";
-import { AvatarComponent } from "../ui/avatar-component";
-import { ButtonInput } from "../ui";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
+import { ButtonInput } from "../ui-setting/ant";
 
 export type NavbarProps = {
   title: string;

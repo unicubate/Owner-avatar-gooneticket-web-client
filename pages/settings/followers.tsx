@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { Input, Skeleton } from "antd";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { useEffect } from "react";
 import { GetInfiniteFollowersAPI } from "@/api-site/follow";
 import ListFollowers from "@/components/setting/list-followers";

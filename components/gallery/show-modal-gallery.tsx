@@ -16,8 +16,8 @@ import { downloadOneFileUploadAPI } from "@/api-site/upload";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
 import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import { GetOnePostAPI } from "@/api-site/post";
-import { AvatarComponent } from "../ui/avatar-component";
-import { ButtonInput } from "../ui";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
+import { ButtonInput } from "../ui-setting/ant";
 
 type Props = {
   openModal: boolean;

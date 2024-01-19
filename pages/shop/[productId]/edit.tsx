@@ -4,10 +4,10 @@ import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
 import { useAuth } from "@/components/util/context-user";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { GetUploadsAPI } from "@/api-site/upload";
 import { Button, Result } from "antd";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { GetStaticPropsContext } from "next";
 
 const ShopEdit = () => {

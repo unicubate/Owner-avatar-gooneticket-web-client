@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { Select, Upload, UploadFile, UploadProps } from 'antd';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
-import { ButtonInput } from '../ui/button-input';
+import { ButtonInput } from '../ui-setting/ant/button-input';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { PlusOutlined } from '@ant-design/icons';
-import { SwitchInput } from '../ui/switch-input';
+import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { CommissionFormModel } from '@/types/commission';
 import { CreateOrUpdateOneCommissionAPI } from '@/api-site/commission';
 import { useRouter } from 'next/router';
-import { TextareaReactQuillInput } from '../ui/textarea-react-quill-input';
-import { TextInput, NumberInput } from '../ui';
+import { TextareaReactQuillInput } from '../ui-setting/ant/textarea-react-quill-input';
+import { TextInput, NumberInput } from '../ui-setting/ant';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { useAuth } from '../util/context-user';
 import { filterImageAndFile } from '@/utils/utils';

@@ -13,7 +13,7 @@ import {
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { AvatarComponent } from "../ui/avatar-component";
+import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import Link from "next/link";
 import { ModelType } from "@/utils/pagination-item";
 import { useRouter } from "next/router";

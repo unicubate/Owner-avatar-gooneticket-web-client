@@ -11,7 +11,7 @@ import {
   TextAreaInput,
   TextInput,
   TextInputPassword,
-} from "@/components/ui";
+} from "@/components/ui-setting/ant";
 import { UserRegisterFormModel } from "@/types/user.type";
 import {
   AlertDangerNotification,
@@ -22,7 +22,7 @@ import { resendCodeAPI, ValidCodeAPI } from "@/api-site/user";
 import { useQuery } from "@tanstack/react-query";
 import { PrivateComponent } from "@/components/util/private-component";
 import { useAuth } from "@/components/util/context-user";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({

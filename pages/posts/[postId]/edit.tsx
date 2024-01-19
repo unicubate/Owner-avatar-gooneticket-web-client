@@ -7,9 +7,9 @@ import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-
 import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { useAuth } from "@/components/util/context-user";
 import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { GetUploadsAPI } from "../../../api-site/upload";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { GetStaticPropsContext } from "next";
 
 const PostsEdit = () => {

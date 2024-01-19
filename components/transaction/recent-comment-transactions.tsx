@@ -5,8 +5,8 @@ import { CommentModel } from "@/types/comment";
 import { GetInfiniteCommentsAPI } from "@/api-site/comment";
 import { ListCommentTransactions } from "../comment/list-comments-transactions";
 import { ModelType } from "@/utils/pagination-item";
-import { ButtonInput } from "../ui";
-import { ErrorFile } from "../ui/error-file";
+import { ButtonInput } from "../ui-setting/ant";
+import { ErrorFile } from "../ui-setting/ant/error-file";
 import { useInView } from "react-intersection-observer";
 
 const RecentCommentTransactions: React.FC<{

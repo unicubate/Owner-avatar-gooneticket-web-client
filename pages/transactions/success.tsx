@@ -1,6 +1,6 @@
 import { Result } from "antd";
 import { useRouter } from "next/router";
-import { ButtonInput } from "@/components/ui/button-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { GetStaticPropsContext } from "next";
 
 const TransactionSuccess = () => {

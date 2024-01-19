@@ -1,10 +1,10 @@
 import * as yup from "yup";
 import { Controller, SubmitHandler } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { Alert, Upload, UploadFile, UploadProps } from "antd";
 import { useEffect, useState } from "react";
-import { SelectSearchInput } from "../ui/select-search-input";
+import { SelectSearchInput } from "../ui-setting/ant/select-search-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -14,7 +14,7 @@ import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
 import { filterImageAndFile } from "@/utils/utils";
 import { useRouter } from "next/router";
 import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { SwitchInput, TextInput, TextareaReactQuillInput } from "../ui";
+import { SwitchInput, TextInput, TextareaReactQuillInput } from "../ui-setting/ant";
 import { GetAllMembershipsAPI } from "@/api-site/membership";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { GetAllCategoriesAPI } from "@/api-site/category";

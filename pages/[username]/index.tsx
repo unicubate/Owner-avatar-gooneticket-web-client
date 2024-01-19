@@ -6,11 +6,11 @@ import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateFormPublicDonation } from "@/components/donation/create-form-public-donation";
 import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
-import { LoadingFile } from "@/components/ui";
+import { LoadingFile } from "@/components/ui-setting/ant";
 import ContentLoader from "react-content-loader";
 import Skeleton from "react-loading-skeleton";
 import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { ErrorFile } from "@/components/ui/error-file";
+import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { GetStaticPropsContext } from "next";
 
 const ProfilePublic = () => {

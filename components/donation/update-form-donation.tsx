@@ -1,11 +1,11 @@
-import { NumberInput, TextInput } from "../ui";
+import { NumberInput, TextInput } from "../ui-setting/ant";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui/button-input";
+import { ButtonInput } from "../ui-setting/ant/button-input";
 import { useEffect, useState } from "react";
-import { TextareaReactQuillInput } from "../ui/textarea-react-quill-input";
+import { TextareaReactQuillInput } from "../ui-setting/ant/textarea-react-quill-input";
 import { useRouter } from "next/router";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { CreateOrUpdateOneMembershipAPI } from "@/api-site/membership";

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { DateInput, TextAreaInput, TextInput } from "@/components/ui";
+import { DateInput, TextAreaInput, TextInput } from "@/components/ui-setting/ant";
 import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PrivateComponent } from "@/components/util/private-component";
@@ -14,8 +14,8 @@ import {
 } from "@/api-site/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
 import { GetOneUserPublicAPI, resendCodeAPI } from "@/api-site/user";
-import { SelectSearchInput } from "@/components/ui/select-search-input";
-import { ButtonInput } from "@/components/ui/button-input";
+import { SelectSearchInput } from "@/components/ui-setting/ant/select-search-input";
+import { ButtonInput } from "@/components/ui-setting/ant/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 const schema = yup.object({
