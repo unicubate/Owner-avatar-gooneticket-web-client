@@ -4,7 +4,6 @@ import Link from "next/link";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { useRouter } from "next/router";
 import { UserModel } from "@/types/user.type";
-import { navigationPublicUser } from "../layout-user-public-site";
 import { useTranslations } from "next-intl";
 
 const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
