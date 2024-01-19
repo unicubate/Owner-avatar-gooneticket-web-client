@@ -1,4 +1,12 @@
-import { UploadFile } from "antd";
+import { UploadFile } from 'antd';
+
+import { clsx, type ClassValue } from 'clsx';
+
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 
 export interface KeyAsString {
   [key: string]: string;
@@ -9,7 +17,7 @@ export interface KeyAsStringNumber {
 }
 
 export const capitalizeName = (s: string) => {
-  if (typeof s !== "string") return "";
+  if (typeof s !== 'string') return '';
   const v = s.toLowerCase();
   return v.charAt(0).toUpperCase() + v.slice(1);
 };
@@ -25,7 +33,7 @@ export const convertToPluralMonth = (value: number): string =>
 /** Fix date */
 export const capitalizeOneFirstLetter = (a: string, b?: string) => {
   const fistLetter = capitalizeName(a).substring(0, 1).toUpperCase();
-  const secondLetter = capitalizeName(b || "")
+  const secondLetter = capitalizeName(b || '')
     .substring(0, 1)
     .toUpperCase();
   return `${fistLetter}${secondLetter}`;
@@ -37,9 +45,10 @@ export const truncateInput = (input: string, value: number) => {
 };
 
 export const truncateInputCard = (input: string, value: number) => {
-  return input?.length > value ? `${input.substring(0, value)} XXXX XXXX` : input;
+  return input?.length > value
+    ? `${input.substring(0, value)} XXXX XXXX`
+    : input;
 };
-
 
 export const filterImageAndFile = (options: {
   imageList?: UploadFile[];
@@ -50,13 +59,13 @@ export const filterImageAndFile = (options: {
   const { imageList, fileList } = options;
 
   imageList
-    ?.filter((file: any) => file?.status === "success")
+    ?.filter((file: any) => file?.status === 'success')
     .forEach((file: any) => {
       newImageLists.push(file);
     });
 
   fileList
-    ?.filter((file: any) => file?.status === "success")
+    ?.filter((file: any) => file?.status === 'success')
     .forEach((file: any) => {
       newFileLists.push(file);
     });
