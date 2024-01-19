@@ -1,13 +1,10 @@
-import Link from "next/link";
-import { BiHomeCircle, BiSearch, BiBookContent } from "react-icons/bi";
-import { VscOpenPreview } from "react-icons/vsc";
-import { useRouter } from "next/router";
-import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
-import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
-import { useState } from "react";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ButtonInput } from "../ui-setting/ant";
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { MenuProps } from 'antd';
+import { usePathname } from 'next/navigation';
+import { logoutUser } from '../util/context-user';
+import { ButtonInput } from '../ui-setting/ant';
+import { cn } from '@/lib/utils';
 
 export type NavbarProps = {
   title: string;
@@ -16,13 +13,13 @@ export type NavbarProps = {
   icon?: any;
 };
 
-const items: MenuProps["items"] = [
+const items: MenuProps['items'] = [
   {
-    key: "1",
+    key: '1',
     label: <Link href="/dashboard">Dashboard</Link>,
   },
   {
-    key: "2",
+    key: '2',
     label: (
       <a href={void 0} title="" onClick={() => logoutUser()}>
         Logout
@@ -33,20 +30,20 @@ const items: MenuProps["items"] = [
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
-    title: "Explore",
-    href: "/explore",
+    title: 'Explore',
+    href: '/explore',
   },
   {
-    title: "Faq",
-    href: "/faqs",
+    title: 'Faq',
+    href: '/faqs',
   },
   {
-    title: "about",
-    href: "/about",
+    title: 'about',
+    href: '/about',
   },
   {
-    title: "Contact",
-    href: "/contact-us",
+    title: 'Contact',
+    href: '/contact-us',
   },
 ];
 
@@ -61,17 +58,23 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white dark:bg-[#121212] border-gray-300 sticky top-0 z-20">
-        <div className="container px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center -m-2 xl:hidden">
+      <header
+        className={cn(
+          'bg-white dark:bg-[#121212] border-gray-300 sticky top-0 z-20',
+        )}
+      >
+        <div className={cn('container px-4 mx-auto sm:px-6 lg:px-8')}>
+          <div className={cn('flex justify-between h-16')}>
+            <div className={cn('flex items-center -m-2 xl:hidden')}>
               <button
                 onClick={showDrawer}
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-gray-400 dark:text-white bg-white dark:bg-[#121212] rounded-lg dark:hover:text-gray-500 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600"
+                className={cn(
+                  'inline-flex items-center justify-center p-2 text-gray-400 dark:text-white bg-white dark:bg-[#121212] rounded-lg dark:hover:text-gray-500 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600',
+                )}
               >
                 <svg
-                  className="w-6 h-6"
+                  className={cn("w-6 h-6")}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -87,7 +90,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
               </button>
             </div>
 
-            <div className="flex ml-6 mr-auto xl:ml-0">
+            <div className={cn('flex ml-6 mr-auto xl:ml-0')}>
               {/* <div className="flex items-center flex-shrink-0">
                 <Image
                   preview={false}
@@ -103,7 +106,9 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                 />
               </div> */}
 
-              <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
+              <div
+                className={cn('hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10')}
+              >
                 {NAVIGATION_ITEMS.map((item: any, index: number) => {
                   const isActive = pathname === item.href;
                   return (
@@ -111,15 +116,17 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
-                        isActive
-                          ? `text-${
-                              user?.profile?.color ?? "indigo"
-                            }-600 border-${
-                              user?.profile?.color ?? "indigo"
-                            }-600`
-                          : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
-                      } `}
+                      className={cn(
+                        `inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
+                          isActive
+                            ? `text-${
+                                user?.profile?.color ?? 'indigo'
+                              }-600 border-${
+                                user?.profile?.color ?? 'indigo'
+                              }-600`
+                            : 'border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300'
+                        } `,
+                      )}
                     >
                       {item?.icon}
 
@@ -157,7 +164,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end">
+            <div className={cn('flex items-center justify-end')}>
               {/* <div className="flex-1 hidden max-w-xs ml-auto lg:block">
                     <label className="sr-only"> Search </label>
                     <div className="relative">
@@ -171,7 +178,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                     </div>
                 </div> */}
 
-              <div className="flex items-center space-x-6 sm:ml-5">
+              <div className={cn('flex items-center space-x-6 sm:ml-5')}>
                 <div className="relative">
                   <ButtonInput
                     status="cancel"

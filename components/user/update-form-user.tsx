@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { TextInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/ant/button-input';
 import { GetOneUserPrivateAPI } from '@/api-site/user';
+import { cn } from '@/lib/utils';
+import { TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   userId: string;
@@ -52,11 +53,19 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
-          <div className="px-4 py-5">
-            <h2 className="text-base font-bold"> Personal Info </h2>
+        <div
+          className={cn(
+            'mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg',
+          )}
+        >
+          <div className={cn('px-4 py-5')}>
+            <h2 className={cn('text-base font-bold')}> Personal Info </h2>
 
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6">
+            <div
+              className={cn(
+                'grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6',
+              )}
+            >
               <div className="mt-2">
                 <TextInput
                   control={control}
@@ -65,7 +74,6 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
                   name="username"
                   placeholder="username"
                   errors={errors}
-                  prefix={`${process.env.NEXT_PUBLIC_SITE}/`}
                 />
 
                 {/* <div className="relative mt-2">
@@ -89,7 +97,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
               </div>
             </div>
 
-            <div className="flex items-center mt-4 mb-2 space-x-4">
+            <div className={cn('flex items-center mt-4 mb-2 space-x-4')}>
               <ButtonInput
                 shape="default"
                 type="submit"
