@@ -9,7 +9,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Button, Input, Menu, Modal } from "antd";
+import { Button, Image, Input, Menu, Modal } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -93,7 +93,7 @@ const Integrations = () => {
     <div className="hidden xl:fixed xl:inset-y-0 xl:flex xl:w-64 xl:flex-col">
         <div className="flex grow flex-col overflow-y-auto bg-gray-900 pt-5">
             <div className="flex shrink-0 items-center px-4">
-                <img className="h-8 w-auto" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-alt.svg" alt="" />
+                <Image className="h-8 w-auto" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-alt.svg" alt="" />
             </div>
 
             <div className="mt-8 flex flex-1 flex-col px-3">
@@ -178,7 +178,7 @@ const Integrations = () => {
 
                 <div className="mt-auto pb-4">
                     <button type="button" className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-white transition-all duration-200 hover:bg-gray-700">
-                        <img className="mr-3 size-6 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/4/avatar-female.png" alt="" />
+                        <Image className="mr-3 size-6 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/4/avatar-female.png" alt="" />
                         Mariana Jones
                         <svg className="ml-auto size-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
@@ -203,7 +203,7 @@ const Integrations = () => {
 
                     <div className="ml-4 mr-auto flex xl:ml-0">
                         <div className="flex shrink-0 items-center">
-                            <img className="block h-8 w-auto xl:hidden" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo.svg" alt="" />
+                            <Image className="block h-8 w-auto xl:hidden" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo.svg" alt="" />
                         </div>
                     </div>
 
@@ -239,7 +239,7 @@ const Integrations = () => {
                         </div>
 
                         <button type="button" className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 xl:hidden">
-                            <img className="size-9 rounded-full bg-gray-300 object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/2/avatar-male.png" alt="" />
+                            <Image className="size-9 rounded-full bg-gray-300 object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/2/avatar-male.png" alt="" />
                         </button>
                     </div>
                 </div>
@@ -274,7 +274,7 @@ const Integrations = () => {
                     <div className="mt-8 rounded-lg border border-indigo-300 bg-indigo-50">
                         <div className="px-4 py-5 sm:p-6">
                             <div className="md:flex md:items-center md:justify-between">
-                                <img className="size-16 shrink-0 rounded-lg object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png" alt="" />
+                                <Image className="size-16 shrink-0 rounded-lg object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png" alt="" />
                                 <div className="mt-4 max-w-xs flex-1 md:ml-6 md:mt-0">
                                     <p className="text-base font-bold text-gray-900">Learn how to connect new apps with Rareblocks API</p>
                                     <p className="mt-1 text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consec tetur.</p>
@@ -319,7 +319,7 @@ const Integrations = () => {
                             <div className="py-5">
                                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                                     <div className="flex min-w-0 flex-1 items-center">
-                                        <img className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" />
+                                        <Image className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" />
                                         <div className="ml-4 min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-gray-900">Mailchimp</p>
                                             <p className="mt-1 truncate text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectetur adipis.</p>
@@ -348,7 +348,7 @@ const Integrations = () => {
                             <div className="py-5">
                                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                                     <div className="flex min-w-0 flex-1 items-center">
-                                        <img className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" />
+                                        <Image className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" />
                                         <div className="ml-4 min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-gray-900">Zapier</p>
                                             <p className="mt-1 truncate text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectes.</p>
@@ -377,7 +377,7 @@ const Integrations = () => {
                             <div className="py-5">
                                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                                     <div className="flex min-w-0 flex-1 items-center">
-                                        <img className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" />
+                                        <Image className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" />
                                         <div className="ml-4 min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-gray-900">Telegram</p>
                                             <p className="mt-1 truncate text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet.</p>
@@ -406,7 +406,7 @@ const Integrations = () => {
                             <div className="py-5">
                                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                                     <div className="flex min-w-0 flex-1 items-center">
-                                        <img className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" />
+                                        <Image className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" />
                                         <div className="ml-4 min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-gray-900">Slack</p>
                                             <p className="mt-1 truncate text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet, consectetur adipis.</p>
@@ -435,7 +435,7 @@ const Integrations = () => {
                             <div className="py-5">
                                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                                     <div className="flex min-w-0 flex-1 items-center">
-                                        <img className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" />
+                                        <Image className="size-10 shrink-0 rounded-full object-cover" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" />
                                         <div className="ml-4 min-w-0 flex-1">
                                             <p className="truncate text-sm font-bold text-gray-900">Dropbox</p>
                                             <p className="mt-1 truncate text-sm font-medium text-gray-500">Lorem ipsum dolor sit amet adipis.</p>

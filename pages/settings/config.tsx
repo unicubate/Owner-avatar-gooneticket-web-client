@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { GetStaticPropsContext } from "next";
+import { Image } from "antd";
 
 const schema = yup.object({
   confirmSwitch: yup.boolean().optional(),
@@ -71,7 +72,7 @@ const Configs = () => {
                 <div className="mt-8 rounded-lg border border-indigo-300 bg-indigo-50">
                   <div className="px-4 py-5 sm:p-6">
                     <div className="md:flex md:items-center md:justify-between">
-                      <img
+                      <Image
                         className="size-16 shrink-0 rounded-lg object-cover"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png"
                         alt=""
@@ -131,7 +132,7 @@ const Configs = () => {
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
+                              {/* <Image className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
                               <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Mailchimp
@@ -165,7 +166,7 @@ const Configs = () => {
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
+                              {/* <Image className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
                               <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Zapier
@@ -199,7 +200,7 @@ const Configs = () => {
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
+                              {/* <Image className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
                               <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Telegram
@@ -232,7 +233,7 @@ const Configs = () => {
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
+                              {/* <Image className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
                               <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Slack
@@ -267,7 +268,7 @@ const Configs = () => {
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                             <div className="flex min-w-0 flex-1 items-center">
-                              {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
+                              {/* <Image className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
                               <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Dropbox

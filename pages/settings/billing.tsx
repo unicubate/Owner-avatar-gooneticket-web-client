@@ -2,7 +2,7 @@ import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button, Card, Col, Pagination, Row } from "antd";
+import { Button, Card, Col, Image, Pagination, Row } from "antd";
 import { DeleteOutlined, DownloadOutlined, EditOutlined, FundViewOutlined, PoweroffOutlined } from "@ant-design/icons";
 
 
@@ -174,7 +174,7 @@ const Billing = () => {
 
                                                                     <td className="px-4 py-4 text-sm font-bold text-gray-900 whitespace-nowrap">
                                                                         <div className="inline-flex items-center">
-                                                                            <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-ecommerce-logo.png" alt="" />
+                                                                            <Image className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-ecommerce-logo.png" alt="" />
                                                                             Clarity eCommerce UI Kit
                                                                         </div>
                                                                         <div className="space-y-1 lg:hidden pl-11">
@@ -221,7 +221,7 @@ const Billing = () => {
 
                                                                     <td className="px-4 py-4 text-sm font-bold text-gray-900 whitespace-nowrap">
                                                                         <div className="inline-flex items-center">
-                                                                            <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-ecommerce-logo.png" alt="" />
+                                                                            <Image className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-ecommerce-logo.png" alt="" />
                                                                             Clarity eCommerce UI Kit
                                                                         </div>
                                                                         <div className="space-y-1 lg:hidden pl-11">
@@ -268,7 +268,7 @@ const Billing = () => {
 
                                                                     <td className="px-4 py-4 text-sm font-bold text-gray-900 whitespace-nowrap">
                                                                         <div className="inline-flex items-center">
-                                                                            <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-landing-logo.png" alt="" />
+                                                                            <Image className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/table-list/1/clarity-landing-logo.png" alt="" />
                                                                             Clarity Landing UI Kit
                                                                         </div>
                                                                         <div className="space-y-1 lg:hidden pl-11">
@@ -352,7 +352,7 @@ const Billing = () => {
                                                         <tr key={index} className="bg-white">
                                                             <td className="whitespace-nowrap p-4 align-top text-sm font-bold text-gray-900 lg:align-middle">
                                                                 <div className="flex items-center">
-                                                                    <img className="mr-3 size-8 shrink-0 rounded-full object-cover" src={person?.image} alt="" />
+                                                                    <Image className="mr-3 size-8 shrink-0 rounded-full object-cover" src={person?.image} alt="" />
                                                                     {person?.name}
                                                                 </div>
                                                             </td>

@@ -1,6 +1,7 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { LayoutDashboard } from "@/components/layout-dashboard";
+import { Image } from "antd";
 
 const Gifts = () => {
   const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -88,7 +89,7 @@ const Gifts = () => {
 
                                                 <div className="relative px-4 py-5">
                                                     <div className="flex items-start">
-                                                        <img className="h-6 w-auto shrink-0 rounded-md" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/select-box/3/visa-logo.png" alt="" />
+                                                        <Image className="h-6 w-auto shrink-0 rounded-md" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/select-box/3/visa-logo.png" alt="" />
 
                                                         <div className="ml-4">
                                                             <p className="text-sm font-bold text-gray-900">Visa ending 4331</p>
@@ -115,7 +116,7 @@ const Gifts = () => {
 
                                                 <div className="relative px-4 py-5">
                                                     <div className="flex items-start">
-                                                        <img className="h-6 w-auto shrink-0 rounded-md" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/select-box/3/visa-logo.png" alt="" />
+                                                        <Image className="h-6 w-auto shrink-0 rounded-md" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/select-box/3/visa-logo.png" alt="" />
 
                                                         <div className="ml-4">
                                                             <p className="text-sm font-bold text-gray-900">Visa ending 5442</p>
