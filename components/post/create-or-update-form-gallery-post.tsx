@@ -4,7 +4,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import { ButtonInput } from "../ui-setting/ant/button-input";
 import { Alert, Upload, UploadFile, UploadProps } from "antd";
 import { useEffect, useState } from "react";
-import { SelectSearchInput } from "../ui-setting/ant/select-search-input";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -19,7 +18,7 @@ import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { GetAllCategoriesAPI } from "@/api-site/category";
 import Link from "next/link";
 import { TextareaReactQuillInput } from "../ui-setting";
-import { TextInput } from "../ui-setting/shadcn";
+import { TextInput, SelectInput } from "../ui-setting/shadcn";
 
 const schema = yup.object({
   title: yup.string().optional(),
@@ -215,7 +214,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     />
                   </div>
                   <div className="mt-4">
-                    <SelectSearchInput
+                    <SelectInput
                       firstOptionName="Choose who can see this post?"
                       label="Who can see this post?"
                       control={control}
@@ -228,7 +227,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                   </div>
 
                   <div className="mt-4">
-                    <SelectSearchInput
+                    <SelectInput
                       firstOptionName="Choose category post"
                       label="Category post"
                       control={control}

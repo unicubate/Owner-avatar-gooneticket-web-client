@@ -6,7 +6,6 @@ export * from './avatar-component';
 export * from './loading-file';
 export * from './number-input';
 export * from './phone-number-input';
-export * from '../react-quill-input';
 export * from './select-input';
 export * from './select-multiple-search-input';
 export * from './select-search-input';

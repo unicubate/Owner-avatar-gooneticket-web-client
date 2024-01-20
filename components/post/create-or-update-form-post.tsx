@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, Controller } from "react-hook-form";
-import * as yup from "yup";
-import { ReactQuillInput, TextInput } from "../ui-setting/ant";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { SelectSearchInput } from "../ui-setting/ant/select-search-input";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
-import { Upload, UploadFile, UploadProps } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
-import { filterImageAndFile } from "@/utils/utils";
-import { GetAllMembershipsAPI } from "@/api-site/membership";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { GetAllCategoriesAPI } from "@/api-site/category";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import { SubmitHandler, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { TextInput, SelectInput } from '../ui-setting/shadcn';
+import { ButtonInput } from '../ui-setting/ant/button-input';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
+import { Upload, UploadFile, UploadProps } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
+import { filterImageAndFile } from '@/utils/utils';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import Link from 'next/link';
+import { ReactQuillInput } from '../ui-setting';
 
 type Props = {
   organizationId: string;
@@ -25,7 +24,7 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  description: yup.string().min(10, "minimum 3 symbols").required(),
+  description: yup.string().min(10, 'minimum 3 symbols').required(),
   categories: yup.array().optional(),
 });
 
@@ -51,22 +50,22 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const { data: categories } = GetAllCategoriesAPI({
-    isPaginate: "false",
+    isPaginate: 'false',
     organizationId,
-    sort: "DESC",
+    sort: 'DESC',
     take: 100,
-    queryKey: ["categories"],
+    queryKey: ['categories'],
   });
 
   useEffect(() => {
     if (post) {
       const fields = [
-        "title",
-        "description",
-        "whoCanSee",
-        "type",
-        "categoryId",
-        "categories",
+        'title',
+        'description',
+        'whoCanSee',
+        'type',
+        'categoryId',
+        'categories',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -85,7 +84,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    data: PostFormModel
+    data: PostFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -100,16 +99,16 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
       };
       await saveMutation.mutateAsync({
         ...payload,
-        type: "ARTICLE",
+        type: 'ARTICLE',
         postId: post?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Article save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Article save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       router.back();
     } catch (error: any) {
@@ -118,14 +117,14 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
@@ -137,7 +136,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
             <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
                 <h2 className="font-bold dark:text-white">
-                  {post?.id ? "Update" : "Create a new"} article
+                  {post?.id ? 'Update' : 'Create a new'} article
                 </h2>
 
                 <div className="mt-4">
@@ -182,7 +181,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-2">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose who can see this post?"
                     label="Who can see this post?"
                     control={control}
@@ -195,7 +194,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose category post"
                     label="Category post"
                     control={control}

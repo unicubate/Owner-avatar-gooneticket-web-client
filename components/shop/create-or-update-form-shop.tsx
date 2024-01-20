@@ -1,42 +1,29 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Select,
-  Upload,
-  UploadFile,
-  UploadProps,
-} from "antd";
-import { SubmitHandler, Controller } from "react-hook-form";
-import * as yup from "yup";
-import {
-  NumberInput,
-  ReactQuillInput,
-  SelectSearchInput,
-  TextAreaInput,
-} from "../ui-setting/ant";
-import { ButtonInput } from "../ui-setting/ant/button-input";
+import React, { useEffect, useState } from 'react';
+import { Button, Select, Upload, UploadFile, UploadProps } from 'antd';
+import { SubmitHandler, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { NumberInput, TextAreaInput } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting/ant/button-input';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
-import { SwitchInput } from "../ui-setting/ant/switch-input";
+} from '@/utils/alert-notification';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import {
   ProductFormModel,
   arrayProductTypes,
   arrayWhoCanSees,
-} from "@/types/product";
-import { CreateOrUpdateOneProductAPI } from "@/api-site/product";
-import { GetAllDiscountsAPI } from "@/api-site/discount";
-import { SelectDiscountSearchInput } from "../discount/select-discount-search-input";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { filterImageAndFile } from "@/utils/utils";
-import { useAuth } from "../util/context-user";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { TextInput } from "../ui-setting/shadcn";
-
-const { Option } = Select;
+} from '@/types/product';
+import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
+import { GetAllDiscountsAPI } from '@/api-site/discount';
+import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { filterImageAndFile } from '@/utils/utils';
+import { useAuth } from '../util/context-user';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { SelectInput, SwitchInput, TextInput } from '../ui-setting/shadcn';
+import { ReactQuillInput } from '../ui-setting';
 
 type Props = {
   product?: any;
@@ -51,22 +38,22 @@ const schema = yup.object({
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
   productType: yup.string().required(),
-  whoCanSee: yup.string().required("Who can see this post"),
-  limitSlot: yup.number().when("enableLimitSlot", (enableLimitSlot, schema) => {
+  whoCanSee: yup.string().required('Who can see this post'),
+  limitSlot: yup.number().when('enableLimitSlot', (enableLimitSlot, schema) => {
     if (enableLimitSlot[0] === true)
-      return schema.min(1).required("limit slots required");
+      return schema.min(1).required('limit slots required');
     return schema.nullable();
   }),
   urlRedirect: yup
     .string()
     .url()
-    .when("enableUrlRedirect", (enableUrlRedirect, schema) => {
+    .when('enableUrlRedirect', (enableUrlRedirect, schema) => {
       if (enableUrlRedirect[0] === true)
-        return schema.min(1).required("url redirect required");
+        return schema.min(1).required('url redirect required');
       return schema.nullable();
     }),
-  discountId: yup.string().when("enableDiscount", (enableDiscount, schema) => {
-    if (enableDiscount[0] === true) return schema.required("discount required");
+  discountId: yup.string().when('enableDiscount', (enableDiscount, schema) => {
+    if (enableDiscount[0] === true) return schema.required('discount required');
     return schema.nullable();
   }),
 });
@@ -94,31 +81,31 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchEnableLimitSlot = watch("enableLimitSlot", false);
-  const watchEnableDiscount = watch("enableDiscount", false);
-  const watchProductType = watch("productType", "PHYSICAL");
-  const watchEnableUrlRedirect = watch("enableUrlRedirect", false);
+  const watchEnableLimitSlot = watch('enableLimitSlot', false);
+  const watchEnableDiscount = watch('enableDiscount', false);
+  const watchProductType = watch('productType', 'PHYSICAL');
+  const watchEnableUrlRedirect = watch('enableUrlRedirect', false);
 
   const { data: discounts } = GetAllDiscountsAPI();
 
   useEffect(() => {
     if (product) {
       const fields = [
-        "title",
-        "price",
-        "urlMedia",
-        "whoCanSee",
-        "productType",
-        "enableLimitSlot",
-        "limitSlot",
-        "description",
-        "moreDescription",
-        "enableChooseQuantity",
-        "urlRedirect",
-        "enableUrlRedirect",
-        "enableDiscount",
-        "discountId",
-        "messageAfterPayment",
+        'title',
+        'price',
+        'urlMedia',
+        'whoCanSee',
+        'productType',
+        'enableLimitSlot',
+        'limitSlot',
+        'description',
+        'moreDescription',
+        'enableChooseQuantity',
+        'urlRedirect',
+        'enableUrlRedirect',
+        'enableDiscount',
+        'discountId',
+        'messageAfterPayment',
       ];
       fields?.forEach((field: any) => setValue(field, product[field]));
     }
@@ -136,7 +123,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<ProductFormModel> = async (
-    data: ProductFormModel
+    data: ProductFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -164,9 +151,9 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       setLoading(false);
       AlertSuccessNotification({
         text: `Product save successfully`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -174,18 +161,18 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
-  const handleFileChange: UploadProps["onChange"] = ({
+  const handleFileChange: UploadProps['onChange'] = ({
     fileList: newFileList,
   }) => setFileList(newFileList);
 
@@ -210,7 +197,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             </div>
 
             <div className="mt-4">
-              <SelectSearchInput
+              <SelectInput
                 firstOptionName="Choose type product selling?"
                 label="Type product selling"
                 control={control}
@@ -293,7 +280,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </span>
             </div>
 
-            {watchProductType === "DIGITAL" ? (
+            {watchProductType === 'DIGITAL' ? (
               <div className="mt-2 grid-cols-1 gap-x-6 gap-y-5">
                 <label className="mb-2 block text-sm font-bold text-gray-700 dark:text-white">
                   Assets
@@ -352,7 +339,10 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             maxCount={10}
                           >
                             {fileList.length >= 10 ? null : (
-                              <Button className="text-center dark:text-white" icon={<UploadOutlined />}>
+                              <Button
+                                className="text-center dark:text-white"
+                                icon={<UploadOutlined />}
+                              >
                                 Upload File
                               </Button>
                             )}
@@ -380,7 +370,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             </div>
 
             <div className="mt-4">
-              <SelectSearchInput
+              <SelectInput
                 firstOptionName="Choose who can see or buy this product?"
                 label="Who can buy this product?"
                 control={control}
@@ -402,18 +392,17 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-bold text-gray-900 dark:text-white"> Discount</p>
+                    <p className="text-sm font-bold text-gray-900 dark:text-white">
+                      {' '}
+                      Discount
+                    </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Apply a discount
                     </p>
                   </div>
                 </div>
 
-                <SwitchInput
-                  control={control}
-                  name="enableDiscount"
-                  label=""
-                />
+                <SwitchInput control={control} name="enableDiscount" label="" />
               </div>
               {watchEnableDiscount ? (
                 <>
@@ -444,8 +433,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
-                      {" "}
-                      Limit slots (optional){" "}
+                      {' '}
+                      Limit slots (optional){' '}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       A limited number of slots creates a sense of urgency and
@@ -478,8 +467,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
-                      {" "}
-                      Special price for members{" "}
+                      {' '}
+                      Special price for members{' '}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Offer a discounted extra price to attract new members and
@@ -498,8 +487,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
-                      {" "}
-                      Allow buyer to choose a quantity{" "}
+                      {' '}
+                      Allow buyer to choose a quantity{' '}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Your supporters will be able to select the desired

@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { SubmitHandler, Controller } from "react-hook-form";
-import * as yup from "yup";
-import { ReactQuillInput, TextInput } from "../ui-setting/ant";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { SelectSearchInput } from "../ui-setting/ant/select-search-input";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI } from "@/api-site/post";
-import { Upload, UploadFile, UploadProps } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { useRouter } from "next/router";
-import { filterImageAndFile } from "@/utils/utils";
-import { GetAllMembershipsAPI } from "@/api-site/membership";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { GetAllCategoriesAPI } from "@/api-site/category";
-import Link from "next/link";
+import React, { useEffect, useState } from 'react';
+import { SubmitHandler, Controller } from 'react-hook-form';
+import * as yup from 'yup';
+import { TextInput, SelectInput } from '../ui-setting/shadcn';
+import { ButtonInput } from '../ui-setting/ant/button-input';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
+import { Upload, UploadFile, UploadProps } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
+import { filterImageAndFile } from '@/utils/utils';
+import { GetAllMembershipsAPI } from '@/api-site/membership';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import Link from 'next/link';
+import { ReactQuillInput } from '../ui-setting';
 
 type Props = {
   organizationId: string;
@@ -25,7 +25,7 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  whoCanSee: yup.string().required("Who can see this post"),
+  whoCanSee: yup.string().required('Who can see this post'),
   description: yup.string().optional(),
   urlMedia: yup.string().url().required(),
   // membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
@@ -56,33 +56,33 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchWhoCanSee = watch("whoCanSee", null);
+  const watchWhoCanSee = watch('whoCanSee', null);
   const { data: memberships } = GetAllMembershipsAPI({
     organizationId,
     take: 100,
     page: 1,
-    sort: "DESC",
-    queryKey: ["memberships"],
+    sort: 'DESC',
+    queryKey: ['memberships'],
   });
 
   const { data: categories } = GetAllCategoriesAPI({
-    isPaginate: "false",
+    isPaginate: 'false',
     organizationId,
-    sort: "DESC",
+    sort: 'DESC',
     take: 100,
-    queryKey: ["categories"],
+    queryKey: ['categories'],
   });
 
   useEffect(() => {
     if (post) {
       const fields = [
-        "title",
-        "urlMedia",
-        "description",
-        "whoCanSee",
-        "type",
-        "categoryId",
-        "membershipId",
+        'title',
+        'urlMedia',
+        'description',
+        'whoCanSee',
+        'type',
+        'categoryId',
+        'membershipId',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -101,7 +101,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    data: PostFormModel
+    data: PostFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -117,16 +117,16 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
 
       await saveMutation.mutateAsync({
         ...payload,
-        type: "VIDEO",
+        type: 'VIDEO',
         postId: post?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Post save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Post save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       push(`/posts`);
     } catch (error: any) {
@@ -135,14 +135,14 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
@@ -154,7 +154,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
             <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
-                  {post?.id ? "Update" : "Create a New"} Video
+                  {post?.id ? 'Update' : 'Create a New'} Video
                 </h2>
 
                 <div className="mt-2">
@@ -213,7 +213,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
                 </span>
 
                 <div className="mt-4">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose who can see this post?"
                     label="Who can see this post?"
                     control={control}
@@ -226,7 +226,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose category post"
                     label="Category post"
                     control={control}

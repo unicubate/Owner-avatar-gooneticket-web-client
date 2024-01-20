@@ -18,7 +18,8 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   firstOptionName: string;
-  optionType: 'currency' | 'other';
+  valueType: 'key' | 'text';
+  allowClear?: boolean;
 }
 
 const SelectInput: React.FC<Props> = ({
@@ -28,7 +29,8 @@ const SelectInput: React.FC<Props> = ({
   name,
   errors,
   placeholder = '',
-  optionType,
+  valueType,
+  allowClear,
   firstOptionName = '',
 }) => {
   return (
@@ -45,10 +47,14 @@ const SelectInput: React.FC<Props> = ({
       <Controller
         name={name}
         control={control}
-        render={({ field: { ref, ...field } }) => (
+        render={({ field: { value, onChange } }) => (
           <>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <SelectTrigger className="w-[180px]">
+            <Select
+              onValueChange={onChange}
+              name={name}
+              value={value}
+            >
+              <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent>
@@ -56,14 +62,10 @@ const SelectInput: React.FC<Props> = ({
                   {dataItem?.length > 0 ? (
                     dataItem?.map((item: any, index: number) => (
                       <SelectItem
-                        value={
-                          optionType === 'currency' ? item?.code : item?.id
-                        }
+                        value={valueType === 'key' ? item?.id : item?.name}
                         key={index}
                       >
-                        {optionType === 'currency'
-                          ? `${item?.code} - ${item?.name}`
-                          : item?.name}
+                        {item?.name}
                       </SelectItem>
                     ))
                   ) : (
@@ -73,7 +75,7 @@ const SelectInput: React.FC<Props> = ({
                   )}
 
                   {/* <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="apple">Apple</SelectItem>
+                  <SelectItem value="" disable>Data Not Found</SelectItem>
                   <SelectItem value="banana">Banana</SelectItem>
                   <SelectItem value="blueberry">Blueberry</SelectItem>
                   <SelectItem value="grapes">Grapes</SelectItem>

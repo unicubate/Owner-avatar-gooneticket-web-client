@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
-import { ReactQuillInput, TextInput } from '../ui-setting/ant';
+import { ReactQuillInput } from '../ui-setting';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
 import { ButtonInput } from '../ui-setting/ant/button-input';
-import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
@@ -170,7 +170,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     render={({ field: { onChange } }) => (
                       <>
                         <div className="mx-auto justify-center text-center">
-                          <ImgCrop  rotationSlider>
+                          <ImgCrop rotationSlider>
                             <Upload
                               multiple
                               name="attachmentImages"
@@ -317,7 +317,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose who can see this post?"
                     label="Who can see this post?"
                     control={control}
@@ -330,7 +330,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4">
-                  <SelectSearchInput
+                  <SelectInput
                     firstOptionName="Choose category post"
                     label="Category post"
                     control={control}
