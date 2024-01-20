@@ -2,9 +2,9 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
   eslint: { ignoreDuringBuilds: true },
-  // experimental: {
-  //   transpilePackages: ["ui"],
-  // },
+  experimental: {
+    transpilePackages: ["ui"],
+  },
 
   i18n: {
     locales: ['en', 'fr'], // Langues prises en charge
