@@ -71,9 +71,9 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-[#121212] rounded-lg shadow-md">
+    <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-        <h6 className="text-xl text-center font-bold">Forgot password?</h6>
+        <h6 className="text-center text-xl font-bold">Forgot password?</h6>
 
         <div className="mt-4">
           <TextInput
@@ -100,7 +100,7 @@ const ForgotPassword = () => {
       </form>
 
       <Link href="/login">
-        <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
+        <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
           Already have an account? Log in here
         </p>
       </Link>

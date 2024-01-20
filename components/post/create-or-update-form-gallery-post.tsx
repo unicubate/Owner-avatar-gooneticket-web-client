@@ -145,14 +145,14 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
             <div
-              className={`overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}
+              className={`overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]`}
             >
               <div className="px-4 py-5">
-                <h2 className="dark:text-white font-bold">
+                <h2 className="font-bold dark:text-white">
                   {post?.id ? "Update" : "Create a new"} gallery
                 </h2>
 
-                <div className="p-2 flex-auto justify-center">
+                <div className="flex-auto justify-center p-2">
                   {hasErrors ? (
                     <div className="mb-4">
                       <Alert message={hasErrors} type="error" showIcon />
@@ -160,7 +160,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                   ) : null}
 
                   {post?.id && uploadImages?.length > 0 ? (
-                    <div className="mt-2 text-center space-x-2">
+                    <div className="mt-2 space-x-2 text-center">
                       <ListCarouselUpload
                         uploads={post?.uploadsImage}
                         folder="posts"
@@ -178,7 +178,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                         control={control}
                         render={({ }) => (
                           <>
-                            <div className="text-center justify-center mx-auto">
+                            <div className="mx-auto justify-center text-center">
                               <Upload
                                 multiple
                                 name="attachmentImages"
@@ -239,13 +239,13 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       allowClear={true}
                       dataItem={categories}
                     />
-                    <div className="flex justify-between items-center">
+                    <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-gray-400">
                         {`Categories makes it easy to browse your posts.`}
                       </span>
-                      <label className="block text-sm mb-2 dark:text-white"></label>
+                      <label className="mb-2 block text-sm dark:text-white"></label>
                       <Link
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                         href="/shop/config"
                       >
                         Setting category
@@ -253,10 +253,10 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                  <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                      <div className="flex items-center flex-1 min-w-0">
-                        <div className="flex-1 min-w-0">
+                      <div className="flex min-w-0 flex-1 items-center">
+                        <div className="min-w-0 flex-1">
                           <p className="text-sm font-bold dark:text-white">
                             {" "}
                             Allow download{" "}
@@ -286,7 +286,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     />
                   </div>
 
-                  <div className="flex items-center mt-4 space-x-4">
+                  <div className="mt-4 flex items-center space-x-4">
                     <ButtonInput
                       status="cancel"
                       type="button"

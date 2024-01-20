@@ -40,7 +40,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
       <div className="lg:col-span-3 lg:row-end-1">
         <div className="lg:flex lg:items-start">
           <div className="lg:order-2 lg:ml-5">
-            <div className="overflow-hidden border-2 border-transparent rounded-sm">
+            <div className="overflow-hidden rounded-sm border-2 border-transparent">
               <Image
                 width={width}
                 height={400}
@@ -55,8 +55,8 @@ const ImageGalleryShopList: React.FC<Props> = ({
             </div>
           </div>
 
-          <div className="w-full lg:w-32 mt-2.5 lg:mt-0 lg:flex-shrink-0 lg:order-1">
-            <div className="flex flex-row items-stretch lg:flex-col lg:space-y-5 space-x-2.5 lg:space-x-0">
+          <div className="mt-2.5 w-full lg:order-1 lg:mt-0 lg:w-32 lg:shrink-0">
+            <div className="flex flex-row items-stretch space-x-2.5 lg:flex-col lg:space-x-0 lg:space-y-5">
               {uploads &&
                 uploads?.length > 0 &&
                 uploads?.map((item: any, index: number) => (
@@ -66,7 +66,7 @@ const ImageGalleryShopList: React.FC<Props> = ({
                     key={index}
                     onClick={() => setSelectedImage(item?.path)}
                   >
-                    <div className="overflow-hidden border-2 border-transparent rounded-sm aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3">
+                    <div className="aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3 overflow-hidden rounded-sm border-2 border-transparent">
                       <Image
                         width={width}
                         height={100}

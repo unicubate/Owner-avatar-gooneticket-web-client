@@ -3,6 +3,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
 import { useState } from "react";
 import { LayoutSite } from "@/components/layout-site";
+import { Image } from "antd";
 
 const faqs = [
   {
@@ -103,7 +104,7 @@ const About = () => {
                   </div>
 
                   <div>
-                    <img className="w-full" src="https://d33wubrfki0l68.cloudfront.net/d6f1462500f7670e0db6b76b35054a081679a5a0/0ce15/images/hero/5.1/illustration.png" alt="" />
+                    <Image className="w-full" src="https://d33wubrfki0l68.cloudfront.net/d6f1462500f7670e0db6b76b35054a081679a5a0/0ce15/images/hero/5.1/illustration.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -166,39 +167,39 @@ const About = () => {
       </LayoutSite> */}
 
       <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
           <div className="absolute inset-0">
-            <img
-              className="object-cover w-full h-full"
+            <Image
+              className="size-full object-cover"
               src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/grid-pattern.png"
               alt=""
             />
           </div>
 
-          <div className="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-            <div className="max-w-xl mx-auto text-center">
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-xl text-center">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
                 About {username} page{" "}
               </h1>
-              <p className="max-w-md mx-auto mt-6 text-base font-normal leading-7 text-gray-500">
+              <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
                 Accept donations. Start a membership. Sell anything you like.
                 It’s easier than you think.
               </p>
 
               <form action="#" method="POST" className="mt-8 sm:mt-10">
-                <div className="relative p-2 sm:border sm:border-gray-400 group sm:rounded-xl sm:focus-within:ring-1 sm:focus-within:ring-gray-900 sm:focus-within:border-gray-900">
+                <div className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-400 sm:focus-within:border-gray-900 sm:focus-within:ring-1 sm:focus-within:ring-gray-900">
                   <input
                     type="email"
                     name=""
                     id=""
                     placeholder="username"
-                    className="block w-full px-4 py-4 text-gray-900 placeholder-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
+                    className="block w-full rounded-xl border border-gray-400 bg-transparent p-4 text-gray-900 outline-none placeholder:text-gray-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
                   />
 
-                  <div className="mt-4 sm:mt-0 sm:absolute sm:inset-y-0 sm:right-0 sm:flex sm:items-center sm:pr-2">
+                  <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
                     <button
                       type="submit"
-                      className="inline-flex px-6 py-3 text-lg font-bold text-white transition-all duration-200 bg-blue-600 rounded-lg focus:outline-none focus:bg-blue-600 font-pj hover:bg-blue-600"
+                      className="font-pj inline-flex rounded-lg bg-blue-600 px-6 py-3 text-lg font-bold text-white transition-all duration-200 hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
                     >
                       {" "}
                       Start my page
@@ -207,7 +208,7 @@ const About = () => {
                 </div>
               </form>
 
-              <ul className="flex items-center justify-center mt-6 space-x-6 sm:space-x-8">
+              <ul className="mt-6 flex items-center justify-center space-x-6 sm:space-x-8">
                 {/* <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -225,27 +226,27 @@ const About = () => {
             </div>
           </div>
 
-          <div className="flex w-full gap-6 pb-8 mt-12 overflow-x-auto sm:mt-16 lg:mt-20 snap-x">
-            <div className="relative snap-center scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
-              <div className="overflow-hidden w-[300px] lg:w-[420px] transition-all duration-200 transform bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+          <div className="mt-12 flex w-full snap-x gap-6 overflow-x-auto pb-8 sm:mt-16 lg:mt-20">
+            <div className="relative shrink-0 snap-center scroll-ml-6 first:pl-6 last:pr-6">
+              <div className="w-[300px] overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg lg:w-[420px]">
                 <div className="px-4 py-5 sm:p-5">
                   <div className="flex items-start lg:items-center">
                     <a href="#" title="" className="shrink-0">
-                      <img
-                        className="lg:h-24 w-14 h-14 lg:w-24 rounded-xl object-cvoer"
+                      <Image
+                        className="object-cvoer size-14 rounded-xl lg:size-24"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/thumbnail-1.png"
                         alt=""
                       />
                     </a>
 
-                    <div className="flex-1 ml-4 lg:ml-6">
+                    <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
                           {" "}
                           Growth{" "}
                         </a>
                       </p>
-                      <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
+                      <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
                           {" "}
                           How a visual artist redefines success in graphic
@@ -261,26 +262,26 @@ const About = () => {
               </div>
             </div>
 
-            <div className="relative snap-center scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
-              <div className="overflow-hidden w-[300px] lg:w-[420px] transition-all duration-200 transform bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+            <div className="relative shrink-0 snap-center scroll-ml-6 first:pl-6 last:pr-6">
+              <div className="w-[300px] overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg lg:w-[420px]">
                 <div className="px-4 py-5 sm:p-5">
                   <div className="flex items-start lg:items-center">
                     <a href="#" title="" className="shrink-0">
-                      <img
-                        className="lg:h-24 w-14 h-14 lg:w-24 rounded-xl object-cvoer"
+                      <Image
+                        className="object-cvoer size-14 rounded-xl lg:size-24"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/thumbnail-2.png"
                         alt=""
                       />
                     </a>
 
-                    <div className="flex-1 ml-4 lg:ml-6">
+                    <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
                           {" "}
                           Growth{" "}
                         </a>
                       </p>
-                      <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
+                      <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
                           {" "}
                           How a visual artist redefines success in graphic
@@ -296,26 +297,26 @@ const About = () => {
               </div>
             </div>
 
-            <div className="relative snap-center scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
-              <div className="overflow-hidden w-[300px] lg:w-[420px] transition-all duration-200 transform bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+            <div className="relative shrink-0 snap-center scroll-ml-6 first:pl-6 last:pr-6">
+              <div className="w-[300px] overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg lg:w-[420px]">
                 <div className="px-4 py-5 sm:p-5">
                   <div className="flex items-start lg:items-center">
                     <a href="#" title="" className="shrink-0">
-                      <img
-                        className="lg:h-24 w-14 h-14 lg:w-24 rounded-xl object-cvoer"
+                      <Image
+                        className="object-cvoer size-14 rounded-xl lg:size-24"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/thumbnail-3.png"
                         alt=""
                       />
                     </a>
 
-                    <div className="flex-1 ml-4 lg:ml-6">
+                    <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
                           {" "}
                           Growth{" "}
                         </a>
                       </p>
-                      <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
+                      <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
                           {" "}
                           How a visual artist redefines success in graphic
@@ -331,26 +332,26 @@ const About = () => {
               </div>
             </div>
 
-            <div className="relative snap-center scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
-              <div className="overflow-hidden w-[300px] lg:w-[420px] transition-all duration-200 transform bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+            <div className="relative shrink-0 snap-center scroll-ml-6 first:pl-6 last:pr-6">
+              <div className="w-[300px] overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg lg:w-[420px]">
                 <div className="px-4 py-5 sm:p-5">
                   <div className="flex items-start lg:items-center">
                     <a href="#" title="" className="shrink-0">
-                      <img
-                        className="lg:h-24 w-14 h-14 lg:w-24 rounded-xl object-cvoer"
+                      <Image
+                        className="object-cvoer size-14 rounded-xl lg:size-24"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/thumbnail-4.png"
                         alt=""
                       />
                     </a>
 
-                    <div className="flex-1 ml-4 lg:ml-6">
+                    <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
                           {" "}
                           Growth{" "}
                         </a>
                       </p>
-                      <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
+                      <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
                           {" "}
                           How a visual artist redefines success in graphic
@@ -366,26 +367,26 @@ const About = () => {
               </div>
             </div>
 
-            <div className="relative snap-center scroll-ml-6 shrink-0 first:pl-6 last:pr-6">
-              <div className="overflow-hidden w-[300px] lg:w-[420px] transition-all duration-200 transform bg-white border border-gray-200 rounded-2xl hover:shadow-lg hover:-translate-y-1">
+            <div className="relative shrink-0 snap-center scroll-ml-6 first:pl-6 last:pr-6">
+              <div className="w-[300px] overflow-hidden rounded-2xl border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg lg:w-[420px]">
                 <div className="px-4 py-5 sm:p-5">
                   <div className="flex items-start lg:items-center">
                     <a href="#" title="" className="shrink-0">
-                      <img
-                        className="lg:h-24 w-14 h-14 lg:w-24 rounded-xl object-cvoer"
+                      <Image
+                        className="object-cvoer size-14 rounded-xl lg:size-24"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/thumbnail-5.png"
                         alt=""
                       />
                     </a>
 
-                    <div className="flex-1 ml-4 lg:ml-6">
+                    <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
                           {" "}
                           Growth{" "}
                         </a>
                       </p>
-                      <p className="mt-2 text-sm font-bold text-gray-900 lg:text-lg group-hover:text-gray-600">
+                      <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
                           {" "}
                           How a visual artist redefines success in graphic
@@ -412,7 +413,7 @@ const About = () => {
               <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
                 <div className="p-4">
                   <div className="flex items-center">
-                    <img className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-1.png" alt="" />
+                    <Image className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-1.png" alt="" />
                     <div className="flex-1 ml-4">
                       <p className="text-base font-bold text-gray-900">Albert Flores</p>
                     </div>
@@ -423,7 +424,7 @@ const About = () => {
               <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
                 <div className="p-4">
                   <div className="flex items-center">
-                    <img className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-2.png" alt="" />
+                    <Image className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-2.png" alt="" />
                     <div className="flex-1 ml-4">
                       <p className="text-base font-bold text-gray-900">Ralph Edwards</p>
                     </div>
@@ -434,7 +435,7 @@ const About = () => {
               <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
                 <div className="p-4">
                   <div className="flex items-center">
-                    <img className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-3.png" alt="" />
+                    <Image className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-3.png" alt="" />
                     <div className="flex-1 ml-4">
                       <p className="text-base font-bold text-gray-900">Theresa Webb</p>
                     </div>
@@ -445,7 +446,7 @@ const About = () => {
               <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
                 <div className="p-4">
                   <div className="flex items-center">
-                    <img className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-4.png" alt="" />
+                    <Image className="object-cover w-16 h-16 rounded-full shrink-0" src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-4.png" alt="" />
                     <div className="flex-1 ml-4">
                       <p className="text-base font-bold text-gray-900">Jane Cooper</p>
                     </div>

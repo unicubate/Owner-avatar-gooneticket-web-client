@@ -56,7 +56,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           play: (
             <>
               <svg
-                className="w-10 h-10 text-black dark:text-white"
+                className="size-10 text-black dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"
@@ -73,7 +73,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           pause: (
             <>
               <svg
-                className="w-10 h-10 text-black dark:text-white"
+                className="size-10 text-black dark:text-white"
                 width="44"
                 height="44"
                 viewBox="0 0 44 44"
@@ -90,7 +90,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           rewind: (
             <>
               <svg
-                className="w-8 h-8 text-gray-400 hover:text-black dark:hover:text-white"
+                className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
                 width="48"
                 height="48"
                 viewBox="0 0 48 48"
@@ -119,7 +119,7 @@ const AudioPlayerInput: React.FC<Props> = ({
           forward: (
             <>
               <svg
-                className="w-8 h-8 text-gray-400 hover:text-black dark:hover:text-white"
+                className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
                 width="48"
                 height="48"
                 viewBox="0 0 48 48"
@@ -158,7 +158,7 @@ const AudioPlayerInput: React.FC<Props> = ({
             {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
               post?.isValidSubscribe !== 1 ? (
               <button className={`font-normal`}>
-                <HiOutlineLockClosed className="w-8 h-8" />
+                <HiOutlineLockClosed className="size-8" />
               </button>
             ) : null}
           </>

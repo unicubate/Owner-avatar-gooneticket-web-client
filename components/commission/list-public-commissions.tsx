@@ -16,14 +16,14 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg"
+        className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
       >
-        <div className="p-8 sm:py-7 sm:px-8">
+        <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             {item?.id ? (
               <Link
                 href={`/${item?.profile?.username}/posts/${item?.slug}`}
-                className="text-lg font-bold dark:text-white cursor-pointer"
+                className="cursor-pointer text-lg font-bold dark:text-white"
               >
                 {item?.title ?? ''}
               </Link>
@@ -48,7 +48,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
               <HtmlParser html={String(item?.description)} />
             </span>
           </div>
-          <div className="mt-4 text-center justify-center mx-auto">
+          <div className="mx-auto mt-4 justify-center text-center">
             <ListCarouselUpload
               uploads={item?.uploadsImage}
               folder="commissions"
@@ -56,7 +56,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
             />
           </div>
 
-          <div className="mt-6 text-center justify-center mx-auto">
+          <div className="mx-auto mt-6 justify-center text-center">
             <div className="sm:mt-0">
               <ButtonInput
                 shape="default"

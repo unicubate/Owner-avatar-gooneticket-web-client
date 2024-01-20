@@ -103,7 +103,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
+      <div className="flex h-full flex-1 flex-col justify-between overflow-x-scroll px-4">
         <div className="space-y-4">
           <nav className="flex-1 space-y-1">
             {navigationItems.map((item: any, index: number) => {
@@ -113,10 +113,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                  className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                     isActive
-                      ? `text-white bg-${user?.profile?.color}-600`
-                      : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                      ? `bg- text-white${user?.profile?.color}-600`
+                      : "text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                   } `}
                 >
                   {item?.icon}
@@ -128,11 +128,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </nav>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
               Monetize
             </p>
 
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="mt-4 flex-1 space-y-1">
               {monetizeItems.map((item: any, index: number) => {
                 const isActive = pathname?.startsWith(item.href);
                 return (
@@ -140,10 +140,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                        ? `bg- text-white${user?.profile?.color}-600`
+                        : "text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                     } `}
                   >
                     {item?.icon}
@@ -164,10 +164,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
               Support
             </p>
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="mt-4 flex-1 space-y-1">
               {supportItems.map((item: any, index: number) => {
                 const isActive = pathname?.startsWith(item.href);
                 return (
@@ -175,10 +175,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                        ? `bg- text-white${user?.profile?.color}-600`
+                        : "text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                     } `}
                   >
                     {item?.icon}
@@ -191,10 +191,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
+            <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
               Settings
             </p>
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="mt-4 flex-1 space-y-1">
               {settingItems.map((item: any, index: number) => {
                 const isActive = pathname?.startsWith(item.href);
                 return (
@@ -202,10 +202,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${
+                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? `text-white bg-${user?.profile?.color}-600`
-                        : "hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white"
+                        ? `bg- text-white${user?.profile?.color}-600`
+                        : "text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700"
                     } `}
                   >
                     {item?.icon}
@@ -233,10 +233,10 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                 href={void 0}
                 title=""
                 onClick={() => logoutUser()}
-                className="flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 dark:text-white text-gray-900 rounded-lg dark:hover:bg-gray-200 group cursor-pointer"
+                className="group flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm font-medium text-gray-900 transition-all duration-200 dark:text-white dark:hover:bg-gray-200"
               >
                 <svg
-                  className="flex-shrink-0 w-5 h-5 mr-4"
+                  className="mr-4 size-5 shrink-0"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"

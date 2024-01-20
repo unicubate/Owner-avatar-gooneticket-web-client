@@ -3,6 +3,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { FaqsList } from "@/components/faq/faqs-list";
 import { LayoutSite } from "@/components/layout-site";
 import { GetStaticPropsContext } from "next";
+import { Image } from "antd";
 
 const faqs = [
   {
@@ -49,38 +50,38 @@ const Faqs = () => {
 
 
 
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="max-w-2xl mx-auto text-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl lg:text-4xl">
               Frequently asked questions
             </h2>
-            <p className="mt-4 text-base font-normal leading-7 text-gray-600 lg:text-lg lg:mt-6 lg:leading-8">
+            <p className="mt-4 text-base font-normal leading-7 text-gray-600 lg:mt-6 lg:text-lg lg:leading-8">
               Ask everything you need to know about our products and services.
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto mt-12 overflow-hidden border border-gray-200 divide-y divide-gray-200 sm:mt-16 rounded-xl">
+          <div className="mx-auto mt-12 max-w-5xl divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200 sm:mt-16">
             {faqs.map((item, index) => (
               <FaqsList item={item} key={index} index={index} />
             ))}
           </div>
 
-          <div className="max-w-5xl mx-auto mt-8 overflow-hidden text-center bg-gray-100 sm:mt-12 rounded-xl">
+          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-xl bg-gray-100 text-center sm:mt-12">
             <div className="px-6 py-12 sm:p-12">
-              <div className="max-w-sm mx-auto">
+              <div className="mx-auto max-w-sm">
                 <div className="relative z-0 flex items-center justify-center -space-x-2 overflow-hidden">
-                  <img
-                    className="relative z-10 inline-block rounded-full w-14 h-14 ring-4 ring-gray-100"
+                  <Image
+                    className="relative z-10 inline-block size-14 rounded-full ring-4 ring-gray-100"
                     src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-male.png"
                     alt=""
                   />
-                  <img
-                    className="relative z-30 inline-block w-16 h-16 rounded-full ring-4 ring-gray-100"
+                  <Image
+                    className="relative z-30 inline-block size-16 rounded-full ring-4 ring-gray-100"
                     src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-female-1.png"
                     alt=""
                   />
-                  <img
-                    className="relative z-10 inline-block rounded-full w-14 h-14 ring-4 ring-gray-100"
+                  <Image
+                    className="relative z-10 inline-block size-14 rounded-full ring-4 ring-gray-100"
                     src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-female-2.png"
                     alt=""
                   />
@@ -97,7 +98,7 @@ const Faqs = () => {
                   <a
                     href="#"
                     title=""
-                    className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-full hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-700"
+                    className="inline-flex items-center justify-center rounded-full border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
                     role="button"
                   >
                     Start free trial
@@ -110,15 +111,15 @@ const Faqs = () => {
 
 
 
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl lg:py-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-y-12 gap-x-8 xl:gap-x-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:grid-cols-12 xl:gap-x-12">
               <div className="col-span-2 md:col-span-4 xl:pr-8">
-                <img className="w-auto h-9" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg" alt="" />
+                <Image className="h-9 w-auto" src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg" alt="" />
 
-                <p className="text-base leading-relaxed text-gray-600 mt-7">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
+                <p className="mt-7 text-base leading-relaxed text-gray-600">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</p>
 
-                <a href="#" title="" className="inline-flex items-center justify-center px-6 py-4 font-semibold text-white transition-all duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:bg-blue-700 mt-7">
-                  <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <a href="#" title="" className="mt-7 inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-4 font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:bg-blue-700">
+                  <svg className="size-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                   </svg>
                   Start Live Chat
@@ -214,19 +215,19 @@ const Faqs = () => {
               </div>
             </div>
 
-            <hr className="mt-16 mb-10 border-gray-200" />
+            <hr className="mb-10 mt-16 border-gray-200" />
 
             <div className="sm:flex sm:items-center sm:justify-between">
               <p className="text-sm text-gray-600">© Copyright 2021, All Rights Reserved by Postcraft</p>
 
-              <ul className="flex items-center mt-5 space-x-3 md:order-3 sm:mt-0">
+              <ul className="mt-5 flex items-center space-x-3 sm:mt-0 md:order-3">
                 <li>
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
-                    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path
                         d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"
                       ></path>
@@ -238,9 +239,9 @@ const Faqs = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
-                    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
                     </svg>
                   </a>
@@ -250,9 +251,9 @@ const Faqs = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
-                    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M11.999 7.377a4.623 4.623 0 1 0 0 9.248 4.623 4.623 0 0 0 0-9.248zm0 7.627a3.004 3.004 0 1 1 0-6.008 3.004 3.004 0 0 1 0 6.008z"></path>
                       <circle cx="16.806" cy="7.207" r="1.078"></circle>
                       <path
@@ -266,9 +267,9 @@ const Faqs = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
-                    <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path
                         fill-rule="evenodd"
                         clip-rule="evenodd"

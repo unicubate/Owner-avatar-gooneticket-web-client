@@ -31,22 +31,22 @@ const ProfilePublic = () => {
         }`}
         user={user}
       >
-        <div className="mt-4 px-4 max-w-full sm:px-6 lg:px-8">
+        <div className="mt-4 max-w-full px-4 sm:px-6 lg:px-8">
           {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
 
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-full mx-auto py-6">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-full py-6">
               {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
 
-              <div className="py-6 border-gray-200 lg:col-span-3 xl:col-span-4">
+              <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
                 <div className="flow-root">
                   <div className="mx-auto sm:px-6 md:px-8">
                     {user?.profile?.description && (
-                      <div className="mt-2 overflow-hidden bg-white dark:bg-[#121212] rounded-lg shadow-xl shadow-gray-600/15">
-                        <div className="p-8 sm:py-4 sm:px-4">
+                      <div className="mt-2 overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+                        <div className="p-8 sm:p-4">
                           <div className="flex items-center">
                             <div
-                              className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}
+                              className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
                             >
                               <span className={`ql-editor`}>
                                 <HtmlParser
@@ -61,8 +61,8 @@ const ProfilePublic = () => {
                       </div>
                     )}
 
-                    <div className="mt-4 overflow-hidden bg-white dark:bg-[#121212] rounded-lg shadow-xl shadow-gray-600/15">
-                      <div className="p-6 sm:py-4 sm:px-4">
+                    <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+                      <div className="p-6 sm:p-4">
                         <div className="flex items-center">
                           {user?.id ? (
                             <CreateFormPublicDonation user={user} />

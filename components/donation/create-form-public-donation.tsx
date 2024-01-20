@@ -28,16 +28,16 @@ const CreateFormPublicDonation: React.FC<{
   };
   return (
     <>
-      <div className="p-2 flex-auto justify-center">
+      <div className="flex-auto justify-center p-2">
         {/* <label className="text-base font-medium text-gray-900"> Buy un pot for {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}</label> */}
 
-        <div className="flex items-center justify-between mt-6">
+        <div className="mt-6 flex items-center justify-between">
           <p className="text-xl font-bold text-gray-900">
             <BiCoffeeTogo
-              className={`h-14 w-14 text-${user?.profile?.color}-500`}
+              className={`text- size-14${user?.profile?.color}-500`}
             />
           </p>
-          <div className="ml-auto flex items-center justify-end space-x-8 border border-gray-200 rounded-md">
+          <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-200">
             <ButtonInput
               shape="default"
               size="normal"
@@ -47,7 +47,7 @@ const CreateFormPublicDonation: React.FC<{
               onClick={() => setIncrement((lk) => lk - 1)}
             >
               <svg
-                className="w-5 h-5"
+                className="size-5"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ const CreateFormPublicDonation: React.FC<{
               onClick={() => setIncrement((lk) => lk + 1)}
             >
               <svg
-                className="w-5 h-5"
+                className="size-5"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -105,7 +105,7 @@ const CreateFormPublicDonation: React.FC<{
             min={1}
             value={newValuePrice}
             onChange={(e) => setPrice(e?.target.value)}
-            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800`}
+            className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white  dark:placeholder:text-gray-500`}
           />
         </div>
 
@@ -117,12 +117,12 @@ const CreateFormPublicDonation: React.FC<{
             placeholder="Your message (optional)"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500  dark:border-gray-800`}
+            className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white  dark:placeholder:text-gray-500`}
           />
         </div>
 
         {newValuePrice > 0 ? (
-          <div className="flex items-center justify-between mt-6">
+          <div className="mt-6 flex items-center justify-between">
             <p className="text-2xl font-bold text-black dark:text-white">Donate</p>
             {newAmount?.value ? (
               <>

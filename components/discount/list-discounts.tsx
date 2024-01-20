@@ -65,7 +65,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
             <p className="text-sm font-bold">
               {item?.percent}% Off Commissions
             </p>
-            <p className="mt-1 ml-2 text-sm font-medium">
+            <p className="ml-2 mt-1 text-sm font-medium">
               {item?.code}
             </p>
           </>
@@ -82,7 +82,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           </div>
 
           <div className="ml-auto">
-            <button className="text-lg ml-2 font-bold transition-all duration-200">
+            <button className="ml-2 text-lg font-bold transition-all duration-200">
               <Tag
                 bordered={false}
                 className="ml-2"

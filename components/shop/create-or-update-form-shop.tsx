@@ -192,7 +192,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold dark:text-white">
               Create a New Product
@@ -222,14 +222,14 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               />
             </div>
 
-            <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="mt-2 grid-cols-1 gap-x-6 gap-y-5">
               <div className="mt-4">
                 <Controller
                   name="attachmentImages"
                   control={control}
                   render={({ field: { onChange } }) => (
                     <>
-                      <div className="text-center justify-center mx-auto">
+                      <div className="mx-auto justify-center text-center">
                         <Upload
                           multiple
                           name="attachmentImages"
@@ -294,13 +294,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             </div>
 
             {watchProductType === "DIGITAL" ? (
-              <div className="grid-cols-1 mt-2 gap-y-5 gap-x-6">
-                <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2">
+              <div className="mt-2 grid-cols-1 gap-x-6 gap-y-5">
+                <label className="mb-2 block text-sm font-bold text-gray-700 dark:text-white">
                   Assets
                 </label>
                 <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                  <div className="flex items-center flex-1 min-w-0">
-                    <div className="flex-1 min-w-0">
+                  <div className="flex min-w-0 flex-1 items-center">
+                    <div className="min-w-0 flex-1">
                       <p className="text-sm font-bold text-gray-900 dark:text-white">
                         {watchEnableUrlRedirect
                           ? `Upload File`
@@ -340,7 +340,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                     control={control}
                     render={({ field: { onChange } }) => (
                       <>
-                        <div className="text-center justify-center mx-auto">
+                        <div className="mx-auto justify-center text-center">
                           <Upload
                             multiple
                             name="attachmentFiles"
@@ -393,15 +393,15 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
             </div>
 
             <div className="mt-4">
-              <label className="block text-gray-700 dark:text-white text-sm font-bold mb-2">
+              <label className="mb-2 block text-sm font-bold text-gray-700 dark:text-white">
                 Advanced settings
               </label>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
+                <div className="flex min-w-0 flex-1 items-center">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold text-gray-900 dark:text-white"> Discount</p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Apply a discount
@@ -427,10 +427,10 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                       name="discountId"
                       dataItem={discounts}
                     />
-                    <div className="flex justify-between items-center">
-                      <label className="block text-sm mb-2 dark:text-white"></label>
+                    <div className="flex items-center justify-between">
+                      <label className="mb-2 block text-sm dark:text-white"></label>
                       <Link
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                         href="/shop/config"
                       >
                         Create discount
@@ -441,8 +441,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               ) : null}
 
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
+                <div className="flex min-w-0 flex-1 items-center">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Limit slots (optional){" "}
@@ -475,8 +475,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               ) : null}
 
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
+                <div className="flex min-w-0 flex-1 items-center">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Special price for members{" "}
@@ -495,8 +495,8 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 />
               </div>
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                <div className="flex items-center flex-1 min-w-0">
-                  <div className="flex-1 min-w-0">
+                <div className="flex min-w-0 flex-1 items-center">
+                  <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
                       {" "}
                       Allow buyer to choose a quantity{" "}
@@ -565,7 +565,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 Save and Publish
               </ButtonInput>
             </div>
-            <div className="flex items-center mt-4 mb-4 space-x-4">
+            <div className="my-4 flex items-center space-x-4">
               <ButtonInput
                 status="cancel"
                 type="button"

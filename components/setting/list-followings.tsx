@@ -85,7 +85,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
           <div className="flex items-center">
             <div
               onClick={() => router.push(`/${item?.profile?.username}`)}
-              className="relative flex-shrink-0 cursor-pointer"
+              className="relative shrink-0 cursor-pointer"
             >
               <AvatarComponent
                 size={40}
@@ -95,7 +95,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
 
             <Link
               href={`/${item?.profile?.username}`}
-              className="flex-1 min-w-0 ml-4 cursor-pointer"
+              className="ml-4 min-w-0 flex-1 cursor-pointer"
             >
               <p className="text-sm font-bold dark:text-white">
                 {item?.profile?.firstName} {item?.profile?.lastName}
@@ -105,7 +105,7 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
               </p>
             </Link>
 
-            <div className="flex items-center justify-end ml-auto space-x-8">
+            <div className="ml-auto flex items-center justify-end space-x-8">
               <ButtonInput
                 shape="default"
                 type="submit"

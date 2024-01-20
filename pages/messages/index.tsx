@@ -23,7 +23,7 @@ const Messages = () => {
       <div className="flex-1">
             <main>
                 <div className="py-6">
-                    <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                    <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                         <div className="max-w-md">
                             <h1 className="text-lg font-bold text-gray-900">Messages</h1>
                             <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
@@ -33,11 +33,11 @@ const Messages = () => {
                     </div>
 
 
-                    <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                    <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
 
-                        <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
+                        <div className="rounded-lg border border-gray-200 bg-white px-3 py-2">
                                 <nav className="flex flex-wrap gap-4">
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Write a message </a>
+                                    <a href="#" className="group inline-flex items-center whitespace-nowrap rounded-lg bg-transparent px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"> Write a message </a>
 
                                     {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Team </a>
 
@@ -54,15 +54,15 @@ const Messages = () => {
 
 
 
-                    <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
-                        <div className="w-full pb-1 overflow-x-auto">
+                    <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+                        <div className="w-full overflow-x-auto pb-1">
                             <div className="border-b border-gray-200">
-                                <nav className="flex -mb-px space-x-10">
-                                    <a href="#" className="py-4 text-sm font-medium text-indigo-500 transition-all duration-200 border-b-2 border-indigo-600 whitespace-nowrap"> Publisher </a>
+                                <nav className="-mb-px flex space-x-10">
+                                    <a href="#" className="whitespace-nowrap border-b-2 border-indigo-600 py-4 text-sm font-medium text-indigo-500 transition-all duration-200"> Publisher </a>
 
-                                    <a href="#" className="py-4 text-sm font-medium text-gray-500 transition-all duration-200 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap"> Drafted </a>
+                                    <a href="#" className="whitespace-nowrap border-b-2 border-transparent py-4 text-sm font-medium text-gray-500 transition-all duration-200 hover:border-gray-300"> Drafted </a>
 
-                                    <a href="#" className="py-4 text-sm font-medium text-gray-600 transition-all duration-200 border-b-2 border-transparent hover:border-gray-300 whitespace-nowrap"> Scheduled </a>
+                                    <a href="#" className="whitespace-nowrap border-b-2 border-transparent py-4 text-sm font-medium text-gray-600 transition-all duration-200 hover:border-gray-300"> Scheduled </a>
                                 </nav>
                             </div>
                         </div>

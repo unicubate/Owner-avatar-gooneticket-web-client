@@ -85,22 +85,22 @@ const CreateOrUpdateCategory: React.FC<{
   return (
     <>
       {showModal ? (
-        <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-          <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-[#121212]">
+        <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
+          <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
+          <div className="relative  m-auto w-full max-w-lg rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212]">
             <button
-              className="bg-transparent border-0 text-black float-right"
+              className="float-right border-0 bg-transparent text-black"
               onClick={() => setShowModal(false)}
             >
-              <span className="dark:text-white opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
+              <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
                 <CloseOutlined />
               </span>
             </button>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-              <div className="p-2 flex-auto justify-center">
+              <div className="flex-auto justify-center p-2">
                 {hasErrors && (
-                  <div className="py-6 bg-white dark:bg-[#121212]">
-                    <div className="bg-red-100 rounded-lg">
+                  <div className="bg-white py-6 dark:bg-[#121212]">
+                    <div className="rounded-lg bg-red-100">
                       <div className="p-3">
                         <div className="flex items-center justify-between">
                           <p className="ml-3 text-sm font-medium text-red-500">
@@ -144,7 +144,7 @@ const CreateOrUpdateCategory: React.FC<{
                   Save
                 </ButtonInput>
               </div> */}
-              <div className="flex items-center mt-2 space-x-4">
+              <div className="mt-2 flex items-center space-x-4">
                 <ButtonInput
                   status="cancel"
                   type="button"

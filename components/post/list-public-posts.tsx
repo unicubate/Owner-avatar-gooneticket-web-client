@@ -29,7 +29,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
         key={item?.id}
         className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-300/60"
       >
-        <div className="p-8 sm:py-7 sm:px-8">
+        <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
@@ -42,14 +42,14 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                 title="Share"
                 className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
               >
-                <IoShareOutline className="w-5 h-5" />
+                <IoShareOutline className="size-5" />
               </button>
               {item?.allowDownload ? (
                 <button
                   title="Download"
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
-                  <FiDownload className="w-5 h-5" />
+                  <FiDownload className="size-5" />
                 </button>
               ) : null}
 
@@ -66,7 +66,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
-                    <MdOutlineModeEdit className="w-5 h-5" />
+                    <MdOutlineModeEdit className="size-5" />
                   </button>
 
                   <button
@@ -74,7 +74,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                     title="Delete"
                     className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                   >
-                    <MdOutlineDeleteOutline className="w-5 h-5" />
+                    <MdOutlineDeleteOutline className="size-5" />
                   </button>
                 </>
               ) : null}
@@ -94,7 +94,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
           ) : null}
 
           {item?.uploadsImage?.length > 0 ? (
-            <div className="group relative mt-2 text-center justify-center mx-auto">
+            <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
                 uploads={item?.uploadsImage}
                 folder="posts"
@@ -118,14 +118,14 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
           {item?.id ? (
             <Link
               href={`/${item?.profile?.username}/posts/${item?.slug}`}
-              className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
+              className="mt-4 cursor-pointer text-lg font-bold text-gray-900"
             >
               {item?.title ?? ""}
             </Link>
           ) : null}
 
           {item?.description ? (
-            <div className={`text-sm font-normal text-gray-600 group relative`}>
+            <div className={`group relative text-sm font-normal text-gray-600`}>
               <span
                 className={`ql-editor ${
                   item?.whoCanSee === "MEMBERSHIP" &&
@@ -147,13 +147,13 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          <div className="flex mt-4 items-center">
+          <div className="mt-4 flex items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-2 text-lg font-bold">
               <BiComment />
             </button>
-            <span className="ml-2 font-normal text-sm">
+            <span className="ml-2 text-sm font-normal">
               {item?.totalComment ?? 0}
             </span>
           </div>

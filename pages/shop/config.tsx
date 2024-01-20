@@ -91,11 +91,11 @@ const Configs = () => {
   return (
     <>
       <LayoutDashboard title={'Setting'}>
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <HorizontalNavShop />
 
-            <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5 sm:p-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-2 sm:mt-0">
@@ -114,13 +114,13 @@ const Configs = () => {
                   <div className="mt-2 sm:mt-0">
                     <Input
                       placeholder="Search name"
-                      className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                      className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                       onChange={handleSetSearch}
                     />
                   </div>
                 </div>
 
-                <div className="flow-root mt-8">
+                <div className="mt-8 flow-root">
                   <div className="-my-5 divide-y divide-gray-100">
                     {showCategoryModal ? (
                       <CreateOrUpdateCategory
@@ -136,7 +136,7 @@ const Configs = () => {
             </div>
 
             {hasNextPageCategories && (
-              <div className="mt-2 text-center justify-center mx-auto">
+              <div className="mx-auto mt-2 justify-center text-center">
                 <div className="sm:mt-0">
                   <ButtonInput
                     onClick={() => fetchNextPageCategories()}
@@ -153,7 +153,7 @@ const Configs = () => {
               </div>
             )}
 
-            <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5 sm:p-6">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
@@ -172,12 +172,12 @@ const Configs = () => {
                     <Input
                       placeholder="Search by name"
                       onChange={handleSetSearch}
-                      className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                      className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                     />
                   </div>
                 </div>
 
-                <div className="mt-2 sm:flex flex-col sm:items-start sm:justify-between">
+                <div className="mt-2 flex-col sm:flex sm:items-start sm:justify-between">
                   <div className="mt-2 sm:mt-0">
                     <ButtonInput
                       onClick={() => setShowModal(true)}
@@ -193,7 +193,7 @@ const Configs = () => {
                   </div>
                 </div>
 
-                <div className="flow-root mt-8">
+                <div className="mt-8 flow-root">
                   <div className="-my-5 divide-y divide-gray-100">
                     {showModal ? (
                       <CreateOrUpdateDiscount
@@ -209,7 +209,7 @@ const Configs = () => {
             </div>
 
             {hasNextPage && (
-              <div className="mt-2 text-center justify-center mx-auto">
+              <div className="mx-auto mt-2 justify-center text-center">
                 <div className="sm:mt-0">
                   <ButtonInput
                     onClick={() => fetchNextPage()}

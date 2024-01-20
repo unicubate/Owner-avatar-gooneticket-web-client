@@ -27,7 +27,7 @@ const SelectMultipleSearchInput: React.FC<Props> = ({
   return (
     <>
       {label ? <label
-        className="block text-sm font-bold mb-2"
+        className="mb-2 block text-sm font-bold"
         htmlFor={name}>
         {label}
       </label> : null}
@@ -65,7 +65,7 @@ const SelectMultipleSearchInput: React.FC<Props> = ({
         )}
       />
       {errors?.[name] && (
-        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+        <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
           {errors?.[name]?.message}
         </span>
       )}

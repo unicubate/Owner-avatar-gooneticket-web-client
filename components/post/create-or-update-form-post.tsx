@@ -134,9 +134,9 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
-                <h2 className="dark:text-white font-bold">
+                <h2 className="font-bold dark:text-white">
                   {post?.id ? "Update" : "Create a new"} article
                 </h2>
 
@@ -146,7 +146,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     control={control}
                     render={({ field: { onChange } }) => (
                       <>
-                        <div className="text-center justify-center mx-auto">
+                        <div className="mx-auto justify-center text-center">
                           <Upload
                             multiple
                             name="attachmentImages"
@@ -206,13 +206,13 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     allowClear={true}
                     dataItem={categories}
                   />
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-400">
                       {`Categories makes it easy to browse your posts.`}
                     </span>
-                    <label className="block text-sm mb-2 dark:text-white"></label>
+                    <label className="mb-2 block text-sm dark:text-white"></label>
                     <Link
-                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                       href="/shop/config"
                     >
                       Setting category
@@ -241,7 +241,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     Save and Publish
                   </ButtonInput>
                 </div> */}
-                <div className="flex items-center mt-4 mb-4 space-x-4">
+                <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
                     status="cancel"
                     type="button"

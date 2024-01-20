@@ -69,7 +69,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="flex py-5 items-center">
+      <div key={index} className="flex items-center py-5">
         {/* <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
               size={100}
@@ -79,7 +79,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             />
           </div> */}
 
-        <div className="flex-1 min-w-0 cursor-pointer">
+        <div className="min-w-0 flex-1 cursor-pointer">
           <div className="flex items-center text-gray-600">
             <button className="tex-sm">
               <AiOutlineCalendar />
@@ -89,7 +89,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             </span>
           </div>
 
-          <div className="flex mt-4 items-center">
+          <div className="mt-4 flex items-center">
             {item?.title ? (
               <p className="text-lg font-bold">
                 <ReadMore html={String(item?.title ?? "")} value={100} />
@@ -97,7 +97,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             ) : null}
           </div>
 
-          <div className="flex mt-4 items-center font-medium text-gray-600">
+          <div className="mt-4 flex items-center font-medium text-gray-600">
             <span className="text-lg font-normal">
               <MdFavoriteBorder />
             </span>
@@ -115,17 +115,17 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
                 <HiOutlineLockClosed />
               )}
             </span>
-            <span className="ml-1.5 font-normal text-sm">
+            <span className="ml-1.5 text-sm font-normal">
               {item?.whoCanSee}
             </span>
             <span className="ml-1.5 text-sm">
               <IconTypePost type={item?.type as PostType} />
             </span>
-            <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
+            <span className="ml-1.5 text-sm font-normal">{item?.type}</span>
           </div>
         </div>
 
-        <div className="py-4 text-sm font-medium text-right">
+        <div className="py-4 text-right text-sm font-medium">
           <Tooltip placement="bottomRight" title={"Edit"}>
             <button
               onClick={() =>

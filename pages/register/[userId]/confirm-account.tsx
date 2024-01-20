@@ -113,31 +113,31 @@ const ConfirmAccount = () => {
 
   return (
     <LayoutSite title="Log In">
-      <div className="w-full max-w-lg p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
-        <div className="flex justify-center mx-auto">
+      <div className="m-auto w-full max-w-lg rounded-lg bg-white p-6 shadow-md">
+        <div className="mx-auto flex justify-center">
           <img
-            className="w-auto h-7 sm:h-8"
+            className="h-7 w-auto sm:h-8"
             src="https://merakiui.com/images/logo.svg"
             alt=""
           />
         </div>
-        <div className="flex mx-auto">
+        <div className="mx-auto flex">
           <h6 className="mt-3 text-xl font-bold">{`Confirm your account`}</h6>
         </div>
-        <div className="flex mx-auto">
+        <div className="mx-auto flex">
           <p>
             We sent a verification code to:{" "}
             <span className="font-bold">{user?.email}</span>
           </p>
         </div>
 
-        <div className="flex mx-auto">
-          <p className="text-sm text-blue-600 decoration-2 font-medium cursor-pointer">
+        <div className="mx-auto flex">
+          <p className="cursor-pointer text-sm font-medium text-blue-600 decoration-2">
             Check your inbox
           </p>
         </div>
 
-        <div className="flex mx-auto">
+        <div className="mx-auto flex">
           <span>Follow the link in the email, or enter the code bellow</span>
         </div>
 
@@ -166,11 +166,11 @@ const ConfirmAccount = () => {
           </div>
         </form>
 
-        <div className="flex mx-auto">
+        <div className="mx-auto flex">
           <p className="mt-3 text-sm">{`If you don't get email after a few minutes, tap below to resend`}</p>
         </div>
-        <div className="flex mx-auto" onClick={() => resendCode()}>
-          <p className="text-sm text-blue-600 hover:underline font-medium cursor-pointer">
+        <div className="mx-auto flex" onClick={() => resendCode()}>
+          <p className="cursor-pointer text-sm font-medium text-blue-600 hover:underline">
             Resend code
           </p>
         </div>

@@ -55,7 +55,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div
           className={cn(
-            'mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg',
+            'mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]',
           )}
         >
           <div className={cn('px-4 py-5')}>
@@ -63,7 +63,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
 
             <div
               className={cn(
-                'grid grid-cols-1 mt-4 sm:grid-cols-1 gap-y-5 gap-x-6',
+                'mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-1',
               )}
             >
               <div className="mt-2">
@@ -97,7 +97,7 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
               </div>
             </div>
 
-            <div className={cn('flex items-center mt-4 mb-2 space-x-4')}>
+            <div className={cn('mb-2 mt-4 flex items-center space-x-4')}>
               <ButtonInput
                 shape="default"
                 type="submit"

@@ -45,14 +45,14 @@ const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold">
               {" "}
               Change password{" "}
             </h2>
 
-            <div className="grid grid-cols-1 mt-4 sm:grid-cols-3 gap-y-5 gap-x-6">
+            <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInputPassword
                   label="Old password"
@@ -86,7 +86,7 @@ const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
               </div>
             </div>
 
-            <div className="flex items-center mt-4 mb-2 space-x-4">
+            <div className="mb-2 mt-4 flex items-center space-x-4">
               <ButtonInput
                 shape="default"
                 type="submit"

@@ -27,7 +27,7 @@ const SelectDiscountSearchInput: React.FC<Props> = ({
   return (
     <>
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="mb-2 block text-sm font-bold text-gray-700"
         htmlFor={name}
       >
         {label}
@@ -59,7 +59,7 @@ const SelectDiscountSearchInput: React.FC<Props> = ({
                       <Space>
                         {icon}
                         {item?.percent}% off commissions - {item?.code}
-                        <button className="text-lg ml-2 font-bold transition-all duration-200">
+                        <button className="ml-2 text-lg font-bold transition-all duration-200">
                           <Tag
                             bordered={false}
                             className="ml-2"
@@ -77,7 +77,7 @@ const SelectDiscountSearchInput: React.FC<Props> = ({
         )}
       />
       {errors?.[name] && (
-        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+        <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
           {errors?.[name]?.message}
         </span>
       )}

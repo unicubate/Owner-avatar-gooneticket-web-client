@@ -86,7 +86,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
     <>
       <div key={index} className="py-5">
         <div className="flex items-center">
-          <div className="relative flex-shrink-0 cursor-pointer">
+          <div className="relative shrink-0 cursor-pointer">
             <Avatar
               size={100}
               shape="square"
@@ -98,16 +98,16 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             />
           </div>
 
-          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
+          <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
               <button className="tex-sm">
                 <AiOutlineCalendar />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
-            <div className="flex mt-4 items-center">
+            <div className="mt-4 flex items-center">
               {item?.title ? (
                 <p className="text-lg font-bold text-gray-600 dark:text-white">
                   <ReadMore html={String(item?.title ?? "")} value={100} />
@@ -115,7 +115,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-            <div className="flex mt-4 items-center font-medium text-gray-600">
+            <div className="mt-4 flex items-center font-medium text-gray-600">
               <button className="text-lg">
                 <BiMoney />
               </button>
@@ -159,7 +159,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-600">
+          <div className="py-4 text-right text-sm font-medium text-gray-600">
             {/* <Tooltip placement="bottomRight" title={"View"}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}

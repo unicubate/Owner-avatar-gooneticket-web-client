@@ -32,7 +32,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
           {profile?.id ? <HeaderVerticalNavDashboard user={user} /> : null}
 
-          <div className={`flex flex-col flex-1 bg-gray-100 dark:bg-[#232325]`}>
+          <div className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#232325]`}>
             <main>
               {children}
             </main>

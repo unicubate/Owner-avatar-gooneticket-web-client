@@ -49,10 +49,10 @@ const Configs = () => {
   return (
     <>
       <LayoutDashboard title={"Gifts"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+            <div className="mx-auto max-w-6xl py-6">
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">
                     Configurations
@@ -68,10 +68,10 @@ const Configs = () => {
                 </div>
               </div> */}
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                 <HorizontalNavShop />
 
-                <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-xl">
+                <div className="mt-8 overflow-hidden rounded-xl border border-gray-200 bg-white">
                   <div className="px-4 py-5 sm:p-6">
                     <div className="sm:flex sm:items-center sm:justify-between">
                       <p className="text-base font-bold text-gray-900">
@@ -109,7 +109,7 @@ const Configs = () => {
                       </div>
                     </div>
 
-                    <div className="flow-root mt-8">
+                    <div className="mt-8 flow-root">
                       <div className="-my-5 divide-y divide-gray-100">
                         {showModal ? (
                           <CreateOrUpdateDiscount
@@ -122,12 +122,12 @@ const Configs = () => {
 
                         {hasNextPage ? (
                           <>
-                            <div className="mb-3 flex flex-col justify-between items-center">
+                            <div className="mb-3 flex flex-col items-center justify-between">
                               {isFetchingNextPage ? null : (
                                 <button
                                   disabled={isFetchingNextPage ? true : false}
                                   onClick={() => fetchNextPage()}
-                                  className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                                  className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                                 >
                                   View more
                                 </button>

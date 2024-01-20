@@ -48,9 +48,9 @@ const PayoutFormUser: React.FC = () => {
 
   return (
     <>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-5">
-          <div className="flex items-center mb-4 space-x-4">
+          <div className="mb-4 flex items-center space-x-4">
             <ButtonInput
               status="cancel"
               type="button"
@@ -82,18 +82,18 @@ const PayoutFormUser: React.FC = () => {
             </ButtonInput>
           </div>
 
-          <div className="flow-root mt-8">
+          <div className="mt-8 flow-root">
             <div className="-my-5 divide-y divide-gray-100">
               {dataTablePayments}
 
               {hasNextPage ? (
                 <>
-                  <div className="mb-3 flex flex-col justify-between items-center">
+                  <div className="mb-3 flex flex-col items-center justify-between">
                     {isFetchingNextPage ? null : (
                       <button
                         disabled={isFetchingNextPage ? true : false}
                         onClick={() => fetchNextPage()}
-                        className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                        className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                       >
                         View more
                       </button>

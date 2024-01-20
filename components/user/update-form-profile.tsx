@@ -122,12 +122,12 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold"> Profile </h2>
 
             {profile?.image ? (
-              <div className="mt-2 text-center space-x-2">
+              <div className="mt-2 space-x-2 text-center">
                 <Avatar
                   size={200}
                   shape="circle"
@@ -142,7 +142,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   control={control}
                   render={({ field: { onChange } }) => (
                     <>
-                      <div className="text-center justify-center mx-auto">
+                      <div className="mx-auto justify-center text-center">
                         <Upload
                           name="attachment"
                           listType="picture"
@@ -167,7 +167,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             )}
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInput
                   label="First name"
@@ -202,7 +202,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="mt-2">
                 <TextInput
                   label="Website"
@@ -224,7 +224,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInput
                   label="First address"
@@ -246,7 +246,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                 />
               </div>
               <div className="mt-2">
-                <label className="block text-gray-700 text-sm font-bold mb-2">
+                <label className="mb-2 block text-sm font-bold text-gray-700">
                   Color
                 </label>
                 <Controller
@@ -277,7 +277,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                               >
                                 <Space>
                                   <span
-                                    className={`text-xs font-semibold text-${item?.name}-600 bg-${item?.name}-50 border border-${item?.name}-600 rounded-md inline-flex items-center px-2.5 py-1`}
+                                    className={`text- text-xs font-semibold${item?.name}-600 bg-${item?.name}-50 border- border${item?.name}-600 inline-flex items-center rounded-md px-2.5 py-1`}
                                   >
                                     {item?.name}
                                   </span>
@@ -349,7 +349,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </span>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
               <div className="mt-2">
                 <TextAreaInput
                   row={3}
@@ -362,7 +362,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="flex items-center mt-4 mb-2 space-x-4">
+            <div className="mb-2 mt-4 flex items-center space-x-4">
               <ButtonInput
                 shape="default"
                 type="submit"

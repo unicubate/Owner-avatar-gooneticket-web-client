@@ -41,10 +41,10 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
 
   return (
     <>
-      <div className={`mt-8 border rounded-lg ${isOpen ? 'bg-indigo-50 dark:bg-indigo-100' : 'bg-red-100'} border-${isOpen ? 'indigo-300' : 'red-500'} `}>
+      <div className={`mt-8 rounded-lg border ${isOpen ? 'bg-indigo-50 dark:bg-indigo-100' : 'bg-red-100'} border-${isOpen ? 'indigo-300' : 'red-500'} `}>
         <div className="px-4 py-5 sm:p-3">
           <div className="md:flex md:items-center md:justify-between">
-            <div className="flex-1 max-w-xs md:mt-0">
+            <div className="max-w-xs flex-1 md:mt-0">
               <p className="text-base font-bold text-gray-600">
                 Shop  {isOpen ? "Open" : "Close"}
               </p>
@@ -56,7 +56,7 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
                 }
               </p>
             </div>
-            <div className="flex items-center justify-start mt-4 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
+            <div className="mt-4 flex items-center justify-start space-x-6 md:ml-auto md:mt-0 md:justify-end md:space-x-reverse">
               <ButtonInput
                 onClick={() => { enableItem(); setIsOpen((lk: boolean) => !lk) }}
                 shape="default"

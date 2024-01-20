@@ -5,7 +5,7 @@ interface IProps {
 const Main = ({ children }: IProps) => {
   return (
     <main>
-      <div className="mx-auto lg:flex mb-10">{children}</div>
+      <div className="mx-auto mb-10 lg:flex">{children}</div>
     </main>
   )
 }

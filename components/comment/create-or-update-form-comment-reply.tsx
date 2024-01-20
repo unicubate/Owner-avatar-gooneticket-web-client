@@ -100,7 +100,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-4 space-y-2 sm:space-y-0 sm:space-x-4 sm:flex sm:items-end">
+        <div className="mt-4 space-y-2 sm:flex sm:items-end sm:space-x-4 sm:space-y-0">
           {/* <div className="flex items-start">
             <Avatar
               size={40}
@@ -133,7 +133,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
           ) : null} */}
 
           {watchDescription.length >= 1 && (
-            <div className="sm:flex flex-col sm:items-end sm:justify-between">
+            <div className="flex-col sm:flex sm:items-end sm:justify-between">
               <ButtonInput
                 shape="default"
                 type="submit"

@@ -80,7 +80,7 @@ const Login = () => {
 
   return (
     <>
-      <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-[#121212] rounded-lg shadow-md">
+      <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
         {/* <div className="flex justify-center mx-auto">
           <img
             className="w-auto h-7 sm:h-8"
@@ -88,8 +88,8 @@ const Login = () => {
             alt=""
           />
         </div> */}
-        <div className="flex justify-center mx-auto">
-          <h6 className="mt-3 text-xl text-center font-bold">
+        <div className="mx-auto flex justify-center">
+          <h6 className="mt-3 text-center text-xl font-bold">
             {`Log in to your account`}
           </h6>
         </div>
@@ -120,13 +120,13 @@ const Login = () => {
               placeholder="Password"
               errors={errors}
             />
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <label
                 htmlFor="password"
-                className="block text-sm mb-2 dark:dark:text-white"
+                className="mb-2 block text-sm dark:dark:text-white"
               ></label>
               <Link
-                className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                 href="/forgot-password"
               >
                 Forgot password?
@@ -146,9 +146,9 @@ const Login = () => {
             </ButtonInput>
           </div>
         </form>
-        <div className="flex items-center justify-between mt-4 mb-4">
+        <div className="my-4 flex items-center justify-between">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-          <p className="text-xs text-center dark:text-gray-500 uppercase dark:dark:text-gray-400">
+          <p className="text-center text-xs uppercase dark:dark:text-gray-400 dark:text-gray-500">
             or login with Social Media
           </p>
 
@@ -191,7 +191,7 @@ const Login = () => {
         </GoogleOAuthProvider>
 
         <Link href="/register">
-          <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer dark:hover:text-blue-600">
+          <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
             {" "}
             New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
           </p>

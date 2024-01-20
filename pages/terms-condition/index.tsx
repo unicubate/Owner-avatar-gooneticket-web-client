@@ -5,17 +5,17 @@ const TermsCondition = () => {
   return (
     <>
       <LayoutSite title="Terms Condition">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="mt-6 py-12 bg-white dark:bg-black sm:py-16 lg:py-20">
-            <div className="max-w-2xl mx-auto text-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-6 bg-white py-12 dark:bg-black sm:py-16 lg:py-20">
+            <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
                 Terms of use
               </h2>
             </div>
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto xl:max-w-4xl">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-3xl xl:max-w-4xl">
                 <div className="mt-8">
-                  <p className="text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj text-base font-normal leading-7 text-gray-700">
                     Welcome to {process.env.NEXT_PUBLIC_NAME_SITE} this page
                     explains our terms of use. When you use{' '}
                     {process.env.NEXT_PUBLIC_NAME_SITE}, you’re agreeing to all
@@ -24,11 +24,11 @@ const TermsCondition = () => {
                     and simple explanations of what everything means.
                   </p>
 
-                  <h2 className="mt-12 text-3xl font-bold font-pj">
+                  <h2 className="font-pj mt-12 text-3xl font-bold">
                     Website Visitors
                   </h2>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     To sign up for a {process.env.NEXT_PUBLIC_NAME_SITE}{' '}
                     account, you need to be 18 or over. You’re responsible for
                     your account and all the activity on it. You can browse{' '}
@@ -40,14 +40,14 @@ const TermsCondition = () => {
                     are offensive or that violate anyone’s rights. If you don’t
                     follow these rules, we may cancel your account.
                   </p>
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     You’re responsible for all the activity on your account, and
                     for keeping your password confidential. If you find out that
                     someone has used your account without your permission, you
                     should report it to support@unpot.com.
                   </p>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     To sign up for an account, you need to be at least 18 years
                     old, or old enough to form a binding contract where you
                     live. If necessary, we may ask you for proof of age.
@@ -57,8 +57,8 @@ const TermsCondition = () => {
             </div>
           </div>
 
-          <footer className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl lg:py-10">
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-y-8 gap-x-8 xl:gap-x-12">
+          <footer className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-8 xl:gap-x-12">
               <div className="lg:col-span-2">
                 <p className="text-base font-semibold">Company</p>
 
@@ -257,22 +257,22 @@ const TermsCondition = () => {
               </div>
             </div>
 
-            <hr className="mt-16 mb-10 border-gray-200" />
+            <hr className="mb-10 mt-16 border-gray-200" />
 
             <div className="sm:flex sm:items-center sm:justify-between">
               <p className="text-sm text-gray-600">
                 © Copyright 2021, All Rights Reserved by Postcraft
               </p>
 
-              <ul className="flex items-center mt-5 space-x-3 md:order-3 sm:mt-0">
+              <ul className="mt-5 flex items-center space-x-3 sm:mt-0 md:order-3">
                 <li>
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -286,10 +286,10 @@ const TermsCondition = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -303,10 +303,10 @@ const TermsCondition = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -322,10 +322,10 @@ const TermsCondition = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"

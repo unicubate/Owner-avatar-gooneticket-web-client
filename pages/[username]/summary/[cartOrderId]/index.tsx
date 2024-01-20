@@ -71,27 +71,27 @@ const Summary = () => {
   }
   return (
     <>
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-center mt-10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mt-10 flex items-center justify-center">
           <h1 className="text-2xl font-bold dark:text-white">
             Shopping Cart
           </h1>
-          <span className="px-2 py-1 ml-4 text-xs font-bold tracking-widest uppercase bg-gray-400 dark:bg-gray-800 rounded-full text-gray-50">
+          <span className="ml-4 rounded-full bg-gray-400 px-2 py-1 text-xs font-bold uppercase tracking-widest text-gray-50 dark:bg-gray-800">
             {carts?.summary?.totalQuantity ?? 0} products
           </span>
         </div>
 
-        <div className="max-w-xl mx-auto mt-10 md:mt-12">
-          <div className="flex py-2 justify-between mt-2 items-center">
-            <label className="block text-sm mb-2 dark:text-white"></label>
+        <div className="mx-auto mt-10 max-w-xl md:mt-12">
+          <div className="mt-2 flex items-center justify-between py-2">
+            <label className="mb-2 block text-sm dark:text-white"></label>
             <Link
-              className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+              className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
               href={`/${username}/shop`}
             >
               Continue Shopping
             </Link>
           </div>
-          <div className="overflow-hidden bg-white dark:bg-[#121212] shadow rounded-xl">
+          <div className="overflow-hidden rounded-xl bg-white shadow dark:bg-[#121212]">
             <div className="px-4 py-6 sm:px-8 sm:py-10">
               <div className="flow-root">
                 <ul className="divide-y divide-gray-200 dark:divide-gray-800">
@@ -100,7 +100,7 @@ const Summary = () => {
               </div>
 
               <hr className="border-gray-200 dark:border-gray-800" />
-              <div className="flex items-center justify-between mt-6">
+              <div className="mt-6 flex items-center justify-between">
                 <p className="text-3xl font-bold dark:text-white">
                   Total
                 </p>

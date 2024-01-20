@@ -77,15 +77,15 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="w-full max-w-sm py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-[#121212] rounded-lg shadow-md">
-      <div className="flex justify-center mx-auto">
+    <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+      <div className="mx-auto flex justify-center">
         <img
-          className="w-auto h-7 sm:h-8"
+          className="h-7 w-auto sm:h-8"
           src="https://merakiui.com/images/logo.svg"
           alt=""
         />
       </div>
-      <div className="flex justify-center mx-auto">
+      <div className="mx-auto flex justify-center">
         <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
       </div>
 

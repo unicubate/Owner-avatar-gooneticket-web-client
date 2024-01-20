@@ -87,16 +87,16 @@ const Register = () => {
   };
 
   return (
-    <div className="w-full max-w-lg py-12 p-6 m-auto mt-10 md:mt-16 mx-auto dark:bg-[#121212] rounded-lg shadow-md">
-      <div className="flex justify-center mx-auto">
+    <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+      <div className="mx-auto flex justify-center">
         <img
-          className="w-auto h-7 sm:h-8"
+          className="h-7 w-auto sm:h-8"
           src="https://merakiui.com/images/logo.svg"
           alt=""
         />
       </div>
-      <div className="flex justify-center mx-auto">
-        <h6 className="mt-3 text-xl text-center font-bold">
+      <div className="mx-auto flex justify-center">
+        <h6 className="mt-3 text-center text-xl font-bold">
           {`Sign up. It's free!`}
         </h6>
       </div>
@@ -165,7 +165,7 @@ const Register = () => {
                   <div className="ml-3">
                     <label
                       htmlFor="remember-me"
-                      className="text-sm text-gray-700 font-bold"
+                      className="text-sm font-bold text-gray-700"
                     >
                       I accept the{" "}
                       <Link
@@ -188,7 +188,7 @@ const Register = () => {
             )}
           />
           {errors?.confirm && (
-            <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+            <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
               {errors?.confirm?.message}
             </span>
           )}
@@ -207,9 +207,9 @@ const Register = () => {
         </div>
       </form>
 
-      <div className="flex items-center justify-between mt-4 mb-4">
+      <div className="my-4 flex items-center justify-between">
         <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-        <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
+        <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
           or login with Social Media
         </p>
 
@@ -248,7 +248,7 @@ const Register = () => {
       </GoogleOAuthProvider>
 
       <Link href="/login">
-        <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
+        <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
           {" "}
           Already have an account? Log in here
         </p>

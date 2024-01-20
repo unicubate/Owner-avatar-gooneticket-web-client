@@ -80,18 +80,18 @@ const ListComments: React.FC<{
         model={model}
       />
 
-      <ul className="mt-4 divide-y divide-gray-200 dark:divide-gray-800 my-2">
+      <ul className="my-2 mt-4 divide-y divide-gray-200 dark:divide-gray-800">
         {dataTableComments}
       </ul>
 
       {hasNextPage ? (
         <>
-          <div className="mt-4 flex flex-col justify-between items-center">
+          <div className="mt-4 flex flex-col items-center justify-between">
             {isFetchingNextPage ? null : (
               <button
                 disabled={isFetchingNextPage ? true : false}
                 onClick={() => fetchNextPage()}
-                className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
               >
                 View more comments
               </button>

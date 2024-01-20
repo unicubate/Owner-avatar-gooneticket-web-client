@@ -39,13 +39,13 @@ const ListFollowPosts: React.FC<Props> = ({
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white dark:bg-[#121212] rounded-lg"
+        className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
       >
-        <div className="p-8 sm:py-7 sm:px-8">
+        <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             <div
               onClick={() => push(`/${item?.profile?.username}`)}
-              className="relative flex-shrink-0 cursor-pointer"
+              className="relative shrink-0 cursor-pointer"
             >
               <AvatarComponent size={50} profile={item?.profile} />
             </div>
@@ -75,7 +75,7 @@ const ListFollowPosts: React.FC<Props> = ({
                     size="medium"
                     loading={false}
                     color={item?.profile?.color as any}
-                    icon={<HiOutlineLockClosed className="w-5 h-5" />}
+                    icon={<HiOutlineLockClosed className="size-5" />}
                   >
                     <span className="ml-1 font-bold">Join membership</span>
                   </ButtonInput>
@@ -84,7 +84,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   title="Share"
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
-                  <IoShareOutline className="w-5 h-5" />
+                  <IoShareOutline className="size-5" />
                 </button>
                 {/* {item?.allowDownload && (
                   <button
@@ -108,7 +108,7 @@ const ListFollowPosts: React.FC<Props> = ({
 
           {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
             <div
-              className={`mt-1 mx-auto 
+              className={`mx-auto mt-1 
             ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
                   ? "blur-xl"
                   : ""
@@ -127,7 +127,7 @@ const ListFollowPosts: React.FC<Props> = ({
 
 
           {item?.uploadsImage?.length > 0 ? (
-            <div className="group relative mt-2 text-center justify-center mx-auto">
+            <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
                 post={item}
                 uploads={item?.uploadsImage}
@@ -172,7 +172,7 @@ const ListFollowPosts: React.FC<Props> = ({
           </div> */}
 
           {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
-            <div className="text-center justify-center mx-auto">
+            <div className="mx-auto justify-center text-center">
               <AudioPlayerInput
                 post={item}
                 urlMedia={item?.urlMedia}
@@ -187,7 +187,7 @@ const ListFollowPosts: React.FC<Props> = ({
             <div className="mt-2 text-lg">
               <Link
                 href={`/posts/${item?.slug}`}
-                className="font-bold text-gray-900 dark:text-white cursor-pointer"
+                className="cursor-pointer font-bold text-gray-900 dark:text-white"
               >
                 {item?.title ?? ""}
               </Link>
@@ -196,7 +196,7 @@ const ListFollowPosts: React.FC<Props> = ({
 
           {item?.description ? (
             <div
-              className={`text-sm font-normal text-gray-600 dark:text-gray-300 group relative`}
+              className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
             >
               <span
                 className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
@@ -213,7 +213,7 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-          <div className="flex mt-2 items-center font-medium text-gray-600">
+          <div className="mt-2 flex items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-2 text-2xl">
@@ -228,7 +228,7 @@ const ListFollowPosts: React.FC<Props> = ({
                     }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                 >
-                  <MdOutlineModeEdit className="w-6 h-6" />
+                  <MdOutlineModeEdit className="size-6" />
                 </Link>
               </>
             ) : null}
@@ -249,7 +249,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   }}
                   className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
                 >
-                  <FiDownload className="w-5 h-5" />
+                  <FiDownload className="size-5" />
                 </button>
               </>
             )}

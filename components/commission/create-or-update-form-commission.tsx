@@ -137,12 +137,12 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
-                <h2 className="dark:text-white font-bold">
+                <h2 className="font-bold dark:text-white">
                   {commission?.id ? 'Update' : 'Create a new'} commission
                 </h2>
-                <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
                     <TextInput
                       label="Name*"
@@ -168,14 +168,14 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   />
                 </div>
 
-                <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mt-4">
                     <Controller
                       name="attachmentImages"
                       control={control}
                       render={({ field: { onChange } }) => (
                         <>
-                          <div className="text-center justify-center mx-auto">
+                          <div className="mx-auto justify-center text-center">
                             <Upload
                               multiple
                               name="attachmentImages"
@@ -201,7 +201,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
                     <TextareaReactQuillInput
                       control={control}
@@ -217,7 +217,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
                     <TextInput
                       label="Embed Media (optional)"
@@ -233,7 +233,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
                     <TextareaReactQuillInput
                       control={control}
@@ -249,18 +249,18 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+                <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
-                    <label className="block dark:text-white text-sm font-bold mb-2">
+                    <label className="mb-2 block text-sm font-bold dark:text-white">
                       Advanced settings
                     </label>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
+                <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex items-center flex-1 min-w-0">
-                      <div className="flex-1 min-w-0">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold dark:text-white">
                           {' '}
                           Limit slots (optional){' '}
@@ -293,8 +293,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   ) : null}
 
                   <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex items-center flex-1 min-w-0">
-                      <div className="flex-1 min-w-0">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold dark:text-white">
                           {' '}
                           Special price for members{' '}
@@ -314,7 +314,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center mt-4 mb-4 space-x-4">
+                <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
                     status="cancel"
                     type="button"

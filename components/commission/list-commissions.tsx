@@ -74,9 +74,9 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="py-5 divide-gray-200">
+      <div key={index} className="divide-gray-200 py-5">
         <div className="flex items-center">
-          <div className="relative flex-shrink-0 cursor-pointer">
+          <div className="relative shrink-0 cursor-pointer">
             <Avatar
               size={100}
               shape="square"
@@ -88,17 +88,17 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             />
           </div>
 
-          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
+          <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center">
               <button className="tex-sm text-gray-700">
                 <AiOutlineCalendar />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
 
-            <div className="flex mt-2 items-center">
+            <div className="mt-2 flex items-center">
               {item?.title ? (
                 <p className="text-lg font-bold text-gray-600">
                   <ReadMore html={String(item?.title ?? "")} value={50} />
@@ -106,7 +106,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-            <div className="flex mt-4 items-center">
+            <div className="mt-4 flex items-center">
               {item?.price ? (
                 <>
                   <span className="text-lg font-normal">
@@ -120,7 +120,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right text-gray-900">
+          <div className="py-4 text-right text-sm font-medium text-gray-900">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() => router.push(`/commissions/${item?.id}/edit`)}

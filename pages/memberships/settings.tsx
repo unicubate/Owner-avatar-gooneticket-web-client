@@ -67,10 +67,10 @@ const SettingDonations = () => {
   return (
     <>
       <LayoutDashboard title={"Memberships setting"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <main>
             <div className="py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+              <div className="mx-auto px-4 sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Donations</h1>
                   <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
@@ -79,13 +79,13 @@ const SettingDonations = () => {
                 </div>
               </div>
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                 <HorizontalNavMembership />
 
-                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
+                <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-10">
                   <div className="flow-root">
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <div className="overflow-hidden bg-white border border-gray-200">
+                      <div className="overflow-hidden border border-gray-200 bg-white">
                         <div className="px-4 py-5 sm:p-6">
                           <div className="sm:flex sm:items-center sm:justify-between">
                             <div>
@@ -105,7 +105,7 @@ const SettingDonations = () => {
                                                         </div> */}
                           </div>
 
-                          <div className="flow-root mt-8">
+                          <div className="mt-8 flow-root">
                             <div className="-my-5 divide-y divide-gray-100">
                               <div className="py-5">
                                 <Radio.Group
@@ -139,19 +139,19 @@ const SettingDonations = () => {
                         <div className="px-4 sm:p-6">
                           <div className="py-5">
                             <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                              <div className="flex items-center flex-1 min-w-0">
-                                <div className="flex-1 min-w-0">
-                                  <p className="text-sm font-bold text-gray-900 truncate">
+                              <div className="flex min-w-0 flex-1 items-center">
+                                <div className="min-w-0 flex-1">
+                                  <p className="truncate text-sm font-bold text-gray-900">
                                     Accept annual memberships
                                   </p>
-                                  <p className="mt-1 text-sm font-medium text-gray-500 truncate">
+                                  <p className="mt-1 truncate text-sm font-medium text-gray-500">
                                     New members can choose to pay for 12 months
                                     upfront.
                                   </p>
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                              <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                                 <button
                                   type="button"
                                   title=""
@@ -160,7 +160,7 @@ const SettingDonations = () => {
                                   {" "}
                                 </button>
 
-                                <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                                <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                   <SwitchInput
                                     control={control}
                                     name="facebookNotif"
@@ -172,8 +172,8 @@ const SettingDonations = () => {
 
                           <div className="py-5">
                             <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                              <div className="flex items-center flex-1 min-w-0">
-                                <div className="flex-1 min-w-0">
+                              <div className="flex min-w-0 flex-1 items-center">
+                                <div className="min-w-0 flex-1">
                                   <p className="text-sm font-bold text-gray-900">
                                     Display member count
                                   </p>
@@ -184,7 +184,7 @@ const SettingDonations = () => {
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                              <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                                 <button
                                   type="button"
                                   title=""
@@ -193,7 +193,7 @@ const SettingDonations = () => {
                                   {" "}
                                 </button>
 
-                                <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                                <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                   <SwitchInput
                                     control={control}
                                     name="facebookNotif"
@@ -205,8 +205,8 @@ const SettingDonations = () => {
 
                           <div className="py-5">
                             <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                              <div className="flex items-center flex-1 min-w-0">
-                                <div className="flex-1 min-w-0">
+                              <div className="flex min-w-0 flex-1 items-center">
+                                <div className="min-w-0 flex-1">
                                   <p className="text-sm font-bold text-gray-900">
                                     Display member count
                                   </p>
@@ -217,7 +217,7 @@ const SettingDonations = () => {
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                              <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                                 <button
                                   type="button"
                                   title=""
@@ -226,7 +226,7 @@ const SettingDonations = () => {
                                   {" "}
                                 </button>
 
-                                <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                                <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                   <SwitchInput
                                     control={control}
                                     name="confirmSwitch"
@@ -239,8 +239,8 @@ const SettingDonations = () => {
 
                           <div className="py-5">
                             <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                              <div className="flex items-center flex-1 min-w-0">
-                                <div className="flex-1 min-w-0">
+                              <div className="flex min-w-0 flex-1 items-center">
+                                <div className="min-w-0 flex-1">
                                   <p className="text-sm font-bold text-gray-900">
                                     Display monthly earnings
                                   </p>
@@ -251,7 +251,7 @@ const SettingDonations = () => {
                                 </div>
                               </div>
 
-                              <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                              <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                                 <button
                                   type="button"
                                   title=""
@@ -260,7 +260,7 @@ const SettingDonations = () => {
                                   {" "}
                                 </button>
 
-                                <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                                <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                   <SwitchInput
                                     control={control}
                                     name="telegramNotif"
@@ -287,7 +287,7 @@ const SettingDonations = () => {
                             </div>
                           </div>
 
-                          <div className="flow-root mt-8">
+                          <div className="mt-8 flow-root">
                             <div className="-my-5 divide-y divide-gray-100">
                               <div className="py-5">
                                 <TextAreaInput

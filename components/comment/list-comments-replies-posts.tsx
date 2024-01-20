@@ -78,7 +78,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
 
   return (
     <>
-      <div key={index} className="flex items-start mt-4">
+      <div key={index} className="mt-4 flex items-start">
         <AvatarComponent size={40} profile={item?.profile} />
 
         <div className="ml-3">
@@ -100,7 +100,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
             <HtmlParser html={String(item?.description)} />
           </p>
 
-          <div className="flex mt-2 items-center font-medium text-gray-600">
+          <div className="mt-2 flex items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
             {userId === item?.userId ? (
@@ -109,13 +109,13 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                   onClick={() => editItem(item)}
                   className="ml-3.5 hover:text-indigo-400 focus:ring-indigo-400"
                 >
-                  <MdOutlineModeEdit className="w-5 h-5" />
+                  <MdOutlineModeEdit className="size-5" />
                 </button>
                 <button
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                 >
-                  <MdOutlineDeleteOutline className="w-5 h-5" />
+                  <MdOutlineDeleteOutline className="size-5" />
                 </button>
               </>
             ) : null}

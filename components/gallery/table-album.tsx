@@ -49,7 +49,7 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
       .flatMap((page: any) => page?.data?.value)
       .map((item: AlbumModel, index: number) => (
         <Fragment key={index}>
-          <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
+          <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
             <div className="p-4">
               <div className="flex items-center">
                 <Avatar
@@ -60,7 +60,7 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
                 >
                   {capitalizeOneFirstLetter(String(item?.name))}
                 </Avatar>
-                <div className="flex-1 ml-4">
+                <div className="ml-4 flex-1">
                   <Link href={`/gallery/album/${item?.id}`}>
                     <p className="text-base font-bold">{item?.name}</p>
                   </Link>

@@ -27,7 +27,7 @@ const SelectMembershipSearchInput: React.FC<Props> = ({
   return (
     <>
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="mb-2 block text-sm font-bold text-gray-700"
         htmlFor={name}
       >
         {label}
@@ -68,7 +68,7 @@ const SelectMembershipSearchInput: React.FC<Props> = ({
         )}
       />
       {errors?.[name] && (
-        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+        <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
           {errors?.[name]?.message}
         </span>
       )}

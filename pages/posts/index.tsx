@@ -71,7 +71,7 @@ const Posts = () => {
     />
   ) : dataPost?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiDetail className="h-10 w-10" />}
+      image={<BiDetail className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
@@ -87,17 +87,17 @@ const Posts = () => {
   return (
     <>
       <LayoutDashboard title={'Posts'}>
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavCreatePost />
 
             <div
-              className={`mt-8 px-3 py-2 bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}
+              className={`mt-8 rounded-lg border border-gray-200 bg-white  px-3 py-2 dark:border-gray-800 dark:bg-[#121212]`}
             >
               <nav className="flex flex-wrap gap-4">
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                  className="group inline-flex items-center whitespace-nowrap rounded-lg bg-transparent px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {' '}
                   Publisher{' '}
@@ -105,7 +105,7 @@ const Posts = () => {
 
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                  className="group inline-flex items-center whitespace-nowrap rounded-lg bg-transparent px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {' '}
                   Drafter{' '}
@@ -113,7 +113,7 @@ const Posts = () => {
 
                 <a
                   href="#"
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"
+                  className="group inline-flex items-center whitespace-nowrap rounded-lg bg-transparent px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
                 >
                   {' '}
                   Scheduled{' '}
@@ -123,7 +123,7 @@ const Posts = () => {
 
             <div className="flow-root">
               <div
-                className={`mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg`}
+                className={`mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]`}
               >
                 <div className="px-4 py-8">
                   <div className="sm:flex sm:items-center sm:justify-between">
@@ -144,7 +144,7 @@ const Posts = () => {
               </div>
 
               {hasNextPage && (
-                <div className="mt-4 text-center justify-center mx-auto">
+                <div className="mx-auto mt-4 justify-center text-center">
                   <div className="mt-4 sm:mt-0">
                     <ButtonInput
                       ref={ref}

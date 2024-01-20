@@ -73,9 +73,9 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="py-5 divide-gray-200">
+      <div key={index} className="divide-gray-200 py-5">
         <div className="flex items-center">
-          <div className="relative flex-shrink-0 cursor-pointer">
+          <div className="relative shrink-0 cursor-pointer">
             {item?.uploadsImage?.length > 0 ? (
               <Avatar
                 size={100}
@@ -89,17 +89,17 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             ) : null}
           </div>
 
-          <div className="flex-1 min-w-0 ml-3 cursor-pointer">
+          <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
               <button className="tex-sm">
                 <AiOutlineCalendar />
               </button>
-              <span className="ml-1.5 font-normal text-sm">
+              <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
 
-            <div className="flex mt-2 items-center">
+            <div className="mt-2 flex items-center">
               {item?.title ? (
                 <p className="mt-2 text-lg font-bold">
                   <ReadMore html={String(item?.title ?? "")} value={100} />
@@ -107,18 +107,18 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-            <div className="flex mt-4 items-center font-medium text-gray-600">
+            <div className="mt-4 flex items-center font-medium text-gray-600">
               <button className="tex-sm">
                 <MdFavoriteBorder />
               </button>
               <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
-              <button className="ml-1.5 tex-sm">
+              <button className="tex-sm ml-1.5">
                 <BiConversation />
               </button>
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
 
-              <button className="ml-1.5 tex-sm">
+              <button className="tex-sm ml-1.5">
                 {item?.whoCanSee === "PUBLIC" ? (
                   <TbWorld />
                 ) : (
@@ -129,20 +129,20 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
 
               {item?.allowDownload && (
                 <>
-                  <button title="Download" className="ml-1.5 tex-sm">
+                  <button title="Download" className="tex-sm ml-1.5">
                     <FiDownload />
                   </button>
-                  <span className="ml-1.5 font-normal text-sm">Download</span>
+                  <span className="ml-1.5 text-sm font-normal">Download</span>
                 </>
               )}
               <span className="ml-1.5 text-sm">
                 <IconTypePost type={item?.type as PostType} />
               </span>
-              <span className="ml-1.5 font-normal text-sm">{item?.type}</span>
+              <span className="ml-1.5 text-sm font-normal">{item?.type}</span>
             </div>
           </div>
 
-          <div className="py-4 text-sm font-medium text-right">
+          <div className="py-4 text-right text-sm font-medium">
             <Tooltip placement="bottomRight" title={"Edit"}>
               <button
                 onClick={() =>

@@ -56,27 +56,27 @@ const Configs = () => {
   return (
     <>
       <LayoutDashboard title={"Gifts"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <main>
-            <div className="max-w-6xl mx-auto py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+            <div className="mx-auto max-w-6xl py-6">
+              <div className="mx-auto px-4 sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Settings</h1>
                 </div>
               </div>
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                 <HorizontalNavSetting />
 
-                <div className="mt-8 border border-indigo-300 rounded-lg bg-indigo-50">
+                <div className="mt-8 rounded-lg border border-indigo-300 bg-indigo-50">
                   <div className="px-4 py-5 sm:p-6">
                     <div className="md:flex md:items-center md:justify-between">
                       <img
-                        className="flex-shrink-0 object-cover w-16 h-16 rounded-lg"
+                        className="size-16 shrink-0 rounded-lg object-cover"
                         src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/avatar-female.png"
                         alt=""
                       />
-                      <div className="flex-1 max-w-xs mt-4 md:mt-0 md:ml-6">
+                      <div className="mt-4 max-w-xs flex-1 md:ml-6 md:mt-0">
                         <p className="text-base font-bold text-gray-900">
                           Learn how to connect new apps with Rareblocks API
                         </p>
@@ -85,10 +85,10 @@ const Configs = () => {
                         </p>
                       </div>
 
-                      <div className="flex items-center justify-start mt-6 space-x-6 md:ml-auto md:justify-end md:mt-0 md:space-x-reverse">
+                      <div className="mt-6 flex items-center justify-start space-x-6 md:ml-auto md:mt-0 md:justify-end md:space-x-reverse">
                         <button
                           type="button"
-                          className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 bg-indigo-600 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600 hover:bg-indigo-500 md:order-last"
+                          className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-sm font-semibold leading-5 text-white transition-all duration-200 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 md:order-last"
                         >
                           View Tutorial
                         </button>
@@ -124,15 +124,15 @@ const Configs = () => {
                                     </div>
                                 </div> */}
 
-                <div className="flow-root mt-8">
-                  <div className="overflow-hidden bg-white border border-gray-200">
+                <div className="mt-8 flow-root">
+                  <div className="overflow-hidden border border-gray-200 bg-white">
                     <div className="px-4 py-5">
                       <div className="-my-5 divide-y divide-gray-200">
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex min-w-0 flex-1 items-center">
                               {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/mailchimp-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
+                              <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Mailchimp
                                 </p>
@@ -143,7 +143,7 @@ const Configs = () => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                            <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                               <button
                                 type="button"
                                 title=""
@@ -152,7 +152,7 @@ const Configs = () => {
                                 {" "}
                               </button>
 
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                              <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                 <SwitchInput
                                   control={control}
                                   name="facebookNotif"
@@ -164,9 +164,9 @@ const Configs = () => {
 
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex min-w-0 flex-1 items-center">
                               {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/zapier-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
+                              <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Zapier
                                 </p>
@@ -176,7 +176,7 @@ const Configs = () => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                            <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                               <button
                                 type="button"
                                 title=""
@@ -185,7 +185,7 @@ const Configs = () => {
                                 {" "}
                               </button>
 
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                              <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                 <SwitchInput
                                   control={control}
                                   name="confirmSwitch"
@@ -198,9 +198,9 @@ const Configs = () => {
 
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex min-w-0 flex-1 items-center">
                               {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/telegram-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
+                              <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Telegram
                                 </p>
@@ -210,7 +210,7 @@ const Configs = () => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                            <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                               <button
                                 type="button"
                                 title=""
@@ -219,7 +219,7 @@ const Configs = () => {
                                 {" "}
                               </button>
 
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                              <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                 <SwitchInput
                                   control={control}
                                   name="telegramNotif"
@@ -231,9 +231,9 @@ const Configs = () => {
 
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex min-w-0 flex-1 items-center">
                               {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/slack-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
+                              <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Slack
                                 </p>
@@ -244,7 +244,7 @@ const Configs = () => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                            <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                               <button
                                 type="button"
                                 title=""
@@ -253,7 +253,7 @@ const Configs = () => {
                                 {" "}
                               </button>
 
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                              <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                 <SwitchInput
                                   control={control}
                                   name="confirmSwitch"
@@ -266,9 +266,9 @@ const Configs = () => {
 
                         <div className="py-5">
                           <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                            <div className="flex items-center flex-1 min-w-0">
+                            <div className="flex min-w-0 flex-1 items-center">
                               {/* <img className="flex-shrink-0 object-cover w-10 h-10 rounded-full" src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/previews/settings/3/dropbox-logo.png" alt="" /> */}
-                              <div className="flex-1 min-w-0 ml-4">
+                              <div className="ml-4 min-w-0 flex-1">
                                 <p className="text-sm font-bold text-gray-900">
                                   Dropbox
                                 </p>
@@ -278,7 +278,7 @@ const Configs = () => {
                               </div>
                             </div>
 
-                            <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+                            <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
                               <button
                                 type="button"
                                 title=""
@@ -287,7 +287,7 @@ const Configs = () => {
                                 {" "}
                               </button>
 
-                              <div className="relative inline-flex flex-shrink-0 h-6 transition-all duration-200 ease-in-out bg-white border border-gray-200 rounded-full cursor-pointer w-11 focus:outline-none">
+                              <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
                                 <SwitchInput
                                   control={control}
                                   name="confirmSwitch"

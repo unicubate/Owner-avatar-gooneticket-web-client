@@ -18,7 +18,7 @@ const FaqsList: React.FC<Props> = ({ item, index }) => {
     <>
       <div key={index} role="region">
         <h3>
-          <button onClick={() => handlerAction()} className="flex items-center justify-between w-full px-6 py-5 text-lg font-semibold text-left text-gray-900 sm:p-6">
+          <button onClick={() => handlerAction()} className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold text-gray-900 sm:p-6">
             <span> {item?.title} </span>
             {item?.id && showFaq ? (
               <BiMinus

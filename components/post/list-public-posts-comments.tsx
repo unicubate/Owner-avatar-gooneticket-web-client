@@ -30,9 +30,9 @@ const ListPublicPostsComments: React.FC<Props> = ({
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white shadow-2xl shadow-gray-4300/60"
+        className="shadow-gray-4300/60 mt-8 overflow-hidden bg-white shadow-2xl"
       >
-        <div className="p-8 sm:py-7 sm:px-8">
+        <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
@@ -45,14 +45,14 @@ const ListPublicPostsComments: React.FC<Props> = ({
                 title="Share"
                 className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
               >
-                <IoShareOutline className="w-5 h-5" />
+                <IoShareOutline className="size-5" />
               </button>
               {item?.allowDownload ? (
                 <button
                   title="Download"
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
-                  <FiDownload className="w-5 h-5" />
+                  <FiDownload className="size-5" />
                 </button>
               ) : null}
 
@@ -69,7 +69,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
                     title="Edit"
                     className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                   >
-                    <MdOutlineModeEdit className="w-5 h-5" />
+                    <MdOutlineModeEdit className="size-5" />
                   </button>
 
                   <button
@@ -77,7 +77,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
                     title="Delete"
                     className="ml-2 text-gray-600 hover:text-red-400 focus:ring-red-400"
                   >
-                    <MdOutlineDeleteOutline className="w-5 h-5" />
+                    <MdOutlineDeleteOutline className="size-5" />
                   </button>
                 </>
               ) : null}
@@ -99,7 +99,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
           {item?.id ? (
             <Link
               href={`/${item?.profile?.username}/posts/${item?.slug}`}
-              className="mt-4 text-lg font-bold text-gray-900 cursor-pointer"
+              className="mt-4 cursor-pointer text-lg font-bold text-gray-900"
             >
               {item?.title ?? ""}
             </Link>
@@ -109,13 +109,13 @@ const ListPublicPostsComments: React.FC<Props> = ({
             <HtmlParser html={String(item?.description)} />
           </p>
 
-          <div className="flex mt-4 items-center">
+          <div className="mt-4 flex items-center">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-3.5 text-lg font-bold">
               <BiComment />
             </button>
-            <span className="ml-1.5 font-normal text-sm">
+            <span className="ml-1.5 text-sm font-normal">
               {item?.totalComment ?? 0}
             </span>
           </div>

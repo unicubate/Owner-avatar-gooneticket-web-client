@@ -82,7 +82,7 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
     <>
       {dataTablePosts}
 
-      <div className="mt-4 text-center justify-center mx-auto">
+      <div className="mx-auto mt-4 justify-center text-center">
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput

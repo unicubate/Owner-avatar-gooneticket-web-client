@@ -25,7 +25,7 @@ const ListPublicGallery: React.FC<Props> = ({
           title={item?.title}
           href={void 0}
           onClick={() => setOpenModal(true)}
-          className="block overflow-hidden aspect-w-16 aspect-h-9"
+          className="aspect-w-16 aspect-h-9 block overflow-hidden"
         >
           {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
             <ListCarouselUpload
@@ -34,7 +34,7 @@ const ListPublicGallery: React.FC<Props> = ({
               folder="posts"
               preview={false}
               height={250}
-              className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110 ${
+              className={`size-full object-cover transition-all duration-200 group-hover:scale-110${
                 item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
                   ? "blur-xl"
                   : ""

@@ -73,10 +73,10 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
       <HeaderHorizontalNavUserPublicSite user={user} />
 
       <main>
-        <div className="mx-auto lg:flex mb-10">
+        <div className="mx-auto mb-10 lg:flex">
           {user?.profile?.id && theme ? (
             <div
-              className={`flex flex-col flex-1 bg-gray-100 dark:bg-[#232325]`}
+              className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#232325]`}
             >
               {children}
             </div>

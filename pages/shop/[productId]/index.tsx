@@ -100,15 +100,15 @@ const ShopView = () => {
       />
     ) : (
       <>
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
-                <div className="overflow-hidden border-2 border-transparent rounded-lg">
+                <div className="overflow-hidden rounded-lg border-2 border-transparent">
                   <div className="mb-2 flex items-center">
                     <AvatarComponent
                       size={40}
-                      className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
+                      className="size-10 shrink-0 rounded-full bg-gray-300"
                       profile={product?.profile}
                     />
                     <div
@@ -129,7 +129,7 @@ const ShopView = () => {
                       }
                       className="ml-auto"
                     >
-                      <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900 cursor-pointer">
+                      <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
                         {" "}
                         View shop
                       </p>
@@ -141,7 +141,7 @@ const ShopView = () => {
                       uploads={product?.uploadsImage}
                       folder="products"
                       preview={false}
-                      className={`object-cover w-full h-full transition-all duration-200 transform group-hover:scale-110`}
+                      className={`size-full object-cover transition-all duration-200 group-hover:scale-110`}
                     />
                   ) : null}
 
@@ -154,7 +154,7 @@ const ShopView = () => {
                   )} */}
 
                   {product?.urlMedia ? (
-                    <div className="mt-2 mx-auto">
+                    <div className="mx-auto mt-2">
                       <ReactPlayer
                         className="mr-auto"
                         url={product?.urlMedia}
@@ -168,12 +168,12 @@ const ShopView = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-3 lg:row-end-2 lg:row-span-2">
+            <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
                 {product?.title ?? ""}
               </h1>
 
-              <div className="flex items-center mt-4">
+              <div className="mt-4 flex items-center">
                 <p className="text-4xl font-bold text-gray-900">
                   {formatePrice({
                     value: Number(product?.priceDiscount ?? 0),
@@ -202,8 +202,8 @@ const ShopView = () => {
               </div>
 
               {product?.enableDiscount ? (
-                <div className="flex items-center mt-3 text-sm font-medium text-gray-500">
-                  <MdOutlineDiscount className="w-4 h-5 mr-2 text-gray-400" />
+                <div className="mt-3 flex items-center text-sm font-medium text-gray-500">
+                  <MdOutlineDiscount className="mr-2 h-5 w-4 text-gray-400" />
                   Save {product?.discount?.percent}% right now
                 </div>
               ) : null}
@@ -262,7 +262,7 @@ const ShopView = () => {
                 </div>
               </div> */}
 
-              <div className="flex items-center mt-6 space-x-4">
+              <div className="mt-6 flex items-center space-x-4">
                 <ButtonInput
                   minW="fit"
                   shape="default"

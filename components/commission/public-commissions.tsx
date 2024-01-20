@@ -69,7 +69,7 @@ const PublicCommissions: React.FC<Props> = ({ organizationId }) => {
     <>
       {dataTableCommissions}
 
-      <div className="mt-6 text-center justify-center mx-auto">
+      <div className="mx-auto mt-6 justify-center text-center">
         {hasNextPage && (
           <div className="sm:mt-0">
             <ButtonInput

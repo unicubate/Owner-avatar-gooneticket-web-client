@@ -44,7 +44,7 @@ const RecentTransactions: React.FC<Props> = ({
     />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiTransfer className="h-10 w-10" />}
+      image={<BiTransfer className="size-10" />}
       title="You don't have any transaction"
       description={`Share your page with your audience to get started.`}
     />
@@ -58,9 +58,9 @@ const RecentTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-[#121212] border dark:border-gray-800 rounded-lg">
+      <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
-          <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
+          <table className="mt-4 min-w-full lg:divide-y lg:divide-gray-200">
             <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
               {dataTableTransactions}
             </tbody>

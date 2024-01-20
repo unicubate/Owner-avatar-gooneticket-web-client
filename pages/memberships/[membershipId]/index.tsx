@@ -59,21 +59,21 @@ const ShopView = () => {
   return (
     <>
       <LayoutSite title={`${product?.title ?? ""}`}>
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid grid-cols-1 mt-8 lg:grid-rows-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:gap-y-16 lg:gap-x-12 xl:gap-x-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
             <div className="lg:col-span-3 lg:row-end-1">
               <div className="lg:flex lg:items-start">
-                <div className="overflow-hidden border-2 border-transparent rounded-lg">
+                <div className="overflow-hidden rounded-lg border-2 border-transparent">
                   <div className="mb-2 flex items-center">
                     <div
                       onClick={() =>
                         push(`/${product?.profile?.username}/shop`)
                       }
-                      className="relative flex-shrink-0 cursor-pointer"
+                      className="relative shrink-0 cursor-pointer"
                     >
                       <Avatar
                         size={40}
-                        className="object-cover w-10 h-10 rounded-full"
+                        className="size-10 rounded-full object-cover"
                         src={product?.profile?.image}
                         alt={`${product?.profile?.firstName} ${product?.profile?.lastName}`}
                       />
@@ -110,12 +110,12 @@ const ShopView = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-3 lg:row-end-2 lg:row-span-2">
+            <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
                 {product?.title ?? ""}
               </h1>
 
-              <div className="flex items-center mt-4">
+              <div className="mt-4 flex items-center">
                 <p className="text-4xl font-bold text-gray-900">
                   {product?.priceDiscount ?? ""}
                 </p>
@@ -135,8 +135,8 @@ const ShopView = () => {
               </div>
 
               {product?.enableDiscount ? (
-                <div className="flex items-center mt-3 text-sm font-medium text-gray-500">
-                  <MdOutlineDiscount className="w-4 h-5 mr-2 text-gray-400" />
+                <div className="mt-3 flex items-center text-sm font-medium text-gray-500">
+                  <MdOutlineDiscount className="mr-2 h-5 w-4 text-gray-400" />
                   Save {product?.discount?.percent}% right now
                 </div>
               ) : null}
@@ -144,7 +144,7 @@ const ShopView = () => {
               <h2 className="mt-4 text-base font-bold text-gray-900">
                 Features
               </h2>
-              <ul className="mt-4 space-y-3 text-base font-medium text-gray-600 list-disc list-inside">
+              <ul className="mt-4 list-inside list-disc space-y-3 text-base font-medium text-gray-600">
                 <li>Made with full cotton</li>
                 <li>Slim fit for any body</li>
                 <li>Quality control by JC</li>
@@ -152,10 +152,10 @@ const ShopView = () => {
 
               <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
+                  <div className="flex items-center justify-end space-x-40 rounded-md border border-gray-100 p-1">
                     <Button shape="default" size="large" loading={false}>
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ const ShopView = () => {
 
                     <Button shape="default" size="large" loading={false}>
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"
@@ -195,7 +195,7 @@ const ShopView = () => {
                 </div>
               </div>
 
-              <div className="flex items-center mt-6 space-x-4">
+              <div className="mt-6 flex items-center space-x-4">
                 <ButtonInput
                   minW="fit"
                   shape="default"
@@ -211,7 +211,7 @@ const ShopView = () => {
               <ul className="mt-8 space-y-3">
                 <li className="flex items-center text-sm font-medium text-gray-500">
                   <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
+                    className="mr-2.5 size-5 text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -229,7 +229,7 @@ const ShopView = () => {
 
                 <li className="flex items-center text-sm font-medium text-gray-500">
                   <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
+                    className="mr-2.5 size-5 text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -247,7 +247,7 @@ const ShopView = () => {
 
                 <li className="flex items-center text-sm font-medium text-gray-500">
                   <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
+                    className="mr-2.5 size-5 text-gray-400"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

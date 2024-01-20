@@ -9,7 +9,7 @@ const TransactionSuccess = () => {
 
   return (
     <>
-      <div className="mt-8 max-w-lg mx-auto">
+      <div className="mx-auto mt-8 max-w-lg">
         <Result
           status="success"
           title="Successfully Purchased"

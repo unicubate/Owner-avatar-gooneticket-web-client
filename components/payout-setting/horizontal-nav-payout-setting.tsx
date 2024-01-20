@@ -16,7 +16,7 @@ const HorizontalNavPayoutSetting: React.FC = () => {
 
   return (
     <>
-      <div className="px-3 py-2 border-gray-200 border bg-white rounded-lg">
+      <div className="rounded-lg border border-gray-200 bg-white px-3 py-2">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -25,10 +25,10 @@ const HorizontalNavPayoutSetting: React.FC = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg group whitespace-nowrap ${
+                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? `bg-gray-100 text-${profile?.color}-500`
-                    : `text-gray-500 bg-transparent hover:text-${profile?.color}-500 hover:bg-gray-100 group`
+                    ? `text- bg-gray-100${profile?.color}-500`
+                    : `hover:text- bg-transparent text-gray-500${profile?.color}-500 group hover:bg-gray-100`
                 } `}
               >
                 {item?.icon}

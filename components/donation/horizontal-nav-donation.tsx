@@ -20,7 +20,7 @@ const HorizontalNavDonation: React.FC = () => {
 
   return (
     <>
-      <div className="px-3 py-2 bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -29,10 +29,10 @@ const HorizontalNavDonation: React.FC = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`inline-flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 rounded-lg group whitespace-nowrap ${
+                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? `text-white bg-${profile?.color}-600`
-                    : `hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white`
+                    ? `bg- text-white${profile?.color}-600`
+                    : `text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700`
                 } `}
               >
                 {item?.icon}

@@ -52,16 +52,16 @@ const Billing = () => {
             <LayoutDashboard title={"Profile"}>
 
 
-                <div className="flex flex-col flex-1">
+                <div className="flex flex-1 flex-col">
                     <main>
-                        <div className="max-w-6xl mx-auto py-6">
-                            <div className="px-4 mx-auto sm:px-6 md:px-8">
+                        <div className="mx-auto max-w-6xl py-6">
+                            <div className="mx-auto px-4 sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Billing</h1>
                                 </div>
                             </div>
 
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
 
                                 <HorizontalNavSetting />
 
@@ -322,23 +322,23 @@ const Billing = () => {
 
 
 
-                                <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-10">
+                                <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-10">
                                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                            <table className="min-w-full lg:divide-gray-200 lg:divide-y">
+                                            <table className="min-w-full lg:divide-y lg:divide-gray-200">
                                                 <thead className="hidden lg:table-header-group">
                                                     <tr>
-                                                        <th className="py-3.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-widest">Customer</th>
+                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Customer</th>
 
-                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Email Address</th>
+                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Email Address</th>
 
-                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Phone Number</th>
+                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Phone Number</th>
 
-                                                        <th className="py-3.5 px-4 text-left hidden xl:table-cell text-xs uppercase tracking-widest font-medium text-gray-500">Join Date</th>
+                                                        <th className="hidden px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500 xl:table-cell">Join Date</th>
 
-                                                        <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Country</th>
+                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Country</th>
 
-                                                        <th className="relative py-3.5 pl-4 pr-4 md:pr-0">
+                                                        <th className="relative px-4 py-3.5 md:pr-0">
                                                             <span className="sr-only"> Actions </span>
                                                         </th>
                                                     </tr>
@@ -350,34 +350,34 @@ const Billing = () => {
 
 
                                                         <tr key={index} className="bg-white">
-                                                            <td className="px-4 py-4 text-sm font-bold text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 align-top text-sm font-bold text-gray-900 lg:align-middle">
                                                                 <div className="flex items-center">
-                                                                    <img className="flex-shrink-0 object-cover w-8 h-8 mr-3 rounded-full" src={person?.image} alt="" />
+                                                                    <img className="mr-3 size-8 shrink-0 rounded-full object-cover" src={person?.image} alt="" />
                                                                     {person?.name}
                                                                 </div>
                                                             </td>
 
-                                                            <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                            <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
                                                                 <div className="flex items-center">
                                                                     {person?.email}
                                                                 </div>
                                                             </td>
 
-                                                            <td className="hidden px-4 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                                                            <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
                                                                 <div className="flex items-center">
                                                                     (480) 555-0103
                                                                 </div>
                                                             </td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
                                                                 <div className="flex items-center">
                                                                     Janvier 9, 2002
                                                                 </div>
                                                             </td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">USA</td>
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">USA</td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
                                                                 <div className="flex items-center space-x-4">
 
                                                                     {/* <Button

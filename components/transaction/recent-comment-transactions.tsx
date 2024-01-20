@@ -68,13 +68,13 @@ const RecentCommentTransactions: React.FC<{
 
   return (
     <>
-      <div className="mt-4 overflow-hidden bg-white dark:bg-[#121212] shadow-xl shadow-gray-600/15">
-        <div className="p-6 sm:py-4 sm:px-4">
+      <div className="mt-4 overflow-hidden bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+        <div className="p-6 sm:p-4">
           <div className="flex items-center">
             <p className="text-lg font-bold">Supporters</p>
           </div>
 
-          <ul className="mt-4 divide-y divide-gray-200 dark:divide-gray-800 my-2">
+          <ul className="my-2 mt-4 divide-y divide-gray-200 dark:divide-gray-800">
             {dataTableTransactions}
           </ul>
         </div>
@@ -82,7 +82,7 @@ const RecentCommentTransactions: React.FC<{
 
       {hasNextPage ? (
         <>
-          <div className="mt-2 text-center justify-center mx-auto">
+          <div className="mx-auto mt-2 justify-center text-center">
             <div className="sm:mt-0">
               <ButtonInput
                 ref={ref}

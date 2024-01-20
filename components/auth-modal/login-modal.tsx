@@ -66,27 +66,27 @@ const LoginModal: React.FC<{
   return (
     <>
       {showModal ? (
-        <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-          <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-sm p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white dark:bg-[#121212]">
+        <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
+          <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
+          <div className="relative  m-auto w-full max-w-sm rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212]">
             <button
-              className="bg-transparent border-0 text-black float-right"
+              className="float-right border-0 bg-transparent text-black"
               onClick={() => setShowModal(false)}
             >
-              <span className="dark:text-white opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
+              <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
                 <CloseOutlined />
               </span>
             </button>
 
-            <div className="flex justify-center mx-auto">
-              <h6 className="mt-3 text-xl text-center font-bold">
+            <div className="mx-auto flex justify-center">
+              <h6 className="mt-3 text-center text-xl font-bold">
                 {`Log in`}
               </h6>
             </div>
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
-                <div className="relative mb-4 block w-full rounded-lg dark:bg-red-500 p-4 text-base leading-5 dark:text-white opacity-100">
+                <div className="relative mb-4 block w-full rounded-lg p-4 text-base leading-5 opacity-100 dark:bg-red-500 dark:text-white">
                   {hasErrors}
                 </div>
               )}
@@ -111,13 +111,13 @@ const LoginModal: React.FC<{
                   placeholder="Password"
                   errors={errors}
                 />
-                <div className="flex justify-between items-center">
+                <div className="flex items-center justify-between">
                   <label
                     htmlFor="password"
-                    className="block text-sm mb-2 dark:dark:text-white"
+                    className="mb-2 block text-sm dark:dark:text-white"
                   ></label>
                   <Link
-                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                    className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                     href="/forgot-password"
                   >
                     Forgot password?
@@ -137,9 +137,9 @@ const LoginModal: React.FC<{
                 </ButtonInput>
               </div>
             </form>
-            <div className="flex items-center justify-between mt-4 mb-4">
+            <div className="my-4 flex items-center justify-between">
               <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-              <p className="text-xs text-center dark:text-gray-500 uppercase dark:dark:text-gray-400">
+              <p className="text-center text-xs uppercase dark:dark:text-gray-400 dark:text-gray-500">
                 or login with Social Media
               </p>
 
@@ -182,7 +182,7 @@ const LoginModal: React.FC<{
             </GoogleOAuthProvider>
 
             <Link href="/register">
-              <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer dark:hover:text-blue-600">
+              <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
                 {" "}
                 New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
               </p>

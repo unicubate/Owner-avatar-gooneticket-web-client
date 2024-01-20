@@ -68,7 +68,7 @@ const MembershipsLevels = () => {
     />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiLockOpen className="h-10 w-10" />}
+      image={<BiLockOpen className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
@@ -83,12 +83,12 @@ const MembershipsLevels = () => {
   return (
     <>
       <LayoutDashboard title={'Memberships'}>
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavMembership />
 
             <div className="flow-root">
-              <div className="mt-4 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                 <div className="px-4 py-8">
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">
@@ -107,7 +107,7 @@ const MembershipsLevels = () => {
                       <Input
                         placeholder="Search by name"
                         onChange={handleSetSearch}
-                        className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+                        className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -119,7 +119,7 @@ const MembershipsLevels = () => {
               </div>
 
               {hasNextPage && (
-                <div className="mt-4 text-center justify-center mx-auto">
+                <div className="mx-auto mt-4 justify-center text-center">
                   <div className="mt-4 sm:mt-0">
                     <ButtonInput
                       ref={ref}

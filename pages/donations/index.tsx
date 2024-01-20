@@ -52,16 +52,16 @@ const Donations = () => {
     <>
       <LayoutDashboard title={"Donations"}>
 
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
 
             <HorizontalNavDonation />
 
             <div className="flow-root">
-              <div className="flex items-center mt-4">
+              <div className="mt-4 flex items-center">
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
-                    <div className="max-w-xs mx-auto">
+                    <div className="mx-auto max-w-xs">
                       <ButtonInput
                         status="cancel"
                         type="button"
@@ -74,13 +74,13 @@ const Donations = () => {
                       </ButtonInput>
 
                       {openDrop && (
-                        <div className="relative mt-2 w-full z-10">
-                          <div className="border-gray-300 dark:border-gray-800 bg-white dark:bg-[#121212] shadow border rounded-lg w-full block text-sm px-4 py-2 space-y-2">
+                        <div className="relative z-10 mt-2 w-full">
+                          <div className="block w-full space-y-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm shadow dark:border-gray-800 dark:bg-[#121212]">
 
                             <ul className="flex flex-col">
-                              <li onClick={() => { handleDaysChange(2), setOpenDrop(false) }} className="w-full rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" >Last 2 days</li>
-                              <li onClick={() => { handleDaysChange(120), setOpenDrop(false) }} className="w-full rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">Last 120 days</li>
-                              <li className="w-full rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">All time</li>
+                              <li onClick={() => { handleDaysChange(2), setOpenDrop(false) }} className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600" >Last 2 days</li>
+                              <li onClick={() => { handleDaysChange(120), setOpenDrop(false) }} className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">Last 120 days</li>
+                              <li className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">All time</li>
                             </ul>
 
                           </div>
@@ -92,13 +92,13 @@ const Donations = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 mt-3 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3">
+                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
-                    <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                       Donator
                     </p>
-                    <div className="flex items-center justify-between mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <p className="text-xl font-bold text-gray-900 dark:text-white">
                         {transaction?.statistic?.count ?? 0}
                       </p>
@@ -106,12 +106,12 @@ const Donations = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
-                    <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                       Last {days} days
                     </p>
-                    <div className="flex items-center justify-between mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <p className="text-xl font-bold text-gray-900 dark:text-white">
                         <SerialPrice
                           className="text-xl font-bold text-gray-900 dark:text-white"
@@ -127,12 +127,12 @@ const Donations = () => {
                 </div>
 
                 {user?.organizationId ? (
-                  <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+                  <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                     <div className="px-5 py-4">
-                      <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                      <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                         All-time
                       </p>
-                      <div className="flex items-center justify-between mt-3">
+                      <div className="mt-3 flex items-center justify-between">
                         <p className="text-xl font-bold text-gray-900 dark:text-white">
                           <SerialPrice
                             className="text-xl font-bold text-gray-900 dark:text-white"

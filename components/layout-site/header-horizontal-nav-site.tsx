@@ -26,7 +26,7 @@ const HeaderHorizontalNavSite: React.FC<Props> = ({ user }) => {
         onClose={onClose}
         open={open}
       >
-        <div className="flex flex-col pt-5 overflow-y-auto">
+        <div className="flex flex-col overflow-y-auto pt-5">
           {/* <VerticalNavDashboard user={user} /> */}
         </div>
       </Drawer>

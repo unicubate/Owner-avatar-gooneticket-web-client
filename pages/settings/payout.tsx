@@ -15,12 +15,12 @@ const SettingsPayout = () => {
   return (
     <>
       <LayoutDashboard title={"Settings"}>
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <HorizontalNavSetting />
 
             <div className="flow-root">
-            <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
+            <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
                 {user?.id ? <PayoutFormUser /> : null}
 
                 {/* {user?.profileId ? (

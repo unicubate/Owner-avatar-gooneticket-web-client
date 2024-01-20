@@ -50,7 +50,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
           />
         </div> */}
 
-        <div className="relative flex flex-col justify-between flex-1 ml-5">
+        <div className="relative ml-5 flex flex-1 flex-col justify-between">
           <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
             <div className="pr-9 sm:pr-5">
               <p className="text-base font-bold dark:text-white">
@@ -62,20 +62,20 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
               </div>
             </div>
 
-            <div className="flex items-end justify-between mt-4 sm:justify-end sm:items-start sm:mt-0">
-              <p className="flex-shrink-0 w-20 text-base font-bold text-left dark:text-white sm:text-right sm:ml-8 sm:order-2">
+            <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+              <p className="w-20 shrink-0 text-left text-base font-bold dark:text-white sm:order-2 sm:ml-8 sm:text-right">
                 {item?.product?.priceDiscount}{" "}
                 {item?.product?.currency?.code ?? ""}
               </p>
             </div>
           </div>
 
-          <div className="absolute top-0 right-0 flex sm:bottom-0 sm:top-auto">
+          <div className="absolute right-0 top-0 flex sm:bottom-0 sm:top-auto">
             <button
               onClick={() => deleteItem(item)}
               className="text-gray-600 hover:text-red-400 focus:ring-red-400"
             >
-              <MdOutlineDeleteOutline className="w-5 h-5" />
+              <MdOutlineDeleteOutline className="size-5" />
             </button>
           </div>
         </div>

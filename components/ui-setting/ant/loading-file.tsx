@@ -15,7 +15,7 @@ const LoadingFile: React.FC<Props> = ({
   return (
     <>
       <div className={className}>
-        <div className="mt-10 py-4 left-0 right-0 top-0 grid place-items-center">
+        <div className="inset-x-0 top-0 mt-10 grid place-items-center py-4">
           <Spin
             tip=""
             indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}

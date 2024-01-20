@@ -99,13 +99,13 @@ const CreateValidationFormCodePhoneUser: React.FC<{
   return (
     <>
       {showModal ? (
-        <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-          <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-          <div className="w-full  max-w-2xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-[#121212]">
+        <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
+          <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
+          <div className="relative  m-auto w-full max-w-2xl rounded-xl bg-white p-5 shadow-lg dark:bg-[#121212]">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h2 className="p-2 text-base font-bold text-center">Valid phone</h2>
-              <h3 className="mb-2 p-2 font-normal text-center">{item?.phone}</h3>
-              <div className="p-2 flex-auto justify-center">
+              <h2 className="p-2 text-center text-base font-bold">Valid phone</h2>
+              <h3 className="mb-2 p-2 text-center font-normal">{item?.phone}</h3>
+              <div className="flex-auto justify-center p-2">
                 {hasErrors && (
                   <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
                     {hasErrors}
@@ -124,10 +124,10 @@ const CreateValidationFormCodePhoneUser: React.FC<{
                     placeholder="Code"
                     errors={errors}
                   />
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <label
                       htmlFor="resend code"
-                      className="block text-sm mb-2 dark:dark:text-white"
+                      className="mb-2 block text-sm dark:dark:text-white"
                     ></label>
                     <button
                       type="button"
@@ -135,12 +135,12 @@ const CreateValidationFormCodePhoneUser: React.FC<{
                       onClick={() => {
                         resendItem(item);
                       }}
-                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                     >
                       Resend code
                     </button>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-400">
                       {`We just sent you a message via SMS with your authentication code. Enter the code in the form above to verify your identity`}
                     </span>
@@ -148,7 +148,7 @@ const CreateValidationFormCodePhoneUser: React.FC<{
                 </div>
 
 
-                <div className="flex items-center mt-4 space-x-4">
+                <div className="mt-4 flex items-center space-x-4">
                   <ButtonInput
                     status="cancel"
                     type="button"

@@ -61,17 +61,17 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="bg-white dark:bg-[#121212] border-gray-300 sticky top-0 z-20">
-        <div className="container px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center -m-2 xl:hidden">
+      <header className="sticky top-0 z-20 border-gray-300 bg-white dark:bg-[#121212]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 justify-between">
+            <div className="-m-2 flex items-center xl:hidden">
               <button
                 onClick={showDrawer}
                 type="button"
-                className="inline-flex items-center justify-center p-2 text-gray-400 dark:text-white bg-white dark:bg-[#121212] rounded-lg dark:hover:text-gray-500 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-indigo-600"
+                className="inline-flex items-center justify-center rounded-lg bg-white p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-[#121212] dark:text-white dark:hover:bg-gray-100 dark:hover:text-gray-500 dark:focus:ring-indigo-600"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -87,7 +87,7 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
               </button>
             </div>
 
-            <div className="flex ml-6 mr-auto xl:ml-0">
+            <div className="ml-6 mr-auto flex xl:ml-0">
               {/* <div className="flex items-center flex-shrink-0">
                 <Image
                   preview={false}
@@ -111,14 +111,14 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
+                      className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${
                         isActive
                           ? `text-${
                               user?.profile?.color ?? "indigo"
                             }-600 border-${
                               user?.profile?.color ?? "indigo"
                             }-600`
-                          : "border-transparent text-gray-500 dark:text-gray-300 hover:border-gray-300"
+                          : "border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300"
                       } `}
                     >
                       {item?.icon}

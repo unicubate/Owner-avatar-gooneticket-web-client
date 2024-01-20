@@ -19,10 +19,10 @@ const TransactionsDonations = () => {
   return (
     <>
       <LayoutDashboard title={"Donations"}>
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <main>
             <div className="py-6">
-              <div className="px-4 mx-auto sm:px-6 md:px-8">
+              <div className="mx-auto px-4 sm:px-6 md:px-8">
                 <div className="max-w-md">
                   <h1 className="text-lg font-bold text-gray-900">Donations</h1>
                   <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
@@ -31,7 +31,7 @@ const TransactionsDonations = () => {
                 </div>
               </div>
 
-              <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
                 <HorizontalNavDonation />
 
                 <div className="mt-8 sm:flex sm:items-center sm:justify-between">
@@ -46,7 +46,7 @@ const TransactionsDonations = () => {
                   <div className="mt-4 sm:mt-0">
                     <button
                       type="button"
-                      className="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold leading-5 text-gray-600 transition-all duration-200 bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                      className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-transparent px-4 py-2 text-sm font-semibold leading-5 text-gray-600 transition-all duration-200 hover:bg-gray-50 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                     >
                       Cancel Subscription
                     </button>
@@ -146,14 +146,14 @@ const TransactionsDonations = () => {
                     <div className="mt-4 sm:mt-0">
                       <div className="flex items-center justify-start space-x-5 sm:justify-end">
                         <div className="flex items-center space-x-1">
-                          <label className="flex-shrink-0 text-sm font-medium text-gray-900">
+                          <label className="shrink-0 text-sm font-medium text-gray-900">
                             {" "}
                             Sort by:{" "}
                           </label>
                           <select
                             name=""
                             id=""
-                            className="block w-full py-0 pl-0 pr-10 text-base bg-transparent border-none rounded-lg focus:outline-none focus:ring-0 sm:text-sm"
+                            className="block w-full rounded-lg border-none bg-transparent py-0 pl-0 pr-10 text-base focus:outline-none focus:ring-0 sm:text-sm"
                           >
                             <option>Recent</option>
                           </select>
@@ -161,10 +161,10 @@ const TransactionsDonations = () => {
 
                         <button
                           type="button"
-                          className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                          className="inline-flex items-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
                         >
                           <svg
-                            className="w-4 h-4 mr-1 -ml-1"
+                            className="-ml-1 mr-1 size-4"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -183,26 +183,26 @@ const TransactionsDonations = () => {
                     </div>
                   </div>
 
-                  <div className="mt-6 ring-1 ring-gray-300 rounded-2xl">
+                  <div className="mt-6 rounded-2xl ring-1 ring-gray-300">
                     <table className="min-w-full lg:divide-y lg:divide-gray-200">
                       <thead className="hidden lg:table-header-group">
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-medium text-gray-400 whitespace-normal"
+                            className="whitespace-normal px-6 py-4 text-sm font-medium text-gray-400"
                           >
                             Invoice
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-medium text-gray-400 whitespace-normal">
+                          <td className="whitespace-normal px-6 py-4 text-sm font-medium text-gray-400">
                             Date
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-medium text-gray-400 whitespace-normal">
+                          <td className="whitespace-normal px-6 py-4 text-sm font-medium text-gray-400">
                             Amount
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-medium text-gray-400 whitespace-normal">
+                          <td className="whitespace-normal px-6 py-4 text-sm font-medium text-gray-400">
                             Status
                           </td>
                         </tr>
@@ -212,7 +212,7 @@ const TransactionsDonations = () => {
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-bold text-gray-900 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-4 text-sm font-bold text-gray-900"
                           >
                             Standard Plan - Feb 2022
                             <div className="mt-1 lg:hidden">
@@ -222,15 +222,15 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             07 February, 2022
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-bold text-right text-gray-900 lg:text-left whitespace-nowrap">
+                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-gray-900 lg:text-left">
                             $59.00
-                            <div className="flex items-center justify-end mt-1 font-medium lg:hidden">
+                            <div className="mt-1 flex items-center justify-end font-medium lg:hidden">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -240,10 +240,10 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             <div className="inline-flex items-center">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -257,7 +257,7 @@ const TransactionsDonations = () => {
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-bold text-gray-900 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-4 text-sm font-bold text-gray-900"
                           >
                             Standard Plan - Jan 2022
                             <div className="mt-1 lg:hidden">
@@ -267,15 +267,15 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             09 January, 2022
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-bold text-right text-gray-900 lg:text-left whitespace-nowrap">
+                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-gray-900 lg:text-left">
                             $59.00
-                            <div className="flex items-center justify-end mt-1 font-medium lg:hidden">
+                            <div className="mt-1 flex items-center justify-end font-medium lg:hidden">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-red-500"
+                                className="mr-1.5 size-2.5 text-red-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -285,10 +285,10 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             <div className="inline-flex items-center">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-red-500"
+                                className="mr-1.5 size-2.5 text-red-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -302,7 +302,7 @@ const TransactionsDonations = () => {
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-bold text-gray-900 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-4 text-sm font-bold text-gray-900"
                           >
                             Basic Plan - Dec 2021
                             <div className="mt-1 lg:hidden">
@@ -312,15 +312,15 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             15 December, 2021
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-bold text-right text-gray-900 lg:text-left whitespace-nowrap">
+                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-gray-900 lg:text-left">
                             $29.00
-                            <div className="flex items-center justify-end mt-1 font-medium lg:hidden">
+                            <div className="mt-1 flex items-center justify-end font-medium lg:hidden">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -330,10 +330,10 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             <div className="inline-flex items-center">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -347,7 +347,7 @@ const TransactionsDonations = () => {
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-bold text-gray-900 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-4 text-sm font-bold text-gray-900"
                           >
                             Basic Plan - Nov 2021
                             <div className="mt-1 lg:hidden">
@@ -357,15 +357,15 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             14 November, 2021
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-bold text-right text-gray-900 lg:text-left whitespace-nowrap">
+                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-gray-900 lg:text-left">
                             $29.00
-                            <div className="flex items-center justify-end mt-1 font-medium lg:hidden">
+                            <div className="mt-1 flex items-center justify-end font-medium lg:hidden">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-yellow-500"
+                                className="mr-1.5 size-2.5 text-yellow-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -375,10 +375,10 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             <div className="inline-flex items-center">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-yellow-500"
+                                className="mr-1.5 size-2.5 text-yellow-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -392,7 +392,7 @@ const TransactionsDonations = () => {
                         <tr>
                           <td
                             width="50%"
-                            className="px-6 py-4 text-sm font-bold text-gray-900 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-4 text-sm font-bold text-gray-900"
                           >
                             Basic Plan - Oct 2021
                             <div className="mt-1 lg:hidden">
@@ -402,15 +402,15 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             15 October, 2021
                           </td>
 
-                          <td className="px-6 py-4 text-sm font-bold text-right text-gray-900 lg:text-left whitespace-nowrap">
+                          <td className="whitespace-nowrap px-6 py-4 text-right text-sm font-bold text-gray-900 lg:text-left">
                             $29.00
-                            <div className="flex items-center justify-end mt-1 font-medium lg:hidden">
+                            <div className="mt-1 flex items-center justify-end font-medium lg:hidden">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >
@@ -420,10 +420,10 @@ const TransactionsDonations = () => {
                             </div>
                           </td>
 
-                          <td className="hidden px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell whitespace-nowrap">
+                          <td className="hidden whitespace-nowrap px-6 py-4 text-sm font-medium text-gray-900 lg:table-cell">
                             <div className="inline-flex items-center">
                               <svg
-                                className="mr-1.5 h-2.5 w-2.5 text-green-500"
+                                className="mr-1.5 size-2.5 text-green-500"
                                 fill="currentColor"
                                 viewBox="0 0 8 8"
                               >

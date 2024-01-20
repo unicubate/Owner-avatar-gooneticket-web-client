@@ -56,7 +56,7 @@ const TableTransactions: React.FC<Props> = ({
     />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiTransfer className="h-10 w-10" />}
+      image={<BiTransfer className="size-10" />}
       title="You don't have any transaction"
       description={`Share your page with your audience to get started.`}
     />
@@ -70,7 +70,7 @@ const TableTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div className="mt-4 px-4 py-4 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
             <p className="text-lg font-bold">Recent transactions</p>
@@ -79,12 +79,12 @@ const TableTransactions: React.FC<Props> = ({
             <Input
               placeholder="Search by email, name"
               onChange={handleSetSearch}
-              className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800"
+              className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
             />
           </div>
         </div>
 
-        <table className="min-w-full mt-4 lg:divide-y">
+        <table className="mt-4 min-w-full lg:divide-y">
           <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
             {dataTableTransactions}
           </tbody>
@@ -92,7 +92,7 @@ const TableTransactions: React.FC<Props> = ({
       </div>
 
       {hasNextPage && (
-        <div className="mt-2 text-center justify-center mx-auto">
+        <div className="mx-auto mt-2 justify-center text-center">
           <div className="sm:mt-0">
             <ButtonInput
               ref={ref}

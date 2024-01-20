@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { LayoutSite } from "@/components/layout-site";
 import { GetStaticPropsContext } from "next";
+import { Image } from "antd";
 
 const schema = yup.object({
   searchInput: yup.string().optional(),
@@ -34,23 +35,23 @@ const Explore = () => {
   return (
     <>
       <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900">
               Meet the creative team
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 px-8 mt-12 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-0">
-            <div className="overflow-hidden bg-white border border-gray-200 rounded-lg cursor-pointer">
+          <div className="mt-12 grid grid-cols-1 gap-4 px-8 sm:grid-cols-2 sm:gap-6 sm:px-0 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="cursor-pointer overflow-hidden rounded-lg border border-gray-200 bg-white">
               <div className="p-4">
                 <div className="flex items-center">
-                  <img
-                    className="object-cover w-16 h-16 rounded-full shrink-0"
+                  <Image
+                    className="size-16 shrink-0 rounded-full object-cover"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-1.png"
                     alt=""
                   />
-                  <div className="flex-1 ml-4">
+                  <div className="ml-4 flex-1">
                     <p className="text-base font-bold text-gray-900">
                       Albert Flores
                     </p>
@@ -59,15 +60,15 @@ const Explore = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
+            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
               <div className="p-4">
                 <div className="flex items-center">
-                  <img
-                    className="object-cover w-16 h-16 rounded-full shrink-0"
+                  <Image
+                    className="size-16 shrink-0 rounded-full object-cover"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-2.png"
                     alt=""
                   />
-                  <div className="flex-1 ml-4">
+                  <div className="ml-4 flex-1">
                     <p className="text-base font-bold text-gray-900">
                       Ralph Edwards
                     </p>
@@ -76,15 +77,15 @@ const Explore = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
+            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
               <div className="p-4">
                 <div className="flex items-center">
-                  <img
-                    className="object-cover w-16 h-16 rounded-full shrink-0"
+                  <Image
+                    className="size-16 shrink-0 rounded-full object-cover"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-3.png"
                     alt=""
                   />
-                  <div className="flex-1 ml-4">
+                  <div className="ml-4 flex-1">
                     <p className="text-base font-bold text-gray-900">
                       Theresa Webb
                     </p>
@@ -93,15 +94,15 @@ const Explore = () => {
               </div>
             </div>
 
-            <div className="overflow-hidden bg-white border border-gray-200 rounded-lg">
+            <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
               <div className="p-4">
                 <div className="flex items-center">
-                  <img
-                    className="object-cover w-16 h-16 rounded-full shrink-0"
+                  <Image
+                    className="size-16 shrink-0 rounded-full object-cover"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/team/7/member-4.png"
                     alt=""
                   />
-                  <div className="flex-1 ml-4">
+                  <div className="ml-4 flex-1">
                     <p className="text-base font-bold text-gray-900">
                       Jane Cooper
                     </p>
@@ -112,15 +113,15 @@ const Explore = () => {
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="mt-8 sm:mt-10">
-            <div className="relative p-2 sm:border sm:border-gray-400 group sm:rounded-xl sm:focus-within:ring-1 sm:focus-within:ring-gray-300 sm:focus-within:border-gray-300">
+            <div className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-400 sm:focus-within:border-gray-300 sm:focus-within:ring-1 sm:focus-within:ring-gray-300">
               <input
                 type="text"
                 {...register("searchInput")}
                 placeholder="Search creators"
-                className="block w-full px-4 py-4 text-gray-900 bg-transparent border border-gray-400 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 rounded-xl sm:border-none sm:focus:ring-0 sm:focus:border-transparent"
+                className="block w-full rounded-xl border border-gray-400 bg-transparent p-4 text-gray-900 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
               />
 
-              <div className="mt-4 sm:mt-0 sm:absolute sm:inset-y-0 sm:right-0 sm:flex sm:items-center sm:pr-2">
+              <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
                 <ButtonInput
                   shape="round"
                   type="button"
@@ -153,7 +154,7 @@ const Explore = () => {
             </div>
           </form> */}
 
-          <div className="text-center md:text-left md:flex md:items-center md:justify-between pt-12">
+          <div className="pt-12 text-center md:flex md:items-center md:justify-between md:text-left">
             <h2 className="text-2xl font-bold text-gray-900">
               Featured Creators{" "}
             </h2>
@@ -170,26 +171,26 @@ const Explore = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-4 px-12 mt-6 text-center sm:mt-6 md:px-0 sm:gap-6 xl:gap-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+          <div className="mt-6 grid grid-cols-1 gap-4 px-12 text-center sm:mt-6 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 md:px-0 xl:grid-cols-5 xl:gap-8">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-1.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-1.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -204,7 +205,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     kuchka70
@@ -214,30 +215,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-2.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-2.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Pompelmus1
@@ -247,30 +248,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-3.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-3.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     AlinaBilash
@@ -280,31 +281,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-4.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-4.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -319,7 +320,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     pavelostrovski
@@ -329,31 +330,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-5.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-5.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -368,7 +369,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Faratey58
@@ -378,30 +379,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-2.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-2.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Pompelmus1
@@ -411,30 +412,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-3.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-3.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     AlinaBilash
@@ -444,31 +445,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-4.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-4.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -483,7 +484,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     pavelostrovski
@@ -493,31 +494,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-5.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-5.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -532,7 +533,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Faratey58
@@ -542,30 +543,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-2.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-2.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Pompelmus1
@@ -575,30 +576,30 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-3.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-3.png"
                     alt=""
                   />
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     AlinaBilash
@@ -608,31 +609,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-4.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-4.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -647,7 +648,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     pavelostrovski
@@ -657,31 +658,31 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>
             </div>
 
-            <div className="relative overflow-hidden transition-all duration-200 transform bg-white border border-gray-200 rounded-lg hover:shadow-lg hover:-translate-y-1">
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-200 hover:-translate-y-1 hover:shadow-lg">
               <div>
-                <img
-                  className="object-cover w-full"
+                <Image
+                  className="w-full object-cover"
                   src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/cover-5.png"
                   alt=""
                 />
               </div>
               <div className="-mt-16 sm:flex sm:items-center sm:justify-center sm:space-x-5">
                 <div className="relative inline-flex">
-                  <img
-                    className="object-cover mx-auto rounded-full h-28 w-28 ring-2 ring-white"
+                  <Image
+                    className="mx-auto size-28 rounded-full object-cover ring-2 ring-white"
                     src="https://landingfoliocom.imgix.net/store/collection/niftyui/images/authors/2/author-5.png"
                     alt=""
                   />
                   <div className="absolute bottom-0 right-0 pr-2">
-                    <div className="inline-flex items-center justify-center text-white bg-blue-600 rounded-full ring-4 ring-white w-7 h-7">
+                    <div className="inline-flex size-7 items-center justify-center rounded-full bg-blue-600 text-white ring-4 ring-white">
                       <svg
-                        className="w-5 h-5"
+                        className="size-5"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                         fill="currentColor"
@@ -696,7 +697,7 @@ const Explore = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 pt-3 pb-6">
+              <div className="px-4 pb-6 pt-3">
                 <p className="text-base font-bold text-gray-900">
                   <a href="#" title="">
                     Faratey58
@@ -706,7 +707,7 @@ const Explore = () => {
                     ></span>
                   </a>
                 </p>
-                <p className="mt-1 text-sm font-medium text-gray-500 uppercase">
+                <p className="mt-1 text-sm font-medium uppercase text-gray-500">
                   $38,194.67
                 </p>
               </div>

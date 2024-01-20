@@ -36,7 +36,7 @@ const SelectInput: React.FC<Props> = ({
       {label ? (
         <Label
           htmlFor={name}
-          className="block dark:text-white text-sm font-bold mb-2"
+          className="mb-2 block text-sm font-bold dark:text-white"
         >
           {label}
         </Label>

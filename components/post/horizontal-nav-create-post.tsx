@@ -36,13 +36,13 @@ const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-5 mt-8 sm:mt-12 sm:grid-cols-2 xl:grid-cols-4 sm:gap-8 xl:gap-12">
+      <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-8 xl:grid-cols-4 xl:gap-12">
         {navigation.map((item: any, index: number) => {
           return (
             <div
               key={index}
               onClick={() => router.push(item?.href)}
-              className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-xl hover:-translate-y-1 cursor-pointer"
+              className="cursor-pointer rounded-xl border border-gray-200 bg-white hover:-translate-y-1 dark:border-gray-800 dark:bg-[#121212]"
             >
               {/* <div className="p-6 lg:px-10 lg:py-8"> */}
               <div className="p-6 lg:px-6 lg:py-4">

@@ -48,8 +48,8 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
     ""
   ) : (
     <>
-      <div className="flow-root mt-8">
-        <ul className="divide-y divide-gray-200 dark:divide-gray-800 -my-7">
+      <div className="mt-8 flow-root">
+        <ul className="-my-7 divide-y divide-gray-200 dark:divide-gray-800">
           {dataPosts?.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item: PostModel, index) => (

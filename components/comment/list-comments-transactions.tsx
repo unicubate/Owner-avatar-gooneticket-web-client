@@ -134,12 +134,12 @@ const ListCommentTransactions: React.FC<{
 
           {hasNextPage ? (
             <>
-              <div className="mt-6 flex flex-col justify-between items-center">
+              <div className="mt-6 flex flex-col items-center justify-between">
                 {isFetchingNextPage ? null : (
                   <button
                     disabled={isFetchingNextPage ? true : false}
                     onClick={() => fetchNextPage()}
-                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                    className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                   >
                     View more response
                   </button>

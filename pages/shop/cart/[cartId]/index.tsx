@@ -79,32 +79,32 @@ const ShopView = () => {
   return (
     <>
       <LayoutSite title={`${product?.title ?? ""}`}>
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
             <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
-            <span className="px-2 py-1 ml-4 text-xs font-bold tracking-widest uppercase bg-gray-400 rounded-full rounded-r-nonepy-1 text-gray-50">
+            <span className="rounded-r-nonepy-1 ml-4 rounded-full bg-gray-400 px-2 py-1 text-xs font-bold uppercase tracking-widest text-gray-50">
               {" "}
               4 Items{" "}
             </span>
           </div>
 
-          <div className="max-w-xl mx-auto mt-8 md:mt-12">
-            <div className="overflow-hidden bg-white shadow rounded-xl">
+          <div className="mx-auto mt-8 max-w-xl md:mt-12">
+            <div className="overflow-hidden rounded-xl bg-white shadow">
               <div className="px-4 py-6 sm:px-8 sm:py-10">
                 <div className="flow-root">
-                  <ul className="divide-y divide-gray-200 -my-7">
+                  <ul className="-my-7 divide-y divide-gray-200">
                     <li className="flex py-7">
-                      <div className="flex-shrink-0">
+                      <div className="shrink-0">
                         <Image
                           width={95}
                           height={95}
-                          className="object-cover rounded-lg"
+                          className="rounded-lg object-cover"
                           src="https://cdn.rareblocks.xyz/collection/clarity-ecommerce/images/cart-page/2/product-2.png"
                           alt=""
                         />
                       </div>
 
-                      <div className="relative flex flex-col justify-between flex-1 ml-5">
+                      <div className="relative ml-5 flex flex-1 flex-col justify-between">
                         <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
                           <div className="pr-9 sm:pr-5">
                             <p className="text-base font-bold text-gray-900">
@@ -123,8 +123,8 @@ const ShopView = () => {
                             </p>
                           </div> */}
 
-                          <div className="flex items-end justify-between mt-4 sm:justify-end sm:items-start sm:mt-0">
-                            <p className="flex-shrink-0 w-20 text-base font-bold text-left text-gray-900 sm:text-right sm:ml-8 sm:order-2">
+                          <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                            <p className="w-20 shrink-0 text-left text-base font-bold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">
                               279 $
                             </p>
 
@@ -140,12 +140,12 @@ const ShopView = () => {
                           </div>
                         </div>
 
-                        <div className="absolute top-0 right-0 flex sm:bottom-0 sm:top-auto">
+                        <div className="absolute right-0 top-0 flex sm:bottom-0 sm:top-auto">
                           <button
                             // onClick={() => deleteItem(item)}
                             className="text-gray-400 hover:text-red-400 focus:ring-red-400"
                           >
-                            <MdOutlineDeleteOutline className="w-5 h-5" />
+                            <MdOutlineDeleteOutline className="size-5" />
                           </button>
                         </div>
                       </div>
@@ -153,18 +153,18 @@ const ShopView = () => {
                   </ul>
                 </div>
 
-                <hr className="border-gray-200 mt-7" />
-                <div className="flex justify-between mt-2 items-center">
-                  <label className="block text-sm mb-2 dark:text-white"></label>
+                <hr className="mt-7 border-gray-200" />
+                <div className="mt-2 flex items-center justify-between">
+                  <label className="mb-2 block text-sm dark:text-white"></label>
                   <Link
-                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                    className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                     href="/shop/config"
                   >
                     Continue Shopping
                   </Link>
                 </div>
 
-                <div className="flex items-center justify-between mt-6">
+                <div className="mt-6 flex items-center justify-between">
                   <p className="text-xl font-medium text-gray-900">Total</p>
                   <p className="text-xl font-bold text-gray-900">699 $</p>
                 </div>
@@ -177,7 +177,7 @@ const ShopView = () => {
                     </div>
                   )}
 
-                  <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                  <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                     <div className="mt-2">
                       <TextInput
                         label="First name"
@@ -236,7 +236,7 @@ const ShopView = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+                  <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                     <div className="mt-2">
                       <TextInput
                         label="State/Province"

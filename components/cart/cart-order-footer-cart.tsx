@@ -26,20 +26,20 @@ const CartOrderFooterCart: React.FC<{
   return (
     <>
       {carts?.summary?.totalQuantity && (
-        <div className="flex fixed bottom-0 w-full items-center justify-center mb-16 py-2 z-20">
-          <div className="relative w-full max-w-md overflow-hidden bg-white dark:bg-[#121212] rounded-lg shadow-lg">
-            <div className="px-3 pt-3 pb-4">
+        <div className="fixed bottom-0 z-20 mb-16 flex w-full items-center justify-center py-2">
+          <div className="relative w-full max-w-md overflow-hidden rounded-lg bg-white shadow-lg dark:bg-[#121212]">
+            <div className="px-3 pb-4 pt-3">
               <div className="flex items-center justify-between">
                 {carts?.cartItems.length > 0 ? (
                   <>
                     <div className="relative">
                       <button
                         type="button"
-                        className="text-gray-700 transition-all duration-200 bg-white dark:bg-[#121212] rounded-full hover:text-gray-900 dark:hover:text-white"
+                        className="rounded-full bg-white text-gray-700 transition-all duration-200 hover:text-gray-900 dark:bg-[#121212] dark:hover:text-white"
                       >
-                        <BiCart className="h-10 w-10 bg-white dark:bg-[#121212]" />
+                        <BiCart className="size-10 bg-white dark:bg-[#121212]" />
                       </button>
-                      <span className="inline-flex items-center px-1.5 absolute -top-px -right-1 py-0.5 rounded-full text-xs font-semibold bg-red-600 text-white">
+                      <span className="absolute -right-1 -top-px inline-flex items-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-semibold text-white">
                       {carts?.summary?.totalQuantity}
                       </span>
                     </div>
@@ -48,7 +48,7 @@ const CartOrderFooterCart: React.FC<{
                       {carts?.summary?.totalPrice} {user?.profile?.currency?.symbol}
                     </p>
 
-                    <div className="flex pl-8 ml-auto">
+                    <div className="ml-auto flex pl-8">
                       <ButtonInput
                         shape="default"
                         type="button"

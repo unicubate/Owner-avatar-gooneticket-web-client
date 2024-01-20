@@ -64,7 +64,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
     />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<RiShakeHandsLine className="h-10 w-10" />}
+      image={<RiShakeHandsLine className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
@@ -78,7 +78,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
 
   return (
     <>
-      <div className="mt-4 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-2 sm:mt-0">
@@ -94,7 +94,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
               </ButtonInput>
             </div>
             <div className="mt-2 sm:mt-0">
-              <Input placeholder="Search by title" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+              <Input placeholder="Search by title" className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500" />
             </div>
           </div>
 
@@ -103,7 +103,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
       </div>
 
       {hasNextPage && (
-        <div className="mt-4 text-center justify-center mx-auto">
+        <div className="mx-auto mt-4 justify-center text-center">
           <div className="mt-4 sm:mt-0">
             <ButtonInput
               ref={ref}

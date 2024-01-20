@@ -22,19 +22,19 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white dark:bg-[#121212] shadow-xl shadow-gray-600/15"
+        className="mt-8 overflow-hidden bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]"
       >
-        <div className="p-8 sm:py-7 sm:px-8">
+        <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             {item?.id ? (
-              <p className="text-lg font-bold text-gray-900 dark:text-white cursor-pointer">
+              <p className="cursor-pointer text-lg font-bold text-gray-900 dark:text-white">
                 {item?.title ?? ""}
               </p>
             ) : null}
           </div>
 
           {item?.uploadsImage?.length > 0 ? (
-            <div className="mt-4 text-center justify-center mx-auto">
+            <div className="mx-auto mt-4 justify-center text-center">
               <ListCarouselUpload
                 uploads={item?.uploadsImage}
                 folder="memberships"
@@ -44,7 +44,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             </div>
           ) : null}
 
-          <div className="flex mt-2 items-end justify-center space-x-1">
+          <div className="mt-2 flex items-end justify-center space-x-1">
             <div className="flex items-start">
               <p className="text-5xl font-medium tracking-tight">
                 {item?.price}
@@ -59,7 +59,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             </span>
           </div>
 
-          <div className="mt-4 text-center justify-center mx-auto">
+          <div className="mx-auto mt-4 justify-center text-center">
             <div className="sm:mt-0">
               {userStorage?.id ? (
                 <ButtonInput

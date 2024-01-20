@@ -19,15 +19,15 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
   return (
     <>
       <li key={item?.id} className="flex items-stretch justify-between space-x-2 py-7">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           {item?.uploadsImage?.length > 0 ? (
-            <div className="object-cover w-16 h-16 rounded-lg">
+            <div className="size-16 rounded-lg object-cover">
               <ListCarouselUpload
                 uploads={item?.uploadsImage}
                 folder="posts"
                 preview={false}
                 height={65}
-                className={`object-cover w-16 h-16 ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`size-16 object-cover${item?.whoCanSee === "MEMBERSHIP" &&
                   item?.isValidSubscribe !== 1
                   ? "blur-xl"
                   : ""
@@ -37,18 +37,18 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
           ) : null}
         </div>
 
-        <div className="flex flex-col justify-between flex-1 ml-5">
+        <div className="ml-5 flex flex-1 flex-col justify-between">
           <div className="flex-1">
             {item?.id ? (
               <Link
                 href={`/posts/${item?.slug}`}
-                className="text-sm font-bold dark:text-white cursor-pointer"
+                className="cursor-pointer text-sm font-bold dark:text-white"
               >
                 {item?.title ?? ""}
               </Link>
             ) : null}
 
-            <div className="flex mt-2 items-center font-medium text-gray-600">
+            <div className="mt-2 flex items-center font-medium text-gray-600">
               <button className="text-lg">
                 <MdFavoriteBorder />
               </button>

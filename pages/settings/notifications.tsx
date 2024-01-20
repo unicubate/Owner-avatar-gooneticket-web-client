@@ -22,30 +22,30 @@ const Notifications = () => {
             <LayoutDashboard title={"Profile"}>
                 
 
-                <div className="flex flex-col flex-1">
+                <div className="flex flex-1 flex-col">
                     <main>
-                        <div className="max-w-6xl mx-auto py-6">
-                            <div className="px-4 mx-auto sm:px-6 md:px-8">
+                        <div className="mx-auto max-w-6xl py-6">
+                            <div className="mx-auto px-4 sm:px-6 md:px-8">
                                 <div className="max-w-md">
                                     <h1 className="text-lg font-bold text-gray-900">Notifications</h1>
                                 </div>
                             </div>
 
-                            <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+                            <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
 
                                     <HorizontalNavSetting />
 
 
 
-                                    <div className="pt-6 border-t border-gray-200 lg:order-1 lg:col-span-10">
+                                    <div className="border-t border-gray-200 pt-6 lg:order-1 lg:col-span-10">
                                         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                                             <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                                <table className="min-w-full lg:divide-gray-200 lg:divide-y">
+                                                <table className="min-w-full lg:divide-y lg:divide-gray-200">
                                                     <thead className="hidden lg:table-header-group">
                                                         <tr>
-                                                            <th className="py-3.5 px-4 text-left text-xs font-medium text-gray-500 uppercase tracking-widest">Message</th>
+                                                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Message</th>
 
-                                                            <th className="py-3.5 px-4 text-left text-xs uppercase tracking-widest font-medium text-gray-500">Date</th>
+                                                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Date</th>
                                                         </tr>
                                                     </thead>
 
@@ -54,33 +54,33 @@ const Notifications = () => {
 
 
                                                         <tr className="bg-white">
-                                                            <td className="px-4 py-4 text-sm font-medium text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 align-top text-sm font-medium text-gray-900 lg:align-middle">
                                                                 <div className="flex items-center">
                                                                     Lorem ipsum dolor sit amet, consectetur adipis.
                                                                 </div>
                                                             </td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">12/01/1990</td>
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">12/01/1990</td>
 
                                                         </tr>
                                                         <tr className="bg-white">
-                                                            <td className="px-4 py-4 text-sm font-medium text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 align-top text-sm font-medium text-gray-900 lg:align-middle">
                                                                 <div className="flex items-center">
                                                                     Lorem ipsum dolor sit amet, consectetur adipis.
                                                                 </div>
                                                             </td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">12/01/1990</td>
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">12/01/1990</td>
 
                                                         </tr>
                                                         <tr className="bg-white">
-                                                            <td className="px-4 py-4 text-sm font-medium text-gray-900 align-top lg:align-middle whitespace-nowrap">
+                                                            <td className="whitespace-nowrap p-4 align-top text-sm font-medium text-gray-900 lg:align-middle">
                                                                 <div className="flex items-center">
                                                                     Lorem ipsum dolor sit amet, consectetur adipis.
                                                                 </div>
                                                             </td>
 
-                                                            <td className="px-4 py-4 text-sm font-medium text-right text-gray-900 align-top lg:align-middle lg:text-left whitespace-nowrap">12/01/1990</td>
+                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">12/01/1990</td>
 
                                                         </tr>
 

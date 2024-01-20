@@ -74,7 +74,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
     />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiImage className="h-10 w-10" />}
+      image={<BiImage className="size-10" />}
       title="Add your first file gallery"
       description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
     />
@@ -87,7 +87,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
   );
   return (
     <>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-8">
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-4 sm:mt-0">
@@ -143,7 +143,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
       </div>
 
       {hasNextPage && (
-        <div className="mt-4 text-center justify-center mx-auto">
+        <div className="mx-auto mt-4 justify-center text-center">
           <div className="mt-4 sm:mt-0">
             <ButtonInput
               ref={ref}

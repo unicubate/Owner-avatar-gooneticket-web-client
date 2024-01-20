@@ -156,7 +156,7 @@ const ListCommentsPosts: React.FC<Props> = ({
               <p className="mt-1 text-sm font-normal text-gray-600 dark:text-gray-300">
                 <HtmlParser html={String(item?.description ?? '')} />
               </p>
-              <div className="flex mt-2 items-center font-medium text-gray-600">
+              <div className="mt-2 flex items-center font-medium text-gray-600">
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
                 {user?.id ? (
@@ -176,13 +176,13 @@ const ListCommentsPosts: React.FC<Props> = ({
                       onClick={() => editItem(item)}
                       className="ml-3.5 hover:text-indigo-400 focus:ring-indigo-400"
                     >
-                      <MdOutlineModeEdit className="w-5 h-5" />
+                      <MdOutlineModeEdit className="size-5" />
                     </button>
                     <button
                       onClick={() => deleteItem(item)}
                       className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                     >
-                      <MdOutlineDeleteOutline className="w-5 h-5" />
+                      <MdOutlineDeleteOutline className="size-5" />
                     </button>
                   </>
                 ) : null}
@@ -206,12 +206,12 @@ const ListCommentsPosts: React.FC<Props> = ({
 
           {hasNextPage ? (
             <>
-              <div className="mt-6 flex flex-col justify-between items-center">
+              <div className="mt-6 flex flex-col items-center justify-between">
                 {isFetchingNextPage ? null : (
                   <button
                     disabled={isFetchingNextPage ? true : false}
                     onClick={() => fetchNextPage()}
-                    className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                    className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                   >
                     View more response
                   </button>

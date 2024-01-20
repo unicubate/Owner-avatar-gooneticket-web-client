@@ -30,7 +30,7 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
         open={open}
         className="bg-white dark:bg-[#121212]"
       >
-        <div className="flex flex-col pt-5 overflow-y-auto">
+        <div className="flex flex-col overflow-y-auto pt-5">
           <VerticalNavDashboard user={user} />
         </div>
       </Drawer>

@@ -70,7 +70,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
 
   return (
     <>
-      <div key={index} className="flex items-start mt-4">
+      <div key={index} className="mt-4 flex items-start">
         <AvatarComponent
           size={40}
           profile={item?.profile}
@@ -95,7 +95,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
             <HtmlParser html={String(item?.description)} />
           </p>
 
-          <div className="flex mt-2 items-center font-medium text-gray-600">
+          <div className="mt-2 flex items-center font-medium text-gray-600">
 
             {userVisitor?.id === item?.userReceiveId ? (
               <>
@@ -103,7 +103,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                 >
-                  <MdOutlineDeleteOutline className="w-5 h-5" />
+                  <MdOutlineDeleteOutline className="size-5" />
                 </button>
               </>
             ) : null}

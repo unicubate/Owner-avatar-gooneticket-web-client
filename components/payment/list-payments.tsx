@@ -146,7 +146,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
           </div> */}
 
           <div className="ml-auto">
-            <button className="text-lg ml-2 font-bold transition-all duration-200">
+            <button className="ml-2 text-lg font-bold transition-all duration-200">
               {["PHONE"].includes(item?.type) && (
                 <Tag
                   bordered={false}

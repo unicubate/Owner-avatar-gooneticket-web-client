@@ -20,37 +20,37 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
     <>
       <tr key={index}>
         <td className="py-4 text-sm font-bold">
-          <div className="flex items-center flex-1 min-w-0">
+          <div className="flex min-w-0 flex-1 items-center">
             {item?.profileSend?.id ? (
               <AvatarComponent size={40} profile={item?.profileSend} />
             ) : (
               <AvatarCoffeeComponent size={40} color={item?.color} />
             )}
 
-            <div className="flex-1 min-w-0 ml-4">
+            <div className="ml-4 min-w-0 flex-1">
               <p className="text-sm font-bold text-gray-900 dark:text-white">
                 {item?.profileSend?.id
                   ? `${item?.profileSend?.firstName} ${item?.profileSend?.lastName}`
                   : item?.fullName}
               </p>
-              <p className="mt-1 text-sm font-medium text-gray-600  hidden sm:table-cell">
+              <p className="mt-1 hidden text-sm font-medium  text-gray-600 sm:table-cell">
                 {item?.profileSend?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-600 sm:hidden">
                 <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
-              <p className="lg:hidden mt-1 text-sm font-medium text-gray-500">
+              <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
                 {formateFromNow(item?.createdAt as Date, locale as string)}
               </p>
             </div>
           </div>
         </td>
 
-        <td className="hidden text-sm text-left font-medium dark:text-white lg:table-cell">
+        <td className="hidden text-left text-sm font-medium dark:text-white lg:table-cell">
           {item?.model.toLocaleLowerCase()}
         </td>
 
-        <td className="hidden text-sm text-right font-bold dark:text-white lg:table-cell">
+        <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           <SerialPrice
             className="text-sm"
             value={Number(item?.amount)}
@@ -62,18 +62,18 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
           <ReadMore html={`${item?.description ?? ""}`} value={20} />
         </td> */}
 
-        <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
+        <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date, locale as string)}
         </td>
 
-        <td className="py-4 text-sm font-medium text-right">
+        <td className="py-4 text-right text-sm font-medium">
           <Button
             type="text"
             shape="circle"
-            icon={<BiDotsHorizontal className="w-5 h-5 text-gray-400" />}
+            icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
             size="small"
           />
-          <div className="mt-1 lg:hidden pt-1">
+          <div className="mt-1 pt-1 lg:hidden">
             <p className="inline-flex text-sm font-bold dark:text-white">
               <SerialPrice
                 className="text-sm"

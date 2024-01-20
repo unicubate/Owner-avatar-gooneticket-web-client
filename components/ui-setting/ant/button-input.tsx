@@ -92,7 +92,7 @@ const ButtonInput: React.FC<Props> = ({
           }
         >
           {loading ? (
-            <Spin indicator={antIcon} className="mr-2 h-3 w-3" />
+            <Spin indicator={antIcon} className="mr-2 size-3" />
           ) : (
             <>
               {icon ? <span className="mr-1">{icon}</span> : null}
@@ -107,31 +107,31 @@ const ButtonInput: React.FC<Props> = ({
           onClick={onClick}
           disabled={loading || disabled ? true : false}
           className={`
+        min-w-
         inline-flex
         items-center
-        justify-center
-        min-w-${minW ?? "fit"}
+        justify-center${minW ?? "fit"}
+        py-
         w-full
-        px-4
-        py-${sizeType[String(size ?? "normal")]} 
-        text-sm 
+        px-4${sizeType[String(size ?? "normal")]} 
+        rounded-md 
+        border 
+        border-gray-200 
+        bg-white 
+        text-sm
         font-semibold 
         leading-3 
         text-gray-600 
-        dark:text-white
-        transition-all 
+        transition-all
         duration-200 
-        bg-white 
-        dark:bg-[#121212]
-        border 
-        border-gray-200
-        dark:border-gray-800
-        rounded-md 
-        focus:outline-none 
-        focus:ring-2 
-        focus:ring-offset-2 
-        focus:ring-gray-200 
         hover:bg-gray-200
+        focus:outline-none
+        focus:ring-2 
+        focus:ring-gray-200 
+        focus:ring-offset-2 
+        dark:border-gray-800 
+        dark:bg-[#121212] 
+        dark:text-white
         `}
         >
           {icon ? <span className="mr-1">{icon}</span> : null}

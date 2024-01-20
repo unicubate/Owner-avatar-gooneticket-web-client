@@ -40,7 +40,7 @@ const TextareaReactQuillInput: React.FC<Props> = ({
   return (
     <>
       {label ? <label
-        className="block dark:text-white text-sm font-bold mb-2"
+        className="mb-2 block text-sm font-bold dark:text-white"
         htmlFor={name}>
         {label}
       </label> : null}
@@ -58,12 +58,12 @@ const TextareaReactQuillInput: React.FC<Props> = ({
             theme="snow"
             placeholder={placeholder}
             modules={{ toolbar: false }}
-            className={`w-full ${className} px-full py-full border-none rounded-lg focus:outline-none focus:ring focus:border-blue-300`}
+            className={`w-full ${className} px-full py-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring`}
           />
         )}
       />
       {errors?.[name] && (
-        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+        <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
           {errors?.[name]?.message}
         </span>
       )}

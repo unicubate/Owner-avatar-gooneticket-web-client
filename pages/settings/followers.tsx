@@ -64,13 +64,13 @@ const Followers = () => {
     <>
       <LayoutDashboard title={"Followers"}>
 
-        <div className="max-w-6xl mx-auto py-6">
+        <div className="mx-auto max-w-6xl py-6">
 
-          <div className="px-4 mx-auto mt-8 sm:px-6 md:px-8">
+          <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <HorizontalNavSetting />
 
             <div className="flow-root">
-              <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                 <div className="px-4 py-8">
 
                   <div className="sm:flex sm:items-center sm:justify-between">
@@ -78,7 +78,7 @@ const Followers = () => {
                       Followers
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input placeholder="Search by email, name" className="dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800" />
+                      <Input placeholder="Search by email, name" className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500" />
                     </div>
                   </div>
 
@@ -91,7 +91,7 @@ const Followers = () => {
                 </div>
 
                 {hasNextPage && (
-                  <div className="mt-4 text-center justify-center mx-auto">
+                  <div className="mx-auto mt-4 justify-center text-center">
                     <div className="sm:mt-0">
                       <ButtonInput
                         ref={ref}

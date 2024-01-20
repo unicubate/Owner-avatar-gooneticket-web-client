@@ -89,7 +89,7 @@ const UpdateFormDonation: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <div className="mt-2">
               <NumberInput
@@ -121,7 +121,7 @@ const UpdateFormDonation: React.FC<{
               </span>
             </div>
 
-            <div className="flex items-center mt-4 mb-4 space-x-4">
+            <div className="my-4 flex items-center space-x-4">
               <ButtonInput
                 minW="fit"
                 shape="default"

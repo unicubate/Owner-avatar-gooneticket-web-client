@@ -48,12 +48,12 @@ const Dashboard = () => {
   return (
     <>
       <LayoutDashboard title={"Dashboard"}>
-        <div className="max-w-6xl mx-auto py-6">
-          <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="px-3 py-2 bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
                 <div className="flex items-center">
-                  <div className="relative flex-shrink-0 cursor-pointer">
+                  <div className="relative shrink-0 cursor-pointer">
                     <AvatarComponent size={60} profile={user?.profile} />
                   </div>
 
@@ -81,30 +81,30 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center mt-3 text-gray-900 dark:text-white">
+                <div className="mt-3 flex items-center text-gray-900 dark:text-white">
                   <Link href="/settings/subscribes">
                     <span className="text-lg font-bold">
                       {user?.totalSubscribe ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">{t('subscribes')}</span>
+                    <span className="ml-2 text-sm font-normal">{t('subscribes')}</span>
                   </Link>
 
                   <Link href="/settings/followers">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollower ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">{t('followers')}</span>
+                    <span className="ml-2 text-sm font-normal">{t('followers')}</span>
                   </Link>
 
                   <Link href="/settings/followings">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollowing ?? 0}
                     </span>
-                    <span className="ml-2 font-normal text-sm">{t('followings')}</span>
+                    <span className="ml-2 text-sm font-normal">{t('followings')}</span>
                   </Link>
                 </div>
 
-                <div className="flex items-center mt-3 text-gray-900 dark:text-white">
+                <div className="mt-3 flex items-center text-gray-900 dark:text-white">
                   <SerialPrice
                     className="text-3xl font-bold"
                     value={Number(user?.wallet?.amount)}
@@ -116,7 +116,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="flex items-center mt-4">
+              <div className="mt-4 flex items-center">
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
                     {/* <Button shape="default" size="large" loading={false}>
@@ -137,13 +137,13 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-5 mt-4 sm:gap-6 sm:grid-cols-1 lg:grid-cols-3">
-                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3">
+                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
-                    <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                       {t('memberships')}
                     </p>
-                    <div className="flex items-center justify-between mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
                         value={Number(transactionMembership?.statistic?.amount)}
@@ -156,12 +156,12 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
-                    <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                       {t('donations')}
                     </p>
-                    <div className="flex items-center justify-between mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
                         value={Number(transactionDonation?.statistic?.amount)}
@@ -174,12 +174,12 @@ const Dashboard = () => {
                   </div>
                 </div>
 
-                <div className="bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
-                    <p className="text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                       {t('shop')}
                     </p>
-                    <div className="flex items-center justify-between mt-3">
+                    <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
                         value={Number(transactionProduct?.statistic?.amount)}
@@ -195,11 +195,11 @@ const Dashboard = () => {
 
               {user?.id ? <RecentTransactions days={dayCount} /> : null}
 
-              <div className="py-4 mt-4 bg-white dark:bg-[#121212] sm:py-4 lg:py-10 rounded-lg">
-                <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                  <div className="grid max-w-2xl grid-cols-1 mx-auto sm:grid-cols-2 xl:max-w-none xl:grid-cols-4 gap-x-8 gap-y-8 sm:gap-y-12">
+              <div className="mt-4 rounded-lg bg-white py-4 dark:bg-[#121212] sm:py-4 lg:py-10">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                  <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-y-12 xl:max-w-none xl:grid-cols-4">
                     <div className="flex items-center">
-                      <CiWallet className="flex-shrink-0 text-gray-900 dark:text-white w-14 h-14" />
+                      <CiWallet className="size-14 shrink-0 text-gray-900 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Secured Payments
@@ -211,7 +211,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiShop className="flex-shrink-0 text-gray-900 dark:text-white w-14 h-14" />
+                      <CiShop className="size-14 shrink-0 text-gray-900 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Shop for Anyone
@@ -223,7 +223,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiUnlock className="flex-shrink-0 text-gray-900 dark:text-white w-14 h-14" />
+                      <CiUnlock className="size-14 shrink-0 text-gray-900 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Membership
@@ -235,7 +235,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiGift className="flex-shrink-0 text-gray-900 dark:text-white w-14 h-14" />
+                      <CiGift className="size-14 shrink-0 text-gray-900 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Quality Products

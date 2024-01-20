@@ -158,9 +158,9 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
-            <div className="overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg">
+            <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
-                <h2 className="text-black dark:text-white font-bold">
+                <h2 className="font-bold text-black dark:text-white">
                   {post?.id ? 'Update' : 'Create a new'} audio
                 </h2>
                 <div className="mt-4">
@@ -169,7 +169,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     control={control}
                     render={({ field: { onChange } }) => (
                       <>
-                        <div className="text-center justify-center mx-auto">
+                        <div className="mx-auto justify-center text-center">
                           <ImgCrop  rotationSlider>
                             <Upload
                               multiple
@@ -210,8 +210,8 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 
                 <div className="mt-4">
                   <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex items-center flex-1 min-w-0">
-                      <div className="flex-1 min-w-0">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold text-black dark:text-white">
                           Upload audio
                         </p>
@@ -266,7 +266,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                           control={control}
                           render={({ field: { onChange } }) => (
                             <>
-                              <div className="text-center justify-center mx-auto">
+                              <div className="mx-auto justify-center text-center">
                                 <Upload
                                   name="attachmentFiles"
                                   listType="picture"
@@ -290,10 +290,10 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                           )}
                         />
                       </div>
-                      <div className="grid grid-cols-1 mt-4 gap-y-5 gap-x-6">
+                      <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                         <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                          <div className="flex items-center flex-1 min-w-0">
-                            <div className="flex-1 min-w-0">
+                          <div className="flex min-w-0 flex-1 items-center">
+                            <div className="min-w-0 flex-1">
                               <p className="text-sm font-bold text-black dark:text-white">
                                 {' '}
                                 Allow download{' '}
@@ -341,13 +341,13 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     allowClear={true}
                     dataItem={categories}
                   />
-                  <div className="flex justify-between items-center">
+                  <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-gray-400">
                       {`Categories makes it easy to browse your posts.`}
                     </span>
-                    <label className="block text-sm mb-2 dark:text-white"></label>
+                    <label className="mb-2 block text-sm dark:text-white"></label>
                     <Link
-                      className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+                      className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                       href="/shop/config"
                     >
                       Setting category
@@ -379,7 +379,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     Save and Publish
                   </ButtonInput>
                 </div> */}
-                <div className="flex items-center mt-4 mb-4 space-x-4">
+                <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
                     status="cancel"
                     type="button"

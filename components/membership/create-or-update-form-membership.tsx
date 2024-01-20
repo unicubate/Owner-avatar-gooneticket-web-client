@@ -116,7 +116,7 @@ const CreateOrUpdateFormMembership: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden bg-white dark:bg-[#121212] border border-gray-200 dark:border-gray-800 rounded-lg">
+        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold text-black dark:text-white">
               Create a new membership
@@ -133,7 +133,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                 errors={errors}
               />
             </div>
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="mt-2">
                 <NumberInput
                   control={control}
@@ -168,7 +168,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                 control={control}
                 render={({}) => (
                   <>
-                    <div className="text-center justify-center mx-auto">
+                    <div className="mx-auto justify-center text-center">
                       <Upload
                         name="attachmentImages"
                         listType="picture-card"
@@ -215,7 +215,7 @@ const CreateOrUpdateFormMembership: React.FC<{
               </span>
             </div>
 
-            <div className="flex items-center mt-4 mb-4 space-x-4">
+            <div className="my-4 flex items-center space-x-4">
               <ButtonInput
                 status="cancel"
                 type="button"

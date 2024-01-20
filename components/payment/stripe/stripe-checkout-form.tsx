@@ -166,7 +166,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
           <CardElement options={CARD_OPTIONS} />
         </div>
         {checkoutError ? (
-          <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
+          <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
             {checkoutError}
           </span>
         ) : null}

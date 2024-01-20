@@ -70,7 +70,7 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
+      <div className="flex h-full flex-1 flex-col justify-between overflow-x-scroll px-4">
         <div className="space-y-4">
           <nav className="flex-1 space-y-2">
             {navigationItems.map((item: any, index: number) => {
@@ -81,9 +81,9 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 group rounded-lg ${isActive
-                    ? `text-white bg-${user?.profile?.color}-600`
-                    : "hover:bg-gray-200 text-gray-900"
+                  className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
+                    ? `bg- text-white${user?.profile?.color}-600`
+                    : "text-gray-900 hover:bg-gray-200"
                     } `}
                 >
                   {item?.icon}

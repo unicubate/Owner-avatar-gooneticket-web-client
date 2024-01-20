@@ -6,17 +6,17 @@ const PrivacyPolicy = () => {
   return (
     <>
       <LayoutSite title="Privacy Policy">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="mt-6 py-12 bg-white dark:bg-black sm:py-16 lg:py-20">
-            <div className="max-w-2xl mx-auto text-center">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-6 bg-white py-12 dark:bg-black sm:py-16 lg:py-20">
+            <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
                 Privacy Policy
               </h2>
             </div>
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto xl:max-w-4xl">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-3xl xl:max-w-4xl">
                 <div className="mt-8">
-                  <p className="text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj text-base font-normal leading-7 text-gray-700">
                     {process.env.NEXT_PUBLIC_NAME_SITE} is a platform for
                     creators to accept support from their audience and share
                     exclusive content. At Buy Me a Pot, your privacy is
@@ -25,7 +25,7 @@ const PrivacyPolicy = () => {
                     our platform.
                   </p>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     {/* The services are provided by Publisherr Inc (parent company
                     and hereinafter referred to as “Buy Me a Coffee”), a
                     Delaware company with registered address at 2035 Sunset Lake
@@ -35,10 +35,10 @@ const PrivacyPolicy = () => {
                     operating our website.
                   </p>
 
-                  <h2 className="mt-12 text-3xl font-bold font-pj">
+                  <h2 className="font-pj mt-12 text-3xl font-bold">
                     Website Visitors
                   </h2>
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     Like most website operators,{' '}
                     {process.env.NEXT_PUBLIC_NAME_SITE} collects
                     non-personally-identifying information of the sort that web
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
                     website.
                   </p>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     {process.env.NEXT_PUBLIC_NAME_SITE} also collects
                     potentially personally-identifying information like Internet
                     Protocol (IP) addresses for logged in users and for users
@@ -71,9 +71,9 @@ const PrivacyPolicy = () => {
                     processing the payments.
                   </p>
 
-                  <h2 className="mt-12 text-3xl font-bold font-pj">Payments</h2>
+                  <h2 className="font-pj mt-12 text-3xl font-bold">Payments</h2>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     To make a payment to a creator on{' '}
                     {process.env.NEXT_PUBLIC_NAME_SITE}, you have to provide our
                     payment processor (Stripe) with your payment information.
@@ -86,11 +86,11 @@ const PrivacyPolicy = () => {
                     what rewards you receive and how often you support them.
                   </p>
 
-                  <h2 className="mt-12 text-3xl font-bold font-pj">
+                  <h2 className="font-pj mt-12 text-3xl font-bold">
                     Gathering of Personally-Identifying Information
                   </h2>
 
-                  <p className="mt-4 text-base font-normal leading-7 text-gray-700 font-pj">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
                     {`Certain visitors to ${process.env.NEXT_PUBLIC_NAME_SITE} websites choose to
                     interact with ${process.env.NEXT_PUBLIC_NAME_SITE} in ways that require 
                     ${process.env.NEXT_PUBLIC_NAME_SITE} to gather personally-identifying information. The
@@ -116,9 +116,9 @@ const PrivacyPolicy = () => {
             </div>
           </div>
 
-          <footer className="px-4 mx-auto sm:px-6 lg:px-8 max-w-8xl lg:py-10">
+          <footer className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
             {/* <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-y-12 gap-x-8 xl:gap-x-12"> */}
-            <div className="grid grid-cols-2 gap-y-12 gap-x-8 lg:grid-cols-8">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-8">
               <div className="lg:col-span-2">
                 <p className="text-base font-semibold text-gray-900">Company</p>
 
@@ -324,22 +324,22 @@ const PrivacyPolicy = () => {
               </div>
             </div>
 
-            <hr className="mt-16 mb-10 border-gray-200" />
+            <hr className="mb-10 mt-16 border-gray-200" />
 
             <div className="sm:flex sm:items-center sm:justify-between">
               <p className="text-sm text-gray-600">
                 © Copyright 2021, All Rights Reserved by Postcraft
               </p>
 
-              <ul className="flex items-center mt-5 space-x-3 md:order-3 sm:mt-0">
+              <ul className="mt-5 flex items-center space-x-3 sm:mt-0 md:order-3">
                 <li>
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -353,10 +353,10 @@ const PrivacyPolicy = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -370,10 +370,10 @@ const PrivacyPolicy = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
@@ -389,10 +389,10 @@ const PrivacyPolicy = () => {
                   <a
                     href="#"
                     title=""
-                    className="flex items-center justify-center text-gray-800 transition-all duration-200 bg-transparent border border-gray-300 rounded-full w-7 h-7 focus:bg-orange-600 hover:text-white focus:text-white hover:bg-orange-600 hover:border-orange-600 focus:border-orange-600"
+                    className="flex size-7 items-center justify-center rounded-full border border-gray-300 bg-transparent text-gray-800 transition-all duration-200 hover:border-orange-600 hover:bg-orange-600 hover:text-white focus:border-orange-600 focus:bg-orange-600 focus:text-white"
                   >
                     <svg
-                      className="w-4 h-4"
+                      className="size-4"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"

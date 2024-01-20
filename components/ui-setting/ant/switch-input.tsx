@@ -11,7 +11,7 @@ interface Props {
 const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
   return (
     <>
-      <div className="flex items-center justify-between mt-4 sm:space-x-6 pl-14 sm:pl-0 sm:justify-end sm:mt-0">
+      <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
         <button
           type="button"
           title=""
@@ -27,25 +27,25 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
               <div className="
                   relative 
                   inline-flex 
-                  flex-shrink-0 
-                  h-6
-                  transition-all 
-                  duration-200 
-                  ease-in-out 
-                  bg-white 
-                  dark:bg-[#121212] 
+                  h-6 
+                  w-11
+                  shrink-0 
+                  cursor-pointer 
+                  rounded-full 
                   border 
                   border-gray-200 
-                  dark:border-gray-800  
-                  rounded-full 
-                  cursor-pointer 
-                  w-11 
-                  focus:outline-none">
+                  bg-white 
+                  transition-all 
+                  duration-200  
+                  ease-in-out 
+                  focus:outline-none 
+                  dark:border-gray-800 
+                  dark:bg-[#121212]">
                 <label
                   htmlFor={name}
-                  className="flex items-center relative w-max cursor-pointer select-none"
+                  className="relative flex w-max cursor-pointer select-none items-center"
                 >
-                  {label ? <span className="font-bold mr-3">{label}</span> : null}
+                  {label ? <span className="mr-3 font-bold">{label}</span> : null}
 
                   <Switch
                     // checkedChildren={<CheckOutlined />}

@@ -97,14 +97,14 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flow-root">
             <div
-              className={`overflow-hidden bg-white dark:bg-[#121212]  border border-gray-200 dark:border-gray-800 rounded-lg`}
+              className={`overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]`}
             >
               <div className="px-4 py-5">
-                <h2 className="text-black dark:text-white font-bold">
+                <h2 className="font-bold text-black dark:text-white">
                   {album?.id ? "Update" : "Create a new"} album
                 </h2>
 
-                <div className="p-2 flex-auto justify-center">
+                <div className="flex-auto justify-center p-2">
                   {hasErrors ? (
                     <div className="mb-4">
                       <Alert message={hasErrors} type="error" showIcon />
@@ -134,7 +134,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
                     />
                   </div>
 
-                  <div className="flex items-center mt-4 space-x-4">
+                  <div className="mt-4 flex items-center space-x-4">
                     <ButtonInput
                       status="cancel"
                       type="button"

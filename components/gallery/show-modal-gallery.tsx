@@ -50,13 +50,13 @@ const ShowModalGallery: React.FC<Props> = ({
     <>
       {openModal ? (
         <>
-          <div className="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto">
-            <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover ">
-              <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-              <div className="w-full overflow-hidden border-none max-w-3xl p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-[#121212] overflow-x-hidden max-h-full flex flex-col pointer-events-auto bg-clip-padding outline-none text-current">
-                <div className="flex flex-shrink-0 items-center justify-between p-4 border-gray-200 rounded-t-md">
+          <div className="fixed left-0 top-0 z-40 size-full overflow-y-auto overflow-x-hidden outline-none">
+            <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
+              <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
+              <div className="pointer-events-auto relative m-auto flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-xl border-none bg-white bg-clip-padding p-5 text-current shadow-lg outline-none dark:bg-[#121212]">
+                <div className="flex shrink-0 items-center justify-between rounded-t-md border-gray-200 p-4">
                   <div className="flex items-center">
-                    <div className="relative flex-shrink-0 cursor-pointer">
+                    <div className="relative shrink-0 cursor-pointer">
                       <AvatarComponent size={50} profile={item?.profile} />
                     </div>
 
@@ -84,7 +84,7 @@ const ShowModalGallery: React.FC<Props> = ({
                           size="medium"
                           loading={false}
                           color={item?.profile?.color as any}
-                          icon={<HiOutlineLockClosed className="w-5 h-5" />}
+                          icon={<HiOutlineLockClosed className="size-5" />}
                         >
                           <span className="ml-1 font-bold">
                             Join membership
@@ -96,7 +96,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         title="Share"
                         className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                       >
-                        <IoShareOutline className="w-6 h-6" />
+                        <IoShareOutline className="size-6" />
                       </button>
                       {item?.allowDownload && (
                         <button
@@ -111,7 +111,7 @@ const ShowModalGallery: React.FC<Props> = ({
                           }}
                           className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                         >
-                          <FiDownload className="w-6 h-6" />
+                          <FiDownload className="size-6" />
                         </button>
                       )}
                       <button
@@ -119,7 +119,7 @@ const ShowModalGallery: React.FC<Props> = ({
                         onClick={() => setOpenModal(false)}
                         className="ml-2 text-gray-900 hover:text-gray-900 focus:ring-gray-900"
                       >
-                        <AiOutlineClose className="w-6 h-6" />
+                        <AiOutlineClose className="size-6" />
                       </button>
                     </div>
                   </div>
@@ -146,7 +146,7 @@ const ShowModalGallery: React.FC<Props> = ({
                   </div>
 
                   {item?.title ? (
-                    <p className="mt-4 text-lg font-bold text-gray-900 cursor-pointer">
+                    <p className="mt-4 cursor-pointer text-lg font-bold text-gray-900">
                       {item?.title ?? ""}
                     </p>
                   ) : null}
@@ -157,13 +157,13 @@ const ShowModalGallery: React.FC<Props> = ({
                     </p>
                   ) : null}
 
-                  <div className="flex mt-4 items-center font-medium text-gray-600">
+                  <div className="mt-4 flex items-center font-medium text-gray-600">
                     <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
                     <button className="ml-2 text-2xl">
                       <BiConversation />
                     </button>
-                    <span className="ml-2 font-normal text-sm">
+                    <span className="ml-2 text-sm font-normal">
                       {item?.totalComment ?? 0}
                     </span>
 
@@ -176,7 +176,7 @@ const ShowModalGallery: React.FC<Props> = ({
                           }/edit?type=${item?.type.toLocaleLowerCase()}`}
                           className="ml-2 text-gray-600 hover:text-indigo-400 focus:ring-indigo-400"
                         >
-                          <MdOutlineModeEdit className="w-6 h-6" />
+                          <MdOutlineModeEdit className="size-6" />
                         </Link>
 
                         {/* <button

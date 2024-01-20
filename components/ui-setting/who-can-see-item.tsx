@@ -14,7 +14,7 @@ const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white">
           <button className="font-bold">
-            <HiOutlineLockClosed className="w-7 h-7" />
+            <HiOutlineLockClosed className="size-7" />
           </button>
           <p className="text-sm font-bold text-white">
             {" "}
@@ -29,7 +29,7 @@ const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
             size="medium"
             loading={false}
             color={profile?.color as any}
-            icon={<HiOutlineLockClosed className="w-5 h-5" />}
+            icon={<HiOutlineLockClosed className="size-5" />}
           >
             Join now
           </ButtonInput>

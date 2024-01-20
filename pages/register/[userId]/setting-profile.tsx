@@ -107,16 +107,16 @@ const SettingProfile = () => {
 
   return (
     <LayoutSite title="Log In">
-      <div className="w-full max-w-lg p-6 m-auto mx-auto bg-white rounded-lg shadow-md">
-        <div className="flex justify-center mx-auto">
+      <div className="m-auto w-full max-w-lg rounded-lg bg-white p-6 shadow-md">
+        <div className="mx-auto flex justify-center">
           <img
-            className="w-auto h-7 sm:h-8"
+            className="h-7 w-auto sm:h-8"
             src="https://merakiui.com/images/logo.svg"
             alt=""
           />
         </div>
-        <div className="flex justify-center mx-auto">
-          <h6 className="mt-3 text-xl text-center font-bold">
+        <div className="mx-auto flex justify-center">
+          <h6 className="mt-3 text-center text-xl font-bold">
             {`Complete your profile`}
           </h6>
         </div>

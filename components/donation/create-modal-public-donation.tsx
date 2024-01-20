@@ -10,15 +10,15 @@ const CreateModalPublicDonation: React.FC<{
   return (
     <>
       {openModal ? (
-        <div className="z-40 fixed top-0 left-0 w-full h-full outline-none overflow-x-hidden overflow-y-auto">
-          <div className="min-w-screen h-screen animated fadeIn faster  fixed  left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover">
-            <div className="absolute bg-black opacity-80 inset-0 z-0"></div>
-            <div className="w-full  max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg  bg-white">
+        <div className="fixed left-0 top-0 z-40 size-full overflow-y-auto overflow-x-hidden outline-none">
+          <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
+            <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
+            <div className="relative  m-auto w-full max-w-lg rounded-xl bg-white p-5 shadow-lg">
               <button
-                className="bg-transparent border-0 text-black float-right"
+                className="float-right border-0 bg-transparent text-black"
                 onClick={() => setOpenModal(false)}
               >
-                <span className="text-black opacity-7 h-6 w-6 text-xl block  py-0 rounded-full">
+                <span className="opacity-7 block size-6 rounded-full py-0 text-xl  text-black">
                   <CloseOutlined />
                 </span>
               </button>
