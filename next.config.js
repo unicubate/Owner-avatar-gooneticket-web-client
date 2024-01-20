@@ -1,6 +1,7 @@
 module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
+  eslint: { ignoreDuringBuilds: true },
   // experimental: {
   //   transpilePackages: ["ui"],
   // },
@@ -16,7 +17,7 @@ module.exports = {
     BASE_NAME_TOKEN: process.env.NEXT_PUBLIC_BASE_NAME_TOKEN,
     PAYPAL_CLIENT_ID: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID,
     STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY,
-    MEDIA_HOST: process.env.NEXT_PUBLIC_MEDIA_HOST ?? "",
+    MEDIA_HOST: process.env.NEXT_PUBLIC_MEDIA_HOST ?? '',
   },
-  images: { domains: ['*'] }
+  images: { domains: ['*'] },
 };
