@@ -128,7 +128,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </nav>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 dark:text-white uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Monetize
             </p>
 
@@ -164,7 +164,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 dark:text-white uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Support
             </p>
             <nav className="flex-1 mt-4 space-y-1">
@@ -191,7 +191,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
           </>
 
           <>
-            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 dark:text-white uppercase">
+            <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Settings
             </p>
             <nav className="flex-1 mt-4 space-y-1">
