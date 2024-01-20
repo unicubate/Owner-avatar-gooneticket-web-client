@@ -1,9 +1,9 @@
 module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
-  experimental: {
-    transpilePackages: ["ui"],
-  },
+  // experimental: {
+  //   transpilePackages: ["ui"],
+  // },
 
   i18n: {
     locales: ['en', 'fr'], // Langues prises en charge
