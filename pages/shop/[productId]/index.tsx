@@ -1,4 +1,4 @@
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
+import { ButtonInput } from "@/components/ui-setting";
 import { useRouter } from "next/router";
 import { GetOneProductAPI } from "@/api-site/product";
 import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
@@ -7,7 +7,6 @@ import { LayoutSite } from "@/components/layout-site";
 import { MdOutlineDiscount } from "react-icons/md";
 import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import ReactPlayer from "react-player";
-import { ImageGalleryShopList } from "@/components/shop/image-gallery-shop-list";
 import ListComments from "@/components/comment/list-comments";
 import { useAuth } from "@/components/util/context-user";
 import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
@@ -263,19 +262,15 @@ const ShopView = () => {
               </div> */}
 
               <div className="mt-6 flex items-center space-x-4">
-                <ButtonInput
-                  minW="fit"
-                  shape="default"
+                {/* <ButtonInput
                   type="button"
-                  size="huge"
                   loading={false}
-                  color={product?.profile?.color}
                   onClick={() => {
                     addToCart(product);
                   }}
                 >
                   Add to cart
-                </ButtonInput>
+                </ButtonInput> */}
               </div>
 
               {/* <ul className="mt-8 space-y-3">

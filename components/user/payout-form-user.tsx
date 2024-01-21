@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { CreatePaymentFormCardUser } from "./create-payment-form-card-user";
-import { Skeleton } from "antd";
-import { GetInfinitePaymentsAPI } from "@/api-site/payment";
-import { ListPayments } from "../payment/list-payments";
-import { PaymentItemModel } from "@/types/payment";
-import { CreatePaymentPhoneFormCardUser } from "./create-payment-phone-form-card-user";
-import { ErrorFile } from "../ui-setting/ant/error-file";
+import React, { useState } from 'react';
+import { ButtonInput } from '../ui-setting';
+import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
+import { GetInfinitePaymentsAPI } from '@/api-site/payment';
+import { ListPayments } from '../payment/list-payments';
+import { PaymentItemModel } from '@/types/payment';
+import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { LoadingFile } from '../ui-setting/ant';
 
 const PayoutFormUser: React.FC = () => {
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
@@ -21,15 +21,11 @@ const PayoutFormUser: React.FC = () => {
     fetchNextPage,
   } = GetInfinitePaymentsAPI({
     take: 10,
-    sort: "DESC",
+    sort: 'DESC',
   });
 
   const dataTablePayments = isLoadingPayments ? (
-    <Skeleton
-      className="mt-2 py-2"
-      loading={isLoadingPayments}
-      paragraph={{ rows: 1 }}
-    />
+    <LoadingFile />
   ) : isErrorPayments ? (
     <ErrorFile
       status="error"
@@ -37,7 +33,7 @@ const PayoutFormUser: React.FC = () => {
       description="Error find data please try again..."
     />
   ) : dataPayments?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataPayments?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -50,40 +46,30 @@ const PayoutFormUser: React.FC = () => {
     <>
       <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-5">
-          <div className="mb-4 flex items-center space-x-4">
+          <div className="mb-4 flex items-center space-x-2">
             <ButtonInput
-              status="cancel"
               type="button"
-              shape="default"
-              size="normal"
+              variant="default"
               loading={false}
               onClick={() => setShowPhoneFormModal(true)}
             >
               Add Phone
             </ButtonInput>
             <ButtonInput
-              status="cancel"
               type="button"
-              shape="default"
-              size="normal"
+              variant="outline"
               loading={false}
               onClick={() => setShowCardModal(true)}
             >
               Add Card
             </ButtonInput>
-            <ButtonInput
-              status="cancel"
-              type="button"
-              shape="default"
-              size="normal"
-              loading={false}
-            >
+            <ButtonInput type="button" variant="info">
               Add PayPal
             </ButtonInput>
           </div>
 
           <div className="mt-8 flow-root">
-            <div className="-my-5 divide-y divide-gray-100">
+            <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
               {dataTablePayments}
 
               {hasNextPage ? (

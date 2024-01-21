@@ -1,20 +1,23 @@
-import { Input } from "antd";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { useRouter } from "next/router";
-import { EmptyData } from "@/components/ui-setting/ant/empty-data";
-import { ListCommissions } from "@/components/commission/list-commissions";
-import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
-import { GetInfiniteCommissionsAPI } from "@/api-site/commission";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { ErrorFile } from "../ui-setting/ant/error-file";
-import { RiShakeHandsLine } from "react-icons/ri";
+import { Input } from 'antd';
+import { ButtonInput, ButtonLoadMore, SearchInput } from '@/components/ui-setting';
+import { useRouter } from 'next/router';
+import { EmptyData } from '@/components/ui-setting/ant/empty-data';
+import { ListCommissions } from '@/components/commission/list-commissions';
+import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
+import { GetInfiniteCommissionsAPI } from '@/api-site/commission';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { RiShakeHandsLine } from 'react-icons/ri';
+import { PlusIcon } from 'lucide-react';
+import { useInputState } from '../hooks/use-input-state';
 
 type Props = {
   organizationId: string;
 };
 
 const TableCommissions: React.FC<Props> = ({ organizationId }) => {
+  const { search, handleSetSearch } = useInputState();
   const router = useRouter();
   const { ref, inView } = useInView();
 
@@ -28,8 +31,9 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
   } = GetInfiniteCommissionsAPI({
     organizationId,
     take: 10,
-    sort: "DESC",
-    queryKey: ["commissions", "infinite"],
+    sort: 'DESC',
+    search,
+    queryKey: ['commissions', 'infinite'],
   });
 
   useEffect(() => {
@@ -48,9 +52,9 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
@@ -83,18 +87,21 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="mt-2 sm:mt-0">
               <ButtonInput
-                onClick={() => router.push(`${`/commissions/create`}`)}
-                shape="default"
                 type="button"
-                size="normal"
-                loading={false}
-                color={"indigo"}
+                className="w-full"
+                size="sm"
+                variant="info"
+                onClick={() => router.push(`${`/commissions/create`}`)}
+                icon={<PlusIcon className="mr-2 size-4" />}
               >
                 Create Commission
               </ButtonInput>
             </div>
             <div className="mt-2 sm:mt-0">
-              <Input placeholder="Search by title" className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500" />
+            <SearchInput
+                      placeholder="Search by title"
+                      onChange={handleSetSearch}
+                    />
             </div>
           </div>
 
@@ -104,20 +111,10 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
 
       {hasNextPage && (
         <div className="mx-auto mt-4 justify-center text-center">
-          <div className="mt-4 sm:mt-0">
-            <ButtonInput
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="large"
-              loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
-          </div>
+          <ButtonLoadMore
+            isFetchingNextPage={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+          />
         </div>
       )}
     </>

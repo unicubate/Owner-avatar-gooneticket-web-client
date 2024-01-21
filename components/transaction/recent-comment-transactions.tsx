@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from "react";
-import { Skeleton } from "antd";
-import { CommentModel } from "@/types/comment";
-import { GetInfiniteCommentsAPI } from "@/api-site/comment";
-import { ListCommentTransactions } from "../comment/list-comments-transactions";
-import { ModelType } from "@/utils/pagination-item";
-import { ButtonInput } from "../ui-setting/ant";
-import { ErrorFile } from "../ui-setting/ant/error-file";
-import { useInView } from "react-intersection-observer";
+import React, { useEffect, useState } from 'react';
+import { Skeleton } from 'antd';
+import { CommentModel } from '@/types/comment';
+import { GetInfiniteCommentsAPI } from '@/api-site/comment';
+import { ListCommentTransactions } from '../comment/list-comments-transactions';
+import { ModelType } from '@/utils/pagination-item';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { useInView } from 'react-intersection-observer';
+import { ButtonLoadMore } from '../ui-setting';
 
 const RecentCommentTransactions: React.FC<{
   userReceiveId: string;
@@ -25,8 +25,8 @@ const RecentCommentTransactions: React.FC<{
     fetchNextPage,
   } = GetInfiniteCommentsAPI({
     take: 10,
-    sort: "DESC",
-    modelIds: ["DONATION"],
+    sort: 'DESC',
+    modelIds: ['DONATION'],
     userReceiveId,
   });
 
@@ -50,7 +50,7 @@ const RecentCommentTransactions: React.FC<{
       description="Error find data please try again..."
     />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataComments?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -83,20 +83,11 @@ const RecentCommentTransactions: React.FC<{
       {hasNextPage ? (
         <>
           <div className="mx-auto mt-2 justify-center text-center">
-            <div className="sm:mt-0">
-              <ButtonInput
-                ref={ref}
-                shape="default"
-                type="button"
-                size="large"
-                onClick={() => fetchNextPage()}
-                loading={isFetchingNextPage ? true : false}
-                color="indigo"
-                minW="fit"
-              >
-                Load More
-              </ButtonInput>
-            </div>
+            <ButtonLoadMore
+              ref={ref}
+              isFetchingNextPage={isFetchingNextPage}
+              onClick={() => fetchNextPage()}
+            />
           </div>
         </>
       ) : null}

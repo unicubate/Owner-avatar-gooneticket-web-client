@@ -1,16 +1,16 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { useState } from "react";
-import { CiGift, CiShop, CiUnlock, CiWallet } from "react-icons/ci";
-import Link from "next/link";
-import { useAuth } from "@/components/util/context-user";
-import { RecentTransactions } from "@/components/transaction/recent-transactions";
-import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
-import { SerialPrice } from "@/components/ui-setting/serial-price";
-import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { GetStaticPropsContext } from "next";
-import { useTranslations } from "next-intl";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { useState } from 'react';
+import { CiGift, CiShop, CiUnlock, CiWallet } from 'react-icons/ci';
+import Link from 'next/link';
+import { useAuth } from '@/components/util/context-user';
+import { RecentTransactions } from '@/components/transaction/recent-transactions';
+import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
+import { GetStaticPropsContext } from 'next';
+import { useTranslations } from 'next-intl';
 
 const Dashboard = () => {
   const t = useTranslations();
@@ -23,12 +23,12 @@ const Dashboard = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ["statistics-transactions"],
+    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
   if (isPending) {
-    return "";
+    return '';
   }
 
   if (isError) {
@@ -36,18 +36,18 @@ const Dashboard = () => {
   }
 
   const transactionDonation = transactions?.find(
-    (item) => item.model === "DONATION"
+    (item) => item.model === 'DONATION',
   );
   const transactionMembership = transactions?.find(
-    (item) => item.model === "MEMBERSHIP"
+    (item) => item.model === 'MEMBERSHIP',
   );
   const transactionProduct = transactions?.find(
-    (item) => item.model === "PRODUCT"
+    (item) => item.model === 'PRODUCT',
   );
 
   return (
     <>
-      <LayoutDashboard title={"Dashboard"}>
+      <LayoutDashboard title={'Dashboard'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
@@ -59,23 +59,16 @@ const Dashboard = () => {
 
                   <div className="ml-4 cursor-pointer">
                     <p className="text-xl font-bold dark:text-white">
-                      {user?.profile?.firstName ?? ""}{" "}
-                      {user?.profile?.lastName ?? ""}
+                      {user?.profile?.firstName ?? ''}{' '}
+                      {user?.profile?.lastName ?? ''}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-600">
-                      {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ""}
+                      {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ''}
                     </p>
                   </div>
 
                   <div className="ml-auto">
-                    <ButtonInput
-                      minW="fit"
-                      shape="default"
-                      type="button"
-                      size="normal"
-                      loading={false}
-                      color="red"
-                    >
+                    <ButtonInput type="button" variant="danger">
                       Withdraw
                     </ButtonInput>
                   </div>
@@ -86,21 +79,27 @@ const Dashboard = () => {
                     <span className="text-lg font-bold">
                       {user?.totalSubscribe ?? 0}
                     </span>
-                    <span className="ml-2 text-sm font-normal">{t('subscribes')}</span>
+                    <span className="ml-2 text-sm font-normal">
+                      {t('subscribes')}
+                    </span>
                   </Link>
 
                   <Link href="/settings/followers">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollower ?? 0}
                     </span>
-                    <span className="ml-2 text-sm font-normal">{t('followers')}</span>
+                    <span className="ml-2 text-sm font-normal">
+                      {t('followers')}
+                    </span>
                   </Link>
 
                   <Link href="/settings/followings">
                     <span className="ml-4 text-lg font-bold">
                       {user?.totalFollowing ?? 0}
                     </span>
-                    <span className="ml-2 text-sm font-normal">{t('followings')}</span>
+                    <span className="ml-2 text-sm font-normal">
+                      {t('followings')}
+                    </span>
                   </Link>
                 </div>
 
@@ -124,13 +123,7 @@ const Dashboard = () => {
                             Last {dayCount} days
                           </span>
                         </Button> */}
-                    <ButtonInput
-                      status="cancel"
-                      type="button"
-                      shape="default"
-                      size="normal"
-                      loading={false}
-                    >
+                    <ButtonInput type="button" size="sm" variant="outline">
                       {t('last_time_days', { day: dayCount })}
                     </ButtonInput>
                   </div>
@@ -264,7 +257,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
         ...(await import(`/lang/${locale}/common.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

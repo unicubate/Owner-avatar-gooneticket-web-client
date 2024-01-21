@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { HtmlParser } from "@/utils/html-parser";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { MembershipModel } from "@/types/membership";
-import { useRouter } from "next/router";
-import { convertToPluralMonth } from "@/utils/utils";
-import { useAuth } from "../util/context-user";
-import { LoginModal } from "../auth-modal/login-modal";
+import React, { useState } from 'react';
+import { HtmlParser } from '@/utils/html-parser';
+import { ButtonInput } from '../ui-setting';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { MembershipModel } from '@/types/membership';
+import { useRouter } from 'next/router';
+import { convertToPluralMonth } from '@/utils/utils';
+import { useAuth } from '../util/context-user';
+import { LoginModal } from '../auth-modal/login-modal';
 
 type Props = {
   item?: MembershipModel;
@@ -28,7 +28,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
           <div className="flex items-center">
             {item?.id ? (
               <p className="cursor-pointer text-lg font-bold text-gray-900 dark:text-white">
-                {item?.title ?? ""}
+                {item?.title ?? ''}
               </p>
             ) : null}
           </div>
@@ -54,42 +54,26 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
               </span>
             </div>
             <span className="ml-0.5 text-lg text-black dark:text-white">
-              {" "}
-              per {convertToPluralMonth(Number(item?.month))}{" "}
+              {' '}
+              per {convertToPluralMonth(Number(item?.month))}{' '}
             </span>
           </div>
 
           <div className="mx-auto mt-4 justify-center text-center">
             <div className="sm:mt-0">
-              {userStorage?.id ? (
-                <ButtonInput
-                  onClick={() => {
-                    router.push(`/memberships/${item?.id}/checkout`);
-                  }}
-                  shape="default"
-                  type="button"
-                  size="large"
-                  loading={false}
-                  color={"indigo"}
-                  minW="fit"
-                >
-                  Join
-                </ButtonInput>
-              ) : (
-                <ButtonInput
-                  onClick={() => {
-                    setShowModal(true);
-                  }}
-                  shape="default"
-                  type="button"
-                  size="large"
-                  loading={false}
-                  color={"indigo"}
-                  minW="fit"
-                >
-                  Join
-                </ButtonInput>
-              )}
+              <ButtonInput
+                onClick={() => {
+                  userStorage?.id
+                    ? router.push(`/memberships/${item?.id}/checkout`)
+                    : setShowModal(true);
+                }}
+                type="button"
+                className="w-full"
+                size="lg"
+                variant="info"
+              >
+                Join
+              </ButtonInput>
             </div>
           </div>
 

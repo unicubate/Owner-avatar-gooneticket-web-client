@@ -1,10 +1,10 @@
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { LayoutSite } from "@/components/layout-site";
-import { GetStaticPropsContext } from "next";
-import { Image } from "antd";
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { LayoutSite } from '@/components/layout-site';
+import { GetStaticPropsContext } from 'next';
+import { Image } from 'antd';
 
 const schema = yup.object({
   searchInput: yup.string().optional(),
@@ -18,7 +18,7 @@ const Explore = () => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -29,7 +29,7 @@ const Explore = () => {
     //     data.append("attachment", file as RcFile);
     //   });
 
-    console.log("payload =======>", payload);
+    console.log('payload =======>', payload);
   };
 
   return (
@@ -116,19 +116,13 @@ const Explore = () => {
             <div className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-400 sm:focus-within:border-gray-300 sm:focus-within:ring-1 sm:focus-within:ring-gray-300">
               <input
                 type="text"
-                {...register("searchInput")}
+                {...register('searchInput')}
                 placeholder="Search creators"
                 className="block w-full rounded-xl border border-gray-400 bg-transparent p-4 text-gray-900 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
               />
 
               <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
-                <ButtonInput
-                  shape="round"
-                  type="button"
-                  size="large"
-                  loading={false}
-                  color="indigo"
-                >
+                <ButtonInput type="button" size="sm" variant="info">
                   Start my page
                 </ButtonInput>
               </div>
@@ -156,7 +150,7 @@ const Explore = () => {
 
           <div className="pt-12 text-center md:flex md:items-center md:justify-between md:text-left">
             <h2 className="text-2xl font-bold text-gray-900">
-              Featured Creators{" "}
+              Featured Creators{' '}
             </h2>
 
             <div className="mt-6 md:mt-0">
@@ -165,8 +159,8 @@ const Explore = () => {
                 title=""
                 className="text-base font-medium text-gray-500 transition-all duration-200 hover:text-gray-900"
               >
-                {" "}
-                See All Artists{" "}
+                {' '}
+                See All Artists{' '}
               </a>
             </div>
           </div>
@@ -726,7 +720,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

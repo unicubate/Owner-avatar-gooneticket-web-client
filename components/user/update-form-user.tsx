@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useEffect } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { ButtonInput } from '../ui-setting/button-input';
 import { GetOneUserPrivateAPI } from '@/api-site/user';
 import { cn } from '@/lib/utils';
 import { TextInput } from '../ui-setting/shadcn';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 
 type Props = {
   userId: string;
@@ -16,19 +16,16 @@ const schema = yup.object({
 });
 
 const UpdateFormUser: React.FC<Props> = ({ userId }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
   const {
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const { data: user } = GetOneUserPrivateAPI({ userId });
 
@@ -99,11 +96,11 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
 
             <div className={cn('mb-2 mt-4 flex items-center space-x-4')}>
               <ButtonInput
-                shape="default"
+                size="lg"
                 type="submit"
-                size="large"
+                variant="info"
+                className="w-full"
                 loading={loading}
-                color="indigo"
               >
                 Save changes
               </ButtonInput>

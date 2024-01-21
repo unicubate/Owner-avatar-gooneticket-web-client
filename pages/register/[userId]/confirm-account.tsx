@@ -1,32 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { Alert, Button, Checkbox, Input } from "antd";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import {
-  DateInput,
-  SelectInput,
-  TextAreaInput,
-  TextInput,
-  TextInputPassword,
-} from "@/components/ui-setting/ant";
-import { UserRegisterFormModel } from "@/types/user.type";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Alert, Button, Checkbox, Input } from 'antd';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { UserRegisterFormModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { resendCodeAPI, ValidCodeAPI } from "@/api-site/user";
-import { useQuery } from "@tanstack/react-query";
-import { PrivateComponent } from "@/components/util/private-component";
-import { useAuth } from "@/components/util/context-user";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { LayoutSite } from "@/components/layout-site";
+} from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
+import { resendCodeAPI, ValidCodeAPI } from '@/api-site/user';
+import { useQuery } from '@tanstack/react-query';
+import { PrivateComponent } from '@/components/util/private-component';
+import { useAuth } from '@/components/util/context-user';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { LayoutSite } from '@/components/layout-site';
+import { TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
-  code: yup.string().max(8, "Maximum 8 symbols").required(),
+  code: yup.string().max(8, 'Maximum 8 symbols').required(),
 });
 
 const ConfirmAccount = () => {
@@ -36,7 +30,7 @@ const ConfirmAccount = () => {
   const userId = String(query?.userId);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     control,
@@ -45,14 +39,14 @@ const ConfirmAccount = () => {
     formState: { errors },
   } = useForm<{ code: string }>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
-  if (user?.nextStep === "SETTING_PROFILE") {
+  if (user?.nextStep === 'SETTING_PROFILE') {
     window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
-  } else if (user?.nextStep === "SETTING_INTEREST") {
+  } else if (user?.nextStep === 'SETTING_INTEREST') {
     window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-interest`;
-  } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
+  } else if (user?.nextStep === 'COMPLETE_REGISTRATION') {
     window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
   }
 
@@ -76,7 +70,7 @@ const ConfirmAccount = () => {
     try {
       await saveMutation.mutateAsync({
         ...payload,
-        nextStep: "COMPLETE_REGISTRATION",
+        nextStep: 'COMPLETE_REGISTRATION',
       });
       router.push(`${`/${user?.username}`}`);
     } catch (error: any) {
@@ -85,9 +79,9 @@ const ConfirmAccount = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -96,17 +90,17 @@ const ConfirmAccount = () => {
     try {
       await resendCodeAPI({ userId: user?.id });
       AlertSuccessNotification({
-        text: "Code verification send successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Code verification send successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
     } catch (error) {
       AlertDangerNotification({
-        text: "An error has occurred.",
-        gravity: "top",
-        className: "info",
-        position: "center",
+        text: 'An error has occurred.',
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -126,7 +120,7 @@ const ConfirmAccount = () => {
         </div>
         <div className="mx-auto flex">
           <p>
-            We sent a verification code to:{" "}
+            We sent a verification code to:{' '}
             <span className="font-bold">{user?.email}</span>
           </p>
         </div>
@@ -155,11 +149,11 @@ const ConfirmAccount = () => {
 
           <div className="mt-6">
             <ButtonInput
-              shape="default"
+              size="lg"
               type="submit"
-              size="large"
+              variant="info"
+              className="w-full"
               loading={loading}
-              color={"indigo"}
             >
               Continue
             </ButtonInput>

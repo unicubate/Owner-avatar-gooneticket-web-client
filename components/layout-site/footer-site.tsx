@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { MenuProps } from 'antd';
 import { usePathname } from 'next/navigation';
 import { logoutUser } from '../util/context-user';
-import { ButtonInput } from '../ui-setting/ant';
 import { cn } from '@/lib/utils';
+import { ButtonInput } from '../ui-setting';
 
 export type NavbarProps = {
   title: string;
@@ -74,7 +74,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                 )}
               >
                 <svg
-                  className={cn("size-6")}
+                  className={cn('size-6')}
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -181,11 +181,8 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
               <div className={cn('flex items-center space-x-6 sm:ml-5')}>
                 <div className="relative">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="normal"
-                    loading={false}
+                    variant="ghost"
                     onClick={() => {
                       router.push(`${user?.profile ? `/dashboard` : `/login`}`);
                     }}
@@ -195,11 +192,8 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                 </div>
                 <div className="relative">
                   <ButtonInput
-                    shape="default"
-                    size="normal"
                     type="button"
-                    color="indigo"
-                    loading={false}
+                    variant="info"
                     onClick={() => {
                       router.push(`${user?.profile ? `/dashboard` : `/login`}`);
                     }}

@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CommentFormModel } from "@/types/comment";
-import {
-  CreateOrUpdateOneCommentReplyAPI,
-} from "@/api-site/comment";
-import { useAuth } from "../util/context-user";
-import { ModelType } from "@/utils/pagination-item";
-import { TextareaReactQuillInput } from "../ui-setting";
+import React, { useEffect, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { ButtonInput } from '../ui-setting';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CommentFormModel } from '@/types/comment';
+import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
+import { useAuth } from '../util/context-user';
+import { ModelType } from '@/utils/pagination-item';
+import { TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -26,7 +24,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   const user = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     watch,
@@ -37,13 +35,13 @@ const CreateOrUpdateFormCommentReply: React.FC<{
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
-  const watchDescription = watch("description", "");
+  const watchDescription = watch('description', '');
 
   useEffect(() => {
     if (comment) {
-      const fields = ["description", "commentId"];
+      const fields = ['description', 'commentId'];
       fields?.forEach((field: any) => setValue(field, comment[field]));
     }
   }, [comment, parentId, setValue]);
@@ -61,7 +59,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   });
 
   const onSubmit: SubmitHandler<CommentFormModel> = async (
-    payload: CommentFormModel
+    payload: CommentFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -79,10 +77,10 @@ const CreateOrUpdateFormCommentReply: React.FC<{
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Comment save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Comment save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -90,9 +88,9 @@ const CreateOrUpdateFormCommentReply: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -135,11 +133,10 @@ const CreateOrUpdateFormCommentReply: React.FC<{
           {watchDescription.length >= 1 && (
             <div className="flex-col sm:flex sm:items-end sm:justify-between">
               <ButtonInput
-                shape="default"
                 type="submit"
-                size="large"
+                size="lg"
+                variant="info"
                 loading={loading}
-                color={"indigo"}
               >
                 Save
               </ButtonInput>

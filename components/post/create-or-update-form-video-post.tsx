@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { TextInput, SelectInput } from '../ui-setting/shadcn';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { ButtonInput } from '../ui-setting/button-input';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
@@ -153,7 +153,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
           <div className="flow-root">
             <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
-                <h2 className="text-base font-bold text-gray-900">
+                <h2 className="text-base font-bold">
                   {post?.id ? 'Update' : 'Create a New'} Video
                 </h2>
 
@@ -274,33 +274,31 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
 
                 <div className="mt-4">
                   <ButtonInput
-                    shape="default"
                     type="submit"
-                    size="large"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color="indigo"
                   >
                     Save and Publish
                   </ButtonInput>
                 </div>
                 <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="large"
-                    loading={loading}
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
                     onClick={() => back()}
                   >
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
-                    shape="default"
                     type="submit"
-                    size="large"
-                    loading={false}
-                    color="indigo"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
+                    loading={loading}
                   >
                     Save as Draft
                   </ButtonInput>

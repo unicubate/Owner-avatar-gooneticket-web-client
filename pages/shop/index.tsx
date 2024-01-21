@@ -1,13 +1,13 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { useAuth } from "@/components/util/context-user";
-import { useEffect, useState } from "react";
-import { ButtonInput } from "@/components/ui-setting/ant";
-import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { SerialPrice } from "@/components/ui-setting/serial-price";
-import { TableTransactions } from "@/components/transaction/table-transactions";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { useAuth } from '@/components/util/context-user';
+import { useEffect, useState } from 'react';
+import { ButtonInput } from '@/components/ui-setting';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { TableTransactions } from '@/components/transaction/table-transactions';
+import { GetStaticPropsContext } from 'next';
 
 const ShopsIndex = () => {
   const user = useAuth() as any;
@@ -23,45 +23,39 @@ const ShopsIndex = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ["statistics-transactions"],
+    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
   if (isPending) {
-    return "";
+    return '';
   }
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
 
-
-  const transaction = transactions?.find((item: any) => item.model === "PRODUCT");
-
-
-
+  const transaction = transactions?.find(
+    (item: any) => item.model === 'PRODUCT',
+  );
 
   return (
     <>
-      <LayoutDashboard title={"Shop"}>
+      <LayoutDashboard title={'Shop'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-
             <HorizontalNavShop />
 
             <div className="flow-root">
-
-
               <div className="mt-4 flex items-center">
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
                     <div className="mx-auto max-w-xs">
                       <ButtonInput
-                        status="cancel"
                         type="button"
-                        shape="default"
-                        size="normal"
-                        loading={false}
-                        onClick={() => setOpenDrop(lk => !lk)}
+                        className="w-full"
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setOpenDrop((lk) => !lk)}
                       >
                         Last {dayCount} days
                       </ButtonInput>
@@ -79,7 +73,6 @@ const ShopsIndex = () => {
                           </div>
                         </div>
                       )} */}
-
                     </div>
                   </div>
                 </div>
@@ -132,9 +125,7 @@ const ShopsIndex = () => {
                             value={Number(user?.product?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(
-                                user?.profile?.currency?.amount
-                              ),
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </p>
@@ -150,7 +141,6 @@ const ShopsIndex = () => {
                   organizationId={user?.organizationId}
                 />
               ) : null}
-
             </div>
           </div>
         </div>
@@ -166,7 +156,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

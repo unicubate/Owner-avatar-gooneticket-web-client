@@ -1,4 +1,4 @@
-import { ButtonInput } from "./ant/button-input";
+import { ButtonInput } from "./button-input";
 import { useRouter } from "next/router";
 import { HiOutlineLockClosed } from "react-icons/hi";
 
@@ -24,12 +24,9 @@ const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
           <ButtonInput
             onClick={() => push(`/${profile?.username}/memberships`)}
             className="mt-2"
-            shape="default"
             type="button"
-            size="medium"
-            loading={false}
-            color={profile?.color as any}
-            icon={<HiOutlineLockClosed className="size-5" />}
+            variant="danger"
+            icon={<HiOutlineLockClosed className="mr-2 size-5" />}
           >
             Join now
           </ButtonInput>

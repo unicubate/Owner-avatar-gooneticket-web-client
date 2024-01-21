@@ -1,16 +1,20 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Input, Skeleton } from "antd";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { useEffect } from "react";
-import { GetInfiniteFollowersAPI } from "@/api-site/follow";
-import ListFollowers from "@/components/setting/list-followers";
-import { useInView } from "react-intersection-observer";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { Input, Skeleton } from 'antd';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { useEffect } from 'react';
+import { GetInfiniteFollowersAPI } from '@/api-site/follow';
+import ListFollowers from '@/components/setting/list-followers';
+import { useInView } from 'react-intersection-observer';
 import { GetStaticPropsContext } from 'next';
+import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
+import { useInputState } from '@/components/hooks/use-input-state';
+import { LoadingFile } from '@/components/ui-setting/ant';
 
 const Followers = () => {
   const { ref, inView } = useInView();
+  const { search, handleSetSearch } = useInputState();
 
   const {
     isLoading: isLoadingFollowers,
@@ -21,15 +25,16 @@ const Followers = () => {
     fetchNextPage,
   } = GetInfiniteFollowersAPI({
     take: 10,
-    sort: "DESC",
+    sort: 'DESC',
+    search,
   });
 
   const dataTableFollowers = isLoadingFollowers ? (
-    <Skeleton loading={isLoadingFollowers} avatar paragraph={{ rows: 1 }} />
+    <LoadingFile />
   ) : isErrorFollowers ? (
     <strong>Error find data please try again...</strong>
   ) : dataFollowers?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataFollowers?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -54,61 +59,46 @@ const Followers = () => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
   return (
     <>
-      <LayoutDashboard title={"Followers"}>
-
+      <LayoutDashboard title={'Followers'}>
         <div className="mx-auto max-w-6xl py-6">
-
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <HorizontalNavSetting />
 
             <div className="flow-root">
               <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                 <div className="px-4 py-8">
-
                   <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="mt-4 sm:mt-0">Followers</div>
                     <div className="mt-4 sm:mt-0">
-                      Followers
-                    </div>
-                    <div className="mt-4 sm:mt-0">
-                      <Input placeholder="Search by email, name" className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500" />
+                      <SearchInput
+                        placeholder="Search by first name, last name, email"
+                        onChange={handleSetSearch}
+                      />
                     </div>
                   </div>
 
-
                   <div className="divide-y divide-gray-200 dark:divide-gray-800">
-
                     {dataTableFollowers}
-
                   </div>
                 </div>
 
                 {hasNextPage && (
                   <div className="mx-auto mt-4 justify-center text-center">
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        ref={ref}
-                        onClick={() => fetchNextPage()}
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={isFetchingNextPage ? true : false}
-                        color={"indigo"}
-                        minW="fit"
-                      >
-                        Load More
-                      </ButtonInput>
-                    </div>
+                    <ButtonLoadMore
+                      ref={ref}
+                      isFetchingNextPage={isFetchingNextPage}
+                      onClick={() => fetchNextPage()}
+                    />
                   </div>
                 )}
-
               </div>
             </div>
           </div>
@@ -125,7 +115,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

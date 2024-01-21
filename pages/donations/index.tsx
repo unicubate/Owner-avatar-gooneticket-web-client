@@ -1,34 +1,32 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
-import { useEffect, useState } from "react";
-import { useAuth } from "@/components/util/context-user";
-import { SerialPrice } from "@/components/ui-setting/serial-price";
-import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { ButtonInput } from "@/components/ui-setting/ant";
-import { TableTransactions } from "@/components/transaction/table-transactions";
-import { useDebounce } from "@/utils";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/components/util/context-user';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
+import { ButtonInput } from '@/components/ui-setting';
+import { TableTransactions } from '@/components/transaction/table-transactions';
+import { useDebounce } from '@/utils';
+import { GetStaticPropsContext } from 'next';
 
 const Donations = () => {
   const user = useAuth() as any;
   const [days, setDays] = useState(30);
   const [openDrop, setOpenDrop] = useState(false);
 
-
   const debouncedFilter = useDebounce(days, 100);
-  const isEnabled = Boolean(debouncedFilter)
+  const isEnabled = Boolean(debouncedFilter);
   const {
     data: transactions,
     isError,
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ["statistics-transactions"],
+    queryKey: ['statistics-transactions'],
     days: debouncedFilter,
     isEnabled: isEnabled,
   });
-
 
   const handleDaysChange = (newDays: number) => {
     setDays(newDays);
@@ -39,22 +37,20 @@ const Donations = () => {
   // }, [days, debouncedFilter]);
 
   if (isPending) {
-    return "";
+    return '';
   }
 
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
 
-  const transaction = transactions?.find((item) => item.model === "DONATION");
+  const transaction = transactions?.find((item) => item.model === 'DONATION');
 
   return (
     <>
-      <LayoutDashboard title={"Donations"}>
-
+      <LayoutDashboard title={'Donations'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-
             <HorizontalNavDonation />
 
             <div className="flow-root">
@@ -63,12 +59,10 @@ const Donations = () => {
                   <div className="flex items-center space-x-4">
                     <div className="mx-auto max-w-xs">
                       <ButtonInput
-                        status="cancel"
                         type="button"
-                        shape="default"
-                        size="normal"
-                        loading={false}
-                        onClick={() => setOpenDrop(lk => !lk)}
+                        size="sm"
+                        variant="outline"
+                        onClick={() => setOpenDrop((lk) => !lk)}
                       >
                         Last {days} days
                       </ButtonInput>
@@ -76,17 +70,30 @@ const Donations = () => {
                       {openDrop && (
                         <div className="relative z-10 mt-2 w-full">
                           <div className="block w-full space-y-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm shadow dark:border-gray-800 dark:bg-[#121212]">
-
                             <ul className="flex flex-col">
-                              <li onClick={() => { handleDaysChange(2), setOpenDrop(false) }} className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600" >Last 2 days</li>
-                              <li onClick={() => { handleDaysChange(120), setOpenDrop(false) }} className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">Last 120 days</li>
-                              <li className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">All time</li>
+                              <li
+                                onClick={() => {
+                                  handleDaysChange(2), setOpenDrop(false);
+                                }}
+                                className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+                              >
+                                Last 2 days
+                              </li>
+                              <li
+                                onClick={() => {
+                                  handleDaysChange(120), setOpenDrop(false);
+                                }}
+                                className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
+                              >
+                                Last 120 days
+                              </li>
+                              <li className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
+                                All time
+                              </li>
                             </ul>
-
                           </div>
                         </div>
                       )}
-
                     </div>
                   </div>
                 </div>
@@ -139,9 +146,7 @@ const Donations = () => {
                             value={Number(user?.donation?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(
-                                user?.profile?.currency?.amount
-                              ),
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </p>

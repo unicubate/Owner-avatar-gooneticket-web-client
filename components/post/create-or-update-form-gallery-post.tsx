@@ -1,29 +1,29 @@
-import * as yup from "yup";
-import { Controller, SubmitHandler } from "react-hook-form";
-import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { Alert, Upload, UploadFile, UploadProps } from "antd";
-import { useEffect, useState } from "react";
+import * as yup from 'yup';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import { PlusOutlined } from '@ant-design/icons';
+import { ButtonInput } from '../ui-setting/button-input';
+import { Alert, Upload, UploadFile, UploadProps } from 'antd';
+import { useEffect, useState } from 'react';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { PostFormModel, arrayWhoCanSees } from "@/types/post";
-import { CreateOrUpdateOnePostGalleryAPI } from "@/api-site/post";
-import { filterImageAndFile } from "@/utils/utils";
-import { useRouter } from "next/router";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { SwitchInput } from "../ui-setting/ant";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { GetAllCategoriesAPI } from "@/api-site/category";
-import Link from "next/link";
-import { TextareaReactQuillInput } from "../ui-setting";
-import { TextInput, SelectInput } from "../ui-setting/shadcn";
+} from '@/utils/alert-notification';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import { CreateOrUpdateOnePostGalleryAPI } from '@/api-site/post';
+import { filterImageAndFile } from '@/utils/utils';
+import { useRouter } from 'next/router';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { SwitchInput } from '../ui-setting/ant';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import Link from 'next/link';
+import { TextareaReactQuillInput } from '../ui-setting';
+import { TextInput, SelectInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   title: yup.string().optional(),
   description: yup.string().optional(),
-  whoCanSee: yup.string().required("who can see is a required field"),
+  whoCanSee: yup.string().required('who can see is a required field'),
   allowDownload: yup.string().optional(),
 });
 
@@ -58,22 +58,22 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const { data: categories } = GetAllCategoriesAPI({
-    isPaginate: "false",
+    isPaginate: 'false',
     organizationId,
-    sort: "DESC",
+    sort: 'DESC',
     take: 100,
-    queryKey: ["categories"],
+    queryKey: ['categories'],
   });
 
   useEffect(() => {
     if (post) {
       const fields = [
-        "title",
-        "description",
-        "whoCanSee",
-        "type",
-        "categoryId",
-        "allowDownload",
+        'title',
+        'description',
+        'whoCanSee',
+        'type',
+        'categoryId',
+        'allowDownload',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -92,7 +92,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<PostFormModel> = async (
-    data: PostFormModel
+    data: PostFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -110,15 +110,15 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         ...payload,
         albumId,
         postId: post?.id,
-        type: "GALLERY",
+        type: 'GALLERY',
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Post save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Post save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       router.back();
     } catch (error: any) {
@@ -127,14 +127,14 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
@@ -148,7 +148,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
             >
               <div className="px-4 py-5">
                 <h2 className="font-bold dark:text-white">
-                  {post?.id ? "Update" : "Create a new"} gallery
+                  {post?.id ? 'Update' : 'Create a new'} gallery
                 </h2>
 
                 <div className="flex-auto justify-center p-2">
@@ -175,7 +175,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       <Controller
                         name="attachmentImages"
                         control={control}
-                        render={({ }) => (
+                        render={({}) => (
                           <>
                             <div className="mx-auto justify-center text-center">
                               <Upload
@@ -257,8 +257,8 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       <div className="flex min-w-0 flex-1 items-center">
                         <div className="min-w-0 flex-1">
                           <p className="text-sm font-bold dark:text-white">
-                            {" "}
-                            Allow download{" "}
+                            {' '}
+                            Allow download{' '}
                           </p>
                           <p className="mt-1 text-sm font-medium text-gray-500">
                             allow everyone to download in original quality file
@@ -285,24 +285,22 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                     />
                   </div>
 
-                  <div className="mt-4 flex items-center space-x-4">
+                  <div className="my-4 flex items-center space-x-4">
                     <ButtonInput
-                      status="cancel"
                       type="button"
-                      shape="default"
-                      size="large"
-                      loading={loading}
+                      className="w-full"
+                      size="lg"
+                      variant="outline"
                       onClick={() => router.back()}
                     >
                       Cancel
                     </ButtonInput>
                     <ButtonInput
-                      minW="fit"
-                      shape="default"
                       type="submit"
-                      size="large"
+                      className="w-full"
+                      size="lg"
+                      variant="info"
                       loading={loading}
-                      color="indigo"
                     >
                       Save and Publish
                     </ButtonInput>

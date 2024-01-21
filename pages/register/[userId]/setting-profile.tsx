@@ -1,30 +1,31 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { DateInput, TextAreaInput, TextInput } from "@/components/ui-setting/ant";
-import { AlertDangerNotification } from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { PrivateComponent } from "@/components/util/private-component";
+import React, { useEffect, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { DateInput } from '@/components/ui-setting/ant';
+import { AlertDangerNotification } from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
+import { PrivateComponent } from '@/components/util/private-component';
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
-} from "@/api-site/profile";
-import { NextStepProfileFormModel } from "@/types/profile.type";
-import { GetOneUserPublicAPI, resendCodeAPI } from "@/api-site/user";
-import { SelectSearchInput } from "@/components/ui-setting/ant/select-search-input";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { LayoutSite } from "@/components/layout-site";
+} from '@/api-site/profile';
+import { NextStepProfileFormModel } from '@/types/profile.type';
+import { GetOneUserPublicAPI, resendCodeAPI } from '@/api-site/user';
+import { SelectSearchInput } from '@/components/ui-setting/ant/select-search-input';
+import { ButtonInput } from '@/components/ui-setting';
+import { LayoutSite } from '@/components/layout-site';
+import { TextAreaInput, TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
   username: yup
     .string()
-    .trim("The username name cannot include leading and trailing spaces")
+    .trim('The username name cannot include leading and trailing spaces')
     .strict(true)
-    .min(1, "The username name needs to be at least 1 char")
-    .max(512, "The username name cannot exceed 512 char")
+    .min(1, 'The username name needs to be at least 1 char')
+    .max(512, 'The username name cannot exceed 512 char')
     .required(),
   url: yup.string().url().optional(),
   birthday: yup.date().max(new Date()).required(),
@@ -39,7 +40,7 @@ const SettingProfile = () => {
   const userId = String(query?.userId);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     control,
@@ -48,20 +49,20 @@ const SettingProfile = () => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { data: currencies } = GetAllCurrenciesAPI();
   const { data: countries } = GetAllCountiesAPI();
   const { data: user } = GetOneUserPublicAPI({ userId }) as any;
 
-  if (user?.nextStep === "CONFIRM_EMAIL") {
+  if (user?.nextStep === 'CONFIRM_EMAIL') {
     window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/confirm-account`;
   }
 
   useEffect(() => {
     if (user) {
-      const fields = ["username"];
+      const fields = ['username'];
       fields?.forEach((field: any) => setValue(field, user[field]));
     }
   }, [user, setValue]);
@@ -78,14 +79,14 @@ const SettingProfile = () => {
   });
 
   const onSubmit: SubmitHandler<NextStepProfileFormModel> = async (
-    payload: NextStepProfileFormModel
+    payload: NextStepProfileFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
       await saveMutation.mutateAsync({
         ...payload,
-        nextStep: "CONFIRM_EMAIL",
+        nextStep: 'CONFIRM_EMAIL',
         userId: userId,
       });
       await resendCodeAPI({ userId });
@@ -98,9 +99,9 @@ const SettingProfile = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -136,7 +137,7 @@ const SettingProfile = () => {
               name="username"
               placeholder="username"
               errors={errors}
-              prefix={"unpot.com/"}
+              // prefix={'unpot.com/'}
             />
           </div>
           <div className="mb-4">
@@ -177,7 +178,6 @@ const SettingProfile = () => {
 
           <div className="mb-4">
             <TextAreaInput
-              row={3}
               control={control}
               label="Bio"
               name="description"
@@ -199,11 +199,11 @@ const SettingProfile = () => {
 
           <div className="mt-6">
             <ButtonInput
-              shape="default"
+              className="w-full"
+              variant="info"
               type="submit"
-              size="large"
+              size="lg"
               loading={loading}
-              color={"indigo"}
             >
               Continue
             </ButtonInput>

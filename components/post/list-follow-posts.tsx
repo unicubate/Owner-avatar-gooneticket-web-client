@@ -18,9 +18,9 @@ import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
 import "react-h5-audio-player/lib/styles.css";
 import { AudioPlayerInput } from "../ui-setting/audio-player-Input";
 import { useRouter } from "next/router";
-import { ButtonInput } from "../ui-setting/ant";
 import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { UserVisitorModel } from "@/types/user.type";
+import { ButtonInput } from "../ui-setting";
 
 type Props = {
   item?: PostModel;
@@ -70,11 +70,8 @@ const ListFollowPosts: React.FC<Props> = ({
                     onClick={() =>
                       push(`/${item?.profile?.username}/memberships`)
                     }
-                    shape="default"
                     type="button"
-                    size="medium"
-                    loading={false}
-                    color={item?.profile?.color as any}
+                    variant="danger"
                     icon={<HiOutlineLockClosed className="size-5" />}
                   >
                     <span className="ml-1 font-bold">Join membership</span>
@@ -84,7 +81,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   title="Share"
                   className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
                 >
-                  <IoShareOutline className="size-5" />
+                  <IoShareOutline  className="mr-2 size-5" />
                 </button>
                 {/* {item?.allowDownload && (
                   <button

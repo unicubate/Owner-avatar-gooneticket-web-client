@@ -1,10 +1,8 @@
 import { PrivateComponent } from '@/components/util/private-component';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { Input, Skeleton } from 'antd';
 import { useState } from 'react';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { PlusOutlined } from '@ant-design/icons';
-import { ButtonInput } from '@/components/ui-setting/ant/button-input';
+import { ButtonInput } from '@/components/ui-setting/button-input';
 import { ListDiscounts } from '@/components/discount/list-discounts';
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
@@ -16,6 +14,8 @@ import { GetStaticPropsContext } from 'next';
 import { useAuth } from '@/components/util/context-user';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LoadingFile } from '@/components/ui-setting/ant';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 
 const Configs = () => {
   const { search, handleSetSearch } = useInputState();
@@ -100,28 +100,26 @@ const Configs = () => {
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-2 sm:mt-0">
                     <ButtonInput
-                      onClick={() => setShowCategoryModal(true)}
-                      shape="default"
                       type="button"
-                      size="normal"
-                      loading={false}
-                      color={'indigo'}
-                      icon={<PlusOutlined />}
+                      className="w-full"
+                      size="sm"
+                      variant="info"
+                      onClick={() => setShowCategoryModal(true)}
+                      icon={<PlusIcon className="mr-2 size-4" />}
                     >
                       Create category
                     </ButtonInput>
                   </div>
                   <div className="mt-2 sm:mt-0">
-                    <Input
-                      placeholder="Search name"
-                      className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
+                    <SearchInput
+                      placeholder="Search by name"
                       onChange={handleSetSearch}
                     />
                   </div>
                 </div>
 
                 <div className="mt-8 flow-root">
-                  <div className="-my-5 divide-y divide-gray-100">
+                  <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
                     {showCategoryModal ? (
                       <CreateOrUpdateCategory
                         showModal={showCategoryModal}
@@ -137,19 +135,10 @@ const Configs = () => {
 
             {hasNextPageCategories && (
               <div className="mx-auto mt-2 justify-center text-center">
-                <div className="sm:mt-0">
-                  <ButtonInput
-                    onClick={() => fetchNextPageCategories()}
-                    shape="default"
-                    type="button"
-                    size="large"
-                    loading={isFetchingNextPageCategories ? true : false}
-                    color={'indigo'}
-                    minW="fit"
-                  >
-                    Load More
-                  </ButtonInput>
-                </div>
+                <ButtonLoadMore
+                  isFetchingNextPage={isFetchingNextPageCategories}
+                  onClick={() => fetchNextPageCategories()}
+                />
               </div>
             )}
 
@@ -169,10 +158,9 @@ const Configs = () => {
                     </div>
                   </div>
                   <div className="mt-4 sm:mt-0">
-                    <Input
-                      placeholder="Search by name"
+                    <SearchInput
+                      placeholder="Search by title"
                       onChange={handleSetSearch}
-                      className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                     />
                   </div>
                 </div>
@@ -180,13 +168,12 @@ const Configs = () => {
                 <div className="mt-2 flex-col sm:flex sm:items-start sm:justify-between">
                   <div className="mt-2 sm:mt-0">
                     <ButtonInput
-                      onClick={() => setShowModal(true)}
-                      shape="default"
                       type="button"
-                      size="normal"
-                      loading={false}
-                      color={'indigo'}
-                      icon={<PlusOutlined />}
+                      className="w-full"
+                      size="sm"
+                      variant="info"
+                      onClick={() => setShowModal(true)}
+                      icon={<PlusIcon className="mr-2 size-4" />}
                     >
                       Create discount
                     </ButtonInput>
@@ -194,7 +181,7 @@ const Configs = () => {
                 </div>
 
                 <div className="mt-8 flow-root">
-                  <div className="-my-5 divide-y divide-gray-100">
+                  <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
                     {showModal ? (
                       <CreateOrUpdateDiscount
                         showModal={showModal}
@@ -210,19 +197,10 @@ const Configs = () => {
 
             {hasNextPage && (
               <div className="mx-auto mt-2 justify-center text-center">
-                <div className="sm:mt-0">
-                  <ButtonInput
-                    onClick={() => fetchNextPage()}
-                    shape="default"
-                    type="button"
-                    size="large"
-                    loading={isFetchingNextPage ? true : false}
-                    color={'indigo'}
-                    minW="fit"
-                  >
-                    Load More
-                  </ButtonInput>
-                </div>
+                <ButtonLoadMore
+                  isFetchingNextPage={isFetchingNextPage}
+                  onClick={() => fetchNextPage()}
+                />
               </div>
             )}
           </div>

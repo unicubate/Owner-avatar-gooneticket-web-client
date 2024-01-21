@@ -1,18 +1,17 @@
-import { NumberInput, TextInput } from "../ui-setting/ant";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { useEffect, useState } from "react";
-import { TextareaReactQuillInput } from "../ui-setting";
-import { useRouter } from "next/router";
-import { Upload, UploadFile, UploadProps } from "antd";
-import { CreateOrUpdateOneMembershipAPI } from "@/api-site/membership";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { MembershipFormModel } from "@/types/membership";
-import { useAuth } from "../util/context-user";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
+import * as yup from 'yup';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { PlusOutlined } from '@ant-design/icons';
+import { ButtonInput } from '../ui-setting/button-input';
+import { useEffect, useState } from 'react';
+import { TextareaReactQuillInput } from '../ui-setting';
+import { useRouter } from 'next/router';
+import { Upload, UploadFile, UploadProps } from 'antd';
+import { CreateOrUpdateOneMembershipAPI } from '@/api-site/membership';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { MembershipFormModel } from '@/types/membership';
+import { useAuth } from '../util/context-user';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   title: yup.string().required(),
@@ -43,11 +42,11 @@ const CreateOrUpdateFormMembership: React.FC<{
   useEffect(() => {
     if (membership) {
       const fields = [
-        "title",
-        "messageWelcome",
-        "price",
-        "month",
-        "description",
+        'title',
+        'messageWelcome',
+        'price',
+        'month',
+        'description',
       ];
       fields?.forEach((field: any) => setValue(field, membership[field]));
     }
@@ -65,14 +64,14 @@ const CreateOrUpdateFormMembership: React.FC<{
   });
 
   const onSubmit: SubmitHandler<MembershipFormModel> = async (
-    data: MembershipFormModel
+    data: MembershipFormModel,
   ) => {
     let newImageLists: any = [];
     setLoading(true);
     setHasErrors(undefined);
     try {
       imageList
-        .filter((file: any) => file?.status === "success")
+        .filter((file: any) => file?.status === 'success')
         .forEach((file: any) => {
           newImageLists.push(file);
         });
@@ -91,9 +90,9 @@ const CreateOrUpdateFormMembership: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: `Membership save successfully`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
       push(`/memberships/levels`);
     } catch (error: any) {
@@ -102,14 +101,14 @@ const CreateOrUpdateFormMembership: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
 
-  const handleImageChange: UploadProps["onChange"] = ({
+  const handleImageChange: UploadProps['onChange'] = ({
     fileList: newImageList,
   }) => setImageList(newImageList);
 
@@ -135,7 +134,7 @@ const CreateOrUpdateFormMembership: React.FC<{
             </div>
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="mt-2">
-                <NumberInput
+                <TextInput
                   control={control}
                   label="Price*"
                   type="number"
@@ -143,14 +142,14 @@ const CreateOrUpdateFormMembership: React.FC<{
                   placeholder="Price subscribe"
                   errors={errors}
                   required
-                  prefix={profile?.currency?.code}
+                  //prefix={profile?.currency?.code}
                 />
                 <span className="text-sm font-medium text-gray-400">
                   {`Set your minimum price  month. Supporters can choose to pay more`}
                 </span>
               </div>
               <div className="mt-2">
-                <NumberInput
+                <TextInput
                   control={control}
                   label="Month*"
                   type="number"
@@ -158,6 +157,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                   placeholder="Month subscribe"
                   errors={errors}
                   required
+                  pattern="[0-9]*"
                 />
               </div>
             </div>
@@ -207,7 +207,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                 name="messageWelcome"
                 placeholder="Write description"
                 className="h-32"
-                defaultValue={"Thank you for the support! 🎉 "}
+                defaultValue={'Thank you for the support! 🎉 '}
                 errors={errors}
               />
               <span className="text-sm font-medium text-gray-400">
@@ -217,22 +217,20 @@ const CreateOrUpdateFormMembership: React.FC<{
 
             <div className="my-4 flex items-center space-x-4">
               <ButtonInput
-                status="cancel"
                 type="button"
-                shape="default"
-                size="normal"
-                loading={loading}
+                className="w-full"
+                size="lg"
+                variant="outline"
                 onClick={() => back()}
               >
                 Cancel
               </ButtonInput>
               <ButtonInput
-                minW="fit"
-                shape="default"
                 type="submit"
-                size="large"
+                className="w-full"
+                size="lg"
+                variant="info"
                 loading={loading}
-                color="indigo"
               >
                 Save and Publish
               </ButtonInput>

@@ -1,23 +1,23 @@
-import { TextInput, TextInputPassword } from "../ui-setting/ant";
-import * as yup from "yup";
-import { SubmitHandler } from "react-hook-form";
-import { CloseOutlined } from "@ant-design/icons";
-import { AlertDangerNotification } from "@/utils";
-import { ButtonInput } from "../ui-setting/ant";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { UserLoginFormModel } from "@/types/user.type";
-import { loginGoogleUserAPI, loginUserAPI } from "@/api-site/user";
-import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
-import Link from "next/link";
+import * as yup from 'yup';
+import { SubmitHandler } from 'react-hook-form';
+import { CloseOutlined } from '@ant-design/icons';
+import { AlertDangerNotification } from '@/utils';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { UserLoginFormModel } from '@/types/user.type';
+import { loginGoogleUserAPI, loginUserAPI } from '@/api-site/user';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import Link from 'next/link';
+import { TextInput } from '../ui-setting/shadcn';
+import { ButtonInput } from '../ui-setting';
 
 const schema = yup.object({
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
-  password: yup.string().min(8, "Minimum 8 symbols").required(),
+  password: yup.string().min(8, 'Minimum 8 symbols').required(),
 });
 
 const LoginModal: React.FC<{
@@ -35,7 +35,7 @@ const LoginModal: React.FC<{
   } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
-    payload: UserLoginFormModel
+    payload: UserLoginFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -45,7 +45,7 @@ const LoginModal: React.FC<{
       const { data: user } = await loginUserAPI({ email, password });
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken)
+        JSON.stringify(user?.accessToken),
       );
       setHasErrors(false);
       setLoading(false);
@@ -55,10 +55,10 @@ const LoginModal: React.FC<{
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: "An error has occurred.",
-        gravity: "top",
-        className: "info",
-        position: "center",
+        text: 'An error has occurred.',
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -79,9 +79,7 @@ const LoginModal: React.FC<{
             </button>
 
             <div className="mx-auto flex justify-center">
-              <h6 className="mt-3 text-center text-xl font-bold">
-                {`Log in`}
-              </h6>
+              <h6 className="mt-3 text-center text-xl font-bold">{`Log in`}</h6>
             </div>
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
@@ -103,7 +101,7 @@ const LoginModal: React.FC<{
               </div>
 
               <div className="mb-4">
-                <TextInputPassword
+                <TextInput
                   control={control}
                   label="Password"
                   type="password"
@@ -127,11 +125,11 @@ const LoginModal: React.FC<{
 
               <div className="mt-6">
                 <ButtonInput
-                  shape="default"
-                  type="submit"
-                  size="large"
+                  type="button"
+                  className="w-full"
+                  variant="info"
+                  size="lg"
                   loading={loading}
-                  color={"indigo"}
                 >
                   Log In
                 </ButtonInput>
@@ -160,7 +158,7 @@ const LoginModal: React.FC<{
                     });
                     localStorage.setItem(
                       String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-                      JSON.stringify(user?.accessToken)
+                      JSON.stringify(user?.accessToken),
                     );
                     setHasErrors(false);
                     location.reload();
@@ -168,22 +166,22 @@ const LoginModal: React.FC<{
                     setHasErrors(true);
                     setHasErrors(error.response.data.message);
                     AlertDangerNotification({
-                      text: "An error has occurred.",
-                      gravity: "top",
-                      className: "info",
-                      position: "center",
+                      text: 'An error has occurred.',
+                      gravity: 'top',
+                      className: 'info',
+                      position: 'center',
                     });
                   }
                 }}
                 onError={() => {
-                  console.log("Login Failed");
+                  console.log('Login Failed');
                 }}
               />
             </GoogleOAuthProvider>
 
             <Link href="/register">
               <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
-                {" "}
+                {' '}
                 New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
               </p>
             </Link>

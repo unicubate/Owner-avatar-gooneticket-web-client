@@ -1,25 +1,20 @@
 "use client";
 
-import { Image } from "antd";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { LayoutSite } from "@/components/layout-site";
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/cart";
 import { useAuth } from "@/components/util/context-user";
 import { GetOneUserPublicAPI } from "@/api-site/user";
-import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
 import { formatePrice } from "@/utils";
-import { useForm } from "react-hook-form";
 import { PrivateComponent } from "@/components/util/private-component";
-import { AvatarComponent, ButtonInput, LoadingFile } from "@/components/ui-setting/ant";
+import {LoadingFile } from "@/components/ui-setting/ant";
 import { ListMiniCats } from "@/components/cart/list-mini-carts";
 import { ErrorFile } from "@/components/ui-setting/ant/error-file";
 import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal";
 import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
 import { useState } from "react";
-import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
 import { GetStaticPropsContext } from "next";
+import { ButtonInput } from "@/components/ui-setting";
 
 const Summary = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -138,11 +133,10 @@ const Summary = () => {
                     <div className="mt-2">
                       <ButtonInput
                         onClick={() => setIsCardPay(true)}
-                        shape="default"
                         type="button"
-                        size="large"
-                        color="indigo"
-                        loading={false}
+                        size="lg"
+                        className="w-full"
+                        variant="info"
                       >
                         Card Pay
                       </ButtonInput>

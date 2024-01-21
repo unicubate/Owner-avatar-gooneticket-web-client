@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   BiHomeCircle,
   BiDetail,
@@ -8,10 +8,10 @@ import {
   BiShoppingBag,
   BiStoreAlt,
   BiStore,
-} from "react-icons/bi";
-import { RiShakeHandsLine } from "react-icons/ri";
-import { useState } from "react";
-import { UserModel } from "@/types/user.type";
+} from 'react-icons/bi';
+import { RiShakeHandsLine } from 'react-icons/ri';
+import { useState } from 'react';
+import { UserModel } from '@/types/user.type';
 
 export type NavbarProps = {
   title: string;
@@ -20,7 +20,7 @@ export type NavbarProps = {
   description?: string;
   icon?: any;
 };
-const classIcon = "flex-shrink-0 w-6 h-6 mr-4";
+const classIcon = 'flex-shrink-0 w-6 h-6 mr-4';
 
 interface Props {
   user?: UserModel;
@@ -30,44 +30,44 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
-      title: "Home",
+      title: 'Home',
       status: true,
       href: `/${user?.username}`,
       icon: <BiHomeCircle className={classIcon} />,
     },
     {
-      title: "Gallery",
+      title: 'Gallery',
       status: user?.profile?.enableGallery,
       href: `/${user?.username}/gallery`,
       icon: <BiImage className={classIcon} />,
     },
     {
-      title: "Memberships",
+      title: 'Memberships',
       status: true,
       href: `/${user?.username}/memberships`,
       icon: <BiLockOpen className={classIcon} />,
     },
     {
-      title: "Posts",
+      title: 'Posts',
       status: true,
       href: `/${user?.username}/posts`,
       icon: <BiDetail className={classIcon} />,
     },
     {
-      title: "Shop",
+      title: 'Shop',
       status: user?.profile?.enableShop,
       href: `/${user?.username}/shop`,
       icon: <BiStoreAlt className={classIcon} />,
     },
     {
-      title: "Commissions",
+      title: 'Commissions',
       status: user?.profile?.enableCommission,
       href: `/${user?.username}/commissions`,
       icon: <RiShakeHandsLine className={classIcon} />,
     },
   ]);
 
-
+  const bgColor = `bg-${user?.profile?.color}-600 text-white`;
   return (
     <>
       <div className="flex h-full flex-1 flex-col justify-between overflow-x-scroll px-4">
@@ -81,10 +81,9 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
-                    ? `bg- text-white${user?.profile?.color}-600`
-                    : "text-gray-900 hover:bg-gray-200"
-                    } `}
+                  className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                    isActive ? bgColor : 'text-gray-900 hover:bg-gray-200'
+                  } `}
                 >
                   {item?.icon}
 
@@ -93,7 +92,6 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
               );
             })}
           </nav>
-          
         </div>
       </div>
     </>

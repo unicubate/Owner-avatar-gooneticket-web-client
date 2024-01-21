@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Select, Upload, UploadFile, UploadProps } from 'antd';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
-import { NumberInput, TextAreaInput } from '../ui-setting/ant';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { NumberInput, SwitchInput } from '../ui-setting/ant';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -14,6 +13,7 @@ import {
   arrayProductTypes,
   arrayWhoCanSees,
 } from '@/types/product';
+import { ReloadIcon, UploadIcon } from '@radix-ui/react-icons';
 import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
 import { GetAllDiscountsAPI } from '@/api-site/discount';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
@@ -22,8 +22,8 @@ import { useRouter } from 'next/router';
 import { filterImageAndFile } from '@/utils/utils';
 import { useAuth } from '../util/context-user';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { SelectInput, SwitchInput, TextInput } from '../ui-setting/shadcn';
-import { ReactQuillInput } from '../ui-setting';
+import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { ButtonInput, ReactQuillInput } from '../ui-setting';
 
 type Props = {
   product?: any;
@@ -339,12 +339,14 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             maxCount={10}
                           >
                             {fileList.length >= 10 ? null : (
-                              <Button
-                                className="text-center dark:text-white"
-                                icon={<UploadOutlined />}
+                              <ButtonInput
+                                type="button"
+                                className="w-full"
+                                variant="outline"
+                                icon={<UploadIcon className="mr-2 size-4" />}
                               >
                                 Upload File
-                              </Button>
+                              </ButtonInput>
                             )}
                           </Upload>
                         </div>
@@ -357,7 +359,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
 
             <div className="mt-2">
               <TextAreaInput
-                row={3}
                 control={control}
                 label="Confirmation message"
                 name="messageAfterPayment"
@@ -451,9 +452,9 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </div>
               {watchEnableLimitSlot ? (
                 <div className="mb-1">
-                  <NumberInput
-                    control={control}
+                  <TextInput
                     label=""
+                    control={control}
                     type="number"
                     name="limitSlot"
                     placeholder="10"
@@ -545,33 +546,31 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
 
             <div className="mt-4">
               <ButtonInput
-                shape="default"
                 type="submit"
-                size="large"
+                className="w-full"
+                size="lg"
+                variant="info"
                 loading={loading}
-                color="indigo"
               >
                 Save and Publish
               </ButtonInput>
             </div>
             <div className="my-4 flex items-center space-x-4">
               <ButtonInput
-                status="cancel"
                 type="button"
-                shape="default"
-                size="large"
-                loading={loading}
+                className="w-full"
+                size="lg"
+                variant="outline"
                 onClick={() => back()}
               >
                 Cancel
               </ButtonInput>
               <ButtonInput
-                minW="fit"
-                shape="default"
                 type="submit"
-                size="large"
-                loading={false}
-                color="indigo"
+                className="w-full"
+                size="lg"
+                variant="info"
+                loading={loading}
               >
                 Save as Draft
               </ButtonInput>

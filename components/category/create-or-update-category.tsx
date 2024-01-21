@@ -1,13 +1,13 @@
-import { TextAreaInput, TextInput } from "../ui-setting/ant";
-import * as yup from "yup";
-import { SubmitHandler } from "react-hook-form";
-import { CloseOutlined } from "@ant-design/icons";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { useEffect } from "react";
-import { ButtonInput } from "../ui-setting/ant";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { CreateOrUpdateOneCategoryAPI } from "@/api-site/category";
-import { CategoryFormModel } from "@/types/category";
+import * as yup from 'yup';
+import { SubmitHandler } from 'react-hook-form';
+import { CloseOutlined } from '@ant-design/icons';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useEffect } from 'react';
+import { ButtonInput } from '../ui-setting';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { CreateOrUpdateOneCategoryAPI } from '@/api-site/category';
+import { CategoryFormModel } from '@/types/category';
+import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -33,7 +33,7 @@ const CreateOrUpdateCategory: React.FC<{
 
   useEffect(() => {
     if (category) {
-      const fields = ["name", "description"];
+      const fields = ['name', 'description'];
       fields?.forEach((field: any) => setValue(field, category[field]));
     }
   }, [category, setValue]);
@@ -51,7 +51,7 @@ const CreateOrUpdateCategory: React.FC<{
   });
 
   const onSubmit: SubmitHandler<CategoryFormModel> = async (
-    payload: CategoryFormModel
+    payload: CategoryFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -63,10 +63,10 @@ const CreateOrUpdateCategory: React.FC<{
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Category save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Category save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       setShowModal(false);
     } catch (error: any) {
@@ -75,9 +75,9 @@ const CreateOrUpdateCategory: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -122,9 +122,8 @@ const CreateOrUpdateCategory: React.FC<{
                     errors={errors}
                   />
                 </div>
-                <div className="mb-2">
+                <div className="mb-4">
                   <TextAreaInput
-                    row={3}
                     control={control}
                     label="Description (optional)"
                     name="description"
@@ -132,39 +131,29 @@ const CreateOrUpdateCategory: React.FC<{
                     errors={errors}
                   />
                 </div>
-              </div>
-              {/* <div className="mt-2 text-center space-x-2">
-                <ButtonInput
-                  shape="default"
-                  type="submit"
-                  size="large"
-                  loading={loading}
-                  color="indigo"
-                >
-                  Save
-                </ButtonInput>
-              </div> */}
-              <div className="mt-2 flex items-center space-x-4">
-                <ButtonInput
-                  status="cancel"
-                  type="button"
-                  shape="default"
-                  size="large"
-                  loading={false}
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </ButtonInput>
-                <ButtonInput
-                  minW="fit"
-                  shape="default"
-                  type="submit"
-                  size="large"
-                  loading={loading}
-                  color="indigo"
-                >
-                  Save
-                </ButtonInput>
+
+                <div className="mt-4 flex items-center space-x-4">
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cancel
+                  </ButtonInput>
+
+                  <ButtonInput
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
+                    disabled={loading}
+                    loading={loading}
+                  >
+                    Save
+                  </ButtonInput>
+                </div>
               </div>
             </form>
           </div>

@@ -1,20 +1,20 @@
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import Link from "next/link";
-import { useAuth } from "../util/context-user";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '../util/context-user';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const HorizontalNavSetting: React.FC = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Profile",
-      href: "/settings",
+      title: 'Profile',
+      href: '/settings',
     },
     {
-      title: "Payout",
-      href: "/settings/payout",
+      title: 'Payout',
+      href: '/settings/payout',
     },
     // {
     //   title: "Configurations",
@@ -33,19 +33,20 @@ const HorizontalNavSetting: React.FC = () => {
     //   href: "/settings/notifications",
     // },
     {
-      title: "Subscribers",
-      href: "/settings/subscribers",
+      title: 'Subscribers',
+      href: '/settings/subscribers',
     },
     {
-      title: "Followings",
-      href: "/settings/followings",
+      title: 'Followings',
+      href: '/settings/followings',
     },
     {
-      title: "Followers",
-      href: "/settings/followers",
+      title: 'Followers',
+      href: '/settings/followers',
     },
   ]);
 
+  const bgColor = `bg-${profile?.color}-600 text-white`;
   return (
     <>
       <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
@@ -59,8 +60,8 @@ const HorizontalNavSetting: React.FC = () => {
                 title={item.title}
                 className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive
-                  ? `bg- text-white${profile?.color}-600`
-                  : `text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700`
+                    ? bgColor
+                    : `text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700`
                 } `}
               >
                 {item?.icon}

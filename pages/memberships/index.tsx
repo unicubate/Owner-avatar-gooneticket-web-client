@@ -1,15 +1,15 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { Button } from "antd";
-import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
-import { useRouter } from "next/router";
-import { useAuth } from "@/components/util/context-user";
-import { SerialPrice } from "@/components/ui-setting/serial-price";
-import { GetStatisticsTransactionsAPI } from "@/api-site/transaction";
-import { useState } from "react";
-import { ButtonInput } from "@/components/ui-setting/ant";
-import { TableTransactions } from "@/components/transaction/table-transactions";
-import { GetStaticPropsContext } from "next";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { Button } from 'antd';
+import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
+import { useRouter } from 'next/router';
+import { useAuth } from '@/components/util/context-user';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
+import { useState } from 'react';
+import { TableTransactions } from '@/components/transaction/table-transactions';
+import { GetStaticPropsContext } from 'next';
+import { ButtonInput } from '@/components/ui-setting';
 
 const Memberships = () => {
   const user = useAuth() as any;
@@ -22,24 +22,23 @@ const Memberships = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ["statistics-transactions"],
+    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
   if (isPending) {
-    return "";
+    return '';
   }
 
   if (isError) {
     return <span>Error: {error.message}</span>;
   }
 
-  const transaction = transactions?.find((item) => item.model === "MEMBERSHIP");
+  const transaction = transactions?.find((item) => item.model === 'MEMBERSHIP');
 
   return (
     <>
-      <LayoutDashboard title={"Memberships"}>
-
+      <LayoutDashboard title={'Memberships'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavMembership />
@@ -49,11 +48,9 @@ const Memberships = () => {
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
                     <ButtonInput
-                      status="cancel"
                       type="button"
-                      shape="default"
-                      size="normal"
-                      loading={false}
+                      size="sm"
+                      variant="outline"
                     >
                       Last {dayCount} days
                     </ButtonInput>
@@ -95,7 +92,7 @@ const Memberships = () => {
                 </div>
 
                 {user?.organizationId ? (
-                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
+                  <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                     <div className="px-5 py-4">
                       <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
                         All-time
@@ -107,9 +104,7 @@ const Memberships = () => {
                             value={Number(user?.membership?.amount)}
                             currency={{
                               code: user?.profile?.currency?.code,
-                              amount: String(
-                                user?.profile?.currency?.amount
-                              ),
+                              amount: String(user?.profile?.currency?.amount),
                             }}
                           />
                         </p>
@@ -140,7 +135,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

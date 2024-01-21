@@ -1,23 +1,23 @@
-import { Avatar, Button, Upload } from "antd";
-import { BiComment, BiConversation } from "react-icons/bi";
-import { FiDownload } from "react-icons/fi";
-import { MdOutlineModeEdit, MdOutlineDeleteOutline } from "react-icons/md";
-import { AiOutlineClose } from "react-icons/ai";
-import { IoShareOutline } from "react-icons/io5";
-import Link from "next/link";
-import { HtmlParser } from "@/utils/html-parser";
-import ListComments from "../comment/list-comments";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { useAuth } from "../util/context-user";
-import { formateDMYHH } from "@/utils";
-import { PostModel } from "@/types/post";
-import { useRouter } from "next/router";
-import { downloadOneFileUploadAPI } from "@/api-site/upload";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import { GetOnePostAPI } from "@/api-site/post";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ButtonInput } from "../ui-setting/ant";
+import { BiConversation } from 'react-icons/bi';
+import { FiDownload } from 'react-icons/fi';
+import { MdOutlineModeEdit } from 'react-icons/md';
+import { AiOutlineClose } from 'react-icons/ai';
+import { IoShareOutline } from 'react-icons/io5';
+import Link from 'next/link';
+import { HtmlParser } from '@/utils/html-parser';
+import ListComments from '../comment/list-comments';
+import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { useAuth } from '../util/context-user';
+import { formateDMYHH } from '@/utils';
+import { PostModel } from '@/types/post';
+import { useRouter } from 'next/router';
+import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
+import { GetOnePostAPI } from '@/api-site/post';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ButtonInput } from '../ui-setting';
+import { LockClosedIcon } from '@radix-ui/react-icons';
 
 type Props = {
   openModal: boolean;
@@ -42,7 +42,7 @@ const ShowModalGallery: React.FC<Props> = ({
     userVisitorId,
   });
 
-  if (status === "pending") {
+  if (status === 'pending') {
     <strong>Loading...</strong>;
   }
 
@@ -62,8 +62,8 @@ const ShowModalGallery: React.FC<Props> = ({
 
                     <div className="ml-2 cursor-pointer">
                       <p className="text-sm font-bold text-black dark:text-white">
-                        {item?.profile?.firstName ?? ""}{" "}
-                        {item?.profile?.lastName ?? ""}
+                        {item?.profile?.firstName ?? ''}{' '}
+                        {item?.profile?.lastName ?? ''}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
                         {formateDMYHH(item?.createdAt as Date, String(locale))}
@@ -73,18 +73,17 @@ const ShowModalGallery: React.FC<Props> = ({
 
                   <div className="ml-auto">
                     <div className="flex items-center space-x-2 sm:ml-5">
-                      {item?.whoCanSee === "MEMBERSHIP" &&
+                      {item?.whoCanSee === 'MEMBERSHIP' &&
                       item?.isValidSubscribe !== 1 ? (
                         <ButtonInput
+                          type="button"
+                          className="w-full"
+                          size="sm"
+                          variant="danger"
                           onClick={() =>
                             push(`/${item?.profile?.username}/memberships`)
                           }
-                          shape="default"
-                          type="button"
-                          size="medium"
-                          loading={false}
-                          color={item?.profile?.color as any}
-                          icon={<HiOutlineLockClosed className="size-5" />}
+                          icon={<LockClosedIcon className="mr-2 size-4" />}
                         >
                           <span className="ml-1 font-bold">
                             Join membership
@@ -104,9 +103,9 @@ const ShowModalGallery: React.FC<Props> = ({
                           onClick={() => {
                             push(
                               `${downloadOneFileUploadAPI({
-                                folder: "posts",
+                                folder: 'posts',
                                 fileName: item?.uploadsImage[0]?.path,
-                              })}`
+                              })}`,
                             );
                           }}
                           className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
@@ -136,10 +135,10 @@ const ShowModalGallery: React.FC<Props> = ({
                         height="100%"
                         alt={item?.title}
                         className={`${
-                          item?.whoCanSee === "MEMBERSHIP" &&
+                          item?.whoCanSee === 'MEMBERSHIP' &&
                           item?.isValidSubscribe !== 1
-                            ? "blur-xl"
-                            : ""
+                            ? 'blur-xl'
+                            : ''
                         }`}
                       />
                     ) : null}
@@ -147,13 +146,13 @@ const ShowModalGallery: React.FC<Props> = ({
 
                   {item?.title ? (
                     <p className="mt-4 cursor-pointer text-lg font-bold text-gray-900">
-                      {item?.title ?? ""}
+                      {item?.title ?? ''}
                     </p>
                   ) : null}
 
                   {item?.description ? (
                     <p className="mt-2 text-sm font-normal text-gray-600">
-                      <HtmlParser html={String(item?.description ?? "")} />
+                      <HtmlParser html={String(item?.description ?? '')} />
                     </p>
                   ) : null}
 
@@ -189,7 +188,7 @@ const ShowModalGallery: React.FC<Props> = ({
                       </>
                     ) : null}
 
-                    {item?.whoCanSee === "MEMBERSHIP" &&
+                    {item?.whoCanSee === 'MEMBERSHIP' &&
                     item?.isValidSubscribe !== 1 ? (
                       <>
                         <button className="ml-auto text-2xl">
@@ -209,7 +208,7 @@ const ShowModalGallery: React.FC<Props> = ({
 
                   <ListComments
                     model="POST"
-                    modelIds={["POST"]}
+                    modelIds={['POST']}
                     postId={String(item?.id)}
                     take={Number(commentTake)}
                     organizationId={item?.organizationId}

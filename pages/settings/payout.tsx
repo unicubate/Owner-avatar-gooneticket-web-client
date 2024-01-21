@@ -1,11 +1,7 @@
 import { PrivateComponent } from "@/components/util/private-component";
-import { SubmitHandler } from "react-hook-form";
 import { LayoutDashboard } from "@/components/layout-dashboard";
 import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
 import { useAuth } from "@/components/util/context-user";
-import { UpdateFormProfile } from "@/components/user/update-form-profile";
-import { UpdateFormPassword } from "@/components/user/update-form-password";
-import { UpdateFormUser } from "@/components/user/update-form-user";
 import { PayoutFormUser } from "@/components/user/payout-form-user";
 import { GetStaticPropsContext } from 'next';
 

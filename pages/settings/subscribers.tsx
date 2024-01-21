@@ -2,7 +2,7 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { Input, Skeleton } from 'antd';
-import { ButtonInput } from '@/components/ui-setting/ant/button-input';
+import { ButtonInput } from '@/components/ui-setting/button-input';
 import { useEffect, useState } from 'react';
 import { GetInfiniteFollowersAPI } from '@/api-site/follow';
 import ListFollowers from '@/components/setting/list-followers';
@@ -11,6 +11,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { useInputState } from '@/components/hooks/use-input-state';
+import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 
 const Subscribers = () => {
   const { ref, inView } = useInView();
@@ -82,10 +83,9 @@ const Subscribers = () => {
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">Subscribers</div>
                     <div className="mt-4 sm:mt-0">
-                      <Input
+                      <SearchInput
                         placeholder="Search by email, name"
                         onChange={handleSetSearch}
-                        className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -97,20 +97,11 @@ const Subscribers = () => {
 
                 {hasNextPage && (
                   <div className="mx-auto mt-4 justify-center text-center">
-                    <div className="sm:mt-0">
-                      <ButtonInput
-                        ref={ref}
-                        onClick={() => fetchNextPage()}
-                        shape="default"
-                        type="button"
-                        size="large"
-                        loading={isFetchingNextPage ? true : false}
-                        color={'indigo'}
-                        minW="fit"
-                      >
-                        Load More
-                      </ButtonInput>
-                    </div>
+                    <ButtonLoadMore
+                      ref={ref}
+                      isFetchingNextPage={isFetchingNextPage}
+                      onClick={() => fetchNextPage()}
+                    />
                   </div>
                 )}
               </div>

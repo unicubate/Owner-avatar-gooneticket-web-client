@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect } from 'react';
-import { ButtonInput, EmptyData, LoadingFile } from '../ui-setting/ant';
+import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
 import { useInView } from 'react-intersection-observer';
 import { ListTransactions } from './list-transactions';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { BiTransfer } from 'react-icons/bi';
 import { ModelType } from '@/utils/pagination-item';
-import { Input } from 'antd';
 import { useInputState } from '../hooks/use-input-state';
+import { ButtonLoadMore, SearchInput } from '../ui-setting';
 
 type Props = {
   model?: ModelType;
@@ -76,10 +76,9 @@ const TableTransactions: React.FC<Props> = ({
             <p className="text-lg font-bold">Recent transactions</p>
           </div>
           <div className="mt-4 sm:mt-0">
-            <Input
-              placeholder="Search by email, name"
+            <SearchInput
+              placeholder="Search by first name, last name, email"
               onChange={handleSetSearch}
-              className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
             />
           </div>
         </div>
@@ -93,44 +92,13 @@ const TableTransactions: React.FC<Props> = ({
 
       {hasNextPage && (
         <div className="mx-auto mt-2 justify-center text-center">
-          <div className="sm:mt-0">
-            <ButtonInput
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="large"
-              loading={isFetchingNextPage ? true : false}
-              color={'indigo'}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
-          </div>
+          <ButtonLoadMore
+            ref={ref}
+            isFetchingNextPage={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+          />
         </div>
       )}
-
-      {/* <div className="flex items-center mt-2 mb-4 space-x-4">
-        <ButtonInput
-          status="cancel"
-          type="button"
-          shape="default"
-          size="normal"
-          loading={false}
-        // onClick={() => back()}
-        >
-          Preview
-        </ButtonInput>
-        <ButtonInput
-          status="cancel"
-          type="button"
-          shape="default"
-          size="normal"
-          loading={false}
-        >
-          Next
-        </ButtonInput>
-      </div> */}
     </>
   );
 };

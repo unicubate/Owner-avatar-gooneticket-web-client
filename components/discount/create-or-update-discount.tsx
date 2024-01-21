@@ -1,14 +1,16 @@
-import { DateInput, NumberInput, TextAreaInput, TextInput } from "../ui-setting/ant";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { CloseOutlined } from "@ant-design/icons";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { useEffect, useState } from "react";
-import { DiscountFormModel } from "@/types/discount";
-import { CreateOrUpdateOneDiscountAPI } from "@/api-site/discount";
-import { SwitchInput, ButtonInput } from "../ui-setting/ant";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { DateInput, NumberInput } from '../ui-setting/ant';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { CloseOutlined } from '@ant-design/icons';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useEffect, useState } from 'react';
+import { DiscountFormModel } from '@/types/discount';
+import { CreateOrUpdateOneDiscountAPI } from '@/api-site/discount';
+import { SwitchInput } from '../ui-setting/ant';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ButtonInput } from '../ui-setting';
+import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   percent: yup.number().required(),
@@ -33,18 +35,18 @@ const CreateOrUpdateDiscount: React.FC<{
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchEnableExpiredAt = watch("enableExpiredAt", false);
+  const watchEnableExpiredAt = watch('enableExpiredAt', false);
 
   useEffect(() => {
     if (discount) {
       const fields = [
-        "code",
-        "description",
-        "percent",
-        "isActive",
-        "enableExpiredAt",
-        "isExpired",
-        "startedAt",
+        'code',
+        'description',
+        'percent',
+        'isActive',
+        'enableExpiredAt',
+        'isExpired',
+        'startedAt',
       ];
       fields?.forEach((field: any) => setValue(field, discount[field]));
     }
@@ -63,7 +65,7 @@ const CreateOrUpdateDiscount: React.FC<{
   });
 
   const onSubmit: SubmitHandler<DiscountFormModel> = async (
-    payload: DiscountFormModel
+    payload: DiscountFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -75,10 +77,10 @@ const CreateOrUpdateDiscount: React.FC<{
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Discount save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Discount save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       setShowModal(false);
     } catch (error: any) {
@@ -87,9 +89,9 @@ const CreateOrUpdateDiscount: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -116,7 +118,7 @@ const CreateOrUpdateDiscount: React.FC<{
                       <div className="p-3">
                         <div className="flex items-center justify-between">
                           <p className="ml-3 text-sm font-medium text-red-500">
-                           {hasErrors}
+                            {hasErrors}
                           </p>
                         </div>
                       </div>
@@ -125,7 +127,7 @@ const CreateOrUpdateDiscount: React.FC<{
                 )}
 
                 <div className="mb-4">
-                  <NumberInput
+                  <TextInput
                     control={control}
                     label="Percentage discount "
                     type="number"
@@ -147,7 +149,6 @@ const CreateOrUpdateDiscount: React.FC<{
                 </div>
                 <div className="mb-2">
                   <TextAreaInput
-                    row={3}
                     control={control}
                     label="Description (optional)"
                     name="description"
@@ -163,7 +164,7 @@ const CreateOrUpdateDiscount: React.FC<{
                           <p className="text-sm font-bold text-black dark:text-white">
                             Set Expiry
                           </p>
-                          <p className="mt-1 text-sm font-medium text-gray-900">
+                          <p className="mt-1 text-sm font-medium text-gray-600">
                             Setting expired date
                           </p>
                         </div>
@@ -188,40 +189,30 @@ const CreateOrUpdateDiscount: React.FC<{
                     ) : null}
                   </div>
                 </div>
+
+                <div className="mt-4 flex items-center space-x-4">
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Cancel
+                  </ButtonInput>
+
+                  <ButtonInput
+                    type="submit"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
+                    disabled={loading}
+                    loading={loading}
+                  >
+                    Save
+                  </ButtonInput>
+                </div>
               </div>
-              <div className="mt-2 space-x-2 text-center">
-                <ButtonInput
-                  shape="default"
-                  type="submit"
-                  size="large"
-                  loading={loading}
-                  color="indigo"
-                >
-                  Save
-                </ButtonInput>
-              </div>
-              {/* <div className="flex items-center mt-2 space-x-4">
-                <ButtonInput
-                status="cancel"
-                type="button"
-                shape="default"
-                size="large"
-                  loading={loading}
-                  onClick={() => setShowModal(false)}
-                >
-                  Cancel
-                </ButtonInput>
-                <ButtonInput
-                  minW="fit"
-                  shape="default"
-                  type="submit"
-                  size="large"
-                  loading={false}
-                  color="indigo"
-                >
-                  Save
-                </ButtonInput>
-              </div> */}
             </form>
           </div>
         </div>

@@ -11,14 +11,16 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
-import { DateInput, TextAreaInput, TextInput } from '../ui-setting/ant';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { DateInput } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting/button-input';
 import { ProfileFormModel, arrayColors } from '@/types/profile.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
+import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 
 const { Option } = Select;
 
@@ -38,19 +40,16 @@ const schema = yup.object({
 
 const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   const [colors] = useState(arrayColors);
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
   const {
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const { data: currencies } = GetAllCurrenciesAPI();
 
@@ -334,7 +333,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               />
             </div>
             <div className="mt-2">
-              <SelectSearchInput
+              <SelectInput
                 label="Payment currency"
                 firstOptionName="Currency"
                 valueType="key"
@@ -352,7 +351,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
               <div className="mt-2">
                 <TextAreaInput
-                  row={3}
                   control={control}
                   label="Bio"
                   name="description"
@@ -364,11 +362,11 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
 
             <div className="mb-2 mt-4 flex items-center space-x-4">
               <ButtonInput
-                shape="default"
+                size="lg"
                 type="submit"
-                size="large"
+                variant="info"
+                className="w-full"
                 loading={loading}
-                color={`indigo`}
               >
                 Save changes
               </ButtonInput>

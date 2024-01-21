@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { AlertDangerNotification } from "@/utils";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { CreateOrDeleteOneFollowerAPI } from "@/api-site/follow";
-import Swal from "sweetalert2";
-import { LoginModal } from "../auth-modal/login-modal";
-import { useAuth } from "../util/context-user";
+import React, { useState } from 'react';
+import { AlertDangerNotification } from '@/utils';
+import { ButtonInput } from '../ui-setting';
+import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
+import Swal from 'sweetalert2';
+import { LoginModal } from '../auth-modal/login-modal';
+import { useAuth } from '../util/context-user';
 
 const CreateOrUpdateFormFollow: React.FC<{
   item?: any;
@@ -15,7 +15,7 @@ const CreateOrUpdateFormFollow: React.FC<{
   const [isFollow, setIsFollow] = useState(item?.isFollow);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
 
   // Create or Update data
@@ -35,14 +35,14 @@ const CreateOrUpdateFormFollow: React.FC<{
       {
         isFollow
           ? Swal.fire({
-              title: "Unfollowing?",
+              title: 'Unfollowing?',
               text: `Are you sure you want to unfollow ${
-                item?.profile?.firstName ?? ""
-              } ${item?.profile?.lastName ?? ""}`,
-              confirmButtonText: "Yes, Unfollow",
-              cancelButtonText: "No, Cancel",
-              confirmButtonColor: "#dc3545",
-              cancelButtonColor: "#6f42c1",
+                item?.profile?.firstName ?? ''
+              } ${item?.profile?.lastName ?? ''}`,
+              confirmButtonText: 'Yes, Unfollow',
+              cancelButtonText: 'No, Cancel',
+              confirmButtonColor: '#dc3545',
+              cancelButtonColor: '#6f42c1',
               showCancelButton: true,
               reverseButtons: true,
             }).then(async (result) => {
@@ -53,7 +53,7 @@ const CreateOrUpdateFormFollow: React.FC<{
                 try {
                   await saveMutation({
                     followerId: item?.profile?.userId,
-                    action: "DELETE",
+                    action: 'DELETE',
                   });
                   setHasErrors(false);
                   setLoading(false);
@@ -67,15 +67,15 @@ const CreateOrUpdateFormFollow: React.FC<{
             })
           : await saveMutation({
               followerId: item?.id,
-              action: "CREATE",
+              action: 'CREATE',
             });
       }
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -86,11 +86,8 @@ const CreateOrUpdateFormFollow: React.FC<{
         <>
           {(item?.isFollow && isFollow) || follow ? (
             <ButtonInput
-              status="cancel"
               type="button"
-              shape="default"
-              size="normal"
-              loading={false}
+              variant="outline"
               onClick={() => {
                 followItem(item);
               }}
@@ -99,10 +96,8 @@ const CreateOrUpdateFormFollow: React.FC<{
             </ButtonInput>
           ) : (
             <ButtonInput
-              shape="default"
-              size="normal"
               type="button"
-              color="red"
+              variant="danger"
               loading={false}
               onClick={() => {
                 followItem(item), setFollow(true);
@@ -114,11 +109,8 @@ const CreateOrUpdateFormFollow: React.FC<{
         </>
       ) : (
         <ButtonInput
-          shape="default"
-          size="normal"
           type="button"
-          color="red"
-          loading={false}
+          variant="danger"
           onClick={() => {
             setShowModal(true);
           }}

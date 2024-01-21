@@ -68,7 +68,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="ml-6 mr-auto flex xl:ml-0">
-              <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
+              {/* <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
                 {NAVIGATION_ITEMS.map((item: any, index: number) => {
                   const isActive = pathname === item.href;
                   return (
@@ -89,7 +89,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                     </Link>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
 
 

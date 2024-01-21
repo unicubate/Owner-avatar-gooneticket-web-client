@@ -1,29 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { Button } from "antd";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { TextInputPassword } from "@/components/ui-setting/ant";
-import { UserResetPasswordFormModel } from "@/types/user.type";
+import React, { useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { UserResetPasswordFormModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { resetPasswordAPI } from "../../../api-site/user";
-import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { LayoutSite } from "@/components/layout-site";
-import { GetStaticPropsContext } from "next";
+} from '@/utils/alert-notification';
+import { resetPasswordAPI } from '../../../api-site/user';
+import { useRouter } from 'next/router';
+import { PublicComponent } from '@/components/util/public-component';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { GetStaticPropsContext } from 'next';
+import { TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
-  newPassword: yup.string().min(8, "Minimum 8 symbols").required(),
+  newPassword: yup.string().min(8, 'Minimum 8 symbols').required(),
   passwordConfirm: yup
     .string()
-    .min(8, "Minimum 8 symbols")
-    .oneOf([yup.ref("password")], "Passwords must match")
+    .min(8, 'Minimum 8 symbols')
+    .oneOf([yup.ref('password')], 'Passwords must match')
     .required(),
 });
 
@@ -33,7 +30,7 @@ const ResetPassword = () => {
   const token = String(query?.token);
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     control,
@@ -42,11 +39,11 @@ const ResetPassword = () => {
     formState: { errors },
   } = useForm<UserResetPasswordFormModel>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<UserResetPasswordFormModel> = async (
-    payload: UserResetPasswordFormModel
+    payload: UserResetPasswordFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -56,10 +53,10 @@ const ResetPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Email send successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Email send successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       reset();
       router.push(`${`/login`}`);
@@ -68,10 +65,10 @@ const ResetPassword = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: "An error has occurred.",
-        gravity: "top",
-        className: "info",
-        position: "center",
+        text: 'An error has occurred.',
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -91,7 +88,7 @@ const ResetPassword = () => {
 
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
-          <TextInputPassword
+          <TextInput
             control={control}
             label="Password"
             type="password"
@@ -102,7 +99,7 @@ const ResetPassword = () => {
         </div>
 
         <div className="mb-4">
-          <TextInputPassword
+          <TextInput
             control={control}
             label="Confirm Password"
             type="password"
@@ -114,11 +111,11 @@ const ResetPassword = () => {
 
         <div className="mt-6">
           <ButtonInput
-            shape="default"
             type="submit"
-            size="large"
+            className="w-full"
+            size="sm"
+            variant="info"
             loading={loading}
-            color={"indigo"}
           >
             Log In
           </ButtonInput>
@@ -139,8 +136,8 @@ export default PublicComponent(ResetPassword);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -148,7 +145,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/auth.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

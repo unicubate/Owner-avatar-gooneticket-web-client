@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ButtonInput } from '@/components/ui-setting/ant/button-input';
+import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
 import { useEffect, useState } from 'react';
 import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import ListGallery from '@/components/gallery/list-gallery';
@@ -12,7 +12,8 @@ import { BiImage } from 'react-icons/bi';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { queyParamsFunc } from '@/utils/generate-random';
 import { useInputState } from '../hooks/use-input-state';
-import { SearchInput } from '../ui-setting/ant/search-input';
+import { SearchInput } from '../ui-setting';
+import { PlusIcon } from 'lucide-react';
 
 type Props = {
   albumId?: string;
@@ -94,12 +95,10 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
               <div className="flex items-center space-x-4">
                 <div className="relative">
                   <ButtonInput
-                    minW="fit"
-                    shape="default"
                     type="button"
-                    size="normal"
-                    loading={false}
-                    color="indigo"
+                    className="w-full"
+                    size="sm"
+                    variant="info"
                     onClick={() =>
                       push(
                         `/posts/create?${queyParamsFunc({
@@ -108,20 +107,21 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
                         })}`,
                       )
                     }
+                    icon={<PlusIcon className="mr-2 size-4" />}
                   >
                     Add Image
                   </ButtonInput>
                 </div>
                 <div className="relative">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="normal"
-                    loading={false}
+                    className="w-full"
+                    size="sm"
+                    variant="info"
                     onClick={() =>
                       push(`/posts/create?${queyParamsFunc({ type: 'album' })}`)
                     }
+                    icon={<PlusIcon className="mr-2 size-4" />}
                   >
                     New Album
                   </ButtonInput>
@@ -144,20 +144,11 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
 
       {hasNextPage && (
         <div className="mx-auto mt-4 justify-center text-center">
-          <div className="mt-4 sm:mt-0">
-            <ButtonInput
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="large"
-              loading={isFetchingNextPage ? true : false}
-              color={'indigo'}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
-          </div>
+          <ButtonLoadMore
+            ref={ref}
+            isFetchingNextPage={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+          />
         </div>
       )}
     </>

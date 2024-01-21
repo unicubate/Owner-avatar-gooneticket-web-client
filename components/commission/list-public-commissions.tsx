@@ -3,7 +3,7 @@ import React from 'react';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { ProductModel } from '@/types/product';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { ButtonInput } from '../ui-setting';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { formatePrice } from '@/utils';
 
@@ -31,12 +31,9 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
 
             <div className="ml-auto">
               <ButtonInput
-                shape="default"
-                type="button"
-                size="normal"
-                loading={false}
-                color={item?.profile?.color}
-                minW="fit"
+                 type="button"
+                 variant="danger"
+                //color={item?.profile?.color}
               >
                 {Number(item?.price ?? 0)} {item?.currency?.symbol ?? ''}
               </ButtonInput>
@@ -59,12 +56,10 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
           <div className="mx-auto mt-6 justify-center text-center">
             <div className="sm:mt-0">
               <ButtonInput
-                shape="default"
                 type="button"
-                size="large"
-                loading={false}
-                color={'indigo'}
-                minW="fit"
+                size="lg"
+                className="w-full"
+                variant="info"
               >
                 Request this
               </ButtonInput>

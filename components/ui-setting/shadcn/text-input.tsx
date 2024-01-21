@@ -8,7 +8,7 @@ interface Props {
   name: string;
   min?: number;
   max?: number;
-  type: 'text' | 'email' | 'password' | 'url';
+  type: 'text' | 'email' | 'password' | 'url' | 'number';
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: 'on' | 'off';
@@ -29,7 +29,7 @@ const TextInput: React.FC<Props> = ({
   placeholder = '',
   defaultValue,
   autoComplete,
-  required,
+  required
 }) => {
   return (
     <>

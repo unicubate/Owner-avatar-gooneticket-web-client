@@ -1,12 +1,12 @@
-import { ButtonInput } from "../ui-setting/ant";
-import { PaymentCardFormModel } from "@/types/payment";
+import { ButtonInput } from '../ui-setting';
+import { PaymentCardFormModel } from '@/types/payment';
 
-import "react-credit-cards-2/dist/es/styles-compiled.css";
-import { useCreditCardValidator, images } from "react-creditcard-validator";
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import { useCreditCardValidator, images } from 'react-creditcard-validator';
 
-import { FormEvent, useState } from "react";
-import { CreateOnPaymentPI } from "@/api-site/payment";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
+import { FormEvent, useState } from 'react';
+import { CreateOnPaymentPI } from '@/api-site/payment';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 
 const CreatePaymentFormCardUser: React.FC<{
   showModal: boolean;
@@ -14,16 +14,16 @@ const CreatePaymentFormCardUser: React.FC<{
 }> = ({ showModal, setShowModal }) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
 
   function expDateValidate(month: string, year: string) {
     if (Number(year) > 2070) {
-      return "Expiry Date Year cannot be greater than 2035";
+      return 'Expiry Date Year cannot be greater than 2035';
     }
     return;
   }
-  const [cardstate, setcardState] = useState({ fullName: "" });
+  const [cardstate, setcardState] = useState({ fullName: '' });
 
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {
@@ -36,49 +36,48 @@ const CreatePaymentFormCardUser: React.FC<{
     },
   });
 
-
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { cardNumber, cvc, expiryDate } = cardstate as any;
-    const strExpirySplit = expiryDate?.split(" ").join("");
+    const strExpirySplit = expiryDate?.split(' ').join('');
     const strExpiryLength = Number(strExpirySplit?.length);
     const monthDate = strExpirySplit?.substring(2, 0);
     const yearDate = strExpirySplit?.substring(
       strExpiryLength,
-      strExpiryLength - 2
+      strExpiryLength - 2,
     );
     const payload: PaymentCardFormModel = {
       cardNumber: cardNumber,
       cardExpMonth: Number(`${monthDate}`),
       cardExpYear: Number(`20${yearDate}`),
-      type: "CARD",
+      type: 'CARD',
       cardCvc: cvc,
     };
     setLoading(true);
     setHasErrors(undefined);
     try {
       await mutateAsync({
-        data: { ...payload, type: "CARD" },
-        paymentModel: "PAYMENT-CREATE",
+        data: { ...payload, type: 'CARD' },
+        paymentModel: 'PAYMENT-CREATE',
       });
       AlertSuccessNotification({
-        text: "Card save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Card save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       setHasErrors(false);
       setLoading(false);
-      setShowModal(false)
+      setShowModal(false);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -108,8 +107,9 @@ const CreatePaymentFormCardUser: React.FC<{
                 <div className="relative mt-4">
                   <input
                     type="text"
-                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${erroredInputs?.cvc ? "border-red-500" : ""
-                      }`}
+                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${
+                      erroredInputs?.cvc ? 'border-red-500' : ''
+                    }`}
                     required
                     placeholder="Full name"
                     name="fullName"
@@ -126,8 +126,9 @@ const CreatePaymentFormCardUser: React.FC<{
                     <svg {...getCardImageProps({ images })} />
                   </div>
                   <input
-                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 pl-12 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-500 sm:text-sm ${erroredInputs?.cardNumber ? "border-red-500" : ""
-                      }`}
+                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 pl-12 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-500 sm:text-sm ${
+                      erroredInputs?.cardNumber ? 'border-red-500' : ''
+                    }`}
                     required
                     {...getCardNumberProps({
                       onChange: (e) =>
@@ -147,8 +148,9 @@ const CreatePaymentFormCardUser: React.FC<{
                 <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
                   <div className="mb-2">
                     <input
-                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-50 placeholder:text-gray-500 focus:border-indigo-50 focus:ring-indigo-50 sm:text-sm ${erroredInputs?.expiryDate ? "border-red-500" : ""
-                        }`}
+                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-50 placeholder:text-gray-500 focus:border-indigo-50 focus:ring-indigo-50 sm:text-sm ${
+                        erroredInputs?.expiryDate ? 'border-red-500' : ''
+                      }`}
                       required
                       {...getExpiryDateProps({
                         onChange: (e) =>
@@ -167,8 +169,9 @@ const CreatePaymentFormCardUser: React.FC<{
 
                   <div className="mb-2">
                     <input
-                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${erroredInputs?.cvc ? "border-red-500" : ""
-                        }`}
+                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${
+                        erroredInputs?.cvc ? 'border-red-500' : ''
+                      }`}
                       required
                       {...getCVCProps({
                         onChange: (e) =>
@@ -188,22 +191,20 @@ const CreatePaymentFormCardUser: React.FC<{
 
                 <div className="mt-4 flex items-center space-x-4">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="normal"
-                    loading={loading}
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
                     onClick={() => setShowModal(false)}
                   >
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
-                    shape="default"
                     type="submit"
-                    size="large"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color="indigo"
                   >
                     Save
                   </ButtonInput>

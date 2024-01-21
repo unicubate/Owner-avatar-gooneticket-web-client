@@ -1,20 +1,14 @@
-import { NumberInput, TextInput } from "../ui-setting/ant";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { useEffect, useState } from "react";
-import { TextareaReactQuillInput } from "../ui-setting";
-import { useRouter } from "next/router";
-import { Upload, UploadFile, UploadProps } from "antd";
-import { CreateOrUpdateOneMembershipAPI } from "@/api-site/membership";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { MembershipFormModel } from "@/types/membership";
-import { useAuth } from "../util/context-user";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { UpdateOneDonationAPI } from "@/api-site/donation";
-import { DonationFormModel } from "@/types/donation";
+import { NumberInput } from '../ui-setting/ant';
+import * as yup from 'yup';
+import { SubmitHandler } from 'react-hook-form';
+import { ButtonInput } from '../ui-setting/button-input';
+import { useEffect } from 'react';
+import { TextareaReactQuillInput } from '../ui-setting';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useAuth } from '../util/context-user';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { UpdateOneDonationAPI } from '@/api-site/donation';
+import { DonationFormModel } from '@/types/donation';
 
 const schema = yup.object({
   price: yup.number().min(1).required(),
@@ -39,7 +33,7 @@ const UpdateFormDonation: React.FC<{
 
   useEffect(() => {
     if (donation) {
-      const fields = ["title", "messageWelcome", "price", "description"];
+      const fields = ['title', 'messageWelcome', 'price', 'description'];
       fields?.forEach((field: any) => setValue(field, donation[field]));
     }
   }, [donation, setValue]);
@@ -56,7 +50,7 @@ const UpdateFormDonation: React.FC<{
   });
 
   const onSubmit: SubmitHandler<DonationFormModel> = async (
-    data: DonationFormModel
+    data: DonationFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -69,9 +63,9 @@ const UpdateFormDonation: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: `Donation save successfully`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -79,9 +73,9 @@ const UpdateFormDonation: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -89,7 +83,7 @@ const UpdateFormDonation: React.FC<{
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
+        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <div className="mt-2">
               <NumberInput
@@ -123,12 +117,11 @@ const UpdateFormDonation: React.FC<{
 
             <div className="my-4 flex items-center space-x-4">
               <ButtonInput
-                minW="fit"
-                shape="default"
                 type="submit"
-                size="large"
+                className="w-full"
+                size="lg"
+                variant="info"
                 loading={loading}
-                color="indigo"
               >
                 Save
               </ButtonInput>

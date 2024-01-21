@@ -1,17 +1,17 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { Input, Skeleton } from "antd";
-import { useState } from "react";
-import { HorizontalNavShop } from "@/components/shop/horizontal-nav-shop";
-import { PlusOutlined } from "@ant-design/icons";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { ListDiscounts } from "@/components/discount/list-discounts";
-import { GetInfiniteDiscountsAPI } from "@/api-site/discount";
-import { CreateOrUpdateDiscount } from "@/components/discount/create-or-update-discount";
-import { useDebounce } from "@/utils";
+import { PrivateComponent } from '@/components/util/private-component';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { Input, Skeleton } from 'antd';
+import { useState } from 'react';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { PlusOutlined } from '@ant-design/icons';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { ListDiscounts } from '@/components/discount/list-discounts';
+import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
+import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { useDebounce } from '@/utils';
 
 const Configs = () => {
-  const [filter, setFilter] = useState<string>("");
+  const [filter, setFilter] = useState<string>('');
   const [showModal, setShowModal] = useState(false);
 
   const debouncedFilter = useDebounce(filter, 500);
@@ -25,7 +25,7 @@ const Configs = () => {
   } = GetInfiniteDiscountsAPI({
     search: debouncedFilter,
     take: 10,
-    sort: "DESC",
+    sort: 'DESC',
   });
 
   const dataTableDiscounts = isLoadingDiscounts ? (
@@ -37,7 +37,7 @@ const Configs = () => {
   ) : isErrorDiscounts ? (
     <strong>Error find data please try again...</strong>
   ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataDiscounts?.pages
       .flatMap((page: any) => page?.data?.value)
@@ -48,7 +48,7 @@ const Configs = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Gifts"}>
+      <LayoutDashboard title={'Gifts'}>
         <div className="flex flex-1 flex-col">
           <main>
             <div className="mx-auto max-w-6xl py-6">
@@ -87,11 +87,9 @@ const Configs = () => {
                       <div className="mt-4 sm:mt-0">
                         <ButtonInput
                           onClick={() => setShowModal(true)}
-                          shape="default"
                           type="button"
-                          size="normal"
-                          loading={false}
-                          color={"indigo"}
+                          size="sm"
+                          variant="info"
                           icon={<PlusOutlined />}
                         >
                           Create discount
@@ -103,7 +101,7 @@ const Configs = () => {
                           onChange={(
                             e: React.ChangeEvent<
                               HTMLInputElement | HTMLTextAreaElement
-                            >
+                            >,
                           ) => setFilter(e.target.value)}
                         />
                       </div>

@@ -1,17 +1,16 @@
-import { Avatar, Button } from "antd";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api-site/product";
-import { GetUploadsAPI } from "@/api-site/upload";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
-import { formateDMYHH } from "@/utils";
-import { HtmlParser } from "@/utils/html-parser";
-import { LayoutSite } from "@/components/layout-site";
-import { MdOutlineDiscount } from "react-icons/md";
-import { GetStaticPropsContext } from "next";
-
+import { Avatar, Button } from 'antd';
+import { ButtonInput } from '@/components/ui-setting';
+import { useRouter } from 'next/router';
+import { GetOneProductAPI } from '@/api-site/product';
+import { GetUploadsAPI } from '@/api-site/upload';
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
+import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { formateDMYHH } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import { LayoutSite } from '@/components/layout-site';
+import { MdOutlineDiscount } from 'react-icons/md';
+import { GetStaticPropsContext } from 'next';
 
 const ShopView = () => {
   const { locale, push } = useRouter();
@@ -32,9 +31,9 @@ const ShopView = () => {
     data: dataImages,
   } = GetUploadsAPI({
     organizationId: product?.organizationId,
-    model: "PRODUCT",
+    model: 'PRODUCT',
     uploadableId: product?.id,
-    uploadType: "image",
+    uploadType: 'image',
   });
 
   const dataTableImages =
@@ -58,7 +57,7 @@ const ShopView = () => {
 
   return (
     <>
-      <LayoutSite title={`${product?.title ?? ""}`}>
+      <LayoutSite title={`${product?.title ?? ''}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
             <div className="lg:col-span-3 lg:row-end-1">
@@ -86,21 +85,21 @@ const ShopView = () => {
                       className="ml-4 cursor-pointer"
                     >
                       <p className="text-sm font-bold text-gray-900">
-                        {product?.profile?.firstName ?? ""}{" "}
-                        {product?.profile?.lastName ?? ""}
+                        {product?.profile?.firstName ?? ''}{' '}
+                        {product?.profile?.lastName ?? ''}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
                         {formateDMYHH(
                           product?.createdAt as Date,
-                          locale as string
+                          locale as string,
                         )}
                       </p>
                     </div>
 
                     <div className="ml-auto">
                       <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                        {" "}
-                        Private{" "}
+                        {' '}
+                        Private{' '}
                       </p>
                     </div>
                   </div>
@@ -112,23 +111,23 @@ const ShopView = () => {
 
             <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
-                {product?.title ?? ""}
+                {product?.title ?? ''}
               </h1>
 
               <div className="mt-4 flex items-center">
                 <p className="text-4xl font-bold text-gray-900">
-                  {product?.priceDiscount ?? ""}
+                  {product?.priceDiscount ?? ''}
                 </p>
                 <p className="text-lg font-bold text-gray-900">
-                  {product?.currency?.symbol ?? ""}
+                  {product?.currency?.symbol ?? ''}
                 </p>
                 {product?.enableDiscount ? (
                   <>
                     <p className="ml-3 text-2xl font-bold text-gray-500">
-                      <del> {product?.price ?? ""} </del>
+                      <del> {product?.price ?? ''} </del>
                     </p>
                     <p className="text-lg font-bold text-gray-500">
-                      <del> {product?.currency?.symbol ?? ""} </del>
+                      <del> {product?.currency?.symbol ?? ''} </del>
                     </p>
                   </>
                 ) : null}
@@ -171,8 +170,8 @@ const ShopView = () => {
                     </Button>
 
                     <span className="text-base font-semibold text-gray-900">
-                      {" "}
-                      1{" "}
+                      {' '}
+                      1{' '}
                     </span>
 
                     <Button shape="default" size="large" loading={false}>
@@ -196,14 +195,7 @@ const ShopView = () => {
               </div>
 
               <div className="mt-6 flex items-center space-x-4">
-                <ButtonInput
-                  minW="fit"
-                  shape="default"
-                  type="button"
-                  size="huge"
-                  loading={false}
-                  color={product?.profile?.color}
-                >
+                <ButtonInput type="button" size="sm" variant="info">
                   Add to cart
                 </ButtonInput>
               </div>

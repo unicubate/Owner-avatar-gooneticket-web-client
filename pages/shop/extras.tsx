@@ -7,14 +7,20 @@ import { useInView } from 'react-intersection-observer';
 import { useRouter } from 'next/router';
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { Fragment, useEffect, useState } from 'react';
-import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ListProductsShop } from '@/components/shop/list-products-shop';
-import { Input } from 'antd';
 import { ProductModel } from '@/types/product';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { BiStoreAlt } from 'react-icons/bi';
 import { GetStaticPropsContext } from 'next';
 import { useInputState } from '@/components/hooks/use-input-state';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { Input } from '@/components/ui/input';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  SearchInput,
+} from '@/components/ui-setting';
 
 const ShopsExtras = () => {
   const { search, handleSetSearch } = useInputState();
@@ -99,22 +105,21 @@ const ShopsExtras = () => {
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">
                       <ButtonInput
-                        onClick={() => router.push(`${`/shop/create`}`)}
-                        shape="default"
                         type="button"
-                        size="normal"
-                        loading={false}
-                        color={'indigo'}
+                        className="w-full"
+                        size="sm"
+                        variant="info"
+                        onClick={() => router.push(`${`/shop/create`}`)}
+                        icon={<PlusIcon className="mr-2 size-4" />}
                       >
                         Create product
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input
+                      <SearchInput
                         placeholder="Search by email, name"
                         onChange={handleSetSearch}
-                        className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
-                      />{' '}
+                      />
                     </div>
                   </div>
 
@@ -126,20 +131,10 @@ const ShopsExtras = () => {
 
               {hasNextPage && (
                 <div className="mx-auto mt-4 justify-center text-center">
-                  <div className="mt-4 sm:mt-0">
-                    <ButtonInput
-                      ref={ref}
-                      onClick={() => fetchNextPage()}
-                      shape="default"
-                      type="button"
-                      size="large"
-                      loading={isFetchingNextPage ? true : false}
-                      color={'indigo'}
-                      minW="fit"
-                    >
-                      Load More
-                    </ButtonInput>
-                  </div>
+                  <ButtonLoadMore
+                    isFetchingNextPage={isFetchingNextPage}
+                    onClick={() => fetchNextPage()}
+                  />
                 </div>
               )}
             </div>

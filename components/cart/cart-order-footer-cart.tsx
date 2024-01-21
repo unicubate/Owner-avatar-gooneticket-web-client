@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { BiCart } from "react-icons/bi";
-import { ButtonInput } from "../ui-setting/ant";
-import { UserModel } from "@/types/user.type";
-import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/cart";
-import { ErrorFile } from "../ui-setting/ant/error-file";
-import { CartOrderModel } from "@/types/cart";
-import { useRouter } from "next/router";
+import React from 'react';
+import { BiCart } from 'react-icons/bi';
+import { UserModel } from '@/types/user.type';
+import { GetCartsAPI, GetOneCartOrderAPI } from '@/api-site/cart';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { CartOrderModel } from '@/types/cart';
+import { useRouter } from 'next/router';
+import { ButtonInput } from '../ui-setting';
 
 const CartOrderFooterCart: React.FC<{
   user: UserModel;
@@ -40,23 +40,23 @@ const CartOrderFooterCart: React.FC<{
                         <BiCart className="size-10 bg-white dark:bg-[#121212]" />
                       </button>
                       <span className="absolute -right-1 -top-px inline-flex items-center rounded-full bg-red-600 px-1.5 py-0.5 text-xs font-semibold text-white">
-                      {carts?.summary?.totalQuantity}
+                        {carts?.summary?.totalQuantity}
                       </span>
                     </div>
 
                     <p className="ml-3 text-xl font-bold text-gray-900 dark:text-white">
-                      {carts?.summary?.totalPrice} {user?.profile?.currency?.symbol}
+                      {carts?.summary?.totalPrice}{' '}
+                      {user?.profile?.currency?.symbol}
                     </p>
 
                     <div className="ml-auto flex pl-8">
                       <ButtonInput
-                        shape="default"
                         type="button"
-                        size="large"
-                        loading={false}
-                        color="indigo"
-                        minW="fit"
-                        onClick={() => push(`/${user?.username}/summary/${cartOrder?.id}`) }
+                        size="lg"
+                        variant="info"
+                        onClick={() =>
+                          push(`/${user?.username}/summary/${cartOrder?.id}`)
+                        }
                       >
                         Checkout
                       </ButtonInput>

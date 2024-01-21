@@ -1,41 +1,41 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { Alert, Button, Checkbox, Input } from "antd";
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { TextInput, TextInputPassword } from "@/components/ui-setting/ant";
-import { UserRegisterFormModel } from "@/types/user.type";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { Alert, Button, Checkbox, Input } from 'antd';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { UserRegisterFormModel } from '@/types/user.type';
 import {
   loginUserAPI,
   registerGoogleUserAPI,
   registerUserAPI,
-} from "../../api-site/user";
+} from '../../api-site/user';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { LayoutSite } from "@/components/layout-site";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { GetStaticPropsContext } from "next";
+} from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
+import { PublicComponent } from '@/components/util/public-component';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { LayoutSite } from '@/components/layout-site';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GetStaticPropsContext } from 'next';
+import { TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
-  password: yup.string().min(8, "Minimum 8 symbols").required(),
+  password: yup.string().min(8, 'Minimum 8 symbols').required(),
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   confirm: yup
     .boolean()
-    .oneOf([true], "Please check the box to deactivate your account")
+    .oneOf([true], 'Please check the box to deactivate your account')
     .required(),
 });
 
@@ -43,7 +43,7 @@ const Register = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    false
+    false,
   );
   const {
     control,
@@ -52,11 +52,11 @@ const Register = () => {
     formState: { errors },
   } = useForm<UserRegisterFormModel>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<UserRegisterFormModel> = async (
-    payload: UserRegisterFormModel
+    payload: UserRegisterFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -64,7 +64,7 @@ const Register = () => {
     try {
       const { data: user } = await registerUserAPI({
         ...payload,
-        nextStep: "SETTING_PROFILE",
+        nextStep: 'SETTING_PROFILE',
       });
       setHasErrors(false);
       setLoading(false);
@@ -79,9 +79,9 @@ const Register = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -142,7 +142,7 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          <TextInputPassword
+          <TextInput
             control={control}
             label="Password"
             type="password"
@@ -167,14 +167,14 @@ const Register = () => {
                       htmlFor="remember-me"
                       className="text-sm font-bold text-gray-700"
                     >
-                      I accept the{" "}
+                      I accept the{' '}
                       <Link
                         className="text-sm text-blue-600 hover:underline"
                         href="/forgot-password"
                       >
                         terms
-                      </Link>{" "}
-                      &{" "}
+                      </Link>{' '}
+                      &{' '}
                       <Link
                         className="text-sm text-blue-600 hover:underline"
                         href="/forgot-password"
@@ -196,11 +196,10 @@ const Register = () => {
 
         <div className="mt-6">
           <ButtonInput
-            shape="default"
             type="submit"
-            size="large"
+            className="w-full"
+            variant="info"
             loading={loading}
-            color={"indigo"}
           >
             Create account
           </ButtonInput>
@@ -234,22 +233,22 @@ const Register = () => {
               setHasErrors(true);
               setHasErrors(error.response.data.message);
               AlertDangerNotification({
-                text: "An error has occurred.",
-                gravity: "top",
-                className: "info",
-                position: "center",
+                text: 'An error has occurred.',
+                gravity: 'top',
+                className: 'info',
+                position: 'center',
               });
             }
           }}
           onError={() => {
-            console.log("Login Failed");
+            console.log('Login Failed');
           }}
         />
       </GoogleOAuthProvider>
 
       <Link href="/login">
         <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
-          {" "}
+          {' '}
           Already have an account? Log in here
         </p>
       </Link>
@@ -258,13 +257,12 @@ const Register = () => {
 };
 export default PublicComponent(Register);
 
-
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/auth.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

@@ -2,7 +2,7 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavCreatePost } from '@/components/post/horizontal-nav-create-post';
 import { useAuth } from '@/components/util/context-user';
-import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ListPosts } from '@/components/post/list-posts';
 import { useInView } from 'react-intersection-observer';
 import { Fragment, useEffect } from 'react';
@@ -13,7 +13,8 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { Input } from 'antd';
 import { useInputState } from '@/components/hooks/use-input-state';
-import { SearchInput } from '../../components/ui-setting/ant/search-input';
+import { SearchInput } from '../../components/ui-setting/search-input';
+import { ButtonLoadMore } from '@/components/ui-setting';
 
 const Posts = () => {
   const { userStorage: user } = useAuth() as any;
@@ -145,20 +146,10 @@ const Posts = () => {
 
               {hasNextPage && (
                 <div className="mx-auto mt-4 justify-center text-center">
-                  <div className="mt-4 sm:mt-0">
-                    <ButtonInput
-                      ref={ref}
-                      onClick={() => fetchNextPage()}
-                      shape="default"
-                      type="button"
-                      size="large"
-                      loading={isFetchingNextPage ? true : false}
-                      color={'indigo'}
-                      minW="fit"
-                    >
-                      Load More
-                    </ButtonInput>
-                  </div>
+                  <ButtonLoadMore
+                    isFetchingNextPage={isFetchingNextPage}
+                    onClick={() => fetchNextPage()}
+                  />
                 </div>
               )}
             </div>

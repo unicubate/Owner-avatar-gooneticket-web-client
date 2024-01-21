@@ -1,34 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { UserForgotPasswordFormModel } from "@/types/user.type";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { UserForgotPasswordFormModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { passwordResetUserAPI } from "../../api-site/user";
-import { PublicComponent } from "@/components/util/public-component";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { LayoutSite } from "@/components/layout-site";
-import { TextInput } from "@/components/ui-setting/ant/text-input";
-import { GetStaticPropsContext } from "next";
+} from '@/utils/alert-notification';
+import { passwordResetUserAPI } from '../../api-site/user';
+import { PublicComponent } from '@/components/util/public-component';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { GetStaticPropsContext } from 'next';
+import { TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
 });
 
 const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
+    undefined,
   );
   const {
     control,
@@ -37,11 +36,11 @@ const ForgotPassword = () => {
     formState: { errors },
   } = useForm<UserForgotPasswordFormModel>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const onSubmit: SubmitHandler<UserForgotPasswordFormModel> = async (
-    payload: UserForgotPasswordFormModel
+    payload: UserForgotPasswordFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -51,10 +50,10 @@ const ForgotPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Email send successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Email send successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       reset();
     } catch (error: any) {
@@ -62,10 +61,10 @@ const ForgotPassword = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: "An error has occurred.",
-        gravity: "top",
-        className: "info",
-        position: "center",
+        text: 'An error has occurred.',
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -88,11 +87,11 @@ const ForgotPassword = () => {
 
         <div className="mt-6">
           <ButtonInput
-            shape="default"
             type="submit"
-            size="large"
+            className="w-full"
+            size="sm"
+            variant="info"
             loading={loading}
-            color={"indigo"}
           >
             Request Password Reset
           </ButtonInput>
@@ -115,7 +114,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/auth.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

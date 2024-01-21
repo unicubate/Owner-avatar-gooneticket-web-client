@@ -1,4 +1,3 @@
-export * from './button-input';
 export * from './date-input';
 export * from './empty-data';
 export * from '../avatar-coffee-component';
@@ -9,7 +8,4 @@ export * from './phone-number-input';
 export * from './select-input';
 export * from './select-multiple-search-input';
 export * from './select-search-input';
-export * from './switch-input';
-export * from './text-input-password';
-export * from './text-input';
-export * from './textarea-input'
+export * from './switch-input'

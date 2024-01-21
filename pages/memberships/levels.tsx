@@ -2,7 +2,7 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
 import { useAuth } from '@/components/util/context-user';
-import { ButtonInput, EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ListMemberships } from '@/components/membership/list-memberships';
 import { useRouter } from 'next/router';
 import { useInView } from 'react-intersection-observer';
@@ -13,13 +13,18 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { BiLockOpen } from 'react-icons/bi';
 import { GetStaticPropsContext } from 'next';
 import { useInputState } from '@/components/hooks/use-input-state';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  SearchInput,
+} from '@/components/ui-setting';
+import { PlusIcon } from 'lucide-react';
 
 const MembershipsLevels = () => {
   const { userStorage: user } = useAuth() as any;
   const router = useRouter();
   const { ref, inView } = useInView();
   const { search, handleSetSearch } = useInputState();
-
 
   const {
     isLoading: isLoadingMembership,
@@ -93,21 +98,20 @@ const MembershipsLevels = () => {
                   <div className="sm:flex sm:items-center sm:justify-between">
                     <div className="mt-4 sm:mt-0">
                       <ButtonInput
-                        onClick={() => router.push(`${`/memberships/create`}`)}
-                        shape="default"
                         type="button"
-                        size="normal"
-                        loading={false}
-                        color={'indigo'}
+                        className="w-full"
+                        size="sm"
+                        variant="info"
+                        onClick={() => router.push(`${`/memberships/create`}`)}
+                        icon={<PlusIcon className="mr-2 size-4" />}
                       >
                         Create level
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">
-                      <Input
-                        placeholder="Search by name"
+                      <SearchInput
+                        placeholder="Search by email, name"
                         onChange={handleSetSearch}
-                        className="dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500"
                       />
                     </div>
                   </div>
@@ -120,20 +124,11 @@ const MembershipsLevels = () => {
 
               {hasNextPage && (
                 <div className="mx-auto mt-4 justify-center text-center">
-                  <div className="mt-4 sm:mt-0">
-                    <ButtonInput
-                      ref={ref}
-                      onClick={() => fetchNextPage()}
-                      shape="default"
-                      type="button"
-                      size="large"
-                      loading={isFetchingNextPage ? true : false}
-                      color={'indigo'}
-                      minW="fit"
-                    >
-                      Load More
-                    </ButtonInput>
-                  </div>
+                  <ButtonLoadMore
+                    ref={ref}
+                    isFetchingNextPage={isFetchingNextPage}
+                    onClick={() => fetchNextPage()}
+                  />
                 </div>
               )}
             </div>

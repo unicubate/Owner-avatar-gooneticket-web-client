@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CommentFormModel } from "@/types/comment";
-import { CreateOrUpdateOneCommentAPI } from "@/api-site/comment";
-import { useAuth } from "../util/context-user";
-import { ButtonInput } from "../ui-setting/ant";
-import { Avatar } from "antd";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ModelType } from "@/utils/pagination-item";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { LoginModal } from "../auth-modal/login-modal";
-import { TextareaReactQuillInput } from "../ui-setting";
+import React, { useEffect, useState } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CommentFormModel } from '@/types/comment';
+import { CreateOrUpdateOneCommentAPI } from '@/api-site/comment';
+import { useAuth } from '../util/context-user';
+import { Avatar } from 'antd';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ModelType } from '@/utils/pagination-item';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { LoginModal } from '../auth-modal/login-modal';
+import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
   description: yup.string().min(7).required(),
@@ -50,11 +49,11 @@ const CreateOrUpdateFormComment: React.FC<{
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchDescription = watch("description", "");
+  const watchDescription = watch('description', '');
 
   useEffect(() => {
     if (comment) {
-      const fields = ["description", "postId"];
+      const fields = ['description', 'postId'];
       fields?.forEach((field: any) => setValue(field, comment[field]));
     }
   }, [comment, postId, setValue]);
@@ -72,16 +71,16 @@ const CreateOrUpdateFormComment: React.FC<{
   });
 
   const onSubmit: SubmitHandler<CommentFormModel> = async (
-    payload: CommentFormModel
+    payload: CommentFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
       await saveMutation({
         ...payload,
-        model: model ?? "",
-        postId: postId ?? "",
-        productId: productId ?? "",
+        model: model ?? '',
+        postId: postId ?? '',
+        productId: productId ?? '',
         commentId: comment?.id,
         organizationId: organizationId,
       });
@@ -93,10 +92,10 @@ const CreateOrUpdateFormComment: React.FC<{
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Comment save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Comment save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -104,9 +103,9 @@ const CreateOrUpdateFormComment: React.FC<{
       setHasErrors(error?.response?.data?.message);
       AlertDangerNotification({
         text: `${error?.response?.data?.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -139,12 +138,10 @@ const CreateOrUpdateFormComment: React.FC<{
           {openModal ? (
             <div className="flex items-center justify-between">
               <ButtonInput
-                status="cancel"
                 type="button"
-                shape="default"
-                size="normal"
-                onClick={() => setOpenModal(false)}
-                loading={false}
+                size="lg"
+                variant="info"
+                loading={loading}
               >
                 Cancel
               </ButtonInput>
@@ -156,11 +153,10 @@ const CreateOrUpdateFormComment: React.FC<{
               <>
                 {watchDescription.length >= 7 && (
                   <ButtonInput
-                    shape="default"
                     type="submit"
-                    size="large"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color={"indigo"}
                   >
                     Save
                   </ButtonInput>
@@ -171,11 +167,10 @@ const CreateOrUpdateFormComment: React.FC<{
                 onClick={() => {
                   setShowModal(true);
                 }}
-                shape="default"
-                type="button"
-                size="large"
+                type="submit"
+                size="lg"
+                variant="info"
                 loading={loading}
-                color={"indigo"}
               >
                 Save
               </ButtonInput>

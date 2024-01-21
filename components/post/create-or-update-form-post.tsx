@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
 import { TextInput, SelectInput } from '../ui-setting/shadcn';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { ButtonInput } from '../ui-setting/button-input';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
@@ -242,21 +242,20 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                 </div> */}
                 <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="large"
-                    loading={loading}
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
                     onClick={() => router.back()}
                   >
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    shape="default"
                     type="submit"
-                    size="large"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color="indigo"
                   >
                     Save and Publish
                   </ButtonInput>

@@ -1,11 +1,12 @@
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { Input } from "antd";
-import { useState } from "react";
-import { BiCoffeeTogo } from "react-icons/bi";
-import { useAuth } from "../util/context-user";
-import { CreatePaymentStripe } from "../payment/stripe/create-payment-stripe";
-import { CreatePaymentPayPal } from "../payment/create-payment-paypal";
-import { UserModel } from "@/types/user.type";
+import { ButtonInput } from '../ui-setting/button-input';
+import { Input } from 'antd';
+import { useState } from 'react';
+import { BiCoffeeTogo } from 'react-icons/bi';
+import { useAuth } from '../util/context-user';
+import { CreatePaymentStripe } from '../payment/stripe/create-payment-stripe';
+import { CreatePaymentPayPal } from '../payment/create-payment-paypal';
+import { UserModel } from '@/types/user.type';
+import { PlusIcon } from 'lucide-react';
 const { TextArea } = Input;
 
 const CreateFormPublicDonation: React.FC<{
@@ -16,7 +17,7 @@ const CreateFormPublicDonation: React.FC<{
   const initialCurrency = user?.profile?.currency?.code;
   const [increment, setIncrement] = useState(1);
   const [price, setPrice] = useState(initialPrice);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState('');
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
 
   const newValuePrice: number = Number(price) * increment;
@@ -34,61 +35,31 @@ const CreateFormPublicDonation: React.FC<{
         <div className="mt-6 flex items-center justify-between">
           <p className="text-xl font-bold text-gray-900">
             <BiCoffeeTogo
-              className={`text- size-14${user?.profile?.color}-500`}
+              className={`text-${user?.profile?.color}-500 size-14`}
             />
           </p>
-          <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-200">
+          <div className="ml-auto flex items-center justify-end space-x-6 rounded-md border border-gray-100 dark:border-gray-600">
             <ButtonInput
-              shape="default"
-              size="normal"
               type="button"
-              color={`${user?.profile?.color}`}
+              variant="info"
+              // color={`${user?.profile?.color}`}
               disabled={increment === 1 ? true : false}
               onClick={() => setIncrement((lk) => lk - 1)}
-            >
-              <svg
-                className="size-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </ButtonInput>
+              icon={<PlusIcon className="mr-2 size-4" />}
+            />
 
             <span className="text-base font-semibold text-black dark:text-white">
               {increment}
             </span>
 
             <ButtonInput
-              shape="default"
-              size="normal"
               type="button"
-              color={`${user?.profile?.color}`}
+              variant="info"
+              // color={`${user?.profile?.color}`}
               loading={false}
               onClick={() => setIncrement((lk) => lk + 1)}
-            >
-              <svg
-                className="size-5"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-            </ButtonInput>
+              icon={<PlusIcon className="mr-2 size-4" />}
+            />
           </div>
         </div>
 
@@ -97,7 +68,7 @@ const CreateFormPublicDonation: React.FC<{
             size="large"
             id="price"
             required={true}
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             type="number"
             name="price"
             placeholder={`${newValuePrice}`}
@@ -123,11 +94,13 @@ const CreateFormPublicDonation: React.FC<{
 
         {newValuePrice > 0 ? (
           <div className="mt-6 flex items-center justify-between">
-            <p className="text-2xl font-bold text-black dark:text-white">Donate</p>
+            <p className="text-2xl font-bold text-black dark:text-white">
+              Donate
+            </p>
             {newAmount?.value ? (
               <>
                 <p className="ml-auto text-xl font-bold text-black dark:text-white">
-                  {newAmount?.value ?? ""}
+                  {newAmount?.value ?? ''}
                 </p>
                 <p className="ml-1 text-xl font-bold text-black dark:text-white">
                   {initialCurrency}
@@ -156,11 +129,10 @@ const CreateFormPublicDonation: React.FC<{
                 <div className="mt-2">
                   <ButtonInput
                     onClick={() => setIsCardPay(true)}
-                    shape="default"
                     type="button"
-                    size="large"
-                    color="indigo"
-                    loading={false}
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                   >
                     Card Pay
                   </ButtonInput>

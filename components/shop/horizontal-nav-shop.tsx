@@ -1,27 +1,28 @@
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import Link from "next/link";
-import { useAuth } from "../util/context-user";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '../util/context-user';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const HorizontalNavShop: React.FC = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Orders",
-      href: "/shop",
+      title: 'Orders',
+      href: '/shop',
     },
     {
-      title: "Extras",
-      href: "/shop/extras",
+      title: 'Extras',
+      href: '/shop/extras',
     },
     {
-      title: "Configurations",
-      href: "/shop/config",
+      title: 'Configurations',
+      href: '/shop/config',
     },
   ]);
 
+  const bgColor = `bg-${profile?.color}-600 text-white`;
   return (
     <>
       <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
@@ -33,10 +34,11 @@ const HorizontalNavShop: React.FC = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${isActive
-                    ? `bg- text-white${profile?.color}-600`
+                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? bgColor
                     : `text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700`
-                  } `}
+                } `}
               >
                 {item?.icon}
 

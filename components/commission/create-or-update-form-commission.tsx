@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Select, Upload, UploadFile, UploadProps } from 'antd';
 import { SubmitHandler, Controller } from 'react-hook-form';
 import * as yup from 'yup';
-import { ButtonInput } from '../ui-setting/ant/button-input';
+import { ButtonInput } from '../ui-setting/button-input';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -13,10 +13,10 @@ import { CommissionFormModel } from '@/types/commission';
 import { CreateOrUpdateOneCommissionAPI } from '@/api-site/commission';
 import { useRouter } from 'next/router';
 import { TextareaReactQuillInput } from '../ui-setting';
-import { TextInput, NumberInput } from '../ui-setting/ant';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { useAuth } from '../util/context-user';
 import { filterImageAndFile } from '@/utils/utils';
+import { TextInput } from '../ui-setting/shadcn';
 
 const { Option } = Select;
 
@@ -156,7 +156,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                 </div>
 
                 <div className="mb-2">
-                  <NumberInput
+                  <TextInput
                     control={control}
                     label="Price*"
                     type="number"
@@ -164,7 +164,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     placeholder="Price commission"
                     errors={errors}
                     required
-                    prefix={profile?.currency?.code}
+                    pattern="[0-9]*"
+                    //prefix={profile?.currency?.code}
                   />
                 </div>
 
@@ -280,7 +281,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                   {watchEnableLimitSlot ? (
                     <div className="mb-1">
-                      <NumberInput
+                      <TextInput
                         control={control}
                         label=""
                         type="number"
@@ -288,6 +289,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                         placeholder="10"
                         errors={errors}
                         required
+                        pattern="[0-9]*"
                       />
                     </div>
                   ) : null}
@@ -316,22 +318,20 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
 
                 <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="large"
-                    loading={loading}
-                    onClick={() => router.back()}
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
+                    onClick={() => back()}
                   >
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
-                    shape="default"
                     type="submit"
-                    size="large"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color="indigo"
                   >
                     Save and Publish
                   </ButtonInput>

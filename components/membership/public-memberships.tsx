@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from "react";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { useInView } from "react-intersection-observer";
-import { GetInfiniteMembershipsAPI } from "@/api-site/membership";
-import { ListPublicMemberships } from "./list-public-memberships";
-import { LoadingFile } from "../ui-setting/ant/loading-file";
-import { ErrorFile } from "../ui-setting/ant/error-file";
-
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
+import { ListPublicMemberships } from './list-public-memberships';
+import { LoadingFile } from '../ui-setting/ant/loading-file';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { ButtonLoadMore } from '../ui-setting';
 
 type Props = {
   organizationId: string;
@@ -24,10 +23,10 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
     fetchNextPage,
   } = GetInfiniteMembershipsAPI({
     take: 10,
-    sort: "DESC",
+    sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    queryKey: ['memberships', "infinite"]
+    queryKey: ['memberships', 'infinite'],
   });
 
   useEffect(() => {
@@ -46,9 +45,9 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
       }
     };
 
-    document.addEventListener("scroll", onScroll);
+    document.addEventListener('scroll', onScroll);
     return () => {
-      document.removeEventListener("scroll", onScroll);
+      document.removeEventListener('scroll', onScroll);
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
@@ -61,13 +60,11 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
       description="Error find data please try again"
     />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListPublicMemberships item={item} key={index} />
-      ))
+      .map((item, index) => <ListPublicMemberships item={item} key={index} />)
   );
 
   return (
@@ -76,20 +73,11 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
 
       <div className="mx-auto mt-6 justify-center text-center">
         {hasNextPage && (
-          <div className="sm:mt-0">
-            <ButtonInput
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="large"
-              loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
-          </div>
+          <ButtonLoadMore
+            ref={ref}
+            isFetchingNextPage={isFetchingNextPage}
+            onClick={() => fetchNextPage()}
+          />
         )}
       </div>
     </>

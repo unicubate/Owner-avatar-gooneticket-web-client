@@ -1,28 +1,27 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { UserLoginFormModel } from "@/types/user.type";
-import { loginGoogleUserAPI, loginUserAPI } from "../../api-site/user";
-import { AlertDangerNotification } from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/public-component";
-import { LayoutSite } from "@/components/layout-site";
-import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui-setting/ant";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
-import { GetStaticPropsContext } from "next";
+import React from 'react';
+import Link from 'next/link';
+import { SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { UserLoginFormModel } from '@/types/user.type';
+import { loginGoogleUserAPI, loginUserAPI } from '../../api-site/user';
+import { AlertDangerNotification } from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
+import { PublicComponent } from '@/components/util/public-component';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
+import { GetStaticPropsContext } from 'next';
+import { ButtonInput } from '@/components/ui-setting';
+import { TextInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
-  password: yup.string().min(8, "Minimum 8 symbols").required(),
+  password: yup.string().min(8, 'Minimum 8 symbols').required(),
 });
 
 const Login = () => {
@@ -40,7 +39,7 @@ const Login = () => {
   } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
-    payload: UserLoginFormModel
+    payload: UserLoginFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -60,7 +59,7 @@ const Login = () => {
       // }
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken)
+        JSON.stringify(user?.accessToken),
       );
       setHasErrors(false);
       setLoading(false);
@@ -70,10 +69,10 @@ const Login = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: "An error has occurred.",
-        gravity: "top",
-        className: "info",
-        position: "center",
+        text: 'An error has occurred.',
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -112,7 +111,7 @@ const Login = () => {
           </div>
 
           <div className="mb-4">
-            <TextInputPassword
+            <TextInput
               control={control}
               label="Password"
               type="password"
@@ -136,11 +135,10 @@ const Login = () => {
 
           <div className="mt-6">
             <ButtonInput
-              shape="default"
               type="submit"
-              size="large"
+              className="w-full"
+              variant="info"
               loading={loading}
-              color={"indigo"}
             >
               Log In
             </ButtonInput>
@@ -169,7 +167,7 @@ const Login = () => {
                 });
                 localStorage.setItem(
                   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-                  JSON.stringify(user?.accessToken)
+                  JSON.stringify(user?.accessToken),
                 );
                 setHasErrors(false);
                 window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
@@ -177,22 +175,22 @@ const Login = () => {
                 setHasErrors(true);
                 setHasErrors(error.response.data.message);
                 AlertDangerNotification({
-                  text: "An error has occurred.",
-                  gravity: "top",
-                  className: "info",
-                  position: "center",
+                  text: 'An error has occurred.',
+                  gravity: 'top',
+                  className: 'info',
+                  position: 'center',
                 });
               }
             }}
             onError={() => {
-              console.log("Login Failed");
+              console.log('Login Failed');
             }}
           />
         </GoogleOAuthProvider>
 
         <Link href="/register">
           <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
-            {" "}
+            {' '}
             New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
           </p>
         </Link>
@@ -208,7 +206,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/auth.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

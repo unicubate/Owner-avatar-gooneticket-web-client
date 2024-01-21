@@ -7,13 +7,13 @@ import { useState } from "react";
 import { AvatarComponent } from "../ui-setting/ant/avatar-component";
 import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
 import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
-import { ButtonInput } from "../ui-setting/ant";
 import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
 import { UserModel } from "@/types/user.type";
 import { ColorType } from "@/types/profile.type";
 import { navigationPublicUser } from "./index";
 import { useTranslations } from "next-intl";
 import { ThemeToggle } from "../ui-setting/theme-toggle";
+import { ButtonInput } from "../ui-setting";
 
 interface Props {
   user?: UserModel;
@@ -150,13 +150,11 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   {userVisiter?.id !== user?.id ? (
                     <>
                       <ButtonInput
-                        shape="default"
-                        size="medium"
+                        // color={user?.profile?.color as ColorType}
                         type="button"
-                        color={user?.profile?.color as ColorType}
-                        loading={false}
+                        variant="info"
                         onClick={() => setOpenModal(true)}
-                        icon={<BiCoffeeTogo className="size-5" />}
+                        icon={<BiCoffeeTogo className="mr-2 size-5" />}
                       >
                         Donate
                       </ButtonInput>

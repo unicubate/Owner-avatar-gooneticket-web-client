@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
 import { useState } from "react";
 import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ButtonInput } from "../ui-setting/ant";
+import { ButtonInput } from "../ui-setting";
 
 export type NavbarProps = {
   title: string;
@@ -174,11 +174,10 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
               <div className="flex items-center space-x-6 sm:ml-5">
                 <div className="relative">
                   <ButtonInput
-                    status="cancel"
-                    type="button"
-                    shape="default"
-                    size="normal"
-                    loading={false}
+                     type="button"
+                     className="w-full"
+                     size="sm"
+                     variant="ghost"
                     onClick={() => {
                       router.push(`${user?.profile ? `/dashboard` : `/login`}`);
                     }}
@@ -188,11 +187,10 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                 </div>
                 <div className="relative">
                   <ButtonInput
-                    shape="default"
-                    size="normal"
-                    type="button"
-                    color="indigo"
-                    loading={false}
+                     type="button"
+                     className="w-full"
+                     size="sm"
+                     variant="info"
                     onClick={() => {
                       router.push(`${user?.profile ? `/dashboard` : `/register`}`);
                     }}

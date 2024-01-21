@@ -1,13 +1,13 @@
-import { TextInput } from "../ui-setting/ant";
-import * as yup from "yup";
-import { ButtonInput } from "../ui-setting/ant";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
+import * as yup from 'yup';
+import { ButtonInput } from '../ui-setting';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 
-import "react-credit-cards-2/dist/es/styles-compiled.css";
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
-import { CreateOnPaymentPI } from "@/api-site/payment";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { SubmitHandler } from "react-hook-form";
+import { CreateOnPaymentPI } from '@/api-site/payment';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { SubmitHandler } from 'react-hook-form';
+import { TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   code: yup.string().min(5).max(8).required(),
@@ -16,7 +16,7 @@ const schema = yup.object({
 const CreateValidationFormCodePhoneUser: React.FC<{
   showModal: boolean;
   setShowModal: any;
-  item: any
+  item: any;
 }> = ({ showModal, setShowModal, item }) => {
   const {
     control,
@@ -39,39 +39,39 @@ const CreateValidationFormCodePhoneUser: React.FC<{
     },
   });
 
-
-  const onSubmit: SubmitHandler<{ code: string }> = async (
-    payload
-  ) => {
+  const onSubmit: SubmitHandler<{ code: string }> = async (payload) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
       await mutateAsync({
-        data: { ...payload, phone: item?.phone, organizationId: item?.organizationId },
+        data: {
+          ...payload,
+          phone: item?.phone,
+          organizationId: item?.organizationId,
+        },
         paymentModel: 'VERIFY-CODE-PHONE',
       });
       AlertSuccessNotification({
-        text: "Phone save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Phone save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       setHasErrors(false);
       setLoading(false);
-      setShowModal(false)
+      setShowModal(false);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
-
 
   const resendItem = async (item: any) => {
     try {
@@ -81,17 +81,17 @@ const CreateValidationFormCodePhoneUser: React.FC<{
       });
 
       AlertSuccessNotification({
-        text: "Your authentication code has been sent",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Your authentication code has been sent',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -103,8 +103,12 @@ const CreateValidationFormCodePhoneUser: React.FC<{
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
           <div className="relative  m-auto w-full max-w-2xl rounded-xl bg-white p-5 shadow-lg dark:bg-[#121212]">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h2 className="p-2 text-center text-base font-bold">Valid phone</h2>
-              <h3 className="mb-2 p-2 text-center font-normal">{item?.phone}</h3>
+              <h2 className="p-2 text-center text-base font-bold">
+                Valid phone
+              </h2>
+              <h3 className="mb-2 p-2 text-center font-normal">
+                {item?.phone}
+              </h3>
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
                   <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
@@ -113,8 +117,6 @@ const CreateValidationFormCodePhoneUser: React.FC<{
                 )}
 
                 <div className="mb-2">
-
-
                   <TextInput
                     control={control}
                     label="Code"
@@ -147,25 +149,22 @@ const CreateValidationFormCodePhoneUser: React.FC<{
                   </div>
                 </div>
 
-
                 <div className="mt-4 flex items-center space-x-4">
                   <ButtonInput
-                    status="cancel"
                     type="button"
-                    shape="default"
-                    size="normal"
-                    loading={loading}
+                    className="w-full"
+                    size="lg"
+                    variant="outline"
                     onClick={() => setShowModal(false)}
                   >
                     Cancel
                   </ButtonInput>
                   <ButtonInput
-                    minW="fit"
-                    shape="default"
                     type="submit"
-                    size="large"
+                    className="w-full"
+                    size="lg"
+                    variant="info"
                     loading={loading}
-                    color="indigo"
                   >
                     Verify
                   </ButtonInput>

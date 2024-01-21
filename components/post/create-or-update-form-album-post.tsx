@@ -1,18 +1,18 @@
-import * as yup from "yup";
-import { SubmitHandler } from "react-hook-form";
-import { ButtonInput } from "../ui-setting/ant/button-input";
-import { Alert } from "antd";
-import { useEffect } from "react";
+import * as yup from 'yup';
+import { SubmitHandler } from 'react-hook-form';
+import { ButtonInput } from '../ui-setting';
+import { Alert } from 'antd';
+import { useEffect } from 'react';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-} from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { AlbumFormModel } from "@/types/album";
-import { CreateOrUpdateOneAlbumAPI } from "@/api-site/album";
-import { TextInput } from "../ui-setting/shadcn";
-import { TextareaReactQuillInput } from "../ui-setting";
+} from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { AlbumFormModel } from '@/types/album';
+import { CreateOrUpdateOneAlbumAPI } from '@/api-site/album';
+import { TextInput } from '../ui-setting/shadcn';
+import { TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
   name: yup.string().required(),
@@ -24,9 +24,7 @@ type Props = {
   organizationId: string;
 };
 
-const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
-  album,
-}) => {
+const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album }) => {
   const { back, push } = useRouter();
   const {
     control,
@@ -41,7 +39,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
 
   useEffect(() => {
     if (album) {
-      const fields = ["name", "description"];
+      const fields = ['name', 'description'];
       fields?.forEach((field: any) => setValue(field, album[field]));
     }
   }, [album, setValue]);
@@ -59,7 +57,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
   });
 
   const onSubmit: SubmitHandler<AlbumFormModel> = async (
-    payload: AlbumFormModel
+    payload: AlbumFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -71,10 +69,10 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Album save successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Album save successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
       push(`/posts/create?type=gallery&albumId=${result?.id}`);
     } catch (error: any) {
@@ -83,13 +81,12 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
-
 
   return (
     <>
@@ -101,7 +98,7 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
             >
               <div className="px-4 py-5">
                 <h2 className="font-bold text-black dark:text-white">
-                  {album?.id ? "Update" : "Create a new"} album
+                  {album?.id ? 'Update' : 'Create a new'} album
                 </h2>
 
                 <div className="flex-auto justify-center p-2">
@@ -110,7 +107,6 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
                       <Alert message={hasErrors} type="error" showIcon />
                     </div>
                   ) : null}
-
 
                   <div className="mt-4">
                     <TextInput
@@ -134,24 +130,22 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({
                     />
                   </div>
 
-                  <div className="mt-4 flex items-center space-x-4">
+                  <div className="my-4 flex items-center space-x-4">
                     <ButtonInput
-                      status="cancel"
                       type="button"
-                      shape="default"
-                      size="large"
-                      loading={loading}
+                      className="w-full"
+                      size="lg"
+                      variant="outline"
                       onClick={() => back()}
                     >
                       Cancel
                     </ButtonInput>
                     <ButtonInput
-                      minW="fit"
-                      shape="default"
                       type="submit"
-                      size="large"
+                      className="w-full"
+                      size="lg"
+                      variant="info"
                       loading={loading}
-                      color="indigo"
                     >
                       Save
                     </ButtonInput>

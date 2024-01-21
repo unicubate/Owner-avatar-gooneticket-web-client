@@ -1,7 +1,7 @@
-import { Result } from "antd";
-import { useRouter } from "next/router";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
-import { GetStaticPropsContext } from "next";
+import { Result } from 'antd';
+import { useRouter } from 'next/router';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { GetStaticPropsContext } from 'next';
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
@@ -18,22 +18,19 @@ const TransactionSuccess = () => {
             <>
               <div className="flex items-center space-x-4">
                 <ButtonInput
-                  status="cancel"
                   type="button"
-                  shape="default"
-                  size="normal"
-                  loading={false}
+                  className="w-full"
+                  size="sm"
+                  variant="outline"
                   onClick={() => back()}
                 >
                   By Again
                 </ButtonInput>
                 <ButtonInput
-                  minW="fit"
-                  shape="default"
                   type="button"
-                  size="large"
-                  loading={false}
-                  color="indigo"
+                  className="w-full"
+                  size="sm"
+                  variant="info"
                   onClick={() => {
                     push(`/home`);
                   }}
@@ -56,7 +53,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

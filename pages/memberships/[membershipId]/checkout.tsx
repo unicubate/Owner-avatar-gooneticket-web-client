@@ -10,7 +10,7 @@ import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal"
 import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
 import { useAuth } from "@/components/util/context-user";
 import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
-import { ButtonInput } from "@/components/ui-setting/ant/button-input";
+import { ButtonInput } from "@/components/ui-setting/button-input";
 import { formatePrice } from "@/utils";
 import { PrivateComponent } from "@/components/util/private-component";
 import { convertToPluralMonth } from "@/utils/utils";
@@ -192,11 +192,10 @@ const CheckoutView = () => {
                                   <div className="mt-2">
                                     <ButtonInput
                                       onClick={() => setIsCardPay(true)}
-                                      shape="default"
                                       type="button"
-                                      size="large"
-                                      color="indigo"
-                                      loading={false}
+                                      className="w-full"
+                                      size="sm"
+                                      variant="info"
                                     >
                                       Card Pay
                                     </ButtonInput>
