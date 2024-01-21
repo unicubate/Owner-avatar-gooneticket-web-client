@@ -15,11 +15,12 @@ const ButtonLoadMore: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <div className="mt-4 sm:mt-0">
+      <div className="mt-2 sm:mt-0">
         <ButtonInput
           type="button"
           size="lg"
-          variant="info"
+          variant="outline"
+          className="w-full"
           ref={ref}
           loading={isFetchingNextPage ? true : false}
           onClick={onClick}
