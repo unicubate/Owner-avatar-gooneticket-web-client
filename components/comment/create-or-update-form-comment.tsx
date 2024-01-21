@@ -12,6 +12,7 @@ import { ModelType } from '@/utils/pagination-item';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { LoginModal } from '../auth-modal/login-modal';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
+import { useDialog } from '../hooks/use-dialog';
 
 const schema = yup.object({
   description: yup.string().min(7).required(),
@@ -34,8 +35,7 @@ const CreateOrUpdateFormComment: React.FC<{
   openModal,
   setOpenModal,
 }) => {
-  const [showModal, setShowModal] = useState(false);
-  const { profile, userStorage } = useAuth() as any;
+  const { isOpen, setIsOpen, userStorage } = useDialog();
   const {
     reset,
     setValue,
@@ -168,7 +168,7 @@ const CreateOrUpdateFormComment: React.FC<{
             ) : (
               <ButtonInput
                 onClick={() => {
-                  setShowModal(true);
+                  setIsOpen(true);
                 }}
                 type="submit"
                 size="lg"
@@ -181,7 +181,7 @@ const CreateOrUpdateFormComment: React.FC<{
           </div>
         </div>
       </form>
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

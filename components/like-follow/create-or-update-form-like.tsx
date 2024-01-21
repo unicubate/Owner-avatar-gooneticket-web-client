@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import * as yup from "yup";
-import { MdFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
-import { BiComment } from "react-icons/bi";
-import { CreateOrUpdateOneLikeAPI } from "@/api-site/like";
-import { AlertDangerNotification } from "@/utils";
-import { useAuth } from "../util/context-user";
-import { LoginModal } from "../auth-modal/login-modal";
+import React, { useState } from 'react';
+import * as yup from 'yup';
+import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
+import { BiComment } from 'react-icons/bi';
+import { CreateOrUpdateOneLikeAPI } from '@/api-site/like';
+import { AlertDangerNotification } from '@/utils';
+import { useAuth } from '../util/context-user';
+import { LoginModal } from '../auth-modal/login-modal';
+import { useDialog } from '../hooks/use-dialog';
 
 const CreateOrUpdateFormLike: React.FC<{
   item?: any;
-  typeLike: "POST" | "COMMENT";
+  typeLike: 'POST' | 'COMMENT';
 }> = ({ item, typeLike }) => {
-  const { userStorage } = useAuth() as any;
-  const [showModal, setShowModal] = useState(false);
+  const { isOpen, setIsOpen, userStorage } = useDialog();
   const [like, setLike] = useState(false);
   const [isLike, setIsLike] = useState(item?.isLike);
   const [totalLike, setTotalLike] = useState(item?.totalLike ?? 0);
@@ -20,7 +20,7 @@ const CreateOrUpdateFormLike: React.FC<{
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrUpdateOneLikeAPI({
     onSuccess: () => {},
-    onError: (error?: any) => {},
+    onError: () => {},
   });
 
   const likeItem = async (item: any) => {
@@ -37,9 +37,9 @@ const CreateOrUpdateFormLike: React.FC<{
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -71,7 +71,7 @@ const CreateOrUpdateFormLike: React.FC<{
       ) : (
         <button
           onClick={() => {
-            setShowModal(true);
+            setIsOpen(true);
           }}
           className="text-2xl hover:text-indigo-600 focus:ring-indigo-600"
         >
@@ -80,7 +80,7 @@ const CreateOrUpdateFormLike: React.FC<{
       )}
 
       <span className="ml-1.5 text-sm">{totalLike}</span>
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

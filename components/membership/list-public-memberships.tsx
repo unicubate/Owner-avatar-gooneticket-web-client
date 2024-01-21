@@ -8,14 +8,14 @@ import { useRouter } from 'next/router';
 import { convertToPluralMonth } from '@/utils/utils';
 import { useAuth } from '../util/context-user';
 import { LoginModal } from '../auth-modal/login-modal';
+import { useDialog } from '../hooks/use-dialog';
 
 type Props = {
   item?: MembershipModel;
 };
 
 const ListPublicMemberships: React.FC<Props> = ({ item }) => {
-  const { userStorage } = useAuth() as any;
-  const [showModal, setShowModal] = useState(false);
+  const { isOpen, setIsOpen, userStorage } = useDialog();
   const router = useRouter();
 
   return (
@@ -65,7 +65,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
                 onClick={() => {
                   userStorage?.id
                     ? router.push(`/memberships/${item?.id}/checkout`)
-                    : setShowModal(true);
+                    : setIsOpen(true);
                 }}
                 type="button"
                 className="w-full"
@@ -83,7 +83,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
         </div>
       </div>
 
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

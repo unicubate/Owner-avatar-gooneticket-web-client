@@ -5,18 +5,21 @@ import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import Swal from 'sweetalert2';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useAuth } from '../util/context-user';
+import { useDialog } from '../hooks/use-dialog';
 
 const CreateOrUpdateFormFollow: React.FC<{
   item?: any;
 }> = ({ item }) => {
-  const { userStorage } = useAuth() as any;
-  const [showModal, setShowModal] = useState(false);
+  const {
+    isOpen,
+    setIsOpen,
+    userStorage,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useDialog();
   const [follow, setFollow] = useState(false);
   const [isFollow, setIsFollow] = useState(item?.isFollow);
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrDeleteOneFollowerAPI({
@@ -112,14 +115,14 @@ const CreateOrUpdateFormFollow: React.FC<{
           type="button"
           variant="danger"
           onClick={() => {
-            setShowModal(true);
+            setIsOpen(true);
           }}
         >
           Follow
         </ButtonInput>
       )}
 
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

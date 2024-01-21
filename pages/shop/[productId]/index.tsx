@@ -1,35 +1,39 @@
-import { ButtonInput } from "@/components/ui-setting";
-import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api-site/product";
-import { AlertDangerNotification, AlertSuccessNotification, formatePrice } from "@/utils";
-import { HtmlParser } from "@/utils/html-parser";
-import { LayoutSite } from "@/components/layout-site";
-import { MdOutlineDiscount } from "react-icons/md";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import ReactPlayer from "react-player";
-import ListComments from "@/components/comment/list-comments";
-import { useAuth } from "@/components/util/context-user";
-import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
-import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from "@/api-site/cart";
-import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { useState } from "react";
-import { LoginModal } from "@/components/auth-modal/login-modal";
-import { GetStaticPropsContext } from "next";
+import { ButtonInput } from '@/components/ui-setting';
+import { useRouter } from 'next/router';
+import { GetOneProductAPI } from '@/api-site/product';
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formatePrice,
+} from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import { LayoutSite } from '@/components/layout-site';
+import { MdOutlineDiscount } from 'react-icons/md';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import ReactPlayer from 'react-player';
+import ListComments from '@/components/comment/list-comments';
+import { useAuth } from '@/components/util/context-user';
+import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from '@/api-site/cart';
+import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { useState } from 'react';
+import { LoginModal } from '@/components/auth-modal/login-modal';
+import { GetStaticPropsContext } from 'next';
+import { useDialog } from '@/components/hooks/use-dialog';
 
 const contentStyle: React.CSSProperties = {
-  height: "100%",
-  width: "100%",
-  lineHeight: "50px",
-  textAlign: "center",
-  background: "#364d79",
+  height: '100%',
+  width: '100%',
+  lineHeight: '50px',
+  textAlign: 'center',
+  background: '#364d79',
 };
 
 const ShopView = () => {
-  const { userStorage: userVisitor } = useAuth() as any;
-  const [showModal, setShowModal] = useState(false);
+  const { isOpen, setIsOpen, userStorage: userVisitor } = useDialog();
   const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);
@@ -70,23 +74,22 @@ const ShopView = () => {
         });
         AlertSuccessNotification({
           text: `Product add to cart successfully`,
-          gravity: "top",
-          className: "info",
-          position: "center",
+          gravity: 'top',
+          className: 'info',
+          position: 'center',
         });
       } else {
-        setShowModal(true);
+        setIsOpen(true);
       }
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
-
 
   const dataProduct =
     isPendingProduct || isPendingUser ? (
@@ -117,8 +120,8 @@ const ShopView = () => {
                       className="ml-2 cursor-pointer"
                     >
                       <p className="text-sm font-bold text-gray-900">
-                        {product?.profile?.firstName ?? ""}{" "}
-                        {product?.profile?.lastName ?? ""}
+                        {product?.profile?.firstName ?? ''}{' '}
+                        {product?.profile?.lastName ?? ''}
                       </p>
                     </div>
 
@@ -129,7 +132,7 @@ const ShopView = () => {
                       className="ml-auto"
                     >
                       <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                        {" "}
+                        {' '}
                         View shop
                       </p>
                     </div>
@@ -169,7 +172,7 @@ const ShopView = () => {
 
             <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
-                {product?.title ?? ""}
+                {product?.title ?? ''}
               </h1>
 
               <div className="mt-4 flex items-center">
@@ -177,24 +180,24 @@ const ShopView = () => {
                   {formatePrice({
                     value: Number(product?.priceDiscount ?? 0),
                     isDivide: false,
-                  }) ?? ""}
+                  }) ?? ''}
                 </p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {product?.currency?.symbol ?? ""}
+                  {product?.currency?.symbol ?? ''}
                 </p>
                 {product?.enableDiscount ? (
                   <>
                     <p className="ml-3 text-2xl font-bold text-gray-500">
                       <del>
-                        {" "}
+                        {' '}
                         {formatePrice({
                           value: Number(product?.price ?? 0),
                           isDivide: false,
-                        }) ?? ""}{" "}
+                        }) ?? ''}{' '}
                       </del>
                     </p>
                     <p className="text-2xl font-bold text-gray-500">
-                      <del> {product?.currency?.symbol ?? ""} </del>
+                      <del> {product?.currency?.symbol ?? ''} </del>
                     </p>
                   </>
                 ) : null}
@@ -342,7 +345,7 @@ const ShopView = () => {
               {product?.id ? (
                 <ListComments
                   model="PRODUCT"
-                  modelIds={["PRODUCT"]}
+                  modelIds={['PRODUCT']}
                   productId={String(product?.id)}
                   take={10}
                   organizationId={userVisitor?.organizationId}
@@ -421,14 +424,14 @@ const ShopView = () => {
         {user?.id && cartOrder?.id ? (
           <CartOrderFooterCart user={user} cartOrder={cartOrder} />
         ) : null}
-        
-        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+
+        <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
       </>
     );
 
   return (
     <>
-      <LayoutSite title={`${product?.title ?? ""}`}>{dataProduct}</LayoutSite>
+      <LayoutSite title={`${product?.title ?? ''}`}>{dataProduct}</LayoutSite>
     </>
   );
 };
@@ -438,8 +441,8 @@ export default ShopView;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -447,7 +450,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

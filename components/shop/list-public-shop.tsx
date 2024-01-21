@@ -1,27 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { Image } from "antd";
-import { HtmlParser } from "@/utils/html-parser";
-import Link from "next/link";
-import { ProductModel } from "@/types/product";
-import { ReadMore } from "@/utils/read-more";
-import { viewOneFileUploadAPI } from "@/api-site/upload";
-import { BiCart } from "react-icons/bi";
-import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
-} from "@/utils";
-import { CreateOrUpdateOneCartAPI } from "@/api-site/cart";
-import { LoginModal } from "../auth-modal/login-modal";
-import { useAuth } from "../util/context-user";
+import React, { useState } from 'react';
+import { Image } from 'antd';
+import { HtmlParser } from '@/utils/html-parser';
+import Link from 'next/link';
+import { ProductModel } from '@/types/product';
+import { ReadMore } from '@/utils/read-more';
+import { viewOneFileUploadAPI } from '@/api-site/upload';
+import { BiCart } from 'react-icons/bi';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
+import { LoginModal } from '../auth-modal/login-modal';
+import { useAuth } from '../util/context-user';
+import { useDialog } from '../hooks/use-dialog';
 
 type Props = {
   item?: ProductModel;
 };
 
 const ListPublicShop: React.FC<Props> = ({ item }) => {
-  const { userStorage } = useAuth() as any;
-  const [showModal, setShowModal] = useState(false);
+  const { isOpen, setIsOpen, userStorage } = useDialog();
+
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
@@ -37,19 +35,19 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
         });
         AlertSuccessNotification({
           text: `Product add to cart successfully`,
-          gravity: "top",
-          className: "info",
-          position: "center",
+          gravity: 'top',
+          className: 'info',
+          position: 'center',
         });
       } else {
-        setShowModal(true);
+        setIsOpen(true);
       }
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -68,7 +66,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
             className="size-full object-cover transition-all duration-300 group-hover:scale-125"
             src={
               viewOneFileUploadAPI({
-                folder: "products",
+                folder: 'products',
                 fileName: String(item?.uploadsImage?.[0]?.path),
               }) as string
             }
@@ -79,19 +77,19 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
             <p className="text-2xl text-gray-900 dark:text-white">
-              {item?.priceDiscount ?? ""}
+              {item?.priceDiscount ?? ''}
             </p>
             <p className="ml-1 text-xl  text-gray-900 dark:text-white">
-              {item?.currency?.symbol ?? ""}
+              {item?.currency?.symbol ?? ''}
             </p>
 
             {item?.enableDiscount ? (
               <>
                 <p className="ml-2 text-lg text-gray-400 dark:text-white">
-                  <del> {item?.price ?? ""} </del>
+                  <del> {item?.price ?? ''} </del>
                 </p>
                 <p className="ml-1 text-lg text-gray-400 dark:text-white">
-                  <del> {item?.currency?.symbol ?? ""} </del>
+                  <del> {item?.currency?.symbol ?? ''} </del>
                 </p>
               </>
             ) : null}
@@ -118,11 +116,11 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
 
           <h3 className="duratin-200 mt-2 flex-1 text-sm font-bold text-gray-900 transition-all hover:text-blue-600 dark:text-white sm:text-base">
             <Link href={`/shop/${item?.slug}`} title={item?.title}>
-              <ReadMore html={String(item?.title ?? "")} value={60} />
+              <ReadMore html={String(item?.title ?? '')} value={60} />
             </Link>
           </h3>
           <p className="mt-2 text-base font-normal text-gray-600 dark:text-white">
-            <HtmlParser html={String(item?.description ?? "")} value={60} />
+            <HtmlParser html={String(item?.description ?? '')} value={60} />
           </p>
           {/* <div className="sm:flex flex-col sm:items-end sm:justify-between">
             <div className="mt-2">
@@ -132,7 +130,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
         </div>
       </div>
 
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

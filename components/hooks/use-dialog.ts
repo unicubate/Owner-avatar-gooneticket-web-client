@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useAuth } from '../util/context-user';
 
 const useDialog = () => {
+  const { userStorage } = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -17,6 +19,7 @@ const useDialog = () => {
     setLoading,
     setSuccess,
     setHasErrors,
+    userStorage,
   };
 };
 

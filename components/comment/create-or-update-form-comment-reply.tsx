@@ -9,6 +9,7 @@ import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
 import { useAuth } from '../util/context-user';
 import { ModelType } from '@/utils/pagination-item';
 import { TextareaReactQuillInput } from '../ui-setting';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -21,22 +22,18 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   setOpenModalReply?: any;
   openModalReply?: boolean;
 }> = ({ parentId, model, comment, openModalReply, setOpenModalReply }) => {
-  const user = useAuth() as any;
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
   const {
-    watch,
     reset,
-    control,
     setValue,
+    watch,
+    control,
     handleSubmit,
-    formState: { errors },
-  } = useForm<any>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
   const watchDescription = watch('description', '');
 
   useEffect(() => {
