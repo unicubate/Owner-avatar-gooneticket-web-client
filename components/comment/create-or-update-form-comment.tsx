@@ -140,8 +140,11 @@ const CreateOrUpdateFormComment: React.FC<{
               <ButtonInput
                 type="button"
                 size="lg"
-                variant="info"
+                variant="outline"
                 loading={loading}
+                onClick={() => {
+                  setOpenModal(false);
+                }}
               >
                 Cancel
               </ButtonInput>

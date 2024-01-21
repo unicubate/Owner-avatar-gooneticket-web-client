@@ -1,26 +1,40 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { PostModel, PostType } from "@/types/post";
-import ListComments from "../comment/list-comments";
-import { formateDMYHH } from "@/utils";
-import { BiComment, BiConversation } from "react-icons/bi";
-import { MdOutlineModeEdit } from "react-icons/md";
-import ReactPlayer from "react-player";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { HtmlParser } from "@/utils/html-parser";
-import { IoShareOutline } from "react-icons/io5";
-import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/context-user";
-import Link from "next/link";
-import { downloadOneFileUploadAPI } from "@/api-site/upload";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { HiOutlineLockClosed, HiOutlineLockOpen } from "react-icons/hi";
-import "react-h5-audio-player/lib/styles.css";
-import { AudioPlayerInput } from "../ui-setting/audio-player-Input";
-import { useRouter } from "next/router";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { UserVisitorModel } from "@/types/user.type";
-import { ButtonInput } from "../ui-setting";
+import React from 'react';
+import { PostModel, PostType } from '@/types/post';
+import ListComments from '../comment/list-comments';
+import { formateDMYHH } from '@/utils';
+import { BiComment, BiConversation } from 'react-icons/bi';
+import { MdOutlineModeEdit } from 'react-icons/md';
+import ReactPlayer from 'react-player';
+import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { HtmlParser } from '@/utils/html-parser';
+import { IoShareOutline } from 'react-icons/io5';
+import { FiDownload } from 'react-icons/fi';
+import { useAuth } from '../util/context-user';
+import Link from 'next/link';
+import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
+import 'react-h5-audio-player/lib/styles.css';
+import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
+import { useRouter } from 'next/router';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { UserVisitorModel } from '@/types/user.type';
+import { ButtonInput } from '../ui-setting';
+
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { CopyIcon } from 'lucide-react';
 
 type Props = {
   item?: PostModel;
@@ -55,7 +69,7 @@ const ListFollowPosts: React.FC<Props> = ({
               className="ml-3 cursor-pointer"
             >
               <p className="text-sm font-bold dark:text-white">
-                {item?.profile?.firstName ?? ""} {item?.profile?.lastName ?? ""}
+                {item?.profile?.firstName ?? ''} {item?.profile?.lastName ?? ''}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {formateDMYHH(item?.createdAt as Date, locale as string)}
@@ -64,8 +78,8 @@ const ListFollowPosts: React.FC<Props> = ({
 
             <div className="ml-auto">
               <div className="flex items-center space-x-2 sm:ml-5">
-                {item?.whoCanSee === "MEMBERSHIP" &&
-                  item?.isValidSubscribe !== 1 ? (
+                {item?.whoCanSee === 'MEMBERSHIP' &&
+                item?.isValidSubscribe !== 1 ? (
                   <ButtonInput
                     onClick={() =>
                       push(`/${item?.profile?.username}/memberships`)
@@ -77,12 +91,48 @@ const ListFollowPosts: React.FC<Props> = ({
                     <span className="ml-1 font-bold">Join membership</span>
                   </ButtonInput>
                 ) : null}
-                <button
-                  title="Share"
-                  className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
-                >
-                  <IoShareOutline  className="mr-2 size-5" />
-                </button>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <ButtonInput
+                      className="ml-2 text-gray-600 hover:text-gray-800 focus:ring-gray-900"
+                      variant="link"
+                      type="button"
+                    >
+                      <IoShareOutline className="mr-2 size-5" />
+                    </ButtonInput>
+                  </DialogTrigger>
+                  <DialogContent className="dark:border-gray-800 sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Share link</DialogTitle>
+                      <DialogDescription>
+                        Anyone who has this link will be able to view this.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="flex items-center space-x-2">
+                      <div className="grid flex-1 gap-2">
+                        <Label htmlFor="link" className="sr-only">
+                          Link
+                        </Label>
+                        <Input
+                          id="link"
+                          defaultValue={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+                          readOnly
+                        />
+                      </div>
+                      <ButtonInput
+                        type="button"
+                        variant="info"
+                        size="sm"
+                        className="px-3"
+                      >
+                        <span className="sr-only">Copy</span>
+                        <CopyIcon className="size-4" />
+                      </ButtonInput>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+
                 {/* {item?.allowDownload && (
                   <button
                     title="Download"
@@ -103,13 +153,14 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           </div>
 
-          {item?.urlMedia && ["VIDEO"].includes(item?.type) ? (
+          {item?.urlMedia && ['VIDEO'].includes(item?.type) ? (
             <div
               className={`mx-auto mt-1 
-            ${item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                }`}
+            ${
+              item?.whoCanSee === 'MEMBERSHIP' && item?.isValidSubscribe !== 1
+                ? 'blur-xl'
+                : ''
+            }`}
             >
               <ReactPlayer
                 className="mr-auto"
@@ -121,8 +172,6 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-
-
           {item?.uploadsImage?.length > 0 ? (
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
@@ -130,11 +179,12 @@ const ListFollowPosts: React.FC<Props> = ({
                 uploads={item?.uploadsImage}
                 folder="posts"
                 height={400}
-                className={`object-cover ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`object-cover ${
+                  item?.whoCanSee === 'MEMBERSHIP' &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                  }`}
+                    ? 'blur-xl'
+                    : ''
+                }`}
               />
             </div>
           ) : null}
@@ -168,7 +218,7 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           </div> */}
 
-          {item?.whoCanSee && ["AUDIO"].includes(item?.type as PostType) ? (
+          {item?.whoCanSee && ['AUDIO'].includes(item?.type as PostType) ? (
             <div className="mx-auto justify-center text-center">
               <AudioPlayerInput
                 post={item}
@@ -186,7 +236,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 href={`/posts/${item?.slug}`}
                 className="cursor-pointer font-bold text-gray-900 dark:text-white"
               >
-                {item?.title ?? ""}
+                {item?.title ?? ''}
               </Link>
             </div>
           ) : null}
@@ -196,14 +246,15 @@ const ListFollowPosts: React.FC<Props> = ({
               className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
             >
               <span
-                className={`ql-editor ${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`ql-editor ${
+                  item?.whoCanSee === 'MEMBERSHIP' &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-lg"
-                  : ""
-                  }`}
+                    ? 'blur-lg'
+                    : ''
+                }`}
               >
                 <HtmlParser
-                  html={String(item?.description ?? "")}
+                  html={String(item?.description ?? '')}
                   value={item?.isValidSubscribe !== 1 ? 600 : 0}
                 />
               </span>
@@ -221,8 +272,9 @@ const ListFollowPosts: React.FC<Props> = ({
               <>
                 <Link
                   title="Edit"
-                  href={`/posts/${item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                 >
                   <MdOutlineModeEdit className="size-6" />
@@ -236,12 +288,12 @@ const ListFollowPosts: React.FC<Props> = ({
                   onClick={() => {
                     push(
                       `${downloadOneFileUploadAPI({
-                        folder: "posts",
+                        folder: 'posts',
                         fileName:
-                          item.type === "AUDIO"
+                          item.type === 'AUDIO'
                             ? item?.uploadsFile[0]?.path
                             : item?.uploadsImage[0]?.path,
-                      })}`
+                      })}`,
                     );
                   }}
                   className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
@@ -251,8 +303,8 @@ const ListFollowPosts: React.FC<Props> = ({
               </>
             )}
 
-            {item?.whoCanSee === "MEMBERSHIP" &&
-              item?.isValidSubscribe !== 1 ? (
+            {item?.whoCanSee === 'MEMBERSHIP' &&
+            item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl">
                   <HiOutlineLockClosed />
@@ -271,8 +323,8 @@ const ListFollowPosts: React.FC<Props> = ({
 
           <ListComments
             model="POST"
-            modelIds={["POST"]}
-            userVisitorId={userVisitor?.id ?? ""}
+            modelIds={['POST']}
+            userVisitorId={userVisitor?.id ?? ''}
             organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}

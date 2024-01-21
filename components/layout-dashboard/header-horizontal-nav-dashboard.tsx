@@ -28,7 +28,7 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
         closable={true}
         onClose={onClose}
         open={open}
-        className="bg-white dark:bg-[#121212]"
+        className="bg-white dark:bg-black"
       >
         <div className="flex flex-col overflow-y-auto pt-5">
           <VerticalNavDashboard user={user} />

@@ -1,5 +1,5 @@
-import { ReloadIcon } from '@radix-ui/react-icons';
 import { Button, SizeButton, VariantButton } from '../ui/button';
+import { LoadingOutlined } from '@ant-design/icons';
 
 interface Props {
   className?: string;
@@ -39,7 +39,11 @@ const ButtonInput: React.FC<Props> = ({
       >
         {loading ? (
           <>
-            <ReloadIcon className="mr-2 size-4 animate-spin" />
+            <LoadingOutlined
+              style={{ fontSize: 20, color: '#ffff' }}
+              spin
+              className="mr-2 size-4 animate-spin"
+            />
             Please wait
           </>
         ) : (

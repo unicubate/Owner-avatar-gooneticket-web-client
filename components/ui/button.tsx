@@ -13,6 +13,7 @@ export type VariantButton =
   | 'outline'
   | 'secondary'
   | 'ghost'
+  | 'success'
   | 'link';
 
 export type SizeButton = 'default' | 'sm' | 'lg' | 'icon';
@@ -27,6 +28,7 @@ const buttonVariants = cva(
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         warning: 'bg-warning text-warning-foreground hover:bg-warning/50',
         info: 'bg-info text-info-foreground hover:bg-info/50',
+        success: 'bg-success text-success-foreground hover:bg-success/50',
         danger: 'bg-danger text-danger-foreground hover:bg-danger/50',
         outline:
           'border border-input bg-background hover:bg-accent hover:text-accent-foreground',

@@ -1,28 +1,28 @@
-"use client"
+'use client';
 
-import React, { useState } from "react";
-import { formateDateDayjs } from "../../utils/formate-date-dayjs";
-import Swal from "sweetalert2";
-import { Avatar, Tooltip } from "antd";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { DeleteOnePostAPI } from "@/api-site/post";
-import { PostModel, PostType } from "@/types/post";
-import { ReadMore } from "@/utils/read-more";
+import React, { useState } from 'react';
+import { formateDateDayjs } from '../../utils/formate-date-dayjs';
+import Swal from 'sweetalert2';
+import { Avatar, Tooltip } from 'antd';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { DeleteOnePostAPI } from '@/api-site/post';
+import { PostModel, PostType } from '@/types/post';
+import { ReadMore } from '@/utils/read-more';
 import {
   MdOutlineDeleteOutline,
   MdFavoriteBorder,
   MdOutlineModeEdit,
-} from "react-icons/md";
-import { BiComment, BiConversation } from "react-icons/bi";
-import { AiOutlineCalendar } from "react-icons/ai";
-import {
-  viewOneFileUploadAPI,
-} from "@/api-site/upload";
-import { FiDownload } from "react-icons/fi";
-import { TbWorld } from "react-icons/tb";
-import { useRouter } from "next/router";
-import { HiOutlineLockClosed } from "react-icons/hi";
-import { IconTypePost } from "@/utils/icon-type-post";
+} from 'react-icons/md';
+import { BiComment, BiConversation } from 'react-icons/bi';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { viewOneFileUploadAPI } from '@/api-site/upload';
+import { FiDownload } from 'react-icons/fi';
+import { TbWorld } from 'react-icons/tb';
+import { useRouter } from 'next/router';
+import { HiOutlineLockClosed } from 'react-icons/hi';
+import { IconTypePost } from '@/utils/icon-type-post';
+import { useDialog } from '../hooks/use-dialog';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
   item?: PostModel;
@@ -30,45 +30,37 @@ type Props = {
 };
 
 const ListGallery: React.FC<Props> = ({ item, index }) => {
+  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
   const router = useRouter();
-  const [openModal, setOpenModal] = useState<boolean>(false);
 
   const saveMutation = DeleteOnePostAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
 
-  const deleteItem = (item: any) => {
-    Swal.fire({
-      title: "Delete?",
-      text: "Are you sure you want to delete this?",
-      confirmButtonText: "Yes, Deleted",
-      cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#dc3545",
-      cancelButtonColor: "#6f42c1",
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        try {
-          await saveMutation.mutateAsync({ postId: item?.id });
-          AlertSuccessNotification({
-            text: "Image deleted successfully",
-            className: "info",
-            gravity: "top",
-            position: "center",
-          });
-        } catch (error: any) {
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-            gravity: "top",
-            className: "info",
-            position: "center",
-          });
-        }
-      }
-    });
+  const deleteItem = async (item: any) => {
+    setLoading(true);
+    setIsOpen(true);
+    try {
+      await saveMutation.mutateAsync({ postId: item?.id });
+      AlertSuccessNotification({
+        text: 'Image deleted successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
+      });
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error: any) {
+      setLoading(false);
+      setIsOpen(true);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
+      });
+    }
   };
 
   return (
@@ -81,7 +73,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 size={100}
                 shape="square"
                 src={viewOneFileUploadAPI({
-                  folder: "posts",
+                  folder: 'posts',
                   fileName: String(item?.uploadsImage?.[0]?.path),
                 })}
                 alt={item?.title}
@@ -102,7 +94,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             <div className="mt-2 flex items-center">
               {item?.title ? (
                 <p className="mt-2 text-lg font-bold">
-                  <ReadMore html={String(item?.title ?? "")} value={100} />
+                  <ReadMore html={String(item?.title ?? '')} value={100} />
                 </p>
               ) : null}
             </div>
@@ -119,7 +111,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
 
               <button className="tex-sm ml-1.5">
-                {item?.whoCanSee === "PUBLIC" ? (
+                {item?.whoCanSee === 'PUBLIC' ? (
                   <TbWorld />
                 ) : (
                   <HiOutlineLockClosed />
@@ -143,13 +135,13 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium">
-            <Tooltip placement="bottomRight" title={"Edit"}>
+            <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() =>
                   router.push(
                     `/posts/${
                       item?.id
-                    }/edit?type=${item?.type.toLocaleLowerCase()}`
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`,
                   )
                 }
                 className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
@@ -158,14 +150,14 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               </button>
             </Tooltip>
 
-            <Tooltip placement="bottomRight" title={"Delete"}>
-              <button
-                onClick={() => deleteItem(item)}
-                className="ml-2 text-lg text-gray-600 hover:text-red-600"
-              >
-                <MdOutlineDeleteOutline />
-              </button>
-            </Tooltip>
+            <ActionModalDialog
+              title="Delete?"
+              loading={loading}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              onClick={() => deleteItem(item)}
+              description="Are you sure you want to delete this?"
+            />
           </div>
         </div>
       </div>

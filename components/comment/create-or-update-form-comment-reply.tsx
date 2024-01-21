@@ -115,20 +115,20 @@ const CreateOrUpdateFormCommentReply: React.FC<{
             className="h-auto"
           />
 
-          {/* {openModalReply ? (
-            <div className="flex justify-between items-center">
+          {openModalReply ? (
+            <div className="flex items-center justify-between">
               <ButtonInput
-                status="cancel"
                 type="button"
-                shape="default"
-                size="large"
-                onClick={() => setOpenModalReply(false)}
-                loading={false}
+                size="lg"
+                variant="outline"
+                onClick={() => {
+                  setOpenModalReply(false);
+                }}
               >
                 Cancel
               </ButtonInput>
             </div>
-          ) : null} */}
+          ) : null}
 
           {watchDescription.length >= 1 && (
             <div className="flex-col sm:flex sm:items-end sm:justify-between">
