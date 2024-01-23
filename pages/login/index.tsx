@@ -13,6 +13,7 @@ import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
 import { GetStaticPropsContext } from 'next';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
+import { TextPasswordInput } from '@/components/ui-setting/shadcn/text-password-input';
 
 const schema = yup.object({
   email: yup
@@ -111,10 +112,9 @@ const Login = () => {
           </div>
 
           <div className="mb-4">
-            <TextInput
+            <TextPasswordInput
               control={control}
               label="Password"
-              type="password"
               name="password"
               placeholder="Password"
               errors={errors}

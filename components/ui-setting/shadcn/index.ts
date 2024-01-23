@@ -3,3 +3,4 @@ export * from './select-input';
 export * from './switch-input';
 export * from './textarea-input';
 export * from './action-modal-dialog';
+export * from './text-password-input';

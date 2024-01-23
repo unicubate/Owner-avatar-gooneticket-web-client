@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { ButtonInput } from '../ui-setting';
-import { TextInput } from '../ui-setting/shadcn';
+import { TextPasswordInput } from '../ui-setting/shadcn';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 
 type Props = {
@@ -48,20 +48,18 @@ const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
 
             <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
-                <TextInput
+                <TextPasswordInput
                   label="Old password"
                   control={control}
-                  type="password"
                   name="oldPassword"
                   placeholder="Old password"
                   errors={errors}
                 />
               </div>
               <div className="mt-2">
-                <TextInput
+                <TextPasswordInput
                   label="New password"
                   control={control}
-                  type="password"
                   name="newPassword"
                   placeholder="New password"
                   errors={errors}
@@ -69,10 +67,9 @@ const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
               </div>
 
               <div className="mt-2">
-                <TextInput
+                <TextPasswordInput
                   label="Confirm password"
                   control={control}
-                  type="password"
                   name="confirmPassword"
                   placeholder="Confirm password"
                   errors={errors}

@@ -3,7 +3,7 @@ import React from 'react';
 import { PostModel, PostType } from '@/types/post';
 import ListComments from '../comment/list-comments';
 import { formateDMYHH } from '@/utils';
-import { BiComment, BiConversation } from 'react-icons/bi';
+import { BiComment, BiConversation, BiDotsHorizontal } from 'react-icons/bi';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
@@ -23,6 +23,22 @@ import { UserVisitorModel } from '@/types/user.type';
 import { ButtonInput } from '../ui-setting';
 
 import {
+  Menubar,
+  MenubarCheckboxItem,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarSeparator,
+  MenubarShortcut,
+  MenubarSub,
+  MenubarSubContent,
+  MenubarSubTrigger,
+  MenubarTrigger,
+} from '@/components/ui/menubar';
+
+import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -35,6 +51,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CopyIcon } from 'lucide-react';
+import { Button } from 'antd';
+import { useDialog } from '../hooks/use-dialog';
 
 type Props = {
   item?: PostModel;
@@ -48,6 +66,7 @@ const ListFollowPosts: React.FC<Props> = ({
   userVisitor,
 }) => {
   const { locale, push } = useRouter();
+  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
 
   return (
     <>
@@ -92,6 +111,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   </ButtonInput>
                 ) : null}
 
+                {/* refaire un refactoring de ce code ci dessous */}
                 <Dialog>
                   <DialogTrigger asChild>
                     <ButtonInput
@@ -303,7 +323,7 @@ const ListFollowPosts: React.FC<Props> = ({
               </>
             )}
 
-            {item?.whoCanSee === 'MEMBERSHIP' &&
+            {/* {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (
               <>
                 <button className="ml-auto text-2xl">
@@ -318,7 +338,43 @@ const ListFollowPosts: React.FC<Props> = ({
                 </button>
                 <span className="ml-2 text-sm">Unlocked</span>
               </>
-            )}
+            )} */}
+
+            {/* <Button
+              type="text"
+              shape="circle"
+              icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
+              size="small"
+              className="ml-auto text-2xl"
+            /> */}
+
+            {/* <Menubar className="ml-auto" defaultValue="Opend">
+              <MenubarMenu>
+                <MenubarTrigger>File</MenubarTrigger>
+                <MenubarContent className="dark:border-gray-900">
+                  <MenubarItem>
+                    New Tab <MenubarShortcut>⌘T</MenubarShortcut>
+                  </MenubarItem>
+                  <MenubarItem>
+                    New Window <MenubarShortcut>⌘N</MenubarShortcut>
+                  </MenubarItem>
+                  <MenubarItem disabled>New Incognito Window</MenubarItem>
+                  <MenubarSeparator />
+                  <MenubarSub>
+                    <MenubarSubTrigger>Share</MenubarSubTrigger>
+                    <MenubarSubContent>
+                      <MenubarItem>Email link</MenubarItem>
+                      <MenubarItem>Messages</MenubarItem>
+                      <MenubarItem>Notes</MenubarItem>
+                    </MenubarSubContent>
+                  </MenubarSub>
+                  <MenubarSeparator />
+                  <MenubarItem>
+                    Print... <MenubarShortcut>⌘P</MenubarShortcut>
+                  </MenubarItem>
+                </MenubarContent>
+              </MenubarMenu>
+            </Menubar> */}
           </div>
 
           <ListComments

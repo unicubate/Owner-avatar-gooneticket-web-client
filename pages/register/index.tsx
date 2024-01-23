@@ -21,7 +21,7 @@ import { ButtonInput } from '@/components/ui-setting/button-input';
 import { LayoutSite } from '@/components/layout-site';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { GetStaticPropsContext } from 'next';
-import { TextInput } from '@/components/ui-setting/shadcn';
+import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 
 const schema = yup.object({
   email: yup
@@ -142,10 +142,9 @@ const Register = () => {
         </div>
 
         <div className="mb-4">
-          <TextInput
+          <TextPasswordInput
             control={control}
             label="Password"
-            type="password"
             name="password"
             placeholder="Password"
             errors={errors}

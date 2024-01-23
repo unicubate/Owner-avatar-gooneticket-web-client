@@ -7,7 +7,7 @@ import { UserLoginFormModel } from '@/types/user.type';
 import { loginGoogleUserAPI, loginUserAPI } from '@/api-site/user';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import Link from 'next/link';
-import { TextInput } from '../ui-setting/shadcn';
+import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
 import { ButtonInput } from '../ui-setting';
 
 const schema = yup.object({
@@ -101,10 +101,9 @@ const LoginModal: React.FC<{
               </div>
 
               <div className="mb-4">
-                <TextInput
+                <TextPasswordInput
                   control={control}
                   label="Password"
-                  type="password"
                   name="password"
                   placeholder="Password"
                   errors={errors}

@@ -45,7 +45,7 @@ const CreateFormPublicDonation: React.FC<{
               // color={`${user?.profile?.color}`}
               disabled={increment === 1 ? true : false}
               onClick={() => setIncrement((lk) => lk - 1)}
-              icon={<PlusIcon className="mr-2 size-4" />}
+              icon={<PlusIcon className="mr-2 size-5" />}
             />
 
             <span className="text-base font-semibold text-black dark:text-white">
@@ -58,7 +58,7 @@ const CreateFormPublicDonation: React.FC<{
               // color={`${user?.profile?.color}`}
               loading={false}
               onClick={() => setIncrement((lk) => lk + 1)}
-              icon={<PlusIcon className="mr-2 size-4" />}
+              icon={<PlusIcon className="mr-2 size-5" />}
             />
           </div>
         </div>
