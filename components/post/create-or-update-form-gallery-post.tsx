@@ -1,24 +1,24 @@
-import * as yup from 'yup';
-import { Controller, SubmitHandler } from 'react-hook-form';
-import { PlusOutlined } from '@ant-design/icons';
-import { ButtonInput } from '../ui-setting/button-input';
-import { Alert, Upload, UploadFile, UploadProps } from 'antd';
-import { useEffect, useState } from 'react';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import { CreateOrUpdateOnePostGalleryAPI } from '@/api-site/post';
+import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { PostFormModel, arrayWhoCanSees } from '@/types/post';
-import { CreateOrUpdateOnePostGalleryAPI } from '@/api-site/post';
 import { filterImageAndFile } from '@/utils/utils';
-import { useRouter } from 'next/router';
-import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { SwitchInput } from '../ui-setting/ant';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { GetAllCategoriesAPI } from '@/api-site/category';
+import { PlusOutlined } from '@ant-design/icons';
+import { Alert, Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { TextareaReactQuillInput } from '../ui-setting';
-import { TextInput, SelectInput } from '../ui-setting/shadcn';
+import { SwitchInput } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting/button-input';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   title: yup.string().optional(),
@@ -120,7 +120,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         gravity: 'top',
         position: 'center',
       });
-      router.back();
+      router.push(`/gallery`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

@@ -17,7 +17,6 @@ import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Skeleton from 'react-loading-skeleton';
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -219,11 +218,11 @@ const CheckoutView = () => {
                         </>
                       ) : (
                         <>
-                          <Skeleton height={200} width={400} />
+                          {/* <Skeleton height={200} width={400} />
                           <Skeleton height={70} width={400} className="mt-4" />
                           <Skeleton height={20} width={400} className="mt-4" />
                           <Skeleton height={40} width={400} className="mt-6" />
-                          <Skeleton height={40} width={400} className="mt-2" />
+                          <Skeleton height={40} width={400} className="mt-2" /> */}
                         </>
                       )}
                     </div>

@@ -2,7 +2,6 @@ import '@/styles/globals.css';
 import 'animate.css';
 import { ConfigProvider } from 'antd';
 import type { AppProps } from 'next/app';
-import 'react-loading-skeleton/dist/skeleton.css';
 import 'react-quill/dist/quill.snow.css';
 import 'toastify-js/src/toastify.css';
 

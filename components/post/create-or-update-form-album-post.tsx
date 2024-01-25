@@ -1,18 +1,17 @@
-import * as yup from 'yup';
-import { SubmitHandler } from 'react-hook-form';
-import { ButtonInput } from '../ui-setting';
-import { Alert } from 'antd';
-import { useEffect } from 'react';
+import { CreateOrUpdateOneAlbumAPI } from '@/api-site/album';
+import { AlbumFormModel } from '@/types/album';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { Alert } from 'antd';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { AlbumFormModel } from '@/types/album';
-import { CreateOrUpdateOneAlbumAPI } from '@/api-site/album';
+import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { TextInput } from '../ui-setting/shadcn';
-import { TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
   name: yup.string().required(),
