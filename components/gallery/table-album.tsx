@@ -32,13 +32,23 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
     isPaginate: 'true',
   });
 
+  const skeletonArray = [];
+  for (var i = 0; i < 4; i++) {
+    skeletonArray.push(
+      <div
+        key={i}
+        className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-black"
+      >
+        <div className="p-2">
+          <div className="flex items-center">
+            <Skeleton className="h-20 w-auto" />
+          </div>
+        </div>
+      </div>,
+    );
+  }
   const dataTableAlbum = isLoadingAlbum ? (
-    <>
-      <Skeleton className="h-20 w-auto" />
-      <Skeleton className="h-20 w-auto" />
-      <Skeleton className="h-20 w-auto" />
-      <Skeleton className="h-20 w-auto" />
-    </>
+    <>{skeletonArray}</>
   ) : isErrorAlbum ? (
     <ErrorFile
       status="error"
@@ -80,14 +90,6 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
   return (
     <>
       {dataTableAlbum}
-
-      {/* <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
-        <div className="p-4">
-          <div className="flex items-center">
-            <Skeleton className="h-4 w-[250px]" />
-          </div>
-        </div>
-      </div> */}
 
       {/* {hasNextPage && (
         <div className="mt-4 text-center justify-center mx-auto">
