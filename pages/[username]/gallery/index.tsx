@@ -1,14 +1,13 @@
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { useRouter } from "next/router";
-import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import PublicGallery from "@/components/gallery/public-gallery";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
-import { useAuth } from "@/components/util/context-user";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { GetStaticPropsContext } from "next";
-import Link from "next/link";
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import PublicGallery from '@/components/gallery/public-gallery';
+import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
+import { SubHorizontalNavPublicUser } from '@/components/user/sub-horizontal-nav-public-user';
+import { useAuth } from '@/components/util/context-user';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const GalleryUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -26,8 +25,9 @@ const GalleryUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Galleries - ${user?.profile?.firstName ?? ""} ${user?.profile?.lastName ?? ""
-          }`}
+        title={`Galleries - ${user?.profile?.firstName ?? ''} ${
+          user?.profile?.lastName ?? ''
+        }`}
         user={user}
       >
         <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -110,9 +110,9 @@ const GalleryUserPublic = () => {
         </div>
       </LayoutUserPublicSite>
 
-      {status === "pending" ? <LoadingFile /> : null}
+      {status === 'pending' ? <LoadingFile /> : null}
 
-      {status === "error" ? (
+      {status === 'error' ? (
         <ErrorFile
           status="error"
           title="404"

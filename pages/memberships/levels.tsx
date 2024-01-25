@@ -1,24 +1,23 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
+import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
-import { useAuth } from '@/components/util/context-user';
-import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ListMemberships } from '@/components/membership/list-memberships';
-import { useRouter } from 'next/router';
-import { useInView } from 'react-intersection-observer';
-import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
-import { useEffect } from 'react';
-import { Input } from 'antd';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { BiLockOpen } from 'react-icons/bi';
-import { GetStaticPropsContext } from 'next';
-import { useInputState } from '@/components/hooks/use-input-state';
 import {
   ButtonInput,
   ButtonLoadMore,
   SearchInput,
 } from '@/components/ui-setting';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import { PlusIcon } from 'lucide-react';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { BiLockOpen } from 'react-icons/bi';
+import { useInView } from 'react-intersection-observer';
 
 const MembershipsLevels = () => {
   const { userStorage: user } = useAuth() as any;

@@ -1,6 +1,5 @@
-import { SmileOutlined } from "@ant-design/icons";
-import { Select, Space, Tag } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { Select, Space, Tag } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
@@ -17,12 +16,12 @@ interface Props {
 const SelectDiscountSearchInput: React.FC<Props> = ({
   control,
   dataItem,
-  label = "",
+  label = '',
   name,
   errors,
-  placeholder = "",
+  placeholder = '',
   icon,
-  firstOptionName = "",
+  firstOptionName = '',
 }) => {
   return (
     <>
@@ -39,12 +38,12 @@ const SelectDiscountSearchInput: React.FC<Props> = ({
           <Select
             showSearch
             size="large"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             id={name}
             placeholder={placeholder}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             filterOption={(input, option) =>
-              (option?.name ?? "").toLowerCase().includes(input.toLowerCase())
+              (option?.name ?? '').toLowerCase().includes(input.toLowerCase())
             }
             {...field}
           >
@@ -63,9 +62,9 @@ const SelectDiscountSearchInput: React.FC<Props> = ({
                           <Tag
                             bordered={false}
                             className="ml-2"
-                            color={`${item.isValid ? "success" : "error"}`}
+                            color={`${item.isValid ? 'success' : 'error'}`}
                           >
-                            {item.isValid ? "Valid" : "Invalid"}
+                            {item.isValid ? 'Valid' : 'Invalid'}
                           </Tag>
                         </button>
                       </Space>

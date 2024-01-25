@@ -1,17 +1,15 @@
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { useRouter } from "next/router";
-import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/context-user";
-import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
-import { HtmlParser } from "@/utils/html-parser";
-import { CreateFormPublicDonation } from "@/components/donation/create-form-public-donation";
-import { RecentCommentTransactions } from "@/components/transaction/recent-comment-transactions";
-import { LoadingFile } from "@/components/ui-setting/ant";
-import ContentLoader from "react-content-loader";
-import Skeleton from "react-loading-skeleton";
-import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { GetStaticPropsContext } from "next";
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { CreateFormPublicDonation } from '@/components/donation/create-form-public-donation';
+import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { RecentCommentTransactions } from '@/components/transaction/recent-comment-transactions';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
+import { SubHorizontalNavPublicUser } from '@/components/user/sub-horizontal-nav-public-user';
+import { useAuth } from '@/components/util/context-user';
+import { HtmlParser } from '@/utils/html-parser';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const ProfilePublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -26,8 +24,8 @@ const ProfilePublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
+        title={`${user?.profile?.firstName ?? ''} ${
+          user?.profile?.lastName ?? ''
         }`}
         user={user}
       >
@@ -51,7 +49,7 @@ const ProfilePublic = () => {
                               <span className={`ql-editor`}>
                                 <HtmlParser
                                   html={String(
-                                    user?.profile?.description ?? ""
+                                    user?.profile?.description ?? '',
                                   )}
                                 />
                               </span>
@@ -74,7 +72,7 @@ const ProfilePublic = () => {
                     {user?.donation?.count > 0 ? (
                       <RecentCommentTransactions
                         model="DONATION"
-                        modelIds={["DONATION"]}
+                        modelIds={['DONATION']}
                         userReceiveId={user?.id}
                       />
                     ) : null}
@@ -86,9 +84,9 @@ const ProfilePublic = () => {
         </div>
       </LayoutUserPublicSite>
 
-      {status === "pending" ? <LoadingFile /> : null}
+      {status === 'pending' ? <LoadingFile /> : null}
 
-      {status === "error" ? (
+      {status === 'error' ? (
         <ErrorFile
           status="error"
           title="404"
@@ -104,8 +102,8 @@ export default ProfilePublic;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -114,7 +112,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
         ...(await import(`/lang/${locale}/common.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

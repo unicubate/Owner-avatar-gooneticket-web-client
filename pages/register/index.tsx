@@ -1,27 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Alert, Button, Checkbox, Input } from 'antd';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { UserRegisterFormModel } from '@/types/user.type';
-import {
-  loginUserAPI,
-  registerGoogleUserAPI,
-  registerUserAPI,
-} from '../../api-site/user';
-import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
-} from '@/utils/alert-notification';
-import { useRouter } from 'next/router';
-import { PublicComponent } from '@/components/util/public-component';
 import { ButtonInput } from '@/components/ui-setting/button-input';
-import { LayoutSite } from '@/components/layout-site';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import { GetStaticPropsContext } from 'next';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { PublicComponent } from '@/components/util/public-component';
+import { UserRegisterFormModel } from '@/types/user.type';
+import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { Checkbox } from 'antd';
+import { GetStaticPropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { registerGoogleUserAPI, registerUserAPI } from '../../api-site/user';
 
 const schema = yup.object({
   email: yup
@@ -88,13 +81,13 @@ const Register = () => {
 
   return (
     <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
-      <div className="mx-auto flex justify-center">
+      {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"
           src="https://merakiui.com/images/logo.svg"
           alt=""
         />
-      </div>
+      </div> */}
       <div className="mx-auto flex justify-center">
         <h6 className="mt-3 text-center text-xl font-bold">
           {`Sign up. It's free!`}
@@ -103,9 +96,9 @@ const Register = () => {
 
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
         {hasErrors && (
-          <div className="font-regular relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-            {hasErrors}
-          </div>
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>{hasErrors}</AlertDescription>
+          </Alert>
         )}
 
         <div className="mb-4">
@@ -198,6 +191,7 @@ const Register = () => {
             type="submit"
             className="w-full"
             variant="info"
+            size="lg"
             loading={loading}
           >
             Create account

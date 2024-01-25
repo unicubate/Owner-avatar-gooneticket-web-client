@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { GetCartsAPI } from '@/api-site/cart';
+import { CartOrderModel } from '@/types/cart';
+import { UserModel } from '@/types/user.type';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { BiCart } from 'react-icons/bi';
-import { UserModel } from '@/types/user.type';
-import { GetCartsAPI, GetOneCartOrderAPI } from '@/api-site/cart';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { CartOrderModel } from '@/types/cart';
-import { useRouter } from 'next/router';
 import { ButtonInput } from '../ui-setting';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 
 const CartOrderFooterCart: React.FC<{
   user: UserModel;

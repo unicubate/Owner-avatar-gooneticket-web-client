@@ -1,22 +1,22 @@
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import {
-  BiHomeCircle,
-  BiSearch,
-  BiDetail,
-  BiCog,
-  BiLockOpen,
   BiBookContent,
-  BiImage,
+  BiCog,
+  BiDetail,
   BiHeart,
+  BiHomeCircle,
+  BiImage,
   BiLayout,
+  BiLockOpen,
+  BiSearch,
   BiStoreAlt,
 } from 'react-icons/bi';
 import { RiShakeHandsLine } from 'react-icons/ri';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { logoutUser } from '../util/context-user';
-import { useTranslations } from 'next-intl';
 
 export type NavbarProps = {
   title: string;

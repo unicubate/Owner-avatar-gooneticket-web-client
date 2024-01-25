@@ -14,6 +14,7 @@ import { PublicComponent } from '@/components/util/public-component';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { GetStaticPropsContext } from 'next';
 import { TextInput } from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const schema = yup.object({
   newPassword: yup.string().min(8, 'Minimum 8 symbols').required(),
@@ -75,18 +76,24 @@ const ResetPassword = () => {
 
   return (
     <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
-      <div className="mx-auto flex justify-center">
+      {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"
           src="https://merakiui.com/images/logo.svg"
           alt=""
         />
-      </div>
+      </div> */}
       <div className="mx-auto flex justify-center">
         <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
       </div>
 
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        {hasErrors && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>{hasErrors}</AlertDescription>
+          </Alert>
+        )}
+
         <div className="mb-4">
           <TextInput
             control={control}
@@ -113,7 +120,7 @@ const ResetPassword = () => {
           <ButtonInput
             type="submit"
             className="w-full"
-            size="sm"
+            size="lg"
             variant="info"
             loading={loading}
           >

@@ -1,7 +1,7 @@
-import { Drawer } from "antd";
-import { VerticalNavDashboard } from "./vertical-nav-dashboard";
-import { useState } from "react";
-import { HorizontalNavDashboard } from "./horizontal-nav-dashboard";
+import { Drawer } from 'antd';
+import { useState } from 'react';
+import { HorizontalNavDashboard } from './horizontal-nav-dashboard';
+import { VerticalNavDashboard } from './vertical-nav-dashboard';
 
 interface Props {
   user?: any;

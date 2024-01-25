@@ -1,6 +1,6 @@
-import { ButtonInput } from "./button-input";
-import { useRouter } from "next/router";
-import { HiOutlineLockClosed } from "react-icons/hi";
+import { useRouter } from 'next/router';
+import { HiOutlineLockClosed } from 'react-icons/hi';
+import { ButtonInput } from './button-input';
 
 interface Props {
   profile: { color: string; username: string };
@@ -17,8 +17,8 @@ const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
             <HiOutlineLockClosed className="size-7" />
           </button>
           <p className="text-sm font-bold text-white">
-            {" "}
-            This post is for members only.{" "}
+            {' '}
+            This post is for members only.{' '}
           </p>
 
           <ButtonInput

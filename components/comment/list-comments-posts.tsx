@@ -1,31 +1,31 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { MdOutlineModeEdit } from 'react-icons/md';
-import { CommentModel } from '@/types/comment';
 import {
   DeleteOneCommentAPI,
   GetInfiniteCommentsRepliesAPI,
 } from '@/api-site/comment';
+import { CommentModel } from '@/types/comment';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateFromNow,
 } from '@/utils';
-import ListCommentsRepliesPosts from './list-comments-replies-posts';
+import { HtmlParser } from '@/utils/html-parser';
+import { ModelType } from '@/utils/pagination-item';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { BsReplyAll } from 'react-icons/bs';
+import { MdOutlineModeEdit } from 'react-icons/md';
+import { useDialog } from '../hooks/use-dialog';
+import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { LoadingFile } from '../ui-setting/ant';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 import { useAuth } from '../util/context-user';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
-import { HtmlParser } from '@/utils/html-parser';
-import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
-import { BsReplyAll } from 'react-icons/bs';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
-import Link from 'next/link';
-import { ModelType } from '@/utils/pagination-item';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { useRouter } from 'next/router';
-import { LoadingFile } from '../ui-setting/ant';
-import { ActionModalDialog } from '../ui-setting/shadcn';
-import { useDialog } from '../hooks/use-dialog';
+import ListCommentsRepliesPosts from './list-comments-replies-posts';
 
 type Props = {
   organizationId: string;

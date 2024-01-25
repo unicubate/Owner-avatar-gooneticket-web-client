@@ -1,6 +1,6 @@
+import { PasswordInput } from '@/components/ui/password-input';
 import { Control, Controller } from 'react-hook-form';
 import { Label } from '../../ui/label';
-import { PasswordInput } from '@/components/ui/password-input';
 
 interface Props {
   control: Control<any>;

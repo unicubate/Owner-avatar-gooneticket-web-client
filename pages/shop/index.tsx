@@ -1,13 +1,13 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { useAuth } from '@/components/util/context-user';
-import { useEffect, useState } from 'react';
-import { ButtonInput } from '@/components/ui-setting';
-import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
-import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { TableTransactions } from '@/components/transaction/table-transactions';
+import { ButtonInput } from '@/components/ui-setting';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
 
 const ShopsIndex = () => {
   const user = useAuth() as any;

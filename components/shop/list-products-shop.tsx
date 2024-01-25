@@ -1,28 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
-import Swal from 'sweetalert2';
-import { Avatar, Switch, Tooltip } from 'antd';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { DeleteOnePostAPI } from '@/api-site/post';
-import { ReadMore } from '@/utils/read-more';
-import {
-  MdOutlineDeleteOutline,
-  MdOutlineCheckBox,
-  MdOutlineCheckBoxOutlineBlank,
-  MdOutlineModeEdit,
-  MdOutlineRemoveRedEye,
-} from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { GetUploadsAPI, viewOneFileUploadAPI } from '@/api-site/upload';
-import { BiMoney } from 'react-icons/bi';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { ProductModel } from '@/types/product';
 import { DeleteOneProductAPI } from '@/api-site/product';
-import { formatePrice } from '@/utils';
-import { LiaDnaSolid } from 'react-icons/lia';
+import { GetUploadsAPI, viewOneFileUploadAPI } from '@/api-site/upload';
+import { ProductModel } from '@/types/product';
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formatePrice,
+} from '@/utils';
+import { ReadMore } from '@/utils/read-more';
+import { Avatar, Tooltip } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { BiMoney } from 'react-icons/bi';
 import { HiOutlineLockClosed } from 'react-icons/hi';
+import { LiaDnaSolid } from 'react-icons/lia';
+import { MdOutlineModeEdit } from 'react-icons/md';
 import { TbWorld } from 'react-icons/tb';
+import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useDialog } from '../hooks/use-dialog';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 

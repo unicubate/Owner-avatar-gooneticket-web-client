@@ -1,5 +1,5 @@
-import { Control, Controller } from 'react-hook-form';
 import { Switch } from '@/components/ui/switch';
+import { Control, Controller } from 'react-hook-form';
 
 interface Props {
   control: Control<any>;

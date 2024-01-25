@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { OneCartModel } from "@/types/cart";
-import { Image } from "antd";
-import { DeleteOneCartAPI } from "@/api-site/cart";
+import { DeleteOneCartAPI } from '@/api-site/cart';
+import { OneCartModel } from '@/types/cart';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import React from 'react';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
 
 type Props = {
   index: number;
@@ -22,17 +21,17 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
     try {
       await saveMutation({ cartId: item?.id });
       AlertSuccessNotification({
-        text: "Product deleted successfully",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Product deleted successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
       });
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };
@@ -54,7 +53,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
           <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
             <div className="pr-9 sm:pr-5">
               <p className="text-base font-bold dark:text-white">
-                {item?.product?.title ?? ""}
+                {item?.product?.title ?? ''}
               </p>
               {/* <p className="mt-1.5 text-sm font-medium text-gray-500">Qty: {item?.quantity}</p> */}
               <div className="mt-1.5 text-sm font-medium text-gray-500">
@@ -64,8 +63,8 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
 
             <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
               <p className="w-20 shrink-0 text-left text-base font-bold dark:text-white sm:order-2 sm:ml-8 sm:text-right">
-                {item?.product?.priceDiscount}{" "}
-                {item?.product?.currency?.code ?? ""}
+                {item?.product?.priceDiscount}{' '}
+                {item?.product?.currency?.code ?? ''}
               </p>
             </div>
           </div>

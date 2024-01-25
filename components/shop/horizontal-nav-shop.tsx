@@ -1,8 +1,8 @@
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { useAuth } from '../util/context-user';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
+import { useAuth } from '../util/context-user';
 
 const HorizontalNavShop: React.FC = () => {
   const { profile } = useAuth() as any;

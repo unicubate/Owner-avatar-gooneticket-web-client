@@ -1,15 +1,15 @@
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { GetOnePostAPI } from "@/api-site/post";
-import { useRouter } from "next/router";
-import { useAuth } from "@/components/util/context-user";
-import { ListFollowPosts } from "@/components/post/list-follow-posts";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { AvatarComponent } from "@/components/ui-setting/ant";
-import { HtmlParser } from "@/utils/html-parser";
-import { PublicLastPosts } from "@/components/post/public-last-posts";
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { GetStaticPropsContext } from "next";
+import { GetOnePostAPI } from '@/api-site/post';
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { ListFollowPosts } from '@/components/post/list-follow-posts';
+import { PublicLastPosts } from '@/components/post/public-last-posts';
+import { AvatarComponent } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { useAuth } from '@/components/util/context-user';
+import { HtmlParser } from '@/utils/html-parser';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const PostShow = () => {
   const { userStorage: userVisitor } = useAuth() as any;
@@ -42,7 +42,7 @@ const PostShow = () => {
       />
     ) : (
       <>
-        {" "}
+        {' '}
         {post?.id && user?.id ? (
           <ListFollowPosts
             item={post}
@@ -52,13 +52,13 @@ const PostShow = () => {
               organizationId: user?.organizationId,
             }}
           />
-        ) : null}{" "}
+        ) : null}{' '}
       </>
     );
 
   return (
     <>
-      <LayoutDashboard title={post?.title ?? ""}>
+      <LayoutDashboard title={post?.title ?? ''}>
         <div className="mx-auto max-w-7xl py-6">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 lg:grid-cols-5 lg:items-start lg:gap-x-12 xl:grid-cols-6 xl:gap-x-16">
@@ -76,17 +76,24 @@ const PostShow = () => {
                     <div className="px-4 py-6 sm:p-6 lg:p-8">
                       <div className="text-center">
                         <AvatarComponent
-                          size={{xs: 50,sm: 50,md: 60,lg: 64,xl: 80,xxl: 100}}
+                          size={{
+                            xs: 50,
+                            sm: 50,
+                            md: 60,
+                            lg: 64,
+                            xl: 80,
+                            xxl: 100,
+                          }}
                           profile={post?.profile}
                         />
                         <p className="mt-4 text-lg font-bold dark:text-white">
-                          {post?.profile?.firstName ?? ""}{" "}
-                          {post?.profile?.lastName ?? ""}{" "}
+                          {post?.profile?.firstName ?? ''}{' '}
+                          {post?.profile?.lastName ?? ''}{' '}
                         </p>
                         <p className="mt-2 text-sm font-normal text-gray-600 dark:text-gray-300">
                           <span className={`ql-editor`}>
                             <HtmlParser
-                              html={String(post?.profile?.description ?? "")}
+                              html={String(post?.profile?.description ?? '')}
                             />
                           </span>
                         </p>

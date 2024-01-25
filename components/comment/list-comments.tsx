@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useEffect } from 'react';
-import { Skeleton } from 'antd';
-import ListCommentsPosts from './list-comments-posts';
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
-import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/pagination-item';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { useInView } from 'react-intersection-observer';
+import React, { Fragment } from 'react';
 import { LoadingFile } from '../ui-setting/ant';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
+import ListCommentsPosts from './list-comments-posts';
 
 const ListComments: React.FC<{
   take: number;

@@ -1,8 +1,7 @@
-import Head from "next/head";
-import { getCurrentUserFormToken, useAuth } from "../util/context-user";
-import { HeaderHorizontalNavUserPublicSite } from "./header-horizontal-nav-user-public-site";
-import { useState } from "react";
-import { UserModel } from "@/types/user.type";
+import { UserModel } from '@/types/user.type';
+import Head from 'next/head';
+import { useAuth } from '../util/context-user';
+import { HeaderHorizontalNavUserPublicSite } from './header-horizontal-nav-user-public-site';
 
 interface IProps {
   user: UserModel;
@@ -14,42 +13,41 @@ export const navigationPublicUser = (options: {
   username: string;
   user: UserModel;
 }) => {
-
   const { username, user } = options;
 
   return [
     {
-      title: "Home",
+      title: 'Home',
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: "Gallery",
+      title: 'Gallery',
       status: user?.profile?.enableGallery,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: "Memberships",
+      title: 'Memberships',
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: "Posts",
+      title: 'Posts',
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: "Shop",
+      title: 'Shop',
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: "Commissions",
+      title: 'Commissions',
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,

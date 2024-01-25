@@ -1,19 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
-import Link from 'next/link';
-import { SubmitHandler } from 'react-hook-form';
-import * as yup from 'yup';
-import { UserLoginFormModel } from '@/types/user.type';
-import { loginGoogleUserAPI, loginUserAPI } from '../../api-site/user';
-import { AlertDangerNotification } from '@/utils/alert-notification';
-import { useRouter } from 'next/router';
-import { PublicComponent } from '@/components/util/public-component';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
-import { GetStaticPropsContext } from 'next';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { TextPasswordInput } from '@/components/ui-setting/shadcn/text-password-input';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { PublicComponent } from '@/components/util/public-component';
+import { UserLoginFormModel } from '@/types/user.type';
+import { AlertDangerNotification } from '@/utils/alert-notification';
+import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { GetStaticPropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { loginGoogleUserAPI, loginUserAPI } from '../../api-site/user';
 
 const schema = yup.object({
   email: yup
@@ -95,9 +95,9 @@ const Login = () => {
         </div>
         <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
-            <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-              {hasErrors}
-            </div>
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>{hasErrors}</AlertDescription>
+            </Alert>
           )}
 
           <div className="mb-4">

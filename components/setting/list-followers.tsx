@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState } from 'react';
-import { Avatar } from 'antd';
-import Link from 'next/link';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { ButtonInput } from '../ui-setting';
-import { FollowModel } from '@/types/follow';
 import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
+import { FollowModel } from '@/types/follow';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import Link from 'next/link';
+import React, { Fragment, useState } from 'react';
+import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
 type Props = {

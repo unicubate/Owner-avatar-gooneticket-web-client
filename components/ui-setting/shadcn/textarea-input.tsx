@@ -1,7 +1,6 @@
-import { Control, Controller } from 'react-hook-form';
-import { Input } from '../../ui/input';
-import { Label } from '../../ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Control, Controller } from 'react-hook-form';
+import { Label } from '../../ui/label';
 
 interface Props {
   control: Control<any>;

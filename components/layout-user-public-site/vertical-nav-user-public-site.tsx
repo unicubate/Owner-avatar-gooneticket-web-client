@@ -1,17 +1,15 @@
+import { UserModel } from '@/types/user.type';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useState } from 'react';
 import {
-  BiHomeCircle,
   BiDetail,
-  BiLockOpen,
+  BiHomeCircle,
   BiImage,
-  BiShoppingBag,
+  BiLockOpen,
   BiStoreAlt,
-  BiStore,
 } from 'react-icons/bi';
 import { RiShakeHandsLine } from 'react-icons/ri';
-import { useState } from 'react';
-import { UserModel } from '@/types/user.type';
 
 export type NavbarProps = {
   title: string;

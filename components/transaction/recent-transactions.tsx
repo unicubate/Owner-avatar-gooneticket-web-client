@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { EmptyData, LoadingFile } from "../ui-setting/ant";
-import { GetInfiniteTransactionsAPI } from "@/api-site/transaction";
-import { ListTransactions } from "./list-transactions";
-import { ErrorFile } from "../ui-setting/ant/error-file";
-import { BiTransfer } from "react-icons/bi";
+import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
+import React from 'react';
+import { BiTransfer } from 'react-icons/bi';
+import { EmptyData, LoadingFile } from '../ui-setting/ant';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { ListTransactions } from './list-transactions';
 
 type Props = {
   model?: string;
@@ -28,8 +28,8 @@ const RecentTransactions: React.FC<Props> = ({
     organizationId,
     model: model?.toLocaleUpperCase(),
     take: 10,
-    sort: "DESC",
-    queryKey: ["recent-transactions", "infinite"],
+    sort: 'DESC',
+    queryKey: ['recent-transactions', 'infinite'],
   });
 
   const dataTableTransactions = isLoadingTransaction ? (

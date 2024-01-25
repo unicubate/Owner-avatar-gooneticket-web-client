@@ -1,26 +1,21 @@
 'use client';
 
-import React, { useState } from 'react';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
-import Swal from 'sweetalert2';
-import { Avatar, Tooltip } from 'antd';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { DeleteOnePostAPI } from '@/api-site/post';
-import { PostModel, PostType } from '@/types/post';
-import { ReadMore } from '@/utils/read-more';
-import {
-  MdOutlineDeleteOutline,
-  MdFavoriteBorder,
-  MdOutlineModeEdit,
-} from 'react-icons/md';
-import { BiComment, BiConversation } from 'react-icons/bi';
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import { FiDownload } from 'react-icons/fi';
-import { TbWorld } from 'react-icons/tb';
-import { useRouter } from 'next/router';
-import { HiOutlineLockClosed } from 'react-icons/hi';
+import { PostModel, PostType } from '@/types/post';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { IconTypePost } from '@/utils/icon-type-post';
+import { ReadMore } from '@/utils/read-more';
+import { Avatar, Tooltip } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { BiConversation } from 'react-icons/bi';
+import { FiDownload } from 'react-icons/fi';
+import { HiOutlineLockClosed } from 'react-icons/hi';
+import { MdFavoriteBorder, MdOutlineModeEdit } from 'react-icons/md';
+import { TbWorld } from 'react-icons/tb';
+import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useDialog } from '../hooks/use-dialog';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 

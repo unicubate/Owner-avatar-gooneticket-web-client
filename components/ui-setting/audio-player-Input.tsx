@@ -2,7 +2,7 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel } from '@/types/post';
 import { UploadFolderType, UploadModel } from '@/types/upload';
 import { useRef } from 'react';
-import ReactH5AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
+import ReactH5AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { HiOutlineLockClosed } from 'react-icons/hi';
 
@@ -34,16 +34,16 @@ const AudioPlayerInput: React.FC<Props> = ({
               ? enableUrlMedia
                 ? urlMedia
                 : `${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: uploads[0]?.path ?? '',
-                })}`
+                    folder: folder,
+                    fileName: uploads[0]?.path ?? '',
+                  })}`
               : ''
             : enableUrlMedia
               ? urlMedia
               : `${viewOneFileUploadAPI({
-                folder: folder,
-                fileName: uploads[0]?.path ?? '',
-              })}`
+                  folder: folder,
+                  fileName: uploads[0]?.path ?? '',
+                })}`
         }
         // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/posts/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"
         layout="stacked-reverse"
@@ -156,7 +156,7 @@ const AudioPlayerInput: React.FC<Props> = ({
         header={
           <>
             {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-              post?.isValidSubscribe !== 1 ? (
+            post?.isValidSubscribe !== 1 ? (
               <button className={`font-normal`}>
                 <HiOutlineLockClosed className="size-8" />
               </button>
@@ -166,11 +166,12 @@ const AudioPlayerInput: React.FC<Props> = ({
         footer={
           <>
             <span
-              className={`${['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-                  post?.isValidSubscribe !== 1
+              className={`${
+                ['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
+                post?.isValidSubscribe !== 1
                   ? 'absolute inset-0'
                   : ''
-                }`}
+              }`}
             />
           </>
         }

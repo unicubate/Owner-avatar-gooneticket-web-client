@@ -1,7 +1,7 @@
-import dynamic from "next/dynamic";
-import { Control, Controller } from "react-hook-form";
+import dynamic from 'next/dynamic';
+import { Control, Controller } from 'react-hook-form';
 import ReactQuill, { ReactQuillProps } from 'react-quill';
-import 'react-quill/dist/quill.bubble.css'
+import 'react-quill/dist/quill.bubble.css';
 
 interface QuillWrapperProps extends ReactQuillProps {
   forwardedRef?: React.Ref<ReactQuill>;
@@ -13,9 +13,8 @@ const DynamicReactQuill = dynamic<QuillWrapperProps>(
     // eslint-disable-next-line react/display-name
     return ({ forwardedRef, ...props }) => <RQ ref={forwardedRef} {...props} />;
   },
-  { ssr: false }
+  { ssr: false },
 );
-
 
 interface Props {
   control: Control<any>;
@@ -29,28 +28,30 @@ interface Props {
 
 const TextareaReactQuillInput: React.FC<Props> = ({
   control,
-  label = "",
+  label = '',
   name,
   errors,
   className,
-  placeholder = "",
+  placeholder = '',
   defaultValue,
 }) => {
-
   return (
     <>
-      {label ? <label
-        className="mb-2 block text-sm font-bold dark:text-white"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label
+          className="mb-2 block text-sm font-bold dark:text-white"
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      ) : null}
 
       <Controller
         name={name}
         control={control}
         defaultValue={defaultValue}
         rules={{
-          required: "Please enter post description"
+          required: 'Please enter post description',
         }}
         render={({ field: { ref, ...field } }) => (
           <DynamicReactQuill

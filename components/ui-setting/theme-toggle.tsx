@@ -1,6 +1,6 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { BiSun, BiMoon } from "react-icons/bi";
+import { BiMoon, BiSun } from "react-icons/bi";
 
 
 const ThemeToggle = () => {

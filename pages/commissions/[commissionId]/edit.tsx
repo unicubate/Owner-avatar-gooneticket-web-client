@@ -1,13 +1,13 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { useRouter } from 'next/router';
-import { useAuth } from '@/components/util/context-user';
-import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
 import { GetOneCommissionAPI } from '@/api-site/commission';
 import { GetUploadsAPI } from '@/api-site/upload';
-import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { GetStaticPropsContext } from 'next';
+import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
+import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const ShopEdit = () => {
   const { userStorage: user } = useAuth() as any;

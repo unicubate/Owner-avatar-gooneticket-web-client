@@ -1,26 +1,25 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { useAuth } from '@/components/util/context-user';
-import { EnableShop } from '@/components/shop/enable-shop';
-import { useInView } from 'react-intersection-observer';
-import { useRouter } from 'next/router';
 import { GetInfiniteProductsAPI } from '@/api-site/product';
-import { Fragment, useEffect, useState } from 'react';
-import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
-import { ListProductsShop } from '@/components/shop/list-products-shop';
-import { ProductModel } from '@/types/product';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { BiStoreAlt } from 'react-icons/bi';
-import { GetStaticPropsContext } from 'next';
 import { useInputState } from '@/components/hooks/use-input-state';
-import { PlusIcon } from '@radix-ui/react-icons';
-import { Input } from '@/components/ui/input';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { EnableShop } from '@/components/shop/enable-shop';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { ListProductsShop } from '@/components/shop/list-products-shop';
 import {
   ButtonInput,
   ButtonLoadMore,
   SearchInput,
 } from '@/components/ui-setting';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { ProductModel } from '@/types/product';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect, useState } from 'react';
+import { BiStoreAlt } from 'react-icons/bi';
+import { useInView } from 'react-intersection-observer';
 
 const ShopsExtras = () => {
   const { search, handleSetSearch } = useInputState();

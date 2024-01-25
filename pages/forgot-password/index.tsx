@@ -1,19 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TextInput } from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { PublicComponent } from '@/components/util/public-component';
 import { UserForgotPasswordFormModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { passwordResetUserAPI } from '../../api-site/user';
-import { PublicComponent } from '@/components/util/public-component';
-import { ButtonInput } from '@/components/ui-setting/button-input';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { GetStaticPropsContext } from 'next';
-import { TextInput } from '@/components/ui-setting/shadcn';
+import Link from 'next/link';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { passwordResetUserAPI } from '../../api-site/user';
 
 const schema = yup.object({
   email: yup
@@ -71,8 +72,17 @@ const ForgotPassword = () => {
 
   return (
     <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+      <div className="mx-auto flex justify-center">
+        <h6 className="mt-3 text-center text-xl font-bold">
+          {`Forgot password?`}
+        </h6>
+      </div>
       <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-        <h6 className="text-center text-xl font-bold">Forgot password?</h6>
+        {hasErrors && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>{hasErrors}</AlertDescription>
+          </Alert>
+        )}
 
         <div className="mt-4">
           <TextInput
@@ -89,7 +99,7 @@ const ForgotPassword = () => {
           <ButtonInput
             type="submit"
             className="w-full"
-            size="sm"
+            size="lg"
             variant="info"
             loading={loading}
           >

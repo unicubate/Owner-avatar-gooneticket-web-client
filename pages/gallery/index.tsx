@@ -1,11 +1,10 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { EnableGallery } from '@/components/gallery/enable-gallery';
+import { TableAlbum } from '@/components/gallery/table-album';
+import { TableGallery } from '@/components/gallery/table-gallery';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { useAuth } from '@/components/util/context-user';
-import { EnableGallery } from '@/components/gallery/enable-gallery';
-import { TableGallery } from '@/components/gallery/table-gallery';
+import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
-import Link from 'next/link';
-import { TableAlbum } from '@/components/gallery/table-album';
 
 const Gallery = () => {
   const { organizationId, profile, userStorage: user } = useAuth() as any;

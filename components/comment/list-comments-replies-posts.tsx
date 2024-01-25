@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { MdOutlineModeEdit } from 'react-icons/md';
-import { CommentModel } from '@/types/comment';
 import { DeleteOneCommentReplyAPI } from '@/api-site/comment';
+import { CommentModel } from '@/types/comment';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateFromNow,
 } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
+import { ModelType } from '@/utils/pagination-item';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { MdOutlineModeEdit } from 'react-icons/md';
+import { useDialog } from '../hooks/use-dialog';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
-import Link from 'next/link';
-import { ModelType } from '@/utils/pagination-item';
-import { useRouter } from 'next/router';
-import { useDialog } from '../hooks/use-dialog';
 import { ActionModalDialog } from '../ui-setting/shadcn';
+import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
 
 type Props = {
   model: ModelType;

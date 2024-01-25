@@ -1,15 +1,14 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { Button } from 'antd';
-import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
-import { useRouter } from 'next/router';
-import { useAuth } from '@/components/util/context-user';
-import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
-import { useState } from 'react';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
 import { TableTransactions } from '@/components/transaction/table-transactions';
-import { GetStaticPropsContext } from 'next';
 import { ButtonInput } from '@/components/ui-setting';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const Memberships = () => {
   const user = useAuth() as any;
@@ -47,11 +46,7 @@ const Memberships = () => {
               <div className="mt-4 flex items-center">
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
-                    <ButtonInput
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                    >
+                    <ButtonInput type="button" size="sm" variant="outline">
                       Last {dayCount} days
                     </ButtonInput>
                   </div>

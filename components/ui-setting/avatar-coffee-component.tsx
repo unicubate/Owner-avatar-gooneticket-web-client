@@ -1,4 +1,4 @@
-import { BiCoffeeTogo } from "react-icons/bi";
+import { BiCoffeeTogo } from 'react-icons/bi';
 
 interface Props {
   color: any;
@@ -9,7 +9,7 @@ interface Props {
 const AvatarCoffeeComponent: React.FC<Props> = ({
   color,
   size,
-  className = "h-10 w-10",
+  className = 'h-10 w-10',
 }) => {
   return (
     <>

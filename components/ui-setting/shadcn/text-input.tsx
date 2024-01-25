@@ -29,7 +29,7 @@ const TextInput: React.FC<Props> = ({
   placeholder = '',
   defaultValue,
   autoComplete,
-  required
+  required,
 }) => {
   return (
     <>

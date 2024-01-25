@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
-import { Skeleton } from 'antd';
-import { CommentModel } from '@/types/comment';
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
-import { ListCommentTransactions } from '../comment/list-comments-transactions';
+import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/pagination-item';
-import { ErrorFile } from '../ui-setting/ant/error-file';
+import { Skeleton } from 'antd';
+import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { ListCommentTransactions } from '../comment/list-comments-transactions';
 import { ButtonLoadMore } from '../ui-setting';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 
 const RecentCommentTransactions: React.FC<{
   userReceiveId: string;

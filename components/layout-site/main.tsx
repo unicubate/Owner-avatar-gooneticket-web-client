@@ -1,5 +1,5 @@
 interface IProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const Main = ({ children }: IProps) => {
@@ -7,7 +7,7 @@ const Main = ({ children }: IProps) => {
     <main>
       <div className="mx-auto mb-10 lg:flex">{children}</div>
     </main>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

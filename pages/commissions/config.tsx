@@ -1,14 +1,14 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { Input, Skeleton } from 'antd';
-import { useState } from 'react';
-import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { PlusOutlined } from '@ant-design/icons';
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { ListDiscounts } from '@/components/discount/list-discounts';
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { ListDiscounts } from '@/components/discount/list-discounts';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { PrivateComponent } from '@/components/util/private-component';
 import { useDebounce } from '@/utils';
+import { PlusOutlined } from '@ant-design/icons';
+import { Input, Skeleton } from 'antd';
+import { useState } from 'react';
 
 const Configs = () => {
   const [filter, setFilter] = useState<string>('');

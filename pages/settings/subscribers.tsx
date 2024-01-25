@@ -1,17 +1,15 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { GetInfiniteFollowersAPI } from '@/api-site/follow';
+import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
-import { Input, Skeleton } from 'antd';
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { useEffect, useState } from 'react';
-import { GetInfiniteFollowersAPI } from '@/api-site/follow';
 import ListFollowers from '@/components/setting/list-followers';
-import { useInView } from 'react-intersection-observer';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetStaticPropsContext } from 'next';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { useInputState } from '@/components/hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const Subscribers = () => {
   const { ref, inView } = useInView();

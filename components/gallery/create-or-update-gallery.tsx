@@ -1,5 +1,3 @@
-import { CloseOutlined } from "@ant-design/icons";
-
 type Props = {
   openModal: boolean;
   setOpenModal: any;
@@ -13,7 +11,6 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
   uploadImages,
   post,
 }) => {
-
   return (
     <>
       {openModal ? (

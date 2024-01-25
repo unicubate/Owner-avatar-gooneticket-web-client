@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
-import { ListPublicMemberships } from './list-public-memberships';
-import { LoadingFile } from '../ui-setting/ant/loading-file';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ButtonLoadMore } from '../ui-setting';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { LoadingFile } from '../ui-setting/ant/loading-file';
+import { ListPublicMemberships } from './list-public-memberships';
 
 type Props = {
   organizationId: string;

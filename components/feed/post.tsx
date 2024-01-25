@@ -1,15 +1,15 @@
 // import IPost from '../../schemas/post'
-import { Image } from 'antd'
+import { Image } from 'antd';
 import {
   BookmarkIcon,
   EmojiCollection,
   HeartIcon,
   MessageIcon,
   ShareIcon,
-} from './icons'
+} from './icons';
 
 interface IProps {
-  post: any
+  post: any;
   // post: IPost
 }
 
@@ -60,7 +60,7 @@ const Post = ({ post }: IProps) => {
         <button className="text-blue-500">Post</button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { ButtonInput } from '../ui-setting';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CommentFormModel } from '@/types/comment';
 import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
-import { useAuth } from '../util/context-user';
+import { CommentFormModel } from '@/types/comment';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ModelType } from '@/utils/pagination-item';
-import { TextareaReactQuillInput } from '../ui-setting';
+import React, { useEffect } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
   description: yup.string().required(),

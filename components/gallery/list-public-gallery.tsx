@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { PostModel } from "@/types/post";
-import { ShowModalGallery } from "./show-modal-gallery";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { UserVisitorModel } from "@/types/user.type";
+import { PostModel } from '@/types/post';
+import { UserVisitorModel } from '@/types/user.type';
+import React, { useState } from 'react';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { ShowModalGallery } from './show-modal-gallery';
 
 type Props = {
   item?: PostModel;
@@ -35,9 +35,9 @@ const ListPublicGallery: React.FC<Props> = ({
               preview={false}
               height={250}
               className={`size-full object-cover transition-all duration-200 group-hover:scale-110${
-                item?.whoCanSee === "MEMBERSHIP" && item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
+                item?.whoCanSee === 'MEMBERSHIP' && item?.isValidSubscribe !== 1
+                  ? 'blur-xl'
+                  : ''
               }`}
             />
           ) : null}
@@ -49,7 +49,7 @@ const ListPublicGallery: React.FC<Props> = ({
           openModal={openModal}
           setOpenModal={setOpenModal}
           post={item}
-          userVisitorId={userVisitor?.id ?? ""}
+          userVisitorId={userVisitor?.id ?? ''}
           commentTake={commentTake}
         />
       ) : null}

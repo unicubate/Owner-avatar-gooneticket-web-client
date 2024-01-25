@@ -1,21 +1,21 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { useState } from 'react';
-import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { ListDiscounts } from '@/components/discount/list-discounts';
+import { GetInfiniteCategoriesAPI } from '@/api-site/category';
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
-import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
 import { CreateOrUpdateCategory } from '@/components/category/create-or-update-category';
 import { ListCategories } from '@/components/category/list-categories';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetInfiniteCategoriesAPI } from '@/api-site/category';
-import { GetStaticPropsContext } from 'next';
-import { useAuth } from '@/components/util/context-user';
+import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { ListDiscounts } from '@/components/discount/list-discounts';
 import { useInputState } from '@/components/hooks/use-input-state';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { PlusIcon } from '@radix-ui/react-icons';
+import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
 
 const Configs = () => {
   const { search, handleSetSearch } = useInputState();

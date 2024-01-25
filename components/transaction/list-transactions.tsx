@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { Button } from "antd";
-import { ReadMore } from "@/utils/read-more";
-import { BiDotsHorizontal } from "react-icons/bi";
-import { TransactionModel } from "@/types/transaction";
-import { formateFromNow } from "@/utils";
-import { AvatarCoffeeComponent, AvatarComponent } from "../ui-setting/ant";
-import { SerialPrice } from "../ui-setting/serial-price";
-import { useRouter } from "next/router";
+import { TransactionModel } from '@/types/transaction';
+import { formateFromNow } from '@/utils';
+import { ReadMore } from '@/utils/read-more';
+import { Button } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { BiDotsHorizontal } from 'react-icons/bi';
+import { AvatarCoffeeComponent, AvatarComponent } from '../ui-setting/ant';
+import { SerialPrice } from '../ui-setting/serial-price';
 
 type Props = {
   item?: TransactionModel;

@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { AlertDangerNotification } from '@/utils';
-import { ButtonInput } from '../ui-setting/button-input';
 import { UpdateEnableProfileAPI } from '@/api-site/user';
-import { useAuth } from '../util/context-user';
+import { AlertDangerNotification } from '@/utils';
+import React, { useState } from 'react';
+import { ButtonInput } from '../ui-setting/button-input';
 
 type Props = {
   profile?: any;

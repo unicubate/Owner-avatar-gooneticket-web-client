@@ -1,13 +1,12 @@
-import { Control, Controller } from 'react-hook-form';
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Control, Controller } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
 interface Props {
@@ -49,11 +48,7 @@ const SelectInput: React.FC<Props> = ({
         control={control}
         render={({ field: { value, onChange } }) => (
           <>
-            <Select
-              onValueChange={onChange}
-              name={name}
-              value={value}
-            >
+            <Select onValueChange={onChange} name={name} value={value}>
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>

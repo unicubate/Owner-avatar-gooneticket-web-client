@@ -1,13 +1,13 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { useAuth } from "@/components/util/context-user";
-import { SwitchInput } from "@/components/ui-setting/ant/switch-input";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { GetStaticPropsContext } from "next";
-import { Image } from "antd";
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { SwitchInput } from '@/components/ui-setting/ant/switch-input';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Image } from 'antd';
+import { GetStaticPropsContext } from 'next';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object({
   confirmSwitch: yup.boolean().optional(),
@@ -23,7 +23,7 @@ const Configs = () => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
   const user = useAuth() as any;
   // const {
@@ -44,7 +44,7 @@ const Configs = () => {
     //     data.append("attachment", file as RcFile);
     //   });
 
-    console.log("payload =======>", payload);
+    console.log('payload =======>', payload);
   };
 
   // useEffect(() => {
@@ -56,7 +56,7 @@ const Configs = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Gifts"}>
+      <LayoutDashboard title={'Gifts'}>
         <div className="flex flex-1 flex-col">
           <main>
             <div className="mx-auto max-w-6xl py-6">
@@ -150,7 +150,7 @@ const Configs = () => {
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
-                                {" "}
+                                {' '}
                               </button>
 
                               <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -183,7 +183,7 @@ const Configs = () => {
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
-                                {" "}
+                                {' '}
                               </button>
 
                               <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -217,7 +217,7 @@ const Configs = () => {
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
-                                {" "}
+                                {' '}
                               </button>
 
                               <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -251,7 +251,7 @@ const Configs = () => {
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
-                                {" "}
+                                {' '}
                               </button>
 
                               <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -285,7 +285,7 @@ const Configs = () => {
                                 title=""
                                 className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                               >
-                                {" "}
+                                {' '}
                               </button>
 
                               <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">

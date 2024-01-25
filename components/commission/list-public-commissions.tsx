@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import { ProductModel } from '@/types/product';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
-import { ProductModel } from '@/types/product';
-import { ButtonInput } from '../ui-setting';
+import React from 'react';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { formatePrice } from '@/utils';
+import { ButtonInput } from '../ui-setting';
 
 type Props = {
   item?: ProductModel;
@@ -31,8 +30,8 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
 
             <div className="ml-auto">
               <ButtonInput
-                 type="button"
-                 variant="danger"
+                type="button"
+                variant="danger"
                 //color={item?.profile?.color}
               >
                 {Number(item?.price ?? 0)} {item?.currency?.symbol ?? ''}

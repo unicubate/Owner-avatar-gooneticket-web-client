@@ -1,19 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import { GetInfiniteCommentsRepliesAPI } from '@/api-site/comment';
 import { CommentModel } from '@/types/comment';
-import { AvatarCoffeeComponent, AvatarComponent, LoadingFile } from '../ui-setting/ant';
-import Link from 'next/link';
 import { formateFromNow } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
+import { ModelType } from '@/utils/pagination-item';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { BsReplyAll } from 'react-icons/bs';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
-import { GetInfiniteCommentsRepliesAPI } from '@/api-site/comment';
-import { Skeleton } from 'antd';
-import { ModelType } from '@/utils/pagination-item';
-import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
-import { useAuth } from '../util/context-user';
+import {
+  AvatarCoffeeComponent,
+  AvatarComponent,
+  LoadingFile,
+} from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { useRouter } from 'next/router';
+import { useAuth } from '../util/context-user';
+import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
 
 const ListCommentTransactions: React.FC<{
   item: CommentModel;

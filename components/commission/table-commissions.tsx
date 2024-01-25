@@ -1,16 +1,19 @@
-import { Input } from 'antd';
-import { ButtonInput, ButtonLoadMore, SearchInput } from '@/components/ui-setting';
-import { useRouter } from 'next/router';
-import { EmptyData } from '@/components/ui-setting/ant/empty-data';
-import { ListCommissions } from '@/components/commission/list-commissions';
-import { useInView } from 'react-intersection-observer';
-import { useEffect } from 'react';
 import { GetInfiniteCommissionsAPI } from '@/api-site/commission';
+import { ListCommissions } from '@/components/commission/list-commissions';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  SearchInput,
+} from '@/components/ui-setting';
+import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { RiShakeHandsLine } from 'react-icons/ri';
 import { PlusIcon } from 'lucide-react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { RiShakeHandsLine } from 'react-icons/ri';
+import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks/use-input-state';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 
 type Props = {
   organizationId: string;
@@ -98,10 +101,10 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
               </ButtonInput>
             </div>
             <div className="mt-2 sm:mt-0">
-            <SearchInput
-                      placeholder="Search by title"
-                      onChange={handleSetSearch}
-                    />
+              <SearchInput
+                placeholder="Search by title"
+                onChange={handleSetSearch}
+              />
             </div>
           </div>
 

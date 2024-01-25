@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useState } from 'react';
-import { ButtonInput } from '../ui-setting';
+import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { FollowModel } from '@/types/follow';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
-import Swal from 'sweetalert2';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { Fragment, useState } from 'react';
+import Swal from 'sweetalert2';
+import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
 type Props = {

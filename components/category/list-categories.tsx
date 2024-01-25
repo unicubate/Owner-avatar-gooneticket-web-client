@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import { CreateOrUpdateCategory } from "./create-or-update-category";
+import { DeleteOneCategoryAPI } from '@/api-site/category';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateDMYHH,
-} from "@/utils";
-import Swal from "sweetalert2";
-import { DeleteOneCategoryAPI } from "@/api-site/category";
-import { Tooltip } from "antd";
-import { useRouter } from "next/router";
+} from '@/utils';
+import { Tooltip } from 'antd';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
+import Swal from 'sweetalert2';
+import { CreateOrUpdateCategory } from './create-or-update-category';
 
 const ListCategories: React.FC<{ item: any; index: number }> = ({
   item,
@@ -26,12 +26,12 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
 
   const deleteItem = (item: any) => {
     Swal.fire({
-      title: "Delete?",
-      text: "Are you sure you want to delete this?",
-      confirmButtonText: "Yes, Deleted",
-      cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#dc3545",
-      cancelButtonColor: "#6f42c1",
+      title: 'Delete?',
+      text: 'Are you sure you want to delete this?',
+      confirmButtonText: 'Yes, Deleted',
+      cancelButtonText: 'No, Cancel',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6f42c1',
       showCancelButton: true,
       reverseButtons: true,
     }).then(async (result) => {
@@ -40,17 +40,17 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
         try {
           await saveMutation.mutateAsync({ categoryId: item?.id });
           AlertSuccessNotification({
-            text: "Category deleted successfully",
-            className: "info",
-            gravity: "top",
-            position: "center",
+            text: 'Category deleted successfully',
+            className: 'info',
+            gravity: 'top',
+            position: 'center',
           });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
-            gravity: "top",
-            className: "info",
-            position: "center",
+            gravity: 'top',
+            className: 'info',
+            position: 'center',
           });
         }
       }
@@ -70,7 +70,7 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
           </div>
 
           <div className="ml-auto">
-            <Tooltip placement="bottomRight" title={"Edit"}>
+            <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => setShowModal(true)}
                 title="Edit"
@@ -79,7 +79,7 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
                 <MdOutlineModeEdit />
               </button>
             </Tooltip>
-            <Tooltip placement="bottomRight" title={"Delete"}>
+            <Tooltip placement="bottomRight" title={'Delete'}>
               <button
                 onClick={() => deleteItem(item)}
                 className="ml-2 text-lg text-gray-600 hover:text-red-600"

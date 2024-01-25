@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { Drawer } from "antd";
-import { HorizontalNavUserPublicSite } from "./horizontal-nav-user-public-site";
-import { VerticalNavUserPublicSite } from "./vertical-nav-user-public-site";
+import { Drawer } from 'antd';
+import { useState } from 'react';
+import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
+import { VerticalNavUserPublicSite } from './vertical-nav-user-public-site';
 
 interface Props {
   user?: any;
@@ -18,7 +18,9 @@ const HeaderHorizontalNavUserPublicSite: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      {user?.id ? <HorizontalNavUserPublicSite showDrawer={showDrawer} user={user} /> : null}
+      {user?.id ? (
+        <HorizontalNavUserPublicSite showDrawer={showDrawer} user={user} />
+      ) : null}
 
       <Drawer
         title=""

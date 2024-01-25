@@ -1,6 +1,6 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 
 const CommissionsCreate = () => {

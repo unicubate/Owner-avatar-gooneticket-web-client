@@ -1,23 +1,23 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { useAuth } from "@/components/util/context-user";
-import { useState } from "react";
-import { ButtonInput } from "@/components/ui-setting/button-input";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Radio } from "antd";
-import { SwitchInput } from "@/components/ui-setting/ant/switch-input";
-import { HorizontalNavMembership } from "@/components/membership/horizontal-nav-membership";
-import { GetStaticPropsContext } from "next";
-import { TextAreaInput } from "@/components/ui-setting/shadcn";
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
+import { SwitchInput } from '@/components/ui-setting/ant/switch-input';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TextAreaInput } from '@/components/ui-setting/shadcn';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Radio } from 'antd';
+import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object({
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .optional(),
   password: yup.string().optional(),
   description: yup.string().optional(),
@@ -32,7 +32,7 @@ const SettingDonations = () => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const user = useAuth() as any;
@@ -54,7 +54,7 @@ const SettingDonations = () => {
     //     data.append("attachment", file as RcFile);
     //   });
 
-    console.log("payload =======>", payload);
+    console.log('payload =======>', payload);
   };
 
   // useEffect(() => {
@@ -66,7 +66,7 @@ const SettingDonations = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Memberships setting"}>
+      <LayoutDashboard title={'Memberships setting'}>
         <div className="flex flex-1 flex-col">
           <main>
             <div className="py-6">
@@ -157,7 +157,7 @@ const SettingDonations = () => {
                                   title=""
                                   className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                                 >
-                                  {" "}
+                                  {' '}
                                 </button>
 
                                 <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -190,7 +190,7 @@ const SettingDonations = () => {
                                   title=""
                                   className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                                 >
-                                  {" "}
+                                  {' '}
                                 </button>
 
                                 <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -223,7 +223,7 @@ const SettingDonations = () => {
                                   title=""
                                   className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                                 >
-                                  {" "}
+                                  {' '}
                                 </button>
 
                                 <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -257,7 +257,7 @@ const SettingDonations = () => {
                                   title=""
                                   className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900"
                                 >
-                                  {" "}
+                                  {' '}
                                 </button>
 
                                 <div className="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border border-gray-200 bg-white transition-all duration-200 ease-in-out focus:outline-none">
@@ -297,7 +297,7 @@ const SettingDonations = () => {
                                   placeholder="Description donation"
                                   errors={errors}
                                   defaultValue={
-                                    "Thank you for the support! 🎉 "
+                                    'Thank you for the support! 🎉 '
                                   }
                                 />
                               </div>
@@ -335,7 +335,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

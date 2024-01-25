@@ -1,32 +1,30 @@
-import Link from "next/link";
-import { BiCoffeeTogo } from "react-icons/bi";
-import { Dropdown, MenuProps } from "antd";
-import { usePathname } from "next/navigation";
-import { logoutUser, useAuth } from "../util/context-user";
-import { useState } from "react";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
-import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
-import { CreateModalPublicDonation } from "../donation/create-modal-public-donation";
-import { UserModel } from "@/types/user.type";
-import { ColorType } from "@/types/profile.type";
-import { navigationPublicUser } from "./index";
-import { useTranslations } from "next-intl";
-import { ThemeToggle } from "../ui-setting/theme-toggle";
-import { ButtonInput } from "../ui-setting";
+import { UserModel } from '@/types/user.type';
+import { Dropdown, MenuProps } from 'antd';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState } from 'react';
+import { BiCoffeeTogo } from 'react-icons/bi';
+import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
+import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
+import { ButtonInput } from '../ui-setting';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ThemeToggle } from '../ui-setting/theme-toggle';
+import { logoutUser, useAuth } from '../util/context-user';
 
 interface Props {
   user?: UserModel;
   showDrawer?: () => void;
 }
 
-const items: MenuProps["items"] = [
+const items: MenuProps['items'] = [
   {
-    key: "1",
+    key: '1',
     label: <Link href="/dashboard">Dashboard</Link>,
   },
   {
-    key: "2",
+    key: '2',
     label: (
       <a href={void 0} title="" onClick={() => logoutUser()}>
         Logout
@@ -36,44 +34,44 @@ const items: MenuProps["items"] = [
 ];
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
-  const t = useTranslations("menu-site");
+  const t = useTranslations('menu-site');
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
   const username = user?.username;
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t("home")}`,
+      title: `${t('home')}`,
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: `${t("gallery")}`,
+      title: `${t('gallery')}`,
       status: user?.profile?.enableGallery,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: `${t("memberships")}`,
+      title: `${t('memberships')}`,
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: `${t("posts")}`,
+      title: `${t('posts')}`,
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: `${t("shop")}`,
+      title: `${t('shop')}`,
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: `${t("commissions")}`,
+      title: `${t('commissions')}`,
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,
@@ -114,7 +112,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   {navigation
                     .filter(
                       (item) =>
-                        item?.status === true && Number(item?.count) >= 1
+                        item?.status === true && Number(item?.count) >= 1,
                     )
                     .map((item: any, index: number) => {
                       const isActive = pathname === item.href;
@@ -142,42 +140,41 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
             <div className="flex items-center justify-end">
               <div className="flex items-center space-x-2 sm:ml-5">
-
                 <div className="relative">
                   <ThemeToggle />
                 </div>
 
-                  {userVisiter?.id !== user?.id ? (
-                    <>
-                      <ButtonInput
-                        // color={user?.profile?.color as ColorType}
+                {userVisiter?.id !== user?.id ? (
+                  <>
+                    <ButtonInput
+                      // color={user?.profile?.color as ColorType}
+                      type="button"
+                      variant="info"
+                      onClick={() => setOpenModal(true)}
+                      icon={<BiCoffeeTogo className="mr-2 size-5" />}
+                    >
+                      Donate
+                    </ButtonInput>
+                    <CreateOrUpdateFormFollow item={user} />
+                  </>
+                ) : (
+                  <>
+                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
+                      <button
                         type="button"
-                        variant="info"
-                        onClick={() => setOpenModal(true)}
-                        icon={<BiCoffeeTogo className="mr-2 size-5" />}
+                        className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
                       >
-                        Donate
-                      </ButtonInput>
-                      <CreateOrUpdateFormFollow item={user} />
-                    </>
-                  ) : (
-                    <>
-                      <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                        <button
-                          type="button"
-                          className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
-                        >
-                          <AvatarComponent
-                            className="size-9"
-                            profile={user?.profile}
-                          />
-                          <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                            {user?.profile?.firstName} {user?.profile?.lastName}
-                          </p>
-                        </button>
-                      </Dropdown>
-                    </>
-                  )}
+                        <AvatarComponent
+                          className="size-9"
+                          profile={user?.profile}
+                        />
+                        <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                          {user?.profile?.firstName} {user?.profile?.lastName}
+                        </p>
+                      </button>
+                    </Dropdown>
+                  </>
+                )}
               </div>
             </div>
           </div>

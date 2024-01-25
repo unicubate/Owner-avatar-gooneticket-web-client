@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import { CreateOrUpdateDiscount } from "./create-or-update-discount";
+import { DeleteOneDiscountAPI } from '@/api-site/discount';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateDMYHH,
-} from "@/utils";
-import Swal from "sweetalert2";
-import { DeleteOneDiscountAPI } from "@/api-site/discount";
-import { Tag, Tooltip } from "antd";
-import { useRouter } from "next/router";
+} from '@/utils';
+import { Tag, Tooltip } from 'antd';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
+import Swal from 'sweetalert2';
+import { CreateOrUpdateDiscount } from './create-or-update-discount';
 
 const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
@@ -26,12 +26,12 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
 
   const deleteItem = (item: any) => {
     Swal.fire({
-      title: "Delete?",
-      text: "Are you sure you want to delete this?",
-      confirmButtonText: "Yes, Deleted",
-      cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#dc3545",
-      cancelButtonColor: "#6f42c1",
+      title: 'Delete?',
+      text: 'Are you sure you want to delete this?',
+      confirmButtonText: 'Yes, Deleted',
+      cancelButtonText: 'No, Cancel',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6f42c1',
       showCancelButton: true,
       reverseButtons: true,
     }).then(async (result) => {
@@ -40,17 +40,17 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
         try {
           await saveMutation.mutateAsync({ discountId: item?.id });
           AlertSuccessNotification({
-            text: "Discount deleted successfully",
-            className: "info",
-            gravity: "top",
-            position: "center",
+            text: 'Discount deleted successfully',
+            className: 'info',
+            gravity: 'top',
+            position: 'center',
           });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
-            gravity: "top",
-            className: "info",
-            position: "center",
+            gravity: 'top',
+            className: 'info',
+            position: 'center',
           });
         }
       }
@@ -65,9 +65,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
             <p className="text-sm font-bold">
               {item?.percent}% Off Commissions
             </p>
-            <p className="ml-2 mt-1 text-sm font-medium">
-              {item?.code}
-            </p>
+            <p className="ml-2 mt-1 text-sm font-medium">{item?.code}</p>
           </>
 
           <div className="ml-auto">
@@ -75,7 +73,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
               {item?.enableExpiredAt
                 ? `Ends Midnight ${formateDMYHH(
                     item?.expiredAt,
-                    String(locale)
+                    String(locale),
                   )}`
                 : `Never Expires `}
             </p>
@@ -86,13 +84,13 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
               <Tag
                 bordered={false}
                 className="ml-2"
-                color={`${item.isValid ? "success" : "error"}`}
+                color={`${item.isValid ? 'success' : 'error'}`}
               >
-                {item.isValid ? "Valid" : "Invalid"}
+                {item.isValid ? 'Valid' : 'Invalid'}
               </Tag>
             </button>
 
-            <Tooltip placement="bottomRight" title={"Edit"}>
+            <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => setShowModal(true)}
                 title="Edit"
@@ -101,7 +99,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
                 <MdOutlineModeEdit />
               </button>
             </Tooltip>
-            <Tooltip placement="bottomRight" title={"Delete"}>
+            <Tooltip placement="bottomRight" title={'Delete'}>
               <button
                 onClick={() => deleteItem(item)}
                 className="ml-2 text-lg text-gray-600 hover:text-red-600"

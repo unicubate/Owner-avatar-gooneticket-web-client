@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { GetCartsAPI, GetOneCartOrderAPI } from "@/api-site/cart";
-import { useAuth } from "@/components/util/context-user";
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { formatePrice } from "@/utils";
-import { PrivateComponent } from "@/components/util/private-component";
-import {LoadingFile } from "@/components/ui-setting/ant";
-import { ListMiniCats } from "@/components/cart/list-mini-carts";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal";
-import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
-import { useState } from "react";
-import { GetStaticPropsContext } from "next";
-import { ButtonInput } from "@/components/ui-setting";
+import { GetCartsAPI, GetOneCartOrderAPI } from '@/api-site/cart';
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { ListMiniCats } from '@/components/cart/list-mini-carts';
+import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
+import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
+import { ButtonInput } from '@/components/ui-setting';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { formatePrice } from '@/utils';
+import { GetStaticPropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const Summary = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -68,9 +68,7 @@ const Summary = () => {
     <>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mt-10 flex items-center justify-center">
-          <h1 className="text-2xl font-bold dark:text-white">
-            Shopping Cart
-          </h1>
+          <h1 className="text-2xl font-bold dark:text-white">Shopping Cart</h1>
           <span className="ml-4 rounded-full bg-gray-400 px-2 py-1 text-xs font-bold uppercase tracking-widest text-gray-50 dark:bg-gray-800">
             {carts?.summary?.totalQuantity ?? 0} products
           </span>
@@ -96,16 +94,14 @@ const Summary = () => {
 
               <hr className="border-gray-200 dark:border-gray-800" />
               <div className="mt-6 flex items-center justify-between">
-                <p className="text-3xl font-bold dark:text-white">
-                  Total
-                </p>
+                <p className="text-3xl font-bold dark:text-white">Total</p>
                 {newAmount?.value ? (
                   <>
                     <p className="ml-auto text-xl font-bold dark:text-white">
                       {formatePrice({
                         value: Number(newAmount?.value),
                         isDivide: false,
-                      }) ?? ""}
+                      }) ?? ''}
                     </p>
                     <p className="ml-1 text-xl font-bold dark:text-white">
                       {newAmount?.currency}
@@ -184,8 +180,8 @@ export default PrivateComponent(Summary);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -194,7 +190,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
         ...(await import(`/lang/${locale}/common.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

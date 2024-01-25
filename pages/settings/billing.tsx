@@ -1,74 +1,68 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { Button, Card, Col, Image, Pagination, Row } from "antd";
-import { DeleteOutlined, DownloadOutlined, EditOutlined, FundViewOutlined, PoweroffOutlined } from "@ant-design/icons";
-
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { PrivateComponent } from '@/components/util/private-component';
+import { DownloadOutlined } from '@ant-design/icons';
+import { Button, Image } from 'antd';
+import { SubmitHandler } from 'react-hook-form';
 
 const people = [
-    {
-        name: 'Jane Cooper',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: 'Admin',
-        email: 'jane.cooper@example.com',
-        image: 'https://bit.ly/33HnjK0',
-    },
-    {
-        name: 'John Doe',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: 'Tester',
-        email: 'john.doe@example.com',
-        image: 'https://bit.ly/3I9nL2D',
-    },
-    {
-        name: 'Veronica Lodge',
-        title: 'Regional Paradigm Technician',
-        department: 'Optimization',
-        role: ' Software Engineer',
-        email: 'veronica.lodge@example.com',
-        image: 'https://bit.ly/3vaOTe1',
-    },
-    // More people...
+  {
+    name: 'Jane Cooper',
+    title: 'Regional Paradigm Technician',
+    department: 'Optimization',
+    role: 'Admin',
+    email: 'jane.cooper@example.com',
+    image: 'https://bit.ly/33HnjK0',
+  },
+  {
+    name: 'John Doe',
+    title: 'Regional Paradigm Technician',
+    department: 'Optimization',
+    role: 'Tester',
+    email: 'john.doe@example.com',
+    image: 'https://bit.ly/3I9nL2D',
+  },
+  {
+    name: 'Veronica Lodge',
+    title: 'Regional Paradigm Technician',
+    department: 'Optimization',
+    role: ' Software Engineer',
+    email: 'veronica.lodge@example.com',
+    image: 'https://bit.ly/3vaOTe1',
+  },
+  // More people...
 ];
 
-
 const Billing = () => {
-    const onSubmit: SubmitHandler<any> = (payload: any) => {
-        // let data = new FormData();
-        // data.append("confirm", `${payload.confirm}`);
-        // payload?.attachment?.fileList?.length > 0 &&
-        //   payload?.attachment?.fileList.forEach((file: any) => {
-        //     data.append("attachment", file as RcFile);
-        //   });
+  const onSubmit: SubmitHandler<any> = (payload: any) => {
+    // let data = new FormData();
+    // data.append("confirm", `${payload.confirm}`);
+    // payload?.attachment?.fileList?.length > 0 &&
+    //   payload?.attachment?.fileList.forEach((file: any) => {
+    //     data.append("attachment", file as RcFile);
+    //   });
 
-        console.log("payload =======>", payload);
-    };
+    console.log('payload =======>', payload);
+  };
 
-    return (
-        <>
-            <LayoutDashboard title={"Profile"}>
+  return (
+    <>
+      <LayoutDashboard title={'Profile'}>
+        <div className="flex flex-1 flex-col">
+          <main>
+            <div className="mx-auto max-w-6xl py-6">
+              <div className="mx-auto px-4 sm:px-6 md:px-8">
+                <div className="max-w-md">
+                  <h1 className="text-lg font-bold text-gray-900">Billing</h1>
+                </div>
+              </div>
 
+              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+                <HorizontalNavSetting />
 
-                <div className="flex flex-1 flex-col">
-                    <main>
-                        <div className="mx-auto max-w-6xl py-6">
-                            <div className="mx-auto px-4 sm:px-6 md:px-8">
-                                <div className="max-w-md">
-                                    <h1 className="text-lg font-bold text-gray-900">Billing</h1>
-                                </div>
-                            </div>
+                {/* <div className="mt-8 bg-white border-gray-200 rounded-xl"> */}
 
-                            <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-
-                                <HorizontalNavSetting />
-
-
-                                {/* <div className="mt-8 bg-white border-gray-200 rounded-xl"> */}
-
-                                {/* <Row>
+                {/* <Row>
                                         <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
                                         <Button type="primary" icon={<DownloadOutlined />} size={'large'}>
                                                 Create
@@ -86,9 +80,7 @@ const Billing = () => {
                                         </Col>
                                     </Row> */}
 
-
-
-                                {/* <div className="flex flex-col mt-4">
+                {/* <div className="flex flex-col mt-4">
                                         <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                                             <div className="flex items-center justify-between">
                                                 <p className="text-xl font-bold text-gray-900">Sales</p>
@@ -319,68 +311,77 @@ const Billing = () => {
                                         </div>
                                     </div> */}
 
+                <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-10">
+                  <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                      <table className="min-w-full lg:divide-y lg:divide-gray-200">
+                        <thead className="hidden lg:table-header-group">
+                          <tr>
+                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">
+                              Customer
+                            </th>
 
+                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">
+                              Email Address
+                            </th>
 
+                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">
+                              Phone Number
+                            </th>
 
-                                <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-10">
-                                    <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                                        <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                                            <table className="min-w-full lg:divide-y lg:divide-gray-200">
-                                                <thead className="hidden lg:table-header-group">
-                                                    <tr>
-                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Customer</th>
+                            <th className="hidden px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500 xl:table-cell">
+                              Join Date
+                            </th>
 
-                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Email Address</th>
+                            <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">
+                              Country
+                            </th>
 
-                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Phone Number</th>
+                            <th className="relative px-4 py-3.5 md:pr-0">
+                              <span className="sr-only"> Actions </span>
+                            </th>
+                          </tr>
+                        </thead>
 
-                                                        <th className="hidden px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500 xl:table-cell">Join Date</th>
+                        <tbody className="divide-y divide-gray-200">
+                          {people.map((person, index) => (
+                            <tr key={index} className="bg-white">
+                              <td className="whitespace-nowrap p-4 align-top text-sm font-bold text-gray-900 lg:align-middle">
+                                <div className="flex items-center">
+                                  <Image
+                                    className="mr-3 size-8 shrink-0 rounded-full object-cover"
+                                    src={person?.image}
+                                    alt=""
+                                  />
+                                  {person?.name}
+                                </div>
+                              </td>
 
-                                                        <th className="px-4 py-3.5 text-left text-xs font-medium uppercase tracking-widest text-gray-500">Country</th>
+                              <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
+                                <div className="flex items-center">
+                                  {person?.email}
+                                </div>
+                              </td>
 
-                                                        <th className="relative px-4 py-3.5 md:pr-0">
-                                                            <span className="sr-only"> Actions </span>
-                                                        </th>
-                                                    </tr>
-                                                </thead>
+                              <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
+                                <div className="flex items-center">
+                                  (480) 555-0103
+                                </div>
+                              </td>
 
-                                                <tbody className="divide-y divide-gray-200">
+                              <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
+                                <div className="flex items-center">
+                                  Janvier 9, 2002
+                                </div>
+                              </td>
 
-                                                    {people.map((person, index) => (
+                              <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
+                                USA
+                              </td>
 
-
-                                                        <tr key={index} className="bg-white">
-                                                            <td className="whitespace-nowrap p-4 align-top text-sm font-bold text-gray-900 lg:align-middle">
-                                                                <div className="flex items-center">
-                                                                    <Image className="mr-3 size-8 shrink-0 rounded-full object-cover" src={person?.image} alt="" />
-                                                                    {person?.name}
-                                                                </div>
-                                                            </td>
-
-                                                            <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
-                                                                <div className="flex items-center">
-                                                                    {person?.email}
-                                                                </div>
-                                                            </td>
-
-                                                            <td className="hidden whitespace-nowrap p-4 text-sm font-medium text-gray-900 lg:table-cell">
-                                                                <div className="flex items-center">
-                                                                    (480) 555-0103
-                                                                </div>
-                                                            </td>
-
-                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
-                                                                <div className="flex items-center">
-                                                                    Janvier 9, 2002
-                                                                </div>
-                                                            </td>
-
-                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">USA</td>
-
-                                                            <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
-                                                                <div className="flex items-center space-x-4">
-
-                                                                    {/* <Button
+                              <td className="whitespace-nowrap p-4 text-right align-top text-sm font-medium text-gray-900 lg:text-left lg:align-middle">
+                                <div className="flex items-center space-x-4">
+                                  {/* <Button
                                                                             type="text"
                                                                             icon={<FundViewOutlined />}
                                                                         >
@@ -392,44 +393,30 @@ const Billing = () => {
                                                                         >
                                                                         </Button> */}
 
-                                                                    <Button
-                                                                        type="link"
-                                                                        icon={<DownloadOutlined />}
-                                                                    >
-                                                                        download
-                                                                    </Button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    ))}
-
-
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                  <Button
+                                    type="link"
+                                    icon={<DownloadOutlined />}
+                                  >
+                                    download
+                                  </Button>
                                 </div>
-
-
-                                {/* </div> */}
-
-
-
-                            </div>
-                        </div>
-                    </main>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
-            </LayoutDashboard>
 
-
-
-
-
-
-
-
-        </>
-    );
+                {/* </div> */}
+              </div>
+            </div>
+          </main>
+        </div>
+      </LayoutDashboard>
+    </>
+  );
 };
 
 export default PrivateComponent(Billing);

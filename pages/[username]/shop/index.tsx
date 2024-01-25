@@ -1,15 +1,15 @@
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { useRouter } from "next/router";
-import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { useAuth } from "@/components/util/context-user";
-import PublicShop from "@/components/shop/public-shop";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { GetOneCartOrderAPI } from "@/api-site/cart";
-import { CartOrderFooterCart } from "@/components/cart/cart-order-footer-cart";
-import { GetStaticPropsContext } from "next";
+import { GetOneCartOrderAPI } from '@/api-site/cart';
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
+import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import PublicShop from '@/components/shop/public-shop';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
+import { SubHorizontalNavPublicUser } from '@/components/user/sub-horizontal-nav-public-user';
+import { useAuth } from '@/components/util/context-user';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
   const { userStorage: userVisitor } = useAuth() as any;
@@ -32,8 +32,8 @@ const ShopUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Shop - ${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
+        title={`Shop - ${user?.profile?.firstName ?? ''} ${
+          user?.profile?.lastName ?? ''
         }`}
         user={user}
       >
@@ -58,9 +58,9 @@ const ShopUserPublic = () => {
         ) : null}
       </LayoutUserPublicSite>
 
-      {statusUser === "pending" ? <LoadingFile /> : null}
+      {statusUser === 'pending' ? <LoadingFile /> : null}
 
-      {statusUser === "error" ? (
+      {statusUser === 'error' ? (
         <ErrorFile
           status="error"
           title="404"

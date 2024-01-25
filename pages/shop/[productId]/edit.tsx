@@ -1,14 +1,13 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { CreateOrUpdateFormShop } from "@/components/shop/create-or-update-form-shop";
-import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api-site/product";
-import { useAuth } from "@/components/util/context-user";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { GetUploadsAPI } from "@/api-site/upload";
-import { Button, Result } from "antd";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { GetStaticPropsContext } from "next";
+import { GetOneProductAPI } from '@/api-site/product';
+import { GetUploadsAPI } from '@/api-site/upload';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { CreateOrUpdateFormShop } from '@/components/shop/create-or-update-form-shop';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const ShopEdit = () => {
   const { organizationId } = useAuth() as any;
@@ -30,9 +29,9 @@ const ShopEdit = () => {
     data: uploadImages,
   } = GetUploadsAPI({
     organizationId,
-    model: "PRODUCT",
+    model: 'PRODUCT',
     uploadableId: productId,
-    uploadType: "image",
+    uploadType: 'image',
   });
 
   const {
@@ -41,9 +40,9 @@ const ShopEdit = () => {
     data: uploadsFiles,
   } = GetUploadsAPI({
     organizationId,
-    model: "PRODUCT",
+    model: 'PRODUCT',
     uploadableId: productId,
-    uploadType: "file",
+    uploadType: 'file',
   });
 
   const dataTableProduct =
@@ -69,7 +68,7 @@ const ShopEdit = () => {
 
   return (
     <>
-      <LayoutDashboard title={`${product?.title ?? ""}`}>
+      <LayoutDashboard title={`${product?.title ?? ''}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             {/* <HorizontalNavShop /> */}
@@ -86,8 +85,8 @@ export default PrivateComponent(ShopEdit);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -95,7 +94,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

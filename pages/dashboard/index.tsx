@@ -1,16 +1,16 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { useState } from 'react';
-import { CiGift, CiShop, CiUnlock, CiWallet } from 'react-icons/ci';
-import Link from 'next/link';
-import { useAuth } from '@/components/util/context-user';
 import { RecentTransactions } from '@/components/transaction/recent-transactions';
 import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { ButtonInput } from '@/components/ui-setting/button-input';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
-import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
+import { CiGift, CiShop, CiUnlock, CiWallet } from 'react-icons/ci';
 
 const Dashboard = () => {
   const t = useTranslations();

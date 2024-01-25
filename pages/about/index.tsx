@@ -1,14 +1,12 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { FaqsList } from "@/components/faq/faqs-list";
-import { useState } from "react";
-import { LayoutSite } from "@/components/layout-site";
-import { Image } from "antd";
+import { LayoutSite } from '@/components/layout-site';
+import { Image } from 'antd';
+import { useState } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 
 const faqs = [
   {
-    id: "ed589200-fd6f-4740-bdf4-6deade38cfc8",
-    title: "Q. Does this theme supports plugins?",
+    id: 'ed589200-fd6f-4740-bdf4-6deade38cfc8',
+    title: 'Q. Does this theme supports plugins?',
     description: `
         It is a long established fact that a reader will be
         distracted by the readable content of a page when looking at
@@ -16,16 +14,16 @@ const faqs = [
         more-or-less normal distribution.`,
   },
   {
-    id: "9d0681d0-8d1f-4069-be43-1df594fb6d2a",
-    title: "Ask everything you need to know about our products and services.",
+    id: '9d0681d0-8d1f-4069-be43-1df594fb6d2a',
+    title: 'Ask everything you need to know about our products and services.',
     description: `
         distracted by the readable content of a page when looking at
         its layout. The point of using Lorem Ipsum is that it has a
         more-or-less normal distribution.`,
   },
   {
-    id: "9d0681d0-2354-09876-ytm-1df594fb6d2a",
-    title: "Ask everything you need to know about our products and services.",
+    id: '9d0681d0-2354-09876-ytm-1df594fb6d2a',
+    title: 'Ask everything you need to know about our products and services.',
     description: `
         distracted by the readable content of a page when looking at
         its layout. The point of using Lorem Ipsum is that it has a
@@ -42,7 +40,7 @@ const About = () => {
     //     data.append("attachment", file as RcFile);
     //   });
 
-    console.log("payload =======>", payload);
+    console.log('payload =======>', payload);
   };
 
   return (
@@ -179,7 +177,7 @@ const About = () => {
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-xl text-center">
               <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl lg:text-5xl">
-                About {username} page{" "}
+                About {username} page{' '}
               </h1>
               <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
                 Accept donations. Start a membership. Sell anything you like.
@@ -201,7 +199,7 @@ const About = () => {
                       type="submit"
                       className="font-pj inline-flex rounded-lg bg-blue-600 px-6 py-3 text-lg font-bold text-white transition-all duration-200 hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
                     >
-                      {" "}
+                      {' '}
                       Start my page
                     </button>
                   </div>
@@ -242,15 +240,15 @@ const About = () => {
                     <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
-                          {" "}
-                          Growth{" "}
+                          {' '}
+                          Growth{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
-                          {" "}
+                          {' '}
                           How a visual artist redefines success in graphic
-                          design{" "}
+                          design{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -277,15 +275,15 @@ const About = () => {
                     <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
-                          {" "}
-                          Growth{" "}
+                          {' '}
+                          Growth{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
-                          {" "}
+                          {' '}
                           How a visual artist redefines success in graphic
-                          design{" "}
+                          design{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -312,15 +310,15 @@ const About = () => {
                     <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
-                          {" "}
-                          Growth{" "}
+                          {' '}
+                          Growth{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
-                          {" "}
+                          {' '}
                           How a visual artist redefines success in graphic
-                          design{" "}
+                          design{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -347,15 +345,15 @@ const About = () => {
                     <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
-                          {" "}
-                          Growth{" "}
+                          {' '}
+                          Growth{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
-                          {" "}
+                          {' '}
                           How a visual artist redefines success in graphic
-                          design{" "}
+                          design{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">
@@ -382,15 +380,15 @@ const About = () => {
                     <div className="ml-4 flex-1 lg:ml-6">
                       <p className="text-xs font-medium text-gray-900 lg:text-sm">
                         <a href="#" title="" className="">
-                          {" "}
-                          Growth{" "}
+                          {' '}
+                          Growth{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-sm font-bold text-gray-900 group-hover:text-gray-600 lg:text-lg">
                         <a href="#" title="" className="">
-                          {" "}
+                          {' '}
                           How a visual artist redefines success in graphic
-                          design{" "}
+                          design{' '}
                         </a>
                       </p>
                       <p className="mt-2 text-xs font-medium text-gray-500 lg:text-sm">

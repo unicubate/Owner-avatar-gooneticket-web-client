@@ -1,10 +1,10 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
-import { UpdateFormDonation } from "@/components/donation/update-form-donation";
-import { useAuth } from "@/components/util/context-user";
-import { GetOneDonationAPI } from "@/api-site/donation";
-import { GetStaticPropsContext } from "next";
+import { GetOneDonationAPI } from '@/api-site/donation';
+import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
+import { UpdateFormDonation } from '@/components/donation/update-form-donation';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
 
 const SettingDonations = () => {
   const user = useAuth() as any;
@@ -19,7 +19,7 @@ const SettingDonations = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Donations settings"}>
+      <LayoutDashboard title={'Donations settings'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavDonation />
@@ -41,7 +41,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

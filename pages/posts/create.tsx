@@ -1,13 +1,13 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
-import { useRouter } from "next/router";
-import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
-import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
-import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
-import { useAuth } from "@/components/util/context-user";
-import { GetStaticPropsContext } from "next";
-import { CreateOrUpdateFormAlbumPost } from "@/components/post/create-or-update-form-album-post";
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { CreateOrUpdateFormAlbumPost } from '@/components/post/create-or-update-form-album-post';
+import { CreateOrUpdateFormAudioPost } from '@/components/post/create-or-update-form-audio-post';
+import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-update-form-gallery-post';
+import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-post';
+import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const PostsCreate = () => {
   const { organizationId } = useAuth() as any;
@@ -16,18 +16,31 @@ const PostsCreate = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Posts create"}>
+      <LayoutDashboard title={'Posts create'}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-            {organizationId && type === "article" ? <CreateOrUpdateFormPost organizationId={organizationId} /> : null}
+            {organizationId && type === 'article' ? (
+              <CreateOrUpdateFormPost organizationId={organizationId} />
+            ) : null}
 
-            {organizationId && type === "audio" ? <CreateOrUpdateFormAudioPost organizationId={organizationId} /> : null}
+            {organizationId && type === 'audio' ? (
+              <CreateOrUpdateFormAudioPost organizationId={organizationId} />
+            ) : null}
 
-            {organizationId && type === "video" ? <CreateOrUpdateFormVideoPost organizationId={organizationId} /> : null}
+            {organizationId && type === 'video' ? (
+              <CreateOrUpdateFormVideoPost organizationId={organizationId} />
+            ) : null}
 
-            {organizationId && type === "gallery" ? <CreateOrUpdateFormGalleryPost organizationId={organizationId} albumId={albumId as string} /> : null}
+            {organizationId && type === 'gallery' ? (
+              <CreateOrUpdateFormGalleryPost
+                organizationId={organizationId}
+                albumId={albumId as string}
+              />
+            ) : null}
 
-            {organizationId && type === "album" ? <CreateOrUpdateFormAlbumPost organizationId={organizationId} /> : null}
+            {organizationId && type === 'album' ? (
+              <CreateOrUpdateFormAlbumPost organizationId={organizationId} />
+            ) : null}
           </div>
         </div>
       </LayoutDashboard>
@@ -42,7 +55,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

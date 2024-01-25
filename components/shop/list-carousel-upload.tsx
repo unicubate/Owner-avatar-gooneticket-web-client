@@ -1,19 +1,16 @@
 'use client';
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useRef, useState } from 'react';
-import { Carousel, Image } from 'antd';
-import { UploadFolderType, UploadModel } from '@/types/upload';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import ContentLoader from 'react-content-loader';
+import { UploadFolderType, UploadModel } from '@/types/upload';
+import { Image } from 'antd';
+import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
 // import required modules
-import { Zoom, Pagination } from 'swiper/modules';
-import Skeleton from 'react-loading-skeleton';
-import { PiLockKey } from 'react-icons/pi';
 import { PostModel } from '@/types/post';
+import { Pagination, Zoom } from 'swiper/modules';
 import { WhoCanSeeItem } from '../ui-setting';
 
 type Props = {

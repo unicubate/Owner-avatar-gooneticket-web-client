@@ -1,28 +1,25 @@
-import { ButtonInput } from '@/components/ui-setting';
-import { useRouter } from 'next/router';
+import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from '@/api-site/cart';
 import { GetOneProductAPI } from '@/api-site/product';
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { LoginModal } from '@/components/auth-modal/login-modal';
+import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
+import ListComments from '@/components/comment/list-comments';
+import { useDialog } from '@/components/hooks/use-dialog';
+import { LayoutSite } from '@/components/layout-site';
+import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formatePrice,
 } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { LayoutSite } from '@/components/layout-site';
-import { MdOutlineDiscount } from 'react-icons/md';
-import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import ReactPlayer from 'react-player';
-import ListComments from '@/components/comment/list-comments';
-import { useAuth } from '@/components/util/context-user';
-import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
-import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
-import { GetOneUserPublicAPI } from '@/api-site/user';
-import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from '@/api-site/cart';
-import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { useState } from 'react';
-import { LoginModal } from '@/components/auth-modal/login-modal';
 import { GetStaticPropsContext } from 'next';
-import { useDialog } from '@/components/hooks/use-dialog';
+import { useRouter } from 'next/router';
+import { MdOutlineDiscount } from 'react-icons/md';
+import ReactPlayer from 'react-player';
 
 const contentStyle: React.CSSProperties = {
   height: '100%',

@@ -1,12 +1,9 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { useAuth } from "@/components/util/context-user";
-import { EnableGallery } from "@/components/gallery/enable-gallery";
-import { TableGallery } from "@/components/gallery/table-gallery";
-import { GetStaticPropsContext } from "next";
-import Link from "next/link";
-import { TableAlbum } from "@/components/gallery/table-album";
-import { useRouter } from "next/router";
+import { TableGallery } from '@/components/gallery/table-gallery';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const Albums = () => {
   const { organizationId, profile, userStorage: user } = useAuth() as any;
@@ -15,11 +12,10 @@ const Albums = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Albums"}>
+      <LayoutDashboard title={'Albums'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-
               {organizationId && albumId ? (
                 <TableGallery
                   albumId={albumId}

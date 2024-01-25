@@ -1,6 +1,5 @@
-import { CloseOutlined } from "@ant-design/icons";
-import { Input } from "antd";
-import { CreateFormPublicDonation } from "./create-form-public-donation";
+import { CloseOutlined } from '@ant-design/icons';
+import { CreateFormPublicDonation } from './create-form-public-donation';
 
 const CreateModalPublicDonation: React.FC<{
   user?: any;
@@ -24,7 +23,6 @@ const CreateModalPublicDonation: React.FC<{
               </button>
 
               <CreateFormPublicDonation user={user} />
-              
             </div>
           </div>
         </div>

@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Select, Upload, UploadFile, UploadProps } from 'antd';
-import { SubmitHandler, Controller } from 'react-hook-form';
-import * as yup from 'yup';
-import { NumberInput, SwitchInput } from '../ui-setting/ant';
-import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
-} from '@/utils/alert-notification';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { GetAllDiscountsAPI } from '@/api-site/discount';
+import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
 import {
   ProductFormModel,
   arrayProductTypes,
   arrayWhoCanSees,
 } from '@/types/product';
-import { ReloadIcon, UploadIcon } from '@radix-ui/react-icons';
-import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
-import { GetAllDiscountsAPI } from '@/api-site/discount';
-import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+} from '@/utils/alert-notification';
+import { filterImageAndFile } from '@/utils/utils';
+import { PlusOutlined } from '@ant-design/icons';
+import { UploadIcon } from '@radix-ui/react-icons';
+import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { filterImageAndFile } from '@/utils/utils';
-import { useAuth } from '../util/context-user';
+import React, { useEffect, useState } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
+import { NumberInput, SwitchInput } from '../ui-setting/ant';
+import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { useAuth } from '../util/context-user';
 
 type Props = {
   product?: any;

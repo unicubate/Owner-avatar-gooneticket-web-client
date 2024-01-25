@@ -1,8 +1,8 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavDonation } from "@/components/donation/horizontal-nav-donation";
-import { GetStaticPropsContext } from "next";
+import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { SubmitHandler } from 'react-hook-form';
 
 const TransactionsDonations = () => {
   const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -13,12 +13,12 @@ const TransactionsDonations = () => {
     //     data.append("attachment", file as RcFile);
     //   });
 
-    console.log("payload =======>", payload);
+    console.log('payload =======>', payload);
   };
 
   return (
     <>
-      <LayoutDashboard title={"Donations"}>
+      <LayoutDashboard title={'Donations'}>
         <div className="flex flex-1 flex-col">
           <main>
             <div className="py-6">
@@ -36,7 +36,7 @@ const TransactionsDonations = () => {
 
                 <div className="mt-8 sm:flex sm:items-center sm:justify-between">
                   <p className="text-base font-bold text-gray-900">
-                    Subscription Plan:{" "}
+                    Subscription Plan:{' '}
                     <span className="text-indigo-600">Standard</span>
                   </p>
                   <p className="mt-1 text-sm font-medium text-gray-500">
@@ -147,8 +147,8 @@ const TransactionsDonations = () => {
                       <div className="flex items-center justify-start space-x-5 sm:justify-end">
                         <div className="flex items-center space-x-1">
                           <label className="shrink-0 text-sm font-medium text-gray-900">
-                            {" "}
-                            Sort by:{" "}
+                            {' '}
+                            Sort by:{' '}
                           </label>
                           <select
                             name=""

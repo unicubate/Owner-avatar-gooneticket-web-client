@@ -1,13 +1,9 @@
-import Link from "next/link";
-import { BiHomeCircle, BiSearch, BiBookContent } from "react-icons/bi";
-import { VscOpenPreview } from "react-icons/vsc";
-import { useRouter } from "next/router";
-import { Avatar, Button, Dropdown, Image, MenuProps } from "antd";
-import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken, logoutUser } from "../util/context-user";
-import { useState } from "react";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ButtonInput } from "../ui-setting";
+import { MenuProps } from 'antd';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { ButtonInput } from '../ui-setting';
+import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -16,13 +12,13 @@ export type NavbarProps = {
   icon?: any;
 };
 
-const items: MenuProps["items"] = [
+const items: MenuProps['items'] = [
   {
-    key: "1",
+    key: '1',
     label: <Link href="/dashboard">Dashboard</Link>,
   },
   {
-    key: "2",
+    key: '2',
     label: (
       <a href={void 0} title="" onClick={() => logoutUser()}>
         Logout
@@ -33,20 +29,20 @@ const items: MenuProps["items"] = [
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
-    title: "Explore",
-    href: "/explore",
+    title: 'Explore',
+    href: '/explore',
   },
   {
-    title: "Faq",
-    href: "/faqs",
+    title: 'Faq',
+    href: '/faqs',
   },
   {
-    title: "about",
-    href: "/about",
+    title: 'about',
+    href: '/about',
   },
   {
-    title: "Contact",
-    href: "/contact-us",
+    title: 'Contact',
+    href: '/contact-us',
   },
 ];
 
@@ -114,11 +110,11 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       className={`inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${
                         isActive
                           ? `text-${
-                              user?.profile?.color ?? "indigo"
+                              user?.profile?.color ?? 'indigo'
                             }-600 border-${
-                              user?.profile?.color ?? "indigo"
+                              user?.profile?.color ?? 'indigo'
                             }-600`
-                          : "border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300"
+                          : 'border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300'
                       } `}
                     >
                       {item?.icon}
@@ -174,10 +170,10 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
               <div className="flex items-center space-x-6 sm:ml-5">
                 <div className="relative">
                   <ButtonInput
-                     type="button"
-                     className="w-full"
-                     size="sm"
-                     variant="ghost"
+                    type="button"
+                    className="w-full"
+                    size="sm"
+                    variant="ghost"
                     onClick={() => {
                       router.push(`${user?.profile ? `/dashboard` : `/login`}`);
                     }}
@@ -187,12 +183,14 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                 </div>
                 <div className="relative">
                   <ButtonInput
-                     type="button"
-                     className="w-full"
-                     size="sm"
-                     variant="info"
+                    type="button"
+                    className="w-full"
+                    size="sm"
+                    variant="info"
                     onClick={() => {
-                      router.push(`${user?.profile ? `/dashboard` : `/register`}`);
+                      router.push(
+                        `${user?.profile ? `/dashboard` : `/register`}`,
+                      );
                     }}
                   >
                     Sign Up

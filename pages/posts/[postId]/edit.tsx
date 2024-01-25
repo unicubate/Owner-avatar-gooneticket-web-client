@@ -1,16 +1,16 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
-import { useRouter } from "next/router";
-import { GetOnePostAPI } from "@/api-site/post";
-import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
-import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
-import { useAuth } from "@/components/util/context-user";
-import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { GetUploadsAPI } from "../../../api-site/upload";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { GetStaticPropsContext } from "next";
+import { GetOnePostAPI } from '@/api-site/post';
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { CreateOrUpdateFormAudioPost } from '@/components/post/create-or-update-form-audio-post';
+import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-update-form-gallery-post';
+import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-post';
+import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { GetUploadsAPI } from '../../../api-site/upload';
 
 const PostsEdit = () => {
   const { userStorage: user } = useAuth() as any;
@@ -34,9 +34,9 @@ const PostsEdit = () => {
     data: uploadImages,
   } = GetUploadsAPI({
     organizationId: post?.organizationId,
-    model: "POST",
+    model: 'POST',
     uploadableId: postId,
-    uploadType: "image",
+    uploadType: 'image',
   });
 
   const {
@@ -45,9 +45,9 @@ const PostsEdit = () => {
     data: uploadsFiles,
   } = GetUploadsAPI({
     organizationId: post?.organizationId,
-    model: "POST",
+    model: 'POST',
     uploadableId: postId,
-    uploadType: "file",
+    uploadType: 'file',
   });
 
   const dataTablePost =
@@ -61,7 +61,7 @@ const PostsEdit = () => {
       />
     ) : (
       <>
-        {user?.organizationId && post?.id && type === "gallery" ? (
+        {user?.organizationId && post?.id && type === 'gallery' ? (
           <CreateOrUpdateFormGalleryPost
             uploadImages={uploadImages}
             post={post}
@@ -70,7 +70,7 @@ const PostsEdit = () => {
           />
         ) : null}
 
-        {post?.id && type === "article" ? (
+        {post?.id && type === 'article' ? (
           <CreateOrUpdateFormPost
             uploadImages={uploadImages}
             post={post}
@@ -79,7 +79,7 @@ const PostsEdit = () => {
           />
         ) : null}
 
-        {post?.id && type === "audio" ? (
+        {post?.id && type === 'audio' ? (
           <CreateOrUpdateFormAudioPost
             post={post}
             postId={postId}
@@ -89,7 +89,7 @@ const PostsEdit = () => {
           />
         ) : null}
 
-        {post?.id && type === "video" ? (
+        {post?.id && type === 'video' ? (
           <CreateOrUpdateFormVideoPost
             uploadImages={uploadImages}
             post={post}
@@ -102,7 +102,7 @@ const PostsEdit = () => {
 
   return (
     <>
-      <LayoutDashboard title={`${post?.title || "Post"}`}>
+      <LayoutDashboard title={`${post?.title || 'Post'}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             {dataTablePost}
@@ -118,8 +118,8 @@ export default PrivateComponent(PostsEdit);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -127,7 +127,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

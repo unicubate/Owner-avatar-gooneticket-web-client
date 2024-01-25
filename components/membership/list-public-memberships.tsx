@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { HtmlParser } from '@/utils/html-parser';
-import { ButtonInput } from '../ui-setting';
-import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { MembershipModel } from '@/types/membership';
-import { useRouter } from 'next/router';
+import { HtmlParser } from '@/utils/html-parser';
 import { convertToPluralMonth } from '@/utils/utils';
-import { useAuth } from '../util/context-user';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useDialog } from '../hooks/use-dialog';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { ButtonInput } from '../ui-setting';
 
 type Props = {
   item?: MembershipModel;

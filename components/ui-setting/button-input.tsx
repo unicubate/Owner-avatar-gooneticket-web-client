@@ -1,5 +1,5 @@
-import { Button, SizeButton, VariantButton } from '../ui/button';
 import { LoadingOutlined } from '@ant-design/icons';
+import { Button, SizeButton, VariantButton } from '../ui/button';
 
 interface Props {
   className?: string;

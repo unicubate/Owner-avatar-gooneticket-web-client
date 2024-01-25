@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { UploadFolderType, UploadModel } from "@/types/upload";
 import { Image } from "antd";
-import { viewOneFileUploadAPI } from "@/api-site/upload";
+import React, { useState } from "react";
 
 type Props = {
   uploads: UploadModel[];

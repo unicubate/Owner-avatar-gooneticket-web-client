@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import { ButtonInput } from '@/components/ui-setting/button-input';
 import { LayoutSite } from '@/components/layout-site';
+import { ButtonInput } from '@/components/ui-setting/button-input';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
 
@@ -41,10 +40,10 @@ export default function Home() {
 
                 <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
                   <ButtonInput
-                   type="button"
-                   className="w-full"
-                   size="sm"
-                   variant="info"
+                    type="button"
+                    className="w-full"
+                    size="sm"
+                    variant="info"
                   >
                     Start my page
                   </ButtonInput>

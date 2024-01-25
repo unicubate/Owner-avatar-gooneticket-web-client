@@ -1,13 +1,13 @@
-import { GetOneUserPublicAPI } from "@/api-site/user";
-import { useRouter } from "next/router";
-import { HorizontalNavPublicUser } from "@/components/user/horizontal-nav-public-user";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { PublicMemberships } from "@/components/membership/public-memberships";
-import { LayoutUserPublicSite } from "@/components/layout-user-public-site";
-import { useAuth } from "@/components/util/context-user";
-import { ErrorFile } from "@/components/ui-setting/ant/error-file";
-import { SubHorizontalNavPublicUser } from "@/components/user/sub-horizontal-nav-public-user";
-import { GetStaticPropsContext } from "next";
+import { GetOneUserPublicAPI } from '@/api-site/user';
+import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { PublicMemberships } from '@/components/membership/public-memberships';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
+import { SubHorizontalNavPublicUser } from '@/components/user/sub-horizontal-nav-public-user';
+import { useAuth } from '@/components/util/context-user';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const MembershipsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -22,8 +22,8 @@ const MembershipsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Memberships - ${user?.profile?.firstName ?? ""} ${
-          user?.profile?.lastName ?? ""
+        title={`Memberships - ${user?.profile?.firstName ?? ''} ${
+          user?.profile?.lastName ?? ''
         }`}
         user={user}
       >
@@ -50,9 +50,9 @@ const MembershipsUserPublic = () => {
         </div>
       </LayoutUserPublicSite>
 
-      {status === "pending" ? <LoadingFile /> : null}
+      {status === 'pending' ? <LoadingFile /> : null}
 
-      {status === "error" ? (
+      {status === 'error' ? (
         <ErrorFile
           status="error"
           title="404"
@@ -68,8 +68,8 @@ export default MembershipsUserPublic;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -78,7 +78,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
         ...(await import(`/lang/${locale}/common.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

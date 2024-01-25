@@ -1,11 +1,10 @@
-import { ButtonInput } from '..';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
+import { ButtonInput } from '..';
 
 import {
   AlertDialog,
   AlertDialogContent,
   AlertDialogDescription,
-  AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,

@@ -1,15 +1,13 @@
-import { DateInput, NumberInput } from '../ui-setting/ant';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { CloseOutlined } from '@ant-design/icons';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { useEffect, useState } from 'react';
-import { DiscountFormModel } from '@/types/discount';
 import { CreateOrUpdateOneDiscountAPI } from '@/api-site/discount';
-import { SwitchInput } from '../ui-setting/ant';
+import { DiscountFormModel } from '@/types/discount';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { CloseOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
+import { SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
+import { DateInput, SwitchInput } from '../ui-setting/ant';
 import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({

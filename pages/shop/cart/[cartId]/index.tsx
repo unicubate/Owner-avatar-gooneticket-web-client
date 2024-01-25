@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { Image } from "antd";
-import { ButtonInput } from "@/components/ui-setting/button-input";
-import { useRouter } from "next/router";
-import { GetOneProductAPI } from "@/api-site/product";
-import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
-import Link from "next/link";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import {  LoadingFile } from "@/components/ui-setting/ant";
-import { GetAllCountiesAPI } from "@/api-site/profile";
-import { SelectSearchInput } from "@/components/ui-setting/ant/select-search-input";
-import { LayoutSite } from "@/components/layout-site";
-import { MdOutlineDeleteOutline } from "react-icons/md";
-import { GetUploadsAPI } from "@/api-site/upload";
-import { GetStaticPropsContext } from "next";
-import { TextInput } from "@/components/ui-setting/shadcn";
+import { GetOneProductAPI } from '@/api-site/product';
+import { GetAllCountiesAPI } from '@/api-site/profile';
+import { GetUploadsAPI } from '@/api-site/upload';
+import { LayoutSite } from '@/components/layout-site';
+import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { SelectSearchInput } from '@/components/ui-setting/ant/select-search-input';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TextInput } from '@/components/ui-setting/shadcn';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Image } from 'antd';
+import { GetStaticPropsContext } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { MdOutlineDeleteOutline } from 'react-icons/md';
+import * as yup from 'yup';
 
 const schema = yup.object({
   firstName: yup.string().nullable(),
@@ -30,7 +30,7 @@ const ShopView = () => {
 
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    false
+    false,
   );
   const {
     control,
@@ -39,7 +39,7 @@ const ShopView = () => {
     formState: { errors },
   } = useForm<any>({
     resolver: yupResolver(schema),
-    mode: "onChange",
+    mode: 'onChange',
   });
 
   const { data: product, isError: isErrorProduct } = GetOneProductAPI({
@@ -54,9 +54,9 @@ const ShopView = () => {
     data: dataImages,
   } = GetUploadsAPI({
     organizationId: product?.organizationId,
-    model: "PRODUCT",
+    model: 'PRODUCT',
     uploadableId: product?.id,
-    uploadType: "image",
+    uploadType: 'image',
   });
 
   const dataTableImages = isLoadingImages ? (
@@ -75,17 +75,17 @@ const ShopView = () => {
     setLoading(true);
     setHasErrors(undefined);
 
-    console.log("payload ======>", payload);
+    console.log('payload ======>', payload);
   };
   return (
     <>
-      <LayoutSite title={`${product?.title ?? ""}`}>
+      <LayoutSite title={`${product?.title ?? ''}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-center">
             <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
             <span className="rounded-r-nonepy-1 ml-4 rounded-full bg-gray-400 px-2 py-1 text-xs font-bold uppercase tracking-widest text-gray-50">
-              {" "}
-              4 Items{" "}
+              {' '}
+              4 Items{' '}
             </span>
           </div>
 
@@ -323,8 +323,8 @@ export default ShopView;
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -332,7 +332,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

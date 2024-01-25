@@ -1,14 +1,14 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/components/util/context-user';
-import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
-import { ButtonInput } from '@/components/ui-setting';
+import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
+import { LayoutDashboard } from '@/components/layout-dashboard';
 import { TableTransactions } from '@/components/transaction/table-transactions';
+import { ButtonInput } from '@/components/ui-setting';
+import { SerialPrice } from '@/components/ui-setting/serial-price';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import { useDebounce } from '@/utils';
 import { GetStaticPropsContext } from 'next';
+import { useState } from 'react';
 
 const Donations = () => {
   const user = useAuth() as any;

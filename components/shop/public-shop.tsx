@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
-import { ButtonInput } from '../ui-setting/button-input';
-import { useInView } from 'react-intersection-observer';
-import ListPublicShop from './list-public-shop';
 import { GetInfiniteProductsAPI } from '@/api-site/product';
-import { LoadingFile } from '../ui-setting/ant/loading-file';
-import { ErrorFile } from '../ui-setting/ant/error-file';
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { LoadingFile } from '../ui-setting/ant/loading-file';
+import ListPublicShop from './list-public-shop';
 
 type Props = {
   organizationId: string;

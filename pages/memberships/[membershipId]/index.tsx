@@ -1,16 +1,15 @@
-import { Avatar, Button } from 'antd';
-import { ButtonInput } from '@/components/ui-setting';
-import { useRouter } from 'next/router';
 import { GetOneProductAPI } from '@/api-site/product';
 import { GetUploadsAPI } from '@/api-site/upload';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { ButtonInput } from '@/components/ui-setting';
 import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { LayoutSite } from '@/components/layout-site';
-import { MdOutlineDiscount } from 'react-icons/md';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Avatar, Button, Spin } from 'antd';
 import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { MdOutlineDiscount } from 'react-icons/md';
 
 const ShopView = () => {
   const { locale, push } = useRouter();

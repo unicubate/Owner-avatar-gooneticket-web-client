@@ -1,5 +1,5 @@
-import { Select, Switch } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { Select, Switch } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   name: string;
 }
 
-const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
+const SwitchInput: React.FC<Props> = ({ control, label = '', name }) => {
   return (
     <>
       <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
@@ -17,14 +17,15 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
           title=""
           className="text-sm font-medium transition-all duration-200"
         >
-          {" "}
+          {' '}
         </button>
         <Controller
           name={name}
           control={control}
           render={({ field: { value, onChange } }) => (
             <>
-              <div className="
+              <div
+                className="
                   relative 
                   inline-flex 
                   h-6 
@@ -40,12 +41,15 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
                   ease-in-out 
                   focus:outline-none 
                   dark:border-gray-800 
-                  dark:bg-[#121212]">
+                  dark:bg-[#121212]"
+              >
                 <label
                   htmlFor={name}
                   className="relative flex w-max cursor-pointer select-none items-center"
                 >
-                  {label ? <span className="mr-3 font-bold">{label}</span> : null}
+                  {label ? (
+                    <span className="mr-3 font-bold">{label}</span>
+                  ) : null}
 
                   <Switch
                     // checkedChildren={<CheckOutlined />}
@@ -55,7 +59,6 @@ const SwitchInput: React.FC<Props> = ({ control, label = "", name }) => {
                   />
                 </label>
               </div>
-
             </>
           )}
         />

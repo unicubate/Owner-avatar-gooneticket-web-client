@@ -1,8 +1,8 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import { LayoutDashboard } from "@/components/layout-dashboard";
-import { HorizontalNavSetting } from "@/components/setting/horizontal-nav-setting";
-import { useAuth } from "@/components/util/context-user";
-import { PayoutFormUser } from "@/components/user/payout-form-user";
+import { LayoutDashboard } from '@/components/layout-dashboard';
+import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { PayoutFormUser } from '@/components/user/payout-form-user';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 
 const SettingsPayout = () => {
@@ -10,13 +10,13 @@ const SettingsPayout = () => {
 
   return (
     <>
-      <LayoutDashboard title={"Settings"}>
+      <LayoutDashboard title={'Settings'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <HorizontalNavSetting />
 
             <div className="flow-root">
-            <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
+              <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
                 {user?.id ? <PayoutFormUser /> : null}
 
                 {/* {user?.profileId ? (
@@ -45,7 +45,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

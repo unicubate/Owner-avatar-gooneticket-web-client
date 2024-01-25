@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/router";
-import { GetOneMembershipAPI } from "@/api-site/membership";
-import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { ListCarouselUpload } from "@/components/shop/list-carousel-upload";
-import { HtmlParser } from "@/utils/html-parser";
-import { CreatePaymentPayPal } from "@/components/payment/create-payment-paypal";
-import { LoadingFile } from "@/components/ui-setting/ant/loading-file";
-import { useAuth } from "@/components/util/context-user";
-import { CreatePaymentStripe } from "@/components/payment/stripe/create-payment-stripe";
-import { ButtonInput } from "@/components/ui-setting/button-input";
-import { formatePrice } from "@/utils";
-import { PrivateComponent } from "@/components/util/private-component";
-import { convertToPluralMonth } from "@/utils/utils";
-import { LayoutSite } from "@/components/layout-site";
-import { AvatarComponent } from "@/components/ui-setting/ant/avatar-component";
-import Skeleton from "react-loading-skeleton";
-import { GetStaticPropsContext } from "next";
+import { GetOneMembershipAPI } from '@/api-site/membership';
+import { LayoutSite } from '@/components/layout-site';
+import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
+import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
+import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
+import { formatePrice } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import { convertToPluralMonth } from '@/utils/utils';
+import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Skeleton from 'react-loading-skeleton';
 
 const CheckoutView = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -30,25 +30,25 @@ const CheckoutView = () => {
     register,
     formState: { errors },
   } = useForm();
-  const watchAmount = watch("amount", "");
+  const watchAmount = watch('amount', '');
   const { status, data: item } = GetOneMembershipAPI({
     membershipId,
   });
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
     : {
-      currency: item?.currency?.code,
-      value: item?.price,
-      month: item?.month,
-    };
+        currency: item?.currency?.code,
+        value: item?.price,
+        month: item?.month,
+      };
 
-  if (status === "pending") {
+  if (status === 'pending') {
     <LoadingFile />;
   }
 
   return (
     <>
-      <LayoutSite title={`${item?.title ?? ""}`}>
+      <LayoutSite title={`${item?.title ?? ''}`}>
         <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mt-8 max-w-xl md:mt-12">
             <div className="overflow-hidden rounded-xl bg-white shadow">
@@ -66,15 +66,15 @@ const CheckoutView = () => {
                     className="ml-2 cursor-pointer"
                   >
                     <p className="text-sm font-bold text-gray-900">
-                      {item?.profile?.firstName ?? ""}{" "}
-                      {item?.profile?.lastName ?? ""}
+                      {item?.profile?.firstName ?? ''}{' '}
+                      {item?.profile?.lastName ?? ''}
                     </p>
                   </div>
 
                   <div className="ml-auto">
                     <p className="text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                      {" "}
-                      Membership{" "}
+                      {' '}
+                      Membership{' '}
                     </p>
                   </div>
                 </div>
@@ -87,7 +87,7 @@ const CheckoutView = () => {
                           <div className="mt-2 flex items-center">
                             {item?.id ? (
                               <p className="cursor-pointer text-lg font-bold text-gray-900">
-                                {item?.title ?? ""}
+                                {item?.title ?? ''}
                               </p>
                             ) : null}
                           </div>
@@ -110,16 +110,17 @@ const CheckoutView = () => {
                           {item?.price ? (
                             <div className="mt-2">
                               <div
-                                className={`overflow-hidden border-2 bg-white transition-all duration-200 ${errors?.amount
-                                  ? "border-red-500"
-                                  : "border-gray-200"
-                                  } rounded-md hover:bg-gray-50`}
+                                className={`overflow-hidden border-2 bg-white transition-all duration-200 ${
+                                  errors?.amount
+                                    ? 'border-red-500'
+                                    : 'border-gray-200'
+                                } rounded-md hover:bg-gray-50`}
                               >
                                 <div className="p-2 sm:p-4">
                                   <div className="flex items-center">
                                     <input
                                       type="radio"
-                                      {...register("amount")}
+                                      {...register('amount')}
                                       id="amount"
                                       defaultChecked
                                       value={JSON.stringify({
@@ -132,9 +133,9 @@ const CheckoutView = () => {
                                     <label className="ml-2 mr-auto">
                                       <p className="text-xl font-semibold text-black">
                                         {item?.price}
-                                        {item?.currency?.symbol} /{" "}
+                                        {item?.currency?.symbol} /{' '}
                                         {convertToPluralMonth(
-                                          Number(item?.month)
+                                          Number(item?.month),
                                         )}
                                       </p>
                                       <p className="text-sm text-gray-600">
@@ -163,7 +164,7 @@ const CheckoutView = () => {
                                   {formatePrice({
                                     value: Number(newAmount?.value),
                                     isDivide: false,
-                                  }) ?? ""}
+                                  }) ?? ''}
                                 </p>
                                 <p className="ml-1 text-2xl font-bold text-gray-900">
                                   {item?.currency?.symbol}
@@ -247,8 +248,8 @@ export default PrivateComponent(CheckoutView);
 export async function getStaticPaths() {
   return {
     paths: [],
-    fallback: true
-  }
+    fallback: true,
+  };
 }
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
@@ -256,7 +257,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { usePathname } from "next/navigation";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { ThemeToggle } from "../ui-setting/theme-toggle";
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ThemeToggle } from '../ui-setting/theme-toggle';
 
 export type NavbarProps = {
   title: string;
@@ -13,20 +12,20 @@ export type NavbarProps = {
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
-    title: "Explore",
-    href: "/explore",
+    title: 'Explore',
+    href: '/explore',
   },
   {
-    title: "Faq",
-    href: "/faqs",
+    title: 'Faq',
+    href: '/faqs',
   },
   {
-    title: "about",
-    href: "/about",
+    title: 'about',
+    href: '/about',
   },
   {
-    title: "Contact",
-    href: "/contact-us",
+    title: 'Contact',
+    href: '/contact-us',
   },
 ];
 
@@ -92,10 +91,8 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
               </div> */}
             </div>
 
-
             <div className="flex items-center justify-end">
               <div className="flex items-center space-x-6 sm:ml-5">
-
                 <div className="relative">
                   <ThemeToggle />
                 </div>

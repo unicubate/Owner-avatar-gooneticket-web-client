@@ -1,23 +1,23 @@
+import { GetOnePostAPI } from '@/api-site/post';
+import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { PostModel } from '@/types/post';
+import { formateDMYHH } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import { LockClosedIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { AiOutlineClose } from 'react-icons/ai';
 import { BiConversation } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
-import { MdOutlineModeEdit } from 'react-icons/md';
-import { AiOutlineClose } from 'react-icons/ai';
+import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
 import { IoShareOutline } from 'react-icons/io5';
-import Link from 'next/link';
-import { HtmlParser } from '@/utils/html-parser';
+import { MdOutlineModeEdit } from 'react-icons/md';
 import ListComments from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
-import { useAuth } from '../util/context-user';
-import { formateDMYHH } from '@/utils';
-import { PostModel } from '@/types/post';
-import { useRouter } from 'next/router';
-import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
-import { GetOnePostAPI } from '@/api-site/post';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ButtonInput } from '../ui-setting';
-import { LockClosedIcon } from '@radix-ui/react-icons';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { useAuth } from '../util/context-user';
 
 type Props = {
   openModal: boolean;

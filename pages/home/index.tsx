@@ -1,18 +1,17 @@
 'use client';
 
-import { PrivateComponent } from '@/components/util/private-component';
-import { LayoutDashboard } from '@/components/layout-dashboard';
-import { ButtonInput } from '@/components/ui-setting/button-input';
 import { GetInfiniteFollowsPostsAPI } from '@/api-site/post';
+import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListFollowPosts } from '@/components/post/list-follow-posts';
+import { ButtonLoadMore } from '@/components/ui-setting';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { useInView } from 'react-intersection-observer';
-import { Suspense, useEffect } from 'react';
-import { GetStaticPropsContext } from 'next';
+import { PrivateComponent } from '@/components/util/private-component';
 import { FloatButton } from 'antd';
-import { ButtonLoadMore } from '@/components/ui-setting';
+import { GetStaticPropsContext } from 'next';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const Home = () => {
   const { ref, inView } = useInView();
