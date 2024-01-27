@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { PostModel } from "@/types/post";
-import ListComments from "../comment/list-comments";
-import { formateDMYHH } from "@/utils";
-import { BiComment } from "react-icons/bi";
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import ReactPlayer from "react-player";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { HtmlParser } from "@/utils/html-parser";
-import { IoShareOutline } from "react-icons/io5";
-import { FiDownload } from "react-icons/fi";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { UserVisitorModel } from "@/types/user.type";
+import { PostModel } from '@/types/post';
+import { UserVisitorModel } from '@/types/user.type';
+import { formateDMYHH } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { BiComment } from 'react-icons/bi';
+import { FiDownload } from 'react-icons/fi';
+import { IoShareOutline } from 'react-icons/io5';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
+import ReactPlayer from 'react-player';
+import { ListComments } from '../comment/list-comments';
+import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 
 type Props = {
   item?: PostModel;
@@ -63,7 +63,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
                       push(
                         `/posts/${
                           item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`
+                        }/edit?type=${item?.type.toLocaleLowerCase()}`,
                       )
                     }
                     title="Edit"
@@ -84,7 +84,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
             </div>
           </div>
 
-          {item?.urlMedia && ["VIDEO", "AUDIO"].includes(item?.type) ? (
+          {item?.urlMedia && ['VIDEO', 'AUDIO'].includes(item?.type) ? (
             <div className="mt-2">
               <ReactPlayer
                 className="mr-auto"
@@ -101,7 +101,7 @@ const ListPublicPostsComments: React.FC<Props> = ({
               href={`/${item?.profile?.username}/posts/${item?.slug}`}
               className="mt-4 cursor-pointer text-lg font-bold text-gray-900"
             >
-              {item?.title ?? ""}
+              {item?.title ?? ''}
             </Link>
           ) : null}
 
@@ -122,11 +122,11 @@ const ListPublicPostsComments: React.FC<Props> = ({
 
           <ListComments
             model="POST"
-            modelIds={["POST"]}
+            modelIds={['POST']}
             organizationId={String(item?.organizationId)}
             postId={String(item?.id)}
             take={commentTake}
-            userVisitorId={userVisitor?.id ?? ""}
+            userVisitorId={userVisitor?.id ?? ''}
           />
         </div>
       </div>

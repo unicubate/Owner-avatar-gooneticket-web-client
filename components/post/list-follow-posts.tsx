@@ -14,7 +14,7 @@ import { HiOutlineLockClosed } from 'react-icons/hi';
 import { IoShareOutline } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
-import ListComments from '../comment/list-comments';
+import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
@@ -283,23 +283,37 @@ const ListFollowPosts: React.FC<Props> = ({
             ) : null}
             {item?.allowDownload && (
               <>
-                <button
-                  title="Download"
-                  onClick={() => {
-                    push(
-                      `${downloadOneFileUploadAPI({
-                        folder: 'posts',
-                        fileName:
-                          item.type === 'AUDIO'
-                            ? item?.uploadsFile[0]?.path
-                            : item?.uploadsImage[0]?.path,
-                      })}`,
-                    );
-                  }}
-                  className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
-                >
-                  <FiDownload className="size-5" />
-                </button>
+                {item?.whoCanSee === 'MEMBERSHIP' &&
+                item?.isValidSubscribe !== 1 ? (
+                  <>
+                    <button
+                      title="Download"
+                      className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                    >
+                      <FiDownload className="size-5" />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      title="Download"
+                      onClick={() => {
+                        push(
+                          `${downloadOneFileUploadAPI({
+                            folder: 'posts',
+                            fileName:
+                              item.type === 'AUDIO'
+                                ? item?.uploadsFile[0]?.path
+                                : item?.uploadsImage[0]?.path,
+                          })}`,
+                        );
+                      }}
+                      className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                    >
+                      <FiDownload className="size-5" />
+                    </button>
+                  </>
+                )}
               </>
             )}
 

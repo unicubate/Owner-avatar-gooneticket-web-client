@@ -3,7 +3,7 @@ import { GetOneProductAPI } from '@/api-site/product';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { LoginModal } from '@/components/auth-modal/login-modal';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
-import ListComments from '@/components/comment/list-comments';
+import { ListComments } from '@/components/comment/list-comments';
 import { useDialog } from '@/components/hooks/use-dialog';
 import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';

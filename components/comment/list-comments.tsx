@@ -101,4 +101,4 @@ const ListComments: React.FC<{
   );
 };
 
-export default ListComments;
+export { ListComments };

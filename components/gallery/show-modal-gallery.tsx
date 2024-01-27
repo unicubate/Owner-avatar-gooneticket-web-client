@@ -12,7 +12,7 @@ import { FiDownload } from 'react-icons/fi';
 import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
 import { IoShareOutline } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
-import ListComments from '../comment/list-comments';
+import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
