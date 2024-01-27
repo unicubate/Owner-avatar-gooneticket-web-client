@@ -18,6 +18,7 @@ const ShopEdit = () => {
     data: product,
     isError: isErrorProduct,
     isLoading: isLoadingProduct,
+    refetch,
   } = GetOneProductAPI({
     productId,
     organizationId,
@@ -61,6 +62,7 @@ const ShopEdit = () => {
             uploadFiles={uploadsFiles}
             uploadImages={uploadImages}
             product={product}
+            refetch={refetch}
           />
         ) : null}
       </>

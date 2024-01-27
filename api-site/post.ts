@@ -23,7 +23,7 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['gallery-posts'];
+  const queryKey = ['posts'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,

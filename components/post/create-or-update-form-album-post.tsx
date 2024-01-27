@@ -20,10 +20,11 @@ const schema = yup.object({
 type Props = {
   albumId?: string;
   album?: any;
+  refetch: any;
   organizationId: string;
 };
 
-const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album }) => {
+const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album, refetch }) => {
   const { back, push } = useRouter();
   const {
     control,
@@ -73,7 +74,11 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album }) => {
         gravity: 'top',
         position: 'center',
       });
-      push(`/posts/create?type=gallery&albumId=${result?.id}`);
+      if (album?.id) {
+        refetch();
+      } else {
+        push(`/posts/create?type=gallery&albumId=${result?.id}`);
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

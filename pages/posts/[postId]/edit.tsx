@@ -22,6 +22,7 @@ const PostsEdit = () => {
     data: post,
     isError: isErrorPost,
     isLoading: isLoadingPost,
+    refetch,
   } = GetOnePostAPI({
     postId,
     organizationId: user?.organizationId,
@@ -65,6 +66,7 @@ const PostsEdit = () => {
           <CreateOrUpdateFormGalleryPost
             uploadImages={uploadImages}
             post={post}
+            refetch={refetch}
             postId={postId}
             organizationId={post?.organizationId}
           />
@@ -74,6 +76,7 @@ const PostsEdit = () => {
           <CreateOrUpdateFormPost
             uploadImages={uploadImages}
             post={post}
+            refetch={refetch}
             postId={postId}
             organizationId={post?.organizationId}
           />
@@ -83,6 +86,7 @@ const PostsEdit = () => {
           <CreateOrUpdateFormAudioPost
             post={post}
             postId={postId}
+            refetch={refetch}
             uploadFiles={uploadsFiles}
             uploadImages={uploadImages}
             organizationId={post?.organizationId}
@@ -93,6 +97,7 @@ const PostsEdit = () => {
           <CreateOrUpdateFormVideoPost
             uploadImages={uploadImages}
             post={post}
+            refetch={refetch}
             postId={postId}
             organizationId={post?.organizationId}
           />

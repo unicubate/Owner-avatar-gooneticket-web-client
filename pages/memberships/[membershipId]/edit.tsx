@@ -18,6 +18,7 @@ const ShopEdit = () => {
     data: membership,
     isError: isErrorMembership,
     isLoading: isLoadingMembership,
+    refetch,
   } = GetOneMembershipAPI({
     membershipId,
     organizationId: organizationId,
@@ -47,6 +48,7 @@ const ShopEdit = () => {
       <CreateOrUpdateFormMembership
         membership={membership}
         uploadImages={dataImageUploads}
+        refetch={refetch}
       />
     );
 

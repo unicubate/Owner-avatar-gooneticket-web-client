@@ -1,25 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { SubmitHandler, Controller } from 'react-hook-form';
-import * as yup from 'yup';
-import { TextInput, SelectInput } from '../ui-setting/shadcn';
-import { ButtonInput } from '../ui-setting/button-input';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
-import { Upload, UploadFile, UploadProps } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/router';
 import { filterImageAndFile } from '@/utils/utils';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { GetAllCategoriesAPI } from '@/api-site/category';
+import { PlusOutlined } from '@ant-design/icons';
+import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
+import { ButtonInput } from '../ui-setting/button-input';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   organizationId: string;
   uploadImages?: any;
   postId?: string;
   post?: any;
+  refetch: any;
 };
 
 const schema = yup.object({
@@ -31,6 +32,7 @@ const schema = yup.object({
 const CreateOrUpdateFormPost: React.FC<Props> = ({
   postId,
   post,
+  refetch,
   uploadImages,
   organizationId,
 }) => {
@@ -110,7 +112,11 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         gravity: 'top',
         position: 'center',
       });
-      router.back();
+      if (post?.id) {
+        refetch();
+      } else {
+        router.back();
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

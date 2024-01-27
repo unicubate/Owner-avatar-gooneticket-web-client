@@ -22,6 +22,7 @@ type Props = {
   uploadFiles?: any;
   uploadImages?: any;
   post?: any;
+  refetch: any;
   organizationId: string;
 };
 
@@ -40,6 +41,7 @@ const schema = yup.object({
 const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   postId,
   post,
+  refetch,
   organizationId,
   uploadFiles,
   uploadImages,
@@ -130,7 +132,11 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
         gravity: 'top',
         position: 'center',
       });
-      back();
+      if (post.id) {
+        refetch();
+      } else {
+        back();
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

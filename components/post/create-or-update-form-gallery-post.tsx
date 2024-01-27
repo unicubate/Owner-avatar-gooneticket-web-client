@@ -32,12 +32,14 @@ type Props = {
   albumId?: string;
   uploadImages?: any;
   post?: any;
+  refetch: any;
   organizationId: string;
 };
 
 const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   uploadImages,
   post,
+  refetch,
   organizationId,
   postId,
   albumId,
@@ -120,7 +122,11 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
         gravity: 'top',
         position: 'center',
       });
-      router.push(`/gallery`);
+      if (post?.id) {
+        refetch();
+      } else {
+        router.push(`/gallery`);
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

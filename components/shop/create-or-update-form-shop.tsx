@@ -29,6 +29,7 @@ type Props = {
   product?: any;
   uploadImages?: any;
   uploadFiles?: any;
+  refetch: any;
 };
 
 const schema = yup.object({
@@ -62,6 +63,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
   product,
   uploadImages,
   uploadFiles,
+  refetch,
 }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
@@ -111,7 +113,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     }
   }, [product, uploadFiles, uploadImages, setValue]);
 
-  const saveMutation = CreateOrUpdateOneProductAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneProductAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -140,11 +142,13 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
         fileList,
         newImageLists,
       };
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
         productId: product?.id,
       });
-      if (!product?.id) {
+      if (product?.id) {
+        refetch();
+      } else {
         push(`/shop`);
       }
       setHasErrors(false);

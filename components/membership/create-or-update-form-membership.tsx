@@ -23,7 +23,8 @@ const schema = yup.object({
 const CreateOrUpdateFormMembership: React.FC<{
   membership?: any;
   uploadImages?: any;
-}> = ({ membership, uploadImages }) => {
+  refetch: any;
+}> = ({ membership, uploadImages, refetch }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -94,7 +95,11 @@ const CreateOrUpdateFormMembership: React.FC<{
         className: 'info',
         position: 'center',
       });
-      push(`/memberships/levels`);
+      if (membership?.id) {
+        refetch();
+      } else {
+        push(`/memberships/levels`);
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
