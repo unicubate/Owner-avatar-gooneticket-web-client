@@ -29,7 +29,7 @@ type Props = {
   product?: any;
   uploadImages?: any;
   uploadFiles?: any;
-  refetch: any;
+  refetch?: any;
 };
 
 const schema = yup.object({

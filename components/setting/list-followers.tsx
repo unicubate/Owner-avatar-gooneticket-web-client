@@ -10,7 +10,7 @@ import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 type Props = {
   item?: FollowModel;
   index: number;
-  refetch: any;
+  refetch?: any;
 };
 
 const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
@@ -20,7 +20,7 @@ const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
   );
 
   // Create or Update data
-  const saveMutation = CreateOrDeleteOneFollowerAPI({
+  const { mutateAsync: saveMutation } = CreateOrDeleteOneFollowerAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -35,7 +35,7 @@ const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation.mutateAsync({
+      await saveMutation({
         followerId: item?.profile?.userId,
         action: 'CREATE',
       });

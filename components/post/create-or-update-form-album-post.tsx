@@ -20,7 +20,7 @@ const schema = yup.object({
 type Props = {
   albumId?: string;
   album?: any;
-  refetch: any;
+  refetch?: any;
   organizationId: string;
 };
 

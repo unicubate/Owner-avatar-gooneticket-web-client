@@ -22,7 +22,7 @@ type Props = {
   uploadFiles?: any;
   uploadImages?: any;
   post?: any;
-  refetch: any;
+  refetch?: any;
   organizationId: string;
 };
 

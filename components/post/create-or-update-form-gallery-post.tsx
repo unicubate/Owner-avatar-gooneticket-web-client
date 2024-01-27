@@ -32,7 +32,7 @@ type Props = {
   albumId?: string;
   uploadImages?: any;
   post?: any;
-  refetch: any;
+  refetch?: any;
   organizationId: string;
 };
 

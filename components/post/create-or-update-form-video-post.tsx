@@ -21,7 +21,7 @@ type Props = {
   uploadImages?: any;
   postId?: string;
   post?: any;
-  refetch: any;
+  refetch?: any;
 };
 
 const schema = yup.object({

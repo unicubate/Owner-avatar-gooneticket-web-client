@@ -23,7 +23,7 @@ const schema = yup.object({
 const CreateOrUpdateFormMembership: React.FC<{
   membership?: any;
   uploadImages?: any;
-  refetch: any;
+  refetch?: any;
 }> = ({ membership, uploadImages, refetch }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
