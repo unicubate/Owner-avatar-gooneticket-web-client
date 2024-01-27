@@ -1,16 +1,10 @@
 import {
-  ResponseStatisticsTransactionModel,
   ResponseTransactionModel,
   StatisticTransactionModel,
 } from '@/types/transaction';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 export const getTransactionsAPI = async (
   payload: {
@@ -31,14 +25,15 @@ export const GetStatisticsTransactionsAPI = (payload: {
   isEnabled?: boolean;
 }) => {
   const { queryKey, days, isEnabled } = payload;
-  const { data, isError, isLoading, status, isPending, error } = useQuery({
-    queryKey: queryKey,
-    queryFn: async () =>
-      await makeApiCall({
-        action: 'getStatisticsTransactions',
-        queryParams: { days },
-      }),
-  });
+  const { data, isError, isLoading, status, isPending, error, refetch } =
+    useQuery({
+      queryKey: queryKey,
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getStatisticsTransactions',
+          queryParams: { days },
+        }),
+    });
 
   return {
     data: data?.data as StatisticTransactionModel[],
@@ -47,6 +42,7 @@ export const GetStatisticsTransactionsAPI = (payload: {
     isLoading,
     status,
     error: error as any,
+    refetch,
   };
 };
 

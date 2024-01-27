@@ -34,7 +34,7 @@ const ListPublicGallery: React.FC<Props> = ({
               folder="posts"
               preview={false}
               height={250}
-              className={`size-full object-cover transition-all duration-200 group-hover:scale-110${
+              className={`object-cover ${
                 item?.whoCanSee === 'MEMBERSHIP' && item?.isValidSubscribe !== 1
                   ? 'blur-xl'
                   : ''

@@ -1,49 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel, PostType } from '@/types/post';
-import ListComments from '../comment/list-comments';
+import { UserVisitorModel } from '@/types/user.type';
 import { formateDMYHH } from '@/utils';
-import { BiComment, BiConversation, BiDotsHorizontal } from 'react-icons/bi';
+import { HtmlParser } from '@/utils/html-parser';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import 'react-h5-audio-player/lib/styles.css';
+import { BiConversation } from 'react-icons/bi';
+import { FiDownload } from 'react-icons/fi';
+import { HiOutlineLockClosed } from 'react-icons/hi';
+import { IoShareOutline } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
+import ListComments from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
-import { HtmlParser } from '@/utils/html-parser';
-import { IoShareOutline } from 'react-icons/io5';
-import { FiDownload } from 'react-icons/fi';
-import { useAuth } from '../util/context-user';
-import Link from 'next/link';
-import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { HiOutlineLockClosed, HiOutlineLockOpen } from 'react-icons/hi';
-import 'react-h5-audio-player/lib/styles.css';
-import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
-import { useRouter } from 'next/router';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
-import { UserVisitorModel } from '@/types/user.type';
 import { ButtonInput } from '../ui-setting';
-
-import {
-  Menubar,
-  MenubarCheckboxItem,
-  MenubarContent,
-  MenubarItem,
-  MenubarMenu,
-  MenubarRadioGroup,
-  MenubarRadioItem,
-  MenubarSeparator,
-  MenubarShortcut,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
-  MenubarTrigger,
-} from '@/components/ui/menubar';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -51,7 +32,6 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CopyIcon } from 'lucide-react';
-import { Button } from 'antd';
 import { useDialog } from '../hooks/use-dialog';
 
 type Props = {

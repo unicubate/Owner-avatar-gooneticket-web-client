@@ -95,4 +95,4 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
   );
 };
 
-export default PublicGallery;
+export { PublicGallery };

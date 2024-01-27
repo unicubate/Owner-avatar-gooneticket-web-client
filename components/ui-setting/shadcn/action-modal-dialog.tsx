@@ -1,4 +1,3 @@
-import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { ButtonInput } from '..';
 
 import {
@@ -16,6 +15,7 @@ interface Props {
   loading?: boolean;
   isOpen?: boolean;
   setIsOpen?: any;
+  buttonDialog: React.ReactNode;
   onClick: (node?: Element | null) => void;
 }
 
@@ -26,19 +26,12 @@ const ActionModalDialog: React.FC<Props> = ({
   description,
   onClick,
   setIsOpen,
+  buttonDialog,
 }) => {
   return (
     <>
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-        <AlertDialogTrigger asChild>
-          <ButtonInput
-            className="text-lg text-gray-600 hover:text-red-600"
-            variant="link"
-            type="button"
-          >
-            <MdOutlineDeleteOutline />
-          </ButtonInput>
-        </AlertDialogTrigger>
+        <AlertDialogTrigger asChild>{buttonDialog}</AlertDialogTrigger>
         <AlertDialogContent className="dark:border-gray-900">
           <AlertDialogHeader>
             <AlertDialogTitle>{title}</AlertDialogTitle>

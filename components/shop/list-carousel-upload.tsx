@@ -22,7 +22,6 @@ type Props = {
   post?: PostModel;
   height?: string | number;
   width?: string | number;
-  autoplay?: boolean;
 };
 
 const contentStyle: React.CSSProperties = {
@@ -40,7 +39,6 @@ const ListCarouselUpload: React.FC<Props> = ({
   className = '',
   height = '100%',
   width = '100%',
-  autoplay = false,
 }) => {
   const ref = useRef();
 
@@ -95,35 +93,6 @@ const ListCarouselUpload: React.FC<Props> = ({
             </>
           ))}
       </Swiper>
-      {/* <Carousel
-        autoplay={autoplay}
-        dots={true}
-        effect={"fade"}
-        dotPosition={"bottom"}
-        pauseOnDotsHover={true}
-        pauseOnHover={true}
-        style={contentStyle}
-        responsive={[{ breakpoint: 1050, settings: "unslick" }]}
-      >
-        {uploads &&
-          uploads?.length > 0 &&
-          uploads?.map((item: any, index: number) => (
-            <Fragment key={index}>
-              <Image
-                width={width}
-                height={height}
-                className={className}
-                preview={preview}
-                style={contentStyle}
-                src={`${viewOneFileUploadAPI({
-                  folder: folder,
-                  fileName: item?.path,
-                })}`}
-                alt={alt}
-              />
-            </Fragment>
-          ))}
-      </Carousel> */}
     </>
   );
 };

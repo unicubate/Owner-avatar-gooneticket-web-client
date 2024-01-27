@@ -1,24 +1,24 @@
-import { UploadFolderType, UploadModel } from "@/types/upload";
-import { makeApiCall } from "@/utils/end-point";
-import { useQuery } from "@tanstack/react-query";
+import { UploadFolderType } from '@/types/upload';
+import { makeApiCall } from '@/utils/end-point';
+import { useQuery } from '@tanstack/react-query';
 
 export const GetUploadsAPI = (payload: {
   organizationId?: string;
   model: string;
   uploadableId: string;
-  uploadType?: "image" | "file";
+  uploadType?: 'image' | 'file';
 }) => {
-  const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["uploads", { ...payload }],
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['uploads', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: "getUploads",
+        action: 'getUploads',
         queryParams: payload,
       }),
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data, isError, isLoading, status };
+  return { data: data?.data, isError, isLoading, status, isPending, refetch };
 };
 
 export const viewOneFileUploadAPI = ({

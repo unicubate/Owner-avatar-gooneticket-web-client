@@ -1,5 +1,5 @@
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import PublicGallery from '@/components/gallery/public-gallery';
+import { PublicGallery } from '@/components/gallery/public-gallery';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
@@ -36,64 +36,6 @@ const GalleryUserPublic = () => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-full py-6">
               {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
-
-              {/* <div className="grid grid-cols-1 gap-4 px-8 mt-6 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:px-0">
-                
-                <div className="overflow-hidden bg-white dark:bg-black  border border-gray-200 dark:border-gray-800 rounded-lg">
-                  <div className="p-4">
-                    <div className="flex items-center">
-
-                      <div className="flex-1 ml-4">
-                        <Link href="/" >
-                          <p className="text-base font-bold">Domande</p>
-                        </Link>
-                        <p className="mt-1 text-sm font-medium text-gray-500">0 Image</p>
-                      </div>
-
-                    </div>
-                  </div>
-                </div>
-
-                <div className="overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
-                  <div className="p-4">
-                    <div className="flex items-center">
-                      <div className="flex-1 ml-4">
-                        <Link href="/" >
-                          <p className="text-base font-bold">Albert Flores</p>
-                        </Link>
-                        <p className="mt-1 text-sm font-medium text-gray-500">123 Images</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
-                  <div className="p-4">
-                    <div className="flex items-center">
-                      <div className="flex-1 ml-4">
-                        <Link href="/" >
-                          <p className="text-base font-bold">Case</p>
-                        </Link>
-                        <p className="mt-1 text-sm font-medium text-gray-500">22 Images</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="overflow-hidden bg-white dark:bg-black border border-gray-200 dark:border-gray-800 rounded-lg">
-                  <div className="p-4">
-                    <div className="flex items-center">
-                      <div className="flex-1 ml-4">
-                        <Link href="/" >
-                          <p className="text-base font-bold">Flores</p>
-                        </Link>
-                        <p className="mt-1 text-sm font-medium text-gray-500">23 Images</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div> */}
 
               <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
                 {user?.id && user?.profile.enableGallery ? (

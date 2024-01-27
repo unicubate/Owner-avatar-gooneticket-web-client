@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { LoadingFile } from '../ui-setting/ant/loading-file';
-import ListPublicShop from './list-public-shop';
+import { ListPublicShop } from './list-public-shop';
 
 type Props = {
   organizationId: string;
@@ -84,4 +84,4 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
   );
 };
 
-export default PublicShop;
+export { PublicShop };

@@ -40,7 +40,7 @@ const ProfilePublic = () => {
                 <div className="flow-root">
                   <div className="mx-auto sm:px-6 md:px-8">
                     {user?.profile?.description && (
-                      <div className="mt-2 overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+                      <div className="mt-2 overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
                         <div className="p-8 sm:p-4">
                           <div className="flex items-center">
                             <div
@@ -59,7 +59,7 @@ const ProfilePublic = () => {
                       </div>
                     )}
 
-                    <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+                    <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
                       <div className="p-6 sm:p-4">
                         <div className="flex items-center">
                           {user?.id ? (

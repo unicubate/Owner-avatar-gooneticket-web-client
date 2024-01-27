@@ -55,7 +55,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl shadow-gray-600/15 transition-all duration-300 dark:bg-[#121212]"
+        className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl transition-all duration-300 dark:bg-[#121212]"
       >
         {item?.uploadsImage.length > 0 ? (
           <Image
@@ -134,4 +134,4 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
   );
 };
 
-export default ListPublicShop;
+export { ListPublicShop };

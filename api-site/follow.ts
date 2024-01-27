@@ -14,7 +14,7 @@ export const CreateOrDeleteOneFollowerAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['followers', 'followings'];
+  const queryKey = ['user'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -39,19 +39,19 @@ export const CreateOrDeleteOneFollowerAPI = ({
       }
     },
     onError: async (error) => {
-      await queryClient.invalidateQueries();
+      await queryClient.invalidateQueries({ queryKey });
       if (onError) {
         onError(error);
       }
     },
     onSettled: async () => {
-      await queryClient.invalidateQueries();
+      await queryClient.invalidateQueries({ queryKey });
       if (onSuccess) {
         onSuccess();
       }
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries();
+      await queryClient.invalidateQueries({ queryKey });
       if (onSuccess) {
         onSuccess();
       }

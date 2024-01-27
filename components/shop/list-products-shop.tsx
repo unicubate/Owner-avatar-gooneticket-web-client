@@ -15,10 +15,11 @@ import { AiOutlineCalendar } from 'react-icons/ai';
 import { BiMoney } from 'react-icons/bi';
 import { HiOutlineLockClosed } from 'react-icons/hi';
 import { LiaDnaSolid } from 'react-icons/lia';
-import { MdOutlineModeEdit } from 'react-icons/md';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { TbWorld } from 'react-icons/tb';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useDialog } from '../hooks/use-dialog';
+import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
@@ -178,6 +179,15 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               setIsOpen={setIsOpen}
               onClick={() => deleteItem(item)}
               description="Are you sure you want to delete this?"
+              buttonDialog={
+                <ButtonInput
+                  className="text-lg text-gray-600 hover:text-red-600"
+                  variant="link"
+                  type="button"
+                >
+                  <MdOutlineDeleteOutline />
+                </ButtonInput>
+              }
             />
           </div>
         </div>

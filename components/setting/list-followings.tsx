@@ -4,25 +4,25 @@ import { FollowModel } from '@/types/follow';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { Fragment, useState } from 'react';
-import Swal from 'sweetalert2';
+import React, { Fragment } from 'react';
+import { useDialog } from '../hooks/use-dialog';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
   item?: FollowModel;
   index: number;
+  refetch: any;
 };
 
-const ListFollowings: React.FC<Props> = ({ item, index }) => {
+const ListFollowings: React.FC<Props> = ({ item, index, refetch }) => {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
+  const { isOpen, setIsOpen, loading, setLoading, hasErrors, setHasErrors } =
+    useDialog();
 
   // Create or Update data
-  const saveMutation = CreateOrDeleteOneFollowerAPI({
+  const { mutateAsync: saveMutation } = CreateOrDeleteOneFollowerAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -34,48 +34,34 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   });
 
   const followerItem = async (item: any) => {
-    Swal.fire({
-      title: 'Unfollowing?',
-      text: `Are you sure you want to unfollow ${
-        item?.profile?.firstName ?? ''
-      } ${item?.profile?.lastName ?? ''}`,
-      confirmButtonText: 'Yes, Unfollow',
-      cancelButtonText: 'No, Cancel',
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6f42c1',
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        setLoading(true);
-        setHasErrors(undefined);
-        try {
-          await saveMutation.mutateAsync({
-            followerId: item?.profile?.userId,
-            action: 'DELETE',
-          });
-          setHasErrors(false);
-          setLoading(false);
-          AlertSuccessNotification({
-            text: 'Unfollowing successfully',
-            className: 'info',
-            gravity: 'top',
-            position: 'center',
-          });
-        } catch (error: any) {
-          setHasErrors(true);
-          setLoading(false);
-          setHasErrors(error.response.data.message);
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-            gravity: 'top',
-            className: 'info',
-            position: 'center',
-          });
-        }
-      }
-    });
+    setLoading(true);
+    setHasErrors(undefined);
+    try {
+      await saveMutation({
+        followerId: item?.profile?.userId,
+        action: 'DELETE',
+      });
+      setHasErrors(false);
+      setLoading(false);
+      setIsOpen(false);
+      refetch();
+      AlertSuccessNotification({
+        text: 'Unfollowing successfully',
+        className: 'info',
+        gravity: 'top',
+        position: 'center',
+      });
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
+      });
+    }
   };
 
   return (
@@ -103,15 +89,21 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
             </Link>
 
             <div className="ml-auto flex items-center justify-end space-x-8">
-              <ButtonInput
-                size="sm"
-                type="button"
-                variant="outline"
+              <ActionModalDialog
+                title="Unfollowing?"
                 loading={loading}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
                 onClick={() => followerItem(item)}
-              >
-                Follow
-              </ButtonInput>
+                description={`Are you sure you want to unfollow ${
+                  item?.profile?.firstName ?? ''
+                } ${item?.profile?.lastName ?? ''}`}
+                buttonDialog={
+                  <ButtonInput size="sm" type="button" variant="outline">
+                    UnFollow
+                  </ButtonInput>
+                }
+              />
             </div>
           </div>
         </div>
@@ -120,4 +112,4 @@ const ListFollowings: React.FC<Props> = ({ item, index }) => {
   );
 };
 
-export default ListFollowings;
+export { ListFollowings };

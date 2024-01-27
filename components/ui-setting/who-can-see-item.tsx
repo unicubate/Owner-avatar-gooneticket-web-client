@@ -26,6 +26,7 @@ const WhoCanSeeItem: React.FC<Props> = ({ profile }) => {
             className="mt-2"
             type="button"
             variant="danger"
+            size="lg"
             icon={<HiOutlineLockClosed className="mr-2 size-5" />}
           >
             Join now

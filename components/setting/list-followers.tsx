@@ -10,9 +10,10 @@ import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 type Props = {
   item?: FollowModel;
   index: number;
+  refetch: any;
 };
 
-const ListFollowers: React.FC<Props> = ({ item, index }) => {
+const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined,
@@ -40,6 +41,7 @@ const ListFollowers: React.FC<Props> = ({ item, index }) => {
       });
       setHasErrors(false);
       setLoading(false);
+      refetch();
       AlertSuccessNotification({
         text: 'Followed successfully',
         className: 'info',

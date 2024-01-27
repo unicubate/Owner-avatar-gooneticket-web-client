@@ -1,10 +1,6 @@
-import { DonationFormModel, DonationModel } from "@/types/donation";
-import { makeApiCall } from "@/utils/end-point";
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { DonationFormModel, DonationModel } from '@/types/donation';
+import { makeApiCall } from '@/utils/end-point';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const UpdateOneDonationAPI = ({
   onSuccess,
@@ -13,14 +9,14 @@ export const UpdateOneDonationAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["donation"];
+  const queryKey = ['donation'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: DonationFormModel & { donationId: string }) => {
       const { donationId } = payload;
       return await makeApiCall({
-        action: "updateOneDonation",
+        action: 'updateOneDonation',
         body: payload,
         urlParams: { donationId },
       });
@@ -50,15 +46,21 @@ export const UpdateOneDonationAPI = ({
 
 export const GetOneDonationAPI = (payload: { donationId: string }) => {
   const { donationId } = payload;
-  const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["donation", payload],
+  const { data, isError, isLoading, status, refetch } = useQuery({
+    queryKey: ['donation', payload],
     queryFn: async () =>
       await makeApiCall({
-        action: "getOneDonation",
+        action: 'getOneDonation',
         urlParams: { donationId },
       }),
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as DonationModel, isError, isLoading, status };
+  return {
+    data: data?.data as DonationModel,
+    isError,
+    isLoading,
+    status,
+    refetch,
+  };
 };

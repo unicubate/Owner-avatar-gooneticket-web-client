@@ -21,7 +21,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]"
+        className="mt-8 overflow-hidden bg-white shadow-xl  dark:bg-[#121212]"
       >
         <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">

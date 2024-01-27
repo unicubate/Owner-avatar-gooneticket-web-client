@@ -124,7 +124,7 @@ export const GetOneMembershipAPI = (payload: {
   membershipId?: string;
   organizationId?: string;
 }) => {
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: ['membership', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
@@ -134,7 +134,13 @@ export const GetOneMembershipAPI = (payload: {
     refetchOnWindowFocus: true,
   });
 
-  return { data: data?.data as MembershipModel, isError, isLoading, status };
+  return {
+    data: data?.data as MembershipModel,
+    isError,
+    isLoading,
+    status,
+    refetch,
+  };
 };
 
 export const getMembershipsAPI = async (
@@ -155,7 +161,7 @@ export const GetAllMembershipsAPI = (payload: {
   queryKey: string[];
 }) => {
   const { organizationId, take, sort, queryKey, page } = payload;
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await getMembershipsAPI({
@@ -167,7 +173,7 @@ export const GetAllMembershipsAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data, isError, isLoading, status };
+  return { data: data?.data, isError, isLoading, status, refetch };
 };
 
 export const GetInfiniteMembershipsAPI = (payload: {

@@ -68,7 +68,7 @@ const RecentCommentTransactions: React.FC<{
 
   return (
     <>
-      <div className="mt-4 overflow-hidden bg-white shadow-xl shadow-gray-600/15 dark:bg-[#121212]">
+      <div className="mt-4 overflow-hidden bg-white shadow-xl dark:bg-[#121212]">
         <div className="p-6 sm:p-4">
           <div className="flex items-center">
             <p className="text-lg font-bold">Supporters</p>

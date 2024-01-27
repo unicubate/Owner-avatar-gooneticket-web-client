@@ -247,14 +247,14 @@ export const getOnePostAPI = async (
 };
 
 export const GetOnePostAPI = (payload: GetOnPostQueryModel) => {
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: ['post', { ...payload }],
     queryFn: async () => await getOnePostAPI({ ...payload }),
     enabled: !!payload,
     refetchOnWindowFocus: true,
   });
 
-  return { data: data?.data as PostModel, isError, isLoading, status };
+  return { data: data?.data as PostModel, isError, isLoading, status, refetch };
 };
 
 export const getPostsAPI = async (

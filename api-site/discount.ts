@@ -1,3 +1,8 @@
+import {
+  DiscountFormModel,
+  DiscountModel,
+  ResponseDiscountModel,
+} from '@/types/discount';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
@@ -6,11 +11,6 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import {
-  DiscountFormModel,
-  DiscountModel,
-  ResponseDiscountModel,
-} from '@/types/discount';
 
 export const CreateOrUpdateOneDiscountAPI = ({
   onSuccess,
@@ -110,7 +110,7 @@ export const getDiscountsAPI = async (
 };
 
 export const GetAllDiscountsAPI = (search?: string) => {
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: ['discounts'],
     queryFn: async () =>
       await makeApiCall({
@@ -121,7 +121,13 @@ export const GetAllDiscountsAPI = (search?: string) => {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as DiscountModel, isError, isLoading, status };
+  return {
+    data: data?.data as DiscountModel,
+    isError,
+    isLoading,
+    status,
+    refetch,
+  };
 };
 
 export const GetInfiniteDiscountsAPI = (payload: {

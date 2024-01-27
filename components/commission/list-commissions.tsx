@@ -13,9 +13,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { BiMoney } from 'react-icons/bi';
-import { MdOutlineModeEdit } from 'react-icons/md';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useDialog } from '../hooks/use-dialog';
+import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
@@ -137,6 +138,15 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               setIsOpen={setIsOpen}
               onClick={() => deleteItem(item)}
               description="Are you sure you want to delete this?"
+              buttonDialog={
+                <ButtonInput
+                  className="text-lg text-gray-600 hover:text-red-600"
+                  variant="link"
+                  type="button"
+                >
+                  <MdOutlineDeleteOutline />
+                </ButtonInput>
+              }
             />
           </div>
         </div>

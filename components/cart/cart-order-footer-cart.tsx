@@ -23,6 +23,7 @@ const CartOrderFooterCart: React.FC<{
     organizationId: user?.organizationId,
   });
 
+  console.log('carts ====>', carts);
   return (
     <>
       {carts?.summary?.totalQuantity && (

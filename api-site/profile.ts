@@ -1,11 +1,10 @@
 import {
-  CurrencyModel,
   NextStepProfileFormModel,
   ProfileFormModel,
   ProfileModel,
-} from "@/types/profile.type";
-import { makeApiCall } from "@/utils/end-point";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+} from '@/types/profile.type';
+import { makeApiCall } from '@/utils/end-point';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const UpdateOneProfileNextStepAPI = ({
   onSuccess,
@@ -14,13 +13,13 @@ export const UpdateOneProfileNextStepAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["user"];
+  const queryKey = ['user'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: NextStepProfileFormModel): Promise<any> => {
       return await makeApiCall({
-        action: "updateOneProfileNextStep",
+        action: 'updateOneProfileNextStep',
         body: payload,
         urlParams: { userId: payload?.userId },
       });
@@ -55,15 +54,15 @@ export const UpdateOneProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["user"];
+  const queryKey = ['user'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: ProfileFormModel & { profileId: string }
+      payload: ProfileFormModel & { profileId: string },
     ): Promise<any> => {
       return await makeApiCall({
-        action: "updateOneProfile",
+        action: 'updateOneProfile',
         body: payload,
         urlParams: { profileId: payload?.profileId },
       });
@@ -93,26 +92,32 @@ export const UpdateOneProfileAPI = ({
 
 export const GetOneProfileAPI = (payload: { profileId: string }) => {
   const { profileId } = payload;
-  const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["profile", { ...payload }],
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['profile', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: "getOneProfile",
+        action: 'getOneProfile',
         urlParams: { profileId },
       }),
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data as ProfileModel | any, isError, isLoading, status };
+  return {
+    data: data?.data as ProfileModel | any,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
 };
-
 
 export const GetAllCurrenciesAPI = (search?: string) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["currencies"],
+    queryKey: ['currencies'],
     queryFn: async () =>
       await makeApiCall({
-        action: "getAllCurrencies",
+        action: 'getAllCurrencies',
         queryParams: search,
       }),
     staleTime: 60_000,
@@ -124,10 +129,10 @@ export const GetAllCurrenciesAPI = (search?: string) => {
 
 export const GetAllCountiesAPI = (search?: string) => {
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["countries"],
+    queryKey: ['countries'],
     queryFn: async () =>
       await makeApiCall({
-        action: "getAllCounties",
+        action: 'getAllCounties',
         queryParams: search,
       }),
     staleTime: 60_000,

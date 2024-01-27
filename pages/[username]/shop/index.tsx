@@ -2,7 +2,7 @@ import { GetOneCartOrderAPI } from '@/api-site/cart';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
-import PublicShop from '@/components/shop/public-shop';
+import { PublicShop } from '@/components/shop/public-shop';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';

@@ -1,26 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
-import Swal from 'sweetalert2';
-import { Tooltip } from 'antd';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { DeleteOnePostAPI } from '@/api-site/post';
+import { PostModel, PostType } from '@/types/post';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { IconTypePost } from '@/utils/icon-type-post';
 import { ReadMore } from '@/utils/read-more';
+import { Tooltip } from 'antd';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { AiOutlineCalendar } from 'react-icons/ai';
+import { BiConversation } from 'react-icons/bi';
+import { HiOutlineLockClosed } from 'react-icons/hi';
 import {
-  MdOutlineDeleteOutline,
   MdFavoriteBorder,
+  MdOutlineDeleteOutline,
   MdOutlineModeEdit,
 } from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { BiComment, BiConversation } from 'react-icons/bi';
-import { LiaDnaSolid } from 'react-icons/lia';
-import { PostModel, PostType } from '@/types/post';
-import { AiOutlineCalendar } from 'react-icons/ai';
 import { TbWorld } from 'react-icons/tb';
-import { HiOutlineLockClosed } from 'react-icons/hi';
-import { IconTypePost } from '@/utils/icon-type-post';
-import { ActionModalDialog } from '../ui-setting/shadcn';
+import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useDialog } from '../hooks/use-dialog';
+import { ButtonInput } from '../ui-setting';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
   item?: PostModel;
@@ -142,6 +141,15 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             setIsOpen={setIsOpen}
             onClick={() => deleteItem(item)}
             description="Are you sure you want to delete this?"
+            buttonDialog={
+              <ButtonInput
+                className="text-lg text-gray-600 hover:text-red-600"
+                variant="link"
+                type="button"
+              >
+                <MdOutlineDeleteOutline />
+              </ButtonInput>
+            }
           />
         </div>
       </div>

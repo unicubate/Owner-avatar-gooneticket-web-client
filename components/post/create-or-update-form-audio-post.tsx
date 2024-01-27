@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { SubmitHandler, Controller } from 'react-hook-form';
-import * as yup from 'yup';
-import { ReactQuillInput } from '../ui-setting';
-import { SelectInput, TextInput } from '../ui-setting/shadcn';
-import { ButtonInput } from '../ui-setting';
+import { GetAllCategoriesAPI } from '@/api-site/category';
+import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
-import { Button, Upload, UploadFile, UploadProps } from 'antd';
-import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import { useRouter } from 'next/router';
-import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { filterImageAndFile } from '@/utils/utils';
-import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { GetAllCategoriesAPI } from '@/api-site/category';
-import Link from 'next/link';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
+import { Button, Upload, UploadFile, UploadProps } from 'antd';
 import ImgCrop from 'antd-img-crop';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ButtonInput, ReactQuillInput } from '../ui-setting';
+import { SwitchInput } from '../ui-setting/ant/switch-input';
+import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   postId?: string;

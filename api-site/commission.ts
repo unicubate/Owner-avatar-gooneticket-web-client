@@ -136,7 +136,7 @@ export const GetOneCommissionAPI = (payload: {
   commissionId?: string;
   organizationId?: string;
 }) => {
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: ['commission', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
@@ -146,7 +146,13 @@ export const GetOneCommissionAPI = (payload: {
     refetchOnWindowFocus: true,
   });
 
-  return { data: data?.data as CommissionModel, isError, isLoading, status };
+  return {
+    data: data?.data as CommissionModel,
+    isError,
+    isLoading,
+    status,
+    refetch,
+  };
 };
 
 export const getCommissionsAPI = async (

@@ -11,9 +11,10 @@ import { ModelType } from '@/utils/pagination-item';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { MdOutlineModeEdit } from 'react-icons/md';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { useDialog } from '../hooks/use-dialog';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
@@ -112,6 +113,15 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                   setIsOpen={setIsOpen}
                   onClick={() => deleteItem(item)}
                   description="Are you sure you want to delete this comment?"
+                  buttonDialog={
+                    <ButtonInput
+                      className="text-lg text-gray-600 hover:text-red-600"
+                      variant="link"
+                      type="button"
+                    >
+                      <MdOutlineDeleteOutline />
+                    </ButtonInput>
+                  }
                 />
               </>
             ) : null}

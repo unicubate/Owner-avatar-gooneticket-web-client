@@ -1,15 +1,14 @@
-import { PrivateComponent } from '@/components/util/private-component';
+import { GetInfiniteFollowingsAPI } from '@/api-site/follow';
+import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
-import { Skeleton } from 'antd';
-import { useInView } from 'react-intersection-observer';
-import { GetInfiniteFollowingsAPI } from '@/api-site/follow';
-import ListFollowings from '../../components/setting/list-followings';
-import { useEffect } from 'react';
-import { GetStaticPropsContext } from 'next';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
-import { useInputState } from '@/components/hooks/use-input-state';
 import { LoadingFile } from '@/components/ui-setting/ant';
+import { PrivateComponent } from '@/components/util/private-component';
+import { GetStaticPropsContext } from 'next';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { ListFollowings } from '../../components/setting/list-followings';
 
 const Followings = () => {
   const { ref, inView } = useInView();
@@ -22,6 +21,7 @@ const Followings = () => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
+    refetch,
   } = GetInfiniteFollowingsAPI({
     take: 10,
     sort: 'DESC',
@@ -60,7 +60,12 @@ const Followings = () => {
     dataFollowings?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListFollowings item={item} key={index} index={index} />
+        <ListFollowings
+          item={item}
+          key={index}
+          index={index}
+          refetch={refetch}
+        />
       ))
   );
 

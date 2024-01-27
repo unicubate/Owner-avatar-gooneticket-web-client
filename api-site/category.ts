@@ -1,3 +1,4 @@
+import { CategoryFormModel, ResponseCategoryModel } from '@/types/category';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
@@ -6,11 +7,6 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import {
-  CategoryFormModel,
-  CategoryModel,
-  ResponseCategoryModel,
-} from '@/types/category';
 
 export const CreateOrUpdateOneCategoryAPI = ({
   onSuccess,
@@ -117,7 +113,7 @@ export const GetAllCategoriesAPI = (payload: {
   queryKey: string[];
 }) => {
   const { take, organizationId, isPaginate, sort, queryKey } = payload;
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await getCategoriesAPI({
@@ -129,7 +125,7 @@ export const GetAllCategoriesAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data, isError, isLoading, status };
+  return { data: data?.data, isError, isLoading, status, refetch };
 };
 
 export const GetInfiniteCategoriesAPI = (payload: {

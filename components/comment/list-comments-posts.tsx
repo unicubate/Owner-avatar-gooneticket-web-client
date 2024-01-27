@@ -15,9 +15,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BsReplyAll } from 'react-icons/bs';
-import { MdOutlineModeEdit } from 'react-icons/md';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { useDialog } from '../hooks/use-dialog';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ErrorFile } from '../ui-setting/ant/error-file';
@@ -177,6 +178,15 @@ const ListCommentsPosts: React.FC<Props> = ({
                       setIsOpen={setIsOpen}
                       onClick={() => deleteItem(item)}
                       description="Are you sure you want to delete this comment?"
+                      buttonDialog={
+                        <ButtonInput
+                          className="text-lg text-gray-600 hover:text-red-600"
+                          variant="link"
+                          type="button"
+                        >
+                          <MdOutlineDeleteOutline />
+                        </ButtonInput>
+                      }
                     />
                   </>
                 ) : null}

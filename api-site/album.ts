@@ -1,3 +1,4 @@
+import { AlbumFormModel, ResponseAlbumModel } from '@/types/album';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
@@ -6,7 +7,6 @@ import {
   useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
-import { AlbumFormModel, ResponseAlbumModel } from '@/types/album';
 
 export const CreateOrUpdateOneAlbumAPI = ({
   onSuccess,
@@ -114,7 +114,7 @@ export const GetAllAlbumsAPI = (payload: {
   queryKey: string[];
 }) => {
   const { take, organizationId, isPaginate, sort, page, queryKey } = payload;
-  const { data, isError, isLoading, status } = useQuery({
+  const { data, isError, isLoading, status, refetch } = useQuery({
     queryKey: queryKey,
     queryFn: async () =>
       await getAlbumsAPI({
@@ -127,7 +127,7 @@ export const GetAllAlbumsAPI = (payload: {
     refetchOnWindowFocus: false,
   });
 
-  return { data: data?.data, isError, isLoading, status };
+  return { data: data?.data, isError, isLoading, status, refetch };
 };
 
 export const GetInfiniteAlbumsAPI = (payload: {
