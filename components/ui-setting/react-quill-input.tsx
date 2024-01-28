@@ -97,25 +97,27 @@ const ReactQuillInput: React.FC<Props> = ({
           required: 'Please enter post description',
         }}
         render={({ field: { ref, ...field } }) => (
-          <DynamicReactQuill
-            {...field}
-            theme="snow"
-            forwardedRef={quillRef}
-            placeholder={placeholder}
-            modules={modules}
-            // modules={{
-            //   toolbar: {
-            //     container: [
-            //       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            //       ['bold', 'italic', 'underline', 'strike'],
-            //       [{ 'align': [] }],
-            //       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-            //       [{ 'color': [] }, { 'background': [] }],
-            //       ['image', 'link']
-            //     ],
-            //   },
-            // }}
-          />
+          <>
+            <DynamicReactQuill
+              {...field}
+              theme="snow"
+              forwardedRef={quillRef}
+              placeholder={placeholder}
+              modules={modules}
+              // modules={{
+              //   toolbar: {
+              //     container: [
+              //       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              //       ['bold', 'italic', 'underline', 'strike'],
+              //       [{ 'align': [] }],
+              //       [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+              //       [{ 'color': [] }, { 'background': [] }],
+              //       ['image', 'link']
+              //     ],
+              //   },
+              // }}
+            />
+          </>
         )}
       />
       {errors?.[name] && (

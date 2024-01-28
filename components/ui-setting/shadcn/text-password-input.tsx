@@ -45,17 +45,19 @@ const TextPasswordInput: React.FC<Props> = ({
         control={control}
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
-          <PasswordInput
-            className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            id={name}
-            pattern={pattern}
-            required={required}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            min={min}
-            max={max}
-            {...field}
-          />
+          <>
+            <PasswordInput
+              className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              id={name}
+              pattern={pattern}
+              required={required}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              min={min}
+              max={max}
+              {...field}
+            />
+          </>
         )}
       />
       {errors?.[name] && (

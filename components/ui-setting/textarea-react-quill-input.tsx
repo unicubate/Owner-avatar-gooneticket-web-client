@@ -54,13 +54,15 @@ const TextareaReactQuillInput: React.FC<Props> = ({
           required: 'Please enter post description',
         }}
         render={({ field: { ref, ...field } }) => (
-          <DynamicReactQuill
-            {...field}
-            theme="snow"
-            placeholder={placeholder}
-            modules={{ toolbar: false }}
-            className={`w-full ${className} px-full py-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring`}
-          />
+          <>
+            <DynamicReactQuill
+              {...field}
+              theme="snow"
+              placeholder={placeholder}
+              modules={{ toolbar: false }}
+              className={`w-full ${className} px-full py-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring`}
+            />
+          </>
         )}
       />
       {errors?.[name] && (

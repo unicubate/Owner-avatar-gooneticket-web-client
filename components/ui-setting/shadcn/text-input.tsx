@@ -47,18 +47,20 @@ const TextInput: React.FC<Props> = ({
         control={control}
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
-          <Input
-            className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            type={type}
-            id={name}
-            pattern={pattern}
-            required={required}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            min={min}
-            max={max}
-            {...field}
-          />
+          <>
+            <Input
+              className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              type={type}
+              id={name}
+              pattern={pattern}
+              required={required}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              min={min}
+              max={max}
+              {...field}
+            />
+          </>
         )}
       />
       {errors?.[name] && (

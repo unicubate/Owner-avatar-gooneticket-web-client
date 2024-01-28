@@ -13,7 +13,12 @@ export const SearchInput: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Input type="text" onChange={onChange} placeholder={placeholder} />
+      <Input
+        type="text"
+        className={className}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
     </>
   );
 };

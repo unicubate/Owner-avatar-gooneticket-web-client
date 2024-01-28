@@ -39,16 +39,18 @@ const TextAreaInput: React.FC<Props> = ({
         control={control}
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
-          <Textarea
-            className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            id={name}
-            maxLength={6000}
-            style={{ height: 120 }}
-            required={required}
-            placeholder={placeholder}
-            autoComplete={autoComplete}
-            {...field}
-          />
+          <>
+            <Textarea
+              className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              id={name}
+              maxLength={6000}
+              style={{ height: 120 }}
+              required={required}
+              placeholder={placeholder}
+              autoComplete={autoComplete}
+              {...field}
+            />
+          </>
         )}
       />
       {errors?.[name] && (
