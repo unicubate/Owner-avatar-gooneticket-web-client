@@ -1,57 +1,56 @@
-import { useState } from "react";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { CreateOnPaymentPI } from "@/api-site/payment";
-import { StripeProps } from "./create-payment-stripe";
-import { AlertDangerNotification } from "@/utils";
-import { useRouter } from "next/router";
-import * as yup from "yup";
-import { generateLongUUID } from "@/utils/generate-random";
-import { useReactHookForm } from "@/components/hooks/use-react-hook-form";
-import { TextInput } from "@/components/ui-setting/shadcn";
-import { ButtonInput } from "@/components/ui-setting";
+import { CreateOnPaymentPI } from '@/api-site/payment';
+import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
+import { ButtonInput } from '@/components/ui-setting';
+import { TextInput } from '@/components/ui-setting/shadcn';
+import { AlertDangerNotification } from '@/utils';
+import { generateLongUUID } from '@/utils/generate-random';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import * as yup from 'yup';
+import { StripeProps } from './create-payment-stripe';
 
 const schema = yup.object({
   fullName: yup
     .string()
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
   email: yup
     .string()
-    .email("Wrong email format")
-    .min(3, "Minimum 3 symbols")
-    .max(50, "Maximum 50 symbols")
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
     .required(),
 });
 
 const containerStyles = {
-  border: "1px solid #d3d3d3",
-  padding: "12px 17px 12px 17px",
-  borderRadius: "10px",
-  width: "100%",
+  border: '1px solid #d3d3d3',
+  padding: '12px 17px 12px 17px',
+  borderRadius: '10px',
+  width: '100%',
 };
 
 const CARD_OPTIONS: any = {
-  iconStyle: "solid",
+  iconStyle: 'solid',
   style: {
     base: {
-      iconColor: "#c4f0ff",
-      color: "#424770",
+      iconColor: '#c4f0ff',
+      color: '#424770',
       // lineHeight: '24px',
       fontWeight: 600,
       fontFamily:
-        "Roboto, Source Code Pro, monospace, Open Sans, Segoe UI, sans-serif",
-      fontSize: "16px",
-      fontSmoothing: "antialiased",
-      ":-webkit-autofill": { color: "#fce883" },
+        'Roboto, Source Code Pro, monospace, Open Sans, Segoe UI, sans-serif',
+      fontSize: '16px',
+      fontSmoothing: 'antialiased',
+      ':-webkit-autofill': { color: '#fce883' },
     },
     invalid: {
-      iconColor: "red",
-      color: "red",
+      iconColor: 'red',
+      color: 'red',
     },
   },
 };
-
 
 const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
   const { push } = useRouter();
@@ -91,8 +90,8 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
     try {
       const newReference = generateLongUUID(30);
       const paymentMethodReq: any = await stripe.createPaymentMethod({
-        type: "card",
-        card: elements.getElement("card"),
+        type: 'card',
+        card: elements.getElement('card'),
         billing_details: {
           email: email,
           name: fullName,
@@ -121,9 +120,9 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
+        gravity: 'top',
+        className: 'info',
+        position: 'center',
       });
     }
   };

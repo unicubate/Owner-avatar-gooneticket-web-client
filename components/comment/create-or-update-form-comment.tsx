@@ -137,7 +137,6 @@ const CreateOrUpdateFormComment: React.FC<{
                 type="button"
                 size="lg"
                 variant="outline"
-                loading={loading}
                 onClick={() => {
                   setOpenModal(false);
                 }}

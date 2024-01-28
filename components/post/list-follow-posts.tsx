@@ -67,7 +67,7 @@ const ListFollowPosts: React.FC<Props> = ({
               onClick={() => push(`/${item?.profile?.username}`)}
               className="ml-3 cursor-pointer"
             >
-              <p className="text-sm font-bold dark:text-white">
+              <p className="text-sm font-bold">
                 {item?.profile?.firstName ?? ''} {item?.profile?.lastName ?? ''}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">

@@ -55,7 +55,6 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
               <p className="text-base font-bold dark:text-white">
                 {item?.product?.title ?? ''}
               </p>
-              {/* <p className="mt-1.5 text-sm font-medium text-gray-500">Qty: {item?.quantity}</p> */}
               <div className="mt-1.5 text-sm font-medium text-gray-500">
                 Qty: {item?.quantity}
               </div>
