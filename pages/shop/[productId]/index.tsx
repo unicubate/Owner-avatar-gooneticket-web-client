@@ -4,7 +4,7 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { LoginModal } from '@/components/auth-modal/login-modal';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
 import { ListComments } from '@/components/comment/list-comments';
-import { useDialog } from '@/components/hooks/use-dialog';
+import { useInputState } from '@/components/hooks';
 import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
@@ -30,7 +30,7 @@ const contentStyle: React.CSSProperties = {
 };
 
 const ShopView = () => {
-  const { isOpen, setIsOpen, userStorage: userVisitor } = useDialog();
+  const { isOpen, setIsOpen, userStorage: userVisitor } = useInputState();
   const router = useRouter();
   const { query } = useRouter();
   const productSlug = String(query?.productId);

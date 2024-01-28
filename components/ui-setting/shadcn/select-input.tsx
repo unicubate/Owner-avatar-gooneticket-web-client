@@ -68,13 +68,6 @@ const SelectInput: React.FC<Props> = ({
                       <p>Data Not Found</p>
                     </div>
                   )}
-
-                  {/* <SelectLabel>Fruits</SelectLabel>
-                  <SelectItem value="" disable>Data Not Found</SelectItem>
-                  <SelectItem value="banana">Banana</SelectItem>
-                  <SelectItem value="blueberry">Blueberry</SelectItem>
-                  <SelectItem value="grapes">Grapes</SelectItem>
-                  <SelectItem value="pineapple">Pineapple</SelectItem> */}
                 </SelectGroup>
               </SelectContent>
             </Select>

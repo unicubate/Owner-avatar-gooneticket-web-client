@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
-import * as yup from 'yup';
-import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
-import { BiComment } from 'react-icons/bi';
 import { CreateOrUpdateOneLikeAPI } from '@/api-site/like';
 import { AlertDangerNotification } from '@/utils';
-import { useAuth } from '../util/context-user';
+import React, { useState } from 'react';
+import { MdFavoriteBorder, MdOutlineFavorite } from 'react-icons/md';
 import { LoginModal } from '../auth-modal/login-modal';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 
 const CreateOrUpdateFormLike: React.FC<{
   item?: any;
   typeLike: 'POST' | 'COMMENT';
 }> = ({ item, typeLike }) => {
-  const { isOpen, setIsOpen, userStorage } = useDialog();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
   const [like, setLike] = useState(false);
   const [isLike, setIsLike] = useState(item?.isLike);
   const [totalLike, setTotalLike] = useState(item?.totalLike ?? 0);

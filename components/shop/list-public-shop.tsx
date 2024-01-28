@@ -10,14 +10,14 @@ import Link from 'next/link';
 import React from 'react';
 import { BiCart } from 'react-icons/bi';
 import { LoginModal } from '../auth-modal/login-modal';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 
 type Props = {
   item?: ProductModel;
 };
 
 const ListPublicShop: React.FC<Props> = ({ item }) => {
-  const { isOpen, setIsOpen, userStorage } = useDialog();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
     onSuccess: () => {},

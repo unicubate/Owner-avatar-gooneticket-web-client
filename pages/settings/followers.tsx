@@ -2,7 +2,7 @@ import { GetInfiniteFollowersAPI } from '@/api-site/follow';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
-import ListFollowers from '@/components/setting/list-followers';
+import { ListFollowers } from '@/components/setting/list-followers';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { PrivateComponent } from '@/components/util/private-component';

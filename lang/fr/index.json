@@ -15,13 +15,13 @@
     "settings": "Paramètres",
     "logout": "Déconnexion",
     "login": "Connexion",
+    "contributor": "Contributeur",
     "sign_up": "Inscription"
   },
 
   "title": "Titre",
   "update": "Mettr a jou",
   "description": "Description",
-
 
   "home_page": {
     "title": "Tout ce dont vous avez besoin pour gagner de l'argent en faisant ce que vous aimez",

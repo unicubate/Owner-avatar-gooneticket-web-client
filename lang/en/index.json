@@ -14,9 +14,10 @@
     "feed": "Feed",
     "support": "Support",
     "monetize": "Monetize",
-    "settings": "settings",
+    "settings": "Settings",
     "logout": "Logout",
     "login": "Sign in",
+    "contributor": "Contributor",
     "sign_up": "Sign up"
   },
 

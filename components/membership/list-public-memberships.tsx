@@ -5,7 +5,7 @@ import { convertToPluralMonth } from '@/utils/utils';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { LoginModal } from '../auth-modal/login-modal';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 
@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ListPublicMemberships: React.FC<Props> = ({ item }) => {
-  const { isOpen, setIsOpen, userStorage } = useDialog();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
   const router = useRouter();
 
   return (

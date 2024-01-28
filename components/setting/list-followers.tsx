@@ -103,4 +103,4 @@ const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
   );
 };
 
-export default ListFollowers;
+export { ListFollowers };

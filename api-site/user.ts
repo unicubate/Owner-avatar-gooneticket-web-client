@@ -1,3 +1,4 @@
+import { ResponsePostModel } from '@/types/post';
 import {
   NextStep,
   UserForgotPasswordFormModel,
@@ -7,7 +8,13 @@ import {
   UserResetPasswordFormModel,
 } from '@/types/user.type';
 import { makeApiCall } from '@/utils/end-point';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { PaginationRequest, SortModel } from '@/utils/pagination-item';
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel,
@@ -214,4 +221,30 @@ export const GetOneUserPublicAPI = (payload: {
     isPending,
     refetch,
   };
+};
+
+export const getUsersAPI = async (
+  payload: PaginationRequest,
+): Promise<{ data: ResponsePostModel }> => {
+  return await makeApiCall({
+    action: 'getUsers',
+    queryParams: payload,
+  });
+};
+
+export const GetInfiniteUsersAPI = (payload: {
+  search: string;
+  take: number;
+  sort: SortModel;
+}) => {
+  return useInfiniteQuery({
+    queryKey: ['users', 'infinite', { ...payload }],
+    queryFn: async ({ pageParam = 1 }) =>
+      await getUsersAPI({
+        ...payload,
+        page: pageParam,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page ?? undefined,
+  });
 };

@@ -32,7 +32,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CopyIcon } from 'lucide-react';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 
 type Props = {
   item?: PostModel;
@@ -46,7 +46,7 @@ const ListFollowPosts: React.FC<Props> = ({
   userVisitor,
 }) => {
   const { locale, push } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
   return (
     <>

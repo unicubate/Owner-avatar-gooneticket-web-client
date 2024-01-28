@@ -18,7 +18,7 @@ import { LiaDnaSolid } from 'react-icons/lia';
 import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { TbWorld } from 'react-icons/tb';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
@@ -29,7 +29,7 @@ type Props = {
 
 const ListProductsShop: React.FC<Props> = ({ item, index }) => {
   const router = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => {},

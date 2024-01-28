@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET, POST, DELETE, PUT } from './consts';
+import { DELETE, GET, POST, PUT } from './consts';
 
 export interface ClientApiMethods {
   [key: string]: {
@@ -90,6 +90,7 @@ export const apiEndpoints: ClientApiMethods = {
   validCode: POST(`${baseUrl}/valid/code`),
   getOneUserPrivate: GET(`${baseUrl}/users/show/:userId`),
   getOneUserPublic: GET(`${baseUrl}/users/view`),
+  getUsers: GET(`${baseUrl}/users`),
 
   /****************** Profile route */
   updateOneProfileNextStep: PUT(`${baseUrl}/profile/update/:userId`),
@@ -129,6 +130,11 @@ export const apiEndpoints: ClientApiMethods = {
   createOneCommentReply: POST(`${baseUrl}/comments/replies`),
   updateOneComment: PUT(`${baseUrl}/comments/:commentId`),
   deleteOneComment: DELETE(`${baseUrl}/comments/:commentId`),
+
+  /****************** Contributors route */
+  getContributors: GET(`${baseUrl}/contributors`),
+  createOneContributor: POST(`${baseUrl}/contributors`),
+  deleteOneContributor: DELETE(`${baseUrl}/contributors/:contributorId`),
 
   /****************** Discounts route */
   getDiscountsUser: GET(`${baseUrl}/discounts/user`),

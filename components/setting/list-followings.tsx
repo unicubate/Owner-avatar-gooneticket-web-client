@@ -5,7 +5,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { Fragment } from 'react';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
@@ -19,7 +19,7 @@ type Props = {
 const ListFollowings: React.FC<Props> = ({ item, index, refetch }) => {
   const router = useRouter();
   const { isOpen, setIsOpen, loading, setLoading, hasErrors, setHasErrors } =
-    useDialog();
+    useInputState();
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrDeleteOneFollowerAPI({

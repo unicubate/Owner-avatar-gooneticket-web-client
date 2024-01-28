@@ -1,5 +1,6 @@
 import { useDebounce } from '@/utils';
 import { useState } from 'react';
+import { useAuth } from '../util/context-user';
 
 const useInputState = () => {
   const [fromAt, setFromAt] = useState<any>(null);
@@ -8,6 +9,14 @@ const useInputState = () => {
   const [extension, setExtension] = useState<'xlsx' | 'csv'>('xlsx');
   const initTime = fromAt?.$d?.toISOString();
   const endTime = toAt?.$d?.toISOString();
+
+  const { userStorage } = useAuth() as any;
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
+    undefined,
+  );
 
   const handleClearDate = () => {
     setFromAt(null);
@@ -39,6 +48,15 @@ const useInputState = () => {
     handleClearDate,
     handleChangeExtension,
     handleSetSearch,
+    success,
+    loading,
+    isOpen,
+    hasErrors,
+    setIsOpen,
+    setLoading,
+    setSuccess,
+    setHasErrors,
+    userStorage,
   };
 };
 

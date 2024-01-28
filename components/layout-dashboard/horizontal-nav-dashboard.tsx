@@ -1,7 +1,17 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ThemeToggle } from '../ui-setting/theme-toggle';
+import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -10,32 +20,14 @@ export type NavbarProps = {
   icon?: any;
 };
 
-const NAVIGATION_ITEMS: NavbarProps[] = [
-  {
-    title: 'Explore',
-    href: '/explore',
-  },
-  {
-    title: 'Faq',
-    href: '/faqs',
-  },
-  {
-    title: 'about',
-    href: '/about',
-  },
-  {
-    title: 'Contact',
-    href: '/contact-us',
-  },
-];
-
 interface Props {
   user?: any;
   showDrawer?: () => void;
 }
 
 const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
-  const router = useRouter();
+  const t = useTranslations('menu-site');
+  const { push } = useRouter();
   const pathname = usePathname();
 
   return (
@@ -99,18 +91,49 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
 
                 <div className="relative">
                   {user?.profile ? (
-                    <button
-                      type="button"
-                      className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
-                    >
-                      <AvatarComponent
-                        className="size-9"
-                        profile={user?.profile}
-                      />
-                      <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                        {user?.profile?.firstName} {user?.profile?.lastName}
-                      </p>
-                    </button>
+                    <>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <button
+                            type="button"
+                            className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                          >
+                            <AvatarComponent
+                              className="size-9"
+                              profile={user?.profile}
+                            />
+                            <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                              {user?.profile?.firstName}{' '}
+                              {user?.profile?.lastName}
+                            </p>
+                          </button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-56 dark:border-gray-800">
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => push(`/dashboard`)}
+                            >
+                              <span className="cursor-pointer">
+                                {t('dashboard')}
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                              onClick={() => push(`/contributors`)}
+                            >
+                              <span className="cursor-pointer">
+                                {t('contributor')}
+                              </span>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem onClick={() => logoutUser()}>
+                            <span className="cursor-pointer">
+                              {t('logout')}
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </>
                   ) : null}
                 </div>
               </div>

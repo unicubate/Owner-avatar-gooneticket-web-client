@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { BsReplyAll } from 'react-icons/bs';
 import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
@@ -47,7 +47,7 @@ const ListCommentsPosts: React.FC<Props> = ({
 }) => {
   const { locale } = useRouter();
   const user = useAuth() as any;
-  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
 

@@ -2,7 +2,7 @@ import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { AlertDangerNotification } from '@/utils';
 import React, { useState } from 'react';
 import { LoginModal } from '../auth-modal/login-modal';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 
 const CreateOrUpdateFormFollow: React.FC<{
@@ -15,7 +15,7 @@ const CreateOrUpdateFormFollow: React.FC<{
     setLoading,
     hasErrors,
     setHasErrors,
-  } = useDialog();
+  } = useInputState();
   const [isFollow, setIsFollow] = useState(item?.isFollow);
 
   // Create or Update data

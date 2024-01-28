@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
@@ -33,7 +33,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
   index,
 }) => {
   const { locale } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useDialog();
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {

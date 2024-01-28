@@ -6,7 +6,7 @@ import React, { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { LoginModal } from '../auth-modal/login-modal';
-import { useDialog } from '../hooks/use-dialog';
+import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
@@ -31,7 +31,7 @@ const CreateOrUpdateFormComment: React.FC<{
   openModal,
   setOpenModal,
 }) => {
-  const { isOpen, setIsOpen, userStorage } = useDialog();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
   const {
     reset,
     setValue,
