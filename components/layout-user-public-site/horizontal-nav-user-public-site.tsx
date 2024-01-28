@@ -1,5 +1,5 @@
 import { UserModel } from '@/types/user.type';
-import { Dropdown, MenuProps } from 'antd';
+import { MenuProps } from 'antd';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -9,9 +9,19 @@ import { CreateModalPublicDonation } from '../donation/create-modal-public-donat
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
 import { ButtonInput } from '../ui-setting';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ThemeToggle } from '../ui-setting/theme-toggle';
 import { logoutUser, useAuth } from '../util/context-user';
+
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { useRouter } from 'next/router';
 
 interface Props {
   user?: UserModel;
@@ -35,6 +45,7 @@ const items: MenuProps['items'] = [
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
   const t = useTranslations('menu-site');
+  const { push } = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
@@ -83,29 +94,6 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
       <header className="sticky top-0 z-20 border-gray-300 bg-white dark:bg-[#1c1b22]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between">
-            <div className="-m-2 flex items-center xl:hidden">
-              <button
-                onClick={showDrawer}
-                type="button"
-                className="inline-flex items-center justify-center rounded-lg bg-white p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-[#121212] dark:text-white dark:hover:text-gray-500 dark:focus:ring-indigo-600"
-              >
-                <svg
-                  className="size-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
-            </div>
-
             <div className="ml-6 mr-auto flex xl:ml-0">
               <div className="hidden sm:-my-px sm:ml-8 xl:flex xl:space-x-10">
                 <nav className="-mb-px flex space-x-10">
@@ -157,24 +145,48 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                     </ButtonInput>
                     <CreateOrUpdateFormFollow item={user} />
                   </>
-                ) : (
-                  <>
-                    <Dropdown menu={{ items }} placement="bottomRight" arrow>
-                      <button
-                        type="button"
-                        className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                ) : null}
+                <div className="-m-2 flex items-center">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="link"
+                        className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                       >
-                        <AvatarComponent
-                          className="size-9"
-                          profile={user?.profile}
-                        />
-                        <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                          {user?.profile?.firstName} {user?.profile?.lastName}
-                        </p>
-                      </button>
-                    </Dropdown>
-                  </>
-                )}
+                        <svg
+                          className="size-6"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M4 6h16M4 12h16M4 18h16"
+                          />
+                        </svg>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56 dark:border-gray-800">
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem onClick={() => push(`/dashboard`)}>
+                          <span className="cursor-pointer">
+                            {t('dashboard')}
+                          </span>
+                        </DropdownMenuItem>
+                        {/* <DropdownMenuItem>
+                          <span className="cursor-pointer">Invite</span>
+                        </DropdownMenuItem> */}
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => logoutUser()}>
+                        <span className="cursor-pointer">{t('logout')}</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </div>
             </div>
           </div>

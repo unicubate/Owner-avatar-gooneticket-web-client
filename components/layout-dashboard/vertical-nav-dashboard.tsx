@@ -106,7 +106,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
     <>
       <div className="flex h-full flex-1 flex-col justify-between overflow-x-scroll px-4">
         <div className="space-y-4">
-          <nav className="flex-1 space-y-1">
+          <nav className="flex-1 space-y-2">
             {navigationItems.map((item: any, index: number) => {
               const isActive = pathname?.startsWith(item.href);
               return (

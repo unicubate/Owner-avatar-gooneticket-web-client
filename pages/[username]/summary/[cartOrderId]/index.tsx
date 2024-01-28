@@ -215,14 +215,14 @@ const Summary = () => {
                             </p>
                             {newAmount?.value ? (
                               <>
-                                <p className="ml-auto text-xl font-bold dark:text-white">
+                                <p className="ml-auto text-lg font-bold dark:text-white">
+                                  {newAmount?.currency}
+                                </p>
+                                <p className="ml-2 text-lg font-bold dark:text-white">
                                   {formatePrice({
                                     value: Number(newAmount?.value),
                                     isDivide: false,
                                   }) ?? ''}
-                                </p>
-                                <p className="ml-1 text-xl font-bold dark:text-white">
-                                  {newAmount?.currency}
                                 </p>
                               </>
                             ) : null}

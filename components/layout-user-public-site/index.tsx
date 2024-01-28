@@ -1,59 +1,13 @@
 import { UserModel } from '@/types/user.type';
 import Head from 'next/head';
 import { useAuth } from '../util/context-user';
-import { HeaderHorizontalNavUserPublicSite } from './header-horizontal-nav-user-public-site';
+import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
 interface IProps {
   user: UserModel;
   title: string;
   children: React.ReactNode;
 }
-
-export const navigationPublicUser = (options: {
-  username: string;
-  user: UserModel;
-}) => {
-  const { username, user } = options;
-
-  return [
-    {
-      title: 'Home',
-      status: true,
-      count: 1,
-      href: `/${username}`,
-    },
-    {
-      title: 'Gallery',
-      status: user?.profile?.enableGallery,
-      count: user?.gallery?.count,
-      href: `/${username}/gallery`,
-    },
-    {
-      title: 'Memberships',
-      status: true,
-      count: user?.membership?.count,
-      href: `/${username}/memberships`,
-    },
-    {
-      title: 'Posts',
-      status: true,
-      count: user?.post?.count,
-      href: `/${username}/posts`,
-    },
-    {
-      title: 'Shop',
-      status: user?.profile?.enableShop,
-      count: user?.product?.count,
-      href: `/${username}/shop`,
-    },
-    {
-      title: 'Commissions',
-      status: user?.profile?.enableCommission,
-      count: user?.commission?.count,
-      href: `/${username}/commissions`,
-    },
-  ];
-};
 
 const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
   const { theme } = useAuth() as any;
@@ -68,7 +22,7 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
       </Head>
 
       {/* <div className="min-h-screen space-y-5"> */}
-      <HeaderHorizontalNavUserPublicSite user={user} />
+      {user?.id ? <HorizontalNavUserPublicSite user={user} /> : null}
 
       <main>
         <div className="mx-auto mb-10 lg:flex">
