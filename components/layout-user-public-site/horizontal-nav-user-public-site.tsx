@@ -1,5 +1,4 @@
 import { UserModel } from '@/types/user.type';
-import { MenuProps } from 'antd';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -27,21 +26,6 @@ interface Props {
   user?: UserModel;
   showDrawer?: () => void;
 }
-
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: <Link href="/dashboard">Dashboard</Link>,
-  },
-  {
-    key: '2',
-    label: (
-      <a href={void 0} title="" onClick={() => logoutUser()}>
-        Logout
-      </a>
-    ),
-  },
-];
 
 const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
   const t = useTranslations('menu-site');
@@ -146,47 +130,49 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                     <CreateOrUpdateFormFollow item={user} />
                   </>
                 ) : null}
-                <div className="-m-2 flex items-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="link"
-                        className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
-                      >
-                        <svg
-                          className="size-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
+                {userVisiter?.id ? (
+                  <div className="-m-2 flex items-center">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="link"
+                          className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4 6h16M4 12h16M4 18h16"
-                          />
-                        </svg>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56 dark:border-gray-800">
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => push(`/dashboard`)}>
-                          <span className="cursor-pointer">
-                            {t('dashboard')}
-                          </span>
-                        </DropdownMenuItem>
-                        {/* <DropdownMenuItem>
+                          <svg
+                            className="size-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M4 6h16M4 12h16M4 18h16"
+                            />
+                          </svg>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-56 dark:border-gray-800">
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem onClick={() => push(`/dashboard`)}>
+                            <span className="cursor-pointer">
+                              {t('dashboard')}
+                            </span>
+                          </DropdownMenuItem>
+                          {/* <DropdownMenuItem>
                           <span className="cursor-pointer">Invite</span>
                         </DropdownMenuItem> */}
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => logoutUser()}>
-                        <span className="cursor-pointer">{t('logout')}</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => logoutUser()}>
+                          <span className="cursor-pointer">{t('logout')}</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
