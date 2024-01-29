@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import { CreateOnPaymentPI } from "@/api-site/payment";
-import { PaymentModel } from "../../api-site/payment";
-import { AlertDangerNotification } from "@/utils";
-import { useRouter } from "next/router";
-import { generateLongUUID } from "@/utils/generate-random";
+import { CreateOnPaymentPI } from '@/api-site/payment';
+import { AlertDangerNotification } from '@/utils';
+import { generateLongUUID } from '@/utils/generate-random';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { PaymentModel } from '../../api-site/payment';
 
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
@@ -29,7 +29,6 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
       setHasErrors(error.response.data.message);
     },
   });
-
 
   const handleApprove = async (options: { order: any }) => {
     const { order } = options;
@@ -64,9 +63,6 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
       });
     }
   };
@@ -75,7 +71,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
     return actions?.order?.create({
       purchase_units: [
         {
-          description: "Payment balance",
+          description: 'Payment balance',
           amount: {
             currency_code: currency,
             value: Number(amount?.value),
@@ -102,9 +98,9 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
         <PayPalScriptProvider
           options={{
             clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
-            components: "buttons",
+            components: 'buttons',
             currency: currency,
-            intent: "capture",
+            intent: 'capture',
           }}
         >
           <div className="text-center">
@@ -118,9 +114,9 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
               disabled={false}
               style={{
                 height: 45,
-                layout: "horizontal",
-                label: "paypal",
-                color: "blue",
+                layout: 'horizontal',
+                label: 'paypal',
+                color: 'blue',
               }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource={undefined}
@@ -129,7 +125,7 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
                 const details = await action?.order?.capture();
                 return handleApprove({ order: details });
               }}
-              onCancel={() => { }}
+              onCancel={() => {}}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);

@@ -72,9 +72,6 @@ const Register = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
@@ -227,9 +224,6 @@ const Register = () => {
               setHasErrors(error.response.data.message);
               AlertDangerNotification({
                 text: 'An error has occurred.',
-                gravity: 'top',
-                className: 'info',
-                position: 'center',
               });
             }
           }}

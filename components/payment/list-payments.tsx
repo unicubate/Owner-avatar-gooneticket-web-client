@@ -1,26 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
-import {
-  MdOutlineDeleteOutline,
-  MdOutlineMailLock,
-  MdOutlineModeEdit,
-} from "react-icons/md";
-import { FcAbout } from "react-icons/fc";
-import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
-  formateDMYHH,
-} from "@/utils";
-import Swal from "sweetalert2";
-import { DeleteOneDiscountAPI } from "@/api-site/discount";
-import { Button, Tag } from "antd";
-import { PaymentItemModel } from "@/types/payment";
-import { GoCreditCard } from "react-icons/go";
-import { FcSmartphoneTablet } from "react-icons/fc";
-import { truncateInputCard } from "@/utils/utils";
-import { useRouter } from "next/router";
-import { CreateValidationFormCodePhoneUser } from "../user/create-validation-form-code-phone-user";
-import { CreateOnPaymentPI, DeleteOnePaymentAPI } from "@/api-site/payment";
+import { CreateOnPaymentPI, DeleteOnePaymentAPI } from '@/api-site/payment';
+import { PaymentItemModel } from '@/types/payment';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { truncateInputCard } from '@/utils/utils';
+import { Tag } from 'antd';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { FcSmartphoneTablet } from 'react-icons/fc';
+import { GoCreditCard } from 'react-icons/go';
+import { MdOutlineDeleteOutline, MdOutlineMailLock } from 'react-icons/md';
+import Swal from 'sweetalert2';
+import { CreateValidationFormCodePhoneUser } from '../user/create-validation-form-code-phone-user';
 
 const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
   item,
@@ -34,23 +24,23 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
   // });
 
   const { mutateAsync: createOnMutate } = CreateOnPaymentPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const { mutateAsync: deleteOnMutate } = DeleteOnePaymentAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = (item: any) => {
     Swal.fire({
-      title: "Delete?",
-      text: "Are you sure you want to delete this?",
-      confirmButtonText: "Yes, Deleted",
-      cancelButtonText: "No, Cancel",
-      confirmButtonColor: "#dc3545",
-      cancelButtonColor: "#6f42c1",
+      title: 'Delete?',
+      text: 'Are you sure you want to delete this?',
+      confirmButtonText: 'Yes, Deleted',
+      cancelButtonText: 'No, Cancel',
+      confirmButtonColor: '#dc3545',
+      cancelButtonColor: '#6f42c1',
       showCancelButton: true,
       reverseButtons: true,
     }).then(async (result) => {
@@ -59,17 +49,11 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
         try {
           await deleteOnMutate({ paymentId: item?.id });
           AlertSuccessNotification({
-            text: "Payment deleted successfully",
-            className: "info",
-            gravity: "top",
-            position: "center",
+            text: 'Payment deleted successfully',
           });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
-            gravity: "top",
-            className: "info",
-            position: "center",
           });
         }
       }
@@ -83,18 +67,12 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
         paymentModel: 'RESEND-VERIFY-CODE-PHONE',
       });
       AlertSuccessNotification({
-        text: "Your authentication code has been sent",
-        className: "info",
-        gravity: "top",
-        position: "center",
+        text: 'Your authentication code has been sent',
       });
-      setShowModal(true)
+      setShowModal(true);
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: "top",
-        className: "info",
-        position: "center",
       });
     }
   };
@@ -103,7 +81,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
     <>
       <div key={index} className="py-4">
         <div className="flex items-center">
-          {item?.type === "CARD" ? (
+          {item?.type === 'CARD' ? (
             <>
               <button className="text-3xl font-bold">
                 <GoCreditCard />
@@ -117,7 +95,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
             </>
           ) : null}
 
-          {item?.type === "PAYPAL" ? (
+          {item?.type === 'PAYPAL' ? (
             <>
               <button className="text-3xl font-bold">
                 <MdOutlineMailLock />
@@ -128,7 +106,7 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
             </>
           ) : null}
 
-          {item?.type === "PHONE" ? (
+          {item?.type === 'PHONE' ? (
             <>
               <button className="text-3xl font-bold">
                 <FcSmartphoneTablet />
@@ -147,45 +125,43 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
 
           <div className="ml-auto">
             <button className="ml-2 text-lg font-bold transition-all duration-200">
-              {["PHONE"].includes(item?.type) && (
+              {['PHONE'].includes(item?.type) && (
                 <Tag
                   bordered={false}
                   className="ml-2"
-                  color={`${item.status === 'ACTIVE'
-                    ? "success"
-                    : "error"
-                    }`}
+                  color={`${item.status === 'ACTIVE' ? 'success' : 'error'}`}
                   title="Resend code validation"
                   onClick={() => {
-                    item.status === 'ACTIVE' ? console.log('Phone number valid') : resendItem(item);
+                    item.status === 'ACTIVE'
+                      ? console.log('Phone number valid')
+                      : resendItem(item);
                   }}
-
                 >
                   {item.status === 'ACTIVE'
-                    ? "PHONE VALID"
-                    : "CONFIRM YOUR PHONE NUMBER"}
+                    ? 'PHONE VALID'
+                    : 'CONFIRM YOUR PHONE NUMBER'}
                 </Tag>
-
               )}
-              {["CARD"].includes(item?.type) && (
+              {['CARD'].includes(item?.type) && (
                 <Tag
                   bordered={false}
                   className="ml-2"
-                  color={`${Number(item.cardExpYear) >= new Date().getFullYear()
-                    ? "success"
-                    : "error"
-                    }`}
+                  color={`${
+                    Number(item.cardExpYear) >= new Date().getFullYear()
+                      ? 'success'
+                      : 'error'
+                  }`}
                   title="Card status"
                   onClick={() => {
-                    item.status === 'ACTIVE' ? console.log('Phone number valid') : resendItem(item);
+                    item.status === 'ACTIVE'
+                      ? console.log('Phone number valid')
+                      : resendItem(item);
                   }}
-
                 >
                   {Number(item.cardExpYear) >= new Date().getFullYear()
-                    ? "CARD VALID"
-                    : "CARD INVALID"}
+                    ? 'CARD VALID'
+                    : 'CARD INVALID'}
                 </Tag>
-
               )}
             </button>
 
@@ -215,7 +191,8 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
               onClick={() => {
                 deleteItem(item);
               }}
-              className="ml-2 text-lg text-gray-600 hover:text-red-600"            >
+              className="ml-2 text-lg text-gray-600 hover:text-red-600"
+            >
               <MdOutlineDeleteOutline />
             </button>
           </div>

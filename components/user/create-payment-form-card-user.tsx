@@ -1,12 +1,12 @@
-import { ButtonInput } from '../ui-setting';
 import { PaymentCardFormModel } from '@/types/payment';
+import { ButtonInput } from '../ui-setting';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { useCreditCardValidator, images } from 'react-creditcard-validator';
+import { images, useCreditCardValidator } from 'react-creditcard-validator';
 
-import { FormEvent, useState } from 'react';
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { FormEvent, useState } from 'react';
 
 const CreatePaymentFormCardUser: React.FC<{
   showModal: boolean;
@@ -62,9 +62,6 @@ const CreatePaymentFormCardUser: React.FC<{
       });
       AlertSuccessNotification({
         text: 'Card save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setHasErrors(false);
       setLoading(false);
@@ -75,9 +72,6 @@ const CreatePaymentFormCardUser: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

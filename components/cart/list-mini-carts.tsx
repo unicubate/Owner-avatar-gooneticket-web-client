@@ -22,16 +22,10 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
       await saveMutation({ cartId: item?.id });
       AlertSuccessNotification({
         text: 'Product deleted successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

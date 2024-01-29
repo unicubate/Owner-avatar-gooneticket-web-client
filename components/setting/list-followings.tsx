@@ -47,9 +47,6 @@ const ListFollowings: React.FC<Props> = ({ item, index, refetch }) => {
       refetch();
       AlertSuccessNotification({
         text: 'Unfollowing successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -57,9 +54,6 @@ const ListFollowings: React.FC<Props> = ({ item, index, refetch }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

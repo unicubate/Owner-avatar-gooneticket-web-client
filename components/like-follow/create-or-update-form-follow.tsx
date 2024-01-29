@@ -46,9 +46,6 @@ const CreateOrUpdateFormFollow: React.FC<{
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -91,9 +91,6 @@ const CreateOrUpdateFormMembership: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: `Membership save successfully`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
       if (membership?.id) {
         refetch();
@@ -106,9 +103,6 @@ const CreateOrUpdateFormMembership: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -56,9 +56,6 @@ const LoginModal: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: 'An error has occurred.',
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
@@ -166,9 +163,6 @@ const LoginModal: React.FC<{
                     setHasErrors(error.response.data.message);
                     AlertDangerNotification({
                       text: 'An error has occurred.',
-                      gravity: 'top',
-                      className: 'info',
-                      position: 'center',
                     });
                   }
                 }}

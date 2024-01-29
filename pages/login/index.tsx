@@ -71,9 +71,6 @@ const Login = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: 'An error has occurred.',
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
@@ -176,9 +173,6 @@ const Login = () => {
                 setHasErrors(error.response.data.message);
                 AlertDangerNotification({
                   text: 'An error has occurred.',
-                  gravity: 'top',
-                  className: 'info',
-                  position: 'center',
                 });
               }
             }}

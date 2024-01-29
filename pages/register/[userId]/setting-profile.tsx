@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { DateInput } from '@/components/ui-setting/ant';
-import { AlertDangerNotification } from '@/utils/alert-notification';
-import { useRouter } from 'next/router';
-import { PrivateComponent } from '@/components/util/private-component';
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
 } from '@/api-site/profile';
-import { NextStepProfileFormModel } from '@/types/profile.type';
 import { GetOneUserPublicAPI, resendCodeAPI } from '@/api-site/user';
-import { SelectSearchInput } from '@/components/ui-setting/ant/select-search-input';
-import { ButtonInput } from '@/components/ui-setting';
 import { LayoutSite } from '@/components/layout-site';
+import { ButtonInput } from '@/components/ui-setting';
+import { DateInput } from '@/components/ui-setting/ant';
+import { SelectSearchInput } from '@/components/ui-setting/ant/select-search-input';
 import { TextAreaInput, TextInput } from '@/components/ui-setting/shadcn';
+import { PrivateComponent } from '@/components/util/private-component';
+import { NextStepProfileFormModel } from '@/types/profile.type';
+import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object({
   username: yup
@@ -99,9 +99,6 @@ const SettingProfile = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

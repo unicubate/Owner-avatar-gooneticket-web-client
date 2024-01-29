@@ -41,16 +41,10 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           await saveMutation.mutateAsync({ discountId: item?.id });
           AlertSuccessNotification({
             text: 'Discount deleted successfully',
-            className: 'info',
-            gravity: 'top',
-            position: 'center',
           });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
-            gravity: 'top',
-            className: 'info',
-            position: 'center',
           });
         }
       }

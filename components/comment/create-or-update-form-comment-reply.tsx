@@ -72,9 +72,6 @@ const CreateOrUpdateFormCommentReply: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: 'Comment save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -82,9 +79,6 @@ const CreateOrUpdateFormCommentReply: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

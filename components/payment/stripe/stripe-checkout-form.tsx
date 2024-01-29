@@ -120,9 +120,6 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -64,9 +64,6 @@ const CreateOrUpdateCategory: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: 'Category save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setShowModal(false);
     } catch (error: any) {
@@ -75,9 +72,6 @@ const CreateOrUpdateCategory: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -155,9 +155,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       setLoading(false);
       AlertSuccessNotification({
         text: `Product save successfully`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -165,9 +162,6 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

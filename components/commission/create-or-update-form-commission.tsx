@@ -108,9 +108,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
       setLoading(false);
       AlertSuccessNotification({
         text: `Commission save successfully`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
       if (!commission?.id) {
         push(`/commissions`);
@@ -121,9 +118,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

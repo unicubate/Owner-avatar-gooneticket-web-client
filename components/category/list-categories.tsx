@@ -41,16 +41,10 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
           await saveMutation.mutateAsync({ categoryId: item?.id });
           AlertSuccessNotification({
             text: 'Category deleted successfully',
-            className: 'info',
-            gravity: 'top',
-            position: 'center',
           });
         } catch (error: any) {
           AlertDangerNotification({
             text: `${error.response.data.message}`,
-            gravity: 'top',
-            className: 'info',
-            position: 'center',
           });
         }
       }

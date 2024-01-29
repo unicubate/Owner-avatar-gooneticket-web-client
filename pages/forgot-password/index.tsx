@@ -52,9 +52,6 @@ const ForgotPassword = () => {
       setLoading(false);
       AlertSuccessNotification({
         text: 'Email send successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       reset();
     } catch (error: any) {
@@ -63,9 +60,6 @@ const ForgotPassword = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: 'An error has occurred.',
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

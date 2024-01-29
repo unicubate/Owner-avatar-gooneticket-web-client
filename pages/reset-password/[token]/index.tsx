@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TextInput } from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { PublicComponent } from '@/components/util/public-component';
 import { UserResetPasswordFormModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { resetPasswordAPI } from '../../../api-site/user';
-import { useRouter } from 'next/router';
-import { PublicComponent } from '@/components/util/public-component';
-import { ButtonInput } from '@/components/ui-setting/button-input';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { GetStaticPropsContext } from 'next';
-import { TextInput } from '@/components/ui-setting/shadcn';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { resetPasswordAPI } from '../../../api-site/user';
 
 const schema = yup.object({
   newPassword: yup.string().min(8, 'Minimum 8 symbols').required(),
@@ -55,9 +55,6 @@ const ResetPassword = () => {
       setLoading(false);
       AlertSuccessNotification({
         text: 'Email send successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       reset();
       router.push(`${`/login`}`);
@@ -67,9 +64,6 @@ const ResetPassword = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: 'An error has occurred.',
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

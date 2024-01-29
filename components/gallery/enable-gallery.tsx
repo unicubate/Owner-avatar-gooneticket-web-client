@@ -26,9 +26,6 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

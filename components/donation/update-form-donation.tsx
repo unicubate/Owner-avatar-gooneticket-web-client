@@ -63,9 +63,6 @@ const UpdateFormDonation: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: `Donation save successfully`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -73,9 +70,6 @@ const UpdateFormDonation: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

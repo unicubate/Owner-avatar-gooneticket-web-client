@@ -45,9 +45,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
       await saveMutation.mutateAsync({ postId: item?.id });
       AlertSuccessNotification({
         text: 'Image deleted successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setLoading(false);
       setIsOpen(false);
@@ -56,9 +53,6 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
       setIsOpen(true);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

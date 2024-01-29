@@ -67,9 +67,6 @@ const ListCommentsPosts: React.FC<Props> = ({
       await saveMutation({ commentId: item?.id });
       AlertSuccessNotification({
         text: 'Comment deleted successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setLoading(false);
       setIsOpen(false);
@@ -78,9 +75,6 @@ const ListCommentsPosts: React.FC<Props> = ({
       setIsOpen(true);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

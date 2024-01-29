@@ -70,9 +70,6 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album, refetch }) => {
       setLoading(false);
       AlertSuccessNotification({
         text: 'Album save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       if (album?.id) {
         refetch();
@@ -85,9 +82,6 @@ const CreateOrUpdateFormAlbumPost: React.FC<Props> = ({ album, refetch }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

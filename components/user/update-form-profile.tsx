@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Select, Space, Upload } from 'antd';
 import {
   GetAllCountiesAPI,
   GetAllCurrenciesAPI,
@@ -7,20 +5,21 @@ import {
   UpdateOneProfileAPI,
   getOneFileProfileAPI,
 } from '@/api-site/profile';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
-import { DateInput } from '../ui-setting/ant';
-import { ButtonInput } from '../ui-setting/button-input';
 import { ProfileFormModel, arrayColors } from '@/types/profile.type';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
-import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { Avatar, Button, Select, Space, Upload } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Controller, SubmitHandler } from 'react-hook-form';
+import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { DateInput } from '../ui-setting/ant';
+import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
+import { ButtonInput } from '../ui-setting/button-input';
+import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
 
 const { Option } = Select;
 
@@ -101,9 +100,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
       setLoading(false);
       AlertSuccessNotification({
         text: `Information save successfully`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -111,9 +107,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'bottom',
-        className: 'info',
-        position: 'center',
       });
     }
   };

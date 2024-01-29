@@ -76,9 +76,6 @@ const CreateOrUpdateDiscount: React.FC<{
       setLoading(false);
       AlertSuccessNotification({
         text: 'Discount save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setShowModal(false);
     } catch (error: any) {
@@ -87,9 +84,6 @@ const CreateOrUpdateDiscount: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import { ButtonInput } from '../ui-setting';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ButtonInput } from '../ui-setting';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
@@ -53,9 +53,6 @@ const CreateValidationFormCodePhoneUser: React.FC<{
       });
       AlertSuccessNotification({
         text: 'Phone save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       setHasErrors(false);
       setLoading(false);
@@ -66,9 +63,6 @@ const CreateValidationFormCodePhoneUser: React.FC<{
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
@@ -82,16 +76,10 @@ const CreateValidationFormCodePhoneUser: React.FC<{
 
       AlertSuccessNotification({
         text: 'Your authentication code has been sent',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -71,9 +71,6 @@ const ShopView = () => {
         });
         AlertSuccessNotification({
           text: `Product add to cart successfully`,
-          gravity: 'top',
-          className: 'info',
-          position: 'center',
         });
       } else {
         setIsOpen(true);
@@ -81,9 +78,6 @@ const ShopView = () => {
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

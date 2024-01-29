@@ -118,9 +118,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       setLoading(false);
       AlertSuccessNotification({
         text: 'Post save successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
       if (post?.id) {
         refetch();
@@ -133,9 +130,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };

@@ -1,23 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { Alert, Button, Checkbox, Input } from 'antd';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { UserRegisterFormModel } from '@/types/user.type';
+import { ValidCodeAPI, resendCodeAPI } from '@/api-site/user';
+import { LayoutSite } from '@/components/layout-site';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TextInput } from '@/components/ui-setting/shadcn';
+import { useAuth } from '@/components/util/context-user';
+import { PrivateComponent } from '@/components/util/private-component';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
-import { resendCodeAPI, ValidCodeAPI } from '@/api-site/user';
-import { useQuery } from '@tanstack/react-query';
-import { PrivateComponent } from '@/components/util/private-component';
-import { useAuth } from '@/components/util/context-user';
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { LayoutSite } from '@/components/layout-site';
-import { TextInput } from '@/components/ui-setting/shadcn';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object({
   code: yup.string().max(8, 'Maximum 8 symbols').required(),
@@ -79,9 +75,6 @@ const ConfirmAccount = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
@@ -91,16 +84,10 @@ const ConfirmAccount = () => {
       await resendCodeAPI({ userId: user?.id });
       AlertSuccessNotification({
         text: 'Code verification send successfully',
-        className: 'info',
-        gravity: 'top',
-        position: 'center',
       });
     } catch (error) {
       AlertDangerNotification({
         text: 'An error has occurred.',
-        gravity: 'top',
-        className: 'info',
-        position: 'center',
       });
     }
   };
