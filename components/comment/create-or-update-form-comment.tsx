@@ -165,7 +165,7 @@ const CreateOrUpdateFormComment: React.FC<{
                 onClick={() => {
                   setIsOpen(true);
                 }}
-                type="submit"
+                type="button"
                 size="lg"
                 variant="info"
                 loading={loading}
