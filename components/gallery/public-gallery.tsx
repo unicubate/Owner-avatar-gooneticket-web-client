@@ -72,7 +72,6 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
             userVisitor={userVisitor}
             item={item}
             key={index}
-            commentTake={10}
           />
         </>
       ))

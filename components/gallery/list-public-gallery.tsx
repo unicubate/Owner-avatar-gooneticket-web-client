@@ -7,15 +7,10 @@ import { ShowModalGallery } from './show-modal-gallery';
 
 type Props = {
   item?: PostModel;
-  commentTake: number;
   userVisitor: UserVisitorModel;
 };
 
-const ListPublicGallery: React.FC<Props> = ({
-  item,
-  commentTake,
-  userVisitor,
-}) => {
+const ListPublicGallery: React.FC<Props> = ({ item, userVisitor }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -50,7 +45,6 @@ const ListPublicGallery: React.FC<Props> = ({
           setOpenModal={setOpenModal}
           post={item}
           userVisitorId={userVisitor?.id ?? ''}
-          commentTake={commentTake}
         />
       ) : null}
     </>
