@@ -11,6 +11,7 @@ import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
 import { TextInput } from '../ui-setting/shadcn';
+import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
 
 const schema = yup.object({
@@ -39,6 +40,7 @@ const CreateOrUpdateFormMembership: React.FC<{
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchPrice = watch('price', '');
 
   useEffect(() => {
     if (membership) {
@@ -141,8 +143,12 @@ const CreateOrUpdateFormMembership: React.FC<{
                   placeholder="Price subscribe"
                   errors={errors}
                   required
-                  //prefix={profile?.currency?.code}
                 />
+                <div className="flex items-center justify-between">
+                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                    {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                  </Label>
+                </div>
                 <span className="text-sm font-medium text-gray-400">
                   {`Set your minimum price  month. Supporters can choose to pay more`}
                 </span>
@@ -177,7 +183,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                         maxCount={1}
                       >
                         {imageList.length >= 1 ? null : (
-                          <div className="text-center">
+                          <div className="text-center dark:text-white">
                             <PlusOutlined />
                             <div style={{ marginTop: 8 }}>Upload cover</div>
                           </div>

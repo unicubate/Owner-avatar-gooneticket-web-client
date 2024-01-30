@@ -2,6 +2,7 @@ export * from './audio-player-Input';
 export * from './avatar-coffee-component';
 export * from './button-input';
 export * from './button-load-more';
+export * from './copy-share-link';
 export * from './react-quill-input';
 export * from './search-input';
 export * from './serial-price';

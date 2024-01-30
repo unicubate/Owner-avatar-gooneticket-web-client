@@ -116,7 +116,7 @@ const ShopsExtras = () => {
                     </div>
                     <div className="mt-4 sm:mt-0">
                       <SearchInput
-                        placeholder="Search by email, name"
+                        placeholder="Search by title"
                         onChange={handleSetSearch}
                       />
                     </div>

@@ -11,27 +11,16 @@ import 'react-h5-audio-player/lib/styles.css';
 import { BiConversation } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
 import { HiOutlineLockClosed } from 'react-icons/hi';
-import { IoShareOutline } from 'react-icons/io5';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput, CopyShareLink } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { CopyIcon } from 'lucide-react';
+import { IoShareOutline } from 'react-icons/io5';
 import { useInputState } from '../hooks';
 
 type Props = {
@@ -92,47 +81,20 @@ const ListFollowPosts: React.FC<Props> = ({
                 ) : null}
 
                 {/* refaire un refactoring de ce code ci dessous */}
-                <Dialog>
-                  <DialogTrigger asChild>
+                <CopyShareLink
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                  link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+                  buttonDialog={
                     <ButtonInput
-                      className="ml-2 text-gray-600 hover:text-gray-800 focus:ring-gray-900"
+                      className="ml-2 text-gray-600 hover:text-gray-400 focus:ring-gray-900"
                       variant="link"
                       type="button"
                     >
-                      <IoShareOutline className="mr-2 size-5" />
+                      <IoShareOutline className="size-6" />
                     </ButtonInput>
-                  </DialogTrigger>
-                  <DialogContent className="dark:border-gray-800 sm:max-w-md">
-                    <DialogHeader>
-                      <DialogTitle>Share link</DialogTitle>
-                      <DialogDescription>
-                        Anyone who has this link will be able to view this.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="flex items-center space-x-2">
-                      <div className="grid flex-1 gap-2">
-                        <Label htmlFor="link" className="sr-only">
-                          Link
-                        </Label>
-                        <Input
-                          id="link"
-                          defaultValue={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
-                          readOnly
-                        />
-                      </div>
-                      <ButtonInput
-                        type="button"
-                        variant="info"
-                        size="sm"
-                        className="px-3"
-                      >
-                        <span className="sr-only">Copy</span>
-                        <CopyIcon className="size-4" />
-                      </ButtonInput>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-
+                  }
+                />
                 {/* {item?.allowDownload && (
                   <button
                     title="Download"

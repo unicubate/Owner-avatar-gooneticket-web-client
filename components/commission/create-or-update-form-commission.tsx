@@ -6,7 +6,7 @@ import {
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
 import { PlusOutlined } from '@ant-design/icons';
-import { Select, Upload, UploadFile, UploadProps } from 'antd';
+import { Upload, UploadFile, UploadProps } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
@@ -16,9 +16,8 @@ import { TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { ButtonInput } from '../ui-setting/button-input';
 import { TextInput } from '../ui-setting/shadcn';
+import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
-
-const { Option } = Select;
 
 type Props = {
   commission?: any;
@@ -61,6 +60,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const watchEnableLimitSlot = watch('enableLimitSlot', false);
+  const watchPrice = watch('price', '');
 
   useEffect(() => {
     if (commission) {
@@ -159,8 +159,12 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     errors={errors}
                     required
                     pattern="[0-9]*"
-                    //prefix={profile?.currency?.code}
                   />
+                  <div className="flex items-center justify-between">
+                    <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                      {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                    </Label>
+                  </div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">

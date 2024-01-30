@@ -21,8 +21,9 @@ import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
-import { NumberInput, SwitchInput } from '../ui-setting/ant';
+import { SwitchInput } from '../ui-setting/ant';
 import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
 
 type Props = {
@@ -83,6 +84,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
+  const watchPrice = watch('price', '');
   const watchEnableLimitSlot = watch('enableLimitSlot', false);
   const watchEnableDiscount = watch('enableDiscount', false);
   const watchProductType = watch('productType', 'PHYSICAL');
@@ -238,17 +240,22 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className="mb-2">
-              <NumberInput
+            <div className="mt-2">
+              <TextInput
                 control={control}
-                label="Price"
+                label="Price*"
                 type="number"
                 name="price"
-                placeholder="Price product"
+                placeholder="Price commission"
                 errors={errors}
                 required
-                prefix={profile?.currency?.code}
+                pattern="[0-9]*"
               />
+              <div className="flex items-center justify-between">
+                <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                  {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                </Label>
+              </div>
             </div>
 
             <div className="mt-2">

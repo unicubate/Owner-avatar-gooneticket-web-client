@@ -57,14 +57,10 @@ const ShopEdit = () => {
   return (
     <>
       <LayoutDashboard title={`${commission?.title || 'Commission'}`}>
-        <div className="flex-1 bg-gray-100">
-          <main>
-            <div className="mx-auto max-w-4xl py-6">
-              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-                {dataTableCommission}
-              </div>
-            </div>
-          </main>
+        <div className="mx-auto max-w-4xl py-6">
+          <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
+            {dataTableCommission}
+          </div>
         </div>
       </LayoutDashboard>
     </>
