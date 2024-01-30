@@ -1,3 +1,10 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { BiMoon, BiSun } from 'react-icons/bi';
@@ -18,22 +25,51 @@ const ThemeToggle = () => {
 
   return (
     <>
-      <Button variant="link">
-        {['dark', 'system'].includes(theme as string) && (
-          <BiMoon
-            title="toggle dark mode"
-            onClick={() => setTheme('light')}
-            className="size-6 bg-white dark:bg-[#1c1b22]"
-          />
-        )}
-        {['light'].includes(theme as string) && (
-          <BiSun
-            title="toggle light mode"
-            onClick={() => setTheme('dark')}
-            className="size-6 bg-white dark:bg-[#1c1b22]"
-          />
-        )}
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="link">
+            {['dark', 'system'].includes(theme as string) && (
+              <BiMoon
+                title="toggle dark mode"
+                onClick={() => setTheme('light')}
+                className="size-6 bg-white dark:bg-[#1c1b22]"
+              />
+            )}
+            {['light'].includes(theme as string) && (
+              <BiSun
+                title="toggle light mode"
+                onClick={() => setTheme('dark')}
+                className="size-6 bg-white dark:bg-[#1c1b22]"
+              />
+            )}
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-16 dark:border-gray-800">
+          <DropdownMenuGroup>
+            <DropdownMenuItem
+              onClick={() => setTheme('light')}
+            >
+              <span className="cursor-pointer">
+                Light
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setTheme('dark')}
+            >
+              <span className="cursor-pointer">
+                Dark
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => setTheme('system')}
+            >
+              <span className="cursor-pointer">
+                System
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
 
       {/* <select value={theme} onChange={(e) => setTheme(e.target.value)}>
         <option value="system">System</option>

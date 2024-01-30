@@ -9,6 +9,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { CopyIcon } from 'lucide-react';
+import { useState } from 'react';
 import { ButtonInput } from '.';
 
 interface Props {
@@ -24,6 +25,10 @@ const CopyShareLink: React.FC<Props> = ({
   setIsOpen,
   buttonDialog,
 }) => {
+  const [copySuccess, setCopySuccess] = useState(false);
+  const copyToClipBoard = async (link: string) => {
+    await navigator.clipboard.writeText(link)
+  };
   return (
     <>
       <Dialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
@@ -42,7 +47,6 @@ const CopyShareLink: React.FC<Props> = ({
               </Label>
               <Input
                 id="link"
-                //defaultValue={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
                 defaultValue={link}
                 readOnly
               />
@@ -52,9 +56,10 @@ const CopyShareLink: React.FC<Props> = ({
               variant="info"
               size="sm"
               className="px-3"
+              onClick={() => { copyToClipBoard(link), setCopySuccess(true) }}
             >
-              <span className="sr-only">Copy</span>
               <CopyIcon className="size-4" />
+              <span className="ml-1">{copySuccess ? "Copied" : "Copy"}</span>
             </ButtonInput>
           </div>
         </DialogContent>

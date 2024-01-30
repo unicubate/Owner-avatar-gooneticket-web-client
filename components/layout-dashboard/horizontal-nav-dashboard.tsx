@@ -84,7 +84,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex items-center justify-end">
-              <div className="flex items-center space-x-6 sm:ml-5">
+              <div className="flex items-center space-x-2 sm:ml-5">
                 <div className="relative">
                   <ThemeToggle />
                 </div>
@@ -108,7 +108,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                             </p>
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-56 dark:border-gray-800">
+                        <DropdownMenuContent className="w-40 dark:border-gray-800">
                           <DropdownMenuGroup>
                             <DropdownMenuItem
                               onClick={() => push(`/dashboard`)}

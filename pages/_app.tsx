@@ -25,8 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={<LoadingFile />}>
-        {/* system */}
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider
             locale={router.locale}
             timeZone="Europe/Berlin"
