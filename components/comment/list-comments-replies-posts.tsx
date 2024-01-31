@@ -21,7 +21,7 @@ import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-
 
 type Props = {
   model: ModelType;
-  item?: CommentModel;
+  item: CommentModel;
   index?: number;
   userId?: string;
 };
@@ -128,6 +128,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
           parentId={String(item?.id)}
           comment={item}
           model={model}
+          organizationId={item?.organizationId}
           openModalReply={openModalReply}
           setOpenModalReply={setOpenModalReply}
         />

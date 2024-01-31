@@ -129,8 +129,8 @@ const ListCommentTransactions: React.FC<{
           {openModalReply ? (
             <CreateOrUpdateFormCommentReply
               model={model}
-              organizationId={organizationId}
               parentId={String(item?.id)}
+              organizationId={item?.organizationId}
               openModalReply={openModalReply}
               setOpenModalReply={setOpenModalReply}
             />
