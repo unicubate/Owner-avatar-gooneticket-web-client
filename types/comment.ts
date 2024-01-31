@@ -1,4 +1,4 @@
-import { ModelType, PaginationResponse } from "@/utils/pagination-item";
+import { ModelType, PaginationResponse } from '@/utils/pagination-item';
 
 export type ResponseCommentModel = {
   value: Array<CommentModel>;
@@ -15,6 +15,7 @@ export type CommentModel = {
   fullName: string;
   email: string;
   userReceiveId: string;
+  organizationId: string;
   profile: {
     username: string;
     color: string;
@@ -33,5 +34,6 @@ export type CommentFormModel = {
   description: string;
   postId: string;
   productId: string;
+  commissionId: string;
   userId: string;
 };

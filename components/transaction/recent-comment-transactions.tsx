@@ -13,7 +13,8 @@ const RecentCommentTransactions: React.FC<{
   userReceiveId: string;
   modelIds: ModelType[];
   model: ModelType;
-}> = ({ modelIds, userReceiveId, model }) => {
+  organizationId: string;
+}> = ({ modelIds, userReceiveId, organizationId, model }) => {
   const { ref, inView } = useInView();
 
   const {
@@ -28,6 +29,7 @@ const RecentCommentTransactions: React.FC<{
     sort: 'DESC',
     modelIds: ['DONATION'],
     userReceiveId,
+    organizationId,
   });
 
   useEffect(() => {
@@ -62,6 +64,7 @@ const RecentCommentTransactions: React.FC<{
           model={model}
           modelIds={modelIds}
           userReceiveId={userReceiveId}
+          organizationId={item?.organizationId}
         />
       ))
   );

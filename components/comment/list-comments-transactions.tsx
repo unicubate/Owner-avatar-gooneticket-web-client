@@ -24,7 +24,8 @@ const ListCommentTransactions: React.FC<{
   modelIds: ModelType[];
   index: number;
   userReceiveId?: string;
-}> = ({ model, modelIds, item, userReceiveId, index }) => {
+  organizationId: string;
+}> = ({ model, modelIds, item, userReceiveId, organizationId, index }) => {
   const { locale } = useRouter();
   const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -41,6 +42,7 @@ const ListCommentTransactions: React.FC<{
     sort: 'DESC',
     modelIds: modelIds,
     commentId: String(item?.id),
+    organizationId,
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
@@ -127,6 +129,7 @@ const ListCommentTransactions: React.FC<{
           {openModalReply ? (
             <CreateOrUpdateFormCommentReply
               model={model}
+              organizationId={organizationId}
               parentId={String(item?.id)}
               openModalReply={openModalReply}
               setOpenModalReply={setOpenModalReply}

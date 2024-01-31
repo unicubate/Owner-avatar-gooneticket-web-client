@@ -39,6 +39,7 @@ const ListComments: React.FC<{
     postId: postId ?? '',
     productId: productId ?? '',
     userVisitorId,
+    organizationId,
   });
 
   const dataTableComments = isLoadingComments ? (
@@ -60,7 +61,7 @@ const ListComments: React.FC<{
             key={index}
             model={model}
             index={index}
-            organizationId={organizationId}
+            organizationId={item?.organizationId}
             userVisitorId={userVisitorId}
             modelIds={modelIds}
           />

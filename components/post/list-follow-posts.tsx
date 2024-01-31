@@ -24,7 +24,7 @@ import { IoShareOutline } from 'react-icons/io5';
 import { useInputState } from '../hooks';
 
 type Props = {
-  item?: PostModel;
+  item: PostModel;
   commentTake: number;
   userVisitor: UserVisitorModel;
 };
@@ -337,8 +337,8 @@ const ListFollowPosts: React.FC<Props> = ({
             model="POST"
             modelIds={['POST']}
             userVisitorId={userVisitor?.id ?? ''}
-            organizationId={String(item?.organizationId)}
-            postId={String(item?.id)}
+            organizationId={item?.organizationId}
+            postId={item?.id}
             take={commentTake}
           />
         </div>

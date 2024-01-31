@@ -3,7 +3,7 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -44,28 +44,16 @@ const ThemeToggle = () => {
             )}
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-16 dark:border-gray-800">
+        <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
           <DropdownMenuGroup>
-            <DropdownMenuItem
-              onClick={() => setTheme('light')}
-            >
-              <span className="cursor-pointer">
-                Light
-              </span>
+            <DropdownMenuItem onClick={() => setTheme('light')}>
+              <span className="cursor-pointer">Light</span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setTheme('dark')}
-            >
-              <span className="cursor-pointer">
-                Dark
-              </span>
+            <DropdownMenuItem onClick={() => setTheme('dark')}>
+              <span className="cursor-pointer">Dark</span>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => setTheme('system')}
-            >
-              <span className="cursor-pointer">
-                System
-              </span>
+            <DropdownMenuItem onClick={() => setTheme('system')}>
+              <span className="cursor-pointer">System</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

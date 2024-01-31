@@ -11,11 +11,7 @@ import * as yup from 'yup';
 import { StripeProps } from './create-payment-stripe';
 
 const schema = yup.object({
-  fullName: yup
-    .string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required(),
+  fullName: yup.string().optional(),
   email: yup
     .string()
     .email('Wrong email format')
@@ -143,7 +139,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
           control={control}
           type="text"
           name="fullName"
-          placeholder="Full name or nickname"
+          placeholder="Full name or nickname (optional)"
           errors={errors}
         />
       </div>
@@ -169,7 +165,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       </div>
       <div className="mt-4">
         <ButtonInput
-          type="button"
+          type="submit"
           className="w-full"
           size="lg"
           variant="info"

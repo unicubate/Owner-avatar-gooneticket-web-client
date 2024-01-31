@@ -33,7 +33,7 @@ type Props = {
   model: ModelType;
   modelIds: ModelType[];
   userVisitorId: string;
-  item?: CommentModel;
+  item: CommentModel;
   index?: number;
 };
 
@@ -92,6 +92,7 @@ const ListCommentsPosts: React.FC<Props> = ({
     modelIds,
     commentId: String(item?.id),
     userVisitorId,
+    organizationId,
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
@@ -194,6 +195,7 @@ const ListCommentsPosts: React.FC<Props> = ({
           {openModalReply ? (
             <CreateOrUpdateFormCommentReply
               model={model}
+              organizationId={item?.organizationId}
               parentId={String(item?.id)}
               openModalReply={openModalReply}
               setOpenModalReply={setOpenModalReply}
@@ -223,8 +225,8 @@ const ListCommentsPosts: React.FC<Props> = ({
         {openModal ? (
           <CreateOrUpdateFormComment
             model={model}
-            organizationId={organizationId}
-            postId={String(item?.postId)}
+            organizationId={item?.organizationId}
+            postId={item?.postId}
             comment={item}
             openModal={openModal}
             setOpenModal={setOpenModal}

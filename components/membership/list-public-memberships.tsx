@@ -63,7 +63,7 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
               <ButtonInput
                 onClick={() => {
                   userStorage?.id
-                    ? router.push(`/memberships/${item?.id}/checkout`)
+                    ? router.push(`/checkouts/${item?.id}/membership`)
                     : setIsOpen(true);
                 }}
                 type="button"

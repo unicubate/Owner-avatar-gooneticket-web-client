@@ -2,6 +2,7 @@ import { CommentFormModel } from '@/types/comment';
 import { ResponsePostModel } from '@/types/post';
 import dyaxios from '@/utils/dyaxios';
 import { makeApiCall } from '@/utils/end-point';
+import { queyParamsFunc } from '@/utils/generate-random';
 import {
   ModelType,
   PaginationRequest,
@@ -12,7 +13,6 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import { queyParamsFunc } from '@/utils/generate-random';
 
 export const CreateOrUpdateOneCommentAPI = ({
   onSuccess,
@@ -236,6 +236,7 @@ export const GetInfiniteCommentsRepliesAPI = (payload: {
   commentId: string;
   modelIds: ModelType[];
   userVisitorId?: string;
+  organizationId: string;
 }) => {
   return useInfiniteQuery({
     queryKey: ['comments-replies', 'infinite', { ...payload }],

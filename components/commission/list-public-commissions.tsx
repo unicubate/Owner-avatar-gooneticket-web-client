@@ -1,16 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ProductModel } from '@/types/product';
+import { CommissionModel } from '@/types/commission';
 import { HtmlParser } from '@/utils/html-parser';
-import Link from 'next/link';
-import React from 'react';
+import { MessageSquarePlusIcon } from 'lucide-react';
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { LoginModal } from '../auth-modal/login-modal';
+import { CreateCommentCommissionModal } from '../comment/create-comment-commission-modal';
+import { useInputState } from '../hooks';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 
 type Props = {
-  item?: ProductModel;
+  item?: CommissionModel;
 };
 
 const ListPublicCommissions: React.FC<Props> = ({ item }) => {
+  const { push } = useRouter();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
+  const [isOpenComment, setIsOpenComment] = useState<boolean>(false);
+
   return (
     <>
       <div
@@ -20,20 +28,22 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
         <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
             {item?.id ? (
-              <Link
-                href={`/${item?.profile?.username}/posts/${item?.slug}`}
-                className="cursor-pointer text-lg font-bold dark:text-white"
-              >
+              <span className="cursor-pointer text-lg font-bold dark:text-white">
                 {item?.title ?? ''}
-              </Link>
+              </span>
             ) : null}
 
             <div className="ml-auto">
               <ButtonInput
+                onClick={() => setIsOpenComment(true)}
                 type="button"
-                variant="danger"
-                //color={item?.profile?.color}
+                variant="info"
               >
+                <MessageSquarePlusIcon />
+              </ButtonInput>
+            </div>
+            <div className="ml-2">
+              <ButtonInput type="button" variant="danger">
                 {Number(item?.price ?? 0)} {item?.currency?.symbol ?? ''}
               </ButtonInput>
             </div>
@@ -59,6 +69,11 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                 size="lg"
                 className="w-full"
                 variant="info"
+                onClick={() => {
+                  userStorage?.id
+                    ? push(`/checkouts/${item?.id}/commission`)
+                    : setIsOpen(true);
+                }}
               >
                 Request this
               </ButtonInput>
@@ -66,6 +81,13 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
           </div>
         </div>
       </div>
+
+      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <CreateCommentCommissionModal
+        isOpen={isOpenComment}
+        commission={item as any}
+        setIsOpen={setIsOpenComment}
+      />
     </>
   );
 };

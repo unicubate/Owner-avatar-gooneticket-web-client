@@ -74,6 +74,7 @@ const ProfilePublic = () => {
                         model="DONATION"
                         modelIds={['DONATION']}
                         userReceiveId={user?.id}
+                        organizationId={user?.organizationId}
                       />
                     ) : null}
                   </div>

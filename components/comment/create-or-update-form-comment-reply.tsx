@@ -18,7 +18,15 @@ const CreateOrUpdateFormCommentReply: React.FC<{
   model: ModelType;
   setOpenModalReply?: any;
   openModalReply?: boolean;
-}> = ({ parentId, model, comment, openModalReply, setOpenModalReply }) => {
+  organizationId: string;
+}> = ({
+  parentId,
+  organizationId,
+  model,
+  comment,
+  openModalReply,
+  setOpenModalReply,
+}) => {
   const {
     reset,
     setValue,
@@ -63,6 +71,7 @@ const CreateOrUpdateFormCommentReply: React.FC<{
         model: model,
         commentId: comment?.id,
         parentId: parentId,
+        organizationId: organizationId,
       });
 
       setOpenModalReply(false);
