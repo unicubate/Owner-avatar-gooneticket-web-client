@@ -151,7 +151,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       if (product?.id) {
         refetch();
       } else {
-        push(`/shop`);
+        back();
       }
       setHasErrors(false);
       setLoading(false);
@@ -549,7 +549,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               </div>
             </div> */}
 
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <ButtonInput
                 type="submit"
                 className="w-full"
@@ -559,7 +559,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
               >
                 Save and Publish
               </ButtonInput>
-            </div>
+            </div> */}
             <div className="my-4 flex items-center space-x-4">
               <ButtonInput
                 type="button"
@@ -577,7 +577,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 variant="info"
                 loading={loading}
               >
-                Save as Draft
+                Save and Publish
               </ButtonInput>
             </div>
           </div>
