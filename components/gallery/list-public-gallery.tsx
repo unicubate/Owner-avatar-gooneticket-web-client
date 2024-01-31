@@ -39,7 +39,7 @@ const ListPublicGallery: React.FC<Props> = ({ item, userVisitor }) => {
         </a>
       </div>
 
-      {openModal ? (
+      {openModal && item?.id ? (
         <ShowModalGallery
           openModal={openModal}
           setOpenModal={setOpenModal}

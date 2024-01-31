@@ -13,7 +13,6 @@ import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-lik
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
-import { useAuth } from '../util/context-user';
 
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { FiDownload } from 'react-icons/fi';
@@ -32,8 +31,6 @@ const ShowModalGallery: React.FC<Props> = ({
   userVisitorId,
 }) => {
   const { locale, push } = useRouter();
-  const user = useAuth() as any;
-
   const { status, data: item } = GetOnePostAPI({
     postId: post?.id,
     userVisitorId,
