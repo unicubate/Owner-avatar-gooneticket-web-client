@@ -191,14 +191,16 @@ const ShowModalGallery: React.FC<Props> = ({
               )}
             </div>
 
-            <ListComments
-              model="POST"
-              modelIds={['POST']}
-              postId={String(item?.id)}
-              take={4}
-              organizationId={item?.organizationId}
-              userVisitorId={userVisitorId}
-            />
+            {item?.id ? (
+              <ListComments
+                model="POST"
+                modelIds={['POST']}
+                postId={String(item?.id)}
+                take={4}
+                organizationId={item?.organizationId}
+                userVisitorId={userVisitorId}
+              />
+            ) : null}
           </div>
         </DialogContent>
       </Dialog>
