@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { BiMoon, BiSun } from 'react-icons/bi';
+import { BiAdjust, BiMoon, BiSun } from 'react-icons/bi';
 import { Button } from '../ui/button';
 
 const ThemeToggle = () => {
@@ -28,8 +28,15 @@ const ThemeToggle = () => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="link">
-            {['dark', 'system'].includes(theme as string) && (
+            {['dark'].includes(theme as string) && (
               <BiMoon
+                title="toggle dark mode"
+                onClick={() => setTheme('light')}
+                className="size-6 bg-white dark:bg-[#1c1b22]"
+              />
+            )}
+            {['system'].includes(theme as string) && (
+              <BiAdjust
                 title="toggle dark mode"
                 onClick={() => setTheme('light')}
                 className="size-6 bg-white dark:bg-[#1c1b22]"

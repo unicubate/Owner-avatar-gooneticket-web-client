@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { CommissionModel } from '@/types/commission';
 import { HtmlParser } from '@/utils/html-parser';
-import { MessageSquarePlusIcon } from 'lucide-react';
+import { MailPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { LoginModal } from '../auth-modal/login-modal';
@@ -39,7 +39,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                 type="button"
                 variant="info"
               >
-                <MessageSquarePlusIcon />
+                <MailPlusIcon />
               </ButtonInput>
             </div>
             <div className="ml-2">

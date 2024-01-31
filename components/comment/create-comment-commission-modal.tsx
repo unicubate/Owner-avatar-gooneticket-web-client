@@ -24,6 +24,7 @@ const CreateCommentCommissionModal: React.FC<{
   parentId?: string;
 }> = ({ isOpen, setIsOpen, commission, comment, parentId }) => {
   const {
+    reset,
     setValue,
     control,
     handleSubmit,
@@ -71,6 +72,7 @@ const CreateCommentCommissionModal: React.FC<{
       AlertSuccessNotification({
         text: 'Message send successfully',
       });
+      reset();
       setIsOpen(false);
     } catch (error: any) {
       setHasErrors(true);
