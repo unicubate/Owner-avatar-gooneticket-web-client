@@ -116,10 +116,18 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-900">
+            {/* <Tooltip placement="bottomRight" title={'Messages'}>
+              <button
+                onClick={() => router.push(`/commissions/${item?.id}/message`)}
+                className="text-lg text-gray-600 hover:text-green-400"
+              >
+                <MdOutlineMarkEmailRead />
+              </button>
+            </Tooltip> */}
             <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => router.push(`/commissions/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+                className="ml-4 text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
               </button>

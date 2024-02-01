@@ -6,8 +6,9 @@ import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
-import { NumberInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/button-input';
+import { TextInput } from '../ui-setting/shadcn';
+import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
 
 const schema = yup.object({
@@ -30,6 +31,7 @@ const UpdateFormDonation: React.FC<{
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchPrice = watch('price', '');
 
   useEffect(() => {
     if (donation) {
@@ -79,7 +81,7 @@ const UpdateFormDonation: React.FC<{
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <NumberInput
                 control={control}
                 label="Minimum price *"
@@ -89,6 +91,27 @@ const UpdateFormDonation: React.FC<{
                 errors={errors}
                 required
                 prefix={profile?.currency?.code}
+              />
+              <span className="text-sm font-medium text-gray-400">
+                {`Change the default price of a pot to an amount of your choice.`}
+              </span>
+            </div> */}
+
+            <div className="mt-2">
+              <TextInput
+                control={control}
+                label="Price*"
+                type="number"
+                name="price"
+                placeholder="Price commission"
+                errors={errors}
+                required
+                pattern="[0-9]*"
+                labelHelp={
+                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                    {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                  </Label>
+                }
               />
               <span className="text-sm font-medium text-gray-400">
                 {`Change the default price of a pot to an amount of your choice.`}

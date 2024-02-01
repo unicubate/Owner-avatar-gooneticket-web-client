@@ -15,6 +15,7 @@ interface Props {
   required?: boolean;
   defaultValue?: string;
   pattern?: string;
+  labelHelp?: React.ReactNode;
 }
 
 const TextInput: React.FC<Props> = ({
@@ -30,18 +31,21 @@ const TextInput: React.FC<Props> = ({
   defaultValue,
   autoComplete,
   required,
+  labelHelp,
 }) => {
   return (
     <>
-      {label ? (
-        <Label
-          htmlFor={name}
-          className="mb-2 block text-sm font-bold dark:text-white"
-        >
-          {label}
-        </Label>
-      ) : null}
-
+      <div className="flex items-center justify-between">
+        {label ? (
+          <Label
+            htmlFor={name}
+            className="mb-2 block text-sm font-bold dark:text-white"
+          >
+            {label}
+          </Label>
+        ) : null}
+        {labelHelp}
+      </div>
       <Controller
         name={name}
         control={control}

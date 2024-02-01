@@ -12,14 +12,14 @@ const HorizontalNavCommission: React.FC = () => {
       title: 'Commissions',
       href: '/commissions',
     },
-    {
-      title: 'Orders',
-      href: '/commissions/orders',
-    },
-    {
-      title: 'Settings',
-      href: '/commissions/settings',
-    },
+    // {
+    //   title: 'Orders',
+    //   href: '/commissions/orders',
+    // },
+    // {
+    //   title: 'Settings',
+    //   href: '/commissions/settings',
+    // },
   ]);
 
   const bgColor = `bg-${profile?.color}-600 text-white`;

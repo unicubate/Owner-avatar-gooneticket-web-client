@@ -1,6 +1,4 @@
 import { GetOneCommissionAPI } from '@/api-site/commission';
-import { GetUploadsAPI } from '@/api-site/upload';
-import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
@@ -9,7 +7,7 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
-const CommissionEdit = () => {
+const MessageEdit = () => {
   const { userStorage: user } = useAuth() as any;
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
@@ -23,36 +21,28 @@ const CommissionEdit = () => {
     organizationId: user?.organizationId,
   });
 
-  const {
-    isError: isErrorImages,
-    isLoading: isLoadingImages,
-    data: uploadImages,
-  } = GetUploadsAPI({
-    organizationId: commission?.organizationId,
-    model: 'COMMISSION',
-    uploadableId: commissionId,
-    uploadType: 'image',
-  });
+  // const {
+  //   isError: isErrorImages,
+  //   isLoading: isLoadingImages,
+  //   data: uploadImages,
+  // } = GetUploadsAPI({
+  //   organizationId: commission?.organizationId,
+  //   model: 'COMMISSION',
+  //   uploadableId: commissionId,
+  //   uploadType: 'image',
+  // });
 
-  const dataTableCommission =
-    isLoadingImages || isLoadingCommission ? (
-      <LoadingFile />
-    ) : isErrorImages || isErrorCommission ? (
-      <ErrorFile
-        status="error"
-        title="404"
-        description="Error find data please try again..."
-      />
-    ) : (
-      <>
-        {user?.organizationId && commission?.id ? (
-          <CreateOrUpdateFormCommission
-            commission={commission}
-            uploadImages={uploadImages}
-          />
-        ) : null}
-      </>
-    );
+  const dataTableCommission = isLoadingCommission ? (
+    <LoadingFile />
+  ) : isErrorCommission ? (
+    <ErrorFile
+      status="error"
+      title="404"
+      description="Error find data please try again..."
+    />
+  ) : (
+    <>null</>
+  );
 
   return (
     <>
@@ -67,7 +57,7 @@ const CommissionEdit = () => {
   );
 };
 
-export default PrivateComponent(CommissionEdit);
+export default PrivateComponent(MessageEdit);
 
 export async function getStaticPaths() {
   return {

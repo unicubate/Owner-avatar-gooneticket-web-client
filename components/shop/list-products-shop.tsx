@@ -160,7 +160,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600  hover:text-indigo-600"
+                className="text-lg text-gray-600  hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
               </button>

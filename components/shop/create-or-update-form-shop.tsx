@@ -250,12 +250,12 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                 errors={errors}
                 required
                 pattern="[0-9]*"
+                labelHelp={
+                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                    {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                  </Label>
+                }
               />
-              <div className="flex items-center justify-between">
-                <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
-                  {watchPrice ? watchPrice : null} {profile?.currency?.code}
-                </Label>
-              </div>
             </div>
 
             <div className="mt-2">

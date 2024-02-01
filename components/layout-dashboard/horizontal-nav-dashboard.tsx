@@ -108,7 +108,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                             </p>
                           </button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent className="w-40 dark:border-gray-800">
+                        <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                           <DropdownMenuGroup>
                             <DropdownMenuItem
                               onClick={() => push(`/dashboard`)}

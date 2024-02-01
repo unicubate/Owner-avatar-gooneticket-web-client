@@ -143,12 +143,13 @@ const CreateOrUpdateFormMembership: React.FC<{
                   placeholder="Price subscribe"
                   errors={errors}
                   required
+                  pattern="[0-9]*"
+                  labelHelp={
+                    <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                      {watchPrice ? watchPrice : null} {profile?.currency?.code}
+                    </Label>
+                  }
                 />
-                <div className="flex items-center justify-between">
-                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
-                    {watchPrice ? watchPrice : null} {profile?.currency?.code}
-                  </Label>
-                </div>
                 <span className="text-sm font-medium text-gray-400">
                   {`Set your minimum price  month. Supporters can choose to pay more`}
                 </span>

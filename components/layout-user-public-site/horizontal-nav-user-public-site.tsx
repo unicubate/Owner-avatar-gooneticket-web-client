@@ -154,7 +154,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                           </svg>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-56 dark:border-gray-800">
+                      <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/dashboard`)}>
                             <span className="cursor-pointer">

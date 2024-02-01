@@ -138,7 +138,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                     }/edit?type=${item?.type.toLocaleLowerCase()}`,
                   )
                 }
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+                className="text-lg text-gray-600 hover:text-indigo-600"
               >
                 <MdOutlineModeEdit />
               </button>
