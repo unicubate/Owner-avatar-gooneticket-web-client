@@ -2,13 +2,30 @@ import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
 import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { TableTransactions } from '@/components/transaction/table-transactions';
-import { ButtonInput } from '@/components/ui-setting';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuGroup,
+//   DropdownMenuItem,
+//   DropdownMenuSeparator,
+//   DropdownMenuTrigger,
+// } from '@/components/ui/dropdown-menu';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { useDebounce } from '@/utils';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const Donations = () => {
   const user = useAuth() as any;
@@ -58,16 +75,42 @@ const Donations = () => {
                 <div className="ml-auto">
                   <div className="flex items-center space-x-4">
                     <div className="mx-auto max-w-xs">
-                      <ButtonInput
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        onClick={() => setOpenDrop((lk) => !lk)}
-                      >
-                        Last {days} days
-                      </ButtonInput>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button type="button" size="sm" variant="outline">
+                            Last {days} days
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="w-10 dark:border-gray-800 dark:bg-[#1c1b22]">
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => {
+                                handleDaysChange(2), setOpenDrop(false);
+                              }}
+                            >
+                              <span className="cursor-pointer">
+                                Last 2 days
+                              </span>
+                            </DropdownMenuItem>
+                            {/* <DropdownMenuItem>
+                          <span className="cursor-pointer">Invite</span>
+                        </DropdownMenuItem> */}
+                          </DropdownMenuGroup>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            onClick={() => {
+                              handleDaysChange(120), setOpenDrop(false);
+                            }}
+                          >
+                            <span className="cursor-pointer">
+                              {' '}
+                              Last 120 days
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
 
-                      {openDrop && (
+                      {/* {openDrop && (
                         <div className="relative z-10 mt-2 w-full">
                           <div className="block w-full space-y-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm shadow dark:border-gray-800 dark:bg-[#121212]">
                             <ul className="flex flex-col">
@@ -93,7 +136,7 @@ const Donations = () => {
                             </ul>
                           </div>
                         </div>
-                      )}
+                      )} */}
                     </div>
                   </div>
                 </div>

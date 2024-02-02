@@ -144,6 +144,7 @@ const CreateOrUpdateFormMembership: React.FC<{
                   errors={errors}
                   required
                   pattern="[0-9]*"
+                  min={1}
                   labelHelp={
                     <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
                       {watchPrice ? watchPrice : null} {profile?.currency?.code}
