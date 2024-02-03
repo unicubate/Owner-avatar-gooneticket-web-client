@@ -8,6 +8,13 @@ import React from 'react';
 import { BiDotsHorizontal } from 'react-icons/bi';
 import { AvatarCoffeeComponent, AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 type Props = {
   item?: TransactionModel;
@@ -67,12 +74,31 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
-          <Button
-            type="text"
-            shape="circle"
-            icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
-            size="small"
-          />
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                type="text"
+                shape="circle"
+                icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
+                size="small"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <span className="cursor-pointer">View info</span>
+                </DropdownMenuItem>
+                {/* <DropdownMenuItem>
+                          <span className="cursor-pointer">Invite</span>
+                        </DropdownMenuItem> */}
+              </DropdownMenuGroup>
+              {/* <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <span className="cursor-pointer">Envoice</span>
+              </DropdownMenuItem> */}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
           <div className="mt-1 pt-1 lg:hidden">
             <p className="inline-flex text-sm font-bold dark:text-white">
               <SerialPrice

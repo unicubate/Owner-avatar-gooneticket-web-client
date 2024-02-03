@@ -1,4 +1,5 @@
 import { CreateOrUpdateOneCommissionAPI } from '@/api-site/commission';
+import { GetAllDiscountsAPI } from '@/api-site/discount';
 import { CommissionFormModel } from '@/types/commission';
 import {
   AlertDangerNotification,
@@ -7,10 +8,13 @@ import {
 import { filterImageAndFile } from '@/utils/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
+import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
@@ -35,12 +39,17 @@ const schema = yup.object({
       return schema.min(1).required('limit slots required');
     return schema.nullable();
   }),
+  discountId: yup.string().when('enableDiscount', (enableDiscount, schema) => {
+    if (enableDiscount[0] === true) return schema.required('discount required');
+    return schema.nullable();
+  }),
 });
 
 const CreateOrUpdateFormCommission: React.FC<Props> = ({
   commission,
   uploadImages,
 }) => {
+  const { isOpen, setIsOpen } = useInputState();
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const router = useRouter();
@@ -60,7 +69,10 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const watchEnableLimitSlot = watch('enableLimitSlot', false);
+  const watchEnableDiscount = watch('enableDiscount', false);
   const watchPrice = watch('price', '');
+
+  const { data: discounts } = GetAllDiscountsAPI();
 
   useEffect(() => {
     if (commission) {
@@ -71,6 +83,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
         'enableLimitSlot',
         'limitSlot',
         'description',
+        'enableDiscount',
+        'discountId',
         'messageAfterPayment',
       ];
       fields?.forEach((field: any) => setValue(field, commission[field]));
@@ -254,6 +268,132 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     <label className="mb-2 block text-sm font-bold dark:text-white">
                       Advanced settings
                     </label>
+                  </div>
+                </div>
+
+                <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold text-gray-900 dark:text-white">
+                          {' '}
+                          Discount
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Apply a discount
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      name="enableDiscount"
+                      label=""
+                    />
+                  </div>
+                  {watchEnableDiscount ? (
+                    <>
+                      <div className="mb-2">
+                        <SelectDiscountSearchInput
+                          label="Discounts"
+                          firstOptionName="Discount"
+                          control={control}
+                          errors={errors}
+                          placeholder="Discount"
+                          name="discountId"
+                          dataItem={discounts}
+                        />
+                        <div className="flex items-center justify-between">
+                          <label
+                            htmlFor="discountId"
+                            className="mb-2 block text-sm dark:dark:text-white"
+                          ></label>
+                          <Link
+                            className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
+                            href="/shop/config"
+                          >
+                            Create discount
+                          </Link>
+                        </div>
+                      </div>
+                    </>
+                  ) : null}
+
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          {' '}
+                          Limit slots (optional){' '}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          A limited number of slots creates a sense of urgency
+                          and also saves you from burn-out.
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      name="enableLimitSlot"
+                      label=""
+                    />
+                  </div>
+                  {watchEnableLimitSlot ? (
+                    <div className="mb-1">
+                      <TextInput
+                        label=""
+                        control={control}
+                        type="number"
+                        name="limitSlot"
+                        placeholder="10"
+                        errors={errors}
+                        required
+                      />
+                    </div>
+                  ) : null}
+
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          {' '}
+                          Special price for members{' '}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Offer a discounted extra price to attract new members
+                          and to keep your current members engaged.
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      name="allowChooseInventory"
+                      label=""
+                    />
+                  </div>
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          {' '}
+                          Allow buyer to choose a quantity{' '}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Your supporters will be able to select the desired
+                          quantity of this item. You will receive payment based
+                          on the quantity they choose multiplied by your set
+                          price.
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      name="enableChooseQuantity"
+                      label=""
+                    />
                   </div>
                 </div>
 

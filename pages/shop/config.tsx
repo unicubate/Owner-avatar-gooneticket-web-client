@@ -2,7 +2,7 @@ import { GetInfiniteCategoriesAPI } from '@/api-site/category';
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateCategory } from '@/components/category/create-or-update-category';
 import { ListCategories } from '@/components/category/list-categories';
-import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { CreateOrUpdateDiscountModal } from '@/components/discount/create-or-update-discount-modal';
 import { ListDiscounts } from '@/components/discount/list-discounts';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
@@ -183,7 +183,7 @@ const Configs = () => {
                 <div className="mt-8 flow-root">
                   <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
                     {showModal ? (
-                      <CreateOrUpdateDiscount
+                      <CreateOrUpdateDiscountModal
                         showModal={showModal}
                         setShowModal={setShowModal}
                       />

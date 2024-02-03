@@ -1,6 +1,6 @@
-import { DatePicker, Input } from "antd";
-import dayjs from "dayjs";
-import { Control, Controller } from "react-hook-form";
+import { DatePicker } from 'antd';
+import dayjs from 'dayjs';
+import { Control, Controller } from 'react-hook-form';
 
 interface Props {
   control: Control<any>;
@@ -12,18 +12,18 @@ interface Props {
 
 const DateInput: React.FC<Props> = ({
   control,
-  label = "",
+  label = '',
   name,
   errors,
-  placeholder = "",
+  placeholder = '',
 }) => {
   return (
     <>
-      {label ? <label
-        className="mb-2 block text-sm font-bold text-gray-700"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label className="mb-2 block text-sm font-bold" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}
@@ -32,14 +32,15 @@ const DateInput: React.FC<Props> = ({
             picker="date"
             size="large"
             format="DD/MM/YYYY"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             id={name}
+            className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500 ${errors?.[name]?.message ? 'border-red-500' : ''}`}
             placeholder={placeholder}
             value={dayjs(field.value ?? new Date())}
             onChange={(value) => {
               field.onChange(value);
             }}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
           />
         )}
       />

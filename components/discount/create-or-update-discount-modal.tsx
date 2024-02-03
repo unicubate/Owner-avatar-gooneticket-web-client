@@ -16,7 +16,7 @@ const schema = yup.object({
   expiredAt: yup.date().min(new Date()).nullable(),
 });
 
-const CreateOrUpdateDiscount: React.FC<{
+const CreateOrUpdateDiscountModal: React.FC<{
   showModal: boolean;
   setShowModal: any;
   discount?: any;
@@ -32,7 +32,6 @@ const CreateOrUpdateDiscount: React.FC<{
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-
   const watchEnableExpiredAt = watch('enableExpiredAt', false);
 
   useEffect(() => {
@@ -51,7 +50,7 @@ const CreateOrUpdateDiscount: React.FC<{
   }, [discount, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOneDiscountAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneDiscountAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -68,7 +67,7 @@ const CreateOrUpdateDiscount: React.FC<{
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation.mutateAsync({
+      await saveMutation({
         ...payload,
         discountId: discount?.id,
       });
@@ -213,4 +212,4 @@ const CreateOrUpdateDiscount: React.FC<{
   );
 };
 
-export { CreateOrUpdateDiscount };
+export { CreateOrUpdateDiscountModal };

@@ -1,5 +1,5 @@
 import { GetInfiniteContributorsAPI } from '@/api-site/contributor';
-import { CreateContributor } from '@/components/contributor/create-contributor';
+import { CreateContributorModal } from '@/components/contributor/create-contributor-modal';
 import { ListContributors } from '@/components/contributor/list-contributors';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
@@ -64,7 +64,7 @@ const ContributorsIndex = () => {
               <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
-                    <CreateContributor
+                    <CreateContributorModal
                       buttonDialog={
                         <ButtonInput
                           type="button"

@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import Swal from 'sweetalert2';
-import { CreateOrUpdateDiscount } from './create-or-update-discount';
+import { CreateOrUpdateDiscountModal } from './create-or-update-discount-modal';
 
 const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
@@ -106,7 +106,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
       </div>
 
       {showModal ? (
-        <CreateOrUpdateDiscount
+        <CreateOrUpdateDiscountModal
           showModal={showModal}
           setShowModal={setShowModal}
           discount={item}

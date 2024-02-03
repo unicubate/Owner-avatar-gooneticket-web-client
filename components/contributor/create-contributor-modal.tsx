@@ -10,7 +10,7 @@ import { Tabs, TabsContent } from '@/components/ui/tabs';
 
 import { SearchInput } from '../ui-setting';
 
-const CreateContributor: React.FC<{
+const CreateContributorModal: React.FC<{
   showModal: boolean;
   setShowModal: any;
   buttonDialog: React.ReactNode;
@@ -100,4 +100,4 @@ const CreateContributor: React.FC<{
   );
 };
 
-export { CreateContributor };
+export { CreateContributorModal };

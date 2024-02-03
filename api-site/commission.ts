@@ -35,6 +35,8 @@ export const CreateOrUpdateOneCommissionAPI = ({
       data.append('enableLimitSlot', `${payload.enableLimitSlot ?? ''}`);
       data.append('limitSlot', `${payload.limitSlot ?? ''}`);
       data.append('description', `${payload.description ?? ''}`);
+      data.append('enableDiscount', `${payload.enableDiscount ?? ''}`);
+      data.append('discountId', `${payload.discountId ?? ''}`);
       data.append(
         'messageAfterPayment',
         `${payload.messageAfterPayment ?? ''}`,

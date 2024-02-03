@@ -1,5 +1,5 @@
 import { GetInfiniteDiscountsAPI } from '@/api-site/discount';
-import { CreateOrUpdateDiscount } from '@/components/discount/create-or-update-discount';
+import { CreateOrUpdateDiscountModal } from '@/components/discount/create-or-update-discount-modal';
 import { ListDiscounts } from '@/components/discount/list-discounts';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
@@ -110,7 +110,7 @@ const Configs = () => {
                     <div className="mt-8 flow-root">
                       <div className="-my-5 divide-y divide-gray-100">
                         {showModal ? (
-                          <CreateOrUpdateDiscount
+                          <CreateOrUpdateDiscountModal
                             showModal={showModal}
                             setShowModal={setShowModal}
                           />
