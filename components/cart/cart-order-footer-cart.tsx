@@ -23,7 +23,6 @@ const CartOrderFooterCart: React.FC<{
     organizationId: user?.organizationId,
   });
 
-  console.log('carts ====>', carts);
   return (
     <>
       {carts?.summary?.totalQuantity && (
@@ -55,9 +54,7 @@ const CartOrderFooterCart: React.FC<{
                         type="button"
                         size="lg"
                         variant="info"
-                        onClick={() =>
-                          push(`/${user?.username}/summary/${cartOrder?.id}`)
-                        }
+                        onClick={() => push(`/checkouts/${cartOrder?.id}/shop`)}
                       >
                         Checkout
                       </ButtonInput>

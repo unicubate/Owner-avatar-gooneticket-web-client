@@ -12,9 +12,20 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CiGift, CiShop, CiUnlock, CiWallet } from 'react-icons/ci';
 
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
 const Dashboard = () => {
   const t = useTranslations();
-  const [dayCount, setDayCount] = useState(30);
+  const [openDrop, setOpenDrop] = useState(false);
+  const [dayCount, setDayCount] = useState(-1);
   const user = useAuth() as any;
 
   const {
@@ -44,6 +55,10 @@ const Dashboard = () => {
   const transactionProduct = transactions?.find(
     (item) => item.model === 'PRODUCT',
   );
+
+  const handleDaysChange = (newDays: number) => {
+    setDayCount(newDays);
+  };
 
   return (
     <>
@@ -123,9 +138,55 @@ const Dashboard = () => {
                             Last {dayCount} days
                           </span>
                         </Button> */}
-                    <ButtonInput type="button" size="sm" variant="outline">
+                    {/* <ButtonInput type="button" size="sm" variant="outline">
                       {t('last_time_days', { day: dayCount })}
-                    </ButtonInput>
+                    </ButtonInput> */}
+
+                    {/* <div className="mx-auto max-w-xs"> */}
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button type="button" size="sm" variant="outline">
+                          {dayCount > 0
+                            ? `${t('last_time_days', { day: dayCount })}`
+                            : 'All time'}
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-20 dark:border-gray-800 dark:bg-[#1c1b22]">
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              handleDaysChange(-1), setOpenDrop(false);
+                            }}
+                          >
+                            <span className="cursor-pointer">All time</span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem
+                            onClick={() => {
+                              handleDaysChange(30), setOpenDrop(false);
+                            }}
+                          >
+                            <span className="cursor-pointer">
+                              {t('last_time_days', { day: 30 })}
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => {
+                            handleDaysChange(120), setOpenDrop(false);
+                          }}
+                        >
+                          <span className="cursor-pointer">
+                            {' '}
+                            {t('last_time_days', { day: 120 })}{' '}
+                          </span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                    {/* </div> */}
                   </div>
                 </div>
               </div>

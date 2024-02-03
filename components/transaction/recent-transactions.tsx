@@ -30,6 +30,7 @@ const RecentTransactions: React.FC<Props> = ({
     take: 10,
     sort: 'DESC',
     queryKey: ['recent-transactions', 'infinite'],
+    days,
   });
 
   const dataTableTransactions = isLoadingTransaction ? (

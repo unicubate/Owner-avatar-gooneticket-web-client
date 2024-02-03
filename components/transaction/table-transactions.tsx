@@ -37,6 +37,7 @@ const TableTransactions: React.FC<Props> = ({
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: 'DESC',
+    days,
     queryKey: ['transactions', 'infinite'],
   });
 

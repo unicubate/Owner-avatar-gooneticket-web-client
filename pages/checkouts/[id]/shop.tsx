@@ -16,11 +16,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-const Summary = () => {
+const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
-  const cartOrderId = String(query?.cartOrderId);
+  const cartOrderId = String(query?.id);
   const username = String(query?.username);
 
   const { status: statusUser, data: user } = GetOneUserPublicAPI({
@@ -303,7 +303,7 @@ const Summary = () => {
   );
 };
 
-export default PrivateComponent(Summary);
+export default PrivateComponent(CheckoutShop);
 
 export async function getStaticPaths() {
   return {

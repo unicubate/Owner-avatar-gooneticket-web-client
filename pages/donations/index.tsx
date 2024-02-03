@@ -29,7 +29,7 @@ import {
 
 const Donations = () => {
   const user = useAuth() as any;
-  const [days, setDays] = useState(30);
+  const [days, setDays] = useState(-1);
   const [openDrop, setOpenDrop] = useState(false);
 
   const debouncedFilter = useDebounce(days, 100);
@@ -49,10 +49,6 @@ const Donations = () => {
     setDays(newDays);
   };
 
-  // useEffect(() => {
-  //   handleDaysChange(days);
-  // }, [days, debouncedFilter]);
-
   if (isPending) {
     return '';
   }
@@ -61,7 +57,7 @@ const Donations = () => {
     return <span>Error: {error.message}</span>;
   }
 
-  const transaction = transactions?.find((item) => item.model === 'DONATION');
+  const transaction = transactions?.find((item) => item?.model === 'DONATION');
 
   return (
     <>
@@ -78,23 +74,31 @@ const Donations = () => {
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button type="button" size="sm" variant="outline">
-                            Last {days} days
+                            {days > 0 ? `Last ${days} days` : 'All time'}
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-10 dark:border-gray-800 dark:bg-[#1c1b22]">
+                          {' '}
                           <DropdownMenuGroup>
                             <DropdownMenuItem
                               onClick={() => {
-                                handleDaysChange(2), setOpenDrop(false);
+                                handleDaysChange(-1), setOpenDrop(false);
+                              }}
+                            >
+                              <span className="cursor-pointer">All time</span>
+                            </DropdownMenuItem>
+                          </DropdownMenuGroup>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuGroup>
+                            <DropdownMenuItem
+                              onClick={() => {
+                                handleDaysChange(30), setOpenDrop(false);
                               }}
                             >
                               <span className="cursor-pointer">
-                                Last 2 days
+                                Last 30 days
                               </span>
                             </DropdownMenuItem>
-                            {/* <DropdownMenuItem>
-                          <span className="cursor-pointer">Invite</span>
-                        </DropdownMenuItem> */}
                           </DropdownMenuGroup>
                           <DropdownMenuSeparator />
                           <DropdownMenuItem
@@ -109,34 +113,6 @@ const Donations = () => {
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
-
-                      {/* {openDrop && (
-                        <div className="relative z-10 mt-2 w-full">
-                          <div className="block w-full space-y-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm shadow dark:border-gray-800 dark:bg-[#121212]">
-                            <ul className="flex flex-col">
-                              <li
-                                onClick={() => {
-                                  handleDaysChange(2), setOpenDrop(false);
-                                }}
-                                className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-                              >
-                                Last 2 days
-                              </li>
-                              <li
-                                onClick={() => {
-                                  handleDaysChange(120), setOpenDrop(false);
-                                }}
-                                className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600"
-                              >
-                                Last 120 days
-                              </li>
-                              <li className="w-full cursor-pointer rounded-md p-2 hover:bg-gray-100 dark:hover:bg-gray-600">
-                                All time
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      )} */}
                     </div>
                   </div>
                 </div>
@@ -159,7 +135,7 @@ const Donations = () => {
                 <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      Last {days} days
+                      {days > 0 ? `Last ${days} days` : 'All time'}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <p className="text-xl font-bold text-gray-900 dark:text-white">
@@ -202,6 +178,7 @@ const Donations = () => {
               {user?.organizationId ? (
                 <TableTransactions
                   model="DONATION"
+                  days={debouncedFilter}
                   organizationId={user?.organizationId}
                 />
               ) : null}
