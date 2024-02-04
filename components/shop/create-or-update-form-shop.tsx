@@ -151,7 +151,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
       if (product?.id) {
         refetch();
       } else {
-        back();
+        push(`/shop/extras`);
       }
       setHasErrors(false);
       setLoading(false);

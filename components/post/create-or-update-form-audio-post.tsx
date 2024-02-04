@@ -46,7 +46,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
   uploadFiles,
   uploadImages,
 }) => {
-  const { back } = useRouter();
+  const { back, push } = useRouter();
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
 
@@ -132,7 +132,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
       if (post.id) {
         refetch();
       } else {
-        back();
+        push(`/posts`);
       }
     } catch (error: any) {
       setHasErrors(true);
