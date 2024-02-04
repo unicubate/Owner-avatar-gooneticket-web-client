@@ -217,49 +217,6 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   </DropdownMenu>
                 </div>
               ) : null}
-
-              {/* <div className="relative">
-                {user?.profile ? (
-                  <>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button
-                          type="button"
-                          className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
-                        >
-                          <AvatarComponent
-                            className="size-9"
-                            profile={user?.profile}
-                          />
-                          <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
-                            {user?.profile?.firstName} {user?.profile?.lastName}
-                          </p>
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/dashboard`)}>
-                            <span className="cursor-pointer">
-                              {t('dashboard')}
-                            </span>
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => push(`/contributors`)}
-                          >
-                            <span className="cursor-pointer">
-                              {t('contributor')}
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => logoutUser()}>
-                          <span className="cursor-pointer">{t('logout')}</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </>
-                ) : null}
-              </div> */}
             </div>
           </div>
         </div>

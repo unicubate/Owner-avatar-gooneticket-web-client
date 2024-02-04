@@ -3,6 +3,9 @@ import Head from 'next/head';
 import { useAuth } from '../util/context-user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { useInputState } from '../hooks';
+import { VerticalNavUserPublicSite } from './vertical-nav-user-public-site';
 interface IProps {
   user: UserModel;
   title: string;
@@ -11,6 +14,10 @@ interface IProps {
 
 const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
   const { theme } = useAuth() as any;
+  const { isOpen, setIsOpen } = useInputState();
+  const showDrawer = () => {
+    setIsOpen((i) => !i);
+  };
   // const user = useAuth() as any;
 
   return (
@@ -21,18 +28,28 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
         </title>
       </Head>
 
-      {/* <div className="min-h-screen space-y-5"> */}
-      {user?.id ? <HorizontalNavUserPublicSite user={user} /> : null}
+      {user?.id ? (
+        <HorizontalNavUserPublicSite showDrawer={showDrawer} user={user} />
+      ) : null}
+
+      {/* Fix Drawer */}
+      <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
+        <SheetTrigger asChild>
+          {/* <Button variant="outline">Open</Button> */}
+        </SheetTrigger>
+        <SheetContent className="dark:border-gray-800 dark:bg-[#1c1b22]">
+          <div className="flex flex-col overflow-y-auto pt-5">
+            <VerticalNavUserPublicSite user={user} />
+          </div>
+        </SheetContent>
+      </Sheet>
+      {/*End Fix Drawer */}
 
       <main>
         <div className="mx-auto mb-10 lg:flex">
-          {user?.profile?.id && theme ? (
-            <div
-              className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#232325]`}
-            >
-              {children}
-            </div>
-          ) : null}
+          <div className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#232325]`}>
+            {children}
+          </div>
         </div>
       </main>
       {/* </div> */}

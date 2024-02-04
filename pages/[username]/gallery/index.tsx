@@ -4,7 +4,6 @@ import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
-import { SubHorizontalNavPublicUser } from '@/components/user/sub-horizontal-nav-public-user';
 import { useAuth } from '@/components/util/context-user';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -35,7 +34,7 @@ const GalleryUserPublic = () => {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-full py-6">
-              {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null}
+              {/* {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null} */}
 
               <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
                 {user?.id && user?.profile.enableGallery ? (
