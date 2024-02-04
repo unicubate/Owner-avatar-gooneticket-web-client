@@ -44,7 +44,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
   postId,
   albumId,
 }) => {
-  const router = useRouter();
+  const { push, back } = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const {
@@ -122,7 +122,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       if (post?.id) {
         refetch();
       } else {
-        router.push(`/gallery`);
+        push(`/posts`);
       }
     } catch (error: any) {
       setHasErrors(true);
@@ -291,7 +291,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
                       className="w-full"
                       size="lg"
                       variant="outline"
-                      onClick={() => router.back()}
+                      onClick={() => back()}
                     >
                       Cancel
                     </ButtonInput>

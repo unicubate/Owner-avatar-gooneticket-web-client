@@ -5,7 +5,6 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Upload, UploadFile, UploadProps } from 'antd';
-import ImgCrop from 'antd-img-crop';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -129,7 +128,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
       AlertSuccessNotification({
         text: 'Post save successfully',
       });
-      if (post.id) {
+      if (post?.id) {
         refetch();
       } else {
         push(`/posts`);
@@ -169,26 +168,22 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                     render={({ field: { onChange } }) => (
                       <>
                         <div className="mx-auto justify-center text-center">
-                          <ImgCrop rotationSlider>
-                            <Upload
-                              multiple
-                              name="attachmentImages"
-                              listType="picture-card"
-                              fileList={imageList}
-                              onChange={handleImageChange}
-                              accept=".png,.jpg,.jpeg"
-                              maxCount={1}
-                            >
-                              {imageList.length >= 1 ? null : (
-                                <div className="text-center text-black dark:text-white">
-                                  <PlusOutlined />
-                                  <div style={{ marginTop: 8 }}>
-                                    Upload cover
-                                  </div>
-                                </div>
-                              )}
-                            </Upload>
-                          </ImgCrop>
+                          <Upload
+                            multiple
+                            name="attachmentImages"
+                            listType="picture-card"
+                            fileList={imageList}
+                            onChange={handleImageChange}
+                            accept=".png,.jpg,.jpeg"
+                            maxCount={1}
+                          >
+                            {imageList.length >= 1 ? null : (
+                              <div className="text-center text-black dark:text-white">
+                                <PlusOutlined />
+                                <div style={{ marginTop: 8 }}>Upload cover</div>
+                              </div>
+                            )}
+                          </Upload>
                         </div>
                       </>
                     )}
