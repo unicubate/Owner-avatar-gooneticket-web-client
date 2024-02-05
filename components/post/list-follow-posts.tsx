@@ -10,7 +10,6 @@ import React from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import { BiConversation } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
-import { HiOutlineLockClosed } from 'react-icons/hi';
 import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
@@ -65,53 +64,34 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
 
             <div className="ml-auto">
-              <div className="flex items-center space-x-2 sm:ml-5">
-                {item?.whoCanSee === 'MEMBERSHIP' &&
-                item?.isValidSubscribe !== 1 ? (
-                  <ButtonInput
-                    onClick={() =>
-                      push(`/${item?.profile?.username}/memberships`)
-                    }
-                    type="button"
-                    variant="danger"
-                    icon={<HiOutlineLockClosed className="size-5" />}
-                  >
-                    <span className="ml-1 font-bold">Join membership</span>
-                  </ButtonInput>
-                ) : null}
-
-                {/* refaire un refactoring de ce code ci dessous */}
-                <CopyShareLink
-                  isOpen={isOpen}
-                  setIsOpen={setIsOpen}
-                  link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
-                  buttonDialog={
-                    <ButtonInput
-                      className="ml-2 text-gray-600 hover:text-gray-400 focus:ring-gray-900"
-                      variant="link"
-                      type="button"
-                    >
-                      <IoShareOutline className="size-6" />
-                    </ButtonInput>
+              {/* {item?.whoCanSee === 'MEMBERSHIP' &&
+              item?.isValidSubscribe !== 1 ? (
+                <ButtonInput
+                  onClick={() =>
+                    push(`/${item?.profile?.username}/memberships`)
                   }
-                />
-                {/* {item?.allowDownload && (
-                  <button
-                    title="Download"
-                    onClick={() => {
-                      router.push(
-                        `${downloadOneFileUploadAPI({
-                          folder: "posts",
-                          fileName: item?.uploadsImage[0]?.path,
-                        })}`
-                      );
-                    }}
-                    className="ml-2 text-gray-600 hover:text-gray-900 focus:ring-gray-900"
+                  type="button"
+                  variant="danger"
+                  icon={<HiOutlineLockClosed className="size-5" />}
+                >
+                  <span className="ml-1 font-bold">Join membership</span>
+                </ButtonInput>
+              ) : null} */}
+
+              <CopyShareLink
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+                buttonDialog={
+                  <ButtonInput
+                    className="ml-2 text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                    variant="link"
+                    type="button"
                   >
-                    <FiDownload className="w-5 h-5" />
-                  </button>
-                )} */}
-              </div>
+                    <IoShareOutline className="size-6" />
+                  </ButtonInput>
+                }
+              />
             </div>
           </div>
 
@@ -207,19 +187,12 @@ const ListFollowPosts: React.FC<Props> = ({
             <div
               className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
             >
-              <span
-                className={`ql-editor ${
-                  item?.whoCanSee === 'MEMBERSHIP' &&
-                  item?.isValidSubscribe !== 1
-                    ? 'blur-lg'
-                    : ''
-                }`}
-              >
-                <HtmlParser
-                  html={String(item?.description ?? '')}
-                  value={item?.isValidSubscribe !== 1 ? 600 : 0}
-                />
-              </span>
+              {['MEMBERSHIP'].includes(item?.whoCanSee) &&
+              item?.isValidSubscribe !== 1 ? null : (
+                <span className={`ql-editor`}>
+                  <HtmlParser html={String(item?.description ?? '')} />
+                </span>
+              )}
             </div>
           ) : null}
 
