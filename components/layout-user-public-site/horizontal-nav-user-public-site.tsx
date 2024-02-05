@@ -2,12 +2,8 @@ import { UserModel } from '@/types/user.type';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { BiCoffeeTogo } from 'react-icons/bi';
 import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
-import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
-import { ButtonInput } from '../ui-setting';
-import { ThemeToggle } from '../ui-setting/theme-toggle';
 import { logoutUser, useAuth } from '../util/context-user';
 
 import { Button } from '@/components/ui/button';
@@ -21,6 +17,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
+import { ThemeToggle } from '../ui-setting';
 
 interface Props {
   user?: UserModel;
@@ -156,67 +154,63 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
             </nav>
 
             <div className="flex items-center justify-end ml-auto space-x-6">
-              <div className="relative">
+              <div className="flex items-center">
                 <ThemeToggle />
-              </div>
-
-              {userVisiter?.id !== user?.id ? (
-                <>
-                  <ButtonInput
-                    // color={user?.profile?.color as ColorType}
-                    type="button"
-                    variant="info"
-                    onClick={() => setOpenModal(true)}
-                    icon={<BiCoffeeTogo className="mr-2 size-5" />}
-                  >
-                    Donate
-                  </ButtonInput>
-                  <CreateOrUpdateFormFollow item={user} />
-                </>
-              ) : null}
-              {userVisiter?.id ? (
-                <div className="-m-2 flex items-center">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button
-                        variant="link"
-                        className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
-                      >
-                        <svg
-                          className="size-6"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          stroke-width="2"
+                {userVisiter?.id !== user?.id ? (
+                  <>
+                    {/* <ButtonInput
+                      // color={user?.profile?.color as ColorType}
+                      type="button"
+                      variant="info"
+                      onClick={() => setOpenModal(true)}
+                      //icon={<BiCoffeeTogo className="mr-2 size-5" />}
+                    >
+                      Donate
+                    </ButtonInput> */}
+                    <CreateOrUpdateFormFollow item={user} />
+                  </>
+                ) : null}
+                {userVisiter?.id ? (
+                  <>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button
+                          variant="link"
+                          className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M4 6h16M4 12h16M4 18h16"
-                          />
-                        </svg>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem onClick={() => push(`/dashboard`)}>
-                          <span className="cursor-pointer">
-                            {t('dashboard')}
-                          </span>
+                          <svg
+                            className="size-6"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M4 6h16M4 12h16M4 18h16"
+                            />
+                          </svg>
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem onClick={() => push(`/dashboard`)}>
+                            <span className="cursor-pointer">
+                              {t('dashboard')}
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => logoutUser()}>
+                          <span className="cursor-pointer">{t('logout')}</span>
                         </DropdownMenuItem>
-                        {/* <DropdownMenuItem>
-                          <span className="cursor-pointer">Invite</span>
-                        </DropdownMenuItem> */}
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => logoutUser()}>
-                        <span className="cursor-pointer">{t('logout')}</span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-              ) : null}
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>
