@@ -55,7 +55,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
               </Button>
             </div>
 
-            <div className="flex ml-6 xl:ml-0">
+            <div className="flex ml-2 xl:ml-0">
               <div className="flex items-center flex-shrink-0">
                 <div className="block w-auto h-8 lg:hidden">
                   <div className="flex items-center">
@@ -86,7 +86,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end ml-auto space-x-6">
+            <div className="flex items-center justify-end ml-auto">
               <div className="relative">
                 <ThemeToggle />
               </div>
@@ -104,7 +104,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <p className="ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                          <p className="hidden w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white lg:block">
                             {user?.profile?.firstName} {user?.profile?.lastName}
                           </p>
                         </button>
