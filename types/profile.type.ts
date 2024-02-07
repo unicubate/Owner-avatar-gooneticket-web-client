@@ -1,10 +1,10 @@
-import { NextStep } from "./user.type";
+import { NextStep } from './user.type';
 
-export type ColorType = "indigo" | "red" | "sky";
+export type ColorType = 'indigo' | 'red' | 'sky';
 
 export const arrayColors = [
-  { id: "2", name: "indigo" },
-  { id: "3", name: "red" },
+  { id: '2', name: 'indigo' },
+  { id: '3', name: 'red' },
   // { id: "4", name: "green" },
 ];
 
@@ -60,4 +60,22 @@ export type CurrencyModel = {
   code: string;
   symbol: string;
   amount: number;
+};
+
+export type ProfileItemModel = {
+  id: string;
+  url: string;
+  color: ColorType;
+  email: string;
+  image: string;
+  username: string;
+  userId: string;
+  fullName: string;
+  description: string;
+  enableShop: boolean;
+  galleryShop: boolean;
+  enableCommission: boolean;
+  lastName: string;
+  firstName: string;
+  countryId: string;
 };

@@ -2,7 +2,8 @@ import {
   ModelType,
   PaginationResponse,
   PaymentType,
-} from "@/utils/pagination-item";
+} from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseTransactionModel = {
   value: Array<TransactionModel>;
@@ -47,28 +48,6 @@ export type TransactionModel = {
     id: string;
     title: string;
   };
-  profileSend: {
-    id: string;
-    url: string;
-    email: string;
-    color: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    firstName: string;
-    lastName: string;
-    countryId: string;
-  };
-  profileReceive: {
-    id: string;
-    url: string;
-    email: string;
-    color: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    firstName: string;
-    lastName: string;
-    countryId: string;
-  };
+  profileSend: ProfileItemModel;
+  profileReceive: ProfileItemModel;
 };

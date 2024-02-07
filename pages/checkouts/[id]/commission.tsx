@@ -21,7 +21,7 @@ const CheckoutCommission = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
-  const commissionId = String(query?.id);
+  const { id: commissionId, username } = query;
   const {
     watch,
     control,
@@ -30,7 +30,7 @@ const CheckoutCommission = () => {
   } = useForm();
   const watchAmount = watch('amount', '');
   const { status, data: item } = GetOneCommissionAPI({
-    commissionId,
+    commissionId: String(commissionId),
   });
 
   const newAmount = watchAmount
@@ -110,7 +110,7 @@ const CheckoutCommission = () => {
                         <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
                           <Link
                             className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                            href={`/${item?.profile?.username}/commissions`}
+                            href={`/${username}/commissions`}
                           >
                             Commission
                           </Link>

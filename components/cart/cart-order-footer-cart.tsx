@@ -54,7 +54,11 @@ const CartOrderFooterCart: React.FC<{
                         type="button"
                         size="lg"
                         variant="info"
-                        onClick={() => push(`/checkouts/${cartOrder?.id}/shop`)}
+                        onClick={() =>
+                          push(
+                            `/checkouts/${cartOrder?.id}/shop?username=${cartOrder?.profileVendor?.username}`,
+                          )
+                        }
                       >
                         Checkout
                       </ButtonInput>

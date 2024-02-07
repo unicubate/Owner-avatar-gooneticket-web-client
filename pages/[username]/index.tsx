@@ -35,10 +35,10 @@ const ProfilePublic = () => {
             <div className="mx-auto max-w-full py-6">
               {/* {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null} */}
 
-              <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
-                <div className="flow-root">
-                  <div className="mx-auto sm:px-6 md:px-8">
-                    {user?.profile?.description && (
+              {user?.id ? (
+                <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
+                  <div className="flow-root">
+                    <div className="mx-auto sm:px-6 md:px-8">
                       <div className="mt-2 overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
                         <div className="p-8 sm:p-4">
                           <div className="flex items-center">
@@ -56,29 +56,27 @@ const ProfilePublic = () => {
                           </div>
                         </div>
                       </div>
-                    )}
 
-                    <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
-                      <div className="p-6 sm:p-4">
-                        <div className="flex items-center">
-                          {user?.id ? (
+                      <div className="mt-4 overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
+                        <div className="p-6 sm:p-4">
+                          <div className="flex items-center">
                             <CreateFormPublicDonation user={user} />
-                          ) : null}
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {user?.donation?.count > 0 ? (
-                      <RecentCommentTransactions
-                        model="DONATION"
-                        modelIds={['DONATION']}
-                        userReceiveId={user?.id}
-                        organizationId={user?.organizationId}
-                      />
-                    ) : null}
+                      {user?.donation?.count > 0 ? (
+                        <RecentCommentTransactions
+                          model="DONATION"
+                          modelIds={['DONATION']}
+                          userReceiveId={user?.id}
+                          organizationId={user?.organizationId}
+                        />
+                      ) : null}
+                    </div>
                   </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>

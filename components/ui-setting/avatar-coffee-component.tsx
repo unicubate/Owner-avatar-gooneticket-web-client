@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { BiCoffeeTogo } from 'react-icons/bi';
 
 interface Props {
@@ -13,7 +14,7 @@ const AvatarCoffeeComponent: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <BiCoffeeTogo className={`${className} text-blue-400`} />
+      <BiCoffeeTogo className={cn('text-blue-400', className)} />
     </>
   );
 };

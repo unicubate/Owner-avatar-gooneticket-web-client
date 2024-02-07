@@ -1,4 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseContributorModel = {
   value: Array<ContributorModel>;
@@ -17,16 +18,7 @@ export type ContributorModel = {
   userId: string;
   type: ModelType;
   userCreatedId: string;
-  profile: {
-    username: string;
-    color: string;
-    email: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
   role: {
     name: ContributorRole;
   };

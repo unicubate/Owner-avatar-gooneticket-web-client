@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 import { Control, Controller } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
@@ -13,6 +14,7 @@ interface Props {
   control: Control<any>;
   dataItem: any;
   label?: string;
+  className?: string;
   name: string;
   errors: { [key: string]: any };
   placeholder?: string;
@@ -27,6 +29,7 @@ const SelectInput: React.FC<Props> = ({
   label = '',
   name,
   errors,
+  className,
   placeholder = '',
   valueType,
   allowClear,
@@ -52,7 +55,7 @@ const SelectInput: React.FC<Props> = ({
               <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className={cn('dark:border-gray-800', className)}>
                 <SelectGroup>
                   {dataItem?.length > 0 ? (
                     dataItem?.map((item: any, index: number) => (

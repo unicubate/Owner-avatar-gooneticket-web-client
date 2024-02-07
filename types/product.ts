@@ -1,17 +1,17 @@
-import { PaginationResponse } from "@/utils/pagination-item";
-import { ColorType } from "./profile.type";
+import { PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export const arrayWhoCanSees = [
-  { id: "1", name: "PUBLIC" },
-  { id: "2", name: "MEMBERSHIP" },
+  { id: '1', name: 'PUBLIC' },
+  { id: '2', name: 'MEMBERSHIP' },
 ];
 
 export const arrayProductTypes = [
-  { id: "1", name: "PHYSICAL" },
-  { id: "2", name: "DIGITAL" },
+  { id: '1', name: 'PHYSICAL' },
+  { id: '2', name: 'DIGITAL' },
 ];
 
-export type ProductType = "DIGITAL" | "PHYSICAL";
+export type ProductType = 'DIGITAL' | 'PHYSICAL';
 
 export type ResponseProductModel = {
   value: Array<ProductModel>;
@@ -50,15 +50,7 @@ export type ProductModel = {
     slug: string;
     color: string;
   };
-  profile: {
-    color: ColorType;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    username: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
   uploadsImage: any;
   uploadsFile: any;
   discount: {

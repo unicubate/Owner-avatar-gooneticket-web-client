@@ -63,7 +63,6 @@ export const DeleteOneCartAPI = ({
     mutationFn: async (payload: { cartId: string }) => {
       const { cartId } = payload;
 
-      console.log('cardId ================>', cartId);
       return await makeApiCall({
         action: 'deleteOneCart',
         urlParams: { cartId },

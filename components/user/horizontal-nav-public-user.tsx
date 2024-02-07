@@ -1,7 +1,7 @@
-import React from "react";
-import { AvatarComponent } from "../ui-setting/ant/avatar-component";
-import { UserModel } from "@/types/user.type";
-import { useTranslations } from "next-intl";
+import { UserModel } from '@/types/user.type';
+import { useTranslations } from 'next-intl';
+import React from 'react';
+import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
 const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
   const t = useTranslations();
@@ -15,22 +15,26 @@ const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
         />
 
         <p className="mt-6 text-lg font-bold dark:text-white">
-          {user?.profile?.firstName ?? ""} {user?.profile?.lastName ?? ""}{" "}
+          {user?.profile?.firstName ?? ''} {user?.profile?.lastName ?? ''}{' '}
         </p>
         <p className="mt-2 text-sm font-medium text-gray-500">
           <span>
-            {user?.totalFollower ?? 0} {t("followers")}
+            {user?.totalFollower ?? 0} {t('followers')}
           </span>
           <span className="ml-2">
-            {user?.totalFollowing ?? 0} {t("followings")}
+            {user?.totalFollowing ?? 0} {t('followings')}
           </span>
         </p>
 
         {user?.totalSubscribe > 0 ? (
           <p className="mt-2 text-sm font-medium text-gray-500">
-            {user?.totalSubscribe} {t("subscribes")}
+            {user?.totalSubscribe} {t('subscribes')}
           </p>
         ) : null}
+
+        {/* <ButtonInput className="mt-4" type="button" variant="danger">
+          Free membership
+        </ButtonInput> */}
       </div>
     </>
   );

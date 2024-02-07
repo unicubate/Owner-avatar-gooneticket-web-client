@@ -69,19 +69,19 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            <p className="text-2xl text-gray-900 dark:text-white">
+            <p className="text-3xl text-gray-900 dark:text-white">
               {item?.priceDiscount ?? ''}
             </p>
-            <p className="ml-1 text-xl  text-gray-900 dark:text-white">
+            <p className="ml-1 text-lg  text-gray-900 dark:text-white">
               {item?.currency?.symbol ?? ''}
             </p>
 
             {item?.enableDiscount ? (
               <>
-                <p className="ml-2 text-lg text-gray-400 dark:text-white">
+                <p className="ml-2 text-lg text-red-500">
                   <del> {item?.price ?? ''} </del>
                 </p>
-                <p className="ml-1 text-lg text-gray-400 dark:text-white">
+                <p className="ml-1 text-lg text-red-500">
                   <del> {item?.currency?.symbol ?? ''} </del>
                 </p>
               </>
@@ -108,7 +108,11 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
           </div>
 
           <h3 className="duratin-200 mt-2 flex-1 text-sm font-bold text-gray-900 transition-all hover:text-blue-600 dark:text-white sm:text-base">
-            <Link href={`/shop/${item?.slug}`} title={item?.title}>
+            <Link
+              className="hover:text-blue-600"
+              href={`/shop/${item?.slug}`}
+              title={item?.title}
+            >
               <ReadMore html={String(item?.title ?? '')} value={60} />
             </Link>
           </h3>

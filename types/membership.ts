@@ -1,5 +1,5 @@
-import { PaginationResponse } from "@/utils/pagination-item";
-import { ColorType } from "./profile.type";
+import { PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseMembershipModel = {
   value: Array<MembershipModel>;
@@ -23,15 +23,7 @@ export type MembershipModel = {
     code: string;
     symbol: string;
   };
-  profile: {
-    color: ColorType;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    username: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
 };
 
 export type MembershipFormModel = {

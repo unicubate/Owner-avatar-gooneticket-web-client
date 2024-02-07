@@ -1,4 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseCommentModel = {
   value: Array<CommentModel>;
@@ -16,16 +17,7 @@ export type CommentModel = {
   email: string;
   userReceiveId: string;
   organizationId: string;
-  profile: {
-    username: string;
-    color: string;
-    email: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
 };
 
 export type CommentFormModel = {

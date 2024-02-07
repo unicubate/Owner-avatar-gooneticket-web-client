@@ -1,13 +1,14 @@
-import { PaginationResponse } from "@/utils/pagination-item";
+import { PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export const arrayWhoCanSees = [
-  { id: "1", name: "PUBLIC" },
-  { id: "2", name: "MEMBERSHIP" },
+  { id: '1', name: 'PUBLIC' },
+  { id: '2', name: 'MEMBERSHIP' },
 ];
 
-export type PostType = "AUDIO" | "VIDEO" | "ARTICLE" | "GALLERY";
+export type PostType = 'AUDIO' | 'VIDEO' | 'ARTICLE' | 'GALLERY';
 
-export type WhoCanSeeType = "PUBLIC" | "MEMBERSHIP";
+export type WhoCanSeeType = 'PUBLIC' | 'MEMBERSHIP';
 
 export type ResponsePostModel = {
   value: Array<PostModel>;
@@ -38,20 +39,7 @@ export type PostModel = {
     slug: string;
     color: string;
   };
-  profile: {
-    color: string;
-    email: string;
-    image: string;
-    username: string;
-    userId: string;
-    fullName: string;
-    description: string;
-    enableShop: boolean;
-    galleryShop: boolean;
-    enableCommission: boolean;
-    lastName: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
 };
 
 export type PostFormModel = {

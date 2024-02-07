@@ -71,7 +71,9 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                 variant="info"
                 onClick={() => {
                   userStorage?.id
-                    ? push(`/checkouts/${item?.id}/commission`)
+                    ? push(
+                        `/checkouts/${item?.id}/commission?username=${item?.profile?.username}`,
+                      )
                     : setIsOpen(true);
                 }}
               >

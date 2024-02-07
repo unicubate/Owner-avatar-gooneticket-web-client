@@ -23,7 +23,7 @@ const CheckoutMembership = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
-  const membershipId = String(query?.id);
+  const { id: membershipId, username } = query;
   const {
     watch,
     control,
@@ -32,7 +32,7 @@ const CheckoutMembership = () => {
   } = useForm();
   const watchAmount = watch('amount', '');
   const { status, data: item } = GetOneMembershipAPI({
-    membershipId,
+    membershipId: String(membershipId),
   });
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
@@ -151,7 +151,7 @@ const CheckoutMembership = () => {
                         <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
                           <Link
                             className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                            href={`/${item?.profile?.username}/memberships`}
+                            href={`/${username}/memberships`}
                           >
                             Membership
                           </Link>

@@ -1,4 +1,5 @@
 import { PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseCommissionModel = {
   value: Array<CommissionModel>;
@@ -24,16 +25,7 @@ export type CommissionModel = {
   };
   uploadsImage: any;
   uploadsFile: any;
-  profile: {
-    username: string;
-    color: string;
-    email: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
 };
 
 export type CommissionFormModel = {

@@ -3,7 +3,7 @@ module.exports = {
   reactStrictMode: false,
   eslint: { ignoreDuringBuilds: true },
   experimental: {
-    transpilePackages: ["ui"],
+    transpilePackages: ['ui'],
   },
 
   i18n: {
@@ -19,5 +19,4 @@ module.exports = {
     STRIPE_PUBLIC_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY,
     MEDIA_HOST: process.env.NEXT_PUBLIC_MEDIA_HOST ?? '',
   },
-  images: { domains: ['*'] },
 };

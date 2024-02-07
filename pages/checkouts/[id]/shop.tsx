@@ -1,7 +1,6 @@
 'use client';
 
 import { GetCartsAPI, GetOneCartOrderAPI } from '@/api-site/cart';
-import { GetOneUserPublicAPI } from '@/api-site/user';
 import { ListMiniCats } from '@/components/cart/list-mini-carts';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
@@ -21,16 +20,14 @@ const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage: userVisitor } = useAuth() as any;
   const { query, push } = useRouter();
-  const cartOrderId = String(query?.id);
-  const username = String(query?.username);
+  const { id: cartOrderId, username } = query;
 
-  const { status: statusUser, data: user } = GetOneUserPublicAPI({
-    username,
-    userVisitorId: userVisitor?.id,
-  });
-
-  const { status, data: cartOrder } = GetOneCartOrderAPI({
-    organizationId: user?.organizationId,
+  const {
+    isLoading: isLoadingCardOrder,
+    isError: isErrorCardOrder,
+    data: cartOrder,
+  } = GetOneCartOrderAPI({
+    organizationId: userVisitor?.organizationId,
   });
 
   const {
@@ -38,33 +35,36 @@ const CheckoutShop = () => {
     isError: isErrorCart,
     data: carts,
   } = GetCartsAPI({
-    cartOrderId: cartOrderId,
+    cartOrderId: String(cartOrderId),
     userId: cartOrder?.userId,
-    organizationId: user?.organizationId,
+    organizationId: userVisitor?.organizationId,
   });
 
-  const dataTableCarts = isLoadingCart ? (
-    <LoadingFile />
-  ) : isErrorCart ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again"
-    />
-  ) : (
-    carts?.cartItems.map((item, index: number) => (
-      <ListMiniCats item={item as any} key={index} index={index} />
-    ))
-  );
+  const dataTableCarts =
+    isLoadingCart || isLoadingCardOrder ? (
+      <LoadingFile />
+    ) : isErrorCart || isErrorCardOrder ? (
+      <ErrorFile
+        status="error"
+        title="404"
+        description="Error find data please try again"
+      />
+    ) : (
+      carts?.cartItems.length > 0 &&
+      carts?.cartItems.map((item, index: number) => (
+        <ListMiniCats item={item as any} key={index} index={index} />
+      ))
+    );
 
   const newAmount = {
     currency: carts?.cartItems[0]?.product?.currency?.code,
-    value: carts?.summary?.totalPrice,
+    value: carts?.summary?.totalPriceDiscount,
   };
 
-  if (Number(carts?.summary?.totalPrice) <= 0) {
+  if (Number(carts?.summary?.totalPriceDiscount) <= 0) {
     push(`${`/${username}/shop`}`);
   }
+
   return (
     <>
       <LayoutCheckoutSite title={`Checkout shop`}>
@@ -86,13 +86,13 @@ const CheckoutShop = () => {
                       <AvatarComponent
                         size={40}
                         className="size-10 shrink-0 rounded-full"
-                        profile={user?.profile}
+                        profile={carts?.cartItems[0]?.profileVendor}
                       />
 
                       <div className="ml-2 cursor-pointer">
                         <p className="text-sm font-bold">
-                          {user?.profile?.firstName ?? ''}{' '}
-                          {user?.profile?.lastName ?? ''}
+                          {carts?.cartItems[0]?.profileVendor?.firstName ?? ''}{' '}
+                          {carts?.cartItems[0]?.profileVendor?.lastName ?? ''}
                         </p>
                         <p className="mt-1 text-sm font-medium text-gray-500">
                           Checkout

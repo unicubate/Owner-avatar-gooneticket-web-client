@@ -1,4 +1,5 @@
-import { PaginationResponse } from "@/utils/pagination-item";
+import { PaginationResponse } from '@/utils/pagination-item';
+import { ProfileItemModel } from './profile.type';
 
 export type ResponseFollowModel = {
   value: Array<FollowModel>;
@@ -8,15 +9,5 @@ export type FollowModel = {
   id: string;
   createdAt: Date;
   followerId: string;
-  profile: {
-    color: string;
-    email: string;
-    username: string;
-    image: string;
-    userId: string;
-    fullName: string;
-    lastName: string;
-    firstName: string;
-  };
+  profile: ProfileItemModel;
 };
-

@@ -1,4 +1,5 @@
-import { ModelType, PaginationResponse } from "@/utils/pagination-item";
+import { ProfileItemModel } from './profile.type';
+import { UploadModel } from './upload';
 
 export type ResponseCartModel = {
   value: Array<CartModel>;
@@ -9,6 +10,7 @@ export type CartOrderModel = {
   id: string;
   userId: string;
   organizationId: string;
+  profileVendor: ProfileItemModel;
 };
 
 export type OneCartModel = {
@@ -19,6 +21,9 @@ export type OneCartModel = {
   userId: string;
   organizationId: string;
   priceTotalProduct: number;
+  profileVendor: ProfileItemModel;
+  uploadsImages: Array<UploadModel>;
+  uploadsFiles: Array<UploadModel>;
   product: {
     id: string;
     slug: string;
@@ -42,7 +47,7 @@ export type OneCartModel = {
 export type CartModel = {
   summary: {
     totalQuantity: number;
-    totalPrice: number;
+    totalPriceDiscount: number;
   };
   cartItems: OneCartModel[];
 };

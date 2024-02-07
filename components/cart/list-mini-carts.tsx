@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { DeleteOneCartAPI } from '@/api-site/cart';
+import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OneCartModel } from '@/types/cart';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { Image } from 'antd';
 import React from 'react';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 
@@ -33,15 +35,20 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
   return (
     <>
       <li className="flex py-7" key={index}>
-        {/* <div className="flex-shrink-0">
-          <Image
-            width={95}
-            height={95}
-            className="object-cover rounded-lg"
-            src={""}
-            alt=""
-          />
-        </div> */}
+        {item?.uploadsImages?.length > 0 ? (
+          <div className="flex-shrink-0">
+            <Image
+              width={80}
+              height={50}
+              preview={false}
+              src={`${viewOneFileUploadAPI({
+                folder: 'products',
+                fileName: item?.uploadsImages[0]?.path,
+              })}`}
+              alt=""
+            />
+          </div>
+        ) : null}
 
         <div className="relative ml-5 flex flex-1 flex-col justify-between">
           <div className="sm:grid sm:grid-cols-2 sm:gap-x-5">
@@ -55,8 +62,11 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
-              <p className="w-20 shrink-0 text-left text-base font-bold dark:text-white sm:order-2 sm:ml-8 sm:text-right">
-                {item?.product?.priceDiscount}{' '}
+              <p className="text-left font-bold text-gray-500 sm:ml-4 sm:text-right">
+                {item?.product?.priceDiscount} x {item?.quantity}{' '}
+              </p>
+              <p className="text-left font-bold sm:ml-4 sm:text-right">
+                {item?.product?.priceDiscount * item?.quantity}{' '}
                 {item?.product?.currency?.code ?? ''}
               </p>
             </div>

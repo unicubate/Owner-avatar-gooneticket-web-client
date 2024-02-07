@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill, { ReactQuillProps } from 'react-quill';
@@ -60,7 +61,10 @@ const TextareaReactQuillInput: React.FC<Props> = ({
               theme="snow"
               placeholder={placeholder}
               modules={{ toolbar: false }}
-              className={`w-full ${className} px-full py-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring`}
+              className={cn(
+                'w-full px-full py-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring dark:border-gray-800',
+                className,
+              )}
             />
           </>
         )}
