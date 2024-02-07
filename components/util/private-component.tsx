@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import { ComponentType, useEffect, useState } from "react";
-import { getTokenToLocalStorage } from "./context-user";
+import { useRouter } from 'next/router';
+import { ComponentType, useEffect, useState } from 'react';
+import { getTokenToLocalStorage } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
   const userToken = getTokenToLocalStorage();
@@ -11,9 +11,8 @@ const PrivateComponent = (Component: ComponentType) => {
 
     useEffect(() => {
       if (!userIsAuthenticated) {
-        router.push("/login");
+        router.push('/login');
       }
-      
     }, [userIsAuthenticated, router]);
 
     return <Component {...props} />;

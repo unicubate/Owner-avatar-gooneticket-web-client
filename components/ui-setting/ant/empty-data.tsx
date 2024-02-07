@@ -1,6 +1,6 @@
-import { ColorType } from "@/types/profile.type";
-import { Empty } from "antd";
-import { CiGift } from "react-icons/ci";
+import { ColorType } from '@/types/profile.type';
+import { Empty } from 'antd';
+import { CiGift } from 'react-icons/ci';
 
 interface Props {
   title: React.ReactNode;
@@ -22,7 +22,9 @@ const EmptyData: React.FC<Props> = ({
             imageStyle={{ height: 50 }}
             description={
               <>
-                <div className="text-lg font-bold text-gray-900 dark:text-white">{title}</div>
+                <div className="text-lg font-bold text-gray-900 dark:text-white">
+                  {title}
+                </div>
                 <span className="font-medium text-gray-600">{description}</span>
               </>
             }

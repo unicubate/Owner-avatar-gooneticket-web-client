@@ -1,5 +1,5 @@
-import { LoadingOutlined } from "@ant-design/icons";
-import { Empty, Spin } from "antd";
+import { LoadingOutlined } from '@ant-design/icons';
+import { Empty, Spin } from 'antd';
 
 interface Props {
   title?: React.ReactNode;
@@ -10,7 +10,7 @@ interface Props {
 const LoadingFile: React.FC<Props> = ({
   title,
   description,
-  className = "relative mx-auto justify-center",
+  className = 'relative mx-auto justify-center',
 }) => {
   return (
     <>

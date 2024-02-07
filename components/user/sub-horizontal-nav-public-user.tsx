@@ -1,10 +1,10 @@
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import Link from "next/link";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
-import { useRouter } from "next/router";
-import { UserModel } from "@/types/user.type";
-import { useTranslations } from "next-intl";
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
+import { useRouter } from 'next/router';
+import { UserModel } from '@/types/user.type';
+import { useTranslations } from 'next-intl';
 
 const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
   user,
@@ -15,37 +15,37 @@ const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t("home")}`,
+      title: `${t('home')}`,
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: `${t("gallery")}`,
+      title: `${t('gallery')}`,
       status: user?.profile?.enableGallery,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: `${t("memberships")}`,
+      title: `${t('memberships')}`,
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: `${t("posts")}`,
+      title: `${t('posts')}`,
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: `${t("shop")}`,
+      title: `${t('shop')}`,
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: `${t("commissions")}`,
+      title: `${t('commissions')}`,
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,

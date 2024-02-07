@@ -1,6 +1,6 @@
-import { SmileOutlined } from "@ant-design/icons";
-import { Select, Space } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { SmileOutlined } from '@ant-design/icons';
+import { Select, Space } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
@@ -11,26 +11,26 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   icon?: React.ReactNode;
-  mode: "multiple" | "tags";
+  mode: 'multiple' | 'tags';
 }
 
 const SelectMultipleSearchInput: React.FC<Props> = ({
   control,
   dataItem,
-  label = "",
+  label = '',
   name,
   errors,
-  placeholder = "",
+  placeholder = '',
   icon,
   mode,
 }) => {
   return (
     <>
-      {label ? <label
-        className="mb-2 block text-sm font-bold"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label className="mb-2 block text-sm font-bold" htmlFor={name}>
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}
@@ -39,12 +39,12 @@ const SelectMultipleSearchInput: React.FC<Props> = ({
             showSearch
             size="large"
             mode={mode}
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             id={name}
             placeholder={placeholder}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             filterOption={(input, option) =>
-              (option?.name ?? "").toLowerCase().includes(input.toLowerCase())
+              (option?.name ?? '').toLowerCase().includes(input.toLowerCase())
             }
             {...field}
           >

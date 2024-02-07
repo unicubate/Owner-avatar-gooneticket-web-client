@@ -1,5 +1,5 @@
-import { PaginationResponse } from "@/utils/pagination-item";
-import { ColorType } from "./profile.type";
+import { PaginationResponse } from '@/utils/pagination-item';
+import { ColorType } from './profile.type';
 
 export type DonationModel = {
   createdAt: Date;

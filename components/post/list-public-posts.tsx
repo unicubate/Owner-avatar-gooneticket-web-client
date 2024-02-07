@@ -1,19 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { PostModel } from "@/types/post";
-import { formateDMYHH } from "@/utils";
-import { BiComment } from "react-icons/bi";
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from "react-icons/md";
-import ReactPlayer from "react-player";
-import { useRouter } from "next/router";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
-import { HtmlParser } from "@/utils/html-parser";
-import { IoShareOutline } from "react-icons/io5";
-import { FiDownload } from "react-icons/fi";
-import { useAuth } from "../util/context-user";
-import Link from "next/link";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { WhoCanSeeItem } from "../ui-setting";
+import React from 'react';
+import { PostModel } from '@/types/post';
+import { formateDMYHH } from '@/utils';
+import { BiComment } from 'react-icons/bi';
+import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
+import ReactPlayer from 'react-player';
+import { useRouter } from 'next/router';
+import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
+import { HtmlParser } from '@/utils/html-parser';
+import { IoShareOutline } from 'react-icons/io5';
+import { FiDownload } from 'react-icons/fi';
+import { useAuth } from '../util/context-user';
+import Link from 'next/link';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { WhoCanSeeItem } from '../ui-setting';
 
 type Props = {
   item?: PostModel;
@@ -60,7 +60,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                       push(
                         `/posts/${
                           item?.id
-                        }/edit?type=${item?.type.toLocaleLowerCase()}`
+                        }/edit?type=${item?.type.toLocaleLowerCase()}`,
                       )
                     }
                     title="Edit"
@@ -81,7 +81,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           </div>
 
-          {item?.urlMedia && ["VIDEO", "AUDIO"].includes(item?.type) ? (
+          {item?.urlMedia && ['VIDEO', 'AUDIO'].includes(item?.type) ? (
             <div className="mt-2">
               <ReactPlayer
                 className="mr-auto"
@@ -101,14 +101,14 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
                 preview={false}
                 height={400}
                 className={`object-cover ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.whoCanSee === 'MEMBERSHIP' &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-xl"
-                    : ""
+                    ? 'blur-xl'
+                    : ''
                 }`}
               />
 
-              {item?.whoCanSee === "MEMBERSHIP" &&
+              {item?.whoCanSee === 'MEMBERSHIP' &&
               item?.isValidSubscribe !== 1 ? (
                 <WhoCanSeeItem profile={item?.profile} />
               ) : null}
@@ -120,7 +120,7 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
               href={`/${item?.profile?.username}/posts/${item?.slug}`}
               className="mt-4 cursor-pointer text-lg font-bold text-gray-900"
             >
-              {item?.title ?? ""}
+              {item?.title ?? ''}
             </Link>
           ) : null}
 
@@ -128,19 +128,19 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             <div className={`group relative text-sm font-normal text-gray-600`}>
               <span
                 className={`ql-editor ${
-                  item?.whoCanSee === "MEMBERSHIP" &&
+                  item?.whoCanSee === 'MEMBERSHIP' &&
                   item?.isValidSubscribe !== 1
-                    ? "blur-lg"
-                    : ""
+                    ? 'blur-lg'
+                    : ''
                 }`}
               >
                 <HtmlParser
-                  html={String(item?.description ?? "")}
+                  html={String(item?.description ?? '')}
                   value={item?.isValidSubscribe !== 1 ? 600 : 0}
                 />
               </span>
 
-              {item?.whoCanSee === "MEMBERSHIP" &&
+              {item?.whoCanSee === 'MEMBERSHIP' &&
               item?.isValidSubscribe !== 1 ? (
                 <WhoCanSeeItem profile={item?.profile} />
               ) : null}

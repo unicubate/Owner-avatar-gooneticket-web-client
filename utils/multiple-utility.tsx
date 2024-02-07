@@ -7,9 +7,9 @@ export const formatePrice = (options: { value: number; isDivide: boolean }) => {
   const numberCal = isDivide ? value / 100 : value;
   return (
     <>
-      {!isNaN(numberCal) && String(numberCal).includes(".")
-        ? numberCal.toLocaleString("IT")
-        : `${numberCal.toLocaleString("IT")},00`}{" "}
+      {!isNaN(numberCal) && String(numberCal).includes('.')
+        ? numberCal.toLocaleString('IT')
+        : `${numberCal.toLocaleString('IT')},00`}{' '}
     </>
   );
 };

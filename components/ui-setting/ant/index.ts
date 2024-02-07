@@ -8,4 +8,4 @@ export * from './phone-number-input';
 export * from './select-input';
 export * from './select-multiple-search-input';
 export * from './select-search-input';
-export * from './switch-input'
+export * from './switch-input';

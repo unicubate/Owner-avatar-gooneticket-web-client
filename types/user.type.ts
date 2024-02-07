@@ -1,10 +1,10 @@
-import { ColorType, ProfileModel } from "./profile.type";
+import { ColorType, ProfileModel } from './profile.type';
 
 export type NextStep =
-  | "SETTING_PROFILE"
-  | "SETTING_INTEREST"
-  | "CONFIRM_EMAIL"
-  | "COMPLETE_REGISTRATION";
+  | 'SETTING_PROFILE'
+  | 'SETTING_INTEREST'
+  | 'CONFIRM_EMAIL'
+  | 'COMPLETE_REGISTRATION';
 
 export type UserLoginFormModel = {
   email: string;
@@ -76,7 +76,7 @@ export type UserVisitorModel = {
   organizationId: string;
   id?: string;
 };
-username: "bokin-1659";
+username: 'bokin-1659';
 export type UserForgotPasswordFormModel = {
   email: string;
 };

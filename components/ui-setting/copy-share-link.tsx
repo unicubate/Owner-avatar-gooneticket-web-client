@@ -27,7 +27,7 @@ const CopyShareLink: React.FC<Props> = ({
 }) => {
   const [copySuccess, setCopySuccess] = useState(false);
   const copyToClipBoard = async (link: string) => {
-    await navigator.clipboard.writeText(link)
+    await navigator.clipboard.writeText(link);
   };
   return (
     <>
@@ -45,21 +45,19 @@ const CopyShareLink: React.FC<Props> = ({
               <Label htmlFor="link" className="sr-only">
                 Link
               </Label>
-              <Input
-                id="link"
-                defaultValue={link}
-                readOnly
-              />
+              <Input id="link" defaultValue={link} readOnly />
             </div>
             <ButtonInput
               type="button"
               variant="info"
               size="sm"
               className="px-3"
-              onClick={() => { copyToClipBoard(link), setCopySuccess(true) }}
+              onClick={() => {
+                copyToClipBoard(link), setCopySuccess(true);
+              }}
             >
               <CopyIcon className="size-4" />
-              <span className="ml-1">{copySuccess ? "Copied" : "Copy"}</span>
+              <span className="ml-1">{copySuccess ? 'Copied' : 'Copy'}</span>
             </ButtonInput>
           </div>
         </DialogContent>

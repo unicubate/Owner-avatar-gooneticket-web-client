@@ -1,11 +1,11 @@
-import { LayoutSite } from "@/components/layout-site";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input } from "antd";
-import { GetStaticPropsContext } from "next";
+import { LayoutSite } from '@/components/layout-site';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { GetStaticPropsContext } from 'next';
 
 export default function ContactUs() {
   const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
+    console.log('Received values of form: ', values);
   };
 
   return (
@@ -112,8 +112,8 @@ export default function ContactUs() {
                 <form action="#" method="POST" className="mt-14">
                   <div className="grid grid-cols-1 gap-x-5 gap-y-4 sm:grid-cols-2">
                     <label className="text-base font-medium text-gray-900">
-                      {" "}
-                      Your name{" "}
+                      {' '}
+                      Your name{' '}
                     </label>
                     <div className="relative mt-2.5">
                       <input
@@ -126,8 +126,8 @@ export default function ContactUs() {
                     </div>
 
                     <label className="text-base font-medium text-gray-900">
-                      {" "}
-                      Email address{" "}
+                      {' '}
+                      Email address{' '}
                     </label>
                     <div className="relative mt-2.5">
                       <input
@@ -140,8 +140,8 @@ export default function ContactUs() {
                     </div>
 
                     <label className="text-base font-medium text-gray-900">
-                      {" "}
-                      Phone number{" "}
+                      {' '}
+                      Phone number{' '}
                     </label>
                     <div className="relative mt-2.5">
                       <input
@@ -154,8 +154,8 @@ export default function ContactUs() {
                     </div>
 
                     <label className="text-base font-medium text-gray-900">
-                      {" "}
-                      Company name{" "}
+                      {' '}
+                      Company name{' '}
                     </label>
                     <div className="relative mt-2.5">
                       <input
@@ -169,8 +169,8 @@ export default function ContactUs() {
 
                     <div className="sm:col-span-2">
                       <label className="text-base font-medium text-gray-900">
-                        {" "}
-                        Message{" "}
+                        {' '}
+                        Message{' '}
                       </label>
                       <div className="relative mt-2.5">
                         <textarea
@@ -206,7 +206,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
-      }
-    }
-  }
+      },
+    },
+  };
 }

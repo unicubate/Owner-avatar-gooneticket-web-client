@@ -1,6 +1,6 @@
-import { SmileOutlined } from "@ant-design/icons";
-import { Select } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { SmileOutlined } from '@ant-design/icons';
+import { Select } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
@@ -11,52 +11,54 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   firstOptionName: string;
-  optionType: "currency" | "other";
+  optionType: 'currency' | 'other';
 }
 
 const SelectInput: React.FC<Props> = ({
   control,
   dataItem,
-  label = "",
+  label = '',
   name,
   errors,
-  placeholder = "",
+  placeholder = '',
   optionType,
-  firstOptionName = "",
+  firstOptionName = '',
 }) => {
   return (
     <>
-      {label ? <label
-        className="mb-2 block text-sm font-bold dark:text-white"
-        htmlFor={name}>
-        {label}
-      </label> : null}
+      {label ? (
+        <label
+          className="mb-2 block text-sm font-bold dark:text-white"
+          htmlFor={name}
+        >
+          {label}
+        </label>
+      ) : null}
       <Controller
         name={name}
         control={control}
         render={({ field: { ref, ...field } }) => (
           <Select
             size="large"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             id={name}
             placeholder={placeholder}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             {...field}
           >
             {dataItem?.length > 0 ? (
               dataItem?.map((item: any, index: number) => (
                 <Option
-                  
-                  value={optionType === "currency" ? item?.code : item?.id}
+                  value={optionType === 'currency' ? item?.code : item?.id}
                   key={index}
                 >
-                  {optionType === "currency"
+                  {optionType === 'currency'
                     ? `${item?.code} - ${item?.name}`
                     : item?.name}
                 </Option>
               ))
             ) : (
-              <div style={{ textAlign: "center" }}>
+              <div style={{ textAlign: 'center' }}>
                 <SmileOutlined style={{ fontSize: 20 }} />
                 <p>Data Not Found</p>
               </div>

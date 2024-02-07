@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { Spin } from "antd";
-import { GetInfinitePostsAPI } from "@/api-site/post";
-import { LoadingOutlined } from "@ant-design/icons";
-import { ListLastPosts } from "./list-last-posts";
-import { PostModel } from "@/types/post";
-import { UserVisitorModel } from "@/types/user.type";
-import { ErrorFile } from "../ui-setting/ant/error-file";
+import React from 'react';
+import { Spin } from 'antd';
+import { GetInfinitePostsAPI } from '@/api-site/post';
+import { LoadingOutlined } from '@ant-design/icons';
+import { ListLastPosts } from './list-last-posts';
+import { PostModel } from '@/types/post';
+import { UserVisitorModel } from '@/types/user.type';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -22,12 +22,11 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
     fetchNextPage,
   } = GetInfinitePostsAPI({
     take: 6,
-    sort: "DESC",
+    sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['last-posts', "infinite"]
-
+    queryKey: ['last-posts', 'infinite'],
   });
 
   const dataTablePosts = isLoadingPosts ? (
@@ -45,7 +44,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
       description="Error find data please try again..."
     />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
-    ""
+    ''
   ) : (
     <>
       <div className="mt-8 flow-root">
@@ -63,9 +62,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
   return (
     <>
       <div className="px-4 py-6 sm:p-6 lg:p-8">
-        <h3 className="font-bold dark:text-white">
-          Latest Posts
-        </h3>
+        <h3 className="font-bold dark:text-white">Latest Posts</h3>
         {dataTablePosts}
       </div>
     </>

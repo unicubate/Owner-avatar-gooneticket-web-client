@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
-import { useRouter } from "next/router";
-import { IconTypePost } from "@/utils/icon-type-post";
+import React, { useState } from 'react';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
+import { useRouter } from 'next/router';
+import { IconTypePost } from '@/utils/icon-type-post';
 
-const classIcon = "flex-shrink-0 w-8 h-8 text-gray-600 md:w-10 md:h-10";
+const classIcon = 'flex-shrink-0 w-8 h-8 text-gray-600 md:w-10 md:h-10';
 
 const HorizontalNavCreatePost: React.FC<{ user?: any }> = ({ user }) => {
   const router = useRouter();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Write a post",
+      title: 'Write a post',
       href: `/posts/create?type=article`,
       description: `983 Available Posts`,
       icon: <IconTypePost type="ARTICLE" className={classIcon} />,
     },
     {
-      title: "Audio post",
+      title: 'Audio post',
       href: `/posts/create?type=audio`,
       description: `142 Available Audio Posts`,
       icon: <IconTypePost type="AUDIO" className={classIcon} />,
     },
     {
-      title: "Album post",
+      title: 'Album post',
       href: `/posts/create?type=album`,
       description: `142 Available Audio Posts`,
       icon: <IconTypePost type="GALLERY" className={classIcon} />,
     },
     {
-      title: "Video post",
+      title: 'Video post',
       href: `/posts/create?type=video`,
       description: `142 Available Videos Posts`,
       icon: <IconTypePost type="VIDEO" className={classIcon} />,

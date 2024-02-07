@@ -1,6 +1,6 @@
-import { SmileOutlined } from "@ant-design/icons";
-import { Select, Space } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { SmileOutlined } from '@ant-design/icons';
+import { Select, Space } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
   errors: { [key: string]: any };
   placeholder?: string;
   firstOptionName: string;
-  valueType: "key" | "text";
+  valueType: 'key' | 'text';
   icon?: React.ReactNode;
   allowClear?: boolean;
 }
@@ -19,14 +19,14 @@ interface Props {
 const SelectSearchInput: React.FC<Props> = ({
   control,
   dataItem,
-  label = "",
+  label = '',
   name,
   errors,
-  placeholder = "",
+  placeholder = '',
   valueType,
   icon,
   allowClear,
-  firstOptionName = "",
+  firstOptionName = '',
 }) => {
   return (
     <>
@@ -44,12 +44,12 @@ const SelectSearchInput: React.FC<Props> = ({
             showSearch
             loading={false}
             size="large"
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             id={name}
             placeholder={placeholder}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             filterOption={(input, option) =>
-              (option?.name ?? "").toLowerCase().includes(input.toLowerCase())
+              (option?.name ?? '').toLowerCase().includes(input.toLowerCase())
             }
             {...field}
             // className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800`}
@@ -59,7 +59,7 @@ const SelectSearchInput: React.FC<Props> = ({
                 ? dataItem?.map((item: any, index: number) => (
                     <Option
                       key={index}
-                      value={valueType === "key" ? item?.id : item?.name}
+                      value={valueType === 'key' ? item?.id : item?.name}
                       name={item?.name}
                     >
                       <Space>

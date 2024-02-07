@@ -2,7 +2,6 @@ import { LayoutSite } from '@/components/layout-site';
 import { GetStaticPropsContext } from 'next';
 
 const PrivacyPolicy = () => {
-
   return (
     <>
       <LayoutSite title="Privacy Policy">

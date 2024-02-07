@@ -4,7 +4,6 @@ export type Method = {
   error?: string;
 };
 
-
 type MethodC = (endpoint: string, options?: { error?: string }) => Method;
 
 export const GET: MethodC = (endpoint, options) => ({

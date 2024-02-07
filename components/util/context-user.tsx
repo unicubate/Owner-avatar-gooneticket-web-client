@@ -6,11 +6,11 @@ import {
   Dispatch,
   SetStateAction,
   ReactNode,
-} from "react";
-import { UserModel } from "@/types/user.type";
-import { GetOneUserPrivateAPI } from "@/api-site/user";
-import { jwtDecode } from "jwt-decode";
-import { useTheme } from "next-themes";
+} from 'react';
+import { UserModel } from '@/types/user.type';
+import { GetOneUserPrivateAPI } from '@/api-site/user';
+import { jwtDecode } from 'jwt-decode';
+import { useTheme } from 'next-themes';
 
 type AuthContextProps = {
   user: UserModel | undefined;
@@ -26,9 +26,9 @@ export const logoutUser = () => {
 
 export const getCurrentUserFormToken = () => {
   const token =
-    typeof window !== "undefined"
+    typeof window !== 'undefined'
       ? window.localStorage.getItem(
-          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         )
       : null;
   if (token !== null) {
@@ -41,22 +41,22 @@ export const getCurrentUserFormToken = () => {
 
 export const getTokenToLocalStorage = () => {
   const user =
-    typeof window !== "undefined"
+    typeof window !== 'undefined'
       ? JSON.parse(
           String(
             localStorage.getItem(
-              String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-            )
-          )
+              String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+            ),
+          ),
         )
       : null;
-      
+
   return user;
 };
 
 export const getThemeLocalStorage = () => {
   const theme =
-    typeof window !== "undefined" ? window.localStorage.getItem("theme") : null;
+    typeof window !== 'undefined' ? window.localStorage.getItem('theme') : null;
   if (theme !== null) {
     return theme;
   } else {
@@ -72,7 +72,7 @@ const initAuthContextPropsState = {
 };
 
 const AuthContext = createContext<AuthContextProps>(
-  initAuthContextPropsState as any
+  initAuthContextPropsState as any,
 );
 
 const useAuth = () => {
@@ -81,7 +81,9 @@ const useAuth = () => {
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { theme } = useTheme();
-  const [userStorage, setUserStorage] = useState(() => getCurrentUserFormToken());
+  const [userStorage, setUserStorage] = useState(() =>
+    getCurrentUserFormToken(),
+  );
 
   const { data: user } = GetOneUserPrivateAPI({
     userId: userStorage?.id,

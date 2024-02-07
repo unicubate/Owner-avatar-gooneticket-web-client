@@ -1,16 +1,16 @@
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import Link from "next/link";
-import { useAuth } from "../util/context-user";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '../util/context-user';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const HorizontalNavPayoutSetting: React.FC = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: "Payout",
-      href: "/payout-settings",
+      title: 'Payout',
+      href: '/payout-settings',
     },
   ]);
 

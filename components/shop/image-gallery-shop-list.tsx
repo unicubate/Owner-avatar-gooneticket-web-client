@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { viewOneFileUploadAPI } from "@/api-site/upload";
-import { UploadFolderType, UploadModel } from "@/types/upload";
-import { Image } from "antd";
-import React, { useState } from "react";
+import { viewOneFileUploadAPI } from '@/api-site/upload';
+import { UploadFolderType, UploadModel } from '@/types/upload';
+import { Image } from 'antd';
+import React, { useState } from 'react';
 
 type Props = {
   uploads: UploadModel[];
@@ -16,9 +16,9 @@ type Props = {
 };
 
 const contentStyle: React.CSSProperties = {
-  lineHeight: "50px",
-  textAlign: "center",
-  background: "#364d79",
+  lineHeight: '50px',
+  textAlign: 'center',
+  background: '#364d79',
 };
 
 const ImageGalleryShopList: React.FC<Props> = ({
@@ -26,13 +26,13 @@ const ImageGalleryShopList: React.FC<Props> = ({
   folder,
   preview,
   alt,
-  className = "object-cover w-full h-full",
-  height = "100%",
-  width = "100%",
+  className = 'object-cover w-full h-full',
+  height = '100%',
+  width = '100%',
   autoplay = false,
 }) => {
   const [selectedImage, setSelectedImage] = useState<string>(
-    uploads?.[0]?.path
+    uploads?.[0]?.path,
   );
 
   return (

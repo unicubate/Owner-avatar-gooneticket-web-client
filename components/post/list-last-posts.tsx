@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { PostModel } from "@/types/post";
-import { formateDMYHH } from "@/utils";
-import { BiConversation } from "react-icons/bi";
-import {
-  MdFavoriteBorder,
-} from "react-icons/md";
-import Link from "next/link";
-import { ListCarouselUpload } from "../shop/list-carousel-upload";
-import { useRouter } from "next/router";
+import React from 'react';
+import { PostModel } from '@/types/post';
+import { formateDMYHH } from '@/utils';
+import { BiConversation } from 'react-icons/bi';
+import { MdFavoriteBorder } from 'react-icons/md';
+import Link from 'next/link';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
+import { useRouter } from 'next/router';
 
 type Props = {
   item?: PostModel;
@@ -18,7 +16,10 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
   const { locale } = useRouter();
   return (
     <>
-      <li key={item?.id} className="flex items-stretch justify-between space-x-2 py-7">
+      <li
+        key={item?.id}
+        className="flex items-stretch justify-between space-x-2 py-7"
+      >
         <div className="shrink-0">
           {item?.uploadsImage?.length > 0 ? (
             <div className="size-16 rounded-lg object-cover">
@@ -27,11 +28,12 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
                 folder="posts"
                 preview={false}
                 height={65}
-                className={`size-16 object-cover${item?.whoCanSee === "MEMBERSHIP" &&
+                className={`size-16 object-cover${
+                  item?.whoCanSee === 'MEMBERSHIP' &&
                   item?.isValidSubscribe !== 1
-                  ? "blur-xl"
-                  : ""
-                  }`}
+                    ? 'blur-xl'
+                    : ''
+                }`}
               />
             </div>
           ) : null}
@@ -44,7 +46,7 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
                 href={`/posts/${item?.slug}`}
                 className="cursor-pointer text-sm font-bold dark:text-white"
               >
-                {item?.title ?? ""}
+                {item?.title ?? ''}
               </Link>
             ) : null}
 
@@ -52,16 +54,12 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
               <button className="text-lg">
                 <MdFavoriteBorder />
               </button>
-              <span className="ml-1.5 text-sm">
-                {item?.totalLike ?? 0}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
               <button className="ml-3.5 text-lg">
                 <BiConversation />
               </button>
-              <span className="ml-1.5 text-sm">
-                {item?.totalComment ?? 0}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
               <span className="ml-auto text-sm">
                 {formateDMYHH(item?.createdAt as Date, locale as string)}
               </span>
@@ -69,7 +67,6 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
           </div>
         </div>
       </li>
-
     </>
   );
 };

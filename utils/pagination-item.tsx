@@ -1,4 +1,4 @@
-import { PaymentModel } from "../api-site/payment";
+import { PaymentModel } from '../api-site/payment';
 interface Props {
   data: any;
   setPageItem: any;
@@ -9,26 +9,26 @@ interface Props {
   pageItem: number;
 }
 
-export type SortModel = "ASC" | "DESC";
+export type SortModel = 'ASC' | 'DESC';
 
-export type PaymentType = "CARD" | "PAYPAL" | "PHONE";
+export type PaymentType = 'CARD' | 'PAYPAL' | 'PHONE';
 
 export type ModelType =
-  | "ORGANIZATION"
-  | "CAMPAIGN"
-  | "DONATION"
-  | "PRODUCT"
-  | "COMMISSION"
-  | "MEMBERSHIP"
-  | "GIFT"
-  | "HELP"
-  | "POST"
-  | "GALLERY"
-  | "COMMENT";
+  | 'ORGANIZATION'
+  | 'CAMPAIGN'
+  | 'DONATION'
+  | 'PRODUCT'
+  | 'COMMISSION'
+  | 'MEMBERSHIP'
+  | 'GIFT'
+  | 'HELP'
+  | 'POST'
+  | 'GALLERY'
+  | 'COMMENT';
 
 export type PaginationRequest = {
   organizationId?: string;
-  isPaginate?: "true" | "false"
+  isPaginate?: 'true' | 'false';
   search?: string;
   sort: SortModel;
   page?: number;
@@ -66,7 +66,7 @@ export const PaginationItem: React.FC<Props> = ({
             <ul className="pagination">
               <li
                 className={`page-item previous ${
-                  (isPreviousData || pageItem <= 1) && "disabled"
+                  (isPreviousData || pageItem <= 1) && 'disabled'
                 }`}
               >
                 <button
@@ -89,7 +89,7 @@ export const PaginationItem: React.FC<Props> = ({
                 className={`page-item next ${
                   !isPreviousData &&
                   data?.data?.total_page === pageItem &&
-                  "disabled"
+                  'disabled'
                 }`}
               >
                 <button

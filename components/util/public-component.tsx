@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import { ComponentType, useEffect } from "react";
-import { getTokenToLocalStorage } from "./context-user";
+import { useRouter } from 'next/router';
+import { ComponentType, useEffect } from 'react';
+import { getTokenToLocalStorage } from './context-user';
 
 const PublicComponent = (Component: ComponentType) => {
   const userToken = getTokenToLocalStorage();
@@ -10,7 +10,7 @@ const PublicComponent = (Component: ComponentType) => {
 
     useEffect(() => {
       if (userIsAuthenticated) {
-        router.push("/");
+        router.push('/');
       }
     }, [userIsAuthenticated, router]);
 

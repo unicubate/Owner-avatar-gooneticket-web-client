@@ -1,5 +1,5 @@
-import { makeApiCall } from "@/utils/end-point";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { makeApiCall } from '@/utils/end-point';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export const CreateOrUpdateOneLikeAPI = ({
   onSuccess,
@@ -8,7 +8,7 @@ export const CreateOrUpdateOneLikeAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["likes"];
+  const queryKey = ['likes'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
@@ -20,11 +20,11 @@ export const CreateOrUpdateOneLikeAPI = ({
       const { likeableId, type, isLike } = payload;
       return !isLike
         ? await makeApiCall({
-            action: "createOneLike",
+            action: 'createOneLike',
             urlParams: { likeableId, type },
           })
         : await makeApiCall({
-            action: "deleteOneLike",
+            action: 'deleteOneLike',
             urlParams: { likeableId, type },
           });
     },

@@ -1,5 +1,5 @@
-import { InputNumber } from "antd";
-import { Control, Controller } from "react-hook-form";
+import { InputNumber } from 'antd';
+import { Control, Controller } from 'react-hook-form';
 
 interface Props {
   control: Control<any>;
@@ -7,10 +7,10 @@ interface Props {
   name: string;
   min?: number;
   max?: number;
-  type: "number";
+  type: 'number';
   errors: { [key: string]: any };
   placeholder?: string;
-  autoComplete?: "on" | "off";
+  autoComplete?: 'on' | 'off';
   required?: boolean;
   pattern?: string;
   defaultValue?: string | number;
@@ -24,13 +24,13 @@ const NumberInput: React.FC<Props> = ({
   suffix,
   max,
   min = 1,
-  label = "",
+  label = '',
   type,
   name,
   pattern,
   errors,
   required,
-  placeholder = "",
+  placeholder = '',
   autoComplete,
   defaultValue,
 }) => {
@@ -51,18 +51,18 @@ const NumberInput: React.FC<Props> = ({
         render={({ field: { ref, ...field } }) => (
           <InputNumber
             className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500 ${
-              errors?.[name]?.message ? "border-red-500" : ""
+              errors?.[name]?.message ? 'border-red-500' : ''
             }`}
             size="large"
             id={name}
             required={required}
             suffix={suffix}
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             type={type}
             pattern={pattern}
             placeholder={placeholder}
             autoComplete={autoComplete}
-            status={errors?.[name]?.message ? "error" : ""}
+            status={errors?.[name]?.message ? 'error' : ''}
             prefix={<strong>{prefix}</strong>}
             min={min}
             max={max}
