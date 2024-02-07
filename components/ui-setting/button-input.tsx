@@ -40,7 +40,7 @@ const ButtonInput: React.FC<Props> = ({
         {loading ? (
           <>
             <LoadingOutlined
-              style={{ fontSize: 20, color: '#ffff' }}
+              style={{ fontSize: 20, color: '##1E90FF' }}
               spin
               className="mr-2 size-4 animate-spin"
             />
