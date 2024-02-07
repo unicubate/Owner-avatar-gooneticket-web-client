@@ -45,7 +45,7 @@ const CartOrderFooterCart: React.FC<{
                     </div>
 
                     <p className="ml-3 text-xl font-bold text-gray-900 dark:text-white">
-                      {carts?.summary?.totalPrice}{' '}
+                      {carts?.summary?.totalPriceDiscount}{' '}
                       {user?.profile?.currency?.symbol}
                     </p>
 
