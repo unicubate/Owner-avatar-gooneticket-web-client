@@ -22,6 +22,13 @@ export const statusOderProductLists: KeyAsString = {
   CANCELLED: 'danger',
 };
 
+export const statusOderItemArray = [
+  { id: 'PENDING', name: 'PENDING' },
+  { id: 'ACCEPTED', name: 'ACCEPTED' },
+  { id: 'DELIVERED', name: 'DELIVERED' },
+  { id: 'CANCELLED', name: 'CANCELLED' },
+];
+
 export type OrderItemModel = {
   createdAt: Date;
   id: string;
@@ -45,3 +52,7 @@ export type OrderItemModel = {
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
 };
+
+export interface OrderItemFormModel {
+  status: StatusOderProduct;
+}

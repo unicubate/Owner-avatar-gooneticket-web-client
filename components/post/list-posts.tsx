@@ -56,7 +56,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
 
   return (
     <>
-      <div key={index} className="flex items-center py-5">
+      <div key={index} className="flex items-center py-4">
         {/* <div className="relative flex-shrink-0 cursor-pointer">
             <Avatar
               size={100}
@@ -76,7 +76,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             </span>
           </div>
 
-          <div className="mt-4 flex items-center">
+          <div className="mt-2 flex items-center">
             {item?.title ? (
               <p className="text-lg font-bold">
                 <ReadMore html={String(item?.title ?? '')} value={100} />
@@ -84,7 +84,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             ) : null}
           </div>
 
-          <div className="mt-4 flex items-center font-medium text-gray-600">
+          <div className="mt-2 flex items-center font-medium text-gray-600">
             <span className="text-lg font-normal">
               <MdFavoriteBorder />
             </span>
@@ -102,13 +102,15 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
                 <HiOutlineLockClosed />
               )}
             </span>
-            <span className="ml-1.5 text-sm font-normal">
+            <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
               {item?.whoCanSee}
             </span>
             <span className="ml-1.5 text-sm">
               <IconTypePost type={item?.type as PostType} />
             </span>
-            <span className="ml-1.5 text-sm font-normal">{item?.type}</span>
+            <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+              {item?.type}
+            </span>
           </div>
         </div>
 

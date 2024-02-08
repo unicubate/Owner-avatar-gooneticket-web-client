@@ -1,4 +1,8 @@
-import { OrderItemModel, ResponseOrderItemModel } from '@/types/order-item';
+import {
+  OrderItemFormModel,
+  OrderItemModel,
+  ResponseOrderItemModel,
+} from '@/types/order-item';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
 import {
@@ -19,7 +23,9 @@ export const UpdateOneOrderItemAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation({
     // mutationKey: queryKey,
-    mutationFn: async (payload: any & { orderItemId: string }) => {
+    mutationFn: async (
+      payload: OrderItemFormModel & { orderItemId: string },
+    ) => {
       const { orderItemId } = payload;
       await makeApiCall({
         action: 'updateOneOrderItem',
@@ -80,7 +86,8 @@ export const getOrderItemsAPI = async (
     status?: string;
     model?: string;
     orderId?: string;
-    organizationSellerId: string;
+    organizationSellerId?: string;
+    organizationBeyerId?: string;
   } & PaginationRequest,
 ): Promise<{ data: ResponseOrderItemModel }> => {
   return await makeApiCall({
@@ -90,7 +97,8 @@ export const getOrderItemsAPI = async (
 };
 
 export const GetInfiniteOrderItemsAPI = (payload: {
-  organizationSellerId: string;
+  organizationSellerId?: string;
+  organizationBeyerId?: string;
   orderId?: string;
   model?: string;
   search?: string;
@@ -105,6 +113,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     days,
     orderId,
     organizationSellerId,
+    organizationBeyerId,
     search,
     take,
     sort,
@@ -122,6 +131,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
         sort,
         days,
         orderId,
+        organizationBeyerId,
         organizationSellerId,
         search: search,
         status: status?.toUpperCase(),

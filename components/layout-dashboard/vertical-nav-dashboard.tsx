@@ -11,6 +11,7 @@ import {
   BiHomeCircle,
   BiImage,
   BiLayout,
+  BiListUl,
   BiLockOpen,
   BiSearch,
   BiStoreAlt,
@@ -91,6 +92,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
       title: `${t('gallery')}`,
       href: '/gallery',
       icon: <BiImage className={classIcon} />,
+    },
+    {
+      title: `${t('payments')}`,
+      href: '/payments',
+      icon: <BiListUl className={classIcon} />,
     },
   ]);
   const [settingItems] = useState<NavbarProps[]>([

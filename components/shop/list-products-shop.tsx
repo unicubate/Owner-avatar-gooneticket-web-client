@@ -91,12 +91,30 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
-            <div className="mt-4 flex items-center">
+            <div className="mt-2 flex items-center">
               {item?.title ? (
                 <p className="text-lg font-bold text-gray-600 dark:text-white">
                   <ReadMore html={String(item?.title ?? '')} value={100} />
                 </p>
               ) : null}
+            </div>
+
+            <div className="mt-2 flex items-center">
+              <span className="text-lg">
+                <LiaDnaSolid />
+              </span>
+              <span className="ml-1.5 text-sm font-bold text-gray-600">
+                {item?.productType}
+              </span>
+
+              <span className="ml-1.5 text-lg">
+                {item?.whoCanSee === 'PUBLIC' ? (
+                  <TbWorld />
+                ) : (
+                  <HiOutlineLockClosed />
+                )}
+              </span>
+              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
             </div>
 
             <div className="mt-4 flex items-center font-medium text-gray-600">
@@ -122,41 +140,10 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
                   </del>
                 </span>
               ) : null}
-
-              <span className="ml-1.5 text-lg">
-                {item?.whoCanSee === 'PUBLIC' ? (
-                  <TbWorld />
-                ) : (
-                  <HiOutlineLockClosed />
-                )}
-              </span>
-              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
-
-              <span className="ml-1.5 text-lg">
-                <LiaDnaSolid />
-              </span>
-              <span className="ml-1.5 text-sm">{item?.productType}</span>
             </div>
           </div>
 
-          <div className="py-4 text-right text-sm font-medium text-gray-600">
-            {/* <Tooltip placement="bottomRight" title={"View"}>
-              <button
-                onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
-              >
-                <MdOutlineRemoveRedEye />
-              </button>
-            </Tooltip> */}
-
-            {/* <Tooltip placement="bottomRight" title={"Deactivate"}>
-              <button
-                // onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
-              >
-                <Switch size="small" defaultChecked />
-              </button>
-            </Tooltip> */}
+          <div className="hidden py-4 text-right text-sm font-medium text-gray-600 lg:table-cell">
             <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}

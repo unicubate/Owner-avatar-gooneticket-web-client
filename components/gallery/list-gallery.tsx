@@ -93,7 +93,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-            <div className="mt-4 flex items-center font-medium text-gray-600">
+            <div className="mt-2 flex items-center font-medium text-gray-600">
               <button className="tex-sm">
                 <MdFavoriteBorder />
               </button>
@@ -103,28 +103,37 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                 <BiConversation />
               </button>
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
+            </div>
 
-              <button className="tex-sm ml-1.5">
+            <div className="mt-3 flex items-center">
+              <span className="text-lg">
                 {item?.whoCanSee === 'PUBLIC' ? (
                   <TbWorld />
                 ) : (
                   <HiOutlineLockClosed />
                 )}
-              </button>
-              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
+              </span>
+              <span className="ml-1.5 text-sm text-gray-600 hidden lg:table-cell">
+                {item?.whoCanSee}
+              </span>
+
+              <span className="ml-2 text-sm">
+                <IconTypePost type={item?.type as PostType} />
+              </span>
+              <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+                {item?.type}
+              </span>
 
               {item?.allowDownload && (
                 <>
-                  <button title="Download" className="tex-sm ml-1.5">
+                  <button title="Download" className="tex-sm ml-2">
                     <FiDownload />
                   </button>
-                  <span className="ml-1.5 text-sm font-normal">Download</span>
+                  <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+                    Download
+                  </span>
                 </>
               )}
-              <span className="ml-1.5 text-sm">
-                <IconTypePost type={item?.type as PostType} />
-              </span>
-              <span className="ml-1.5 text-sm font-normal">{item?.type}</span>
             </div>
           </div>
 

@@ -7,7 +7,7 @@ import { useInputState } from '../hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '../ui-setting';
 import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { ListOrderItems } from './list-order-items';
+import { ListOrderItemsUser } from './list-order-items-user';
 
 type Props = {
   model?: ModelType;
@@ -15,7 +15,11 @@ type Props = {
   organizationId: string;
 };
 
-const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
+const TableOrderItemsUser: React.FC<Props> = ({
+  model,
+  organizationId,
+  days,
+}) => {
   const { search, handleSetSearch } = useInputState();
 
   const {
@@ -27,7 +31,7 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
     search,
-    organizationSellerId: organizationId,
+    organizationBeyerId: organizationId,
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: 'DESC',
@@ -53,7 +57,7 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
     dataOrderItems?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListOrderItems item={item} key={index} index={index} />
+        <ListOrderItemsUser item={item} key={index} index={index} />
       ))
   );
 
@@ -91,4 +95,4 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
   );
 };
 
-export { TableOrderItems };
+export { TableOrderItemsUser };
