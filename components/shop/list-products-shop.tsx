@@ -9,14 +9,17 @@ import {
 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar, Tooltip } from 'antd';
+import {
+  AtomIcon,
+  CalendarIcon,
+  GlobeIcon,
+  LockKeyholeIcon,
+  PencilIcon,
+  TrashIcon,
+  WalletIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BiMoney } from 'react-icons/bi';
-import { HiOutlineLockClosed } from 'react-icons/hi';
-import { LiaDnaSolid } from 'react-icons/lia';
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
-import { TbWorld } from 'react-icons/tb';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -84,8 +87,8 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
 
           <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
-              <button className="tex-sm">
-                <AiOutlineCalendar />
+              <button className="font-normal">
+                <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
@@ -93,33 +96,31 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             </div>
             <div className="mt-2 flex items-center">
               {item?.title ? (
-                <p className="text-lg font-bold text-gray-600 dark:text-white">
+                <p className="text-lg font-bold">
                   <ReadMore html={String(item?.title ?? '')} value={100} />
                 </p>
               ) : null}
             </div>
 
-            <div className="mt-2 flex items-center">
-              <span className="text-lg">
-                <LiaDnaSolid />
+            <div className="mt-2 flex items-center text-gray-600">
+              <span className="font-bold">
+                <AtomIcon className="size-4" />
               </span>
-              <span className="ml-1.5 text-sm font-bold text-gray-600">
-                {item?.productType}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.productType}</span>
 
-              <span className="ml-1.5 text-lg">
+              <span className="ml-1.5">
                 {item?.whoCanSee === 'PUBLIC' ? (
-                  <TbWorld />
+                  <GlobeIcon className="size-4" />
                 ) : (
-                  <HiOutlineLockClosed />
+                  <LockKeyholeIcon className="size-4" />
                 )}
               </span>
               <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
             </div>
 
             <div className="mt-4 flex items-center font-medium text-gray-600">
-              <button className="text-lg">
-                <BiMoney />
+              <button className="font-normal">
+                <WalletIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm">
                 {formatePrice({
@@ -130,7 +131,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               </span>
 
               {item?.enableDiscount ? (
-                <span className="ml-1.5 text-sm">
+                <span className="ml-1.5 text-sm text-red-600">
                   <del>
                     {formatePrice({
                       value: Number(item?.price ?? 0),
@@ -143,13 +144,13 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
 
-          <div className="hidden py-4 text-right text-sm font-medium text-gray-600 lg:table-cell">
+          <div className="py-4 text-right text-sm font-medium text-gray-600">
             <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="text-lg text-gray-600  hover:text-indigo-600"
+                className="text-gray-600  hover:text-indigo-600"
               >
-                <MdOutlineModeEdit />
+                <PencilIcon className="size-4" />
               </button>
             </Tooltip>
 
@@ -162,11 +163,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               description="Are you sure you want to delete this?"
               buttonDialog={
                 <ButtonInput
-                  className="text-lg text-gray-600 hover:text-red-600"
+                  className="text-gray-600 hover:text-red-600"
                   variant="link"
                   type="button"
                 >
-                  <MdOutlineDeleteOutline />
+                  <TrashIcon className="size-4" />
                 </ButtonInput>
               }
             />

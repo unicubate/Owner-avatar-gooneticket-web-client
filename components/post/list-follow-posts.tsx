@@ -8,9 +8,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import 'react-h5-audio-player/lib/styles.css';
-import { BiConversation } from 'react-icons/bi';
-import { FiDownload } from 'react-icons/fi';
-import { MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
@@ -19,7 +16,14 @@ import { ButtonInput, CopyShareLink } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 
-import { IoShareOutline } from 'react-icons/io5';
+import {
+  DownloadIcon,
+  LockKeyholeIcon,
+  MessageSquareTextIcon,
+  PencilIcon,
+  ShareIcon,
+  UnlockKeyholeIcon,
+} from 'lucide-react';
 import { useInputState } from '../hooks';
 
 type Props = {
@@ -77,21 +81,6 @@ const ListFollowPosts: React.FC<Props> = ({
                   <span className="ml-1 font-bold">Join membership</span>
                 </ButtonInput>
               ) : null} */}
-
-              <CopyShareLink
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
-                buttonDialog={
-                  <ButtonInput
-                    className="ml-2 text-gray-600 hover:text-gray-400 focus:ring-gray-900"
-                    variant="link"
-                    type="button"
-                  >
-                    <IoShareOutline className="size-6" />
-                  </ButtonInput>
-                }
-              />
             </div>
           </div>
 
@@ -199,8 +188,8 @@ const ListFollowPosts: React.FC<Props> = ({
           <div className="mt-2 flex items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-2 text-2xl">
-              <BiConversation />
+            <button className="ml-3">
+              <MessageSquareTextIcon className="size-5" />
             </button>
             <span className="ml-2 text-sm">{item?.totalComment ?? 0}</span>
             {userVisitor?.id === item?.userId ? (
@@ -210,12 +199,27 @@ const ListFollowPosts: React.FC<Props> = ({
                   href={`/posts/${
                     item?.id
                   }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                  className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
+                  className="ml-3 hover:text-green-400 focus:ring-green-400"
                 >
-                  <MdOutlineModeEdit className="size-6" />
+                  <PencilIcon className="size-4" />
                 </Link>
               </>
             ) : null}
+
+            <CopyShareLink
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+              buttonDialog={
+                <ButtonInput
+                  className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                  variant="link"
+                  type="button"
+                >
+                  <ShareIcon className="size-4" />
+                </ButtonInput>
+              }
+            />
             {item?.allowDownload && (
               <>
                 {item?.whoCanSee === 'MEMBERSHIP' &&
@@ -223,9 +227,9 @@ const ListFollowPosts: React.FC<Props> = ({
                   <>
                     <button
                       title="Download"
-                      className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                      className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
                     >
-                      <FiDownload className="size-5" />
+                      <DownloadIcon className="size-5" />
                     </button>
                   </>
                 ) : (
@@ -243,67 +247,21 @@ const ListFollowPosts: React.FC<Props> = ({
                           })}`,
                         );
                       }}
-                      className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                      className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
                     >
-                      <FiDownload className="size-5" />
+                      <DownloadIcon className="size-5" />
                     </button>
                   </>
                 )}
               </>
             )}
 
-            {/* {item?.whoCanSee === 'MEMBERSHIP' &&
+            {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (
-              <>
-                <button className="ml-auto text-2xl">
-                  <HiOutlineLockClosed />
-                </button>
-                <span className="ml-2 text-sm">Locked</span>
-              </>
+              <LockKeyholeIcon className="ml-auto size-5" />
             ) : (
-              <>
-                <button className="ml-auto text-2xl">
-                  <HiOutlineLockOpen />
-                </button>
-                <span className="ml-2 text-sm">Unlocked</span>
-              </>
-            )} */}
-
-            {/* <Button
-              type="text"
-              shape="circle"
-              icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
-              size="small"
-              className="ml-auto text-2xl"
-            /> */}
-
-            {/* <Menubar className="ml-auto" defaultValue="Opend">
-              <MenubarMenu>
-                <MenubarTrigger>File</MenubarTrigger>
-                <MenubarContent className="dark:border-gray-900">
-                  <MenubarItem>
-                    New Tab <MenubarShortcut>⌘T</MenubarShortcut>
-                  </MenubarItem>
-                  <MenubarItem>
-                    New Window <MenubarShortcut>⌘N</MenubarShortcut>
-                  </MenubarItem>
-                  <MenubarItem disabled>New Incognito Window</MenubarItem>
-                  <MenubarSeparator />
-                  <MenubarSub>
-                    <MenubarSubTrigger>Share</MenubarSubTrigger>
-                    <MenubarSubContent>
-                      <MenubarItem>Email link</MenubarItem>
-                      <MenubarItem>Messages</MenubarItem>
-                      <MenubarItem>Notes</MenubarItem>
-                    </MenubarSubContent>
-                  </MenubarSub>
-                  <MenubarSeparator />
-                  <MenubarItem>
-                    Print... <MenubarShortcut>⌘P</MenubarShortcut>
-                  </MenubarItem>
-                </MenubarContent>
-              </MenubarMenu>
-            </Menubar> */}
+              <UnlockKeyholeIcon className="ml-auto size-5" />
+            )}
           </div>
 
           <ListComments

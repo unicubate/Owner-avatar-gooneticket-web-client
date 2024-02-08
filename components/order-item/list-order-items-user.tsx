@@ -4,13 +4,12 @@ import { OrderItemModel } from '@/types/order-item';
 import { formateDateDayjs, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar, Tooltip } from 'antd';
+import { CalendarIcon, ViewIcon, Wallet2Icon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BiMoney } from 'react-icons/bi';
 import { LiaDnaSolid } from 'react-icons/lia';
-import { MdOutlineModeEdit } from 'react-icons/md';
 import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
 
 type Props = {
   item: OrderItemModel;
@@ -42,7 +41,7 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
           <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
               <button className="tex-sm">
-                <AiOutlineCalendar />
+                <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
@@ -70,7 +69,7 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
 
             <div className="mt-2 flex items-center font-medium text-gray-600">
               <button className="text-lg">
-                <BiMoney />
+                <Wallet2Icon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm">
                 {formatePrice({
@@ -95,11 +94,16 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-600">
-            <Tooltip placement="bottomRight" title={'Edit'}>
-              <button className="text-lg text-gray-600  hover:text-indigo-600">
-                <MdOutlineModeEdit />
-              </button>
-            </Tooltip>
+            <ButtonInput
+              type="button"
+              size="sm"
+              variant="ghost"
+              className="hover:text-indigo-600"
+            >
+              <Tooltip placement="bottomRight" title={'View Content'}>
+                <ViewIcon className="size-6" />
+              </Tooltip>
+            </ButtonInput>
           </div>
         </div>
       </div>

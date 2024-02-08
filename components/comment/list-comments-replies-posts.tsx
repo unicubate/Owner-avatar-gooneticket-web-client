@@ -8,10 +8,10 @@ import {
 } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/pagination-item';
+import { PencilIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
@@ -97,7 +97,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                   onClick={() => editItem(item)}
                   className="ml-3.5 hover:text-indigo-400 focus:ring-indigo-400"
                 >
-                  <MdOutlineModeEdit className="size-5" />
+                  <PencilIcon className="size-4" />
                 </button>
 
                 <ActionModalDialog
@@ -113,7 +113,7 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
                       variant="link"
                       type="button"
                     >
-                      <MdOutlineDeleteOutline />
+                      <TrashIcon className="size-4" />
                     </ButtonInput>
                   }
                 />

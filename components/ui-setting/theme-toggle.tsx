@@ -5,9 +5,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Laptop2Icon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { BiAdjust, BiMoon, BiSun } from 'react-icons/bi';
 import { Button } from '../ui/button';
 
 const ThemeToggle = () => {
@@ -23,31 +23,26 @@ const ThemeToggle = () => {
     return null;
   }
 
+  const classIcon = 'size-5 bg-white dark:bg-[#1c1b22]';
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="link">
             {['dark'].includes(theme as string) && (
-              <BiMoon
-                title="toggle dark mode"
+              <MoonIcon
                 onClick={() => setTheme('light')}
-                className="size-6 bg-white dark:bg-[#1c1b22]"
+                className={classIcon}
               />
             )}
             {['system'].includes(theme as string) && (
-              <BiAdjust
-                title="toggle dark mode"
+              <Laptop2Icon
                 onClick={() => setTheme('light')}
-                className="size-6 bg-white dark:bg-[#1c1b22]"
+                className={classIcon}
               />
             )}
             {['light'].includes(theme as string) && (
-              <BiSun
-                title="toggle light mode"
-                onClick={() => setTheme('dark')}
-                className="size-6 bg-white dark:bg-[#1c1b22]"
-              />
+              <SunIcon onClick={() => setTheme('dark')} className={classIcon} />
             )}
           </Button>
         </DropdownMenuTrigger>

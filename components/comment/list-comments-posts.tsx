@@ -11,11 +11,10 @@ import {
 } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/pagination-item';
+import { PencilIcon, ReplyIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { BsReplyAll } from 'react-icons/bs';
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
@@ -151,9 +150,9 @@ const ListCommentsPosts: React.FC<Props> = ({
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
                     }}
-                    className="ml-3.5 text-2xl hover:text-green-400 focus:ring-green-400"
+                    className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
                   >
-                    <BsReplyAll />
+                    <ReplyIcon className="size-6" />
                   </button>
                 ) : null}
 
@@ -163,7 +162,7 @@ const ListCommentsPosts: React.FC<Props> = ({
                       onClick={() => editItem(item)}
                       className="ml-3.5 hover:text-indigo-400 focus:ring-indigo-400"
                     >
-                      <MdOutlineModeEdit className="size-5" />
+                      <PencilIcon className="size-4" />
                     </button>
 
                     <ActionModalDialog
@@ -175,11 +174,11 @@ const ListCommentsPosts: React.FC<Props> = ({
                       description="Are you sure you want to delete this comment?"
                       buttonDialog={
                         <ButtonInput
-                          className="text-lg text-gray-600 hover:text-red-600"
+                          className="text-sm text-gray-600 hover:text-red-600"
                           variant="link"
                           type="button"
                         >
-                          <MdOutlineDeleteOutline />
+                          <TrashIcon className="size-4" />
                         </ButtonInput>
                       }
                     />

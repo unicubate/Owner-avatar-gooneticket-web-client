@@ -63,7 +63,7 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
       .map((item: AlbumModel, index: number) => (
         <Fragment key={index}>
           <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
-            <div className="p-4">
+            <div className="p-4 w-full">
               <div className="flex items-center">
                 <Avatar
                   shape="square"
@@ -87,30 +87,7 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
         </Fragment>
       ))
   );
-  return (
-    <>
-      {dataTableAlbum}
-
-      {/* {hasNextPage && (
-        <div className="mt-4 text-center justify-center mx-auto">
-          <div className="mt-4 sm:mt-0">
-            <ButtonInput
-              ref={ref}
-              onClick={() => fetchNextPage()}
-              shape="default"
-              type="button"
-              size="large"
-              loading={isFetchingNextPage ? true : false}
-              color={"indigo"}
-              minW="fit"
-            >
-              Load More
-            </ButtonInput>
-          </div>
-        </div>
-      )} */}
-    </>
-  );
+  return <>{dataTableAlbum}</>;
 };
 
 export { TableAlbum };

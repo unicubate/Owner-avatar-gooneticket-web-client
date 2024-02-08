@@ -9,11 +9,9 @@ import {
 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar, Tooltip } from 'antd';
+import { CalendarIcon, PencilIcon, TrashIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AiOutlineCalendar } from 'react-icons/ai';
-import { BiMoney } from 'react-icons/bi';
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -80,9 +78,9 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="ml-3 min-w-0 flex-1 cursor-pointer">
-            <div className="flex items-center">
-              <button className="tex-sm text-gray-700">
-                <AiOutlineCalendar />
+            <div className="flex items-center text-gray-600">
+              <button className="font-normal">
+                <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
                 {formateDateDayjs(item?.createdAt as Date)}
@@ -91,17 +89,41 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
 
             <div className="mt-2 flex items-center">
               {item?.title ? (
-                <p className="text-lg font-bold text-gray-600">
+                <p className="text-lg font-bold">
                   <ReadMore html={String(item?.title ?? '')} value={50} />
                 </p>
               ) : null}
             </div>
 
-            <div className="mt-4 flex items-center">
+            <div className="mt-4 flex items-center font-medium text-gray-600">
+              <button className="font-normal">
+                <WalletIcon className="size-4" />
+              </button>
+              <span className="ml-1.5 text-sm">
+                {formatePrice({
+                  value: Number(item?.priceDiscount ?? 0),
+                  isDivide: false,
+                })}{' '}
+                {item?.currency?.symbol}
+              </span>
+
+              {item?.enableDiscount ? (
+                <span className="ml-1.5 text-sm text-red-600">
+                  <del>
+                    {formatePrice({
+                      value: Number(item?.price ?? 0),
+                      isDivide: false,
+                    })}{' '}
+                    {item?.currency?.symbol}
+                  </del>
+                </span>
+              ) : null}
+            </div>
+            {/* <div className="mt-4 flex items-center text-gray-600">
               {item?.price ? (
                 <>
-                  <span className="text-lg font-normal">
-                    <BiMoney />
+                  <span className="font-normal">
+                    <WalletIcon className="size-4" />
                   </span>
                   <span className="ml-2 text-sm font-bold">
                     {formatePrice({
@@ -112,7 +134,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                   </span>
                 </>
               ) : null}
-            </div>
+            </div> */}
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-900">
@@ -127,9 +149,9 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
             <Tooltip placement="bottomRight" title={'Edit'}>
               <button
                 onClick={() => router.push(`/commissions/${item?.id}/edit`)}
-                className="ml-4 text-lg text-gray-600 hover:text-indigo-600"
+                className="ml-4 text-gray-600 hover:text-indigo-600"
               >
-                <MdOutlineModeEdit />
+                <PencilIcon className="size-4" />
               </button>
             </Tooltip>
 
@@ -142,11 +164,11 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               description="Are you sure you want to delete this?"
               buttonDialog={
                 <ButtonInput
-                  className="text-lg text-gray-600 hover:text-red-600"
+                  className="text-gray-600 hover:text-red-600"
                   variant="link"
                   type="button"
                 >
-                  <MdOutlineDeleteOutline />
+                  <TrashIcon className="size-4" />
                 </ButtonInput>
               }
             />

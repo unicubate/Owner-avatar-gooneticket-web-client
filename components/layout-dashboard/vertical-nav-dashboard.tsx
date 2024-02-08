@@ -1,22 +1,23 @@
+import {
+  Dice6Icon,
+  ExternalLinkIcon,
+  HeartHandshakeIcon,
+  HeartIcon,
+  HomeIcon,
+  ImageIcon,
+  ListIcon,
+  LockKeyholeIcon,
+  LogOutIcon,
+  MenuSquareIcon,
+  SearchIcon,
+  SettingsIcon,
+  StoreIcon,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import {
-  BiBookContent,
-  BiCog,
-  BiDetail,
-  BiHeart,
-  BiHomeCircle,
-  BiImage,
-  BiLayout,
-  BiListUl,
-  BiLockOpen,
-  BiSearch,
-  BiStoreAlt,
-} from 'react-icons/bi';
-import { RiShakeHandsLine } from 'react-icons/ri';
 import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
@@ -27,7 +28,7 @@ export type NavbarProps = {
   count?: number;
   icon?: any;
 };
-const classIcon = 'flex-shrink-0 w-5 h-5 mr-4';
+const classIcon = 'flex-shrink-0 size-5 mr-4';
 
 interface Props {
   user?: any;
@@ -41,22 +42,22 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
     {
       title: `${t('home')}`,
       href: '/dashboard',
-      icon: <BiHomeCircle className={classIcon} />,
+      icon: <HomeIcon className={classIcon} />,
     },
     {
       title: `${t('your_page')}`,
       href: `/${user?.username}`,
-      icon: <BiLayout className={classIcon} />,
+      icon: <ExternalLinkIcon className={classIcon} />,
     },
     {
       title: `${t('feed')}`,
       href: '/home',
-      icon: <BiBookContent className={classIcon} />,
+      icon: <Dice6Icon className={classIcon} />,
     },
     {
       title: 'Explore',
       href: '/explore',
-      icon: <BiSearch className={classIcon} />,
+      icon: <SearchIcon className={classIcon} />,
     },
   ]);
 
@@ -64,46 +65,46 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
     {
       title: `${t('donations')}`,
       href: '/donations',
-      icon: <BiHeart className={classIcon} />,
+      icon: <HeartIcon className={classIcon} />,
     },
     {
       title: `${t('memberships')}`,
       href: '/memberships',
-      icon: <BiLockOpen className={classIcon} />,
+      icon: <LockKeyholeIcon className={classIcon} />,
     },
     {
       title: `${t('commissions')}`,
       href: '/commissions',
-      icon: <RiShakeHandsLine className={classIcon} />,
+      icon: <HeartHandshakeIcon className={classIcon} />,
     },
     {
       title: `${t('shop')}`,
       href: '/shop',
-      icon: <BiStoreAlt className={classIcon} />,
+      icon: <StoreIcon className={classIcon} />,
     },
   ]);
   const [supportItems] = useState<NavbarProps[]>([
     {
       title: `${t('posts')}`,
       href: '/posts',
-      icon: <BiDetail className={classIcon} />,
+      icon: <MenuSquareIcon className={classIcon} />,
     },
     {
       title: `${t('gallery')}`,
       href: '/gallery',
-      icon: <BiImage className={classIcon} />,
+      icon: <ImageIcon className={classIcon} />,
     },
     {
       title: `${t('payments')}`,
       href: '/payments',
-      icon: <BiListUl className={classIcon} />,
+      icon: <ListIcon className={classIcon} />,
     },
   ]);
   const [settingItems] = useState<NavbarProps[]>([
     {
       title: `${t('settings')}`,
       href: '/settings',
-      icon: <BiCog className={classIcon} />,
+      icon: <SettingsIcon className={classIcon} />,
     },
   ]);
 
@@ -242,20 +243,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                 onClick={() => logoutUser()}
                 className="group flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm font-medium text-gray-900 transition-all duration-200 dark:text-white dark:hover:bg-gray-200"
               >
-                <svg
-                  className="mr-4 size-5 shrink-0"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                  />
-                </svg>
+                <LogOutIcon className={classIcon} />
                 {t('logout')}
               </a>
             </nav>

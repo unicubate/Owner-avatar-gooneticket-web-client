@@ -1,11 +1,10 @@
 import { PostType } from '@/types/post';
-import { BiImage } from 'react-icons/bi';
 import {
-  LuFileText,
-  LuFileAudio2,
-  LuFileVideo2,
-  LuImage,
-} from 'react-icons/lu';
+  FileAudioIcon,
+  FileVideoIcon,
+  ImageIcon,
+  MenuSquareIcon,
+} from 'lucide-react';
 
 const IconTypePost: React.FC<{ type: PostType; className?: string }> = ({
   type,
@@ -13,10 +12,10 @@ const IconTypePost: React.FC<{ type: PostType; className?: string }> = ({
 }) => {
   return (
     <>
-      {type === 'ARTICLE' ? <LuFileText className={className} /> : null}
-      {type === 'AUDIO' ? <LuFileAudio2 className={className} /> : null}
-      {type === 'VIDEO' ? <LuFileVideo2 className={className} /> : null}
-      {type === 'GALLERY' ? <LuImage className={className} /> : null}
+      {type === 'ARTICLE' ? <MenuSquareIcon className={className} /> : null}
+      {type === 'AUDIO' ? <FileAudioIcon className={className} /> : null}
+      {type === 'VIDEO' ? <FileVideoIcon className={className} /> : null}
+      {type === 'GALLERY' ? <ImageIcon className={className} /> : null}
     </>
   );
 };

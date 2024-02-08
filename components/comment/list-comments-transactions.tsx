@@ -4,10 +4,10 @@ import { CommentModel } from '@/types/comment';
 import { formateFromNow } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/pagination-item';
+import { ReplyIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { BsReplyAll } from 'react-icons/bs';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
 import {
   AvatarCoffeeComponent,
@@ -114,9 +114,9 @@ const ListCommentTransactions: React.FC<{
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
                     }}
-                    className="ml-3.5 text-2xl hover:text-green-400 focus:ring-green-400"
+                    className="ml-3.5 text-2xl hover:text-indigo-400 focus:ring-indigo-400"
                   >
-                    <BsReplyAll />
+                    <ReplyIcon className="size-6" />
                   </button>
                 </>
               ) : null}

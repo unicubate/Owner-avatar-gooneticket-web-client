@@ -23,6 +23,8 @@ export type CommissionModel = {
     name: string;
     symbol: string;
   };
+  priceDiscount: string;
+  enableDiscount?: boolean;
   uploadsImage: any;
   uploadsFile: any;
   profile: ProfileItemModel;

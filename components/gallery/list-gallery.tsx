@@ -7,18 +7,18 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { IconTypePost } from '@/utils/icon-type-post';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar, Tooltip } from 'antd';
+import {
+  GlobeIcon,
+  HeartIcon,
+  LockKeyholeIcon,
+  MessageSquareTextIcon,
+  PencilIcon,
+  TrashIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { AiOutlineCalendar } from 'react-icons/ai';
-import { BiConversation } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
-import { HiOutlineLockClosed } from 'react-icons/hi';
-import {
-  MdFavoriteBorder,
-  MdOutlineDeleteOutline,
-  MdOutlineModeEdit,
-} from 'react-icons/md';
-import { TbWorld } from 'react-icons/tb';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -94,35 +94,34 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="mt-2 flex items-center font-medium text-gray-600">
-              <button className="tex-sm">
-                <MdFavoriteBorder />
-              </button>
+              <span className="font-normal">
+                <HeartIcon className="size-4" />
+              </span>
               <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
-              <button className="tex-sm ml-1.5">
-                <BiConversation />
-              </button>
+              <span className="ml-1.5">
+                <MessageSquareTextIcon className="size-4" />
+              </span>
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
             </div>
 
-            <div className="mt-3 flex items-center">
-              <span className="text-lg">
+            <div className="mt-3 flex items-center text-gray-600">
+              <span className="font-bold">
                 {item?.whoCanSee === 'PUBLIC' ? (
-                  <TbWorld />
+                  <GlobeIcon className="size-4" />
                 ) : (
-                  <HiOutlineLockClosed />
+                  <LockKeyholeIcon className="size-4" />
                 )}
               </span>
-              <span className="ml-1.5 text-sm text-gray-600 hidden lg:table-cell">
-                {item?.whoCanSee}
-              </span>
+              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
 
-              <span className="ml-2 text-sm">
-                <IconTypePost type={item?.type as PostType} />
+              <span className="ml-2">
+                <IconTypePost
+                  className="size-4"
+                  type={item?.type as PostType}
+                />
               </span>
-              <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
-                {item?.type}
-              </span>
+              <span className="ml-1.5 text-sm font-normal">{item?.type}</span>
 
               {item?.allowDownload && (
                 <>
@@ -147,9 +146,9 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
                     }/edit?type=${item?.type.toLocaleLowerCase()}`,
                   )
                 }
-                className="text-lg text-gray-600 hover:text-indigo-600"
+                className="text-gray-600 hover:text-indigo-600"
               >
-                <MdOutlineModeEdit />
+                <PencilIcon className="size-4" />
               </button>
             </Tooltip>
 
@@ -162,11 +161,11 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               description="Are you sure you want to delete this?"
               buttonDialog={
                 <ButtonInput
-                  className="text-lg text-gray-600 hover:text-red-600"
+                  className="text-gray-600 hover:text-red-600"
                   variant="link"
                   type="button"
                 >
-                  <MdOutlineDeleteOutline />
+                  <TrashIcon className="size-4" />
                 </ButtonInput>
               }
             />

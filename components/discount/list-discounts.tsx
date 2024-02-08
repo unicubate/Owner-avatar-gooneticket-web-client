@@ -6,51 +6,45 @@ import {
   formateDMYHH,
 } from '@/utils';
 import { Tag, Tooltip } from 'antd';
+import { PencilIcon, TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
-import Swal from 'sweetalert2';
+import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateDiscountModal } from './create-or-update-discount-modal';
 
 const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const { locale } = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  const saveMutation = DeleteOneDiscountAPI({
+  const { mutateAsync: saveMutation } = DeleteOneDiscountAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
 
-  const deleteItem = (item: any) => {
-    Swal.fire({
-      title: 'Delete?',
-      text: 'Are you sure you want to delete this?',
-      confirmButtonText: 'Yes, Deleted',
-      cancelButtonText: 'No, Cancel',
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6f42c1',
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        try {
-          await saveMutation.mutateAsync({ discountId: item?.id });
-          AlertSuccessNotification({
-            text: 'Discount deleted successfully',
-          });
-        } catch (error: any) {
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-          });
-        }
-      }
-    });
+  const deleteItem = async (item: any) => {
+    setLoading(true);
+    setIsOpen(true);
+    try {
+      await saveMutation({ discountId: item?.id });
+      AlertSuccessNotification({
+        text: 'Discount deleted successfully',
+      });
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error: any) {
+      setLoading(false);
+      setIsOpen(true);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
   };
-
   return (
     <>
       <div key={index} className="py-4">
@@ -88,19 +82,28 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
               <button
                 onClick={() => setShowModal(true)}
                 title="Edit"
-                className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+                className="ml-2 text-gray-600 hover:text-indigo-600"
               >
-                <MdOutlineModeEdit />
+                <PencilIcon className="size-4" />
               </button>
             </Tooltip>
-            <Tooltip placement="bottomRight" title={'Delete'}>
-              <button
-                onClick={() => deleteItem(item)}
-                className="ml-2 text-lg text-gray-600 hover:text-red-600"
-              >
-                <MdOutlineDeleteOutline />
-              </button>
-            </Tooltip>
+            <ActionModalDialog
+              title="Delete?"
+              loading={loading}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              onClick={() => deleteItem(item)}
+              description="Are you sure you want to delete this discount?"
+              buttonDialog={
+                <ButtonInput
+                  className="text-sm text-gray-600 hover:text-red-600"
+                  variant="link"
+                  type="button"
+                >
+                  <TrashIcon className="size-4" />
+                </ButtonInput>
+              }
+            />
           </div>
         </div>
       </div>

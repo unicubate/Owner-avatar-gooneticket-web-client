@@ -8,9 +8,9 @@ import {
 } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/pagination-item';
+import { TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { useAuth } from '../util/context-user';
@@ -93,7 +93,7 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
                   onClick={() => deleteItem(item)}
                   className="ml-3.5 hover:text-red-400 focus:ring-red-400"
                 >
-                  <MdOutlineDeleteOutline className="size-5" />
+                  <TrashIcon className="size-4" />
                 </button>
               </>
             ) : null}
