@@ -11,6 +11,7 @@ import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Image } from 'antd';
+import { TrashIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
