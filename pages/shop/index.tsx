@@ -1,6 +1,5 @@
 import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { TableOrderItems } from '@/components/order-item/table-order-items';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { TableTransactions } from '@/components/transaction/table-transactions';
 import { ButtonInput } from '@/components/ui-setting';
@@ -135,13 +134,6 @@ const ShopsIndex = () => {
                   </div>
                 ) : null}
               </div>
-
-              {user?.organizationId ? (
-                <TableOrderItems
-                  model="PRODUCT"
-                  organizationId={user?.organizationId}
-                />
-              ) : null}
 
               {user?.organizationId ? (
                 <TableTransactions

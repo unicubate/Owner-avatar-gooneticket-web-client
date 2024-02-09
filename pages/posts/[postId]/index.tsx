@@ -61,13 +61,9 @@ const PostShow = () => {
       <LayoutDashboard title={post?.title ?? ''}>
         <div className="mx-auto max-w-7xl py-6">
           <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mt-2 grid grid-cols-1 gap-y-10 lg:grid-cols-5 lg:items-start lg:gap-x-12 xl:grid-cols-6 xl:gap-x-16">
+            <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
               <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
-                <div className="flow-root">
-                  <div className="mx-auto sm:px-6 md:px-8">
-                    {dataTablePosts}
-                  </div>
-                </div>
+                <div className="flow-root">{dataTablePosts}</div>
               </div>
 
               <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
@@ -77,10 +73,10 @@ const PostShow = () => {
                       <div className="text-center">
                         <AvatarComponent
                           size={{
-                            xs: 50,
-                            sm: 50,
-                            md: 60,
-                            lg: 64,
+                            xs: 70,
+                            sm: 70,
+                            md: 80,
+                            lg: 84,
                             xl: 80,
                             xxl: 100,
                           }}

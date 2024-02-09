@@ -37,10 +37,7 @@ const TextInput: React.FC<Props> = ({
     <>
       <div className="flex items-center justify-between">
         {label ? (
-          <Label
-            htmlFor={name}
-            className="mb-2 block text-sm font-bold dark:text-white"
-          >
+          <Label htmlFor={name} className="mb-2 block text-sm font-bold">
             {label}
           </Label>
         ) : null}

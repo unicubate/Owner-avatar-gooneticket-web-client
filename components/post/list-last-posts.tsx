@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
 import { PostModel } from '@/types/post';
 import { formateDMYHH } from '@/utils';
-import { BiConversation } from 'react-icons/bi';
-import { MdFavoriteBorder } from 'react-icons/md';
+import { HeartIcon, MessageSquareIcon } from 'lucide-react';
 import Link from 'next/link';
-import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { useRouter } from 'next/router';
+import React from 'react';
+import { ListCarouselUpload } from '../shop/list-carousel-upload';
 
 type Props = {
   item?: PostModel;
@@ -51,13 +50,13 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
             ) : null}
 
             <div className="mt-2 flex items-center font-medium text-gray-600">
-              <button className="text-lg">
-                <MdFavoriteBorder />
+              <button className="hover:text-gray-600">
+                <HeartIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
-              <button className="ml-3.5 text-lg">
-                <BiConversation />
+              <button className="ml-3.5">
+                <MessageSquareIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
               <span className="ml-auto text-sm">

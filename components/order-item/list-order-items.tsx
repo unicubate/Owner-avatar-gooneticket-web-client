@@ -3,11 +3,12 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Button, Image } from 'antd';
+import { Image } from 'antd';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BiDotsHorizontal } from 'react-icons/bi';
 import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Badge } from '../ui/badge';
@@ -39,8 +40,8 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
             {item?.uploadsImages?.length > 0 ? (
               <div className="flex-shrink-0">
                 <Image
-                  width={90}
-                  height={76}
+                  width={100}
+                  height={80}
                   preview={false}
                   src={`${viewOneFileUploadAPI({
                     folder: 'products',
@@ -61,8 +62,11 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
                     <AvatarComponent size={26} profile={item?.profile} />
                   ) : null}
                   <div className="ml-2 min-w-0 flex-1">
-                    <p className="text-sm font-medium dark:text-white">
+                    <p className="text-sm font-bold dark:text-white">
                       {item?.profile?.firstName} {item?.profile?.lastName}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {item?.profile?.email}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
                       {formateFromNow(
@@ -74,7 +78,7 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
                 </p>
               </div>
               <p className="mt-1 text-sm font-medium  text-gray-600">
-                {item?.quantity && `Qty: ${item?.quantity}`}
+                {item?.quantity && `Quantity: ${item?.quantity}`}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
                 {formateFromNow(item?.createdAt as Date, locale as string)}
@@ -110,10 +114,8 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
           </div>
         </td> */}
 
-        <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          <Badge className="rounded-sm" variant={'default'}>
-            {item?.product?.productType?.toLocaleLowerCase()}
-          </Badge>
+        <td className="hidden text-sm font-bold dark:text-white lg:table-cell">
+          {item?.product?.productType}
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
@@ -122,8 +124,13 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
               {item?.status.toLocaleLowerCase()}
             </Badge>
           )}
-          {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
+          {['DELIVERED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'success'}>
+              {item?.status.toLocaleLowerCase()}
+            </Badge>
+          )}
+          {['ACCEPTED'].includes(item?.status) && (
+            <Badge className="rounded-sm" variant={'info'}>
               {item?.status.toLocaleLowerCase()}
             </Badge>
           )}
@@ -176,11 +183,12 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
         <td className="py-4 text-right text-sm font-medium">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                type="text"
-                shape="circle"
+              <ButtonInput
+                type="button"
+                variant="ghost"
                 icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
-                size="small"
+                size="icon"
+                onClick={() => showDrawer()}
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
@@ -200,10 +208,8 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
                 currency={{ code: String(item?.currency) }}
               />
             </p>
-            <div className="mt-2 ml-auto min-w-0 flex-1">
-              <Badge className="rounded-sm" variant={'default'}>
-                {item?.product?.productType?.toLocaleLowerCase()}
-              </Badge>
+            <div className="mt-2 font-bold ml-auto min-w-0 flex-1">
+              {item?.product?.productType}
             </div>
             <div className="mt-2 ml-auto min-w-0 flex-1">
               {item?.status === 'CANCELLED' && (
@@ -211,8 +217,13 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
                   {item?.status.toLocaleLowerCase()}
                 </Badge>
               )}
-              {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
+              {['DELIVERED'].includes(item?.status) && (
                 <Badge className="rounded-sm" variant={'success'}>
+                  {item?.status.toLocaleLowerCase()}
+                </Badge>
+              )}
+              {['ACCEPTED'].includes(item?.status) && (
+                <Badge className="rounded-sm" variant={'info'}>
                   {item?.status.toLocaleLowerCase()}
                 </Badge>
               )}
@@ -226,11 +237,7 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
         </td>
       </tr>
 
-      <UpdateOrderItemModal
-        orderItem={item}
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-      />
+      <UpdateOrderItemModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

@@ -19,7 +19,7 @@ import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 import {
   DownloadIcon,
   LockKeyholeIcon,
-  MessageSquareTextIcon,
+  MessageSquareIcon,
   PencilIcon,
   ShareIcon,
   UnlockKeyholeIcon,
@@ -189,7 +189,7 @@ const ListFollowPosts: React.FC<Props> = ({
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-3">
-              <MessageSquareTextIcon className="size-5" />
+              <MessageSquareIcon className="size-5" />
             </button>
             <span className="ml-2 text-sm">{item?.totalComment ?? 0}</span>
             {userVisitor?.id === item?.userId ? (

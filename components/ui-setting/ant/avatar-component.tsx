@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
 import { Avatar } from 'antd';
 import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
@@ -14,14 +15,14 @@ const AvatarComponent: React.FC<Props> = ({ profile, size, className }) => {
     <Link href={`/${profile?.username}`}>
       {profile?.image ? (
         <Avatar
-          className={`${className} bg-${profile?.color}-400 rounded-full`}
+          className={cn(`bg-${profile?.color}-600 rounded-full`, className)}
           size={size}
           src={profile?.image}
           alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
         />
       ) : (
         <Avatar
-          className={`${className} bg-${profile?.color}-400 rounded-full`}
+          className={cn(`bg-${profile?.color}-600  rounded-full`, className)}
           size={size}
           alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
         >

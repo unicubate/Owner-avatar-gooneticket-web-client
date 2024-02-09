@@ -32,10 +32,7 @@ const TextPasswordInput: React.FC<Props> = ({
   return (
     <>
       {label ? (
-        <Label
-          htmlFor={name}
-          className="mb-2 block text-sm font-bold dark:text-white"
-        >
+        <Label htmlFor={name} className="mb-2 block text-sm font-bold">
           {label}
         </Label>
       ) : null}

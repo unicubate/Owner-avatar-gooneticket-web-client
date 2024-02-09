@@ -16,7 +16,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { MdOutlineDeleteOutline } from 'react-icons/md';
 import * as yup from 'yup';
 
 const schema = yup.object({
@@ -146,7 +145,7 @@ const ShopView = () => {
                             // onClick={() => deleteItem(item)}
                             className="text-gray-400 hover:text-red-400 focus:ring-red-400"
                           >
-                            <MdOutlineDeleteOutline className="size-5" />
+                            <TrashIcon className="size-4" />
                           </button>
                         </div>
                       </div>

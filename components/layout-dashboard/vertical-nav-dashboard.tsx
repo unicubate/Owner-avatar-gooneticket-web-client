@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import {
   Dice6Icon,
   ExternalLinkIcon,
@@ -121,11 +122,13 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item?.title}
-                  className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                    isActive
-                      ? bgColor
-                      : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                  } `}
+                  className={cn(
+                    `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                      isActive
+                        ? bgColor
+                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                    }`,
+                  )}
                 >
                   {item?.icon}
 
@@ -148,11 +151,13 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? bgColor
-                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                    } `}
+                    className={cn(
+                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? bgColor
+                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                      }`,
+                    )}
                   >
                     {item?.icon}
 
@@ -183,11 +188,13 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? bgColor
-                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                    } `}
+                    className={cn(
+                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? bgColor
+                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                      }`,
+                    )}
                   >
                     {item?.icon}
 
@@ -210,11 +217,13 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? bgColor
-                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                    } `}
+                    className={cn(
+                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? bgColor
+                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                      }`,
+                    )}
                   >
                     {item?.icon}
 

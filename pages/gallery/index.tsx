@@ -15,15 +15,14 @@ const Gallery = () => {
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             {profile?.id ? <EnableGallery profile={profile} /> : null}
-            {/* <HorizontalNavDonation /> */}
+
+            <div className="mt-4 grid grid-cols-1 gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-8 xl:grid-cols-4 xl:gap-12">
+              {organizationId ? (
+                <TableAlbum userVisitor={{ id: user?.id, organizationId }} />
+              ) : null}
+            </div>
 
             <div className="flow-root">
-              <div className="mt-6 grid grid-cols-1 gap-4 px-8 sm:grid-cols-2 sm:gap-6 sm:px-0 lg:grid-cols-3 xl:grid-cols-4">
-                {organizationId ? (
-                  <TableAlbum userVisitor={{ id: user?.id, organizationId }} />
-                ) : null}
-              </div>
-
               {organizationId ? (
                 <TableGallery userVisitor={{ id: user?.id, organizationId }} />
               ) : null}

@@ -10,7 +10,6 @@ import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
-import { CiGift, CiShop, CiUnlock, CiWallet } from 'react-icons/ci';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,6 +20,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  LockKeyholeIcon,
+  ShieldCheckIcon,
+  ShoppingBagIcon,
+  StoreIcon,
+} from 'lucide-react';
 
 const Dashboard = () => {
   const t = useTranslations();
@@ -253,7 +258,7 @@ const Dashboard = () => {
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                   <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-y-12 xl:max-w-none xl:grid-cols-4">
                     <div className="flex items-center">
-                      <CiWallet className="size-14 shrink-0 text-gray-900 dark:text-white" />
+                      <ShieldCheckIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Secured Payments
@@ -265,7 +270,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiShop className="size-14 shrink-0 text-gray-900 dark:text-white" />
+                      <ShoppingBagIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Shop for Anyone
@@ -277,7 +282,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiUnlock className="size-14 shrink-0 text-gray-900 dark:text-white" />
+                      <LockKeyholeIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Membership
@@ -289,7 +294,7 @@ const Dashboard = () => {
                     </div>
 
                     <div className="flex items-center">
-                      <CiGift className="size-14 shrink-0 text-gray-900 dark:text-white" />
+                      <StoreIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
                           Quality Products

@@ -11,7 +11,7 @@ import {
   GlobeIcon,
   HeartIcon,
   LockKeyholeIcon,
-  MessageSquareTextIcon,
+  MessageSquareIcon,
   PencilIcon,
   TrashIcon,
 } from 'lucide-react';
@@ -100,7 +100,7 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
               <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
 
               <span className="ml-1.5">
-                <MessageSquareTextIcon className="size-4" />
+                <MessageSquareIcon className="size-4" />
               </span>
               <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
             </div>

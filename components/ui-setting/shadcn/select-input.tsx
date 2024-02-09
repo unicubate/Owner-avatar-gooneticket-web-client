@@ -63,9 +63,7 @@ const SelectInput: React.FC<Props> = ({
                         value={valueType === 'key' ? item?.id : item?.name}
                         key={index}
                       >
-                        <span className="font-medium text-gray-900">
-                          {item?.name}
-                        </span>
+                        <span className="font-normal">{item?.name}</span>
                       </SelectItem>
                     ))
                   ) : (
