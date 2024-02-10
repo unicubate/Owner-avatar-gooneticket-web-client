@@ -1,17 +1,15 @@
-import { ColorType } from '@/types/profile.type';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Empty, Result, Spin } from 'antd';
+import { Result } from 'antd';
 import { ResultStatusType } from 'antd/es/result';
 
 interface Props {
-  status: ResultStatusType;
+  status?: ResultStatusType;
   title: React.ReactNode;
   description?: React.ReactNode;
   className?: string;
 }
 
 const ErrorFile: React.FC<Props> = ({
-  status,
+  status = '404',
   title,
   description,
   className = 'relative mx-auto justify-center',
@@ -23,10 +21,10 @@ const ErrorFile: React.FC<Props> = ({
           <Result
             status={status}
             title={
-              <p className="text-8xl font-bold dark:text-gray-900">{title}</p>
+              <p className="text-8xl font-bold dark:text-white">{title}</p>
             }
             subTitle={
-              <span className="text-2xl font-bold dark:text-gray-900">
+              <span className="text-2xl font-bold dark:text-gray-500">
                 {description}
               </span>
             }

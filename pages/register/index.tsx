@@ -1,18 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
+import { useReactHookForm } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserRegisterFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { Checkbox } from 'antd';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { registerGoogleUserAPI, registerUserAPI } from '../../api-site/user';
 
@@ -33,20 +32,17 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    false,
-  );
+  const { query, push } = useRouter();
+  const { redirect } = query;
   const {
     control,
-    register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserRegisterFormModel>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserRegisterFormModel> = async (
     payload: UserRegisterFormModel,
@@ -65,7 +61,7 @@ const Register = () => {
       //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
       //   JSON.stringify(user?.accessToken)
       // );
-      router.push(`${`/login`}`);
+      push({ pathname: 'login', query: { redirect } });
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -178,7 +174,7 @@ const Register = () => {
           />
           {errors?.confirm && (
             <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-              {errors?.confirm?.message}
+              {errors?.confirm?.message as any}
             </span>
           )}
         </div>
@@ -218,7 +214,7 @@ const Register = () => {
                 token: String(credentialResponse.credential),
               });
               setHasErrors(false);
-              router.push(`${`/login`}`);
+              push({ pathname: 'login', query: { redirect } });
             } catch (error: any) {
               setHasErrors(true);
               setHasErrors(error.response.data.message);

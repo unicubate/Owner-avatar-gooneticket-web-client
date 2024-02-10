@@ -26,7 +26,8 @@ const schema = yup.object({
 });
 
 const Login = () => {
-  const router = useRouter();
+  const { query } = useRouter();
+  const { redirect } = query;
   const {
     watch,
     control,
@@ -64,7 +65,9 @@ const Login = () => {
       );
       setHasErrors(false);
       setLoading(false);
-      window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
+      window.location.href = `${
+        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -167,7 +170,11 @@ const Login = () => {
                   JSON.stringify(user?.accessToken),
                 );
                 setHasErrors(false);
-                window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
+                window.location.href = `${
+                  redirect
+                    ? redirect
+                    : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+                }`;
               } catch (error: any) {
                 setHasErrors(true);
                 setHasErrors(error.response.data.message);
@@ -182,7 +189,14 @@ const Login = () => {
           />
         </GoogleOAuthProvider>
 
-        <Link href="/register">
+        {/* <Link href="/register">
+          <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
+            {' '}
+            New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
+          </p>
+        </Link> */}
+
+        <Link href={{ pathname: 'register', query: { redirect } }}>
           <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
             {' '}
             New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here

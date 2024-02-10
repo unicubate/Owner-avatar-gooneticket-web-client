@@ -35,11 +35,7 @@ const MessageEdit = () => {
   const dataTableCommission = isLoadingCommission ? (
     <LoadingFile />
   ) : isErrorCommission ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : (
     <>null</>
   );

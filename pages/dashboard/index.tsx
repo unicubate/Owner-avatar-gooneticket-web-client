@@ -88,7 +88,7 @@ const Dashboard = () => {
                   </div>
 
                   <div className="ml-auto">
-                    <ButtonInput type="button" variant="danger">
+                    <ButtonInput type="button" variant="default">
                       Withdraw
                     </ButtonInput>
                   </div>

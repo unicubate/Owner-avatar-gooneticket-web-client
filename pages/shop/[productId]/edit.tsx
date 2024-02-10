@@ -51,7 +51,6 @@ const ShopEdit = () => {
       <LoadingFile />
     ) : isErrorProduct || isErrorFileUploads || isErrorImageUploads ? (
       <ErrorFile
-        status="error"
         title="404"
         description="Error find data please try again..."
       />

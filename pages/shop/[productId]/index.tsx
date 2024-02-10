@@ -86,11 +86,7 @@ const ShopView = () => {
     isPendingProduct || isPendingUser ? (
       <LoadingFile />
     ) : isErrorProduct || isErrorUser ? (
-      <ErrorFile
-        status="error"
-        title="404"
-        description="Error find data please try again"
-      />
+      <ErrorFile title="404" description="Error find data please try again" />
     ) : (
       <>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

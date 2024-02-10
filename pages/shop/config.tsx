@@ -55,11 +55,7 @@ const Configs = () => {
   const dataTableDiscounts = isLoadingDiscounts ? (
     <LoadingFile />
   ) : isErrorDiscounts ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (
@@ -73,11 +69,7 @@ const Configs = () => {
   const dataTableCategories = isLoadingCategories ? (
     <LoadingFile />
   ) : isErrorCategories ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again"
-    />
+    <ErrorFile title="404" description="Error find data please try again" />
   ) : dataCategories?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

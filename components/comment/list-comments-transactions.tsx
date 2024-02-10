@@ -48,11 +48,7 @@ const ListCommentTransactions: React.FC<{
   const dataTableCommentsReplies = isLoadingComments ? (
     <LoadingFile />
   ) : isErrorComments ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again"
-    />
+    <ErrorFile title="404" description="Error find data please try again" />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

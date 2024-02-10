@@ -8,7 +8,7 @@ import {
   formatePrice,
 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Avatar, Tooltip } from 'antd';
+import { Avatar } from 'antd';
 import {
   AtomIcon,
   CalendarIcon,
@@ -145,14 +145,13 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-600">
-            <Tooltip placement="bottomRight" title={'Edit'}>
-              <button
-                onClick={() => router.push(`/shop/${item?.id}/edit`)}
-                className="text-gray-600  hover:text-indigo-600"
-              >
-                <PencilIcon className="size-4" />
-              </button>
-            </Tooltip>
+            <ButtonInput
+              variant="ghost"
+              type="button"
+              size="icon"
+              icon={<PencilIcon className="size-4 text-gray-600" />}
+              onClick={() => router.push(`/shop/${item?.id}/edit`)}
+            />
 
             <ActionModalDialog
               title="Delete?"
@@ -163,12 +162,11 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               description="Are you sure you want to delete this?"
               buttonDialog={
                 <ButtonInput
-                  className="text-gray-600 hover:text-red-600"
-                  variant="link"
+                  variant="ghost"
                   type="button"
-                >
-                  <TrashIcon className="size-4" />
-                </ButtonInput>
+                  size="icon"
+                  icon={<TrashIcon className="size-4 text-gray-600" />}
+                />
               }
             />
           </div>

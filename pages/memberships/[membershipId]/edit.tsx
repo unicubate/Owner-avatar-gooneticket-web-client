@@ -40,7 +40,6 @@ const ShopEdit = () => {
       <LoadingFile />
     ) : isErrorImageUploads || isErrorMembership ? (
       <ErrorFile
-        status="error"
         title="404"
         description="Error find data please try again..."
       />

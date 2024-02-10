@@ -54,11 +54,7 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
   const dataTableMemberships = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again"
-    />
+    <ErrorFile title="404" description="Error find data please try again" />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
-import { Spin } from 'antd';
 import { GetInfinitePostsAPI } from '@/api-site/post';
-import { LoadingOutlined } from '@ant-design/icons';
-import { ListLastPosts } from './list-last-posts';
 import { PostModel } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+import React from 'react';
 import { ErrorFile } from '../ui-setting/ant/error-file';
+import { ListLastPosts } from './list-last-posts';
 
 type Props = {
   userVisitor: UserVisitorModel;
@@ -38,11 +38,7 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
       <div className="content" />
     </Spin>
   ) : isErrorPosts ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

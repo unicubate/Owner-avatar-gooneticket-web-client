@@ -172,7 +172,7 @@ const LoginModal: React.FC<{
               />
             </GoogleOAuthProvider>
 
-            <Link href="/register">
+            <Link href="/register?redirect=https://www.buymeacoffee.com/bokino12">
               <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
                 {' '}
                 New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here

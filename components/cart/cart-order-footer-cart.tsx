@@ -68,7 +68,6 @@ const CartOrderFooterCart: React.FC<{
 
                 {isErrorCart ? (
                   <ErrorFile
-                    status="error"
                     title="404"
                     description="Error find data please try again"
                   />

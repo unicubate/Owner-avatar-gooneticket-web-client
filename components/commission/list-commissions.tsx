@@ -8,7 +8,7 @@ import {
   formatePrice,
 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Avatar, Tooltip } from 'antd';
+import { Avatar } from 'antd';
 import { CalendarIcon, PencilIcon, TrashIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -146,14 +146,13 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
                 <MdOutlineMarkEmailRead />
               </button>
             </Tooltip> */}
-            <Tooltip placement="bottomRight" title={'Edit'}>
-              <button
-                onClick={() => router.push(`/commissions/${item?.id}/edit`)}
-                className="ml-4 text-gray-600 hover:text-indigo-600"
-              >
-                <PencilIcon className="size-4" />
-              </button>
-            </Tooltip>
+            <ButtonInput
+              variant="ghost"
+              type="button"
+              size="icon"
+              icon={<PencilIcon className="size-4 text-gray-600" />}
+              onClick={() => router.push(`/commissions/${item?.id}/edit`)}
+            />
 
             <ActionModalDialog
               title="Delete?"
@@ -164,12 +163,11 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               description="Are you sure you want to delete this?"
               buttonDialog={
                 <ButtonInput
-                  className="text-gray-600 hover:text-red-600"
-                  variant="link"
+                  variant="ghost"
                   type="button"
-                >
-                  <TrashIcon className="size-4" />
-                </ButtonInput>
+                  size="icon"
+                  icon={<TrashIcon className="size-4 text-gray-600" />}
+                />
               }
             />
           </div>

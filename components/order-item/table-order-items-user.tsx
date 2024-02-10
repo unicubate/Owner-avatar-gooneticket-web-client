@@ -42,11 +42,7 @@ const TableOrderItemsUser: React.FC<Props> = ({
   const dataTableTransactions = isLoadingOrderItems ? (
     <LoadingFile />
   ) : isErrorOrderItems ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataOrderItems?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<BiTransfer className="size-10" />}

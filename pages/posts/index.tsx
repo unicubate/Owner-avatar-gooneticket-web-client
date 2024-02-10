@@ -10,7 +10,7 @@ import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PostModel } from '@/types/post';
 import { GetStaticPropsContext } from 'next';
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { BiDetail } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
 import { SearchInput } from '../../components/ui-setting/search-input';
@@ -32,43 +32,39 @@ const Posts = () => {
       id: user?.id,
       organizationId: user?.organizationId,
     },
-    take: 10,
+    take: 6,
     sort: 'DESC',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
     queryKey: ['posts', 'infinite'],
     search,
   });
 
-  useEffect(() => {
-    let fetching = false;
-    if (inView) {
-      fetchNextPage();
-    }
-    const onScroll = async (event: any) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement;
+  // useEffect(() => {
+  //   let fetching = false;
+  //   if (inView) {
+  //     fetchNextPage();
+  //   }
+  //   const onScroll = async (event: any) => {
+  //     const { scrollHeight, scrollTop, clientHeight } =
+  //       event.target.scrollingElement;
 
-      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-        fetching = false;
-      }
-    };
+  //     if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+  //       fetching = true;
+  //       if (hasNextPage) await fetchNextPage();
+  //       fetching = false;
+  //     }
+  //   };
 
-    document.addEventListener('scroll', onScroll);
-    return () => {
-      document.removeEventListener('scroll', onScroll);
-    };
-  }, [fetchNextPage, hasNextPage, inView]);
+  //   document.addEventListener('scroll', onScroll);
+  //   return () => {
+  //     document.removeEventListener('scroll', onScroll);
+  //   };
+  // }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTablePosts = isLoadingPost ? (
     <LoadingFile />
   ) : isErrorPost ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataPost?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<BiDetail className="size-10" />}

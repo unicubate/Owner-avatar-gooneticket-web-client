@@ -60,11 +60,7 @@ const ShopUserPublic = () => {
       {statusUser === 'pending' ? <LoadingFile /> : null}
 
       {statusUser === 'error' ? (
-        <ErrorFile
-          status="error"
-          title="404"
-          description="Error find data please try again"
-        />
+        <ErrorFile title="404" description="Error find data please try again" />
       ) : null}
     </>
   );

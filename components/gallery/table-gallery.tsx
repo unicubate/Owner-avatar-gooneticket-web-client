@@ -68,11 +68,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
   const dataTableGallery = isLoadingGallery ? (
     <LoadingFile />
   ) : isErrorGallery ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<BiImage className="size-10" />}

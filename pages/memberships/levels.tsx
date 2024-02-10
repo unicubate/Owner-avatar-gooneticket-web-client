@@ -65,11 +65,7 @@ const MembershipsLevels = () => {
   const dataTableMemberships = isLoadingMembership ? (
     <LoadingFile />
   ) : isErrorMembership ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<BiLockOpen className="size-10" />}

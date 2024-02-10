@@ -36,7 +36,6 @@ const PostShow = () => {
       <LoadingFile />
     ) : isErrorPost || isErrorUser ? (
       <ErrorFile
-        status="error"
         title="404"
         description="Error find data please try again..."
       />

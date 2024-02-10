@@ -86,7 +86,6 @@ const ProfilePublic = () => {
 
       {status === 'error' ? (
         <ErrorFile
-          status="error"
           title="404"
           description="Error find data please try again"
           className="dark:text-white"

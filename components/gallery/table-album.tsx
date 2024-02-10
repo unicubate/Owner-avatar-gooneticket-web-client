@@ -50,11 +50,7 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
   const dataTableAlbum = isLoadingAlbum ? (
     <>{skeletonArray}</>
   ) : isErrorAlbum ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataAlbum?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { ButtonInput } from '../ui-setting';
-import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
 import { GetInfinitePaymentsAPI } from '@/api-site/payment';
-import { ListPayments } from '../payment/list-payments';
 import { PaymentItemModel } from '@/types/payment';
-import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
-import { ErrorFile } from '../ui-setting/ant/error-file';
+import React, { useState } from 'react';
+import { ListPayments } from '../payment/list-payments';
+import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
+import { ErrorFile } from '../ui-setting/ant/error-file';
+import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
+import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
 
 const PayoutFormUser: React.FC = () => {
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
@@ -27,11 +27,7 @@ const PayoutFormUser: React.FC = () => {
   const dataTablePayments = isLoadingPayments ? (
     <LoadingFile />
   ) : isErrorPayments ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataPayments?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

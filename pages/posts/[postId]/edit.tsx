@@ -56,7 +56,6 @@ const PostsEdit = () => {
       <LoadingFile />
     ) : isErrorPost || isErrorImages || isErrorFiles ? (
       <ErrorFile
-        status="error"
         title="404"
         description="Error find data please try again..."
       />

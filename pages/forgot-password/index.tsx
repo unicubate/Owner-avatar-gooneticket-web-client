@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { useReactHookForm } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -8,11 +9,10 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { passwordResetUserAPI } from '../../api-site/user';
 
@@ -26,19 +26,17 @@ const schema = yup.object({
 });
 
 const ForgotPassword = () => {
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
+  const { query, push } = useRouter();
+  const { redirect } = query;
   const {
     control,
-    reset,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserForgotPasswordFormModel>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserForgotPasswordFormModel> = async (
     payload: UserForgotPasswordFormModel,
@@ -53,7 +51,7 @@ const ForgotPassword = () => {
       AlertSuccessNotification({
         text: 'Email send successfully',
       });
-      reset();
+      push({ pathname: 'login', query: { redirect } });
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

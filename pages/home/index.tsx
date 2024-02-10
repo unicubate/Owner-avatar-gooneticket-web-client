@@ -8,7 +8,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { FloatButton } from 'antd';
 import { GetStaticPropsContext } from 'next';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -37,11 +36,7 @@ const Home = () => {
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
   ) : isErrorPosts ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again"
-    />
+    <ErrorFile title="404" description="Error find data please try again" />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (
@@ -67,7 +62,7 @@ const Home = () => {
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             {dataTablePosts}
 
-            <FloatButton onClick={() => console.log('onClick')} />
+            {/* <FloatButton onClick={() => console.log('onClick')} /> */}
             {hasNextPage && (
               <div className="mx-auto mt-2 justify-center py-2 text-center">
                 <ButtonLoadMore

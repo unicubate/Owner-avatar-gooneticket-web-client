@@ -34,11 +34,7 @@ const CreateContributorModal: React.FC<{
   const dataTableUsers = isLoadingUsers ? (
     <LoadingFile />
   ) : isErrorUsers ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataUsers?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (

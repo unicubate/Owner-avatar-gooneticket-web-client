@@ -55,11 +55,7 @@ const PostsUserPublic = () => {
       {status === 'pending' ? <LoadingFile /> : null}
 
       {status === 'error' ? (
-        <ErrorFile
-          status="error"
-          title="404"
-          description="Error find data please try again"
-        />
+        <ErrorFile title="404" description="Error find data please try again" />
       ) : null}
     </>
   );

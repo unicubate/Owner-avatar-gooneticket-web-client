@@ -44,11 +44,7 @@ const CheckoutShop = () => {
     isLoadingCart || isLoadingCardOrder ? (
       <LoadingFile />
     ) : isErrorCart || isErrorCardOrder ? (
-      <ErrorFile
-        status="error"
-        title="404"
-        description="Error find data please try again"
-      />
+      <ErrorFile title="404" description="Error find data please try again" />
     ) : (
       carts?.cartItems.length > 0 &&
       carts?.cartItems.map((item, index: number) => (

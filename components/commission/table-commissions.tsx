@@ -64,11 +64,7 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
   const dataTableCommissions = isLoadingGallery ? (
     <LoadingFile />
   ) : isErrorGallery ? (
-    <ErrorFile
-      status="error"
-      title="404"
-      description="Error find data please try again..."
-    />
+    <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       image={<RiShakeHandsLine className="size-10" />}
