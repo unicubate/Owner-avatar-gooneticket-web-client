@@ -229,7 +229,7 @@ const Register = () => {
         />
       </GoogleOAuthProvider>
 
-      <Link href="/login">
+      <Link href={{ pathname: 'login', query: { redirect } }}>
         <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
           {' '}
           Already have an account? Log in here
