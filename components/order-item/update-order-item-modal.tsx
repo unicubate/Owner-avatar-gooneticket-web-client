@@ -305,7 +305,6 @@ const UpdateOrderItemModal: React.FC<{
                     defaultValue="298198281562717"
                     placeholder="country"
                     readOnly
-                    disabled
                   />
                 </div>
                 <div className="mb-2">
@@ -322,7 +321,6 @@ const UpdateOrderItemModal: React.FC<{
                     defaultValue={item.orderNumber}
                     placeholder="Order number"
                     readOnly
-                    disabled
                   />
                 </div>
                 <div className="mb-2">
@@ -339,7 +337,6 @@ const UpdateOrderItemModal: React.FC<{
                     defaultValue={item.quantity}
                     placeholder="quantity"
                     readOnly
-                    disabled
                   />
                 </div>
                 <div className="mb-2">
@@ -356,7 +353,6 @@ const UpdateOrderItemModal: React.FC<{
                     defaultValue={'PAYPAL'}
                     placeholder=" Payment Method"
                     readOnly
-                    disabled
                   />
                 </div>
               </div>

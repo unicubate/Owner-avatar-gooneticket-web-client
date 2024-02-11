@@ -122,7 +122,7 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
       if (post?.id) {
         refetch();
       } else {
-        push(`/posts`);
+        push(`/gallery`);
       }
     } catch (error: any) {
       setHasErrors(true);
