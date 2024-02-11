@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { LayoutAuth } from '@/components/layout-auth';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -69,66 +70,68 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
-      {/* <div className="mx-auto flex justify-center">
+    <LayoutAuth title="Reset password">
+      <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+        {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"
           src="https://merakiui.com/images/logo.svg"
           alt=""
         />
       </div> */}
-      <div className="mx-auto flex justify-center">
-        <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
-      </div>
-
-      <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
-        {hasErrors && (
-          <Alert variant="destructive" className="mb-4">
-            <AlertDescription>{hasErrors}</AlertDescription>
-          </Alert>
-        )}
-
-        <div className="mb-4">
-          <TextInput
-            control={control}
-            label="Password"
-            type="password"
-            name="newPassword"
-            placeholder="Password"
-            errors={errors}
-          />
+        <div className="mx-auto flex justify-center">
+          <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
         </div>
 
-        <div className="mb-4">
-          <TextInput
-            control={control}
-            label="Confirm Password"
-            type="password"
-            name="passwordConfirm"
-            placeholder="Confirm Password"
-            errors={errors}
-          />
-        </div>
+        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+          {hasErrors && (
+            <Alert variant="destructive" className="mb-4">
+              <AlertDescription>{hasErrors}</AlertDescription>
+            </Alert>
+          )}
 
-        <div className="mt-6">
-          <ButtonInput
-            type="submit"
-            className="w-full"
-            size="lg"
-            variant="info"
-            loading={loading}
-          >
-            Log In
-          </ButtonInput>
-        </div>
-      </form>
+          <div className="mb-4">
+            <TextInput
+              control={control}
+              label="Password"
+              type="password"
+              name="newPassword"
+              placeholder="Password"
+              errors={errors}
+            />
+          </div>
 
-      {/* <Link href="/login">
+          <div className="mb-4">
+            <TextInput
+              control={control}
+              label="Confirm Password"
+              type="password"
+              name="passwordConfirm"
+              placeholder="Confirm Password"
+              errors={errors}
+            />
+          </div>
+
+          <div className="mt-6">
+            <ButtonInput
+              type="submit"
+              className="w-full"
+              size="lg"
+              variant="info"
+              loading={loading}
+            >
+              Log In
+            </ButtonInput>
+          </div>
+        </form>
+
+        {/* <Link href="/login">
           <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
             Already have an account? Log in here
           </p>
         </Link> */}
-    </div>
+      </div>
+    </LayoutAuth>
   );
 };
 

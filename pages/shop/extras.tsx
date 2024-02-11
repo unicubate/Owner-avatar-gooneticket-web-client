@@ -14,11 +14,10 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { ProductModel } from '@/types/product';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { PlusIcon, StoreIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
-import { BiStoreAlt } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
 
 const ShopsExtras = () => {
@@ -71,9 +70,9 @@ const ShopsExtras = () => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataProduct?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiStoreAlt className="size-10" />}
-      title="Add your first listing to get started"
-      description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
+      image={<StoreIcon className="size-12" />}
+      title="You haven't added anything yet."
+      description={`Shop is a simple and effective way to offer something to your audience. It could be anything.`}
     />
   ) : (
     dataProduct?.pages.map((page, index) => (

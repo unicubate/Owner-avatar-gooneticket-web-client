@@ -1,6 +1,5 @@
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { TableOrderItemsUser } from '@/components/order-item/table-order-items-user';
-import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
@@ -13,7 +12,7 @@ const PaymentsIndex = () => {
       <LayoutDashboard title={'Payments'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-            <HorizontalNavShop />
+            {/* <HorizontalNavShop /> */}
 
             <div className="flow-root">
               {user?.organizationId ? (

@@ -11,8 +11,8 @@ import {
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
 import { PlusOutlined } from '@ant-design/icons';
-import { UploadIcon } from '@radix-ui/react-icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
+import { UploadIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';

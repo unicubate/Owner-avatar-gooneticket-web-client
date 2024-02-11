@@ -11,10 +11,9 @@ import {
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { PlusIcon } from 'lucide-react';
+import { ArrowRightLeftIcon, PlusIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { BiTransfer } from 'react-icons/bi';
 
 const ContributorsIndex = () => {
   const { push } = useRouter();
@@ -39,7 +38,7 @@ const ContributorsIndex = () => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiTransfer className="size-10" />}
+      image={<ArrowRightLeftIcon className="size-10" />}
       title="You don't have any contributor"
       description={`Share your page with your audience to get started.`}
     />

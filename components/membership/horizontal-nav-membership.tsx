@@ -25,7 +25,7 @@ const HorizontalNavMembership: React.FC = () => {
   const bgColor = `bg-${profile?.color}-600 text-white`;
   return (
     <>
-      <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
+      {/* <div className="rounded-lg border border-gray-200 bg-white px-3 py-2 dark:border-gray-800 dark:bg-[#121212]">
         <nav className="flex flex-wrap gap-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -47,33 +47,31 @@ const HorizontalNavMembership: React.FC = () => {
             );
           })}
         </nav>
+      </div> */}
+
+      <div className="border-gray-200 border-b dark:border-b-gray-600">
+        <nav className="flex flex-wrap gap-4">
+          {navigation.map((item: any, index: number) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={index}
+                href={`${item.href}`}
+                title={item.title}
+                className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                  isActive
+                    ? `text-${profile?.color}-600 border-${profile?.color}-600`
+                    : 'border-transparent hover:border-gray-300'
+                } `}
+              >
+                {item?.icon}
+
+                {item?.title}
+              </Link>
+            );
+          })}
+        </nav>
       </div>
-      {/* <div className="w-full pb-1 overflow-x-auto">
-                <div className="border-b border-gray-200">
-                    <nav className="flex -mb-px space-x-10">
-
-                        {navigation.map((item: any, index: number) => {
-                            const isActive = pathname === item.href;
-                            return (
-                                <Link
-                                    key={index}
-                                    href={`${item.href}`}
-                                    title=""
-                                    className={`py-4 text-sm font-medium text-gray-500 transition-all duration-200 border-b-2 ${isActive
-                                        ? "border-indigo-600 whitespace-nowrap"
-                                        : "border-transparent hover:border-gray-300 whitespace-nowrap"
-                                        } `}
-                                >
-                                    {item?.icon}
-
-                                    {item?.title}
-                                </Link>
-                            );
-                        })}
-
-                    </nav>
-                </div>
-            </div> */}
     </>
   );
 };

@@ -9,9 +9,9 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PostModel } from '@/types/post';
+import { MenuSquareIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { Fragment } from 'react';
-import { BiDetail } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
 import { SearchInput } from '../../components/ui-setting/search-input';
 
@@ -67,7 +67,7 @@ const Posts = () => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataPost?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiDetail className="size-10" />}
+      image={<MenuSquareIcon className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

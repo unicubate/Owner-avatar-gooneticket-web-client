@@ -4,12 +4,12 @@ import { OrderItemModel } from '@/types/order-item';
 import { formateDateDayjs, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar, Tooltip } from 'antd';
-import { CalendarIcon, ViewIcon, Wallet2Icon } from 'lucide-react';
+import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { LiaDnaSolid } from 'react-icons/lia';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
+import { OrderItemUserModal } from './order-item-user-modal';
 
 type Props = {
   item: OrderItemModel;
@@ -26,17 +26,19 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
     <>
       <div key={index} className="py-5">
         <div className="flex items-center">
-          <div className="relative shrink-0 cursor-pointer">
-            <Avatar
-              size={100}
-              shape="square"
-              src={viewOneFileUploadAPI({
-                folder: 'products',
-                fileName: item?.uploadsImages[0]?.path,
-              })}
-              alt={item?.product?.title}
-            />
-          </div>
+          {item?.uploadsImages?.length > 0 ? (
+            <div className="relative shrink-0 cursor-pointer">
+              <Avatar
+                size={100}
+                shape="square"
+                src={viewOneFileUploadAPI({
+                  folder: 'products',
+                  fileName: item?.uploadsImages[0]?.path,
+                })}
+                alt={item?.product?.title}
+              />
+            </div>
+          ) : null}
 
           <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
@@ -58,9 +60,9 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
               ) : null}
             </div>
 
-            <div className="mt-2 flex items-center">
-              <span className="text-lg">
-                <LiaDnaSolid />
+            <div className="mt-2 flex items-center text-gray-600">
+              <span className="font-bold">
+                <AtomIcon className="size-4" />
               </span>
               <span className="ml-1.5 text-sm font-bold text-gray-600">
                 {item?.product?.productType}
@@ -68,8 +70,8 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
             </div>
 
             <div className="mt-2 flex items-center font-medium text-gray-600">
-              <button className="text-lg">
-                <Wallet2Icon className="size-4" />
+              <button className="font-normal">
+                <WalletIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm">
                 {formatePrice({
@@ -80,7 +82,7 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
               </span>
 
               {item?.percentDiscount ? (
-                <span className="ml-1.5 text-sm">
+                <span className="ml-1.5 text-sm text-red-600">
                   <del>
                     {formatePrice({
                       value: Number(item?.price ?? 0),
@@ -99,14 +101,16 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
               size="sm"
               variant="ghost"
               className="hover:text-indigo-600"
+              onClick={() => setIsOpen((lk: boolean) => !lk)}
             >
               <Tooltip placement="bottomRight" title={'View Content'}>
-                <ViewIcon className="size-6" />
+                <ViewIcon className="size-5 text-gray-400" />
               </Tooltip>
             </ButtonInput>
           </div>
         </div>
       </div>
+      <OrderItemUserModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

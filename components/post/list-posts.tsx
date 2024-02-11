@@ -26,7 +26,7 @@ type Props = {
 };
 
 const ListPosts: React.FC<Props> = ({ item, index }) => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
@@ -120,7 +120,7 @@ const ListPosts: React.FC<Props> = ({ item, index }) => {
             size="icon"
             icon={<PencilIcon className="size-4 text-gray-600" />}
             onClick={() =>
-              router.push(
+              push(
                 `/posts/${
                   item?.id
                 }/edit?type=${item?.type.toLocaleLowerCase()}`,

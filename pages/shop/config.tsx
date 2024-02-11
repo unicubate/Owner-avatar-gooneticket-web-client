@@ -13,7 +13,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { PlusIcon } from '@radix-ui/react-icons';
+import { PlusIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 

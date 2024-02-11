@@ -6,10 +6,9 @@ import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { UserVisitorModel } from '@/types/user.type';
 import { queyParamsFunc } from '@/utils/generate-random';
-import { PlusIcon } from 'lucide-react';
+import { ImageIcon, PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { BiImage } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks/use-input-state';
 import { SearchInput } from '../ui-setting';
@@ -71,7 +70,7 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiImage className="size-10" />}
+      image={<ImageIcon className="size-10" />}
       title="Add your first file gallery"
       description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
     />

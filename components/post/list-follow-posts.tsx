@@ -67,8 +67,8 @@ const ListFollowPosts: React.FC<Props> = ({
               </p>
             </div>
 
-            <div className="ml-auto">
-              {/* {item?.whoCanSee === 'MEMBERSHIP' &&
+            {/* <div className="ml-auto">
+              {item?.whoCanSee === 'MEMBERSHIP' &&
               item?.isValidSubscribe !== 1 ? (
                 <ButtonInput
                   onClick={() =>
@@ -80,8 +80,8 @@ const ListFollowPosts: React.FC<Props> = ({
                 >
                   <span className="ml-1 font-bold">Join membership</span>
                 </ButtonInput>
-              ) : null} */}
-            </div>
+              ) : null}
+            </div> */}
           </div>
 
           {item?.urlMedia && ['VIDEO'].includes(item?.type) ? (

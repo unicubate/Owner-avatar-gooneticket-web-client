@@ -4,21 +4,14 @@ import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
+import { ViewIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { BiDotsHorizontal } from 'react-icons/bi';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Badge } from '../ui/badge';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
 import { UpdateOrderItemModal } from './update-order-item-modal';
 
 type Props = {
@@ -43,6 +36,7 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
                   width={100}
                   height={80}
                   preview={false}
+                  className="rounded-md"
                   src={`${viewOneFileUploadAPI({
                     folder: 'products',
                     fileName: item?.uploadsImages[0]?.path,
@@ -53,13 +47,13 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
             ) : null}
 
             <div className="ml-4 min-w-0 flex-1">
-              <p className="text-sm font-bold text-gray-900 dark:text-white">
+              <p className="text-lg font-bold text-gray-900 dark:text-white">
                 <ReadMore html={`${item?.product?.title}`} value={18} />
               </p>
               <div className="hidden lg:table-cell">
                 <p className="mt-1 flex min-w-0 flex-1 items-center text-sm font-bold text-gray-600">
                   {item?.profile ? (
-                    <AvatarComponent size={26} profile={item?.profile} />
+                    <AvatarComponent size={30} profile={item?.profile} />
                   ) : null}
                   <div className="ml-2 min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
@@ -181,24 +175,13 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <ButtonInput
-                type="button"
-                variant="ghost"
-                icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
-                size="icon"
-                onClick={() => showDrawer()}
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
-              <DropdownMenuGroup onClick={() => showDrawer()}>
-                <DropdownMenuItem>
-                  <span className="cursor-pointer">View info</span>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <ButtonInput
+            type="button"
+            variant="ghost"
+            icon={<ViewIcon className="size-5 text-gray-400" />}
+            size="icon"
+            onClick={() => showDrawer()}
+          />
 
           <div className="mt-1 pt-1 lg:hidden">
             <p className="inline-flex text-sm font-bold dark:text-white">
