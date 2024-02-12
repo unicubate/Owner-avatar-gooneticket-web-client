@@ -18,16 +18,21 @@ import { useState } from 'react';
 
 const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userBayer } = useAuth() as any;
   const { query, push } = useRouter();
   const { id: cartOrderId, username } = query;
+
+  // const { status, data: user } = GetOneUserPublicAPI({
+  //   username: String(username),
+  //   userVisitorId: userBayer?.id,
+  // });
 
   const {
     isLoading: isLoadingCardOrder,
     isError: isErrorCardOrder,
     data: cartOrder,
   } = GetOneCartOrderAPI({
-    organizationId: userVisitor?.organizationId,
+    cartOrderId: String(cartOrderId),
   });
 
   const {
@@ -36,8 +41,7 @@ const CheckoutShop = () => {
     data: carts,
   } = GetCartsAPI({
     cartOrderId: String(cartOrderId),
-    userId: cartOrder?.userId,
-    organizationId: userVisitor?.organizationId,
+    userId: userBayer?.id,
   });
 
   const dataTableCarts =
@@ -106,50 +110,6 @@ const CheckoutShop = () => {
                         </p>
                       </div>
                     </div>
-
-                    {/* <div className="space-y-5 mt-4">
-                          <>
-                            {isCardPay ? (
-                              <>
-                                <CreatePaymentStripe
-                                  paymentModel="STRIPE-SHOP"
-                                  data={{
-                                    cartOrderId,
-                                    amount: newAmount,
-                                    userReceiveId: cartOrder?.userId,
-                                    userSendId: userVisitor?.id,
-                                    organizationId: cartOrder?.organizationId,
-                                  }}
-                                />
-                              </>
-                            ) : (
-                              <>
-                                <div className="mt-2">
-                                  <ButtonInput
-                                    onClick={() => setIsCardPay(true)}
-                                    type="button"
-                                    size="lg"
-                                    className="w-full"
-                                    variant="info"
-                                  >
-                                    Card Pay
-                                  </ButtonInput>
-                                </div>
-                              </>
-                            )}
-
-                            <CreatePaymentPayPal
-                              paymentModel="PAYPAL-SHOP"
-                              data={{
-                                cartOrderId,
-                                amount: newAmount,
-                                userReceiveId: cartOrder?.userId,
-                                userSendId: userVisitor?.id,
-                                organizationId: cartOrder?.organizationId,
-                              }}
-                            />
-                          </>
-                        </div> */}
                   </div>
                   <div className="py-6">
                     <ul className="space-y-3">
@@ -171,6 +131,24 @@ const CheckoutShop = () => {
                               </>
                             ) : null}
                           </li> */}
+                      <li className="flex items-center justify-between">
+                        <p className="text-lg font-medium dark:text-white">
+                          SubTotal
+                        </p>
+                        {newAmount?.value ? (
+                          <>
+                            <p className="ml-auto text-sm font-bold dark:text-white">
+                              {newAmount?.currency}
+                            </p>
+                            <p className="ml-2 text-sm font-bold dark:text-white">
+                              {formatePrice({
+                                value: Number(newAmount?.value),
+                                isDivide: false,
+                              }) ?? ''}
+                            </p>
+                          </>
+                        ) : null}
+                      </li>
                       <li className="flex items-center justify-between">
                         <p className="text-3xl font-medium dark:text-white">
                           Total
@@ -201,8 +179,8 @@ const CheckoutShop = () => {
                             data={{
                               cartOrderId,
                               amount: newAmount,
-                              userReceiveId: cartOrder?.userId,
-                              userSendId: userVisitor?.id,
+                              userReceiveId: '',
+                              userSendId: userBayer?.id,
                               organizationId: cartOrder?.organizationId,
                             }}
                           />
@@ -228,8 +206,8 @@ const CheckoutShop = () => {
                         data={{
                           cartOrderId,
                           amount: newAmount,
-                          userReceiveId: cartOrder?.userId,
-                          userSendId: userVisitor?.id,
+                          userReceiveId: '',
+                          userSendId: userBayer?.id,
                           organizationId: cartOrder?.organizationId,
                         }}
                       />

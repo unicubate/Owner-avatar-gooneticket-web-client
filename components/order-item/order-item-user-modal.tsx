@@ -1,6 +1,10 @@
-import { viewOneFileUploadAPI } from '@/api-site/upload';
+import {
+  downloadOneFileUploadAPI,
+  viewOneFileUploadAPI,
+} from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateDateDayjs } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import {
@@ -12,22 +16,20 @@ import {
   PaperclipIcon,
   XIcon,
 } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import prettyBytes from 'pretty-bytes';
 import { useState } from 'react';
-import * as yup from 'yup';
 import { ButtonInput, SerialPrice } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
-
-const schema = yup.object({
-  status: yup.string().required(),
-});
 
 const OrderItemUserModal: React.FC<{
   isOpen: boolean;
   setIsOpen: any;
-  item: OrderItemModel | any;
+  item: OrderItemModel;
 }> = ({ isOpen, setIsOpen, item }) => {
-  const linkCopy =
-    'https://ko-fi.com/home/coffeeshop?txid=0b23119b-e8f7-40bc-bf3f-b4450a4fb59b';
+  const { push } = useRouter();
+  const linkCopy = item?.product?.urlRedirect;
   const [copySuccess, setCopySuccess] = useState(false);
   const copyToClipBoard = async (link: string) => {
     await navigator.clipboard.writeText(link);
@@ -78,7 +80,7 @@ const OrderItemUserModal: React.FC<{
                   <div className="mt-2 flex items-center">
                     {item?.product?.title ? (
                       <p className="text-lg font-bold text-gray-600 dark:text-white">
-                        <ReadMore html={`${item?.product?.title}`} value={18} />
+                        <ReadMore html={`${item?.product?.title}`} value={30} />
                       </p>
                     ) : null}
                   </div>
@@ -110,6 +112,7 @@ const OrderItemUserModal: React.FC<{
                 </div>
               </div>
             </div>
+
             <div className="py-2">
               <div className="flex items-center">
                 <h2 className="font-bold text-base">Price</h2>
@@ -124,81 +127,97 @@ const OrderItemUserModal: React.FC<{
               </div>
             </div>
 
-            <>
-              <div className="divide-y divide-gray-200 dark:divide-gray-800">
-                {['2', '3', '4'].map((x, y) => (
-                  <div className="py-4">
-                    <div className="flex items-center">
-                      <div className="relative shrink-0 cursor-pointer">
-                        <button className="tex-sm text-gray-600">
-                          <PaperclipIcon className="size-8" />
-                        </button>
-                      </div>
-                      <div className="ml-2 cursor-pointer">
-                        <div className="mt-2 flex items-center">
-                          {item?.product?.title ? (
-                            <p className="text-sm font-bold text-gray-600 dark:text-white">
-                              <ReadMore
-                                html={`${item?.product?.title}`}
-                                value={18}
-                              />
-                            </p>
-                          ) : null}
-                        </div>
-                        <div className="mt-2 flex items-center text-gray-600">
-                          <span className="ml-1.5 text-sm font-normal">
-                            12MB
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="ml-auto">
-                        <ButtonInput
-                          type="button"
-                          icon={<DownloadIcon className="size-4" />}
-                          variant="outline"
-                        >
-                          <span className="ml-1">Download</span>
-                        </ButtonInput>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-                <div className="py-4">
-                  <div className="flex items-center">
-                    <div className="relative shrink-0 cursor-pointer">
-                      <button className="tex-sm text-gray-600">
-                        <LinkIcon className="size-8" />
-                      </button>
-                    </div>
-                    <div className="ml-2 cursor-pointer">
-                      <div className="mt-2 flex items-center">
-                        {item?.product?.title ? (
-                          <p className="text-sm font-bold text-gray-600 dark:text-white">
-                            <ReadMore html={linkCopy} value={50} />
-                          </p>
-                        ) : null}
-                      </div>
-                    </div>
-
-                    <div className="ml-auto">
-                      <ButtonInput
-                        type="button"
-                        variant="outline"
-                        onClick={() => {
-                          copyToClipBoard(linkCopy), setCopySuccess(true);
-                        }}
-                      >
-                        <CopyIcon className="size-4" />
-                        <span className="ml-1">
-                          {copySuccess ? 'Copied' : 'Copy'}
-                        </span>
-                      </ButtonInput>
-                    </div>
-                  </div>
-                </div>
+            <div className="py-2">
+              <h2 className="font-bold text-base">Message from creator</h2>
+              <div className="flex items-center">
+                <HtmlParser
+                  html={String(item?.product?.messageAfterPayment ?? '')}
+                />
               </div>
-            </>
+            </div>
+
+            {item?.product?.productType === 'DIGITAL' ? (
+              <>
+                <div className="divide-y divide-gray-200 dark:divide-gray-800">
+                  {item?.uploadsFiles?.length > 0 &&
+                    item?.uploadsFiles.map((upl, index: number) => (
+                      <div className="py-4" key={index}>
+                        <div className="flex items-center">
+                          <div className="relative shrink-0 cursor-pointer">
+                            <button className="tex-sm text-gray-600">
+                              <PaperclipIcon className="size-7" />
+                            </button>
+                          </div>
+                          <div className="ml-2 cursor-pointer">
+                            <div className="mt-2 flex items-center">
+                              <p className="text-sm font-bold text-gray-600 dark:text-white">
+                                {upl?.name}
+                              </p>
+                            </div>
+                            <div className="mt-2 flex items-center text-gray-600">
+                              <span className="ml-1.5 text-sm font-normal">
+                                {prettyBytes(upl?.size)}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="ml-auto">
+                            <ButtonInput
+                              type="button"
+                              icon={<DownloadIcon className="size-4" />}
+                              variant="outline"
+                              title="Download"
+                              onClick={() => {
+                                push(
+                                  `${downloadOneFileUploadAPI({
+                                    folder: 'products',
+                                    fileName: upl?.path,
+                                  })}`,
+                                );
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  {linkCopy ? (
+                    <div className="py-4">
+                      <div className="flex items-center">
+                        <div className="relative shrink-0 cursor-pointer">
+                          <button className="tex-sm text-gray-600">
+                            <LinkIcon className="size-7" />
+                          </button>
+                        </div>
+                        <div className="ml-2 cursor-pointer">
+                          <div className="mt-2 flex items-center">
+                            <p className="text-sm font-bold text-indigo-600 dark:text-white">
+                              <Link href={linkCopy} target="_blank">
+                                {linkCopy}
+                              </Link>
+                            </p>
+                          </div>
+                        </div>
+
+                        <div className="ml-auto">
+                          <ButtonInput
+                            type="button"
+                            variant="outline"
+                            onClick={() => {
+                              copyToClipBoard(linkCopy), setCopySuccess(true);
+                            }}
+                          >
+                            <CopyIcon className="size-4" />
+                            <span className="ml-1">
+                              {copySuccess ? 'Copied' : 'Copy'}
+                            </span>
+                          </ButtonInput>
+                        </div>
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+              </>
+            ) : null}
           </div>
         </div>
       ) : null}

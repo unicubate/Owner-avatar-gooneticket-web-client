@@ -48,7 +48,7 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
 
             <div className="ml-4 min-w-0 flex-1">
               <p className="text-lg font-bold text-gray-900 dark:text-white">
-                <ReadMore html={`${item?.product?.title}`} value={18} />
+                <ReadMore html={`${item?.product?.title}`} value={30} />
               </p>
               <div className="hidden lg:table-cell">
                 <p className="mt-1 flex min-w-0 flex-1 items-center text-sm font-bold text-gray-600">

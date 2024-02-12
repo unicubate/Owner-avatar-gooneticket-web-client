@@ -25,7 +25,7 @@ import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
-  item?: PostModel;
+  item: PostModel;
   index: number;
 };
 
@@ -62,13 +62,13 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
       <div key={index} className="divide-gray-200 py-5">
         <div className="flex items-center">
           <div className="relative shrink-0 cursor-pointer">
-            {item?.uploadsImage?.length > 0 ? (
+            {item?.uploadsImages?.length > 0 ? (
               <Avatar
                 size={100}
                 shape="square"
                 src={viewOneFileUploadAPI({
                   folder: 'posts',
-                  fileName: String(item?.uploadsImage?.[0]?.path),
+                  fileName: String(item?.uploadsImages?.[0]?.path),
                 })}
                 alt={item?.title}
               />

@@ -22,10 +22,10 @@ const ListPublicGallery: React.FC<Props> = ({ item, userVisitor }) => {
           onClick={() => setOpenModal(true)}
           className="aspect-w-16 aspect-h-9 block overflow-hidden"
         >
-          {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
+          {item?.uploadsImages && item?.uploadsImages.length > 0 ? (
             <ListCarouselUpload
               post={item}
-              uploads={item?.uploadsImage}
+              uploads={item?.uploadsImages}
               folder="posts"
               preview={false}
               height={250}

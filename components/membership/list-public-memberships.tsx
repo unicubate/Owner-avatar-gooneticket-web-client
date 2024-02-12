@@ -10,7 +10,7 @@ import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 
 type Props = {
-  item?: MembershipModel;
+  item: MembershipModel;
 };
 
 const ListPublicMemberships: React.FC<Props> = ({ item }) => {
@@ -32,10 +32,10 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
             ) : null}
           </div>
 
-          {item?.uploadsImage?.length > 0 ? (
+          {item?.uploadsImages?.length > 0 ? (
             <div className="mx-auto mt-4 justify-center text-center">
               <ListCarouselUpload
-                uploads={item?.uploadsImage}
+                uploads={item?.uploadsImages}
                 folder="memberships"
                 preview={false}
                 height={200}

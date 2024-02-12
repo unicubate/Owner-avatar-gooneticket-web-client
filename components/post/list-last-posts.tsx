@@ -8,7 +8,7 @@ import React from 'react';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 
 type Props = {
-  item?: PostModel;
+  item: PostModel;
 };
 
 const ListLastPosts: React.FC<Props> = ({ item }) => {
@@ -20,10 +20,10 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
         className="flex items-stretch justify-between space-x-2 py-7"
       >
         <div className="shrink-0">
-          {item?.uploadsImage?.length > 0 ? (
+          {item?.uploadsImages?.length > 0 ? (
             <div className="size-16 rounded-lg object-cover">
               <ListCarouselUpload
-                uploads={item?.uploadsImage}
+                uploads={item?.uploadsImages}
                 folder="posts"
                 preview={false}
                 height={65}

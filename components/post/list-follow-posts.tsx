@@ -103,11 +103,11 @@ const ListFollowPosts: React.FC<Props> = ({
             </div>
           ) : null}
 
-          {item?.uploadsImage?.length > 0 ? (
+          {item?.uploadsImages?.length > 0 ? (
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
                 post={item}
-                uploads={item?.uploadsImage}
+                uploads={item?.uploadsImages}
                 folder="posts"
                 height={400}
                 className={`object-cover ${
@@ -155,7 +155,7 @@ const ListFollowPosts: React.FC<Props> = ({
                 post={item}
                 urlMedia={item?.urlMedia}
                 enableUrlMedia={item?.enableUrlMedia}
-                uploads={item?.uploadsFile}
+                uploads={item?.uploadsFiles}
                 folder="posts"
               />
             </div>
@@ -242,8 +242,8 @@ const ListFollowPosts: React.FC<Props> = ({
                             folder: 'posts',
                             fileName:
                               item.type === 'AUDIO'
-                                ? item?.uploadsFile[0]?.path
-                                : item?.uploadsImage[0]?.path,
+                                ? item?.uploadsFiles[0]?.path
+                                : item?.uploadsImages[0]?.path,
                           })}`,
                         );
                       }}

@@ -6,14 +6,15 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
+import { ShoppingCartIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { BiCart } from 'react-icons/bi';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
 
 type Props = {
-  item?: ProductModel;
+  item: ProductModel;
 };
 
 const ListPublicShop: React.FC<Props> = ({ item }) => {
@@ -51,7 +52,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
         key={item?.id}
         className="flex flex-col overflow-hidden rounded-lg bg-white shadow-xl transition-all duration-300 dark:bg-[#121212]"
       >
-        {item?.uploadsImage.length > 0 ? (
+        {item?.uploadsImages?.length > 0 ? (
           <Image
             preview={false}
             height={200}
@@ -60,7 +61,7 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
             src={
               viewOneFileUploadAPI({
                 folder: 'products',
-                fileName: String(item?.uploadsImage?.[0]?.path),
+                fileName: String(item?.uploadsImages?.[0]?.path),
               }) as string
             }
             alt={item?.title}
@@ -96,15 +97,18 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
               <BiCart className="h-10 w-10" />
             </p> */}
 
-            <button
-              type="button"
-              onClick={() => {
-                addToCart(item);
-              }}
-              className="ml-auto rounded-full bg-white text-gray-700 transition-all duration-200 hover:text-blue-600 dark:bg-[#121212]"
-            >
-              <BiCart className="size-10 bg-white dark:bg-[#121212]" />
-            </button>
+            <div className="ml-auto">
+              <ButtonInput
+                type="button"
+                onClick={() => {
+                  addToCart(item);
+                }}
+                variant="ghost"
+                className="text-gray-700 dark:bg-[#121212]"
+              >
+                <ShoppingCartIcon className="size-8 dark:bg-[#121212]" />
+              </ButtonInput>
+            </div>
           </div>
 
           <h3 className="duratin-200 mt-2 flex-1 text-sm font-bold text-gray-900 transition-all hover:text-blue-600 dark:text-white sm:text-base">

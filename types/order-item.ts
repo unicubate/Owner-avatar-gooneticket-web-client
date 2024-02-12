@@ -47,6 +47,7 @@ export type OrderItemModel = {
   orderId: string;
   userId: string;
   profile: ProfileItemModel;
+  profileSeller: ProfileItemModel;
   product: ProductModel;
   commission: CommissionModel;
   uploadsImages: Array<UploadModel>;

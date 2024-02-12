@@ -1,5 +1,6 @@
 import { PaginationResponse } from '@/utils/pagination-item';
 import { ProfileItemModel } from './profile.type';
+import { UploadModel } from './upload';
 
 export type ResponseCommissionModel = {
   value: Array<CommissionModel>;
@@ -25,8 +26,8 @@ export type CommissionModel = {
   };
   priceDiscount: string;
   enableDiscount?: boolean;
-  uploadsImage: any;
-  uploadsFile: any;
+  uploadsImages: Array<UploadModel>;
+  uploadsFiles: Array<UploadModel>;
   profile: ProfileItemModel;
 };
 

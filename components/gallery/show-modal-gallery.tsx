@@ -20,7 +20,7 @@ import { FiDownload } from 'react-icons/fi';
 type Props = {
   openModal: boolean;
   setOpenModal: any;
-  post?: PostModel;
+  post: PostModel;
   userVisitorId: string;
 };
 
@@ -87,10 +87,10 @@ const ShowModalGallery: React.FC<Props> = ({
 
           <div className="flex-auto overflow-y-auto p-4">
             <div className="group relative mt-2">
-              {item?.uploadsImage && item?.uploadsImage.length > 0 ? (
+              {item?.uploadsImages && item?.uploadsImages.length > 0 ? (
                 <ListCarouselUpload
                   post={item}
-                  uploads={item?.uploadsImage}
+                  uploads={item?.uploadsImages}
                   folder="posts"
                   preview={false}
                   height="100%"
@@ -173,8 +173,8 @@ const ShowModalGallery: React.FC<Props> = ({
                               folder: 'posts',
                               fileName:
                                 item.type === 'AUDIO'
-                                  ? item?.uploadsFile[0]?.path
-                                  : item?.uploadsImage[0]?.path,
+                                  ? item?.uploadsFiles[0]?.path
+                                  : item?.uploadsImages[0]?.path,
                             })}`,
                           );
                         }}

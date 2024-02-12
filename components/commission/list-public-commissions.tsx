@@ -11,7 +11,7 @@ import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 
 type Props = {
-  item?: CommissionModel;
+  item: CommissionModel;
 };
 
 const ListPublicCommissions: React.FC<Props> = ({ item }) => {
@@ -56,7 +56,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
           </div>
           <div className="mx-auto mt-4 justify-center text-center">
             <ListCarouselUpload
-              uploads={item?.uploadsImage}
+              uploads={item?.uploadsImages}
               folder="commissions"
               height={400}
             />

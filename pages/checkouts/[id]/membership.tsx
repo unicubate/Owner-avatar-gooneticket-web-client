@@ -63,10 +63,10 @@ const CheckoutMembership = () => {
                       ) : null}
                     </div>
 
-                    {item?.uploadsImage?.length > 0 ? (
+                    {item?.uploadsImages?.length > 0 ? (
                       <div className="mx-auto mt-4 justify-center text-center">
                         <ListCarouselUpload
-                          uploads={item?.uploadsImage}
+                          uploads={item?.uploadsImages}
                           folder="memberships"
                           preview={false}
                         />

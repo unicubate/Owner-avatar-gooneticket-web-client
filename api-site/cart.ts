@@ -111,7 +111,7 @@ export const GetCartsAPI = (payload: {
 };
 
 export const GetOneCartOrderAPI = (payload: {
-  organizationId: string;
+  organizationId?: string;
   cartOrderId?: string;
 }) => {
   const { data, isError, isLoading, status, refetch } = useQuery({

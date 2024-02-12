@@ -5,8 +5,11 @@ import { LoginModal } from '@/components/auth-modal/login-modal';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
 import { ListComments } from '@/components/comment/list-comments';
 import { useInputState } from '@/components/hooks';
+import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -79,128 +82,115 @@ const ShopView = () => {
     }
   };
 
-  // const dataProduct =
-  //   isPendingProduct || isPendingUser ? (
-  //     <LoadingFile />
-  //   ) : isErrorProduct || isErrorUser ? (
-  //     <ErrorFile title="404" description="Error find data please try again" />
-  //   ) : (
-  //     <>
+  const dataProduct =
+    isPendingProduct || isPendingUser ? (
+      <LoadingFile />
+    ) : isErrorProduct || isErrorUser ? (
+      <ErrorFile title="404" description="Error find data please try again" />
+    ) : (
+      <>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
+            <div className="lg:col-span-3 lg:row-end-1">
+              <div className="lg:flex lg:items-start">
+                <div className="overflow-hidden rounded-lg border-2 border-transparent">
+                  <div className="mb-2 flex items-center">
+                    <AvatarComponent
+                      size={40}
+                      className="size-10 shrink-0 rounded-full bg-gray-300"
+                      profile={product?.profile}
+                    />
+                    <div
+                      onClick={() =>
+                        router.push(`/${product?.profile?.username}/shop`)
+                      }
+                      className="ml-2 cursor-pointer"
+                    >
+                      <p className="text-sm font-bold text-gray-900">
+                        {product?.profile?.firstName ?? ''}{' '}
+                        {product?.profile?.lastName ?? ''}
+                      </p>
+                    </div>
 
-  //     </>
-  //   );
-
-  return (
-    <>
-      {/* <LayoutSite title={`${product?.title ?? 'Product'}`}> */}
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
-          <div className="lg:col-span-3 lg:row-end-1">
-            <div className="lg:flex lg:items-start">
-              <div className="overflow-hidden rounded-lg border-2 border-transparent">
-                <div className="mb-2 flex items-center">
-                  <AvatarComponent
-                    size={40}
-                    className="size-10 shrink-0 rounded-full bg-gray-300"
-                    profile={product?.profile}
-                  />
-                  <div
-                    onClick={() =>
-                      router.push(`/${product?.profile?.username}/shop`)
-                    }
-                    className="ml-2 cursor-pointer"
-                  >
-                    <p className="text-sm font-bold text-gray-900">
-                      {product?.profile?.firstName ?? ''}{' '}
-                      {product?.profile?.lastName ?? ''}
-                    </p>
+                    <div
+                      onClick={() =>
+                        router.push(`/${product?.profile?.username}/shop`)
+                      }
+                      className="ml-auto"
+                    >
+                      <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
+                        {' '}
+                        View shop
+                      </p>
+                    </div>
                   </div>
 
-                  <div
-                    onClick={() =>
-                      router.push(`/${product?.profile?.username}/shop`)
-                    }
-                    className="ml-auto"
-                  >
-                    <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                      {' '}
-                      View shop
-                    </p>
-                  </div>
-                </div>
-
-                {product?.uploadsImages && product?.uploadsImages.length > 0 ? (
-                  <ListCarouselUpload
-                    uploads={product?.uploadsImages}
-                    folder="products"
-                    preview={false}
-                    className={`size-full object-cover transition-all duration-200 group-hover:scale-110`}
-                  />
-                ) : null}
-
-                {/* {product?.uploadsImage.length > 0 && (
-                    <ImageGalleryShopList
-                      uploads={product?.uploadsImage}
+                  {product?.uploadsImages &&
+                  product?.uploadsImages.length > 0 ? (
+                    <ListCarouselUpload
+                      uploads={product?.uploadsImages}
                       folder="products"
                       preview={false}
+                      className={`size-full object-cover transition-all duration-200 group-hover:scale-110`}
                     />
-                  )} */}
+                  ) : null}
 
-                {product?.urlMedia ? (
-                  <div className="mx-auto mt-2">
-                    <ReactPlayer
-                      className="mr-auto"
-                      url={product?.urlMedia}
-                      height="350px"
-                      width="100%"
-                      controls
-                    />
-                  </div>
+                  {product?.urlMedia ? (
+                    <div className="mx-auto mt-2">
+                      <ReactPlayer
+                        className="mr-auto"
+                        url={product?.urlMedia}
+                        height="350px"
+                        width="100%"
+                        controls
+                      />
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
+              <h1 className="text-3xl font-bold text-gray-900 sm:text-2xl">
+                {product?.title ?? ''}
+              </h1>
+
+              <div className="mt-4 flex items-center">
+                <p className="text-4xl font-bold text-gray-900">
+                  {formatePrice({
+                    value: Number(product?.priceDiscount ?? 0),
+                    isDivide: false,
+                  }) ?? ''}
+                </p>
+                <p className="text-2xl font-bold text-gray-900">
+                  {product?.currency?.symbol ?? ''}
+                </p>
+                {product?.enableDiscount ? (
+                  <>
+                    <p className="ml-3 text-2xl font-bold text-gray-500">
+                      <del>
+                        {' '}
+                        {formatePrice({
+                          value: Number(product?.price ?? 0),
+                          isDivide: false,
+                        }) ?? ''}{' '}
+                      </del>
+                    </p>
+                    <p className="text-2xl font-bold text-gray-500">
+                      <del> {product?.currency?.symbol ?? ''} </del>
+                    </p>
+                  </>
                 ) : null}
               </div>
-            </div>
-          </div>
 
-          <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
-            <h1 className="text-4xl font-bold">{product?.title ?? ''}</h1>
-
-            <div className="mt-4 flex items-center">
-              <p className="text-4xl font-bold text-gray-900">
-                {formatePrice({
-                  value: Number(product?.priceDiscount ?? 0),
-                  isDivide: false,
-                }) ?? ''}
-              </p>
-              <p className="text-2xl font-bold text-gray-900">
-                {product?.currency?.symbol ?? ''}
-              </p>
               {product?.enableDiscount ? (
-                <>
-                  <p className="ml-3 text-2xl font-bold text-gray-500">
-                    <del>
-                      {' '}
-                      {formatePrice({
-                        value: Number(product?.price ?? 0),
-                        isDivide: false,
-                      }) ?? ''}{' '}
-                    </del>
-                  </p>
-                  <p className="text-2xl font-bold text-gray-500">
-                    <del> {product?.currency?.symbol ?? ''} </del>
-                  </p>
-                </>
+                <div className="mt-3 flex items-center text-sm font-medium text-gray-500">
+                  <MdOutlineDiscount className="mr-2 h-5 w-4 text-gray-400" />
+                  Save {product?.discount?.percent}% right now
+                </div>
               ) : null}
-            </div>
 
-            {product?.enableDiscount ? (
-              <div className="mt-3 flex items-center text-sm font-medium text-gray-500">
-                <MdOutlineDiscount className="mr-2 h-5 w-4 text-gray-400" />
-                Save {product?.discount?.percent}% right now
-              </div>
-            ) : null}
-
-            {/* <h2 className="mt-4 text-base font-bold text-gray-900">
+              {/* <h2 className="mt-4 text-base font-bold text-gray-900">
                 Features
               </h2>
               <ul className="mt-4 space-y-3 text-base font-medium text-gray-600 list-disc list-inside">
@@ -209,7 +199,7 @@ const ShopView = () => {
                 <li>Quality control by JC</li>
               </ul> */}
 
-            {/* <div className="mt-6 space-y-5">
+              {/* <div className="mt-6 space-y-5">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
                     <Button shape="default" size="large" loading={false}>
@@ -254,8 +244,8 @@ const ShopView = () => {
                 </div>
               </div> */}
 
-            <div className="mt-6 flex items-center space-x-4">
-              {/* <ButtonInput
+              <div className="mt-6 flex items-center space-x-4">
+                {/* <ButtonInput
                   type="button"
                   loading={false}
                   onClick={() => {
@@ -264,9 +254,9 @@ const ShopView = () => {
                 >
                   Add to cart
                 </ButtonInput> */}
-            </div>
+              </div>
 
-            {/* <ul className="mt-8 space-y-3">
+              {/* <ul className="mt-8 space-y-3">
                 <li className="flex items-center text-sm font-medium text-gray-500">
                   <svg
                     className="w-5 h-5 mr-2.5 text-gray-400"
@@ -322,28 +312,28 @@ const ShopView = () => {
                 </li>
               </ul> */}
 
-            <h2 className="mt-2 text-xl font-bold text-gray-900">
-              Description
-            </h2>
+              <h2 className="mt-2 text-xl font-bold text-gray-900">
+                Description
+              </h2>
 
-            <p className="mt-4 text-base text-gray-600">
-              <HtmlParser html={String(product?.description)} />
-            </p>
-          </div>
+              <p className="mt-4 text-base text-gray-600">
+                <HtmlParser html={String(product?.description)} />
+              </p>
+            </div>
 
-          <div className="lg:col-span-3">
-            {product?.id ? (
-              <ListComments
-                model="PRODUCT"
-                modelIds={['PRODUCT']}
-                productId={String(product?.id)}
-                take={10}
-                organizationId={userVisitor?.organizationId}
-                userVisitorId={userVisitor?.id}
-              />
-            ) : null}
+            <div className="lg:col-span-3">
+              {product?.id ? (
+                <ListComments
+                  model="PRODUCT"
+                  modelIds={['PRODUCT']}
+                  productId={String(product?.id)}
+                  take={10}
+                  organizationId={userVisitor?.organizationId}
+                  userVisitorId={userVisitor?.id}
+                />
+              ) : null}
 
-            {/* <h2 className="mb-2 text-base font-bold text-gray-900">
+              {/* <h2 className="mb-2 text-base font-bold text-gray-900">
                 Description
               </h2>
 
@@ -351,7 +341,7 @@ const ShopView = () => {
                 <HtmlParser html={String(product?.description)} />
               </p> */}
 
-            {/* <div className="border-b border-gray-200">
+              {/* <div className="border-b border-gray-200">
                 <nav className="flex -mb-px space-x-8 sm:space-x-14">
                   <a
                     href="#"
@@ -385,7 +375,7 @@ const ShopView = () => {
                 </nav>
               </div> */}
 
-            {/* <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">
+              {/* <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">
                 <button
                   type="button"
                   className="inline-flex items-center justify-center text-xs font-bold tracking-widest text-gray-400 uppercase transition-all duration-200 rounded hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
@@ -407,16 +397,21 @@ const ShopView = () => {
                   Load more reviews
                 </button>
               </div> */}
+            </div>
           </div>
         </div>
-      </div>
 
-      {user?.id && cartOrder?.id ? (
-        <CartOrderFooterCart user={user} cartOrder={cartOrder} />
-      ) : null}
+        {user?.id && cartOrder?.id ? (
+          <CartOrderFooterCart user={user} cartOrder={cartOrder} />
+        ) : null}
 
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      {/* </LayoutSite> */}
+        <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      </>
+    );
+
+  return (
+    <>
+      <LayoutSite title={`${product?.title ?? ''}`}>{dataProduct}</LayoutSite>
     </>
   );
 };

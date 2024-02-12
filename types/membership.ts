@@ -1,5 +1,6 @@
 import { PaginationResponse } from '@/utils/pagination-item';
 import { ProfileItemModel } from './profile.type';
+import { UploadModel } from './upload';
 
 export type ResponseMembershipModel = {
   value: Array<MembershipModel>;
@@ -17,8 +18,8 @@ export type MembershipModel = {
   messageWelcome: string;
   currencyId: string;
   userId: string;
-  uploadsImage: any;
-  uploadsFile: any;
+  uploadsImages: Array<UploadModel>;
+  uploadsFiles: Array<UploadModel>;
   currency: {
     code: string;
     symbol: string;

@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
 import { PostModel } from '@/types/post';
 import { formateDMYHH } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 import { BiComment } from 'react-icons/bi';
+import { FiDownload } from 'react-icons/fi';
+import { IoShareOutline } from 'react-icons/io5';
 import { MdOutlineDeleteOutline, MdOutlineModeEdit } from 'react-icons/md';
 import ReactPlayer from 'react-player';
-import { useRouter } from 'next/router';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
-import { HtmlParser } from '@/utils/html-parser';
-import { IoShareOutline } from 'react-icons/io5';
-import { FiDownload } from 'react-icons/fi';
-import { useAuth } from '../util/context-user';
-import Link from 'next/link';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { WhoCanSeeItem } from '../ui-setting';
+import { useAuth } from '../util/context-user';
 
 type Props = {
-  item?: PostModel;
+  item: PostModel;
   commentTake: number;
 };
 
@@ -93,10 +93,10 @@ const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
             </div>
           ) : null}
 
-          {item?.uploadsImage?.length > 0 ? (
+          {item?.uploadsImages?.length > 0 ? (
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
-                uploads={item?.uploadsImage}
+                uploads={item?.uploadsImages}
                 folder="posts"
                 preview={false}
                 height={400}

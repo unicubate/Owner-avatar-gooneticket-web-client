@@ -1,5 +1,6 @@
 import { PaginationResponse } from '@/utils/pagination-item';
 import { ProfileItemModel } from './profile.type';
+import { UploadModel } from './upload';
 
 export const arrayWhoCanSees = [
   { id: '1', name: 'PUBLIC' },
@@ -32,6 +33,8 @@ export type ProductModel = {
   description: string;
   messageAfterPayment: string;
   moreDescription: string;
+  urlRedirect: string;
+  enableUrlRedirect: boolean;
   enableChooseQuantity: boolean;
   enableLimitSlot: boolean;
   enableDiscount: boolean;
@@ -51,8 +54,8 @@ export type ProductModel = {
     color: string;
   };
   profile: ProfileItemModel;
-  uploadsImage: any;
-  uploadsFile: any;
+  uploadsImages: Array<UploadModel>;
+  uploadsFiles: Array<UploadModel>;
   discount: {
     isValid: boolean;
     percent: number;

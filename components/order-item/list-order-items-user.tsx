@@ -3,7 +3,7 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateDateDayjs, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Avatar, Tooltip } from 'antd';
+import { Avatar } from 'antd';
 import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -102,11 +102,9 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
               variant="ghost"
               className="hover:text-indigo-600"
               onClick={() => setIsOpen((lk: boolean) => !lk)}
-            >
-              <Tooltip placement="bottomRight" title={'View Content'}>
-                <ViewIcon className="size-5 text-gray-400" />
-              </Tooltip>
-            </ButtonInput>
+              title={'View Content'}
+              icon={<ViewIcon className="size-5 text-gray-400" />}
+            />
           </div>
         </div>
       </div>

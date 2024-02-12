@@ -1,5 +1,6 @@
 import { PaginationResponse } from '@/utils/pagination-item';
 import { ProfileItemModel } from './profile.type';
+import { UploadModel } from './upload';
 
 export const arrayWhoCanSees = [
   { id: '1', name: 'PUBLIC' },
@@ -29,8 +30,8 @@ export type PostModel = {
   description: string;
   totalComment: number;
   totalLike: number;
-  uploadsImage: any;
-  uploadsFile: any;
+  uploadsImages: UploadModel[];
+  uploadsFiles: Array<UploadModel>;
   isValidSubscribe: number;
   enableUrlMedia: boolean;
   category: {

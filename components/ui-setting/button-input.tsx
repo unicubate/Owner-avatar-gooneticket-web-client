@@ -2,7 +2,9 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Button, SizeButton, VariantButton } from '../ui/button';
 
 interface Props {
+  asChild?: boolean;
   className?: string;
+  title?: string;
   disabled?: boolean;
   size?: SizeButton;
   variant: VariantButton;
@@ -15,6 +17,7 @@ interface Props {
 }
 
 const ButtonInput: React.FC<Props> = ({
+  asChild,
   type,
   size,
   icon,
@@ -23,6 +26,7 @@ const ButtonInput: React.FC<Props> = ({
   onClick,
   loading,
   variant,
+  title,
   disabled,
   ref,
 }) => {
@@ -33,6 +37,8 @@ const ButtonInput: React.FC<Props> = ({
         type={type}
         className={className}
         size={size}
+        title={title}
+        asChild={asChild}
         variant={variant}
         onClick={onClick}
         disabled={disabled ? disabled : loading}
