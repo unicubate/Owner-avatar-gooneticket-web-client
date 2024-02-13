@@ -74,7 +74,7 @@ const HorizontalNavSetting: React.FC = () => {
       </div> */}
 
       <div className="border-gray-200 border-b dark:border-b-gray-600">
-        <nav className="flex flex-wrap gap-4">
+        <nav className="flex flex-wrap gap-4 space-x-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
             return (

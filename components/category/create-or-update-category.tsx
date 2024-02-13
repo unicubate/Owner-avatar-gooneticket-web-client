@@ -1,7 +1,7 @@
 import { CreateOrUpdateOneCategoryAPI } from '@/api-site/category';
 import { CategoryFormModel } from '@/types/category';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CloseOutlined } from '@ant-design/icons';
+import { XIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -81,13 +81,13 @@ const CreateOrUpdateCategory: React.FC<{
       {showModal ? (
         <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
-          <div className="relative  m-auto w-full max-w-lg rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212]">
+          <div className="relative  m-auto w-full max-w-lg rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212] overflow-y-scroll max-h-screen">
             <button
               className="float-right border-0 bg-transparent text-black"
               onClick={() => setShowModal(false)}
             >
               <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-                <CloseOutlined />
+                <XIcon />
               </span>
             </button>
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>

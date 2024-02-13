@@ -9,6 +9,7 @@ import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import {
   CalendarIcon,
+  CheckIcon,
   CopyIcon,
   DownloadIcon,
   HashIcon,
@@ -30,7 +31,7 @@ const OrderItemUserModal: React.FC<{
 }> = ({ isOpen, setIsOpen, item }) => {
   const { push } = useRouter();
   const linkCopy = item?.product?.urlRedirect;
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
   const copyToClipBoard = async (link: string) => {
     await navigator.clipboard.writeText(link);
   };
@@ -40,7 +41,7 @@ const OrderItemUserModal: React.FC<{
       {isOpen ? (
         <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
-          <div className="relative m-auto w-full max-w-3xl rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212] overflow-y-scroll max-h-screen">
+          <div className="relative  m-auto w-full max-w-2xl rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212] overflow-y-scroll max-h-screen">
             <button
               className="float-right border-0 bg-transparent text-black"
               onClick={() => setIsOpen((lk: boolean) => !lk)}
@@ -129,7 +130,7 @@ const OrderItemUserModal: React.FC<{
 
             <div className="py-2">
               <h2 className="font-bold text-base">Message from creator</h2>
-              <div className="flex items-center">
+              <div className="mt-4 flex items-center">
                 <HtmlParser
                   html={String(item?.product?.messageAfterPayment ?? '')}
                 />
@@ -190,7 +191,7 @@ const OrderItemUserModal: React.FC<{
                         </div>
                         <div className="ml-2 cursor-pointer">
                           <div className="mt-2 flex items-center">
-                            <p className="text-sm font-bold text-indigo-600 dark:text-white">
+                            <p className="text-sm font-bold text-indigo-600">
                               <Link href={linkCopy} target="_blank">
                                 {linkCopy}
                               </Link>
@@ -203,13 +204,21 @@ const OrderItemUserModal: React.FC<{
                             type="button"
                             variant="outline"
                             onClick={() => {
-                              copyToClipBoard(linkCopy), setCopySuccess(true);
+                              copyToClipBoard(linkCopy), setCopied(true);
                             }}
+                            onMouseLeave={() => setCopied(false)}
                           >
-                            <CopyIcon className="size-4" />
-                            <span className="ml-1">
-                              {copySuccess ? 'Copied' : 'Copy'}
-                            </span>
+                            {copied ? (
+                              <>
+                                <CheckIcon className="size-4" />
+                                <span className="ml-1">Copied</span>
+                              </>
+                            ) : (
+                              <>
+                                <CopyIcon className="size-4" />
+                                <span className="ml-1">Copy</span>
+                              </>
+                            )}
                           </ButtonInput>
                         </div>
                       </div>

@@ -105,7 +105,6 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         data: { ...data, reference: newReference, paymentMethod },
         paymentModel,
       });
-
       setHasErrors(false);
       setLoading(false);
 

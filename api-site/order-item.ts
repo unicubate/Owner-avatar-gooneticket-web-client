@@ -106,7 +106,6 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   days?: number;
   status?: string;
   sort: SortModel;
-  queryKey: string[];
 }) => {
   const {
     model,
@@ -118,10 +117,9 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     take,
     sort,
     status,
-    queryKey,
   } = payload;
   return useInfiniteQuery({
-    queryKey: [...queryKey, { ...payload }],
+    queryKey: [['order-items', 'infinite'], { ...payload }],
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>

@@ -50,7 +50,7 @@ const ShopView = () => {
   });
 
   const { data: cartOrder } = GetOneCartOrderAPI({
-    organizationId: user?.organizationId,
+    organizationSellerId: user?.organizationId,
   });
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({

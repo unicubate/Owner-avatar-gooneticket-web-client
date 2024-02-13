@@ -1,7 +1,7 @@
-import { Result } from 'antd';
-import { useRouter } from 'next/router';
 import { ButtonInput } from '@/components/ui-setting/button-input';
+import { Result } from 'antd';
 import { GetStaticPropsContext } from 'next';
+import { useRouter } from 'next/router';
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
@@ -13,29 +13,30 @@ const TransactionSuccess = () => {
         <Result
           status="success"
           title="Successfully Purchased"
+          className="text-with"
           subTitle={`Order number: ${token}`}
           extra={[
             <>
               <div className="flex items-center space-x-4">
-                <ButtonInput
+                {/* <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="outline"
                   onClick={() => back()}
                 >
                   By Again
-                </ButtonInput>
+                </ButtonInput> */}
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="info"
                   onClick={() => {
-                    push(`/home`);
+                    push(`/payments`);
                   }}
                 >
-                  Go Home
+                  Go Payments
                 </ButtonInput>
               </div>
             </>,

@@ -36,10 +36,9 @@ const TableOrderItemsUser: React.FC<Props> = ({
     take: 10,
     sort: 'DESC',
     days,
-    queryKey: ['order-items', 'infinite'],
   });
 
-  const dataTableTransactions = isLoadingOrderItems ? (
+  const dataTables = isLoadingOrderItems ? (
     <LoadingFile />
   ) : isErrorOrderItems ? (
     <ErrorFile title="404" description="Error find data please try again..." />
@@ -74,7 +73,7 @@ const TableOrderItemsUser: React.FC<Props> = ({
 
         <table className="mt-4 min-w-full lg:divide-y">
           <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-            {dataTableTransactions}
+            {dataTables}
           </tbody>
         </table>
       </div>

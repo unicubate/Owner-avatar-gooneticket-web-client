@@ -29,9 +29,13 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         <td className="py-4 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
             {item?.profileSend?.id ? (
-              <AvatarComponent size={40} profile={item?.profileSend} />
+              <>
+                <AvatarComponent size={40} profile={item?.profileSend} />
+              </>
             ) : (
-              <AvatarCoffeeComponent size={40} color={item?.color} />
+              <>
+                <AvatarCoffeeComponent size={40} color={item?.color} />
+              </>
             )}
 
             <div className="ml-4 min-w-0 flex-1">

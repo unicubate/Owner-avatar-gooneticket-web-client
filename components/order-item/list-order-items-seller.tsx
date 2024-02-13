@@ -19,7 +19,7 @@ type Props = {
   index: number;
 };
 
-const ListOrderItems: React.FC<Props> = ({ item, index }) => {
+const ListOrderItemsSeller: React.FC<Props> = ({ item, index }) => {
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
@@ -81,33 +81,6 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
           </div>
         </td>
 
-        {/* <td className="hidden text-left text-sm font-medium dark:text-white lg:table-cell">
-          {item?.model.toLocaleLowerCase()}
-        </td> */}
-
-        {/* <td className="text-sm font-bold dark:text-white">
-          <div className="flex min-w-0 flex-1 items-center">
-            {item?.profile ? (
-              <AvatarComponent size={40} profile={item?.profile} />
-            ) : null}
-
-            <div className="ml-4 min-w-0 flex-1">
-              <p className="text-sm font-bold text-gray-900 dark:text-white">
-                {item?.profile?.firstName} {item?.profile?.lastName}
-              </p>
-              <p className="mt-1 hidden text-sm font-medium  text-gray-600 sm:table-cell">
-                {item?.profile?.email}
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-600 sm:hidden">
-                <ReadMore html={`${item?.profile?.email}`} value={18} />
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
-              </p>
-            </div>
-          </div>
-        </td> */}
-
         <td className="hidden text-sm font-bold dark:text-white lg:table-cell">
           {item?.product?.productType}
         </td>
@@ -115,22 +88,22 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           {item?.status === 'CANCELLED' && (
             <Badge className="rounded-sm" variant={'danger'}>
-              {item?.status.toLocaleLowerCase()}
+              {item?.status}
             </Badge>
           )}
           {['DELIVERED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'success'}>
-              {item?.status.toLocaleLowerCase()}
+              {item?.status}
             </Badge>
           )}
           {['ACCEPTED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'info'}>
-              {item?.status.toLocaleLowerCase()}
+              {item?.status}
             </Badge>
           )}
           {item?.status === 'PENDING' && (
             <Badge className="rounded-sm" variant={'warning'}>
-              {item?.status.toLocaleLowerCase()}
+              {item?.status}
             </Badge>
           )}
         </td>
@@ -146,29 +119,6 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
             </p>
           </div>
         </td>
-
-        {/* <td className="text-sm font-bold">
-          <div className="flex min-w-0 flex-1 items-center">
-            {item?.profile ? (
-              <AvatarComponent size={40} profile={item?.profile} />
-            ) : null}
-
-            <div className="ml-4 min-w-0 flex-1">
-              <p className="text-sm font-bold text-gray-900 dark:text-white">
-                {item?.profile?.firstName} {item?.profile?.lastName}
-              </p>
-              <p className="mt-1 hidden text-sm font-medium  text-gray-600 sm:table-cell">
-                {item?.profile?.email}
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-600 sm:hidden">
-                <ReadMore html={`${item?.profile?.email}`} value={18} />
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
-              </p>
-            </div>
-          </div>
-        </td> */}
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date, locale as string)}
@@ -218,11 +168,14 @@ const ListOrderItems: React.FC<Props> = ({ item, index }) => {
             </div>
           </div>
         </td>
+        <UpdateOrderItemModal
+          item={item}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </tr>
-
-      <UpdateOrderItemModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };
 
-export { ListOrderItems };
+export { ListOrderItemsSeller };

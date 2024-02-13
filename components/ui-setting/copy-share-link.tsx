@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CopyIcon } from 'lucide-react';
+import { CheckIcon, CopyIcon } from 'lucide-react';
 import { useState } from 'react';
 import { ButtonInput } from '.';
 
@@ -25,7 +25,7 @@ const CopyShareLink: React.FC<Props> = ({
   setIsOpen,
   buttonDialog,
 }) => {
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copied, setCopied] = useState(false);
   const copyToClipBoard = async (link: string) => {
     await navigator.clipboard.writeText(link);
   };
@@ -53,11 +53,21 @@ const CopyShareLink: React.FC<Props> = ({
               size="sm"
               className="px-3"
               onClick={() => {
-                copyToClipBoard(link), setCopySuccess(true);
+                copyToClipBoard(link), setCopied(true);
               }}
+              onMouseLeave={() => setCopied(false)}
             >
-              <CopyIcon className="size-4" />
-              <span className="ml-1">{copySuccess ? 'Copied' : 'Copy'}</span>
+              {copied ? (
+                <>
+                  <CheckIcon className="size-4" />
+                  <span className="ml-1">Copied</span>
+                </>
+              ) : (
+                <>
+                  <CopyIcon className="size-4" />
+                  <span className="ml-1">Copy</span>
+                </>
+              )}
             </ButtonInput>
           </div>
         </DialogContent>

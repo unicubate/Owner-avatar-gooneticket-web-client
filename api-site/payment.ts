@@ -67,6 +67,13 @@ export const CreateOnPaymentPI = ({
         });
       }
 
+      if (paymentModel === 'STRIPE-SHOP') {
+        return await makeApiCall({
+          action: 'createOnePaymentsStripeShop',
+          body: { paymentModel, ...data },
+        });
+      }
+
       if (paymentModel === 'PAYMENT-CREATE') {
         return await makeApiCall({
           action: 'createOnePaymentsCreate',

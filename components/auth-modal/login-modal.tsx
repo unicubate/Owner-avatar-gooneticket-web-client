@@ -4,6 +4,7 @@ import { AlertDangerNotification } from '@/utils';
 import { CloseOutlined } from '@ant-design/icons';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -24,6 +25,8 @@ const LoginModal: React.FC<{
   isOpen: boolean;
   setIsOpen: any;
 }> = ({ isOpen, setIsOpen }) => {
+  const { query } = useRouter();
+  const { redirect } = query;
   const {
     control,
     handleSubmit,
@@ -79,7 +82,7 @@ const LoginModal: React.FC<{
               <h6 className="mt-3 text-center text-xl font-bold">{`Log in`}</h6>
             </div>
 
-            <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+            <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
                 <div className="relative mb-4 block w-full rounded-lg p-4 text-base leading-5 opacity-100 dark:bg-red-500 dark:text-white">
                   {hasErrors}
@@ -112,7 +115,7 @@ const LoginModal: React.FC<{
                   ></label>
                   <Link
                     className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                    href="/forgot-password"
+                    href={`/forgot-password${redirect ? `?redirect=${redirect}` : ''}`}
                   >
                     Forgot password?
                   </Link>
@@ -140,39 +143,44 @@ const LoginModal: React.FC<{
               <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
             </div>
 
-            <GoogleOAuthProvider
-              clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-            >
-              <GoogleLogin
-                size="large"
-                width={350}
-                useOneTap
-                onSuccess={async (credentialResponse) => {
-                  try {
-                    const { data: user } = await loginGoogleUserAPI({
-                      token: String(credentialResponse.credential),
-                    });
-                    localStorage.setItem(
-                      String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-                      JSON.stringify(user?.accessToken),
-                    );
-                    setHasErrors(false);
-                    location.reload();
-                  } catch (error: any) {
-                    setHasErrors(true);
-                    setHasErrors(error.response.data.message);
-                    AlertDangerNotification({
-                      text: 'An error has occurred.',
-                    });
-                  }
-                }}
-                onError={() => {
-                  console.log('Login Failed');
-                }}
-              />
-            </GoogleOAuthProvider>
+            <div className="flex justify-center">
+              <GoogleOAuthProvider
+                clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+              >
+                <GoogleLogin
+                  size="large"
+                  width="100%"
+                  useOneTap
+                  theme="filled_blue"
+                  type="standard"
+                  shape="rectangular"
+                  onSuccess={async (credentialResponse) => {
+                    try {
+                      const { data: user } = await loginGoogleUserAPI({
+                        token: String(credentialResponse.credential),
+                      });
+                      localStorage.setItem(
+                        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+                        JSON.stringify(user?.accessToken),
+                      );
+                      setHasErrors(false);
+                      location.reload();
+                    } catch (error: any) {
+                      setHasErrors(true);
+                      setHasErrors(error.response.data.message);
+                      AlertDangerNotification({
+                        text: 'An error has occurred.',
+                      });
+                    }
+                  }}
+                  onError={() => {
+                    console.log('Login Failed');
+                  }}
+                />
+              </GoogleOAuthProvider>
+            </div>
 
-            <Link href="/register?redirect=https://www.buymeacoffee.com/bokino12">
+            <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
               <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
                 {' '}
                 New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here

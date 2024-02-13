@@ -1,6 +1,7 @@
 'use client';
 
-import { GetCartsAPI, GetOneCartOrderAPI } from '@/api-site/cart';
+import { GetCartsAPI } from '@/api-site/cart';
+import { GetOneUserPublicAPI } from '@/api-site/user';
 import { ListMiniCats } from '@/components/cart/list-mini-carts';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
@@ -22,17 +23,13 @@ const CheckoutShop = () => {
   const { query, push } = useRouter();
   const { id: cartOrderId, username } = query;
 
-  // const { status, data: user } = GetOneUserPublicAPI({
-  //   username: String(username),
-  //   userVisitorId: userBayer?.id,
-  // });
-
   const {
-    isLoading: isLoadingCardOrder,
-    isError: isErrorCardOrder,
-    data: cartOrder,
-  } = GetOneCartOrderAPI({
-    cartOrderId: String(cartOrderId),
+    isPending: isPendingUser,
+    isError: isErrorUser,
+    data: userSeller,
+  } = GetOneUserPublicAPI({
+    username: String(username),
+    userVisitorId: userBayer?.id,
   });
 
   const {
@@ -45,9 +42,9 @@ const CheckoutShop = () => {
   });
 
   const dataTableCarts =
-    isLoadingCart || isLoadingCardOrder ? (
+    isLoadingCart || isPendingUser || isLoadingCart ? (
       <LoadingFile />
-    ) : isErrorCart || isErrorCardOrder ? (
+    ) : isErrorCart || isErrorUser || isErrorUser ? (
       <ErrorFile title="404" description="Error find data please try again" />
     ) : (
       carts?.cartItems.length > 0 &&
@@ -179,9 +176,13 @@ const CheckoutShop = () => {
                             data={{
                               cartOrderId,
                               amount: newAmount,
-                              userReceiveId: '',
                               userSendId: userBayer?.id,
-                              organizationId: cartOrder?.organizationId,
+                              organizationId: userSeller?.organizationId,
+                              // cartOrderId,
+                              // amount: newAmount,
+                              // userReceiveId: '',
+                              // userSendId: userBayer?.id,
+                              // organizationId: userSeller?.organizationId,
                             }}
                           />
                         </>
@@ -206,9 +207,8 @@ const CheckoutShop = () => {
                         data={{
                           cartOrderId,
                           amount: newAmount,
-                          userReceiveId: '',
                           userSendId: userBayer?.id,
-                          organizationId: cartOrder?.organizationId,
+                          organizationId: userSeller?.organizationId,
                         }}
                       />
                     </>

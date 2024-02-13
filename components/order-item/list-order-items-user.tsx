@@ -49,16 +49,17 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
                 {formateDateDayjs(item?.createdAt as Date)}
               </span>
             </div>
-            <div className="mt-2 flex items-center">
-              {item?.product?.title ? (
+
+            {item?.product?.title ? (
+              <div className="mt-2 flex items-center">
                 <p className="text-lg font-bold text-gray-600 dark:text-white">
                   <ReadMore
                     html={String(item?.product?.title ?? '')}
                     value={100}
                   />
                 </p>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
 
             <div className="mt-2 flex items-center text-gray-600">
               <span className="font-bold">
@@ -107,8 +108,9 @@ const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
             />
           </div>
         </div>
+
+        <OrderItemUserModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
-      <OrderItemUserModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

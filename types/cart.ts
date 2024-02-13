@@ -19,7 +19,7 @@ export type OneCartModel = {
   quantity: number;
   productId: string;
   userId: string;
-  organizationId: string;
+  organizationSellerId: string;
   priceTotalProduct: number;
   profileVendor: ProfileItemModel;
   uploadsImages: Array<UploadModel>;

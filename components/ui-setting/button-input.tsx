@@ -13,6 +13,7 @@ interface Props {
   icon?: React.ReactNode;
   type: 'button' | 'submit';
   onClick?: () => void;
+  onMouseLeave?: () => void;
   ref?: (node?: Element | null) => void;
 }
 
@@ -28,6 +29,7 @@ const ButtonInput: React.FC<Props> = ({
   variant,
   title,
   disabled,
+  onMouseLeave,
   ref,
 }) => {
   return (
@@ -41,6 +43,7 @@ const ButtonInput: React.FC<Props> = ({
         asChild={asChild}
         variant={variant}
         onClick={onClick}
+        onMouseLeave={onMouseLeave}
         disabled={disabled ? disabled : loading}
       >
         {loading ? (

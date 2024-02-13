@@ -11,17 +11,25 @@ import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userBayer } = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
-  const { status: statusUser, data: user } = GetOneUserPublicAPI({
+  const {
+    isPending: isPendingUser,
+    isError: isErrorUser,
+    data: user,
+  } = GetOneUserPublicAPI({
     username,
-    userVisitorId: userVisitor?.id,
+    userVisitorId: userBayer?.id,
   });
 
-  const { status, data: cartOrder } = GetOneCartOrderAPI({
-    organizationId: user?.organizationId,
+  const {
+    isPending: isPendingCartOrder,
+    isError: isErrorCartOrder,
+    data: cartOrder,
+  } = GetOneCartOrderAPI({
+    organizationSellerId: user?.organizationId,
   });
 
   if (user?.profile?.enableShop === false) {
@@ -57,9 +65,9 @@ const ShopUserPublic = () => {
         ) : null}
       </LayoutUserPublicSite>
 
-      {statusUser === 'pending' ? <LoadingFile /> : null}
+      {isPendingUser || isPendingCartOrder ? <LoadingFile /> : null}
 
-      {statusUser === 'error' ? (
+      {isErrorUser || isErrorCartOrder ? (
         <ErrorFile title="404" description="Error find data please try again" />
       ) : null}
     </>

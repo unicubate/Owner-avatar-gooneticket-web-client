@@ -111,10 +111,10 @@ export const GetCartsAPI = (payload: {
 };
 
 export const GetOneCartOrderAPI = (payload: {
-  organizationId?: string;
+  organizationSellerId?: string;
   cartOrderId?: string;
 }) => {
-  const { data, isError, isLoading, status, refetch } = useQuery({
+  const { data, isError, isLoading, status, refetch, isPending } = useQuery({
     queryKey: ['cart-order', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
@@ -129,6 +129,7 @@ export const GetOneCartOrderAPI = (payload: {
     isError,
     isLoading,
     status,
+    isPending,
     refetch,
   };
 };

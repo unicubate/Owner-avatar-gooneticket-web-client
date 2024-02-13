@@ -7,7 +7,7 @@ import { useInputState } from '../hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '../ui-setting';
 import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { ListOrderItems } from './list-order-items';
+import { ListOrderItemsSeller } from './list-order-items-seller';
 
 type Props = {
   model?: ModelType;
@@ -15,7 +15,11 @@ type Props = {
   organizationId: string;
 };
 
-const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
+const TableOrderItemsSeller: React.FC<Props> = ({
+  model,
+  organizationId,
+  days,
+}) => {
   const { search, handleSetSearch } = useInputState();
 
   const {
@@ -32,7 +36,6 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
     take: 10,
     sort: 'DESC',
     days,
-    queryKey: ['order-items', 'infinite'],
   });
 
   const dataTableTransactions = isLoadingOrderItems ? (
@@ -49,7 +52,7 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
     dataOrderItems?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListOrderItems item={item} key={index} index={index} />
+        <ListOrderItemsSeller item={item} key={index} index={index} />
       ))
   );
 
@@ -87,4 +90,4 @@ const TableOrderItems: React.FC<Props> = ({ model, organizationId, days }) => {
   );
 };
 
-export { TableOrderItems };
+export { TableOrderItemsSeller };

@@ -1,6 +1,6 @@
 import { GetStatisticsTransactionsAPI } from '@/api-site/transaction';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { TableOrderItems } from '@/components/order-item/table-order-items';
+import { TableOrderItemsSeller } from '@/components/order-item/table-order-items-seller';
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
@@ -47,7 +47,7 @@ const OrdersIndex = () => {
 
             <div className="flow-root">
               {user?.organizationId ? (
-                <TableOrderItems
+                <TableOrderItemsSeller
                   model="PRODUCT"
                   organizationId={user?.organizationId}
                 />

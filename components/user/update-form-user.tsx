@@ -1,11 +1,11 @@
+import { GetOneUserPrivateAPI } from '@/api-site/user';
+import { cn } from '@/lib/utils';
 import React, { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { ButtonInput } from '../ui-setting/button-input';
-import { GetOneUserPrivateAPI } from '@/api-site/user';
-import { cn } from '@/lib/utils';
-import { TextInput } from '../ui-setting/shadcn';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { ButtonInput } from '../ui-setting/button-input';
+import { TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   userId: string;
@@ -64,6 +64,22 @@ const UpdateFormUser: React.FC<Props> = ({ userId }) => {
               )}
             >
               <div className="mt-2">
+                {/* <label className="block text-sm font-bold"> Website </label>
+                <div className="relative flex mt-2">
+                  <div className="inline-flex items-center px-10 text-gray-900 border border-r-0 border-gray-300 rounded-l-lg bg-gray-50 sm:text-sm">
+                    https://google.com
+                  </div>
+
+                  <input
+                    type="url"
+                    name=""
+                    id=""
+                    placeholder="example.com"
+                    value=""
+                    className="flex-1 border block w-full min-w-0 px-4 py-3 placeholder-gray-500 border-gray-300 rounded-none rounded-r-lg sm:text-sm"
+                  />
+                </div> */}
+
                 <TextInput
                   control={control}
                   label="Username"
