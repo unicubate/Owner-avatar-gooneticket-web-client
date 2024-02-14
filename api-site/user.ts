@@ -253,7 +253,7 @@ export const getUsersAPI = async (
   });
 };
 
-export const logoutUsersAPI = async () => {
+export const logoutUsersAPI = async (): Promise<any> => {
   try {
     return await makeApiCall({
       action: 'logoutUsers',

@@ -1,3 +1,4 @@
+import { logoutUsersAPI } from '@/api-site/user';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
@@ -12,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -30,6 +30,11 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
   const t = useTranslations('menu-site');
   const { push } = useRouter();
   const pathname = usePathname();
+
+  const logoutUser = () => {
+    logoutUsersAPI();
+    location.reload();
+  };
 
   return (
     <>

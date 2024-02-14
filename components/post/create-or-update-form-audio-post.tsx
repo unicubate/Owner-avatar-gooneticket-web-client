@@ -230,7 +230,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                       <AudioPlayerInput
                         urlMedia={post?.urlMedia}
                         enableUrlMedia={post?.enableUrlMedia}
-                        uploads={post?.uploadsFile}
+                        uploads={post?.uploadsFiles}
                         folder="posts"
                       />
                     </div>

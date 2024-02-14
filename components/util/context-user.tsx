@@ -1,4 +1,4 @@
-import { GetOneUserMeAPI, logoutUsersAPI } from '@/api-site/user';
+import { GetOneUserMeAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
 import Cookies from 'js-cookie';
 import { FC, ReactNode, createContext, useContext } from 'react';
@@ -6,18 +6,11 @@ import { FC, ReactNode, createContext, useContext } from 'react';
 type AuthContextProps = {
   user?: UserModel | undefined;
   userStorage?: any;
-  logout?: () => void;
-};
-
-export const logoutUser = () => {
-  logoutUsersAPI();
-  location.reload();
 };
 
 const initAuthContextPropsState = {
   user: undefined,
   userStorage: undefined,
-  logout: () => {},
 };
 
 const AuthContext = createContext<AuthContextProps>(
@@ -35,7 +28,6 @@ export const getCookieUser = () =>
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { data: user } = GetOneUserMeAPI();
-  const logout = () => logoutUser();
 
   return (
     <>
@@ -43,7 +35,6 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
         value={{
           ...(user as any),
           userStorage: user,
-          logout,
         }}
       >
         {children}

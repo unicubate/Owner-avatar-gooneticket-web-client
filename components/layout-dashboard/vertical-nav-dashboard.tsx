@@ -1,3 +1,4 @@
+import { logoutUsersAPI } from '@/api-site/user';
 import { cn } from '@/lib/utils';
 import {
   Dice6Icon,
@@ -8,7 +9,6 @@ import {
   ImageIcon,
   ListIcon,
   LockKeyholeIcon,
-  LogOutIcon,
   MenuSquareIcon,
   SearchIcon,
   SettingsIcon,
@@ -19,7 +19,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -108,6 +107,11 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
       icon: <SettingsIcon className={classIcon} />,
     },
   ]);
+
+  const logoutUser = () => {
+    logoutUsersAPI();
+    location.reload();
+  };
 
   const bgColor = `bg-${user?.profile?.color}-600 text-white`;
   return (
@@ -245,16 +249,6 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
 
                     {item?.title}
                   </Link> */}
-
-              <a
-                href={void 0}
-                title=""
-                onClick={() => logoutUser()}
-                className="group flex cursor-pointer items-center rounded-lg px-4 py-2 text-sm font-medium text-gray-900 transition-all duration-200 dark:text-white dark:hover:bg-gray-200"
-              >
-                <LogOutIcon className={classIcon} />
-                {t('logout')}
-              </a>
             </nav>
           </>
         </div>

@@ -74,7 +74,7 @@ export const apiEndpoints: ClientApiMethods = {
   loginGoogleUser: POST(`${baseUrl}/login-google-auth`),
   registerGoogleUser: POST(`${baseUrl}/register-google-auth`),
   registerUser: POST(`${baseUrl}/register`),
-  logoutUsers: DELETE(`${baseUrl}/logout`),
+  logoutUsers: GET(`${baseUrl}/logout`),
   passwordResetUser: POST(`${baseUrl}/password/reset`),
   resetPassword: PUT(`${baseUrl}/password/update/:token`),
   resendCode: GET(`${baseUrl}/resend/code/:userId`),

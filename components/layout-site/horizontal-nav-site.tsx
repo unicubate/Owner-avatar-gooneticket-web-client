@@ -1,9 +1,8 @@
-import { MenuProps } from 'antd';
+import { logoutUsersAPI } from '@/api-site/user';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { ButtonInput } from '../ui-setting';
-import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -11,21 +10,6 @@ export type NavbarProps = {
   description?: string;
   icon?: any;
 };
-
-const items: MenuProps['items'] = [
-  {
-    key: '1',
-    label: <Link href="/dashboard">Dashboard</Link>,
-  },
-  {
-    key: '2',
-    label: (
-      <a href={void 0} title="" onClick={() => logoutUser()}>
-        Logout
-      </a>
-    ),
-  },
-];
 
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
@@ -54,6 +38,11 @@ interface Props {
 const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
   const router = useRouter();
   const pathname = usePathname();
+
+  const logoutUser = () => {
+    logoutUsersAPI();
+    location.reload();
+  };
 
   return (
     <>
