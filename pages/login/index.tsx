@@ -66,6 +66,10 @@ const Login = () => {
       // );
       setHasErrors(false);
       setLoading(false);
+      localStorage.setItem(
+        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+        JSON.stringify(user?.accessToken),
+      );
       window.location.href = `${
         redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
       }`;
