@@ -65,14 +65,9 @@ export const makeApiCall = async ({
   //   const m = this._methods[req.action];
 
   axios.defaults.headers.common['Authorization'] = `${userToken}` ?? {};
+  axios.defaults.withCredentials = true;
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
-    withCredentials: true,
-    // headers: {
-    //   Accept: 'application/json',
-    //   'Content-type': 'application/json',
-    //   Authorization: `${user ? user : {}}`,
-    // },
     url: url,
     data: body,
   });
