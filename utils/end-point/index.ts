@@ -1,6 +1,6 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import { DELETE, GET, POST, PUT } from './consts';
-
 export interface ClientApiMethods {
   [key: string]: {
     endpoint: string;
@@ -14,6 +14,11 @@ export type IntegrationApiCall = {
   urlParams?: Object;
   queryParams?: Object;
 };
+
+const userToken =
+  typeof window !== 'undefined'
+    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+    : null;
 
 export const makeApiCall = async ({
   action,
@@ -56,9 +61,18 @@ export const makeApiCall = async ({
     queryParams: queryParams,
   });
 
+  //   async request(req: Request<M>) {
+  //   const m = this._methods[req.action];
+
+  axios.defaults.headers.common['Authorization'] = `${userToken}` ?? {};
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     withCredentials: true,
+    // headers: {
+    //   Accept: 'application/json',
+    //   'Content-type': 'application/json',
+    //   Authorization: `${user ? user : {}}`,
+    // },
     url: url,
     data: body,
   });
