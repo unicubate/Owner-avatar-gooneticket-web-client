@@ -15,15 +15,6 @@ export type IntegrationApiCall = {
   queryParams?: Object;
 };
 
-const user =
-  typeof window !== 'undefined'
-    ? JSON.parse(
-        String(
-          localStorage.getItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)),
-        ),
-      )
-    : null;
-
 export const makeApiCall = async ({
   action,
   body,
@@ -65,7 +56,6 @@ export const makeApiCall = async ({
     queryParams: queryParams,
   });
 
-  axios.defaults.headers.common['Authorization'] = user ?? {};
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     withCredentials: true,
@@ -84,12 +74,14 @@ export const apiEndpoints: ClientApiMethods = {
   loginGoogleUser: POST(`${baseUrl}/login-google-auth`),
   registerGoogleUser: POST(`${baseUrl}/register-google-auth`),
   registerUser: POST(`${baseUrl}/register`),
+  logoutUsers: DELETE(`${baseUrl}/logout`),
   passwordResetUser: POST(`${baseUrl}/password/reset`),
   resetPassword: PUT(`${baseUrl}/password/update/:token`),
   resendCode: GET(`${baseUrl}/resend/code/:userId`),
   validCode: POST(`${baseUrl}/valid/code`),
   getOneUserPrivate: GET(`${baseUrl}/users/show/:userId`),
   getOneUserPublic: GET(`${baseUrl}/users/view`),
+  getOneUserMe: GET(`${baseUrl}/users/me`),
   getUsers: GET(`${baseUrl}/users`),
 
   /****************** Profile route */

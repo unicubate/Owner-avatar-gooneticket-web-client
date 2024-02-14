@@ -1,20 +1,21 @@
 import { useRouter } from 'next/router';
 import { ComponentType, useEffect } from 'react';
-import { getTokenToLocalStorage } from './context-user';
+import { getCookieUser, useAuth } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
-  const userToken = getTokenToLocalStorage();
+  const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
+    const { userStorage } = useAuth() as any;
+    const isOnline = userStorage?.id !== undefined;
     const { push, pathname } = useRouter();
     const linkHref =
       typeof window !== 'undefined' ? window.location.href : null;
-    const userIsAuthenticated = userToken !== null;
 
     useEffect(() => {
-      if (!userIsAuthenticated) {
+      if (!userToken && !isOnline) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [userIsAuthenticated, pathname, push]);
+    }, [userToken, isOnline, pathname, push]);
 
     return <Component {...props} />;
   };

@@ -1,73 +1,22 @@
-import {
-  FC,
-  useState,
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  ReactNode,
-} from 'react';
+import { GetOneUserMeAPI, logoutUsersAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
-import { GetOneUserPrivateAPI } from '@/api-site/user';
-import { jwtDecode } from 'jwt-decode';
-import { useTheme } from 'next-themes';
+import Cookies from 'js-cookie';
+import { FC, ReactNode, createContext, useContext } from 'react';
 
 type AuthContextProps = {
-  user: UserModel | undefined;
-  userStorage: any;
-  setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
-  logout: () => void;
+  user?: UserModel | undefined;
+  userStorage?: any;
+  logout?: () => void;
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
-  window.location.href = `${process.env.NEXT_PUBLIC_SITE}`;
-};
-
-export const getCurrentUserFormToken = () => {
-  const token =
-    typeof window !== 'undefined'
-      ? window.localStorage.getItem(
-          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        )
-      : null;
-  if (token !== null) {
-    const user: any = jwtDecode(token);
-    return user;
-  } else {
-    return;
-  }
-};
-
-export const getTokenToLocalStorage = () => {
-  const user =
-    typeof window !== 'undefined'
-      ? JSON.parse(
-          String(
-            localStorage.getItem(
-              String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-            ),
-          ),
-        )
-      : null;
-
-  return user;
-};
-
-export const getThemeLocalStorage = () => {
-  const theme =
-    typeof window !== 'undefined' ? window.localStorage.getItem('theme') : null;
-  if (theme !== null) {
-    return theme;
-  } else {
-    return;
-  }
+  logoutUsersAPI();
+  location.reload();
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => {},
-  setCurrentUser: () => {},
   user: undefined,
+  userStorage: undefined,
   logout: () => {},
 };
 
@@ -79,22 +28,27 @@ const useAuth = () => {
   return useContext(AuthContext);
 };
 
+export const getCookieUser = () =>
+  typeof window !== 'undefined'
+    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+    : null;
+
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  const { theme } = useTheme();
-  const [userStorage, setUserStorage] = useState(() =>
-    getCurrentUserFormToken(),
-  );
-
-  const { data: user } = GetOneUserPrivateAPI({
-    userId: userStorage?.id,
-  });
-
+  const { data: user } = GetOneUserMeAPI();
   const logout = () => logoutUser();
 
   return (
-    <AuthContext.Provider value={{ ...user, userStorage, theme, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <>
+      <AuthContext.Provider
+        value={{
+          ...(user as any),
+          userStorage: user,
+          logout,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </>
   );
 };
 

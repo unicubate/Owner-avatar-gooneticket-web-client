@@ -223,6 +223,27 @@ export const GetOneUserPublicAPI = (payload: {
   };
 };
 
+export const GetOneUserMeAPI = () => {
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['user'],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'getOneUserMe',
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as UserModel,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
+};
+
 export const getUsersAPI = async (
   payload: PaginationRequest,
 ): Promise<{ data: ResponsePostModel }> => {
@@ -230,6 +251,14 @@ export const getUsersAPI = async (
     action: 'getUsers',
     queryParams: payload,
   });
+};
+
+export const logoutUsersAPI = async () => {
+  try {
+    return await makeApiCall({
+      action: 'logoutUsers',
+    });
+  } catch (error) {}
 };
 
 export const GetInfiniteUsersAPI = (payload: {

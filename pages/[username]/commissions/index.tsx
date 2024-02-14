@@ -7,6 +7,7 @@ import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public
 import { useAuth } from '@/components/util/context-user';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const CommissionsUserPublic = () => {
   const { userStorage: userVisiter } = useAuth() as any;
@@ -31,9 +32,12 @@ const CommissionsUserPublic = () => {
     </>
   );
 
-  if (user?.profile?.enableCommission === false) {
-    push(`${`/${username}`}`);
-  }
+  useEffect(() => {
+    if (user?.profile?.enableCommission === false) {
+      push(`${`/${username}`}`);
+    }
+  }, [user]);
+
   return (
     <>
       <LayoutUserPublicSite

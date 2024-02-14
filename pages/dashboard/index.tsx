@@ -5,7 +5,6 @@ import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { useAuth } from '@/components/util/context-user';
-import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -20,6 +19,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { PrivateComponent } from '@/components/util/private-component';
 import {
   LockKeyholeIcon,
   ShieldCheckIcon,
@@ -315,6 +315,7 @@ const Dashboard = () => {
   );
 };
 
+//export default Dashboard;
 export default PrivateComponent(Dashboard);
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {

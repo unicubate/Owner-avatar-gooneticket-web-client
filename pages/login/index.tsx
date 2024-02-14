@@ -60,10 +60,10 @@ const Login = () => {
       // } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
       //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
       // }
-      localStorage.setItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken),
-      );
+      // localStorage.setItem(
+      //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+      //   JSON.stringify(user?.accessToken),
+      // );
       setHasErrors(false);
       setLoading(false);
       window.location.href = `${

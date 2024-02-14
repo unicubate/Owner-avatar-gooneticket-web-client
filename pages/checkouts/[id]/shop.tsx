@@ -15,7 +15,7 @@ import { formatePrice } from '@/utils';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
@@ -58,9 +58,11 @@ const CheckoutShop = () => {
     value: carts?.summary?.totalPriceDiscount,
   };
 
-  if (Number(carts?.summary?.totalPriceDiscount) <= 0) {
-    push(`${`/${username}/shop`}`);
-  }
+  useEffect(() => {
+    if (Number(carts?.summary?.totalPriceDiscount) <= 0) {
+      push(`${`/${username}/shop`}`);
+    }
+  }, [carts]);
 
   return (
     <>
