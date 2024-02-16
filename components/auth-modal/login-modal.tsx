@@ -45,11 +45,7 @@ const LoginModal: React.FC<{
     const { email, password } = payload;
 
     try {
-      const { data: user } = await loginUserAPI({ email, password });
-      localStorage.setItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken),
-      );
+      await loginUserAPI({ email, password });
       setHasErrors(false);
       setLoading(false);
       location.reload();
@@ -159,10 +155,6 @@ const LoginModal: React.FC<{
                       const { data: user } = await loginGoogleUserAPI({
                         token: String(credentialResponse.credential),
                       });
-                      localStorage.setItem(
-                        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-                        JSON.stringify(user?.accessToken),
-                      );
                       setHasErrors(false);
                       location.reload();
                     } catch (error: any) {

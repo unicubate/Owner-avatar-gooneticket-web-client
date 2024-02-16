@@ -52,16 +52,12 @@ const Register = () => {
     setHasErrors(undefined);
 
     try {
-      const { data: user } = await registerUserAPI({
+      await registerUserAPI({
         ...payload,
         nextStep: 'SETTING_PROFILE',
       });
       setHasErrors(false);
       setLoading(false);
-      // localStorage.setItem(
-      //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-      //   JSON.stringify(user?.accessToken)
-      // );
       push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
       setHasErrors(true);
