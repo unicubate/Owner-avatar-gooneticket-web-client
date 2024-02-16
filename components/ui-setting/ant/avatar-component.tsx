@@ -25,6 +25,7 @@ const AvatarComponent: React.FC<Props> = ({ profile, size, className }) => {
           className={cn(`bg-${profile?.color}-600  rounded-full`, className)}
           size={size}
           alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
+          style={{ backgroundColor: '#fde3', color: `${profile?.color}` }}
         >
           {capitalizeOneFirstLetter(
             String(profile?.firstName),
