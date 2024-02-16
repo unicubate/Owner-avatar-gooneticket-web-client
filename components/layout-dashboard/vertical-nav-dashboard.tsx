@@ -1,4 +1,3 @@
-import { logoutUsersAPI } from '@/api-site/user';
 import { cn } from '@/lib/utils';
 import {
   Dice6Icon,
@@ -107,11 +106,6 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
       icon: <SettingsIcon className={classIcon} />,
     },
   ]);
-
-  const logoutUser = () => {
-    logoutUsersAPI();
-    location.reload();
-  };
 
   const bgColor = `bg-${user?.profile?.color}-600 text-white`;
   return (

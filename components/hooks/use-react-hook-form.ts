@@ -14,7 +14,7 @@ const useReactHookForm = (options: { schema: any }) => {
     control,
     setValue,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<any>({
     resolver: yupResolver(schema),
     mode: 'onChange',
@@ -30,6 +30,9 @@ const useReactHookForm = (options: { schema: any }) => {
     loading,
     setLoading,
     hasErrors,
+    isDirty,
+    isValid,
+    isSubmitting,
     setHasErrors,
   };
 };

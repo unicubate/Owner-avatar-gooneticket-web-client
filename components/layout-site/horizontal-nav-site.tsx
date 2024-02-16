@@ -1,4 +1,3 @@
-import { logoutUsersAPI } from '@/api-site/user';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
@@ -38,11 +37,6 @@ interface Props {
 const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
   const router = useRouter();
   const pathname = usePathname();
-
-  const logoutUser = () => {
-    logoutUsersAPI();
-    location.reload();
-  };
 
   return (
     <>

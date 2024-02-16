@@ -21,6 +21,11 @@ const useAuth = () => {
   return useContext(AuthContext);
 };
 
+export const logoutUser = () => {
+  Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
+  location.reload();
+};
+
 export const getCookieUser = () =>
   typeof window !== 'undefined'
     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))

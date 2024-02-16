@@ -33,6 +33,8 @@ const ForgotPassword = () => {
     control,
     handleSubmit,
     errors,
+    isValid,
+    isDirty,
     loading,
     setLoading,
     hasErrors,
@@ -96,6 +98,7 @@ const ForgotPassword = () => {
               size="lg"
               variant="info"
               loading={loading}
+              disabled={!isDirty || !isValid}
             >
               Request Password Reset
             </ButtonInput>

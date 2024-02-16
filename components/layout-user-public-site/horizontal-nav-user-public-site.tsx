@@ -4,9 +4,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
-import { useAuth } from '../util/context-user';
+import { logoutUser, useAuth } from '../util/context-user';
 
-import { logoutUsersAPI } from '@/api-site/user';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -71,11 +70,6 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
       href: `/${username}/commissions`,
     },
   ]);
-
-  const logoutUser = () => {
-    logoutUsersAPI();
-    location.reload();
-  };
 
   return (
     <>
