@@ -15,12 +15,10 @@ const PaymentsIndex = () => {
             {/* <HorizontalNavShop /> */}
 
             <div className="flow-root">
-              {user?.organizationId ? (
-                <TableOrderItemsUser
-                  model="PRODUCT"
-                  organizationId={user?.organizationId}
-                />
-              ) : null}
+              <TableOrderItemsUser
+                model="PRODUCT"
+                organizationId={user?.organizationId}
+              />
             </div>
           </div>
         </div>

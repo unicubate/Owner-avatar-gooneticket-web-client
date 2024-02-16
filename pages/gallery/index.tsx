@@ -23,9 +23,7 @@ const Gallery = () => {
             </div>
 
             <div className="flow-root">
-              {organizationId ? (
-                <TableGallery userVisitor={{ id: user?.id, organizationId }} />
-              ) : null}
+              <TableGallery userVisitor={{ id: user?.id, organizationId }} />
             </div>
           </div>
         </div>

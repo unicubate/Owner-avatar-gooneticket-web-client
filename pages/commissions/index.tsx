@@ -19,9 +19,7 @@ const Commissions = () => {
             {profile?.id ? <EnableCommission profile={profile} /> : null}
 
             <div className="flow-root">
-              {organizationId ? (
-                <TableCommissions organizationId={organizationId} />
-              ) : null}
+              <TableCommissions organizationId={organizationId} />
             </div>
           </div>
         </div>

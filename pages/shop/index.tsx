@@ -23,7 +23,6 @@ const ShopsIndex = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
@@ -135,12 +134,10 @@ const ShopsIndex = () => {
                 ) : null}
               </div>
 
-              {user?.organizationId ? (
-                <TableTransactions
-                  model="PRODUCT"
-                  organizationId={user?.organizationId}
-                />
-              ) : null}
+              <TableTransactions
+                model="PRODUCT"
+                organizationId={user?.organizationId}
+              />
             </div>
           </div>
         </div>

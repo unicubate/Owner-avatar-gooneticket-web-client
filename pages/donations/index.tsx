@@ -17,6 +17,7 @@ import { useDebounce } from '@/utils';
 import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -40,7 +41,6 @@ const Donations = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ['statistics-transactions'],
     days: debouncedFilter,
     isEnabled: isEnabled,
   });
@@ -54,7 +54,12 @@ const Donations = () => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return (
+      <ErrorFile
+        title="404"
+        description="Error find data please try again..."
+      />
+    );
   }
 
   const transaction = transactions?.find((item) => item?.model === 'DONATION');

@@ -21,7 +21,6 @@ const OrdersIndex = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
@@ -46,12 +45,10 @@ const OrdersIndex = () => {
             {/* {profile?.id ? <EnableShop profile={profile} /> : null} */}
 
             <div className="flow-root">
-              {user?.organizationId ? (
-                <TableOrderItemsSeller
-                  model="PRODUCT"
-                  organizationId={user?.organizationId}
-                />
-              ) : null}
+              <TableOrderItemsSeller
+                model="PRODUCT"
+                organizationId={user?.organizationId}
+              />
             </div>
           </div>
         </div>

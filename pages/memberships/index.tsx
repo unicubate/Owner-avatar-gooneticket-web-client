@@ -3,6 +3,7 @@ import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavMembership } from '@/components/membership/horizontal-nav-membership';
 import { TableTransactions } from '@/components/transaction/table-transactions';
 import { ButtonInput } from '@/components/ui-setting';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
@@ -21,7 +22,6 @@ const Memberships = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
@@ -30,7 +30,12 @@ const Memberships = () => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return (
+      <ErrorFile
+        title="404"
+        description="Error find data please try again..."
+      />
+    );
   }
 
   const transaction = transactions?.find((item) => item.model === 'MEMBERSHIP');
