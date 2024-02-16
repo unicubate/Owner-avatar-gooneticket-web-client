@@ -1,22 +1,19 @@
 import { useRouter } from 'next/router';
 import { ComponentType, useEffect } from 'react';
-import { useAuth } from './context-user';
+import { getCookieUser, useAuth } from './context-user';
 
 const PublicComponent = (Component: ComponentType) => {
-  //const userToken = getCookieUser();
+  const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
     const { userStorage } = useAuth() as any;
     const isOnline = userStorage?.id !== undefined;
     const { push, query } = useRouter();
 
     useEffect(() => {
-      if (isOnline) {
+      if (userToken && isOnline) {
         push(`/dashboard`);
       }
-      // if (userToken && isOnline) {
-      //   push(`/dashboard`);
-      // }
-    }, [isOnline, push, query]);
+    }, [userToken, isOnline, push, query]);
 
     return <Component {...props} />;
   };
