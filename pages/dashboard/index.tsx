@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -39,7 +40,6 @@ const Dashboard = () => {
     isPending,
     error,
   } = GetStatisticsTransactionsAPI({
-    queryKey: ['statistics-transactions'],
     days: dayCount,
   });
 
@@ -48,7 +48,12 @@ const Dashboard = () => {
   }
 
   if (isError) {
-    return <span>Error: {error.message}</span>;
+    return (
+      <ErrorFile
+        title="404"
+        description="Error find data please try again..."
+      />
+    );
   }
 
   const transactionDonation = transactions?.find(
