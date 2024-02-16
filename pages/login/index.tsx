@@ -66,9 +66,9 @@ const Login = () => {
       // );
       setHasErrors(false);
       setLoading(false);
-      // window.location.href = `${
-      //   redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      // }`;
+      window.location.href = `${
+        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
