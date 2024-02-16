@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { loginGoogleUserAPI } from '../../api-site/user';
+import { loginGoogleUserAPI, loginUserAPI } from '../../api-site/user';
 
 const schema = yup.object({
   email: yup
@@ -27,7 +27,7 @@ const schema = yup.object({
 });
 
 const Login = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const { redirect } = query;
   const {
     watch,
@@ -49,7 +49,7 @@ const Login = () => {
     const { email, password } = payload;
 
     try {
-      //const { data: user } = await loginUserAPI({ email, password });
+      const { data: user } = await loginUserAPI({ email, password });
       // if (user?.nextStep === "SETTING_PROFILE") {
       //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
       // } else if (user?.nextStep === "SETTING_INTEREST") {
@@ -66,6 +66,7 @@ const Login = () => {
       // );
       setHasErrors(false);
       setLoading(false);
+      console.log('cookie save');
       window.location.href = `${
         redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
       }`;
