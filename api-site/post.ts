@@ -280,22 +280,12 @@ export const GetInfinitePostsAPI = (payload: {
   sort: SortModel;
   type?: PostType;
   typeIds?: string[];
-  queryKey: string[];
   search?: string;
 }) => {
-  const {
-    userVisitor,
-    albumId,
-    take,
-    sort,
-    status,
-    type,
-    typeIds,
-    search,
-    queryKey,
-  } = payload;
+  const { userVisitor, albumId, take, sort, status, type, typeIds, search } =
+    payload;
   return useInfiniteQuery({
-    queryKey: [...queryKey, { ...payload }],
+    queryKey: ['posts', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getPostsAPI({

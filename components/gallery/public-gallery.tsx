@@ -28,7 +28,6 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
     userVisitor,
     status: 'ACTIVE',
     typeIds: ['GALLERY'],
-    queryKey: ['gallery-posts', 'infinite'],
   });
 
   useEffect(() => {

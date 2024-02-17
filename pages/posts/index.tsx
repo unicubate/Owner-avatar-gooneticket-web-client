@@ -35,7 +35,6 @@ const Posts = () => {
     take: 6,
     sort: 'DESC',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['posts', 'infinite'],
     search,
   });
 

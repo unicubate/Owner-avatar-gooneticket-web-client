@@ -26,7 +26,6 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
     userVisitor,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['last-posts', 'infinite'],
   });
 
   const dataTablePosts = isLoadingPosts ? (

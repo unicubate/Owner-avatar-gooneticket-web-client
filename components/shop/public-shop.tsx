@@ -26,7 +26,6 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    queryKey: ['products', 'infinite'],
   });
 
   useEffect(() => {

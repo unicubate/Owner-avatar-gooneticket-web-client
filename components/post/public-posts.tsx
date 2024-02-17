@@ -27,7 +27,6 @@ const PublicPosts: React.FC<Props> = ({ userVisitor }) => {
     userVisitor,
     status: 'ACTIVE',
     typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ['posts', 'infinite'],
   });
 
   // useEffect(() => {

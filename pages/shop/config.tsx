@@ -19,7 +19,7 @@ import { useState } from 'react';
 
 const Configs = () => {
   const { search, handleSetSearch } = useInputState();
-  const { userStorage: user } = useAuth() as any;
+  const { organizationId } = useAuth() as any;
   const [showModal, setShowModal] = useState(false);
   const [showCategoryModal, setShowCategoryModal] = useState(false);
 
@@ -34,7 +34,7 @@ const Configs = () => {
     search,
     take: 10,
     sort: 'DESC',
-    organizationId: user?.organizationId,
+    organizationId: organizationId,
   });
 
   const {
@@ -49,7 +49,7 @@ const Configs = () => {
     take: 10,
     sort: 'DESC',
     isPaginate: 'true',
-    organizationId: user?.organizationId,
+    organizationId: organizationId,
   });
 
   const dataTableDiscounts = isLoadingDiscounts ? (

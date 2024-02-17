@@ -25,7 +25,7 @@ const CartOrderFooterCart: React.FC<{
 
   return (
     <>
-      {carts && carts?.summary?.totalQuantity > 0 && (
+      {carts?.cartItems.length > 0 && carts?.summary?.totalQuantity > 0 && (
         <div className="fixed bottom-0 z-20 mb-16 flex w-full items-center justify-center py-2">
           <div className="relative w-full max-w-md overflow-hidden rounded-lg bg-white shadow-lg dark:bg-[#121212]">
             <div className="px-3 pb-4 pt-3">

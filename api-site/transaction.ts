@@ -53,12 +53,10 @@ export const GetInfiniteTransactionsAPI = (payload: {
   days?: number;
   status?: string;
   sort: SortModel;
-  queryKey: string[];
 }) => {
-  const { model, days, organizationId, search, take, sort, status, queryKey } =
-    payload;
+  const { model, days, organizationId, search, take, sort, status } = payload;
   return useInfiniteQuery({
-    queryKey: [...queryKey, { ...payload }],
+    queryKey: ['recent-transactions', 'infinite', { ...payload }],
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>

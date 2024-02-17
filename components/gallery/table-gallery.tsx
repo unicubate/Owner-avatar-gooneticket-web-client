@@ -39,7 +39,6 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
     take: 10,
     sort: 'DESC',
     typeIds: ['GALLERY'],
-    queryKey: ['posts', 'infinite'],
   });
 
   useEffect(() => {

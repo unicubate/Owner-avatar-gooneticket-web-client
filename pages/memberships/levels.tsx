@@ -36,7 +36,6 @@ const MembershipsLevels = () => {
     organizationId: user?.organizationId,
     take: 10,
     sort: 'DESC',
-    queryKey: ['memberships', 'infinite'],
     search,
   });
 

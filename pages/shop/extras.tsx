@@ -22,7 +22,7 @@ import { useInView } from 'react-intersection-observer';
 
 const ShopsExtras = () => {
   const { search, handleSetSearch } = useInputState();
-  const { userStorage: user, profile } = useAuth() as any;
+  const { organizationId, profile } = useAuth() as any;
   const router = useRouter();
   const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
@@ -36,10 +36,9 @@ const ShopsExtras = () => {
     fetchNextPage,
   } = GetInfiniteProductsAPI({
     search,
-    organizationId: user?.organizationId,
+    organizationId: organizationId,
     take: 10,
     sort: 'DESC',
-    queryKey: ['products', 'infinite'],
   });
 
   useEffect(() => {

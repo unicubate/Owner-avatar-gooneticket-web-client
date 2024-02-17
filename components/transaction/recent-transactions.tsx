@@ -29,7 +29,6 @@ const RecentTransactions: React.FC<Props> = ({
     model: model?.toLocaleUpperCase(),
     take: 10,
     sort: 'DESC',
-    queryKey: ['recent-transactions', 'infinite'],
     days,
   });
 

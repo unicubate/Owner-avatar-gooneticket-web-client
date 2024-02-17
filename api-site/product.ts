@@ -185,12 +185,11 @@ export const GetInfiniteProductsAPI = (payload: {
   take: number;
   status?: string;
   sort: SortModel;
-  queryKey: string[];
   search?: string;
 }) => {
-  const { organizationId, take, sort, status, search, queryKey } = payload;
+  const { organizationId, take, sort, status, search } = payload;
   return useInfiniteQuery({
-    queryKey: [...queryKey, { ...payload }],
+    queryKey: ['products', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getProductsAPI({

@@ -54,7 +54,7 @@ const ForgotPassword = () => {
       AlertSuccessNotification({
         text: 'Email send successfully',
       });
-      push({ pathname: 'login', query: { redirect } });
+      push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

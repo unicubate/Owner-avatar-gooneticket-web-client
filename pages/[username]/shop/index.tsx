@@ -3,8 +3,6 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { PublicShop } from '@/components/shop/public-shop';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
 import { useAuth } from '@/components/util/context-user';
 import { GetStaticPropsContext } from 'next';
@@ -12,7 +10,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const ShopUserPublic = () => {
-  const { userStorage: userBayer } = useAuth() as any;
+  const userBayer = useAuth() as any;
   const { query, push } = useRouter();
   const username = String(query?.username);
 
@@ -62,16 +60,10 @@ const ShopUserPublic = () => {
           </div>
         </div>
 
-        {user?.id && cartOrder?.id ? (
+        {userBayer?.id && user?.id && cartOrder?.id ? (
           <CartOrderFooterCart user={user} cartOrder={cartOrder} />
         ) : null}
       </LayoutUserPublicSite>
-
-      {isPendingUser || isPendingCartOrder ? <LoadingFile /> : null}
-
-      {isErrorUser || isErrorCartOrder ? (
-        <ErrorFile title="404" description="Error find data please try again" />
-      ) : null}
     </>
   );
 };

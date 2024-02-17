@@ -53,7 +53,7 @@ const ListOrderItemsSeller: React.FC<Props> = ({ item, index }) => {
               <div className="hidden lg:table-cell">
                 <p className="mt-1 flex min-w-0 flex-1 items-center text-sm font-bold text-gray-600">
                   {item?.profile ? (
-                    <AvatarComponent size={30} profile={item?.profile} />
+                    <AvatarComponent size={35} profile={item?.profile} />
                   ) : null}
                   <div className="ml-2 min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">

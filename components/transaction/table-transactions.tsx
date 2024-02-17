@@ -38,7 +38,6 @@ const TableTransactions: React.FC<Props> = ({
     take: 10,
     sort: 'DESC',
     days,
-    queryKey: ['transactions', 'infinite'],
   });
 
   useEffect(() => {

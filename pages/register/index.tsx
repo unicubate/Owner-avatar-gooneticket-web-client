@@ -148,7 +148,8 @@ const Register = () => {
                     <div className="ml-3">
                       <label
                         htmlFor="remember-me"
-                        className="text-sm font-bold text-gray-700"
+                        //className="text-sm font-bold text-gray-700"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
                         I accept the{' '}
                         <Link

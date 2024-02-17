@@ -26,7 +26,6 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    queryKey: ['memberships', 'infinite'],
   });
 
   useEffect(() => {
