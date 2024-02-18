@@ -10,7 +10,7 @@ const HorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({ user }) => {
     <>
       <div className="text-center">
         <AvatarComponent
-          size={{ xs: 50, sm: 50, md: 60, lg: 64, xl: 80, xxl: 100 }}
+          size={{ xs: 70, sm: 70, md: 70, lg: 84, xl: 80, xxl: 100 }}
           profile={user?.profile}
         />
 

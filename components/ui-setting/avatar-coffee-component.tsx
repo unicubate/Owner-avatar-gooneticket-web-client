@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { BiCoffeeTogo } from 'react-icons/bi';
+import { CupSodaIcon } from 'lucide-react';
 
 interface Props {
   color: any;
@@ -14,7 +14,7 @@ const AvatarCoffeeComponent: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <BiCoffeeTogo className={cn('text-blue-400', className)} />
+      <CupSodaIcon className={cn('text-blue-400', className)} />
     </>
   );
 };

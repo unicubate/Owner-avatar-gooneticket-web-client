@@ -1,8 +1,7 @@
 import { UserModel } from '@/types/user.type';
 import { Input } from 'antd';
-import { PlusIcon } from 'lucide-react';
+import { CupSodaIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
-import { BiCoffeeTogo } from 'react-icons/bi';
 import { CreatePaymentPayPal } from '../payment/create-payment-paypal';
 import { CreatePaymentStripe } from '../payment/stripe/create-payment-stripe';
 import { ButtonInput } from '../ui-setting/button-input';
@@ -34,7 +33,7 @@ const CreateFormPublicDonation: React.FC<{
 
         <div className="mt-6 flex items-center justify-between">
           <p className="text-xl font-bold text-gray-900">
-            <BiCoffeeTogo
+            <CupSodaIcon
               className={`text-${user?.profile?.color}-500 size-14`}
             />
           </p>
@@ -42,6 +41,7 @@ const CreateFormPublicDonation: React.FC<{
             <ButtonInput
               type="button"
               variant="info"
+              size="sm"
               // color={`${user?.profile?.color}`}
               disabled={increment === 1 ? true : false}
               onClick={() => setIncrement((lk) => lk - 1)}
@@ -55,6 +55,7 @@ const CreateFormPublicDonation: React.FC<{
             <ButtonInput
               type="button"
               variant="info"
+              size="sm"
               // color={`${user?.profile?.color}`}
               loading={false}
               onClick={() => setIncrement((lk) => lk + 1)}
@@ -95,7 +96,7 @@ const CreateFormPublicDonation: React.FC<{
         {newValuePrice > 0 ? (
           <div className="mt-6 flex items-center justify-between">
             <p className="text-2xl font-bold text-black dark:text-white">
-              Donate
+              Tipo
             </p>
             {newAmount?.value ? (
               <>
@@ -125,19 +126,17 @@ const CreateFormPublicDonation: React.FC<{
                 />
               </>
             ) : (
-              <>
-                <div className="mt-2">
-                  <ButtonInput
-                    onClick={() => setIsCardPay(true)}
-                    type="button"
-                    className="w-full"
-                    size="lg"
-                    variant="info"
-                  >
-                    Card Pay
-                  </ButtonInput>
-                </div>
-              </>
+              <div className="mt-2">
+                <ButtonInput
+                  onClick={() => setIsCardPay(true)}
+                  type="button"
+                  className="w-full"
+                  size="lg"
+                  variant="info"
+                >
+                  Card Pay
+                </ButtonInput>
+              </div>
             )}
 
             <CreatePaymentPayPal

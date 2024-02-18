@@ -1,4 +1,4 @@
-import { ColorType, ProfileModel } from './profile.type';
+import { ProfileModel } from './profile.type';
 
 export type NextStep =
   | 'SETTING_PROFILE'
@@ -74,6 +74,7 @@ export type UserModel = {
 
 export type UserVisitorModel = {
   organizationId: string;
+  username?: string;
   id?: string;
 };
 username: 'bokin-1659';

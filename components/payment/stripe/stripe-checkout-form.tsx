@@ -32,12 +32,13 @@ const CARD_OPTIONS: any = {
   style: {
     base: {
       iconColor: '#c4f0ff',
-      color: '#424770',
+      color: '#fff',
+      fontSize: '16px',
+
       // lineHeight: '24px',
       fontWeight: 600,
       fontFamily:
         'Roboto, Source Code Pro, monospace, Open Sans, Segoe UI, sans-serif',
-      fontSize: '16px',
       fontSmoothing: 'antialiased',
       ':-webkit-autofill': { color: '#fce883' },
     },

@@ -279,7 +279,7 @@ export const GetInfinitePostsAPI = (payload: {
   status?: string;
   sort: SortModel;
   type?: PostType;
-  typeIds?: string[];
+  typeIds?: PostType[];
   search?: string;
 }) => {
   const { userVisitor, albumId, take, sort, status, type, typeIds, search } =

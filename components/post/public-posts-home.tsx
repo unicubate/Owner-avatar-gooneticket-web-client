@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { PostType } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
+import { useRouter } from 'next/navigation';
 import React from 'react';
-import { ButtonLoadMore } from '../ui-setting';
+import { ButtonInput } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { LoadingFile } from '../ui-setting/ant/loading-file';
 import { ListFollowPosts } from './list-follow-posts';
@@ -13,9 +13,8 @@ type Props = {
   typeIds: PostType[];
 };
 
-const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
-  // const { ref, inView } = useInView();
-
+const PublicPostsHome: React.FC<Props> = ({ userVisitor, typeIds }) => {
+  const { push } = useRouter();
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -24,34 +23,12 @@ const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 20,
+    take: 2,
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
-    typeIds: typeIds, //['ARTICLE', 'AUDIO', 'VIDEO'],
+    typeIds: typeIds,
   });
-
-  // useEffect(() => {
-  //   let fetching = false;
-  //   if (inView && hasNextPage) {
-  //     fetchNextPage();
-  //   }
-  //   const onScroll = async (event: any) => {
-  //     const { scrollHeight, scrollTop, clientHeight } =
-  //       event.target.scrollingElement;
-
-  //     if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-  //       fetching = true;
-  //       if (hasNextPage) await fetchNextPage();
-  //       fetching = false;
-  //     }
-  //   };
-
-  //   document.addEventListener("scroll", onScroll);
-  //   return () => {
-  //     document.removeEventListener("scroll", onScroll);
-  //   };
-  // }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTablePosts = isLoadingPosts ? (
     <LoadingFile />
@@ -76,16 +53,21 @@ const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
     <>
       {dataTablePosts}
 
-      <div className="mx-auto mt-6 justify-center text-center">
+      <div className="mx-auto mt-2 justify-center text-center">
         {hasNextPage && (
-          <ButtonLoadMore
-            isFetchingNextPage={isFetchingNextPage}
-            onClick={() => fetchNextPage()}
-          />
+          <ButtonInput
+            type="button"
+            size="lg"
+            variant="outline"
+            className="w-full"
+            onClick={() => push(`${userVisitor.username}/posts`)}
+          >
+            View all posts
+          </ButtonInput>
         )}
       </div>
     </>
   );
 };
 
-export { PublicPosts };
+export { PublicPostsHome };

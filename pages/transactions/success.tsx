@@ -18,15 +18,15 @@ const TransactionSuccess = () => {
           extra={[
             <>
               <div className="flex items-center space-x-4">
-                {/* <ButtonInput
+                <ButtonInput
                   type="button"
                   className="w-full"
                   size="lg"
                   variant="outline"
                   onClick={() => back()}
                 >
-                  By Again
-                </ButtonInput> */}
+                  Back
+                </ButtonInput>
                 <ButtonInput
                   type="button"
                   className="w-full"

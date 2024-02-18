@@ -38,6 +38,7 @@ const PostsUserPublic = () => {
                   <div className="mx-auto sm:px-6 md:px-8">
                     {user?.id ? (
                       <PublicPosts
+                        typeIds={['ARTICLE', 'AUDIO', 'VIDEO']}
                         userVisitor={{
                           id: userVisiter?.id,
                           organizationId: user?.organizationId,
