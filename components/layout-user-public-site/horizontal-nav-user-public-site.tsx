@@ -1,11 +1,13 @@
 import { UserModel } from '@/types/user.type';
+import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
-import { logoutUser, useAuth } from '../util/context-user';
+import { useAuth } from '../util/context-user';
 
+import { logoutUsersAPI } from '@/api-site/user';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -70,6 +72,12 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
       href: `/${username}/commissions`,
     },
   ]);
+
+  const logoutUserItem = async () => {
+    Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
+    await logoutUsersAPI();
+    push(`/`);
+  };
 
   return (
     <>
@@ -203,7 +211,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => logoutUser()}>
+                        <DropdownMenuItem onClick={() => logoutUserItem()}>
                           <span className="cursor-pointer">{t('logout')}</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>

@@ -253,12 +253,18 @@ export const getUsersAPI = async (
   });
 };
 
+export const deleteOneUserAPI = async (options: { userId: string }) => {
+  const { userId } = options;
+  return await makeApiCall({
+    action: 'deleteOneUser',
+    urlParams: { userId },
+  });
+};
+
 export const logoutUsersAPI = async (): Promise<any> => {
-  try {
-    return await makeApiCall({
-      action: 'logoutUsers',
-    });
-  } catch (error) {}
+  await makeApiCall({
+    action: 'logoutUsers',
+  });
 };
 
 export const GetInfiniteUsersAPI = (payload: {

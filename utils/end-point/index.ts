@@ -89,6 +89,7 @@ export const apiEndpoints: ClientApiMethods = {
   resendCode: GET(`${baseUrl}/resend/code/:userId`),
   validCode: POST(`${baseUrl}/valid/code`),
   getOneUserPrivate: GET(`${baseUrl}/users/show/:userId`),
+  deleteOneUser: DELETE(`${baseUrl}/users/:userId`),
   getOneUserPublic: GET(`${baseUrl}/users/view`),
   getOneUserMe: GET(`${baseUrl}/users/me`),
   getUsers: GET(`${baseUrl}/users`),

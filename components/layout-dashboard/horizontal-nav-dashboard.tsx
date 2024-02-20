@@ -1,5 +1,6 @@
+import { logoutUsersAPI } from '@/api-site/user';
+import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
-import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { ThemeToggle } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
@@ -12,7 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { logoutUser } from '../util/context-user';
 
 export type NavbarProps = {
   title: string;
@@ -29,7 +29,12 @@ interface Props {
 const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
   const t = useTranslations('menu-site');
   const { push } = useRouter();
-  const pathname = usePathname();
+
+  const logoutUserItem = async () => {
+    Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
+    await logoutUsersAPI();
+    push(`/`);
+  };
 
   return (
     <>
@@ -125,7 +130,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => logoutUser()}>
+                        <DropdownMenuItem onClick={() => logoutUserItem()}>
                           <span className="cursor-pointer">{t('logout')}</span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>

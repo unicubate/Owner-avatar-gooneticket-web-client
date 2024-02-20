@@ -1,4 +1,4 @@
-import { GetOneUserMeAPI, logoutUsersAPI } from '@/api-site/user';
+import { GetOneUserMeAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
 import Cookies from 'js-cookie';
 import { FC, ReactNode, createContext, useContext } from 'react';
@@ -19,12 +19,6 @@ const AuthContext = createContext<AuthContextProps>(
 
 const useAuth = () => {
   return useContext(AuthContext);
-};
-
-export const logoutUser = () => {
-  Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
-  logoutUsersAPI();
-  location.reload();
 };
 
 export const getCookieUser = () =>

@@ -1,5 +1,6 @@
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { DeleteOneUser } from '@/components/user/delete-one-user';
 import { UpdateFormPassword } from '@/components/user/update-form-password';
 import { UpdateFormProfile } from '@/components/user/update-form-profile';
 import { UpdateFormUser } from '@/components/user/update-form-user';
@@ -28,6 +29,8 @@ const Settings = () => {
                 {user?.profileId ? (
                   <UpdateFormPassword userId={user?.id} user={user} />
                 ) : null}
+
+                <DeleteOneUser user={user} />
               </div>
             </div>
           </div>
