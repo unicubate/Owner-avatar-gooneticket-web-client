@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel, PostType } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
 import { formateDMYHH } from '@/utils';
@@ -17,14 +16,25 @@ import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+
+import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import {
+  AlertCircleIcon,
   DownloadIcon,
-  LockKeyholeIcon,
-  MessageSquareIcon,
+  MessageCircleIcon,
+  MoreHorizontalIcon,
   PencilIcon,
   ShareIcon,
-  UnlockKeyholeIcon,
 } from 'lucide-react';
 import { useInputState } from '../hooks';
+import { Button } from '../ui/button';
 
 type Props = {
   item: PostModel;
@@ -67,21 +77,63 @@ const ListFollowPosts: React.FC<Props> = ({
               </p>
             </div>
 
-            {/* <div className="ml-auto">
-              {item?.whoCanSee === 'MEMBERSHIP' &&
-              item?.isValidSubscribe !== 1 ? (
-                <ButtonInput
-                  onClick={() =>
-                    push(`/${item?.profile?.username}/memberships`)
-                  }
-                  type="button"
-                  variant="danger"
-                  icon={<HiOutlineLockClosed className="size-5" />}
-                >
-                  <span className="ml-1 font-bold">Join membership</span>
-                </ButtonInput>
-              ) : null}
-            </div> */}
+            <div className="ml-auto">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button type="button" size="icon" variant="ghost">
+                    <MoreHorizontalIcon className="size-5 text-gray-400" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#121212]">
+                  <DropdownMenuGroup>
+                    {item?.allowDownload && (
+                      <>
+                        {item?.whoCanSee === 'MEMBERSHIP' &&
+                        item?.isValidSubscribe !== 1 ? (
+                          ''
+                        ) : (
+                          <>
+                            <DropdownMenuItem
+                              onClick={() => {
+                                push(
+                                  `${downloadOneFileUploadAPI({
+                                    folder: 'posts',
+                                    fileName:
+                                      item.type === 'AUDIO'
+                                        ? item?.uploadsFiles[0]?.path
+                                        : item?.uploadsImages[0]?.path,
+                                  })}`,
+                                );
+                              }}
+                            >
+                              <button
+                                title="Download"
+                                className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                              >
+                                <DownloadIcon className="size-5" />
+                              </button>
+                              <span className="cursor-pointer ml-2">
+                                Download
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                          </>
+                        )}
+                      </>
+                    )}
+                    <DropdownMenuItem>
+                      <button
+                        title="Report"
+                        className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                      >
+                        <AlertCircleIcon className="size-5" />
+                      </button>
+                      <span className="cursor-pointer ml-2">Report</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
 
           {item?.urlMedia && ['VIDEO'].includes(item?.type) ? (
@@ -189,9 +241,11 @@ const ListFollowPosts: React.FC<Props> = ({
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-3">
-              <MessageSquareIcon className="size-5" />
+              <MessageCircleIcon className="size-5" />
             </button>
-            <span className="ml-2 text-sm">{item?.totalComment ?? 0}</span>
+            <span className="ml-2 text-sm">
+              {item?.totalComment > 0 ? item?.totalComment : ''}
+            </span>
             {userVisitor?.id === item?.userId ? (
               <>
                 <Link
@@ -201,7 +255,7 @@ const ListFollowPosts: React.FC<Props> = ({
                   }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-3 hover:text-green-400 focus:ring-green-400"
                 >
-                  <PencilIcon className="size-4" />
+                  <PencilIcon className="size-5" />
                 </Link>
               </>
             ) : null}
@@ -216,52 +270,17 @@ const ListFollowPosts: React.FC<Props> = ({
                   variant="link"
                   type="button"
                 >
-                  <ShareIcon className="size-4" />
+                  <ShareIcon className="size-5" />
                 </ButtonInput>
               }
             />
-            {item?.allowDownload && (
-              <>
-                {item?.whoCanSee === 'MEMBERSHIP' &&
-                item?.isValidSubscribe !== 1 ? (
-                  <>
-                    <button
-                      title="Download"
-                      className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
-                    >
-                      <DownloadIcon className="size-5" />
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      title="Download"
-                      onClick={() => {
-                        push(
-                          `${downloadOneFileUploadAPI({
-                            folder: 'posts',
-                            fileName:
-                              item.type === 'AUDIO'
-                                ? item?.uploadsFiles[0]?.path
-                                : item?.uploadsImages[0]?.path,
-                          })}`,
-                        );
-                      }}
-                      className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
-                    >
-                      <DownloadIcon className="size-5" />
-                    </button>
-                  </>
-                )}
-              </>
-            )}
 
-            {item?.whoCanSee === 'MEMBERSHIP' &&
+            {/* {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (
-              <LockKeyholeIcon className="ml-auto size-5" />
+              <LockKeyholeIcon className="ml-auto size-6" />
             ) : (
-              <UnlockKeyholeIcon className="ml-auto size-5" />
-            )}
+              <UnlockKeyholeIcon className="ml-auto size-6" />
+            )} */}
           </div>
 
           <ListComments

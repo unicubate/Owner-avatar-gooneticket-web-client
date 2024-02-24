@@ -44,13 +44,9 @@ const ProfilePublic = () => {
                             <div
                               className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
                             >
-                              <span className={`ql-editor`}>
-                                <HtmlParser
-                                  html={String(
-                                    user?.profile?.description ?? '',
-                                  )}
-                                />
-                              </span>
+                              <HtmlParser
+                                html={String(user?.profile?.description ?? '')}
+                              />
                             </div>
                           </div>
                         </div>

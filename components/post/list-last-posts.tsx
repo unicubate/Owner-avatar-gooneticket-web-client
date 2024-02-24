@@ -53,12 +53,16 @@ const ListLastPosts: React.FC<Props> = ({ item }) => {
               <button className="hover:text-gray-600">
                 <HeartIcon className="size-4" />
               </button>
-              <span className="ml-1.5 text-sm">{item?.totalLike ?? 0}</span>
+              <span className="ml-1.5 text-sm">
+                {item?.totalLike ? item?.totalLike : ''}
+              </span>
 
               <button className="ml-3.5">
                 <MessageSquareIcon className="size-4" />
               </button>
-              <span className="ml-1.5 text-sm">{item?.totalComment ?? 0}</span>
+              <span className="ml-1.5 text-sm">
+                {item?.totalComment ? item?.totalComment : ''}
+              </span>
               <span className="ml-auto text-sm">
                 {formateDMYHH(item?.createdAt as Date, locale as string)}
               </span>

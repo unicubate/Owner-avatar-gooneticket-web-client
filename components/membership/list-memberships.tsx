@@ -121,7 +121,9 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
             variant="ghost"
             type="button"
             size="icon"
-            icon={<PencilIcon className="size-4 text-gray-600" />}
+            icon={
+              <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+            }
             onClick={() => router.push(`/memberships/${item?.id}/edit`)}
           />
 
@@ -137,7 +139,9 @@ const ListMemberships: React.FC<Props> = ({ item, index }) => {
                 variant="ghost"
                 type="button"
                 size="icon"
-                icon={<TrashIcon className="size-4 text-gray-600" />}
+                icon={
+                  <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
+                }
               />
             }
           />

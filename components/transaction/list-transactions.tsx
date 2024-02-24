@@ -2,12 +2,12 @@
 import { TransactionModel } from '@/types/transaction';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Button } from 'antd';
+import { MoreHorizontalIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { BiDotsHorizontal } from 'react-icons/bi';
 import { AvatarCoffeeComponent, AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -80,12 +80,9 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         <td className="py-4 text-right text-sm font-medium">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                type="text"
-                shape="circle"
-                icon={<BiDotsHorizontal className="size-5 text-gray-400" />}
-                size="small"
-              />
+              <Button type="button" size="icon" variant="ghost">
+                <MoreHorizontalIcon className="size-5 text-gray-400" />
+              </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
               <DropdownMenuGroup>

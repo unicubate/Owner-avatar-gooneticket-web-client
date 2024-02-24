@@ -143,16 +143,15 @@ const CreateOrUpdateFormComment: React.FC<{
           <div className="flex-col sm:flex sm:items-end sm:justify-between">
             {userStorage?.id ? (
               <>
-                {watchDescription.length >= 7 && (
-                  <ButtonInput
-                    type="submit"
-                    size="lg"
-                    variant="info"
-                    loading={loading}
-                  >
-                    Save
-                  </ButtonInput>
-                )}
+                <ButtonInput
+                  type="submit"
+                  size="lg"
+                  variant="info"
+                  className="w-full"
+                  loading={loading}
+                >
+                  Save
+                </ButtonInput>
               </>
             ) : (
               <ButtonInput
@@ -162,6 +161,7 @@ const CreateOrUpdateFormComment: React.FC<{
                 type="button"
                 size="lg"
                 variant="info"
+                className="w-full"
                 loading={loading}
               >
                 Save

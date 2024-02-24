@@ -121,24 +121,24 @@ const CreateOrUpdateFormCommentReply: React.FC<{
                 onClick={() => {
                   setOpenModalReply(false);
                 }}
+                className="w-full"
               >
                 Cancel
               </ButtonInput>
             </div>
           ) : null}
 
-          {watchDescription.length >= 1 && (
-            <div className="flex-col sm:flex sm:items-end sm:justify-between">
-              <ButtonInput
-                type="submit"
-                size="lg"
-                variant="info"
-                loading={loading}
-              >
-                Save
-              </ButtonInput>
-            </div>
-          )}
+          <div className="flex-col sm:flex sm:items-end sm:justify-between">
+            <ButtonInput
+              type="submit"
+              size="lg"
+              variant="info"
+              loading={loading}
+              className="w-full"
+            >
+              Save
+            </ButtonInput>
+          </div>
         </div>
       </form>
     </>

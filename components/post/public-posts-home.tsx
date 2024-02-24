@@ -53,7 +53,7 @@ const PublicPostsHome: React.FC<Props> = ({ userVisitor, typeIds }) => {
     <>
       {dataTablePosts}
 
-      <div className="mx-auto mt-2 justify-center text-center">
+      <div className="mx-auto my-4 mt-2 justify-center text-center">
         {hasNextPage && (
           <ButtonInput
             type="button"

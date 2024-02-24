@@ -121,6 +121,7 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                               {t('dashboard')}
                             </span>
                           </DropdownMenuItem>
+                          <DropdownMenuSeparator />
                           <DropdownMenuItem
                             onClick={() => push(`/contributors`)}
                           >

@@ -16,21 +16,30 @@ import {
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextIntlClientProvider } from 'next-intl';
 
+import { ClientOnly } from '@/components/util/client-only';
 import { useRouter } from 'next/router';
-import { Suspense } from 'react';
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <QueryClientProvider client={queryClient}>
-      <Suspense fallback={<LoadingFile />}>
+      <ClientOnly fallback={<LoadingFile />}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NextIntlClientProvider
+            formats={{
+              dateTime: {
+                short: {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                },
+              },
+            }}
             locale={router.locale}
+            messages={pageProps.messages}
             timeZone="Europe/Berlin"
             now={new Date()}
-            messages={pageProps.messages}
           >
             <HydrationBoundary state={pageProps.dehydratedState}>
               <ConfigProvider>
@@ -48,7 +57,7 @@ export default function App({ Component, pageProps }: AppProps) {
             </HydrationBoundary>
           </NextIntlClientProvider>
         </ThemeProvider>
-      </Suspense>
+      </ClientOnly>
     </QueryClientProvider>
   );
 }

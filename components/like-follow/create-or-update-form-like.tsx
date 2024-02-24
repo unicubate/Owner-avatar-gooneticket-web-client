@@ -2,6 +2,7 @@ import { CreateOrUpdateOneLikeAPI } from '@/api-site/like';
 import { AlertDangerNotification } from '@/utils';
 import { HeartIcon } from 'lucide-react';
 import React, { useState } from 'react';
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useInputState } from '../hooks';
 
@@ -49,7 +50,7 @@ const CreateOrUpdateFormLike: React.FC<{
               }}
               className="text-indigo-600"
             >
-              <HeartIcon className="size-5" />
+              <MdOutlineFavorite className="size-6" />
             </button>
           ) : (
             <button
@@ -58,7 +59,7 @@ const CreateOrUpdateFormLike: React.FC<{
               }}
               className="hover:text-indigo-600 focus:ring-indigo-600"
             >
-              <HeartIcon className="size-5" />
+              <MdOutlineFavoriteBorder className="size-6" />
             </button>
           )}
         </>
@@ -69,11 +70,11 @@ const CreateOrUpdateFormLike: React.FC<{
           }}
           className="hover:text-indigo-600 focus:ring-indigo-600"
         >
-          <HeartIcon className="size-5" />
+          <HeartIcon className="size-6" />
         </button>
       )}
 
-      <span className="ml-1.5 text-sm">{totalLike}</span>
+      <span className="ml-1.5 text-sm">{totalLike > 0 ? totalLike : ''}</span>
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );

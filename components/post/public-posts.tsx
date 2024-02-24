@@ -76,7 +76,7 @@ const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
     <>
       {dataTablePosts}
 
-      <div className="mx-auto mt-6 justify-center text-center">
+      <div className="mx-auto my-4 mt-6 justify-center text-center">
         {hasNextPage && (
           <ButtonLoadMore
             isFetchingNextPage={isFetchingNextPage}
