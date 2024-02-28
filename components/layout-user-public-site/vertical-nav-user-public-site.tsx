@@ -29,7 +29,7 @@ const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
     },
     {
       title: `${t('gallery')}`,
-      status: user?.profile?.enableGallery,
+      status: true,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },

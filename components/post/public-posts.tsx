@@ -2,7 +2,6 @@
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { PostType } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
-import React from 'react';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { LoadingFile } from '../ui-setting/ant/loading-file';
@@ -13,8 +12,8 @@ type Props = {
   typeIds: PostType[];
 };
 
-const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
-  // const { ref, inView } = useInView();
+export function PublicPosts(props: Props) {
+  const { userVisitor, typeIds } = props;
 
   const {
     isLoading: isLoadingPosts,
@@ -86,6 +85,4 @@ const PublicPosts: React.FC<Props> = ({ userVisitor, typeIds }) => {
       </div>
     </>
   );
-};
-
-export { PublicPosts };
+}

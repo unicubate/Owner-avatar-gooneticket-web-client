@@ -2,7 +2,7 @@ import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ModelType } from '@/utils/pagination-item';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -12,21 +12,23 @@ const schema = yup.object({
   description: yup.string().required(),
 });
 
-const CreateOrUpdateFormCommentReply: React.FC<{
+export function CreateOrUpdateFormCommentReply(props: {
   parentId: string;
   comment?: any;
   model: ModelType;
   setOpenModalReply?: any;
   openModalReply?: boolean;
   organizationId: string;
-}> = ({
-  parentId,
-  organizationId,
-  model,
-  comment,
-  openModalReply,
-  setOpenModalReply,
-}) => {
+}) {
+  const {
+    parentId,
+    organizationId,
+    model,
+    comment,
+    openModalReply,
+    setOpenModalReply,
+  } = props;
+
   const {
     reset,
     setValue,
@@ -143,6 +145,4 @@ const CreateOrUpdateFormCommentReply: React.FC<{
       </form>
     </>
   );
-};
-
-export { CreateOrUpdateFormCommentReply };
+}

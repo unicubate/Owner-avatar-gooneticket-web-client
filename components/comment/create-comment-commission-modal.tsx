@@ -16,13 +16,14 @@ const schema = yup.object({
   description: yup.string().max(1000).required(),
 });
 
-const CreateCommentCommissionModal: React.FC<{
+export function CreateCommentCommissionModal(props: {
   isOpen: boolean;
   setIsOpen: any;
   commission: CommissionModel;
   comment?: any;
   parentId?: string;
-}> = ({ isOpen, setIsOpen, commission, comment, parentId }) => {
+}) {
+  const { isOpen, setIsOpen, commission, comment, parentId } = props;
   const {
     reset,
     setValue,
@@ -148,6 +149,4 @@ const CreateCommentCommissionModal: React.FC<{
       ) : null}
     </>
   );
-};
-
-export { CreateCommentCommissionModal };
+}

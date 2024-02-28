@@ -1,26 +1,23 @@
 import { GetOneCartOrderAPI } from '@/api-site/cart';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
+import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { PublicShop } from '@/components/shop/public-shop';
-import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
-import { useAuth } from '@/components/util/context-user';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const ShopUserPublic = () => {
-  const userBayer = useAuth() as any;
+  const { userStorage: userVisiter } = useInputState();
   const { query, push } = useRouter();
   const username = String(query?.username);
 
-  const {
-    isPending: isPendingUser,
-    isError: isErrorUser,
-    data: user,
-  } = GetOneUserPublicAPI({
+  const { status, data: user } = GetOneUserPublicAPI({
     username,
-    userVisitorId: userBayer?.id,
+    userVisitorId: userVisiter?.id,
   });
 
   const {
@@ -40,17 +37,13 @@ const ShopUserPublic = () => {
     <>
       <LayoutUserPublicSite
         title={`Shop - ${user?.profile?.firstName ?? ''} ${
-          user?.profile?.lastName ?? ''
+          user?.profile?.lastName ?? 'Profile'
         }`}
         user={user}
       >
         <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
-          {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
-
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-full py-6">
-              {/* {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null} */}
-
               <div className="mt-2 grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
                 {user?.id && user?.profile.enableShop ? (
                   <PublicShop organizationId={user?.organizationId} />
@@ -60,10 +53,20 @@ const ShopUserPublic = () => {
           </div>
         </div>
 
-        {userBayer?.id && user?.id && cartOrder?.id ? (
+        {userVisiter?.id && user?.id && cartOrder?.id ? (
           <CartOrderFooterCart user={user} cartOrder={cartOrder} />
         ) : null}
       </LayoutUserPublicSite>
+
+      {status === 'pending' && isPendingCartOrder ? <LoadingFile /> : null}
+
+      {status === 'error' && isErrorCartOrder ? (
+        <ErrorFile
+          title="404"
+          description="Error find data please try again"
+          className="dark:text-white"
+        />
+      ) : null}
     </>
   );
 };

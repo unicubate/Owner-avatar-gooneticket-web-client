@@ -109,9 +109,15 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <p className="hidden w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white lg:block">
-                            {user?.profile?.firstName} {user?.profile?.lastName}
-                          </p>
+                          <div className="ml-2 min-w-0 flex-1">
+                            <p className="hidden w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white lg:block">
+                              {user?.profile?.firstName}{' '}
+                              {user?.profile?.lastName}
+                            </p>
+                            <p className="mt-1 hidden text-sm font-medium text-gray-600 sm:table-cell">
+                              <span>{user?.profile?.email}</span>
+                            </p>
+                          </div>
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">

@@ -2,13 +2,13 @@
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
 import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/pagination-item';
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
-import ListCommentsPosts from './list-comments-posts';
+import { ListCommentsPosts } from './list-comments-posts';
 
-const ListComments: React.FC<{
+type Props = {
   take: number;
   model: ModelType;
   organizationId: string;
@@ -16,15 +16,19 @@ const ListComments: React.FC<{
   postId?: string;
   productId?: string;
   userVisitorId: string;
-}> = ({
-  take,
-  model,
-  modelIds,
-  organizationId,
-  postId,
-  productId,
-  userVisitorId,
-}) => {
+};
+
+export function ListComments(props: Props) {
+  const {
+    take,
+    model,
+    modelIds,
+    organizationId,
+    postId,
+    productId,
+    userVisitorId,
+  } = props;
+
   const {
     isLoading: isLoadingComments,
     isError: isErrorComments,
@@ -96,6 +100,4 @@ const ListComments: React.FC<{
       ) : null}
     </>
   );
-};
-
-export { ListComments };
+}

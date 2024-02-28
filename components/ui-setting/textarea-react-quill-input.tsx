@@ -27,15 +27,17 @@ interface Props {
   defaultValue?: string;
 }
 
-const TextareaReactQuillInput: React.FC<Props> = ({
-  control,
-  label = '',
-  name,
-  errors,
-  className,
-  placeholder = '',
-  defaultValue,
-}) => {
+export function TextareaReactQuillInput(props: Props) {
+  const {
+    control,
+    label = '',
+    name,
+    errors,
+    className,
+    placeholder = '',
+    defaultValue,
+  } = props;
+
   return (
     <>
       {label ? (
@@ -76,6 +78,4 @@ const TextareaReactQuillInput: React.FC<Props> = ({
       )}
     </>
   );
-};
-
-export { TextareaReactQuillInput };
+}

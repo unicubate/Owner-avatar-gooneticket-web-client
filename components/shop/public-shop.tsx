@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteProductsAPI } from '@/api-site/product';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
@@ -11,7 +11,8 @@ type Props = {
   organizationId: string;
 };
 
-const PublicShop: React.FC<Props> = ({ organizationId }) => {
+export function PublicShop(props: Props) {
+  const { organizationId } = props;
   const { ref, inView } = useInView();
 
   const {
@@ -77,6 +78,4 @@ const PublicShop: React.FC<Props> = ({ organizationId }) => {
       </div>
     </>
   );
-};
-
-export { PublicShop };
+}

@@ -5,7 +5,6 @@ import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import 'react-h5-audio-player/lib/styles.css';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
@@ -42,11 +41,8 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListFollowPosts: React.FC<Props> = ({
-  item,
-  commentTake,
-  userVisitor,
-}) => {
+export function ListFollowPosts(props: Props) {
+  const { item, commentTake, userVisitor } = props;
   const { locale, push } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
@@ -295,6 +291,4 @@ const ListFollowPosts: React.FC<Props> = ({
       </div>
     </>
   );
-};
-
-export { ListFollowPosts };
+}

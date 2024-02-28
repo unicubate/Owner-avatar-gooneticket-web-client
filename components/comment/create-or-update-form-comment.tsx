@@ -2,7 +2,7 @@ import { CreateOrUpdateOneCommentAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ModelType } from '@/utils/pagination-item';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { LoginModal } from '../auth-modal/login-modal';
@@ -14,7 +14,7 @@ const schema = yup.object({
   description: yup.string().min(7).required(),
 });
 
-const CreateOrUpdateFormComment: React.FC<{
+export function CreateOrUpdateFormComment(props: {
   organizationId: string;
   productId?: string;
   postId?: string;
@@ -22,15 +22,17 @@ const CreateOrUpdateFormComment: React.FC<{
   model: ModelType;
   setOpenModal?: any;
   openModal?: boolean;
-}> = ({
-  postId,
-  organizationId,
-  model,
-  productId,
-  comment,
-  openModal,
-  setOpenModal,
-}) => {
+}) {
+  const {
+    postId,
+    organizationId,
+    model,
+    productId,
+    comment,
+    openModal,
+    setOpenModal,
+  } = props;
+
   const { isOpen, setIsOpen, userStorage } = useInputState();
   const {
     reset,
@@ -49,10 +51,10 @@ const CreateOrUpdateFormComment: React.FC<{
 
   useEffect(() => {
     if (comment) {
-      const fields = ['description', 'postId'];
+      const fields = ['description', 'postId', 'productId', 'organizationId'];
       fields?.forEach((field: any) => setValue(field, comment[field]));
     }
-  }, [comment, postId, setValue]);
+  }, [comment, postId, productId, organizationId, setValue]);
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCommentAPI({
@@ -173,6 +175,4 @@ const CreateOrUpdateFormComment: React.FC<{
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
-};
-
-export { CreateOrUpdateFormComment };
+}

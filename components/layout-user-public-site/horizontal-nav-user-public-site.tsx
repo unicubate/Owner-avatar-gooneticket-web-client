@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
 import { ThemeToggle } from '../ui-setting';
+import { HorizontalNavPublicUser } from '../user/horizontal-nav-public-user';
 
 interface Props {
   user?: UserModel;
@@ -43,7 +44,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
     },
     {
       title: `${t('gallery')}`,
-      status: user?.profile?.enableGallery,
+      status: true,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
@@ -81,7 +82,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white border-gray-300 dark:bg-[#1c1b22]">
+      <header className="sticky top-0 z-20 bg-white border-b border-gray-300 dark:border-gray-800 dark:bg-[#1c1b22]">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center -m-2 xl:hidden">
@@ -140,8 +141,8 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                   (item) => item?.status === true && Number(item?.count) >= 1,
                 )
                 .map((item: any, index: number) => {
-                  const isActive = pathname === item.href;
-                  // const isActive = pathname.startsWith(item.href);
+                  //const isActive = pathname === item.href;
+                  const isActive = pathname?.startsWith(item.href);
                   return (
                     <Link
                       key={index}
@@ -161,7 +162,8 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
                 })}
             </nav>
 
-            <div className="flex items-center justify-end ml-auto space-x-6">
+            <div className="flex items-center justify-end ml-auto">
+              {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
               <div className="flex items-center">
                 <ThemeToggle />
                 {userVisiter?.id !== user?.id ? (

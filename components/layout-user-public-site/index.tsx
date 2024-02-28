@@ -49,7 +49,7 @@ const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
         <main>
           <div className="mx-auto mb-10 lg:flex">
             <div
-              className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#232325]`}
+              className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
             >
               {children}
             </div>

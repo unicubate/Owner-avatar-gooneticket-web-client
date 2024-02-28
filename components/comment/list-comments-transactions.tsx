@@ -7,7 +7,7 @@ import { ModelType } from '@/utils/pagination-item';
 import { ReplyIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
 import {
   AvatarCoffeeComponent,
@@ -18,14 +18,18 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useAuth } from '../util/context-user';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
 
-const ListCommentTransactions: React.FC<{
+type Props = {
   item: CommentModel;
   model: ModelType;
   modelIds: ModelType[];
   index: number;
   userReceiveId?: string;
   organizationId: string;
-}> = ({ model, modelIds, item, userReceiveId, organizationId, index }) => {
+};
+
+export function ListCommentTransactions(props: Props) {
+  const { model, modelIds, item, userReceiveId, organizationId, index } = props;
+
   const { locale } = useRouter();
   const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -153,6 +157,4 @@ const ListCommentTransactions: React.FC<{
       </li>
     </>
   );
-};
-
-export { ListCommentTransactions };
+}

@@ -42,6 +42,7 @@ export type ProductModel = {
   status: string;
   userId: string;
   categoryId: string;
+  totalComment: number;
   currency: {
     code: string;
     name: string;

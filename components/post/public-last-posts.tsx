@@ -4,15 +4,11 @@ import { PostModel } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
-import React from 'react';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListLastPosts } from './list-last-posts';
 
-type Props = {
-  userVisitor: UserVisitorModel;
-};
-
-const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
+export function PublicLastPosts(props: { userVisitor: UserVisitorModel }) {
+  const { userVisitor } = props;
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -62,6 +58,4 @@ const PublicLastPosts: React.FC<Props> = ({ userVisitor }) => {
       </div>
     </>
   );
-};
-
-export { PublicLastPosts };
+}

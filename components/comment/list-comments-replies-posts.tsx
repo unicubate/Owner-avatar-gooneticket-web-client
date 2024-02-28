@@ -11,7 +11,7 @@ import { ModelType } from '@/utils/pagination-item';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
@@ -19,19 +19,13 @@ import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
 
-type Props = {
+export function ListCommentsRepliesPosts(props: {
   model: ModelType;
   item: CommentModel;
   index?: number;
   userId?: string;
-};
-
-const ListCommentsRepliesPosts: React.FC<Props> = ({
-  item,
-  model,
-  userId,
-  index,
-}) => {
+}) {
+  const { item, model, userId, index } = props;
   const { locale } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -135,6 +129,4 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({
       ) : null}
     </>
   );
-};
-
-export default ListCommentsRepliesPosts;
+}

@@ -14,7 +14,7 @@ import { ModelType } from '@/utils/pagination-item';
 import { PencilIcon, ReplyIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
@@ -25,25 +25,18 @@ import { ActionModalDialog } from '../ui-setting/shadcn';
 import { useAuth } from '../util/context-user';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
-import ListCommentsRepliesPosts from './list-comments-replies-posts';
+import { ListCommentsRepliesPosts } from './list-comments-replies-posts';
 
-type Props = {
+export function ListCommentsPosts(props: {
   organizationId: string;
   model: ModelType;
   modelIds: ModelType[];
   userVisitorId: string;
   item: CommentModel;
   index?: number;
-};
+}) {
+  const { model, item, modelIds, userVisitorId, organizationId, index } = props;
 
-const ListCommentsPosts: React.FC<Props> = ({
-  model,
-  item,
-  modelIds,
-  userVisitorId,
-  organizationId,
-  index,
-}) => {
   const { locale } = useRouter();
   const user = useAuth() as any;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
@@ -230,6 +223,4 @@ const ListCommentsPosts: React.FC<Props> = ({
       </li>
     </>
   );
-};
-
-export default ListCommentsPosts;
+}

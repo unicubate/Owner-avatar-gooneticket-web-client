@@ -22,12 +22,9 @@ type Props = {
   userReceiveId: string;
 };
 
-const ListCommentsRepliesTransactions: React.FC<Props> = ({
-  item,
-  model,
-  index,
-  userReceiveId,
-}) => {
+export function ListCommentsRepliesTransactions(props: Props) {
+  const { item, model, index, userReceiveId } = props;
+
   const { locale } = useRouter();
   const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
@@ -102,6 +99,4 @@ const ListCommentsRepliesTransactions: React.FC<Props> = ({
       </div>
     </>
   );
-};
-
-export { ListCommentsRepliesTransactions };
+}

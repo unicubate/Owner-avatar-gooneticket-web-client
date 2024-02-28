@@ -1,427 +1,99 @@
-import { CreateOrUpdateOneCartAPI, GetOneCartOrderAPI } from '@/api-site/cart';
+import { GetOneCartOrderAPI } from '@/api-site/cart';
 import { GetOneProductAPI } from '@/api-site/product';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { LoginModal } from '@/components/auth-modal/login-modal';
 import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
-import { ListComments } from '@/components/comment/list-comments';
 import { useInputState } from '@/components/hooks';
-import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
-import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
-import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
-  formatePrice,
-} from '@/utils';
-import { HtmlParser } from '@/utils/html-parser';
+import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { PublicLastProducts } from '@/components/shop/public-last-products';
+import { ViewProductsShop } from '@/components/shop/view-products-shop';
+import { LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { MdOutlineDiscount } from 'react-icons/md';
-import ReactPlayer from 'react-player';
 
-const contentStyle: React.CSSProperties = {
-  height: '100%',
-  width: '100%',
-  lineHeight: '50px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+const ShopUserPublic = () => {
+  const { query, push } = useRouter();
+  const { isOpen, setIsOpen, userStorage: userBayer } = useInputState();
 
-const ShopView = () => {
-  const { isOpen, setIsOpen, userStorage: userVisitor } = useInputState();
-  const router = useRouter();
-  const { query } = useRouter();
-  const productSlug = String(query?.productId);
-
-  const {
-    isError: isErrorProduct,
-    isPending: isPendingProduct,
-    data: product,
-  } = GetOneProductAPI({
-    productSlug,
+  const { status, data: product } = GetOneProductAPI({
+    productSlug: String(query?.productId),
   });
 
   const {
-    isError: isErrorUser,
     isPending: isPendingUser,
+    isError: isErrorUser,
     data: user,
   } = GetOneUserPublicAPI({
     username: product?.profile?.username,
-    userVisitorId: userVisitor?.id,
+    userVisitorId: userBayer?.id,
   });
 
-  const { data: cartOrder } = GetOneCartOrderAPI({
-    organizationSellerId: user?.organizationId,
+  const {
+    isPending: isPendingCartOrder,
+    isError: isErrorCartOrder,
+    data: cartOrder,
+  } = GetOneCartOrderAPI({
+    organizationSellerId: product?.organizationId,
   });
-
-  const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
-  });
-
-  const addToCart = async (itemCard: any) => {
-    try {
-      if (userVisitor?.id) {
-        await saveMutation({
-          quantity: 1,
-          productId: itemCard?.id,
-          organizationId: itemCard?.organizationId,
-        });
-        AlertSuccessNotification({
-          text: `Product add to cart successfully`,
-        });
-      } else {
-        setIsOpen(true);
-      }
-    } catch (error: any) {
-      AlertDangerNotification({
-        text: `${error.response.data.message}`,
-      });
-    }
-  };
-
-  // const dataProduct =
-  //   isPendingProduct || isPendingUser ? (
-  //     <LoadingFile />
-  //   ) : isErrorProduct || isErrorUser ? (
-  //     <ErrorFile title="404" description="Error find data please try again" />
-  //   ) : (
-  //     <>
-
-  //     </>
-  //   );
 
   return (
     <>
-      {/* <LayoutSite title={`${product?.title ?? 'Product'}`}> */}
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
-          <div className="lg:col-span-3 lg:row-end-1">
-            <div className="lg:flex lg:items-start">
-              <div className="overflow-hidden rounded-lg border-2 border-transparent">
-                <div className="mb-2 flex items-center">
-                  <AvatarComponent
-                    size={40}
-                    className="size-10 shrink-0 rounded-full bg-gray-300"
-                    profile={product?.profile}
-                  />
-                  <div
-                    onClick={() =>
-                      router.push(`/${product?.profile?.username}/shop`)
-                    }
-                    className="ml-2 cursor-pointer"
-                  >
-                    <p className="text-sm font-bold text-gray-900">
-                      {product?.profile?.firstName ?? ''}{' '}
-                      {product?.profile?.lastName ?? ''}
-                    </p>
-                  </div>
-
-                  <div
-                    onClick={() =>
-                      router.push(`/${product?.profile?.username}/shop`)
-                    }
-                    className="ml-auto"
-                  >
-                    <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                      {' '}
-                      View shop
-                    </p>
-                  </div>
-                </div>
-
-                {product?.uploadsImages && product?.uploadsImages.length > 0 ? (
-                  <ListCarouselUpload
-                    uploads={product?.uploadsImages}
-                    folder="products"
-                    preview={false}
-                    className={`size-full object-cover transition-all duration-200 group-hover:scale-110`}
-                  />
-                ) : null}
-
-                {/* {product?.uploadsImage.length > 0 && (
-                    <ImageGalleryShopList
-                      uploads={product?.uploadsImage}
-                      folder="products"
-                      preview={false}
-                    />
-                  )} */}
-
-                {product?.urlMedia ? (
-                  <div className="mx-auto mt-2">
-                    <ReactPlayer
-                      className="mr-auto"
-                      url={product?.urlMedia}
-                      height="350px"
-                      width="100%"
-                      controls
-                    />
-                  </div>
-                ) : null}
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-3 lg:row-span-2 lg:row-end-2">
-            <h1 className="text-4xl font-bold">{product?.title ?? ''}</h1>
-
-            <div className="mt-4 flex items-center">
-              <p className="text-4xl font-bold text-gray-900">
-                {formatePrice({
-                  value: Number(product?.priceDiscount ?? 0),
-                  isDivide: false,
-                }) ?? ''}
-              </p>
-              <p className="text-2xl font-bold text-gray-900">
-                {product?.currency?.symbol ?? ''}
-              </p>
-              {product?.enableDiscount ? (
+      <LayoutUserPublicSite title={`${product?.title ?? 'Shop'}`} user={user}>
+        <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
+              {product?.id ? (
                 <>
-                  <p className="ml-3 text-2xl font-bold text-gray-500">
-                    <del>
-                      {' '}
-                      {formatePrice({
-                        value: Number(product?.price ?? 0),
-                        isDivide: false,
-                      }) ?? ''}{' '}
-                    </del>
-                  </p>
-                  <p className="text-2xl font-bold text-gray-500">
-                    <del> {product?.currency?.symbol ?? ''} </del>
-                  </p>
+                  <div className="my-4 border-gray-200 lg:col-span-3 xl:col-span-4">
+                    <div className="flow-root">
+                      <ViewProductsShop item={product} />
+                    </div>
+                  </div>
+
+                  <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
+                    <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                      <div className="flow-root">
+                        {product?.id && user?.organizationId ? (
+                          <PublicLastProducts
+                            userVisitor={{
+                              id: user?.id,
+                              organizationId: user?.organizationId,
+                            }}
+                          />
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
                 </>
               ) : null}
             </div>
-
-            {product?.enableDiscount ? (
-              <div className="mt-3 flex items-center text-sm font-medium text-gray-500">
-                <MdOutlineDiscount className="mr-2 h-5 w-4 text-gray-400" />
-                Save {product?.discount?.percent}% right now
-              </div>
-            ) : null}
-
-            {/* <h2 className="mt-4 text-base font-bold text-gray-900">
-                Features
-              </h2>
-              <ul className="mt-4 space-y-3 text-base font-medium text-gray-600 list-disc list-inside">
-                <li>Made with full cotton</li>
-                <li>Slim fit for any body</li>
-                <li>Quality control by JC</li>
-              </ul> */}
-
-            {/* <div className="mt-6 space-y-5">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center justify-end p-1 space-x-40 border border-gray-100 rounded-md">
-                    <Button shape="default" size="large" loading={false}>
-                      <svg
-                        className="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M18 12H6"
-                        />
-                      </svg>
-                    </Button>
-
-                    <span className="text-base font-semibold text-gray-900">
-                      {" "}
-                      1{" "}
-                    </span>
-
-                    <Button shape="default" size="large" loading={false}>
-                      <svg
-                        className="w-5 h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                      </svg>
-                    </Button>
-                  </div>
-                </div>
-              </div> */}
-
-            <div className="mt-6 flex items-center space-x-4">
-              {/* <ButtonInput
-                  type="button"
-                  loading={false}
-                  onClick={() => {
-                    addToCart(product);
-                  }}
-                >
-                  Add to cart
-                </ButtonInput> */}
-            </div>
-
-            {/* <ul className="mt-8 space-y-3">
-                <li className="flex items-center text-sm font-medium text-gray-500">
-                  <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  Free shipping worldwide
-                </li>
-
-                <li className="flex items-center text-sm font-medium text-gray-500">
-                  <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
-                    />
-                  </svg>
-                  100% Secured Payment
-                </li>
-
-                <li className="flex items-center text-sm font-medium text-gray-500">
-                  <svg
-                    className="w-5 h-5 mr-2.5 text-gray-400"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                    />
-                  </svg>
-                  Made by the Professionals
-                </li>
-              </ul> */}
-
-            <h2 className="mt-2 text-xl font-bold text-gray-900">
-              Description
-            </h2>
-
-            <p className="mt-4 text-base text-gray-600">
-              <HtmlParser html={String(product?.description)} />
-            </p>
-          </div>
-
-          <div className="lg:col-span-3">
-            {product?.id ? (
-              <ListComments
-                model="PRODUCT"
-                modelIds={['PRODUCT']}
-                productId={String(product?.id)}
-                take={10}
-                organizationId={userVisitor?.organizationId}
-                userVisitorId={userVisitor?.id}
-              />
-            ) : null}
-
-            {/* <h2 className="mb-2 text-base font-bold text-gray-900">
-                Description
-              </h2>
-
-              <p className="text-base text-gray-600">
-                <HtmlParser html={String(product?.description)} />
-              </p> */}
-
-            {/* <div className="border-b border-gray-200">
-                <nav className="flex -mb-px space-x-8 sm:space-x-14">
-                  <a
-                    href="#"
-                    title=""
-                    className="py-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 whitespace-nowrap"
-                  >
-                    {" "}
-                    Description{" "}
-                  </a>
-
-                  <a
-                    href="#"
-                    title=""
-                    className="inline-flex items-center py-4 text-sm font-medium text-gray-900 border-b-2 border-gray-900 whitespace-nowrap"
-                  >
-                    Reviews
-                    <span className="block px-2 py-0.5 ml-2 text-xs font-bold bg-gray-400 rounded-full text-gray-50">
-                      {" "}
-                      157{" "}
-                    </span>
-                  </a>
-
-                  <a
-                    href="#"
-                    title=""
-                    className="py-4 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-gray-700 hover:border-gray-300 whitespace-nowrap"
-                  >
-                    {" "}
-                    Support{" "}
-                  </a>
-                </nav>
-              </div> */}
-
-            {/* <div className="mt-8 text-center lg:pl-16 sm:mt-12 lg:text-left">
-                <button
-                  type="button"
-                  className="inline-flex items-center justify-center text-xs font-bold tracking-widest text-gray-400 uppercase transition-all duration-200 rounded hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                >
-                  <svg
-                    className="w-4 h-4 mr-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    />
-                  </svg>
-                  Load more reviews
-                </button>
-              </div> */}
           </div>
         </div>
-      </div>
 
-      {user?.id && cartOrder?.id ? (
-        <CartOrderFooterCart user={user} cartOrder={cartOrder} />
+        {userBayer?.id && user?.id && cartOrder?.id ? (
+          <CartOrderFooterCart user={user} cartOrder={cartOrder} />
+        ) : null}
+
+        <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
+      </LayoutUserPublicSite>
+
+      {status === 'pending' && isPendingUser && isPendingCartOrder ? (
+        <LoadingFile />
       ) : null}
 
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
-      {/* </LayoutSite> */}
+      {status === 'error' && isErrorUser && isErrorCartOrder ? (
+        <ErrorFile
+          title="404"
+          description="Error find data please try again"
+          className="dark:text-white"
+        />
+      ) : null}
     </>
   );
 };
 
-export default ShopView;
+export default ShopUserPublic;
 
 export async function getStaticPaths() {
   return {
@@ -435,6 +107,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
     props: {
       messages: {
         ...(await import(`/lang/${locale}/index.json`)).default,
+        ...(await import(`/lang/${locale}/common.json`)).default,
       },
     },
   };

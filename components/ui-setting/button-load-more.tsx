@@ -7,15 +7,11 @@ interface Props {
   isFetchingNextPage: boolean;
 }
 
-const ButtonLoadMore: React.FC<Props> = ({
-  children = 'Load More',
-  onClick,
-  ref,
-  isFetchingNextPage,
-}) => {
+export function ButtonLoadMore(props: Props) {
+  const { children = 'Load More', onClick, ref, isFetchingNextPage } = props;
   return (
     <>
-      <div className="mt-2 sm:mt-0">
+      <div className="my-2 mt-2 sm:mt-0">
         <ButtonInput
           type="button"
           size="lg"
@@ -30,6 +26,4 @@ const ButtonLoadMore: React.FC<Props> = ({
       </div>
     </>
   );
-};
-
-export { ButtonLoadMore };
+}

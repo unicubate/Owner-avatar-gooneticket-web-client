@@ -8,7 +8,6 @@ import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import { ShoppingCartIcon } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -17,7 +16,8 @@ type Props = {
   item: ProductModel;
 };
 
-const ListPublicShop: React.FC<Props> = ({ item }) => {
+export function ListPublicShop(props: Props) {
+  const { item } = props;
   const { isOpen, setIsOpen, userStorage } = useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
@@ -70,12 +70,8 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            <p className="text-3xl text-gray-900 dark:text-white">
-              {item?.priceDiscount ?? ''}
-            </p>
-            <p className="ml-1 text-lg  text-gray-900 dark:text-white">
-              {item?.currency?.symbol ?? ''}
-            </p>
+            <p className="text-3xl">{item?.priceDiscount ?? ''}</p>
+            <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
 
             {item?.enableDiscount ? (
               <>
@@ -134,6 +130,4 @@ const ListPublicShop: React.FC<Props> = ({ item }) => {
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
-};
-
-export { ListPublicShop };
+}

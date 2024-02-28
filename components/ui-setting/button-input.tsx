@@ -17,21 +17,22 @@ interface Props {
   ref?: (node?: Element | null) => void;
 }
 
-const ButtonInput: React.FC<Props> = ({
-  asChild,
-  type,
-  size,
-  icon,
-  children,
-  className,
-  onClick,
-  loading,
-  variant,
-  title,
-  disabled,
-  onMouseLeave,
-  ref,
-}) => {
+export function ButtonInput(props: Props) {
+  const {
+    asChild,
+    type,
+    size,
+    icon,
+    children,
+    className,
+    onClick,
+    loading,
+    variant,
+    title,
+    disabled,
+    onMouseLeave,
+    ref,
+  } = props;
   return (
     <>
       <Button
@@ -63,6 +64,4 @@ const ButtonInput: React.FC<Props> = ({
       </Button>
     </>
   );
-};
-
-export { ButtonInput };
+}

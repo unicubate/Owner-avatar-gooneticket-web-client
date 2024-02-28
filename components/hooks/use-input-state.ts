@@ -34,6 +34,8 @@ const useInputState = () => {
   };
 
   const newSearch = useDebounce(search, 500);
+
+  const linkHref = typeof window !== 'undefined' ? window.location.href : null;
   return {
     fromAt,
     setFromAt,
@@ -57,6 +59,7 @@ const useInputState = () => {
     setSuccess,
     setHasErrors,
     userStorage,
+    linkHref,
   };
 };
 
