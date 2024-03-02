@@ -27,11 +27,13 @@ import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import {
   AlertCircleIcon,
   DownloadIcon,
+  LockKeyholeIcon,
   MessageCircleIcon,
   MoreHorizontalIcon,
   PencilIcon,
   ShareIcon,
 } from 'lucide-react';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { Button } from '../ui/button';
 
@@ -44,6 +46,7 @@ type Props = {
 export function ListFollowPosts(props: Props) {
   const { item, commentTake, userVisitor } = props;
   const { locale, push } = useRouter();
+  const [isComment, setIsComment] = useState(false);
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
   return (
@@ -151,7 +154,8 @@ export function ListFollowPosts(props: Props) {
             </div>
           ) : null}
 
-          {item?.uploadsImages?.length > 0 ? (
+          {['GALLERY'].includes(item?.type) &&
+          item?.uploadsImages?.length > 0 ? (
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
                 post={item}
@@ -198,15 +202,17 @@ export function ListFollowPosts(props: Props) {
           </div> */}
 
           {item?.whoCanSee && ['AUDIO'].includes(item?.type as PostType) ? (
-            <div className="mx-auto justify-center text-center">
-              <AudioPlayerInput
-                post={item}
-                urlMedia={item?.urlMedia}
-                enableUrlMedia={item?.enableUrlMedia}
-                uploads={item?.uploadsFiles}
-                folder="posts"
-              />
-            </div>
+            <>
+              <div className="mx-auto justify-center text-center">
+                <AudioPlayerInput
+                  post={item}
+                  urlMedia={item?.urlMedia}
+                  enableUrlMedia={item?.enableUrlMedia}
+                  uploads={item?.uploadsFiles}
+                  folder="posts"
+                />
+              </div>
+            </>
           ) : null}
 
           {item?.title ? (
@@ -236,7 +242,7 @@ export function ListFollowPosts(props: Props) {
           <div className="mt-2 flex items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button className="ml-3">
+            <button onClick={() => setIsComment(true)} className="ml-3">
               <MessageCircleIcon className="size-5" />
             </button>
             <span className="ml-2 text-sm">
@@ -271,22 +277,22 @@ export function ListFollowPosts(props: Props) {
               }
             />
 
-            {/* {item?.whoCanSee === 'MEMBERSHIP' &&
+            {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (
               <LockKeyholeIcon className="ml-auto size-6" />
-            ) : (
-              <UnlockKeyholeIcon className="ml-auto size-6" />
-            )} */}
+            ) : null}
           </div>
 
-          <ListComments
-            model="POST"
-            modelIds={['POST']}
-            userVisitorId={userVisitor?.id ?? ''}
-            organizationId={item?.organizationId}
-            postId={item?.id}
-            take={commentTake}
-          />
+          {isComment ? (
+            <ListComments
+              model="POST"
+              modelIds={['POST']}
+              userVisitorId={userVisitor?.id ?? ''}
+              organizationId={item?.organizationId}
+              postId={item?.id}
+              take={commentTake}
+            />
+          ) : null}
         </div>
       </div>
     </>

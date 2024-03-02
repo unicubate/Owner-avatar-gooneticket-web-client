@@ -137,9 +137,12 @@ body {
   color: #6b7380;
 }
 
-.rhap_progress-filled,
-.rhap_progress-indicator {
+.rhap_progress-filled {
   background-color: #007aff !important;
+}
+
+.rhap_progress-indicator {
+  width: 0px !important;
 }
 
 .PhoneInputInput {

@@ -4,7 +4,6 @@ import { ContributorModel } from '@/types/contributor';
 import { formateFromNow } from '@/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { AvatarComponent } from '../ui-setting/ant';
 
 type Props = {
@@ -12,7 +11,8 @@ type Props = {
   index: number;
 };
 
-const ListContributors: React.FC<Props> = ({ item, index }) => {
+export function ListContributors(props: Props) {
+  const { item, index } = props;
   const { locale } = useRouter();
   return (
     <>
@@ -56,6 +56,4 @@ const ListContributors: React.FC<Props> = ({ item, index }) => {
       </div>
     </>
   );
-};
-
-export { ListContributors };
+}

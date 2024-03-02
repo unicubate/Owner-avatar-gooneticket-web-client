@@ -86,7 +86,7 @@ const Posts = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavCreatePost />
 
-            <div
+            {/* <div
               className={`mt-8 rounded-lg border border-gray-200 bg-white  px-3 py-2 dark:border-gray-800 dark:bg-[#121212]`}
             >
               <nav className="flex flex-wrap gap-4">
@@ -114,7 +114,7 @@ const Posts = () => {
                   Scheduled{' '}
                 </a>
               </nav>
-            </div>
+            </div> */}
 
             <div className="flow-root">
               <div

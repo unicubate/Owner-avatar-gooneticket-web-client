@@ -31,10 +31,7 @@ export function AvatarComponent(props: Props) {
           ) : (
             <>
               <Avatar
-                className={cn(
-                  `bg-${profile?.color}-900  rounded-full`,
-                  className,
-                )}
+                className={cn(`bg-blue-600  rounded-full`, className)}
                 size={size}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
               >

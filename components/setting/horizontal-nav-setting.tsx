@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
-const HorizontalNavSetting: React.FC = () => {
+export function HorizontalNavSetting() {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
@@ -98,6 +98,4 @@ const HorizontalNavSetting: React.FC = () => {
       </div>
     </>
   );
-};
-
-export { HorizontalNavSetting };
+}

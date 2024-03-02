@@ -3,11 +3,9 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListFollowPosts } from '@/components/post/list-follow-posts';
 import { PublicLastPosts } from '@/components/post/public-last-posts';
-import { AvatarComponent } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
-import { HtmlParser } from '@/utils/html-parser';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
@@ -66,7 +64,7 @@ const PostShow = () => {
               </div>
 
               <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                {/* <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                   {post?.id && user?.organizationId ? (
                     <div className="px-4 py-6 sm:p-6 lg:p-8">
                       <div className="text-center">
@@ -95,7 +93,7 @@ const PostShow = () => {
                       </div>
                     </div>
                   ) : null}
-                </div>
+                </div> */}
 
                 <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                   {post?.id && user?.organizationId ? (

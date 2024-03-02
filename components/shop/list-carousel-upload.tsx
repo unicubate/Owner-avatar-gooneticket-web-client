@@ -30,16 +30,17 @@ const contentStyle: React.CSSProperties = {
   // background: "#364d79",
 };
 
-const ListCarouselUpload: React.FC<Props> = ({
-  uploads,
-  folder,
-  preview = false,
-  alt,
-  post,
-  className = '',
-  height = '100%',
-  width = '100%',
-}) => {
+export function ListCarouselUpload(props: Props) {
+  const {
+    uploads,
+    folder,
+    preview = false,
+    alt,
+    post,
+    className = '',
+    height = '100%',
+    width = '100%',
+  } = props;
   const ref = useRef();
 
   return (
@@ -95,6 +96,4 @@ const ListCarouselUpload: React.FC<Props> = ({
       </Swiper>
     </>
   );
-};
-
-export { ListCarouselUpload };
+}
