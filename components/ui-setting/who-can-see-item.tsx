@@ -43,7 +43,7 @@ export function RedirectToMembershipsButton(props: {
         onClick={() => push(`/${username}/memberships`)}
         className={cn('mt-2', className)}
         type="button"
-        variant="info"
+        variant="default"
         size="lg"
         icon={<LockKeyholeIcon className="mr-2 size-6" />}
       >
