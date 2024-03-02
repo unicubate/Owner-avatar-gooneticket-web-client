@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfinitePostsAPI } from '@/api-site/post';
-import ListGallery from '@/components/gallery/list-gallery';
+import { ListGallery } from '@/components/gallery/list-gallery';
 import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
 import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
@@ -19,7 +19,8 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
+export function TableGallery(props: Props) {
+  const { userVisitor, albumId } = props;
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
   const { search, handleSetSearch } = useInputState();
@@ -147,6 +148,4 @@ const TableGallery: React.FC<Props> = ({ userVisitor, albumId }) => {
       )}
     </>
   );
-};
-
-export { TableGallery };
+}

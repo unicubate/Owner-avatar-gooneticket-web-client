@@ -15,7 +15,8 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
+export function TableAlbum(props: Props) {
+  const { userVisitor } = props;
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
 
@@ -84,6 +85,4 @@ const TableAlbum: React.FC<Props> = ({ userVisitor }) => {
       ))
   );
   return <>{dataTableAlbum}</>;
-};
-
-export { TableAlbum };
+}

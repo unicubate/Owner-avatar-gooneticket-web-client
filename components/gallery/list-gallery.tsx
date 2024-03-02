@@ -16,7 +16,6 @@ import {
   TrashIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { FiDownload } from 'react-icons/fi';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
@@ -29,7 +28,8 @@ type Props = {
   index: number;
 };
 
-const ListGallery: React.FC<Props> = ({ item, index }) => {
+export function ListGallery(props: Props) {
+  const { item, index } = props;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const router = useRouter();
 
@@ -176,6 +176,4 @@ const ListGallery: React.FC<Props> = ({ item, index }) => {
       </div>
     </>
   );
-};
-
-export default ListGallery;
+}
