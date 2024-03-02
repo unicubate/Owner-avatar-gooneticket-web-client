@@ -145,6 +145,10 @@ body {
   width: 0px !important;
 }
 
+.rhap_time {
+  font-size: 14px !important;
+}
+
 .PhoneInputInput {
   flex: 1;
   min-width: 0;

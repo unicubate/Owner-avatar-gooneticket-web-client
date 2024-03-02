@@ -14,7 +14,7 @@ interface Props {
 
 export function AudioPlayerInput(props: Props) {
   const { folder, item } = props;
-  const player = useRef(null);
+  const player = useRef<any>(null);
 
   const oneImage =
     item?.uploadsImages?.length > 0
@@ -72,10 +72,10 @@ export function AudioPlayerInput(props: Props) {
                     <LockKeyholeIcon className="justify-items-center size-8" />
                   ) : (
                     <svg
-                      className="size-10 text-black dark:text-white"
-                      width="44"
-                      height="44"
-                      viewBox="0 0 44 44"
+                      className="size-11 text-black dark:text-white"
+                      width="50"
+                      height="50"
+                      viewBox="0 0 50 50"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                     >
@@ -90,10 +90,10 @@ export function AudioPlayerInput(props: Props) {
               pause: (
                 <>
                   <svg
-                    className="size-10 text-black dark:text-white"
-                    width="44"
-                    height="44"
-                    viewBox="0 0 44 44"
+                    className="size-11 text-black dark:text-white"
+                    width="50"
+                    height="50"
+                    viewBox="0 0 50 50"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -107,10 +107,10 @@ export function AudioPlayerInput(props: Props) {
               rewind: (
                 <>
                   <svg
-                    className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
-                    width="48"
-                    height="48"
-                    viewBox="0 0 48 48"
+                    className="size-10 text-gray-400 hover:text-black dark:hover:text-white"
+                    width="54"
+                    height="54"
+                    viewBox="0 0 54 54"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -136,10 +136,10 @@ export function AudioPlayerInput(props: Props) {
               forward: (
                 <>
                   <svg
-                    className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
-                    width="48"
-                    height="48"
-                    viewBox="0 0 48 48"
+                    className="size-10 text-gray-400 hover:text-black dark:hover:text-white"
+                    width="54"
+                    height="54"
+                    viewBox="0 0 54 54"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -170,6 +170,7 @@ export function AudioPlayerInput(props: Props) {
             className="relative rounded-lg"
             ref={player}
             style={{ boxShadow: 'none', background: 'transparent' }}
+            key={item.id}
             // header={
             //   <>
             //     {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
