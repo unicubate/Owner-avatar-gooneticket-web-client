@@ -18,7 +18,9 @@ import { NextIntlClientProvider } from 'next-intl';
 
 import { ClientOnly } from '@/components/util/client-only';
 import { useRouter } from 'next/router';
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { staleTime: 60_000, gcTime: 10 * (60 * 1000) } },
+});
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();

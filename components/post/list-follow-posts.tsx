@@ -6,11 +6,14 @@ import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import 'react-h5-audio-player/lib/styles.css';
-import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { ButtonInput, CopyShareLink } from '../ui-setting';
+import {
+  ButtonInput,
+  CopyShareLink,
+  RedirectToMembershipsButton,
+} from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 
@@ -34,6 +37,7 @@ import {
   ShareIcon,
 } from 'lucide-react';
 import { useState } from 'react';
+import ReactPlayer from 'react-player';
 import { useInputState } from '../hooks';
 import { Button } from '../ui/button';
 
@@ -136,17 +140,20 @@ export function ListFollowPosts(props: Props) {
           </div>
 
           {item?.urlMedia && ['VIDEO'].includes(item?.type) ? (
-            <div
-              className={`mx-auto mt-1 
-            ${
-              item?.whoCanSee === 'MEMBERSHIP' && item?.isValidSubscribe !== 1
-                ? 'blur-xl'
-                : ''
-            }`}
-            >
+            <div className={`mx-auto mt-1`}>
               <ReactPlayer
-                className="mr-auto"
-                url={item?.urlMedia}
+                className={`mr-auto ${
+                  item?.whoCanSee === 'MEMBERSHIP' &&
+                  item?.isValidSubscribe !== 1
+                    ? 'blur-xl'
+                    : ''
+                }`}
+                url={
+                  ['MEMBERSHIP'].includes(item?.whoCanSee) &&
+                  item?.isValidSubscribe !== 1
+                    ? ''
+                    : item?.urlMedia
+                }
                 height="350px"
                 width="100%"
                 controls
@@ -171,7 +178,6 @@ export function ListFollowPosts(props: Props) {
               />
             </div>
           ) : null}
-
           {/* <div className="flex mt-2 items-center">
             {item?.uploadsImage?.length > 0 && ["AUDIO"].includes(item?.type as PostType) ? (
               <ListCarouselUpload
@@ -200,7 +206,6 @@ export function ListFollowPosts(props: Props) {
               ) : null}
             </div>
           </div> */}
-
           {item?.whoCanSee && ['AUDIO'].includes(item?.type as PostType) ? (
             <>
               <div className="mx-auto justify-center text-center">
@@ -208,7 +213,6 @@ export function ListFollowPosts(props: Props) {
               </div>
             </>
           ) : null}
-
           {item?.title ? (
             <div className="mt-2 text-lg">
               <Link
@@ -219,7 +223,6 @@ export function ListFollowPosts(props: Props) {
               </Link>
             </div>
           ) : null}
-
           {item?.description ? (
             <div
               className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
@@ -232,16 +235,25 @@ export function ListFollowPosts(props: Props) {
               )}
             </div>
           ) : null}
-
           <div className="mt-2 flex items-center font-medium text-gray-600">
             <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-            <button onClick={() => setIsComment(true)} className="ml-3">
-              <MessageCircleIcon className="size-5" />
-            </button>
-            <span className="ml-2 text-sm">
-              {item?.totalComment > 0 ? item?.totalComment : ''}
-            </span>
+            {['MEMBERSHIP'].includes(item?.whoCanSee) &&
+            item?.isValidSubscribe !== 1 ? (
+              <button className="ml-3">
+                <MessageCircleIcon className="size-6" />
+              </button>
+            ) : (
+              <button onClick={() => setIsComment(true)} className="ml-3">
+                <MessageCircleIcon className="size-6" />
+              </button>
+            )}
+
+            {item?.totalComment > 0 ? (
+              <span className="ml-2 text-sm">{item?.totalComment}</span>
+            ) : (
+              ''
+            )}
             {userVisitor?.id === item?.userId ? (
               <>
                 <Link
@@ -251,7 +263,7 @@ export function ListFollowPosts(props: Props) {
                   }/edit?type=${item?.type.toLocaleLowerCase()}`}
                   className="ml-3 hover:text-green-400 focus:ring-green-400"
                 >
-                  <PencilIcon className="size-5" />
+                  <PencilIcon className="size-6" />
                 </Link>
               </>
             ) : null}
@@ -266,7 +278,7 @@ export function ListFollowPosts(props: Props) {
                   variant="link"
                   type="button"
                 >
-                  <ShareIcon className="size-5" />
+                  <ShareIcon className="size-6" />
                 </ButtonInput>
               }
             />
@@ -276,7 +288,6 @@ export function ListFollowPosts(props: Props) {
               <LockKeyholeIcon className="ml-auto size-6" />
             ) : null}
           </div>
-
           {isComment ? (
             <ListComments
               model="POST"
@@ -285,6 +296,13 @@ export function ListFollowPosts(props: Props) {
               organizationId={item?.organizationId}
               postId={item?.id}
               take={commentTake}
+            />
+          ) : null}
+          {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+          item?.isValidSubscribe !== 1 ? (
+            <RedirectToMembershipsButton
+              className="w-full"
+              username={item?.profile?.username}
             />
           ) : null}
         </div>

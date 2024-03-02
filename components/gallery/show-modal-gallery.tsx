@@ -5,17 +5,38 @@ import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { BiConversation } from 'react-icons/bi';
-import { HiOutlineLockClosed } from 'react-icons/hi';
-import { MdOutlineModeEdit } from 'react-icons/md';
 import { ListComments } from '../comment/list-comments';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
-import { ButtonInput } from '../ui-setting';
+import {
+  ButtonInput,
+  CopyShareLink,
+  RedirectToMembershipsButton,
+} from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
+import { Button } from '../ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
-import { FiDownload } from 'react-icons/fi';
+import {
+  AlertCircleIcon,
+  DownloadIcon,
+  LockKeyholeIcon,
+  MessageCircleIcon,
+  MoreHorizontalIcon,
+  PencilIcon,
+  ShareIcon,
+} from 'lucide-react';
+import { useState } from 'react';
+import { useInputState } from '../hooks';
 
 type Props = {
   openModal: boolean;
@@ -24,12 +45,12 @@ type Props = {
   userVisitorId: string;
 };
 
-const ShowModalGallery: React.FC<Props> = ({
-  setOpenModal,
-  openModal,
-  post,
-  userVisitorId,
-}) => {
+export function ShowModalGallery(props: Props) {
+  const { setOpenModal, openModal, post, userVisitorId } = props;
+
+  const [isComment, setIsComment] = useState(false);
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+
   const { locale, push } = useRouter();
   const { status, data: item } = GetOnePostAPI({
     postId: post?.id,
@@ -67,21 +88,61 @@ const ShowModalGallery: React.FC<Props> = ({
             </div>
 
             <div className="ml-auto">
-              <div className="flex items-center space-x-2 sm:ml-5">
-                {item?.whoCanSee === 'MEMBERSHIP' &&
-                item?.isValidSubscribe !== 1 ? (
-                  <ButtonInput
-                    onClick={() =>
-                      push(`/${item?.profile?.username}/memberships`)
-                    }
-                    type="button"
-                    variant="danger"
-                    icon={<HiOutlineLockClosed className="size-5" />}
-                  >
-                    <span className="ml-1 font-bold">Join membership</span>
-                  </ButtonInput>
-                ) : null}
-              </div>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button type="button" size="icon" variant="ghost">
+                    <MoreHorizontalIcon className="size-5 text-gray-400" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#121212]">
+                  <DropdownMenuGroup>
+                    {item?.allowDownload && (
+                      <>
+                        {item?.whoCanSee === 'MEMBERSHIP' &&
+                        item?.isValidSubscribe !== 1 ? (
+                          ''
+                        ) : (
+                          <>
+                            <DropdownMenuItem
+                              onClick={() => {
+                                push(
+                                  `${downloadOneFileUploadAPI({
+                                    folder: 'posts',
+                                    fileName:
+                                      item.type === 'AUDIO'
+                                        ? item?.uploadsFiles[0]?.path
+                                        : item?.uploadsImages[0]?.path,
+                                  })}`,
+                                );
+                              }}
+                            >
+                              <button
+                                title="Download"
+                                className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                              >
+                                <DownloadIcon className="size-5" />
+                              </button>
+                              <span className="cursor-pointer ml-2">
+                                Download
+                              </span>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                          </>
+                        )}
+                      </>
+                    )}
+                    <DropdownMenuItem>
+                      <button
+                        title="Report"
+                        className="text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
+                      >
+                        <AlertCircleIcon className="size-5" />
+                      </button>
+                      <span className="cursor-pointer ml-2">Report</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -134,10 +195,22 @@ const ShowModalGallery: React.FC<Props> = ({
             <div className="mt-2 flex items-center font-medium text-gray-600">
               <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
-              <button className="ml-2 text-2xl">
-                <BiConversation />
-              </button>
-              <span className="ml-2 text-sm">{item?.totalComment ?? 0}</span>
+              {['MEMBERSHIP'].includes(item?.whoCanSee) &&
+              item?.isValidSubscribe !== 1 ? (
+                <button className="ml-3">
+                  <MessageCircleIcon className="size-6" />
+                </button>
+              ) : (
+                <button onClick={() => setIsComment(true)} className="ml-3">
+                  <MessageCircleIcon className="size-6" />
+                </button>
+              )}
+
+              {item?.totalComment > 0 ? (
+                <span className="ml-2 text-sm">{item?.totalComment}</span>
+              ) : (
+                ''
+              )}
               {userVisitorId === item?.userId ? (
                 <>
                   <Link
@@ -145,50 +218,35 @@ const ShowModalGallery: React.FC<Props> = ({
                     href={`/posts/${
                       item?.id
                     }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                    className="ml-2 hover:text-indigo-400 focus:ring-indigo-400"
+                    className="ml-3 hover:text-green-400 focus:ring-green-400"
                   >
-                    <MdOutlineModeEdit className="size-6" />
+                    <PencilIcon className="size-6" />
                   </Link>
                 </>
               ) : null}
-              {item?.allowDownload && (
-                <>
-                  {item?.whoCanSee === 'MEMBERSHIP' &&
-                  item?.isValidSubscribe !== 1 ? (
-                    <>
-                      <button
-                        title="Download"
-                        className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
-                      >
-                        <FiDownload className="size-5" />
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        title="Download"
-                        onClick={() => {
-                          push(
-                            `${downloadOneFileUploadAPI({
-                              folder: 'posts',
-                              fileName:
-                                item.type === 'AUDIO'
-                                  ? item?.uploadsFiles[0]?.path
-                                  : item?.uploadsImages[0]?.path,
-                            })}`,
-                          );
-                        }}
-                        className="ml-2 text-2xl text-gray-600 hover:text-indigo-500 focus:ring-indigo-500"
-                      >
-                        <FiDownload className="size-5" />
-                      </button>
-                    </>
-                  )}
-                </>
-              )}
+
+              <CopyShareLink
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+                buttonDialog={
+                  <ButtonInput
+                    className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                    variant="link"
+                    type="button"
+                  >
+                    <ShareIcon className="size-6" />
+                  </ButtonInput>
+                }
+              />
+
+              {item?.whoCanSee === 'MEMBERSHIP' &&
+              item?.isValidSubscribe !== 1 ? (
+                <LockKeyholeIcon className="ml-auto size-6" />
+              ) : null}
             </div>
 
-            {item?.id ? (
+            {isComment && item?.id ? (
               <ListComments
                 model="POST"
                 modelIds={['POST']}
@@ -198,11 +256,17 @@ const ShowModalGallery: React.FC<Props> = ({
                 userVisitorId={userVisitorId}
               />
             ) : null}
+
+            {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+            item?.isValidSubscribe !== 1 ? (
+              <RedirectToMembershipsButton
+                className="w-full"
+                username={item?.profile?.username}
+              />
+            ) : null}
           </div>
         </DialogContent>
       </Dialog>
     </>
   );
-};
-
-export { ShowModalGallery };
+}

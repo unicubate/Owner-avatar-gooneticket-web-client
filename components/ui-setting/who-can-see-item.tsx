@@ -16,14 +16,14 @@ export function WhoCanSeeItem(props: Props) {
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center text-white">
           <button className="font-bold">
-            <LockKeyholeIcon className="size-7" />
+            <LockKeyholeIcon className="size-10" />
           </button>
-          <p className="text-sm font-bold text-white">
+          {/* <p className="text-sm font-bold text-white">
             {' '}
             This post is for members only.{' '}
-          </p>
+          </p> */}
 
-          <RedirectToMembershipsButton username={profile?.username} />
+          {/* <RedirectToMembershipsButton username={profile?.username} /> */}
         </div>
       </div>
     </>
@@ -43,11 +43,11 @@ export function RedirectToMembershipsButton(props: {
         onClick={() => push(`/${username}/memberships`)}
         className={cn('mt-2', className)}
         type="button"
-        variant="danger"
+        variant="info"
         size="lg"
-        icon={<LockKeyholeIcon className="mr-2 size-5" />}
+        icon={<LockKeyholeIcon className="mr-2 size-6" />}
       >
-        Join now
+        Become a member
       </ButtonInput>
     </>
   );

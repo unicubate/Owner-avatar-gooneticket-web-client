@@ -1,12 +1,11 @@
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import { PostModel, PostType } from '@/types/post';
+import { PostModel } from '@/types/post';
 import { UploadFolderType } from '@/types/upload';
 import { Avatar } from 'antd';
 import { LockKeyholeIcon } from 'lucide-react';
 import { useRef } from 'react';
 import ReactH5AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
-import { RedirectToMembershipsButton } from '.';
 
 interface Props {
   folder: UploadFolderType;
@@ -196,14 +195,6 @@ export function AudioPlayerInput(props: Props) {
           />
         </div>
       </div>
-      {['AUDIO'].includes(item?.type as PostType) &&
-      ['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
-      item?.isValidSubscribe !== 1 ? (
-        <RedirectToMembershipsButton
-          className="ml-2"
-          username={item?.profile?.username}
-        />
-      ) : null}
     </>
   );
 }

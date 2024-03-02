@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { UserVisitorModel } from '@/types/user.type';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
@@ -12,7 +12,8 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
+export function PublicGallery(props: Props) {
+  const { userVisitor } = props;
   const { ref, inView } = useInView();
 
   const {
@@ -87,6 +88,4 @@ const PublicGallery: React.FC<Props> = ({ userVisitor }) => {
       </div>
     </>
   );
-};
-
-export { PublicGallery };
+}

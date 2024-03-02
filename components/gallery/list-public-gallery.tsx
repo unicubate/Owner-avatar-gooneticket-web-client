@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { PostModel } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ShowModalGallery } from './show-modal-gallery';
 
@@ -10,15 +10,16 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListPublicGallery: React.FC<Props> = ({ item, userVisitor }) => {
+export function ListPublicGallery(props: Props) {
+  const { item, userVisitor } = props;
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
       <div className="group relative" key={item?.id}>
         <a
-          title={item?.title}
           href={void 0}
+          title={item?.title}
           onClick={() => setOpenModal(true)}
           className="aspect-w-16 aspect-h-9 block overflow-hidden"
         >
@@ -49,6 +50,4 @@ const ListPublicGallery: React.FC<Props> = ({ item, userVisitor }) => {
       ) : null}
     </>
   );
-};
-
-export { ListPublicGallery };
+}
