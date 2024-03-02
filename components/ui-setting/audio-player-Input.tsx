@@ -1,6 +1,6 @@
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel, PostType } from '@/types/post';
-import { UploadFolderType, UploadModel } from '@/types/upload';
+import { UploadFolderType } from '@/types/upload';
 import { Avatar } from 'antd';
 import { LockKeyholeIcon } from 'lucide-react';
 import { useRef } from 'react';
@@ -9,34 +9,31 @@ import 'react-h5-audio-player/lib/styles.css';
 import { RedirectToMembershipsButton } from '.';
 
 interface Props {
-  uploads: UploadModel[];
   folder: UploadFolderType;
-  post: PostModel;
-  urlMedia?: string;
-  enableUrlMedia?: boolean;
+  item: PostModel;
 }
 
 export function AudioPlayerInput(props: Props) {
-  const { uploads, folder, post, urlMedia, enableUrlMedia } = props;
+  const { folder, item } = props;
   const player = useRef(null);
 
   const oneImage =
-    post?.uploadsImages?.length > 0
+    item?.uploadsImages?.length > 0
       ? viewOneFileUploadAPI({
-          folder: 'posts',
-          fileName: String(post?.uploadsImages?.[0]?.path),
+          folder: folder,
+          fileName: String(item?.uploadsImages?.[0]?.path),
         })
       : '';
   return (
     <>
       <div className="mt-4 flex">
-        {['AUDIO'].includes(post?.type) ? (
+        {['AUDIO'].includes(item?.type) ? (
           <div className="full items-center relative shrink-0 cursor-pointer">
             <Avatar
               shape="square"
               className="rounded-lg object-cover size-28"
               src={oneImage}
-              alt={post?.title}
+              alt={item?.title}
             />
           </div>
         ) : null}
@@ -45,23 +42,23 @@ export function AudioPlayerInput(props: Props) {
             autoPlay={false}
             autoPlayAfterSrcChange={false}
             src={
-              ['MEMBERSHIP'].includes(String(post?.whoCanSee))
-                ? post?.isValidSubscribe === 1
-                  ? enableUrlMedia
-                    ? urlMedia
+              ['MEMBERSHIP'].includes(String(item?.whoCanSee))
+                ? item?.isValidSubscribe === 1
+                  ? item?.enableUrlMedia
+                    ? item?.urlMedia
                     : `${viewOneFileUploadAPI({
                         folder: folder,
-                        fileName: uploads[0]?.path ?? '',
+                        fileName: item?.uploadsFiles[0]?.path ?? '',
                       })}`
                   : ''
-                : enableUrlMedia
-                  ? urlMedia
+                : item?.enableUrlMedia
+                  ? item?.urlMedia
                   : `${viewOneFileUploadAPI({
                       folder: folder,
-                      fileName: uploads[0]?.path ?? '',
+                      fileName: item?.uploadsFiles[0]?.path ?? '',
                     })}`
             }
-            // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/posts/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"
+            // src="https://unpot-dev.s3.eu-west-2.amazonaws.com/items/05779949-a4bf-4e03-9ee7-22fb3f1b285d-20231104FVnOiZrz.mp3"
             layout="stacked-reverse"
             timeFormat="auto"
             progressJumpSteps={{
@@ -71,8 +68,8 @@ export function AudioPlayerInput(props: Props) {
             customIcons={{
               play: (
                 <>
-                  {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-                  post?.isValidSubscribe !== 1 ? (
+                  {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+                  item?.isValidSubscribe !== 1 ? (
                     <LockKeyholeIcon className="justify-items-center size-8" />
                   ) : (
                     <svg
@@ -176,8 +173,8 @@ export function AudioPlayerInput(props: Props) {
             style={{ boxShadow: 'none', background: 'transparent' }}
             // header={
             //   <>
-            //     {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-            //     post?.isValidSubscribe !== 1 ? (
+            //     {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+            //     item?.isValidSubscribe !== 1 ? (
             //       <button className={`py-8 text-center font-normal`}>
             //         <HiOutlineLockClosed className="size-8" />
             //       </button>
@@ -188,8 +185,8 @@ export function AudioPlayerInput(props: Props) {
               <>
                 <span
                   className={`${
-                    ['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-                    post?.isValidSubscribe !== 1
+                    ['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+                    item?.isValidSubscribe !== 1
                       ? 'absolute inset-0'
                       : ''
                   }`}
@@ -199,12 +196,12 @@ export function AudioPlayerInput(props: Props) {
           />
         </div>
       </div>
-      {['AUDIO'].includes(post?.type as PostType) &&
-      ['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-      post?.isValidSubscribe !== 1 ? (
+      {['AUDIO'].includes(item?.type as PostType) &&
+      ['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
+      item?.isValidSubscribe !== 1 ? (
         <RedirectToMembershipsButton
           className="ml-2"
-          username={post?.profile?.username}
+          username={item?.profile?.username}
         />
       ) : null}
     </>

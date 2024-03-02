@@ -227,12 +227,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
 
                   {post?.id ? (
                     <div className="mt-2 text-center">
-                      <AudioPlayerInput
-                        urlMedia={post?.urlMedia}
-                        enableUrlMedia={post?.enableUrlMedia}
-                        uploads={post?.uploadsFiles}
-                        folder="posts"
-                      />
+                      <AudioPlayerInput item={post} folder="posts" />
                     </div>
                   ) : null}
 

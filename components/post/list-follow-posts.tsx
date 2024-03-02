@@ -204,13 +204,7 @@ export function ListFollowPosts(props: Props) {
           {item?.whoCanSee && ['AUDIO'].includes(item?.type as PostType) ? (
             <>
               <div className="mx-auto justify-center text-center">
-                <AudioPlayerInput
-                  post={item}
-                  urlMedia={item?.urlMedia}
-                  enableUrlMedia={item?.enableUrlMedia}
-                  uploads={item?.uploadsFiles}
-                  folder="posts"
-                />
+                <AudioPlayerInput item={item} folder="posts" />
               </div>
             </>
           ) : null}
