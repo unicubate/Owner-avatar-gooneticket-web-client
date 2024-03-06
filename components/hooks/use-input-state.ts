@@ -10,7 +10,7 @@ export function useInputState() {
   const initTime = fromAt?.$d?.toISOString();
   const endTime = toAt?.$d?.toISOString();
 
-  const { userStorage, profile } = useAuth() as any;
+  const { userStorage, ipLocation, profile } = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,6 +59,7 @@ export function useInputState() {
     setSuccess,
     setHasErrors,
     userStorage,
+    ipLocation,
     profile,
     linkHref,
   };

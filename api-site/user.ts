@@ -1,5 +1,6 @@
 import { ResponsePostModel } from '@/types/post';
 import {
+  IpLocationModal,
   NextStep,
   UserForgotPasswordFormModel,
   UserLoginFormModel,
@@ -23,6 +24,27 @@ export const loginUserAPI = async (
     action: 'loginUser',
     body: payload,
   });
+};
+
+export const IpLocationAPI = () => {
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['ip-location'],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'ipLocation',
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as IpLocationModal,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
 };
 
 export const loginGoogleUserAPI = async (payload: {

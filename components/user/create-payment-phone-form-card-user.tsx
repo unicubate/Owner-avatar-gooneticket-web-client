@@ -20,7 +20,7 @@ export function CreatePaymentPhoneFormCardUser(props: {
   showModal: boolean;
   setShowModal: any;
 }) {
-  const { userStorage } = useInputState();
+  const { ipLocation } = useInputState();
   const { showModal, setShowModal } = props;
   const {
     control,
@@ -69,7 +69,6 @@ export function CreatePaymentPhoneFormCardUser(props: {
     }
   };
 
-  console.log('userStorage ===>', userStorage?.ipLocation?.countryCode);
   return (
     <>
       {showModal ? (
@@ -97,7 +96,7 @@ export function CreatePaymentPhoneFormCardUser(props: {
 
                 <div className="mt-4">
                   <PhoneNumberInput
-                    defaultCountry={userStorage?.ipLocation?.countryCode}
+                    defaultCountry={ipLocation?.countryCode}
                     control={control}
                     name="phone"
                     placeholder="xxx xxx xxx"

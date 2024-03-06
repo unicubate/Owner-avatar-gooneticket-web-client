@@ -10,7 +10,7 @@ import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
 import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
 
 export function PayoutFormUser() {
-  const { userStorage } = useInputState();
+  const { ipLocation } = useInputState();
   const [showPayPalFormModal, setShowPayPalFormModal] = useState(false);
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
@@ -46,7 +46,7 @@ export function PayoutFormUser() {
       <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-5">
           <div className="mb-4 flex items-center space-x-2">
-            {['CM', 'IT'].includes(userStorage?.ipLocation?.countryCode) && (
+            {['EU', 'AF'].includes(ipLocation?.continentCode) && (
               <ButtonInput
                 type="button"
                 variant="default"
@@ -65,13 +65,15 @@ export function PayoutFormUser() {
             >
               Add Card
             </ButtonInput>
-            <ButtonInput
-              type="button"
-              variant="info"
-              onClick={() => setShowPayPalFormModal(true)}
-            >
-              Add PayPal
-            </ButtonInput>
+            {['EU'].includes(ipLocation?.continentCode) && (
+              <ButtonInput
+                type="button"
+                variant="info"
+                onClick={() => setShowPayPalFormModal(true)}
+              >
+                Add PayPal
+              </ButtonInput>
+            )}
           </div>
 
           <div className="mt-8 flow-root">
@@ -105,8 +107,7 @@ export function PayoutFormUser() {
         />
       ) : null}
 
-      {['CM', 'IT'].includes(userStorage?.ipLocation?.countryCode) &&
-      showPhoneFormModal ? (
+      {['EU', 'AF'].includes(ipLocation?.countryCode) && showPhoneFormModal ? (
         <CreatePaymentPhoneFormCardUser
           showModal={showPhoneFormModal}
           setShowModal={setShowPhoneFormModal}

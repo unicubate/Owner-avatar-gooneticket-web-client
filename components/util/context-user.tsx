@@ -1,4 +1,4 @@
-import { GetOneUserMeAPI } from '@/api-site/user';
+import { GetOneUserMeAPI, IpLocationAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
 import Cookies from 'js-cookie';
 import { FC, ReactNode, createContext, useContext } from 'react';
@@ -28,6 +28,7 @@ export const getCookieUser = () =>
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { data: user } = GetOneUserMeAPI();
+  const { data: ipLocation } = IpLocationAPI();
 
   return (
     <>
@@ -35,6 +36,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
         value={{
           ...(user as any),
           userStorage: user,
+          ipLocation: ipLocation,
         }}
       >
         {children}
