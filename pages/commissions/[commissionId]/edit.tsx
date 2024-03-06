@@ -1,16 +1,16 @@
 import { GetOneCommissionAPI } from '@/api-site/commission';
 import { GetUploadsAPI } from '@/api-site/upload';
 import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const CommissionEdit = () => {
-  const { userStorage: user } = useAuth() as any;
+  const { userStorage: user } = useInputState();
   const { query } = useRouter();
   const commissionId = String(query?.commissionId);
 

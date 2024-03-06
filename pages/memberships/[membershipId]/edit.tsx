@@ -1,16 +1,16 @@
 import { GetOneMembershipAPI } from '@/api-site/membership';
 import { GetUploadsAPI } from '@/api-site/upload';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormMembership } from '@/components/membership/create-or-update-form-membership';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ShopEdit = () => {
-  const { organizationId } = useAuth() as any;
+  const { userStorage: user } = useInputState();
   const { query } = useRouter();
   const membershipId = String(query?.membershipId);
 
@@ -21,7 +21,7 @@ const ShopEdit = () => {
     refetch,
   } = GetOneMembershipAPI({
     membershipId,
-    organizationId: organizationId,
+    organizationId: user?.organizationId,
   });
 
   const {
@@ -31,7 +31,7 @@ const ShopEdit = () => {
   } = GetUploadsAPI({
     uploadType: 'image',
     model: 'membership',
-    organizationId: organizationId,
+    organizationId: user?.organizationId,
     uploadableId: membershipId,
   });
 

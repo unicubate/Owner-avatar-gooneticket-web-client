@@ -16,11 +16,11 @@ export function AvatarComponent(props: Props) {
       {/* <Link href={`/${profile?.username}`}> */}
       <div className="relative sm:flex sm:items-center">
         <div className="relative inline-flex shrink-0">
-          {profile?.image ? (
+          {profile?.image && (
             <>
               <Avatar
                 className={cn(
-                  `bg-${profile?.color}-600 rounded-full`,
+                  `object-cover bg-${profile?.color}-600 rounded-full`,
                   className,
                 )}
                 size={size}
@@ -28,18 +28,19 @@ export function AvatarComponent(props: Props) {
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
               />
             </>
-          ) : (
+          )}
+
+          {!profile?.image && (
             <>
               <Avatar
-                className={cn(`bg-blue-600  rounded-full`, className)}
+                className={cn(`object-cover rounded-full`, className)}
                 size={size}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
-              >
-                {capitalizeOneFirstLetter(
-                  String(profile?.firstName),
-                  String(profile?.lastName),
-                )}
-              </Avatar>
+                src={`https://ui-avatars.com/api/?name=${capitalizeOneFirstLetter(
+                  String(profile?.firstName ?? ''),
+                  String(profile?.lastName ?? ''),
+                )}&color=7F9CF5&background=EBF4FF`}
+              />
             </>
           )}
 

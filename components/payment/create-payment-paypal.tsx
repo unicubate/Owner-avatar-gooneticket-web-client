@@ -57,7 +57,8 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
         paymentModel,
       });
 
-      push(`/transactions/success?token=${newReference}`);
+      console.log('order paypal ========>', order);
+      //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);

@@ -107,10 +107,10 @@ export function AudioPlayerInput(props: Props) {
               rewind: (
                 <>
                   <svg
-                    className="size-10 text-gray-400 hover:text-black dark:hover:text-white"
-                    width="54"
-                    height="54"
-                    viewBox="0 0 54 54"
+                    className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
@@ -136,10 +136,10 @@ export function AudioPlayerInput(props: Props) {
               forward: (
                 <>
                   <svg
-                    className="size-10 text-gray-400 hover:text-black dark:hover:text-white"
-                    width="54"
-                    height="54"
-                    viewBox="0 0 54 54"
+                    className="size-8 text-gray-400 hover:text-black dark:hover:text-white"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >

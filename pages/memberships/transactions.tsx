@@ -12,8 +12,6 @@ const TransactionsDonations = () => {
     //   payload?.attachment?.fileList.forEach((file: any) => {
     //     data.append("attachment", file as RcFile);
     //   });
-
-    console.log('payload =======>', payload);
   };
 
   return (

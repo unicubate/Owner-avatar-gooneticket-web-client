@@ -1,12 +1,12 @@
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { PayoutFormUser } from '@/components/user/payout-form-user';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 
 const SettingsPayout = () => {
-  const user = useAuth() as any;
+  const { userStorage: user } = useInputState();
 
   return (
     <>

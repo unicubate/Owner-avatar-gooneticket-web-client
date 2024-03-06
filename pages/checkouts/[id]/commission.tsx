@@ -1,13 +1,13 @@
 'use client';
 
 import { GetOneCommissionAPI } from '@/api-site/commission';
+import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -19,7 +19,7 @@ import { useForm } from 'react-hook-form';
 
 const CheckoutCommission = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userVisitor } = useInputState();
   const { query, push } = useRouter();
   const { id: commissionId, username } = query;
   const {

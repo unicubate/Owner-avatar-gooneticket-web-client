@@ -1,6 +1,7 @@
 import { GetInfinitePaymentsAPI } from '@/api-site/payment';
 import { PaymentItemModel } from '@/types/payment';
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useInputState } from '../hooks';
 import { ListPayments } from '../payment/list-payments';
 import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
@@ -8,7 +9,9 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
 import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
 
-const PayoutFormUser: React.FC = () => {
+export function PayoutFormUser() {
+  const { userStorage } = useInputState();
+  const [showPayPalFormModal, setShowPayPalFormModal] = useState(false);
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -43,14 +46,17 @@ const PayoutFormUser: React.FC = () => {
       <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 py-5">
           <div className="mb-4 flex items-center space-x-2">
-            <ButtonInput
-              type="button"
-              variant="default"
-              loading={false}
-              onClick={() => setShowPhoneFormModal(true)}
-            >
-              Add Phone
-            </ButtonInput>
+            {['CM', 'IT'].includes(userStorage?.ipLocation?.countryCode) && (
+              <ButtonInput
+                type="button"
+                variant="default"
+                loading={false}
+                onClick={() => setShowPhoneFormModal(true)}
+              >
+                Add Phone
+              </ButtonInput>
+            )}
+
             <ButtonInput
               type="button"
               variant="outline"
@@ -59,7 +65,11 @@ const PayoutFormUser: React.FC = () => {
             >
               Add Card
             </ButtonInput>
-            <ButtonInput type="button" variant="info">
+            <ButtonInput
+              type="button"
+              variant="info"
+              onClick={() => setShowPayPalFormModal(true)}
+            >
               Add PayPal
             </ButtonInput>
           </div>
@@ -95,14 +105,22 @@ const PayoutFormUser: React.FC = () => {
         />
       ) : null}
 
-      {showPhoneFormModal ? (
+      {['CM', 'IT'].includes(userStorage?.ipLocation?.countryCode) &&
+      showPhoneFormModal ? (
         <CreatePaymentPhoneFormCardUser
           showModal={showPhoneFormModal}
           setShowModal={setShowPhoneFormModal}
         />
       ) : null}
+
+      {/* <Elements stripe={stripeKeyPromise}>
+        {showPayPalFormModal ? (
+          <CreatePaymentPayPalFormCardUser
+            showModal={showPayPalFormModal}
+            setShowModal={setShowPayPalFormModal}
+          />
+        ) : null}
+      </Elements> */}
     </>
   );
-};
-
-export { PayoutFormUser };
+}

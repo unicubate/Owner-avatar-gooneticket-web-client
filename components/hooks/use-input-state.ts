@@ -2,7 +2,7 @@ import { useDebounce } from '@/utils';
 import { useState } from 'react';
 import { useAuth } from '../util/context-user';
 
-const useInputState = () => {
+export function useInputState() {
   const [fromAt, setFromAt] = useState<any>(null);
   const [toAt, setToAt] = useState<any>(null);
   const [search, setSearch] = useState<string>('');
@@ -10,7 +10,7 @@ const useInputState = () => {
   const initTime = fromAt?.$d?.toISOString();
   const endTime = toAt?.$d?.toISOString();
 
-  const { userStorage } = useAuth() as any;
+  const { userStorage, profile } = useAuth() as any;
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -59,8 +59,7 @@ const useInputState = () => {
     setSuccess,
     setHasErrors,
     userStorage,
+    profile,
     linkHref,
   };
-};
-
-export { useInputState };
+}

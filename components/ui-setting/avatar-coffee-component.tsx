@@ -7,16 +7,11 @@ interface Props {
   className?: string;
 }
 
-const AvatarCoffeeComponent: React.FC<Props> = ({
-  color,
-  size,
-  className = 'h-10 w-10',
-}) => {
+export function AvatarCoffeeComponent(props: Props) {
+  const { color, size, className = 'h-10 w-10' } = props;
   return (
     <>
       <CupSodaIcon className={cn('text-blue-400', className)} />
     </>
   );
-};
-
-export { AvatarCoffeeComponent };
+}

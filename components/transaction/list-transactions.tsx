@@ -5,7 +5,7 @@ import { ReadMore } from '@/utils/read-more';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { AvatarCoffeeComponent, AvatarComponent } from '../ui-setting/ant';
+import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Button } from '../ui/button';
 import {
@@ -28,15 +28,14 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
       <tr key={index}>
         <td className="py-4 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            {item?.profileSend?.id ? (
-              <>
-                <AvatarComponent size={40} profile={item?.profileSend} />
-              </>
-            ) : (
-              <>
-                <AvatarCoffeeComponent size={40} color={item?.color} />
-              </>
-            )}
+            <AvatarComponent
+              size={40}
+              profile={
+                item?.profileSend?.id
+                  ? item?.profileSend
+                  : { firstName: item?.fullName }
+              }
+            />
 
             <div className="ml-4 min-w-0 flex-1">
               <p className="text-sm font-bold text-gray-900 dark:text-white">

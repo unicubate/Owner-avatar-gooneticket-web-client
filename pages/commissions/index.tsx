@@ -1,13 +1,13 @@
 import { EnableCommission } from '@/components/commission/enable-commission';
 import { HorizontalNavCommission } from '@/components/commission/horizontal-nav-commission';
 import { TableCommissions } from '@/components/commission/table-commissions';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 
 const Commissions = () => {
-  const { organizationId, profile } = useAuth() as any;
+  const { userStorage, profile } = useInputState();
 
   return (
     <>
@@ -19,7 +19,7 @@ const Commissions = () => {
             {profile?.id ? <EnableCommission profile={profile} /> : null}
 
             <div className="flow-root">
-              <TableCommissions organizationId={organizationId} />
+              <TableCommissions organizationId={userStorage?.organizationId} />
             </div>
           </div>
         </div>

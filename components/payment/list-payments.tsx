@@ -3,19 +3,18 @@ import { CreateOnPaymentPI, DeleteOnePaymentAPI } from '@/api-site/payment';
 import { PaymentItemModel } from '@/types/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { truncateInputCard } from '@/utils/utils';
-import { Tag } from 'antd';
+import { TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { FcSmartphoneTablet } from 'react-icons/fc';
-import { GoCreditCard } from 'react-icons/go';
-import { MdOutlineDeleteOutline, MdOutlineMailLock } from 'react-icons/md';
-import Swal from 'sweetalert2';
+import { useState } from 'react';
+import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
+import { ActionModalDialog } from '../ui-setting/shadcn';
+import { Badge } from '../ui/badge';
 import { CreateValidationFormCodePhoneUser } from '../user/create-validation-form-code-phone-user';
 
-const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
-  item,
-  index,
-}) => {
+export function ListPayments(props: { item: PaymentItemModel; index: number }) {
+  const { item, index } = props;
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [showModal, setShowModal] = useState(false);
   const { locale } = useRouter();
   // const saveMutation = DeleteOneDiscountAPI({
@@ -33,31 +32,23 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
     onError: (error?: any) => {},
   });
 
-  const deleteItem = (item: any) => {
-    Swal.fire({
-      title: 'Delete?',
-      text: 'Are you sure you want to delete this?',
-      confirmButtonText: 'Yes, Deleted',
-      cancelButtonText: 'No, Cancel',
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6f42c1',
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        try {
-          await deleteOnMutate({ paymentId: item?.id });
-          AlertSuccessNotification({
-            text: 'Payment deleted successfully',
-          });
-        } catch (error: any) {
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-          });
-        }
-      }
-    });
+  const deleteItem = async (item: any) => {
+    setLoading(true);
+    setIsOpen(true);
+    try {
+      await deleteOnMutate({ paymentId: item?.id });
+      AlertSuccessNotification({
+        text: 'Payment deleted successfully',
+      });
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error: any) {
+      setLoading(false);
+      setIsOpen(true);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
   };
 
   const resendItem = async (item: any) => {
@@ -81,120 +72,80 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
     <>
       <div key={index} className="py-4">
         <div className="flex items-center">
-          {item?.type === 'CARD' ? (
-            <>
-              <button className="text-3xl font-bold">
-                <GoCreditCard />
-              </button>
-              <p className="ml-2 text-lg font-bold dark:text-white">
-                {truncateInputCard(item?.cardNumber, 8)}
-              </p>
-              {/* <p className="ml-2 text-sm font-medium text-gray-900 hidden sm:table-cell">
-                {item?.cardExpMonth}/{item?.cardExpYear}
-              </p> */}
-            </>
-          ) : null}
+          <div className="min-w-0 flex-1">
+            <div>
+              {item?.type === 'CARD' ? (
+                <p className="text-lg font-bold dark:text-white">
+                  {truncateInputCard(item?.cardNumber, 8)}
+                </p>
+              ) : null}
 
-          {item?.type === 'PAYPAL' ? (
-            <>
-              <button className="text-3xl font-bold">
-                <MdOutlineMailLock />
-              </button>
-              <p className="ml-2 text-lg font-bold dark:text-white">
-                {item?.email}
-              </p>
-            </>
-          ) : null}
+              {item?.type === 'PAYPAL' ? (
+                <p className="text-lg font-bold dark:text-white">
+                  {item?.email}
+                </p>
+              ) : null}
 
-          {item?.type === 'PHONE' ? (
-            <>
-              <button className="text-3xl font-bold">
-                <FcSmartphoneTablet />
-              </button>
-              <p className="ml-2 text-lg font-bold dark:text-white">
-                {item?.phone}
-              </p>
-            </>
-          ) : null}
-
-          {/* <div className="ml-auto">
-            <p className="mt-1 text-sm font-medium text-gray-500">
-              {item?.type}
-            </p>
-          </div> */}
-
-          <div className="ml-auto">
-            <button className="ml-2 text-lg font-bold transition-all duration-200">
+              {item?.type === 'PHONE' ? (
+                <p className="text-lg font-bold dark:text-white">
+                  {item?.phone}
+                </p>
+              ) : null}
+            </div>
+            <div>
               {['PHONE'].includes(item?.type) && (
-                <Tag
-                  bordered={false}
-                  className="ml-2"
-                  color={`${item.status === 'ACTIVE' ? 'success' : 'error'}`}
-                  title="Resend code validation"
+                <Badge
+                  className="rounded-sm cursor-pointer"
+                  variant={`${item.status === 'ACTIVE' ? 'success' : 'danger'}`}
                   onClick={() => {
                     item.status === 'ACTIVE'
                       ? console.log('Phone number valid')
                       : resendItem(item);
                   }}
+                  title="Resend code validation"
                 >
                   {item.status === 'ACTIVE'
                     ? 'PHONE VALID'
                     : 'CONFIRM YOUR PHONE NUMBER'}
-                </Tag>
+                </Badge>
               )}
+
               {['CARD'].includes(item?.type) && (
-                <Tag
-                  bordered={false}
-                  className="ml-2"
-                  color={`${
+                <Badge
+                  className="rounded-sm cursor-pointer"
+                  variant={`${
                     Number(item.cardExpYear) >= new Date().getFullYear()
                       ? 'success'
-                      : 'error'
+                      : 'danger'
                   }`}
-                  title="Card status"
-                  onClick={() => {
-                    item.status === 'ACTIVE'
-                      ? console.log('Phone number valid')
-                      : resendItem(item);
-                  }}
                 >
                   {Number(item.cardExpYear) >= new Date().getFullYear()
                     ? 'CARD VALID'
                     : 'CARD INVALID'}
-                </Tag>
+                </Badge>
               )}
-            </button>
+            </div>
+          </div>
 
-            {/* <button className="text-lg ml-2 font-bold transition-all duration-200">
-              {["CARD", "PHONE"].includes(item?.type) && (
-                <Tag
-                  bordered={false}
-                  className="ml-2"
-                  color={`${Number(item.cardExpYear) >= new Date().getFullYear() || item.status === 'ACTIVE'
-                    ? "success"
-                    : "error"
-                    }`}
-                >
-                  {Number(item.cardExpYear) >= new Date().getFullYear() || item.status === 'ACTIVE'
-                    ? "Valid"
-                    : "Invalid"}
-                </Tag>
-
-              )}
-            </button> */}
-            <button className="text-sm font-medium dark:text-white">
-              {item?.action}
-            </button>
-
-            <button
-              title="Delete"
-              onClick={() => {
-                deleteItem(item);
-              }}
-              className="ml-2 text-lg text-gray-600 hover:text-red-600"
-            >
-              <MdOutlineDeleteOutline />
-            </button>
+          <div className="ml-auto">
+            <ActionModalDialog
+              title="Delete?"
+              loading={loading}
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              onClick={() => deleteItem(item)}
+              description="Are you sure you want to delete this?"
+              buttonDialog={
+                <ButtonInput
+                  variant="ghost"
+                  type="button"
+                  size="icon"
+                  icon={
+                    <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
+                  }
+                />
+              }
+            />
           </div>
         </div>
       </div>
@@ -206,6 +157,4 @@ const ListPayments: React.FC<{ item: PaymentItemModel; index: number }> = ({
       />
     </>
   );
-};
-
-export { ListPayments };
+}

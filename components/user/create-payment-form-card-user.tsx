@@ -2,20 +2,20 @@ import { PaymentCardFormModel } from '@/types/payment';
 import { ButtonInput } from '../ui-setting';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { images, useCreditCardValidator } from 'react-creditcard-validator';
+import { useCreditCardValidator } from 'react-creditcard-validator';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { FormEvent, useState } from 'react';
+import { useInputState } from '../hooks';
+import { Input } from '../ui/input';
 
-const CreatePaymentFormCardUser: React.FC<{
+export function CreatePaymentFormCardUser(props: {
   showModal: boolean;
   setShowModal: any;
-}> = ({ showModal, setShowModal }) => {
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
+}) {
+  const { showModal, setShowModal } = props;
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
   function expDateValidate(month: string, year: string) {
     if (Number(year) > 2070) {
@@ -99,11 +99,7 @@ const CreatePaymentFormCardUser: React.FC<{
                   </div>
                 )}
                 <div className="relative mt-4">
-                  <input
-                    type="text"
-                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${
-                      erroredInputs?.cvc ? 'border-red-500' : ''
-                    }`}
+                  <Input
                     required
                     placeholder="Full name"
                     name="fullName"
@@ -116,11 +112,12 @@ const CreatePaymentFormCardUser: React.FC<{
                   />
                 </div>
                 <div className="relative mt-4">
-                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
+                  {/* <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
                     <svg {...getCardImageProps({ images })} />
-                  </div>
-                  <input
-                    className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 pl-12 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-500 sm:text-sm ${
+                  </div> */}
+
+                  <Input
+                    className={`${
                       erroredInputs?.cardNumber ? 'border-red-500' : ''
                     }`}
                     required
@@ -141,8 +138,8 @@ const CreatePaymentFormCardUser: React.FC<{
 
                 <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
                   <div className="mb-2">
-                    <input
-                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-50 placeholder:text-gray-500 focus:border-indigo-50 focus:ring-indigo-50 sm:text-sm ${
+                    <Input
+                      className={`${
                         erroredInputs?.expiryDate ? 'border-red-500' : ''
                       }`}
                       required
@@ -162,8 +159,8 @@ const CreatePaymentFormCardUser: React.FC<{
                   </div>
 
                   <div className="mb-2">
-                    <input
-                      className={`block w-full rounded-lg border border-gray-300 px-3 py-2.5 caret-indigo-200 placeholder:text-gray-500 focus:border-indigo-200 focus:ring-indigo-200 sm:text-sm ${
+                    <Input
+                      className={`${
                         erroredInputs?.cvc ? 'border-red-500' : ''
                       }`}
                       required
@@ -210,6 +207,4 @@ const CreatePaymentFormCardUser: React.FC<{
       ) : null}
     </>
   );
-};
-
-export { CreatePaymentFormCardUser };
+}

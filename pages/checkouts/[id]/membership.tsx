@@ -1,6 +1,7 @@
 'use client';
 
 import { GetOneMembershipAPI } from '@/api-site/membership';
+import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
@@ -8,7 +9,6 @@ import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -21,7 +21,7 @@ import { useForm } from 'react-hook-form';
 
 const CheckoutMembership = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userVisitor } = useInputState();
   const { query, push } = useRouter();
   const { id: membershipId, username } = query;
   const {

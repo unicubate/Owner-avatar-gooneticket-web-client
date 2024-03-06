@@ -40,10 +40,10 @@ export function HorizontalNavSetting() {
       title: 'Followings',
       href: '/settings/followings',
     },
-    {
-      title: 'Followers',
-      href: '/settings/followers',
-    },
+    // {
+    //   title: 'Followers',
+    //   href: '/settings/followers',
+    // },
   ]);
 
   const bgColor = `bg-${profile?.color}-600 text-white`;

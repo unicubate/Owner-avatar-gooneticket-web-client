@@ -3,13 +3,13 @@
 import { GetCartsAPI } from '@/api-site/cart';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { ListMiniCats } from '@/components/cart/list-mini-carts';
+import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { GetStaticPropsContext } from 'next';
@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react';
 
 const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userBayer } = useAuth() as any;
+  const { userStorage: userBayer } = useInputState();
   const { query, push } = useRouter();
   const { id: cartOrderId, username } = query;
 
