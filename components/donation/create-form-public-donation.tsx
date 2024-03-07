@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import { CupSodaIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 import { CreatePaymentPayPal } from '../payment/create-payment-paypal';
-import { CreatePaymentStripe } from '../payment/stripe/create-payment-stripe';
+import { CreateCardStripe } from '../payment/stripe/create-payment-stripe';
 import { ButtonInput } from '../ui-setting/button-input';
 import { useAuth } from '../util/context-user';
 const { TextArea } = Input;
@@ -115,7 +115,7 @@ const CreateFormPublicDonation: React.FC<{
           <>
             {isCardPay ? (
               <>
-                <CreatePaymentStripe
+                <CreateCardStripe
                   paymentModel="STRIPE-DONATION"
                   data={{
                     amount: newAmount,

@@ -6,23 +6,25 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useStripe } from '@stripe/react-stripe-js';
 import { SubmitHandler } from 'react-hook-form';
-import { useInputState } from '../hooks';
-import { PhoneNumberInput } from '../ui-setting/ant';
 import { TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 
+// const stripeTestPromise = loadStripe(
+//   `${process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}`,
+// );
+
 const schema = yup.object({
-  fullName: yup.string().optional(),
-  phone: yup.string().required(),
+  email: yup.string().required(),
 });
 
-export function CreatePaymentPhoneFormCardUser(props: {
+export function CreatePaymentStripeFormCardUser(props: {
   showModal: boolean;
   setShowModal: any;
 }) {
-  const { ipLocation } = useInputState();
   const { showModal, setShowModal } = props;
+  const stripe = useStripe();
   const {
     control,
     handleSubmit,
@@ -44,19 +46,39 @@ export function CreatePaymentPhoneFormCardUser(props: {
     },
   });
 
-  const onSubmit: SubmitHandler<{ phone: string; fullName: string }> = async (
-    payload,
-  ) => {
+  const onSubmit: SubmitHandler<{ email: string }> = async (payload) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await mutateAsync({
-        data: { ...payload, type: 'PHONE' },
+      const { data: setupIntent } = await mutateAsync({
+        data: { ...payload, type: 'PAYPAL' },
         paymentModel: 'PAYMENT-CREATE',
       });
       AlertSuccessNotification({
         text: 'Phone save successfully',
       });
+      // Redirects away from the client
+      const stripeRes = await stripe?.redirectToCheckout(
+        { sessionId: setupIntent?.client_secret },
+        // `${setupIntent?.client_secret}`,
+        // {
+        //   return_url: 'https://www.unopot.com',
+        //   mandate_data: {
+        //     customer_acceptance: {
+        //       type: 'online',
+        //       online: {
+        //         infer_from_client: true,
+        //       },
+        //     },
+        //   },
+        // },
+      );
+
+      console.log('stripeRes ===>', stripeRes);
+
+      // if (error) {
+      //   // Inform the customer that there was an error.
+      // }
       setHasErrors(false);
       setLoading(false);
       setShowModal(false);
@@ -77,7 +99,6 @@ export function CreatePaymentPhoneFormCardUser(props: {
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
           <div className="relative  m-auto w-full max-w-2xl rounded-xl bg-white p-5 shadow-lg dark:bg-[#121212]">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <h2 className="p-2 text-base font-bold">Add your phone number</h2>
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
                   <Alert variant="destructive" className="mb-4">
@@ -88,21 +109,10 @@ export function CreatePaymentPhoneFormCardUser(props: {
                 <div className="mt-4">
                   <TextInput
                     control={control}
-                    type="text"
-                    name="fullName"
-                    placeholder="Full name"
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
                     errors={errors}
-                  />
-                </div>
-
-                <div className="mt-4">
-                  <PhoneNumberInput
-                    defaultCountry={ipLocation?.countryCode}
-                    control={control}
-                    name="phone"
-                    placeholder="xxx xxx xxx"
-                    errors={errors}
-                    required={true}
                   />
                 </div>
 

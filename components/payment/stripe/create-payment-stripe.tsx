@@ -1,6 +1,7 @@
 import { PaymentModel } from '@/api-site/payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { CreateStripeCardForm } from './create-stripe-card-form';
 import { StripeCheckoutForm } from './stripe-checkout-form';
 
 export const stripeKeyPromise = loadStripe(
@@ -12,7 +13,8 @@ export type StripeProps = {
   paymentModel: PaymentModel;
 };
 
-const CreatePaymentStripe: React.FC<StripeProps> = ({ data, paymentModel }) => {
+export function CreatePaymentStripe(props: StripeProps) {
+  const { data, paymentModel } = props;
   return (
     <>
       <div className="mt-4">
@@ -22,5 +24,17 @@ const CreatePaymentStripe: React.FC<StripeProps> = ({ data, paymentModel }) => {
       </div>
     </>
   );
-};
-export { CreatePaymentStripe };
+}
+
+export function CreateCardStripe(props: StripeProps) {
+  const { data, paymentModel } = props;
+  return (
+    <>
+      <div className="mt-4">
+        <Elements stripe={stripeKeyPromise}>
+          <CreateStripeCardForm paymentModel={paymentModel} data={data} />
+        </Elements>
+      </div>
+    </>
+  );
+}

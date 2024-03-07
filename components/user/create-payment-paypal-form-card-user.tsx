@@ -9,6 +9,7 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { useStripe } from '@stripe/react-stripe-js';
 import { SubmitHandler } from 'react-hook-form';
 import { TextInput } from '../ui-setting/shadcn';
+import { Alert, AlertDescription } from '../ui/alert';
 
 // const stripeTestPromise = loadStripe(
 //   `${process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}`,
@@ -99,9 +100,9 @@ export function CreatePaymentPayPalFormCardUser(props: {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
-                  <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-                    {hasErrors}
-                  </div>
+                  <Alert variant="destructive" className="mb-4">
+                    <AlertDescription> {hasErrors}</AlertDescription>
+                  </Alert>
                 )}
 
                 <div className="mt-4">

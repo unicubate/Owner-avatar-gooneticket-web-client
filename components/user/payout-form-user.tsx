@@ -1,17 +1,21 @@
 import { GetInfinitePaymentsAPI } from '@/api-site/payment';
 import { PaymentItemModel } from '@/types/payment';
+import { Elements } from '@stripe/react-stripe-js';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ListPayments } from '../payment/list-payments';
+import { stripeKeyPromise } from '../payment/stripe/create-payment-stripe';
 import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
 import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
+import { CreatePaymentStripeFormCardUser } from './create-payment-stripe-form-card-user';
 
 export function PayoutFormUser() {
   const { ipLocation } = useInputState();
   const [showPayPalFormModal, setShowPayPalFormModal] = useState(false);
+  const [showStripeFormModal, setShowStripeFormModal] = useState(false);
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -65,7 +69,7 @@ export function PayoutFormUser() {
             >
               Add Card
             </ButtonInput>
-            {['EU'].includes(ipLocation?.continentCode) && (
+            {/* {['EU'].includes(ipLocation?.continentCode) && (
               <ButtonInput
                 type="button"
                 variant="info"
@@ -73,7 +77,14 @@ export function PayoutFormUser() {
               >
                 Add PayPal
               </ButtonInput>
-            )}
+            )} */}
+            <ButtonInput
+              type="button"
+              variant="info"
+              onClick={() => setShowStripeFormModal(true)}
+            >
+              Add Stipe
+            </ButtonInput>
           </div>
 
           <div className="mt-8 flow-root">
@@ -100,19 +111,35 @@ export function PayoutFormUser() {
         </div>
       </div>
 
-      {showCardModal ? (
-        <CreatePaymentFormCardUser
-          showModal={showCardModal}
-          setShowModal={setShowCardModal}
-        />
-      ) : null}
+      <Elements stripe={stripeKeyPromise}>
+        {showCardModal ? (
+          <CreatePaymentFormCardUser
+            showModal={showCardModal}
+            setShowModal={setShowCardModal}
+          />
+        ) : null}
+      </Elements>
 
-      {['EU', 'AF'].includes(ipLocation?.countryCode) && showPhoneFormModal ? (
+      {/* {['EU', 'AF'].includes(ipLocation?.countryCode) && showPhoneFormModal ? (
         <CreatePaymentPhoneFormCardUser
           showModal={showPhoneFormModal}
           setShowModal={setShowPhoneFormModal}
         />
-      ) : null}
+      ) : null} */}
+
+      <CreatePaymentPhoneFormCardUser
+        showModal={showPhoneFormModal}
+        setShowModal={setShowPhoneFormModal}
+      />
+
+      <Elements stripe={stripeKeyPromise}>
+        {showStripeFormModal ? (
+          <CreatePaymentStripeFormCardUser
+            showModal={showStripeFormModal}
+            setShowModal={setShowStripeFormModal}
+          />
+        ) : null}
+      </Elements>
 
       {/* <Elements stripe={stripeKeyPromise}>
         {showPayPalFormModal ? (

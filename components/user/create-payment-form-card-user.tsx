@@ -1,4 +1,3 @@
-import { PaymentCardFormModel } from '@/types/payment';
 import { ButtonInput } from '../ui-setting';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
@@ -6,14 +5,21 @@ import { useCreditCardValidator } from 'react-creditcard-validator';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useElements, useStripe } from '@stripe/react-stripe-js';
 import { FormEvent, useState } from 'react';
 import { useInputState } from '../hooks';
+import { Alert, AlertDescription } from '../ui/alert';
 import { Input } from '../ui/input';
 
 export function CreatePaymentFormCardUser(props: {
   showModal: boolean;
   setShowModal: any;
 }) {
+  const stripe = useStripe();
+  const elements: any = useElements();
+  if (!stripe || !elements) {
+    return;
+  }
   const { showModal, setShowModal } = props;
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
@@ -46,7 +52,7 @@ export function CreatePaymentFormCardUser(props: {
       strExpiryLength,
       strExpiryLength - 2,
     );
-    const payload: PaymentCardFormModel = {
+    const payload: any = {
       cardNumber: cardNumber,
       cardExpMonth: Number(`${monthDate}`),
       cardExpYear: Number(`20${yearDate}`),
@@ -91,13 +97,14 @@ export function CreatePaymentFormCardUser(props: {
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
           <div className="relative  m-auto w-full max-w-2xl rounded-xl bg-white p-5 shadow-lg dark:bg-[#121212]">
             <form onSubmit={handleUserPageSubmit}>
-              <h2 className="p-2 text-base font-bold">Add your card payment</h2>
+              {/* <h2 className="p-2 text-base font-bold">Add your card payment</h2> */}
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
-                  <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
-                    {hasErrors}
-                  </div>
+                  <Alert variant="destructive" className="mb-4">
+                    <AlertDescription>{hasErrors}</AlertDescription>
+                  </Alert>
                 )}
+
                 <div className="relative mt-4">
                   <Input
                     required
@@ -112,10 +119,6 @@ export function CreatePaymentFormCardUser(props: {
                   />
                 </div>
                 <div className="relative mt-4">
-                  {/* <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4">
-                    <svg {...getCardImageProps({ images })} />
-                  </div> */}
-
                   <Input
                     className={`${
                       erroredInputs?.cardNumber ? 'border-red-500' : ''
@@ -195,6 +198,7 @@ export function CreatePaymentFormCardUser(props: {
                     className="w-full"
                     size="lg"
                     variant="info"
+                    disabled={!stripe || !elements}
                     loading={loading}
                   >
                     Save

@@ -4,7 +4,7 @@ import { GetOneMembershipAPI } from '@/api-site/membership';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
-import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
+import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
@@ -200,51 +200,53 @@ const CheckoutMembership = () => {
                     </ul>
                   </div>
 
-                  <div className="py-6">
-                    <>
+                  {userVisitor?.organizationId !== item?.organizationId ? (
+                    <div className="py-6">
                       <>
-                        {isCardPay ? (
-                          <>
-                            <CreatePaymentStripe
-                              paymentModel="STRIPE-SUBSCRIBE"
-                              data={{
-                                membershipId,
-                                amount: newAmount,
-                                userReceiveId: item?.userId,
-                                userSendId: userVisitor?.id,
-                                organizationId: item?.organizationId,
-                              }}
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <div className="mt-2">
-                              <ButtonInput
-                                onClick={() => setIsCardPay(true)}
-                                type="button"
-                                className="w-full"
-                                size="lg"
-                                variant="info"
-                              >
-                                Card Pay
-                              </ButtonInput>
-                            </div>
-                          </>
-                        )}
+                        <>
+                          {isCardPay ? (
+                            <>
+                              <CreateCardStripe
+                                paymentModel="STRIPE-SUBSCRIBE"
+                                data={{
+                                  membershipId,
+                                  amount: newAmount,
+                                  userReceiveId: item?.userId,
+                                  userSendId: userVisitor?.id,
+                                  organizationId: item?.organizationId,
+                                }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div className="mt-2">
+                                <ButtonInput
+                                  onClick={() => setIsCardPay(true)}
+                                  type="button"
+                                  className="w-full"
+                                  size="lg"
+                                  variant="info"
+                                >
+                                  Card Pay
+                                </ButtonInput>
+                              </div>
+                            </>
+                          )}
 
-                        <CreatePaymentPayPal
-                          paymentModel="PAYPAL-SUBSCRIBE"
-                          data={{
-                            membershipId,
-                            amount: newAmount,
-                            userReceiveId: item?.userId,
-                            userSendId: userVisitor?.id,
-                            organizationId: item?.organizationId,
-                          }}
-                        />
+                          <CreatePaymentPayPal
+                            paymentModel="PAYPAL-SUBSCRIBE"
+                            data={{
+                              membershipId,
+                              amount: newAmount,
+                              userReceiveId: item?.userId,
+                              userSendId: userVisitor?.id,
+                              organizationId: item?.organizationId,
+                            }}
+                          />
+                        </>
                       </>
-                    </>
-                  </div>
+                    </div>
+                  ) : null}
 
                   <div className="py-6">
                     <h2 className="font-bold text-gray-500 text-base">

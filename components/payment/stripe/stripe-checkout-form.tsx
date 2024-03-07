@@ -2,6 +2,7 @@ import { CreateOnPaymentPI } from '@/api-site/payment';
 import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
@@ -133,6 +134,20 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
           </div>
         </div>
       ) : null}
+
+      <div className="rounded-lg bg-red-600">
+        <div className="p-3">
+          <div className="flex items-start justify-between md:items-center">
+            <div className="flex-1 md:flex md:items-center md:justify-between">
+              <p className="text-sm font-medium text-white">yeyeye</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Alert variant="destructive" className="mb-4">
+        <AlertDescription>{hasErrors}</AlertDescription>
+      </Alert>
 
       <div className="mt-4">
         <TextInput

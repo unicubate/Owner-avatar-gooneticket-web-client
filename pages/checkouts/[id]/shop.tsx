@@ -6,7 +6,7 @@ import { ListMiniCats } from '@/components/cart/list-mini-carts';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
-import { CreatePaymentStripe } from '@/components/payment/stripe/create-payment-stripe';
+import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
@@ -173,18 +173,13 @@ const CheckoutShop = () => {
                     <>
                       {isCardPay ? (
                         <>
-                          <CreatePaymentStripe
+                          <CreateCardStripe
                             paymentModel="STRIPE-SHOP"
                             data={{
                               cartOrderId,
                               amount: newAmount,
                               userSendId: userBayer?.id,
                               organizationId: userSeller?.organizationId,
-                              // cartOrderId,
-                              // amount: newAmount,
-                              // userReceiveId: '',
-                              // userSendId: userBayer?.id,
-                              // organizationId: userSeller?.organizationId,
                             }}
                           />
                         </>

@@ -8,11 +8,14 @@ export const arrayTypePayments = [
 ];
 
 export type PaymentCardFormModel = {
-  fullName?: string;
-  cardNumber: string;
-  cardExpMonth: number;
-  cardExpYear: number;
-  cardCvc: string;
+  card: {
+    cardNumber: string;
+    cardExpMonth: number;
+    cardExpYear: number;
+    cardCvc: string;
+    fullName?: string;
+    email?: string;
+  };
   type: PaymentType;
 };
 

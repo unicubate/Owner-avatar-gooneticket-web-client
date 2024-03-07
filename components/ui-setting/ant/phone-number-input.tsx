@@ -1,11 +1,11 @@
 import { Control, Controller } from 'react-hook-form';
-import PhoneInput, { Country } from 'react-phone-number-input';
+import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 
 interface Props {
   control: Control<any>;
   label?: string;
-  defaultCountry: Country;
+  defaultCountry: any;
   name: string;
   errors: { [key: string]: any };
   placeholder?: string;
@@ -38,16 +38,18 @@ const PhoneNumberInput: React.FC<Props> = ({
         control={control}
         defaultValue={defaultValue}
         render={({ field: { ref, ...field } }) => (
-          <PhoneInput
-            defaultCountry={defaultCountry}
-            className={`w-full rounded-md border px-4 py-2.5 text-base font-semibold duration-200 focus:border-blue-600 focus:outline-none dark:border-gray-800 dark:bg-[#121212] dark:text-white  dark:placeholder:text-gray-500  ${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            placeholder={placeholder}
-            id={name}
-            required={required}
-            autoComplete="off"
-            {...field}
-            rules={{ required: true }}
-          />
+          <>
+            <PhoneInput
+              defaultCountry={defaultCountry}
+              className={`w-full rounded-md border px-4 py-2.5 text-base font-semibold dark:border-gray-800 ${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              placeholder={placeholder}
+              id={name}
+              required={required}
+              autoComplete="off"
+              {...field}
+              rules={{ required: true }}
+            />
+          </>
         )}
       />
       {errors?.[name] && (
