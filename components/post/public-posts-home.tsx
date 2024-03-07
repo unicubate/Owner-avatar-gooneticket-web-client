@@ -21,7 +21,7 @@ export function PublicPostsHome(props: Props) {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 10,
+    take: 3,
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',

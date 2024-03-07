@@ -9,11 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
-import {
-  AvatarCoffeeComponent,
-  AvatarComponent,
-  LoadingFile,
-} from '../ui-setting/ant';
+import { AvatarComponent, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useAuth } from '../util/context-user';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
@@ -72,14 +68,14 @@ export function ListCommentTransactions(props: Props) {
     <>
       <li key={index} className="py-4">
         <div className="flex items-start">
-          {item?.profile?.username ? (
-            <AvatarComponent size={45} profile={item?.profile} />
-          ) : (
-            <AvatarCoffeeComponent
-              size={45}
-              color={item?.profile?.color ?? 'indigo'}
-            />
-          )}
+          <AvatarComponent
+            size={45}
+            profile={
+              item?.profile?.username
+                ? item?.profile
+                : { firstName: item?.fullName }
+            }
+          />
 
           <div className="ml-3">
             <div className="flex items-center space-x-px">
