@@ -2,6 +2,7 @@ import { UpdateOneOrderItemAPI } from '@/api-site/order-item';
 import {
   OrderItemFormModel,
   OrderItemModel,
+  OrderModel,
   statusOderItemArray,
 } from '@/types/order-item';
 import {
@@ -26,11 +27,13 @@ const schema = yup.object({
   status: yup.string().required(),
 });
 
-const UpdateOrderItemModal: React.FC<{
+export function UpdateOrderItemModal(props: {
   isOpen: boolean;
   setIsOpen: any;
   item: OrderItemModel | any;
-}> = ({ isOpen, setIsOpen, item }) => {
+  order: OrderModel;
+}) {
+  const { isOpen, order, setIsOpen, item } = props;
   const {
     control,
     setValue,
@@ -232,11 +235,30 @@ const UpdateOrderItemModal: React.FC<{
                     id="country"
                     type="text"
                     name="country"
-                    defaultValue="Italy"
+                    defaultValue={order?.address?.country ?? ''}
                     placeholder="country"
                     readOnly
                   />
                 </div>
+                <div className="mb-2">
+                  <Label
+                    htmlFor={'city'}
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    City
+                  </Label>
+                  <Input
+                    id="city"
+                    type="text"
+                    name="city"
+                    defaultValue={order?.address?.city ?? ''}
+                    placeholder="city"
+                    readOnly
+                  />
+                </div>
+              </div>
+
+              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
                 <div className="mb-2">
                   <Label
                     htmlFor={'address'}
@@ -248,7 +270,7 @@ const UpdateOrderItemModal: React.FC<{
                     id="address"
                     type="text"
                     name="address"
-                    defaultValue="via della costa 13"
+                    defaultValue={order?.address?.street1 ?? ''}
                     placeholder="address"
                     readOnly
                   />
@@ -264,7 +286,7 @@ const UpdateOrderItemModal: React.FC<{
                     id="cap"
                     type="text"
                     name="cap"
-                    defaultValue="1203"
+                    defaultValue={order?.address?.cap ?? ''}
                     placeholder="address"
                     readOnly
                   />
@@ -280,7 +302,7 @@ const UpdateOrderItemModal: React.FC<{
                     id="phone"
                     type="text"
                     name="phone"
-                    defaultValue="3425712192"
+                    defaultValue={order?.address?.phone ?? ''}
                     placeholder="Phone Number"
                     readOnly
                   />
@@ -290,20 +312,20 @@ const UpdateOrderItemModal: React.FC<{
 
             <div className="py-2">
               <h2 className="font-bold text-base">Payment details</h2>
-              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
                 <div className="mb-2">
                   <Label
-                    htmlFor={'country'}
+                    htmlFor={'quantity'}
                     className="mb-2 block text-sm font-bold"
                   >
-                    Transaction ID
+                    Quantity
                   </Label>
                   <Input
-                    id="transactionId"
+                    id="quantity"
                     type="text"
-                    name="transactionId"
-                    defaultValue="298198281562717"
-                    placeholder="country"
+                    name="quantity"
+                    defaultValue={item.quantity}
+                    placeholder="quantity"
                     readOnly
                   />
                 </div>
@@ -318,24 +340,8 @@ const UpdateOrderItemModal: React.FC<{
                     id="orderNumber"
                     type="text"
                     name="orderNumber"
-                    defaultValue={item.orderNumber}
+                    defaultValue={order.orderNumber}
                     placeholder="Order number"
-                    readOnly
-                  />
-                </div>
-                <div className="mb-2">
-                  <Label
-                    htmlFor={'quantity'}
-                    className="mb-2 block text-sm font-bold"
-                  >
-                    Quantity
-                  </Label>
-                  <Input
-                    id="quantity"
-                    type="text"
-                    name="quantity"
-                    defaultValue={item.quantity}
-                    placeholder="quantity"
                     readOnly
                   />
                 </div>
@@ -367,7 +373,7 @@ const UpdateOrderItemModal: React.FC<{
                 <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
                   {hasErrors && (
                     <Alert variant="destructive" className="mb-4">
-                      <AlertDescription>rre</AlertDescription>
+                      <AlertDescription>{hasErrors}</AlertDescription>
                     </Alert>
                   )}
 
@@ -414,6 +420,4 @@ const UpdateOrderItemModal: React.FC<{
       ) : null}
     </>
   );
-};
-
-export { UpdateOrderItemModal };
+}

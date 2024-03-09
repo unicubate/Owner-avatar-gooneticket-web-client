@@ -1,6 +1,7 @@
 import {
   OrderItemFormModel,
   OrderItemModel,
+  OrderModel,
   ResponseOrderItemModel,
 } from '@/types/order-item';
 import { makeApiCall } from '@/utils/end-point';
@@ -94,6 +95,29 @@ export const getOrderItemsAPI = async (
     action: 'getOrderItems',
     queryParams: payload,
   });
+};
+
+export const GetOneOrderAPI = (options: { orderId: string }) => {
+  const { orderId } = options;
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['order'],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'getOneOrder',
+        urlParams: { orderId },
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as OrderModel,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
 };
 
 export const GetInfiniteOrderItemsAPI = (payload: {

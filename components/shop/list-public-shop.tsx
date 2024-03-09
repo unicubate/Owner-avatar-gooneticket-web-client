@@ -2,7 +2,7 @@
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { ProductModel } from '@/types/product';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { AlertDangerNotification } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
@@ -33,9 +33,9 @@ export function ListPublicShop(props: Props) {
           productId: itemCard?.id,
           organizationId: itemCard?.organizationId,
         });
-        AlertSuccessNotification({
-          text: `Product add to cart successfully`,
-        });
+        // AlertSuccessNotification({
+        //   text: `Product add to cart successfully`,
+        // });
       } else {
         setIsOpen(true);
       }

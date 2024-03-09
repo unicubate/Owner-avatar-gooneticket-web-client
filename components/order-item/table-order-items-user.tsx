@@ -2,7 +2,6 @@
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
 import { ModelType } from '@/utils/pagination-item';
 import { ArrowRightLeftIcon } from 'lucide-react';
-import React from 'react';
 import { useInputState } from '../hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '../ui-setting';
 import { EmptyData, LoadingFile } from '../ui-setting/ant';
@@ -15,11 +14,8 @@ type Props = {
   organizationId: string;
 };
 
-const TableOrderItemsUser: React.FC<Props> = ({
-  model,
-  organizationId,
-  days,
-}) => {
+export function TableOrderItemsUser(props: Props) {
+  const { model, organizationId, days } = props;
   const { search, handleSetSearch } = useInputState();
 
   const {
@@ -88,6 +84,4 @@ const TableOrderItemsUser: React.FC<Props> = ({
       )}
     </>
   );
-};
-
-export { TableOrderItemsUser };
+}

@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { GetOneOrderAPI } from '@/api-site/order-item';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow } from '@/utils';
@@ -6,7 +7,6 @@ import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import { ViewIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
@@ -19,12 +19,17 @@ type Props = {
   index: number;
 };
 
-const ListOrderItemsSeller: React.FC<Props> = ({ item, index }) => {
+export function ListOrderItemsSeller(props: Props) {
+  const { item, index } = props;
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
+  const { data: order } = GetOneOrderAPI({
+    orderId: item?.orderId,
+  });
   const { locale } = useRouter();
+
   return (
     <>
       <tr key={index}>
@@ -48,7 +53,7 @@ const ListOrderItemsSeller: React.FC<Props> = ({ item, index }) => {
 
             <div className="ml-4 min-w-0 flex-1">
               <p className="text-lg font-bold text-gray-900 dark:text-white">
-                <ReadMore html={`${item?.product?.title}`} value={30} />
+                <ReadMore html={`${item?.product?.title}`} value={100} />
               </p>
               <div className="hidden lg:table-cell">
                 <p className="mt-1 flex min-w-0 flex-1 items-center text-sm font-bold text-gray-600">
@@ -170,12 +175,11 @@ const ListOrderItemsSeller: React.FC<Props> = ({ item, index }) => {
         </td>
         <UpdateOrderItemModal
           item={item}
+          order={order}
           isOpen={isOpen}
           setIsOpen={setIsOpen}
         />
       </tr>
     </>
   );
-};
-
-export { ListOrderItemsSeller };
+}

@@ -2,7 +2,7 @@
 import { DeleteOneCartAPI } from '@/api-site/cart';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OneCartModel } from '@/types/cart';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { AlertDangerNotification } from '@/utils';
 import { Image } from 'antd';
 import React from 'react';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
@@ -22,9 +22,9 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
     //Envoyer la requet au serve
     try {
       await saveMutation({ cartId: item?.id });
-      AlertSuccessNotification({
-        text: 'Product deleted successfully',
-      });
+      // AlertSuccessNotification({
+      //   text: 'Product deleted successfully',
+      // });
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,

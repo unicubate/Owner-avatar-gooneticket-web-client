@@ -6,7 +6,6 @@ import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { OrderItemUserModal } from './order-item-user-modal';
@@ -16,7 +15,8 @@ type Props = {
   index: number;
 };
 
-const ListOrderItemsUser: React.FC<Props> = ({ item, index }) => {
+const ListOrderItemsUser = (props: Props) => {
+  const { item, index } = props;
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);

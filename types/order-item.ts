@@ -54,6 +54,29 @@ export type OrderItemModel = {
   uploadsFiles: Array<UploadModel>;
 };
 
+export type OrderModel = {
+  createdAt: Date;
+  updatedAt: Date;
+  deletedAt: Date;
+  id: string;
+  orderNumber: string;
+  totalPriceDiscount: number;
+  totalPriceNoDiscount: number;
+  currency: string;
+  address: {
+    id: string;
+    cap: string;
+    city: string;
+    phone: string;
+    region: string;
+    country: string;
+    street1: string;
+    street2: string;
+    lastName: string;
+    firstName: string;
+  };
+  userId: string;
+};
 export interface OrderItemFormModel {
   status: StatusOderProduct;
 }

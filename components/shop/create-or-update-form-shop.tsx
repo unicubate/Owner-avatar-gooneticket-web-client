@@ -340,7 +340,7 @@ const CreateOrUpdateFormShop: React.FC<Props> = ({
                             className="upload-list-inline dark:text-white"
                             fileList={fileList}
                             onChange={handleFileChange}
-                            accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls"
+                            accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
                             maxCount={10}
                           >
                             {fileList.length >= 10 ? null : (

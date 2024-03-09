@@ -111,6 +111,9 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneCart: PUT(`${baseUrl}/carts/:cartId`),
   deleteOneCart: DELETE(`${baseUrl}/carts/:cartId`),
 
+  /****************** Order route */
+  getOneOrder: GET(`${baseUrl}/orders/:orderId`),
+
   /****************** OrderItem route */
   getOrderItems: GET(`${baseUrl}/orders/order-items`),
   updateOneOrderItem: PUT(`${baseUrl}/orders/order-items/:orderItemId`),

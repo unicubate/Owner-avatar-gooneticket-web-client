@@ -11,6 +11,7 @@ export function CreatePaymentPayPal(props: Props) {
   const { data, paymentModel } = props;
   const { push } = useRouter();
   const {
+    userAddress,
     amount,
     membershipId,
     cartOrderId,
@@ -39,6 +40,7 @@ export function CreatePaymentPayPal(props: Props) {
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(false);
     const payload = {
+      userAddress,
       cartOrderId,
       membershipId,
       userSendId,
@@ -60,9 +62,6 @@ export function CreatePaymentPayPal(props: Props) {
         data: payload,
         paymentModel,
       });
-
-      console.log('order =====>', order);
-      console.log('order?.purchase_units[0] =====>', order?.purchase_units[0]);
 
       //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {

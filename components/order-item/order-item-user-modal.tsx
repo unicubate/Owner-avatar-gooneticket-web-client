@@ -24,11 +24,12 @@ import { useState } from 'react';
 import { ButtonInput, SerialPrice } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
 
-const OrderItemUserModal: React.FC<{
+const OrderItemUserModal = (props: {
   isOpen: boolean;
   setIsOpen: any;
   item: OrderItemModel;
-}> = ({ isOpen, setIsOpen, item }) => {
+}) => {
+  const { isOpen, setIsOpen, item } = props;
   const { push } = useRouter();
   const linkCopy = item?.product?.urlRedirect;
   const [copied, setCopied] = useState(false);
@@ -81,7 +82,10 @@ const OrderItemUserModal: React.FC<{
                   <div className="mt-2 flex items-center">
                     {item?.product?.title ? (
                       <p className="text-lg font-bold text-gray-600 dark:text-white">
-                        <ReadMore html={`${item?.product?.title}`} value={30} />
+                        <ReadMore
+                          html={`${item?.product?.title}`}
+                          value={100}
+                        />
                       </p>
                     ) : null}
                   </div>
