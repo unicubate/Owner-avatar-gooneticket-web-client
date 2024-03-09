@@ -120,7 +120,7 @@ const CreateFormPublicDonation: React.FC<{
                   data={{
                     amount: newAmount,
                     userReceiveId: user?.id,
-                    userSendId: userBayer?.id,
+                    userBuyerId: userBayer?.id,
                     organizationSellerId: user?.organizationId,
                     organizationBuyerId: userBayer?.organizationId,
                   }}
@@ -145,7 +145,7 @@ const CreateFormPublicDonation: React.FC<{
               data={{
                 amount: newAmount,
                 userReceiveId: user?.id,
-                userSendId: userBayer?.id,
+                userBuyerId: userBayer?.id,
                 organizationSellerId: user?.organizationId,
                 organizationBuyerId: userBayer?.organizationId,
               }}

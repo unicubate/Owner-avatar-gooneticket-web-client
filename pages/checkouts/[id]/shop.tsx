@@ -200,7 +200,7 @@ const CheckoutShop = () => {
                                   userAddress,
                                   cartOrderId,
                                   amount: newAmount,
-                                  userSendId: userBayer?.id,
+                                  userBuyerId: userBayer?.id,
                                   organizationSellerId:
                                     userSeller?.organizationId,
                                   organizationBuyerId:
@@ -230,7 +230,7 @@ const CheckoutShop = () => {
                               userAddress,
                               cartOrderId,
                               amount: newAmount,
-                              userSendId: userBayer?.id,
+                              userBuyerId: userBayer?.id,
                               organizationSellerId: userSeller?.organizationId,
                               organizationBuyerId: userBayer?.organizationId,
                             }}

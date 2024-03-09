@@ -236,7 +236,7 @@ const CheckoutMembership = () => {
                                       membershipId,
                                       amount: newAmount,
                                       userReceiveId: item?.userId,
-                                      userSendId: userVisitor?.id,
+                                      userBuyerId: userVisitor?.id,
                                       organizationSellerId:
                                         item?.organizationId,
                                       organizationBuyerId:
@@ -267,7 +267,7 @@ const CheckoutMembership = () => {
                                   membershipId,
                                   amount: newAmount,
                                   userReceiveId: item?.userId,
-                                  userSendId: userVisitor?.id,
+                                  userBuyerId: userVisitor?.id,
                                   organizationSellerId: item?.organizationId,
                                   organizationBuyerId:
                                     userVisitor?.organizationId,

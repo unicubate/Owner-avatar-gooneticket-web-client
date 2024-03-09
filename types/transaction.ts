@@ -33,7 +33,7 @@ export type TransactionModel = {
   type: PaymentType;
   giftId: string;
   campaignId: string;
-  userSendId: string;
+  userBuyerId: string;
   userReceiveId: string;
   userId: string;
   email: string;

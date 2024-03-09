@@ -196,7 +196,7 @@ const CheckoutCommission = () => {
                                       commissionId,
                                       amount: newAmount,
                                       userReceiveId: item?.userId,
-                                      userSendId: userBayer?.id,
+                                      userBuyerId: userBayer?.id,
                                       organizationSellerId:
                                         item?.organizationId,
                                       organizationBuyerId:
@@ -227,7 +227,7 @@ const CheckoutCommission = () => {
                                   commissionId,
                                   amount: newAmount,
                                   userReceiveId: item?.userId,
-                                  userSendId: userBayer?.id,
+                                  userBuyerId: userBayer?.id,
                                   organizationSellerId: item?.organizationId,
                                   organizationBuyerId:
                                     userBayer?.organizationId,

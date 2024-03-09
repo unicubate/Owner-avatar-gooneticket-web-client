@@ -7,7 +7,7 @@ import { Spin } from 'antd';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListLastPosts } from './list-last-posts';
 
-export function PublicLastPosts(props: { userVisitor: UserVisitorModel }) {
+export const PublicLastPosts = (props: { userVisitor: UserVisitorModel }) => {
   const { userVisitor } = props;
   const {
     isLoading: isLoadingPosts,
@@ -21,7 +21,7 @@ export function PublicLastPosts(props: { userVisitor: UserVisitorModel }) {
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO', 'GALLERY'],
+    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
   });
 
   const dataTablePosts = isLoadingPosts ? (
@@ -58,4 +58,4 @@ export function PublicLastPosts(props: { userVisitor: UserVisitorModel }) {
       </div>
     </>
   );
-}
+};
