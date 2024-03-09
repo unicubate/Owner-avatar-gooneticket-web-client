@@ -9,6 +9,7 @@ import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { MessageCircleIcon, ShareIcon, ShoppingCartIcon } from 'lucide-react';
+import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { useInputState } from '../hooks';
 
@@ -112,6 +113,18 @@ export function ViewProductsShop(props: Props) {
               <span className={`ql-editor`}>
                 <HtmlParser html={String(item?.description ?? '')} />
               </span>
+            </div>
+          ) : null}
+
+          {item?.urlMedia ? (
+            <div className={`mx-auto mt-1`}>
+              <ReactPlayer
+                className={`mr-auto`}
+                url={item?.urlMedia}
+                height="350px"
+                width="100%"
+                controls
+              />
             </div>
           ) : null}
 

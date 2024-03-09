@@ -7,7 +7,8 @@ import { useState } from 'react';
 import { PaymentModel } from '../../api-site/payment';
 
 type Props = { data?: any; paymentModel: PaymentModel };
-const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
+export function CreatePaymentPayPal(props: Props) {
+  const { data, paymentModel } = props;
   const { push } = useRouter();
   const {
     amount,
@@ -15,7 +16,8 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
     cartOrderId,
     userSendId,
     userReceiveId,
-    organizationId,
+    organizationSellerId,
+    organizationBuyerId,
   } = data;
   const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
@@ -41,9 +43,11 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
       membershipId,
       userSendId,
       userReceiveId,
-      organizationId,
+      organizationSellerId,
+      organizationBuyerId,
       reference: newReference,
       amount: {
+        name: name,
         description: amount?.description,
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),
@@ -57,7 +61,10 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
         paymentModel,
       });
 
-      push(`/transactions/success?token=${newReference}`);
+      console.log('order =====>', order);
+      console.log('order?.purchase_units[0] =====>', order?.purchase_units[0]);
+
+      //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -114,12 +121,12 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
               disabled={false}
               style={{
                 height: 45,
-                layout: 'horizontal',
+                layout: 'vertical',
                 label: 'paypal',
                 color: 'blue',
               }}
               forceReRender={[Number(amount?.value), currency]}
-              fundingSource={undefined}
+              fundingSource="paypal"
               createOrder={(data, actions) => createOrder(data, actions)}
               onApprove={async (data, action) => {
                 const details = await action?.order?.capture();
@@ -136,5 +143,4 @@ const CreatePaymentPayPal: React.FC<Props> = ({ data, paymentModel }) => {
       </div>
     </>
   );
-};
-export { CreatePaymentPayPal };
+}

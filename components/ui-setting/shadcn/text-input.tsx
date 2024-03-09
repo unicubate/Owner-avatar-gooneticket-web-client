@@ -15,6 +15,7 @@ interface Props {
   required?: boolean;
   defaultValue?: string;
   pattern?: string;
+  disabled?: boolean;
   labelHelp?: React.ReactNode;
 }
 
@@ -32,6 +33,7 @@ const TextInput: React.FC<Props> = ({
   autoComplete,
   required,
   labelHelp,
+  disabled,
 }) => {
   return (
     <>
@@ -59,6 +61,7 @@ const TextInput: React.FC<Props> = ({
               autoComplete={autoComplete}
               min={min}
               max={max}
+              disabled={disabled}
               {...field}
             />
           </>

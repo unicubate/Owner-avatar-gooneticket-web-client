@@ -11,8 +11,10 @@ import { ModelType } from '@/utils/pagination-item';
 import { TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import Swal from 'sweetalert2';
+import { useInputState } from '../hooks';
+import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { ActionModalDialog } from '../ui-setting/shadcn';
 import { useAuth } from '../util/context-user';
 
 type Props = {
@@ -23,8 +25,9 @@ type Props = {
 };
 
 export function ListCommentsRepliesTransactions(props: Props) {
-  const { item, model, index, userReceiveId } = props;
+  const { item, index } = props;
 
+  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const { locale } = useRouter();
   const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
@@ -32,33 +35,24 @@ export function ListCommentsRepliesTransactions(props: Props) {
     onError: (error?: any) => {},
   });
 
-  const deleteItem = (item: any) => {
-    Swal.fire({
-      title: 'Delete?',
-      text: 'Are you sure you want to delete this?',
-      confirmButtonText: 'Yes, Deleted',
-      cancelButtonText: 'No, Cancel',
-      confirmButtonColor: '#dc3545',
-      cancelButtonColor: '#6f42c1',
-      showCancelButton: true,
-      reverseButtons: true,
-    }).then(async (result) => {
-      if (result.value) {
-        //Envoyer la requet au serve
-        try {
-          await saveMutation({ commentId: item?.id });
-          AlertSuccessNotification({
-            text: 'Comment deleted successfully',
-          });
-        } catch (error: any) {
-          AlertDangerNotification({
-            text: `${error.response.data.message}`,
-          });
-        }
-      }
-    });
+  const deleteItem = async (item: any) => {
+    setLoading(true);
+    setIsOpen(true);
+    try {
+      await saveMutation({ commentId: item?.id });
+      AlertSuccessNotification({
+        text: 'Comment deleted successfully',
+      });
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error: any) {
+      setLoading(false);
+      setIsOpen(true);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
   };
-
   return (
     <>
       <div key={index} className="mt-4 flex items-start">
@@ -86,12 +80,23 @@ export function ListCommentsRepliesTransactions(props: Props) {
           <div className="mt-2 flex items-center font-medium text-gray-600">
             {userVisitor?.id === item?.userReceiveId ? (
               <>
-                <button
+                <ActionModalDialog
+                  title="Delete?"
+                  loading={loading}
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
                   onClick={() => deleteItem(item)}
-                  className="ml-3.5 hover:text-red-400 focus:ring-red-400"
-                >
-                  <TrashIcon className="size-4" />
-                </button>
+                  description="Are you sure you want to delete this comment?"
+                  buttonDialog={
+                    <ButtonInput
+                      className="text-sm text-gray-600 hover:text-red-600"
+                      variant="link"
+                      type="button"
+                    >
+                      <TrashIcon className="size-4" />
+                    </ButtonInput>
+                  }
+                />
               </>
             ) : null}
           </div>

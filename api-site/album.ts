@@ -66,11 +66,11 @@ export const DeleteOneAlbumAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: { AlbumId: string }) => {
-      const { AlbumId } = payload;
+    mutationFn: async (payload: { albumId: string }) => {
+      const { albumId } = payload;
       return await makeApiCall({
         action: 'deleteOneAlbum',
-        urlParams: { AlbumId },
+        urlParams: { albumId },
       });
     },
     onError: async (error) => {

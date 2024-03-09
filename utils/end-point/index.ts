@@ -161,6 +161,12 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneAlbum: PUT(`${baseUrl}/albums/:albumId`),
   deleteOneAlbum: DELETE(`${baseUrl}/albums/:albumId`),
 
+  /****************** UserAddress route */
+  getOneUserAddress: GET(`${baseUrl}/user-address`),
+  createOneUserAddress: POST(`${baseUrl}/user-address`),
+  updateOneUserAddress: PUT(`${baseUrl}/user-address/:userAddressId`),
+  deleteOneUserAddress: DELETE(`${baseUrl}/user-address/:userAddressId`),
+
   /****************** Donations route */
   getOneDonation: GET(`${baseUrl}/donations/show/:donationId`),
   updateOneDonation: PUT(`${baseUrl}/donations/:donationId`),
@@ -202,6 +208,12 @@ export const apiEndpoints: ClientApiMethods = {
   createOnePaymentsStripeDonation: POST(`${baseUrl}/payments/stripe/donation`),
   createOnePaymentsPaypalShop: POST(`${baseUrl}/payments/paypal/shop`),
   createOnePaymentsStripeShop: POST(`${baseUrl}/payments/stripe/shop`),
+  createOnePaymentsPaypalCommission: POST(
+    `${baseUrl}/payments/paypal/commission`,
+  ),
+  createOnePaymentsStripeCommission: POST(
+    `${baseUrl}/payments/stripe/commission`,
+  ),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
   resendVerifyCodeOnePaymentsCreate: POST(
     `${baseUrl}/payments/resend-code-verify-phone`,

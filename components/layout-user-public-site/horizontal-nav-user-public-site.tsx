@@ -167,19 +167,17 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
               <div className="flex items-center">
                 <ThemeToggle />
                 {userVisiter?.id !== user?.id ? (
-                  <>
-                    {/* <ButtonInput
-                      // color={user?.profile?.color as ColorType}
-                      type="button"
-                      variant="info"
-                      onClick={() => setOpenModal(true)}
-                      //icon={<BiCoffeeTogo className="mr-2 size-5" />}
-                    >
-                      Donate
-                    </ButtonInput> */}
-                    <CreateOrUpdateFormFollow item={user} />
-                  </>
+                  <CreateOrUpdateFormFollow item={user} />
                 ) : null}
+                {/* <ButtonInput
+                  type="button"
+                  className="w-full"
+                  size="sm"
+                  variant="info"
+                  icon={<PlusIcon className="mr-2 size-4" />}
+                >
+                  Create
+                </ButtonInput> */}
                 {userVisiter?.id ? (
                   <>
                     <DropdownMenu>

@@ -21,7 +21,7 @@ export function PublicLastPosts(props: { userVisitor: UserVisitorModel }) {
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
+    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO', 'GALLERY'],
   });
 
   const dataTablePosts = isLoadingPosts ? (

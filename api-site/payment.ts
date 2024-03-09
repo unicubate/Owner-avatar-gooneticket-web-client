@@ -13,6 +13,8 @@ export type PaymentModel =
   | 'PAYMENT-CREATE'
   | 'PAYPAL-SUBSCRIBE'
   | 'STRIPE-SUBSCRIBE'
+  | 'PAYPAL-COMMISSION'
+  | 'STRIPE-COMMISSION'
   | 'PAYPAL-SHOP'
   | 'STRIPE-SHOP'
   | 'RESEND-VERIFY-CODE-PHONE'
@@ -70,6 +72,20 @@ export const CreateOnPaymentPI = ({
       if (paymentModel === 'STRIPE-SHOP') {
         return await makeApiCall({
           action: 'createOnePaymentsStripeShop',
+          body: { paymentModel, ...data },
+        });
+      }
+
+      if (paymentModel === 'PAYPAL-COMMISSION') {
+        return await makeApiCall({
+          action: 'createOnePaymentsPaypalCommission',
+          body: { paymentModel, ...data },
+        });
+      }
+
+      if (paymentModel === 'STRIPE-COMMISSION') {
+        return await makeApiCall({
+          action: 'createOnePaymentsStripeCommission',
           body: { paymentModel, ...data },
         });
       }

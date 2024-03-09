@@ -358,26 +358,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold dark:text-white">
                           {' '}
-                          Special price for members{' '}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Offer a discounted extra price to attract new members
-                          and to keep your current members engaged.
-                        </p>
-                      </div>
-                    </div>
-
-                    <SwitchInput
-                      control={control}
-                      name="allowChooseInventory"
-                      label=""
-                    />
-                  </div>
-                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex min-w-0 flex-1 items-center">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold dark:text-white">
-                          {' '}
                           Allow buyer to choose a quantity{' '}
                         </p>
                         <p className="mt-1 text-sm font-medium text-gray-500">
@@ -392,64 +372,6 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     <SwitchInput
                       control={control}
                       name="enableChooseQuantity"
-                      label=""
-                    />
-                  </div>
-                </div>
-
-                <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
-                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex min-w-0 flex-1 items-center">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold dark:text-white">
-                          {' '}
-                          Limit slots (optional){' '}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          A limited number of slots creates a sense of urgency
-                          and also saves you from burn-out.
-                        </p>
-                      </div>
-                    </div>
-
-                    <SwitchInput
-                      control={control}
-                      name="enableLimitSlot"
-                      label=""
-                    />
-                  </div>
-                  {watchEnableLimitSlot ? (
-                    <div className="mb-1">
-                      <TextInput
-                        control={control}
-                        label=""
-                        type="number"
-                        name="limitSlot"
-                        placeholder="10"
-                        errors={errors}
-                        required
-                        pattern="[0-9]*"
-                      />
-                    </div>
-                  ) : null}
-
-                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-                    <div className="flex min-w-0 flex-1 items-center">
-                      <div className="min-w-0 flex-1">
-                        <p className="text-sm font-bold dark:text-white">
-                          {' '}
-                          Special price for members{' '}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Offer a discounted extra price to attract new members
-                          and to keep your current members engaged.
-                        </p>
-                      </div>
-                    </div>
-
-                    <SwitchInput
-                      control={control}
-                      name="allowChooseInventory"
                       label=""
                     />
                   </div>

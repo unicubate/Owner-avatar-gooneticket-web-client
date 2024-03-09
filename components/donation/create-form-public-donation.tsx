@@ -11,7 +11,7 @@ const { TextArea } = Input;
 const CreateFormPublicDonation: React.FC<{
   user: UserModel;
 }> = ({ user }) => {
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userBayer } = useAuth() as any;
   const initialPrice = String(user?.donationUser?.price || 0);
   const initialCurrency = user?.profile?.currency?.code;
   const [increment, setIncrement] = useState(1);
@@ -120,8 +120,9 @@ const CreateFormPublicDonation: React.FC<{
                   data={{
                     amount: newAmount,
                     userReceiveId: user?.id,
-                    userSendId: userVisitor?.id,
-                    organizationId: user?.organizationId,
+                    userSendId: userBayer?.id,
+                    organizationSellerId: user?.organizationId,
+                    organizationBuyerId: userBayer?.organizationId,
                   }}
                 />
               </>
@@ -144,8 +145,9 @@ const CreateFormPublicDonation: React.FC<{
               data={{
                 amount: newAmount,
                 userReceiveId: user?.id,
-                userSendId: userVisitor?.id,
-                organizationId: user?.organizationId,
+                userSendId: userBayer?.id,
+                organizationSellerId: user?.organizationId,
+                organizationBuyerId: userBayer?.organizationId,
               }}
             />
           </>

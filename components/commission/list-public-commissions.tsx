@@ -3,8 +3,8 @@ import { CommissionModel } from '@/types/commission';
 import { HtmlParser } from '@/utils/html-parser';
 import { MailPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
-import { LoginModal } from '../auth-modal/login-modal';
+import { useState } from 'react';
+import ReactPlayer from 'react-player';
 import { CreateCommentCommissionModal } from '../comment/create-comment-commission-modal';
 import { useInputState } from '../hooks';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
@@ -14,11 +14,13 @@ type Props = {
   item: CommissionModel;
 };
 
-const ListPublicCommissions: React.FC<Props> = ({ item }) => {
-  const { push } = useRouter();
-  const { isOpen, setIsOpen, userStorage } = useInputState();
+export function ListPublicCommissions(props: Props) {
+  const { item } = props;
+  const { push, pathname } = useRouter();
+  const { userStorage } = useInputState();
   const [isOpenComment, setIsOpenComment] = useState<boolean>(false);
 
+  const linkHref = `${process.env.NEXT_PUBLIC_SITE}/checkouts/${item?.id}/commission?username=${item?.profile?.username}`;
   return (
     <>
       <div
@@ -49,11 +51,6 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
             </div>
           </div>
 
-          <div className="text-sm font-normal text-gray-600 dark:text-gray-300">
-            <span className={`ql-editor`}>
-              <HtmlParser html={String(item?.description)} />
-            </span>
-          </div>
           <div className="mx-auto mt-4 justify-center text-center">
             <ListCarouselUpload
               uploads={item?.uploadsImages}
@@ -61,6 +58,22 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
               height={400}
             />
           </div>
+          <div className="text-sm font-normal text-gray-600 dark:text-gray-300">
+            <span className={`ql-editor`}>
+              <HtmlParser html={String(item?.description)} />
+            </span>
+          </div>
+          {item?.urlMedia ? (
+            <div className={`mx-auto mt-1`}>
+              <ReactPlayer
+                className={`mr-auto`}
+                url={item?.urlMedia}
+                height="350px"
+                width="100%"
+                controls
+              />
+            </div>
+          ) : null}
 
           <div className="mx-auto mt-6 justify-center text-center">
             <div className="sm:mt-0">
@@ -74,7 +87,7 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
                     ? push(
                         `/checkouts/${item?.id}/commission?username=${item?.profile?.username}`,
                       )
-                    : setIsOpen(true);
+                    : push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
                 }}
               >
                 Request this
@@ -84,7 +97,6 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
         </div>
       </div>
 
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
       <CreateCommentCommissionModal
         isOpen={isOpenComment}
         commission={item as any}
@@ -92,6 +104,4 @@ const ListPublicCommissions: React.FC<Props> = ({ item }) => {
       />
     </>
   );
-};
-
-export default ListPublicCommissions;
+}

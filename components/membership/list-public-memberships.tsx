@@ -4,7 +4,6 @@ import { HtmlParser } from '@/utils/html-parser';
 import { convertToPluralMonth } from '@/utils/utils';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { LoginModal } from '../auth-modal/login-modal';
 import { useInputState } from '../hooks';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
@@ -14,9 +13,10 @@ type Props = {
 };
 
 const ListPublicMemberships: React.FC<Props> = ({ item }) => {
-  const { isOpen, setIsOpen, userStorage } = useInputState();
-  const router = useRouter();
+  const { userStorage } = useInputState();
+  const { push, pathname } = useRouter();
 
+  const linkHref = `${process.env.NEXT_PUBLIC_SITE}/checkouts/${item?.id}/membership?username=${item?.profile?.username}`;
   return (
     <>
       <div
@@ -63,10 +63,10 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
               <ButtonInput
                 onClick={() => {
                   userStorage?.id
-                    ? router.push(
+                    ? push(
                         `/checkouts/${item?.id}/membership?username=${item?.profile?.username}`,
                       )
-                    : setIsOpen(true);
+                    : push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
                 }}
                 type="button"
                 className="w-full"
@@ -83,8 +83,6 @@ const ListPublicMemberships: React.FC<Props> = ({ item }) => {
           </div>
         </div>
       </div>
-
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

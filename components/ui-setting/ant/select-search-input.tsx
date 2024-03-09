@@ -1,4 +1,4 @@
-import { SmileOutlined } from '@ant-design/icons';
+import { Label } from '@/components/ui/label';
 import { Select, Space } from 'antd';
 import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
@@ -14,6 +14,7 @@ interface Props {
   valueType: 'key' | 'text';
   icon?: React.ReactNode;
   allowClear?: boolean;
+  disabled?: boolean;
 }
 
 const SelectSearchInput: React.FC<Props> = ({
@@ -26,14 +27,15 @@ const SelectSearchInput: React.FC<Props> = ({
   valueType,
   icon,
   allowClear,
+  disabled,
   firstOptionName = '',
 }) => {
   return (
     <>
       {label ? (
-        <label className="mb-2 block text-sm font-bold" htmlFor={name}>
+        <Label htmlFor={name} className="mb-2 block text-sm font-bold">
           {label}
-        </label>
+        </Label>
       ) : null}
       <Controller
         name={name}
@@ -52,7 +54,8 @@ const SelectSearchInput: React.FC<Props> = ({
               (option?.name ?? '').toLowerCase().includes(input.toLowerCase())
             }
             {...field}
-            // className={`dark:bg-[#121212] dark:text-white dark:placeholder-gray-500 dark:border-gray-800`}
+            disabled={disabled}
+            //className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white  dark:placeholder:text-gray-500`}
           >
             <>
               {dataItem?.length > 0

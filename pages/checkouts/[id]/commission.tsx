@@ -1,13 +1,16 @@
 'use client';
 
 import { GetOneCommissionAPI } from '@/api-site/commission';
+import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
+import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -19,13 +22,11 @@ import { useForm } from 'react-hook-form';
 
 const CheckoutCommission = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userVisitor } = useInputState();
+  const { userStorage: userBayer } = useInputState();
   const { query, push } = useRouter();
   const { id: commissionId, username } = query;
   const {
     watch,
-    control,
-    register,
     formState: { errors },
   } = useForm();
   const watchAmount = watch('amount', '');
@@ -33,11 +34,13 @@ const CheckoutCommission = () => {
     commissionId: String(commissionId),
   });
 
+  const { data: userAddress } = GetOneUserAddressMeAPI();
+
   const newAmount = watchAmount
     ? JSON.parse(watchAmount)
     : {
         currency: item?.currency?.code,
-        value: item?.price,
+        value: item?.priceDiscount,
       };
 
   if (status === 'pending') {
@@ -46,7 +49,7 @@ const CheckoutCommission = () => {
 
   return (
     <>
-      <LayoutCheckoutSite title={`Checkout commissions - ${item?.title ?? ''}`}>
+      <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'commissions'}`}>
         <div className="overflow-hidden bg-white dark:bg-[#121212] shadow rounded-xl">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="px-5 py-6 dark:bg-[#121212] md:px-8">
@@ -159,63 +162,83 @@ const CheckoutCommission = () => {
                     </ul>
                   </div>
 
-                  <div className="py-6">
+                  {userBayer?.organizationId !== item?.organizationId ? (
                     <>
-                      <>
-                        {isCardPay ? (
-                          <>
-                            {/* <CreatePaymentStripe
-                                  paymentModel="STRIPE-SUBSCRIBE"
-                                  data={{
-                                    membershipId,
-                                    amount: newAmount,
-                                    userReceiveId: item?.userId,
-                                    userSendId: userVisitor?.id,
-                                    organizationId: item?.organizationId,
-                                  }}
-                                /> */}
-                          </>
-                        ) : (
-                          <>
-                            <div className="mt-2">
-                              <ButtonInput
-                                onClick={() => setIsCardPay(true)}
-                                type="button"
-                                className="w-full"
-                                size="lg"
-                                variant="info"
-                              >
-                                Card Pay
-                              </ButtonInput>
-                            </div>
-                          </>
-                        )}
+                      <div className="py-4">
+                        <h2 className="font-bold text-gray-500 text-base">
+                          Billing Information
+                        </h2>
+                      </div>
 
-                        <CreatePaymentPayPal
-                          paymentModel="PAYPAL-SUBSCRIBE"
-                          data={{
-                            commissionId,
-                            amount: {},
-                            userReceiveId: item?.userId,
-                            userSendId: userVisitor?.id,
-                            organizationId: item?.organizationId,
-                          }}
+                      <div className="py-4">
+                        <CreateOrUpdateUserAddressForm
+                          userAddress={userAddress}
                         />
-                      </>
+                      </div>
+
+                      {userAddress?.street1 &&
+                      userAddress?.city &&
+                      userAddress?.country ? (
+                        <>
+                          <div className="py-4">
+                            <h2 className="font-bold text-gray-500 text-base">
+                              Payment Method
+                            </h2>
+                          </div>
+                          <div className="py-6">
+                            <>
+                              {isCardPay ? (
+                                <>
+                                  <CreateCardStripe
+                                    paymentModel="STRIPE-COMMISSION"
+                                    data={{
+                                      userAddress,
+                                      commissionId,
+                                      amount: newAmount,
+                                      userReceiveId: item?.userId,
+                                      userSendId: userBayer?.id,
+                                      organizationSellerId:
+                                        item?.organizationId,
+                                      organizationBuyerId:
+                                        userBayer?.organizationId,
+                                    }}
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <div className="mt-2">
+                                    <ButtonInput
+                                      onClick={() => setIsCardPay(true)}
+                                      type="button"
+                                      className="w-full"
+                                      size="lg"
+                                      variant="info"
+                                    >
+                                      Card Pay
+                                    </ButtonInput>
+                                  </div>
+                                </>
+                              )}
+
+                              <CreatePaymentPayPal
+                                paymentModel="PAYPAL-COMMISSION"
+                                data={{
+                                  userAddress,
+                                  commissionId,
+                                  amount: newAmount,
+                                  userReceiveId: item?.userId,
+                                  userSendId: userBayer?.id,
+                                  organizationSellerId: item?.organizationId,
+                                  organizationBuyerId:
+                                    userBayer?.organizationId,
+                                }}
+                              />
+                            </>
+                          </div>
+                        </>
+                      ) : null}
                     </>
-                  </div>
-
-                  <div className="py-6">
-                    <h2 className="font-bold text-gray-500 text-base">
-                      Billing Information
-                    </h2>
-                  </div>
-
-                  <div className="py-6">
-                    <h2 className="font-bold text-gray-500 text-base">
-                      Payment Method
-                    </h2>
-                  </div>
+                  ) : null}
                 </div>
               </div>
             </div>

@@ -22,7 +22,6 @@ import { LoadingFile } from '../ui-setting/ant';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ActionModalDialog } from '../ui-setting/shadcn';
-import { useAuth } from '../util/context-user';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
 import { ListCommentsRepliesPosts } from './list-comments-replies-posts';
@@ -38,8 +37,8 @@ export function ListCommentsPosts(props: {
   const { model, item, modelIds, userVisitorId, organizationId, index } = props;
 
   const { locale } = useRouter();
-  const user = useAuth() as any;
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, userStorage } =
+    useInputState();
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
 
@@ -102,7 +101,7 @@ export function ListCommentsPosts(props: {
           item={item}
           key={index}
           index={index}
-          userId={user?.id}
+          userId={userStorage?.id}
         />
       ))
   );
@@ -134,7 +133,7 @@ export function ListCommentsPosts(props: {
               <div className="mt-2 flex items-center font-medium text-gray-600">
                 <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
-                {user?.id ? (
+                {userStorage?.id ? (
                   <button
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
@@ -145,7 +144,7 @@ export function ListCommentsPosts(props: {
                   </button>
                 ) : null}
 
-                {user?.id === item?.userId ? (
+                {userStorage?.id === item?.userId ? (
                   <>
                     <button
                       onClick={() => editItem(item)}

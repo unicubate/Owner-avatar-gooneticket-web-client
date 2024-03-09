@@ -2,6 +2,7 @@
 
 import { GetCartsAPI } from '@/api-site/cart';
 import { GetOneUserPublicAPI } from '@/api-site/user';
+import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { ListMiniCats } from '@/components/cart/list-mini-carts';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
@@ -10,6 +11,7 @@ import { CreateCardStripe } from '@/components/payment/stripe/create-payment-str
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { GetStaticPropsContext } from 'next';
@@ -23,6 +25,7 @@ const CheckoutShop = () => {
   const { query, push } = useRouter();
   const { id: cartOrderId, username } = query;
 
+  const { data: userAddress } = GetOneUserAddressMeAPI();
   const {
     isPending: isPendingUser,
     isError: isErrorUser,
@@ -169,59 +172,73 @@ const CheckoutShop = () => {
                     </ul>
                   </div>
 
-                  <div className="py-6">
-                    <>
-                      {isCardPay ? (
-                        <>
-                          <CreateCardStripe
-                            paymentModel="STRIPE-SHOP"
-                            data={{
-                              cartOrderId,
-                              amount: newAmount,
-                              userSendId: userBayer?.id,
-                              organizationId: userSeller?.organizationId,
-                            }}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <div className="mt-2">
-                            <ButtonInput
-                              onClick={() => setIsCardPay(true)}
-                              type="button"
-                              size="lg"
-                              className="w-full"
-                              variant="info"
-                            >
-                              Card Pay
-                            </ButtonInput>
-                          </div>
-                        </>
-                      )}
-
-                      <CreatePaymentPayPal
-                        paymentModel="PAYPAL-SHOP"
-                        data={{
-                          cartOrderId,
-                          amount: newAmount,
-                          userSendId: userBayer?.id,
-                          organizationId: userSeller?.organizationId,
-                        }}
-                      />
-                    </>
-                  </div>
-
-                  <div className="py-6">
+                  <div className="py-4">
                     <h2 className="font-bold text-gray-500 text-base">
                       Billing Information
                     </h2>
                   </div>
-
-                  <div className="py-6">
-                    <h2 className="font-bold text-gray-500 text-base">
-                      Payment Method
-                    </h2>
+                  <div className="py-4">
+                    <CreateOrUpdateUserAddressForm userAddress={userAddress} />
                   </div>
+
+                  {userAddress?.street1 &&
+                  userAddress?.city &&
+                  userAddress?.country ? (
+                    <>
+                      <div className="py-4">
+                        <h2 className="font-bold text-gray-500 text-base">
+                          Payment Method
+                        </h2>
+                      </div>
+                      <div className="py-6">
+                        <>
+                          {isCardPay ? (
+                            <>
+                              <CreateCardStripe
+                                paymentModel="STRIPE-SHOP"
+                                data={{
+                                  userAddress,
+                                  cartOrderId,
+                                  amount: newAmount,
+                                  userSendId: userBayer?.id,
+                                  organizationSellerId:
+                                    userSeller?.organizationId,
+                                  organizationBuyerId:
+                                    userBayer?.organizationId,
+                                }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div className="mt-2">
+                                <ButtonInput
+                                  onClick={() => setIsCardPay(true)}
+                                  type="button"
+                                  size="lg"
+                                  className="w-full"
+                                  variant="info"
+                                >
+                                  Card Pay
+                                </ButtonInput>
+                              </div>
+                            </>
+                          )}
+
+                          <CreatePaymentPayPal
+                            paymentModel="PAYPAL-SHOP"
+                            data={{
+                              userAddress,
+                              cartOrderId,
+                              amount: newAmount,
+                              userSendId: userBayer?.id,
+                              organizationSellerId: userSeller?.organizationId,
+                              organizationBuyerId: userBayer?.organizationId,
+                            }}
+                          />
+                        </>
+                      </div>
+                    </>
+                  ) : null}
                 </div>
               </div>
             </div>

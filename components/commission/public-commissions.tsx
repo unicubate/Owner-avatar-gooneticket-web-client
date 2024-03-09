@@ -1,16 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteCommissionsAPI } from '@/api-site/commission';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant/loading-file';
-import ListPublicCommissions from './list-public-commissions';
+import { ListPublicCommissions } from './list-public-commissions';
 
 type Props = {
   organizationId: string;
 };
 
-const PublicCommissions: React.FC<Props> = ({ organizationId }) => {
+export function PublicCommissions(props: Props) {
+  const { organizationId } = props;
   const { ref, inView } = useInView();
 
   const {
@@ -77,6 +78,4 @@ const PublicCommissions: React.FC<Props> = ({ organizationId }) => {
       </div>
     </>
   );
-};
-
-export { PublicCommissions };
+}

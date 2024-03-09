@@ -14,7 +14,7 @@ const PrivateComponent = (Component: ComponentType) => {
       if (!userToken && !isOnline) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [userToken, isOnline, pathname, push]);
+    }, [userStorage, isOnline, pathname, push]);
 
     return <Component {...props} />;
   };

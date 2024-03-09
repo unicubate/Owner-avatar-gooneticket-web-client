@@ -1,6 +1,7 @@
 'use client';
 
 import { GetOneMembershipAPI } from '@/api-site/membership';
+import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
@@ -9,6 +10,7 @@ import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
+import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -22,15 +24,16 @@ import { useForm } from 'react-hook-form';
 const CheckoutMembership = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
   const { userStorage: userVisitor } = useInputState();
-  const { query, push } = useRouter();
+  const { query } = useRouter();
   const { id: membershipId, username } = query;
   const {
     watch,
-    control,
     register,
     formState: { errors },
   } = useForm();
   const watchAmount = watch('amount', '');
+
+  const { data: userAddress } = GetOneUserAddressMeAPI();
   const { status, data: item } = GetOneMembershipAPI({
     membershipId: String(membershipId),
   });
@@ -48,7 +51,7 @@ const CheckoutMembership = () => {
 
   return (
     <>
-      <LayoutCheckoutSite title={`Checkout membership - ${item?.title ?? ''}`}>
+      <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'membership'}`}>
         <div className="overflow-hidden bg-white dark:bg-[#121212] shadow rounded-xl">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="px-5 py-6 dark:bg-[#121212] md:px-8">
@@ -199,66 +202,83 @@ const CheckoutMembership = () => {
                       </li>
                     </ul>
                   </div>
-
                   {userVisitor?.organizationId !== item?.organizationId ? (
-                    <div className="py-6">
-                      <>
+                    <>
+                      <div className="py-4">
+                        <h2 className="font-bold text-gray-500 text-base">
+                          Billing Information
+                        </h2>
+                      </div>
+
+                      <div className="py-4">
+                        <CreateOrUpdateUserAddressForm
+                          userAddress={userAddress}
+                        />
+                      </div>
+
+                      {userAddress?.street1 &&
+                      userAddress?.city &&
+                      userAddress?.country ? (
                         <>
-                          {isCardPay ? (
+                          <div className="py-4">
+                            <h2 className="font-bold text-gray-500 text-base">
+                              Payment Method
+                            </h2>
+                          </div>
+                          <div className="py-6">
                             <>
-                              <CreateCardStripe
-                                paymentModel="STRIPE-SUBSCRIBE"
+                              {isCardPay ? (
+                                <>
+                                  <CreateCardStripe
+                                    paymentModel="STRIPE-SUBSCRIBE"
+                                    data={{
+                                      userAddress,
+                                      membershipId,
+                                      amount: newAmount,
+                                      userReceiveId: item?.userId,
+                                      userSendId: userVisitor?.id,
+                                      organizationSellerId:
+                                        item?.organizationId,
+                                      organizationBuyerId:
+                                        userVisitor?.organizationId,
+                                    }}
+                                  />
+                                </>
+                              ) : (
+                                <>
+                                  <div className="mt-2">
+                                    <ButtonInput
+                                      onClick={() => setIsCardPay(true)}
+                                      type="button"
+                                      className="w-full"
+                                      size="lg"
+                                      variant="info"
+                                    >
+                                      Card Pay
+                                    </ButtonInput>
+                                  </div>
+                                </>
+                              )}
+
+                              <CreatePaymentPayPal
+                                paymentModel="PAYPAL-COMMISSION"
                                 data={{
+                                  userAddress,
                                   membershipId,
                                   amount: newAmount,
                                   userReceiveId: item?.userId,
                                   userSendId: userVisitor?.id,
-                                  organizationId: item?.organizationId,
+                                  organizationSellerId: item?.organizationId,
+                                  organizationBuyerId:
+                                    userVisitor?.organizationId,
                                 }}
                               />
                             </>
-                          ) : (
-                            <>
-                              <div className="mt-2">
-                                <ButtonInput
-                                  onClick={() => setIsCardPay(true)}
-                                  type="button"
-                                  className="w-full"
-                                  size="lg"
-                                  variant="info"
-                                >
-                                  Card Pay
-                                </ButtonInput>
-                              </div>
-                            </>
-                          )}
-
-                          <CreatePaymentPayPal
-                            paymentModel="PAYPAL-SUBSCRIBE"
-                            data={{
-                              membershipId,
-                              amount: newAmount,
-                              userReceiveId: item?.userId,
-                              userSendId: userVisitor?.id,
-                              organizationId: item?.organizationId,
-                            }}
-                          />
+                          </div>
                         </>
-                      </>
-                    </div>
+                      ) : null}
+                    </>
                   ) : null}
-
-                  <div className="py-6">
-                    <h2 className="font-bold text-gray-500 text-base">
-                      Billing Information
-                    </h2>
-                  </div>
-
-                  <div className="py-6">
-                    <h2 className="font-bold text-gray-500 text-base">
-                      Payment Method
-                    </h2>
-                  </div>
                 </div>
               </div>
             </div>

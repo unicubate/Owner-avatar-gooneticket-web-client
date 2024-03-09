@@ -1,15 +1,16 @@
 import { CreateOrUpdateOneLikeAPI } from '@/api-site/like';
 import { AlertDangerNotification } from '@/utils';
 import { HeartIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import { LoginModal } from '../auth-modal/login-modal';
 import { useInputState } from '../hooks';
 
-const CreateOrUpdateFormLike: React.FC<{
+export function CreateOrUpdateFormLike(props: {
   item?: any;
   typeLike: 'POST' | 'COMMENT';
-}> = ({ item, typeLike }) => {
+}) {
+  const { item, typeLike } = props;
   const { isOpen, setIsOpen, userStorage } = useInputState();
   const [like, setLike] = useState(false);
   const [isLike, setIsLike] = useState(item?.isLike);
@@ -50,7 +51,7 @@ const CreateOrUpdateFormLike: React.FC<{
               }}
               className="text-indigo-600"
             >
-              <MdOutlineFavorite className="size-6" />
+              <MdOutlineFavorite className="size-7" />
             </button>
           ) : (
             <button
@@ -59,7 +60,7 @@ const CreateOrUpdateFormLike: React.FC<{
               }}
               className="hover:text-indigo-600 focus:ring-indigo-600"
             >
-              <MdOutlineFavoriteBorder className="size-6" />
+              <MdOutlineFavoriteBorder className="size-7" />
             </button>
           )}
         </>
@@ -70,7 +71,7 @@ const CreateOrUpdateFormLike: React.FC<{
           }}
           className="hover:text-indigo-600 focus:ring-indigo-600"
         >
-          <HeartIcon className="size-6" />
+          <HeartIcon className="size-7" />
         </button>
       )}
 
@@ -78,6 +79,4 @@ const CreateOrUpdateFormLike: React.FC<{
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
-};
-
-export { CreateOrUpdateFormLike };
+}

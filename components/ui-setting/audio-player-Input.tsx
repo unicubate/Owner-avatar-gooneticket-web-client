@@ -69,7 +69,7 @@ export function AudioPlayerInput(props: Props) {
                 <>
                   {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
                   item?.isValidSubscribe !== 1 ? (
-                    <LockKeyholeIcon className="justify-items-center size-8" />
+                    <LockKeyholeIcon className="justify-items-center size-10" />
                   ) : (
                     <svg
                       className="size-11 text-black dark:text-white"
