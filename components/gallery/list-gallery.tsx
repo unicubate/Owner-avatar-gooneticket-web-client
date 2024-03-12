@@ -28,8 +28,7 @@ type Props = {
   index: number;
 };
 
-export const ListGallery = (props: Props) => {
-  const { item, index } = props;
+export const ListGallery = ({ item, index }: Props) => {
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const router = useRouter();
 

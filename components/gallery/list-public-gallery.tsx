@@ -10,8 +10,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export const ListPublicGallery = (props: Props) => {
-  const { item, userVisitor } = props;
+export const ListPublicGallery = ({ item, userVisitor }: Props) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
