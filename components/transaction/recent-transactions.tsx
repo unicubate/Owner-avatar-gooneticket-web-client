@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
 import { ArrowRightLeftIcon } from 'lucide-react';
-import React from 'react';
 import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListTransactions } from './list-transactions';
@@ -12,11 +11,7 @@ type Props = {
   organizationId?: string;
 };
 
-const RecentTransactions: React.FC<Props> = ({
-  model,
-  organizationId,
-  days,
-}) => {
+export const RecentTransactions = ({ model, organizationId, days }: Props) => {
   const {
     isLoading: isLoadingTransaction,
     isError: isErrorTransaction,
@@ -64,5 +59,3 @@ const RecentTransactions: React.FC<Props> = ({
     </>
   );
 };
-
-export { RecentTransactions };

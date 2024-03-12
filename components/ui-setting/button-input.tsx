@@ -17,22 +17,21 @@ interface Props {
   ref?: (node?: Element | null) => void;
 }
 
-export function ButtonInput(props: Props) {
-  const {
-    asChild,
-    type,
-    size,
-    icon,
-    children,
-    className,
-    onClick,
-    loading,
-    variant,
-    title,
-    disabled,
-    onMouseLeave,
-    ref,
-  } = props;
+export const ButtonInput = ({
+  asChild,
+  type,
+  size,
+  icon,
+  children,
+  className,
+  onClick,
+  loading,
+  variant,
+  title,
+  disabled,
+  onMouseLeave,
+  ref,
+}: Props) => {
   return (
     <>
       <Button
@@ -64,4 +63,4 @@ export function ButtonInput(props: Props) {
       </Button>
     </>
   );
-}
+};

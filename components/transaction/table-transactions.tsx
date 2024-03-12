@@ -16,9 +16,7 @@ type Props = {
   organizationId?: string;
 };
 
-export function TableTransactions(props: Props) {
-  const { model, organizationId, days } = props;
-
+export const TableTransactions = ({ model, organizationId, days }: Props) => {
   const { search, handleSetSearch } = useInputState();
   const { ref, inView } = useInView();
 
@@ -97,4 +95,4 @@ export function TableTransactions(props: Props) {
       )}
     </>
   );
-}
+};

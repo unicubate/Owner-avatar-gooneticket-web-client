@@ -45,9 +45,12 @@ type Props = {
   userVisitorId: string;
 };
 
-export function ShowModalGallery(props: Props) {
-  const { setOpenModal, openModal, post, userVisitorId } = props;
-
+export const ShowModalGallery = ({
+  setOpenModal,
+  openModal,
+  post,
+  userVisitorId,
+}: Props) => {
   const [isComment, setIsComment] = useState(false);
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
@@ -269,4 +272,4 @@ export function ShowModalGallery(props: Props) {
       </Dialog>
     </>
   );
-}
+};

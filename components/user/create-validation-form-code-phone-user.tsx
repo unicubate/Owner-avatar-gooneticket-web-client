@@ -9,15 +9,20 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import { TextInput } from '../ui-setting/shadcn';
 
+type Props = {
+  showModal: boolean;
+  setShowModal: any;
+  item: any;
+};
 const schema = yup.object({
   code: yup.string().min(5).max(8).required(),
 });
 
-const CreateValidationFormCodePhoneUser: React.FC<{
-  showModal: boolean;
-  setShowModal: any;
-  item: any;
-}> = ({ showModal, setShowModal, item }) => {
+const CreateValidationFormCodePhoneUser = ({
+  showModal,
+  setShowModal,
+  item,
+}: Props) => {
   const {
     control,
     handleSubmit,

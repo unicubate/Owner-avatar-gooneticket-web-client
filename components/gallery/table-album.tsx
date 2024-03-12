@@ -15,8 +15,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function TableAlbum(props: Props) {
-  const { userVisitor } = props;
+export const TableAlbum = ({ userVisitor }: Props) => {
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
 
@@ -85,4 +84,4 @@ export function TableAlbum(props: Props) {
       ))
   );
   return <>{dataTableAlbum}</>;
-}
+};

@@ -12,7 +12,7 @@ import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
 import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
 import { CreatePaymentStripeFormCardUser } from './create-payment-stripe-form-card-user';
 
-export function PayoutFormUser() {
+const PayoutFormUser = () => {
   const { ipLocation } = useInputState();
   const [showPayPalFormModal, setShowPayPalFormModal] = useState(false);
   const [showStripeFormModal, setShowStripeFormModal] = useState(false);
@@ -151,4 +151,6 @@ export function PayoutFormUser() {
       </Elements> */}
     </>
   );
-}
+};
+
+export { PayoutFormUser };

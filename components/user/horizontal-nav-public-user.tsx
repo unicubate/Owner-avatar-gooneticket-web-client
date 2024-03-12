@@ -2,14 +2,15 @@ import { UserModel } from '@/types/user.type';
 import { useTranslations } from 'next-intl';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
-export function HorizontalNavPublicUser(props: { user: UserModel }) {
-  const { user } = props;
+const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
   const t = useTranslations();
 
   return (
     <>
       <div className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
-        <AvatarComponent className="size-10" profile={user?.profile} />
+        <div className="hidden lg:block">
+          <AvatarComponent className="size-10" profile={user?.profile} />
+        </div>
         <div className="ml-2 min-w-0 flex-1">
           <p className="w-auto hidden text-sm font-bold text-gray-900 dark:text-white lg:block">
             {user?.profile?.firstName} {user?.profile?.lastName}
@@ -55,4 +56,6 @@ export function HorizontalNavPublicUser(props: { user: UserModel }) {
       </div> */}
     </>
   );
-}
+};
+
+export { HorizontalNavPublicUser };

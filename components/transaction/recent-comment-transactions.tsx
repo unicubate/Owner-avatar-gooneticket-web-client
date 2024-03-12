@@ -3,18 +3,25 @@ import { GetInfiniteCommentsAPI } from '@/api-site/comment';
 import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/pagination-item';
 import { Skeleton } from 'antd';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ListCommentTransactions } from '../comment/list-comments-transactions';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 
-const RecentCommentTransactions: React.FC<{
+type Props = {
   userReceiveId: string;
   modelIds: ModelType[];
   model: ModelType;
   organizationId: string;
-}> = ({ modelIds, userReceiveId, organizationId, model }) => {
+};
+
+export const RecentCommentTransactions = ({
+  modelIds,
+  userReceiveId,
+  organizationId,
+  model,
+}: Props) => {
   const { ref, inView } = useInView();
 
   const {
@@ -93,5 +100,3 @@ const RecentCommentTransactions: React.FC<{
     </>
   );
 };
-
-export { RecentCommentTransactions };

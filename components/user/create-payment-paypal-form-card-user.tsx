@@ -19,10 +19,10 @@ const schema = yup.object({
   email: yup.string().required(),
 });
 
-export function CreatePaymentPayPalFormCardUser(props: {
+const CreatePaymentPayPalFormCardUser = (props: {
   showModal: boolean;
   setShowModal: any;
-}) {
+}) => {
   const { showModal, setShowModal } = props;
   const stripe = useStripe();
   const {
@@ -142,4 +142,6 @@ export function CreatePaymentPayPalFormCardUser(props: {
       ) : null}
     </>
   );
-}
+};
+
+export { CreatePaymentPayPalFormCardUser };

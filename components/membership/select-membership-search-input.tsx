@@ -13,7 +13,7 @@ interface Props {
   icon?: React.ReactNode;
 }
 
-const SelectMembershipSearchInput: React.FC<Props> = ({
+const SelectMembershipSearchInput = ({
   control,
   dataItem,
   label = '',
@@ -22,7 +22,7 @@ const SelectMembershipSearchInput: React.FC<Props> = ({
   placeholder = '',
   icon,
   firstOptionName = '',
-}) => {
+}: Props) => {
   return (
     <>
       <label

@@ -30,7 +30,6 @@ import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import {
   AlertCircleIcon,
   DownloadIcon,
-  LockKeyholeIcon,
   MessageCircleIcon,
   MoreHorizontalIcon,
   PencilIcon,
@@ -47,8 +46,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function ListFollowPosts(props: Props) {
-  const { item, commentTake, userVisitor } = props;
+export function ListFollowPosts({ item, commentTake, userVisitor }: Props) {
   const { locale, push } = useRouter();
   const [isComment, setIsComment] = useState(false);
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
@@ -283,10 +281,10 @@ export function ListFollowPosts(props: Props) {
               }
             />
 
-            {item?.whoCanSee === 'MEMBERSHIP' &&
+            {/* {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (
               <LockKeyholeIcon className="ml-auto size-6" />
-            ) : null}
+            ) : null} */}
           </div>
           {isComment ? (
             <ListComments

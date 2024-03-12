@@ -1,6 +1,6 @@
 import { GetOneUserPrivateAPI } from '@/api-site/user';
 import { cn } from '@/lib/utils';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -15,7 +15,7 @@ const schema = yup.object({
   username: yup.string().required(),
 });
 
-const UpdateFormUser: React.FC<Props> = ({ userId }) => {
+const UpdateFormUser = ({ userId }: Props) => {
   const {
     control,
     setValue,

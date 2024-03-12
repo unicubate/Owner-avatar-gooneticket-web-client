@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteMembershipsAPI } from '@/api-site/membership';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
@@ -11,7 +11,7 @@ type Props = {
   organizationId: string;
 };
 
-const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
+export const PublicMemberships = ({ organizationId }: Props) => {
   const { ref, inView } = useInView();
 
   const {
@@ -78,5 +78,3 @@ const PublicMemberships: React.FC<Props> = ({ organizationId }) => {
     </>
   );
 };
-
-export { PublicMemberships };

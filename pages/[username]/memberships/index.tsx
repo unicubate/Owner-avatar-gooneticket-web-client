@@ -20,25 +20,17 @@ const MembershipsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Memberships - ${user?.profile?.firstName ?? ''} ${
+        title={`Memberships - ${user?.profile?.firstName ?? 'user'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}
       >
         <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-full py-6">
-              <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
-                <div className="flow-root">
-                  <div className="mx-auto sm:px-6 md:px-8">
-                    {user?.id ? (
-                      <PublicMemberships
-                        organizationId={user?.organizationId}
-                      />
-                    ) : null}
-                  </div>
-                </div>
-              </div>
+          <div className="mx-auto max-w-full py-6">
+            <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
+              {user?.id ? (
+                <PublicMemberships organizationId={user?.organizationId} />
+              ) : null}
             </div>
           </div>
         </div>

@@ -19,12 +19,12 @@ interface Props {
   buttonDialog: React.ReactNode;
 }
 
-const CopyShareLink: React.FC<Props> = ({
+export const CopyShareLink = ({
   link,
   isOpen,
   setIsOpen,
   buttonDialog,
-}) => {
+}: Props) => {
   const [copied, setCopied] = useState(false);
   const copyToClipBoard = async (link: string) => {
     await navigator.clipboard.writeText(link);
@@ -75,5 +75,3 @@ const CopyShareLink: React.FC<Props> = ({
     </>
   );
 };
-
-export { CopyShareLink };

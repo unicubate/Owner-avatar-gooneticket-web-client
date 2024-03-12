@@ -12,7 +12,6 @@ import { convertToPluralMonth } from '@/utils/utils';
 import { Avatar } from 'antd';
 import { CalendarIcon, PencilIcon, TrashIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -23,7 +22,7 @@ type Props = {
   index: number;
 };
 
-const ListMemberships: React.FC<Props> = ({ item, index }) => {
+const ListMemberships = ({ item, index }: Props) => {
   const router = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 

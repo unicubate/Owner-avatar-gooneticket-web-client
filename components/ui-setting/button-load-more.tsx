@@ -7,15 +7,19 @@ interface Props {
   isFetchingNextPage: boolean;
 }
 
-export function ButtonLoadMore(props: Props) {
-  const { children = 'Load More', onClick, ref, isFetchingNextPage } = props;
+export const ButtonLoadMore = ({
+  children = 'Load More',
+  onClick,
+  ref,
+  isFetchingNextPage,
+}: Props) => {
   return (
     <>
       <div className="my-2 mt-2 sm:mt-0">
         <ButtonInput
           type="button"
           size="lg"
-          variant="outline"
+          variant="default"
           className="w-full"
           ref={ref}
           loading={isFetchingNextPage ? true : false}
@@ -26,4 +30,4 @@ export function ButtonLoadMore(props: Props) {
       </div>
     </>
   );
-}
+};

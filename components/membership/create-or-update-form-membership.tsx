@@ -21,11 +21,15 @@ const schema = yup.object({
   description: yup.string().min(10).required(),
 });
 
-const CreateOrUpdateFormMembership: React.FC<{
+const CreateOrUpdateFormMembership = ({
+  membership,
+  uploadImages,
+  refetch,
+}: {
   membership?: any;
   uploadImages?: any;
   refetch?: any;
-}> = ({ membership, uploadImages, refetch }) => {
+}) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);

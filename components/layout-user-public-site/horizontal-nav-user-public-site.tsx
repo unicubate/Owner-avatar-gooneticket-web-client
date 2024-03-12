@@ -104,7 +104,7 @@ const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
               </Button>
             </div>
 
-            <div className="flex ml-6 xl:ml-0">
+            <div className="flex ml-2 xl:ml-0">
               <div className="flex items-center flex-shrink-0">
                 <div className="block w-auto h-8 lg:hidden">
                   <div className="flex items-center">

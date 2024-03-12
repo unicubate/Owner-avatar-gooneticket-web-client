@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextPasswordInput } from '../ui-setting/shadcn';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
 
 type Props = {
   userId: string;
@@ -16,7 +15,7 @@ const schema = yup.object({
   confirmPassword: yup.string().required('confirm password required'),
 });
 
-const UpdateFormPassword: React.FC<Props> = ({ userId, user }) => {
+const UpdateFormPassword = ({ userId, user }: Props) => {
   const {
     control,
     setValue,

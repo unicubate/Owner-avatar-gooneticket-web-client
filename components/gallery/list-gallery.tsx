@@ -28,7 +28,7 @@ type Props = {
   index: number;
 };
 
-export function ListGallery(props: Props) {
+export const ListGallery = (props: Props) => {
   const { item, index } = props;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const router = useRouter();
@@ -176,4 +176,4 @@ export function ListGallery(props: Props) {
       </div>
     </>
   );
-}
+};

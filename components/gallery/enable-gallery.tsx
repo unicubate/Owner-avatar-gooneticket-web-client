@@ -1,14 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { UpdateEnableProfileAPI } from '@/api-site/user';
 import { AlertDangerNotification } from '@/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ButtonInput } from '../ui-setting';
 
 type Props = {
   profile?: any;
 };
 
-const EnableGallery: React.FC<Props> = ({ profile }) => {
+export const EnableGallery = ({ profile }: Props) => {
   const [isOpen, setIsOpen] = useState(profile?.enableGallery);
 
   // Create or Update data
@@ -67,4 +67,3 @@ const EnableGallery: React.FC<Props> = ({ profile }) => {
     </>
   );
 };
-export { EnableGallery };

@@ -23,7 +23,7 @@ import { useForm } from 'react-hook-form';
 
 const CheckoutMembership = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(false);
-  const { userStorage: userVisitor } = useInputState();
+  const { userStorage: userBuyer } = useInputState();
   const { query } = useRouter();
   const { id: membershipId, username } = query;
   const {
@@ -202,7 +202,7 @@ const CheckoutMembership = () => {
                       </li>
                     </ul>
                   </div>
-                  {userVisitor?.organizationId !== item?.organizationId ? (
+                  {userBuyer?.organizationId !== item?.organizationId ? (
                     <>
                       <div className="py-4">
                         <h2 className="font-bold text-gray-500 text-base">
@@ -236,11 +236,11 @@ const CheckoutMembership = () => {
                                       membershipId,
                                       amount: newAmount,
                                       userReceiveId: item?.userId,
-                                      userBuyerId: userVisitor?.id,
+                                      userBuyerId: userBuyer?.id,
                                       organizationSellerId:
                                         item?.organizationId,
                                       organizationBuyerId:
-                                        userVisitor?.organizationId,
+                                        userBuyer?.organizationId,
                                     }}
                                   />
                                 </>
@@ -261,16 +261,16 @@ const CheckoutMembership = () => {
                               )}
 
                               <CreatePaymentPayPal
-                                paymentModel="PAYPAL-COMMISSION"
+                                paymentModel="PAYPAL-SUBSCRIBE"
                                 data={{
                                   userAddress,
                                   membershipId,
                                   amount: newAmount,
                                   userReceiveId: item?.userId,
-                                  userBuyerId: userVisitor?.id,
+                                  userBuyerId: userBuyer?.id,
                                   organizationSellerId: item?.organizationId,
                                   organizationBuyerId:
-                                    userVisitor?.organizationId,
+                                    userBuyer?.organizationId,
                                 }}
                               />
                             </>

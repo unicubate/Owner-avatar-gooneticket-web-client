@@ -17,10 +17,10 @@ const schema = yup.object({
   phone: yup.string().required(),
 });
 
-export function CreatePaymentPhoneFormCardUser(props: {
+const CreatePaymentPhoneFormCardUser = (props: {
   showModal: boolean;
   setShowModal: any;
-}) {
+}) => {
   const { ipLocation } = useInputState();
   const { showModal, setShowModal } = props;
   const {
@@ -133,4 +133,6 @@ export function CreatePaymentPhoneFormCardUser(props: {
       ) : null}
     </>
   );
-}
+};
+
+export { CreatePaymentPhoneFormCardUser };

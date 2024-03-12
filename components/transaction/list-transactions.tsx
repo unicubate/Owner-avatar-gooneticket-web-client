@@ -4,7 +4,6 @@ import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { MoreHorizontalIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Button } from '../ui/button';
@@ -21,7 +20,7 @@ type Props = {
   index: number;
 };
 
-const ListTransactions: React.FC<Props> = ({ item, index }) => {
+export const ListTransactions = ({ item, index }: Props) => {
   const { locale } = useRouter();
   return (
     <>
@@ -117,5 +116,3 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
     </>
   );
 };
-
-export { ListTransactions };

@@ -13,7 +13,7 @@ export type StripeProps = {
   paymentModel: PaymentModel;
 };
 
-export function CreatePaymentStripe(props: StripeProps) {
+export const CreatePaymentStripe = (props: StripeProps) => {
   const { data, paymentModel } = props;
   return (
     <>
@@ -24,9 +24,9 @@ export function CreatePaymentStripe(props: StripeProps) {
       </div>
     </>
   );
-}
+};
 
-export function CreateCardStripe(props: StripeProps) {
+export const CreateCardStripe = (props: StripeProps) => {
   const { data, paymentModel } = props;
   return (
     <>
@@ -37,4 +37,4 @@ export function CreateCardStripe(props: StripeProps) {
       </div>
     </>
   );
-}
+};

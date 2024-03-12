@@ -1,14 +1,12 @@
-import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
-import { useRouter } from 'next/router';
 import { UserModel } from '@/types/user.type';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
-const SubHorizontalNavPublicUser: React.FC<{ user: UserModel }> = ({
-  user,
-}) => {
+const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
   const t = useTranslations('menu-site');
   const { query } = useRouter();
   const username = String(query?.username);

@@ -3,7 +3,6 @@ import { deleteOneUserAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting/button-input';
 import { ActionModalDialog } from '../ui-setting/shadcn';
@@ -12,7 +11,7 @@ type Props = {
   user: UserModel;
 };
 
-export const DeleteOneUser: React.FC<Props> = ({ user }) => {
+const DeleteOneUser = ({ user }: Props) => {
   const { push } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
@@ -74,3 +73,5 @@ export const DeleteOneUser: React.FC<Props> = ({ user }) => {
     </>
   );
 };
+
+export { DeleteOneUser };

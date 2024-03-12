@@ -5,12 +5,12 @@ type Props = {
   post?: any;
 };
 
-const CreateOrUpdateGallery: React.FC<Props> = ({
+const CreateOrUpdateGallery = ({
   openModal,
   setOpenModal,
   uploadImages,
   post,
-}) => {
+}: Props) => {
   return (
     <>
       {openModal ? (
@@ -47,5 +47,3 @@ const CreateOrUpdateGallery: React.FC<Props> = ({
     </>
   );
 };
-
-export { CreateOrUpdateGallery };

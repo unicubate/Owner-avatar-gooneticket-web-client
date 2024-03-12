@@ -6,11 +6,7 @@ interface Props {
   placeholder: string;
 }
 
-export const SearchInput: React.FC<Props> = ({
-  onChange,
-  className,
-  placeholder,
-}) => {
+export const SearchInput = ({ onChange, className, placeholder }: Props) => {
   return (
     <>
       <Input

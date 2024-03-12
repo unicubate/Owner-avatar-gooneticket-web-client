@@ -10,7 +10,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function ListPublicGallery(props: Props) {
+export const ListPublicGallery = (props: Props) => {
   const { item, userVisitor } = props;
   const [openModal, setOpenModal] = useState(false);
 
@@ -50,4 +50,4 @@ export function ListPublicGallery(props: Props) {
       ) : null}
     </>
   );
-}
+};

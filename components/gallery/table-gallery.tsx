@@ -19,8 +19,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function TableGallery(props: Props) {
-  const { userVisitor, albumId } = props;
+export const TableGallery = ({ userVisitor, albumId }: Props) => {
   const { push, back } = useRouter();
   const { ref, inView } = useInView();
   const { search, handleSetSearch } = useInputState();
@@ -148,4 +147,4 @@ export function TableGallery(props: Props) {
       )}
     </>
   );
-}
+};

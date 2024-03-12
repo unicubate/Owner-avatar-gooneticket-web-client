@@ -15,15 +15,18 @@ import { Alert, AlertDescription } from '../ui/alert';
 //   `${process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY}`,
 // );
 
+type Props = {
+  showModal: boolean;
+  setShowModal: any;
+};
 const schema = yup.object({
   email: yup.string().required(),
 });
 
-export function CreatePaymentStripeFormCardUser(props: {
-  showModal: boolean;
-  setShowModal: any;
-}) {
-  const { showModal, setShowModal } = props;
+const CreatePaymentStripeFormCardUser = ({
+  showModal,
+  setShowModal,
+}: Props) => {
   const stripe = useStripe();
   const {
     control,
@@ -143,4 +146,6 @@ export function CreatePaymentStripeFormCardUser(props: {
       ) : null}
     </>
   );
-}
+};
+
+export { CreatePaymentStripeFormCardUser };

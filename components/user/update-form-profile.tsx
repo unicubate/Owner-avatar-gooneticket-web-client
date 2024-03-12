@@ -12,7 +12,7 @@ import {
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
 import { Avatar, Button, Select, Space, Upload } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -37,7 +37,7 @@ const schema = yup.object({
   countryId: yup.string().uuid().required('country is a required field'),
 });
 
-const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
+const UpdateFormProfile = ({ profileId, user }: Props) => {
   const [colors] = useState(arrayColors);
   const {
     control,

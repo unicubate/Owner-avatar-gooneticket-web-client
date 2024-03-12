@@ -7,8 +7,7 @@ interface Props {
   profile: { color: string; username: string };
 }
 
-export function WhoCanSeeItem(props: Props) {
-  const { profile } = props;
+export const WhoCanSeeItem = ({ profile }: Props) => {
   const { push } = useRouter();
 
   return (
@@ -28,7 +27,7 @@ export function WhoCanSeeItem(props: Props) {
       </div>
     </>
   );
-}
+};
 
 export function RedirectToMembershipsButton(props: {
   className?: string;

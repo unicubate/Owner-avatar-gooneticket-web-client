@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
-const HorizontalNavMembership: React.FC = () => {
+const HorizontalNavMembership = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([

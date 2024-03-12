@@ -11,10 +11,10 @@ import { useInputState } from '../hooks';
 import { Alert, AlertDescription } from '../ui/alert';
 import { Input } from '../ui/input';
 
-export function CreatePaymentFormCardUser(props: {
+const CreatePaymentFormCardUser = (props: {
   showModal: boolean;
   setShowModal: any;
-}) {
+}) => {
   const stripe = useStripe();
   const elements: any = useElements();
   if (!stripe || !elements) {
@@ -23,12 +23,12 @@ export function CreatePaymentFormCardUser(props: {
   const { showModal, setShowModal } = props;
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
-  function expDateValidate(month: string, year: string) {
+  const expDateValidate = (month: string, year: string) => {
     if (Number(year) > 2070) {
       return 'Expiry Date Year cannot be greater than 2035';
     }
     return;
-  }
+  };
   const [cardstate, setcardState] = useState({ fullName: '' });
 
   const { mutateAsync } = CreateOnPaymentPI({
@@ -211,4 +211,6 @@ export function CreatePaymentFormCardUser(props: {
       ) : null}
     </>
   );
-}
+};
+
+export { CreatePaymentFormCardUser };

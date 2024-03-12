@@ -12,8 +12,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function PublicGallery(props: Props) {
-  const { userVisitor } = props;
+export const PublicGallery = ({ userVisitor }: Props) => {
   const { ref, inView } = useInView();
 
   const {
@@ -88,4 +87,4 @@ export function PublicGallery(props: Props) {
       </div>
     </>
   );
-}
+};

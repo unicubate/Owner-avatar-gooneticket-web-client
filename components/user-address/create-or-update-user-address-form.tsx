@@ -5,6 +5,7 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -26,9 +27,9 @@ const schema = yup.object({
   cap: yup.string().required('cap is a required field'),
 });
 
-export function CreateOrUpdateUserAddressForm(props: Props) {
-  const [isEdit, setIsEdit] = useState(true);
-  const { userAddress } = props;
+const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
+  const { back } = useRouter();
+  const [isEdit, setIsEdit] = useState(false);
   const {
     control,
     setValue,
@@ -85,7 +86,7 @@ export function CreateOrUpdateUserAddressForm(props: Props) {
       AlertSuccessNotification({
         text: `address save successfully`,
       });
-      setIsEdit((lk) => !lk);
+      //setIsEdit((lk) => !lk);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -200,35 +201,29 @@ export function CreateOrUpdateUserAddressForm(props: Props) {
             disabled={isEdit}
           />
         </div>
-
-        <div className="mb-2 mt-4 flex items-center space-x-4">
-          {!isEdit && (
-            <ButtonInput
-              size="lg"
-              type="submit"
-              variant="info"
-              className="w-full"
-              loading={loading}
-            >
-              Continue
-            </ButtonInput>
-          )}
-        </div>
-      </form>
-      {isEdit && (
-        <div className="sm:flex flex-col sm:items-end sm:justify-between">
+        <div className="my-4 flex items-center space-x-4">
           <ButtonInput
-            onClick={() => setIsEdit((lk) => !lk)}
-            size="lg"
             type="button"
-            variant="info-hover"
+            className="w-full"
+            size="lg"
+            variant="outline"
+            onClick={() => back()}
+          >
+            Cancel
+          </ButtonInput>
+          <ButtonInput
+            size="lg"
+            type="submit"
+            variant="info"
             className="w-full"
             loading={loading}
           >
-            Edit Billing Information
+            Save continue
           </ButtonInput>
         </div>
-      )}
+      </form>
     </>
   );
-}
+};
+
+export { CreateOrUpdateUserAddressForm };

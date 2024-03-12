@@ -12,8 +12,7 @@ interface Props {
   item: PostModel;
 }
 
-export function AudioPlayerInput(props: Props) {
-  const { folder, item } = props;
+export const AudioPlayerInput = ({ folder, item }: Props) => {
   const player = useRef<any>(null);
 
   const oneImage =
@@ -198,4 +197,4 @@ export function AudioPlayerInput(props: Props) {
       </div>
     </>
   );
-}
+};
