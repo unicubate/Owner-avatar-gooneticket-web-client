@@ -16,7 +16,7 @@ interface Props {
   user?: any;
 }
 
-const VerticalNavUserPublicSite: React.FC<Props> = ({ user }) => {
+const VerticalNavUserPublicSite = ({ user }:Props) => {
   const t = useTranslations('menu-site');
   const pathname = usePathname();
   const username = user?.username;

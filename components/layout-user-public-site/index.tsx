@@ -12,7 +12,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-const LayoutUserPublicSite: React.FC<IProps> = ({ children, title, user }) => {
+const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
   const { theme } = useAuth() as any;
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {

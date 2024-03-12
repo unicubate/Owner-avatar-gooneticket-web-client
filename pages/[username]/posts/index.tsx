@@ -25,22 +25,20 @@ const PostsUserPublic = () => {
         }`}
         user={user}
       >
-        <div className="mt-4 max-w-8xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-full py-6">
-              <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
-                <div className="flow-root">
-                  <div className="mx-auto sm:px-6 md:px-8">
-                    {user?.id ? (
-                      <PublicPosts
-                        typeIds={['ARTICLE', 'AUDIO', 'VIDEO']}
-                        userVisitor={{
-                          id: userVisiter?.id,
-                          organizationId: user?.organizationId,
-                        }}
-                      />
-                    ) : null}
-                  </div>
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-full py-6">
+            <div className="border-gray-200 py-6 lg:col-span-3 xl:col-span-4">
+              <div className="flow-root">
+                <div className="mx-auto sm:px-6 md:px-8">
+                  {user?.id ? (
+                    <PublicPosts
+                      typeIds={['ARTICLE', 'AUDIO', 'VIDEO']}
+                      userVisitor={{
+                        id: userVisiter?.id,
+                        organizationId: user?.organizationId,
+                      }}
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>

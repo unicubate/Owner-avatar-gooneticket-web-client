@@ -28,7 +28,7 @@ interface Props {
   showDrawer?: () => void;
 }
 
-const HorizontalNavUserPublicSite: React.FC<Props> = ({ user, showDrawer }) => {
+const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   const t = useTranslations('menu-site');
   const { push } = useRouter();
   const [openModal, setOpenModal] = useState(false);
