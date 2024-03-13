@@ -46,7 +46,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-export function ListFollowPosts({ item, commentTake, userVisitor }: Props) {
+export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
   const { locale, push } = useRouter();
   const [isComment, setIsComment] = useState(false);
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
@@ -307,4 +307,4 @@ export function ListFollowPosts({ item, commentTake, userVisitor }: Props) {
       </div>
     </>
   );
-}
+};
