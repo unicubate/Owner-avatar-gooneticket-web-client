@@ -16,8 +16,8 @@ interface Props {
   user?: any;
 }
 
-const VerticalNavUserPublicSite = ({ user }:Props) => {
-  const t = useTranslations('menu-site');
+const VerticalNavUserPublicSite = ({ user }: Props) => {
+  const t = useTranslations('menu_site');
   const pathname = usePathname();
   const username = user?.username;
   const [navigation] = useState<NavbarProps[]>([

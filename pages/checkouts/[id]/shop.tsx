@@ -20,7 +20,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const CheckoutShop = () => {
-  const [isCardPay, setIsCardPay] = useState<boolean>(false);
+  const [isPayPalPay, setIsPayPalPay] = useState<boolean>(false);
+  const [isCardPay, setIsCardPay] = useState<boolean>(true);
   const { userStorage: userBayer } = useInputState();
   const { query, push } = useRouter();
   const { id: cartOrderId, username } = query;
@@ -191,6 +192,32 @@ const CheckoutShop = () => {
                         </h2>
                       </div>
                       <div className="py-6">
+                        <div className="flex items-center space-x-4">
+                          <ButtonInput
+                            size="lg"
+                            type="button"
+                            variant={isCardPay ? 'info' : 'ghost'}
+                            className="w-full"
+                            onClick={() => {
+                              setIsPayPalPay(false);
+                              setIsCardPay(true);
+                            }}
+                          >
+                            Card
+                          </ButtonInput>
+                          <ButtonInput
+                            size="lg"
+                            type="button"
+                            variant={isPayPalPay ? 'info' : 'ghost'}
+                            className="w-full"
+                            onClick={() => {
+                              setIsCardPay(false);
+                              setIsPayPalPay(true);
+                            }}
+                          >
+                            PayPal
+                          </ButtonInput>
+                        </div>
                         <>
                           {isCardPay ? (
                             <>
@@ -208,33 +235,22 @@ const CheckoutShop = () => {
                                 }}
                               />
                             </>
-                          ) : (
-                            <>
-                              <div className="mt-2">
-                                <ButtonInput
-                                  onClick={() => setIsCardPay(true)}
-                                  type="button"
-                                  size="lg"
-                                  className="w-full"
-                                  variant="info"
-                                >
-                                  Card Pay
-                                </ButtonInput>
-                              </div>
-                            </>
-                          )}
+                          ) : null}
 
-                          <CreatePaymentPayPal
-                            paymentModel="PAYPAL-SHOP"
-                            data={{
-                              userAddress,
-                              cartOrderId,
-                              amount: newAmount,
-                              userBuyerId: userBayer?.id,
-                              organizationSellerId: userSeller?.organizationId,
-                              organizationBuyerId: userBayer?.organizationId,
-                            }}
-                          />
+                          {isPayPalPay ? (
+                            <CreatePaymentPayPal
+                              paymentModel="PAYPAL-SHOP"
+                              data={{
+                                userAddress,
+                                cartOrderId,
+                                amount: newAmount,
+                                userBuyerId: userBayer?.id,
+                                organizationSellerId:
+                                  userSeller?.organizationId,
+                                organizationBuyerId: userBayer?.organizationId,
+                              }}
+                            />
+                          ) : null}
                         </>
                       </div>
                     </>

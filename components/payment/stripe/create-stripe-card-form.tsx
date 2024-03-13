@@ -11,11 +11,12 @@ import { Input } from '@/components/ui/input';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { useStripe } from '@stripe/react-stripe-js';
+import { Checkbox } from 'antd';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { StripeProps } from './create-payment-stripe';
 
-export function CreateStripeCardForm(props: StripeProps) {
+const CreateStripeCardForm = (props: StripeProps) => {
   const { push } = useRouter();
   const stripe = useStripe();
   if (!stripe) {
@@ -24,13 +25,17 @@ export function CreateStripeCardForm(props: StripeProps) {
   const { data, paymentModel } = props;
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
-  function expDateValidate(month: string, year: string) {
+  const expDateValidate = (month: string, year: string) => {
     if (Number(year) > 2070) {
       return 'Expiry Date Year cannot be greater than 2035';
     }
     return;
-  }
-  const [cardstate, setcardState] = useState({ fullName: '', email: '' });
+  };
+  const [isSaveCard, setIsSaveCard] = useState(false);
+  const [cardstate, setcardState] = useState({
+    fullName: '',
+    email: '',
+  });
 
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {
@@ -45,7 +50,8 @@ export function CreateStripeCardForm(props: StripeProps) {
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { cardNumber, cvc, email, fullName, expiryDate } = cardstate as any;
+    const { cardNumber, cvc, email, fullName, isReuse, expiryDate } =
+      cardstate as any;
     const strExpirySplit = expiryDate?.split(' ').join('');
     const strExpiryLength = Number(strExpirySplit?.length);
     const monthDate = strExpirySplit?.substring(2, 0);
@@ -61,6 +67,7 @@ export function CreateStripeCardForm(props: StripeProps) {
         cardExpYear: Number(`20${yearDate}`),
         cardCvc: cvc,
         email: email,
+        isSaveCard: isSaveCard,
         fullName: fullName,
       },
       type: 'CARD',
@@ -192,6 +199,24 @@ export function CreateStripeCardForm(props: StripeProps) {
                 </span>
               )}
             </div>
+
+            <div className="mt-2">
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="isReuse"
+                  defaultChecked={isSaveCard}
+                  onChange={() => {
+                    setIsSaveCard((i) => !i);
+                  }}
+                />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium text-gray-500"
+                >
+                  Save this payment method
+                </label>
+              </div>
+            </div>
           </div>
 
           <div className="mt-4 flex items-center space-x-4">
@@ -210,4 +235,6 @@ export function CreateStripeCardForm(props: StripeProps) {
       </form>
     </>
   );
-}
+};
+
+export { CreateStripeCardForm };

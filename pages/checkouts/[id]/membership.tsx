@@ -22,7 +22,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const CheckoutMembership = () => {
-  const [isCardPay, setIsCardPay] = useState<boolean>(false);
+  const [isPayPalPay, setIsPayPalPay] = useState<boolean>(false);
+  const [isCardPay, setIsCardPay] = useState<boolean>(true);
   const { userStorage: userBuyer } = useInputState();
   const { query } = useRouter();
   const { id: membershipId, username } = query;
@@ -226,6 +227,33 @@ const CheckoutMembership = () => {
                             </h2>
                           </div>
                           <div className="py-6">
+                            <div className="flex items-center space-x-4">
+                              <ButtonInput
+                                size="lg"
+                                type="button"
+                                variant={isCardPay ? 'info' : 'ghost'}
+                                className="w-full"
+                                onClick={() => {
+                                  setIsPayPalPay(false);
+                                  setIsCardPay(true);
+                                }}
+                              >
+                                Card
+                              </ButtonInput>
+                              <ButtonInput
+                                size="lg"
+                                type="button"
+                                variant={isPayPalPay ? 'info' : 'ghost'}
+                                className="w-full"
+                                onClick={() => {
+                                  setIsCardPay(false);
+                                  setIsPayPalPay(true);
+                                }}
+                              >
+                                PayPal
+                              </ButtonInput>
+                            </div>
+
                             <>
                               {isCardPay ? (
                                 <>
@@ -244,35 +272,23 @@ const CheckoutMembership = () => {
                                     }}
                                   />
                                 </>
-                              ) : (
-                                <>
-                                  <div className="mt-2">
-                                    <ButtonInput
-                                      onClick={() => setIsCardPay(true)}
-                                      type="button"
-                                      className="w-full"
-                                      size="lg"
-                                      variant="info"
-                                    >
-                                      Card Pay
-                                    </ButtonInput>
-                                  </div>
-                                </>
-                              )}
+                              ) : null}
 
-                              <CreatePaymentPayPal
-                                paymentModel="PAYPAL-SUBSCRIBE"
-                                data={{
-                                  userAddress,
-                                  membershipId,
-                                  amount: newAmount,
-                                  userReceiveId: item?.userId,
-                                  userBuyerId: userBuyer?.id,
-                                  organizationSellerId: item?.organizationId,
-                                  organizationBuyerId:
-                                    userBuyer?.organizationId,
-                                }}
-                              />
+                              {isPayPalPay ? (
+                                <CreatePaymentPayPal
+                                  paymentModel="PAYPAL-SUBSCRIBE"
+                                  data={{
+                                    userAddress,
+                                    membershipId,
+                                    amount: newAmount,
+                                    userReceiveId: item?.userId,
+                                    userBuyerId: userBuyer?.id,
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userBuyer?.organizationId,
+                                  }}
+                                />
+                              ) : null}
                             </>
                           </div>
                         </>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
-  const t = useTranslations('menu-site');
+  const t = useTranslations('menu_site');
   const { query } = useRouter();
   const username = String(query?.username);
   const pathname = usePathname();

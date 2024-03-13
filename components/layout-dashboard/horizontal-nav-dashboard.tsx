@@ -27,7 +27,7 @@ interface Props {
 }
 
 const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
-  const t = useTranslations('menu-site');
+  const t = useTranslations('menu_site');
   const { push } = useRouter();
 
   const logoutUserItem = async () => {

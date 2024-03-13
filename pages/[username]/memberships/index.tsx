@@ -20,12 +20,12 @@ const MembershipsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Memberships - ${user?.profile?.firstName ?? 'user'} ${
+        title={`Memberships - ${user?.profile?.firstName ?? 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}
       >
-        <div className="mx-auto mt-4 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-full py-6">
             <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
               {user?.id ? (

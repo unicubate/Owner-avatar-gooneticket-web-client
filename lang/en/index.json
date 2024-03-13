@@ -1,7 +1,7 @@
 {
   "page_title": "Home",
 
-  "menu-site": {
+  "menu_site": {
     "dashboard": "Dashboard",
     "home": "Home",
     "gallery": "Gallery",
@@ -25,5 +25,9 @@
   "home_page": {
     "title": "Everything you need to make money doing what you love",
     "subTitle": "Accept donations. Start a membership. Sell anything you like. It’s easier than you think."
+  },
+
+  "payment": {
+    "save_payment": "Save this payment method"
   }
 }

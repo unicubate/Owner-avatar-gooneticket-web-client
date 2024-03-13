@@ -27,7 +27,7 @@ const CommissionsUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Commissions - ${user?.profile?.firstName ?? 'user'} ${
+        title={`Commissions - ${user?.profile?.firstName ?? 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}

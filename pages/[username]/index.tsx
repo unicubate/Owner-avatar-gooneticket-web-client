@@ -23,7 +23,7 @@ const ProfilePublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName ?? 'user'} ${
+        title={`${user?.profile?.firstName ?? 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}

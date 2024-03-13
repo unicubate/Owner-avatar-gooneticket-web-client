@@ -29,7 +29,7 @@ interface Props {
 }
 
 const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
-  const t = useTranslations('menu-site');
+  const t = useTranslations('menu_site');
   const { push } = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;

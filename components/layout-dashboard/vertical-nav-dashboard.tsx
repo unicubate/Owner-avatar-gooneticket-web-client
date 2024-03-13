@@ -35,7 +35,7 @@ interface Props {
 
 const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
   const router = useRouter();
-  const t = useTranslations('menu-site');
+  const t = useTranslations('menu_site');
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {

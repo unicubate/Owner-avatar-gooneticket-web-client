@@ -218,7 +218,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
             className="w-full"
             loading={loading}
           >
-            Save continue
+            Update address
           </ButtonInput>
         </div>
       </form>
