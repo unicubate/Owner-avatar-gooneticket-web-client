@@ -96,8 +96,9 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Profile route */
   updateOneProfileNextStep: PUT(`${baseUrl}/profile/update/:userId`),
-  updateOneProfile: PUT(`${baseUrl}/users/update/profile/:profileId`),
+  updateOneProfile: PUT(`${baseUrl}/users/update/profile`),
   updateEnableProfile: PUT(`${baseUrl}/users/update/enable/:profileId`),
+  updateUpdatePassword: PUT(`${baseUrl}/users/update-password`),
   getOneProfile: GET(`${baseUrl}/users/profile/show/:profileId`),
 
   /****************** Transaction route */

@@ -2,6 +2,9 @@
  * others
  */
 
+import { viewOneFileUploadAPI } from '@/api-site/upload';
+import { ImageProfileModel } from '@/types/profile.type';
+
 export const formatePrice = (options: { value: number; isDivide: boolean }) => {
   const { value, isDivide } = options;
   const numberCal = isDivide ? value / 100 : value;
@@ -12,4 +15,16 @@ export const formatePrice = (options: { value: number; isDivide: boolean }) => {
         : `${numberCal.toLocaleString('IT')},00`}{' '}
     </>
   );
+};
+
+export const oneImageToURL = (image: ImageProfileModel) => {
+  const url =
+    image?.id === 'aws'
+      ? viewOneFileUploadAPI({
+          folder: 'profiles',
+          fileName: image?.patch,
+        })
+      : image?.patch;
+
+  return url as string;
 };

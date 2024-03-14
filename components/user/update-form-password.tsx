@@ -1,41 +1,52 @@
+import { updateUpdatePasswordAPI } from '@/api-site/user';
+import { UserUpdatePasswordFormModel } from '@/types/user.type';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextPasswordInput } from '../ui-setting/shadcn';
-
-type Props = {
-  userId: string;
-  user: any;
-};
+import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({
   oldPassword: yup.string().required('old password required'),
-  newPassword: yup.string().required('new password required'),
-  confirmPassword: yup.string().required('confirm password required'),
+  password: yup.string().required('new password required'),
+  passwordConfirm: yup.string().required('confirm password required'),
 });
 
-const UpdateFormPassword = ({ userId, user }: Props) => {
+const UpdateFormPassword = () => {
   const {
     control,
-    setValue,
     handleSubmit,
     errors,
     loading,
+    reset,
     setLoading,
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
-
-    console.log('payload =======>', payload);
+  const onSubmit: SubmitHandler<UserUpdatePasswordFormModel> = async (
+    payload: any,
+  ) => {
+    setLoading(true);
+    setHasErrors(undefined);
+    try {
+      await updateUpdatePasswordAPI({ ...payload });
+      setHasErrors(false);
+      setLoading(false);
+      AlertSuccessNotification({
+        text: `Information save successfully`,
+      });
+      reset();
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
   };
 
   return (
@@ -44,6 +55,12 @@ const UpdateFormPassword = ({ userId, user }: Props) => {
         <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold"> Change password </h2>
+
+            {hasErrors && (
+              <Alert variant="destructive" className="mt-2">
+                <AlertDescription>{hasErrors}</AlertDescription>
+              </Alert>
+            )}
 
             <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
@@ -59,7 +76,7 @@ const UpdateFormPassword = ({ userId, user }: Props) => {
                 <TextPasswordInput
                   label="New password"
                   control={control}
-                  name="newPassword"
+                  name="password"
                   placeholder="New password"
                   errors={errors}
                 />
@@ -69,7 +86,7 @@ const UpdateFormPassword = ({ userId, user }: Props) => {
                 <TextPasswordInput
                   label="Confirm password"
                   control={control}
-                  name="confirmPassword"
+                  name="passwordConfirm"
                   placeholder="Confirm password"
                   errors={errors}
                 />

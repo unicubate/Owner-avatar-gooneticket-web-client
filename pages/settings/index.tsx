@@ -1,15 +1,27 @@
+import {
+  GetAllCountiesAPI,
+  GetAllCurrenciesAPI,
+  GetOneProfileAPI,
+} from '@/api-site/profile';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { DeleteOneUser } from '@/components/user/delete-one-user';
 import { UpdateFormPassword } from '@/components/user/update-form-password';
 import { UpdateFormProfile } from '@/components/user/update-form-profile';
-import { UpdateFormUser } from '@/components/user/update-form-user';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 
 const Settings = () => {
-  const user = useAuth() as any;
+  const { userStorage: user } = useInputState();
+
+  const { data: profile, status } = GetOneProfileAPI({
+    profileId: user?.profileId,
+  });
+
+  const { data: currencies } = GetAllCurrenciesAPI();
+
+  const { data: countries } = GetAllCountiesAPI();
 
   return (
     <>
@@ -20,17 +32,18 @@ const Settings = () => {
 
             <div className="flow-root">
               <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
-                {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
-
-                {user?.profileId ? (
-                  <UpdateFormProfile profileId={user?.profileId} user={user} />
+                {profile?.id ? (
+                  <UpdateFormProfile
+                    profile={profile}
+                    currencies={currencies}
+                    countries={countries}
+                    user={user}
+                  />
                 ) : null}
 
-                {user?.profileId ? (
-                  <UpdateFormPassword userId={user?.id} user={user} />
-                ) : null}
+                {user?.provider === 'default' ? <UpdateFormPassword /> : null}
 
-                <DeleteOneUser user={user} />
+                {user?.id ? <DeleteOneUser user={user} /> : null}
               </div>
             </div>
           </div>

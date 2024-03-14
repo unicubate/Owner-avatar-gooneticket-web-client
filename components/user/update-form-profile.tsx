@@ -1,17 +1,17 @@
+import { UpdateOneProfileAPI } from '@/api-site/profile';
 import {
-  GetAllCountiesAPI,
-  GetAllCurrenciesAPI,
-  GetOneProfileAPI,
-  UpdateOneProfileAPI,
-  getOneFileProfileAPI,
-} from '@/api-site/profile';
-import { ProfileFormModel, arrayColors } from '@/types/profile.type';
+  ProfileFormModel,
+  ProfileModel,
+  arrayColors,
+} from '@/types/profile.type';
+import { UserModel } from '@/types/user.type';
+import { oneImageToURL } from '@/utils';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { UploadOutlined } from '@ant-design/icons';
-import { Avatar, Button, Select, Space, Upload } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { Avatar, GetProp, Select, Space, Upload, UploadProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -20,12 +20,36 @@ import { DateInput } from '../ui-setting/ant';
 import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
-
+import { Alert, AlertDescription } from '../ui/alert';
 const { Option } = Select;
 
+type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+const getBase64 = (img: FileType, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
+const beforeUpload = (file: FileType) => {
+  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+  if (!isJpgOrPng) {
+    AlertDangerNotification({
+      text: 'You can only upload JPG/PNG file!',
+    });
+  }
+  const isLt2M = file.size / 1024 / 1024 < 4;
+  if (!isLt2M) {
+    AlertDangerNotification({
+      text: 'Image must smaller than 2MB!',
+    });
+  }
+  return isJpgOrPng && isLt2M;
+};
+
 type Props = {
-  profileId: string;
-  user: any;
+  user: UserModel | any;
+  profile: ProfileModel | any;
+  countries: any;
+  currencies: any;
 };
 
 const schema = yup.object({
@@ -33,11 +57,16 @@ const schema = yup.object({
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
   birthday: yup.date().max(new Date()).required(),
+  username: yup.string().required('username is a required field'),
   currencyId: yup.string().uuid().required('currency is a required field'),
   countryId: yup.string().uuid().required('country is a required field'),
 });
 
-const UpdateFormProfile = ({ profileId, user }: Props) => {
+const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
+  const [imageUrl, setImageUrl] = useState<string>(
+    oneImageToURL(profile?.image),
+  );
+  const [attachment, setAttachment] = useState<any>();
   const [colors] = useState(arrayColors);
   const {
     control,
@@ -49,12 +78,6 @@ const UpdateFormProfile = ({ profileId, user }: Props) => {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-
-  const { data: currencies } = GetAllCurrenciesAPI();
-
-  const { data: countries } = GetAllCountiesAPI();
-
-  const { data: profile, status } = GetOneProfileAPI({ profileId });
 
   useEffect(() => {
     if (profile) {
@@ -73,9 +96,13 @@ const UpdateFormProfile = ({ profileId, user }: Props) => {
       ];
       fields?.forEach((field: any) => setValue(field, profile[field]));
     }
-  }, [profile, profileId, setValue]);
+    if (user) {
+      const fields = ['username'];
+      fields?.forEach((field: any) => setValue(field, user[field]));
+    }
+  }, [profile, user, setValue]);
 
-  const saveMutation = UpdateOneProfileAPI({
+  const { mutateAsync: saveMutation } = UpdateOneProfileAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -87,14 +114,14 @@ const UpdateFormProfile = ({ profileId, user }: Props) => {
   });
 
   const onSubmit: SubmitHandler<ProfileFormModel> = async (
-    payload: ProfileFormModel,
+    data: ProfileFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
-      await saveMutation.mutateAsync({
-        ...payload,
-        profileId: profileId,
+      await saveMutation({
+        ...data,
+        attachment,
       });
       setHasErrors(false);
       setLoading(false);
@@ -111,6 +138,21 @@ const UpdateFormProfile = ({ profileId, user }: Props) => {
     }
   };
 
+  const handleChange: UploadProps['onChange'] = (info) => {
+    if (info.file.status === 'uploading') {
+      setLoading(true);
+      return;
+    }
+    if (info.file.status === 'done') {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj as FileType, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+        setAttachment(info.file.originFileObj);
+      });
+    }
+  };
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -118,46 +160,60 @@ const UpdateFormProfile = ({ profileId, user }: Props) => {
           <div className="px-4 py-5">
             <h2 className="text-base font-bold"> Profile </h2>
 
-            {profile?.image ? (
-              <div className="mt-2 space-x-2 text-center">
-                <Avatar
-                  size={200}
-                  shape="circle"
-                  src={getOneFileProfileAPI(String(profile?.image))}
-                  alt={`${profile?.firstName} ${profile?.lastName}`}
-                />
-              </div>
-            ) : (
-              <div className="mb-4">
-                <Controller
-                  name="attachment"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="mx-auto justify-center text-center">
-                        <Upload
-                          name="attachment"
-                          listType="picture"
-                          maxCount={1}
-                          className="upload-list-inline"
-                          onChange={onChange}
-                          accept=".png,.jpg"
-                        >
-                          <Button icon={<UploadOutlined />}>
-                            Click to Upload
-                          </Button>
-                        </Upload>
-                      </div>
-                    </>
-                  )}
-                />
-                {/* {errors?.attachment && (
-                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                                            {errors?.attachment?.message}
-                                        </span>
-                                    )} */}
-              </div>
+            {hasErrors && (
+              <Alert variant="destructive" className="mt-2">
+                <AlertDescription>{hasErrors}</AlertDescription>
+              </Alert>
             )}
+
+            <div className="mt-4">
+              <Controller
+                name="attachment"
+                control={control}
+                render={({ field: { onChange } }) => (
+                  <>
+                    <div className="mx-auto justify-center text-center">
+                      <Upload
+                        multiple
+                        name="attachmentImages"
+                        listType="picture-circle"
+                        className="avatar-uploader"
+                        showUploadList={false}
+                        onChange={handleChange}
+                        beforeUpload={beforeUpload}
+                        accept=".png,.jpg,.jpeg,.gif"
+                        maxCount={1}
+                      >
+                        {imageUrl ? (
+                          <Avatar
+                            size={100}
+                            shape="circle"
+                            src={imageUrl}
+                            alt={`${profile?.firstName} ${profile?.lastName}`}
+                          />
+                        ) : (
+                          <div className="text-center text-black dark:text-white">
+                            <PlusOutlined />
+                            <div style={{ marginTop: 8 }}>Upload</div>
+                          </div>
+                        )}
+                      </Upload>
+                    </div>
+                  </>
+                )}
+              />
+            </div>
+
+            <div className="mt-2">
+              <TextInput
+                control={control}
+                label="Username"
+                type="text"
+                name="username"
+                placeholder="username"
+                errors={errors}
+              />
+            </div>
 
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">

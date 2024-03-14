@@ -27,6 +27,12 @@ export type UserResetPasswordFormModel = {
   passwordConfirm: string;
 };
 
+export type UserUpdatePasswordFormModel = {
+  oldPassword: string;
+  password: string;
+  passwordConfirm: string;
+};
+
 export type UserModel = {
   accessToken: string;
   confirmedAt: string;
@@ -100,12 +106,13 @@ export type IpLocationModal = {
     query: string;
   };
 };
+
 export type UserVisitorModel = {
   organizationId: string;
   username?: string;
   id?: string;
 };
-username: 'bokin-1659';
+
 export type UserForgotPasswordFormModel = {
   email: string;
 };

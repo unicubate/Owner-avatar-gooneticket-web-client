@@ -33,7 +33,7 @@ interface Props {
   user?: any;
 }
 
-const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
+const VerticalNavDashboard = ({ user }: Props) => {
   const router = useRouter();
   const t = useTranslations('menu_site');
   const pathname = usePathname();

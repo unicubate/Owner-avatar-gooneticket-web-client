@@ -289,6 +289,16 @@ export const logoutUsersAPI = async (): Promise<any> => {
   });
 };
 
+export const updateUpdatePasswordAPI = async (body: {
+  password: string;
+  passwordConfirm: string;
+}): Promise<any> => {
+  await makeApiCall({
+    action: 'updateUpdatePassword',
+    body: body,
+  });
+};
+
 export const GetInfiniteUsersAPI = (payload: {
   search: string;
   take: number;

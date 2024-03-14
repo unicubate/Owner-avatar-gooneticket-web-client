@@ -3,7 +3,8 @@ export type UploadFolderType =
   | 'galleries'
   | 'products'
   | 'commissions'
-  | 'memberships';
+  | 'memberships'
+  | 'profiles';
 
 export type UploadModel = {
   createdAt: Date;

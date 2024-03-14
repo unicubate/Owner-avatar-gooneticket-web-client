@@ -78,6 +78,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
     Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
     await logoutUsersAPI();
     push(`/`);
+    location.reload();
   };
 
   return (

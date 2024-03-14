@@ -2,6 +2,10 @@ import { NextStep } from './user.type';
 
 export type ColorType = 'indigo' | 'red' | 'sky';
 
+export type ImageProfileModel = {
+  id: 'aws' | 'provider';
+  patch: string;
+};
 export const arrayColors = [
   { id: '2', name: 'indigo' },
   { id: '3', name: 'red' },
@@ -9,18 +13,19 @@ export const arrayColors = [
 ];
 
 export type ProfileFormModel = {
-  fullName: string;
+  username: string;
+  lastName: string;
+  firstName: string;
   phone: string;
-  firstAddress: string;
-  secondAddress: string;
+  description: string;
   birthday: Date;
   currencyId: string;
-  image: string;
   color: string;
   url: string;
-  enableCommission: boolean;
-  enableShop: boolean;
-  enableGallery: boolean;
+  countryId: string;
+  imageList: any;
+  social: any;
+  attachment: any;
 };
 
 export type NextStepProfileFormModel = {
@@ -39,7 +44,7 @@ export type ProfileModel = {
   lastName: string;
   countryId: string;
   fullName: string;
-  image: string;
+  image: ImageProfileModel;
   url: string;
   userId: string;
   description: string;

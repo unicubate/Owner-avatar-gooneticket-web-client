@@ -1,13 +1,12 @@
-import linkifyHtml from 'linkify-html';
 import parse, { HTMLReactParserOptions, domToReact } from 'html-react-parser';
-import DOMPurify from 'dompurify';
+import linkifyHtml from 'linkify-html';
 
 interface HtmlParserProps {
   html: string;
   value?: number;
 }
 
-const HtmlParser: React.FC<HtmlParserProps> = ({ html, value }) => {
+export const HtmlParser = ({ html, value }: HtmlParserProps) => {
   const options: HTMLReactParserOptions = {
     replace: (node: any) => {
       if (node.name === 'a') {
@@ -31,5 +30,3 @@ const HtmlParser: React.FC<HtmlParserProps> = ({ html, value }) => {
   // return <span className="ql-editor">{parse(cleanHtmlString, options)}</span>;
   return parse(cleanHtmlString, options);
 };
-
-export { HtmlParser };

@@ -7,7 +7,7 @@ import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { Button, Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -37,14 +37,14 @@ const schema = yup.object({
   }),
 });
 
-const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
+const CreateOrUpdateFormAudioPost = ({
   postId,
   post,
   refetch,
   organizationId,
   uploadFiles,
   uploadImages,
-}) => {
+}: Props) => {
   const { back, push } = useRouter();
   const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -174,7 +174,7 @@ const CreateOrUpdateFormAudioPost: React.FC<Props> = ({
                             listType="picture-card"
                             fileList={imageList}
                             onChange={handleImageChange}
-                            accept=".png,.jpg,.jpeg"
+                            accept=".png,.jpg,.jpeg,.gif"
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (

@@ -202,7 +202,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
           />
         </div>
         <div className="my-4 flex items-center space-x-4">
-          <ButtonInput
+          {/* <ButtonInput
             type="button"
             className="w-full"
             size="lg"
@@ -210,7 +210,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
             onClick={() => back()}
           >
             Cancel
-          </ButtonInput>
+          </ButtonInput> */}
           <ButtonInput
             size="lg"
             type="submit"

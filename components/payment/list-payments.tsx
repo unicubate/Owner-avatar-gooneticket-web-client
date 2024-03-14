@@ -2,7 +2,7 @@
 import { CreateOnPaymentPI, DeleteOnePaymentAPI } from '@/api-site/payment';
 import { PaymentItemModel } from '@/types/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { truncateInputCard } from '@/utils/utils';
+import { truncateSubstring } from '@/utils/utils';
 import { TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ import { ActionModalDialog } from '../ui-setting/shadcn';
 import { Badge } from '../ui/badge';
 import { CreateValidationFormCodePhoneUser } from '../user/create-validation-form-code-phone-user';
 
-export function ListPayments(props: { item: PaymentItemModel; index: number }) {
+const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
   const { item, index } = props;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [showModal, setShowModal] = useState(false);
@@ -76,7 +76,7 @@ export function ListPayments(props: { item: PaymentItemModel; index: number }) {
             <div>
               {item?.type === 'CARD' ? (
                 <p className="text-lg font-bold dark:text-white">
-                  {truncateInputCard(item?.cardNumber, 8)}
+                  {`XXXX XXXX ${truncateSubstring(item?.cardNumber, 12)}`}
                 </p>
               ) : null}
 
@@ -111,18 +111,27 @@ export function ListPayments(props: { item: PaymentItemModel; index: number }) {
               )}
 
               {['CARD'].includes(item?.type) && (
-                <Badge
-                  className="rounded-sm cursor-pointer"
-                  variant={`${
-                    Number(item.cardExpYear) >= new Date().getFullYear()
-                      ? 'success'
-                      : 'danger'
-                  }`}
-                >
-                  {Number(item.cardExpYear) >= new Date().getFullYear()
-                    ? 'CARD VALID'
-                    : 'CARD INVALID'}
-                </Badge>
+                <>
+                  <Badge
+                    className="rounded-sm cursor-pointer"
+                    variant={`${
+                      Number(item.cardExpYear) >= new Date().getFullYear()
+                        ? 'success'
+                        : 'danger'
+                    }`}
+                  >
+                    {Number(item.cardExpYear) >= new Date().getFullYear()
+                      ? 'CARD VALID'
+                      : 'CARD INVALID'}
+                  </Badge>
+                  <Badge
+                    className="ml-1 rounded-sm cursor-pointer"
+                    variant="outline"
+                  >
+                    {item.cardExpMonth}/
+                    {truncateSubstring(String(item?.cardExpYear), 2)}
+                  </Badge>
+                </>
               )}
             </div>
           </div>
@@ -157,4 +166,6 @@ export function ListPayments(props: { item: PaymentItemModel; index: number }) {
       />
     </>
   );
-}
+};
+
+export { ListPayments };

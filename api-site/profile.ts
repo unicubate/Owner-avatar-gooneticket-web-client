@@ -54,18 +54,31 @@ export const UpdateOneProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user'];
+  const queryKey = ['profile'];
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (
-      payload: ProfileFormModel & { profileId: string },
-    ): Promise<any> => {
-      return await makeApiCall({
+    mutationFn: async (payload: ProfileFormModel): Promise<any> => {
+      const { attachment } = payload;
+      let data = new FormData();
+      data.append('url', `${payload.url ?? ''}`);
+      data.append('color', `${payload.color ?? ''}`);
+      data.append('currencyId', `${payload.currencyId ?? ''}`);
+      data.append('countryId', `${payload.countryId ?? ''}`);
+      data.append('birthday', `${payload.birthday ?? ''}`);
+      data.append('phone', `${payload.phone ?? ''}`);
+      data.append('lastName', `${payload.lastName ?? ''}`);
+      data.append('firstName', `${payload.firstName ?? ''}`);
+      data.append('username', `${payload.username ?? ''}`);
+      data.append('description', `${payload.description ?? ''}`);
+      data.append('attachment', attachment);
+
+      await makeApiCall({
         action: 'updateOneProfile',
-        body: payload,
-        urlParams: { profileId: payload?.profileId },
+        body: data,
       });
+
+      return 'Ok';
     },
     onError: async (error) => {
       await queryClient.invalidateQueries({ queryKey });

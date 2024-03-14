@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils';
+import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
 import { Avatar } from 'antd';
 import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
@@ -24,7 +25,7 @@ export function AvatarComponent(props: Props) {
                   className,
                 )}
                 size={size}
-                src={profile?.image}
+                src={oneImageToURL(profile?.image)}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
               />
             </>
