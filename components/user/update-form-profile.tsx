@@ -164,14 +164,16 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
     }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
-      getBase64(info.file.originFileObj as FileType, (url) => {
-        setAttachment(info.file.originFileObj);
-        setImageUrl(url as any);
-      });
+      setAttachment(info.file.originFileObj);
+      // getBase64(info.file.originFileObj as FileType, (url) => {
+      //   setAttachment(info.file.originFileObj);
+      //   setImageUrl(url as any);
+      // });
     }
   };
 
   console.log('imageUrl =======>', imageUrl);
+  console.log('attachment =======>', attachment);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
