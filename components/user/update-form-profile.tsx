@@ -153,6 +153,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
     }
   };
 
+  console.log('imageUrl =======>', imageUrl);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
