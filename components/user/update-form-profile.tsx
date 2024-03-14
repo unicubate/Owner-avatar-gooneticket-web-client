@@ -24,30 +24,30 @@ import { Alert, AlertDescription } from '../ui/alert';
 const { Option } = Select;
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
-// const getBase64 = (img: FileType, callback: (url: string) => void) => {
-//   const reader = new FileReader();
-//   reader.addEventListener('loadend', () => callback(reader.result as string));
-//   reader.readAsDataURL(img);
-// };
-const getBase64 = (
-  img: FileType,
-  callback: (url: string | ArrayBuffer | null) => void,
-) => {
+const getBase64 = (img: FileType, callback: (url: string) => void) => {
   const reader = new FileReader();
-
-  reader.onloadend = () => {
-    if (
-      typeof reader.result === 'string' ||
-      reader.result instanceof ArrayBuffer
-    ) {
-      callback(reader.result);
-    } else {
-      callback(null);
-    }
-  };
-
+  reader.addEventListener('load', () => callback(reader.result as string));
   reader.readAsDataURL(img);
 };
+// const getBase64 = (
+//   img: FileType,
+//   callback: (url: string | ArrayBuffer | null) => void,
+// ) => {
+//   const reader = new FileReader();
+
+//   reader.onloadend = () => {
+//     if (
+//       typeof reader.result === 'string' ||
+//       reader.result instanceof ArrayBuffer
+//     ) {
+//       callback(reader.result);
+//     } else {
+//       callback(null);
+//     }
+//   };
+
+//   reader.readAsDataURL(img);
+// };
 const beforeUpload = (file: FileType) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -163,22 +163,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
       setAttachment(info.file.originFileObj);
       setImageUrl(url as any);
     });
-    // if (info.file.status === 'uploading') {
-    //   console.log('uploading =========>', info.file);
-    //   //setLoading(true);
-    //   return;
-    // }
-    // if (info.file.status === 'done') {
-    //   // Get this url from response in real world.
-    //   setAttachment(info.file.originFileObj);
-    //   getBase64(info.file.originFileObj as FileType, (url) => {
-    //     setAttachment(info.file.originFileObj);
-    //     setImageUrl(url as any);
-    //   });
-    // }
   };
 
-  console.log('imageUrl =======>', imageUrl);
   console.log('attachment =======>', attachment);
   return (
     <>
