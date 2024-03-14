@@ -158,10 +158,11 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
   };
 
   const handleChange: UploadProps['onChange'] = (info) => {
-    // if (info.file.status === 'uploading') {
-    //   setLoading(true);
-    //   return;
-    // }
+    if (info.file.status === 'uploading') {
+      console.log('uploading =========>', info.file);
+      //setLoading(true);
+      return;
+    }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       setAttachment(info.file.originFileObj);
