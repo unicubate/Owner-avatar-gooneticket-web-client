@@ -165,9 +165,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj as FileType, (url) => {
-        setLoading(false);
-        setImageUrl(url as any);
         setAttachment(info.file.originFileObj);
+        setImageUrl(url as any);
       });
     }
   };
@@ -360,35 +359,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
             </div>
 
-            {/* <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <SelectSearchInput
-                  label="Counties"
-                  firstOptionName="Country"
-                  valueType="key"
-                  control={control}
-                  errors={errors}
-                  placeholder="Country"
-                  name="countryId"
-                  dataItem={countries}
-                />
-              </div>
-              <div className="mt-2">
-                <SelectSearchInput
-                  label="Payment currency"
-                  firstOptionName="Currency"
-                  valueType="key"
-                  control={control}
-                  errors={errors}
-                  placeholder="Currency"
-                  name="currencyId"
-                  dataItem={currencies}
-                />
-                <span className="text-sm font-medium text-gray-400">
-                  {`Your supporters will pay in this currency.`}
-                </span>
-              </div>
-            </div> */}
             <div className="mt-2">
               <SelectSearchInput
                 label="Counties"
