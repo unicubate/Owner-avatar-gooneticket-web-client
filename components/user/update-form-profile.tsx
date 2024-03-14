@@ -29,25 +29,6 @@ const getBase64 = (img: FileType, callback: (url: string) => void) => {
   reader.addEventListener('load', () => callback(reader.result as string));
   reader.readAsDataURL(img);
 };
-// const getBase64 = (
-//   img: FileType,
-//   callback: (url: string | ArrayBuffer | null) => void,
-// ) => {
-//   const reader = new FileReader();
-
-//   reader.onloadend = () => {
-//     if (
-//       typeof reader.result === 'string' ||
-//       reader.result instanceof ArrayBuffer
-//     ) {
-//       callback(reader.result);
-//     } else {
-//       callback(null);
-//     }
-//   };
-
-//   reader.readAsDataURL(img);
-// };
 const beforeUpload = (file: FileType) => {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
@@ -165,7 +146,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
     });
   };
 
-  console.log('attachment =======>', attachment);
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
