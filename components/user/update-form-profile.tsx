@@ -158,17 +158,17 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
   };
 
   const handleChange: UploadProps['onChange'] = (info) => {
-    if (info.file.status === 'uploading') {
-      setLoading(true);
-      return;
-    }
+    // if (info.file.status === 'uploading') {
+    //   setLoading(true);
+    //   return;
+    // }
     if (info.file.status === 'done') {
       // Get this url from response in real world.
       setAttachment(info.file.originFileObj);
-      // getBase64(info.file.originFileObj as FileType, (url) => {
-      //   setAttachment(info.file.originFileObj);
-      //   setImageUrl(url as any);
-      // });
+      getBase64(info.file.originFileObj as FileType, (url) => {
+        setAttachment(info.file.originFileObj);
+        setImageUrl(url as any);
+      });
     }
   };
 
@@ -195,8 +195,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                   <>
                     <div className="mx-auto justify-center text-center">
                       <Upload
-                        multiple
-                        name="attachmentImages"
+                        name="attachment"
                         listType="picture-circle"
                         className="avatar-uploader"
                         showUploadList={false}
