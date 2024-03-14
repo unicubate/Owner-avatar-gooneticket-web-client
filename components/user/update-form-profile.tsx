@@ -24,9 +24,28 @@ import { Alert, AlertDescription } from '../ui/alert';
 const { Option } = Select;
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
-const getBase64 = (img: FileType, callback: (url: string) => void) => {
+// const getBase64 = (img: FileType, callback: (url: string) => void) => {
+//   const reader = new FileReader();
+//   reader.addEventListener('loadend', () => callback(reader.result as string));
+//   reader.readAsDataURL(img);
+// };
+const getBase64 = (
+  img: FileType,
+  callback: (url: string | ArrayBuffer | null) => void,
+) => {
   const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
+
+  reader.onloadend = () => {
+    if (
+      typeof reader.result === 'string' ||
+      reader.result instanceof ArrayBuffer
+    ) {
+      callback(reader.result);
+    } else {
+      callback(null);
+    }
+  };
+
   reader.readAsDataURL(img);
 };
 const beforeUpload = (file: FileType) => {
@@ -147,7 +166,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
       // Get this url from response in real world.
       getBase64(info.file.originFileObj as FileType, (url) => {
         setLoading(false);
-        setImageUrl(url);
+        setImageUrl(url as any);
         setAttachment(info.file.originFileObj);
       });
     }
@@ -171,7 +190,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               <Controller
                 name="attachment"
                 control={control}
-                render={({ field: { onChange } }) => (
+                render={({}) => (
                   <>
                     <div className="mx-auto justify-center text-center">
                       <Upload
