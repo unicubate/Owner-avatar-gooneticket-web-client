@@ -4,14 +4,13 @@ import { formateDMYHH } from '@/utils';
 import { HeartIcon, MessageSquareIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
 
 type Props = {
   item: PostModel;
 };
 
-const ListLastPosts: React.FC<Props> = ({ item }) => {
+const ListLastPosts = ({ item }: Props) => {
   const { locale } = useRouter();
   return (
     <>

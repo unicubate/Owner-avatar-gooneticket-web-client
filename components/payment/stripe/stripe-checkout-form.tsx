@@ -50,7 +50,7 @@ const CARD_OPTIONS: any = {
   },
 };
 
-const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
+const StripeCheckoutForm = ({ data, paymentModel }: StripeProps) => {
   const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
   const {

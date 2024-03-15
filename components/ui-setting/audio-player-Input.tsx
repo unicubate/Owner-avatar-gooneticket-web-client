@@ -201,7 +201,7 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
           <div className="full items-center relative shrink-0 cursor-pointer">
             <Avatar
               shape="square"
-              className="rounded-lg object-cover size-28"
+              className="rounded-lg object-cover w-full h-96"
               src={oneImage}
               alt={item?.title}
             />

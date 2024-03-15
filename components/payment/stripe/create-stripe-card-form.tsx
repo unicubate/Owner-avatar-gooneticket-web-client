@@ -8,7 +8,7 @@ import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Input } from '@/components/ui/input';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { useStripe } from '@stripe/react-stripe-js';
 import { Checkbox } from 'antd';
@@ -16,18 +16,17 @@ import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { StripeProps } from './create-payment-stripe';
 
-const CreateStripeCardForm = (props: StripeProps) => {
+const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   const { push } = useRouter();
   const stripe = useStripe();
   if (!stripe) {
     return;
   }
-  const { data, paymentModel } = props;
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
   const expDateValidate = (month: string, year: string) => {
     if (Number(year) > 2070) {
-      return 'Expiry Date Year cannot be greater than 2035';
+      return 'Expiry Date Year cannot be greater than';
     }
     return;
   };
@@ -60,6 +59,7 @@ const CreateStripeCardForm = (props: StripeProps) => {
       strExpiryLength - 2,
     );
 
+    const newReference = generateLongUUID(30);
     const payload: PaymentCardFormModel = {
       card: {
         cardNumber: cardNumber,
@@ -70,24 +70,21 @@ const CreateStripeCardForm = (props: StripeProps) => {
         isSaveCard: isSaveCard,
         fullName: fullName,
       },
-      type: 'CARD',
       ...data,
+      type: 'CARD',
+      reference: newReference,
     };
     setLoading(true);
     setHasErrors(undefined);
-    const newReference = generateLongUUID(30);
     try {
       await mutateAsync({
-        data: { ...payload, reference: newReference, type: 'CARD' },
+        data: payload,
         paymentModel: paymentModel,
-      });
-      AlertSuccessNotification({
-        text: 'Card save successfully',
       });
       setHasErrors(false);
       setLoading(false);
 
-      //push(`/transactions/success?token=${newReference}`);
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

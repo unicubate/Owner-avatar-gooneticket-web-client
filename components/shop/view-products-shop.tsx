@@ -17,8 +17,7 @@ type Props = {
   item: ProductModel;
 };
 
-export function ViewProductsShop(props: Props) {
-  const { item } = props;
+const ViewProductsShop = ({ item }: Props) => {
   const { query, pathname, push } = useRouter();
   const { linkHref, isOpen, setIsOpen, loading, setLoading, userStorage } =
     useInputState();
@@ -162,4 +161,6 @@ export function ViewProductsShop(props: Props) {
       </div>
     </>
   );
-}
+};
+
+export { ViewProductsShop };

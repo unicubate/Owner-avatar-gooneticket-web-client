@@ -62,3 +62,6 @@ export const filterImageAndFile = (options: {
 
   return { newFileLists, newImageLists };
 };
+
+export const itemsNumberArray = (value: number) =>
+  Array.from({ length: value }, (_, index) => index);

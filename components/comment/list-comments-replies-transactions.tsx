@@ -24,9 +24,7 @@ type Props = {
   userReceiveId: string;
 };
 
-export function ListCommentsRepliesTransactions(props: Props) {
-  const { item, index } = props;
-
+const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const { locale } = useRouter();
   const { userStorage: userVisitor } = useAuth() as any;
@@ -104,4 +102,6 @@ export function ListCommentsRepliesTransactions(props: Props) {
       </div>
     </>
   );
-}
+};
+
+export { ListCommentsRepliesTransactions };

@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
-import { AvatarComponent, LoadingFile } from '../ui-setting/ant';
+import { AvatarComponent } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useAuth } from '../util/context-user';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
@@ -23,9 +23,14 @@ type Props = {
   organizationId: string;
 };
 
-export function ListCommentTransactions(props: Props) {
-  const { model, modelIds, item, userReceiveId, organizationId, index } = props;
-
+const ListCommentTransactions = ({
+  model,
+  modelIds,
+  item,
+  userReceiveId,
+  organizationId,
+  index,
+}: Props) => {
   const { locale } = useRouter();
   const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -38,7 +43,7 @@ export function ListCommentTransactions(props: Props) {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteCommentsRepliesAPI({
-    take: 3,
+    take: 6,
     sort: 'DESC',
     modelIds: modelIds,
     commentId: String(item?.id),
@@ -46,7 +51,7 @@ export function ListCommentTransactions(props: Props) {
   });
 
   const dataTableCommentsReplies = isLoadingComments ? (
-    <LoadingFile />
+    ''
   ) : isErrorComments ? (
     <ErrorFile title="404" description="Error find data please try again" />
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
@@ -153,4 +158,6 @@ export function ListCommentTransactions(props: Props) {
       </li>
     </>
   );
-}
+};
+
+export { ListCommentTransactions };

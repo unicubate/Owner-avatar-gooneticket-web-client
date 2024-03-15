@@ -2,14 +2,17 @@
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ProductModel } from '@/types/product';
 import { UserVisitorModel } from '@/types/user.type';
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { itemsNumberArray } from '@/utils/utils';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
+import { Skeleton } from '../ui/skeleton';
 import { ListLastProducts } from './list-last-products';
 
-export function PublicLastProducts(props: { userVisitor: UserVisitorModel }) {
-  const { userVisitor } = props;
+export function PublicLastProducts({
+  userVisitor,
+}: {
+  userVisitor: UserVisitorModel;
+}) {
   const {
     isLoading: isLoadingProducts,
     isError: isErrorProducts,
@@ -25,13 +28,17 @@ export function PublicLastProducts(props: { userVisitor: UserVisitorModel }) {
   });
 
   const dataTable = isLoadingProducts ? (
-    <Spin
-      tip="Loading"
-      indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
-      size="large"
-    >
-      <div className="content" />
-    </Spin>
+    <>
+      {itemsNumberArray(4).map((i, index) => (
+        <li key={index} className="flex py-2 items-center space-x-2">
+          <Skeleton className="size-16 rounded-md" />
+          <div className="space-y-1">
+            <Skeleton className="h-4 w-[200px]" />
+            <Skeleton className="h-4 w-[200px]" />
+          </div>
+        </li>
+      ))}
+    </>
   ) : isErrorProducts ? (
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataProducts?.pages[0]?.data?.total <= 0 ? (
@@ -53,8 +60,11 @@ export function PublicLastProducts(props: { userVisitor: UserVisitorModel }) {
   return (
     <>
       <div className="px-4 py-6 sm:p-6 lg:p-8">
-        <h3 className="font-bold dark:text-white">More from Shop</h3>
+        {userVisitor?.organizationId && (
+          <h3 className="font-bold dark:text-white">More from Shop</h3>
+        )}
         {dataTable}
+
         <div className="mt-4 mx-auto justify-center text-center">
           {hasNextPage && (
             <ButtonLoadMore

@@ -3,8 +3,8 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListFollowPosts } from '@/components/post/list-follow-posts';
 import { PublicLastPosts } from '@/components/post/public-last-posts';
+import { PostSkeleton } from '@/components/skeleton/post-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
@@ -31,7 +31,7 @@ const PostShow = () => {
 
   const dataTablePosts =
     isLoadingPost || isLoadingUser ? (
-      <LoadingFile />
+      <PostSkeleton index={0} />
     ) : isErrorPost || isErrorUser ? (
       <ErrorFile
         title="404"
@@ -96,14 +96,12 @@ const PostShow = () => {
                 </div> */}
 
                 <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                  {post?.id && user?.organizationId ? (
-                    <PublicLastPosts
-                      userVisitor={{
-                        id: userVisitor?.id,
-                        organizationId: post?.organizationId,
-                      }}
-                    />
-                  ) : null}
+                  <PublicLastPosts
+                    userVisitor={{
+                      id: userVisitor?.id,
+                      organizationId: post?.organizationId,
+                    }}
+                  />
                 </div>
               </div>
             </div>

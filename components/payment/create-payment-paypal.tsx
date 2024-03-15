@@ -7,8 +7,7 @@ import { useState } from 'react';
 import { PaymentModel } from '../../api-site/payment';
 
 type Props = { data?: any; paymentModel: PaymentModel };
-export function CreatePaymentPayPal(props: Props) {
-  const { data, paymentModel } = props;
+const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   const { push } = useRouter();
   const {
     userAddress,
@@ -60,10 +59,10 @@ export function CreatePaymentPayPal(props: Props) {
     try {
       await mutateAsync({
         data: payload,
-        paymentModel,
+        paymentModel: paymentModel,
       });
 
-      //push(`/transactions/success?token=${newReference}`);
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -142,4 +141,6 @@ export function CreatePaymentPayPal(props: Props) {
       </div>
     </>
   );
-}
+};
+
+export { CreatePaymentPayPal };
