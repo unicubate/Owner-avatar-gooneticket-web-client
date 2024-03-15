@@ -2,11 +2,10 @@ import { GetOneProductAPI } from '@/api-site/product';
 import { GetUploadsAPI } from '@/api-site/upload';
 import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
-import { ButtonInput } from '@/components/ui-setting';
+import { ButtonInput, LoaderIconComponent } from '@/components/ui-setting';
 import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { Avatar, Button, Spin } from 'antd';
-import { LoaderCircleIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { MdOutlineDiscount } from 'react-icons/md';
@@ -39,7 +38,7 @@ const ShopView = () => {
     isLoadingImages && isLoadingProduct ? (
       <Spin
         tip="Loading"
-        indicator={<LoaderCircleIcon style={{ fontSize: 30 }} />}
+        indicator={<LoaderIconComponent style={{ fontSize: 30 }} />}
         size="large"
       >
         <div className="content" />

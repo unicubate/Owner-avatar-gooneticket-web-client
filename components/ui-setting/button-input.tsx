@@ -1,4 +1,4 @@
-import { LoaderCircleIcon } from 'lucide-react';
+import { LoaderIconComponent } from '.';
 import { Button, SizeButton, VariantButton } from '../ui/button';
 
 interface Props {
@@ -48,9 +48,8 @@ export const ButtonInput = ({
       >
         {loading ? (
           <>
-            <LoaderCircleIcon
+            <LoaderIconComponent
               style={{ fontSize: 20, color: '##1E90FF' }}
-              //spin
               className="mr-2 size-4 animate-spin"
             />
             Please wait

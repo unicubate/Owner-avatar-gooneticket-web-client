@@ -86,7 +86,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
       <header className="sticky top-0 z-20 bg-white border-b border-gray-300 dark:border-gray-800 dark:bg-[#1c1b22]">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-2 xl:hidden">
+            <div className="flex items-center -m-2 lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
                   className="w-6 h-6"
