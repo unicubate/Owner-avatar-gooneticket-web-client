@@ -1,8 +1,8 @@
 import { loginGoogleUserAPI, loginUserAPI } from '@/api-site/user';
 import { UserLoginFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils';
-import { CloseOutlined } from '@ant-design/icons';
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
@@ -70,7 +70,7 @@ const LoginModal: React.FC<{
               onClick={() => setIsOpen(false)}
             >
               <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-                <CloseOutlined />
+                <X />
               </span>
             </button>
 

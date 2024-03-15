@@ -1,4 +1,4 @@
-import { CloseOutlined } from '@ant-design/icons';
+import { X } from 'lucide-react';
 import { CreateFormPublicDonation } from './create-form-public-donation';
 
 const CreateModalPublicDonation: React.FC<{
@@ -18,7 +18,7 @@ const CreateModalPublicDonation: React.FC<{
                 onClick={() => setOpenModal(false)}
               >
                 <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-                  <CloseOutlined />
+                  <X />
                 </span>
               </button>
 

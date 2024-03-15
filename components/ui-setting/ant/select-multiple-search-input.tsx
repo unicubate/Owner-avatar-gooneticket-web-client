@@ -1,4 +1,3 @@
-import { SmileOutlined } from '@ant-design/icons';
 import { Select, Space } from 'antd';
 import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;

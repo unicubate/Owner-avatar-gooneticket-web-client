@@ -1,4 +1,3 @@
-import { SmileOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
@@ -59,7 +58,6 @@ const SelectInput: React.FC<Props> = ({
               ))
             ) : (
               <div style={{ textAlign: 'center' }}>
-                <SmileOutlined style={{ fontSize: 20 }} />
                 <p>Data Not Found</p>
               </div>
             )}

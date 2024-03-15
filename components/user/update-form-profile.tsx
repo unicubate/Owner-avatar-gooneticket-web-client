@@ -10,8 +10,8 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { PlusOutlined } from '@ant-design/icons';
 import { Avatar, GetProp, Select, Space, Upload, UploadProps } from 'antd';
+import { PlusIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -185,7 +185,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                           />
                         ) : (
                           <div className="text-center text-black dark:text-white">
-                            <PlusOutlined />
+                            <PlusIcon />
                             <div style={{ marginTop: 8 }}>Upload</div>
                           </div>
                         )}

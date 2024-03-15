@@ -5,8 +5,8 @@ import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput } from '@/components/ui-setting';
 import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { LoadingOutlined } from '@ant-design/icons';
 import { Avatar, Button, Spin } from 'antd';
+import { LoaderCircleIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { MdOutlineDiscount } from 'react-icons/md';
@@ -39,7 +39,7 @@ const ShopView = () => {
     isLoadingImages && isLoadingProduct ? (
       <Spin
         tip="Loading"
-        indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+        indicator={<LoaderCircleIcon style={{ fontSize: 30 }} />}
         size="large"
       >
         <div className="content" />

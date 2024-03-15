@@ -1,8 +1,7 @@
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { PrivateComponent } from '@/components/util/private-component';
-import { DownloadOutlined } from '@ant-design/icons';
-import { Button, Image } from 'antd';
+import { Image } from 'antd';
 import { SubmitHandler } from 'react-hook-form';
 
 const people = [
@@ -393,12 +392,12 @@ const Billing = () => {
                                                                         >
                                                                         </Button> */}
 
-                                  <Button
+                                  {/* <Button
                                     type="link"
                                     icon={<DownloadOutlined />}
                                   >
                                     download
-                                  </Button>
+                                  </Button> */}
                                 </div>
                               </td>
                             </tr>

@@ -6,8 +6,8 @@ import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { PrivateComponent } from '@/components/util/private-component';
 import { useDebounce } from '@/utils';
-import { PlusOutlined } from '@ant-design/icons';
 import { Input, Skeleton } from 'antd';
+import { PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const Configs = () => {
@@ -90,7 +90,7 @@ const Configs = () => {
                           type="button"
                           size="sm"
                           variant="info"
-                          icon={<PlusOutlined />}
+                          icon={<PlusIcon />}
                         >
                           Create discount
                         </ButtonInput>

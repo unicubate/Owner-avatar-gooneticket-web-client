@@ -2,8 +2,8 @@ import { CreateOrUpdateOneCommentAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { CommissionModel } from '@/types/commission';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { CloseOutlined } from '@ant-design/icons';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
+import { X } from 'lucide-react';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -95,7 +95,7 @@ export function CreateCommentCommissionModal(props: {
               onClick={() => setIsOpen(false)}
             >
               <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-                <CloseOutlined />
+                <X />
               </span>
             </button>
 

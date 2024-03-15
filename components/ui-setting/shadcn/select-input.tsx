@@ -97,7 +97,6 @@ const SelectInput: React.FC<Props> = ({
                 ))
               ) : (
                 <div style={{ textAlign: "center" }}>
-                  <SmileOutlined style={{ fontSize: 20 }} />
                   <p>Data Not Found</p>
                 </div>
               )}

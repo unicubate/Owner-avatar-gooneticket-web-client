@@ -1,8 +1,8 @@
 import { CreateOrUpdateOneMembershipAPI } from '@/api-site/membership';
 import { MembershipFormModel } from '@/types/membership';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { PlusOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
+import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
@@ -190,7 +190,7 @@ const CreateOrUpdateFormMembership = ({
                       >
                         {imageList.length >= 1 ? null : (
                           <div className="text-center dark:text-white">
-                            <PlusOutlined />
+                            <PlusIcon />
                             <div style={{ marginTop: 8 }}>Upload cover</div>
                           </div>
                         )}

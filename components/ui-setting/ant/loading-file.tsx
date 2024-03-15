@@ -1,5 +1,5 @@
-import { LoadingOutlined } from '@ant-design/icons';
-import { Empty, Spin } from 'antd';
+import { Spin } from 'antd';
+import { LoaderCircleIcon } from 'lucide-react';
 
 interface Props {
   title?: React.ReactNode;
@@ -18,7 +18,7 @@ const LoadingFile: React.FC<Props> = ({
         <div className="inset-x-0 top-0 mt-10 grid place-items-center py-4">
           <Spin
             tip=""
-            indicator={<LoadingOutlined style={{ fontSize: 30 }} spin />}
+            indicator={<LoaderCircleIcon style={{ fontSize: 30 }} />}
             size="large"
           >
             <div className="content" />

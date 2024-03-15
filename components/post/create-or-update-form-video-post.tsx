@@ -4,8 +4,8 @@ import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
-import { PlusOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
+import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -175,7 +175,7 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
                           >
                             {imageList.length >= 1 ? null : (
                               <div className="text-center dark:text-white">
-                                <PlusOutlined />
+                                <PlusIcon />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>
                             )}

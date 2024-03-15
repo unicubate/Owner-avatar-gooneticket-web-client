@@ -1,4 +1,4 @@
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoaderCircleIcon } from 'lucide-react';
 import { Button, SizeButton, VariantButton } from '../ui/button';
 
 interface Props {
@@ -48,9 +48,9 @@ export const ButtonInput = ({
       >
         {loading ? (
           <>
-            <LoadingOutlined
+            <LoaderCircleIcon
               style={{ fontSize: 20, color: '##1E90FF' }}
-              spin
+              //spin
               className="mr-2 size-4 animate-spin"
             />
             Please wait
