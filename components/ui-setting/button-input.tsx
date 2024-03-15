@@ -1,4 +1,4 @@
-import { LoaderIconComponent } from '.';
+import { LoadingOutlined } from '@ant-design/icons';
 import { Button, SizeButton, VariantButton } from '../ui/button';
 
 interface Props {
@@ -48,7 +48,7 @@ export const ButtonInput = ({
       >
         {loading ? (
           <>
-            <LoaderIconComponent
+            <LoadingOutlined
               style={{ fontSize: 20, color: '##1E90FF' }}
               className="mr-2 size-4 animate-spin"
             />

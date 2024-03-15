@@ -19,7 +19,7 @@ export default function Home() {
         </div> */}
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mt-6 mx-auto max-w-4xl text-center">
             <h1 className="text-2xl font-bold sm:text-4xl lg:text-5xl">
               {t('title')}
             </h1>
@@ -29,36 +29,40 @@ export default function Home() {
           </div>
           <div className="mx-auto max-w-xl text-center">
             <form action="#" method="POST" className="mt-8 sm:mt-10">
-              <div className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-400 sm:focus-within:border-gray-300 sm:focus-within:ring-1 sm:focus-within:ring-gray-300">
+              <div
+                className="group relative p-3 rounded-xl sm:border sm:border-gray-200 dark:sm:border-gray-600 sm:focus-within:border-gray-200"
+                //className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-200 sm:focus-within:border-gray-200 sm:focus-within:ring-1 sm:focus-within:ring-gray-300"
+              >
+                {/* <Input className="block bg-transparent p-3 outline-none focus:border-transparent focus:ring-transparent sm:border-none sm:focus:border-transparent sm:focus:ring-0" /> */}
                 <input
                   type="text"
                   name=""
                   id=""
-                  placeholder="yourname"
-                  className="block w-full rounded-xl border border-gray-400 bg-transparent p-4 outline-none placeholder:text-gray-900 focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
+                  placeholder="Email address"
+                  className="block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent p-2 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
                 />
 
-                <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
+                <div className="mt-2 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
                   <ButtonInput
                     type="button"
                     className="w-full"
-                    size="sm"
+                    size="xlg"
                     variant="info"
                   >
-                    Start my page
+                    Get started
                   </ButtonInput>
                 </div>
               </div>
             </form>
 
-            <ul className="mt-4 flex items-center justify-center space-x-6 sm:space-x-8">
+            {/* <ul className="mt-4 flex items-center justify-center space-x-6 sm:space-x-8">
               <li className="flex items-center">
                 <span className="text-xs font-medium sm:text-sm">
                   {' '}
                   It’s free, and takes less than a minute.{' '}
                 </span>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </div>

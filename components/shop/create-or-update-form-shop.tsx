@@ -10,8 +10,8 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
-import { PlusIcon, UploadIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -24,6 +24,8 @@ import { SwitchInput } from '../ui-setting/ant';
 import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
+
+const { Dragger } = Upload;
 
 type Props = {
   product?: any;
@@ -227,7 +229,7 @@ const CreateOrUpdateFormShop = ({
                         >
                           {imageList.length >= 10 ? null : (
                             <div className="text-center dark:text-white">
-                              <PlusIcon />
+                              <UploadOutlined />
                               <div style={{ marginTop: 8 }}>Upload</div>
                             </div>
                           )}
@@ -326,37 +328,40 @@ const CreateOrUpdateFormShop = ({
                     </span>
                   </div>
                 ) : (
-                  <Controller
-                    name="attachmentFiles"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <>
-                        <div className="mx-auto justify-center text-center">
-                          <Upload
-                            multiple
-                            name="attachmentFiles"
-                            listType="picture"
-                            className="upload-list-inline dark:text-white"
-                            fileList={fileList}
-                            onChange={handleFileChange}
-                            accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
-                            maxCount={10}
-                          >
-                            {fileList.length >= 10 ? null : (
-                              <ButtonInput
-                                type="button"
-                                className="w-full"
-                                variant="outline"
-                                icon={<UploadIcon className="mr-2 size-4" />}
-                              >
-                                Upload File
-                              </ButtonInput>
-                            )}
-                          </Upload>
-                        </div>
-                      </>
-                    )}
-                  />
+                  <>
+                    <Controller
+                      name="attachmentFiles"
+                      control={control}
+                      render={({ field: { onChange } }) => (
+                        <>
+                          <div className="mt-4 mx-auto justify-center text-center">
+                            <Dragger
+                              multiple
+                              name="attachmentFiles"
+                              listType="picture"
+                              className="upload-list-inline dark:text-white"
+                              fileList={fileList}
+                              onChange={handleFileChange}
+                              accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
+                              maxCount={10}
+                            >
+                              <p className="ant-upload-drag-icon">
+                                <InboxOutlined />
+                              </p>
+                              <p className="dark:text-white">
+                                Click or drag file to this area to upload
+                              </p>
+                              <p className="dark:text-gray-600">
+                                Support for a single or bulk upload. Strictly
+                                prohibited from uploading company data or other
+                                banned files.
+                              </p>
+                            </Dragger>
+                          </div>
+                        </>
+                      )}
+                    />
+                  </>
                 )}
               </div>
             ) : null}

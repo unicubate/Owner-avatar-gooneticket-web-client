@@ -6,8 +6,8 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
+import { UploadOutlined } from '@ant-design/icons';
 import { Alert, Upload, UploadFile, UploadProps } from 'antd';
-import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -188,7 +188,7 @@ const CreateOrUpdateFormGalleryPost = ({
                               >
                                 {imageList.length >= 10 ? null : (
                                   <div className="text-center dark:text-white">
-                                    <PlusIcon />
+                                    <UploadOutlined />
                                     <div style={{ marginTop: 8 }}>
                                       Upload image
                                     </div>

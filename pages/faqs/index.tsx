@@ -1,8 +1,7 @@
 import { FaqsList } from '@/components/faq/faqs-list';
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { LayoutSite } from '@/components/layout-site';
-import { Image } from 'antd';
 import { GetStaticPropsContext } from 'next';
-import { SubmitHandler } from 'react-hook-form';
 
 const faqs = [
   {
@@ -32,21 +31,12 @@ const faqs = [
   },
 ];
 const Faqs = () => {
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
-  };
-
   return (
     <>
-      <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
+      <LayoutSite title="FAQS">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl lg:text-4xl">
+          <div className="mt-8 mx-auto max-w-2xl text-center">
+            <h2 className="text-4xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
               Frequently asked questions
             </h2>
             <p className="mt-4 text-base font-normal leading-7 text-gray-600 lg:mt-6 lg:text-lg lg:leading-8">
@@ -54,92 +44,17 @@ const Faqs = () => {
             </p>
           </div>
 
-          <div className="mx-auto mt-12 max-w-5xl divide-y divide-gray-200 overflow-hidden rounded-xl border border-gray-200 sm:mt-16">
+          <div className="mx-auto max-w-3xl divide-y dark:divide-gray-600 overflow-hidden rounded-md border dark:border-gray-600 sm:mt-16">
             {faqs.map((item, index) => (
               <FaqsList item={item} key={index} index={index} />
             ))}
           </div>
 
-          <div className="mx-auto mt-8 max-w-5xl overflow-hidden rounded-xl bg-gray-100 text-center sm:mt-12">
-            <div className="px-6 py-12 sm:p-12">
-              <div className="mx-auto max-w-sm">
-                <div className="relative z-0 flex items-center justify-center -space-x-2 overflow-hidden">
-                  <Image
-                    className="relative z-10 inline-block size-14 rounded-full ring-4 ring-gray-100"
-                    src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-male.png"
-                    alt=""
-                  />
-                  <Image
-                    className="relative z-30 inline-block size-16 rounded-full ring-4 ring-gray-100"
-                    src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-female-1.png"
-                    alt=""
-                  />
-                  <Image
-                    className="relative z-10 inline-block size-14 rounded-full ring-4 ring-gray-100"
-                    src="https://landingfoliocom.imgix.net/store/collection/saasui/images/faq/1/avatar-female-2.png"
-                    alt=""
-                  />
-                </div>
+          <MediumFooter />
 
-                <h3 className="mt-6 text-2xl font-semibold text-gray-900">
-                  Still have questions?
-                </h3>
-                <p className="mt-2 text-base font-normal text-gray-600">
-                  Cant find the answer youre looking for? Please chat with our
-                  friendly team.
-                </p>
-                <div className="mt-6">
-                  <a
-                    href="#"
-                    title=""
-                    className="inline-flex items-center justify-center rounded-full border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white transition-all duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:ring-offset-2"
-                    role="button"
-                  >
-                    Start free trial
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
+          {/* <div className="mt-4 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
             <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4 lg:grid-cols-12 xl:gap-x-12">
-              <div className="col-span-2 md:col-span-4 xl:pr-8">
-                <Image
-                  className="h-9 w-auto"
-                  src="https://cdn.rareblocks.xyz/collection/celebration/images/logo.svg"
-                  alt=""
-                />
-
-                <p className="mt-7 text-base leading-relaxed text-gray-600">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                  amet sint. Velit officia consequat duis enim velit mollit.
-                </p>
-
-                <a
-                  href="#"
-                  title=""
-                  className="mt-7 inline-flex items-center justify-center rounded-md bg-blue-600 px-6 py-4 font-semibold text-white transition-all duration-200 hover:bg-blue-700 focus:bg-blue-700"
-                >
-                  <svg
-                    className="size-6"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-                    />
-                  </svg>
-                  Start Live Chat
-                </a>
-              </div>
-
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-4">
                 <p className="text-base font-semibold text-gray-900">Company</p>
 
                 <ul className="mt-6 space-y-5">
@@ -189,7 +104,7 @@ const Faqs = () => {
                 </ul>
               </div>
 
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-4">
                 <p className="text-base font-semibold text-gray-900">Help</p>
 
                 <ul className="mt-6 space-y-4">
@@ -239,7 +154,7 @@ const Faqs = () => {
                 </ul>
               </div>
 
-              <div className="lg:col-span-2">
+              <div className="lg:col-span-4">
                 <p className="text-base font-semibold text-gray-900">
                   Resources
                 </p>
@@ -290,68 +205,16 @@ const Faqs = () => {
                   </li>
                 </ul>
               </div>
-
-              <div className="lg:col-span-2">
-                <p className="text-base font-semibold text-gray-900">
-                  Extra Links
-                </p>
-
-                <ul className="mt-6 space-y-5">
-                  <li>
-                    <a
-                      href="#"
-                      title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
-                    >
-                      {' '}
-                      Customer Support{' '}
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="#"
-                      title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
-                    >
-                      {' '}
-                      Delivery Details{' '}
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="#"
-                      title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
-                    >
-                      {' '}
-                      Terms & Conditions{' '}
-                    </a>
-                  </li>
-
-                  <li>
-                    <a
-                      href="#"
-                      title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
-                    >
-                      {' '}
-                      Privacy Policy{' '}
-                    </a>
-                  </li>
-                </ul>
-              </div>
             </div>
 
-            <hr className="mb-10 mt-16 border-gray-200" />
+            <hr className="mb-8 mt-4 dark:border-gray-600" />
 
             <div className="sm:flex sm:items-center sm:justify-between">
               <p className="text-sm text-gray-600">
                 © Copyright 2021, All Rights Reserved by Postcraft
               </p>
 
-              <ul className="mt-5 flex items-center space-x-3 sm:mt-0 md:order-3">
+              <ul className="flex items-center space-x-3 sm:mt-0 md:order-3">
                 <li>
                   <a
                     href="#"
@@ -427,7 +290,7 @@ const Faqs = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </LayoutSite>
     </>

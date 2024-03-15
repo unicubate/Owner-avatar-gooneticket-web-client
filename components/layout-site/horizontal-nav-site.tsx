@@ -2,22 +2,17 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { NavbarSiteProps } from '.';
 import { ButtonInput, ThemeToggle } from '../ui-setting';
 import { Button } from '../ui/button';
 
-export type NavbarProps = {
-  title: string;
-  href: string;
-  description?: string;
-  icon?: any;
-};
 interface Props {
   user?: any;
   showDrawer?: () => void;
 }
 
 const HorizontalNavSite = ({ user, showDrawer }: Props) => {
-  const [navigation] = useState<NavbarProps[]>([
+  const [navigation] = useState<NavbarSiteProps[]>([
     {
       title: 'Explore',
       href: '/explore',
@@ -27,7 +22,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
       href: '/faqs',
     },
     {
-      title: 'about',
+      title: 'About',
       href: '/about',
     },
     {
@@ -104,10 +99,10 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     key={index}
                     href={`${item?.href}`}
                     title={item?.title}
-                    className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                    className={`whitespace-nowrap py-4 text-sm font-medium transition-all duration-200 ${
                       isActive
-                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                        : `border-transparent text-gray-500 hover:text-indigo-600 dark:text-gray-300`
+                        ? `text-indigo-600 `
+                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
                     } `}
                   >
                     {item?.icon}
@@ -129,7 +124,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="ghost"
                   onClick={() => {
-                    push(`${user?.profile ? `/dashboard` : `/login`}`);
+                    push(`${user?.id ? `/dashboard` : `/login`}`);
                   }}
                 >
                   Log In
@@ -142,7 +137,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="info"
                   onClick={() => {
-                    push(`${user?.profile ? `/dashboard` : `/register`}`);
+                    push(`${user?.id ? `/dashboard` : `/register`}`);
                   }}
                 >
                   Sign Up

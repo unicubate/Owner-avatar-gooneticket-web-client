@@ -3,8 +3,8 @@ import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
-import { Button, Upload, UploadFile, UploadProps } from 'antd';
-import { PlusIcon, UploadIcon } from 'lucide-react';
+import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -15,6 +15,8 @@ import { ButtonInput, ReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { AudioPlayerInput } from '../ui-setting/audio-player-Input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
+
+const { Dragger } = Upload;
 
 type Props = {
   postId?: string;
@@ -178,7 +180,7 @@ const CreateOrUpdateFormAudioPost = ({
                           >
                             {imageList.length >= 1 ? null : (
                               <div className="text-center text-black dark:text-white">
-                                <PlusIcon />
+                                <UploadOutlined />
                                 <div style={{ marginTop: 8 }}>Upload cover</div>
                               </div>
                             )}
@@ -248,8 +250,40 @@ const CreateOrUpdateFormAudioPost = ({
                     </>
                   ) : (
                     <>
-                      <div className="mt-4">
-                        <Controller
+                      <Controller
+                        name="attachmentFiles"
+                        control={control}
+                        render={({ field: { onChange } }) => (
+                          <>
+                            <div className="mt-4 mx-auto justify-center text-center">
+                              <Dragger
+                                multiple={false}
+                                name="attachmentFiles"
+                                listType="picture"
+                                className="upload-list-inline dark:text-white"
+                                fileList={fileList}
+                                onChange={handleFileChange}
+                                maxCount={1}
+                                accept=".mp3"
+                              >
+                                <p className="ant-upload-drag-icon">
+                                  <InboxOutlined />
+                                </p>
+                                <p className="dark:text-white">
+                                  Click or drag file audio to this area to
+                                  upload
+                                </p>
+                                <p className="dark:text-gray-600">
+                                  Support for a single or bulk upload. Strictly
+                                  prohibited from uploading company data or
+                                  other banned files.
+                                </p>
+                              </Dragger>
+                            </div>
+                          </>
+                        )}
+                      />
+                      {/* <Controller
                           name="attachment"
                           control={control}
                           render={({ field: { onChange } }) => (
@@ -276,8 +310,7 @@ const CreateOrUpdateFormAudioPost = ({
                               </div>
                             </>
                           )}
-                        />
-                      </div>
+                        /> */}
                       <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                         <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                           <div className="flex min-w-0 flex-1 items-center">

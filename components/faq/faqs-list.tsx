@@ -1,14 +1,13 @@
 'use client';
 
+import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
-import { BiMinus, BiPlus } from 'react-icons/bi';
-
 interface Props {
   item: any;
   index: number;
 }
 
-const FaqsList: React.FC<Props> = ({ item, index }) => {
+const FaqsList = ({ item, index }: Props) => {
   const [showFaq, setShowFaq] = useState<boolean>(false);
 
   const handlerAction = () => {
@@ -20,13 +19,19 @@ const FaqsList: React.FC<Props> = ({ item, index }) => {
         <h3>
           <button
             onClick={() => handlerAction()}
-            className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold text-gray-900 sm:p-6"
+            className="flex w-full items-center justify-between px-6 py-5 text-left text-lg font-semibold sm:p-6"
           >
             <span> {item?.title} </span>
             {item?.id && showFaq ? (
-              <BiMinus className="ml-4" onClick={() => handlerAction()} />
+              <MinusIcon
+                className="ml-4 size-4"
+                onClick={() => handlerAction()}
+              />
             ) : (
-              <BiPlus className="ml-4" onClick={() => handlerAction()} />
+              <PlusIcon
+                className="ml-4 size-4"
+                onClick={() => handlerAction()}
+              />
             )}
           </button>
         </h3>

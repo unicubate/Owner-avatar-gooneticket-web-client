@@ -2,14 +2,22 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import Head from 'next/head';
 import { useInputState } from '../hooks';
 import { HorizontalNavSite } from './horizontal-nav-site';
+import { VerticalNavSite } from './vertical-nav-site';
 
 interface IProps {
   title: string;
   children: React.ReactNode;
 }
 
+export type NavbarSiteProps = {
+  title: string;
+  href: string;
+  description?: string;
+  icon?: any;
+};
+
 const LayoutSite = ({ children, title }: IProps) => {
-  const { isOpen, setIsOpen } = useInputState();
+  const { isOpen, setIsOpen, userStorage } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
@@ -32,7 +40,7 @@ const LayoutSite = ({ children, title }: IProps) => {
       </Head>
 
       {/* <div className="min-h-screen space-y-5"> */}
-      <HorizontalNavSite showDrawer={showDrawer} />
+      <HorizontalNavSite showDrawer={showDrawer} user={userStorage} />
 
       {/* Fix Drawer */}
       <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
@@ -41,14 +49,12 @@ const LayoutSite = ({ children, title }: IProps) => {
         </SheetTrigger>
         <SheetContent className="dark:border-gray-800 dark:bg-[#1c1b22]">
           <div className="flex flex-col overflow-y-auto pt-5">
-            {/* <VerticalNavDashboard /> */}
+            <VerticalNavSite />
           </div>
         </SheetContent>
       </Sheet>
       {/*End Fix Drawer */}
-      <main>
-        <div className="mx-auto mb-10 lg:flex">{children}</div>
-      </main>
+      <main>{children}</main>
       {/* </div> */}
     </>
   );

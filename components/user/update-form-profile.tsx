@@ -10,8 +10,8 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { UploadOutlined } from '@ant-design/icons';
 import { Avatar, GetProp, Select, Space, Upload, UploadProps } from 'antd';
-import { PlusIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
@@ -139,11 +139,13 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
   };
 
   const handleChange: UploadProps['onChange'] = (info) => {
-    setAttachment(info.file.originFileObj);
-    getBase64(info.file.originFileObj as FileType, (url) => {
-      setAttachment(info.file.originFileObj);
-      setImageUrl(url as any);
-    });
+    const { file } = info;
+    if (file?.status === 'done') {
+      getBase64(file?.originFileObj as FileType, (url) => {
+        setImageUrl(url as any);
+      });
+      setAttachment(file?.originFileObj);
+    }
   };
 
   return (
@@ -185,8 +187,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                           />
                         ) : (
                           <div className="text-center text-black dark:text-white">
-                            <PlusIcon />
-                            <div style={{ marginTop: 8 }}>Upload</div>
+                            <UploadOutlined />
+                            <div style={{ marginTop: 8 }}>Profile</div>
                           </div>
                         )}
                       </Upload>
