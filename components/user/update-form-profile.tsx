@@ -140,12 +140,11 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
 
   const handleChange: UploadProps['onChange'] = (info) => {
     const { file } = info;
-    console.log('file =====>', file);
-    if (file?.status === 'done') {
+    if (['done', 'error'].includes(String(file?.status))) {
       getBase64(file?.originFileObj as FileType, (url) => {
         setImageUrl(url as any);
+        setAttachment(file?.originFileObj);
       });
-      setAttachment(file?.originFileObj);
     }
   };
 
