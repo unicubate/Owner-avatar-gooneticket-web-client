@@ -110,11 +110,10 @@ export const GetAllCategoriesAPI = (payload: {
   isPaginate: 'true' | 'false';
   take: number;
   sort: SortModel;
-  queryKey: string[];
 }) => {
-  const { take, organizationId, isPaginate, sort, queryKey } = payload;
+  const { take, organizationId, isPaginate, sort } = payload;
   const { data, isError, isLoading, status, refetch } = useQuery({
-    queryKey: queryKey,
+    queryKey: ['categories', { ...payload }],
     queryFn: async () =>
       await getCategoriesAPI({
         organizationId: organizationId,

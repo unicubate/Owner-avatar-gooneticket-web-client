@@ -7,7 +7,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -29,13 +29,13 @@ const schema = yup.object({
   categories: yup.array().optional(),
 });
 
-const CreateOrUpdateFormPost: React.FC<Props> = ({
+const CreateOrUpdateFormPost = ({
   postId,
   post,
   refetch,
   uploadImages,
   organizationId,
-}) => {
+}: Props) => {
   const router = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -56,7 +56,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     organizationId,
     sort: 'DESC',
     take: 100,
-    queryKey: ['categories'],
   });
 
   useEffect(() => {

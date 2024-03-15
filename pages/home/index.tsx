@@ -3,11 +3,12 @@
 import { GetInfiniteFollowsPostsAPI } from '@/api-site/post';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListFollowPosts } from '@/components/post/list-follow-posts';
+import { PostSkeleton } from '@/components/skeleton/post-skeleton';
 import { ButtonLoadMore } from '@/components/ui-setting';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
+import { itemsNumberArray } from '@/utils/utils';
 import { GetStaticPropsContext } from 'next';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -34,7 +35,11 @@ const Home = () => {
   }, [inView, fetchNextPage, hasNextPage]);
 
   const dataTablePosts = isLoadingPosts ? (
-    <LoadingFile />
+    <>
+      {itemsNumberArray(4).map((i, index) => (
+        <PostSkeleton index={index} />
+      ))}
+    </>
   ) : isErrorPosts ? (
     <ErrorFile title="404" description="Error find data please try again" />
   ) : dataPosts?.pages[0]?.data?.total <= 0 ? (

@@ -32,6 +32,9 @@ const PostSkeleton = ({ index }: { index: number }) => {
           <Skeleton className="ml-2 size-8 rounded-md" />
           <Skeleton className="ml-2 size-8 rounded-md" />
         </div>
+        <div className="mt-6 flex items-center font-medium text-gray-600">
+          <Skeleton className="h-12 w-full" />
+        </div>
       </div>
     </div>
   );

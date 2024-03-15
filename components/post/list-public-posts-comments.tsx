@@ -5,7 +5,6 @@ import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { BiComment } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
 import { IoShareOutline } from 'react-icons/io5';
@@ -20,11 +19,7 @@ type Props = {
   userVisitor: UserVisitorModel;
 };
 
-const ListPublicPostsComments: React.FC<Props> = ({
-  item,
-  commentTake,
-  userVisitor,
-}) => {
+const ListPublicPostsComments = ({ item, commentTake, userVisitor }: Props) => {
   const { push, locale } = useRouter();
   return (
     <>

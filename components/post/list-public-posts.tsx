@@ -4,7 +4,6 @@ import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { BiComment } from 'react-icons/bi';
 import { FiDownload } from 'react-icons/fi';
 import { IoShareOutline } from 'react-icons/io5';
@@ -20,7 +19,7 @@ type Props = {
   commentTake: number;
 };
 
-const ListPublicPosts: React.FC<Props> = ({ item, commentTake }) => {
+const ListPublicPosts = ({ item, commentTake }: Props) => {
   const { locale, push } = useRouter();
   const userVisiter = useAuth() as any;
   return (

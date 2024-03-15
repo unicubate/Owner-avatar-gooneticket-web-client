@@ -11,8 +11,7 @@ type Props = {
   typeIds: PostType[];
 };
 
-export function PublicPostsHome(props: Props) {
-  const { typeIds, userVisitor } = props;
+const PublicPostsHome = ({ typeIds, userVisitor }: Props) => {
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -61,4 +60,5 @@ export function PublicPostsHome(props: Props) {
       </div>
     </>
   );
-}
+};
+export { PublicPostsHome };

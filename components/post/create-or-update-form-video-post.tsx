@@ -1,5 +1,4 @@
 import { GetAllCategoriesAPI } from '@/api-site/category';
-import { GetAllMembershipsAPI } from '@/api-site/membership';
 import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
 import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
@@ -8,7 +7,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -36,13 +35,13 @@ const schema = yup.object({
   // }),
 });
 
-const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
+const CreateOrUpdateFormVideoPost = ({
   postId,
   post,
   refetch,
   uploadImages,
   organizationId,
-}) => {
+}: Props) => {
   const { push, back } = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -59,20 +58,12 @@ const CreateOrUpdateFormVideoPost: React.FC<Props> = ({
   } = useReactHookForm({ schema });
 
   const watchWhoCanSee = watch('whoCanSee', null);
-  const { data: memberships } = GetAllMembershipsAPI({
-    organizationId,
-    take: 100,
-    page: 1,
-    sort: 'DESC',
-    queryKey: ['memberships'],
-  });
 
   const { data: categories } = GetAllCategoriesAPI({
     isPaginate: 'false',
     organizationId,
     sort: 'DESC',
     take: 100,
-    queryKey: ['categories'],
   });
 
   useEffect(() => {

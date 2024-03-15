@@ -7,8 +7,11 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 import { Skeleton } from '../ui/skeleton';
 import { ListLastPosts } from './list-last-posts';
 
-export const PublicLastPosts = (props: { userVisitor: UserVisitorModel }) => {
-  const { userVisitor } = props;
+export const PublicLastPosts = ({
+  userVisitor,
+}: {
+  userVisitor: UserVisitorModel;
+}) => {
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,

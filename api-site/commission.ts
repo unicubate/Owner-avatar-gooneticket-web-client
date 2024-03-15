@@ -173,12 +173,11 @@ export const GetInfiniteCommissionsAPI = (payload: {
   status?: string;
   take: number;
   sort: SortModel;
-  queryKey: string[];
   search?: string;
 }) => {
-  const { organizationId, take, sort, status, search, queryKey } = payload;
+  const { organizationId, take, sort, status, search } = payload;
   return useInfiniteQuery({
-    queryKey: [...queryKey, { organizationId, take, sort, status }],
+    queryKey: ['commissions', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getCommissionsAPI({

@@ -97,10 +97,10 @@ export const getOrderItemsAPI = async (
   });
 };
 
-export const GetOneOrderAPI = (options: { orderId: string }) => {
-  const { orderId } = options;
+export const GetOneOrderAPI = (payload: { orderId: string }) => {
+  const { orderId } = payload;
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
-    queryKey: ['order'],
+    queryKey: ['order', payload],
     queryFn: async () =>
       await makeApiCall({
         action: 'getOneOrder',

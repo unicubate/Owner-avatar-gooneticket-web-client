@@ -68,7 +68,6 @@ const CreateOrUpdateFormAudioPost = ({
     organizationId,
     sort: 'DESC',
     take: 100,
-    queryKey: ['categories'],
   });
 
   useEffect(() => {

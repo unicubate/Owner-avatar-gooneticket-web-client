@@ -26,7 +26,7 @@ export const GetStatisticsTransactionsAPI = (payload: {
   const { days, isEnabled } = payload;
   const { data, isError, isLoading, status, isPending, error, refetch } =
     useQuery({
-      queryKey: ['statistics-transactions', { days }],
+      queryKey: ['statistics-transactions', { ...payload }],
       queryFn: async () =>
         await makeApiCall({
           action: 'getStatisticsTransactions',

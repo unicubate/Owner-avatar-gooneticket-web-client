@@ -14,7 +14,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import { PlusIcon, UploadIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
@@ -59,12 +59,12 @@ const schema = yup.object({
   }),
 });
 
-const CreateOrUpdateFormShop: React.FC<Props> = ({
+const CreateOrUpdateFormShop = ({
   product,
   uploadImages,
   uploadFiles,
   refetch,
-}) => {
+}: Props) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
 

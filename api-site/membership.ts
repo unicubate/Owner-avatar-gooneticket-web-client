@@ -158,11 +158,10 @@ export const GetAllMembershipsAPI = (payload: {
   page: number;
   status?: string;
   sort: SortModel;
-  queryKey: string[];
 }) => {
-  const { organizationId, take, sort, queryKey, page } = payload;
+  const { organizationId, take, sort, page } = payload;
   const { data, isError, isLoading, status, refetch } = useQuery({
-    queryKey: queryKey,
+    queryKey: ['memberships', { ...payload }],
     queryFn: async () =>
       await getMembershipsAPI({
         organizationId,

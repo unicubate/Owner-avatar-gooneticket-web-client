@@ -10,8 +10,7 @@ type Props = {
   organizationId: string;
 };
 
-export function PublicCommissions(props: Props) {
-  const { organizationId } = props;
+const PublicCommissions = ({ organizationId }: Props) => {
   const { ref, inView } = useInView();
 
   const {
@@ -26,7 +25,6 @@ export function PublicCommissions(props: Props) {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    queryKey: ['commissions', 'infinite'],
   });
 
   useEffect(() => {
@@ -78,4 +76,5 @@ export function PublicCommissions(props: Props) {
       </div>
     </>
   );
-}
+};
+export { PublicCommissions };

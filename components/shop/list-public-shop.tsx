@@ -16,8 +16,7 @@ type Props = {
   item: ProductModel;
 };
 
-export function ListPublicShop(props: Props) {
-  const { item } = props;
+const ListPublicShop = ({ item }: Props) => {
   const { isOpen, setIsOpen, userStorage } = useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
@@ -116,7 +115,7 @@ export function ListPublicShop(props: Props) {
               <ReadMore html={String(item?.title ?? '')} value={60} />
             </Link>
           </h3>
-          <p className="mt-2 text-base font-normal text-gray-600 dark:text-white">
+          <p className="mt-2 text-base font-normal text-gray-600">
             <HtmlParser html={String(item?.description ?? '')} value={60} />
           </p>
           {/* <div className="sm:flex flex-col sm:items-end sm:justify-between">
@@ -130,4 +129,5 @@ export function ListPublicShop(props: Props) {
       <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
-}
+};
+export { ListPublicShop };

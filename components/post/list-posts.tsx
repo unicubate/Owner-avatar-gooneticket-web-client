@@ -14,7 +14,6 @@ import {
   TrashIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -25,7 +24,7 @@ type Props = {
   index: number;
 };
 
-const ListPosts: React.FC<Props> = ({ item, index }) => {
+const ListPosts = ({ item, index }: Props) => {
   const { push } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 

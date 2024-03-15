@@ -36,14 +36,14 @@ type Props = {
   organizationId: string;
 };
 
-const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
+const CreateOrUpdateFormGalleryPost = ({
   uploadImages,
   post,
   refetch,
   organizationId,
   postId,
   albumId,
-}) => {
+}: Props) => {
   const { push, back } = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -64,7 +64,6 @@ const CreateOrUpdateFormGalleryPost: React.FC<Props> = ({
     organizationId,
     sort: 'DESC',
     take: 100,
-    queryKey: ['categories'],
   });
 
   useEffect(() => {

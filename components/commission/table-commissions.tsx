@@ -19,7 +19,7 @@ type Props = {
   organizationId: string;
 };
 
-const TableCommissions: React.FC<Props> = ({ organizationId }) => {
+const TableCommissions = ({ organizationId }: Props) => {
   const { search, handleSetSearch } = useInputState();
   const router = useRouter();
   const { ref, inView } = useInView();
@@ -36,7 +36,6 @@ const TableCommissions: React.FC<Props> = ({ organizationId }) => {
     take: 10,
     sort: 'DESC',
     search,
-    queryKey: ['commissions', 'infinite'],
   });
 
   useEffect(() => {
