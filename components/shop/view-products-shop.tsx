@@ -70,7 +70,7 @@ const ViewProductsShop = ({ item }: Props) => {
             <div className="mt-2 font-bold text-2xl">{item?.title ?? ''}</div>
           ) : null}
 
-          <div className="relative shrink-0 cursor-pointer">
+          <div className="mt-4 relative shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
                 <p className="text-3xl">{item?.currency?.symbol ?? ''}</p>

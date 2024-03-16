@@ -13,8 +13,8 @@ const ProductSkeleton = ({ index }: { index: number }) => {
         <div className="mt-4 mx-auto justify-center text-center">
           <Skeleton className="h-4 w-full" />
         </div>
-        <div className="mt-6 flex items-center font-medium text-gray-600">
-          <Skeleton className="h-4 w-40 rounded-md" />
+        <div className="mt-6 flex items-center">
+          <Skeleton className="h-10 w-24 rounded-md" />
           <Skeleton className="ml-auto h-10 w-40 rounded-md" />
         </div>
         <div className="mt-6 space-y-2">
@@ -23,12 +23,12 @@ const ProductSkeleton = ({ index }: { index: number }) => {
           <Skeleton className="h-4 w-full" />
         </div>
 
-        <div className="mt-6 flex items-center font-medium text-gray-600">
+        <div className="mt-6 flex items-center">
           <Skeleton className="size-8 rounded-md" />
           <Skeleton className="ml-2 size-8 rounded-md" />
         </div>
 
-        <div className="mt-6 flex items-center font-medium text-gray-600">
+        <div className="mt-6 flex items-center">
           <Skeleton className="h-12 w-full" />
         </div>
       </div>

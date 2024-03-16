@@ -15,6 +15,7 @@ export type UserAddressModel = {
   region: string;
   street1: string;
   street2: string;
+  isUpdated: boolean;
   organizationId: string;
   createdAt: Date;
   id: string;

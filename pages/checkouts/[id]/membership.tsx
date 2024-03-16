@@ -7,6 +7,8 @@ import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
+import { MembershipCheckoutSkeleton } from '@/components/skeleton/membership-checkout-skeleton';
+import { ProfileCheckoutSkeleton } from '@/components/skeleton/profile-checkout-skeleton';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
@@ -126,46 +128,61 @@ const CheckoutMembership = () => {
                       </div>
                     ) : null}
                   </>
-                ) : null}
+                ) : (
+                  <MembershipCheckoutSkeleton />
+                )}
               </div>
             </div>
 
             <div className="px-5 py-6 md:px-8">
               <div className="flow-root">
                 <div className="-my-6 divide-y divide-gray-200 dark:divide-gray-800 ">
-                  <div className="py-6">
-                    <div className="mb-2 flex items-center">
-                      <AvatarComponent
-                        size={40}
-                        className="size-10 shrink-0 rounded-full"
-                        profile={item?.profile}
-                      />
+                  {item?.id ? (
+                    <>
+                      <div className="py-6">
+                        <div className="mb-2 flex items-center">
+                          <AvatarComponent
+                            size={40}
+                            className="size-10 shrink-0 rounded-full"
+                            profile={item?.profile}
+                          />
 
-                      <div className="ml-2 cursor-pointer">
-                        <p className="text-sm font-bold">
-                          {item?.profile?.firstName ?? ''}{' '}
-                          {item?.profile?.lastName ?? ''}
-                        </p>
-                        <p className="mt-1 text-sm font-medium text-gray-500">
-                          Checkout
-                        </p>
-                      </div>
+                          <div className="ml-2 cursor-pointer">
+                            <p className="text-sm font-bold">
+                              {item?.profile?.firstName ?? ''}{' '}
+                              {item?.profile?.lastName ?? ''}
+                            </p>
+                            <p className="mt-1 text-sm font-medium text-gray-500">
+                              Checkout
+                            </p>
+                          </div>
 
-                      <div className="ml-auto">
-                        <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                          <Link
-                            className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                            href={`/${username}/memberships`}
+                          {/* <div className="ml-auto">
+                            <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
+                              <Link
+                                className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
+                                href={`/${username}/memberships`}
+                              >
+                                Membership
+                              </Link>
+                            </p>
+                          </div> */}
+
+                          <ButtonInput
+                            type="button"
+                            size="sm"
+                            variant="info"
+                            className="ml-auto"
                           >
-                            Membership
-                          </Link>
-                        </p>
+                            <Link href={`/${username}/memberships`}>
+                              Membership
+                            </Link>
+                          </ButtonInput>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="py-6">
-                    <ul className="space-y-3">
-                      {/* <li className="flex items-center justify-between">
+                      <div className="py-6">
+                        <ul className="space-y-3">
+                          {/* <li className="flex items-center justify-between">
                             <p className="text-sm font-medium dark:text-white">
                               Tva
                             </p>
@@ -183,118 +200,116 @@ const CheckoutMembership = () => {
                               </>
                             ) : null}
                           </li> */}
-                      <li className="flex items-center justify-between">
-                        <p className="text-3xl font-medium dark:text-white">
-                          Total
-                        </p>
-                        {newAmount?.value ? (
-                          <>
-                            <p className="ml-auto text-xl font-bold dark:text-white">
-                              {newAmount?.currency}
+                          <li className="flex items-center justify-between">
+                            <p className="text-3xl font-medium dark:text-white">
+                              Total
                             </p>
-                            <p className="ml-1 text-xl font-bold dark:text-white">
-                              {formatePrice({
-                                value: Number(newAmount?.value),
-                                isDivide: false,
-                              }) ?? ''}
-                            </p>
-                          </>
-                        ) : null}
-                      </li>
-                    </ul>
-                  </div>
-                  {userBuyer?.organizationId !== item?.organizationId ? (
-                    <>
-                      <div className="py-4">
-                        <h2 className="font-bold text-gray-500 text-base">
-                          Billing Information
-                        </h2>
+                            {newAmount?.value ? (
+                              <>
+                                <p className="ml-auto text-xl font-bold dark:text-white">
+                                  {newAmount?.currency}
+                                </p>
+                                <p className="ml-1 text-xl font-bold dark:text-white">
+                                  {formatePrice({
+                                    value: Number(newAmount?.value),
+                                    isDivide: false,
+                                  }) ?? ''}
+                                </p>
+                              </>
+                            ) : null}
+                          </li>
+                        </ul>
                       </div>
-
-                      <div className="py-4">
-                        <CreateOrUpdateUserAddressForm
-                          userAddress={userAddress}
-                        />
-                      </div>
-
-                      {userAddress?.street1 &&
-                      userAddress?.city &&
-                      userAddress?.country ? (
+                      {userBuyer?.organizationId !== item?.organizationId ? (
                         <>
-                          <div className="py-4">
-                            <h2 className="font-bold text-gray-500 text-base">
-                              Payment Method
-                            </h2>
-                          </div>
-                          <div className="py-6">
-                            <div className="flex items-center space-x-4">
-                              <ButtonInput
-                                size="lg"
-                                type="button"
-                                variant={isCardPay ? 'info' : 'ghost'}
-                                className="w-full"
-                                onClick={() => {
-                                  setIsPayPalPay(false);
-                                  setIsCardPay(true);
-                                }}
-                              >
-                                Card
-                              </ButtonInput>
-                              <ButtonInput
-                                size="lg"
-                                type="button"
-                                variant={isPayPalPay ? 'info' : 'ghost'}
-                                className="w-full"
-                                onClick={() => {
-                                  setIsCardPay(false);
-                                  setIsPayPalPay(true);
-                                }}
-                              >
-                                PayPal
-                              </ButtonInput>
-                            </div>
+                          <CreateOrUpdateUserAddressForm
+                            userAddress={userAddress}
+                          />
 
+                          {userAddress?.isUpdated &&
+                          userAddress?.street1 &&
+                          userAddress?.city &&
+                          userAddress?.country ? (
                             <>
-                              {isCardPay ? (
-                                <>
-                                  <CreateCardStripe
-                                    paymentModel="STRIPE-SUBSCRIBE"
-                                    data={{
-                                      userAddress,
-                                      membershipId,
-                                      amount: newAmount,
-                                      userReceiveId: item?.userId,
-                                      userBuyerId: userBuyer?.id,
-                                      organizationSellerId:
-                                        item?.organizationId,
-                                      organizationBuyerId:
-                                        userBuyer?.organizationId,
+                              <div className="py-4">
+                                <h2 className="font-bold text-gray-500 text-base">
+                                  Payment Method
+                                </h2>
+                              </div>
+                              <div className="py-6">
+                                <div className="flex items-center space-x-4">
+                                  <ButtonInput
+                                    size="lg"
+                                    type="button"
+                                    variant={isCardPay ? 'info' : 'ghost'}
+                                    className="w-full"
+                                    onClick={() => {
+                                      setIsPayPalPay(false);
+                                      setIsCardPay(true);
                                     }}
-                                  />
-                                </>
-                              ) : null}
+                                  >
+                                    Card
+                                  </ButtonInput>
+                                  <ButtonInput
+                                    size="lg"
+                                    type="button"
+                                    variant={isPayPalPay ? 'info' : 'ghost'}
+                                    className="w-full"
+                                    onClick={() => {
+                                      setIsCardPay(false);
+                                      setIsPayPalPay(true);
+                                    }}
+                                  >
+                                    PayPal
+                                  </ButtonInput>
+                                </div>
 
-                              {isPayPalPay ? (
-                                <CreatePaymentPayPal
-                                  paymentModel="PAYPAL-SUBSCRIBE"
-                                  data={{
-                                    userAddress,
-                                    membershipId,
-                                    amount: newAmount,
-                                    userReceiveId: item?.userId,
-                                    userBuyerId: userBuyer?.id,
-                                    organizationSellerId: item?.organizationId,
-                                    organizationBuyerId:
-                                      userBuyer?.organizationId,
-                                  }}
-                                />
-                              ) : null}
+                                <>
+                                  {isCardPay ? (
+                                    <>
+                                      <CreateCardStripe
+                                        paymentModel="STRIPE-SUBSCRIBE"
+                                        data={{
+                                          userAddress,
+                                          membershipId,
+                                          amount: newAmount,
+                                          userReceiveId: item?.userId,
+                                          userBuyerId: userBuyer?.id,
+                                          organizationSellerId:
+                                            item?.organizationId,
+                                          organizationBuyerId:
+                                            userBuyer?.organizationId,
+                                        }}
+                                      />
+                                    </>
+                                  ) : null}
+
+                                  {isPayPalPay ? (
+                                    <CreatePaymentPayPal
+                                      paymentModel="PAYPAL-SUBSCRIBE"
+                                      data={{
+                                        userAddress,
+                                        membershipId,
+                                        amount: newAmount,
+                                        userReceiveId: item?.userId,
+                                        userBuyerId: userBuyer?.id,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userBuyer?.organizationId,
+                                      }}
+                                    />
+                                  ) : null}
+                                </>
+                              </div>
                             </>
-                          </div>
+                          ) : null}
                         </>
                       ) : null}
                     </>
-                  ) : null}
+                  ) : (
+                    <ProfileCheckoutSkeleton />
+                  )}
                 </div>
               </div>
             </div>
