@@ -136,9 +136,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
   return (
     <>

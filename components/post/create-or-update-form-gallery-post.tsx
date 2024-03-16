@@ -20,6 +20,8 @@ import { SwitchInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
+const { Dragger } = Upload;
+
 const schema = yup.object({
   title: yup.string().optional(),
   description: yup.string().optional(),
@@ -133,9 +135,8 @@ const CreateOrUpdateFormGalleryPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
   return (
     <>
@@ -183,7 +184,7 @@ const CreateOrUpdateFormGalleryPost = ({
                                 listType="picture-card"
                                 fileList={imageList}
                                 onChange={handleImageChange}
-                                accept=".png,.jpg,.jpeg"
+                                accept=".png,.jpg,.jpeg,.gif"
                                 maxCount={10}
                               >
                                 {imageList.length >= 10 ? null : (

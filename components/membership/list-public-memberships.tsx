@@ -37,7 +37,7 @@ const ListPublicMemberships = ({ item }: Props) => {
                 uploads={item?.uploadsImages}
                 folder="memberships"
                 preview={false}
-                height={200}
+                height={250}
               />
             </div>
           ) : null}

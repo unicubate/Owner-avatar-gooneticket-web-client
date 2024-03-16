@@ -133,9 +133,8 @@ const CreateOrUpdateFormVideoPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
   return (
     <>
@@ -156,12 +155,12 @@ const CreateOrUpdateFormVideoPost = ({
                       <>
                         <div className="mx-auto justify-center text-center">
                           <Upload
-                            multiple
+                            multiple={false}
                             name="attachmentImages"
                             listType="picture-card"
                             fileList={imageList}
                             onChange={handleImageChange}
-                            accept=".png,.jpg,.jpeg"
+                            accept=".png,.jpg,.jpeg,.gif"
                             maxCount={1}
                           >
                             {imageList.length >= 1 ? null : (

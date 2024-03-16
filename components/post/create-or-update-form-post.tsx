@@ -123,9 +123,8 @@ const CreateOrUpdateFormPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
   return (
     <>

@@ -144,13 +144,11 @@ const CreateOrUpdateFormAudioPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
-  const handleFileChange: UploadProps['onChange'] = ({
-    fileList: newFileList,
-  }) => setFileList(newFileList);
+  const handleFileChange: UploadProps['onChange'] = ({ fileList }) =>
+    setFileList(fileList);
 
   return (
     <>

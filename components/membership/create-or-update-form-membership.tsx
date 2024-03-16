@@ -1,8 +1,8 @@
 import { CreateOrUpdateOneMembershipAPI } from '@/api-site/membership';
 import { MembershipFormModel } from '@/types/membership';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { UploadOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
-import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
@@ -113,9 +113,8 @@ const CreateOrUpdateFormMembership = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({
-    fileList: newImageList,
-  }) => setImageList(newImageList);
+  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
+    setImageList(fileList);
 
   return (
     <>
@@ -181,16 +180,17 @@ const CreateOrUpdateFormMembership = ({
                   <>
                     <div className="mx-auto justify-center text-center">
                       <Upload
+                        multiple={false}
                         name="attachmentImages"
                         listType="picture-card"
                         fileList={imageList}
                         onChange={handleImageChange}
-                        accept=".png,.jpg,.jpeg"
+                        accept=".png,.jpg,.jpeg,.gif"
                         maxCount={1}
                       >
                         {imageList.length >= 1 ? null : (
                           <div className="text-center dark:text-white">
-                            <PlusIcon />
+                            <UploadOutlined />
                             <div style={{ marginTop: 8 }}>Upload cover</div>
                           </div>
                         )}

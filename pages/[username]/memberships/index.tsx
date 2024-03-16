@@ -25,9 +25,9 @@ const MembershipsUserPublic = () => {
         }`}
         user={user}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-full py-6">
-            <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
+            <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-2 lg:gap-8 xl:gap-2">
               {user?.id ? (
                 <PublicMemberships organizationId={user?.organizationId} />
               ) : null}
