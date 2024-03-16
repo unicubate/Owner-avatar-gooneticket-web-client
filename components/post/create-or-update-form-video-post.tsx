@@ -8,7 +8,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
@@ -148,32 +148,24 @@ const CreateOrUpdateFormVideoPost = ({
                 </h2>
 
                 <div className="mt-2">
-                  <Controller
-                    name="attachmentImages"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <>
-                        <div className="mx-auto justify-center text-center">
-                          <Upload
-                            multiple={false}
-                            name="attachmentImages"
-                            listType="picture-card"
-                            fileList={imageList}
-                            onChange={handleImageChange}
-                            accept=".png,.jpg,.jpeg,.gif"
-                            maxCount={1}
-                          >
-                            {imageList.length >= 1 ? null : (
-                              <div className="text-center dark:text-white">
-                                <UploadOutlined />
-                                <div style={{ marginTop: 8 }}>Upload cover</div>
-                              </div>
-                            )}
-                          </Upload>
+                  <div className="mx-auto justify-center text-center">
+                    <Upload
+                      multiple={false}
+                      name="attachmentImages"
+                      listType="picture-card"
+                      fileList={imageList}
+                      onChange={handleImageChange}
+                      accept=".png,.jpg,.jpeg,.gif"
+                      maxCount={1}
+                    >
+                      {imageList.length >= 1 ? null : (
+                        <div className="text-center dark:text-white">
+                          <UploadOutlined />
+                          <div style={{ marginTop: 8 }}>Upload cover</div>
                         </div>
-                      </>
-                    )}
-                  />
+                      )}
+                    </Upload>
+                  </div>
                 </div>
 
                 <div className="mt-2">

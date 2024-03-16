@@ -8,7 +8,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
@@ -161,32 +161,24 @@ const CreateOrUpdateFormAudioPost = ({
                   {post?.id ? 'Update' : 'Create a new'} audio
                 </h2>
                 <div className="mt-4">
-                  <Controller
-                    name="attachmentImages"
-                    control={control}
-                    render={({ field: { onChange } }) => (
-                      <>
-                        <div className="mx-auto justify-center text-center">
-                          <Upload
-                            multiple
-                            name="attachmentImages"
-                            listType="picture-card"
-                            fileList={imageList}
-                            onChange={handleImageChange}
-                            accept=".png,.jpg,.jpeg,.gif"
-                            maxCount={1}
-                          >
-                            {imageList.length >= 1 ? null : (
-                              <div className="text-center text-black dark:text-white">
-                                <UploadOutlined />
-                                <div style={{ marginTop: 8 }}>Upload cover</div>
-                              </div>
-                            )}
-                          </Upload>
+                  <div className="mx-auto justify-center text-center">
+                    <Upload
+                      multiple
+                      name="attachmentImages"
+                      listType="picture-card"
+                      fileList={imageList}
+                      onChange={handleImageChange}
+                      accept=".png,.jpg,.jpeg,.gif"
+                      maxCount={1}
+                    >
+                      {imageList.length >= 1 ? null : (
+                        <div className="text-center text-black dark:text-white">
+                          <UploadOutlined />
+                          <div style={{ marginTop: 8 }}>Upload cover</div>
                         </div>
-                      </>
-                    )}
-                  />
+                      )}
+                    </Upload>
+                  </div>
                 </div>
 
                 <div className="mt-2">
@@ -248,67 +240,30 @@ const CreateOrUpdateFormAudioPost = ({
                     </>
                   ) : (
                     <>
-                      <Controller
-                        name="attachmentFiles"
-                        control={control}
-                        render={({ field: { onChange } }) => (
-                          <>
-                            <div className="mt-4 mx-auto justify-center text-center">
-                              <Dragger
-                                multiple={false}
-                                name="attachmentFiles"
-                                listType="picture"
-                                className="upload-list-inline dark:text-white"
-                                fileList={fileList}
-                                onChange={handleFileChange}
-                                maxCount={1}
-                                accept=".mp3"
-                              >
-                                <p className="ant-upload-drag-icon">
-                                  <InboxOutlined />
-                                </p>
-                                <p className="dark:text-white">
-                                  Click or drag file audio to this area to
-                                  upload
-                                </p>
-                                <p className="dark:text-gray-600">
-                                  Support for a single or bulk upload. Strictly
-                                  prohibited from uploading company data or
-                                  other banned files.
-                                </p>
-                              </Dragger>
-                            </div>
-                          </>
-                        )}
-                      />
-                      {/* <Controller
-                          name="attachment"
-                          control={control}
-                          render={({ field: { onChange } }) => (
-                            <>
-                              <div className="mx-auto justify-center text-center">
-                                <Upload
-                                  name="attachmentFiles"
-                                  listType="picture"
-                                  className="upload-list-inline"
-                                  fileList={fileList}
-                                  onChange={handleFileChange}
-                                  maxCount={1}
-                                  accept=".mp3"
-                                >
-                                  {fileList.length >= 1 ? null : (
-                                    <Button
-                                      className="text-center text-black dark:text-white"
-                                      icon={<UploadIcon />}
-                                    >
-                                      Upload audio
-                                    </Button>
-                                  )}
-                                </Upload>
-                              </div>
-                            </>
-                          )}
-                        /> */}
+                      <div className="mt-4 mx-auto justify-center text-center">
+                        <Dragger
+                          multiple={false}
+                          name="attachmentFiles"
+                          listType="picture"
+                          className="upload-list-inline dark:text-white"
+                          fileList={fileList}
+                          onChange={handleFileChange}
+                          maxCount={1}
+                          accept=".mp3"
+                        >
+                          <p className="ant-upload-drag-icon">
+                            <InboxOutlined />
+                          </p>
+                          <p className="dark:text-white">
+                            Click or drag file audio to this area to upload
+                          </p>
+                          <p className="dark:text-gray-600">
+                            Support for a single or bulk upload. Strictly
+                            prohibited from uploading company data or other
+                            banned files.
+                          </p>
+                        </Dragger>
+                      </div>
                       <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                         <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                           <div className="flex min-w-0 flex-1 items-center">

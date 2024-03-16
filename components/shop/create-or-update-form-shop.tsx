@@ -15,7 +15,7 @@ import { Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -208,34 +208,24 @@ const CreateOrUpdateFormShop = ({
               />
             </div>
 
-            <div className="mt-2 grid-cols-1 gap-x-6 gap-y-5">
-              <div className="mt-4">
-                <Controller
+            <div className="mt-4 grid-cols-1 gap-x-6 gap-y-5">
+              <div className="mx-auto justify-center text-center">
+                <Upload
+                  multiple
                   name="attachmentImages"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="mx-auto justify-center text-center">
-                        <Upload
-                          multiple
-                          name="attachmentImages"
-                          listType="picture-card"
-                          fileList={imageList}
-                          onChange={handleImageChange}
-                          accept=".png,.jpg,.jpeg"
-                          maxCount={10}
-                        >
-                          {imageList.length >= 10 ? null : (
-                            <div className="text-center dark:text-white">
-                              <UploadOutlined />
-                              <div style={{ marginTop: 8 }}>Upload</div>
-                            </div>
-                          )}
-                        </Upload>
-                      </div>
-                    </>
+                  listType="picture-card"
+                  fileList={imageList}
+                  onChange={handleImageChange}
+                  accept=".png,.jpg,.jpeg"
+                  maxCount={10}
+                >
+                  {imageList.length >= 10 ? null : (
+                    <div className="text-center dark:text-white">
+                      <UploadOutlined />
+                      <div style={{ marginTop: 8 }}>Upload</div>
+                    </div>
                   )}
-                />
+                </Upload>
               </div>
             </div>
 
@@ -327,38 +317,30 @@ const CreateOrUpdateFormShop = ({
                   </div>
                 ) : (
                   <>
-                    <Controller
-                      name="attachmentFiles"
-                      control={control}
-                      render={({ field: { onChange } }) => (
-                        <>
-                          <div className="mt-4 mx-auto justify-center text-center">
-                            <Dragger
-                              multiple
-                              name="attachmentFiles"
-                              listType="picture"
-                              className="upload-list-inline dark:text-white"
-                              fileList={fileList}
-                              onChange={handleFileChange}
-                              accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
-                              maxCount={10}
-                            >
-                              <p className="ant-upload-drag-icon">
-                                <InboxOutlined />
-                              </p>
-                              <p className="dark:text-white">
-                                Click or drag file to this area to upload
-                              </p>
-                              <p className="dark:text-gray-600">
-                                Support for a single or bulk upload. Strictly
-                                prohibited from uploading company data or other
-                                banned files.
-                              </p>
-                            </Dragger>
-                          </div>
-                        </>
-                      )}
-                    />
+                    <div className="mt-4 mx-auto justify-center text-center">
+                      <Dragger
+                        multiple
+                        name="attachmentFiles"
+                        listType="picture"
+                        className="upload-list-inline dark:text-white"
+                        fileList={fileList}
+                        onChange={handleFileChange}
+                        accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
+                        maxCount={10}
+                      >
+                        <p className="ant-upload-drag-icon">
+                          <InboxOutlined />
+                        </p>
+                        <p className="dark:text-white">
+                          Click or drag file to this area to upload
+                        </p>
+                        <p className="dark:text-gray-600">
+                          Support for a single or bulk upload. Strictly
+                          prohibited from uploading company data or other banned
+                          files.
+                        </p>
+                      </Dragger>
+                    </div>
                   </>
                 )}
               </div>

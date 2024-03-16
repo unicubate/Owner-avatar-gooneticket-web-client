@@ -11,7 +11,7 @@ import { Alert, Upload, UploadFile, UploadProps } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ListCarouselUpload } from '../shop/list-carousel-upload';
@@ -172,34 +172,24 @@ const CreateOrUpdateFormGalleryPost = ({
 
                   {!postId ? (
                     <div className="mb-4">
-                      <Controller
-                        name="attachmentImages"
-                        control={control}
-                        render={({}) => (
-                          <>
-                            <div className="mx-auto justify-center text-center">
-                              <Upload
-                                multiple
-                                name="attachmentImages"
-                                listType="picture-card"
-                                fileList={imageList}
-                                onChange={handleImageChange}
-                                accept=".png,.jpg,.jpeg,.gif"
-                                maxCount={10}
-                              >
-                                {imageList.length >= 10 ? null : (
-                                  <div className="text-center dark:text-white">
-                                    <UploadOutlined />
-                                    <div style={{ marginTop: 8 }}>
-                                      Upload image
-                                    </div>
-                                  </div>
-                                )}
-                              </Upload>
+                      <div className="mx-auto justify-center text-center">
+                        <Upload
+                          multiple
+                          name="attachmentImages"
+                          listType="picture-card"
+                          fileList={imageList}
+                          onChange={handleImageChange}
+                          accept=".png,.jpg,.jpeg,.gif"
+                          maxCount={10}
+                        >
+                          {imageList.length >= 10 ? null : (
+                            <div className="text-center dark:text-white">
+                              <UploadOutlined />
+                              <div style={{ marginTop: 8 }}>Upload image</div>
                             </div>
-                          </>
-                        )}
-                      />
+                          )}
+                        </Upload>
+                      </div>
                     </div>
                   ) : null}
 

@@ -11,7 +11,7 @@ import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
 import { useInputState } from '../hooks';
@@ -182,35 +182,23 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
-                  <div className="mt-4">
-                    <Controller
+                  <div className="mx-auto justify-center text-center">
+                    <Upload
+                      multiple
                       name="attachmentImages"
-                      control={control}
-                      render={({ field: { onChange } }) => (
-                        <>
-                          <div className="mx-auto justify-center text-center">
-                            <Upload
-                              multiple
-                              name="attachmentImages"
-                              listType="picture-card"
-                              fileList={imageList}
-                              onChange={handleImageChange}
-                              accept=".png,.jpg,.jpeg"
-                              maxCount={10}
-                            >
-                              {imageList.length >= 10 ? null : (
-                                <div className="text-center dark:text-white">
-                                  <PlusIcon />
-                                  <div style={{ marginTop: 8 }}>
-                                    Upload cover
-                                  </div>
-                                </div>
-                              )}
-                            </Upload>
-                          </div>
-                        </>
+                      listType="picture-card"
+                      fileList={imageList}
+                      onChange={handleImageChange}
+                      accept=".png,.jpg,.jpeg"
+                      maxCount={10}
+                    >
+                      {imageList.length >= 10 ? null : (
+                        <div className="text-center dark:text-white">
+                          <PlusIcon />
+                          <div style={{ marginTop: 8 }}>Upload cover</div>
+                        </div>
                       )}
-                    />
+                    </Upload>
                   </div>
                 </div>
 
