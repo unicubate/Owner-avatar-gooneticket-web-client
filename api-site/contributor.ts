@@ -20,10 +20,21 @@ export const CreateOneContributorAPI = ({
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (payload: ContributorFormModel) => {
-      await makeApiCall({
-        action: 'createOneContributor',
-        body: { ...payload },
-      });
+      const { email, userId, action } = payload;
+      if (action === 'INVITED') {
+        await makeApiCall({
+          action: 'createOneContributorInvited',
+          urlParams: { userId },
+        });
+      }
+      if (action === 'CREATED-NEW') {
+        await makeApiCall({
+          action: 'createOneContributor',
+          body: { email },
+        });
+      }
+
+      return 'ok';
     },
     onError: (error) => {
       queryClient.invalidateQueries({ queryKey });

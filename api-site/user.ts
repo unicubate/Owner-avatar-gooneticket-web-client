@@ -1,7 +1,7 @@
-import { ResponsePostModel } from '@/types/post';
 import {
   IpLocationModal,
   NextStep,
+  ResponseUserModel,
   UserForgotPasswordFormModel,
   UserLoginFormModel,
   UserModel,
@@ -268,11 +268,33 @@ export const GetOneUserMeAPI = () => {
 
 export const getUsersAPI = async (
   payload: PaginationRequest,
-): Promise<{ data: ResponsePostModel }> => {
+): Promise<{ data: ResponseUserModel }> => {
   return await makeApiCall({
     action: 'getUsers',
     queryParams: payload,
   });
+};
+
+export const VerifyTokenUsersAPI = (payload: object) => {
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['user-verify', payload],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'verifyTokenUsersAPI',
+        queryParams: payload,
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as any,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
 };
 
 export const deleteOneUserAPI = async (options: { userId: string }) => {

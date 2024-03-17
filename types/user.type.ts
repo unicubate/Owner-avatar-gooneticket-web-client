@@ -1,4 +1,9 @@
+import { PaginationResponse } from '@/utils/pagination-item';
 import { ProfileModel } from './profile.type';
+
+export type ResponseUserModel = {
+  value: Array<UserModel>;
+} & PaginationResponse;
 
 export type NextStep =
   | 'SETTING_PROFILE'

@@ -10,11 +10,15 @@ import { Tabs, TabsContent } from '@/components/ui/tabs';
 
 import { SearchInput } from '../ui-setting';
 
-const CreateContributorModal: React.FC<{
+const CreateContributorModal = ({
+  showModal,
+  setShowModal,
+  buttonDialog,
+}: {
   showModal: boolean;
   setShowModal: any;
   buttonDialog: React.ReactNode;
-}> = ({ showModal, setShowModal, buttonDialog }) => {
+}) => {
   const { search, isOpen, setIsOpen, handleSetSearch, hasErrors } =
     useInputState();
 

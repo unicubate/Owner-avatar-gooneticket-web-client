@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
+import { CreateOneContributorAPI } from '@/api-site/contributor';
 import { UserModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
@@ -8,7 +8,6 @@ import {
 } from '@/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
@@ -18,13 +17,13 @@ type Props = {
   index: number;
 };
 
-const ListInviteUsers: React.FC<Props> = ({ item, index }) => {
+const ListInviteUsers = ({ item, index }: Props) => {
   const { locale } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading, hasErrors, setHasErrors } =
     useInputState();
 
   // Create or Update data
-  const { mutateAsync: saveMutation } = CreateOrDeleteOneFollowerAPI({
+  const { mutateAsync: saveMutation } = CreateOneContributorAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -35,18 +34,18 @@ const ListInviteUsers: React.FC<Props> = ({ item, index }) => {
     },
   });
 
-  const followingItem = async (item: any) => {
+  const inviteItem = async (item: any) => {
     setLoading(true);
     setHasErrors(undefined);
     try {
       await saveMutation({
-        followerId: item?.profile?.userId,
-        action: 'CREATE',
+        userId: item?.id,
+        action: 'INVITED',
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Followed successfully',
+        text: 'Invitation send successfully',
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -91,7 +90,7 @@ const ListInviteUsers: React.FC<Props> = ({ item, index }) => {
               type="button"
               variant="ghost"
               loading={loading}
-              onClick={() => followingItem(item)}
+              onClick={() => inviteItem(item)}
             >
               Invite
             </ButtonInput>

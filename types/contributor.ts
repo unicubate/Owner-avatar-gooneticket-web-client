@@ -25,10 +25,7 @@ export type ContributorModel = {
 };
 
 export type ContributorFormModel = {
-  organizationId: string;
-  model: ModelType;
-  description: string;
-  postId: string;
-  productId: string;
-  userId: string;
+  action: 'INVITED' | 'CREATED-NEW';
+  email?: string;
+  userId?: string;
 };

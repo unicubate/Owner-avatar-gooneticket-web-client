@@ -1,3 +1,4 @@
+import { VariantButton } from '@/components/ui/button';
 import { ButtonInput } from '..';
 
 import {
@@ -15,6 +16,7 @@ interface Props {
   loading?: boolean;
   isOpen?: boolean;
   setIsOpen?: any;
+  variant?: VariantButton;
   buttonDialog: React.ReactNode;
   onClick: (node?: Element | null) => void;
 }
@@ -27,6 +29,7 @@ const ActionModalDialog: React.FC<Props> = ({
   onClick,
   setIsOpen,
   buttonDialog,
+  variant = 'danger',
 }) => {
   return (
     <>
@@ -51,7 +54,7 @@ const ActionModalDialog: React.FC<Props> = ({
               type="button"
               className="w-full"
               size="lg"
-              variant="danger"
+              variant={variant}
               onClick={onClick}
               loading={loading}
             >
