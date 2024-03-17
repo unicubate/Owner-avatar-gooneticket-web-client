@@ -27,7 +27,7 @@ export type UserRegisterFormModel = {
 };
 
 export type UserResetPasswordFormModel = {
-  newPassword: string;
+  password: string;
   token?: string;
   passwordConfirm: string;
 };

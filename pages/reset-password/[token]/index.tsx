@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
+import { useReactHookForm } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layout-auth';
 import { ButtonInput } from '@/components/ui-setting/button-input';
-import { TextInput } from '@/components/ui-setting/shadcn';
+import { TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserResetPasswordFormModel } from '@/types/user.type';
@@ -9,16 +10,14 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { resetPasswordAPI } from '../../../api-site/user';
 
 const schema = yup.object({
-  newPassword: yup.string().min(8, 'Minimum 8 symbols').required(),
+  password: yup.string().min(8, 'Minimum 8 symbols').required(),
   passwordConfirm: yup
     .string()
     .min(8, 'Minimum 8 symbols')
@@ -27,22 +26,19 @@ const schema = yup.object({
 });
 
 const ResetPassword = () => {
-  const router = useRouter();
-  const { query } = useRouter();
+  const { query, push } = useRouter();
+  const { redirect } = query;
   const token = String(query?.token);
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined,
-  );
+
   const {
     control,
-    reset,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserResetPasswordFormModel>({
-    resolver: yupResolver(schema),
-    mode: 'onChange',
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserResetPasswordFormModel> = async (
     payload: UserResetPasswordFormModel,
@@ -57,8 +53,7 @@ const ResetPassword = () => {
       AlertSuccessNotification({
         text: 'Email send successfully',
       });
-      reset();
-      router.push(`${`/login`}`);
+      push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -91,21 +86,19 @@ const ResetPassword = () => {
           )}
 
           <div className="mb-4">
-            <TextInput
+            <TextPasswordInput
               control={control}
               label="Password"
-              type="password"
-              name="newPassword"
+              name="password"
               placeholder="Password"
               errors={errors}
             />
           </div>
 
           <div className="mb-4">
-            <TextInput
+            <TextPasswordInput
               control={control}
               label="Confirm Password"
-              type="password"
               name="passwordConfirm"
               placeholder="Confirm Password"
               errors={errors}

@@ -86,11 +86,11 @@ export const registerUserAPI = async (
 export const resetPasswordAPI = async (
   payload: UserResetPasswordFormModel,
 ): Promise<{ data: UserModel }> => {
-  const { newPassword, passwordConfirm, token } = payload;
+  const { password, passwordConfirm, token } = payload;
   return await makeApiCall({
     action: 'resetPassword',
     urlParams: { token },
-    body: { password: newPassword, passwordConfirm },
+    body: { password: password, passwordConfirm },
   });
 };
 
