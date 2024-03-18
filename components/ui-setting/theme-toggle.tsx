@@ -27,7 +27,7 @@ const ThemeToggle = () => {
             {['system'].includes(theme as string) && (
               <Laptop2Icon
                 onClick={() => setTheme('light')}
-                className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+                className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:rotate-0 dark:scale-100"
               />
             )}
             {['light'].includes(theme as string) && (
