@@ -1,3 +1,4 @@
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { LayoutSite } from '@/components/layout-site';
 import { GetStaticPropsContext } from 'next';
 
@@ -6,16 +7,16 @@ const PrivacyPolicy = () => {
     <>
       <LayoutSite title="Privacy Policy">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 bg-white py-12 dark:bg-black sm:py-16 lg:py-20">
+          <div className="mt-6 bg-white py-12 dark:bg-[#1c1b22] sm:py-16 lg:py-20">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
                 Privacy Policy
               </h2>
             </div>
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
               <div className="mx-auto max-w-3xl xl:max-w-4xl">
                 <div className="mt-8">
-                  <p className="font-pj text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj text-base font-normal leading-7 text-gray-500">
                     {process.env.NEXT_PUBLIC_NAME_SITE} is a platform for
                     creators to accept support from their audience and share
                     exclusive content. At Buy Me a Pot, your privacy is
@@ -24,7 +25,7 @@ const PrivacyPolicy = () => {
                     our platform.
                   </p>
 
-                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-500">
                     {/* The services are provided by Publisherr Inc (parent company
                     and hereinafter referred to as “Buy Me a Coffee”), a
                     Delaware company with registered address at 2035 Sunset Lake
@@ -37,7 +38,7 @@ const PrivacyPolicy = () => {
                   <h2 className="font-pj mt-12 text-3xl font-bold">
                     Website Visitors
                   </h2>
-                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-500">
                     Like most website operators,{' '}
                     {process.env.NEXT_PUBLIC_NAME_SITE} collects
                     non-personally-identifying information of the sort that web
@@ -55,7 +56,7 @@ const PrivacyPolicy = () => {
                     website.
                   </p>
 
-                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-500">
                     {process.env.NEXT_PUBLIC_NAME_SITE} also collects
                     potentially personally-identifying information like Internet
                     Protocol (IP) addresses for logged in users and for users
@@ -72,7 +73,7 @@ const PrivacyPolicy = () => {
 
                   <h2 className="font-pj mt-12 text-3xl font-bold">Payments</h2>
 
-                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-500">
                     To make a payment to a creator on{' '}
                     {process.env.NEXT_PUBLIC_NAME_SITE}, you have to provide our
                     payment processor (Stripe) with your payment information.
@@ -89,7 +90,7 @@ const PrivacyPolicy = () => {
                     Gathering of Personally-Identifying Information
                   </h2>
 
-                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-700">
+                  <p className="font-pj mt-4 text-base font-normal leading-7 text-gray-500">
                     {`Certain visitors to ${process.env.NEXT_PUBLIC_NAME_SITE} websites choose to
                     interact with ${process.env.NEXT_PUBLIC_NAME_SITE} in ways that require 
                     ${process.env.NEXT_PUBLIC_NAME_SITE} to gather personally-identifying information. The
@@ -115,21 +116,21 @@ const PrivacyPolicy = () => {
             </div>
           </div>
 
-          <footer className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
-            {/* <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-12 gap-y-12 gap-x-8 xl:gap-x-12"> */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-8">
+          <MediumFooter />
+
+          {/* <footer className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-8 xl:gap-x-12">
               <div className="lg:col-span-2">
-                <p className="text-base font-semibold text-gray-900">Company</p>
+                <p className="text-base font-semibold">Company</p>
 
                 <ul className="mt-6 space-y-5">
                   <li>
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
-                      {' '}
-                      About{' '}
+                      About
                     </a>
                   </li>
 
@@ -137,10 +138,9 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
-                      {' '}
-                      Features{' '}
+                      Features
                     </a>
                   </li>
 
@@ -148,10 +148,9 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
-                      {' '}
-                      Works{' '}
+                      Works
                     </a>
                   </li>
 
@@ -159,7 +158,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Career{' '}
@@ -169,14 +168,14 @@ const PrivacyPolicy = () => {
               </div>
 
               <div className="lg:col-span-2">
-                <p className="text-base font-semibold text-gray-900">Help</p>
+                <p className="text-base font-semibold">Help</p>
 
                 <ul className="mt-6 space-y-4">
                   <li>
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Customer Support{' '}
@@ -187,7 +186,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Delivery Details{' '}
@@ -198,7 +197,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Terms & Conditions{' '}
@@ -209,7 +208,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Privacy Policy{' '}
@@ -219,16 +218,14 @@ const PrivacyPolicy = () => {
               </div>
 
               <div className="lg:col-span-2">
-                <p className="text-base font-semibold text-gray-900">
-                  Resources
-                </p>
+                <p className="text-base font-semibold">Resources</p>
 
                 <ul className="mt-6 space-y-5">
                   <li>
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Free eBooks{' '}
@@ -239,7 +236,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Development Tutorial{' '}
@@ -250,7 +247,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       How to - Blog{' '}
@@ -261,7 +258,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       YouTube Playlist{' '}
@@ -271,16 +268,14 @@ const PrivacyPolicy = () => {
               </div>
 
               <div className="lg:col-span-2">
-                <p className="text-base font-semibold text-gray-900">
-                  Extra Links
-                </p>
+                <p className="text-base font-semibold">Extra Links</p>
 
                 <ul className="mt-6 space-y-5">
                   <li>
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Customer Support{' '}
@@ -291,7 +286,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Delivery Details{' '}
@@ -302,7 +297,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Terms & Conditions{' '}
@@ -313,7 +308,7 @@ const PrivacyPolicy = () => {
                     <a
                       href="#"
                       title=""
-                      className="flex text-sm text-gray-800 transition-all duration-200 hover:text-orange-600 focus:text-orange-600"
+                      className="flex text-sm transition-all duration-200 hover:text-indigo-600 focus:text-indigo-600"
                     >
                       {' '}
                       Privacy Policy{' '}
@@ -406,7 +401,7 @@ const PrivacyPolicy = () => {
                 </li>
               </ul>
             </div>
-          </footer>
+          </footer> */}
         </div>
       </LayoutSite>
     </>

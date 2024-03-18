@@ -71,7 +71,7 @@ const Register = () => {
 
   return (
     <LayoutAuth title="Register">
-      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
         {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"
@@ -80,38 +80,40 @@ const Register = () => {
         />
       </div> */}
         <div className="mx-auto flex justify-center">
-          <h6 className="mt-3 text-center text-xl font-bold">
+          <h6 className="text-center text-xl font-bold">
             {`Sign up. It's free!`}
           </h6>
         </div>
 
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
             <Alert variant="destructive" className="mb-4">
               <AlertDescription>{hasErrors}</AlertDescription>
             </Alert>
           )}
 
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="First Name"
-              type="text"
-              name="firstName"
-              placeholder="Full Name"
-              errors={errors}
-            />
-          </div>
+          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+            <div className="mb-4">
+              <TextInput
+                control={control}
+                label="First Name"
+                type="text"
+                name="firstName"
+                placeholder="Full Name"
+                errors={errors}
+              />
+            </div>
 
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="Last Name"
-              type="text"
-              name="lastName"
-              placeholder="Full Name"
-              errors={errors}
-            />
+            <div className="mb-4">
+              <TextInput
+                control={control}
+                label="Last Name"
+                type="text"
+                name="lastName"
+                placeholder="Full Name"
+                errors={errors}
+              />
+            </div>
           </div>
 
           <div className="mb-4">
@@ -154,14 +156,14 @@ const Register = () => {
                         I accept the{' '}
                         <Link
                           className="text-sm text-blue-600 hover:underline"
-                          href="/forgot-password"
+                          href="/terms-condition"
                         >
                           terms
                         </Link>{' '}
                         &{' '}
                         <Link
                           className="text-sm text-blue-600 hover:underline"
-                          href="/forgot-password"
+                          href="/privacy-policy"
                         >
                           privacy policy
                         </Link>

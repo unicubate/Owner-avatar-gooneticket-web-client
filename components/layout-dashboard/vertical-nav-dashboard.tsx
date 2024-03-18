@@ -9,7 +9,6 @@ import {
   ListIcon,
   LockKeyholeIcon,
   MenuSquareIcon,
-  SearchIcon,
   SettingsIcon,
   StoreIcon,
 } from 'lucide-react';
@@ -52,11 +51,6 @@ const VerticalNavDashboard = ({ user }: Props) => {
       title: `${t('feed')}`,
       href: '/home',
       icon: <Dice6Icon className={classIcon} />,
-    },
-    {
-      title: 'Explore',
-      href: '/explore',
-      icon: <SearchIcon className={classIcon} />,
     },
   ]);
 

@@ -13,10 +13,10 @@ interface Props {
 
 const HorizontalNavSite = ({ user, showDrawer }: Props) => {
   const [navigation] = useState<NavbarSiteProps[]>([
-    {
-      title: 'Explore',
-      href: '/explore',
-    },
+    // {
+    //   title: 'Explore',
+    //   href: '/explore',
+    // },
     {
       title: 'Faq',
       href: '/faqs',
@@ -35,7 +35,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-b border-gray-100 dark:border-gray-800 dark:bg-[#1c1b22]">
+      <header className="sticky top-0 z-20 bg-white border-b border-gray-100 dark:border-gray-800 dark:bg-[#121212]">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center -m-2 lg:hidden">
@@ -75,7 +75,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className="hidden w-auto h-8 lg:block">
+                <div className="ml-4 hidden w-auto h-8 lg:block">
                   <div className="flex items-center">
                     <div
                       onClick={() => push('/')}

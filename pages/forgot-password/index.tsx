@@ -67,7 +67,7 @@ const ForgotPassword = () => {
 
   return (
     <LayoutAuth title="Forgot password">
-      <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
         <div className="mx-auto flex justify-center">
           <h6 className="mt-3 text-center text-xl font-bold">
             {`Forgot password?`}

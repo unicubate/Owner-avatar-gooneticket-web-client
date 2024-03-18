@@ -83,7 +83,7 @@ const Login = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
           {/* <div className="flex justify-center mx-auto">
           <img
             className="w-auto h-7 sm:h-8"

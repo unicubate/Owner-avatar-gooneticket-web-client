@@ -39,18 +39,22 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       <div className="flex flex-col">
         <HorizontalNavDashboard showDrawer={showDrawer} user={user} />
 
-        {/* Fix Drawer */}
-        <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-          <SheetTrigger asChild>
-            {/* <Button variant="outline">Open</Button> */}
-          </SheetTrigger>
-          <SheetContent className="dark:border-gray-800 dark:bg-[#1c1b22]">
-            <div className="flex flex-col overflow-y-auto pt-5">
-              <VerticalNavDashboard user={user} />
-            </div>
-          </SheetContent>
-        </Sheet>
-        {/*End Fix Drawer */}
+        {profile?.id ? (
+          <>
+            {/* Fix Drawer */}
+            <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
+              <SheetTrigger asChild>
+                {/* <Button variant="outline">Open</Button> */}
+              </SheetTrigger>
+              <SheetContent className="dark:border-gray-800">
+                <div className="flex flex-col overflow-y-auto pt-5">
+                  <VerticalNavDashboard user={user} />
+                </div>
+              </SheetContent>
+            </Sheet>
+            {/*End Fix Drawer */}
+          </>
+        ) : null}
 
         <div className="flex flex-1">
           {profile?.id ? (

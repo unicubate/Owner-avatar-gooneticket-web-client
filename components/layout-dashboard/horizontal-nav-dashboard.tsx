@@ -42,7 +42,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
       <header className="sticky top-0 z-20 border-gray-300">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-2 lg:hidden">
+            <div className="ml-2 flex items-center -m-2 lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
                   className="w-6 h-6"
@@ -73,7 +73,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className="hidden w-auto h-8 lg:block">
+                <div className="ml-4 hidden w-auto h-8 lg:block">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
                       <img

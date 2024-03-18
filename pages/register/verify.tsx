@@ -25,19 +25,17 @@ const schema = yup.object({
 });
 
 const Verify = () => {
-  const { query, push } = useRouter();
+  const { query, push, back } = useRouter();
   const { token } = query;
 
   const { status, data: verify } = VerifyTokenUsersAPI({
     token: token,
   });
 
-  console.log('verify >===', verify);
-
   return (
     <>
       <LayoutAuth title="Verify account">
-        <div className="m-auto mt-10 w-full max-w-4xl rounded-lg p-6 py-12 shadow-md dark:bg-[#121212] md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-3xl rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto flex justify-center">
             <img
               className="h-12 w-auto sm:h-14"
@@ -62,9 +60,9 @@ const Verify = () => {
                   className="w-md"
                   size="lg"
                   variant="outline"
-                  //onClick={() => back()}
+                  onClick={() => push(`/login`)}
                 >
-                  Cancel
+                  Login
                 </ButtonInput>
                 <ButtonInput
                   type="button"
