@@ -1,5 +1,4 @@
 import { logoutUsersAPI } from '@/api-site/user';
-import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { ThemeToggle } from '../ui-setting';
@@ -31,9 +30,8 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
   const { push } = useRouter();
 
   const logoutUserItem = async () => {
-    Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
     await logoutUsersAPI();
-    push(`/`);
+    push(`/login`);
     location.reload();
   };
 

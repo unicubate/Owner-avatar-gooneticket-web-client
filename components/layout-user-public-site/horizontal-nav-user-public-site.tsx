@@ -1,5 +1,4 @@
 import { UserModel } from '@/types/user.type';
-import Cookies from 'js-cookie';
 import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -75,9 +74,8 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   ]);
 
   const logoutUserItem = async () => {
-    Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
     await logoutUsersAPI();
-    push(`/`);
+    push(`/login`);
     location.reload();
   };
 
