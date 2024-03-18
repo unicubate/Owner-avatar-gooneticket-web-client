@@ -41,7 +41,7 @@ const Settings = () => {
                   />
                 ) : null}
 
-                {user?.provider === 'default' ? <UpdateFormPassword /> : null}
+                {user?.provider === 'DEFAULT' ? <UpdateFormPassword /> : null}
 
                 {user?.id ? <DeleteOneUser user={user} /> : null}
               </div>
