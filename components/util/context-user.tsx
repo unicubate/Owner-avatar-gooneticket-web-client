@@ -26,6 +26,11 @@ export const getCookieUser = () =>
     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
     : null;
 
+export const getCookieVerifyUser = () =>
+  typeof window !== 'undefined'
+    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_VERIFY_TOKEN))
+    : null;
+
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { data: user } = GetOneUserMeAPI();
   const { data: ipLocation } = IpLocationAPI();

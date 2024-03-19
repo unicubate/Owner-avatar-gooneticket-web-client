@@ -50,6 +50,15 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
+      setHasErrors(false);
+      setLoading(false);
+      if (!user?.confirmedAt) {
+        push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
+      } else {
+        window.location.href = `${
+          redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+        }`;
+      }
       // if (user?.nextStep === "SETTING_PROFILE") {
       //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
       // } else if (user?.nextStep === "SETTING_INTEREST") {
@@ -64,12 +73,12 @@ const Login = () => {
       //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
       //   JSON.stringify(user?.accessToken),
       // );
-      setHasErrors(false);
-      setLoading(false);
-      console.log('cookie save');
-      window.location.href = `${
-        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      }`;
+      // setHasErrors(false);
+      // setLoading(false);
+      // console.log('cookie save');
+      // window.location.href = `${
+      //   redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      // }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

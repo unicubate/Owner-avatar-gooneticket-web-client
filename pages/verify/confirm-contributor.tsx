@@ -7,7 +7,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
-const ConfirmAccount = () => {
+const ConfirmContributor = () => {
   const { query, push, back } = useRouter();
   const { token } = query;
   const { status, data: verify } = VerifyTokenUsersAPI({
@@ -42,7 +42,7 @@ const ConfirmAccount = () => {
     </>
   );
 };
-export default ConfirmAccount;
+export default ConfirmContributor;
 
 export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
