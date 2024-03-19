@@ -7,6 +7,7 @@ import {
   UserModel,
   UserRegisterFormModel,
   UserResetPasswordFormModel,
+  UserVerifyTokenModel,
 } from '@/types/user.type';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
@@ -275,20 +276,20 @@ export const getUsersAPI = async (
   });
 };
 
-export const VerifyTokenUsersAPI = (payload: object) => {
+export const VerifyTokenUsersAPI = ({ token }: { token: string }) => {
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
-    queryKey: ['user-verify', payload],
+    queryKey: ['user-verify', token],
     queryFn: async () =>
       await makeApiCall({
-        action: 'verifyTokenUsersAPI',
-        queryParams: payload,
+        action: 'verifyTokenUser',
+        queryParams: { token },
       }),
     staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
   return {
-    data: data?.data as any,
+    data: data?.data as UserVerifyTokenModel,
     isError,
     isLoading,
     status,

@@ -1,5 +1,7 @@
+import { cn } from '@/lib/utils';
 import parse, { HTMLReactParserOptions, domToReact } from 'html-react-parser';
 import linkifyHtml from 'linkify-html';
+import { useState } from 'react';
 
 interface HtmlParserProps {
   html: string;
@@ -7,6 +9,8 @@ interface HtmlParserProps {
 }
 
 export const HtmlParser = ({ html, value }: HtmlParserProps) => {
+  const [isReadMore, setIsReadMore] = useState(true);
+  const lengthHtml = html.length;
   const options: HTMLReactParserOptions = {
     replace: (node: any) => {
       if (node.name === 'a') {
@@ -22,11 +26,29 @@ export const HtmlParser = ({ html, value }: HtmlParserProps) => {
     },
   };
 
-  const cleanHtmlString = linkifyHtml(value ? html.slice(0, value) : html, {
+  const classNameValue = {
     className: {
       url: 'text-blue-500 hover:underline',
     },
+  };
+  const cleanHtmlString = linkifyHtml(html.slice(0, value), {
+    ...classNameValue,
   });
-  // return <span className="ql-editor">{parse(cleanHtmlString, options)}</span>;
-  return parse(cleanHtmlString, options);
+  const cleanHtmlNotSliceString = linkifyHtml(html, { ...classNameValue });
+  const parseSliceValue = parse(cleanHtmlString, options);
+  const parseNotSliceValue = parse(cleanHtmlNotSliceString, options);
+
+  return (
+    <>
+      {isReadMore ? parseSliceValue : parseNotSliceValue}
+      {lengthHtml > Number(value) && (
+        <span
+          onClick={() => setIsReadMore((lk) => !lk)}
+          className={cn('text-sm text-blue-600 cursor-pointer')}
+        >
+          {isReadMore ? '...read more' : ''}
+        </span>
+      )}
+    </>
+  );
 };

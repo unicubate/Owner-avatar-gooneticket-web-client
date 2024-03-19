@@ -1,16 +1,16 @@
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormAlbumPost } from '@/components/post/create-or-update-form-album-post';
 import { CreateOrUpdateFormAudioPost } from '@/components/post/create-or-update-form-audio-post';
 import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-update-form-gallery-post';
 import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-post';
 import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-
 const PostsCreate = () => {
-  const { organizationId } = useAuth() as any;
+  const { userStorage } = useInputState();
+  const organizationId = userStorage?.organizationId;
   const { query } = useRouter();
   const { type, albumId } = query;
 

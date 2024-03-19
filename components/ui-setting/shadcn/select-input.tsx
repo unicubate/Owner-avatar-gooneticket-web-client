@@ -23,7 +23,7 @@ interface Props {
   allowClear?: boolean;
 }
 
-const SelectInput: React.FC<Props> = ({
+const SelectInput = ({
   control,
   dataItem,
   label = '',
@@ -32,9 +32,7 @@ const SelectInput: React.FC<Props> = ({
   className,
   placeholder = '',
   valueType,
-  allowClear,
-  firstOptionName = '',
-}) => {
+}: Props) => {
   return (
     <>
       {label ? (
@@ -52,7 +50,9 @@ const SelectInput: React.FC<Props> = ({
         render={({ field: { value, onChange } }) => (
           <>
             <Select onValueChange={onChange} name={name} value={value}>
-              <SelectTrigger>
+              <SelectTrigger
+                className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent className={cn('dark:border-gray-800', className)}>

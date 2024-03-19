@@ -1,16 +1,16 @@
 import { GetOnePostAPI } from '@/api-site/post';
 import { GetOneUserPublicAPI } from '@/api-site/user';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListFollowPosts } from '@/components/post/list-follow-posts';
 import { PublicLastPosts } from '@/components/post/public-last-posts';
 import { PostSkeleton } from '@/components/skeleton/post-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { useAuth } from '@/components/util/context-user';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const PostShow = () => {
-  const { userStorage: userVisitor } = useAuth() as any;
+  const { userStorage: userVisitor } = useInputState();
   const { query } = useRouter();
   const postSlug = String(query?.postId);
 

@@ -6,9 +6,10 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 import { SearchInput } from '../ui-setting';
+import { CreateOrUpdateFormContributor } from './create-or-update-form-contributor';
 
 const CreateContributorModal = ({
   showModal,
@@ -30,7 +31,7 @@ const CreateContributorModal = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteUsersAPI({
-    take: 4,
+    take: 2,
     sort: 'DESC',
     search,
   });
@@ -57,13 +58,15 @@ const CreateContributorModal = ({
         defaultOpen={showModal}
       >
         <DialogTrigger asChild>{buttonDialog}</DialogTrigger>
-        <DialogContent className="sm:max-w-[700px] dark:bg-[#121212] dark:border-gray-800">
-          <Tabs defaultValue="account" className="w-full mt-4">
-            {/* <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="account">Account</TabsTrigger>
-              <TabsTrigger value="password">Password</TabsTrigger>
-            </TabsList> */}
-            <TabsContent value="account">
+        <DialogContent className="sm:max-w-[650px] dark:bg-[#121212] dark:border-gray-800">
+          <Tabs defaultValue="invite" className="w-full mt-4">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="invite">Invite people</TabsTrigger>
+              <TabsTrigger value="new-contributor">
+                Create contributor
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="invite">
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
                   <div className="bg-white py-6 dark:bg-[#121212]">
@@ -92,6 +95,9 @@ const CreateContributorModal = ({
                   </div>
                 </div>
               </div>
+            </TabsContent>
+            <TabsContent value="new-contributor">
+              <CreateOrUpdateFormContributor />
             </TabsContent>
           </Tabs>
         </DialogContent>

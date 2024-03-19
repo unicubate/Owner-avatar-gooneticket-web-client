@@ -1,4 +1,5 @@
 import { GetOnePostAPI } from '@/api-site/post';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormAudioPost } from '@/components/post/create-or-update-form-audio-post';
 import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-update-form-gallery-post';
@@ -6,14 +7,13 @@ import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-
 import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { GetUploadsAPI } from '../../../api-site/upload';
 
 const PostsEdit = () => {
-  const { userStorage: user } = useAuth() as any;
+  const { userStorage: user } = useInputState();
   const { query } = useRouter();
   const { type } = query;
   const postId = String(query?.postId);

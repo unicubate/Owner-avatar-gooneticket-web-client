@@ -113,7 +113,7 @@ const ResetPassword = () => {
               variant="info"
               loading={loading}
             >
-              Log In
+              Reset Password
             </ButtonInput>
           </div>
         </form>

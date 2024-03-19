@@ -19,7 +19,7 @@ interface Props {
   labelHelp?: React.ReactNode;
 }
 
-const TextInput: React.FC<Props> = ({
+const TextInput = ({
   control,
   max,
   min,
@@ -34,7 +34,7 @@ const TextInput: React.FC<Props> = ({
   required,
   labelHelp,
   disabled,
-}) => {
+}: Props) => {
   return (
     <>
       <div className="flex items-center justify-between">

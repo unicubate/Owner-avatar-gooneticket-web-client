@@ -1,4 +1,7 @@
-import { ContributorFormModel } from '@/types/contributor';
+import {
+  ConfirmContributorFormModel,
+  ContributorFormModel,
+} from '@/types/contributor';
 import { ResponsePostModel } from '@/types/post';
 import { makeApiCall } from '@/utils/end-point';
 import { PaginationRequest, SortModel } from '@/utils/pagination-item';
@@ -8,7 +11,7 @@ import {
   useQueryClient,
 } from '@tanstack/react-query';
 
-export const CreateOneContributorAPI = ({
+export const CreateOrUpdateOneContributorAPI = ({
   onSuccess,
   onError,
 }: {
@@ -19,18 +22,28 @@ export const CreateOneContributorAPI = ({
   const queryClient = useQueryClient();
   const result = useMutation({
     mutationKey: queryKey,
-    mutationFn: async (payload: ContributorFormModel) => {
-      const { email, userId, action } = payload;
+    mutationFn: async (
+      payload: ContributorFormModel & { contributorId?: string },
+    ) => {
+      const { userId, action, contributorId } = payload;
       if (action === 'INVITED') {
         await makeApiCall({
           action: 'createOneContributorInvited',
           urlParams: { userId },
         });
       }
-      if (action === 'CREATED-NEW') {
+      if (action === 'NEW-CONTRIBUTOR') {
         await makeApiCall({
           action: 'createOneContributor',
-          body: { email },
+          body: payload,
+        });
+      }
+
+      if (action === 'UPDATE-CONTRIBUTOR' && contributorId) {
+        await makeApiCall({
+          action: 'updateOneContributor',
+          urlParams: { contributorId },
+          body: payload,
         });
       }
 
@@ -98,6 +111,17 @@ export const DeleteOneContributorAPI = ({
   });
 
   return result;
+};
+
+export const confirmOneContributorAPI = async (
+  payload: ConfirmContributorFormModel,
+): Promise<{ data: any }> => {
+  const { token } = payload;
+  return await makeApiCall({
+    action: 'confirmOneContributor',
+    urlParams: { token },
+    body: payload,
+  });
 };
 
 export const getContributorsAPI = async (

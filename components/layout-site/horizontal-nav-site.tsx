@@ -121,7 +121,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="ghost"
                   onClick={() => {
                     push(`${user?.id ? `/dashboard` : `/login`}`);
@@ -134,7 +134,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="info"
                   onClick={() => {
                     push(`${user?.id ? `/dashboard` : `/register`}`);

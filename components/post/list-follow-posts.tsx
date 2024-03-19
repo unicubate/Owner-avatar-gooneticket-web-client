@@ -159,7 +159,7 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
             </div>
           ) : null}
 
-          {['GALLERY'].includes(item?.type) &&
+          {['GALLERY', 'ARTICLE'].includes(item?.type) &&
           item?.uploadsImages?.length > 0 ? (
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
@@ -228,7 +228,10 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
               {['MEMBERSHIP'].includes(item?.whoCanSee) &&
               item?.isValidSubscribe !== 1 ? null : (
                 <span className={`ql-editor`}>
-                  <HtmlParser html={String(item?.description ?? '')} />
+                  <HtmlParser
+                    html={String(item?.description ?? '')}
+                    value={3500}
+                  />
                 </span>
               )}
             </div>

@@ -80,7 +80,7 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** User route */
   loginUser: POST(`${baseUrl}/login`),
   ipLocation: GET(`${baseUrl}/ip-location`),
-  verifyTokenUsersAPI: GET(`${baseUrl}/verify-token`),
+  verifyTokenUser: GET(`${baseUrl}/verify-token`),
   loginGoogleUser: POST(`${baseUrl}/login-google-auth`),
   registerGoogleUser: POST(`${baseUrl}/register-google-auth`),
   registerUser: POST(`${baseUrl}/register`),
@@ -145,7 +145,9 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** Contributors route */
   getContributors: GET(`${baseUrl}/contributors`),
   createOneContributor: POST(`${baseUrl}/contributors`),
+  updateOneContributor: PUT(`${baseUrl}/contributors/:contributorId`),
   createOneContributorInvited: GET(`${baseUrl}/contributors/invited/:userId`),
+  confirmOneContributor: PUT(`${baseUrl}/contributors/confirm/:token`),
   deleteOneContributor: DELETE(`${baseUrl}/contributors/:contributorId`),
 
   /****************** Discounts route */

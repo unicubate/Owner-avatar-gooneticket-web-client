@@ -86,7 +86,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
       AlertSuccessNotification({
         text: `address save successfully`,
       });
-      //setIsEdit((lk) => !lk);
+      setIsEdit((i: boolean) => !i);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -104,15 +104,20 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
           <h2 className="font-bold text-gray-500 text-base">
             Billing Information
           </h2>
-          <ButtonInput
-            type="button"
-            size="sm"
-            variant="destructive"
-            onClick={() => setIsEdit((i: boolean) => !i)}
-            className="ml-auto"
-          >
-            {isEdit ? 'Edit address' : 'Cancel'}
-          </ButtonInput>
+          {userAddress?.isUpdated &&
+            userAddress?.street1 &&
+            userAddress?.city &&
+            userAddress?.country && (
+              <ButtonInput
+                type="button"
+                size="sm"
+                variant={isEdit ? 'info' : 'outline'}
+                onClick={() => setIsEdit((i: boolean) => !i)}
+                className="ml-auto"
+              >
+                {isEdit ? 'Edit address' : 'Cancel'}
+              </ButtonInput>
+            )}
         </div>
       </div>
 

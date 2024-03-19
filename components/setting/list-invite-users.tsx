@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { CreateOneContributorAPI } from '@/api-site/contributor';
+import { CreateOrUpdateOneContributorAPI } from '@/api-site/contributor';
 import { UserModel } from '@/types/user.type';
 import {
   AlertDangerNotification,
@@ -19,11 +19,10 @@ type Props = {
 
 const ListInviteUsers = ({ item, index }: Props) => {
   const { locale } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading, hasErrors, setHasErrors } =
-    useInputState();
+  const { loading, setLoading, setHasErrors } = useInputState();
 
   // Create or Update data
-  const { mutateAsync: saveMutation } = CreateOneContributorAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneContributorAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -41,6 +40,7 @@ const ListInviteUsers = ({ item, index }: Props) => {
       await saveMutation({
         userId: item?.id,
         action: 'INVITED',
+        role: 'MODERATOR',
       });
       setHasErrors(false);
       setLoading(false);

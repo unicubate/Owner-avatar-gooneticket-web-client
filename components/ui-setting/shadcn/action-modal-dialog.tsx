@@ -21,7 +21,7 @@ interface Props {
   onClick: (node?: Element | null) => void;
 }
 
-const ActionModalDialog: React.FC<Props> = ({
+const ActionModalDialog = ({
   title,
   loading,
   isOpen,
@@ -30,7 +30,7 @@ const ActionModalDialog: React.FC<Props> = ({
   setIsOpen,
   buttonDialog,
   variant = 'danger',
-}) => {
+}: Props) => {
   return (
     <>
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>

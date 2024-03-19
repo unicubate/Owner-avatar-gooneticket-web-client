@@ -118,6 +118,22 @@ export type UserVisitorModel = {
   id?: string;
 };
 
+export type UserVerifyTokenModel = {
+  userId: string;
+  contributorId: string;
+  contributorStatus: 'CONTRIBUTOR' | 'INVITED-CONTRIBUTOR' | 'NEW-CONTRIBUTOR';
+  guest: {
+    lastName: string;
+    firstName: string;
+  };
+  user: {
+    email: string;
+    organizationName: string;
+    firstName: string;
+    lastName: string;
+  };
+};
+
 export type UserForgotPasswordFormModel = {
   email: string;
 };

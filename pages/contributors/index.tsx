@@ -68,7 +68,7 @@ const ContributorsIndex = () => {
                           variant="info"
                           icon={<PlusIcon className="mr-2 size-4" />}
                         >
-                          Add contributor
+                          Invite contributor
                         </ButtonInput>
                       }
                       showModal={isOpen}

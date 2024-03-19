@@ -1,13 +1,13 @@
 import Head from 'next/head';
 import { useRouter } from 'next/navigation';
-import { ButtonInput, ThemeToggle } from '../ui-setting';
+import { ButtonInput } from '../ui-setting';
 
 interface IProps {
   title: string;
   children: React.ReactNode;
 }
 
-const LayoutAuth: React.FC<IProps> = ({ children, title }) => {
+const LayoutAuth = ({ children, title }: IProps) => {
   const { push } = useRouter();
 
   return (
@@ -66,14 +66,14 @@ const LayoutAuth: React.FC<IProps> = ({ children, title }) => {
             </div>
 
             <div className="flex items-center justify-end ml-auto space-x-2">
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <ThemeToggle />
-              </div>
+              </div> */}
               <div className="relative">
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="ghost"
                   onClick={() => {
                     push(`/login`);
@@ -86,7 +86,7 @@ const LayoutAuth: React.FC<IProps> = ({ children, title }) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
                   variant="info"
                   onClick={() => {
                     push(`/register`);
