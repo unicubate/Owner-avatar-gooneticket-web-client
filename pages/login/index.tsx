@@ -59,26 +59,6 @@ const Login = () => {
           redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
         }`;
       }
-      // if (user?.nextStep === "SETTING_PROFILE") {
-      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-profile`;
-      // } else if (user?.nextStep === "SETTING_INTEREST") {
-      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/setting-interest`;
-      // } else if (user?.nextStep === "CONFIRM_EMAIL") {
-      //   await resendCodeAPI({ userId: user?.id });
-      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/register/${user?.id}/confirm-account`;
-      // } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-      //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
-      // }
-      // localStorage.setItem(
-      //   String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-      //   JSON.stringify(user?.accessToken),
-      // );
-      // setHasErrors(false);
-      // setLoading(false);
-      // console.log('cookie save');
-      // window.location.href = `${
-      //   redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      // }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -92,16 +72,16 @@ const Login = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
-          {/* <div className="flex justify-center mx-auto">
-          <img
-            className="w-auto h-7 sm:h-8"
-            src="https://merakiui.com/images/logo.svg"
-            alt=""
-          />
-        </div> */}
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto flex justify-center">
-            <h6 className="mt-3 text-center text-xl font-bold">
+            <img
+              className="h-12 w-auto sm:h-14"
+              src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
+              alt=""
+            />
+          </div>
+          <div className="mx-auto flex justify-center">
+            <h6 className="mt-4 text-center text-xl font-bold">
               {`Log in to your account`}
             </h6>
           </div>

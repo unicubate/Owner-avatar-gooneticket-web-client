@@ -1,13 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import { resendCodeAPI, validCodeAPI } from '@/api-site/user';
 import { useReactHookForm } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layout-auth';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicVerifyComponent } from '@/components/util/public-verify-component';
-import { AlertDangerNotification } from '@/utils';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -16,14 +18,13 @@ const schema = yup.object({
 });
 
 const ConfirmEmail = () => {
+  const [isResend, setIsResend] = useState(false);
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
     control,
     handleSubmit,
     errors,
-    isValid,
-    isDirty,
     loading,
     setLoading,
     hasErrors,
@@ -37,13 +38,12 @@ const ConfirmEmail = () => {
     setHasErrors(undefined);
 
     try {
-      // await passwordResetUserAPI(payload);
+      await validCodeAPI({ ...payload });
       setHasErrors(false);
       setLoading(false);
-      // AlertSuccessNotification({
-      //   text: 'Email send successfully',
-      // });
-      push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
+      window.location.href = `${
+        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -53,10 +53,32 @@ const ConfirmEmail = () => {
       });
     }
   };
+
+  const resendCodeItem = async () => {
+    try {
+      setIsResend(true);
+      setHasErrors(undefined);
+
+      await resendCodeAPI();
+
+      setHasErrors(false);
+      setIsResend(false);
+      AlertSuccessNotification({
+        text: 'Email send successfully',
+      });
+    } catch (error: any) {
+      setHasErrors(true);
+      setIsResend(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: error.response.data.message,
+      });
+    }
+  };
   return (
     <>
       <LayoutAuth title="Confirm your account">
-        <div className="m-auto mt-8 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-8 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto flex justify-center">
             <img
               className="h-12 w-auto sm:h-14"
@@ -65,9 +87,13 @@ const ConfirmEmail = () => {
             />
           </div>
           <div className="justify-center">
-            <h6 className="mt-3 text-center text-xl font-bold">
+            <h6 className="mt-4 text-center text-xl font-bold">
               {`Confirm your account`}
             </h6>
+            <p className="mt-4 text-center text-sm sm:text-sm text-gray-600">
+              We sent a verification code to your email. Enter the code from the
+              email in the field below.
+            </p>
           </div>
           <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
@@ -79,12 +105,25 @@ const ConfirmEmail = () => {
             <div className="mt-4">
               <TextInput
                 control={control}
-                label="Code"
+                label="Device Verification Code"
                 type="text"
                 name="code"
-                placeholder="Code"
+                placeholder="Enter 6-digit code"
                 errors={errors}
+                required
               />
+              <div className="mt-3 flex items-center justify-between">
+                <ButtonInput
+                  variant="info"
+                  type="button"
+                  size="sm"
+                  className="ml-auto"
+                  onClick={() => resendCodeItem()}
+                  loading={isResend}
+                >
+                  Resend code
+                </ButtonInput>
+              </div>
             </div>
 
             <div className="mt-6">
@@ -94,9 +133,8 @@ const ConfirmEmail = () => {
                 size="lg"
                 variant="info"
                 loading={loading}
-                disabled={!isDirty || !isValid}
               >
-                Confirm
+                Verify code
               </ButtonInput>
             </div>
           </form>

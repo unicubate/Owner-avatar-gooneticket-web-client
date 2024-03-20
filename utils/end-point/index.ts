@@ -87,7 +87,7 @@ export const apiEndpoints: ClientApiMethods = {
   logoutUsers: GET(`${baseUrl}/logout`),
   passwordResetUser: POST(`${baseUrl}/password/reset`),
   resetPassword: PUT(`${baseUrl}/password/update/:token`),
-  resendCode: GET(`${baseUrl}/resend/code/:userId`),
+  resendCode: GET(`${baseUrl}/resend/code`),
   validCode: POST(`${baseUrl}/valid/code`),
   getOneUserPrivate: GET(`${baseUrl}/users/show/:userId`),
   deleteOneUser: DELETE(`${baseUrl}/users/:userId`),

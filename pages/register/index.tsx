@@ -58,7 +58,7 @@ const Register = () => {
       });
       setHasErrors(false);
       setLoading(false);
-      push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
+      push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -71,15 +71,15 @@ const Register = () => {
 
   return (
     <LayoutAuth title="Register">
-      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
-        {/* <div className="mx-auto flex justify-center">
-        <img
-          className="h-7 w-auto sm:h-8"
-          src="https://merakiui.com/images/logo.svg"
-          alt=""
-        />
-      </div> */}
+      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
         <div className="mx-auto flex justify-center">
+          <img
+            className="h-12 w-auto sm:h-14"
+            src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
+            alt=""
+          />
+        </div>
+        <div className="mt-4 mx-auto flex justify-center">
           <h6 className="text-center text-xl font-bold">
             {`Sign up. It's free!`}
           </h6>

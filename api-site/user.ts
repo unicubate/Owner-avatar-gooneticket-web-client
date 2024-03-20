@@ -1,6 +1,5 @@
 import {
   IpLocationModal,
-  NextStep,
   ResponseUserModel,
   UserForgotPasswordFormModel,
   UserLoginFormModel,
@@ -75,6 +74,15 @@ export const passwordResetUserAPI = async (
   });
 };
 
+export const validCodeAPI = async (payload: {
+  code: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'validCode',
+    body: payload,
+  });
+};
+
 export const registerUserAPI = async (
   payload: UserRegisterFormModel,
 ): Promise<{ data: UserModel }> => {
@@ -95,13 +103,9 @@ export const resetPasswordAPI = async (
   });
 };
 
-export const resendCodeAPI = async (payload: {
-  userId: string;
-}): Promise<{ data: UserModel }> => {
-  const { userId } = payload;
+export const resendCodeAPI = async (): Promise<{ data: UserModel }> => {
   return await makeApiCall({
     action: 'resendCode',
-    urlParams: { userId },
   });
 };
 
@@ -128,49 +132,6 @@ export const UpdateEnableProfileAPI = ({
         action: 'updateEnableProfile',
         urlParams: { profileId },
         queryParams: { enableCommission, enableShop, enableGallery },
-      });
-    },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-  });
-
-  return result;
-};
-
-export const ValidCodeAPI = ({
-  onSuccess,
-  onError,
-}: {
-  onSuccess?: () => void;
-  onError?: (error: any) => void;
-} = {}) => {
-  const queryKey = ['user'];
-  const queryClient = useQueryClient();
-  const result = useMutation({
-    mutationKey: queryKey,
-    mutationFn: async (payload: {
-      code: string;
-      nextStep: NextStep;
-    }): Promise<{ data: UserModel }> => {
-      return await makeApiCall({
-        action: 'validCode',
-        body: payload,
       });
     },
     onError: async (error) => {

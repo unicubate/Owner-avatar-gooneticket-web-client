@@ -14,11 +14,10 @@ const ConfirmContributor = () => {
     token: String(token),
   });
 
-  console.log('verify ===>', verify);
   return (
     <>
       <LayoutAuth title="Confirm your account">
-        <div className="m-auto mt-10 w-full max-w-2xl rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-2xl rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto flex justify-center">
             <img
               className="h-12 w-auto sm:h-14"
