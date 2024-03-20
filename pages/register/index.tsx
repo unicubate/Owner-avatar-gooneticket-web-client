@@ -54,7 +54,6 @@ const Register = () => {
     try {
       await registerUserAPI({
         ...payload,
-        nextStep: 'SETTING_PROFILE',
       });
       setHasErrors(false);
       setLoading(false);

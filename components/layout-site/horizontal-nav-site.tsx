@@ -114,7 +114,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
             </nav>
 
             <div className="flex items-center justify-end ml-auto space-x-2">
-              <div className="flex items-center">
+              <div className="hidden items-center lg:block">
                 <ThemeToggle />
               </div>
               <div className="relative">

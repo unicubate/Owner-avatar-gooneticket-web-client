@@ -23,7 +23,6 @@ export type UserRegisterFormModel = {
   firstName: string;
   lastName: string;
   birthday?: string;
-  nextStep?: NextStep;
 };
 
 export type UserResetPasswordFormModel = {
