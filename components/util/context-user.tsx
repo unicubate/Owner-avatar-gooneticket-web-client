@@ -1,6 +1,5 @@
 import { GetOneUserMeAPI, IpLocationAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user.type';
-import Cookies from 'js-cookie';
 import { FC, ReactNode, createContext, useContext } from 'react';
 
 type AuthContextProps = {
@@ -21,15 +20,15 @@ const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export const getCookieUser = () =>
-  typeof window !== 'undefined'
-    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-    : null;
+// export const getCookieUser = () =>
+//   typeof window !== 'undefined'
+//     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+//     : null;
 
-export const getCookieVerifyUser = () =>
-  typeof window !== 'undefined'
-    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_VERIFY_TOKEN))
-    : null;
+// export const getCookieVerifyUser = () =>
+//   typeof window !== 'undefined'
+//     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_VERIFY_TOKEN))
+//     : null;
 
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
   const { data: user } = GetOneUserMeAPI();

@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router';
 import { ComponentType, useEffect } from 'react';
 import { useInputState } from '../hooks';
-import { getCookieUser } from './context-user';
+// import { getCookieUser } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
-  const userToken = getCookieUser();
+  // const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
     const { linkHref, userStorage } = useInputState();
     const isOnline = userStorage?.id !== undefined;
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!userToken && !isOnline) {
+      if (!isOnline) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
     }, [userStorage, isOnline, pathname, push]);
