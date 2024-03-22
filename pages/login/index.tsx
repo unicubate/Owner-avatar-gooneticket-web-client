@@ -52,17 +52,13 @@ const Login = () => {
       const { data: user } = await loginUserAPI({ email, password });
       setHasErrors(false);
       setLoading(false);
-      if (!user?.confirmedAt) {
+      if (user?.confirmedAt) {
+        window.location.href = `${
+          redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+        }`;
+      } else {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
       }
-      // if (user?.confirmedAt) {
-      //   window.location.href = `${
-      //     redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      //   }`;
-      // }
-      // window.location.href = `${
-      //   redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      // }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
