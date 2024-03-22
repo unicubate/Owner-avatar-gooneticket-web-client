@@ -55,11 +55,14 @@ const Login = () => {
       if (!user?.confirmedAt) {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
       }
-      if (user?.confirmedAt) {
-        window.location.href = `${
-          redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-        }`;
-      }
+      // if (user?.confirmedAt) {
+      //   window.location.href = `${
+      //     redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      //   }`;
+      // }
+      window.location.href = `${
+        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
