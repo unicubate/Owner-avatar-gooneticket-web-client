@@ -1,6 +1,10 @@
 import { GetAllCategoriesAPI } from '@/api-site/category';
 import { CreateOrUpdateOnePostGalleryAPI } from '@/api-site/post';
-import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import {
+  PostFormModel,
+  arrayStringWhoCanSees,
+  arrayWhoCanSees,
+} from '@/types/post';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -20,12 +24,14 @@ import { SwitchInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
-const { Dragger } = Upload;
-
 const schema = yup.object({
   title: yup.string().optional(),
   description: yup.string().optional(),
-  whoCanSee: yup.string().required('who can see is a required field'),
+  whoCanSee: yup
+    .mixed()
+    .oneOf([...arrayStringWhoCanSees] as const)
+    .defined()
+    .required('Who can see this post'),
   allowDownload: yup.string().optional(),
 });
 
@@ -158,10 +164,10 @@ const CreateOrUpdateFormGalleryPost = ({
                     </div>
                   ) : null}
 
-                  {post?.id && uploadImages?.length > 0 ? (
+                  {postId && uploadImages?.length > 0 ? (
                     <div className="mt-2 space-x-2 text-center">
                       <ListCarouselUpload
-                        uploads={post?.uploadsImage}
+                        uploads={post?.uploadsImages}
                         folder="posts"
                         preview={false}
                         height="300px"

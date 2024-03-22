@@ -70,28 +70,26 @@ export function ListCarouselUpload(props: Props) {
         {uploads &&
           uploads?.length > 0 &&
           uploads?.map((item: any, index: number) => (
-            <>
-              <SwiperSlide key={index}>
-                <Image
-                  width={width}
-                  height={height}
-                  className={className}
-                  preview={preview}
-                  style={contentStyle}
-                  src={`${viewOneFileUploadAPI({
-                    folder: folder,
-                    fileName: item?.path,
-                  })}`}
-                  alt={alt}
-                  loading="lazy"
-                />
+            <SwiperSlide key={index}>
+              <Image
+                width={width}
+                height={height}
+                className={className}
+                preview={preview}
+                style={contentStyle}
+                src={`${viewOneFileUploadAPI({
+                  folder: folder,
+                  fileName: item?.path,
+                })}`}
+                alt={alt}
+                loading="lazy"
+              />
 
-                {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
-                post?.isValidSubscribe !== 1 ? (
-                  <WhoCanSeeItem profile={post?.profile as any} />
-                ) : null}
-              </SwiperSlide>
-            </>
+              {['MEMBERSHIP'].includes(String(post?.whoCanSee)) &&
+              post?.isValidSubscribe !== 1 ? (
+                <WhoCanSeeItem profile={post?.profile as any} />
+              ) : null}
+            </SwiperSlide>
           ))}
       </Swiper>
     </>

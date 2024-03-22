@@ -7,6 +7,8 @@ export const arrayWhoCanSees = [
   { id: '2', name: 'MEMBERSHIP' },
 ];
 
+export const arrayStringWhoCanSees = ['MEMBERSHIP', 'PUBLIC'];
+
 export type PostType = 'AUDIO' | 'VIDEO' | 'ARTICLE' | 'GALLERY';
 
 export type WhoCanSeeType = 'PUBLIC' | 'MEMBERSHIP';

@@ -1,5 +1,6 @@
 import { GetAllDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
+import { arrayStringWhoCanSees } from '@/types/post';
 import {
   ProductFormModel,
   arrayProductTypes,
@@ -41,7 +42,11 @@ const schema = yup.object({
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
   productType: yup.string().required(),
-  whoCanSee: yup.string().required('Who can see this post'),
+  whoCanSee: yup
+    .mixed()
+    .oneOf([...arrayStringWhoCanSees] as const)
+    .defined()
+    .required('Who can see this post'),
   limitSlot: yup.number().when('enableLimitSlot', (enableLimitSlot, schema) => {
     if (enableLimitSlot[0] === true)
       return schema.min(1).required('limit slots required');
@@ -222,7 +227,7 @@ const CreateOrUpdateFormShop = ({
                   {imageList.length >= 10 ? null : (
                     <div className="text-center dark:text-white">
                       <UploadOutlined />
-                      <div style={{ marginTop: 8 }}>Upload</div>
+                      <div style={{ marginTop: 8 }}>Cover</div>
                     </div>
                   )}
                 </Upload>

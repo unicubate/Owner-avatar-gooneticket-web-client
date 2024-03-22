@@ -12,8 +12,8 @@ import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
 const schema = yup.object({
-  firstName: yup.string().required('first name is a required field'),
-  lastName: yup.string().required('last name is a required field'),
+  firstName: yup.string().optional(),
+  lastName: yup.string().optional(),
   password: yup.string().min(8, 'Minimum 8 symbols').optional(),
   passwordConfirm: yup
     .string()
@@ -55,7 +55,7 @@ const ConfirmProfileContributor = ({
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Profile save successfully',
+        text: 'Invitation confirm successfully',
       });
       push(`/login`);
     } catch (error: any) {
@@ -85,57 +85,62 @@ const ConfirmProfileContributor = ({
           </Alert>
         )}
 
-        <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="First name"
-              type="text"
-              name="firstName"
-              placeholder="First name"
-              defaultValue={verify?.guest?.firstName}
-              errors={errors}
-            />
-          </div>
+        <>
+          {verify && verify?.contributorStatus === 'NEW-CONTRIBUTOR' && (
+            <>
+              <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                <div className="mb-4">
+                  <TextInput
+                    control={control}
+                    label="First name"
+                    type="text"
+                    name="firstName"
+                    placeholder="First name"
+                    defaultValue={verify?.guest?.firstName}
+                    errors={errors}
+                    required
+                  />
+                </div>
 
-          <div className="mb-4">
-            <TextInput
-              control={control}
-              label="Last name"
-              type="text"
-              name="lastName"
-              placeholder="Last name"
-              defaultValue={verify?.guest?.lastName}
-              errors={errors}
-            />
-          </div>
-        </div>
+                <div className="mb-4">
+                  <TextInput
+                    control={control}
+                    label="Last name"
+                    type="text"
+                    name="lastName"
+                    placeholder="Last name"
+                    defaultValue={verify?.guest?.lastName}
+                    errors={errors}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                <div className="mb-4">
+                  <TextPasswordInput
+                    required
+                    control={control}
+                    label="Password"
+                    name="password"
+                    placeholder="Password"
+                    errors={errors}
+                  />
+                </div>
 
-        {verify?.contributorStatus === 'NEW-CONTRIBUTOR' && (
-          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-            <div className="mb-4">
-              <TextPasswordInput
-                required
-                control={control}
-                label="Password"
-                name="password"
-                placeholder="Password"
-                errors={errors}
-              />
-            </div>
-
-            <div className="mb-4">
-              <TextPasswordInput
-                required
-                control={control}
-                label="Confirm Password"
-                name="passwordConfirm"
-                placeholder="Confirm Password"
-                errors={errors}
-              />
-            </div>
-          </div>
-        )}
+                <div className="mb-4">
+                  <TextPasswordInput
+                    required
+                    control={control}
+                    label="Confirm Password"
+                    name="passwordConfirm"
+                    placeholder="Confirm Password"
+                    errors={errors}
+                  />
+                </div>
+              </div>
+            </>
+          )}
+        </>
 
         <div className="mt-4 flex justify-center space-x-4">
           <ButtonInput

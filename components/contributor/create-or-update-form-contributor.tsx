@@ -23,8 +23,15 @@ const schema = yup.object({
     .defined()
     .required(),
 });
-const CreateOrUpdateFormContributor = () => {
+const CreateOrUpdateFormContributor = ({
+  showModal,
+  setShowModal,
+}: {
+  showModal: boolean;
+  setShowModal: any;
+}) => {
   const {
+    reset,
     control,
     handleSubmit,
     errors,
@@ -58,6 +65,8 @@ const CreateOrUpdateFormContributor = () => {
       });
       setHasErrors(false);
       setLoading(false);
+      reset();
+      setShowModal((i: boolean) => !i);
       AlertSuccessNotification({
         text: 'Contributor save successfully',
       });

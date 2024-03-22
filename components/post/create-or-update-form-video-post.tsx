@@ -1,6 +1,10 @@
 import { GetAllCategoriesAPI } from '@/api-site/category';
 import { CreateOrUpdateOnePostAPI } from '@/api-site/post';
-import { PostFormModel, arrayWhoCanSees } from '@/types/post';
+import {
+  PostFormModel,
+  arrayStringWhoCanSees,
+  arrayWhoCanSees,
+} from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
 import { UploadOutlined } from '@ant-design/icons';
@@ -25,7 +29,11 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  whoCanSee: yup.string().required('Who can see this post'),
+  whoCanSee: yup
+    .mixed()
+    .oneOf([...arrayStringWhoCanSees] as const)
+    .defined()
+    .required('Who can see this post'),
   description: yup.string().optional(),
   urlMedia: yup.string().url().required(),
   // membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {

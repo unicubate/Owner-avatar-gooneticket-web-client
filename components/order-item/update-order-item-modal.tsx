@@ -140,7 +140,7 @@ export function UpdateOrderItemModal(props: {
                 </div>
 
                 <div className="ml-auto">
-                  <ButtonInput type="button" variant="info">
+                  <ButtonInput type="button" size="sm" variant="info">
                     <span className="ml-1 font-bold">Message</span>
                   </ButtonInput>
                 </div>

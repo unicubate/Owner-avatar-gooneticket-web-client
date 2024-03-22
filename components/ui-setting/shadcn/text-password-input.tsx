@@ -16,7 +16,7 @@ interface Props {
   pattern?: string;
 }
 
-const TextPasswordInput: React.FC<Props> = ({
+const TextPasswordInput = ({
   control,
   max,
   min,
@@ -28,7 +28,7 @@ const TextPasswordInput: React.FC<Props> = ({
   defaultValue,
   autoComplete,
   required,
-}) => {
+}: Props) => {
   return (
     <>
       {label ? (

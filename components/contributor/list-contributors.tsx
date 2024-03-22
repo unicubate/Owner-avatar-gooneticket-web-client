@@ -150,44 +150,42 @@ export function ListContributors({ item, index }: Props) {
                 />
               )}
 
-              {userStorage?.role?.name === 'ADMIN' ? (
-                <>
-                  <UpdateRoleContributorModal
-                    buttonDialog={
-                      <ButtonInput
-                        variant="ghost"
-                        type="button"
-                        size="icon"
-                        icon={
-                          <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                        }
-                      />
-                    }
-                    contributor={item}
-                    showModal={isUpdate}
-                    setShowModal={setIsUpdate}
-                  />
+              <>
+                <UpdateRoleContributorModal
+                  buttonDialog={
+                    <ButtonInput
+                      variant="ghost"
+                      type="button"
+                      size="icon"
+                      icon={
+                        <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                      }
+                    />
+                  }
+                  contributor={item}
+                  showModal={isUpdate}
+                  setShowModal={setIsUpdate}
+                />
 
-                  <ActionModalDialog
-                    title="Delete?"
-                    loading={loading}
-                    isOpen={isOpen}
-                    setIsOpen={setIsOpen}
-                    onClick={() => deleteItem(item)}
-                    description="Are you sure you want to delete this?"
-                    buttonDialog={
-                      <ButtonInput
-                        variant="ghost"
-                        type="button"
-                        size="icon"
-                        icon={
-                          <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
-                        }
-                      />
-                    }
-                  />
-                </>
-              ) : null}
+                <ActionModalDialog
+                  title="Delete?"
+                  loading={loading}
+                  isOpen={isOpen}
+                  setIsOpen={setIsOpen}
+                  onClick={() => deleteItem(item)}
+                  description="Are you sure you want to delete this?"
+                  buttonDialog={
+                    <ButtonInput
+                      variant="ghost"
+                      type="button"
+                      size="icon"
+                      icon={
+                        <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
+                      }
+                    />
+                  }
+                />
+              </>
             </div>
           ) : null}
         </div>

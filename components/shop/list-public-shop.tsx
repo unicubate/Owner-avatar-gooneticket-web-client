@@ -3,7 +3,6 @@ import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { ProductModel } from '@/types/product';
 import { AlertDangerNotification } from '@/utils';
-import { HtmlParser } from '@/utils/html-parser';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import { ShoppingCartIcon } from 'lucide-react';
@@ -115,9 +114,9 @@ const ListPublicShop = ({ item }: Props) => {
               <ReadMore html={String(item?.title ?? '')} value={60} />
             </Link>
           </h3>
-          <p className="mt-2 text-base font-normal text-gray-600">
-            <HtmlParser html={String(item?.description ?? '')} value={60} />
-          </p>
+          {/* <p className="mt-2 text-base font-normal text-gray-600">
+            <HtmlParser html={String(item?.description ?? '')} value={200} />
+          </p> */}
           {/* <div className="sm:flex flex-col sm:items-end sm:justify-between">
             <div className="mt-2">
               <Button shape="circle" icon={<ShoppingCartOutlined />} />
