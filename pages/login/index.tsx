@@ -54,7 +54,8 @@ const Login = () => {
       setLoading(false);
       if (!user?.confirmedAt) {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
-      } else {
+      }
+      if (user?.confirmedAt) {
         window.location.href = `${
           redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
         }`;
