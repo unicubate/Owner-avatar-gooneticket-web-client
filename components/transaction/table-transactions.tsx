@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteTransactionsAPI } from '@/api-site/transaction';
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { ArrowRightLeftIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';

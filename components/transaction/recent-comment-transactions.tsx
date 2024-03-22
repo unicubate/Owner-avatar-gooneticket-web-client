@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
 import { CommentModel } from '@/types/comment';
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { itemsNumberArray } from '@/utils/utils';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';

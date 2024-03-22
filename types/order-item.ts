@@ -1,4 +1,4 @@
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { KeyAsString } from '@/utils/utils';
 import { CommissionModel } from './commission';
 import { ProductModel } from './product';

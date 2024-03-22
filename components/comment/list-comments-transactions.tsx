@@ -3,7 +3,7 @@ import { GetInfiniteCommentsRepliesAPI } from '@/api-site/comment';
 import { CommentModel } from '@/types/comment';
 import { formateFromNow } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { ReplyIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

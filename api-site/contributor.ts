@@ -4,7 +4,7 @@ import {
 } from '@/types/contributor';
 import { ResponsePostModel } from '@/types/post';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/pagination-item';
+import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,

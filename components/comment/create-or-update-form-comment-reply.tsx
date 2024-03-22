@@ -1,7 +1,7 @@
 import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';

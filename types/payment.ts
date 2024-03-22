@@ -1,4 +1,4 @@
-import { PaymentType } from '@/utils/pagination-item';
+import { PaymentType } from '@/utils/paginations';
 
 export type ActionPayment = 'PAYMENT' | 'WITHDRAWING';
 

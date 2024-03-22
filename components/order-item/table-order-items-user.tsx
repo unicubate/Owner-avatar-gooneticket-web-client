@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
-import { ModelType } from '@/utils/pagination-item';
+import { ModelType } from '@/utils/paginations';
 import { ArrowRightLeftIcon } from 'lucide-react';
 import { useInputState } from '../hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '../ui-setting';

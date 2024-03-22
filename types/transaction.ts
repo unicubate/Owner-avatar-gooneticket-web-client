@@ -2,7 +2,7 @@ import {
   ModelType,
   PaginationResponse,
   PaymentType,
-} from '@/utils/pagination-item';
+} from '@/utils/paginations';
 import { ProfileItemModel } from './profile.type';
 
 export type ResponseTransactionModel = {

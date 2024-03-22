@@ -7,7 +7,7 @@ import {
 } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/pagination-item';
+import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,

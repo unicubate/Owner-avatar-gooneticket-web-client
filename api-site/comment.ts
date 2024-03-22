@@ -3,11 +3,7 @@ import { ResponsePostModel } from '@/types/post';
 import dyaxios from '@/utils/dyaxios';
 import { makeApiCall } from '@/utils/end-point';
 import { queyParamsFunc } from '@/utils/generate-random';
-import {
-  ModelType,
-  PaginationRequest,
-  SortModel,
-} from '@/utils/pagination-item';
+import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,

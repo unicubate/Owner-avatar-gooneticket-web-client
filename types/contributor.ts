@@ -1,4 +1,4 @@
-import { ModelType, PaginationResponse } from '@/utils/pagination-item';
+import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { ProfileItemModel } from './profile.type';
 
 export type ResponseContributorModel = {

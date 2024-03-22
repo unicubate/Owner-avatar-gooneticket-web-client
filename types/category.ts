@@ -1,4 +1,4 @@
-import { PaginationResponse } from '@/utils/pagination-item';
+import { PaginationResponse } from '@/utils/paginations';
 
 export type ResponseCategoryModel = {
   value: Array<CategoryModel>;
