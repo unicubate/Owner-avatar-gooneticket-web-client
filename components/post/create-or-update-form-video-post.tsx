@@ -8,12 +8,13 @@ import {
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
 import { UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
@@ -51,8 +52,9 @@ const CreateOrUpdateFormVideoPost = ({
   organizationId,
 }: Props) => {
   const { push, back } = useRouter();
-
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
+  const { imageList, handleImageChange } = useUploadItem({
+    uploadImages,
+  });
   const {
     watch,
     control,
@@ -141,9 +143,6 @@ const CreateOrUpdateFormVideoPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
   return (
     <>
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -155,8 +154,8 @@ const CreateOrUpdateFormVideoPost = ({
                   {post?.id ? 'Update' : 'Create a New'} Video
                 </h2>
 
-                <div className="mt-2">
-                  <div className="mx-auto justify-center text-center">
+                <div className="mt-4 py-2">
+                  <div className="mx-auto max-w-[100px]">
                     <Upload
                       multiple={false}
                       name="attachmentImages"

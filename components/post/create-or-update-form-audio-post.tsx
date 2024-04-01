@@ -8,12 +8,13 @@ import {
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
@@ -56,8 +57,8 @@ const CreateOrUpdateFormAudioPost = ({
   uploadImages,
 }: Props) => {
   const { back, push } = useRouter();
-  const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
+  const { fileList, imageList, handleImageChange, handleFileChange } =
+    useUploadItem({ uploadFiles, uploadImages });
 
   const {
     watch,
@@ -152,12 +153,6 @@ const CreateOrUpdateFormAudioPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
-  const handleFileChange: UploadProps['onChange'] = ({ fileList }) =>
-    setFileList(fileList);
-
   return (
     <>
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -168,8 +163,8 @@ const CreateOrUpdateFormAudioPost = ({
                 <h2 className="font-bold text-black dark:text-white">
                   {post?.id ? 'Update' : 'Create a new'} audio
                 </h2>
-                <div className="mt-4">
-                  <div className="mx-auto justify-center text-center">
+                <div className="mt-4 py-2">
+                  <div className="mx-auto max-w-[100px]">
                     <Upload
                       multiple
                       name="attachmentImages"

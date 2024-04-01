@@ -9,11 +9,9 @@ import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import { useInputState } from '../hooks';
 import { PhoneNumberInput } from '../ui-setting/ant';
-import { TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({
-  fullName: yup.string().optional(),
   phone: yup.string().required(),
 });
 
@@ -85,7 +83,7 @@ const CreatePaymentPhoneFormCardUser = (props: {
                   </Alert>
                 )}
 
-                <div className="mt-4">
+                {/* <div className="mt-4">
                   <TextInput
                     control={control}
                     type="text"
@@ -93,7 +91,7 @@ const CreatePaymentPhoneFormCardUser = (props: {
                     placeholder="Full name"
                     errors={errors}
                   />
-                </div>
+                </div> */}
 
                 <div className="mt-4">
                   <PhoneNumberInput

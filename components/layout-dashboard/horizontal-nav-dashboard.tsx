@@ -92,11 +92,8 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="flex items-center justify-end ml-auto">
-              <div className="relative">
+              <div className="flex items-center">
                 <ThemeToggle />
-              </div>
-
-              <div className="relative">
                 {user?.profile ? (
                   <>
                     <DropdownMenu>

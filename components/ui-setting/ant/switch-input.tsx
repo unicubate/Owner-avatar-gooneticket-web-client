@@ -1,4 +1,3 @@
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
@@ -55,8 +54,8 @@ const SwitchInput = ({ control, label = '', name, defaultValue }: Props) => {
                   ) : null}
 
                   <Switch
-                    checkedChildren={<CheckOutlined />}
-                    unCheckedChildren={<CloseOutlined />}
+                    // checkedChildren={<CheckOutlined />}
+                    // unCheckedChildren={<CloseOutlined />}
                     checked={value}
                     onChange={onChange}
                     defaultValue={defaultValue}

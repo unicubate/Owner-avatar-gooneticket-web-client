@@ -2,11 +2,12 @@ import { CreateOrUpdateOneMembershipAPI } from '@/api-site/membership';
 import { MembershipFormModel } from '@/types/membership';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
@@ -32,7 +33,10 @@ const CreateOrUpdateFormMembership = ({
 }) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
+  const { imageList, handleImageChange } = useUploadItem({
+    uploadImages,
+  });
+
   const {
     watch,
     control,
@@ -109,9 +113,6 @@ const CreateOrUpdateFormMembership = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -168,8 +169,8 @@ const CreateOrUpdateFormMembership = ({
               </div>
             </div>
 
-            <div className="mt-2">
-              <div className="mx-auto justify-center text-center">
+            <div className="mt-4 py-2">
+              <div className="mx-auto max-w-[100px]">
                 <Upload
                   multiple={false}
                   name="attachmentImages"

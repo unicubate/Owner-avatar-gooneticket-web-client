@@ -98,6 +98,9 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
                   className="rounded-sm cursor-pointer"
                   variant={statusPaymentColorLists[item?.status] as any}
                   title={`${item?.type} ${statusPaymentLists[item?.status]}`}
+                  onClick={() => {
+                    item.status !== 'ACTIVE' ? resendItem(item) : null;
+                  }}
                 >
                   {`${item?.type} ${statusPaymentLists[item?.status]}`}
                 </Badge>

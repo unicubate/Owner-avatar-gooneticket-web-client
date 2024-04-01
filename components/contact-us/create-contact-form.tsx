@@ -1,5 +1,5 @@
 import { CreateContactAPI } from '@/api-site/contact';
-import { useReactHookForm } from '@/components/hooks';
+import { useReactHookForm, useUploadItem } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import {
   SwitchInput,
@@ -13,9 +13,8 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
-import { Checkbox, Upload, UploadFile, UploadProps } from 'antd';
+import { Checkbox, Upload } from 'antd';
 import Link from 'next/link';
-import { useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -36,7 +35,7 @@ const schema = yup.object({
 });
 
 const CreateContactForm = () => {
-  const [fileList, setFileList] = useState<UploadFile[]>([]);
+  const { fileList, handleFileChange } = useUploadItem({});
   const {
     reset,
     watch,
@@ -99,9 +98,6 @@ const CreateContactForm = () => {
       });
     }
   };
-
-  const handleFileChange: UploadProps['onChange'] = ({ fileList }) =>
-    setFileList(fileList);
 
   return (
     <>

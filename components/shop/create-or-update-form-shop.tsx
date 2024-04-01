@@ -12,13 +12,14 @@ import {
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
+import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant';
@@ -75,9 +76,8 @@ const CreateOrUpdateFormShop = ({
 }: Props) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
-
-  const [fileList, setFileList] = useState<UploadFile[]>(uploadFiles ?? []);
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
+  const { fileList, imageList, handleImageChange, handleFileChange } =
+    useUploadItem({ uploadFiles, uploadImages });
 
   const {
     watch,
@@ -179,12 +179,6 @@ const CreateOrUpdateFormShop = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
-  const handleFileChange: UploadProps['onChange'] = ({ fileList }) =>
-    setFileList(fileList);
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -218,15 +212,15 @@ const CreateOrUpdateFormShop = ({
               />
             </div>
 
-            <div className="mt-4 grid-cols-1 gap-x-6 gap-y-5">
-              <div className="mx-auto justify-center text-center">
+            <div className="mt-4 py-2">
+              <div className="mx-auto max-w-[100px]">
                 <Upload
                   multiple
                   name="attachmentImages"
                   listType="picture-card"
                   fileList={imageList}
                   onChange={handleImageChange}
-                  accept=".png,.jpg,.jpeg"
+                  accept=".png,.jpg,.jpeg,.gif"
                   maxCount={10}
                 >
                   {imageList.length >= 10 ? null : (

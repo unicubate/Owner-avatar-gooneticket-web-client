@@ -4,12 +4,13 @@ import { PostFormModel, arrayWhoCanSees } from '@/types/post';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { filterImageAndFile } from '@/utils/utils';
 import { UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
@@ -37,8 +38,10 @@ const CreateOrUpdateFormPost = ({
   organizationId,
 }: Props) => {
   const router = useRouter();
+  const { imageList, handleImageChange } = useUploadItem({
+    uploadImages,
+  });
 
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
   const {
     watch,
     control,
@@ -123,9 +126,6 @@ const CreateOrUpdateFormPost = ({
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
   return (
     <>
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -137,8 +137,8 @@ const CreateOrUpdateFormPost = ({
                   {post?.id ? 'Update' : 'Create a new'} article
                 </h2>
 
-                <div className="mt-4">
-                  <div className="mx-auto justify-center text-center">
+                <div className="mt-4 py-2">
+                  <div className="mx-auto max-w-[100px]">
                     <Upload
                       multiple
                       name="attachmentImages"

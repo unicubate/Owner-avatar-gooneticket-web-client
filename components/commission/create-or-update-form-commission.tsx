@@ -7,14 +7,14 @@ import {
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
 import { UploadOutlined } from '@ant-design/icons';
-import { Upload, UploadFile, UploadProps } from 'antd';
+import { Upload } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
-import { useInputState } from '../hooks';
+import { useInputState, useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
@@ -52,8 +52,9 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
   const router = useRouter();
-
-  const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
+  const { imageList, handleImageChange } = useUploadItem({
+    uploadImages,
+  });
 
   const {
     watch,
@@ -141,9 +142,6 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
     }
   };
 
-  const handleImageChange: UploadProps['onChange'] = ({ fileList }) =>
-    setImageList(fileList);
-
   return (
     <>
       <div className="mt-4 lg:order-1 lg:col-span-3 xl:col-span-4">
@@ -186,8 +184,8 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
                   />
                 </div>
 
-                <div className="mt-4">
-                  <div className="mx-auto justify-center text-center">
+                <div className="mt-4 py-2">
+                  <div className="mx-auto max-w-[100px]">
                     <Upload
                       multiple
                       name="attachmentImages"
