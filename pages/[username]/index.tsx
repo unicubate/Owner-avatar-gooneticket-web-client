@@ -6,6 +6,7 @@ import { PublicPostsHome } from '@/components/post/public-posts-home';
 import { RecentCommentTransactions } from '@/components/transaction/recent-comment-transactions';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { HtmlParser } from '@/utils/html-parser';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
@@ -47,22 +48,24 @@ const ProfilePublic = () => {
                   </div>
                 </div>
 
-                <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                  {/* <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                    <div className="flow-root">
-                      <div className="p-8 sm:p-4">
-                        <div className="flex items-center">
-                          <div
-                            className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
-                          >
-                            <HtmlParser
-                              html={String(user?.profile?.description ?? '')}
-                            />
+                <div className="my-8 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
+                  {user?.profile?.description && (
+                    <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                      <div className="flow-root">
+                        <div className="p-8 sm:p-4">
+                          <div className="flex items-center">
+                            <div
+                              className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
+                            >
+                              <HtmlParser
+                                html={String(user?.profile?.description ?? '')}
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div> */}
+                  )}
 
                   <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">

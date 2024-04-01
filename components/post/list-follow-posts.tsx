@@ -244,31 +244,16 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
             {['MEMBERSHIP'].includes(item?.whoCanSee) &&
             item?.isValidSubscribe !== 1 ? (
               <button className="ml-3">
-                <MessageCircleIcon className="size-6" />
+                <MessageCircleIcon className="size-7" />
               </button>
             ) : (
               <button onClick={() => setIsComment(true)} className="ml-3">
-                <MessageCircleIcon className="size-6" />
+                <MessageCircleIcon className="size-7" />
               </button>
             )}
 
             {item?.totalComment > 0 ? (
               <span className="ml-2 text-sm">{item?.totalComment}</span>
-            ) : (
-              ''
-            )}
-            {userVisitor?.id === item?.userId ? (
-              <>
-                <Link
-                  title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                  className="ml-3 hover:text-green-400 focus:ring-green-400"
-                >
-                  <PencilIcon className="size-6" />
-                </Link>
-              </>
             ) : null}
 
             <CopyShareLink
@@ -281,10 +266,24 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
                   variant="link"
                   type="button"
                 >
-                  <ShareIcon className="size-6" />
+                  <ShareIcon className="size-7" />
                 </ButtonInput>
               }
             />
+
+            {userVisitor?.id === item?.userId ? (
+              <>
+                <Link
+                  title="Edit"
+                  href={`/posts/${
+                    item?.id
+                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                  className="hover:text-green-400 focus:ring-green-400"
+                >
+                  <PencilIcon className="size-6" />
+                </Link>
+              </>
+            ) : null}
 
             {/* {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (

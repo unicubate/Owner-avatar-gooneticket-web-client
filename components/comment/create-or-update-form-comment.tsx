@@ -116,7 +116,7 @@ export function CreateOrUpdateFormComment(props: {
             <AvatarComponent
               size={40}
               className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              profile={profile?.profile}
+              profile={''}
             />
           </div> */}
           <TextareaReactQuillInput
@@ -126,23 +126,21 @@ export function CreateOrUpdateFormComment(props: {
             errors={errors}
             className="h-auto"
           />
-
-          {openModal ? (
-            <div className="flex items-center justify-between">
+          <div className="flex space-x-2 justify-between">
+            {openModal ? (
               <ButtonInput
                 type="button"
                 size="lg"
                 variant="outline"
+                className="w-full"
                 onClick={() => {
                   setOpenModal(false);
                 }}
               >
                 Cancel
               </ButtonInput>
-            </div>
-          ) : null}
+            ) : null}
 
-          <div className="flex-col sm:flex sm:items-end sm:justify-between">
             {userStorage?.id ? (
               <>
                 <ButtonInput

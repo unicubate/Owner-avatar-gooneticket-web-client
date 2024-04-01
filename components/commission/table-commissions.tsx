@@ -7,10 +7,9 @@ import {
 } from '@/components/ui-setting';
 import { EmptyData } from '@/components/ui-setting/ant/empty-data';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
-import { PlusIcon } from 'lucide-react';
+import { HeartHandshakeIcon, PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { RiShakeHandsLine } from 'react-icons/ri';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks/use-input-state';
 import { ErrorFile } from '../ui-setting/ant/error-file';
@@ -67,7 +66,7 @@ const TableCommissions = ({ organizationId }: Props) => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<RiShakeHandsLine className="size-10" />}
+      image={<HeartHandshakeIcon className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

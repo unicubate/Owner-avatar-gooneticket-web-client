@@ -12,11 +12,10 @@ import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { PlusIcon } from 'lucide-react';
+import { LockKeyholeIcon, PlusIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { BiLockOpen } from 'react-icons/bi';
 import { useInView } from 'react-intersection-observer';
 
 const MembershipsLevels = () => {
@@ -67,7 +66,7 @@ const MembershipsLevels = () => {
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      image={<BiLockOpen className="size-10" />}
+      image={<LockKeyholeIcon className="size-10" />}
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />

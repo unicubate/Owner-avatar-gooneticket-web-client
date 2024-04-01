@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
-import { CommentModel } from '@/types/comment';
 import { ModelType } from '@/utils/paginations';
-import { Fragment } from 'react';
 import { LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
@@ -53,21 +51,19 @@ export function ListComments(props: Props) {
   ) : dataComments?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (
-    dataComments?.pages.map((page, index) => (
-      <Fragment key={index}>
-        {page?.data?.value.map((item: CommentModel, index: number) => (
-          <ListCommentsPosts
-            item={item}
-            key={index}
-            model={model}
-            index={index}
-            organizationId={item?.organizationId}
-            userVisitorId={userVisitorId}
-            modelIds={modelIds}
-          />
-        ))}
-      </Fragment>
-    ))
+    dataComments?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListCommentsPosts
+          item={item}
+          key={index}
+          model={model}
+          index={index}
+          organizationId={item?.organizationId}
+          userVisitorId={userVisitorId}
+          modelIds={modelIds}
+        />
+      ))
   );
 
   return (
