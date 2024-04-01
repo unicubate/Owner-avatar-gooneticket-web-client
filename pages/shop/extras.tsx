@@ -17,7 +17,7 @@ import { ProductModel } from '@/types/product';
 import { PlusIcon, StoreIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const ShopsExtras = () => {
@@ -75,13 +75,14 @@ const ShopsExtras = () => {
       description={`Shop is a simple and effective way to offer something to your audience. It could be anything.`}
     />
   ) : (
-    dataProduct?.pages.map((page, index) => (
-      <Fragment key={index}>
-        {page?.data?.value.map((item: ProductModel, index: number) => (
-          <ListProductsShop item={item} key={index} index={index} />
-        ))}
-      </Fragment>
-    ))
+    dataProduct?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map(
+        (item: ProductModel, index: number) =>
+          organizationId && (
+            <ListProductsShop item={item} key={index} index={index} />
+          ),
+      )
   );
 
   return (

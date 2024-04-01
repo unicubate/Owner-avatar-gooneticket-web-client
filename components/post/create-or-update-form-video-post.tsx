@@ -155,7 +155,7 @@ const CreateOrUpdateFormVideoPost = ({
                 </h2>
 
                 <div className="mt-4 py-2">
-                  <div className="mx-auto max-w-[100px]">
+                  <div className="mx-auto max-w-max">
                     <Upload
                       multiple={false}
                       name="attachmentImages"

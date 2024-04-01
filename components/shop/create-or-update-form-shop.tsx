@@ -213,7 +213,7 @@ const CreateOrUpdateFormShop = ({
             </div>
 
             <div className="mt-4 py-2">
-              <div className="mx-auto max-w-[100px]">
+              <div className="mx-auto max-w-max">
                 <Upload
                   multiple
                   name="attachmentImages"

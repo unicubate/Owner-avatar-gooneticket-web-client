@@ -19,10 +19,10 @@ import {
   WalletIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
+import { ButtonCopy } from '../ui-setting/button-copy';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
@@ -30,8 +30,8 @@ type Props = {
   index: number;
 };
 
-const ListProductsShop: React.FC<Props> = ({ item, index }) => {
-  const router = useRouter();
+const ListProductsShop = ({ item, index }: Props) => {
+  const { push } = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
@@ -145,6 +145,13 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-600">
+            <ButtonCopy
+              size="icon"
+              variant="ghost"
+              link={`${process.env.NEXT_PUBLIC_SITE}/shop/${item?.slug}`}
+              iconClassName="size-4 text-gray-600 hover:text-green-600"
+            />
+
             <ButtonInput
               variant="ghost"
               type="button"
@@ -152,7 +159,7 @@ const ListProductsShop: React.FC<Props> = ({ item, index }) => {
               icon={
                 <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
               }
-              onClick={() => router.push(`/shop/${item?.id}/edit`)}
+              onClick={() => push(`/shop/${item?.id}/edit`)}
             />
 
             <ActionModalDialog

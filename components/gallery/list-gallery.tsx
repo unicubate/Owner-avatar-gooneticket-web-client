@@ -21,6 +21,7 @@ import { FiDownload } from 'react-icons/fi';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
+import { ButtonCopy } from '../ui-setting/button-copy';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
@@ -136,6 +137,13 @@ export const ListGallery = ({ item, index }: Props) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium">
+            <ButtonCopy
+              size="icon"
+              variant="ghost"
+              link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
+              iconClassName="size-4 text-gray-600 hover:text-green-600"
+            />
+
             <ButtonInput
               variant="ghost"
               type="button"

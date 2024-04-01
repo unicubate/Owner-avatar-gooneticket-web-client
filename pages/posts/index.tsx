@@ -6,19 +6,16 @@ import { ListPosts } from '@/components/post/list-posts';
 import { ButtonLoadMore } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PostModel } from '@/types/post';
 import { MenuSquareIcon } from 'lucide-react';
 import { GetStaticPropsContext } from 'next';
-import { Fragment } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { SearchInput } from '../../components/ui-setting/search-input';
 
 const Posts = () => {
-  const { userStorage: user } = useAuth() as any;
+  const { search, handleSetSearch, userStorage: user } = useInputState();
   const { ref, inView } = useInView();
-  const { search, handleSetSearch } = useInputState();
 
   const {
     isLoading: isLoadingPost,
@@ -71,13 +68,14 @@ const Posts = () => {
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
   ) : (
-    dataPost?.pages.map((page, index) => (
-      <Fragment key={index}>
-        {page?.data?.value.map((item: PostModel, index: number) => (
-          <ListPosts item={item} key={index} index={index} />
-        ))}
-      </Fragment>
-    ))
+    dataPost?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map(
+        (item: PostModel, index: number) =>
+          user?.organizationId && (
+            <ListPosts item={item} key={index} index={index} />
+          ),
+      )
   );
   return (
     <>
