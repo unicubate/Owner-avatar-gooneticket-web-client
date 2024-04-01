@@ -31,7 +31,7 @@ const ConfirmContributor = () => {
           {status === 'error' ? (
             <ErrorFile
               title="404"
-              description="Token not valid or expired"
+              description="Token invalid or expired"
               className="dark:text-white"
             />
           ) : null}

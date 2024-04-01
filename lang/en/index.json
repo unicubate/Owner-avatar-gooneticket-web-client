@@ -19,12 +19,13 @@
     "login": "Sign in",
     "contributor": "Contributor",
     "sign_up": "Sign up",
-    "payments": "Payments"
+    "payments": "Payments",
+    "affiliates": "Affiliates"
   },
 
   "home_page": {
     "title": "Everything you need to make money doing what you love",
-    "subTitle": "Accept donations. Start a membership. Sell anything you like. It’s easier than you think."
+    "subTitle": "Accept support. Start a membership. Setup a shop. It’s easier than you think."
   },
 
   "payment": {

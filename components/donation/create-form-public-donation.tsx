@@ -8,9 +8,7 @@ import { ButtonInput } from '../ui-setting/button-input';
 import { useAuth } from '../util/context-user';
 const { TextArea } = Input;
 
-const CreateFormPublicDonation: React.FC<{
-  user: UserModel;
-}> = ({ user }) => {
+const CreateFormPublicDonation = ({ user }: { user: UserModel }) => {
   const { userStorage: userBayer } = useAuth() as any;
   const initialPrice = String(user?.donationUser?.price || 0);
   const initialCurrency = user?.profile?.currency?.code;

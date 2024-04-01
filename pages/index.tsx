@@ -1,25 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
+import { MediumFooter } from '@/components/footer/medium-footer';
+import {
+  comparedLandingPage,
+  featuresLandingPage,
+} from '@/components/landing-page/data-map';
 import { LayoutSite } from '@/components/layout-site';
-import { ButtonInput } from '@/components/ui-setting/button-input';
+import { ButtonInput } from '@/components/ui-setting';
 import { GetStaticPropsContext } from 'next';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useState } from 'react';
 
 export default function Home() {
+  const [features] = useState(featuresLandingPage);
+  const [compared] = useState(comparedLandingPage);
   const t = useTranslations('home_page');
 
   return (
     <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
-        {/* <div className="absolute inset-0">
-          <img
-            className="object-cover w-full h-full"
-            src="https://landingfoliocom.imgix.net/store/collection/clarity-blog/images/hero/5/grid-pattern.png"
-            alt=""
-          />
-        </div> */}
-
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 mx-auto max-w-4xl text-center">
+          <div className="mt-8 py-6 mx-auto max-w-5xl text-center">
             <h1 className="text-2xl font-bold sm:text-4xl lg:text-5xl">
               {t('title')}
             </h1>
@@ -27,57 +28,184 @@ export default function Home() {
               {t('subTitle')}
             </p>
           </div>
+
           <div className="mx-auto max-w-xl text-center">
-            <form action="#" method="POST" className="mt-8 sm:mt-10">
-              <div
-                className="group relative p-3 rounded-xl sm:border sm:border-gray-200 dark:sm:border-gray-600 sm:focus-within:border-gray-200"
-                //className="group relative p-2 sm:rounded-xl sm:border sm:border-gray-200 sm:focus-within:border-gray-200 sm:focus-within:ring-1 sm:focus-within:ring-gray-300"
-              >
-                {/* <Input className="block bg-transparent p-3 outline-none focus:border-transparent focus:ring-transparent sm:border-none sm:focus:border-transparent sm:focus:ring-0" /> */}
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  placeholder="Email address"
-                  className="block w-full rounded-md border border-gray-200 dark:border-gray-600 bg-transparent p-2 outline-none focus:border-gray-900 focus:ring-1 focus:ring-gray-900 sm:border-none sm:focus:border-transparent sm:focus:ring-0"
-                />
+            <div className="flex flex-wrap justify-center">
+              <Link href={`/register`}>
+                <ButtonInput
+                  type="button"
+                  className="px-10 text-lg"
+                  size="xlg"
+                  variant="info"
+                >
+                  Start free with email
+                </ButtonInput>
+              </Link>
+            </div>
 
-                <div className="mt-2 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
-                  <ButtonInput
-                    type="button"
-                    className="w-full"
-                    size="xlg"
-                    variant="info"
-                  >
-                    Get started
-                  </ButtonInput>
-                </div>
-              </div>
-            </form>
-
-            {/* <ul className="mt-4 flex items-center justify-center space-x-6 sm:space-x-8">
+            <ul className="mt-2 flex items-center justify-center space-x-6 sm:space-x-8">
               <li className="flex items-center">
-                <span className="text-xs font-medium sm:text-sm">
-                  {' '}
-                  It’s free, and takes less than a minute.{' '}
+                <span className="text-xs font-normal text-gray-500 sm:text-sm">
+                  It’s free, and takes less than a minute.
                 </span>
               </li>
-            </ul> */}
+            </ul>
           </div>
         </div>
       </div>
 
-      {/* <section className="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-gray-800 left-12 bottom-16 dark:border-gray-700 rounded-2xl">
-        <h2 className="font-semibold text-gray-800 dark:text-white">🍪 Cookie Notice</h2>
+      <div className="mt-16 my-8 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            Designed for creators,
+          </h2>
+          <p className="text-lg font-bold mt-2 leading-tight sm:text-lg lg:text-lg text-gray-600">
+            not for businesses.
+          </p>
+        </div>
 
-        <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">We use cookies to ensure that we give you the best experience on our website. <a href="#" className="text-blue-500 hover:underline">Read cookies policies</a>. </p>
+        <div className="grid mt-4 grid-cols-1 gap-6 lg:mt-4 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="overflow-hidden dark:bg-black/15 rounded">
+            <div className="p-4">
+              <p className="text-base leading-relaxed text-gray-600">
+                You have 100% ownership of your supporters. We never email them,
+                and you can export the list any time you like.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-hidden dark:bg-black/15 rounded">
+            <div className="p-4">
+              <p className="text-base leading-relaxed text-gray-600">
+                You get to talk to a human for help, or if you just like some
+                advice to hit the ground running.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-hidden dark:bg-black/15 rounded">
+            <div className="p-4">
+              <p className="text-base leading-relaxed text-gray-600">
+                We don't call them "customers" or transactions. They are your
+                supporters.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl font-bold leading-tight sm:text-4xl lg:text-5xl">
+            Make 20% or more,
+          </h2>
+          <p className="text-lg font-bold  mt-2 leading-tight sm:text-lg lg:text-lg text-gray-600">
+            compared to other platforms.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 mt-4 lg:mt-4 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {compared.map((feature, index) => (
+            <div
+              key={index}
+              className="overflow-hidden dark:bg-black/15 rounded"
+            >
+              <div className="p-4">
+                <div className="flex items-center">
+                  {feature?.icon}
+                  <div className="ml-5 mr-auto">
+                    <p className="text-xl font-semibold">{feature?.title}</p>
+                  </div>
+                </div>
+
+                <p className="text-base leading-relaxed text-gray-600 mt-2">
+                  {feature?.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl font-bold leading-none sm:text-4xl lg:text-5xl">
+            Fund your creative work by
+            <span className="text-indigo-600"> creating your page </span>
+          </h2>
+          <p className="text-lg font-bold mt-2 leading-tight sm:text-lg lg:text-lg text-gray-600">
+            It only takes a minute to create your page and start receiving
+            donations and support
+          </p>
+        </div>
+
+        <div className="flex mt-4 flex-wrap justify-center">
+          <ButtonInput
+            type="button"
+            className="px-10 text-lg"
+            size="xlg"
+            variant="info"
+          >
+            Start free with email
+          </ButtonInput>
+        </div>
+      </div>
+
+      <div className="my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-4xl font-bold leading-none sm:text-4xl lg:text-5xl">
+            All the features you need
+          </h2>
+          <p className="text-lg font-bold  mt-2 leading-tight sm:text-lg lg:text-lg text-gray-600">
+            Everything you need to make an income from your work.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 mt-4 lg:mt-4 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="overflow-hidden dark:bg-black/15 rounded"
+            >
+              <div className="p-4">
+                <div className="flex items-center">
+                  {feature?.icon}
+                  <div className="ml-5 mr-auto">
+                    <p className="text-xl font-semibold">{feature?.title}</p>
+                  </div>
+                </div>
+
+                <p className="text-base leading-relaxed text-gray-600 mt-2">
+                  {feature?.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <MediumFooter />
+
+      {/* <section className="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-black/15 left-12 bottom-16 dark:border-gray-700 rounded-2xl">
+        <h2 className="font-semibold text-gray-800 dark:text-white">
+          🍪 Cookie Notice
+        </h2>
+
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">
+          We use cookies to ensure that we give you the best experience on our
+          website.{' '}
+          <a href="#" className="text-blue-500 hover:underline">
+            Read cookies policies
+          </a>
+          .{' '}
+        </p>
 
         <div className="flex items-center justify-between mt-4 gap-x-4 shrink-0">
           <button className="text-xs text-gray-800 underline transition-colors duration-300 dark:text-white dark:hover:text-gray-400 hover:text-gray-600 focus:outline-none">
             Manage your preferences
           </button>
 
-          <button className=" text-xs bg-gray-900 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none">
+          <button className=" text-xs bg-indigo-500 font-medium rounded-lg hover:bg-gray-700 text-white px-4 py-2.5 duration-300 transition-colors focus:outline-none">
             Accept
           </button>
         </div>

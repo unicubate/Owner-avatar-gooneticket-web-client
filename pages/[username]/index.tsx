@@ -6,7 +6,6 @@ import { PublicPostsHome } from '@/components/post/public-posts-home';
 import { RecentCommentTransactions } from '@/components/transaction/recent-comment-transactions';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { HtmlParser } from '@/utils/html-parser';
 import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
@@ -49,7 +48,7 @@ const ProfilePublic = () => {
                 </div>
 
                 <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                  {/* <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">
                       <div className="p-8 sm:p-4">
                         <div className="flex items-center">
@@ -63,12 +62,12 @@ const ProfilePublic = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
 
                   <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">
                       <div className="overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
-                        <div className="p-6 sm:p-4">
+                        <div className="p-8 sm:p-4">
                           <div className="flex items-center">
                             <CreateFormPublicDonation user={user} />
                           </div>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { DeleteOneCommissionAPI } from '@/api-site/commission';
+import { DeleteOneProductAPI } from '@/api-site/product';
 import { GetUploadsAPI, viewOneFileUploadAPI } from '@/api-site/upload';
-import { CommissionModel } from '@/types/commission';
+import { ProductModel } from '@/types/product';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -11,22 +11,21 @@ import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { CalendarIcon, PencilIcon, TrashIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import React from 'react';
 import { formateDateDayjs } from '../../utils/formate-date-dayjs';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 
 type Props = {
-  item?: CommissionModel;
+  item?: ProductModel;
   index: number;
 };
 
-const ListCommissions: React.FC<Props> = ({ item, index }) => {
+const ListCommissions = ({ item, index }: Props) => {
   const router = useRouter();
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
 
-  const { mutateAsync: saveMutation } = DeleteOneCommissionAPI({
+  const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},
   });
@@ -35,7 +34,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
     setLoading(true);
     setIsOpen(true);
     try {
-      await saveMutation({ commissionId: item?.id });
+      await saveMutation({ productId: item?.id });
       AlertSuccessNotification({
         text: 'Commission deleted successfully',
       });
@@ -70,7 +69,7 @@ const ListCommissions: React.FC<Props> = ({ item, index }) => {
               size={100}
               shape="square"
               src={viewOneFileUploadAPI({
-                folder: 'commissions',
+                folder: 'products',
                 fileName: String(dataImages?.[0]?.path),
               })}
               alt={item?.title}

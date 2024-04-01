@@ -42,6 +42,17 @@ const GalleryUserPublic = () => {
                 />
               ) : null}
             </div>
+
+            {/* <div className="grid gap-6 lg:grid-cols-3">
+              {user?.id ? (
+                <PublicGallery
+                  userVisitor={{
+                    id: userVisiter?.id,
+                    organizationId: user?.organizationId,
+                  }}
+                />
+              ) : null}
+            </div> */}
           </div>
         </div>
       </LayoutUserPublicSite>

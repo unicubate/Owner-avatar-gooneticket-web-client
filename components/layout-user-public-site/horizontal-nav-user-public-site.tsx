@@ -84,7 +84,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
       <header className="sticky top-0 z-20 bg-white border-b border-gray-300 dark:border-gray-800 dark:bg-[#1c1b22]">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-2 lg:hidden">
+            <div className="flex items-center -m-3 lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
                   className="w-6 h-6"
@@ -104,34 +104,36 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="flex ml-2 xl:ml-0">
-              <div className="flex items-center flex-shrink-0">
-                <div className="block w-auto h-8 lg:hidden">
-                  <div className="flex items-center">
-                    <div className="relative shrink-0 cursor-pointer">
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
+              <Link href="/">
+                <div className="flex items-center flex-shrink-0">
+                  <div className="block w-auto h-8 lg:hidden">
+                    <div className="flex items-center">
+                      <div className="relative shrink-0 cursor-pointer">
+                        <img
+                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
+                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
+                        />
+                      </div>
 
-                    <div className="ml-2 cursor-pointer">
-                      <p className="text-lg font-bold">
-                        {process.env.NEXT_PUBLIC_NAME_SITE}
-                      </p>
+                      <div className="ml-2 cursor-pointer">
+                        <p className="text-lg font-bold">
+                          {process.env.NEXT_PUBLIC_NAME_SITE}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="hidden w-auto h-8 lg:block">
+                    <div className="flex items-center">
+                      <div className="relative shrink-0 cursor-pointer">
+                        <img
+                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
+                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="hidden w-auto h-8 lg:block">
-                  <div className="flex items-center">
-                    <div className="relative shrink-0 cursor-pointer">
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </Link>
             </div>
 
             <nav className="hidden w-auto ml-4 space-x-10 lg:block">
@@ -183,7 +185,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="link"
-                          className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
+                          className="bg-white -m-3 text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                         >
                           <svg
                             className="size-6"

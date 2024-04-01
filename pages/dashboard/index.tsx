@@ -21,6 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   LockKeyholeIcon,
   ShieldCheckIcon,
@@ -84,8 +85,8 @@ const Dashboard = () => {
 
                   <div className="ml-4 cursor-pointer">
                     <p className="text-xl font-bold dark:text-white">
-                      {user?.profile?.firstName ?? ''}{' '}
-                      {user?.profile?.lastName ?? ''}
+                      {capitalizeFirstLetter(user?.profile?.firstName ?? '')}{' '}
+                      {capitalizeFirstLetter(user?.profile?.lastName ?? '')}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-600">
                       {process.env.NEXT_PUBLIC_SITE}/{user?.username ?? ''}

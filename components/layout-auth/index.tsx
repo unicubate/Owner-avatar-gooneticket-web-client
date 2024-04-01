@@ -73,7 +73,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
+                  size="sm"
                   variant="ghost"
                   onClick={() => {
                     push(`/login`);
@@ -86,7 +86,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
+                  size="sm"
                   variant="info"
                   onClick={() => {
                     push(`/register`);

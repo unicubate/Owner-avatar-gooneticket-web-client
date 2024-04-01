@@ -1,6 +1,6 @@
 import { CreateOrUpdateOneCommentAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
-import { CommissionModel } from '@/types/commission';
+import { ProductModel } from '@/types/product';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { X } from 'lucide-react';
@@ -19,11 +19,11 @@ const schema = yup.object({
 export function CreateCommentCommissionModal(props: {
   isOpen: boolean;
   setIsOpen: any;
-  commission: CommissionModel;
+  product: ProductModel;
   comment?: any;
   parentId?: string;
 }) {
-  const { isOpen, setIsOpen, commission, comment, parentId } = props;
+  const { isOpen, setIsOpen, product, comment, parentId } = props;
   const {
     reset,
     setValue,
@@ -38,7 +38,7 @@ export function CreateCommentCommissionModal(props: {
 
   useEffect(() => {
     if (comment) {
-      const fields = ['description', 'commentId'];
+      const fields = ['description', 'productId'];
       fields?.forEach((field: any) => setValue(field, comment[field]));
     }
   }, [comment, parentId, setValue]);
@@ -65,8 +65,8 @@ export function CreateCommentCommissionModal(props: {
         ...payload,
         model: 'COMMISSION',
         commentId: comment?.id,
-        commissionId: commission?.id,
-        organizationId: commission?.organizationId,
+        productId: product?.id,
+        organizationId: product?.organizationId,
       });
       setHasErrors(false);
       setLoading(false);
@@ -100,7 +100,7 @@ export function CreateCommentCommissionModal(props: {
             </button>
 
             <div className="mx-auto flex">
-              <h6 className="mt-3 text-xl font-bold">{`Ask me about: ${commission.title}`}</h6>
+              <h6 className="mt-3 text-xl font-bold">{`Ask me about: ${product.title}`}</h6>
             </div>
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>

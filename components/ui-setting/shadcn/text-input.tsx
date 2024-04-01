@@ -8,7 +8,7 @@ interface Props {
   name: string;
   min?: number;
   max?: number;
-  type: 'text' | 'email' | 'password' | 'url' | 'number';
+  type: 'text' | 'email' | 'password' | 'url' | 'number' | 'tel';
   errors: { [key: string]: any };
   placeholder?: string;
   autoComplete?: 'on' | 'off';

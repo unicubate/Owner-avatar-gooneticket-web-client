@@ -3,7 +3,7 @@ import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { FollowModel } from '@/types/follow';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import Link from 'next/link';
-import React, { Fragment, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
@@ -13,7 +13,7 @@ type Props = {
   refetch?: any;
 };
 
-const ListFollowers: React.FC<Props> = ({ item, index, refetch }) => {
+const ListFollowers = ({ item, index, refetch }: Props) => {
   const [loading, setLoading] = useState(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined,

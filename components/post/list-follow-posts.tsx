@@ -27,6 +27,7 @@ import {
 } from '../ui/dropdown-menu';
 
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   AlertCircleIcon,
   DownloadIcon,
@@ -71,7 +72,8 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
               className="ml-3 cursor-pointer"
             >
               <p className="text-sm font-bold">
-                {item?.profile?.firstName ?? ''} {item?.profile?.lastName ?? ''}
+                {capitalizeFirstLetter(item?.profile?.firstName ?? '')}{' '}
+                {capitalizeFirstLetter(item?.profile?.lastName ?? '')}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
                 {formateDMYHH(item?.createdAt as Date, locale as string)}

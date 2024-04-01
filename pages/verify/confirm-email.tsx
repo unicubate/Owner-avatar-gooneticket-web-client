@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { resendCodeAPI, validCodeAPI } from '@/api-site/user';
-import { useReactHookForm } from '@/components/hooks';
+import { useDecrementTimer, useReactHookForm } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layout-auth';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
@@ -18,6 +18,9 @@ const schema = yup.object({
 });
 
 const ConfirmEmail = () => {
+  const defaultTimer = 20;
+  const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
+
   const [isResend, setIsResend] = useState(false);
   const { query, push } = useRouter();
   const { redirect } = query;
@@ -66,6 +69,7 @@ const ConfirmEmail = () => {
       AlertSuccessNotification({
         text: 'Email send successfully',
       });
+      setIsRunning(true);
     } catch (error: any) {
       setHasErrors(true);
       setIsResend(false);
@@ -106,27 +110,16 @@ const ConfirmEmail = () => {
               <TextInput
                 control={control}
                 label="Device Verification Code"
-                type="text"
                 name="code"
                 placeholder="Enter 6-digit code"
                 errors={errors}
                 required
+                type="number"
+                pattern="[0-9]*"
               />
-              <div className="mt-3 flex items-center justify-between">
-                <ButtonInput
-                  variant="info"
-                  type="button"
-                  size="sm"
-                  className="ml-auto"
-                  onClick={() => resendCodeItem()}
-                  loading={isResend}
-                >
-                  Resend code
-                </ButtonInput>
-              </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <ButtonInput
                 type="submit"
                 className="w-full"
@@ -135,6 +128,20 @@ const ConfirmEmail = () => {
                 loading={loading}
               >
                 Verify code
+              </ButtonInput>
+            </div>
+
+            <div className="mt-6 flex items-center justify-between">
+              <ButtonInput
+                variant="outline"
+                type="button"
+                size="sm"
+                className="w-full"
+                onClick={() => resendCodeItem()}
+                loading={isResend}
+                disabled={isRunning}
+              >
+                {timer} Resend code
               </ButtonInput>
             </div>
           </form>

@@ -1,6 +1,6 @@
 'use client';
 
-import { GetOneCommissionAPI } from '@/api-site/commission';
+import { GetOneProductAPI } from '@/api-site/product';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { useInputState } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
@@ -17,10 +17,12 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { GetStaticPropsContext } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 
 const CheckoutCommission = () => {
   const [isPayPalPay, setIsPayPalPay] = useState<boolean>(false);
@@ -33,8 +35,9 @@ const CheckoutCommission = () => {
     formState: { errors },
   } = useForm();
   const watchAmount = watch('amount', '');
-  const { status, data: item } = GetOneCommissionAPI({
-    commissionId: String(commissionId),
+  const { status, data: item } = GetOneProductAPI({
+    productId: String(commissionId),
+    isVisible: 'TRUE',
   });
 
   const { data: userAddress } = GetOneUserAddressMeAPI();
@@ -71,7 +74,7 @@ const CheckoutCommission = () => {
                       <div className="mx-auto mt-4 justify-center text-center">
                         <ListCarouselUpload
                           uploads={item?.uploadsImages}
-                          folder="commissions"
+                          folder="products"
                           height={400}
                         />
                       </div>
@@ -194,7 +197,16 @@ const CheckoutCommission = () => {
                                 <h2 className="font-bold text-gray-500 text-base">
                                   Payment Method
                                 </h2>
+
+                                <Image
+                                  className="mt-3"
+                                  src={'/assets/payment-cards.png'}
+                                  height={180}
+                                  width={180}
+                                  alt="Payment cards"
+                                />
                               </div>
+
                               <div className="py-6">
                                 <div className="flex items-center space-x-4">
                                   <ButtonInput
@@ -206,6 +218,7 @@ const CheckoutCommission = () => {
                                       setIsPayPalPay(false);
                                       setIsCardPay(true);
                                     }}
+                                    icon={<FaCreditCard className="size-6" />}
                                   >
                                     Card
                                   </ButtonInput>
@@ -218,6 +231,7 @@ const CheckoutCommission = () => {
                                       setIsCardPay(false);
                                       setIsPayPalPay(true);
                                     }}
+                                    icon={<FaPaypal className="size-6" />}
                                   >
                                     PayPal
                                   </ButtonInput>
@@ -229,7 +243,7 @@ const CheckoutCommission = () => {
                                         paymentModel="STRIPE-COMMISSION"
                                         data={{
                                           userAddress,
-                                          commissionId,
+                                          productId: commissionId,
                                           amount: newAmount,
                                           userReceiveId: item?.userId,
                                           userBuyerId: userBayer?.id,
@@ -247,7 +261,7 @@ const CheckoutCommission = () => {
                                       paymentModel="PAYPAL-COMMISSION"
                                       data={{
                                         userAddress,
-                                        commissionId,
+                                        productId: commissionId,
                                         amount: newAmount,
                                         userReceiveId: item?.userId,
                                         userBuyerId: userBayer?.id,

@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import {
   Dice6Icon,
   ExternalLinkIcon,
+  FanIcon,
   HeartHandshakeIcon,
   HeartIcon,
   HomeIcon,
@@ -98,6 +99,11 @@ const VerticalNavDashboard = ({ user }: Props) => {
       title: `${t('settings')}`,
       href: '/settings',
       icon: <SettingsIcon className={classIcon} />,
+    },
+    {
+      title: `${t('affiliates')}`,
+      href: '/affiliates',
+      icon: <FanIcon className={classIcon} />,
     },
   ]);
 

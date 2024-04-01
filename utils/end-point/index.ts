@@ -64,11 +64,11 @@ export const makeApiCall = async ({
   //   const m = this._methods[req.action];
 
   // axios.defaults.headers.common['Authorization'] = `${userToken}` ?? {};
-  axios.defaults.withCredentials = true;
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     url: url,
     data: body,
+    withCredentials: true,
   });
 
   return response;
@@ -179,6 +179,9 @@ export const apiEndpoints: ClientApiMethods = {
   getOneDonation: GET(`${baseUrl}/donations/show/:donationId`),
   updateOneDonation: PUT(`${baseUrl}/donations/:donationId`),
 
+  /****************** ContactUs route */
+  createOneContact: POST(`${baseUrl}/contacts`),
+
   /****************** Uploads route */
   getUploads: GET(`${baseUrl}/uploads`),
   updateOneUpload: PUT(`${baseUrl}/uploads/update`),
@@ -189,13 +192,6 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneProduct: PUT(`${baseUrl}/products/:productId`),
   getOneProduct: GET(`${baseUrl}/products/view`),
   deleteOneProduct: DELETE(`${baseUrl}/products/:productId`),
-
-  /****************** Commissions route */
-  getCommissions: GET(`${baseUrl}/commissions`),
-  getOneCommission: GET(`${baseUrl}/commissions/view`),
-  createOneCommission: POST(`${baseUrl}/commissions`),
-  updateOneCommission: PUT(`${baseUrl}/commissions/:commissionId`),
-  deleteOneCommission: DELETE(`${baseUrl}/commissions/:commissionId`),
 
   /****************** Memberships route */
   getMemberships: GET(`${baseUrl}/memberships`),

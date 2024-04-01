@@ -1,16 +1,16 @@
-import { CreateOrUpdateOneCommissionAPI } from '@/api-site/commission';
 import { GetAllDiscountsAPI } from '@/api-site/discount';
-import { CommissionFormModel } from '@/types/commission';
+import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
+import { ProductFormModel, arrayProductTypes } from '@/types/product';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { filterImageAndFile } from '@/utils/utils';
+import { UploadOutlined } from '@ant-design/icons';
 import { Upload, UploadFile, UploadProps } from 'antd';
-import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { SelectDiscountSearchInput } from '../discount/select-discount-search-input';
@@ -19,12 +19,12 @@ import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant/switch-input';
 import { ButtonInput } from '../ui-setting/button-input';
-import { TextInput } from '../ui-setting/shadcn';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
 import { Label } from '../ui/label';
 import { useAuth } from '../util/context-user';
 
 type Props = {
-  commission?: any;
+  product?: any;
   uploadImages?: any;
 };
 
@@ -33,6 +33,8 @@ const schema = yup.object({
   urlMedia: yup.string().url().nullable(),
   price: yup.number().required(),
   messageAfterPayment: yup.string().nullable(),
+  productType: yup.string().required(),
+  isVisible: yup.boolean().required(),
   description: yup.string().min(10, 'Minimum 10 symbols').required(),
   limitSlot: yup.number().when('enableLimitSlot', (enableLimitSlot, schema) => {
     if (enableLimitSlot[0] === true)
@@ -45,10 +47,7 @@ const schema = yup.object({
   }),
 });
 
-const CreateOrUpdateFormCommission: React.FC<Props> = ({
-  commission,
-  uploadImages,
-}) => {
+const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
   const { isOpen, setIsOpen } = useInputState();
   const { profile } = useAuth() as any;
   const { push, back } = useRouter();
@@ -68,30 +67,34 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const watchEnableLimitSlot = watch('enableLimitSlot', false);
-  const watchEnableDiscount = watch('enableDiscount', false);
   const watchPrice = watch('price', '');
+  const watchIsVisible = watch('isVisible', true);
+  const watchEnableDiscount = watch('enableDiscount', false);
+  const watchEnableLimitSlot = watch('enableLimitSlot', false);
 
   const { data: discounts } = GetAllDiscountsAPI();
 
   useEffect(() => {
-    if (commission) {
+    if (product) {
       const fields = [
         'title',
         'price',
         'urlMedia',
+        'isVisible',
         'enableLimitSlot',
         'limitSlot',
+        'model',
+        'productType',
         'description',
         'enableDiscount',
         'discountId',
         'messageAfterPayment',
       ];
-      fields?.forEach((field: any) => setValue(field, commission[field]));
+      fields?.forEach((field: any) => setValue(field, product[field]));
     }
-  }, [commission, setValue]);
+  }, [product, setValue]);
 
-  const { mutateAsync: saveMutation } = CreateOrUpdateOneCommissionAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneProductAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -102,8 +105,8 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
     },
   });
 
-  const onSubmit: SubmitHandler<CommissionFormModel> = async (
-    data: CommissionFormModel,
+  const onSubmit: SubmitHandler<ProductFormModel> = async (
+    data: ProductFormModel,
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -116,14 +119,16 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
       };
       await saveMutation({
         ...payload,
-        commissionId: commission?.id,
+        model: 'COMMISSION',
+        whoCanSee: 'PUBLIC',
+        productId: product?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
         text: `Commission save successfully`,
       });
-      if (!commission?.id) {
+      if (!product?.id) {
         push(`/commissions`);
       }
     } catch (error: any) {
@@ -147,9 +152,9 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
             <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5">
                 <h2 className="font-bold dark:text-white">
-                  {commission?.id ? 'Update' : 'Create a new'} commission
+                  {product?.id ? 'Update' : 'Create a new'} commission
                 </h2>
-                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
                   <div className="mb-2">
                     <TextInput
                       label="Name*"
@@ -162,7 +167,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="mb-2">
+                <div className="mt-4">
                   <TextInput
                     control={control}
                     label="Price*"
@@ -181,7 +186,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   />
                 </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
                   <div className="mx-auto justify-center text-center">
                     <Upload
                       multiple
@@ -194,7 +199,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                     >
                       {imageList.length >= 10 ? null : (
                         <div className="text-center dark:text-white">
-                          <PlusIcon />
+                          <UploadOutlined />
                           <div style={{ marginTop: 8 }}>Upload cover</div>
                         </div>
                       )}
@@ -202,7 +207,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
                   <div className="mb-2">
                     <TextareaReactQuillInput
                       control={control}
@@ -218,7 +223,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
                   <div className="mb-2">
                     <TextInput
                       label="Embed Media (optional)"
@@ -234,7 +239,7 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
                   <div className="mb-2">
                     <TextareaReactQuillInput
                       control={control}
@@ -250,7 +255,33 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                   </div>
                 </div>
 
-                <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
+                <div className="mt-4">
+                  <SelectInput
+                    firstOptionName="Choose call action?"
+                    label="Call action"
+                    control={control}
+                    errors={errors}
+                    placeholder="Select call action..."
+                    valueType="text"
+                    name="callAction"
+                    dataItem={[]}
+                  />
+                </div>
+
+                <div className="mt-4">
+                  <SelectInput
+                    firstOptionName="Choose type commission selling?"
+                    label="Type commission selling"
+                    control={control}
+                    errors={errors}
+                    placeholder="Select type commission selling..."
+                    valueType="text"
+                    name="productType"
+                    dataItem={arrayProductTypes}
+                  />
+                </div>
+
+                <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-5">
                   <div className="mb-2">
                     <label className="mb-2 block text-sm font-bold dark:text-white">
                       Advanced settings
@@ -259,6 +290,28 @@ const CreateOrUpdateFormCommission: React.FC<Props> = ({
                 </div>
 
                 <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
+                  <div className="mt-4 sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          Commission {watchIsVisible ? 'visible' : 'invisible'}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Make the Commission{' '}
+                          {watchIsVisible ? 'visible' : 'invisible'} to the
+                          public
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      defaultValue={watchIsVisible}
+                      name="isVisible"
+                      label=""
+                    />
+                  </div>
+
                   <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                     <div className="flex min-w-0 flex-1 items-center">
                       <div className="min-w-0 flex-1">

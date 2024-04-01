@@ -1,4 +1,5 @@
 import { UserModel } from '@/types/user.type';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import { useTranslations } from 'next-intl';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
@@ -13,7 +14,8 @@ const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
         </div>
         <div className="ml-2 min-w-0 flex-1">
           <p className="w-auto hidden text-sm font-bold text-gray-900 dark:text-white lg:block">
-            {user?.profile?.firstName} {user?.profile?.lastName}
+            {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
+            {capitalizeFirstLetter(user?.profile?.lastName)}
           </p>
           <p className="mt-1 hidden text-sm font-medium text-gray-600 lg:block">
             <span>

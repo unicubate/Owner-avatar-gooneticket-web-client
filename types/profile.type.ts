@@ -3,7 +3,7 @@ import { NextStep } from './user.type';
 export type ColorType = 'indigo' | 'red' | 'sky';
 
 export type ImageProfileModel = {
-  id: 'aws' | 'provider';
+  key: 'aws' | 'provider';
   patch: string;
 };
 export const arrayColors = [

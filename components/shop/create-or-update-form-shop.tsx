@@ -42,6 +42,7 @@ const schema = yup.object({
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
   productType: yup.string().required(),
+  isVisible: yup.boolean().required(),
   whoCanSee: yup
     .mixed()
     .oneOf([...arrayStringWhoCanSees] as const)
@@ -91,9 +92,10 @@ const CreateOrUpdateFormShop = ({
   } = useReactHookForm({ schema });
 
   const watchPrice = watch('price', '');
-  const watchEnableLimitSlot = watch('enableLimitSlot', false);
-  const watchEnableDiscount = watch('enableDiscount', false);
+  const watchIsVisible = watch('isVisible', true);
   const watchProductType = watch('productType', 'PHYSICAL');
+  const watchEnableDiscount = watch('enableDiscount', false);
+  const watchEnableLimitSlot = watch('enableLimitSlot', false);
   const watchEnableUrlRedirect = watch('enableUrlRedirect', false);
 
   const { data: discounts } = GetAllDiscountsAPI();
@@ -108,6 +110,8 @@ const CreateOrUpdateFormShop = ({
         'productType',
         'enableLimitSlot',
         'limitSlot',
+        'model',
+        'isVisible',
         'description',
         'moreDescription',
         'enableChooseQuantity',
@@ -152,6 +156,7 @@ const CreateOrUpdateFormShop = ({
       };
       await saveMutation({
         ...payload,
+        model: 'PRODUCT',
         productId: product?.id,
       });
       if (product?.id) {
@@ -238,11 +243,11 @@ const CreateOrUpdateFormShop = ({
               <TextInput
                 control={control}
                 label="Price*"
-                type="number"
                 name="price"
                 placeholder="Price commission"
                 errors={errors}
                 required
+                type="number"
                 pattern="[0-9]*"
                 labelHelp={
                   <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
@@ -384,6 +389,27 @@ const CreateOrUpdateFormShop = ({
             </div>
 
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
+              <div className="mt-4 sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                <div className="flex min-w-0 flex-1 items-center">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-bold dark:text-white">
+                      Product {watchIsVisible ? 'visible' : 'invisible'}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-gray-500">
+                      Make the product{' '}
+                      {watchIsVisible ? 'visible' : 'invisible'} to the public
+                    </p>
+                  </div>
+                </div>
+
+                <SwitchInput
+                  control={control}
+                  defaultValue={watchIsVisible}
+                  name="isVisible"
+                  label=""
+                />
+              </div>
+
               <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">

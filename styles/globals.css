@@ -134,7 +134,7 @@ body {
 
 .quill > .ql-container > .ql-editor.ql-blank::before {
   font-style: normal;
-  /* color: #6b7380; */
+  color: #6b7380;
 }
 
 .rhap_progress-filled {

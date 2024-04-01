@@ -4,7 +4,7 @@ import {
   ResponseProductModel,
 } from '@/types/product';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/paginations';
+import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -27,10 +27,12 @@ export const CreateOrUpdateOneProductAPI = ({
     mutationFn: async (
       payload: ProductFormModel & { productId?: string },
     ): Promise<any> => {
-      const { productId, newImageLists, newFileLists } = payload;
+      const { productId, newImageLists, model, newFileLists } = payload;
       let data = new FormData();
       data.append('title', `${payload.title ?? ''}`);
       data.append('price', `${payload.price ?? ''}`);
+      data.append('isVisible', `${payload.isVisible ?? ''}`);
+      data.append('model', `${payload.model ?? 'PRODUCT'}`);
       data.append('urlMedia', `${payload.urlMedia ?? ''}`);
       data.append('limitSlot', `${payload.limitSlot ?? ''}`);
       data.append('enableLimitSlot', `${payload.enableLimitSlot ?? ''}`);
@@ -59,7 +61,7 @@ export const CreateOrUpdateOneProductAPI = ({
         const result = await makeApiCall({
           action: 'updateOneUpload',
           body: { newImageLists, newFileLists },
-          queryParams: { uploadableId: productId, model: 'PRODUCT' },
+          queryParams: { uploadableId: productId, model },
         });
         if (result) {
           await makeApiCall({
@@ -145,14 +147,15 @@ export const GetOneProductAPI = (payload: {
   productId?: string;
   productSlug?: string;
   organizationId?: string;
+  isVisible?: 'TRUE' | 'FALSE';
 }) => {
-  const { productId, organizationId, productSlug } = payload;
+  const { productId, organizationId, isVisible, productSlug } = payload;
   const { data, isError, isLoading, isPending, status, refetch } = useQuery({
     queryKey: ['product', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
         action: 'getOneProduct',
-        queryParams: { productId, organizationId, productSlug },
+        queryParams: { productId, organizationId, isVisible, productSlug },
       }),
     // staleTime: 60_000,
     refetchOnWindowFocus: false,
@@ -172,6 +175,8 @@ export const getProductsAPI = async (
   payload: {
     organizationId: string;
     status?: string;
+    modelIds: ModelType[];
+    isVisible?: 'TRUE' | 'FALSE';
   } & PaginationRequest,
 ): Promise<{ data: ResponseProductModel }> => {
   return await makeApiCall({
@@ -186,8 +191,11 @@ export const GetInfiniteProductsAPI = (payload: {
   status?: string;
   sort: SortModel;
   search?: string;
+  modelIds: ModelType[];
+  isVisible?: 'TRUE' | 'FALSE';
 }) => {
-  const { organizationId, take, sort, status, search } = payload;
+  const { organizationId, take, sort, status, isVisible, modelIds, search } =
+    payload;
   return useInfiniteQuery({
     queryKey: ['products', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -197,6 +205,8 @@ export const GetInfiniteProductsAPI = (payload: {
         take,
         sort,
         search,
+        modelIds,
+        isVisible,
         status: status?.toUpperCase(),
         page: pageParam,
       }),

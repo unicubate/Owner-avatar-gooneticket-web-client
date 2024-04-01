@@ -19,7 +19,7 @@ export const formatePrice = (options: { value: number; isDivide: boolean }) => {
 
 export const oneImageToURL = (image: ImageProfileModel) => {
   const url =
-    image?.id === 'aws'
+    image?.key === 'aws'
       ? viewOneFileUploadAPI({
           folder: 'profiles',
           fileName: image?.patch,

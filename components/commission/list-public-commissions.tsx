@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { CommissionModel } from '@/types/commission';
+import { ProductModel } from '@/types/product';
 import { HtmlParser } from '@/utils/html-parser';
 import { MailPlusIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ReactPlayer from 'react-player';
@@ -11,7 +12,7 @@ import { ListCarouselUpload } from '../shop/list-carousel-upload';
 import { ButtonInput } from '../ui-setting';
 
 type Props = {
-  item: CommissionModel;
+  item: ProductModel;
 };
 
 export function ListPublicCommissions(props: Props) {
@@ -29,11 +30,20 @@ export function ListPublicCommissions(props: Props) {
       >
         <div className="p-8 sm:px-8 sm:py-7">
           <div className="flex items-center">
-            {item?.id ? (
+            <Link
+              className="hover:text-blue-600"
+              href={`/shop/${item?.slug}`}
+              title={item?.title}
+            >
               <span className="cursor-pointer text-lg font-bold dark:text-white">
                 {item?.title ?? ''}
               </span>
-            ) : null}
+            </Link>
+            {/* {item?.id ? (
+              <span className="cursor-pointer text-lg font-bold dark:text-white">
+                {item?.title ?? ''}
+              </span>
+            ) : null} */}
 
             <div className="ml-auto">
               <ButtonInput
@@ -54,7 +64,7 @@ export function ListPublicCommissions(props: Props) {
           <div className="mx-auto mt-4 justify-center text-center">
             <ListCarouselUpload
               uploads={item?.uploadsImages}
-              folder="commissions"
+              folder="products"
               height={400}
             />
           </div>
@@ -99,7 +109,7 @@ export function ListPublicCommissions(props: Props) {
 
       <CreateCommentCommissionModal
         isOpen={isOpenComment}
-        commission={item as any}
+        product={item as any}
         setIsOpen={setIsOpenComment}
       />
     </>

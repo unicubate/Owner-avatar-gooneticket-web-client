@@ -9,6 +9,7 @@ import { ButtonInput } from '../ui-setting';
 import { LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreatePaymentFormCardUser } from './create-payment-form-card-user';
+import { CreatePaymentIbanFormUser } from './create-payment-iban-form-user';
 import { CreatePaymentPhoneFormCardUser } from './create-payment-phone-form-card-user';
 import { CreatePaymentStripeFormCardUser } from './create-payment-stripe-form-card-user';
 
@@ -16,6 +17,7 @@ const PayoutFormUser = () => {
   const { ipLocation } = useInputState();
   const [showPayPalFormModal, setShowPayPalFormModal] = useState(false);
   const [showStripeFormModal, setShowStripeFormModal] = useState(false);
+  const [showIbanModal, setShowIbanModal] = useState(false);
   const [showPhoneFormModal, setShowPhoneFormModal] = useState(false);
   const [showCardModal, setShowCardModal] = useState(false);
 
@@ -53,21 +55,32 @@ const PayoutFormUser = () => {
             {['EU', 'AF'].includes(ipLocation?.continentCode) && (
               <ButtonInput
                 type="button"
-                variant="default"
+                variant="info"
                 loading={false}
+                size="sm"
                 onClick={() => setShowPhoneFormModal(true)}
               >
-                Add Phone
+                Phone
               </ButtonInput>
             )}
 
             <ButtonInput
               type="button"
-              variant="outline"
+              variant="info"
               loading={false}
+              size="sm"
               onClick={() => setShowCardModal(true)}
             >
-              Add Card
+              Card
+            </ButtonInput>
+            <ButtonInput
+              type="button"
+              variant="info"
+              loading={false}
+              size="sm"
+              onClick={() => setShowIbanModal(true)}
+            >
+              IBAN
             </ButtonInput>
             {/* {['EU'].includes(ipLocation?.continentCode) && (
               <ButtonInput
@@ -78,17 +91,17 @@ const PayoutFormUser = () => {
                 Add PayPal
               </ButtonInput>
             )} */}
-            <ButtonInput
+            {/* <ButtonInput
               type="button"
               variant="info"
               onClick={() => setShowStripeFormModal(true)}
             >
               Add Stipe
-            </ButtonInput>
+            </ButtonInput> */}
           </div>
 
           <div className="mt-8 flow-root">
-            <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
+            <div className="divide-y divide-gray-200 dark:divide-gray-800">
               {dataTablePayments}
 
               {hasNextPage ? (
@@ -119,6 +132,13 @@ const PayoutFormUser = () => {
           />
         ) : null}
       </Elements>
+
+      {showIbanModal ? (
+        <CreatePaymentIbanFormUser
+          showModal={showIbanModal}
+          setShowModal={setShowIbanModal}
+        />
+      ) : null}
 
       {/* {['EU', 'AF'].includes(ipLocation?.countryCode) && showPhoneFormModal ? (
         <CreatePaymentPhoneFormCardUser

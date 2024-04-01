@@ -39,6 +39,7 @@ const ShopsExtras = () => {
     organizationId: organizationId,
     take: 10,
     sort: 'DESC',
+    modelIds: ['PRODUCT'],
   });
 
   useEffect(() => {

@@ -27,6 +27,8 @@ export function PublicShop(props: Props) {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
+    modelIds: ['PRODUCT'],
+    isVisible: 'TRUE',
   });
 
   useEffect(() => {

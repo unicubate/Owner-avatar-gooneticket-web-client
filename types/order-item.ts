@@ -1,6 +1,5 @@
 import { ModelType } from '@/utils/paginations';
 import { KeyAsString } from '@/utils/utils';
-import { CommissionModel } from './commission';
 import { ProductModel } from './product';
 import { ProfileItemModel } from './profile.type';
 import { UploadModel } from './upload';
@@ -49,7 +48,6 @@ export type OrderItemModel = {
   profile: ProfileItemModel;
   profileSeller: ProfileItemModel;
   product: ProductModel;
-  commission: CommissionModel;
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
 };

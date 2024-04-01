@@ -14,13 +14,19 @@ export type StripeProps = {
 };
 
 export const CreatePaymentStripe = (props: StripeProps) => {
+  const options = {
+    theme: 'stripe',
+  };
   const { data, paymentModel } = props;
+
   return (
     <>
       <div className="mt-4">
-        <Elements stripe={stripeKeyPromise}>
-          <StripeCheckoutForm paymentModel={paymentModel} data={data} />
-        </Elements>
+        {stripeKeyPromise && (
+          <Elements stripe={stripeKeyPromise}>
+            <StripeCheckoutForm paymentModel={paymentModel} data={data} />
+          </Elements>
+        )}
       </div>
     </>
   );

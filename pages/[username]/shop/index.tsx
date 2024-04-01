@@ -32,7 +32,8 @@ const ShopUserPublic = () => {
     if (user?.profile?.enableShop === false) {
       push(`${`/${username}`}`);
     }
-  }, [user]);
+  }, [user, username]);
+
   return (
     <>
       <LayoutUserPublicSite

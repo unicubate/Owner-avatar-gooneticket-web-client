@@ -1,3 +1,4 @@
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Select, Switch } from 'antd';
 import { Control, Controller } from 'react-hook-form';
 const { Option } = Select;
@@ -6,9 +7,10 @@ interface Props {
   control: Control<any>;
   label?: string;
   name: string;
+  defaultValue?: boolean;
 }
 
-const SwitchInput: React.FC<Props> = ({ control, label = '', name }) => {
+const SwitchInput = ({ control, label = '', name, defaultValue }: Props) => {
   return (
     <>
       <div className="mt-4 flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
@@ -22,6 +24,7 @@ const SwitchInput: React.FC<Props> = ({ control, label = '', name }) => {
         <Controller
           name={name}
           control={control}
+          defaultValue={defaultValue}
           render={({ field: { value, onChange } }) => (
             <>
               <div
@@ -52,10 +55,11 @@ const SwitchInput: React.FC<Props> = ({ control, label = '', name }) => {
                   ) : null}
 
                   <Switch
-                    // checkedChildren={<CheckOutlined />}
-                    // unCheckedChildren={<CloseOutlined />}
+                    checkedChildren={<CheckOutlined />}
+                    unCheckedChildren={<CloseOutlined />}
                     checked={value}
                     onChange={onChange}
+                    defaultValue={defaultValue}
                   />
                 </label>
               </div>

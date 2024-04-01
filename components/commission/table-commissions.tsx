@@ -1,4 +1,4 @@
-import { GetInfiniteCommissionsAPI } from '@/api-site/commission';
+import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ListCommissions } from '@/components/commission/list-commissions';
 import {
   ButtonInput,
@@ -31,11 +31,12 @@ const TableCommissions = ({ organizationId }: Props) => {
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteCommissionsAPI({
+  } = GetInfiniteProductsAPI({
     organizationId,
     take: 10,
     sort: 'DESC',
     search,
+    modelIds: ['COMMISSION'],
   });
 
   useEffect(() => {

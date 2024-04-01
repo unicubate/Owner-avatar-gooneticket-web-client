@@ -2,7 +2,6 @@ export type UploadFolderType =
   | 'posts'
   | 'galleries'
   | 'products'
-  | 'commissions'
   | 'memberships'
   | 'profiles';
 

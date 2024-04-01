@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetInfiniteCommissionsAPI } from '@/api-site/commission';
+import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
@@ -14,17 +14,19 @@ const PublicCommissions = ({ organizationId }: Props) => {
   const { ref, inView } = useInView();
 
   const {
-    isLoading: isLoadingPosts,
-    isError: isErrorPosts,
-    data: dataPosts,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+    data: dataProducts,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteCommissionsAPI({
+  } = GetInfiniteProductsAPI({
     take: 10,
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
+    isVisible: 'TRUE',
+    modelIds: ['COMMISSION'],
   });
 
   useEffect(() => {
@@ -49,14 +51,14 @@ const PublicCommissions = ({ organizationId }: Props) => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTableCommissions = isLoadingPosts ? (
+  const dataTableCommissions = isLoadingProducts ? (
     <LoadingFile />
-  ) : isErrorPosts ? (
+  ) : isErrorProducts ? (
     <strong>Error find data please try again...</strong>
-  ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
+  ) : dataProducts?.pages[0]?.data?.total <= 0 ? (
     ''
   ) : (
-    dataPosts?.pages
+    dataProducts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => <ListPublicCommissions item={item} key={index} />)
   );

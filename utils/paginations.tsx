@@ -1,4 +1,3 @@
-import { PaymentModel } from '../api-site/payment';
 interface Props {
   data: any;
   setPageItem: any;
@@ -11,7 +10,7 @@ interface Props {
 
 export type SortModel = 'ASC' | 'DESC';
 
-export type PaymentType = 'CARD' | 'PAYPAL' | 'PHONE';
+export type PaymentType = 'CARD' | 'PAYPAL' | 'PHONE' | 'IBAN';
 
 export type ModelType =
   | 'ORGANIZATION'

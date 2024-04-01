@@ -17,10 +17,11 @@ const ShopUserPublic = () => {
   const { userStorage: userBayer } = useInputState();
 
   const {
-    isPending: isPendingProduct,
+    isLoading: isLoadingProduct,
     isError: isErrorProduct,
     data: product,
   } = GetOneProductAPI({
+    isVisible: 'TRUE',
     productSlug: String(query?.productId),
   });
 
@@ -41,7 +42,7 @@ const ShopUserPublic = () => {
     organizationSellerId: product?.organizationId,
   });
 
-  const dataItemProduct = isPendingProduct ? (
+  const dataItemProduct = isLoadingProduct ? (
     <ProductSkeleton index={0} />
   ) : isErrorProduct ? (
     <ErrorFile title="404" description="Error find data please try again..." />
@@ -81,11 +82,9 @@ const ShopUserPublic = () => {
         ) : null}
       </LayoutUserPublicSite>
 
-      {status === 'pending' && isPendingUser && isPendingCartOrder ? (
-        <LoadingFile />
-      ) : null}
+      {isPendingUser && isPendingCartOrder ? <LoadingFile /> : null}
 
-      {status === 'error' && isErrorUser && isErrorCartOrder ? (
+      {isErrorUser && isErrorCartOrder ? (
         <ErrorFile
           title="404"
           description="Error find data please try again"

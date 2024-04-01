@@ -1,6 +1,19 @@
 import { PaymentType } from '@/utils/paginations';
+import { KeyAsString } from '@/utils/utils';
 
 export type ActionPayment = 'PAYMENT' | 'WITHDRAWING';
+
+export const statusPaymentLists: KeyAsString = {
+  PENDING: 'CURRENTLY BEING VALIDATED',
+  ACTIVE: 'VALID',
+  INVALID: 'INVALID',
+};
+
+export const statusPaymentColorLists: KeyAsString = {
+  PENDING: 'warning',
+  ACTIVE: 'success',
+  INVALID: 'danger',
+};
 
 export const arrayTypePayments = [
   { id: '1', name: 'CARD' },
@@ -29,6 +42,7 @@ export type PaymentItemModel = {
   action: ActionPayment;
   fullName: string;
   phone: string;
+  iban: string;
   status: 'PENDING' | 'ACTIVE' | 'INVALID';
   cardNumber: string;
   cardExpMonth: number;

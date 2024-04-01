@@ -56,7 +56,7 @@ export const ButtonInput = ({
           </>
         ) : (
           <>
-            {icon} {children}
+            <span className="mr-2">{icon}</span> {children}
           </>
         )}
       </Button>

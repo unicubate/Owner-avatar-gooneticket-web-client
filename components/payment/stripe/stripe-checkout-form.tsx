@@ -53,6 +53,12 @@ const CARD_OPTIONS: any = {
 const StripeCheckoutForm = ({ data, paymentModel }: StripeProps) => {
   const { push } = useRouter();
   const [checkoutError, setCheckoutError] = useState();
+  const stripe = useStripe();
+  const elements = useElements() as any;
+  if (!stripe || !elements) {
+    return;
+  }
+
   const {
     control,
     handleSubmit,
@@ -73,12 +79,6 @@ const StripeCheckoutForm = ({ data, paymentModel }: StripeProps) => {
       setHasErrors(error.response.data.message);
     },
   });
-
-  const stripe = useStripe();
-  const elements: any = useElements();
-  if (!stripe || !elements) {
-    return;
-  }
 
   const onSubmit = async (payload: any) => {
     const { email, fullName } = payload;
@@ -170,7 +170,7 @@ const StripeCheckoutForm = ({ data, paymentModel }: StripeProps) => {
       </div>
       <div className="mt-5">
         <div style={containerStyles}>
-          <CardElement options={CARD_OPTIONS} />
+          <CardElement id="payment-element" options={CARD_OPTIONS} />
         </div>
         {checkoutError ? (
           <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">

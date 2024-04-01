@@ -1,4 +1,4 @@
-import { PaginationResponse } from '@/utils/paginations';
+import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { ProfileItemModel } from './profile.type';
 import { UploadModel } from './upload';
 
@@ -41,6 +41,7 @@ export type ProductModel = {
   limitSlot: string;
   status: string;
   userId: string;
+  model: ModelType;
   categoryId: string;
   totalComment: number;
   currency: {
@@ -80,8 +81,10 @@ export type ProductFormModel = {
   productType: ProductType;
   enableDiscount: boolean;
   limitSlot: number;
+  isVisible: boolean;
   enableLimitSlot: boolean;
   urlRedirect: string;
+  model: ModelType;
   enableUrlRedirect: boolean;
   attachments: any;
   attachment: any;

@@ -59,7 +59,7 @@ const CreateOrUpdateFormMembership = ({
     }
   }, [membership, setValue]);
 
-  const saveMutation = CreateOrUpdateOneMembershipAPI({
+  const { mutateAsync: saveMutation } = CreateOrUpdateOneMembershipAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -83,14 +83,10 @@ const CreateOrUpdateFormMembership = ({
           newImageLists.push(file);
         });
 
-      const payload = {
+      await saveMutation({
         ...data,
         newImageLists,
         imageList,
-      };
-
-      await saveMutation.mutateAsync({
-        ...payload,
         membershipId: membership?.id,
       });
       setHasErrors(false);
@@ -149,7 +145,7 @@ const CreateOrUpdateFormMembership = ({
                   pattern="[0-9]*"
                   min={1}
                   labelHelp={
-                    <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                    <Label className="ml-auto block text-lg font-bold text-start">
                       {watchPrice ? watchPrice : null} {profile?.currency?.code}
                     </Label>
                   }

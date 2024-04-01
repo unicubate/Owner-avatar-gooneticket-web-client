@@ -1,4 +1,4 @@
-import { GetOneCommissionAPI } from '@/api-site/commission';
+import { GetOneProductAPI } from '@/api-site/product';
 import { GetUploadsAPI } from '@/api-site/upload';
 import { CreateOrUpdateFormCommission } from '@/components/commission/create-or-update-form-commission';
 import { useInputState } from '@/components/hooks';
@@ -12,14 +12,14 @@ import { useRouter } from 'next/router';
 const CommissionEdit = () => {
   const { userStorage: user } = useInputState();
   const { query } = useRouter();
-  const commissionId = String(query?.commissionId);
+  const productId = String(query?.commissionId);
 
   const {
-    data: commission,
-    isError: isErrorCommission,
-    isLoading: isLoadingCommission,
-  } = GetOneCommissionAPI({
-    commissionId,
+    data: product,
+    isError: isErrorProduct,
+    isLoading: isLoadingProduct,
+  } = GetOneProductAPI({
+    productId,
     organizationId: user?.organizationId,
   });
 
@@ -28,25 +28,25 @@ const CommissionEdit = () => {
     isLoading: isLoadingImages,
     data: uploadImages,
   } = GetUploadsAPI({
-    organizationId: commission?.organizationId,
+    organizationId: product?.organizationId,
     model: 'COMMISSION',
-    uploadableId: commissionId,
+    uploadableId: productId,
     uploadType: 'image',
   });
 
   const dataTableCommission =
-    isLoadingImages || isLoadingCommission ? (
+    isLoadingImages || isLoadingProduct ? (
       <LoadingFile />
-    ) : isErrorImages || isErrorCommission ? (
+    ) : isErrorImages || isErrorProduct ? (
       <ErrorFile
         title="404"
         description="Error find data please try again..."
       />
     ) : (
       <>
-        {user?.organizationId && commission?.id ? (
+        {user?.organizationId && product?.id ? (
           <CreateOrUpdateFormCommission
-            commission={commission}
+            product={product}
             uploadImages={uploadImages}
           />
         ) : null}
@@ -55,7 +55,7 @@ const CommissionEdit = () => {
 
   return (
     <>
-      <LayoutDashboard title={`${commission?.title || 'Commission'}`}>
+      <LayoutDashboard title={`${product?.title || 'Commission'}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             {dataTableCommission}

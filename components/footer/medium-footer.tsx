@@ -16,11 +16,11 @@ const MediumFooter = () => {
       description: 'About',
       href: '/about',
     },
-    {
-      title: 'Features',
-      description: 'About',
-      href: '/features',
-    },
+    // {
+    //   title: 'Features',
+    //   description: 'About',
+    //   href: '/features',
+    // },
     {
       title: 'Privacy',
       description: 'Privacy',
@@ -36,7 +36,7 @@ const MediumFooter = () => {
     <>
       <footer className="mt-4 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
         <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col items-center space-y-10 lg:justify-between lg:space-y-0 lg:flex-row">
+          <div className="flex flex-col items-center space-y-4 lg:justify-between lg:space-y-0 lg:flex-row">
             <div className="shrink-0">
               <div className="flex items-center">
                 <div className="relative shrink-0 cursor-pointer">
@@ -54,7 +54,7 @@ const MediumFooter = () => {
               </div>
             </div>
 
-            <nav className="flex items-center justify-center space-x-6 sm:space-x-10 xl:space-x-16">
+            <nav className="flex items-center justify-center space-x-2 sm:space-x-10 xl:space-x-16">
               {navigation.map((item: any, index: number) => {
                 return (
                   <Link

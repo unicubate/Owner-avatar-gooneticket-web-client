@@ -18,6 +18,7 @@ import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { convertToPluralMonth } from '@/utils/utils';
 import { GetStaticPropsContext } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -235,6 +236,14 @@ const CheckoutMembership = () => {
                                 <h2 className="font-bold text-gray-500 text-base">
                                   Payment Method
                                 </h2>
+
+                                <Image
+                                  className="mt-3"
+                                  src={'/assets/payment-cards.png'}
+                                  height={180}
+                                  width={180}
+                                  alt="Payment cards"
+                                />
                               </div>
                               <div className="py-6">
                                 <div className="flex items-center space-x-4">

@@ -17,7 +17,8 @@
     "login": "Connexion",
     "contributor": "Contributeur",
     "sign_up": "Inscription",
-    "payments": "Achats"
+    "payments": "Achats",
+    "affiliates": "Affiliates"
   },
 
   "title": "Titre",
@@ -26,7 +27,7 @@
 
   "home_page": {
     "title": "Tout ce dont vous avez besoin pour gagner de l'argent en faisant ce que vous aimez",
-    "subTitle": "Acceptez les dons. Commencez une adhésion. Vendez tout ce que vous voulez. C'est plus facile que vous ne le pensez."
+    "subTitle": "Acceptez le soutien. Commencez une adhésion. Créez une boutique. C'est plus facile que vous ne le pensez."
   },
 
   "payment": {

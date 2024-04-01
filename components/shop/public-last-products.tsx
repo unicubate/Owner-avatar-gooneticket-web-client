@@ -25,6 +25,7 @@ export function PublicLastProducts({
     sort: 'DESC',
     organizationId: userVisitor?.organizationId,
     status: 'ACTIVE',
+    modelIds: ['PRODUCT', 'COMMISSION'],
   });
 
   const dataTable = isLoadingProducts ? (

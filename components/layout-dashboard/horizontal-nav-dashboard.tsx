@@ -1,4 +1,5 @@
 import { logoutUsersAPI } from '@/api-site/user';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
 import { ThemeToggle } from '../ui-setting';
@@ -40,7 +41,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
       <header className="sticky top-0 z-20 border-gray-300">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
-            <div className="ml-2 flex items-center -m-2 lg:hidden">
+            <div className="flex items-center -m-3 lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
                   className="w-6 h-6"
@@ -108,10 +109,10 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <div className="ml-2 min-w-0 flex-1">
-                            <p className="hidden w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white lg:block">
-                              {user?.profile?.firstName}{' '}
-                              {user?.profile?.lastName}
+                          <div className="hidden ml-2 min-w-0 flex-1 lg:block">
+                            <p className="w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                              {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
+                              {capitalizeFirstLetter(user?.profile?.lastName)}
                             </p>
                             <p className="mt-1 hidden text-sm font-medium text-gray-600 sm:table-cell">
                               <span>{user?.profile?.email}</span>

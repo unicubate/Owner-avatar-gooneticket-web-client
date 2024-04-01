@@ -7,6 +7,7 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
+import { useDecrementTimer } from '../hooks';
 import { TextInput } from '../ui-setting/shadcn';
 
 type Props = {
@@ -23,6 +24,8 @@ const CreateValidationFormCodePhoneUser = ({
   setShowModal,
   item,
 }: Props) => {
+  const defaultTimer = 20;
+  const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const {
     control,
     handleSubmit,
@@ -82,6 +85,8 @@ const CreateValidationFormCodePhoneUser = ({
       AlertSuccessNotification({
         text: 'Your authentication code has been sent',
       });
+
+      setIsRunning(true);
     } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -113,11 +118,12 @@ const CreateValidationFormCodePhoneUser = ({
                   <TextInput
                     control={control}
                     label="Code"
-                    type="text"
                     name="code"
-                    required
-                    placeholder="Code"
+                    placeholder="Enter 6-digit code"
                     errors={errors}
+                    required
+                    type="number"
+                    pattern="[0-9]*"
                   />
                   <div className="flex items-center justify-between">
                     <label
@@ -131,8 +137,9 @@ const CreateValidationFormCodePhoneUser = ({
                         resendItem(item);
                       }}
                       className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
+                      disabled={isRunning}
                     >
-                      Resend code
+                      {timer} Resend code
                     </button>
                   </div>
                   <div className="flex items-center justify-between">
