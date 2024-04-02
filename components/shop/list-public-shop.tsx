@@ -7,7 +7,7 @@ import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import { ShoppingCartIcon } from 'lucide-react';
 import Link from 'next/link';
-import { LoginModal } from '../auth-modal/login-modal';
+import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 

@@ -5,7 +5,7 @@ import { ModelType } from '@/utils/paginations';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { LoginModal } from '../auth-modal/login-modal';
+import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';

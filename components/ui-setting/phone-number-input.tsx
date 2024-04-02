@@ -50,7 +50,6 @@ const PhoneNumberInput = ({
               required={required}
               autoComplete="off"
               {...field}
-              pattern="[0-9]*"
               rules={{ required: true }}
             />
           </>

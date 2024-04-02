@@ -3,7 +3,7 @@ import { AlertDangerNotification } from '@/utils';
 import { HeartIcon } from 'lucide-react';
 import { useState } from 'react';
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
-import { LoginModal } from '../auth-modal/login-modal';
+import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 
 export function CreateOrUpdateFormLike(props: {

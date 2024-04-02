@@ -1,6 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { useDecrementTimer, useReactHookForm } from '@/components/hooks';
+import {
+  useDecrementTimer,
+  useInputState,
+  useReactHookForm,
+} from '@/components/hooks';
 import { LayoutAuth } from '@/components/layout-auth';
+import { PhoneNumberInput } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -18,13 +23,12 @@ import * as yup from 'yup';
 import {
   registerGoogleUserAPI,
   registerUserAPI,
-  sendCodeEmailUserAPI,
+  sendCodePhoneUserAPI,
 } from '../../api-site/user';
 
 const schema = yup.object({
-  email: yup
+  phone: yup
     .string()
-    .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required(),
@@ -43,6 +47,7 @@ const Register = () => {
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
+  const { ipLocation } = useInputState();
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
@@ -55,7 +60,7 @@ const Register = () => {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const watchEmail = watch('email', '');
+  const watchPhone = watch('phone', '');
   const watchCode = watch('code', '');
 
   const onSubmit: SubmitHandler<UserRegisterFormModel> = async (
@@ -87,7 +92,7 @@ const Register = () => {
     setHasErrors(undefined);
     setIsResend(true);
     try {
-      await sendCodeEmailUserAPI({ email: watchEmail });
+      await sendCodePhoneUserAPI({ phone: watchPhone });
       setIsResend(false);
       setIsRunning(true);
     } catch (error: any) {
@@ -115,21 +120,21 @@ const Register = () => {
             </Alert>
           )}
 
-          <div className="mt-4">
-            <TextInput
+          <div className="mb-4">
+            <PhoneNumberInput
+              defaultCountry={ipLocation?.countryCode ?? 'IT'}
               control={control}
-              label="Email"
-              type="text"
-              name="email"
-              placeholder="Email address"
+              name="phone"
+              label="Phone"
+              placeholder="Phone number"
               errors={errors}
               required
               labelHelp={
                 <Link
-                  href={`/register/phone${redirect ? `?redirect=${redirect}` : ''}`}
+                  href={`/register${redirect ? `?redirect=${redirect}` : ''}`}
                 >
                   <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                    Sign up with phone
+                    Sign up with email
                   </p>
                 </Link>
               }
@@ -190,7 +195,7 @@ const Register = () => {
               variant="info"
               loading={isResend}
               onClick={() => resendCodeItem()}
-              disabled={!watchEmail || isRunning ? true : false}
+              disabled={!watchPhone || isRunning ? true : false}
             >
               {timer} Send code
             </ButtonInput>

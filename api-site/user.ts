@@ -45,6 +45,15 @@ export const sendCodePhoneUserAPI = async (payload: {
   });
 };
 
+export const sendCodeEmailUserAPI = async (payload: {
+  email: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'sendCodeEmailUser',
+    urlParams: payload,
+  });
+};
+
 export const IpLocationAPI = () => {
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
     queryKey: ['ip-location'],

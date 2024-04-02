@@ -1,7 +1,7 @@
 import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { AlertDangerNotification } from '@/utils';
 import React, { useState } from 'react';
-import { LoginModal } from '../auth-modal/login-modal';
+import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 

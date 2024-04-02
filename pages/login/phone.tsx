@@ -8,6 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginPhoneFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
+import { GoogleLogin } from '@react-oauth/google';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -15,9 +16,10 @@ import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
+  loginGoogleUserAPI,
   loginPhoneUserAPI,
   sendCodePhoneUserAPI,
-} from '../../../api-site/user';
+} from '../../api-site/user';
 
 const schema = yup.object({
   phone: yup.string().required(),
@@ -35,7 +37,6 @@ const LoginPhone = () => {
   const {
     watch,
     control,
-    setValue,
     handleSubmit,
     errors,
     loading,
@@ -60,13 +61,6 @@ const LoginPhone = () => {
       window.location.href = `${
         redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
       }`;
-      // if (user?.confirmedAt) {
-      //   window.location.href = `${
-      //     redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      //   }`;
-      // } else {
-      //   push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
-      // }
     } catch (error: any) {
       setLoading(false);
       setHasErrors(true);
@@ -98,10 +92,10 @@ const LoginPhone = () => {
     <>
       <LayoutAuth title="Login">
         <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
-          <div className="mx-auto flex justify-center">
-            <h6 className="mt-4 text-center text-xl font-bold">{`Log in`}</h6>
+          <div className="mt-4 mx-auto flex justify-center">
+            <h6 className="text-center text-xl font-bold">{`Log in`}</h6>
           </div>
-          <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
               <Alert variant="destructive" className="mb-4 text-center">
                 <AlertDescription>{hasErrors}</AlertDescription>
@@ -116,12 +110,12 @@ const LoginPhone = () => {
                 label="Phone"
                 placeholder="Phone number"
                 errors={errors}
-                required={true}
+                required
                 labelHelp={
                   <Link
-                    href={`/login/phone-or-email${redirect ? `?redirect=${redirect}` : ''}`}
+                    href={`/login${redirect ? `?redirect=${redirect}` : ''}`}
                   >
-                    <p className="cursor-pointer text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
+                    <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
                       Log in with email
                     </p>
                   </Link>
@@ -166,6 +160,48 @@ const LoginPhone = () => {
               </ButtonInput>
             </div>
           </form>
+
+          <div className="my-4 flex items-center justify-between">
+            <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+            <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
+              or login with Social Media
+            </p>
+
+            <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
+          </div>
+
+          <div className="mt-4 mx-auto max-w-max">
+            <GoogleLogin
+              size="large"
+              useOneTap
+              theme="outline"
+              type="standard"
+              shape="rectangular"
+              width="100%"
+              onSuccess={async (credentialResponse) => {
+                try {
+                  await loginGoogleUserAPI({
+                    token: String(credentialResponse.credential),
+                  });
+                  setHasErrors(false);
+                  window.location.href = `${
+                    redirect
+                      ? redirect
+                      : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+                  }`;
+                } catch (error: any) {
+                  setHasErrors(true);
+                  setHasErrors(error.response.data.message);
+                  AlertDangerNotification({
+                    text: 'An error has occurred.',
+                  });
+                }
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
+          </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
             <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
