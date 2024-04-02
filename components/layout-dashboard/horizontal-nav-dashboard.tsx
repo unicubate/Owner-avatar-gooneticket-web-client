@@ -93,7 +93,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
             <div className="flex items-center justify-end ml-auto">
               <ThemeToggle />
-              <div className="hidden items-center lg:block">
+              <div className="items-end">
                 {/* <ThemeToggle /> */}
                 {user?.profile ? (
                   <>
@@ -107,7 +107,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <div className="ml-2 min-w-0 flex-1">
+                          <div className="hidden ml-2 min-w-0 flex-1 lg:block">
                             <p className="w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white">
                               {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
                               {capitalizeFirstLetter(user?.profile?.lastName)}
