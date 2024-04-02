@@ -79,6 +79,8 @@ const baseUrl = process.env.NEXT_PUBLIC_HOST_SERVER;
 export const apiEndpoints: ClientApiMethods = {
   /****************** User route */
   loginUser: POST(`${baseUrl}/login`),
+  loginPhoneUser: POST(`${baseUrl}/login-phone`),
+  sendCodePhoneUser: GET(`${baseUrl}/send-code-phone/:phone`),
   ipLocation: GET(`${baseUrl}/ip-location`),
   verifyTokenUser: GET(`${baseUrl}/verify-token`),
   loginGoogleUser: POST(`${baseUrl}/login-google-auth`),

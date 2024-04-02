@@ -16,6 +16,11 @@ export type UserLoginFormModel = {
   password: string;
 };
 
+export type UserLoginPhoneFormModel = {
+  phone: string;
+  code: string;
+};
+
 export type UserRegisterFormModel = {
   email: string;
   confirm: boolean;

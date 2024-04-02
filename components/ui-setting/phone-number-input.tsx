@@ -1,6 +1,7 @@
 import { Control, Controller } from 'react-hook-form';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { Label } from '../ui/label';
 
 interface Props {
   control: Control<any>;
@@ -11,9 +12,10 @@ interface Props {
   placeholder?: string;
   required?: boolean;
   defaultValue?: string;
+  labelHelp?: React.ReactNode;
 }
 
-const PhoneNumberInput: React.FC<Props> = ({
+const PhoneNumberInput = ({
   control,
   label = '',
   name,
@@ -22,17 +24,18 @@ const PhoneNumberInput: React.FC<Props> = ({
   placeholder = '',
   defaultValue,
   required,
-}) => {
+  labelHelp,
+}: Props) => {
   return (
     <>
-      {label ? (
-        <label
-          className="mb-2 block text-sm font-bold dark:text-white"
-          htmlFor={name}
-        >
-          {label}
-        </label>
-      ) : null}
+      <div className="flex items-center justify-between">
+        {label ? (
+          <Label htmlFor={name} className="mb-2 block text-sm font-bold">
+            {label}
+          </Label>
+        ) : null}
+        {labelHelp}
+      </div>
       <Controller
         name={name}
         control={control}

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput, PhoneNumberInput } from '../ui-setting';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
@@ -8,7 +8,6 @@ import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import { useInputState } from '../hooks';
-import { PhoneNumberInput } from '../ui-setting/ant';
 import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({

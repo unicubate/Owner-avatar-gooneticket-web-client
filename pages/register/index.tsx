@@ -7,7 +7,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserRegisterFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { Checkbox } from 'antd';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
@@ -202,36 +202,32 @@ const Register = () => {
         </div>
 
         <div className="flex justify-center">
-          <GoogleOAuthProvider
-            clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-          >
-            <GoogleLogin
-              size="large"
-              width="100%"
-              useOneTap
-              theme="filled_blue"
-              type="standard"
-              shape="rectangular"
-              onSuccess={async (credentialResponse) => {
-                try {
-                  await registerGoogleUserAPI({
-                    token: String(credentialResponse.credential),
-                  });
-                  setHasErrors(false);
-                  push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
-                } catch (error: any) {
-                  setHasErrors(true);
-                  setHasErrors(error.response.data.message);
-                  AlertDangerNotification({
-                    text: 'An error has occurred.',
-                  });
-                }
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            />
-          </GoogleOAuthProvider>
+          <GoogleLogin
+            size="large"
+            width="100%"
+            useOneTap
+            theme="filled_blue"
+            type="standard"
+            shape="rectangular"
+            onSuccess={async (credentialResponse) => {
+              try {
+                await registerGoogleUserAPI({
+                  token: String(credentialResponse.credential),
+                });
+                setHasErrors(false);
+                push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
+              } catch (error: any) {
+                setHasErrors(true);
+                setHasErrors(error.response.data.message);
+                AlertDangerNotification({
+                  text: 'An error has occurred.',
+                });
+              }
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
         </div>
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
           <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">

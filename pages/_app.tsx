@@ -17,6 +17,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { NextIntlClientProvider } from 'next-intl';
 
 import { ClientOnly } from '@/components/util/client-only';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useRouter } from 'next/router';
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 60_000, gcTime: 10 * (60 * 1000) } },
@@ -26,40 +27,44 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <QueryClientProvider client={queryClient}>
-      <ClientOnly fallback={<LoadingFile />}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <NextIntlClientProvider
-            formats={{
-              dateTime: {
-                short: {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
+      <GoogleOAuthProvider
+        clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+      >
+        <ClientOnly fallback={<LoadingFile />}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <NextIntlClientProvider
+              formats={{
+                dateTime: {
+                  short: {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  },
                 },
-              },
-            }}
-            locale={router.locale}
-            messages={pageProps.messages}
-            timeZone="Europe/Berlin"
-            now={new Date()}
-          >
-            <HydrationBoundary state={pageProps.dehydratedState}>
-              <ConfigProvider>
-                <ContextUserProvider>
-                  <Component {...pageProps} />
+              }}
+              locale={router.locale}
+              messages={pageProps.messages}
+              timeZone="Europe/Berlin"
+              now={new Date()}
+            >
+              <HydrationBoundary state={pageProps.dehydratedState}>
+                <ConfigProvider>
+                  <ContextUserProvider>
+                    <Component {...pageProps} />
 
-                  {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-                    <ReactQueryDevtools
-                      buttonPosition="bottom-left"
-                      initialIsOpen={false}
-                    />
-                  )}
-                </ContextUserProvider>
-              </ConfigProvider>
-            </HydrationBoundary>
-          </NextIntlClientProvider>
-        </ThemeProvider>
-      </ClientOnly>
+                    {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
+                      <ReactQueryDevtools
+                        buttonPosition="bottom-left"
+                        initialIsOpen={false}
+                      />
+                    )}
+                  </ContextUserProvider>
+                </ConfigProvider>
+              </HydrationBoundary>
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </ClientOnly>
+      </GoogleOAuthProvider>
     </QueryClientProvider>
   );
 }

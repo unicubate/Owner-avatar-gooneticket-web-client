@@ -3,6 +3,7 @@ import {
   ResponseUserModel,
   UserForgotPasswordFormModel,
   UserLoginFormModel,
+  UserLoginPhoneFormModel,
   UserModel,
   UserRegisterFormModel,
   UserResetPasswordFormModel,
@@ -23,6 +24,24 @@ export const loginUserAPI = async (
   return await makeApiCall({
     action: 'loginUser',
     body: payload,
+  });
+};
+
+export const loginPhoneUserAPI = async (
+  payload: UserLoginPhoneFormModel,
+): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'loginPhoneUser',
+    body: payload,
+  });
+};
+
+export const sendCodePhoneUserAPI = async (payload: {
+  phone: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'sendCodePhoneUser',
+    urlParams: payload,
   });
 };
 
