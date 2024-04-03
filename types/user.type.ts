@@ -44,8 +44,10 @@ export type UserUpdatePasswordFormModel = {
 
 export type UserModel = {
   accessToken: string;
-  confirmedAt: string;
+  confirmedAt: Date;
   createdAt: Date;
+  emailConfirmedAt: Date;
+  phoneConfirmedAt: Date;
   email: string;
   id: string;
   username: string;

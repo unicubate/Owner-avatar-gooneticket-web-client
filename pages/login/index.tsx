@@ -51,7 +51,7 @@ const Login = () => {
       const { data: user } = await loginUserAPI({ email, password });
       setHasErrors(false);
       setLoading(false);
-      if (user?.confirmedAt) {
+      if (user?.emailConfirmedAt) {
         window.location.href = `${
           redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
         }`;

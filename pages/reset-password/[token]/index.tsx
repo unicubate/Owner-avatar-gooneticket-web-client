@@ -22,7 +22,7 @@ const schema = yup.object({
     .string()
     .min(8, 'Minimum 8 symbols')
     .oneOf([yup.ref('password')], 'Passwords must match')
-    .required(),
+    .required('confirm password is a required field'),
 });
 
 const ResetPassword = () => {
@@ -92,16 +92,18 @@ const ResetPassword = () => {
               name="password"
               placeholder="Password"
               errors={errors}
+              required
             />
           </div>
 
           <div className="mb-4">
             <TextPasswordInput
               control={control}
-              label="Confirm Password"
+              label="Confirm password"
               name="passwordConfirm"
-              placeholder="Confirm Password"
+              placeholder="Confirm password"
               errors={errors}
+              required
             />
           </div>
 
