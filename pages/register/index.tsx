@@ -135,18 +135,6 @@ const Register = () => {
               }
             />
           </div>
-
-          <div className="mt-4">
-            <TextPasswordInput
-              control={control}
-              label="Password"
-              name="password"
-              placeholder="Password"
-              errors={errors}
-              required
-            />
-          </div>
-
           <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
             <div className="mt-2">
               <TextInput
@@ -171,6 +159,16 @@ const Register = () => {
                 required
               />
             </div>
+          </div>
+          <div className="mt-4">
+            <TextPasswordInput
+              control={control}
+              label="Password"
+              name="password"
+              placeholder="Password"
+              errors={errors}
+              required
+            />
           </div>
 
           <div className="mt-6 flex-row md:mb-0 md:flex">
