@@ -148,7 +148,7 @@ const LoginPhone = () => {
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <ButtonInput
                 type="submit"
                 className="w-full"
