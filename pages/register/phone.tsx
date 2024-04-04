@@ -21,6 +21,7 @@ import { useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
+  registerCheckEmailOrPhoneUserAPI,
   registerGoogleUserAPI,
   registerUserAPI,
   sendCodePhoneUserAPI,
@@ -47,6 +48,8 @@ const Register = () => {
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
+  const [isSuccessCheckEmailOrPhone, setIsSuccessCheckEmailOrPhone] =
+    useState(false);
   const { ipLocation } = useInputState();
   const { query, push } = useRouter();
   const { redirect } = query;
@@ -64,6 +67,7 @@ const Register = () => {
   } = useReactHookForm({ schema });
   const watchPhone = watch('phone', '');
   const watchCode = watch('code', '');
+  const watchPassword = watch('password', '');
 
   const onSubmit: SubmitHandler<UserRegisterFormModel> = async (
     payload: UserRegisterFormModel,
@@ -101,6 +105,28 @@ const Register = () => {
     } catch (error: any) {
       setIsResend(false);
       setHasErrors(true);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
+  };
+
+  const checkEmailOrPhoneItem = async () => {
+    setLoading(true);
+    setHasSuccess(false);
+    setHasErrors(undefined);
+    try {
+      setIsSuccessCheckEmailOrPhone(false);
+
+      await registerCheckEmailOrPhoneUserAPI({ phone: watchPhone });
+
+      setLoading(false);
+      setHasSuccess(true);
+      setIsSuccessCheckEmailOrPhone(true);
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -157,32 +183,6 @@ const Register = () => {
             />
           </div>
 
-          <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-            <div className="mt-2">
-              <TextInput
-                control={control}
-                label="First name"
-                type="text"
-                name="firstName"
-                placeholder="First name"
-                errors={errors}
-                required
-              />
-            </div>
-
-            <div className="mt-2">
-              <TextInput
-                control={control}
-                label="Last name"
-                type="text"
-                name="lastName"
-                placeholder="Last name"
-                errors={errors}
-                required
-              />
-            </div>
-          </div>
-
           <div className="mt-4">
             <TextPasswordInput
               control={control}
@@ -194,90 +194,131 @@ const Register = () => {
             />
           </div>
 
-          <div className="mt-4">
-            <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
-              <div className="flex-1">
-                <TextInput
+          {isSuccessCheckEmailOrPhone ? (
+            <>
+              <div className="mt-4">
+                <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+                  <div className="flex-1">
+                    <TextInput
+                      control={control}
+                      name="code"
+                      placeholder="Enter 6-digit code"
+                      errors={errors}
+                      required
+                      type="number"
+                      pattern="[0-9]*"
+                    />
+                  </div>
+
+                  <div className="relative group">
+                    <ButtonInput
+                      type="button"
+                      variant="info"
+                      className="w-full"
+                      loading={isResend}
+                      onClick={() => resendCodeItem()}
+                      disabled={!watchPhone || isRunning ? true : false}
+                    >
+                      {timer} Resend code
+                    </ButtonInput>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                <div className="mt-2">
+                  <TextInput
+                    control={control}
+                    label="First name"
+                    type="text"
+                    name="firstName"
+                    placeholder="First name"
+                    errors={errors}
+                    required
+                  />
+                </div>
+
+                <div className="mt-2">
+                  <TextInput
+                    control={control}
+                    label="Last name"
+                    type="text"
+                    name="lastName"
+                    placeholder="Last name"
+                    errors={errors}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="mt-4">
+                <Controller
+                  name="confirm"
                   control={control}
-                  name="code"
-                  placeholder="Enter 6-digit code"
-                  errors={errors}
-                  required
-                  type="number"
-                  pattern="[0-9]*"
+                  render={({ field: { value, onChange } }) => (
+                    <>
+                      <div className="flex items-center">
+                        <div className="flex">
+                          <Checkbox checked={value} onChange={onChange} />
+                        </div>
+                        <div className="ml-3">
+                          <label
+                            htmlFor="remember-me"
+                            //className="text-sm font-bold text-gray-700"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                          >
+                            I accept the{' '}
+                            <Link
+                              className="text-sm text-blue-600 hover:underline"
+                              href="/terms-condition"
+                            >
+                              terms
+                            </Link>{' '}
+                            &{' '}
+                            <Link
+                              className="text-sm text-blue-600 hover:underline"
+                              href="/privacy-policy"
+                            >
+                              privacy policy
+                            </Link>
+                          </label>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 />
+                {errors?.confirm && (
+                  <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                    {errors?.confirm?.message as any}
+                  </span>
+                )}
               </div>
 
-              <div className="relative group">
+              <div className="mt-6">
                 <ButtonInput
-                  type="button"
-                  variant="info"
+                  type="submit"
                   className="w-full"
-                  loading={isResend}
-                  onClick={() => resendCodeItem()}
-                  disabled={!watchPhone || isRunning ? true : false}
+                  variant="info"
+                  size="lg"
+                  loading={loading}
+                  disabled={watchCode.length !== 6 && true}
                 >
-                  {timer} Send code
+                  Create account
                 </ButtonInput>
               </div>
+            </>
+          ) : (
+            <div className="mt-4">
+              <ButtonInput
+                type="button"
+                className="w-full"
+                variant="info"
+                loading={loading}
+                disabled={!watchPhone.length || !watchPassword.length}
+                onClick={() => checkEmailOrPhoneItem()}
+              >
+                Continue
+              </ButtonInput>
             </div>
-          </div>
-
-          <div className="mt-4">
-            <Controller
-              name="confirm"
-              control={control}
-              render={({ field: { value, onChange } }) => (
-                <>
-                  <div className="flex items-center">
-                    <div className="flex">
-                      <Checkbox checked={value} onChange={onChange} />
-                    </div>
-                    <div className="ml-3">
-                      <label
-                        htmlFor="remember-me"
-                        //className="text-sm font-bold text-gray-700"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                      >
-                        I accept the{' '}
-                        <Link
-                          className="text-sm text-blue-600 hover:underline"
-                          href="/terms-condition"
-                        >
-                          terms
-                        </Link>{' '}
-                        &{' '}
-                        <Link
-                          className="text-sm text-blue-600 hover:underline"
-                          href="/privacy-policy"
-                        >
-                          privacy policy
-                        </Link>
-                      </label>
-                    </div>
-                  </div>
-                </>
-              )}
-            />
-            {errors?.confirm && (
-              <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-                {errors?.confirm?.message as any}
-              </span>
-            )}
-          </div>
-
-          <div className="mt-6">
-            <ButtonInput
-              type="submit"
-              className="w-full"
-              variant="info"
-              size="lg"
-              loading={loading}
-              disabled={watchCode.length !== 6 && true}
-            >
-              Create account
-            </ButtonInput>
-          </div>
+          )}
         </form>
 
         <div className="my-4 flex items-center justify-between">

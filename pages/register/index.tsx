@@ -41,11 +41,11 @@ const schema = yup.object({
 
 const Register = () => {
   const defaultTimer = 60;
-  const [isSuccessCheckEmailOrPhone, setIsSuccessCheckEmailOrPhone] =
-    useState(false);
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
+  const [isSuccessCheckEmailOrPhone, setIsSuccessCheckEmailOrPhone] =
+    useState(false);
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
@@ -63,8 +63,8 @@ const Register = () => {
     setHasErrors,
   } = useReactHookForm({ schema });
   const watchEmail = watch('email', '');
-  const watchPassword = watch('password', '');
   const watchCode = watch('code', '');
+  const watchPassword = watch('password', '');
 
   const onSubmit: SubmitHandler<UserRegisterFormModel> = async (
     payload: UserRegisterFormModel,
