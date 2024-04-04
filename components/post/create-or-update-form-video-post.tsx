@@ -17,6 +17,7 @@ import * as yup from 'yup';
 import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
+import { SwitchInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
@@ -37,6 +38,7 @@ const schema = yup.object({
     .required('Who can see this post'),
   description: yup.string().optional(),
   urlMedia: yup.string().url().required(),
+  enableVisibility: yup.boolean().required(),
   // membershipId: yup.string().when("whoCanSee", (enableUrlMedia, schema) => {
   //   if ((enableUrlMedia[0] as WhoCanSeeType) === "MEMBERSHIP")
   //     return yup.string().uuid().required("membership is a required field");
@@ -66,8 +68,7 @@ const CreateOrUpdateFormVideoPost = ({
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-
-  const watchWhoCanSee = watch('whoCanSee', null);
+  const watchEnableVisibility = watch('enableVisibility', true);
 
   const { data: categories } = GetAllCategoriesAPI({
     isPaginate: 'false',
@@ -86,6 +87,7 @@ const CreateOrUpdateFormVideoPost = ({
         'type',
         'categoryId',
         'membershipId',
+        'enableVisibility',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -261,7 +263,32 @@ const CreateOrUpdateFormVideoPost = ({
                   </span>
                 </div>
 
-                <div className="mt-4">
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          Product{' '}
+                          {watchEnableVisibility ? 'visible' : 'invisible'}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Make the product{' '}
+                          {watchEnableVisibility ? 'visible' : 'invisible'} to
+                          the public
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      defaultValue={watchEnableVisibility}
+                      name="enableVisibility"
+                      label=""
+                    />
+                  </div>
+                </div>
+
+                {/* <div className="mt-4">
                   <ButtonInput
                     type="submit"
                     className="w-full"
@@ -271,7 +298,7 @@ const CreateOrUpdateFormVideoPost = ({
                   >
                     Save and Publish
                   </ButtonInput>
-                </div>
+                </div> */}
                 <div className="my-4 flex items-center space-x-4">
                   <ButtonInput
                     type="button"
@@ -289,7 +316,7 @@ const CreateOrUpdateFormVideoPost = ({
                     variant="info"
                     loading={loading}
                   >
-                    Save as Draft
+                    Save {watchEnableVisibility && 'and Publish'}
                   </ButtonInput>
                 </div>
               </div>

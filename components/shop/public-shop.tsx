@@ -28,7 +28,7 @@ export function PublicShop(props: Props) {
     organizationId,
     status: 'ACTIVE',
     modelIds: ['PRODUCT'],
-    isVisible: 'TRUE',
+    enableVisibility: 'TRUE',
   });
 
   useEffect(() => {

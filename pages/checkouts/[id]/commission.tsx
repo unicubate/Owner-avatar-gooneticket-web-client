@@ -37,7 +37,7 @@ const CheckoutCommission = () => {
   const watchAmount = watch('amount', '');
   const { status, data: item } = GetOneProductAPI({
     productId: String(commissionId),
-    isVisible: 'TRUE',
+    enableVisibility: 'TRUE',
   });
 
   const { data: userAddress } = GetOneUserAddressMeAPI();

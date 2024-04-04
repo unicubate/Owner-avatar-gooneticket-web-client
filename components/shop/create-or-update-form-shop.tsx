@@ -1,11 +1,6 @@
 import { GetAllDiscountsAPI } from '@/api-site/discount';
 import { CreateOrUpdateOneProductAPI } from '@/api-site/product';
-import { arrayStringWhoCanSees } from '@/types/post';
-import {
-  ProductFormModel,
-  arrayProductTypes,
-  arrayWhoCanSees,
-} from '@/types/product';
+import { ProductFormModel, arrayProductTypes } from '@/types/product';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
@@ -43,12 +38,12 @@ const schema = yup.object({
   messageAfterPayment: yup.string().nullable(),
   description: yup.string().nullable(),
   productType: yup.string().required(),
-  isVisible: yup.boolean().required(),
-  whoCanSee: yup
-    .mixed()
-    .oneOf([...arrayStringWhoCanSees] as const)
-    .defined()
-    .required('Who can see this post'),
+  enableVisibility: yup.boolean().required(),
+  // whoCanSee: yup
+  //   .mixed()
+  //   .oneOf([...arrayStringWhoCanSees] as const)
+  //   .defined()
+  //   .required('Who can see this post'),
   limitSlot: yup.number().when('enableLimitSlot', (enableLimitSlot, schema) => {
     if (enableLimitSlot[0] === true)
       return schema.min(1).required('limit slots required');
@@ -92,7 +87,7 @@ const CreateOrUpdateFormShop = ({
   } = useReactHookForm({ schema });
 
   const watchPrice = watch('price', '');
-  const watchIsVisible = watch('isVisible', true);
+  const watchEnableVisibility = watch('enableVisibility', true);
   const watchProductType = watch('productType', 'PHYSICAL');
   const watchEnableDiscount = watch('enableDiscount', false);
   const watchEnableLimitSlot = watch('enableLimitSlot', false);
@@ -111,7 +106,7 @@ const CreateOrUpdateFormShop = ({
         'enableLimitSlot',
         'limitSlot',
         'model',
-        'isVisible',
+        'enableVisibility',
         'description',
         'moreDescription',
         'enableChooseQuantity',
@@ -205,7 +200,7 @@ const CreateOrUpdateFormShop = ({
                 label="Type product selling"
                 control={control}
                 errors={errors}
-                placeholder="Select type product selling..."
+                placeholder="DIGITAL"
                 valueType="text"
                 name="productType"
                 dataItem={arrayProductTypes}
@@ -226,7 +221,7 @@ const CreateOrUpdateFormShop = ({
                   {imageList.length >= 10 ? null : (
                     <div className="text-center dark:text-white">
                       <UploadOutlined />
-                      <div style={{ marginTop: 8 }}>Cover</div>
+                      <div style={{ marginTop: 8 }}>Upload cover</div>
                     </div>
                   )}
                 </Upload>
@@ -256,7 +251,7 @@ const CreateOrUpdateFormShop = ({
                 control={control}
                 label="Description"
                 name="description"
-                placeholder="Write description"
+                placeholder="Write description product"
                 errors={errors}
               />
               <span className="text-sm font-medium text-gray-400">
@@ -363,7 +358,7 @@ const CreateOrUpdateFormShop = ({
               </span>
             </div>
 
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <SelectInput
                 firstOptionName="Choose who can see or buy this product?"
                 label="Who can buy this product?"
@@ -374,7 +369,7 @@ const CreateOrUpdateFormShop = ({
                 name="whoCanSee"
                 dataItem={arrayWhoCanSees}
               />
-            </div>
+            </div> */}
 
             <div className="mt-4">
               <label className="mb-2 block text-sm font-bold text-gray-700 dark:text-white">
@@ -383,23 +378,24 @@ const CreateOrUpdateFormShop = ({
             </div>
 
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
-              <div className="mt-4 sm:flex sm:items-center sm:justify-between sm:space-x-5">
+              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
-                      Product {watchIsVisible ? 'visible' : 'invisible'}
+                      Product {watchEnableVisibility ? 'visible' : 'invisible'}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500">
                       Make the product{' '}
-                      {watchIsVisible ? 'visible' : 'invisible'} to the public
+                      {watchEnableVisibility ? 'visible' : 'invisible'} to the
+                      public
                     </p>
                   </div>
                 </div>
 
                 <SwitchInput
                   control={control}
-                  defaultValue={watchIsVisible}
-                  name="isVisible"
+                  defaultValue={watchEnableVisibility}
+                  name="enableVisibility"
                   label=""
                 />
               </div>
@@ -444,7 +440,7 @@ const CreateOrUpdateFormShop = ({
                 </>
               ) : null}
 
-              <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+              {/* <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                 <div className="flex min-w-0 flex-1 items-center">
                   <div className="min-w-0 flex-1">
                     <p className="text-sm font-bold dark:text-white">
@@ -518,7 +514,7 @@ const CreateOrUpdateFormShop = ({
                   name="enableChooseQuantity"
                   label=""
                 />
-              </div>
+              </div> */}
             </div>
 
             {/* <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
@@ -586,7 +582,7 @@ const CreateOrUpdateFormShop = ({
                 variant="info"
                 loading={loading}
               >
-                Save and Publish
+                Save {watchEnableVisibility && 'and Publish'}
               </ButtonInput>
             </div>
           </div>

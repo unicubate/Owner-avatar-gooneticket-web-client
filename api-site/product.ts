@@ -31,7 +31,7 @@ export const CreateOrUpdateOneProductAPI = ({
       let data = new FormData();
       data.append('title', `${payload.title ?? ''}`);
       data.append('price', `${payload.price ?? ''}`);
-      data.append('isVisible', `${payload.isVisible ?? ''}`);
+      data.append('enableVisibility', `${payload.enableVisibility ?? ''}`);
       data.append('model', `${payload.model ?? 'PRODUCT'}`);
       data.append('urlMedia', `${payload.urlMedia ?? ''}`);
       data.append('limitSlot', `${payload.limitSlot ?? ''}`);
@@ -147,15 +147,20 @@ export const GetOneProductAPI = (payload: {
   productId?: string;
   productSlug?: string;
   organizationId?: string;
-  isVisible?: 'TRUE' | 'FALSE';
+  enableVisibility?: 'TRUE' | 'FALSE';
 }) => {
-  const { productId, organizationId, isVisible, productSlug } = payload;
+  const { productId, organizationId, enableVisibility, productSlug } = payload;
   const { data, isError, isLoading, isPending, status, refetch } = useQuery({
     queryKey: ['product', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
         action: 'getOneProduct',
-        queryParams: { productId, organizationId, isVisible, productSlug },
+        queryParams: {
+          productId,
+          organizationId,
+          enableVisibility,
+          productSlug,
+        },
       }),
     // staleTime: 60_000,
     refetchOnWindowFocus: false,
@@ -176,7 +181,7 @@ export const getProductsAPI = async (
     organizationId: string;
     status?: string;
     modelIds: ModelType[];
-    isVisible?: 'TRUE' | 'FALSE';
+    enableVisibility?: 'TRUE' | 'FALSE';
   } & PaginationRequest,
 ): Promise<{ data: ResponseProductModel }> => {
   return await makeApiCall({
@@ -192,10 +197,17 @@ export const GetInfiniteProductsAPI = (payload: {
   sort: SortModel;
   search?: string;
   modelIds: ModelType[];
-  isVisible?: 'TRUE' | 'FALSE';
+  enableVisibility?: 'TRUE' | 'FALSE';
 }) => {
-  const { organizationId, take, sort, status, isVisible, modelIds, search } =
-    payload;
+  const {
+    organizationId,
+    take,
+    sort,
+    status,
+    enableVisibility,
+    modelIds,
+    search,
+  } = payload;
   return useInfiniteQuery({
     queryKey: ['products', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -206,7 +218,7 @@ export const GetInfiniteProductsAPI = (payload: {
         sort,
         search,
         modelIds,
-        isVisible,
+        enableVisibility,
         status: status?.toUpperCase(),
         page: pageParam,
       }),

@@ -34,7 +34,7 @@ const schema = yup.object({
   price: yup.number().required(),
   messageAfterPayment: yup.string().nullable(),
   productType: yup.string().required(),
-  isVisible: yup.boolean().required(),
+  enableVisibility: yup.boolean().required(),
   description: yup.string().min(10, 'Minimum 10 symbols').required(),
   limitSlot: yup.number().when('enableLimitSlot', (enableLimitSlot, schema) => {
     if (enableLimitSlot[0] === true)
@@ -69,7 +69,7 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
   } = useReactHookForm({ schema });
 
   const watchPrice = watch('price', '');
-  const watchIsVisible = watch('isVisible', true);
+  const watchEnableVisibility = watch('enableVisibility', true);
   const watchEnableDiscount = watch('enableDiscount', false);
   const watchEnableLimitSlot = watch('enableLimitSlot', false);
 
@@ -81,7 +81,7 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
         'title',
         'price',
         'urlMedia',
-        'isVisible',
+        'enableVisibility',
         'enableLimitSlot',
         'limitSlot',
         'model',
@@ -292,20 +292,21 @@ const CreateOrUpdateFormCommission = ({ product, uploadImages }: Props) => {
                     <div className="flex min-w-0 flex-1 items-center">
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-bold dark:text-white">
-                          Commission {watchIsVisible ? 'visible' : 'invisible'}
+                          Commission{' '}
+                          {watchEnableVisibility ? 'visible' : 'invisible'}
                         </p>
                         <p className="mt-1 text-sm font-medium text-gray-500">
                           Make the Commission{' '}
-                          {watchIsVisible ? 'visible' : 'invisible'} to the
-                          public
+                          {watchEnableVisibility ? 'visible' : 'invisible'} to
+                          the public
                         </p>
                       </div>
                     </div>
 
                     <SwitchInput
                       control={control}
-                      defaultValue={watchIsVisible}
-                      name="isVisible"
+                      defaultValue={watchEnableVisibility}
+                      name="enableVisibility"
                       label=""
                     />
                   </div>

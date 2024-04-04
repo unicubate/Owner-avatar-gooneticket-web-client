@@ -8,8 +8,8 @@ export const arrayWhoCanSees = [
 ];
 
 export const arrayProductTypes = [
-  { id: '1', name: 'PHYSICAL' },
-  { id: '2', name: 'DIGITAL' },
+  { id: '1', name: 'DIGITAL' },
+  // { id: '2', name: 'PHYSICAL' },
 ];
 
 export type ProductType = 'DIGITAL' | 'PHYSICAL';
@@ -81,7 +81,7 @@ export type ProductFormModel = {
   productType: ProductType;
   enableDiscount: boolean;
   limitSlot: number;
-  isVisible: boolean;
+  enableVisibility: boolean;
   enableLimitSlot: boolean;
   urlRedirect: string;
   model: ModelType;

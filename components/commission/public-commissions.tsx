@@ -25,7 +25,7 @@ const PublicCommissions = ({ organizationId }: Props) => {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    isVisible: 'TRUE',
+    enableVisibility: 'TRUE',
     modelIds: ['COMMISSION'],
   });
 

@@ -13,6 +13,7 @@ import * as yup from 'yup';
 import { useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ReactQuillInput } from '../ui-setting';
+import { SwitchInput } from '../ui-setting/ant';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
@@ -28,6 +29,7 @@ const schema = yup.object({
   title: yup.string().required(),
   description: yup.string().min(10, 'minimum 3 symbols').required(),
   categories: yup.array().optional(),
+  enableVisibility: yup.boolean().required(),
 });
 
 const CreateOrUpdateFormPost = ({
@@ -53,6 +55,7 @@ const CreateOrUpdateFormPost = ({
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchEnableVisibility = watch('enableVisibility', true);
 
   const { data: categories } = GetAllCategoriesAPI({
     isPaginate: 'false',
@@ -70,6 +73,7 @@ const CreateOrUpdateFormPost = ({
         'type',
         'categoryId',
         'categories',
+        'enableVisibility',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -218,6 +222,30 @@ const CreateOrUpdateFormPost = ({
                     errors={errors}
                   />
                 </div>
+                <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
+                  <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                    <div className="flex min-w-0 flex-1 items-center">
+                      <div className="min-w-0 flex-1">
+                        <p className="text-sm font-bold dark:text-white">
+                          Product{' '}
+                          {watchEnableVisibility ? 'visible' : 'invisible'}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-gray-500">
+                          Make the product{' '}
+                          {watchEnableVisibility ? 'visible' : 'invisible'} to
+                          the public
+                        </p>
+                      </div>
+                    </div>
+
+                    <SwitchInput
+                      control={control}
+                      defaultValue={watchEnableVisibility}
+                      name="enableVisibility"
+                      label=""
+                    />
+                  </div>
+                </div>
 
                 {/* <div className="mt-4">
                   <ButtonInput
@@ -247,7 +275,7 @@ const CreateOrUpdateFormPost = ({
                     variant="info"
                     loading={loading}
                   >
-                    Save and Publish
+                    Save {watchEnableVisibility && 'and Publish'}
                   </ButtonInput>
                 </div>
               </div>

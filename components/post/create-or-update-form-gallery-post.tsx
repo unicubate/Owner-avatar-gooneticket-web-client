@@ -28,6 +28,7 @@ import { SelectInput, TextInput } from '../ui-setting/shadcn';
 const schema = yup.object({
   title: yup.string().optional(),
   description: yup.string().optional(),
+  enableVisibility: yup.boolean().required(),
   whoCanSee: yup
     .mixed()
     .oneOf([...arrayStringWhoCanSees] as const)
@@ -69,6 +70,7 @@ const CreateOrUpdateFormGalleryPost = ({
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchEnableVisibility = watch('enableVisibility', true);
 
   const { data: categories } = GetAllCategoriesAPI({
     isPaginate: 'false',
@@ -86,6 +88,7 @@ const CreateOrUpdateFormGalleryPost = ({
         'type',
         'categoryId',
         'allowDownload',
+        'enableVisibility',
       ];
       fields?.forEach((field: any) => setValue(field, post[field]));
     }
@@ -248,8 +251,41 @@ const CreateOrUpdateFormGalleryPost = ({
                     </div>
                   </div>
 
+                  <div className="mt-4">
+                    <TextareaReactQuillInput
+                      control={control}
+                      name="description"
+                      label="Description (optional)"
+                      placeholder="description"
+                      errors={errors}
+                      className="h-36"
+                    />
+                  </div>
+
                   <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5">
                     <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
+                      <div className="flex min-w-0 flex-1 items-center">
+                        <div className="min-w-0 flex-1">
+                          <p className="text-sm font-bold dark:text-white">
+                            Product{' '}
+                            {watchEnableVisibility ? 'visible' : 'invisible'}
+                          </p>
+                          <p className="mt-1 text-sm font-medium text-gray-500">
+                            Make the product{' '}
+                            {watchEnableVisibility ? 'visible' : 'invisible'} to
+                            the public
+                          </p>
+                        </div>
+                      </div>
+
+                      <SwitchInput
+                        control={control}
+                        defaultValue={watchEnableVisibility}
+                        name="enableVisibility"
+                        label=""
+                      />
+                    </div>
+                    {/* <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
                       <div className="flex min-w-0 flex-1 items-center">
                         <div className="min-w-0 flex-1">
                           <p className="text-sm font-bold dark:text-white">
@@ -267,18 +303,7 @@ const CreateOrUpdateFormGalleryPost = ({
                         name="allowDownload"
                         label=""
                       />
-                    </div>
-                  </div>
-
-                  <div className="mt-4">
-                    <TextareaReactQuillInput
-                      control={control}
-                      name="description"
-                      label="Description (optional)"
-                      placeholder="description"
-                      errors={errors}
-                      className="h-36"
-                    />
+                    </div> */}
                   </div>
 
                   <div className="my-4 flex items-center space-x-4">
@@ -298,7 +323,7 @@ const CreateOrUpdateFormGalleryPost = ({
                       variant="info"
                       loading={loading}
                     >
-                      Save and Publish
+                      Save {watchEnableVisibility && 'and Publish'}
                     </ButtonInput>
                   </div>
                 </div>

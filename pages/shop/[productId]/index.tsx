@@ -21,7 +21,7 @@ const ShopUserPublic = () => {
     isError: isErrorProduct,
     data: product,
   } = GetOneProductAPI({
-    isVisible: 'TRUE',
+    enableVisibility: 'TRUE',
     productSlug: String(query?.productId),
   });
 

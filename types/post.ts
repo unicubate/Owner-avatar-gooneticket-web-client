@@ -60,6 +60,7 @@ export type PostFormModel = {
   type?: PostType;
   attachment?: any;
   imageList?: any;
+  enableVisibility?: string;
   newImageLists?: any;
   fileList?: any;
   newFileLists?: any;
