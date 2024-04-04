@@ -58,6 +58,8 @@ const Register = () => {
     loading,
     setLoading,
     hasErrors,
+    hasSuccess,
+    setHasSuccess,
     setHasErrors,
   } = useReactHookForm({ schema });
   const watchPhone = watch('phone', '');
@@ -95,6 +97,7 @@ const Register = () => {
       await sendCodePhoneUserAPI({ phone: watchPhone });
       setIsResend(false);
       setIsRunning(true);
+      setHasSuccess(true);
     } catch (error: any) {
       setIsResend(false);
       setHasErrors(true);
@@ -120,7 +123,20 @@ const Register = () => {
             </Alert>
           )}
 
-          <div className="mb-4">
+          {hasSuccess && (
+            <div className="rounded-lg bg-indigo-200">
+              <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+                <p className="p-3 text-sm font-medium text-indigo-800">
+                  We sent a verification code to{' '}
+                  <strong className="text-blue-600 underline">
+                    {watchPhone}
+                  </strong>
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="mt-4">
             <PhoneNumberInput
               defaultCountry={ipLocation?.countryCode ?? 'IT'}
               control={control}

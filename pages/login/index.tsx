@@ -11,9 +11,14 @@ import { GoogleLogin } from '@react-oauth/google';
 import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
-import { loginGoogleUserAPI, loginUserAPI } from '../../api-site/user';
+import {
+  checkEmailOrPhoneUserAPI,
+  loginGoogleUserAPI,
+  loginUserAPI,
+} from '../../api-site/user';
 
 const schema = yup.object({
   email: yup
@@ -28,7 +33,9 @@ const schema = yup.object({
 const Login = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
+  const [isSuccessCheckEmail, setIsSuccessCheckEmail] = useState(false);
   const {
+    watch,
     control,
     handleSubmit,
     errors,
@@ -39,6 +46,7 @@ const Login = () => {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchEmail = watch('email', '');
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
     payload: UserLoginFormModel,
@@ -64,6 +72,26 @@ const Login = () => {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: error.response.data.message,
+      });
+    }
+  };
+
+  const checkEmailItem = async () => {
+    setLoading(true);
+    setHasErrors(undefined);
+    try {
+      setIsSuccessCheckEmail(false);
+
+      await checkEmailOrPhoneUserAPI({ email: watchEmail });
+
+      setLoading(false);
+      setIsSuccessCheckEmail(true);
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
       });
     }
   };
@@ -103,39 +131,56 @@ const Login = () => {
               />
             </div>
 
-            <div className="mb-4">
-              <TextPasswordInput
-                control={control}
-                label="Password"
-                name="password"
-                placeholder="Password"
-                errors={errors}
-              />
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="password"
-                  className="mb-2 block text-sm dark:dark:text-white"
-                ></label>
-                <Link
-                  className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                  href={`/forgot-password${redirect ? `?redirect=${redirect}` : ''}`}
-                >
-                  Forgot password?
-                </Link>
-              </div>
-            </div>
+            {isSuccessCheckEmail ? (
+              <>
+                <div className="mb-4">
+                  <TextPasswordInput
+                    control={control}
+                    label="Password"
+                    name="password"
+                    placeholder="Password"
+                    errors={errors}
+                  />
+                  <div className="flex items-center justify-between">
+                    <label
+                      htmlFor="password"
+                      className="mb-2 block text-sm dark:dark:text-white"
+                    ></label>
+                    <Link
+                      className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
+                      href={`/forgot-password${redirect ? `?redirect=${redirect}` : ''}`}
+                    >
+                      Forgot password?
+                    </Link>
+                  </div>
+                </div>
 
-            <div className="mt-4">
-              <ButtonInput
-                type="submit"
-                className="w-full"
-                variant="info"
-                loading={loading}
-                disabled={!isDirty || !isValid}
-              >
-                Log In
-              </ButtonInput>
-            </div>
+                <div className="mt-4">
+                  <ButtonInput
+                    type="submit"
+                    className="w-full"
+                    variant="info"
+                    loading={loading}
+                    disabled={!isDirty || !isValid}
+                  >
+                    Log In
+                  </ButtonInput>
+                </div>
+              </>
+            ) : (
+              <div className="mt-4">
+                <ButtonInput
+                  type="button"
+                  className="w-full"
+                  variant="info"
+                  loading={loading}
+                  disabled={!watchEmail.length}
+                  onClick={() => checkEmailItem()}
+                >
+                  Continue with email
+                </ButtonInput>
+              </div>
+            )}
           </form>
 
           <div className="my-4 flex items-center justify-between">

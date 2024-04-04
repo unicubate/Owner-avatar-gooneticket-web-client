@@ -45,6 +45,16 @@ export const sendCodePhoneUserAPI = async (payload: {
   });
 };
 
+export const checkEmailOrPhoneUserAPI = async (payload: {
+  phone?: string;
+  email?: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'checkEmailOrPhoneUser',
+    body: payload,
+  });
+};
+
 export const sendCodeEmailUserAPI = async (payload: {
   email: string;
 }): Promise<{ data: UserModel }> => {

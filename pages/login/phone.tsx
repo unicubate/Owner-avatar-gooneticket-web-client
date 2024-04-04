@@ -16,6 +16,7 @@ import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
+  checkEmailOrPhoneUserAPI,
   loginGoogleUserAPI,
   loginPhoneUserAPI,
   sendCodePhoneUserAPI,
@@ -28,6 +29,7 @@ const schema = yup.object({
 
 const LoginPhone = () => {
   const defaultTimer = 60;
+  const [isSuccessCheckPhone, setIsSuccessCheckPhone] = useState(false);
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
@@ -43,6 +45,8 @@ const LoginPhone = () => {
     setLoading,
     hasErrors,
     setHasErrors,
+    hasSuccess,
+    setHasSuccess,
   } = useReactHookForm({ schema });
   const watchCode = watch('code', '');
   const watchPhone = watch('phone', '');
@@ -71,13 +75,37 @@ const LoginPhone = () => {
     }
   };
 
+  const checkPhoneItem = async () => {
+    setLoading(true);
+    setHasSuccess(false);
+    setHasErrors(undefined);
+    try {
+      setIsSuccessCheckPhone(false);
+
+      await checkEmailOrPhoneUserAPI({ phone: watchPhone });
+
+      setLoading(false);
+      setHasSuccess(true);
+      setIsSuccessCheckPhone(true);
+    } catch (error: any) {
+      setHasErrors(true);
+      setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
+  };
+
   const resendCodeItem = async () => {
+    setHasSuccess(false);
     setHasErrors(undefined);
     setIsResend(true);
     try {
       await sendCodePhoneUserAPI({ phone: watchPhone });
       setIsResend(false);
       setIsRunning(true);
+      setHasSuccess(true);
     } catch (error: any) {
       setIsResend(false);
       setHasErrors(true);
@@ -102,7 +130,20 @@ const LoginPhone = () => {
               </Alert>
             )}
 
-            <div className="mb-4">
+            {hasSuccess && (
+              <div className="rounded-lg text-center bg-indigo-200">
+                <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+                  <p className="p-3 text-sm font-medium text-indigo-800">
+                    We sent a verification code to{' '}
+                    <strong className="text-blue-600 underline">
+                      {watchPhone}
+                    </strong>
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <div className="mt-4">
               <PhoneNumberInput
                 defaultCountry={ipLocation?.countryCode ?? 'IT'}
                 control={control}
@@ -123,34 +164,49 @@ const LoginPhone = () => {
               />
             </div>
 
-            <div className="mt-4">
-              <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
-                <div className="flex-1">
-                  <TextInput
-                    control={control}
-                    name="code"
-                    placeholder="Enter 6-digit code"
-                    errors={errors}
-                    required
-                    type="number"
-                    pattern="[0-9]*"
-                  />
-                </div>
+            {isSuccessCheckPhone ? (
+              <div className="mt-4">
+                <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+                  <div className="flex-1">
+                    <TextInput
+                      control={control}
+                      name="code"
+                      placeholder="Enter 6-digit code"
+                      errors={errors}
+                      required
+                      type="number"
+                      pattern="[0-9]*"
+                    />
+                  </div>
 
-                <div className="relative group">
-                  <ButtonInput
-                    type="button"
-                    variant="info"
-                    className="w-full"
-                    loading={isResend}
-                    onClick={() => resendCodeItem()}
-                    disabled={!watchPhone || isRunning ? true : false}
-                  >
-                    {timer} Send code
-                  </ButtonInput>
+                  <div className="relative group">
+                    <ButtonInput
+                      type="button"
+                      variant="info"
+                      className="w-full"
+                      loading={isResend}
+                      onClick={() => resendCodeItem()}
+                      disabled={!watchPhone || isRunning ? true : false}
+                    >
+                      {timer} Send code
+                    </ButtonInput>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div className="mt-4">
+                <ButtonInput
+                  type="button"
+                  className="w-full"
+                  variant="info"
+                  loading={loading}
+                  disabled={!watchPhone.length}
+                  onClick={() => checkPhoneItem()}
+                >
+                  Continue with phone
+                </ButtonInput>
+              </div>
+            )}
 
             {watchCode.length === 6 && (
               <div className="mt-4">
