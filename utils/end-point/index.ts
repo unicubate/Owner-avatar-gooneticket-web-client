@@ -80,9 +80,12 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** User route */
   loginUser: POST(`${baseUrl}/login`),
   loginPhoneUser: POST(`${baseUrl}/login-phone`),
+  loginCheckEmailOrPhoneUser: POST(`${baseUrl}/login/check-email-or-phone`),
+  registerCheckEmailOrPhoneUser: POST(
+    `${baseUrl}/register/check-email-or-phone`,
+  ),
   sendCodePhoneUser: GET(`${baseUrl}/send-code-phone/:phone`),
   sendCodeEmailUser: GET(`${baseUrl}/send-code-email/:email`),
-  checkEmailOrPhoneUser: POST(`${baseUrl}/check-email-or-phone`),
   ipLocation: GET(`${baseUrl}/ip-location`),
   verifyTokenUser: GET(`${baseUrl}/verify-token`),
   loginGoogleUser: POST(`${baseUrl}/login-google-auth`),

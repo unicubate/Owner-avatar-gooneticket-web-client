@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
-  checkEmailOrPhoneUserAPI,
+  loginCheckEmailOrPhoneUserAPI,
   loginGoogleUserAPI,
   loginUserAPI,
 } from '../../api-site/user';
@@ -76,13 +76,13 @@ const Login = () => {
     }
   };
 
-  const checkEmailItem = async () => {
+  const checkEmailOrPhoneItem = async () => {
     setLoading(true);
     setHasErrors(undefined);
     try {
       setIsSuccessCheckEmail(false);
 
-      await checkEmailOrPhoneUserAPI({ email: watchEmail });
+      await loginCheckEmailOrPhoneUserAPI({ email: watchEmail });
 
       setLoading(false);
       setIsSuccessCheckEmail(true);
@@ -175,7 +175,7 @@ const Login = () => {
                   variant="info"
                   loading={loading}
                   disabled={!watchEmail.length}
-                  onClick={() => checkEmailItem()}
+                  onClick={() => checkEmailOrPhoneItem()}
                 >
                   Continue with email
                 </ButtonInput>

@@ -85,7 +85,7 @@ const ForgotPassword = () => {
           )}
 
           {hasSuccess && (
-            <div className="rounded-lg bg-indigo-200">
+            <div className="rounded-lg text-center bg-indigo-200">
               <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
                 <p className="p-3 text-sm font-medium text-indigo-800">
                   We sent a link recovery{' '}

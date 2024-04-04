@@ -16,7 +16,7 @@ import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
-  checkEmailOrPhoneUserAPI,
+  loginCheckEmailOrPhoneUserAPI,
   loginGoogleUserAPI,
   loginPhoneUserAPI,
   sendCodePhoneUserAPI,
@@ -75,14 +75,14 @@ const LoginPhone = () => {
     }
   };
 
-  const checkPhoneItem = async () => {
+  const checkEmailOrPhoneItem = async () => {
     setLoading(true);
     setHasSuccess(false);
     setHasErrors(undefined);
     try {
       setIsSuccessCheckPhone(false);
 
-      await checkEmailOrPhoneUserAPI({ phone: watchPhone });
+      await loginCheckEmailOrPhoneUserAPI({ phone: watchPhone });
 
       setLoading(false);
       setHasSuccess(true);
@@ -201,7 +201,7 @@ const LoginPhone = () => {
                   variant="info"
                   loading={loading}
                   disabled={!watchPhone.length}
-                  onClick={() => checkPhoneItem()}
+                  onClick={() => checkEmailOrPhoneItem()}
                 >
                   Continue with phone
                 </ButtonInput>

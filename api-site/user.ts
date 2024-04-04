@@ -45,12 +45,22 @@ export const sendCodePhoneUserAPI = async (payload: {
   });
 };
 
-export const checkEmailOrPhoneUserAPI = async (payload: {
+export const loginCheckEmailOrPhoneUserAPI = async (payload: {
   phone?: string;
   email?: string;
 }): Promise<{ data: UserModel }> => {
   return await makeApiCall({
-    action: 'checkEmailOrPhoneUser',
+    action: 'loginCheckEmailOrPhoneUser',
+    body: payload,
+  });
+};
+
+export const registerCheckEmailOrPhoneUserAPI = async (payload: {
+  phone?: string;
+  email?: string;
+}): Promise<{ data: UserModel }> => {
+  return await makeApiCall({
+    action: 'registerCheckEmailOrPhoneUser',
     body: payload,
   });
 };
