@@ -43,7 +43,7 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  const defaultTimer = 30;
+  const defaultTimer = 60;
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
@@ -178,27 +178,33 @@ const Register = () => {
             />
           </div>
 
-          <div className="mt-6 flex-row md:mb-0 md:flex">
-            <div className="relative mb-3 w-full md:mr-3 md:mb-0">
-              <TextInput
-                control={control}
-                name="code"
-                placeholder="Enter 6-digit code"
-                errors={errors}
-                type="number"
-                pattern="[0-9]*"
-                required
-              />
+          <div className="mt-4">
+            <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+              <div className="flex-1">
+                <TextInput
+                  control={control}
+                  name="code"
+                  placeholder="Enter 6-digit code"
+                  errors={errors}
+                  required
+                  type="number"
+                  pattern="[0-9]*"
+                />
+              </div>
+
+              <div className="relative group">
+                <ButtonInput
+                  type="button"
+                  variant="info"
+                  className="w-full"
+                  loading={isResend}
+                  onClick={() => resendCodeItem()}
+                  disabled={!watchPhone || isRunning ? true : false}
+                >
+                  {timer} Send code
+                </ButtonInput>
+              </div>
             </div>
-            <ButtonInput
-              type="button"
-              variant="info"
-              loading={isResend}
-              onClick={() => resendCodeItem()}
-              disabled={!watchPhone || isRunning ? true : false}
-            >
-              {timer} Send code
-            </ButtonInput>
           </div>
 
           <div className="mt-4">

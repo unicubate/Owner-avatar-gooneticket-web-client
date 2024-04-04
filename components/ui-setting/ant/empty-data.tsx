@@ -1,6 +1,4 @@
-import { ColorType } from '@/types/profile.type';
 import { Empty } from 'antd';
-import { CiGift } from 'react-icons/ci';
 
 interface Props {
   title: React.ReactNode;
@@ -8,11 +6,11 @@ interface Props {
   description: React.ReactNode;
 }
 
-const EmptyData: React.FC<Props> = ({
+const EmptyData = ({
   title,
   image = Empty.PRESENTED_IMAGE_SIMPLE,
   description,
-}) => {
+}: Props) => {
   return (
     <>
       <div className="relative">

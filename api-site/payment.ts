@@ -96,20 +96,6 @@ export const CreateOnPaymentPI = ({
           body: { paymentModel, ...data },
         });
       }
-
-      if (paymentModel === 'RESEND-VERIFY-CODE-PHONE') {
-        return await makeApiCall({
-          action: 'resendVerifyCodeOnePaymentsCreate',
-          body: { paymentModel, ...data },
-        });
-      }
-
-      if (paymentModel === 'VERIFY-CODE-PHONE') {
-        return await makeApiCall({
-          action: 'verifyCodeOnePaymentsCreate',
-          body: { paymentModel, ...data },
-        });
-      }
     },
     onError: async (error) => {
       await queryClient.invalidateQueries({ queryKey });

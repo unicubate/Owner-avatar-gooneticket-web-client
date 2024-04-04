@@ -30,6 +30,7 @@ const ForgotPassword = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
+    watch,
     control,
     handleSubmit,
     errors,
@@ -39,7 +40,10 @@ const ForgotPassword = () => {
     setLoading,
     hasErrors,
     setHasErrors,
+    hasSuccess,
+    setHasSuccess,
   } = useReactHookForm({ schema });
+  const watchEmail = watch('email', '');
 
   const onSubmit: SubmitHandler<UserForgotPasswordFormModel> = async (
     payload: UserForgotPasswordFormModel,
@@ -54,13 +58,13 @@ const ForgotPassword = () => {
       AlertSuccessNotification({
         text: 'Email send successfully',
       });
-      push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
+      setHasSuccess(true);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: 'An error has occurred.',
+        text: error.response.data.message,
       });
     }
   };
@@ -78,6 +82,19 @@ const ForgotPassword = () => {
             <Alert variant="destructive" className="mb-4">
               <AlertDescription>{hasErrors}</AlertDescription>
             </Alert>
+          )}
+
+          {hasSuccess && (
+            <div className="rounded-lg bg-indigo-200">
+              <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+                <p className="p-3 text-sm font-medium text-indigo-800">
+                  We sent a link recovery{' '}
+                  <strong className="text-blue-600 underline">
+                    {watchEmail}
+                  </strong>
+                </p>
+              </div>
+            </div>
           )}
 
           <div className="mt-4">

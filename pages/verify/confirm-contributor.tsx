@@ -19,14 +19,6 @@ const ConfirmContributor = () => {
     <>
       <LayoutAuth title="Confirm your account">
         <div className="m-auto mt-10 w-full max-w-xl rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
-          <div className="mx-auto flex justify-center">
-            <img
-              className="h-12 w-auto sm:h-14"
-              src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-              alt=""
-            />
-          </div>
-
           {verify?.user && <ConfirmProfileContributor verify={verify} />}
           {status === 'error' ? (
             <ErrorFile

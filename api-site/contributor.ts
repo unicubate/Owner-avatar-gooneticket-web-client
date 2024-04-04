@@ -134,6 +134,8 @@ export const getContributorsAPI = async (
 };
 
 export const GetInfiniteContributorsAPI = (payload: {
+  organizationId?: string;
+  userId?: string;
   search: string;
   take: number;
   sort: SortModel;

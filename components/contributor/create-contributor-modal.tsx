@@ -2,8 +2,13 @@ import { useInputState } from '../hooks';
 
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
-import { Tabs, TabsContent } from '@/components/ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
+import { GetInfiniteUsersAPI } from '@/api-site/user';
+import { ListInviteUsers } from '../setting/list-invite-users';
+import { SearchInput } from '../ui-setting';
+import { LoadingFile } from '../ui-setting/ant';
+import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreateOrUpdateFormContributor } from './create-or-update-form-contributor';
 
 const CreateContributorModal = ({
@@ -18,32 +23,32 @@ const CreateContributorModal = ({
   const { search, isOpen, setIsOpen, handleSetSearch, hasErrors } =
     useInputState();
 
-  // const {
-  //   isLoading: isLoadingUsers,
-  //   isError: isErrorUsers,
-  //   data: dataUsers,
-  //   isFetchingNextPage,
-  //   hasNextPage,
-  //   fetchNextPage,
-  // } = GetInfiniteUsersAPI({
-  //   take: 2,
-  //   sort: 'DESC',
-  //   search,
-  // });
+  const {
+    isLoading: isLoadingUsers,
+    isError: isErrorUsers,
+    data: dataUsers,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfiniteUsersAPI({
+    take: 2,
+    sort: 'DESC',
+    search,
+  });
 
-  // const dataTableUsers = isLoadingUsers ? (
-  //   <LoadingFile />
-  // ) : isErrorUsers ? (
-  //   <ErrorFile title="404" description="Error find data please try again..." />
-  // ) : dataUsers?.pages[0]?.data?.total <= 0 ? (
-  //   ''
-  // ) : (
-  //   dataUsers?.pages
-  //     .flatMap((page: any) => page?.data?.value)
-  //     .map((item, index) => (
-  //       <ListInviteUsers item={item} key={index} index={index} />
-  //     ))
-  // );
+  const dataTableUsers = isLoadingUsers ? (
+    <LoadingFile />
+  ) : isErrorUsers ? (
+    <ErrorFile title="404" description="Error find data please try again..." />
+  ) : dataUsers?.pages[0]?.data?.total <= 0 ? (
+    ''
+  ) : (
+    dataUsers?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListInviteUsers item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
@@ -55,19 +60,19 @@ const CreateContributorModal = ({
         <DialogTrigger asChild>{buttonDialog}</DialogTrigger>
         <DialogContent className="sm:max-w-[650px] dark:bg-[#121212] dark:border-gray-800">
           <Tabs defaultValue="new-contributor" className="w-full mt-4">
-            {/* <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="new-contributor">
                 Create contributor
               </TabsTrigger>
               <TabsTrigger value="invite">Invite people</TabsTrigger>
-            </TabsList> */}
+            </TabsList>
             <TabsContent value="new-contributor">
               <CreateOrUpdateFormContributor
                 showModal={showModal}
                 setShowModal={setShowModal}
               />
             </TabsContent>
-            {/* <TabsContent value="invite">
+            <TabsContent value="invite">
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
                   <div className="bg-white py-6 dark:bg-[#121212]">
@@ -96,7 +101,7 @@ const CreateContributorModal = ({
                   </div>
                 </div>
               </div>
-            </TabsContent> */}
+            </TabsContent>
           </Tabs>
         </DialogContent>
       </Dialog>

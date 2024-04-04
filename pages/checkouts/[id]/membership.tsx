@@ -236,14 +236,6 @@ const CheckoutMembership = () => {
                                 <h2 className="font-bold text-gray-500 text-base">
                                   Payment Method
                                 </h2>
-
-                                <Image
-                                  className="mt-3"
-                                  src={'/assets/payment-cards.png'}
-                                  height={180}
-                                  width={180}
-                                  alt="Payment cards"
-                                />
                               </div>
                               <div className="py-6">
                                 <div className="flex items-center space-x-4">
@@ -309,6 +301,14 @@ const CheckoutMembership = () => {
                                       }}
                                     />
                                   ) : null}
+
+                                  <Image
+                                    className="ml-auto mt-2"
+                                    src={'/assets/payment-cards.png'}
+                                    height={180}
+                                    width={180}
+                                    alt="Payment cards"
+                                  />
                                 </>
                               </div>
                             </>

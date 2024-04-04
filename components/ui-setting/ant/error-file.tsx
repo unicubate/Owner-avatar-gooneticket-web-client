@@ -1,5 +1,7 @@
 import { Result } from 'antd';
 import { ResultStatusType } from 'antd/es/result';
+import Link from 'next/link';
+import { ButtonInput } from '..';
 
 interface Props {
   status?: ResultStatusType;
@@ -24,9 +26,22 @@ const ErrorFile: React.FC<Props> = ({
               <p className="text-8xl font-bold dark:text-white">{title}</p>
             }
             subTitle={
-              <span className="text-2xl font-bold dark:text-gray-500">
-                {description}
-              </span>
+              <>
+                <div className="mx-auto max-w-xl text-center">
+                  <Link href={'/'}>
+                    <ButtonInput size="default" variant="info" type="button">
+                      Back To Home
+                    </ButtonInput>
+                  </Link>
+                  <ul className="mt-2 flex items-center justify-center space-x-6 sm:space-x-8">
+                    <li className="flex items-center">
+                      <span className="text-xl font-bold dark:text-gray-500">
+                        {description}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </>
             }
           />
         </div>

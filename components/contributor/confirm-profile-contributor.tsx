@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { confirmOneContributorAPI } from '@/api-site/contributor';
-import { useReactHookForm } from '@/components/hooks';
-import { ButtonInput } from '@/components/ui-setting';
+import { useInputState, useReactHookForm } from '@/components/hooks';
+import { ButtonInput, PhoneNumberInput } from '@/components/ui-setting';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ConfirmContributorFormModel } from '@/types/contributor';
@@ -27,9 +27,11 @@ const ConfirmProfileContributor = ({
 }: {
   verify: UserVerifyTokenModel;
 }) => {
+  const { ipLocation } = useInputState();
   const { query, push, back } = useRouter();
   const { token } = query;
   const {
+    watch,
     control,
     handleSubmit,
     errors,
@@ -38,6 +40,8 @@ const ConfirmProfileContributor = ({
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchCode = watch('code', '');
+  const watchPhone = watch('phone', '');
 
   const onSubmit: SubmitHandler<ConfirmContributorFormModel> = async (
     payload: ConfirmContributorFormModel,
@@ -115,8 +119,8 @@ const ConfirmProfileContributor = ({
                   />
                 </div>
               </div>
-              <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-                <div className="mb-4">
+              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+                <div className="mb-2">
                   <TextPasswordInput
                     required
                     control={control}
@@ -127,7 +131,7 @@ const ConfirmProfileContributor = ({
                   />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-2">
                   <TextPasswordInput
                     required
                     control={control}
@@ -138,12 +142,22 @@ const ConfirmProfileContributor = ({
                   />
                 </div>
               </div>
+              <div className="mt-2">
+                <PhoneNumberInput
+                  defaultCountry={ipLocation?.countryCode}
+                  control={control}
+                  name="phone"
+                  placeholder="xxx xxx xxx"
+                  errors={errors}
+                  required={true}
+                />
+              </div>
             </>
           )}
         </>
 
-        <div className="mt-4 flex justify-center space-x-4">
-          <ButtonInput
+        <div className="mt-6 flex justify-center space-x-4">
+          {/* <ButtonInput
             type="button"
             className="w-md"
             size="lg"
@@ -151,10 +165,10 @@ const ConfirmProfileContributor = ({
             onClick={() => push(`/login`)}
           >
             Login
-          </ButtonInput>
+          </ButtonInput> */}
           <ButtonInput
             type="submit"
-            className="w-md"
+            className="w-full"
             size="lg"
             variant="info"
             loading={loading}

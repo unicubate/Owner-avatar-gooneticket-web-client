@@ -5,22 +5,31 @@ import { ButtonInput, PhoneNumberInput } from '../ui-setting';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
+import { sendCodePhoneUserAPI } from '@/api-site/user';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
-import { useInputState } from '../hooks';
+import { useDecrementTimer, useInputState } from '../hooks';
+import { TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({
   phone: yup.string().required(),
+  code: yup.string().required(),
 });
 
 const CreatePaymentPhoneFormCardUser = (props: {
   showModal: boolean;
   setShowModal: any;
 }) => {
+  const defaultTimer = 60;
+  const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
+  const [isResend, setIsResend] = useState(false);
+
   const { ipLocation } = useInputState();
   const { showModal, setShowModal } = props;
   const {
+    watch,
     control,
     handleSubmit,
     errors,
@@ -29,6 +38,8 @@ const CreatePaymentPhoneFormCardUser = (props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchPhone = watch('phone', '');
+  const watchCode = watch('code', '');
 
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {
@@ -60,6 +71,23 @@ const CreatePaymentPhoneFormCardUser = (props: {
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
+      setHasErrors(error.response.data.message);
+      AlertDangerNotification({
+        text: `${error.response.data.message}`,
+      });
+    }
+  };
+
+  const resendCodeItem = async (item: string) => {
+    setHasErrors(undefined);
+    setIsResend(true);
+    try {
+      await sendCodePhoneUserAPI({ phone: watchPhone });
+      setIsResend(false);
+      setIsRunning(true);
+    } catch (error: any) {
+      setIsResend(false);
+      setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -103,6 +131,35 @@ const CreatePaymentPhoneFormCardUser = (props: {
                   />
                 </div>
 
+                <div className="mt-4">
+                  <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+                    <div className="flex-1">
+                      <TextInput
+                        control={control}
+                        name="code"
+                        placeholder="Enter 6-digit code"
+                        errors={errors}
+                        required
+                        type="number"
+                        pattern="[0-9]*"
+                      />
+                    </div>
+
+                    <div className="relative group">
+                      <ButtonInput
+                        type="button"
+                        variant="info"
+                        className="w-full"
+                        loading={isResend}
+                        onClick={() => resendCodeItem(watchPhone)}
+                        disabled={!watchPhone || isRunning ? true : false}
+                      >
+                        {timer} Send code
+                      </ButtonInput>
+                    </div>
+                  </div>
+                </div>
+
                 <div className="mt-4 flex items-center space-x-4">
                   <ButtonInput
                     type="button"
@@ -119,6 +176,7 @@ const CreatePaymentPhoneFormCardUser = (props: {
                     size="lg"
                     variant="info"
                     loading={loading}
+                    disabled={watchCode.length !== 6 && true}
                   >
                     Save
                   </ButtonInput>

@@ -125,14 +125,14 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                               {t('dashboard')}
                             </span>
                           </DropdownMenuItem>
-                          <DropdownMenuSeparator />
+                          {/* <DropdownMenuSeparator />
                           <DropdownMenuItem
                             onClick={() => push(`/contributors`)}
                           >
                             <span className="cursor-pointer">
                               {t('contributor')}
                             </span>
-                          </DropdownMenuItem>
+                          </DropdownMenuItem> */}
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>

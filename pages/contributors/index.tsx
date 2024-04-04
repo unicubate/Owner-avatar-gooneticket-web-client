@@ -17,7 +17,8 @@ import { useRouter } from 'next/router';
 
 const ContributorsIndex = () => {
   const { push } = useRouter();
-  const { search, isOpen, setIsOpen, handleSetSearch } = useInputState();
+  const { search, isOpen, setIsOpen, handleSetSearch, userStorage } =
+    useInputState();
 
   const {
     isLoading: isLoadingTransaction,
@@ -30,6 +31,7 @@ const ContributorsIndex = () => {
     search,
     take: 10,
     sort: 'DESC',
+    organizationId: userStorage?.organizationId,
   });
 
   const dataTableContributors = isLoadingTransaction ? (

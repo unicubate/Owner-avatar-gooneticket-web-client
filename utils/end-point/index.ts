@@ -222,10 +222,6 @@ export const apiEndpoints: ClientApiMethods = {
     `${baseUrl}/payments/stripe/commission`,
   ),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
-  resendVerifyCodeOnePaymentsCreate: POST(
-    `${baseUrl}/payments/resend-code-verify-phone`,
-  ),
-  verifyCodeOnePaymentsCreate: POST(`${baseUrl}/payments/code-verify-phone`),
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
 
   /****************** Posts route */

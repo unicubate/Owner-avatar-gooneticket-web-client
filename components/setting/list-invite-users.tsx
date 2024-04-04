@@ -19,7 +19,7 @@ type Props = {
 
 const ListInviteUsers = ({ item, index }: Props) => {
   const { locale } = useRouter();
-  const { loading, setLoading, setHasErrors } = useInputState();
+  const { loading, setLoading, setHasErrors, userStorage } = useInputState();
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrUpdateOneContributorAPI({
@@ -84,17 +84,19 @@ const ListInviteUsers = ({ item, index }: Props) => {
             </Link>
           </div>
 
-          <div className="ml-auto flex items-center justify-end space-x-8">
-            <ButtonInput
-              size="sm"
-              type="button"
-              variant="ghost"
-              loading={loading}
-              onClick={() => inviteItem(item)}
-            >
-              Invite
-            </ButtonInput>
-          </div>
+          {userStorage?.id !== item?.id && (
+            <div className="ml-auto flex items-center justify-end space-x-8">
+              <ButtonInput
+                size="sm"
+                type="button"
+                variant="ghost"
+                loading={loading}
+                onClick={() => inviteItem(item)}
+              >
+                Invite
+              </ButtonInput>
+            </div>
+          )}
         </div>
       </div>
     </>

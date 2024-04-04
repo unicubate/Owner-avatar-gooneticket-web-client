@@ -4,7 +4,7 @@ import { ButtonInput } from '../ui-setting';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-// import IBAN from 'iban';
+import IBAN from 'iban';
 import { SubmitHandler } from 'react-hook-form';
 import { useInputState } from '../hooks';
 import { TextInput } from '../ui-setting/shadcn';
@@ -16,17 +16,16 @@ type Props = {
 };
 const schema = yup.object({
   fullName: yup.string().required('full name is a required field'),
-  iban: yup.string().required('IBAN is a required field'),
-  // .test('isValid', 'IBAN invalide', (value) => {
-  //   return IBAN.isValid(value);
-  // }),
+  iban: yup
+    .string()
+    .required('IBAN is a required field')
+    .test('iban', 'IBAN value is invalid', (value) => {
+      return IBAN.isValid(value);
+    }),
   ibanConfirm: yup
     .string()
     .oneOf([yup.ref('iban')], 'IBAN must match')
     .required('IBAN is a required field'),
-  // .test('isValid', 'IBAN invalide', (value) => {
-  //   return IBAN.isValid(value);
-  // }),
 });
 
 const CreatePaymentIbanFormUser = ({ showModal, setShowModal }: Props) => {
@@ -92,7 +91,7 @@ const CreatePaymentIbanFormUser = ({ showModal, setShowModal }: Props) => {
                   </Alert>
                 )}
 
-                <div className="mt-4">
+                <div className="mt-2">
                   <TextInput
                     control={control}
                     type="text"

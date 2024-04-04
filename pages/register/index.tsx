@@ -39,7 +39,7 @@ const schema = yup.object({
 });
 
 const Register = () => {
-  const defaultTimer = 30;
+  const defaultTimer = 60;
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
@@ -53,6 +53,8 @@ const Register = () => {
     loading,
     setLoading,
     hasErrors,
+    hasSuccess,
+    setHasSuccess,
     setHasErrors,
   } = useReactHookForm({ schema });
   const watchEmail = watch('email', '');
@@ -62,13 +64,11 @@ const Register = () => {
     payload: UserRegisterFormModel,
   ) => {
     setLoading(true);
-    setHasErrors(undefined);
 
     try {
       await registerUserAPI({
         ...payload,
       });
-      setHasErrors(false);
       setLoading(false);
       window.location.href = `${
         redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
@@ -90,6 +90,7 @@ const Register = () => {
       await sendCodeEmailUserAPI({ email: watchEmail });
       setIsResend(false);
       setIsRunning(true);
+      setHasSuccess(true);
     } catch (error: any) {
       setIsResend(false);
       setHasErrors(true);
@@ -110,9 +111,23 @@ const Register = () => {
 
         <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
-            <Alert variant="destructive" className="mb-4 text-center">
+            <Alert variant="destructive" className="mb-4">
               <AlertDescription>{hasErrors}</AlertDescription>
             </Alert>
+          )}
+
+          {hasSuccess && (
+            <div className="rounded-lg bg-indigo-200">
+              <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+                <p className="p-3 text-sm font-medium text-indigo-800">
+                  We sent a verification code to{' '}
+                  <strong className="text-blue-600 underline">
+                    {watchEmail}
+                  </strong>
+                  . Enter the code from the email in the field below.
+                </p>
+              </div>
+            </div>
           )}
 
           <div className="mt-4">
@@ -171,27 +186,33 @@ const Register = () => {
             />
           </div>
 
-          <div className="mt-6 flex-row md:mb-0 md:flex">
-            <div className="relative mb-3 w-full md:mr-3 md:mb-0">
-              <TextInput
-                control={control}
-                name="code"
-                placeholder="Enter 6-digit code"
-                errors={errors}
-                type="number"
-                pattern="[0-9]*"
-                required
-              />
+          <div className="mt-4">
+            <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+              <div className="flex-1">
+                <TextInput
+                  control={control}
+                  name="code"
+                  placeholder="Enter 6-digit code"
+                  errors={errors}
+                  required
+                  type="number"
+                  pattern="[0-9]*"
+                />
+              </div>
+
+              <div className="relative group">
+                <ButtonInput
+                  type="button"
+                  variant="info"
+                  className="w-full"
+                  loading={isResend}
+                  onClick={() => resendCodeItem()}
+                  disabled={!watchEmail || isRunning ? true : false}
+                >
+                  {timer} Send code
+                </ButtonInput>
+              </div>
             </div>
-            <ButtonInput
-              type="button"
-              variant="info"
-              loading={isResend}
-              onClick={() => resendCodeItem()}
-              disabled={!watchEmail || isRunning ? true : false}
-            >
-              {timer} Send code
-            </ButtonInput>
           </div>
 
           <div className="mt-4">

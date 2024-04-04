@@ -27,7 +27,7 @@ const schema = yup.object({
 });
 
 const LoginPhone = () => {
-  const defaultTimer = 30;
+  const defaultTimer = 60;
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
@@ -44,8 +44,8 @@ const LoginPhone = () => {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const watchPhone = watch('phone', '');
   const watchCode = watch('code', '');
+  const watchPhone = watch('phone', '');
 
   const onSubmit: SubmitHandler<UserLoginPhoneFormModel> = async (
     payload: UserLoginPhoneFormModel,
@@ -55,7 +55,7 @@ const LoginPhone = () => {
     const { code, phone } = payload;
 
     try {
-      const { data: user } = await loginPhoneUserAPI({ code, phone });
+      await loginPhoneUserAPI({ code, phone });
       setHasErrors(false);
       setLoading(false);
       window.location.href = `${
@@ -71,7 +71,7 @@ const LoginPhone = () => {
     }
   };
 
-  const resendCodeItem = async (item: string) => {
+  const resendCodeItem = async () => {
     setHasErrors(undefined);
     setIsResend(true);
     try {
@@ -123,9 +123,9 @@ const LoginPhone = () => {
               />
             </div>
 
-            <div className="mb-4">
-              <div className="mb-6 flex-row md:mb-0 md:flex">
-                <div className="relative mb-3 w-full md:mr-3 md:mb-0">
+            <div className="mt-4">
+              <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+                <div className="flex-1">
                   <TextInput
                     control={control}
                     name="code"
@@ -136,29 +136,35 @@ const LoginPhone = () => {
                     pattern="[0-9]*"
                   />
                 </div>
-                <ButtonInput
-                  type="button"
-                  variant="info"
-                  onClick={() => resendCodeItem(watchPhone)}
-                  loading={isResend}
-                  disabled={!watchPhone || isRunning ? true : false}
-                >
-                  {timer} Send code
-                </ButtonInput>
+
+                <div className="relative group">
+                  <ButtonInput
+                    type="button"
+                    variant="info"
+                    className="w-full"
+                    loading={isResend}
+                    onClick={() => resendCodeItem()}
+                    disabled={!watchPhone || isRunning ? true : false}
+                  >
+                    {timer} Send code
+                  </ButtonInput>
+                </div>
               </div>
             </div>
 
-            <div className="mt-4">
-              <ButtonInput
-                type="submit"
-                className="w-full"
-                variant="info"
-                loading={loading}
-                disabled={watchCode.length !== 6 && true}
-              >
-                Log In
-              </ButtonInput>
-            </div>
+            {watchCode.length === 6 && (
+              <div className="mt-4">
+                <ButtonInput
+                  type="submit"
+                  className="w-full"
+                  variant="info"
+                  loading={loading}
+                  disabled={watchCode.length !== 6 && true}
+                >
+                  Log In
+                </ButtonInput>
+              </div>
+            )}
           </form>
 
           <div className="my-4 flex items-center justify-between">

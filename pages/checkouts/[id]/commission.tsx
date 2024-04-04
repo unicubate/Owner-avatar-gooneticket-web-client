@@ -197,14 +197,6 @@ const CheckoutCommission = () => {
                                 <h2 className="font-bold text-gray-500 text-base">
                                   Payment Method
                                 </h2>
-
-                                <Image
-                                  className="mt-3"
-                                  src={'/assets/payment-cards.png'}
-                                  height={180}
-                                  width={180}
-                                  alt="Payment cards"
-                                />
                               </div>
 
                               <div className="py-6">
@@ -272,6 +264,14 @@ const CheckoutCommission = () => {
                                       }}
                                     />
                                   ) : null}
+
+                                  <Image
+                                    className="ml-auto mt-2"
+                                    src={'/assets/payment-cards.png'}
+                                    height={180}
+                                    width={180}
+                                    alt="Payment cards"
+                                  />
                                 </>
                               </div>
                             </>

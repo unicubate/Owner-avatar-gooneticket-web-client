@@ -114,7 +114,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
           )}
           <div className="relative mt-4">
             <Input
-              placeholder="Full name or nickname"
+              placeholder="Full name"
               name="fullName"
               onChange={(e) =>
                 setcardState({
@@ -124,7 +124,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               }
             />
           </div>
-          <div className="relative mt-4">
+          {/* <div className="relative mt-4">
             <Input
               required
               placeholder="Email"
@@ -136,7 +136,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
                 })
               }
             />
-          </div>
+          </div> */}
           <div className="relative mt-4">
             <Input
               className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}

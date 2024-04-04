@@ -1,31 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { CreateOnPaymentPI, DeleteOnePaymentAPI } from '@/api-site/payment';
+import { DeleteOnePaymentAPI } from '@/api-site/payment';
 import {
   PaymentItemModel,
   statusPaymentColorLists,
   statusPaymentLists,
 } from '@/types/payment';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formateDateDayjs,
+} from '@/utils';
 import { truncateSubstring } from '@/utils/utils';
-import { MailPlusIcon, TrashIcon } from 'lucide-react';
+import { TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { Badge } from '../ui/badge';
-import { CreateValidationFormCodePhoneUser } from '../user/create-validation-form-code-phone-user';
 
 const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
   const { item, index } = props;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [showModal, setShowModal] = useState(false);
   const { locale } = useRouter();
-
-  const { mutateAsync: createOnMutate } = CreateOnPaymentPI({
-    onSuccess: () => {},
-    onError: (error?: any) => {},
-  });
 
   const { mutateAsync: deleteOnMutate } = DeleteOnePaymentAPI({
     onSuccess: () => {},
@@ -45,23 +43,6 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
     } catch (error: any) {
       setLoading(false);
       setIsOpen(true);
-      AlertDangerNotification({
-        text: `${error.response.data.message}`,
-      });
-    }
-  };
-
-  const resendItem = async (item: any) => {
-    try {
-      await createOnMutate({
-        data: { phone: item?.phone, organizationId: item?.organizationId },
-        paymentModel: 'RESEND-VERIFY-CODE-PHONE',
-      });
-      AlertSuccessNotification({
-        text: 'Your validation code has been sent',
-      });
-      setShowModal(true);
-    } catch (error: any) {
       AlertDangerNotification({
         text: `${error.response.data.message}`,
       });
@@ -92,72 +73,58 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
             ) : null}
           </div>
           <div className="mt-1">
-            {['PHONE'].includes(item?.type) && (
-              <>
-                <Badge
-                  className="rounded-sm cursor-pointer"
-                  variant={statusPaymentColorLists[item?.status] as any}
-                  title={`${item?.type} ${statusPaymentLists[item?.status]}`}
-                  onClick={() => {
-                    item.status !== 'ACTIVE' ? resendItem(item) : null;
-                  }}
-                >
-                  {`${item?.type} ${statusPaymentLists[item?.status]}`}
-                </Badge>
-              </>
-            )}
+            <div className="flex items-center">
+              {['PHONE'].includes(item?.type) && (
+                <>
+                  <Badge
+                    className="rounded-sm cursor-pointer"
+                    variant={statusPaymentColorLists[item?.status] as any}
+                    title={`${item?.type} ${statusPaymentLists[item?.status]}`}
+                  >
+                    {`${item?.type} ${statusPaymentLists[item?.status]}`}
+                  </Badge>
+                </>
+              )}
 
-            {['CARD'].includes(item?.type) && (
-              <>
-                <Badge
-                  className="rounded-sm cursor-pointer"
-                  variant={`${
-                    Number(item.cardExpYear) >= new Date().getFullYear()
-                      ? 'success'
-                      : 'danger'
-                  }`}
-                >
-                  {Number(item.cardExpYear) >= new Date().getFullYear()
-                    ? 'CARD VALID'
-                    : 'CARD INVALID'}
-                </Badge>
-                <Badge
-                  className="ml-1 rounded-sm cursor-pointer"
-                  variant="outline"
-                >
-                  {item.cardExpMonth}/
-                  {truncateSubstring(String(item?.cardExpYear), 2)}
-                </Badge>
-              </>
-            )}
-            {['IBAN'].includes(item?.type) && (
-              <>
-                <Badge
-                  className="rounded-sm cursor-pointer"
-                  variant={statusPaymentColorLists[item?.status] as any}
-                >
-                  {`${item?.type} ${statusPaymentLists[item?.status]}`}
-                </Badge>
-              </>
-            )}
+              {['CARD'].includes(item?.type) && (
+                <>
+                  <Badge
+                    className="rounded-sm cursor-pointer"
+                    variant={`${
+                      Number(item.cardExpYear) >= new Date().getFullYear()
+                        ? 'success'
+                        : 'danger'
+                    }`}
+                  >
+                    {Number(item.cardExpYear) >= new Date().getFullYear()
+                      ? 'CARD VALID'
+                      : 'CARD INVALID'}
+                  </Badge>
+                  {/* <span className="ml-3 text-sm font-normal text-red-600">
+                    {item.cardExpMonth}/
+                    {truncateSubstring(String(item?.cardExpYear), 2)}
+                  </span> */}
+                </>
+              )}
+              {['IBAN'].includes(item?.type) && (
+                <>
+                  <Badge
+                    className="rounded-sm cursor-pointer"
+                    variant={statusPaymentColorLists[item?.status] as any}
+                  >
+                    {`${item?.type} ${statusPaymentLists[item?.status]}`}
+                  </Badge>
+                </>
+              )}
+
+              <span className="ml-2 text-sm font-normal text-gray-600">
+                {formateDateDayjs(item?.createdAt as Date)}
+              </span>
+            </div>
           </div>
         </div>
 
         <div className="ml-auto">
-          {['PHONE'].includes(item?.type) && item?.status !== 'ACTIVE' && (
-            <ButtonInput
-              variant="ghost"
-              type="button"
-              size="icon"
-              onClick={() => {
-                item.status !== 'ACTIVE' ? resendItem(item) : null;
-              }}
-              icon={
-                <MailPlusIcon className="size-4 text-gray-600 hover:text-yellow-600" />
-              }
-            />
-          )}
-
           <ActionModalDialog
             title="Delete?"
             loading={loading}
@@ -178,12 +145,6 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
           />
         </div>
       </div>
-
-      <CreateValidationFormCodePhoneUser
-        item={item}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
     </>
   );
 };

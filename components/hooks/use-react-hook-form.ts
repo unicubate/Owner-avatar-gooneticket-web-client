@@ -13,6 +13,9 @@ type HookOptions<T> = {
 
 const useReactHookForm = <T>({ schema }: HookOptions<T>) => {
   const [loading, setLoading] = useState(false);
+  const [hasSuccess, setHasSuccess] = useState<boolean | string | undefined>(
+    undefined,
+  );
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined,
   );
@@ -41,6 +44,8 @@ const useReactHookForm = <T>({ schema }: HookOptions<T>) => {
     isDirty,
     isValid,
     isSubmitting,
+    hasSuccess,
+    setHasSuccess,
     setHasErrors,
   };
 };
