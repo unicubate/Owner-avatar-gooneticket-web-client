@@ -15,7 +15,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
-import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -297,21 +296,3 @@ const CheckoutShop = () => {
 };
 
 export default PrivateComponent(CheckoutShop);
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}
