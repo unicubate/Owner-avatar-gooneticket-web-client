@@ -6,7 +6,6 @@ import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-updat
 import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-post';
 import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 const PostsCreate = () => {
   const { userStorage } = useInputState();
@@ -49,13 +48,3 @@ const PostsCreate = () => {
 };
 
 export default PrivateComponent(PostsCreate);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

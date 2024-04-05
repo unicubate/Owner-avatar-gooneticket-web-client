@@ -7,7 +7,6 @@ import {
 } from '@/utils';
 import { Tag, Tooltip } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -18,8 +17,8 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
-  const { locale } = useRouter();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+
   const [showModal, setShowModal] = useState(false);
 
   const { mutateAsync: saveMutation } = DeleteOneDiscountAPI({
@@ -59,10 +58,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium">
               {item?.enableExpiredAt
-                ? `Ends Midnight ${formateDMYHH(
-                    item?.expiredAt,
-                    String(locale),
-                  )}`
+                ? `Ends Midnight ${formateDMYHH(item?.expiredAt, lang)}`
                 : `Never Expires `}
             </p>
           </div>

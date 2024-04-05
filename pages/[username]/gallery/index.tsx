@@ -4,7 +4,6 @@ import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const GalleryUserPublic = () => {
@@ -67,21 +66,3 @@ const GalleryUserPublic = () => {
 };
 
 export default GalleryUserPublic;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

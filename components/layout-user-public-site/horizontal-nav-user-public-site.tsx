@@ -1,5 +1,4 @@
 import { UserModel } from '@/types/user.type';
-import { useTranslations } from 'next-intl';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
@@ -18,6 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useIntl } from 'react-intl';
 import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
 import { ThemeToggle } from '../ui-setting';
 import { HorizontalNavPublicUser } from '../user/horizontal-nav-public-user';
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
-  const t = useTranslations('menu_site');
+  const t = useIntl();
   const { push } = useRouter();
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
@@ -36,37 +36,37 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   const username = user?.username;
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t('home')}`,
+      title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: `${t('gallery')}`,
+      title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
       status: true,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: `${t('memberships')}`,
+      title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: `${t('posts')}`,
+      title: `${t.formatMessage({ id: 'MENU.POST' })}`,
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: `${t('shop')}`,
+      title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: `${t('commissions')}`,
+      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,
@@ -207,13 +207,15 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/dashboard`)}>
                             <span className="cursor-pointer">
-                              {t('dashboard')}
+                              {t.formatMessage({ id: 'MENU.DASHBOARD' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <span className="cursor-pointer">{t('logout')}</span>
+                          <span className="cursor-pointer">
+                            {t.formatMessage({ id: 'MENU.LOGOUT' })}
+                          </span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

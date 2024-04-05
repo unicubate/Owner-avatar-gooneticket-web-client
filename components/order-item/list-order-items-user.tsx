@@ -5,7 +5,6 @@ import { formateDateDayjs, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { OrderItemUserModal } from './order-item-user-modal';
@@ -21,7 +20,6 @@ const ListOrderItemsUser = (props: Props) => {
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
-  const { locale } = useRouter();
   return (
     <>
       <div key={index} className="py-5">

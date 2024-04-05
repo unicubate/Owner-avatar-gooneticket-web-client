@@ -9,7 +9,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PostModel } from '@/types/post';
 import { MenuSquareIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import { useInView } from 'react-intersection-observer';
 import { SearchInput } from '../../components/ui-setting/search-input';
 
@@ -153,13 +152,3 @@ const Posts = () => {
 };
 
 export default PrivateComponent(Posts);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

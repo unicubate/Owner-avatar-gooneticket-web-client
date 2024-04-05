@@ -14,7 +14,6 @@ import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { useDebounce } from '@/utils';
-import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
@@ -196,11 +195,3 @@ const Donations = () => {
 };
 
 export default PrivateComponent(Donations);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../../lang/${locale}/index.json`)).default,
-    },
-  };
-}

@@ -6,7 +6,6 @@ import { ListFollowers } from '@/components/setting/list-followers';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -113,13 +112,3 @@ const Followers = () => {
 };
 
 export default PrivateComponent(Followers);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

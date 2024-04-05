@@ -4,7 +4,6 @@ import { PublicPosts } from '@/components/post/public-posts';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { useAuth } from '@/components/util/context-user';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const PostsUserPublic = () => {
@@ -56,21 +55,3 @@ const PostsUserPublic = () => {
 };
 
 export default PostsUserPublic;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

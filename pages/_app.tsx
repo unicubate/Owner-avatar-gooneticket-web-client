@@ -14,9 +14,9 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { NextIntlClientProvider } from 'next-intl';
 
 import { ClientOnly } from '@/components/util/client-only';
+import { ContextIntlProvider } from '@/i18n/context-intl-provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useRouter } from 'next/router';
 const queryClient = new QueryClient({
@@ -27,26 +27,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <QueryClientProvider client={queryClient}>
-      <GoogleOAuthProvider
-        clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-      >
-        <ClientOnly fallback={<LoadingFile />}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <NextIntlClientProvider
-              formats={{
-                dateTime: {
-                  short: {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                  },
-                },
-              }}
-              locale={router.locale}
-              messages={pageProps.messages}
-              timeZone="Europe/Berlin"
-              now={new Date()}
-            >
+      <ContextIntlProvider>
+        <GoogleOAuthProvider
+          clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+        >
+          <ClientOnly fallback={<LoadingFile />}>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               <HydrationBoundary state={pageProps.dehydratedState}>
                 <ConfigProvider>
                   <ContextUserProvider>
@@ -61,10 +47,27 @@ export default function App({ Component, pageProps }: AppProps) {
                   </ContextUserProvider>
                 </ConfigProvider>
               </HydrationBoundary>
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </ClientOnly>
-      </GoogleOAuthProvider>
+              {/* <NextIntlClientProvider
+                  formats={{
+                    dateTime: {
+                      short: {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      },
+                    },
+                  }}
+                  locale={router.locale}
+                  messages={pageProps.messages}
+                  timeZone="Europe/Rome"
+                  now={new Date()}
+                >
+                  
+                </NextIntlClientProvider> */}
+            </ThemeProvider>
+          </ClientOnly>
+        </GoogleOAuthProvider>
+      </ContextIntlProvider>
     </QueryClientProvider>
   );
 }

@@ -10,7 +10,6 @@ import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/paginations';
 import { TrashIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
@@ -25,8 +24,7 @@ type Props = {
 };
 
 const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
-  const { locale } = useRouter();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
   const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
@@ -67,7 +65,7 @@ const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
                 {item?.profile?.firstName} {item?.profile?.lastName}{' '}
               </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
+                {formateFromNow(item?.createdAt as Date, lang as string)}
               </p>
             </div>
           </div>

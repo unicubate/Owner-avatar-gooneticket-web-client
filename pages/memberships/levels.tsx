@@ -13,7 +13,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { LockKeyholeIcon, PlusIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -133,13 +132,3 @@ const MembershipsLevels = () => {
 };
 
 export default PrivateComponent(MembershipsLevels);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

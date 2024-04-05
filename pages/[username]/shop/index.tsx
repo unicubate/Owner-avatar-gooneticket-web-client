@@ -6,7 +6,6 @@ import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { PublicShop } from '@/components/shop/public-shop';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -71,21 +70,3 @@ const ShopUserPublic = () => {
 };
 
 export default ShopUserPublic;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

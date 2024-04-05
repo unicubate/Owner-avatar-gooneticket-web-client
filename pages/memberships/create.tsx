@@ -1,7 +1,6 @@
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormMembership } from '@/components/membership/create-or-update-form-membership';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const MembershipsLevelCreate = () => {
   return (
@@ -18,13 +17,3 @@ const MembershipsLevelCreate = () => {
 };
 
 export default PrivateComponent(MembershipsLevelCreate);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

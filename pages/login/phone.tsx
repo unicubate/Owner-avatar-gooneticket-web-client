@@ -9,7 +9,6 @@ import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginPhoneFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { GoogleLogin } from '@react-oauth/google';
-import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -166,31 +165,28 @@ const LoginPhone = () => {
 
             {isSuccessCheckPhone ? (
               <div className="mt-4">
-                <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
-                  <div className="flex-1">
-                    <TextInput
-                      control={control}
-                      name="code"
-                      placeholder="Enter 6-digit code"
-                      errors={errors}
-                      required
-                      type="number"
-                      pattern="[0-9]*"
-                    />
-                  </div>
+                <div className="relative flex w-full max-w-auto">
+                  <TextInput
+                    control={control}
+                    name="code"
+                    placeholder="Enter 6-digit code"
+                    errors={errors}
+                    required
+                    type="number"
+                    pattern="[0-9]*"
+                  />
 
-                  <div className="relative group">
-                    <ButtonInput
-                      type="button"
-                      variant="info"
-                      className="w-full"
-                      loading={isResend}
-                      onClick={() => resendCodeItem()}
-                      disabled={!watchPhone || isRunning ? true : false}
-                    >
-                      {timer} Send code
-                    </ButtonInput>
-                  </div>
+                  <ButtonInput
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="!absolute right-1 top-1 rounded"
+                    loading={isResend}
+                    onClick={() => resendCodeItem()}
+                    disabled={!watchPhone || isRunning ? true : false}
+                  >
+                    {timer} Resend code
+                  </ButtonInput>
                 </div>
               </div>
             ) : (
@@ -278,13 +274,3 @@ const LoginPhone = () => {
 };
 
 export default PublicComponent(LoginPhone);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/auth.json`)).default,
-      },
-    },
-  };
-}

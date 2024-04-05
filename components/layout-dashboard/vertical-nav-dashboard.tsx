@@ -12,14 +12,14 @@ import {
   SettingsIcon,
   StoreIcon,
 } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
+import { useIntl } from 'react-intl';
 
 export type NavbarProps = {
-  title: string;
+  title: ReactNode;
   href: string;
   status?: boolean;
   description?: string;
@@ -33,22 +33,22 @@ interface Props {
 }
 
 const VerticalNavDashboard = ({ user }: Props) => {
+  const t = useIntl();
   const router = useRouter();
-  const t = useTranslations('menu_site');
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
-      title: `${t('home')}`,
+      title: `${t.formatMessage({ id: 'MENU.DASHBOARD' })}`,
       href: '/dashboard',
       icon: <HomeIcon className={classIcon} />,
     },
     {
-      title: `${t('your_page')}`,
+      title: `${t.formatMessage({ id: 'MENU.PAGE' })}`,
       href: `/${user?.username}`,
       icon: <ExternalLinkIcon className={classIcon} />,
     },
     {
-      title: `${t('feed')}`,
+      title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
       href: '/home',
       icon: <Dice6Icon className={classIcon} />,
     },
@@ -56,46 +56,46 @@ const VerticalNavDashboard = ({ user }: Props) => {
 
   const [monetizeItems] = useState<NavbarProps[]>([
     {
-      title: `${t('donations')}`,
+      title: `${t.formatMessage({ id: 'MENU.DONATION' })}`,
       href: '/donations',
       icon: <HeartIcon className={classIcon} />,
     },
     {
-      title: `${t('memberships')}`,
+      title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
       href: '/memberships',
       icon: <LockKeyholeIcon className={classIcon} />,
     },
     {
-      title: `${t('commissions')}`,
+      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
       href: '/commissions',
       icon: <HeartHandshakeIcon className={classIcon} />,
     },
     {
-      title: `${t('shop')}`,
+      title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
       href: '/shop',
       icon: <StoreIcon className={classIcon} />,
     },
   ]);
   const [supportItems] = useState<NavbarProps[]>([
     {
-      title: `${t('posts')}`,
+      title: `${t.formatMessage({ id: 'MENU.POST' })}`,
       href: '/posts',
       icon: <MenuSquareIcon className={classIcon} />,
     },
     {
-      title: `${t('gallery')}`,
+      title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
       href: '/gallery',
       icon: <ImageIcon className={classIcon} />,
     },
     {
-      title: `${t('payments')}`,
+      title: `${t.formatMessage({ id: 'MENU.PAYMENT' })}`,
       href: '/payments',
       icon: <ListIcon className={classIcon} />,
     },
   ]);
   const [settingItems] = useState<NavbarProps[]>([
     {
-      title: `${t('settings')}`,
+      title: `${t.formatMessage({ id: 'MENU.SETTING' })}`,
       href: '/settings',
       icon: <SettingsIcon className={classIcon} />,
     },

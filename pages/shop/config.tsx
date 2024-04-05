@@ -14,7 +14,6 @@ import { ButtonInput } from '@/components/ui-setting/button-input';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PlusIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 
 const Configs = () => {
@@ -203,13 +202,3 @@ const Configs = () => {
 };
 
 export default PrivateComponent(Configs);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

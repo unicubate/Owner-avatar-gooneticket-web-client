@@ -1,3 +1,4 @@
+import { IntlProvider } from '@/i18n/intl-provider';
 import {
   PropsWithChildren,
   ReactNode,
@@ -26,5 +27,9 @@ export const ClientOnly = ({
     return <>{fallback}</>;
   }
 
-  return <Suspense fallback={fallback}>{children}</Suspense>;
+  return (
+    <Suspense fallback={fallback}>
+      <IntlProvider>{children}</IntlProvider>
+    </Suspense>
+  );
 };

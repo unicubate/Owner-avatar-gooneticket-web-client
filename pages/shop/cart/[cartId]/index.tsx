@@ -12,7 +12,6 @@ import { TextInput } from '@/components/ui-setting/shadcn';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Image } from 'antd';
 import { TrashIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -324,15 +323,5 @@ export async function getStaticPaths() {
   return {
     paths: [],
     fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
   };
 }

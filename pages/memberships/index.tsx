@@ -7,7 +7,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -129,13 +128,3 @@ const Memberships = () => {
 };
 
 export default PrivateComponent(Memberships);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

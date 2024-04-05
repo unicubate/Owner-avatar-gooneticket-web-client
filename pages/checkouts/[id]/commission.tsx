@@ -16,7 +16,6 @@ import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -297,20 +296,3 @@ const CheckoutCommission = () => {
   );
 };
 export default PrivateComponent(CheckoutCommission);
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

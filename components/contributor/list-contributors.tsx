@@ -11,7 +11,6 @@ import {
   formateFromNow,
 } from '@/utils';
 import { MailPlusIcon, PencilIcon, TrashIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -28,9 +27,15 @@ type Props = {
 export function ListContributors({ item, index }: Props) {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isResend, setIsResend] = useState(false);
-  const { locale } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading, setHasErrors, userStorage } =
-    useInputState();
+  const {
+    isOpen,
+    setIsOpen,
+    loading,
+    setLoading,
+    setHasErrors,
+    userStorage,
+    lang,
+  } = useInputState();
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrUpdateOneContributorAPI({
@@ -110,7 +115,7 @@ export function ListContributors({ item, index }: Props) {
               {item?.profile?.email}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-              {formateFromNow(item?.createdAt as Date, locale as string)}
+              {formateFromNow(item?.createdAt as Date, lang as string)}
             </p>
 
             <div className="mt-1">

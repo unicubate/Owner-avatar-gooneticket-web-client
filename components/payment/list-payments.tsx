@@ -12,7 +12,6 @@ import {
 } from '@/utils';
 import { truncateSubstring } from '@/utils/utils';
 import { TrashIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -23,7 +22,6 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
   const { item, index } = props;
   const { isOpen, setIsOpen, loading, setLoading } = useInputState();
   const [showModal, setShowModal] = useState(false);
-  const { locale } = useRouter();
 
   const { mutateAsync: deleteOnMutate } = DeleteOnePaymentAPI({
     onSuccess: () => {},

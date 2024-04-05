@@ -1,6 +1,5 @@
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const TransactionCancel = () => {
@@ -23,13 +22,3 @@ const TransactionCancel = () => {
 };
 
 export default TransactionCancel;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`../../lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

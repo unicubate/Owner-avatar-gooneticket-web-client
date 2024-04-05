@@ -1,7 +1,6 @@
 import { HorizontalNavDonation } from '@/components/donation/horizontal-nav-donation';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { SubmitHandler } from 'react-hook-form';
 
 const TransactionsDonations = () => {
@@ -447,13 +446,3 @@ const TransactionsDonations = () => {
 };
 
 export default PrivateComponent(TransactionsDonations);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

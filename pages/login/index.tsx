@@ -8,7 +8,6 @@ import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { GoogleLogin } from '@react-oauth/google';
-import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -238,13 +237,3 @@ const Login = () => {
 };
 
 export default PublicComponent(Login);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/auth.json`)).default,
-      },
-    },
-  };
-}

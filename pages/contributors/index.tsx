@@ -12,7 +12,6 @@ import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
 import { ArrowRightLeftIcon, PlusIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ContributorsIndex = () => {
@@ -107,13 +106,3 @@ const ContributorsIndex = () => {
 };
 
 export default PrivateComponent(ContributorsIndex);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

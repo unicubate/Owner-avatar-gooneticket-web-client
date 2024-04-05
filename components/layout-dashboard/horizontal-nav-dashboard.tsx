@@ -1,9 +1,10 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/router';
+import { useIntl } from 'react-intl';
 import { ThemeToggle } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
+import { LangToggle } from '../ui-setting/lang-toggle';
 import { Button } from '../ui/button';
 import {
   DropdownMenu,
@@ -27,7 +28,7 @@ interface Props {
 }
 
 const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
-  const t = useTranslations('menu_site');
+  const t = useIntl();
   const { push } = useRouter();
 
   const logoutUserItem = async () => {
@@ -93,6 +94,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
             <div className="flex items-center justify-end ml-auto">
               <ThemeToggle />
+              <LangToggle />
               <div className="items-end">
                 {/* <ThemeToggle /> */}
                 {user?.profile ? (
@@ -122,7 +124,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/dashboard`)}>
                             <span className="cursor-pointer">
-                              {t('dashboard')}
+                              {t.formatMessage({ id: 'MENU.DASHBOARD' })}
                             </span>
                           </DropdownMenuItem>
                           {/* <DropdownMenuSeparator />
@@ -136,7 +138,9 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <span className="cursor-pointer">{t('logout')}</span>
+                          <span className="cursor-pointer">
+                            {t.formatMessage({ id: 'MENU.LOGOUT' })}
+                          </span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>

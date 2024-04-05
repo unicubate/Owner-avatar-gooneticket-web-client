@@ -7,7 +7,6 @@ import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicVerifyComponent } from '@/components/util/public-verify-component';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
@@ -151,13 +150,3 @@ const ConfirmEmail = () => {
   );
 };
 export default PublicVerifyComponent(ConfirmEmail);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/auth.json`)).default,
-      },
-    },
-  };
-}

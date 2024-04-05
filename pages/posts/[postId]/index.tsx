@@ -6,7 +6,6 @@ import { ListFollowPosts } from '@/components/post/list-follow-posts';
 import { PublicLastPosts } from '@/components/post/public-last-posts';
 import { PostSkeleton } from '@/components/skeleton/post-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const PostShow = () => {
@@ -113,20 +112,3 @@ const PostShow = () => {
 };
 
 export default PostShow;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

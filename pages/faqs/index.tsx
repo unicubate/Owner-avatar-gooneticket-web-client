@@ -1,7 +1,6 @@
 import { FaqsList } from '@/components/faq/faqs-list';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { LayoutSite } from '@/components/layout-site';
-import { GetStaticPropsContext } from 'next';
 
 const faqs = [
   {
@@ -298,13 +297,3 @@ const Faqs = () => {
 };
 
 export default Faqs;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

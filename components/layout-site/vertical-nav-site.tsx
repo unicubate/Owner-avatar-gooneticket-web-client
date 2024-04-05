@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
@@ -7,7 +6,6 @@ import { NavbarSiteProps } from '.';
 
 const VerticalNavSite = () => {
   const router = useRouter();
-  const t = useTranslations('menu_site');
   const pathname = usePathname();
   const [navigation] = useState<NavbarSiteProps[]>([
     {

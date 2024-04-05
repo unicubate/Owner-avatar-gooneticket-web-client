@@ -6,7 +6,6 @@ import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import { ViewIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
@@ -21,15 +20,13 @@ type Props = {
 
 export function ListOrderItemsSeller(props: Props) {
   const { item, index } = props;
-  const { isOpen, setIsOpen } = useInputState();
+  const { isOpen, setIsOpen, lang } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
   const { data: order } = GetOneOrderAPI({
     orderId: item?.orderId,
   });
-  const { locale } = useRouter();
-
   return (
     <>
       <tr key={index}>
@@ -68,10 +65,7 @@ export function ListOrderItemsSeller(props: Props) {
                       {item?.profile?.email}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                      {formateFromNow(
-                        item?.createdAt as Date,
-                        locale as string,
-                      )}
+                      {formateFromNow(item?.createdAt as Date, lang as string)}
                     </p>
                   </div>
                 </p>
@@ -80,7 +74,7 @@ export function ListOrderItemsSeller(props: Props) {
                 {item?.quantity && `Quantity: ${item?.quantity}`}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
+                {formateFromNow(item?.createdAt as Date, lang as string)}
               </p>
             </div>
           </div>
@@ -126,7 +120,7 @@ export function ListOrderItemsSeller(props: Props) {
         </td>
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date, locale as string)}
+          {formateFromNow(item?.createdAt as Date, lang as string)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">

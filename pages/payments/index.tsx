@@ -2,7 +2,6 @@ import { LayoutDashboard } from '@/components/layout-dashboard';
 import { TableOrderItemsUser } from '@/components/order-item/table-order-items-user';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const PaymentsIndex = () => {
   const user = useAuth() as any;
@@ -28,13 +27,3 @@ const PaymentsIndex = () => {
 };
 
 export default PrivateComponent(PaymentsIndex);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

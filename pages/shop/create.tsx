@@ -1,7 +1,6 @@
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { CreateOrUpdateFormShop } from '@/components/shop/create-or-update-form-shop';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const ShopCreate = () => {
   return (
@@ -18,13 +17,3 @@ const ShopCreate = () => {
 };
 
 export default PrivateComponent(ShopCreate);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

@@ -5,7 +5,6 @@ import { LayoutAuth } from '@/components/layout-auth';
 import { ButtonInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ConfirmContributor = () => {
@@ -50,13 +49,3 @@ const ConfirmContributor = () => {
   );
 };
 export default ConfirmContributor;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/auth.json`)).default,
-      },
-    },
-  };
-}

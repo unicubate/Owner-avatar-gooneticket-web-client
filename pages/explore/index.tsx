@@ -1,10 +1,9 @@
-import { ButtonInput } from '@/components/ui-setting/button-input';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import { LayoutSite } from '@/components/layout-site';
-import { GetStaticPropsContext } from 'next';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Image } from 'antd';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object({
   searchInput: yup.string().optional(),
@@ -714,13 +713,3 @@ const Explore = () => {
 };
 
 export default Explore;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

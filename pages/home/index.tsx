@@ -9,7 +9,6 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { itemsNumberArray } from '@/utils/utils';
-import { GetStaticPropsContext } from 'next';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -85,13 +84,3 @@ const Home = () => {
 };
 
 export default PrivateComponent(Home);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

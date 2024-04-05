@@ -10,7 +10,6 @@ import { DeleteOneUser } from '@/components/user/delete-one-user';
 import { UpdateFormPassword } from '@/components/user/update-form-password';
 import { UpdateFormProfile } from '@/components/user/update-form-profile';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const Settings = () => {
   const { userStorage: user } = useInputState();
@@ -54,13 +53,3 @@ const Settings = () => {
 };
 
 export default PrivateComponent(Settings);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

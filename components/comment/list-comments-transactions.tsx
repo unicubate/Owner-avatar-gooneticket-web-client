@@ -6,9 +6,9 @@ import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/paginations';
 import { ReplyIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
+import { useInputState } from '../hooks';
 import { AvatarComponent } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useAuth } from '../util/context-user';
@@ -31,7 +31,7 @@ const ListCommentTransactions = ({
   organizationId,
   index,
 }: Props) => {
-  const { locale } = useRouter();
+  const { lang } = useInputState();
   const { userStorage: userVisiter } = useAuth() as any;
   const [openModalReply, setOpenModalReply] = useState(false);
 
@@ -99,7 +99,7 @@ const ListCommentTransactions = ({
                 )}
 
                 <p className="ml-3.5 text-sm font-normal text-gray-500">
-                  {formateFromNow(item?.createdAt as Date, locale as string)}
+                  {formateFromNow(item?.createdAt as Date, lang as string)}
                 </p>
               </div>
             </div>

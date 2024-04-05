@@ -4,7 +4,6 @@ import { TableOrderItemsSeller } from '@/components/order-item/table-order-items
 import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 
 const OrdersIndex = () => {
@@ -58,13 +57,3 @@ const OrdersIndex = () => {
 };
 
 export default PrivateComponent(OrdersIndex);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

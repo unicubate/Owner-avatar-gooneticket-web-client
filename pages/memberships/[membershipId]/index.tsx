@@ -6,7 +6,6 @@ import { ButtonInput, LoaderIconComponent } from '@/components/ui-setting';
 import { formateDMYHH } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { Avatar, Button, Spin } from 'antd';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { MdOutlineDiscount } from 'react-icons/md';
 
@@ -531,20 +530,3 @@ const ShopView = () => {
 };
 
 export default ShopView;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

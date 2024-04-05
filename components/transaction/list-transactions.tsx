@@ -3,7 +3,7 @@ import { TransactionModel } from '@/types/transaction';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { MoreHorizontalIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
+import { useInputState } from '../hooks';
 import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Button } from '../ui/button';
@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const ListTransactions = ({ item, index }: Props) => {
-  const { locale } = useRouter();
+  const { lang } = useInputState();
   return (
     <>
       <tr key={index}>
@@ -49,7 +49,7 @@ export const ListTransactions = ({ item, index }: Props) => {
                 <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
+                {formateFromNow(item?.createdAt as Date, lang)}
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export const ListTransactions = ({ item, index }: Props) => {
         </td> */}
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date, locale as string)}
+          {formateFromNow(item?.createdAt as Date, lang)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">

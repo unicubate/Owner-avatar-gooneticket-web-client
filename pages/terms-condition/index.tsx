@@ -1,6 +1,5 @@
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { LayoutSite } from '@/components/layout-site';
-import { GetStaticPropsContext } from 'next';
 
 const TermsCondition = () => {
   return (
@@ -66,13 +65,3 @@ const TermsCondition = () => {
 };
 
 export default TermsCondition;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

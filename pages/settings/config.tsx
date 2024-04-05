@@ -5,7 +5,6 @@ import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Image } from 'antd';
-import { GetStaticPropsContext } from 'next';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -312,13 +311,3 @@ const Configs = () => {
 };
 
 export default PrivateComponent(Configs);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

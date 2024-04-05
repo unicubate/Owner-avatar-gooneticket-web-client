@@ -1,10 +1,10 @@
 import { UserModel } from '@/types/user.type';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { useTranslations } from 'next-intl';
+import { useIntl } from 'react-intl';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
 
 const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
-  const t = useTranslations();
+  const t = useIntl();
 
   return (
     <>
@@ -19,11 +19,13 @@ const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
           </p>
           <p className="mt-1 hidden text-sm font-medium text-gray-600 lg:block">
             <span>
-              {user?.totalSubscribe} {t('subscribes')}
+              {user?.totalSubscribe}{' '}
+              {t.formatMessage({ id: 'MENU.SUBSCRIBER' })}
             </span>
             {' - '}
             <span>
-              {user?.totalFollower ?? 0} {t('followers')}
+              {user?.totalFollower ?? 0}{' '}
+              {t.formatMessage({ id: 'MENU.FOLLOWER' })}
             </span>
           </p>
         </div>

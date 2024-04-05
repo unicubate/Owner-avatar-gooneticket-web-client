@@ -15,7 +15,6 @@ import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { ProductModel } from '@/types/product';
 import { PlusIcon, StoreIcon } from 'lucide-react';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -141,13 +140,3 @@ const ShopsExtras = () => {
 };
 
 export default PrivateComponent(ShopsExtras);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

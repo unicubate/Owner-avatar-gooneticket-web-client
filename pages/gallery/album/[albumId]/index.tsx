@@ -2,7 +2,6 @@ import { TableGallery } from '@/components/gallery/table-gallery';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const Albums = () => {
@@ -31,20 +30,3 @@ const Albums = () => {
 };
 
 export default PrivateComponent(Albums);
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

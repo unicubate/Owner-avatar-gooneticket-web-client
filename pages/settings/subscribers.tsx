@@ -7,7 +7,6 @@ import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -108,13 +107,3 @@ const Subscribers = () => {
 };
 
 export default PrivateComponent(Subscribers);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

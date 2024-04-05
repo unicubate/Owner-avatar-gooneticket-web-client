@@ -7,7 +7,6 @@ import {
   formateFromNow,
 } from '@/utils';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant/avatar-component';
@@ -18,7 +17,7 @@ type Props = {
 };
 
 const ListInviteUsers = ({ item, index }: Props) => {
-  const { locale } = useRouter();
+  const { lang } = useInputState();
   const { loading, setLoading, setHasErrors, userStorage } = useInputState();
 
   // Create or Update data
@@ -79,7 +78,7 @@ const ListInviteUsers = ({ item, index }: Props) => {
                 {item?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
+                {formateFromNow(item?.createdAt as Date, lang)}
               </p>
             </Link>
           </div>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { ProductModel } from '@/types/product';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { useInputState } from '../hooks';
 import { ListCarouselUpload } from './list-carousel-upload';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export function ListLastProducts(props: Props) {
   const { item } = props;
-  const { locale } = useRouter();
+  const { lang } = useInputState();
   return (
     <>
       <li

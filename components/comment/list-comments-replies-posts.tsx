@@ -10,7 +10,6 @@ import { HtmlParser } from '@/utils/html-parser';
 import { ModelType } from '@/utils/paginations';
 import { PencilIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
@@ -26,8 +25,7 @@ export function ListCommentsRepliesPosts(props: {
   userId?: string;
 }) {
   const { item, model, userId, index } = props;
-  const { locale } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const editItem = (item: any) => {
@@ -74,7 +72,7 @@ export function ListCommentsRepliesPosts(props: {
                 {item?.profile?.firstName} {item?.profile?.lastName}{' '}
               </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {formateFromNow(item?.createdAt as Date, locale as string)}
+                {formateFromNow(item?.createdAt as Date, lang as string)}
               </p>
             </div>
           </div>

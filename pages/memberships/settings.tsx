@@ -7,7 +7,6 @@ import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Radio } from 'antd';
-import { GetStaticPropsContext } from 'next';
 import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -329,13 +328,3 @@ const SettingDonations = () => {
 };
 
 export default PrivateComponent(SettingDonations);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

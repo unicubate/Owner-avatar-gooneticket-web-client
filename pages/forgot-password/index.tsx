@@ -10,7 +10,6 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { GetStaticPropsContext } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
@@ -133,13 +132,3 @@ const ForgotPassword = () => {
 };
 
 export default PublicComponent(ForgotPassword);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/auth.json`)).default,
-      },
-    },
-  };
-}

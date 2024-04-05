@@ -7,7 +7,6 @@ import {
 } from '@/utils';
 import { Tooltip } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
@@ -18,8 +17,13 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
-  const { locale } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const {
+    isOpen,
+    setIsOpen,
+    loading,
+    setLoading,
+    lang: locale,
+  } = useInputState();
   const [showModal, setShowModal] = useState(false);
 
   const { mutateAsync: saveMutation } = DeleteOneCategoryAPI({

@@ -1,5 +1,4 @@
 import { ButtonInput } from '@/components/ui-setting';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const TransactionSuccess = () => {
@@ -93,13 +92,3 @@ const TransactionSuccess = () => {
 };
 
 export default TransactionSuccess;
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

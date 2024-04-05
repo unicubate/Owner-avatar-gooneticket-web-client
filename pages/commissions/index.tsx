@@ -4,7 +4,6 @@ import { TableCommissions } from '@/components/commission/table-commissions';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const Commissions = () => {
   const { userStorage, profile } = useInputState();
@@ -29,13 +28,3 @@ const Commissions = () => {
 };
 
 export default PrivateComponent(Commissions);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

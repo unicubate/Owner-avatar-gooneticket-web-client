@@ -11,10 +11,10 @@ import {
   formateDMYHH,
 } from '@/utils';
 import { XIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, SerialPrice } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
@@ -44,7 +44,7 @@ export function UpdateOrderItemModal(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const { locale } = useRouter();
+  const { lang } = useInputState();
 
   useEffect(() => {
     if (item) {
@@ -135,7 +135,7 @@ export function UpdateOrderItemModal(props: {
                     {item?.profile?.email ?? ''}
                   </p>
                   <p className="mt-1 text-sm font-medium text-gray-500">
-                    {formateDMYHH(item?.createdAt as Date, locale as string)}
+                    {formateDMYHH(item?.createdAt as Date, lang as string)}
                   </p>
                 </div>
 

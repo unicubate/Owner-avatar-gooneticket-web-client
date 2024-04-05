@@ -1,7 +1,6 @@
 import { CreateContactForm } from '@/components/contact-us/create-contact-form';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { LayoutSite } from '@/components/layout-site';
-import { GetStaticPropsContext } from 'next';
 
 export default function ContactUs() {
   return (
@@ -68,14 +67,4 @@ export default function ContactUs() {
       </LayoutSite>
     </>
   );
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
 }

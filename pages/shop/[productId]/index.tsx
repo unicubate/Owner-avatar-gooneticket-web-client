@@ -9,7 +9,6 @@ import { ViewProductsShop } from '@/components/shop/view-products-shop';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
@@ -96,21 +95,3 @@ const ShopUserPublic = () => {
 };
 
 export default ShopUserPublic;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

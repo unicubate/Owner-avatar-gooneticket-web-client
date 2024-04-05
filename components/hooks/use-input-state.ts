@@ -1,5 +1,6 @@
 import { useDebounce } from '@/utils';
 import { useState } from 'react';
+import { useLang } from '../../i18n/context-intl-provider';
 import { useAuth } from '../util/context-user';
 
 export function useInputState() {
@@ -11,6 +12,7 @@ export function useInputState() {
   const endTime = toAt?.$d?.toISOString();
 
   const { userStorage, ipLocation, profile } = useAuth() as any;
+  const lang = useLang();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -62,5 +64,6 @@ export function useInputState() {
     ipLocation,
     profile,
     linkHref,
+    lang,
   };
 }

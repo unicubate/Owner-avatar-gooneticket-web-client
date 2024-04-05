@@ -3,7 +3,6 @@ import { LayoutDashboard } from '@/components/layout-dashboard';
 import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { PayoutFormUser } from '@/components/user/payout-form-user';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 
 const SettingsPayout = () => {
   const { userStorage: user } = useInputState();
@@ -39,13 +38,3 @@ const SettingsPayout = () => {
 };
 
 export default PrivateComponent(SettingsPayout);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

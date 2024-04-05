@@ -1,49 +1,49 @@
 import { UserModel } from '@/types/user.type';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
-  const t = useTranslations('menu_site');
+  const t = useIntl();
   const { query } = useRouter();
   const username = String(query?.username);
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t('home')}`,
+      title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
       status: true,
       count: 1,
       href: `/${username}`,
     },
     {
-      title: `${t('gallery')}`,
+      title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
       status: user?.profile?.enableGallery,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
-      title: `${t('memberships')}`,
+      title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
       status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
-      title: `${t('posts')}`,
+      title: `${t.formatMessage({ id: 'MENU.POST' })}`,
       status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
-      title: `${t('shop')}`,
+      title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
     {
-      title: `${t('commissions')}`,
+      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
       status: user?.profile?.enableCommission,
       count: user?.commission?.count,
       href: `/${username}/commissions`,

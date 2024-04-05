@@ -6,7 +6,6 @@ import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const CommissionEdit = () => {
@@ -67,20 +66,3 @@ const CommissionEdit = () => {
 };
 
 export default PrivateComponent(CommissionEdit);
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-      },
-    },
-  };
-}

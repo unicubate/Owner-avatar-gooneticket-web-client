@@ -7,7 +7,6 @@ import { RecentCommentTransactions } from '@/components/transaction/recent-comme
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { HtmlParser } from '@/utils/html-parser';
-import { GetStaticPropsContext } from 'next';
 import { useRouter } from 'next/router';
 
 const ProfilePublic = () => {
@@ -113,21 +112,3 @@ const ProfilePublic = () => {
 };
 
 export default ProfilePublic;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

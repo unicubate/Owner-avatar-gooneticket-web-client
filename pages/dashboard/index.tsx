@@ -5,8 +5,6 @@ import { AvatarComponent } from '@/components/ui-setting/ant/avatar-component';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { SerialPrice } from '@/components/ui-setting/serial-price';
 import { useAuth } from '@/components/util/context-user';
-import { GetStaticPropsContext } from 'next';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -28,9 +26,10 @@ import {
   ShoppingBagIcon,
   StoreIcon,
 } from 'lucide-react';
+import { useIntl } from 'react-intl';
 
 const Dashboard = () => {
-  const t = useTranslations();
+  const t = useIntl();
   const [openDrop, setOpenDrop] = useState(false);
   const [dayCount, setDayCount] = useState(-1);
   const user = useAuth() as any;
@@ -95,7 +94,7 @@ const Dashboard = () => {
 
                   <div className="ml-auto">
                     <ButtonInput type="button" variant="default">
-                      Withdraw
+                      {t.formatMessage({ id: 'TRANSACTION.WITHDRAW' })}
                     </ButtonInput>
                   </div>
                 </div>
@@ -106,7 +105,7 @@ const Dashboard = () => {
                       {user?.totalSubscribe ?? 0}
                     </span>
                     <span className="ml-2 text-sm font-normal">
-                      {t('subscribes')}
+                      {t.formatMessage({ id: 'MENU.SUBSCRIBER' })}
                     </span>
                   </Link>
 
@@ -115,7 +114,7 @@ const Dashboard = () => {
                       {user?.totalFollower ?? 0}
                     </span>
                     <span className="ml-2 text-sm font-normal">
-                      {t('followers')}
+                      {t.formatMessage({ id: 'MENU.FOLLOWER' })}
                     </span>
                   </Link>
 
@@ -124,7 +123,7 @@ const Dashboard = () => {
                       {user?.totalFollowing ?? 0}
                     </span>
                     <span className="ml-2 text-sm font-normal">
-                      {t('followings')}
+                      {t.formatMessage({ id: 'MENU.FOLLOWING' })}
                     </span>
                   </Link>
                 </div>
@@ -158,8 +157,8 @@ const Dashboard = () => {
                       <DropdownMenuTrigger asChild>
                         <Button type="button" size="sm" variant="outline">
                           {dayCount > 0
-                            ? `${t('last_time_days', { day: dayCount })}`
-                            : 'All time'}
+                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
+                            : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-20 dark:border-gray-800 dark:bg-[#1c1b22]">
@@ -169,7 +168,9 @@ const Dashboard = () => {
                               handleDaysChange(-1), setOpenDrop(false);
                             }}
                           >
-                            <span className="cursor-pointer">All time</span>
+                            <span className="cursor-pointer">
+                              {t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}
+                            </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
@@ -180,7 +181,10 @@ const Dashboard = () => {
                             }}
                           >
                             <span className="cursor-pointer">
-                              {t('last_time_days', { day: 30 })}
+                              {t.formatMessage(
+                                { id: 'TRANSACTION.LAST_DAY' },
+                                { day: 30 },
+                              )}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
@@ -191,8 +195,10 @@ const Dashboard = () => {
                           }}
                         >
                           <span className="cursor-pointer">
-                            {' '}
-                            {t('last_time_days', { day: 120 })}{' '}
+                            {t.formatMessage(
+                              { id: 'TRANSACTION.LAST_DAY' },
+                              { day: 120 },
+                            )}
                           </span>
                         </DropdownMenuItem>
                       </DropdownMenuContent>
@@ -206,7 +212,7 @@ const Dashboard = () => {
                 <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      {t('memberships')}
+                      {t.formatMessage({ id: 'MENU.MEMBERSHIP' })}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
@@ -224,7 +230,7 @@ const Dashboard = () => {
                 <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      {t('donations')}
+                      {t.formatMessage({ id: 'MENU.DONATION' })}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
@@ -242,7 +248,7 @@ const Dashboard = () => {
                 <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      {t('shop')}
+                      {t.formatMessage({ id: 'MENU.SHOP' })}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
@@ -267,10 +273,12 @@ const Dashboard = () => {
                       <ShieldCheckIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                          Secured Payments
+                          {t.formatMessage({ id: 'DASHBOARD.FEATURE.1.TITLE' })}
                         </h3>
                         <p className="mt-1 text-sm font-normal text-gray-600 dark:text-white">
-                          Make payment with ease
+                          {t.formatMessage({
+                            id: 'DASHBOARD.FEATURE.1.DESCRIPTION',
+                          })}
                         </p>
                       </div>
                     </div>
@@ -279,10 +287,12 @@ const Dashboard = () => {
                       <ShoppingBagIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                          Shop for Anyone
+                          {t.formatMessage({ id: 'DASHBOARD.FEATURE.2.TITLE' })}
                         </h3>
                         <p className="mt-1 text-sm font-normal text-gray-600 dark:text-white">
-                          You can shop for any category
+                          {t.formatMessage({
+                            id: 'DASHBOARD.FEATURE.2.DESCRIPTION',
+                          })}
                         </p>
                       </div>
                     </div>
@@ -291,10 +301,12 @@ const Dashboard = () => {
                       <LockKeyholeIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                          Membership
+                          {t.formatMessage({ id: 'DASHBOARD.FEATURE.3.TITLE' })}
                         </h3>
                         <p className="mt-1 text-sm font-normal text-gray-600 dark:text-white">
-                          Monthly membership for your biggest fans.
+                          {t.formatMessage({
+                            id: 'DASHBOARD.FEATURE.3.DESCRIPTION',
+                          })}
                         </p>
                       </div>
                     </div>
@@ -303,10 +315,12 @@ const Dashboard = () => {
                       <StoreIcon className="size-14 shrink-0 text-gray-700 dark:text-white" />
                       <div className="ml-4">
                         <h3 className="text-base font-bold text-gray-900 dark:text-white">
-                          Quality Products
+                          {t.formatMessage({ id: 'DASHBOARD.FEATURE.4.TITLE' })}
                         </h3>
                         <p className="mt-1 text-sm font-normal text-gray-600 dark:text-white">
-                          Made with highest care
+                          {t.formatMessage({
+                            id: 'DASHBOARD.FEATURE.4.DESCRIPTION',
+                          })}
                         </p>
                       </div>
                     </div>
@@ -323,14 +337,3 @@ const Dashboard = () => {
 
 //export default Dashboard;
 export default PrivateComponent(Dashboard);
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: {
-        ...(await import(`/lang/${locale}/index.json`)).default,
-        ...(await import(`/lang/${locale}/common.json`)).default,
-      },
-    },
-  };
-}

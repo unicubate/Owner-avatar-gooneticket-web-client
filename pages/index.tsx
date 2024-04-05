@@ -6,15 +6,14 @@ import {
 } from '@/components/landing-page/data-map';
 import { LayoutSite } from '@/components/layout-site';
 import { ButtonInput } from '@/components/ui-setting';
-import { GetStaticPropsContext } from 'next';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 
 export default function Home() {
   const [features] = useState(featuresLandingPage);
   const [compared] = useState(comparedLandingPage);
-  const t = useTranslations('home_page');
+  const t = useIntl();
 
   return (
     <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
@@ -22,10 +21,10 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-8 py-6 mx-auto max-w-5xl text-center">
             <h1 className="text-2xl font-bold sm:text-4xl lg:text-5xl">
-              {t('title')}
+              {t.formatMessage({ id: 'HOME.TITLE' })}
             </h1>
             <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
-              {t('subTitle')}
+              {t.formatMessage({ id: 'HOME.SUBTITLE' })}
             </p>
           </div>
 
@@ -250,12 +249,4 @@ export default function Home() {
       </section> */}
     </LayoutSite>
   );
-}
-
-export async function getStaticProps({ locale }: GetStaticPropsContext) {
-  return {
-    props: {
-      messages: (await import(`../lang/${locale}/index.json`)).default,
-    },
-  };
 }
