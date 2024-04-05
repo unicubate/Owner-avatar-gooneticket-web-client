@@ -13,7 +13,7 @@ const languages = [
   {
     lang: 'en',
     name: 'English',
-    flag: 'media/flags/england.svg',
+    flag: 'media/flags/uk.svg',
   },
   {
     lang: 'fr',
@@ -50,8 +50,6 @@ const languages = [
 const LangToggle = () => {
   const lang = useLang();
   const currentLanguage = languages.find((x) => x.lang === lang);
-
-  console.log('navigator.language ======>', navigator.language);
   return (
     <>
       <DropdownMenu>
@@ -60,8 +58,8 @@ const LangToggle = () => {
             <Image
               width={15}
               height={15}
-              src={String(currentLanguage?.flag)}
-              alt={String(currentLanguage?.name)}
+              src={String(currentLanguage?.flag ?? 'media/flags/uk.svg')}
+              alt={String(currentLanguage?.name ?? 'English')}
             />
             <span className="sr-only">Toggle lang</span>
           </Button>
