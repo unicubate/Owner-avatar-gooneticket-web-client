@@ -1,12 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
 import Cookies from 'js-cookie';
+//import { navigator } from 'window'
 import { ReactNode, createContext, useContext } from 'react';
 
 const I18N_CONFIG_KEY = process.env.NEXT_PUBLIC_I18N_CONFIG_KEY ?? 'x-lang';
 
 type Props = 'de' | 'en' | 'es' | 'fr' | 'ja' | 'zh';
 
-const initialState: Props = 'en';
+const initialState: Props =
+  typeof window !== 'undefined' ? (navigator.language as Props) : 'en';
 
 function getConfig(): Props {
   const ls = Cookies.get(I18N_CONFIG_KEY);

@@ -17,7 +17,7 @@ import frMessages from './lang/fr.json';
 import jaMessages from './lang/ja.json';
 import zhMessages from './lang/zh.json';
 
-const allMessages = {
+const allMessages: any = {
   de: deMessages,
   en: enMessages,
   es: esMessages,
@@ -29,9 +29,10 @@ const allMessages = {
 const IntlProvider = ({ children }: { children?: ReactNode }) => {
   const locale = useLang();
   const messages = allMessages[locale];
+  const newMessages = messages ? messages : allMessages['en'];
 
   return (
-    <NextIntlProvider locale={locale} messages={messages}>
+    <NextIntlProvider locale={locale} messages={newMessages}>
       {children}
     </NextIntlProvider>
   );
