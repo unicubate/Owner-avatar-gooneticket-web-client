@@ -318,10 +318,3 @@ const ShopView = () => {
 };
 
 export default ShopView;
-
-export async function getStaticPaths() {
-  return {
-    paths: [],
-    fallback: true,
-  };
-}
