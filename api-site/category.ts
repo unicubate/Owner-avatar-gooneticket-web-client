@@ -1,6 +1,6 @@
 import { CategoryFormModel, ResponseCategoryModel } from '@/types/category';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/paginations';
+import { IsPaginate, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -107,7 +107,7 @@ export const getCategoriesAPI = async (
 
 export const GetAllCategoriesAPI = (payload: {
   organizationId: string;
-  isPaginate: 'true' | 'false';
+  isPaginate: IsPaginate;
   take: number;
   sort: SortModel;
 }) => {
@@ -129,7 +129,7 @@ export const GetAllCategoriesAPI = (payload: {
 
 export const GetInfiniteCategoriesAPI = (payload: {
   organizationId: string;
-  isPaginate: 'true' | 'false';
+  isPaginate: IsPaginate;
   search?: string;
   take: number;
   sort: SortModel;

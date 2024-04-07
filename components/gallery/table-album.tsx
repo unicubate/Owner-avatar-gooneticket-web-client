@@ -29,7 +29,7 @@ export const TableAlbum = ({ userVisitor }: Props) => {
     organizationId: userVisitor?.organizationId,
     take: 10,
     sort: 'DESC',
-    isPaginate: 'true',
+    isPaginate: 'TRUE',
   });
 
   const skeletonArray = [];

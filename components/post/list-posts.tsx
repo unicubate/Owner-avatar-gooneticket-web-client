@@ -14,7 +14,7 @@ import {
   TrashIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
+import { formateDate } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ButtonCopy } from '../ui-setting/button-copy';
@@ -27,7 +27,7 @@ type Props = {
 
 const ListPosts = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
     onSuccess: () => {},
@@ -71,7 +71,7 @@ const ListPosts = ({ item, index }: Props) => {
               <CalendarIcon className="size-4" />
             </button>
             <span className="ml-1.5 text-sm font-normal">
-              {formateDateDayjs(item?.createdAt as Date)}
+              {formateDate(item?.createdAt as Date, lang)}
             </span>
           </div>
 

@@ -170,6 +170,17 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneCategory: PUT(`${baseUrl}/categories/:categoryId`),
   deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
 
+  /****************** Conversations route */
+  getConversations: GET(`${baseUrl}/conversations`),
+  getOneConversation: GET(`${baseUrl}/conversations/:fkConversationId`),
+  getConversationsMessages: GET(
+    `${baseUrl}/conversations/messages/:fkConversationId`,
+  ),
+  createOneConversationMessage: POST(`${baseUrl}/conversations/messages`),
+  createOneConversation: POST(`${baseUrl}/conversations`),
+  // updateOneCategory: PUT(`${baseUrl}/categories/:categoryId`),
+  // deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
+
   /****************** Albums route */
   getAlbums: GET(`${baseUrl}/albums`),
   createOneAlbum: POST(`${baseUrl}/albums`),

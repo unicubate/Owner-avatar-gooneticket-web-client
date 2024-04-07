@@ -19,7 +19,7 @@ import {
   WalletIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
+import { formateDate } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ButtonCopy } from '../ui-setting/button-copy';
@@ -32,7 +32,7 @@ type Props = {
 
 const ListProductsShop = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => {},
@@ -91,7 +91,7 @@ const ListProductsShop = ({ item, index }: Props) => {
                 <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDateDayjs(item?.createdAt as Date)}
+                {formateDate(item?.createdAt as Date, lang)}
               </span>
             </div>
             <div className="mt-2 flex items-center">

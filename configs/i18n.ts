@@ -4,8 +4,8 @@ export const i18n = {
   langDirection: {
     en: 'ltr',
     fr: 'ltr',
-    ar: 'rtl'
-  }
-} as const
+    ar: 'rtl',
+  },
+} as const;
 
-export type Locale = (typeof i18n)['locales'][number]
+export type Locale = (typeof i18n)['locales'][number];

@@ -46,7 +46,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
               <SheetTrigger asChild>
                 {/* <Button variant="outline">Open</Button> */}
               </SheetTrigger>
-              <SheetContent className="dark:border-gray-800">
+              <SheetContent className="dark:border-gray-800 dark:bg-black/15">
                 <div className="flex flex-col overflow-y-auto pt-5">
                   <VerticalNavDashboard user={user} />
                 </div>
@@ -56,7 +56,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
           </>
         ) : null}
 
-        <div className="flex flex-1">
+        <div className="flex flex-1 dark:bg-black/15">
           {profile?.id ? (
             <div className="hidden md:flex md:w-56 md:flex-col">
               <div className="fixed flex max-h-screen flex-col pt-5">
@@ -65,7 +65,9 @@ const LayoutDashboard = ({ children, title }: IProps) => {
             </div>
           ) : null}
 
-          <div className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}>
+          <div
+            className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22] min-h-screen`}
+          >
             <main>{children}</main>
           </div>
         </div>

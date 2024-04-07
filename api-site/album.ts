@@ -1,6 +1,6 @@
 import { AlbumFormModel, ResponseAlbumModel } from '@/types/album';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/paginations';
+import { IsPaginate, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -107,7 +107,7 @@ export const getAlbumsAPI = async (
 
 export const GetAllAlbumsAPI = (payload: {
   organizationId: string;
-  isPaginate: 'true' | 'false';
+  isPaginate: IsPaginate;
   take: number;
   page: number;
   sort: SortModel;
@@ -132,7 +132,7 @@ export const GetAllAlbumsAPI = (payload: {
 
 export const GetInfiniteAlbumsAPI = (payload: {
   organizationId: string;
-  isPaginate: 'true' | 'false';
+  isPaginate: IsPaginate;
   search?: string;
   take: number;
   sort: SortModel;

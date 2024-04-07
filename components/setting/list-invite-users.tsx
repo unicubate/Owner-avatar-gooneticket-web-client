@@ -78,7 +78,7 @@ const ListInviteUsers = ({ item, index }: Props) => {
                 {item?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, lang)}
+                {formateFromNow(String(item?.createdAt), lang)}
               </p>
             </Link>
           </div>

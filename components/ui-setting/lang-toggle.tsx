@@ -13,12 +13,12 @@ const languages = [
   {
     lang: 'en',
     name: 'English',
-    flag: 'media/flags/uk.svg',
+    flag: '/media/flags/uk.svg',
   },
   {
     lang: 'fr',
     name: 'French',
-    flag: 'media/flags/france.svg',
+    flag: '/media/flags/france.svg',
   },
   // {
   //   lang: 'zh',
@@ -58,7 +58,7 @@ const LangToggle = () => {
             <Image
               width={15}
               height={15}
-              src={String(currentLanguage?.flag ?? 'media/flags/uk.svg')}
+              src={String(currentLanguage?.flag ?? '/media/flags/uk.svg')}
               alt={String(currentLanguage?.name ?? 'English')}
             />
             <span className="sr-only">Toggle lang</span>

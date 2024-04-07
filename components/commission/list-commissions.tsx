@@ -11,7 +11,7 @@ import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { CalendarIcon, PencilIcon, TrashIcon, WalletIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
+import { formateDate } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
@@ -23,7 +23,7 @@ type Props = {
 
 const ListCommissions = ({ item, index }: Props) => {
   const router = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => {},
@@ -82,7 +82,7 @@ const ListCommissions = ({ item, index }: Props) => {
                 <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDateDayjs(item?.createdAt as Date)}
+                {formateDate(item?.createdAt as Date, lang)}
               </span>
             </div>
 

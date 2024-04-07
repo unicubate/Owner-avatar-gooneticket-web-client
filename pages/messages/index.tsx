@@ -1,89 +1,119 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+import { GetInfiniteConversationsAPI } from '@/api-site/conversations';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
+import { ListConversationsMessage } from '@/components/messages/list-conversations-message';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  SearchInput,
+} from '@/components/ui-setting';
+import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { PrivateComponent } from '@/components/util/private-component';
+import { MailIcon, PlusIcon } from 'lucide-react';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const Messages = () => {
-  const onSubmit: SubmitHandler<any> = (payload: any) => {
-    // let data = new FormData();
-    // data.append("confirm", `${payload.confirm}`);
-    // payload?.attachment?.fileList?.length > 0 &&
-    //   payload?.attachment?.fileList.forEach((file: any) => {
-    //     data.append("attachment", file as RcFile);
-    //   });
+  const { ref, inView } = useInView();
+  const { search, handleSetSearch } = useInputState();
 
-    console.log('payload =======>', payload);
-  };
+  const {
+    isLoading: isLoadingConversation,
+    isError: isErrorConversation,
+    data: dataConversation,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = GetInfiniteConversationsAPI({
+    search,
+    take: 10,
+    sort: 'DESC',
+  });
+
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage();
+    }
+  }, [inView, fetchNextPage, hasNextPage]);
+
+  const dataTableContributors = isLoadingConversation ? (
+    <LoadingFile />
+  ) : isErrorConversation ? (
+    <ErrorFile title="404" description="Error find data please try again..." />
+  ) : dataConversation?.pages[0]?.data?.total <= 0 ? (
+    <EmptyData
+      image={<MailIcon className="size-10" />}
+      title="You don't have any message"
+      description={`Share your page with your audience to get started.`}
+    />
+  ) : (
+    dataConversation?.pages
+      .flatMap((page: any) => page?.data?.value)
+      .map((item, index) => (
+        <ListConversationsMessage item={item} key={index} index={index} />
+      ))
+  );
 
   return (
     <>
-      <LayoutDashboard title={'Message'}>
-        <div className="flex-1">
-          <main>
-            <div className="py-6">
-              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-                <div className="max-w-md">
-                  <h1 className="text-lg font-bold text-gray-900">Messages</h1>
-                  <p className="mt-2 text-sm font-medium leading-6 text-gray-500">
-                    Recevez vos message de vos utilisateur
-                  </p>
-                </div>
-              </div>
+      <LayoutDashboard title={'Messages'}>
+        <div className="mx-auto max-w-5xl py-6">
+          <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
+            <div className="flow-root">
+              <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
+                <div className="sm:flex sm:items-center sm:justify-between">
+                  <div className="mt-4 sm:mt-0">
+                    {/* <CreateContributorModal
+                      buttonDialog={
+                        <ButtonInput
+                          type="button"
+                          className="w-full"
+                          size="sm"
+                          variant="info"
+                          icon={<PlusIcon className="mr-2 size-4" />}
+                        >
+                          Invite contributor
+                        </ButtonInput>
+                      }
+                      showModal={isOpen}
+                      setShowModal={setIsOpen}
+                    /> */}
 
-              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-                <div className="rounded-lg border border-gray-200 bg-white px-3 py-2">
-                  <nav className="flex flex-wrap gap-4">
-                    <a
-                      href="#"
-                      className="group inline-flex items-center whitespace-nowrap rounded-lg bg-transparent px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
+                    <ButtonInput
+                      type="button"
+                      className="w-full"
+                      size="sm"
+                      variant="info"
+                      icon={<PlusIcon className="mr-2 size-4" />}
                     >
-                      {' '}
-                      Write a message{' '}
-                    </a>
-
-                    {/* <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Team </a>
-
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 rounded-lg group whitespace-nowrap bg-transparent hover:text-gray-900 hover:bg-gray-100"> Notification </a>
-
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 transition-all duration-200 rounded-lg group whitespace-nowrap bg-gray-100"> Billing Details </a>
-
-                                    <a href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-500 transition-all duration-200 bg-transparent rounded-lg hover:text-gray-900 hover:bg-gray-100 group whitespace-nowrap"> Integrations </a> */}
-                  </nav>
-                </div>
-              </div>
-
-              <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-                <div className="w-full overflow-x-auto pb-1">
-                  <div className="border-b border-gray-200">
-                    <nav className="-mb-px flex space-x-10">
-                      <a
-                        href="#"
-                        className="whitespace-nowrap border-b-2 border-indigo-600 py-4 text-sm font-medium text-indigo-500 transition-all duration-200"
-                      >
-                        {' '}
-                        Publisher{' '}
-                      </a>
-
-                      <a
-                        href="#"
-                        className="whitespace-nowrap border-b-2 border-transparent py-4 text-sm font-medium text-gray-500 transition-all duration-200 hover:border-gray-300"
-                      >
-                        {' '}
-                        Drafted{' '}
-                      </a>
-
-                      <a
-                        href="#"
-                        className="whitespace-nowrap border-b-2 border-transparent py-4 text-sm font-medium text-gray-600 transition-all duration-200 hover:border-gray-300"
-                      >
-                        {' '}
-                        Scheduled{' '}
-                      </a>
-                    </nav>
+                      New message
+                    </ButtonInput>
+                  </div>
+                  <div className="mt-4 sm:mt-0">
+                    <SearchInput
+                      placeholder="Search by first name, last name, email"
+                      onChange={handleSetSearch}
+                    />
                   </div>
                 </div>
+
+                <div className="mt-2 divide-y divide-gray-200 dark:divide-gray-800">
+                  {dataTableContributors}
+                </div>
               </div>
+
+              {hasNextPage && (
+                <div className="mx-auto mt-2 justify-center text-center">
+                  <ButtonLoadMore
+                    ref={ref}
+                    isFetchingNextPage={isFetchingNextPage}
+                    onClick={() => fetchNextPage()}
+                  />
+                </div>
+              )}
             </div>
-          </main>
+          </div>
         </div>
       </LayoutDashboard>
     </>

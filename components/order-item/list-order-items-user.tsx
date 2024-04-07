@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
-import { formateDateDayjs, formatePrice } from '@/utils';
+import { formateDate, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
@@ -16,7 +16,7 @@ type Props = {
 
 const ListOrderItemsUser = (props: Props) => {
   const { item, index } = props;
-  const { isOpen, setIsOpen } = useInputState();
+  const { isOpen, setIsOpen, lang } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
@@ -44,7 +44,7 @@ const ListOrderItemsUser = (props: Props) => {
                 <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDateDayjs(item?.createdAt as Date)}
+                {formateDate(item?.createdAt as Date, lang)}
               </span>
             </div>
 

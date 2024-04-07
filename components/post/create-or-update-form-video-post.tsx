@@ -71,7 +71,7 @@ const CreateOrUpdateFormVideoPost = ({
   const watchEnableVisibility = watch('enableVisibility', true);
 
   const { data: categories } = GetAllCategoriesAPI({
-    isPaginate: 'false',
+    isPaginate: 'FALSE',
     organizationId,
     sort: 'DESC',
     take: 100,

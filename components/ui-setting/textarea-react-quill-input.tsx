@@ -71,6 +71,10 @@ export function TextareaReactQuillInput(props: Props) {
           </>
         )}
       />
+
+      {/* <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+        description required
+      </span> */}
       {errors?.[name] && (
         <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
           {errors?.[name]?.message}

@@ -65,7 +65,7 @@ export function ListOrderItemsSeller(props: Props) {
                       {item?.profile?.email}
                     </p>
                     <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                      {formateFromNow(item?.createdAt as Date, lang as string)}
+                      {formateFromNow(String(item?.createdAt), lang as string)}
                     </p>
                   </div>
                 </p>
@@ -74,7 +74,7 @@ export function ListOrderItemsSeller(props: Props) {
                 {item?.quantity && `Quantity: ${item?.quantity}`}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, lang as string)}
+                {formateFromNow(String(item?.createdAt), lang as string)}
               </p>
             </div>
           </div>
@@ -120,7 +120,7 @@ export function ListOrderItemsSeller(props: Props) {
         </td>
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date, lang as string)}
+          {formateFromNow(String(item?.createdAt), lang as string)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">

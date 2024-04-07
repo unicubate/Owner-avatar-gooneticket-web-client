@@ -169,7 +169,7 @@ const Login = () => {
             ) : (
               <div className="mt-4">
                 <ButtonInput
-                  type="button"
+                  type="submit"
                   className="w-full"
                   variant="info"
                   loading={loading}

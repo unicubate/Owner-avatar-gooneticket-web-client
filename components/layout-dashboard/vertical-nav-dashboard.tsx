@@ -8,6 +8,7 @@ import {
   ImageIcon,
   ListIcon,
   LockKeyholeIcon,
+  MailIcon,
   MenuSquareIcon,
   SettingsIcon,
   StoreIcon,
@@ -88,12 +89,17 @@ const VerticalNavDashboard = ({ user }: Props) => {
       icon: <ImageIcon className={classIcon} />,
     },
     {
+      title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
+      href: '/messages',
+      icon: <MailIcon className={classIcon} />,
+    },
+  ]);
+  const [settingItems] = useState<NavbarProps[]>([
+    {
       title: `${t.formatMessage({ id: 'MENU.PAYMENT' })}`,
       href: '/payments',
       icon: <ListIcon className={classIcon} />,
     },
-  ]);
-  const [settingItems] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.SETTING' })}`,
       href: '/settings',

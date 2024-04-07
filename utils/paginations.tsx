@@ -10,9 +10,12 @@ interface Props {
 
 export type SortModel = 'ASC' | 'DESC';
 
+export type IsPaginate = 'TRUE' | 'FALSE';
+
 export type PaymentType = 'CARD' | 'PAYPAL' | 'PHONE' | 'IBAN';
 
 export type ModelType =
+  | 'MESSAGE'
   | 'ORGANIZATION'
   | 'CAMPAIGN'
   | 'DONATION'
@@ -27,7 +30,7 @@ export type ModelType =
 
 export type PaginationRequest = {
   organizationId?: string;
-  isPaginate?: 'true' | 'false';
+  isPaginate?: IsPaginate;
   search?: string;
   sort: SortModel;
   page?: number;

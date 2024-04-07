@@ -2,15 +2,18 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { CreateFormPublicDonation } from '@/components/donation/create-form-public-donation';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
 import { PublicPostsHome } from '@/components/post/public-posts-home';
 import { RecentCommentTransactions } from '@/components/transaction/recent-comment-transactions';
+import { ButtonInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { HtmlParser } from '@/utils/html-parser';
+import { MailPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 
 const ProfilePublic = () => {
-  const { userStorage: userVisiter } = useInputState();
+  const { isOpen, setIsOpen, userStorage: userVisiter } = useInputState();
   const { query } = useRouter();
   const username = String(query?.username);
 
@@ -48,6 +51,21 @@ const ProfilePublic = () => {
                 </div>
 
                 <div className="my-8 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
+                  {user?.id !== userVisiter?.id && (
+                    <div className="py-2 sm:mt-0">
+                      <ButtonInput
+                        type="button"
+                        size="lg"
+                        variant="default"
+                        className="w-full"
+                        onClick={() => setIsOpen(true)}
+                        icon={<MailPlusIcon className="size-5" />}
+                      >
+                        Send message
+                      </ButtonInput>
+                    </div>
+                  )}
+
                   {user?.profile?.description && (
                     <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                       <div className="flow-root">
@@ -96,6 +114,12 @@ const ProfilePublic = () => {
           </div>
         </div>
         {/* </div> */}
+
+        <CreateConversationsModal
+          isOpen={isOpen}
+          user={user}
+          setIsOpen={setIsOpen}
+        />
       </LayoutUserPublicSite>
 
       {status === 'pending' ? <LoadingFile /> : null}

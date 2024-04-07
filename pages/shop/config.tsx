@@ -47,7 +47,7 @@ const Configs = () => {
     search,
     take: 10,
     sort: 'DESC',
-    isPaginate: 'true',
+    isPaginate: 'TRUE',
     organizationId: organizationId,
   });
 

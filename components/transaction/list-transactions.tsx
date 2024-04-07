@@ -49,7 +49,7 @@ export const ListTransactions = ({ item, index }: Props) => {
                 <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(item?.createdAt as Date, lang)}
+                {formateFromNow(String(item?.createdAt), lang)}
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export const ListTransactions = ({ item, index }: Props) => {
         </td> */}
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date, lang)}
+          {formateFromNow(String(item?.createdAt), lang)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">

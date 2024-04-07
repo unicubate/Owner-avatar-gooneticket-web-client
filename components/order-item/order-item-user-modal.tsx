@@ -3,7 +3,7 @@ import {
   viewOneFileUploadAPI,
 } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
-import { formateDateDayjs } from '@/utils';
+import { formateDate } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import prettyBytes from 'pretty-bytes';
 import { useState } from 'react';
+import { useInputState } from '../hooks';
 import { ButtonInput, SerialPrice } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
 
@@ -29,6 +30,7 @@ const OrderItemUserModal = (props: {
   setIsOpen: any;
   item: OrderItemModel;
 }) => {
+  const { lang } = useInputState();
   const { isOpen, setIsOpen, item } = props;
   const { push } = useRouter();
   const linkCopy = item?.product?.urlRedirect;
@@ -76,7 +78,7 @@ const OrderItemUserModal = (props: {
                       <CalendarIcon className="size-4" />
                     </button>
                     <span className="ml-1.5 text-sm font-normal">
-                      {formateDateDayjs(item?.createdAt as Date)}
+                      {formateDate(item?.createdAt as Date, lang)}
                     </span>
                   </div>
                   <div className="mt-2 flex items-center">

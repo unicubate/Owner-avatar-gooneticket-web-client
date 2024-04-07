@@ -18,7 +18,7 @@ import {
 import { useRouter } from 'next/router';
 import { AiOutlineCalendar } from 'react-icons/ai';
 import { FiDownload } from 'react-icons/fi';
-import { formateDateDayjs } from '../../utils/formate-date-dayjs';
+import { formateDate } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ButtonCopy } from '../ui-setting/button-copy';
@@ -30,7 +30,7 @@ type Props = {
 };
 
 export const ListGallery = ({ item, index }: Props) => {
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
   const router = useRouter();
 
   const saveMutation = DeleteOnePostAPI({
@@ -81,7 +81,7 @@ export const ListGallery = ({ item, index }: Props) => {
                 <AiOutlineCalendar />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDateDayjs(item?.createdAt as Date)}
+                {formateDate(item?.createdAt as Date, lang)}
               </span>
             </div>
 

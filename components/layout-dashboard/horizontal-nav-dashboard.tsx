@@ -39,7 +39,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-gray-300">
+      <header className="sticky top-0 z-20 bg-white dark:bg-black/15 border-gray-300">
         <div className="px-4 mx-auto">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center -m-3 lg:hidden">
