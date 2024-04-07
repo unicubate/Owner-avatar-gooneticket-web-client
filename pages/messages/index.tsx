@@ -2,15 +2,11 @@ import { GetInfiniteConversationsAPI } from '@/api-site/conversations';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { ListConversationsMessage } from '@/components/messages/list-conversations-message';
-import {
-  ButtonInput,
-  ButtonLoadMore,
-  SearchInput,
-} from '@/components/ui-setting';
+import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { MailIcon, PlusIcon } from 'lucide-react';
+import { MailIcon } from 'lucide-react';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -80,7 +76,7 @@ const Messages = () => {
                       setShowModal={setIsOpen}
                     /> */}
 
-                    <ButtonInput
+                    {/* <ButtonInput
                       type="button"
                       className="w-full"
                       size="sm"
@@ -88,7 +84,7 @@ const Messages = () => {
                       icon={<PlusIcon className="mr-2 size-4" />}
                     >
                       New message
-                    </ButtonInput>
+                    </ButtonInput> */}
                   </div>
                   <div className="mt-4 sm:mt-0">
                     <SearchInput
