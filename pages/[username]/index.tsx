@@ -51,7 +51,7 @@ const ProfilePublic = () => {
                 </div>
 
                 <div className="my-8 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                  {user?.id !== userVisiter?.id && (
+                  {userVisiter && userVisiter?.id !== user?.id && (
                     <div className="py-2 sm:mt-0">
                       <ButtonInput
                         type="button"

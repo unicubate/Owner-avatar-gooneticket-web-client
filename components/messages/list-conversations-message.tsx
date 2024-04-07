@@ -43,7 +43,7 @@ export function ListConversationsMessage({ item, index }: Props) {
               <p className="py-2 text-sm font-medium  text-gray-600">
                 <HtmlParser
                   html={String(item?.lastMessage?.description ?? '')}
-                  value={140}
+                  value={120}
                 />
               </p>
             </div>
