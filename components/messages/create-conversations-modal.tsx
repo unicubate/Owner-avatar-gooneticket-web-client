@@ -10,7 +10,7 @@ import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
 const schema = yup.object({
-  description: yup.string().max(1000).required(),
+  description: yup.string().min(16).max(1000).required(),
 });
 
 export function CreateConversationsModal(props: {
