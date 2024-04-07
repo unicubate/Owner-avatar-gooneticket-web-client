@@ -9,7 +9,7 @@ import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant';
 
 const schema = yup.object({
-  description: yup.string().min(16).max(1000).required(),
+  description: yup.string().max(1000).required(),
 });
 
 export function CreateFormMessages(props: {
@@ -30,7 +30,6 @@ export function CreateFormMessages(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-
   const watchDescription = watch('description', '');
 
   // Create or Update data
@@ -87,6 +86,7 @@ export function CreateFormMessages(props: {
             size="default"
             className="!absolute right-1 top-1 rounded"
             loading={loading}
+            disabled={watchDescription.length >= 12 ? false : true}
           >
             Send
           </ButtonInput>

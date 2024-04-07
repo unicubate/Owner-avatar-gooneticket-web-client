@@ -11,7 +11,7 @@ import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
-  description: yup.string().min(7).required(),
+  description: yup.string().max(1000).required(),
 });
 
 export function CreateOrUpdateFormComment(props: {
@@ -46,7 +46,6 @@ export function CreateOrUpdateFormComment(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-
   const watchDescription = watch('description', '');
 
   useEffect(() => {
@@ -149,6 +148,7 @@ export function CreateOrUpdateFormComment(props: {
                   variant="info"
                   className="w-full"
                   loading={loading}
+                  disabled={watchDescription.length >= 12 ? false : true}
                 >
                   Save
                 </ButtonInput>

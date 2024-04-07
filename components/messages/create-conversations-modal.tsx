@@ -10,7 +10,7 @@ import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
 
 const schema = yup.object({
-  description: yup.string().min(16).max(1000).required(),
+  description: yup.string().max(1000).required(),
 });
 
 export function CreateConversationsModal(props: {
@@ -20,6 +20,7 @@ export function CreateConversationsModal(props: {
 }) {
   const { isOpen, setIsOpen, user } = props;
   const {
+    watch,
     reset,
     setValue,
     control,
@@ -30,6 +31,7 @@ export function CreateConversationsModal(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchDescription = watch('description', '');
 
   const onSubmit: SubmitHandler<ConversationFormModel> = async (
     payload: ConversationFormModel,
@@ -99,6 +101,7 @@ export function CreateConversationsModal(props: {
                   size="default"
                   className="!absolute right-1 top-1 rounded"
                   loading={loading}
+                  disabled={watchDescription.length >= 12 ? false : true}
                 >
                   Send
                 </ButtonInput>

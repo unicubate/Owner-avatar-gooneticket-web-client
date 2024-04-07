@@ -25,6 +25,7 @@ export function CreateCommentCommissionModal(props: {
 }) {
   const { isOpen, setIsOpen, product, comment, parentId } = props;
   const {
+    watch,
     reset,
     setValue,
     control,
@@ -35,6 +36,7 @@ export function CreateCommentCommissionModal(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
+  const watchDescription = watch('description', '');
 
   useEffect(() => {
     if (comment) {
