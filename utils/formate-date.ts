@@ -10,8 +10,5 @@ export const formateDate = (date: Date, locale: string) => {
     : dateInit.setLocale(locale).toFormat('D');
 };
 
-export const formateDMYHH = (date: Date, locale: string) =>
-  DateTime.fromJSDate(date).setLocale(locale).toFormat('dd LLL yyyy');
-
 export const formateFromNow = (date: string, locale: string) =>
   DateTime.fromISO(date).setLocale(locale).toRelative();

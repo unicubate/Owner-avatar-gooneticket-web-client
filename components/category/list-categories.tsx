@@ -3,7 +3,7 @@ import { DeleteOneCategoryAPI } from '@/api-site/category';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-  formateDMYHH,
+  formateDate,
 } from '@/utils';
 import { Tooltip } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
@@ -58,7 +58,7 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
 
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium">
-              {formateDMYHH(item?.createdAt as Date, locale as string)}
+              {formateDate(item?.createdAt as Date, locale as string)}
             </p>
           </div>
 

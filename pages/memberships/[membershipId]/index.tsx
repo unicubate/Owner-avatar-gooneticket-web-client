@@ -3,7 +3,7 @@ import { GetUploadsAPI } from '@/api-site/upload';
 import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput, LoaderIconComponent } from '@/components/ui-setting';
-import { formateDMYHH } from '@/utils';
+import { formateDate } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { Avatar, Button, Spin } from 'antd';
 import { useRouter } from 'next/router';
@@ -86,7 +86,7 @@ const ShopView = () => {
                         {product?.profile?.lastName ?? ''}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
-                        {formateDMYHH(
+                        {formateDate(
                           product?.createdAt as Date,
                           locale as string,
                         )}

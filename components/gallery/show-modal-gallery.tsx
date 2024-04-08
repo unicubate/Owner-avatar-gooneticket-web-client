@@ -1,7 +1,7 @@
 import { GetOnePostAPI } from '@/api-site/post';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { PostModel } from '@/types/post';
-import { formateDMYHH } from '@/utils';
+import { formateDate } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -85,7 +85,7 @@ export const ShowModalGallery = ({
                   {item?.profile?.lastName ?? ''}
                 </p>
                 <p className="mt-1 text-sm font-medium text-gray-500">
-                  {formateDMYHH(item?.createdAt as Date, String(locale))}
+                  {formateDate(item?.createdAt as Date, String(locale))}
                 </p>
               </div>
             </div>

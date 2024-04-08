@@ -3,7 +3,7 @@ import { DeleteOneDiscountAPI } from '@/api-site/discount';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-  formateDMYHH,
+  formateDate,
 } from '@/utils';
 import { Tag, Tooltip } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
@@ -58,7 +58,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium">
               {item?.enableExpiredAt
-                ? `Ends Midnight ${formateDMYHH(item?.expiredAt, lang)}`
+                ? `Ends Midnight ${formateDate(item?.expiredAt, lang)}`
                 : `Never Expires `}
             </p>
           </div>

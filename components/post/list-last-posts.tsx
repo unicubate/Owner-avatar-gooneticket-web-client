@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { PostModel } from '@/types/post';
-import { formateDMYHH } from '@/utils';
+import { formateDate } from '@/utils';
 import { HeartIcon, MessageSquareIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -63,7 +63,7 @@ const ListLastPosts = ({ item }: Props) => {
                 {item?.totalComment ? item?.totalComment : ''}
               </span>
               <span className="ml-auto text-sm">
-                {formateDMYHH(item?.createdAt as Date, locale as string)}
+                {formateDate(item?.createdAt as Date, locale as string)}
               </span>
             </div>
           </div>

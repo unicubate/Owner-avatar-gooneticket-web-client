@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { PostModel } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
-import { formateDMYHH } from '@/utils';
+import { formateDate } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -31,7 +31,7 @@ const ListPublicPostsComments = ({ item, commentTake, userVisitor }: Props) => {
           <div className="flex items-center">
             <div className="cursor-pointer">
               <p className="mt-1 text-sm font-medium text-gray-500">
-                {formateDMYHH(item?.createdAt as Date, locale as string)}
+                {formateDate(item?.createdAt as Date, locale as string)}
               </p>
             </div>
 

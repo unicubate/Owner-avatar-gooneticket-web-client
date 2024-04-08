@@ -8,7 +8,7 @@ import {
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-  formateDMYHH,
+  formateDate,
 } from '@/utils';
 import { XIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -135,7 +135,7 @@ export function UpdateOrderItemModal(props: {
                     {item?.profile?.email ?? ''}
                   </p>
                   <p className="mt-1 text-sm font-medium text-gray-500">
-                    {formateDMYHH(item?.createdAt as Date, lang as string)}
+                    {formateDate(item?.createdAt as Date, lang as string)}
                   </p>
                 </div>
 
