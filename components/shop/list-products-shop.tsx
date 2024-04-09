@@ -32,7 +32,7 @@ type Props = {
 
 const ListProductsShop = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
     onSuccess: () => {},
@@ -91,7 +91,7 @@ const ListProductsShop = ({ item, index }: Props) => {
                 <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDate(item?.createdAt as Date, lang)}
+                {formateDate(item?.createdAt as Date, locale)}
               </span>
             </div>
             <div className="mt-2 flex items-center">

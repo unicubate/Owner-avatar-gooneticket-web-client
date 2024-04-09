@@ -17,13 +17,7 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
-  const {
-    isOpen,
-    setIsOpen,
-    loading,
-    setLoading,
-    lang: locale,
-  } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
   const [showModal, setShowModal] = useState(false);
 
   const { mutateAsync: saveMutation } = DeleteOneCategoryAPI({

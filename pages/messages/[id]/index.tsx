@@ -146,6 +146,7 @@ const MessagesView = () => {
                       <CreateFormMessages
                         model="MESSAGE"
                         conversation={conversation}
+                        chatContainerRef={chatContainerRef}
                       />
                     </div>
                   ) : null}

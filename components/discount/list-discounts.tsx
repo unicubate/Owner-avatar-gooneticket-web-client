@@ -17,7 +17,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   item,
   index,
 }) => {
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const [showModal, setShowModal] = useState(false);
 
@@ -58,7 +58,7 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
           <div className="ml-auto">
             <p className="mt-1 text-sm font-medium">
               {item?.enableExpiredAt
-                ? `Ends Midnight ${formateDate(item?.expiredAt, lang)}`
+                ? `Ends Midnight ${formateDate(item?.expiredAt, locale)}`
                 : `Never Expires `}
             </p>
           </div>

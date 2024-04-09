@@ -14,7 +14,7 @@ type Props = {
 
 export function ListConversationsMessage({ item, index }: Props) {
   const { push } = useRouter();
-  const { lang } = useInputState();
+  const { locale } = useInputState();
 
   return (
     <>
@@ -33,10 +33,7 @@ export function ListConversationsMessage({ item, index }: Props) {
                 {item?.profile?.firstName} {item?.profile?.lastName}
               </p>
               <p className="ml-auto text-sm font-medium text-gray-500">
-                {formateFromNow(
-                  String(item?.lastMessage?.createdAt),
-                  lang as string,
-                )}
+                {formateFromNow(String(item?.lastMessage?.createdAt), locale)}
               </p>
             </div>
             <div className="flex items-center">

@@ -16,7 +16,7 @@ type Props = {
 
 const ListOrderItemsUser = (props: Props) => {
   const { item, index } = props;
-  const { isOpen, setIsOpen, lang } = useInputState();
+  const { isOpen, setIsOpen, locale } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
@@ -44,7 +44,7 @@ const ListOrderItemsUser = (props: Props) => {
                 <CalendarIcon className="size-4" />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDate(item?.createdAt as Date, lang)}
+                {formateDate(item?.createdAt as Date, locale)}
               </span>
             </div>
 

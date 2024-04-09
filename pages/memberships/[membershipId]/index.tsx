@@ -1,8 +1,10 @@
 import { GetOneProductAPI } from '@/api-site/product';
 import { GetUploadsAPI } from '@/api-site/upload';
+import { useInputState } from '@/components/hooks';
 import { LayoutSite } from '@/components/layout-site';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
 import { ButtonInput, LoaderIconComponent } from '@/components/ui-setting';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { formateDate } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { Avatar, Button, Spin } from 'antd';
@@ -10,8 +12,8 @@ import { useRouter } from 'next/router';
 import { MdOutlineDiscount } from 'react-icons/md';
 
 const ShopView = () => {
-  const { locale, push } = useRouter();
-  const { query } = useRouter();
+  const { locale } = useInputState();
+  const { push, query } = useRouter();
   const productSlug = String(query?.productId);
 
   const {
@@ -43,7 +45,10 @@ const ShopView = () => {
         <div className="content" />
       </Spin>
     ) : isErrorProduct || isErrorImages ? (
-      <strong>Error find data please try again...</strong>
+      <ErrorFile
+        title="404"
+        description="Error find data please try again..."
+      />
     ) : (
       <ListCarouselUpload
         uploads={dataImages}
@@ -86,10 +91,7 @@ const ShopView = () => {
                         {product?.profile?.lastName ?? ''}
                       </p>
                       <p className="mt-1 text-sm font-medium text-gray-500">
-                        {formateDate(
-                          product?.createdAt as Date,
-                          locale as string,
-                        )}
+                        {formateDate(product?.createdAt as Date, locale)}
                       </p>
                     </div>
 

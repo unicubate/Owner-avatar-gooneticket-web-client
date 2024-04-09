@@ -44,3 +44,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 [Mambaui](https://mambaui.com/components/breadcrumb/).
 
 [Flowbite](https://flowbite.com/docs/components/carousel/)
+
+[Hyperui](https://www.hyperui.dev/)

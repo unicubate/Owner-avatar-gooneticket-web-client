@@ -30,7 +30,7 @@ const OrderItemUserModal = (props: {
   setIsOpen: any;
   item: OrderItemModel;
 }) => {
-  const { lang } = useInputState();
+  const { locale } = useInputState();
   const { isOpen, setIsOpen, item } = props;
   const { push } = useRouter();
   const linkCopy = item?.product?.urlRedirect;
@@ -78,7 +78,7 @@ const OrderItemUserModal = (props: {
                       <CalendarIcon className="size-4" />
                     </button>
                     <span className="ml-1.5 text-sm font-normal">
-                      {formateDate(item?.createdAt as Date, lang)}
+                      {formateDate(item?.createdAt as Date, locale)}
                     </span>
                   </div>
                   <div className="mt-2 flex items-center">

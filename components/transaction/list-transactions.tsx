@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const ListTransactions = ({ item, index }: Props) => {
-  const { lang } = useInputState();
+  const { locale } = useInputState();
   return (
     <>
       <tr key={index}>
@@ -49,7 +49,7 @@ export const ListTransactions = ({ item, index }: Props) => {
                 <ReadMore html={`${item?.profileSend?.email}`} value={18} />
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(String(item?.createdAt), lang)}
+                {formateFromNow(String(item?.createdAt), locale)}
               </p>
             </div>
           </div>
@@ -72,7 +72,7 @@ export const ListTransactions = ({ item, index }: Props) => {
         </td> */}
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(String(item?.createdAt), lang)}
+          {formateFromNow(String(item?.createdAt), locale)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">

@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ListInviteUsers = ({ item, index }: Props) => {
-  const { lang } = useInputState();
+  const { locale } = useInputState();
   const { loading, setLoading, setHasErrors, userStorage } = useInputState();
 
   // Create or Update data
@@ -78,7 +78,7 @@ const ListInviteUsers = ({ item, index }: Props) => {
                 {item?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-                {formateFromNow(String(item?.createdAt), lang)}
+                {formateFromNow(String(item?.createdAt), locale)}
               </p>
             </Link>
           </div>

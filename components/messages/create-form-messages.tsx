@@ -15,8 +15,9 @@ const schema = yup.object({
 export function CreateFormMessages(props: {
   conversation: ConversationModel;
   model: ModelType;
+  chatContainerRef: any;
 }) {
-  const { conversation, model } = props;
+  const { conversation, chatContainerRef, model } = props;
 
   const {
     reset,
@@ -56,9 +57,12 @@ export function CreateFormMessages(props: {
         model: model,
       });
       reset();
-
       setHasErrors(false);
       setLoading(false);
+      if (chatContainerRef.current) {
+        chatContainerRef.current.scrollTop =
+          chatContainerRef.current.scrollHeight;
+      }
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -106,7 +110,7 @@ export function CreateFormMessages(props: {
             <SwitchInput
               control={control}
               defaultValue={true}
-              name="enableChooseQuantity"
+              name="enableSendEmail"
               label=""
             />
           </div>

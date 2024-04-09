@@ -44,7 +44,7 @@ export function UpdateOrderItemModal(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const { lang } = useInputState();
+  const { locale } = useInputState();
 
   useEffect(() => {
     if (item) {
@@ -135,7 +135,7 @@ export function UpdateOrderItemModal(props: {
                     {item?.profile?.email ?? ''}
                   </p>
                   <p className="mt-1 text-sm font-medium text-gray-500">
-                    {formateDate(item?.createdAt as Date, lang as string)}
+                    {formateDate(item?.createdAt as Date, locale)}
                   </p>
                 </div>
 

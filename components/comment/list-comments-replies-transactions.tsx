@@ -24,7 +24,7 @@ type Props = {
 };
 
 const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
   const { userStorage: userVisitor } = useAuth() as any;
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
@@ -65,7 +65,7 @@ const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
                 {item?.profile?.firstName} {item?.profile?.lastName}{' '}
               </Link>
               <p className="ml-3.5 text-sm font-normal text-gray-500">
-                {formateFromNow(String(item?.createdAt), lang as string)}
+                {formateFromNow(String(item?.createdAt), locale)}
               </p>
             </div>
           </div>

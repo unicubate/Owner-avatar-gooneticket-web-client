@@ -20,7 +20,7 @@ import { Badge } from '../ui/badge';
 
 const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
   const { item, index } = props;
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
   const [showModal, setShowModal] = useState(false);
 
   const { mutateAsync: deleteOnMutate } = DeleteOnePaymentAPI({
@@ -116,7 +116,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
               )}
 
               <span className="ml-2 text-sm font-normal text-gray-600">
-                {formateDate(item?.createdAt as Date, lang)}
+                {formateDate(item?.createdAt as Date, locale)}
               </span>
             </div>
           </div>

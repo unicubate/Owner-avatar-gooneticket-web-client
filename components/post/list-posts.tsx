@@ -27,7 +27,7 @@ type Props = {
 
 const ListPosts = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
     onSuccess: () => {},
@@ -71,7 +71,7 @@ const ListPosts = ({ item, index }: Props) => {
               <CalendarIcon className="size-4" />
             </button>
             <span className="ml-1.5 text-sm font-normal">
-              {formateDate(item?.createdAt as Date, lang)}
+              {formateDate(item?.createdAt as Date, locale)}
             </span>
           </div>
 

@@ -35,7 +35,7 @@ export function ListCommentsPosts(props: {
 }) {
   const { model, item, modelIds, userVisitorId, organizationId, index } = props;
 
-  const { isOpen, setIsOpen, loading, setLoading, userStorage, lang } =
+  const { isOpen, setIsOpen, loading, setLoading, userStorage, locale } =
     useInputState();
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -121,7 +121,7 @@ export function ListCommentsPosts(props: {
                     {item?.profile?.firstName} {item?.profile?.lastName}{' '}
                   </Link>
                   <p className="ml-3.5 text-sm font-normal text-gray-500">
-                    {formateFromNow(String(item?.createdAt), lang as string)}
+                    {formateFromNow(String(item?.createdAt), locale)}
                   </p>
                 </div>
               </div>

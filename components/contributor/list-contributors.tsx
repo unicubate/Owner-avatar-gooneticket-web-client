@@ -34,7 +34,7 @@ export function ListContributors({ item, index }: Props) {
     setLoading,
     setHasErrors,
     userStorage,
-    lang,
+    locale,
   } = useInputState();
 
   // Create or Update data
@@ -115,7 +115,7 @@ export function ListContributors({ item, index }: Props) {
               {item?.profile?.email}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-              {formateFromNow(String(item?.createdAt), lang as string)}
+              {formateFromNow(String(item?.createdAt), locale)}
             </p>
 
             <div className="mt-1">

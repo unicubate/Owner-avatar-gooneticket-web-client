@@ -30,7 +30,7 @@ type Props = {
 };
 
 export const ListGallery = ({ item, index }: Props) => {
-  const { isOpen, setIsOpen, loading, setLoading, lang } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
   const router = useRouter();
 
   const saveMutation = DeleteOnePostAPI({
@@ -81,7 +81,7 @@ export const ListGallery = ({ item, index }: Props) => {
                 <AiOutlineCalendar />
               </button>
               <span className="ml-1.5 text-sm font-normal">
-                {formateDate(item?.createdAt as Date, lang)}
+                {formateDate(item?.createdAt as Date, locale)}
               </span>
             </div>
 

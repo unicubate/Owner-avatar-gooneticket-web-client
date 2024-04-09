@@ -48,9 +48,9 @@ type Props = {
 };
 
 export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
-  const { locale, push } = useRouter();
+  const { push } = useRouter();
   const [isComment, setIsComment] = useState(false);
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, locale, setLoading } = useInputState();
 
   return (
     <>
@@ -76,7 +76,7 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
                 {capitalizeFirstLetter(item?.profile?.lastName ?? '')}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
-                {formateDate(item?.createdAt as Date, locale as string)}
+                {formateDate(item?.createdAt as Date, locale)}
               </p>
             </div>
 

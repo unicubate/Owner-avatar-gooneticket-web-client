@@ -12,7 +12,7 @@ export function useInputState() {
   const endTime = toAt?.$d?.toISOString();
 
   const { userStorage, ipLocation, profile } = useAuth() as any;
-  const lang = useLang();
+  const locale = useLang();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -64,6 +64,6 @@ export function useInputState() {
     ipLocation,
     profile,
     linkHref,
-    lang,
+    locale,
   };
 }

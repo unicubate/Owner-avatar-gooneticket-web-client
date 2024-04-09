@@ -5,8 +5,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { setLanguage, useLang } from '@/i18n/context-intl-provider';
+import { setLanguage } from '@/i18n/context-intl-provider';
 import Image from 'next/image';
+import { useInputState } from '../hooks';
 import { Button } from '../ui/button';
 
 const languages = [
@@ -48,8 +49,8 @@ const languages = [
 ];
 
 const LangToggle = () => {
-  const lang = useLang();
-  const currentLanguage = languages.find((x) => x.lang === lang);
+  const { locale } = useInputState();
+  const currentLanguage = languages.find((x) => x.lang === locale);
   return (
     <>
       <DropdownMenu>

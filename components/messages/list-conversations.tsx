@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function ListConversations({ item, index }: Props) {
-  const { lang, userStorage } = useInputState();
+  const { locale, userStorage } = useInputState();
 
   const organizationId = userStorage?.organizationId;
   return (
@@ -41,7 +41,7 @@ export function ListConversations({ item, index }: Props) {
             </p>
           </div>
           <span className="text-xs text-gray-500 leading-none">
-            {formateFromNow(String(item?.createdAt), lang as string)}
+            {formateFromNow(String(item?.createdAt), locale)}
           </span>
         </div>
       </div>

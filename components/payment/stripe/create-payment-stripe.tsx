@@ -1,3 +1,5 @@
+'use client';
+
 import { PaymentModel } from '@/api-site/payment';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -15,6 +17,8 @@ export type StripeProps = {
 
 export const CreatePaymentStripe = (props: StripeProps) => {
   const options = {
+    mode: 'payment',
+    currency: 'usd',
     theme: 'stripe',
   };
   const { data, paymentModel } = props;
