@@ -2,7 +2,7 @@
 
 import { ConversationModel } from '@/types/message';
 import { formateFromNow } from '@/utils';
-import { HtmlParser } from '@/utils/html-parser';
+import { HtmlParserMessage } from '@/utils/html-parser';
 import { useRouter } from 'next/navigation';
 import { useInputState } from '../hooks';
 import { AvatarComponent } from '../ui-setting/ant';
@@ -38,7 +38,7 @@ export function ListConversationsMessage({ item, index }: Props) {
             </div>
             <div className="flex items-center">
               <p className="py-2 text-sm font-medium  text-gray-600">
-                <HtmlParser
+                <HtmlParserMessage
                   html={String(item?.lastMessage?.description ?? '')}
                   value={120}
                 />
