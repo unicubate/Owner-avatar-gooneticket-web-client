@@ -2,7 +2,7 @@
 
 import { ConversationsMessageModel } from '@/types/message';
 import { formateFromNow } from '@/utils';
-import { HtmlParser } from '@/utils/html-parser';
+import { HtmlParserMessage } from '@/utils/html-parser';
 import { useInputState } from '../hooks';
 
 type Props = {
@@ -37,7 +37,7 @@ export function ListConversations({ item, index }: Props) {
             className={`text-white p-3 ${organizationId !== item?.organizationId ? 'bg-gray-600 rounded-r-lg rounded-bl-xl' : 'bg-blue-600 rounded-l-lg rounded-br-xl'} `}
           >
             <p className="text-sm">
-              <HtmlParser html={String(item?.description ?? '')} />
+              <HtmlParserMessage html={String(item?.description ?? '')} />
             </p>
           </div>
           <span className="text-xs text-gray-500 leading-none">

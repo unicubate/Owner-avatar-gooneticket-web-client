@@ -27,7 +27,7 @@ type Props = {
 
 const schema = yup.object({
   title: yup.string().required(),
-  description: yup.string().min(10, 'minimum 3 symbols').required(),
+  description: yup.string().min(30, 'minimum 3 symbols').required(),
   categories: yup.array().optional(),
   enableVisibility: yup.boolean().required(),
 });

@@ -19,7 +19,7 @@ const schema = yup.object({
   title: yup.string().required(),
   price: yup.number().min(1).required(),
   month: yup.number().min(1).required(),
-  description: yup.string().min(10).required(),
+  description: yup.string().min(20).required(),
 });
 
 const CreateOrUpdateFormMembership = ({
