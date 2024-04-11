@@ -14,10 +14,7 @@ const PaymentsIndex = () => {
             {/* <HorizontalNavShop /> */}
 
             <div className="flow-root">
-              <TableOrderItemsUser
-                model="PRODUCT"
-                organizationId={user?.organizationId}
-              />
+              <TableOrderItemsUser organizationId={user?.organizationId} />
             </div>
           </div>
         </div>

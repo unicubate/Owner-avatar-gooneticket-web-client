@@ -178,7 +178,7 @@ export const apiEndpoints: ClientApiMethods = {
   ),
   createOneConversationMessage: POST(`${baseUrl}/conversations/messages`),
   createOneConversation: POST(`${baseUrl}/conversations`),
-  // updateOneCategory: PUT(`${baseUrl}/categories/:categoryId`),
+  readOneConversation: PUT(`${baseUrl}/conversations/:fkConversationId/readAt`),
   // deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
 
   /****************** Albums route */

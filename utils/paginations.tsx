@@ -1,3 +1,5 @@
+import { KeyAsString } from './utils';
+
 interface Props {
   data: any;
   setPageItem: any;
@@ -27,6 +29,12 @@ export type ModelType =
   | 'POST'
   | 'GALLERY'
   | 'COMMENT';
+
+export const foldersType: KeyAsString = {
+  MEMBERSHIP: 'memberships',
+  PRODUCT: 'products',
+  POST: 'posts',
+};
 
 export type PaginationRequest = {
   organizationId?: string;

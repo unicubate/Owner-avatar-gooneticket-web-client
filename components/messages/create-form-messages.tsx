@@ -9,7 +9,7 @@ import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant';
 
 const schema = yup.object({
-  description: yup.string().max(1000).required(),
+  description: yup.string().required(),
 });
 
 export function CreateFormMessages(props: {

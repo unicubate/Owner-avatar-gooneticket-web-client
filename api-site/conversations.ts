@@ -52,6 +52,47 @@ export const CreateOneConversationMessagesAPI = ({
   return result;
 };
 
+export const ReadOneConversationAPI = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: (error: any) => void;
+} = {}) => {
+  const queryKey = ['conversations'];
+  const queryClient = useQueryClient();
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { fkConversationId: string }) => {
+      const { fkConversationId } = payload;
+      return await makeApiCall({
+        action: 'readOneConversation',
+        urlParams: { fkConversationId },
+      });
+    },
+    onError: (error) => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
+
+  return result;
+};
+
 export const createOneConversationAPI = async (
   body: ConversationFormModel,
 ): Promise<any> => {
@@ -88,7 +129,11 @@ export const GetConversationsMessagesAPI = (payload: {
     queryFn: async ({ pageParam = 1 }) =>
       await makeApiCall({
         action: 'getConversationsMessages',
-        queryParams: { ...payload, page: pageParam },
+        queryParams: {
+          page: pageParam,
+          take: payload?.take,
+          sort: payload?.sort,
+        },
         urlParams: { fkConversationId: payload?.fkConversationId },
       }),
     initialPageParam: 1,

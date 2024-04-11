@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
-import { ModelType } from '@/utils/paginations';
 import { ArrowRightLeftIcon } from 'lucide-react';
 import { useInputState } from '../hooks/use-input-state';
 import { ButtonLoadMore, SearchInput } from '../ui-setting';
@@ -9,13 +8,12 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListOrderItemsUser } from './list-order-items-user';
 
 type Props = {
-  model?: ModelType;
   days?: number;
   organizationId: string;
 };
 
 export function TableOrderItemsUser(props: Props) {
-  const { model, organizationId, days } = props;
+  const { organizationId, days } = props;
   const { search, handleSetSearch } = useInputState();
 
   const {
@@ -28,7 +26,7 @@ export function TableOrderItemsUser(props: Props) {
   } = GetInfiniteOrderItemsAPI({
     search,
     organizationBeyerId: organizationId,
-    model: model?.toLocaleUpperCase(),
+    modelIds: ['MEMBERSHIP', 'PRODUCT'],
     take: 10,
     sort: 'DESC',
     days,

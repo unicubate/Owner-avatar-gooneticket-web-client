@@ -236,6 +236,7 @@ const CheckoutMembership = () => {
                                   Payment Method
                                 </h2>
                               </div>
+
                               <div className="py-6">
                                 <div className="flex items-center space-x-4">
                                   <ButtonInput

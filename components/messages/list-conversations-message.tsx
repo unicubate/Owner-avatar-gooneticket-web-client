@@ -1,7 +1,8 @@
 'use client';
 
+import { ReadOneConversationAPI } from '@/api-site/conversations';
 import { ConversationModel } from '@/types/message';
-import { formateFromNow } from '@/utils';
+import { AlertDangerNotification, formateFromNow } from '@/utils';
 import { HtmlParserMessage } from '@/utils/html-parser';
 import { useRouter } from 'next/navigation';
 import { useInputState } from '../hooks';
@@ -14,16 +15,40 @@ type Props = {
 
 export function ListConversationsMessage({ item, index }: Props) {
   const { push } = useRouter();
-  const { locale } = useInputState();
+  const { locale, setHasErrors } = useInputState();
+
+  // Create or Update data
+  const { mutateAsync: saveMutation } = ReadOneConversationAPI({
+    onSuccess: () => {},
+    onError: (error?: any) => {},
+  });
+
+  const readAtItem = async () => {
+    setHasErrors(undefined);
+    try {
+      await saveMutation({
+        fkConversationId: String(item?.fkConversationId),
+      });
+      setHasErrors(true);
+      push(`/messages/${item?.fkConversationId}`, { scroll: false });
+    } catch (error: any) {
+      setHasErrors(true);
+      AlertDangerNotification({
+        text: `${error?.response?.data?.message}`,
+      });
+    }
+  };
 
   return (
     <>
       <div
         key={index}
-        className="py-2 hover:bg-gray-100 dark:hover:bg-gray-900 cursor-pointer"
-        onClick={() =>
-          push(`/messages/${item?.fkConversationId}`, { scroll: false })
-        }
+        className={`py-2 ${item?.readAt ? 'hover:bg-gray-100 dark:hover:bg-gray-900' : 'bg-gray-100 dark:bg-gray-900'}  cursor-pointer`}
+        onClick={() => {
+          item?.readAt
+            ? push(`/messages/${item?.fkConversationId}`, { scroll: false })
+            : readAtItem();
+        }}
       >
         <div className="flex items-center">
           <AvatarComponent size={50} profile={item?.profile} />
@@ -33,7 +58,7 @@ export function ListConversationsMessage({ item, index }: Props) {
                 {item?.profile?.firstName} {item?.profile?.lastName}
               </p>
               <p className="ml-auto text-sm font-medium text-gray-500">
-                {formateFromNow(String(item?.lastMessage?.createdAt), locale)}
+                {formateFromNow(item?.lastMessage?.createdAt as Date, locale)}
               </p>
             </div>
             <div className="flex items-center">

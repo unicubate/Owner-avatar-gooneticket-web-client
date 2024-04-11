@@ -86,14 +86,7 @@ export const HtmlParserMessage = ({ html, value }: HtmlParserProps) => {
   return (
     <>
       {isReadMore ? parseSliceValue : parseNotSliceValue}
-      {lengthHtml > Number(value) && (
-        <span
-          onClick={() => setIsReadMore((lk) => !lk)}
-          className={cn('text-sm cursor-pointer')}
-        >
-          {isReadMore ? '...' : ''}
-        </span>
-      )}
+      {lengthHtml > Number(value) && (isReadMore ? '...' : '')}
     </>
   );
 };

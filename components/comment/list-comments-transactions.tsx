@@ -99,7 +99,7 @@ const ListCommentTransactions = ({
                 )}
 
                 <p className="ml-3.5 text-sm font-normal text-gray-500">
-                  {formateFromNow(String(item?.createdAt), locale)}
+                  {formateFromNow(item?.createdAt as Date, locale)}
                 </p>
               </div>
             </div>

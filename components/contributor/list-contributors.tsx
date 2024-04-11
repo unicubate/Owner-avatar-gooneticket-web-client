@@ -115,7 +115,7 @@ export function ListContributors({ item, index }: Props) {
               {item?.profile?.email}
             </p>
             <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
-              {formateFromNow(String(item?.createdAt), locale)}
+              {formateFromNow(item?.createdAt as Date, locale)}
             </p>
 
             <div className="mt-1">

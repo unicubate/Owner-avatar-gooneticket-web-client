@@ -41,7 +41,7 @@ const MessagesView = () => {
     hasNextPage,
     fetchNextPage,
   } = GetConversationsMessagesAPI({
-    take: 10,
+    take: 20,
     sort: 'DESC',
     fkConversationId,
   });

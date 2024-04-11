@@ -40,9 +40,19 @@ export function ListConversations({ item, index }: Props) {
               <HtmlParserMessage html={String(item?.description ?? '')} />
             </p>
           </div>
-          <span className="text-xs text-gray-500 leading-none">
-            {formateFromNow(String(item?.createdAt), locale)}
-          </span>
+
+          {/* {organizationId === item?.organizationId && (
+            <CheckCheckIcon className="size-3" />
+          )} */}
+
+          <div className="ml-auto">
+            <span className="text-xs text-gray-500 leading-none">
+              {formateFromNow(item?.createdAt as Date, locale)}
+            </span>
+            {/* <span className="ml-2 text-gray-500 leading-none">
+              <CheckCheckIcon className="size-3" />
+            </span> */}
+          </div>
         </div>
       </div>
     </>

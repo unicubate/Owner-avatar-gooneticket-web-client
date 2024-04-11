@@ -10,5 +10,12 @@ export const formateDate = (date: Date, locale: string) => {
     : dateInit.setLocale(locale).toFormat('D');
 };
 
-export const formateFromNow = (date: string, locale: string) =>
-  DateTime.fromISO(date).setLocale(locale).toRelative();
+export const formateFromNow = (date: Date, locale: string) => {
+  const todaysDate = new Date();
+  const dateInit = DateTime.fromISO(String(date));
+  const currentYear = todaysDate.getFullYear();
+  const dateYear = Number(dateInit.toFormat('yyyy'));
+  return currentYear === dateYear
+    ? dateInit.setLocale(locale).toRelative()
+    : dateInit.setLocale(locale).toFormat('D');
+};

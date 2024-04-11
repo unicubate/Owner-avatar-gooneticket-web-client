@@ -41,7 +41,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 [Tw-elements](https://tw-elements.com/docs/standard/designblocks/banners/)
 
-[Mambaui](https://mambaui.com/components/breadcrumb/).
+[Mambaui](https://mambaui.com/components/).
 
 [Flowbite](https://flowbite.com/docs/components/carousel/)
 

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
-import { formateDate, formatePrice } from '@/utils';
+import { foldersType, formateDate, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { AtomIcon, CalendarIcon, ViewIcon, WalletIcon } from 'lucide-react';
@@ -27,10 +27,10 @@ const ListOrderItemsUser = (props: Props) => {
           {item?.uploadsImages?.length > 0 ? (
             <div className="relative shrink-0 cursor-pointer">
               <Avatar
-                size={100}
+                size={80}
                 shape="square"
                 src={viewOneFileUploadAPI({
-                  folder: 'products',
+                  folder: foldersType[item?.model] as any,
                   fileName: item?.uploadsImages[0]?.path,
                 })}
                 alt={item?.product?.title}
@@ -64,7 +64,7 @@ const ListOrderItemsUser = (props: Props) => {
                 <AtomIcon className="size-4" />
               </span>
               <span className="ml-1.5 text-sm font-bold text-gray-600">
-                {item?.product?.productType}
+                {item?.model}
               </span>
             </div>
 
@@ -72,39 +72,52 @@ const ListOrderItemsUser = (props: Props) => {
               <button className="font-normal">
                 <WalletIcon className="size-4" />
               </button>
-              <span className="ml-1.5 text-sm">
-                {formatePrice({
-                  value: Number(item?.priceDiscount ?? 0),
-                  isDivide: true,
-                })}{' '}
-                {item?.currency}
-              </span>
 
               {item?.percentDiscount ? (
-                <span className="ml-1.5 text-sm text-red-600">
-                  <del>
+                <>
+                  <span className="ml-1.5 text-sm">
                     {formatePrice({
-                      value: Number(item?.price ?? 0),
+                      value: Number(item?.priceDiscount ?? 0),
                       isDivide: true,
                     })}{' '}
                     {item?.currency}
-                  </del>
+                  </span>
+
+                  <span className="ml-1.5 text-sm text-red-600">
+                    <del>
+                      {formatePrice({
+                        value: Number(item?.price ?? 0),
+                        isDivide: true,
+                      })}{' '}
+                      {item?.currency}
+                    </del>
+                  </span>
+                </>
+              ) : (
+                <span className="ml-1.5 text-sm">
+                  {formatePrice({
+                    value: Number(item?.price ?? 0),
+                    isDivide: true,
+                  })}{' '}
+                  {item?.currency}
                 </span>
-              ) : null}
+              )}
             </div>
           </div>
 
-          <div className="py-4 text-right text-sm font-medium text-gray-600">
-            <ButtonInput
-              type="button"
-              size="sm"
-              variant="ghost"
-              className="hover:text-indigo-600 text-gray-600"
-              onClick={() => setIsOpen((lk: boolean) => !lk)}
-              title={'View Content'}
-              icon={<ViewIcon className="size-5 text-gray-400" />}
-            />
-          </div>
+          {item?.productId && (
+            <div className="py-4 text-right text-sm font-medium text-gray-600">
+              <ButtonInput
+                type="button"
+                size="sm"
+                variant="ghost"
+                className="hover:text-indigo-600 text-gray-600"
+                onClick={() => setIsOpen((lk: boolean) => !lk)}
+                title={'View Content'}
+                icon={<ViewIcon className="size-5 text-gray-400" />}
+              />
+            </div>
+          )}
         </div>
 
         <OrderItemUserModal item={item} isOpen={isOpen} setIsOpen={setIsOpen} />

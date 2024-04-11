@@ -5,7 +5,7 @@ import {
   ResponseOrderItemModel,
 } from '@/types/order-item';
 import { makeApiCall } from '@/utils/end-point';
-import { PaginationRequest, SortModel } from '@/utils/paginations';
+import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -89,6 +89,7 @@ export const getOrderItemsAPI = async (
     orderId?: string;
     organizationSellerId?: string;
     organizationBeyerId?: string;
+    modelIds: ModelType[];
   } & PaginationRequest,
 ): Promise<{ data: ResponseOrderItemModel }> => {
   return await makeApiCall({
@@ -124,7 +125,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   organizationSellerId?: string;
   organizationBeyerId?: string;
   orderId?: string;
-  model?: string;
+  modelIds: ModelType[];
   search?: string;
   take: number;
   days?: number;
@@ -132,7 +133,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   sort: SortModel;
 }) => {
   const {
-    model,
+    modelIds,
     days,
     orderId,
     organizationSellerId,
@@ -148,7 +149,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getOrderItemsAPI({
-        model: model?.toUpperCase(),
+        modelIds,
         take,
         sort,
         days,

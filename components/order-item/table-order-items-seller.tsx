@@ -28,7 +28,7 @@ export function TableOrderItemsSeller(props: Props) {
   } = GetInfiniteOrderItemsAPI({
     search,
     organizationSellerId: organizationId,
-    model: model?.toLocaleUpperCase(),
+    modelIds: ['PRODUCT'],
     take: 10,
     sort: 'DESC',
     days,
