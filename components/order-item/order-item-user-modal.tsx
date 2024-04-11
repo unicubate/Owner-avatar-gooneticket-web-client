@@ -59,7 +59,7 @@ const OrderItemUserModal = (props: {
                   {item?.uploadsImages?.length > 0 ? (
                     <div className="flex-shrink-0">
                       <Image
-                        width={100}
+                        width={80}
                         height={70}
                         preview={false}
                         className="rounded-md"

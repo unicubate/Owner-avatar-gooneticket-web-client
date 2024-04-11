@@ -59,19 +59,10 @@ const ListOrderItemsUser = (props: Props) => {
               </div>
             ) : null}
 
-            <div className="mt-2 flex items-center text-gray-600">
-              <span className="font-bold">
-                <AtomIcon className="size-4" />
-              </span>
-              <span className="ml-1.5 text-sm font-bold text-gray-600">
-                {item?.model}
-              </span>
-            </div>
-
             <div className="mt-2 flex items-center font-medium text-gray-600">
-              <button className="font-normal">
+              <span className="font-normal">
                 <WalletIcon className="size-4" />
-              </button>
+              </span>
 
               {item?.percentDiscount ? (
                 <>
@@ -102,6 +93,12 @@ const ListOrderItemsUser = (props: Props) => {
                   {item?.currency}
                 </span>
               )}
+              <span className="ml-1.5 text-sm">
+                <AtomIcon className="size-4" />
+              </span>
+              <span className="ml-1.5 text-sm font-bold text-gray-600">
+                {item?.model}
+              </span>
             </div>
           </div>
 
