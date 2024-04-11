@@ -101,7 +101,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
     <>
       <div className="py-4">
         <div className="flex items-center">
-          <h2 className="font-bold text-gray-500 text-base">
+          <h2 className="text-base font-bold text-gray-500">
             Billing Information
           </h2>
           {userAddress?.isUpdated &&

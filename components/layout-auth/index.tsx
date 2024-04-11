@@ -29,11 +29,11 @@ const LayoutAuth = ({ children, title }: IProps) => {
       </Head>
 
       <header className="sticky border-b border-gray-100 dark:border-gray-800">
-        <div className="px-4 mx-auto">
-          <div className="flex items-center justify-between h-16">
+        <div className="mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
             <div className="flex xl:ml-0">
-              <div className="flex items-center flex-shrink-0">
-                <div className="block w-auto h-8 lg:hidden">
+              <div className="flex shrink-0 items-center">
+                <div className="block h-8 w-auto lg:hidden">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
                       <img
@@ -49,7 +49,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="ml-4 hidden w-auto h-8 lg:block">
+                <div className="ml-4 hidden h-8 w-auto lg:block">
                   <div className="flex items-center">
                     <div
                       onClick={() => push('/')}
@@ -65,7 +65,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end ml-auto space-x-2">
+            <div className="ml-auto flex items-center justify-end space-x-2">
               {/* <div className="flex items-center">
                 <ThemeToggle />
               </div> */}

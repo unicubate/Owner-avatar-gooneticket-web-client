@@ -49,7 +49,7 @@ export const RecentCommentTransactions = ({
   const dataTableTransactions = isLoadingComments ? (
     <>
       {itemsNumberArray(4).map((i, index) => (
-        <li key={index} className="flex py-2 items-center space-x-2">
+        <li key={index} className="flex items-center space-x-2 py-2">
           <Skeleton className="size-10 rounded-full" />
           <div className="space-y-1">
             <Skeleton className="h-2 w-[250px]" />

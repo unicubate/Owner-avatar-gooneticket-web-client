@@ -108,7 +108,7 @@ export function CreateCommentCommissionModal(props: {
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
                 <Alert variant="destructive">
-                  <ExclamationTriangleIcon className="h-4 w-4" />
+                  <ExclamationTriangleIcon className="size-4" />
                   <AlertTitle>Error</AlertTitle>
                   <AlertDescription>{hasErrors}</AlertDescription>
                 </Alert>

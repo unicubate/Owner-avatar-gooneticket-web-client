@@ -39,13 +39,13 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white dark:bg-black/15 border-gray-300">
-        <div className="px-4 mx-auto">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-3 lg:hidden">
+      <header className="sticky top-0 z-20 border-gray-300 bg-white dark:bg-black/15">
+        <div className="mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
+            <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -61,9 +61,9 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
               </Button>
             </div>
 
-            <div className="flex ml-2 xl:ml-0">
-              <div className="flex items-center flex-shrink-0">
-                <div className="block w-auto h-8 lg:hidden">
+            <div className="ml-2 flex xl:ml-0">
+              <div className="flex shrink-0 items-center">
+                <div className="block h-8 w-auto lg:hidden">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
                       <img
@@ -73,7 +73,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                     </div>
                   </div>
                 </div>
-                <div className="ml-4 hidden w-auto h-8 lg:block">
+                <div className="ml-4 hidden h-8 w-auto lg:block">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
                       <img
@@ -92,7 +92,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
               </div>
             </div>
 
-            <div className="flex items-center justify-end ml-auto">
+            <div className="ml-auto flex items-center justify-end">
               <ThemeToggle />
               <LangToggle />
               <div className="items-end">
@@ -109,8 +109,8 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <div className="hidden ml-2 min-w-0 flex-1 lg:block">
-                            <p className="w-auto ml-1 text-sm font-bold text-gray-900 dark:text-white">
+                          <div className="ml-2 hidden min-w-0 flex-1 lg:block">
+                            <p className="ml-1 w-auto text-sm font-bold text-gray-900 dark:text-white">
                               {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
                               {capitalizeFirstLetter(user?.profile?.lastName)}
                             </p>

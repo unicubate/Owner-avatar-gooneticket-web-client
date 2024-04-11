@@ -20,7 +20,7 @@ export const ButtonLoadMore = ({
 }: Props) => {
   return (
     <>
-      <div className="my-2 mt-2 sm:mt-0">
+      <div className="my-2 sm:mt-0">
         <ButtonInput
           type="button"
           size={size}

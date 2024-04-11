@@ -66,7 +66,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
           ) : null}
 
           <div
-            className={`flex flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22] min-h-screen`}
+            className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
           >
             <main>{children}</main>
           </div>

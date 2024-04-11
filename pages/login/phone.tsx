@@ -118,8 +118,8 @@ const LoginPhone = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
-          <div className="mt-4 mx-auto flex justify-center">
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
+          <div className="mx-auto mt-4 flex justify-center">
             <h6 className="text-center text-xl font-bold">{`Log in`}</h6>
           </div>
           <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
@@ -130,8 +130,8 @@ const LoginPhone = () => {
             )}
 
             {hasSuccess && (
-              <div className="rounded-lg text-center bg-indigo-200">
-                <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+              <div className="rounded-lg bg-indigo-200 text-center">
+                <div className="ml-3 flex-1 md:flex md:items-center md:justify-between">
                   <p className="p-3 text-sm font-medium text-indigo-800">
                     We sent a verification code to{' '}
                     <strong className="text-blue-600 underline">
@@ -165,7 +165,7 @@ const LoginPhone = () => {
 
             {isSuccessCheckPhone ? (
               <div className="mt-4">
-                <div className="relative flex w-full max-w-auto">
+                <div className="max-w-auto relative flex w-full">
                   <TextInput
                     control={control}
                     name="code"
@@ -228,7 +228,7 @@ const LoginPhone = () => {
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
           </div>
 
-          <div className="mt-4 mx-auto max-w-max">
+          <div className="mx-auto mt-4 max-w-max">
             <GoogleLogin
               size="large"
               useOneTap

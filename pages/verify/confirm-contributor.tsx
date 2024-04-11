@@ -17,7 +17,7 @@ const ConfirmContributor = () => {
   return (
     <>
       <LayoutAuth title="Confirm your account">
-        <div className="m-auto mt-10 w-full max-w-xl rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-xl rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
           {verify?.user && <ConfirmProfileContributor verify={verify} />}
           {status === 'error' ? (
             <ErrorFile

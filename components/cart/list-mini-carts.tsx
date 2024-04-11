@@ -36,7 +36,7 @@ const ListMiniCats: React.FC<Props> = ({ item, index }) => {
     <>
       <li className="flex py-4" key={index}>
         {item?.uploadsImages?.length > 0 ? (
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             <Image
               width={80}
               height={50}

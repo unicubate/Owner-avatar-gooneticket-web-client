@@ -55,7 +55,7 @@ const CheckoutMembership = () => {
   return (
     <>
       <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'membership'}`}>
-        <div className="overflow-hidden bg-white dark:bg-[#121212] shadow rounded-xl">
+        <div className="overflow-hidden rounded-xl bg-white shadow dark:bg-[#121212]">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="px-5 py-6 dark:bg-[#121212] md:px-8">
               <div className="flow-root">
@@ -92,7 +92,7 @@ const CheckoutMembership = () => {
                     {item?.price ? (
                       <div className="mt-2">
                         <div
-                          className={`overflow-hidden border-2 bg-white dark:bg-[#121212] transition-all duration-200 ${
+                          className={`overflow-hidden border-2 bg-white transition-all duration-200 dark:bg-[#121212] ${
                             errors?.amount
                               ? 'border-red-500'
                               : 'border-gray-200'
@@ -232,7 +232,7 @@ const CheckoutMembership = () => {
                           userAddress?.country ? (
                             <>
                               <div className="py-4">
-                                <h2 className="font-bold text-gray-500 text-base">
+                                <h2 className="text-base font-bold text-gray-500">
                                   Payment Method
                                 </h2>
                               </div>

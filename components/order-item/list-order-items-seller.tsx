@@ -33,7 +33,7 @@ export function ListOrderItemsSeller(props: Props) {
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
             {item?.uploadsImages?.length > 0 ? (
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <Image
                   width={100}
                   height={80}
@@ -140,10 +140,10 @@ export function ListOrderItemsSeller(props: Props) {
                 currency={{ code: String(item?.currency) }}
               />
             </p>
-            <div className="mt-2 font-bold ml-auto min-w-0 flex-1">
+            <div className="ml-auto mt-2 min-w-0 flex-1 font-bold">
               {item?.product?.productType}
             </div>
-            <div className="mt-2 ml-auto min-w-0 flex-1">
+            <div className="ml-auto mt-2 min-w-0 flex-1">
               {item?.status === 'CANCELLED' && (
                 <Badge className="rounded-sm" variant={'danger'}>
                   {item?.status.toLocaleLowerCase()}

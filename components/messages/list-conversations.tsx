@@ -18,7 +18,7 @@ export function ListConversations({ item, index }: Props) {
     <>
       <div
         key={index}
-        className={`flex w-full space-x-3 max-w-xl ${organizationId === item?.organizationId ? 'ml-auto justify-end' : ''}`}
+        className={`flex w-full max-w-xl space-x-3 ${organizationId === item?.organizationId ? 'ml-auto justify-end' : ''}`}
       >
         {/* {organizationId !== item?.organizationId && (
           <AvatarComponent
@@ -34,7 +34,7 @@ export function ListConversations({ item, index }: Props) {
 
         <div>
           <div
-            className={`text-white p-3 ${organizationId !== item?.organizationId ? 'bg-gray-600 rounded-r-lg rounded-bl-xl' : 'bg-blue-600 rounded-l-lg rounded-br-xl'} `}
+            className={`p-3 text-white ${organizationId !== item?.organizationId ? 'rounded-r-lg rounded-bl-xl bg-gray-600' : 'rounded-l-lg rounded-br-xl bg-blue-600'} `}
           >
             <p className="text-sm">
               <HtmlParserMessage html={String(item?.description ?? '')} />
@@ -46,7 +46,7 @@ export function ListConversations({ item, index }: Props) {
           )} */}
 
           <div className="ml-auto">
-            <span className="text-xs text-gray-500 leading-none">
+            <span className="text-xs leading-none text-gray-500">
               {formateFromNow(item?.createdAt as Date, locale)}
             </span>
             {/* <span className="ml-2 text-gray-500 leading-none">

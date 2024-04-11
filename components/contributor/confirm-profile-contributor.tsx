@@ -74,7 +74,7 @@ const ConfirmProfileContributor = ({
 
   return (
     <>
-      <p className="mt-8 text-center text-xl md:text-2xl sm:text-lg">
+      <p className="mt-8 text-center text-xl sm:text-lg md:text-2xl">
         You've been invited tho the <b>{verify?.user?.organizationName}</b>{' '}
         organization
       </p>

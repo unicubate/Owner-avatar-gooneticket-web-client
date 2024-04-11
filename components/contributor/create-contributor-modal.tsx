@@ -58,8 +58,8 @@ const CreateContributorModal = ({
         defaultOpen={showModal}
       >
         <DialogTrigger asChild>{buttonDialog}</DialogTrigger>
-        <DialogContent className="sm:max-w-[650px] dark:bg-[#121212] dark:border-gray-800">
-          <Tabs defaultValue="new-contributor" className="w-full mt-4">
+        <DialogContent className="dark:border-gray-800 dark:bg-[#121212] sm:max-w-[650px]">
+          <Tabs defaultValue="new-contributor" className="mt-4 w-full">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="new-contributor">
                 Create contributor

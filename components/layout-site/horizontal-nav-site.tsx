@@ -35,13 +35,13 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white dark:bg-black/5 border-b border-gray-100 dark:border-gray-800">
-        <div className="px-4 mx-auto">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-3 lg:hidden">
+      <header className="sticky top-0 z-20 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-black/5">
+        <div className="mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
+            <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -57,10 +57,10 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               </Button>
             </div>
 
-            <div className="flex ml-2 xl:ml-0">
+            <div className="ml-2 flex xl:ml-0">
               <Link href="/">
-                <div className="flex items-center flex-shrink-0">
-                  <div className="block w-auto h-8 lg:hidden">
+                <div className="flex shrink-0 items-center">
+                  <div className="block h-8 w-auto lg:hidden">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
                         <img
@@ -76,7 +76,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="hidden w-auto h-8 lg:block">
+                  <div className="hidden h-8 w-auto lg:block">
                     {/* <div className="flex items-center">
                     <div
                       onClick={() => push('/')}
@@ -107,8 +107,8 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               </Link>
             </div>
 
-            <div className="flex items-center justify-end ml-auto space-x-2">
-              <nav className="hidden w-auto ml-4 space-x-10 lg:block">
+            <div className="ml-auto flex items-center justify-end space-x-2">
+              <nav className="ml-4 hidden w-auto space-x-10 lg:block">
                 {navigation.map((item: any, index: number) => {
                   const isActive = pathname?.startsWith(item.href);
                   return (
@@ -116,7 +116,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                       key={index}
                       href={`${item?.href}`}
                       title={item?.title}
-                      className={`whitespace-nowrap py-4 text-sm font-medium transition-all duration-200 border-transparent hover:text-indigo-600`}
+                      className={`whitespace-nowrap border-transparent py-4 text-sm font-medium transition-all duration-200 hover:text-indigo-600`}
                     >
                       {item?.icon}
 

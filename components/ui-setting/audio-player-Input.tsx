@@ -198,17 +198,17 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
 
       <div className="mt-4">
         {['AUDIO'].includes(item?.type) ? (
-          <div className="full items-center relative shrink-0 cursor-pointer">
+          <div className="full relative shrink-0 cursor-pointer items-center">
             <Avatar
               shape="square"
-              className="rounded-lg object-cover w-full h-96"
+              className="h-96 w-full rounded-lg object-cover"
               src={oneImage}
               alt={item?.title}
             />
           </div>
         ) : null}
 
-        <div className="w-full mt-2">
+        <div className="mt-2 w-full">
           <ReactH5AudioPlayer
             autoPlay={false}
             autoPlayAfterSrcChange={false}
@@ -241,7 +241,7 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
                 <>
                   {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
                   item?.isValidSubscribe !== 1 ? (
-                    <LockKeyholeIcon className="justify-items-center size-10" />
+                    <LockKeyholeIcon className="size-10 justify-items-center" />
                   ) : (
                     <svg
                       className="size-11 text-black dark:text-white"

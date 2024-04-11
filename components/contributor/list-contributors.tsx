@@ -119,11 +119,11 @@ export function ListContributors({ item, index }: Props) {
             </p>
 
             <div className="mt-1">
-              <Badge className="rounded-sm cursor-pointer" variant="default">
+              <Badge className="cursor-pointer rounded-sm" variant="default">
                 {item?.role?.name}
               </Badge>
               <Badge
-                className="ml-2 rounded-sm cursor-pointer"
+                className="ml-2 cursor-pointer rounded-sm"
                 variant={`${item?.confirmedAt ? 'success' : 'destructive'}`}
               >
                 {item?.confirmedAt ? 'CONFIRM' : 'PENDING'}

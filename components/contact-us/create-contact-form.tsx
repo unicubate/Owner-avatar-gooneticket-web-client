@@ -175,7 +175,7 @@ const CreateContactForm = () => {
         </div>
 
         {watchEnableUpload && (
-          <div className="mt-4 mx-auto justify-center text-center">
+          <div className="mx-auto mt-4 justify-center text-center">
             <Upload
               multiple
               name="attachmentFiles"

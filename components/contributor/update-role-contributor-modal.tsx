@@ -88,7 +88,7 @@ const UpdateRoleContributorModal = ({
         defaultOpen={showModal}
       >
         <DialogTrigger asChild>{buttonDialog}</DialogTrigger>
-        <DialogContent className="sm:max-w-[500px] dark:bg-[#121212] dark:border-gray-800">
+        <DialogContent className="dark:border-gray-800 dark:bg-[#121212] sm:max-w-[500px]">
           <div className="flex-auto justify-center p-2">
             <form onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (

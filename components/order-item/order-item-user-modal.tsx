@@ -44,7 +44,7 @@ const OrderItemUserModal = (props: {
       {isOpen ? (
         <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
-          <div className="relative  m-auto w-full max-w-3xl rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212] overflow-y-scroll max-h-screen">
+          <div className="relative  m-auto max-h-screen w-full max-w-3xl overflow-y-scroll rounded-xl bg-white  p-5 shadow-lg dark:bg-[#121212]">
             <button
               className="float-right border-0 bg-transparent text-black"
               onClick={() => setIsOpen((lk: boolean) => !lk)}
@@ -57,7 +57,7 @@ const OrderItemUserModal = (props: {
               <div className="flex items-center">
                 <div className="relative shrink-0 cursor-pointer">
                   {item?.uploadsImages?.length > 0 ? (
-                    <div className="flex-shrink-0">
+                    <div className="shrink-0">
                       <Image
                         width={80}
                         height={70}
@@ -122,11 +122,11 @@ const OrderItemUserModal = (props: {
 
             <div className="py-2">
               <div className="flex items-center">
-                <h2 className="font-bold text-base">Price</h2>
+                <h2 className="text-base font-bold">Price</h2>
 
                 <div className="ml-auto">
                   <SerialPrice
-                    className="font-bold text-lg"
+                    className="text-lg font-bold"
                     value={Number(item?.priceDiscount)}
                     currency={{ code: String(item?.currency) }}
                   />
@@ -135,7 +135,7 @@ const OrderItemUserModal = (props: {
             </div>
 
             <div className="py-2">
-              <h2 className="font-bold text-base">Message from creator</h2>
+              <h2 className="text-base font-bold">Message from creator</h2>
               <div className="mt-4 flex items-center">
                 <HtmlParser
                   html={String(item?.product?.messageAfterPayment ?? '')}

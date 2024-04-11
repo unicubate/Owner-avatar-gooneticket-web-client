@@ -21,7 +21,7 @@ export function AvatarComponent(props: Props) {
             <>
               <Avatar
                 className={cn(
-                  `object-cover bg-${profile?.color}-600 rounded-full`,
+                  `bg- object-cover${profile?.color}-600 rounded-full`,
                   className,
                 )}
                 size={size}
@@ -34,7 +34,7 @@ export function AvatarComponent(props: Props) {
           {!profile?.image && (
             <>
               <Avatar
-                className={cn(`object-cover rounded-full`, className)}
+                className={cn(`rounded-full object-cover`, className)}
                 size={size}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
                 src={`https://ui-avatars.com/api/?name=${capitalizeOneFirstLetter(

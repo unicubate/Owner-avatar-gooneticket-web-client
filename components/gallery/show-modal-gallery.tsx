@@ -72,7 +72,7 @@ export const ShowModalGallery = ({
         defaultOpen={openModal}
       >
         <DialogTrigger asChild></DialogTrigger>
-        <DialogContent className="sm:max-w-[750px] dark:bg-[#121212] dark:border-gray-800 overflow-y-scroll max-h-screen">
+        <DialogContent className="max-h-screen overflow-y-scroll dark:border-gray-800 dark:bg-[#121212] sm:max-w-[750px]">
           <div className="flex shrink-0 items-center justify-between rounded-t-md border-gray-200 p-4">
             <div className="flex items-center">
               <div className="relative shrink-0 cursor-pointer">
@@ -125,7 +125,7 @@ export const ShowModalGallery = ({
                               >
                                 <DownloadIcon className="size-5" />
                               </button>
-                              <span className="cursor-pointer ml-2">
+                              <span className="ml-2 cursor-pointer">
                                 Download
                               </span>
                             </DropdownMenuItem>
@@ -141,7 +141,7 @@ export const ShowModalGallery = ({
                       >
                         <AlertCircleIcon className="size-5" />
                       </button>
-                      <span className="cursor-pointer ml-2">Report</span>
+                      <span className="ml-2 cursor-pointer">Report</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                 </DropdownMenuContent>

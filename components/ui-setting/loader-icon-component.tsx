@@ -12,7 +12,7 @@ const LoaderIconComponent = ({
   return (
     <LoaderCircleIcon
       style={style}
-      className={cn('my-28 size-16 text-indigo-600 animate-spin', className)}
+      className={cn('my-28 size-16 animate-spin text-indigo-600', className)}
     />
   );
 };

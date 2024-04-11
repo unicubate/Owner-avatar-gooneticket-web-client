@@ -101,13 +101,13 @@ const ListPosts = ({ item, index }: Props) => {
                 <LockKeyholeIcon className="size-4" />
               )}
             </span>
-            <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+            <span className="ml-1.5 hidden text-sm font-normal lg:table-cell">
               {item?.whoCanSee}
             </span>
             <span className="ml-1.5">
               <IconTypePost className="size-4" type={item?.type as PostType} />
             </span>
-            <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+            <span className="ml-1.5 hidden text-sm font-normal lg:table-cell">
               {item?.type}
             </span>
           </div>

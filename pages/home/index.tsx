@@ -67,7 +67,7 @@ const Home = () => {
             {dataTablePosts}
 
             {/* <FloatButton onClick={() => console.log('onClick')} /> */}
-            <div className="mx-auto mt-2 my-4 justify-center py-2 text-center">
+            <div className="mx-auto my-4 mt-2 justify-center py-2 text-center">
               {hasNextPage && (
                 <ButtonLoadMore
                   ref={ref}

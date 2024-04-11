@@ -12,7 +12,7 @@ const TransactionSuccess = () => {
           <div className="p-6  md:mx-auto">
             <svg
               viewBox="0 0 24 24"
-              className="text-green-600 w-16 h-16 mx-auto my-6"
+              className="mx-auto my-6 size-16 text-green-600"
             >
               <path
                 fill="currentColor"
@@ -20,10 +20,10 @@ const TransactionSuccess = () => {
               ></path>
             </svg>
             <div className="text-center">
-              <h3 className="md:text-2xl text-base font-semibold text-center">
+              <h3 className="text-center text-base font-semibold md:text-2xl">
                 Payment Done!
               </h3>
-              <p className="text-gray-600 my-2">
+              <p className="my-2 text-gray-600">
                 Thank you for completing your secure online payment.
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>

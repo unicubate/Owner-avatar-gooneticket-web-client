@@ -34,7 +34,7 @@ const Faqs = () => {
     <>
       <LayoutSite title="FAQS">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mt-8 mx-auto max-w-2xl text-center">
+          <div className="mx-auto mt-8 max-w-2xl text-center">
             <h2 className="text-4xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
               Frequently asked questions
             </h2>
@@ -43,7 +43,7 @@ const Faqs = () => {
             </p>
           </div>
 
-          <div className="mx-auto max-w-3xl divide-y dark:divide-gray-600 overflow-hidden rounded-md border dark:border-gray-600 sm:mt-16">
+          <div className="mx-auto max-w-3xl divide-y overflow-hidden rounded-md border dark:divide-gray-600 dark:border-gray-600 sm:mt-16">
             {faqs.map((item, index) => (
               <FaqsList item={item} key={index} index={index} />
             ))}

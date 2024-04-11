@@ -128,7 +128,7 @@ export const ListGallery = ({ item, index }: Props) => {
                   <button title="Download" className="tex-sm ml-2">
                     <FiDownload />
                   </button>
-                  <span className="ml-1.5 text-sm font-normal hidden lg:table-cell">
+                  <span className="ml-1.5 hidden text-sm font-normal lg:table-cell">
                     Download
                   </span>
                 </>

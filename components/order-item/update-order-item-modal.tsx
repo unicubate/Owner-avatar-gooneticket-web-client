@@ -95,7 +95,7 @@ export function UpdateOrderItemModal(props: {
       {isOpen ? (
         <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
           <div className="absolute inset-0 z-0 bg-black opacity-80"></div>
-          <div className="relative m-auto w-full max-w-3xl rounded-xl bg-white p-5 shadow-lg  dark:bg-[#121212] overflow-y-scroll max-h-screen">
+          <div className="relative m-auto max-h-screen w-full max-w-3xl overflow-y-scroll rounded-xl bg-white  p-5 shadow-lg dark:bg-[#121212]">
             <button
               className="float-right border-0 bg-transparent text-black"
               onClick={() => setIsOpen((lk: boolean) => !lk)}
@@ -149,11 +149,11 @@ export function UpdateOrderItemModal(props: {
 
             <div className="py-2">
               <div className="flex items-center">
-                <h2 className="font-bold text-base">{item?.product?.title}</h2>
+                <h2 className="text-base font-bold">{item?.product?.title}</h2>
 
                 <div className="ml-auto">
                   <SerialPrice
-                    className="font-bold text-lg"
+                    className="text-lg font-bold"
                     value={Number(item?.priceDiscount)}
                     currency={{ code: String(item?.currency) }}
                   />
@@ -221,7 +221,7 @@ export function UpdateOrderItemModal(props: {
             </div>
 
             <div className="py-4">
-              <h2 className="font-bold text-base">Address</h2>
+              <h2 className="text-base font-bold">Address</h2>
 
               <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                 <div className="mb-2">
@@ -311,7 +311,7 @@ export function UpdateOrderItemModal(props: {
             </div>
 
             <div className="py-2">
-              <h2 className="font-bold text-base">Payment details</h2>
+              <h2 className="text-base font-bold">Payment details</h2>
               <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
                 <div className="mb-2">
                   <Label
@@ -366,7 +366,7 @@ export function UpdateOrderItemModal(props: {
 
             {item?.product?.productType === 'PHYSICAL' && (
               <>
-                <div className="mt-2 mx-auto flex justify-start">
+                <div className="mx-auto mt-2 flex justify-start">
                   <h6 className="mt-3 text-center text-xl font-bold">{`Change status order`}</h6>
                 </div>
 

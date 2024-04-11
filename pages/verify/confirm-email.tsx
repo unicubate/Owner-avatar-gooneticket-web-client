@@ -81,7 +81,7 @@ const ConfirmEmail = () => {
   return (
     <>
       <LayoutAuth title="Confirm your account">
-        <div className="m-auto mt-8 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-8 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto flex justify-center">
             <img
               className="h-12 w-auto sm:h-14"
@@ -93,7 +93,7 @@ const ConfirmEmail = () => {
             <h6 className="mt-4 text-center text-xl font-bold">
               {`Confirm your account`}
             </h6>
-            <p className="mt-4 text-center text-sm sm:text-sm text-gray-600">
+            <p className="mt-4 text-center text-sm text-gray-600 sm:text-sm">
               We sent a verification code to your email. Enter the code from the
               email in the field below.
             </p>

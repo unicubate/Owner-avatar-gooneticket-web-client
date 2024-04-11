@@ -18,7 +18,7 @@ const PostSkeleton = ({ index }: { index: number }) => {
           <Skeleton className="ml-auto size-8 rounded-md" />
         </div>
 
-        <div className="mt-4 mx-auto justify-center text-center">
+        <div className="mx-auto mt-4 justify-center text-center">
           <Skeleton className="h-96 w-full" />
         </div>
         <div className="mt-6 space-y-2">

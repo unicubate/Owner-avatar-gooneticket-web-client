@@ -49,7 +49,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
 
   return (
     <>
-      <div key={index} className="py-2 flex items-center">
+      <div key={index} className="flex items-center py-2">
         <div className="min-w-0 flex-1">
           <div>
             {item?.type === 'CARD' ? (
@@ -75,7 +75,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
               {['PHONE'].includes(item?.type) && (
                 <>
                   <Badge
-                    className="rounded-sm cursor-pointer"
+                    className="cursor-pointer rounded-sm"
                     variant={statusPaymentColorLists[item?.status] as any}
                     title={`${item?.type} ${statusPaymentLists[item?.status]}`}
                   >
@@ -87,7 +87,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
               {['CARD'].includes(item?.type) && (
                 <>
                   <Badge
-                    className="rounded-sm cursor-pointer"
+                    className="cursor-pointer rounded-sm"
                     variant={`${
                       Number(item.cardExpYear) >= new Date().getFullYear()
                         ? 'success'
@@ -107,7 +107,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
               {['IBAN'].includes(item?.type) && (
                 <>
                   <Badge
-                    className="rounded-sm cursor-pointer"
+                    className="cursor-pointer rounded-sm"
                     variant={statusPaymentColorLists[item?.status] as any}
                   >
                     {`${item?.type} ${statusPaymentLists[item?.status]}`}

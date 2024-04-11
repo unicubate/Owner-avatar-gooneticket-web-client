@@ -30,7 +30,7 @@ export const PublicLastPosts = ({
   const dataTablePosts = isLoadingPosts ? (
     <>
       {itemsNumberArray(4).map((i, index) => (
-        <li key={index} className="flex py-2 items-center space-x-2">
+        <li key={index} className="flex items-center space-x-2 py-2">
           <Skeleton className="size-16 rounded-md" />
           <div className="space-y-1">
             <Skeleton className="h-4 w-[200px]" />

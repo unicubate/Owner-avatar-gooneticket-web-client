@@ -7,10 +7,10 @@ const ProductSkeleton = ({ index }: { index: number }) => {
       className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
     >
       <div className="p-8 sm:px-8 sm:py-7">
-        <div className="mt-4 mx-auto justify-center text-center">
+        <div className="mx-auto mt-4 justify-center text-center">
           <Skeleton className="h-96 w-full" />
         </div>
-        <div className="mt-4 mx-auto justify-center text-center">
+        <div className="mx-auto mt-4 justify-center text-center">
           <Skeleton className="h-4 w-full" />
         </div>
         <div className="mt-6 flex items-center">

@@ -132,7 +132,7 @@ const CreatePaymentPhoneFormCardUser = (props: {
                 </div>
 
                 <div className="mt-4">
-                  <div className="space-y-2 sm:space-x-2 sm:flex sm:space-y-0 sm:items-start">
+                  <div className="space-y-2 sm:flex sm:items-start sm:space-x-2 sm:space-y-0">
                     <div className="flex-1">
                       <TextInput
                         control={control}
@@ -145,7 +145,7 @@ const CreatePaymentPhoneFormCardUser = (props: {
                       />
                     </div>
 
-                    <div className="relative group">
+                    <div className="group relative">
                       <ButtonInput
                         type="button"
                         variant="info"

@@ -239,7 +239,7 @@ const CreateOrUpdateFormShop = ({
                 type="number"
                 pattern="[0-9]*"
                 labelHelp={
-                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                  <Label className="ml-auto block text-start text-lg font-bold dark:text-white">
                     {watchPrice ? watchPrice : null} {profile?.currency?.code}
                   </Label>
                 }
@@ -316,7 +316,7 @@ const CreateOrUpdateFormShop = ({
                   </div>
                 ) : (
                   <>
-                    <div className="mt-4 mx-auto justify-center text-center">
+                    <div className="mx-auto mt-4 justify-center text-center">
                       <Dragger
                         multiple
                         name="attachmentFiles"

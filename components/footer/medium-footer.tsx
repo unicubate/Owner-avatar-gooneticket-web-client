@@ -34,9 +34,9 @@ const MediumFooter = () => {
   ]);
   return (
     <>
-      <footer className="mt-4 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col items-center space-y-4 lg:justify-between lg:space-y-0 lg:flex-row">
+      <footer className="max-w-8xl mx-auto mt-4 px-4 sm:px-6 lg:px-8 lg:py-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center space-y-4 lg:flex-row lg:justify-between lg:space-y-0">
             <div className="shrink-0">
               <div className="flex items-center">
                 <div className="relative shrink-0 cursor-pointer">
@@ -76,7 +76,7 @@ const MediumFooter = () => {
                 <a
                   href="#"
                   title=""
-                  className="inline-flex items-center justify-center w-8 h-8 text-white transition-all duration-200 bg-gray-800 rounded-full hover:bg-red-600"
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 text-white transition-all duration-200 hover:bg-red-600"
                   target="_blank"
                   rel="noopener"
                 >
@@ -87,7 +87,7 @@ const MediumFooter = () => {
                 <a
                   href="#"
                   title=""
-                  className="inline-flex items-center justify-center w-8 h-8 text-white transition-all duration-200 bg-gray-800 rounded-full hover:bg-red-400"
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 text-white transition-all duration-200 hover:bg-red-400"
                   target="_blank"
                   rel="noopener"
                 >
@@ -99,12 +99,12 @@ const MediumFooter = () => {
                 <a
                   href="#"
                   title=""
-                  className="inline-flex items-center justify-center w-8 h-8 text-white transition-all duration-200 bg-gray-800 rounded-full hover:bg-blue-600"
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 text-white transition-all duration-200 hover:bg-blue-600"
                   target="_blank"
                   rel="noopener"
                 >
                   <svg
-                    className="w-4 h-4"
+                    className="size-4"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
@@ -118,7 +118,7 @@ const MediumFooter = () => {
                 <a
                   href="#"
                   title=""
-                  className="inline-flex items-center justify-center w-8 h-8 text-white transition-all duration-200 bg-gray-800 rounded-full hover:bg-blue-600"
+                  className="inline-flex size-8 items-center justify-center rounded-full bg-gray-800 text-white transition-all duration-200 hover:bg-blue-600"
                   target="_blank"
                   rel="noopener"
                 >
@@ -128,7 +128,7 @@ const MediumFooter = () => {
             </ul>
           </div>
 
-          <div className="pt-4 mt-4 text-center border-t dark:border-gray-600 sm:mt-8 lg:mt-8">
+          <div className="mt-4 border-t pt-4 text-center dark:border-gray-600 sm:mt-8 lg:mt-8">
             <p className="text-sm font-normal dark:text-gray-600">
               © Copyright {new Date().getFullYear()}, All Rights Reserved by{' '}
               {process.env.NEXT_PUBLIC_NAME_SITE}

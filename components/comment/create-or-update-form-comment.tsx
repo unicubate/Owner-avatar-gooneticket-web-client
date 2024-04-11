@@ -125,7 +125,7 @@ export function CreateOrUpdateFormComment(props: {
             errors={errors}
             className="h-auto"
           />
-          <div className="flex space-x-2 justify-between">
+          <div className="flex justify-between space-x-2">
             {openModal ? (
               <ButtonInput
                 type="button"

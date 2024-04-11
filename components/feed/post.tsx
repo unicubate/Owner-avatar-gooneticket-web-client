@@ -48,7 +48,7 @@ const Post = ({ post }: IProps) => {
         <h3 className="text-xs text-gray-500">{post.createdAt}</h3>
       </div>
 
-      <div className="relative inset-x-0 -mx-5 h-[1px] bg-gray-200"></div>
+      <div className="relative inset-x-0 -mx-5 h-px bg-gray-200"></div>
 
       <div className="flex gap-4">
         <EmojiCollection />

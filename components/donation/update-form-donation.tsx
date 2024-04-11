@@ -108,7 +108,7 @@ const UpdateFormDonation: React.FC<{
                 required
                 pattern="[0-9]*"
                 labelHelp={
-                  <Label className="ml-auto block text-lg font-bold dark:text-white text-start">
+                  <Label className="ml-auto block text-start text-lg font-bold dark:text-white">
                     {watchPrice ? watchPrice : null} {profile?.currency?.code}
                   </Label>
                 }

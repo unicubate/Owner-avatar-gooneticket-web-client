@@ -115,7 +115,7 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
                               >
                                 <DownloadIcon className="size-5" />
                               </button>
-                              <span className="cursor-pointer ml-2">
+                              <span className="ml-2 cursor-pointer">
                                 Download
                               </span>
                             </DropdownMenuItem>
@@ -131,7 +131,7 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
                       >
                         <AlertCircleIcon className="size-5" />
                       </button>
-                      <span className="cursor-pointer ml-2">Report</span>
+                      <span className="ml-2 cursor-pointer">Report</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                 </DropdownMenuContent>

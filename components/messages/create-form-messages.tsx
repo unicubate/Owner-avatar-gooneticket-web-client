@@ -76,7 +76,7 @@ export function CreateFormMessages(props: {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="relative flex w-full max-w-auto">
+        <div className="max-w-auto relative flex w-full">
           <TextareaReactQuillInput
             control={control}
             name="description"

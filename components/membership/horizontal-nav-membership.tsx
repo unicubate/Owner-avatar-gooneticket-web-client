@@ -49,7 +49,7 @@ const HorizontalNavMembership = () => {
         </nav>
       </div> */}
 
-      <div className="border-gray-200 border-b dark:border-b-gray-600">
+      <div className="border-b border-gray-200 dark:border-b-gray-600">
         <nav className="flex flex-wrap gap-4 space-x-4">
           {navigation.map((item: any, index: number) => {
             const isActive = pathname === item.href;
@@ -58,7 +58,7 @@ const HorizontalNavMembership = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`py-4 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
+                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
                   isActive
                     ? `text-${profile?.color}-600 border-${profile?.color}-600`
                     : 'border-transparent hover:border-gray-300'

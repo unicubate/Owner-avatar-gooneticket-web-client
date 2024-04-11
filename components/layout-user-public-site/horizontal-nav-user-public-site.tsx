@@ -81,13 +81,13 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 bg-white border-b border-gray-300 dark:border-gray-800 dark:bg-[#1c1b22]">
-        <div className="px-4 mx-auto">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center -m-3 lg:hidden">
+      <header className="sticky top-0 z-20 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-[#1c1b22]">
+        <div className="mx-auto px-4">
+          <div className="flex h-16 items-center justify-between">
+            <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
                 <svg
-                  className="w-6 h-6"
+                  className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -103,10 +103,10 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
               </Button>
             </div>
 
-            <div className="flex ml-2 xl:ml-0">
+            <div className="ml-2 flex xl:ml-0">
               <Link href="/">
-                <div className="flex items-center flex-shrink-0">
-                  <div className="block w-auto h-8 lg:hidden">
+                <div className="flex shrink-0 items-center">
+                  <div className="block h-8 w-auto lg:hidden">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
                         <img
@@ -122,7 +122,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       </div>
                     </div>
                   </div>
-                  <div className="hidden w-auto h-8 lg:block">
+                  <div className="hidden h-8 w-auto lg:block">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
                         <img
@@ -136,7 +136,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
               </Link>
             </div>
 
-            <nav className="hidden w-auto ml-4 space-x-10 lg:block">
+            <nav className="ml-4 hidden w-auto space-x-10 lg:block">
               {navigation
                 .filter(
                   (item) => item?.status === true && Number(item?.count) >= 1,
@@ -163,7 +163,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                 })}
             </nav>
 
-            <div className="flex items-center justify-end ml-auto">
+            <div className="ml-auto flex items-center justify-end">
               {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
               <div className="flex items-center">
                 <ThemeToggle />
@@ -185,7 +185,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="link"
-                          className="bg-white -m-3 text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
+                          className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                         >
                           <svg
                             className="size-6"

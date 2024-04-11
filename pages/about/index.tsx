@@ -8,14 +8,14 @@ const About = () => {
   return (
     <LayoutSite title="About">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mt-8 mx-auto max-w-2xl text-center">
+        <div className="mx-auto mt-8 max-w-2xl text-center">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
             What makes different?
           </h2>
         </div>
         <div className="mt-8 grid grid-cols-1 gap-12 text-center sm:grid-cols-2 md:grid-cols-3 lg:gap-y-16">
           <div>
-            <div className="relative flex items-center justify-center mx-auto">
+            <div className="relative mx-auto flex items-center justify-center">
               <svg
                 className="text-blue-100"
                 width="72"
@@ -27,7 +27,7 @@ const About = () => {
                 <path d="M63.6911 28.8569C68.0911 48.8121 74.6037 61.2674 53.2349 65.9792C31.8661 70.6909 11.6224 61.2632 7.22232 41.308C2.82229 21.3528 3.6607 12.3967 25.0295 7.68503C46.3982 2.97331 59.2911 8.90171 63.6911 28.8569Z" />
               </svg>
               <svg
-                className="absolute text-blue-600 w-9 h-9"
+                className="absolute size-9 text-blue-600"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ const About = () => {
           </div>
 
           <div>
-            <div className="relative flex items-center justify-center mx-auto">
+            <div className="relative mx-auto flex items-center justify-center">
               <svg
                 className="text-orange-100"
                 width="62"
@@ -61,7 +61,7 @@ const About = () => {
                 <path d="M62 13.001C62 33.4355 53.9345 64.001 33.5 64.001C13.0655 64.001 0 50.435 0 30.0005C0 9.56596 2.56546 4.00021 23 4.00021C43.4345 4.00021 62 -7.43358 62 13.001Z" />
               </svg>
               <svg
-                className="absolute text-orange-600 w-9 h-9"
+                className="absolute size-9 text-orange-600"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -83,7 +83,7 @@ const About = () => {
           </div>
 
           <div>
-            <div className="relative flex items-center justify-center mx-auto">
+            <div className="relative mx-auto flex items-center justify-center">
               <svg
                 className="text-green-100"
                 width="66"
@@ -95,7 +95,7 @@ const About = () => {
                 <path d="M65.5 30C65.5 50.4345 46.4345 68 26 68C5.56546 68 0 50.4345 0 30C0 9.56546 12.5655 0 33 0C53.4345 0 65.5 9.56546 65.5 30Z" />
               </svg>
               <svg
-                className="absolute text-green-600 w-9 h-9"
+                className="absolute size-9 text-green-600"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -118,8 +118,8 @@ const About = () => {
         </div>
       </div>
 
-      <div className="mb-20 text-center my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="mb-12 max-w-2xl mx-auto text-center">
+      <div className="mx-auto my-20 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="text-3xl font-bold leading-tight sm:text-3xl lg:text-4xl">
             Teams
           </h2>
@@ -127,7 +127,7 @@ const About = () => {
 
         <div className="grid gap-6 md:grid-cols-3 xl:gap-x-12">
           <div className="mb-6 lg:mb-0">
-            <div className="relative block rounded-lg p-6 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+            <div className="relative block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
               <div className="flex-row items-center lg:flex">
                 <div className="w-full shrink-0 grow-0 basis-auto lg:w-5/12 lg:pr-6">
                   <img
@@ -147,7 +147,7 @@ const About = () => {
           </div>
 
           <div className="mb-6 lg:mb-0">
-            <div className="relative block rounded-lg p-6 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+            <div className="relative block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
               <div className="flex-row items-center lg:flex">
                 <div className="w-full shrink-0 grow-0 basis-auto lg:w-5/12 lg:pr-6">
                   <img
@@ -165,7 +165,7 @@ const About = () => {
                     <a href="#!" className="px-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-4 w-4 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-4 text-primary"
                         fill="currentColor"
                         viewBox="0 0 24 24"
                       >
@@ -176,7 +176,7 @@ const About = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="h-4 w-4 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-4 text-primary"
                       >
                         <path
                           fill="currentColor"
@@ -188,7 +188,7 @@ const About = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="h-3.5 w-3.5 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-3.5 text-primary"
                       >
                         <path
                           fill="currentColor"
@@ -203,7 +203,7 @@ const About = () => {
           </div>
 
           <div className="mb-6 lg:mb-0">
-            <div className="relative block rounded-lg p-6 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+            <div className="relative block rounded-lg bg-white p-6 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
               <div className="flex-row items-center lg:flex">
                 <div className="w-full shrink-0 grow-0 basis-auto lg:w-5/12 lg:pr-6">
                   <img
@@ -222,7 +222,7 @@ const About = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="h-4 w-4 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-4 text-primary"
                       >
                         <path
                           fill="currentColor"
@@ -234,7 +234,7 @@ const About = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="h-3.5 w-3.5 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-3.5 text-primary"
                       >
                         <path
                           fill="currentColor"
@@ -246,7 +246,7 @@ const About = () => {
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="h-4 w-4 text-primary dark:text-primary-400"
+                        className="dark:text-primary-400 size-4 text-primary"
                       >
                         <path
                           fill="currentColor"
@@ -262,8 +262,8 @@ const About = () => {
         </div>
       </div>
 
-      <div className="mb-20 text-center my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="mb-12 max-w-2xl mx-auto text-center">
+      <div className="mx-auto my-20 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
           <h2 className="text-3xl font-bold leading-tight sm:text-3xl lg:text-4xl">
             Testimonials
           </h2>
@@ -278,7 +278,7 @@ const About = () => {
               />
             </div>
             <h5 className="mb-2 text-lg font-bold">Maria Smantha</h5>
-            <h6 className="mb-4 font-medium text-primary dark:text-primary-400">
+            <h6 className="dark:text-primary-400 mb-4 font-medium text-primary">
               Web Developer
             </h6>
             <p className="mb-4">
@@ -304,7 +304,7 @@ const About = () => {
               />
             </div>
             <h5 className="mb-2 text-lg font-bold">Maria Smantha</h5>
-            <h6 className="mb-4 font-medium text-primary dark:text-primary-400">
+            <h6 className="dark:text-primary-400 mb-4 font-medium text-primary">
               Web Developer
             </h6>
             <p className="mb-4">
@@ -330,7 +330,7 @@ const About = () => {
               />
             </div>
             <h5 className="mb-2 text-lg font-bold">Lisa Cudrow</h5>
-            <h6 className="mb-4 font-medium text-primary dark:text-primary-400">
+            <h6 className="dark:text-primary-400 mb-4 font-medium text-primary">
               Graphic Designer
             </h6>
             <p className="mb-4">
@@ -356,7 +356,7 @@ const About = () => {
               />
             </div>
             <h5 className="mb-2 text-lg font-bold">John Smith</h5>
-            <h6 className="mb-4 font-medium text-primary dark:text-primary-400">
+            <h6 className="dark:text-primary-400 mb-4 font-medium text-primary">
               Marketing Specialist
             </h6>
             <p className="mb-4">
@@ -377,39 +377,39 @@ const About = () => {
         </div>
       </div>
 
-      <div className="my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-5xl">
-        <div className="max-w-2xl mx-auto text-center">
+      <div className="mx-auto my-20 max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold leading-none sm:text-3xl">
             Fund your creative work by
             <span className="text-indigo-600"> creating your page </span>
           </h2>
-          <p className="text-lg font-bold mt-2 leading-tight sm:text-lg lg:text-lg text-gray-600">
+          <p className="mt-2 text-lg font-bold leading-tight text-gray-600 sm:text-lg lg:text-lg">
             It only takes a minute to create your page and start receiving
             donations and support
           </p>
         </div>
 
-        <div className="flex mt-4 flex-wrap justify-center">
-          <button className="px-8 py-3 m-2 text-lg border dark:border-gray-600 rounded">
+        <div className="mt-4 flex flex-wrap justify-center">
+          <button className="m-2 rounded border px-8 py-3 text-lg dark:border-gray-600">
             Log In
           </button>
-          <button className="px-8 py-3 m-2 text-lg font-semibold rounded bg-indigo-600 text-white">
+          <button className="m-2 rounded bg-indigo-600 px-8 py-3 text-lg font-semibold text-white">
             Get started
           </button>
         </div>
       </div>
-      <div className="my-20 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-        <div className="max-w-2xl mx-auto text-center">
+      <div className="mx-auto my-20 max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold leading-tight sm:text-3xl lg:text-4xl">
             All the features you need
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 mt-12 lg:mt-16 xl:gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 xl:gap-10">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="overflow-hidden dark:bg-black/15 rounded"
+              className="overflow-hidden rounded dark:bg-black/15"
             >
               <div className="p-4">
                 <div className="flex items-center">
@@ -419,7 +419,7 @@ const About = () => {
                   </div>
                 </div>
 
-                <p className="text-base leading-relaxed text-gray-600 mt-2">
+                <p className="mt-2 text-base leading-relaxed text-gray-600">
                   {feature?.description}
                 </p>
               </div>

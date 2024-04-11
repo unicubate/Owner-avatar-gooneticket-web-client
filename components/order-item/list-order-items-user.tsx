@@ -108,7 +108,7 @@ const ListOrderItemsUser = (props: Props) => {
                 type="button"
                 size="sm"
                 variant="ghost"
-                className="hover:text-indigo-600 text-gray-600"
+                className="text-gray-600 hover:text-indigo-600"
                 onClick={() => setIsOpen((lk: boolean) => !lk)}
                 title={'View Content'}
                 icon={<ViewIcon className="size-5 text-gray-400" />}

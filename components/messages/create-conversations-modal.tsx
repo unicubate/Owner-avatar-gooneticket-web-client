@@ -87,7 +87,7 @@ export function CreateConversationsModal(props: {
                 </Alert>
               )}
 
-              <div className="relative flex w-full max-w-auto">
+              <div className="max-w-auto relative flex w-full">
                 <TextareaReactQuillInput
                   control={control}
                   name="description"

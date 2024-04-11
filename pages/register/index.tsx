@@ -132,8 +132,8 @@ const Register = () => {
   };
   return (
     <LayoutAuth title="Register">
-      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
-        <div className="mt-4 mx-auto flex justify-center">
+      <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
+        <div className="mx-auto mt-4 flex justify-center">
           <h6 className="text-center text-xl font-bold">
             {`Sign up. It's free!`}
           </h6>
@@ -147,8 +147,8 @@ const Register = () => {
           )}
 
           {hasSuccess && (
-            <div className="rounded-lg text-center bg-indigo-200">
-              <div className="flex-1 ml-3 md:flex md:items-center md:justify-between">
+            <div className="rounded-lg bg-indigo-200 text-center">
+              <div className="ml-3 flex-1 md:flex md:items-center md:justify-between">
                 <p className="p-3 text-sm font-medium text-indigo-800">
                   We sent a verification code to{' '}
                   <strong className="text-blue-600 underline">
@@ -195,7 +195,7 @@ const Register = () => {
           {isSuccessCheckEmailOrPhone ? (
             <>
               <div className="mt-4">
-                <div className="relative flex w-full max-w-auto">
+                <div className="max-w-auto relative flex w-full">
                   <TextInput
                     control={control}
                     name="code"

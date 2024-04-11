@@ -146,7 +146,7 @@ const CreateOrUpdateFormMembership = ({
                   pattern="[0-9]*"
                   min={1}
                   labelHelp={
-                    <Label className="ml-auto block text-lg font-bold text-start">
+                    <Label className="ml-auto block text-start text-lg font-bold">
                       {watchPrice ? watchPrice : null} {profile?.currency?.code}
                     </Label>
                   }

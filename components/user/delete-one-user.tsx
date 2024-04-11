@@ -37,7 +37,7 @@ const DeleteOneUser = ({ user }: Props) => {
 
   return (
     <>
-      <div className={`mt-8 rounded-lg border bg-red-100 border-red-500 `}>
+      <div className={`mt-8 rounded-lg border border-red-500 bg-red-100 `}>
         <div className="px-4 py-5 sm:p-3">
           <div className="md:flex md:items-center md:justify-between">
             <div className="max-w-2xs flex-1 md:mt-0">

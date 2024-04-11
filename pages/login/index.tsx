@@ -98,8 +98,8 @@ const Login = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-6 shadow-md dark:bg-black md:mt-16">
-          <div className="mt-4 mx-auto flex justify-center">
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
+          <div className="mx-auto mt-4 flex justify-center">
             <h6 className="text-center text-xl font-bold">{`Log in`}</h6>
           </div>
 
@@ -191,7 +191,7 @@ const Login = () => {
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
           </div>
 
-          <div className="mt-4 mx-auto max-w-max">
+          <div className="mx-auto mt-4 max-w-max">
             <GoogleLogin
               size="large"
               useOneTap

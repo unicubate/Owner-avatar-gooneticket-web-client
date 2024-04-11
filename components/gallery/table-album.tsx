@@ -59,7 +59,7 @@ export const TableAlbum = ({ userVisitor }: Props) => {
       .map((item: AlbumModel, index: number) => (
         <Fragment key={index}>
           <div className="overflow-hidden rounded-lg border  border-gray-200 bg-white dark:border-gray-800 dark:bg-black">
-            <div className="p-4 w-full">
+            <div className="w-full p-4">
               <div className="flex items-center">
                 <Avatar
                   shape="square"

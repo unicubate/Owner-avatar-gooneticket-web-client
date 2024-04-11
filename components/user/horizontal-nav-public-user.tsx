@@ -13,7 +13,7 @@ const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
           <AvatarComponent className="size-10" profile={user?.profile} />
         </div>
         <div className="ml-2 min-w-0 flex-1">
-          <p className="w-auto hidden text-sm font-bold text-gray-900 dark:text-white lg:block">
+          <p className="hidden w-auto text-sm font-bold text-gray-900 dark:text-white lg:block">
             {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
             {capitalizeFirstLetter(user?.profile?.lastName)}
           </p>

@@ -20,7 +20,7 @@ const useDecrementTimer = (lk: number) => {
       setIsRunning((i) => !i);
       setCount(lk);
     }
-  }, [count]);
+  }, [count, lk]);
 
   const timer = ![0, lk].includes(count) && count;
   return {
