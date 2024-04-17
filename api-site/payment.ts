@@ -4,6 +4,7 @@ import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
+  useQuery,
   useQueryClient,
 } from '@tanstack/react-query';
 
@@ -186,4 +187,26 @@ export const GetInfinitePaymentsAPI = (payload: {
       }),
     initialPageParam: 1,
   });
+};
+
+export const GetOnePaymentsStripeClientSecretAPI = (payload: any) => {
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ['stripe-client-secret', payload],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'getOnePaymentsStripeClientSecret',
+        queryParams: payload,
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
 };

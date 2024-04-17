@@ -88,7 +88,7 @@ export const getOrderItemsAPI = async (
     model?: string;
     orderId?: string;
     organizationSellerId?: string;
-    organizationBeyerId?: string;
+    organizationBuyerId?: string;
     modelIds: ModelType[];
   } & PaginationRequest,
 ): Promise<{ data: ResponseOrderItemModel }> => {
@@ -123,7 +123,7 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
 
 export const GetInfiniteOrderItemsAPI = (payload: {
   organizationSellerId?: string;
-  organizationBeyerId?: string;
+  organizationBuyerId?: string;
   orderId?: string;
   modelIds: ModelType[];
   search?: string;
@@ -137,7 +137,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     days,
     orderId,
     organizationSellerId,
-    organizationBeyerId,
+    organizationBuyerId,
     search,
     take,
     sort,
@@ -154,7 +154,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
         sort,
         days,
         orderId,
-        organizationBeyerId,
+        organizationBuyerId,
         organizationSellerId,
         search: search,
         status: status?.toUpperCase(),

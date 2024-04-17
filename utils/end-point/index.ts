@@ -219,6 +219,9 @@ export const apiEndpoints: ClientApiMethods = {
   deleteOneMembership: DELETE(`${baseUrl}/memberships/:membershipId`),
 
   /****************** Payments route */
+  getOnePaymentsStripeClientSecret: GET(
+    `${baseUrl}/payments/stripe/client-secret`,
+  ),
   getPayments: GET(`${baseUrl}/payments`),
   createOnePaymentsPaypalSubscribe: POST(
     `${baseUrl}/payments/paypal/subscribe`,

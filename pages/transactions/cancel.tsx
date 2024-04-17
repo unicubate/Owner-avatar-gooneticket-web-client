@@ -1,7 +1,6 @@
 'use client';
 
-import { StripeV2CheckoutForm } from '@/components/payment/stripe/stripe-v2-checkout-form';
-import { Elements } from '@stripe/react-stripe-js';
+import { GetOnePaymentsStripeClientSecretAPI } from '@/api-site/payment';
 import { loadStripe } from '@stripe/stripe-js';
 import { useRouter } from 'next/router';
 
@@ -13,26 +12,26 @@ const TransactionCancel = () => {
   const { query } = useRouter();
   const username = String(query?.username);
 
-  const options = {
-    type: 'card',
-    mode: 'payment',
+  const {
+    data: item,
+    isError: isErrorPost,
+    isLoading: isLoadingPost,
+    refetch,
+  } = GetOnePaymentsStripeClientSecretAPI({
     amount: 10,
-    currency: 'eur',
-  };
+    currency: 'EUR',
+    reference: '535768',
+  });
 
   return (
     <>
       <div className="mx-auto max-w-5xl py-6">
         <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-          <div className="flow-root">
-            {stripeKeyPromise && (
-              <div>
-                <Elements stripe={stripeKeyPromise} options={options as any}>
-                  <StripeV2CheckoutForm />
-                </Elements>
-              </div>
-            )}
-          </div>
+          {/* {item?.client_secret && (
+            <div className="flow-root">
+              <StripeV2CheckoutForm clientSecret={item?.client_secret} />
+            </div>
+          )} */}
         </div>
       </div>
     </>

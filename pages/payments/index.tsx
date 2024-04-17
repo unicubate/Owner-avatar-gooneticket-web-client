@@ -1,10 +1,10 @@
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
 import { TableOrderItemsUser } from '@/components/order-item/table-order-items-user';
-import { useAuth } from '@/components/util/context-user';
 import { PrivateComponent } from '@/components/util/private-component';
 
 const PaymentsIndex = () => {
-  const user = useAuth() as any;
+  const { userStorage } = useInputState() as any;
 
   return (
     <>
@@ -13,9 +13,13 @@ const PaymentsIndex = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             {/* <HorizontalNavShop /> */}
 
-            <div className="flow-root">
-              <TableOrderItemsUser organizationId={user?.organizationId} />
-            </div>
+            {userStorage?.organizationId && (
+              <div className="flow-root">
+                <TableOrderItemsUser
+                  organizationId={userStorage?.organizationId}
+                />
+              </div>
+            )}
           </div>
         </div>
       </LayoutDashboard>

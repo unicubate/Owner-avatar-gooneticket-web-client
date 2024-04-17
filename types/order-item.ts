@@ -36,7 +36,7 @@ export type OrderItemModel = {
   percentDiscount: string;
   price: string;
   priceDiscount: string;
-  organizationBeyerId: string;
+  organizationBuyerId: string;
   organizationSellerId: string;
   model: ModelType;
   status: StatusOderProduct;
