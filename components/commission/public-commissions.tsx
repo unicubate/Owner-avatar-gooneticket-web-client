@@ -55,7 +55,7 @@ const PublicCommissions = ({ organizationId }: Props) => {
     <LoadingFile />
   ) : isErrorProducts ? (
     <strong>Error find data please try again...</strong>
-  ) : dataProducts?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataProducts?.pages

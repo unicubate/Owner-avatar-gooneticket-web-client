@@ -37,7 +37,7 @@ const PayoutFormUser = () => {
     <LoadingFile />
   ) : isErrorPayments ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataPayments?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataPayments?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataPayments?.pages

@@ -38,7 +38,7 @@ export function TableOrderItemsSeller(props: Props) {
     <LoadingFile />
   ) : isErrorOrderItems ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataOrderItems?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<ArrowRightLeftIcon className="size-10" />}
       title="You don't have any order"

@@ -36,7 +36,7 @@ const Configs = () => {
     />
   ) : isErrorDiscounts ? (
     <strong>Error find data please try again...</strong>
-  ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataDiscounts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataDiscounts?.pages

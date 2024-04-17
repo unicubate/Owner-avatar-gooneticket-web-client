@@ -2,6 +2,8 @@ import { CreateOneConversationMessagesAPI } from '@/api-site/conversations';
 import { ConversationModel, MessageFormModel } from '@/types/message';
 import { AlertDangerNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
+import EmojiPicker from 'emoji-picker-react';
+import { useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
@@ -17,6 +19,7 @@ export function CreateFormMessages(props: {
   model: ModelType;
   chatContainerRef: any;
 }) {
+  const [isOpenEmoji, setIsOpenEmoji] = useState(false);
   const { conversation, chatContainerRef, model } = props;
 
   const {
@@ -45,6 +48,7 @@ export function CreateFormMessages(props: {
     },
   });
 
+  const handleEmoji = () => {};
   const onSubmit: SubmitHandler<MessageFormModel> = async (
     payload: MessageFormModel,
   ) => {
@@ -84,6 +88,7 @@ export function CreateFormMessages(props: {
             errors={errors}
             className="h-auto"
           />
+          <EmojiPicker open={isOpenEmoji} onEmojiClick={handleEmoji} />
           <ButtonInput
             type="submit"
             variant="info"

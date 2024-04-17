@@ -60,7 +60,7 @@ const Posts = () => {
     <LoadingFile />
   ) : isErrorPost ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataPost?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataPost?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<MenuSquareIcon className="size-10" />}
       title="Add your first listing to get started"

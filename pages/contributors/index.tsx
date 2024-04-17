@@ -37,7 +37,7 @@ const ContributorsIndex = () => {
     <LoadingFile />
   ) : isErrorTransaction ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataTransaction?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataTransaction?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<ArrowRightLeftIcon className="size-10" />}
       title="You don't have any contributor"

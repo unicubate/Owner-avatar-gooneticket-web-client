@@ -63,7 +63,7 @@ const MembershipsLevels = () => {
     <LoadingFile />
   ) : isErrorMembership ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataGallery?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<LockKeyholeIcon className="size-10" />}
       title="Add your first listing to get started"

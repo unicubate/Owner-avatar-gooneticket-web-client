@@ -67,7 +67,7 @@ const ShopsExtras = () => {
     <LoadingFile />
   ) : isErrorProduct ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataProduct?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<StoreIcon className="size-12" />}
       title="You haven't added anything yet."

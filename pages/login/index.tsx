@@ -116,6 +116,7 @@ const Login = () => {
                 label="Email"
                 type="email"
                 name="email"
+                inputMode="email"
                 placeholder="Email address"
                 errors={errors}
                 labelHelp={

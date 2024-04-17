@@ -17,6 +17,16 @@ interface Props {
   pattern?: string;
   disabled?: boolean;
   labelHelp?: React.ReactNode;
+  inputMode?:
+    | 'none'
+    | 'text'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | 'search'
+    | undefined;
 }
 
 const TextInput = ({
@@ -34,6 +44,7 @@ const TextInput = ({
   required,
   labelHelp,
   disabled,
+  inputMode,
 }: Props) => {
   return (
     <>
@@ -61,6 +72,7 @@ const TextInput = ({
               autoComplete={autoComplete}
               min={min}
               max={max}
+              inputMode={inputMode}
               disabled={disabled}
               {...field}
             />

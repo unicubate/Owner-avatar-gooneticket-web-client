@@ -37,7 +37,7 @@ const Messages = () => {
     <LoadingFile />
   ) : isErrorConversation ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataConversation?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataConversation?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<MailIcon className="size-10" />}
       title="You don't have any message"

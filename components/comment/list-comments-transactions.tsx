@@ -54,7 +54,7 @@ const ListCommentTransactions = ({
     ''
   ) : isErrorComments ? (
     <ErrorFile title="404" description="Error find data please try again" />
-  ) : dataComments?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataComments?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataComments?.pages

@@ -31,7 +31,7 @@ const PublicPostsHome = ({ typeIds, userVisitor }: Props) => {
     <LoadingFile />
   ) : isErrorPosts ? (
     <ErrorFile title="404" description="Error find data please try again" />
-  ) : dataPosts?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataPosts?.pages

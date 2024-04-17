@@ -51,7 +51,7 @@ export const TableAlbum = ({ userVisitor }: Props) => {
     <>{skeletonArray}</>
   ) : isErrorAlbum ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataAlbum?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataAlbum?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataAlbum?.pages

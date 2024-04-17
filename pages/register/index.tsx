@@ -204,6 +204,7 @@ const Register = () => {
                     required
                     type="number"
                     pattern="[0-9]*"
+                    inputMode="numeric"
                   />
 
                   <ButtonInput

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { Control, Controller } from 'react-hook-form';
 import ReactQuill, { ReactQuillProps } from 'react-quill';
 
@@ -56,26 +56,24 @@ const ReactQuillInput = ({
               theme="snow"
               forwardedRef={quillRef}
               placeholder={placeholder}
-              modules={useMemo(
-                () => ({
-                  toolbar: {
-                    container: [
-                      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-                      ['bold', 'italic', 'underline', 'strike'],
-                      [{ align: [] }],
-                      [
-                        { list: 'ordered' },
-                        { list: 'bullet' },
-                        { indent: '-1' },
-                        { indent: '+1' },
-                      ],
-                      [{ color: [] }, { background: [] }],
-                      ['link'],
+              modules={{
+                toolbar: {
+                  container: [
+                    [{ header: [1, 2, 3, 4, 5, 6, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ align: [] }],
+                    [
+                      { list: 'ordered' },
+                      { list: 'bullet' },
+                      { indent: '-1' },
+                      { indent: '+1' },
                     ],
-                  },
-                }),
-                [],
-              )}
+                    [{ color: [] }, { background: [] }],
+                    ['link'],
+                    ['emoji'],
+                  ],
+                },
+              }}
             />
           </>
         )}

@@ -55,7 +55,7 @@ const Configs = () => {
     <LoadingFile />
   ) : isErrorDiscounts ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataDiscounts?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataDiscounts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataDiscounts?.pages
@@ -69,7 +69,7 @@ const Configs = () => {
     <LoadingFile />
   ) : isErrorCategories ? (
     <ErrorFile title="404" description="Error find data please try again" />
-  ) : dataCategories?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataCategories?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataCategories?.pages
