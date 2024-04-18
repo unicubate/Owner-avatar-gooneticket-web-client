@@ -42,7 +42,7 @@ export function PublicLastProducts({
     </>
   ) : isErrorProducts ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataProducts?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     <>

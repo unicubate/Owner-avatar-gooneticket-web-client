@@ -53,7 +53,7 @@ const Followings = () => {
     <LoadingFile />
   ) : isErrorFollowings ? (
     <strong>Error find data please try again...</strong>
-  ) : dataFollowings?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataFollowings?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataFollowings?.pages

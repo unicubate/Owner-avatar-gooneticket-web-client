@@ -40,7 +40,7 @@ const CreateContributorModal = ({
     <LoadingFile />
   ) : isErrorUsers ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : dataUsers?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataUsers?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataUsers?.pages

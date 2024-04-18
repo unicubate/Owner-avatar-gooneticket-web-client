@@ -31,7 +31,7 @@ const Followers = () => {
     <LoadingFile />
   ) : isErrorFollowers ? (
     <strong>Error find data please try again...</strong>
-  ) : dataFollowers?.pages[0]?.data?.total <= 0 ? (
+  ) : Number(dataFollowers?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     dataFollowers?.pages
