@@ -55,7 +55,7 @@ const ShopView = () => {
 
   return (
     <>
-      <LayoutSite title={`${product?.title ?? ''}`}>
+      <LayoutSite title={`${product?.title || 'Commission'}`}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mt-8 grid grid-cols-1 gap-y-12 lg:mt-12 lg:grid-cols-5 lg:grid-rows-1 lg:gap-x-12 lg:gap-y-16 xl:gap-x-16">
             <div className="lg:col-span-3 lg:row-end-1">

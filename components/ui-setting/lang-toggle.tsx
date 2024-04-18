@@ -21,6 +21,11 @@ const languages = [
     name: 'French',
     flag: '/media/flags/france.svg',
   },
+  {
+    lang: 'it',
+    name: 'Italian',
+    flag: 'media/flags/italy.svg',
+  },
   // {
   //   lang: 'zh',
   //   name: 'Mandarin',
@@ -40,11 +45,6 @@ const languages = [
   //   lang: 'de',
   //   name: 'German',
   //   flag: 'media/flags/germany.svg',
-  // },
-  // {
-  //   lang: 'it',
-  //   name: 'Italian',
-  //   flag: 'media/flags/italy.svg',
   // },
 ];
 

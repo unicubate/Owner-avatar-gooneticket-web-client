@@ -1,9 +1,12 @@
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { PostType } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
+import { itemsNumberArray } from '@/utils/utils';
+import { MenuSquareIcon } from 'lucide-react';
+import { PostSkeleton } from '../skeleton/post-skeleton';
 import { ButtonLoadMore } from '../ui-setting';
+import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { LoadingFile } from '../ui-setting/ant/loading-file';
 import { ListFollowPosts } from './list-follow-posts';
 
 type Props = {
@@ -12,6 +15,7 @@ type Props = {
 };
 
 const PublicPostsHome = ({ typeIds, userVisitor }: Props) => {
+  const numberTake = 3;
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -20,7 +24,7 @@ const PublicPostsHome = ({ typeIds, userVisitor }: Props) => {
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 3,
+    take: numberTake,
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
@@ -28,11 +32,19 @@ const PublicPostsHome = ({ typeIds, userVisitor }: Props) => {
   });
 
   const dataTablePosts = isLoadingPosts ? (
-    <LoadingFile />
+    itemsNumberArray(numberTake).map((i, index) => (
+      <PostSkeleton index={index} />
+    ))
   ) : isErrorPosts ? (
     <ErrorFile title="404" description="Error find data please try again" />
   ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (
-    ''
+    <div className="mt-4 overflow-hidden rounded-lg bg-white py-4 dark:bg-[#121212]">
+      <EmptyData
+        image={<MenuSquareIcon className="size-10" />}
+        title="This creator hasn't published anything yet!"
+        description={`When he does, his publications will appear here first.`}
+      />
+    </div>
   ) : (
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)

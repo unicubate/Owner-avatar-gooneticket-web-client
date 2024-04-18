@@ -31,12 +31,12 @@ const ShopUserPublic = () => {
     if (user?.profile?.enableShop === false) {
       push(`${`/${username}`}`);
     }
-  }, [user, username]);
+  }, [user, username, push]);
 
   return (
     <>
       <LayoutUserPublicSite
-        title={`Shop - ${user?.profile?.firstName ?? 'User'} ${
+        title={`Shop - ${user?.profile?.firstName || 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}

@@ -67,7 +67,7 @@ const CheckoutShop = () => {
     if (Number(carts?.summary?.totalPriceDiscount) <= 0) {
       push(`${`/${username}/shop`}`);
     }
-  }, [carts]);
+  }, [carts, username, push]);
 
   return (
     <>

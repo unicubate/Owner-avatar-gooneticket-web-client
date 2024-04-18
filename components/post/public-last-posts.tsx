@@ -12,6 +12,7 @@ export const PublicLastPosts = ({
 }: {
   userVisitor: UserVisitorModel;
 }) => {
+  const takeNumber = 4;
   const {
     isLoading: isLoadingPosts,
     isError: isErrorPosts,
@@ -20,16 +21,16 @@ export const PublicLastPosts = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfinitePostsAPI({
-    take: 4,
+    take: takeNumber,
     sort: 'DESC',
     userVisitor,
     status: 'ACTIVE',
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
+    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO', 'GALLERY'],
   });
 
   const dataTablePosts = isLoadingPosts ? (
     <>
-      {itemsNumberArray(4).map((i, index) => (
+      {itemsNumberArray(takeNumber).map((i, index) => (
         <li key={index} className="flex items-center space-x-2 py-2">
           <Skeleton className="size-16 rounded-md" />
           <div className="space-y-1">

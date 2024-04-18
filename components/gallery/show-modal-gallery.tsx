@@ -52,9 +52,9 @@ export const ShowModalGallery = ({
   userVisitorId,
 }: Props) => {
   const [isComment, setIsComment] = useState(false);
-  const { isOpen, setIsOpen, loading, setLoading } = useInputState();
+  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
-  const { locale, push } = useRouter();
+  const { push } = useRouter();
   const { status, data: item } = GetOnePostAPI({
     postId: post?.id,
     userVisitorId,

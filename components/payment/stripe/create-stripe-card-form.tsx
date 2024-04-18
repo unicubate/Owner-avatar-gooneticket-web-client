@@ -23,6 +23,11 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     return;
   }
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const [isSaveCard, setIsSaveCard] = useState(false);
+  const [cardstate, setcardState] = useState({
+    fullName: '',
+    email: '',
+  });
 
   const expDateValidate = (month: string, year: string) => {
     if (Number(year) > 2070) {
@@ -30,11 +35,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     }
     return;
   };
-  const [isSaveCard, setIsSaveCard] = useState(false);
-  const [cardstate, setcardState] = useState({
-    fullName: '',
-    email: '',
-  });
 
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {

@@ -324,7 +324,7 @@ const CreateOrUpdateFormShop = ({
                         className="upload-list-inline dark:text-white"
                         fileList={fileList}
                         onChange={handleFileChange}
-                        accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif"
+                        accept=".png,.jpg,.jpeg,.pdf,.gif,.doc,.docx,.xml,.csv,.mp3,.flac.,.xlx,.xls,.zip,.gif,.gz"
                         maxCount={10}
                       >
                         <p className="ant-upload-drag-icon">

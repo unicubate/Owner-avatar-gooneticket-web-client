@@ -46,15 +46,14 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
         </Sheet>
         {/*End Fix Drawer */}
 
-        <main>
-          <div className="mx-auto mb-10 lg:flex">
-            <div
-              className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
-            >
-              {children}
-            </div>
+        <div className="flex flex-1 dark:bg-black/15">
+          <div
+            className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
+          >
+            <main>{children}</main>
           </div>
-        </main>
+        </div>
+
         {/* </div> */}
       </div>
     </>

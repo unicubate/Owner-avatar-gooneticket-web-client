@@ -2,7 +2,9 @@
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { PostType } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
+import { MenuSquareIcon } from 'lucide-react';
 import { ButtonLoadMore } from '../ui-setting';
+import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { LoadingFile } from '../ui-setting/ant/loading-file';
 import { ListFollowPosts } from './list-follow-posts';
@@ -55,7 +57,11 @@ const PublicPosts = ({ userVisitor, typeIds }: Props) => {
   ) : isErrorPosts ? (
     <ErrorFile title="404" description="Error find data please try again" />
   ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (
-    ''
+    <EmptyData
+      image={<MenuSquareIcon className="size-10" />}
+      title="This creator hasn't published anything yet!"
+      description={`When he does, his publications will appear here first.`}
+    />
   ) : (
     dataPosts?.pages
       .flatMap((page: any) => page?.data?.value)

@@ -26,7 +26,7 @@ import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
-  title: yup.string().optional(),
+  title: yup.string().required(),
   description: yup.string().optional(),
   enableVisibility: yup.boolean().required(),
   whoCanSee: yup
@@ -210,6 +210,7 @@ const CreateOrUpdateFormGalleryPost = ({
                       name="title"
                       placeholder="Title"
                       errors={errors}
+                      required
                     />
                   </div>
                   <div className="mt-4">

@@ -50,7 +50,7 @@ const ShopUserPublic = () => {
   );
   return (
     <>
-      <LayoutUserPublicSite title={`${product?.title ?? 'Shop'}`} user={user}>
+      <LayoutUserPublicSite title={`${product?.title || 'Shop'}`} user={user}>
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">

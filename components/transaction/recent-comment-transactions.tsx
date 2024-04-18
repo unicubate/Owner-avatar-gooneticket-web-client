@@ -23,6 +23,7 @@ export const RecentCommentTransactions = ({
   organizationId,
   model,
 }: Props) => {
+  const numberTake = 4;
   const { ref, inView } = useInView();
 
   const {
@@ -33,7 +34,7 @@ export const RecentCommentTransactions = ({
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteCommentsAPI({
-    take: 4,
+    take: numberTake,
     sort: 'DESC',
     modelIds: ['DONATION'],
     userReceiveId,
@@ -48,7 +49,7 @@ export const RecentCommentTransactions = ({
 
   const dataTableTransactions = isLoadingComments ? (
     <>
-      {itemsNumberArray(4).map((i, index) => (
+      {itemsNumberArray(numberTake).map((i, index) => (
         <li key={index} className="flex items-center space-x-2 py-2">
           <Skeleton className="size-10 rounded-full" />
           <div className="space-y-1">

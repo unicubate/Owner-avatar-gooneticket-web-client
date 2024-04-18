@@ -22,7 +22,7 @@ const GalleryUserPublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`Galleries - ${user?.profile?.firstName ?? 'User'} ${
+        title={`Galleries - ${user?.profile?.firstName || 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}
@@ -31,7 +31,7 @@ const GalleryUserPublic = () => {
           <div className="mx-auto max-w-full py-6">
             {/* {user?.id ? <SubHorizontalNavPublicUser user={user} /> : null} */}
 
-            <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
+            <div className="grid grid-cols-1 gap-6 py-2 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-8 xl:gap-3">
               {user?.id ? (
                 <PublicGallery
                   userVisitor={{

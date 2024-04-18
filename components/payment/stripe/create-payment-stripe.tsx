@@ -16,11 +16,6 @@ export type StripeProps = {
 };
 
 export const CreatePaymentStripe = (props: StripeProps) => {
-  const options = {
-    mode: 'payment',
-    currency: 'usd',
-    theme: 'stripe',
-  };
   const { data, paymentModel } = props;
 
   return (

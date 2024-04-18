@@ -24,18 +24,18 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
       : '';
   return (
     <>
-      {/* <div className="mt-4 flex">
+      <div className="mt-4 flex">
         {['AUDIO'].includes(item?.type) ? (
-          <div className="full items-center relative shrink-0 cursor-pointer">
+          <div className="full relative shrink-0 cursor-pointer items-center">
             <Avatar
               shape="square"
-              className="rounded-lg object-cover size-28"
+              className="size-28 rounded-lg object-cover"
               src={oneImage}
               alt={item?.title}
             />
           </div>
         ) : null}
-        <div className="w-full mt-9">
+        <div className="mt-9 w-full">
           <ReactH5AudioPlayer
             autoPlay={false}
             autoPlayAfterSrcChange={false}
@@ -68,7 +68,7 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
                 <>
                   {['MEMBERSHIP'].includes(String(item?.whoCanSee)) &&
                   item?.isValidSubscribe !== 1 ? (
-                    <LockKeyholeIcon className="justify-items-center size-10" />
+                    <LockKeyholeIcon className="size-10 justify-items-center" />
                   ) : (
                     <svg
                       className="size-11 text-black dark:text-white"
@@ -194,9 +194,9 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
             }
           />
         </div>
-      </div> */}
+      </div>
 
-      <div className="mt-4">
+      {/* <div className="mt-4">
         {['AUDIO'].includes(item?.type) ? (
           <div className="full relative shrink-0 cursor-pointer items-center">
             <Avatar
@@ -367,7 +367,7 @@ export const AudioPlayerInput = ({ folder, item }: Props) => {
             }
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

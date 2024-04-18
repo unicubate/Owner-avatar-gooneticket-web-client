@@ -21,12 +21,12 @@ const CommissionsUserPublic = () => {
     if (user?.profile?.enableCommission === false) {
       push(`${`/${username}`}`);
     }
-  }, [user]);
+  }, [user, push, username]);
 
   return (
     <>
       <LayoutUserPublicSite
-        title={`Commissions - ${user?.profile?.firstName ?? 'User'} ${
+        title={`Commissions - ${user?.profile?.firstName || 'User'} ${
           user?.profile?.lastName ?? ''
         }`}
         user={user}

@@ -243,13 +243,22 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
 
             {['MEMBERSHIP'].includes(item?.whoCanSee) &&
             item?.isValidSubscribe !== 1 ? (
-              <button className="ml-3">
+              <ButtonInput
+                className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                variant="link"
+                type="button"
+              >
                 <MessageCircleIcon className="size-7" />
-              </button>
+              </ButtonInput>
             ) : (
-              <button onClick={() => setIsComment(true)} className="ml-3">
+              <ButtonInput
+                onClick={() => setIsComment(true)}
+                className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                variant="link"
+                type="button"
+              >
                 <MessageCircleIcon className="size-7" />
-              </button>
+              </ButtonInput>
             )}
 
             {item?.totalComment > 0 ? (
@@ -266,24 +275,26 @@ export const ListFollowPosts = ({ item, commentTake, userVisitor }: Props) => {
                   variant="link"
                   type="button"
                 >
-                  <ShareIcon className="size-7" />
+                  <ShareIcon className="size-6" />
                 </ButtonInput>
               }
             />
 
-            {userVisitor?.id === item?.userId ? (
-              <>
-                <Link
-                  title="Edit"
-                  href={`/posts/${
-                    item?.id
-                  }/edit?type=${item?.type.toLocaleLowerCase()}`}
-                  className="hover:text-green-400 focus:ring-green-400"
-                >
-                  <PencilIcon className="size-6" />
-                </Link>
-              </>
-            ) : null}
+            <div className="ml-auto">
+              {userVisitor?.id === item?.userId ? (
+                <>
+                  <Link
+                    title="Edit"
+                    href={`/posts/${
+                      item?.id
+                    }/edit?type=${item?.type.toLocaleLowerCase()}`}
+                    className="hover:text-gray-400 focus:ring-gray-900"
+                  >
+                    <PencilIcon className="size-5" />
+                  </Link>
+                </>
+              ) : null}
+            </div>
 
             {/* {item?.whoCanSee === 'MEMBERSHIP' &&
             item?.isValidSubscribe !== 1 ? (

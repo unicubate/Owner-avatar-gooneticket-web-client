@@ -34,11 +34,7 @@ const Home = () => {
   }, [inView, fetchNextPage, hasNextPage]);
 
   const dataTablePosts = isLoadingPosts ? (
-    <>
-      {itemsNumberArray(4).map((i, index) => (
-        <PostSkeleton index={index} />
-      ))}
-    </>
+    itemsNumberArray(4).map((i, index) => <PostSkeleton index={index} />)
   ) : isErrorPosts ? (
     <ErrorFile title="404" description="Error find data please try again" />
   ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (

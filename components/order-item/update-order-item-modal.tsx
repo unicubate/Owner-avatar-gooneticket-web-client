@@ -312,7 +312,7 @@ export function UpdateOrderItemModal(props: {
 
             <div className="py-2">
               <h2 className="text-base font-bold">Payment details</h2>
-              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
+              <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                 <div className="mb-2">
                   <Label
                     htmlFor={'quantity'}
@@ -345,7 +345,7 @@ export function UpdateOrderItemModal(props: {
                     readOnly
                   />
                 </div>
-                <div className="mb-2">
+                {/* <div className="mb-2">
                   <Label
                     htmlFor={'quantity'}
                     className="mb-2 block text-sm font-bold"
@@ -360,7 +360,7 @@ export function UpdateOrderItemModal(props: {
                     placeholder=" Payment Method"
                     readOnly
                   />
-                </div>
+                </div> */}
               </div>
             </div>
 

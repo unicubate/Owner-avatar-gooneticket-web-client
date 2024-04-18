@@ -212,6 +212,12 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => push(`/settings`)}>
+                          <span className="cursor-pointer">
+                            {t.formatMessage({ id: 'MENU.SETTING' })}
+                          </span>
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
                           <span className="cursor-pointer">
                             {t.formatMessage({ id: 'MENU.LOGOUT' })}
