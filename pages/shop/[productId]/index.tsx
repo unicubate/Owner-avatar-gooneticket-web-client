@@ -62,12 +62,14 @@ const ShopUserPublic = () => {
                 <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
                   <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">
-                      <PublicLastProducts
-                        userVisitor={{
-                          id: user?.id,
-                          organizationId: user?.organizationId,
-                        }}
-                      />
+                      {product?.id && (
+                        <PublicLastProducts
+                          userVisitor={{
+                            id: user?.id,
+                            organizationId: user?.organizationId,
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
