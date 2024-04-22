@@ -17,7 +17,7 @@ interface Props {
   isOpen?: boolean;
   setIsOpen?: any;
   variant?: VariantButton;
-  buttonDialog: React.ReactNode;
+  buttonDialog?: React.ReactNode;
   onClick: (node?: Element | null) => void;
 }
 

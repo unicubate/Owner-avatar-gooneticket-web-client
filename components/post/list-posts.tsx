@@ -116,13 +116,13 @@ const ListPosts = ({ item, index }: Props) => {
         <div className="py-4 text-right text-sm font-medium">
           <ButtonCopy
             size="icon"
-            variant="ghost"
+            variant="link"
             link={`${process.env.NEXT_PUBLIC_SITE}/posts/${item?.slug}`}
             iconClassName="size-4 text-gray-600 hover:text-green-600"
           />
 
           <ButtonInput
-            variant="ghost"
+            variant="link"
             type="button"
             size="icon"
             icon={
@@ -146,7 +146,7 @@ const ListPosts = ({ item, index }: Props) => {
             description="Are you sure you want to delete this?"
             buttonDialog={
               <ButtonInput
-                variant="ghost"
+                variant="link"
                 type="button"
                 size="icon"
                 icon={

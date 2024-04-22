@@ -95,7 +95,7 @@ const MembershipsLevels = () => {
                         size="sm"
                         variant="info"
                         onClick={() => router.push(`${`/memberships/create`}`)}
-                        icon={<PlusIcon className="mr-2 size-4" />}
+                        icon={<PlusIcon className="size-4" />}
                       >
                         Create level
                       </ButtonInput>

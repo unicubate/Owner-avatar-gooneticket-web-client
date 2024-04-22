@@ -88,6 +88,11 @@ const Configs = () => {
 
             <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
               <div className="px-4 py-5 sm:p-6">
+                <div className="py-2 sm:mt-0">
+                  <p className="text-base font-bold text-gray-900 dark:text-white">
+                    Categories
+                  </p>
+                </div>
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-2 sm:mt-0">
                     <ButtonInput
@@ -96,7 +101,7 @@ const Configs = () => {
                       size="sm"
                       variant="info"
                       onClick={() => setShowCategoryModal(true)}
-                      icon={<PlusIcon className="mr-2 size-4" />}
+                      icon={<PlusIcon className="size-4" />}
                     >
                       Create category
                     </ButtonInput>
@@ -109,18 +114,11 @@ const Configs = () => {
                   </div>
                 </div>
 
-                <div className="mt-8 flow-root">
-                  <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
-                    {showCategoryModal ? (
-                      <CreateOrUpdateCategory
-                        showModal={showCategoryModal}
-                        setShowModal={setShowCategoryModal}
-                      />
-                    ) : null}
-
+                <table className="mt-4 min-w-full lg:divide-y">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
                     {dataTableCategories}
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -164,25 +162,18 @@ const Configs = () => {
                       size="sm"
                       variant="info"
                       onClick={() => setShowModal(true)}
-                      icon={<PlusIcon className="mr-2 size-4" />}
+                      icon={<PlusIcon className="size-4" />}
                     >
                       Create discount
                     </ButtonInput>
                   </div>
                 </div>
 
-                <div className="mt-8 flow-root">
-                  <div className="-my-5 divide-y divide-gray-100 dark:divide-gray-900">
-                    {showModal ? (
-                      <CreateOrUpdateDiscountModal
-                        showModal={showModal}
-                        setShowModal={setShowModal}
-                      />
-                    ) : null}
-
+                <table className="mt-4 min-w-full lg:divide-y">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
                     {dataTableDiscounts}
-                  </div>
-                </div>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -197,6 +188,20 @@ const Configs = () => {
           </div>
         </div>
       </LayoutDashboard>
+
+      {showModal ? (
+        <CreateOrUpdateDiscountModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
+      ) : null}
+
+      {showCategoryModal ? (
+        <CreateOrUpdateCategory
+          showModal={showCategoryModal}
+          setShowModal={setShowCategoryModal}
+        />
+      ) : null}
     </>
   );
 };

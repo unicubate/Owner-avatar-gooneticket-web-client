@@ -101,7 +101,7 @@ export const TableGallery = ({ userVisitor, albumId }: Props) => {
                         })}`,
                       )
                     }
-                    icon={<PlusIcon className="mr-2 size-4" />}
+                    icon={<PlusIcon className="size-4" />}
                   >
                     Add Image
                   </ButtonInput>
@@ -115,7 +115,7 @@ export const TableGallery = ({ userVisitor, albumId }: Props) => {
                     onClick={() =>
                       push(`/posts/create?${queyParamsFunc({ type: 'album' })}`)
                     }
-                    icon={<PlusIcon className="mr-2 size-4" />}
+                    icon={<PlusIcon className="size-4" />}
                   >
                     New Album
                   </ButtonInput>

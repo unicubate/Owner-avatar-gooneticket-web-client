@@ -1,4 +1,3 @@
-import { AlertSuccessNotification } from '@/utils';
 import { CheckIcon, CopyIcon } from 'lucide-react';
 import { useState } from 'react';
 import { SizeButton, VariantButton } from '../ui/button';
@@ -7,6 +6,7 @@ import { ButtonInput } from './index';
 interface Props {
   children?: React.ReactNode;
   link: string;
+  title?: string;
   variant: VariantButton;
   size: SizeButton;
   iconClassName: string;
@@ -17,6 +17,7 @@ export const ButtonCopy = ({
   link,
   variant,
   size,
+  title = 'Copy',
   iconClassName,
 }: Props) => {
   const [copied, setCopied] = useState(false);
@@ -24,17 +25,13 @@ export const ButtonCopy = ({
     await navigator.clipboard.writeText(link);
   };
 
-  copied &&
-    AlertSuccessNotification({
-      text: `Link copied successfully`,
-    });
-
   return (
     <>
       <ButtonInput
         variant={variant}
         type="button"
         size={size}
+        title={title}
         icon={
           copied ? (
             <CheckIcon className={iconClassName} />

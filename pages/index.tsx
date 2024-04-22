@@ -85,8 +85,8 @@ export default function Home() {
           <div className="overflow-hidden rounded dark:bg-black/15">
             <div className="p-4">
               <p className="text-base leading-relaxed text-gray-600">
-                We don't call them "customers" or transactions. They are your
-                supporters.
+                {`We don't call them "customers" or transactions. They are your
+                supporters.`}
               </p>
             </div>
           </div>

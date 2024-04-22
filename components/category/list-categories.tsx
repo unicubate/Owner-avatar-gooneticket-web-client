@@ -3,20 +3,16 @@ import { DeleteOneCategoryAPI } from '@/api-site/category';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
-  formateDate,
+  formateFromNow,
 } from '@/utils';
-import { Tooltip } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateCategory } from './create-or-update-category';
 
-const ListCategories: React.FC<{ item: any; index: number }> = ({
-  item,
-  index,
-}) => {
+const ListCategories = ({ item, index }: { item: any; index: number }) => {
   const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
   const [showModal, setShowModal] = useState(false);
 
@@ -46,47 +42,57 @@ const ListCategories: React.FC<{ item: any; index: number }> = ({
 
   return (
     <>
-      <div key={index} className="py-4">
-        <div className="flex items-center">
-          <p className="text-sm font-bold">{item?.name}</p>
-
-          <div className="ml-auto">
-            <p className="mt-1 text-sm font-medium">
-              {formateDate(item?.createdAt as Date, locale as string)}
-            </p>
+      <tr key={index}>
+        <td className="py-4 text-sm font-bold">
+          <div className="flex min-w-0 flex-1 items-center">
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-gray-900 dark:text-white">
+                {item?.name}
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
+                {formateFromNow(item?.createdAt as Date, locale)}
+              </p>
+            </div>
           </div>
+        </td>
 
-          <div className="ml-auto">
-            <Tooltip placement="bottomRight" title={'Edit'}>
-              <button
-                onClick={() => setShowModal(true)}
-                title="Edit"
-                className="ml-2 text-gray-600 hover:text-indigo-600"
-              >
-                <PencilIcon className="size-4" />
-              </button>
-            </Tooltip>
+        <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
+          {formateFromNow(item?.createdAt as Date, locale)}
+        </td>
 
-            <ActionModalDialog
-              title="Delete?"
-              loading={loading}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              onClick={() => deleteItem(item)}
-              description="Are you sure you want to delete this category?"
-              buttonDialog={
-                <ButtonInput
-                  className="text-sm text-gray-600 hover:text-red-600"
-                  variant="link"
-                  type="button"
-                >
-                  <TrashIcon className="size-4" />
-                </ButtonInput>
-              }
-            />
-          </div>
-        </div>
-      </div>
+        <td className="py-2 text-right text-sm font-medium">
+          <ButtonInput
+            variant="link"
+            type="button"
+            size="icon"
+            title="Edit"
+            icon={
+              <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+            }
+            onClick={() => setShowModal(true)}
+          />
+
+          <ActionModalDialog
+            title="Delete?"
+            loading={loading}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            onClick={() => deleteItem(item)}
+            description="Are you sure you want to delete this category?"
+            buttonDialog={
+              <ButtonInput
+                variant="link"
+                type="button"
+                size="icon"
+                title="Delete"
+                icon={
+                  <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
+                }
+              />
+            }
+          />
+        </td>
+      </tr>
 
       {showModal ? (
         <CreateOrUpdateCategory

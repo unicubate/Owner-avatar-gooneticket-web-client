@@ -145,9 +145,13 @@ const StripeCheckoutForm = ({ data, paymentModel }: StripeProps) => {
         </div>
       </div>
 
-      <Alert variant="destructive" className="mb-4">
-        <AlertDescription>{hasErrors}</AlertDescription>
-      </Alert>
+      {hasErrors && (
+        <Alert variant="destructive" className="mb-4 bg-red-600 text-center">
+          <AlertDescription className="text-white">
+            {hasErrors}
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="mt-4">
         <TextInput

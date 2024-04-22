@@ -156,8 +156,13 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
             <h2 className="text-base font-bold"> Profile </h2>
 
             {hasErrors && (
-              <Alert variant="destructive" className="mt-2">
-                <AlertDescription>{hasErrors}</AlertDescription>
+              <Alert
+                variant="destructive"
+                className="mb-4 bg-red-600 text-center"
+              >
+                <AlertDescription className="text-white">
+                  {hasErrors}
+                </AlertDescription>
               </Alert>
             )}
 

@@ -48,7 +48,7 @@ const ProfilePublic = () => {
             </div>
 
             <div className="my-8 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-              {userVisiter && userVisiter?.id !== user?.id && (
+              {userVisiter && userVisiter?.id !== user?.id ? (
                 <div className="py-2 sm:mt-0">
                   <ButtonInput
                     type="button"
@@ -61,7 +61,7 @@ const ProfilePublic = () => {
                     Send message
                   </ButtonInput>
                 </div>
-              )}
+              ):null}
 
               {user?.profile?.description && (
                 <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">

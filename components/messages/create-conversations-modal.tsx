@@ -80,10 +80,15 @@ export function CreateConversationsModal(props: {
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
-                <Alert variant="destructive">
+                <Alert
+                  variant="destructive"
+                  className="mb-4 bg-red-600 text-center"
+                >
                   <ExclamationTriangleIcon className="size-4" />
-                  <AlertTitle>Error</AlertTitle>
-                  <AlertDescription>{hasErrors}</AlertDescription>
+                  <AlertTitle className="text-white">Error</AlertTitle>
+                  <AlertDescription className="text-white">
+                    {hasErrors}
+                  </AlertDescription>
                 </Alert>
               )}
 

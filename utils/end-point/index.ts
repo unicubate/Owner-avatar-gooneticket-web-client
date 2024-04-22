@@ -164,6 +164,12 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneDiscount: PUT(`${baseUrl}/discounts/:discountId`),
   deleteOneDiscount: DELETE(`${baseUrl}/discounts/:discountId`),
 
+  /****************** Affiliations route */
+  getAffiliations: GET(`${baseUrl}/affiliations`),
+  createOneAffiliation: POST(`${baseUrl}/affiliations`),
+  updateOneAffiliation: PUT(`${baseUrl}/affiliations/:affiliationId`),
+  deleteOneAffiliation: DELETE(`${baseUrl}/affiliations/:affiliationId`),
+
   /****************** Categories route */
   getCategories: GET(`${baseUrl}/categories`),
   createOneCategory: POST(`${baseUrl}/categories`),

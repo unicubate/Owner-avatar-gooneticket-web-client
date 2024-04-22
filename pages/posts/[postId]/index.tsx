@@ -38,7 +38,6 @@ const PostShow = () => {
       />
     ) : (
       <>
-        {' '}
         {post?.id && user?.id ? (
           <ListFollowPosts
             item={post}
@@ -95,12 +94,14 @@ const PostShow = () => {
                 </div> */}
 
                 <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                  <PublicLastPosts
-                    userVisitor={{
-                      id: userVisitor?.id,
-                      organizationId: post?.organizationId,
-                    }}
-                  />
+                  {post?.id && (
+                    <PublicLastPosts
+                      userVisitor={{
+                        id: userVisitor?.id,
+                        organizationId: post?.organizationId,
+                      }}
+                    />
+                  )}
                 </div>
               </div>
             </div>

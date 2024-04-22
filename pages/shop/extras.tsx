@@ -104,7 +104,7 @@ const ShopsExtras = () => {
                         size="sm"
                         variant="info"
                         onClick={() => router.push(`${`/shop/create`}`)}
-                        icon={<PlusIcon className="mr-2 size-4" />}
+                        icon={<PlusIcon className="size-4" />}
                       >
                         Create product
                       </ButtonInput>

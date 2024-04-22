@@ -4,19 +4,17 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
   formateDate,
+  formateFromNow,
 } from '@/utils';
-import { Tag, Tooltip } from 'antd';
+import { Tag } from 'antd';
 import { PencilIcon, TrashIcon } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateDiscountModal } from './create-or-update-discount-modal';
 
-const ListDiscounts: React.FC<{ item: any; index: number }> = ({
-  item,
-  index,
-}) => {
+const ListDiscounts = ({ item, index }: { item: any; index: number }) => {
   const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const [showModal, setShowModal] = useState(false);
@@ -46,25 +44,77 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
   };
   return (
     <>
-      <div key={index} className="py-4">
-        <div className="flex items-center">
-          <>
-            <p className="text-sm font-bold">
-              {item?.percent}% Off Commissions
-            </p>
-            <p className="ml-2 mt-1 text-sm font-medium">{item?.code}</p>
-          </>
+      <tr key={index}>
+        <td className="py-4 text-sm font-bold">
+          <div className="flex min-w-0 flex-1 items-center">
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-gray-900 dark:text-white">
+                {item?.percent}% Off Commissions
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
+                {formateFromNow(item?.createdAt, locale)}
+              </p>
+            </div>
+          </div>
+        </td>
 
-          <div className="ml-auto">
-            <p className="mt-1 text-sm font-medium">
+        <td className="hidden text-left text-sm font-medium dark:text-white lg:table-cell">
+          <Tag
+            bordered={false}
+            className="ml-2"
+            color={`${item.isValid ? 'success' : 'error'}`}
+          >
+            {item.isValid ? 'Valid' : 'Invalid'}
+          </Tag>
+        </td>
+
+        <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
+          {item?.enableExpiredAt
+            ? `Ends Midnight ${formateDate(item?.expiredAt, locale)}`
+            : `Never Expires `}
+        </td>
+
+        <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
+          {formateFromNow(item?.createdAt, locale)}
+        </td>
+
+        <td className="py-4 text-right text-sm font-medium">
+          <ButtonInput
+            variant="link"
+            type="button"
+            size="icon"
+            icon={
+              <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+            }
+            onClick={() => setShowModal(true)}
+          />
+
+          <ActionModalDialog
+            title="Delete?"
+            loading={loading}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            onClick={() => deleteItem(item)}
+            description="Are you sure you want to delete this?"
+            buttonDialog={
+              <ButtonInput
+                variant="link"
+                type="button"
+                size="icon"
+                icon={
+                  <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
+                }
+              />
+            }
+          />
+
+          <div className="mt-1 pt-1 lg:hidden">
+            <p className="inline-flex">
               {item?.enableExpiredAt
                 ? `Ends Midnight ${formateDate(item?.expiredAt, locale)}`
                 : `Never Expires `}
             </p>
-          </div>
-
-          <div className="ml-auto">
-            <button className="ml-2 text-lg font-bold transition-all duration-200">
+            <p className="ml-2 inline-flex">
               <Tag
                 bordered={false}
                 className="ml-2"
@@ -72,37 +122,10 @@ const ListDiscounts: React.FC<{ item: any; index: number }> = ({
               >
                 {item.isValid ? 'Valid' : 'Invalid'}
               </Tag>
-            </button>
-
-            <Tooltip placement="bottomRight" title={'Edit'}>
-              <button
-                onClick={() => setShowModal(true)}
-                title="Edit"
-                className="ml-2 text-gray-600 hover:text-indigo-600"
-              >
-                <PencilIcon className="size-4" />
-              </button>
-            </Tooltip>
-            <ActionModalDialog
-              title="Delete?"
-              loading={loading}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              onClick={() => deleteItem(item)}
-              description="Are you sure you want to delete this discount?"
-              buttonDialog={
-                <ButtonInput
-                  className="text-sm text-gray-600 hover:text-red-600"
-                  variant="link"
-                  type="button"
-                >
-                  <TrashIcon className="size-4" />
-                </ButtonInput>
-              }
-            />
+            </p>
           </div>
-        </div>
-      </div>
+        </td>
+      </tr>
 
       {showModal ? (
         <CreateOrUpdateDiscountModal

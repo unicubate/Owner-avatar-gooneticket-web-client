@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import {
   Dice6Icon,
   ExternalLinkIcon,
+  FanIcon,
   HeartHandshakeIcon,
   HeartIcon,
   HomeIcon,
@@ -105,11 +106,11 @@ const VerticalNavDashboard = ({ user }: Props) => {
       href: '/settings',
       icon: <SettingsIcon className={classIcon} />,
     },
-    // {
-    //   title: `${t('affiliates')}`,
-    //   href: '/affiliates',
-    //   icon: <FanIcon className={classIcon} />,
-    // },
+    {
+      title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
+      href: '/affiliates',
+      icon: <FanIcon className={classIcon} />,
+    },
   ]);
 
   const bgColor = `bg-${user?.profile?.color}-600 text-white`;

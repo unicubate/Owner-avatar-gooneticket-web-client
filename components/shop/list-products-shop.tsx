@@ -14,16 +14,28 @@ import {
   CalendarIcon,
   GlobeIcon,
   LockKeyholeIcon,
+  MoreHorizontalIcon,
   PencilIcon,
+  ShareIcon,
   TrashIcon,
+  UserPlusIcon,
   WalletIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { formateDate } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
-import { ButtonCopy } from '../ui-setting/button-copy';
+import { CopyShareLink } from '../ui-setting';
 import { ActionModalDialog } from '../ui-setting/shadcn';
+import { Button } from '../ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 type Props = {
   item?: ProductModel;
@@ -32,6 +44,8 @@ type Props = {
 
 const ListProductsShop = ({ item, index }: Props) => {
   const { push } = useRouter();
+  const [copied, setCopied] = useState(false);
+  const [isAffiliate, setIsAffiliate] = useState(false);
   const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
@@ -145,44 +159,63 @@ const ListProductsShop = ({ item, index }: Props) => {
           </div>
 
           <div className="py-4 text-right text-sm font-medium text-gray-600">
-            <ButtonCopy
-              size="icon"
-              variant="ghost"
-              link={`${process.env.NEXT_PUBLIC_SITE}/shop/${item?.slug}`}
-              iconClassName="size-4 text-gray-600 hover:text-green-600"
-            />
-
-            <ButtonInput
-              variant="ghost"
-              type="button"
-              size="icon"
-              icon={
-                <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-              }
-              onClick={() => push(`/shop/${item?.id}/edit`)}
-            />
-
-            <ActionModalDialog
-              title="Delete?"
-              loading={loading}
-              isOpen={isOpen}
-              setIsOpen={setIsOpen}
-              onClick={() => deleteItem(item)}
-              description="Are you sure you want to delete this?"
-              buttonDialog={
-                <ButtonInput
-                  variant="ghost"
-                  type="button"
-                  size="icon"
-                  icon={
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button type="button" size="icon" variant="ghost">
+                  <MoreHorizontalIcon className="size-5 text-gray-400" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#121212]">
+                <DropdownMenuGroup>
+                  <DropdownMenuItem
+                    onClick={() => push(`/shop/${item?.id}/affiliations`)}
+                  >
+                    <UserPlusIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                    <span className="ml-2 cursor-pointer">Affiliate</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setCopied(true)}>
+                    <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                    <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                      Share
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={() => push(`/shop/${item?.id}/edit`)}
+                  >
+                    <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                    <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                      Edit
+                    </span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => setIsOpen(true)}>
                     <TrashIcon className="size-4 text-gray-600 hover:text-red-600" />
-                  }
-                />
-              }
-            />
+                    <span className="ml-2 cursor-pointer hover:text-red-600">
+                      Delete
+                    </span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
       </div>
+      {/**** Copy and delete *****/}
+      <CopyShareLink
+        isOpen={copied}
+        setIsOpen={setCopied}
+        link={`${process.env.NEXT_PUBLIC_SITE}/shop/${item?.slug}`}
+      />
+      <ActionModalDialog
+        title="Delete?"
+        loading={loading}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onClick={() => deleteItem(item)}
+        description="Are you sure you want to delete this?"
+      />
     </>
   );
 };

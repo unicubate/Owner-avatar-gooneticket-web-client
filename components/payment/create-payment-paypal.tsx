@@ -12,6 +12,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   const {
     userAddress,
     amount,
+    affiliate,
     membershipId,
     cartOrderId,
     userBuyerId,
@@ -39,6 +40,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(false);
     const payload = {
+      affiliate,
       userAddress,
       cartOrderId,
       membershipId,

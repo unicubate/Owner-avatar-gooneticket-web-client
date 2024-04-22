@@ -100,8 +100,13 @@ const CreatePaymentPayPalFormCardUser = (props: {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex-auto justify-center p-2">
                 {hasErrors && (
-                  <Alert variant="destructive" className="mb-4">
-                    <AlertDescription> {hasErrors}</AlertDescription>
+                  <Alert
+                    variant="destructive"
+                    className="mb-4 bg-red-600 text-center"
+                  >
+                    <AlertDescription className="text-white">
+                      {hasErrors}
+                    </AlertDescription>
                   </Alert>
                 )}
 

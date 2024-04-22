@@ -16,7 +16,7 @@ interface Props {
   link: string;
   isOpen: boolean;
   setIsOpen: any;
-  buttonDialog: React.ReactNode;
+  buttonDialog?: React.ReactNode;
 }
 
 export const CopyShareLink = ({

@@ -100,8 +100,13 @@ const ConfirmEmail = () => {
           </div>
           <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
-              <Alert variant="destructive" className="mb-4">
-                <AlertDescription>{hasErrors}</AlertDescription>
+              <Alert
+                variant="destructive"
+                className="mb-4 bg-red-600 text-center"
+              >
+                <AlertDescription className="text-white">
+                  {hasErrors}
+                </AlertDescription>
               </Alert>
             )}
 

@@ -25,7 +25,7 @@ const CheckoutShop = () => {
   const [isCardPay, setIsCardPay] = useState<boolean>(true);
   const { userStorage: userBayer } = useInputState();
   const { query, push } = useRouter();
-  const { id: cartOrderId, username } = query;
+  const { id: cartOrderId, username, affiliate } = query;
 
   const { data: userAddress } = GetOneUserAddressMeAPI();
   const {
@@ -91,7 +91,7 @@ const CheckoutShop = () => {
                         <div className="mb-2 flex items-center">
                           <AvatarComponent
                             size={40}
-                            className="size-10 shrink-0 rounded-full"
+                            className="size-10 shrink-0 rounded-full border"
                             profile={carts?.cartItems[0]?.profileVendor}
                           />
 
@@ -235,6 +235,7 @@ const CheckoutShop = () => {
                                   <CreateCardStripe
                                     paymentModel="STRIPE-SHOP"
                                     data={{
+                                      affiliate,
                                       userAddress,
                                       cartOrderId,
                                       amount: newAmount,
@@ -252,6 +253,7 @@ const CheckoutShop = () => {
                                 <CreatePaymentPayPal
                                   paymentModel="PAYPAL-SHOP"
                                   data={{
+                                    affiliate,
                                     userAddress,
                                     cartOrderId,
                                     amount: newAmount,
