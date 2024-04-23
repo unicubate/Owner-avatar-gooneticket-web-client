@@ -11,9 +11,9 @@ import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import {
   AtomIcon,
+  CalendarDaysIcon,
   CalendarIcon,
   GlobeIcon,
-  LockKeyholeIcon,
   MoreHorizontalIcon,
   PencilIcon,
   ShareIcon,
@@ -41,7 +41,7 @@ type Props = {
   index: number;
 };
 
-const ListProductsShop = ({ item, index }: Props) => {
+const ListProductsEvent = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [copied, setCopied] = useState(false);
   const [isAffiliate, setIsAffiliate] = useState(false);
@@ -58,7 +58,7 @@ const ListProductsShop = ({ item, index }: Props) => {
     try {
       await saveMutation({ productId: item?.id });
       AlertSuccessNotification({
-        text: 'Product deleted successfully',
+        text: 'Event deleted successfully',
       });
       setLoading(false);
       setIsOpen(false);
@@ -73,7 +73,7 @@ const ListProductsShop = ({ item, index }: Props) => {
 
   const { status, data: dataImages } = GetUploadsAPI({
     organizationId: item?.organizationId,
-    model: 'PRODUCT',
+    model: 'EVENT',
     uploadableId: `${item?.id}`,
     uploadType: 'image',
   });
@@ -100,9 +100,9 @@ const ListProductsShop = ({ item, index }: Props) => {
 
           <div className="ml-3 min-w-0 flex-1 cursor-pointer">
             <div className="flex items-center text-gray-600">
-              <button className="font-normal">
+              <span className="font-bold">
                 <CalendarIcon className="size-4" />
-              </button>
+              </span>
               <span className="ml-1.5 text-sm font-normal">
                 {formateDate(item?.createdAt as Date, locale)}
               </span>
@@ -119,23 +119,26 @@ const ListProductsShop = ({ item, index }: Props) => {
               <span className="font-bold">
                 <AtomIcon className="size-4" />
               </span>
-              <span className="ml-1.5 text-sm">{item?.productType}</span>
+              <span className="ml-2 text-sm">{item?.productType}</span>
 
-              <span className="ml-1.5">
-                {item?.whoCanSee === 'PUBLIC' ? (
-                  <GlobeIcon className="size-4" />
-                ) : (
-                  <LockKeyholeIcon className="size-4" />
-                )}
+              <span className="ml-2">
+                <GlobeIcon className="size-4" />
               </span>
-              <span className="ml-1.5 text-sm">{item?.whoCanSee}</span>
+              <span className="ml-1.5 text-sm">{item?.model}</span>
             </div>
 
             <div className="mt-4 flex items-center font-medium text-gray-600">
-              <button className="font-normal">
+              <span className="font-bold">
+                <CalendarDaysIcon className="size-4" />
+              </span>
+              <span className="ml-2 text-sm font-normal">
+                {formateDate(item?.expiredAt as Date, locale)}
+              </span>
+
+              <span className="ml-2 font-bold">
                 <WalletIcon className="size-4" />
-              </button>
-              <span className="ml-1.5 text-sm">
+              </span>
+              <span className="ml-2 text-sm">
                 {formatePrice({
                   value: Number(item?.priceDiscount ?? 0),
                   isDivide: false,
@@ -144,7 +147,7 @@ const ListProductsShop = ({ item, index }: Props) => {
               </span>
 
               {item?.enableDiscount ? (
-                <span className="ml-1.5 text-sm text-red-600">
+                <span className="ml-2 text-sm text-red-600">
                   <del>
                     {formatePrice({
                       value: Number(item?.price ?? 0),
@@ -154,6 +157,8 @@ const ListProductsShop = ({ item, index }: Props) => {
                   </del>
                 </span>
               ) : null}
+
+
             </div>
           </div>
 
@@ -174,7 +179,7 @@ const ListProductsShop = ({ item, index }: Props) => {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
-                    onClick={() => push(`/shop/${item?.id}/edit`)}
+                    onClick={() => push(`/events/${item?.id}/edit`)}
                   >
                     <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
                     <span className="ml-2 cursor-pointer hover:text-indigo-600">
@@ -198,7 +203,7 @@ const ListProductsShop = ({ item, index }: Props) => {
       <CopyShareLink
         isOpen={copied}
         setIsOpen={setCopied}
-        link={`${process.env.NEXT_PUBLIC_SITE}/shop/${item?.slug}`}
+        link={`${process.env.NEXT_PUBLIC_SITE}/events/${item?.slug}`}
       />
       <ActionModalDialog
         title="Delete?"
@@ -212,4 +217,4 @@ const ListProductsShop = ({ item, index }: Props) => {
   );
 };
 
-export { ListProductsShop };
+export { ListProductsEvent };

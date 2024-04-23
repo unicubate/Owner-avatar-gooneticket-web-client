@@ -20,7 +20,7 @@ const CreateContributorModal = ({
   setShowModal: any;
   buttonDialog: React.ReactNode;
 }) => {
-  const { search, isOpen, setIsOpen, handleSetSearch, hasErrors } =
+  const { search, isOpen, setIsOpen, handleSetSearch, hasErrors, t } =
     useInputState();
 
   const {

@@ -4,7 +4,6 @@ import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
 import { PublicPostsHome } from '@/components/post/public-posts-home';
-import { RecentCommentTransactions } from '@/components/transaction/recent-comment-transactions';
 import { ButtonInput } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
@@ -25,9 +24,8 @@ const ProfilePublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName || 'User'} ${
-          user?.profile?.lastName ?? ''
-        }`}
+        title={`${user?.profile?.firstName || 'User'} ${user?.profile?.lastName ?? ''
+          }`}
         user={user}
       >
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -61,7 +59,7 @@ const ProfilePublic = () => {
                     Send message
                   </ButtonInput>
                 </div>
-              ):null}
+              ) : null}
 
               {user?.profile?.description && (
                 <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
@@ -95,18 +93,7 @@ const ProfilePublic = () => {
                 </div>
               ) : null}
 
-              {user?.donation?.count > 0 ? (
-                <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                  <div className="flow-root">
-                    <RecentCommentTransactions
-                      model="DONATION"
-                      modelIds={['DONATION']}
-                      userReceiveId={user?.id}
-                      organizationId={user?.organizationId}
-                    />
-                  </div>
-                </div>
-              ) : null}
+
             </div>
           </div>
         </div>

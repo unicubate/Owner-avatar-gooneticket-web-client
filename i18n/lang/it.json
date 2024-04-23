@@ -66,7 +66,16 @@
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Le client a été mis à jour",
   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Le client a été créé",
 
-  "MENU.DASHBOARD": "Cruscotto",
+  "INPUT.ROLE": "Ruolo",
+  "INPUT.EMAIL": "Email",
+  "INPUT.FIRSTNAME": "Nome",
+  "INPUT.LASTNAME": "Cognome",
+
+  "ACTION.INVITE": "Invitare",
+  "ACTION.NO.CANCEL": "No, Annulla",
+  "ACTION.YES.CONTINUE": "SI, Continua",
+
+  "MENU.DASHBOARD": "Dashboard",
   "MENU.HOME": "Home",
   "MENU.GALLERY": "Gallerie",
   "MENU.POST": "Poste",
@@ -74,6 +83,7 @@
   "MENU.DONATION": "Don",
   "MENU.PAGE": "Tua pagina",
   "MENU.SHOP": "Negozio",
+  "MENU.EVENT": "Eventi",
   "MENU.MESSAGE": "Messaggi",
   "MENU.COMMISSION": "Commissioni",
   "MENU.FEED": "Aggiornamento",
@@ -82,17 +92,19 @@
   "MENU.SETTING": "Parametri",
   "MENU.LOGOUT": "Disconnessione",
   "MENU.LOGIN": "Connessione",
-  "MENU.CONTRIBUTOR": "Contribuenti",
+  "MENU.CONTRIBUTOR": "Team",
   "MENU.REGISTER": "Registrazione",
-  "MENU.PAYMENT": "Acquista",
+  "MENU.PAYMENT": "Acquisti",
   "MENU.AFFILIATE": "Affiliato",
   "MENU.FOLLOWER": "Abbonati",
   "MENU.FOLLOWING": "Seguito",
   "MENU.SUBSCRIBER": "Membri",
 
-  "TRANSACTION.LAST_DAY": "Ultimo {day} giorni",
+  "TRANSACTION.LAST_DAY": "Ultimi {day} giorni",
   "TRANSACTION.ALL_TIME": "Sempre",
   "TRANSACTION.WITHDRAW": "Ritiro",
+  "TRANSACTION.RECENT": "Transazioni recenti",
+  "TRANSACTION.ANY": "Hai nessuna transazione",
 
   "HOME.TITLE": "Tutto ciò che serve per guadagnare facendo ciò che si ama",
   "HOME.SUBTITLE": "Accettare il sostegno. Avviare un'associazione. Avviare un negozio. È più facile di quanto si pensi.",
@@ -104,5 +116,11 @@
   "DASHBOARD.FEATURE.3.TITLE": "Soci",
   "DASHBOARD.FEATURE.3.DESCRIPTION": "Abbonamento mensile per i vostri fan più accaniti.",
   "DASHBOARD.FEATURE.4.TITLE": "Prodotti di qualità",
-  "DASHBOARD.FEATURE.4.DESCRIPTION": "Prodotto con la massima cura"
+  "DASHBOARD.FEATURE.4.DESCRIPTION": "Prodotto con la massima cura",
+
+  "UTIL.RESEND_INVITATION": "Invia nuovamente l'invito",
+  "UTIL.SEARCH_BY": "Ricerca con nome, cognome, email",
+  "UTIL.CONFIRM_RESEND_INVITATION": "Sei sicuro di voler inviare nuovamente l'invito a questo utente?",
+  "UTIL.DELETE": "Eliminare",
+  "UTIL.CONFIRM_DELETE": "Sei sicuro di voler cancellare questo?"
 }

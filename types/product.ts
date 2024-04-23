@@ -20,11 +20,14 @@ export type ResponseProductModel = {
 
 export type ProductModel = {
   createdAt: Date;
+  expiredAt: Date;
   id: string;
   title: string;
   subTitle: string;
   slug: string;
   sku: string;
+  address: string;
+  city: string;
   whoCanSee: string;
   organizationId: string;
   urlMedia: string;
@@ -44,6 +47,10 @@ export type ProductModel = {
   model: ModelType;
   categoryId: string;
   totalComment: number;
+  country: {
+    code: string;
+    name: string;
+  };
   currency: {
     code: string;
     name: string;
@@ -78,6 +85,10 @@ export type ProductFormModel = {
   discountId: string;
   whoCanSee: string;
   categoryId: string;
+  city: string;
+  address: string;
+  countryId: string;
+  expiredAt: Date;
   productType: ProductType;
   enableDiscount: boolean;
   limitSlot: number;

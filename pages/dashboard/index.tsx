@@ -56,11 +56,8 @@ const Dashboard = () => {
     );
   }
 
-  const transactionDonation = transactions?.find(
-    (item) => item.model === 'DONATION',
-  );
-  const transactionMembership = transactions?.find(
-    (item) => item.model === 'MEMBERSHIP',
+  const transactionEvent = transactions?.find(
+    (item) => item.model === 'EVENT',
   );
   const transactionProduct = transactions?.find(
     (item) => item.model === 'PRODUCT',
@@ -208,34 +205,16 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-6 lg:grid-cols-3">
+              <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-1 sm:gap-6 lg:grid-cols-2">
                 <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                   <div className="px-5 py-4">
                     <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      {t.formatMessage({ id: 'MENU.MEMBERSHIP' })}
+                      {t.formatMessage({ id: 'MENU.EVENT' })}
                     </p>
                     <div className="mt-3 flex items-center justify-between">
                       <SerialPrice
                         className="text-xl font-bold text-gray-900 dark:text-white"
-                        value={Number(transactionMembership?.statistic?.amount)}
-                        currency={{
-                          code: user?.profile?.currency?.code,
-                          amount: String(user?.profile?.currency?.amount),
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
-                  <div className="px-5 py-4">
-                    <p className="text-xs font-medium uppercase tracking-wider text-gray-500">
-                      {t.formatMessage({ id: 'MENU.DONATION' })}
-                    </p>
-                    <div className="mt-3 flex items-center justify-between">
-                      <SerialPrice
-                        className="text-xl font-bold text-gray-900 dark:text-white"
-                        value={Number(transactionDonation?.statistic?.amount)}
+                        value={Number(transactionEvent?.statistic?.amount)}
                         currency={{
                           code: user?.profile?.currency?.code,
                           amount: String(user?.profile?.currency?.amount),

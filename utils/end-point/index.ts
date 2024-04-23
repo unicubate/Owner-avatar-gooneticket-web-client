@@ -14,11 +14,6 @@ export type IntegrationApiCall = {
   queryParams?: Object;
 };
 
-// const userToken =
-//   typeof window !== 'undefined'
-//     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-//     : null;
-
 export const makeApiCall = async ({
   action,
   body,
@@ -164,12 +159,6 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneDiscount: PUT(`${baseUrl}/discounts/:discountId`),
   deleteOneDiscount: DELETE(`${baseUrl}/discounts/:discountId`),
 
-  /****************** Affiliations route */
-  getAffiliations: GET(`${baseUrl}/affiliations`),
-  createOneAffiliation: POST(`${baseUrl}/affiliations`),
-  updateOneAffiliation: PUT(`${baseUrl}/affiliations/:affiliationId`),
-  deleteOneAffiliation: DELETE(`${baseUrl}/affiliations/:affiliationId`),
-
   /****************** Categories route */
   getCategories: GET(`${baseUrl}/categories`),
   createOneCategory: POST(`${baseUrl}/categories`),
@@ -187,21 +176,11 @@ export const apiEndpoints: ClientApiMethods = {
   readOneConversation: PUT(`${baseUrl}/conversations/:fkConversationId/readAt`),
   // deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
 
-  /****************** Albums route */
-  getAlbums: GET(`${baseUrl}/albums`),
-  createOneAlbum: POST(`${baseUrl}/albums`),
-  updateOneAlbum: PUT(`${baseUrl}/albums/:albumId`),
-  deleteOneAlbum: DELETE(`${baseUrl}/albums/:albumId`),
-
   /****************** UserAddress route */
   getOneUserAddress: GET(`${baseUrl}/user-address`),
   createOneUserAddress: POST(`${baseUrl}/user-address`),
   updateOneUserAddress: PUT(`${baseUrl}/user-address/:userAddressId`),
   deleteOneUserAddress: DELETE(`${baseUrl}/user-address/:userAddressId`),
-
-  /****************** Donations route */
-  getOneDonation: GET(`${baseUrl}/donations/show/:donationId`),
-  updateOneDonation: PUT(`${baseUrl}/donations/:donationId`),
 
   /****************** ContactUs route */
   createOneContact: POST(`${baseUrl}/contacts`),
@@ -216,13 +195,6 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneProduct: PUT(`${baseUrl}/products/:productId`),
   getOneProduct: GET(`${baseUrl}/products/view`),
   deleteOneProduct: DELETE(`${baseUrl}/products/:productId`),
-
-  /****************** Memberships route */
-  getMemberships: GET(`${baseUrl}/memberships`),
-  getOneMembership: GET(`${baseUrl}/memberships/view`),
-  createOneMembership: POST(`${baseUrl}/memberships`),
-  updateOneMembership: PUT(`${baseUrl}/memberships/:membershipId`),
-  deleteOneMembership: DELETE(`${baseUrl}/memberships/:membershipId`),
 
   /****************** Payments route */
   getOnePaymentsStripeClientSecret: GET(

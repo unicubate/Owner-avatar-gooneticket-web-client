@@ -1,7 +1,6 @@
 import { GetInfinitePostsAPI } from '@/api-site/post';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavCreatePost } from '@/components/post/horizontal-nav-create-post';
 import { ListPosts } from '@/components/post/list-posts';
 import { ButtonLoadMore } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
@@ -81,7 +80,6 @@ const Posts = () => {
       <LayoutDashboard title={'Posts'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-            <HorizontalNavCreatePost />
 
             {/* <div
               className={`mt-8 rounded-lg border border-gray-200 bg-white  px-3 py-2 dark:border-gray-800 dark:bg-[#121212]`}

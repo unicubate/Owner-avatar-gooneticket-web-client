@@ -35,6 +35,7 @@ export function ListContributors({ item, index }: Props) {
     setHasErrors,
     userStorage,
     locale,
+    t,
   } = useInputState();
 
   // Create or Update data
@@ -50,7 +51,7 @@ export function ListContributors({ item, index }: Props) {
   });
 
   const { mutateAsync: saveMutationDelete } = DeleteOneContributorAPI({
-    onSuccess: () => {},
+    onSuccess: () => { },
     onError: (error?: any) => {
       setHasErrors(error.response.data.message);
     },
@@ -131,48 +132,21 @@ export function ListContributors({ item, index }: Props) {
             </div>
           </div>
 
-          {/* <div className="flex text-center items-center">
-            <div className="flex -space-x-6">
-              <img
-                alt=""
-                className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-300"
-                src="https://source.unsplash.com/40x40/?portrait?1"
-              />
-              <img
-                alt=""
-                className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-300"
-                src="https://source.unsplash.com/40x40/?portrait?2"
-              />
-              <img
-                alt=""
-                className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-300"
-                src="https://source.unsplash.com/40x40/?portrait?3"
-              />
-              <img
-                alt=""
-                className="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-300"
-                src="https://source.unsplash.com/40x40/?portrait?4"
-              />
-              <span className="flex items-center justify-center w-10 h-10 font-semibold border rounded-full dark:bg-gray-50 dark:text-gray-800 dark:border-gray-300">
-                +3
-              </span>
-            </div>
-          </div> */}
 
           {item?.userId !== userStorage?.id ? (
             <div className="py-1 text-right text-sm font-medium">
               {!item?.confirmedAt && (
                 <ActionModalDialog
-                  title="Resend invitation?"
+                  title={t.formatMessage({ id: 'UTIL.RESEND_INVITATION' })}
                   loading={loading}
                   isOpen={isResend}
                   setIsOpen={setIsResend}
                   onClick={() => inviteItem(item)}
                   variant="info"
-                  description="Are you sure you want to resend invitation in this user?"
+                  description={t.formatMessage({ id: 'UTIL.CONFIRM_RESEND_INVITATION' })}
                   buttonDialog={
                     <ButtonInput
-                      variant="ghost"
+                      variant="link"
                       type="button"
                       size="icon"
                       icon={
@@ -187,7 +161,7 @@ export function ListContributors({ item, index }: Props) {
                 <UpdateRoleContributorModal
                   buttonDialog={
                     <ButtonInput
-                      variant="ghost"
+                      variant="link"
                       type="button"
                       size="icon"
                       icon={
@@ -201,15 +175,15 @@ export function ListContributors({ item, index }: Props) {
                 />
 
                 <ActionModalDialog
-                  title="Delete?"
+                  title={t.formatMessage({ id: 'UTIL.DELETE' })}
                   loading={loading}
                   isOpen={isOpen}
                   setIsOpen={setIsOpen}
                   onClick={() => deleteItem(item)}
-                  description="Are you sure you want to delete this?"
+                  description={t.formatMessage({ id: 'UTIL.CONFIRM_DELETE' })}
                   buttonDialog={
                     <ButtonInput
-                      variant="ghost"
+                      variant="link"
                       type="button"
                       size="icon"
                       icon={

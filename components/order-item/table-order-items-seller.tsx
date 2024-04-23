@@ -54,7 +54,7 @@ export function TableOrderItemsSeller(props: Props) {
 
   return (
     <>
-      <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
+      <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
             <p className="text-lg font-bold">Recent orders</p>

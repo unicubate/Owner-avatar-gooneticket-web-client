@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const TableTransactions = ({ model, organizationId, days }: Props) => {
-  const { search, handleSetSearch } = useInputState();
+  const { search, handleSetSearch, t } = useInputState();
   const { ref, inView } = useInView();
 
   const {
@@ -49,7 +49,7 @@ export const TableTransactions = ({ model, organizationId, days }: Props) => {
   ) : Number(dataTransaction?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
       image={<ArrowRightLeftIcon className="size-10" />}
-      title="You don't have any transaction"
+      title={t.formatMessage({ id: 'TRANSACTION.ANY' })}
       description={`Share your page with your audience to get started.`}
     />
   ) : (
@@ -67,11 +67,11 @@ export const TableTransactions = ({ model, organizationId, days }: Props) => {
 
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
-            <p className="text-lg font-bold">Recent transactions</p>
+            <p className="text-lg font-bold">{t.formatMessage({ id: 'TRANSACTION.RECENT' })}</p>
           </div>
           <div className="mt-4 sm:mt-0">
             <SearchInput
-              placeholder="Search by first name, last name, email"
+              placeholder={t.formatMessage({ id: 'UTIL.SEARCH_BY' })}
               onChange={handleSetSearch}
             />
           </div>

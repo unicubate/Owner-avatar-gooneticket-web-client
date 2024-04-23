@@ -3,12 +3,12 @@ import { HtmlParser } from '@/utils/html-parser';
 import { useRouter } from 'next/router';
 import 'react-h5-audio-player/lib/styles.css';
 import { ButtonInput, CopyShareLink } from '../ui-setting';
-import { ListCarouselUpload } from './list-carousel-upload';
+import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
-import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { MessageCircleIcon, ShareIcon, ShoppingCartIcon } from 'lucide-react';
+import { AlertDangerNotification, AlertSuccessNotification, formateDate, formatePrice } from '@/utils';
+import { MapIcon, MessageCircleIcon, ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { useInputState } from '../hooks';
@@ -17,9 +17,9 @@ type Props = {
   item: ProductModel;
 };
 
-const ViewProductsShop = ({ item }: Props) => {
+const ViewProductsEvent = ({ item }: Props) => {
   const { query, pathname, push } = useRouter();
-  const { linkHref, isOpen, setIsOpen, loading, setLoading, userStorage } =
+  const { linkHref, isOpen, setIsOpen, locale, loading, setLoading, userStorage } =
     useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
@@ -73,8 +73,13 @@ const ViewProductsShop = ({ item }: Props) => {
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-                <p className="text-3xl">{item?.currency?.symbol ?? ''}</p>
-                <p className="ml-1 text-3xl">{item?.priceDiscount ?? ''}</p>
+                <span className="ml-1 text-3xl">{item?.currency?.symbol ?? ''}</span>
+                <span className="ml-1 text-3xl">
+                  {formatePrice({
+                    value: Number(item?.priceDiscount ?? 0),
+                    isDivide: false,
+                  })}
+                </span>
 
                 {item?.enableDiscount ? (
                   <>
@@ -88,22 +93,70 @@ const ViewProductsShop = ({ item }: Props) => {
                 ) : null}
               </div>
 
-              <div className="ml-auto">
-                <ButtonInput
-                  type="button"
-                  className="w-full"
-                  size="lg"
-                  variant="destructive"
-                  onClick={() => {
-                    addToCart(item);
-                  }}
-                  icon={<ShoppingCartIcon className="mr-2 size-6" />}
-                >
-                  Get ticket
-                </ButtonInput>
+              <div className="ml-auto font-bold">
+                <span className="text-xl">
+                  {formateDate(item?.expiredAt as Date, locale)}
+                </span>
               </div>
             </div>
           </div>
+          <div className="relative mt-4 shrink-0 cursor-pointer">
+            <div className="hidden items-center lg:table-cell">
+              <div className="flex shrink-0 font-bold">
+                <MapIcon className="size-6" />
+                <span className="ml-2 text-lg">{item?.address ?? ''}</span>
+                <span className="ml-2 text-lg">-</span>
+                <span className="ml-2 text-lg">{item?.city ?? ''}</span>
+                <span className="ml-2 text-lg">-</span>
+                <span className="ml-2 text-lg">{item?.country?.name ?? ''}</span>
+              </div>
+            </div>
+
+            <div className="text-lg lg:hidden">
+              <div className="flex font-bold">
+                Location
+              </div>
+              <div className="flex">
+                {item?.address ?? ''}
+              </div>
+              <div className="flex">
+                {item?.city ?? ''}
+              </div>
+              <div className="flex">
+                {item?.country?.name ?? ''}
+              </div>
+            </div>
+
+          </div>
+
+          <div className="relative mt-4 shrink-0 cursor-pointer">
+            <div className="flex items-center">
+              <ButtonInput
+                type="button"
+                className="w-full"
+                size="lg"
+                variant="info-hover"
+                onClick={() => {
+                  userStorage?.id
+                    ? push(
+                      `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
+                    )
+                    : push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
+                }}
+              >
+                <span className="text-xl">{item?.currency?.symbol ?? ''}</span>
+                <span className="ml-1 text-xl">
+                  {formatePrice({
+                    value: Number(item?.priceDiscount ?? 0),
+                    isDivide: false,
+                  })}
+                </span>
+                <span className="ml-1.5 text-xl">Get this ticket</span>
+              </ButtonInput>
+
+            </div>
+          </div>
+
 
           {item?.description ? (
             <div
@@ -136,7 +189,7 @@ const ViewProductsShop = ({ item }: Props) => {
             <CopyShareLink
               isOpen={isOpen}
               setIsOpen={setIsOpen}
-              link={`${process.env.NEXT_PUBLIC_SITE}/shop/${item?.slug}`}
+              link={`${process.env.NEXT_PUBLIC_SITE}/events/${item?.slug}`}
               buttonDialog={
                 <ButtonInput
                   className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
@@ -163,4 +216,4 @@ const ViewProductsShop = ({ item }: Props) => {
   );
 };
 
-export { ViewProductsShop };
+export { ViewProductsEvent };

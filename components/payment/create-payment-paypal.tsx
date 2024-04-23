@@ -123,7 +123,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
                 height: 45,
                 layout: 'vertical',
                 label: 'paypal',
-                color: 'blue',
+                color: 'gold',
               }}
               forceReRender={[Number(amount?.value), currency]}
               fundingSource="paypal"
@@ -132,7 +132,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
                 const details = await action?.order?.capture();
                 return handleApprove({ order: details });
               }}
-              onCancel={() => {}}
+              onCancel={() => { }}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);

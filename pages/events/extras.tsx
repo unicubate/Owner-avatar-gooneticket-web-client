@@ -1,8 +1,8 @@
 import { GetInfiniteProductsAPI } from '@/api-site/product';
+import { HorizontalNavEvent } from '@/components/event/horizontal-nav-event';
+import { ListProductsEvent } from '@/components/event/list-products-event';
 import { useInputState } from '@/components/hooks/use-input-state';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavShop } from '@/components/shop/horizontal-nav-shop';
-import { ListProductsShop } from '@/components/shop/list-products-shop';
 import {
   ButtonInput,
   ButtonLoadMore,
@@ -15,14 +15,13 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { ProductModel } from '@/types/product';
 import { PlusIcon, StoreIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const ShopsExtras = () => {
   const { search, handleSetSearch } = useInputState();
   const { organizationId, profile } = useAuth() as any;
   const router = useRouter();
-  const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
 
   const {
@@ -37,7 +36,7 @@ const ShopsExtras = () => {
     organizationId: organizationId,
     take: 10,
     sort: 'DESC',
-    modelIds: ['PRODUCT'],
+    modelIds: ['EVENT'],
   });
 
   useEffect(() => {
@@ -78,17 +77,17 @@ const ShopsExtras = () => {
       .map(
         (item: ProductModel, index: number) =>
           organizationId && (
-            <ListProductsShop item={item} key={index} index={index} />
+            <ListProductsEvent item={item} key={index} index={index} />
           ),
       )
   );
 
   return (
     <>
-      <LayoutDashboard title={'Shop'}>
+      <LayoutDashboard title={'Events extras'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-            <HorizontalNavShop />
+            <HorizontalNavEvent />
 
 
             <div className="flow-root">
@@ -101,10 +100,10 @@ const ShopsExtras = () => {
                         className="w-full"
                         size="sm"
                         variant="info"
-                        onClick={() => router.push(`${`/shop/create`}`)}
+                        onClick={() => router.push(`${`/events/create`}`)}
                         icon={<PlusIcon className="size-4" />}
                       >
-                        Create product
+                        Create event
                       </ButtonInput>
                     </div>
                     <div className="mt-4 sm:mt-0">

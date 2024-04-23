@@ -1,9 +1,11 @@
 import { useDebounce } from '@/utils';
 import { useState } from 'react';
+import { useIntl } from 'react-intl';
 import { useLang } from '../../i18n/context-intl-provider';
 import { useAuth } from '../util/context-user';
 
 export function useInputState() {
+  const t = useIntl();
   const [fromAt, setFromAt] = useState<any>(null);
   const [toAt, setToAt] = useState<any>(null);
   const [search, setSearch] = useState<string>('');
@@ -65,5 +67,6 @@ export function useInputState() {
     profile,
     linkHref,
     locale,
+    t,
   };
 }

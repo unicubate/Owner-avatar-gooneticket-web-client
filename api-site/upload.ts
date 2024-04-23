@@ -1,10 +1,11 @@
 import { UploadFolderType } from '@/types/upload';
+import { ModelType } from '@/utils';
 import { makeApiCall } from '@/utils/end-point';
 import { useQuery } from '@tanstack/react-query';
 
 export const GetUploadsAPI = (payload: {
   organizationId?: string;
-  model: string;
+  model: ModelType;
   uploadableId: string;
   uploadType?: 'image' | 'file';
 }) => {

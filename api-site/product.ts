@@ -39,6 +39,10 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append('urlRedirect', `${payload.urlRedirect ?? ''}`);
       data.append('productType', `${payload.productType ?? ''}`);
       data.append('categoryId', `${payload.categoryId ?? ''}`);
+      data.append('city', `${payload.city ?? ''}`);
+      data.append('address', `${payload.address ?? ''}`);
+      data.append('countryId', `${payload.countryId ?? ''}`);
+      data.append('expiredAt', `${payload.expiredAt ?? ''}`);
       data.append('enableUrlRedirect', `${payload.enableUrlRedirect ?? ''}`);
       data.append('enableChooseQuantity', `${payload.enableChooseQuantity}`);
       data.append(

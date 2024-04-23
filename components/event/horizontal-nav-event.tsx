@@ -1,32 +1,29 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useInputState } from '../hooks';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
-export function HorizontalNavSetting() {
+const HorizontalNavEvent = () => {
+  const { t } = useInputState();
   const { profile } = useAuth() as any;
   const pathname = usePathname();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: 'Profile',
-      href: '/settings',
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      href: '/events',
     },
     {
-      title: 'Payout',
-      href: '/settings/payout',
+      title: 'Extras',
+      href: '/events/extras',
     },
     {
-      title: 'Subscribers',
-      href: '/settings/subscribers',
-    },
-    {
-      title: 'Categories',
-      href: '/settings/categories',
+      title: 'Orders',
+      href: '/events/orders',
     },
   ]);
 
-  const bgColor = `bg-${profile?.color}-600 text-white`;
   return (
     <>
       <div className="border-b border-gray-200 dark:border-b-gray-600">
@@ -53,4 +50,6 @@ export function HorizontalNavSetting() {
       </div>
     </>
   );
-}
+};
+
+export { HorizontalNavEvent };

@@ -3,6 +3,7 @@ import { ContributorFormModel, roleContributors } from '@/types/contributor';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
@@ -38,8 +39,9 @@ const CreateOrUpdateFormContributor = ({
     loading,
     setLoading,
     hasErrors,
-    setHasErrors,
+    setHasErrors
   } = useReactHookForm({ schema });
+  const { t } = useInputState();
 
   // Create or Update data
   const { mutateAsync: saveMutation } = CreateOrUpdateOneContributorAPI({
@@ -95,10 +97,10 @@ const CreateOrUpdateFormContributor = ({
           <div className="mb-4">
             <TextInput
               control={control}
-              label="First name"
+              label={t.formatMessage({ id: 'INPUT.FIRSTNAME' })}
               type="text"
               name="firstName"
-              placeholder="Full name"
+              placeholder={t.formatMessage({ id: 'INPUT.FIRSTNAME' })}
               errors={errors}
             />
           </div>
@@ -106,10 +108,10 @@ const CreateOrUpdateFormContributor = ({
           <div className="mb-4">
             <TextInput
               control={control}
-              label="Last name"
+              label={t.formatMessage({ id: 'INPUT.LASTNAME' })}
               type="text"
               name="lastName"
-              placeholder="Last name"
+              placeholder={t.formatMessage({ id: 'INPUT.LASTNAME' })}
               errors={errors}
             />
           </div>
@@ -117,10 +119,10 @@ const CreateOrUpdateFormContributor = ({
         <div className="mb-4">
           <TextInput
             control={control}
-            label="Email address"
+            label={t.formatMessage({ id: 'INPUT.EMAIL' })}
             type="email"
             name="email"
-            placeholder="Email address"
+            placeholder={t.formatMessage({ id: 'INPUT.EMAIL' })}
             errors={errors}
           />
         </div>
@@ -128,7 +130,7 @@ const CreateOrUpdateFormContributor = ({
         <div className="mb-4">
           <SelectInput
             firstOptionName="Choose role"
-            label="Role"
+            label={t.formatMessage({ id: 'INPUT.ROLE' })}
             control={control}
             errors={errors}
             placeholder="Select role"
@@ -147,7 +149,7 @@ const CreateOrUpdateFormContributor = ({
             disabled={loading}
             loading={loading}
           >
-            Invite
+            {t.formatMessage({ id: 'ACTION.INVITE' })}
           </ButtonInput>
         </div>
       </form>

@@ -66,6 +66,15 @@
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Le client a été mis à jour",
   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Le client a été créé",
 
+  "INPUT.ROLE": "Rôle",
+  "INPUT.EMAIL": "E-mail",
+  "INPUT.FIRSTNAME": "Prénom",
+  "INPUT.LASTNAME": "Nom",
+
+  "ACTION.INVITE": "Inviter",
+  "ACTION.NO.CANCEL": "Non, Annuler",
+  "ACTION.YES.CONTINUE": "Oui, Continuer",
+
   "MENU.DASHBOARD": "Tableau de Bord",
   "MENU.HOME": "Accueil",
   "MENU.GALLERY": "Galleries",
@@ -74,6 +83,7 @@
   "MENU.DONATION": "Don",
   "MENU.PAGE": "Votre page",
   "MENU.SHOP": "Boutique",
+  "MENU.EVENT": "Evenements",
   "MENU.MESSAGE": "Messages",
   "MENU.COMMISSION": "Commissions",
   "MENU.FEED": "Actualiter",
@@ -93,6 +103,8 @@
   "TRANSACTION.LAST_DAY": "Dernier {day} jours",
   "TRANSACTION.ALL_TIME": "Toute le temp",
   "TRANSACTION.WITHDRAW": "Retrait",
+  "TRANSACTION.RECENT": "Derniers transactions",
+  "TRANSACTION.ANY": "Vous n'avez aucune transaction",
 
   "HOME.TITLE": "Tout ce dont vous avez besoin pour gagner de l'argent en faisant ce que vous aimez",
   "HOME.SUBTITLE": "Acceptez le soutien. Commencez une adhésion. Créez une boutique. C'est plus facile que vous ne le pensez.",
@@ -104,5 +116,11 @@
   "DASHBOARD.FEATURE.3.TITLE": "Adhésion",
   "DASHBOARD.FEATURE.3.DESCRIPTION": "Abonnement mensuel pour vos plus grands fans.",
   "DASHBOARD.FEATURE.4.TITLE": "Produits de qualité",
-  "DASHBOARD.FEATURE.4.DESCRIPTION": "Fabriqué avec le plus grand soin"
+  "DASHBOARD.FEATURE.4.DESCRIPTION": "Fabriqué avec le plus grand soin",
+
+  "UTIL.RESEND_INVITATION": "Renvoyer l'invitation",
+  "UTIL.SEARCH_BY": "Recherche avec le nom, prénom, address email",
+  "UTIL.CONFIRM_RESEND_INVITATION": "Etes-vous sûr de vouloir renvoyer l'invitation à cet utilisateur ?",
+  "UTIL.DELETE": "Supprimer",
+  "UTIL.CONFIRM_DELETE": "Etes-vous sûr de vouloir supprimer ceci?"
 }

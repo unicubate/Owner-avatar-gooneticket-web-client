@@ -1,6 +1,7 @@
 import { VariantButton } from '@/components/ui/button';
 import { ButtonInput } from '..';
 
+import { useInputState } from '@/components/hooks';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -31,6 +32,8 @@ const ActionModalDialog = ({
   buttonDialog,
   variant = 'danger',
 }: Props) => {
+  const { t } = useInputState();
+
   return (
     <>
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
@@ -48,7 +51,7 @@ const ActionModalDialog = ({
               variant="outline"
               onClick={() => setIsOpen((lk: boolean) => !lk)}
             >
-              No, Cancel
+              {t.formatMessage({ id: 'ACTION.NO.CANCEL' })}
             </ButtonInput>
             <ButtonInput
               type="button"
@@ -58,7 +61,7 @@ const ActionModalDialog = ({
               onClick={onClick}
               loading={loading}
             >
-              Yes, Continue
+              {t.formatMessage({ id: 'ACTION.YES.CONTINUE' })}
             </ButtonInput>
           </div>
         </AlertDialogContent>

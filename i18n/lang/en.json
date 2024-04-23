@@ -66,6 +66,15 @@
   "ECOMMERCE.CUSTOMERS.EDIT.UPDATE_MESSAGE": "Customer has been updated",
   "ECOMMERCE.CUSTOMERS.EDIT.ADD_MESSAGE": "Customer has been created",
 
+  "INPUT.ROLE": "Role",
+  "INPUT.EMAIL": "Email",
+  "INPUT.FIRSTNAME": "First name",
+  "INPUT.LASTNAME": "Last name",
+
+  "ACTION.INVITE": "Invite",
+  "ACTION.NO.CANCEL": "No, Cancel",
+  "ACTION.YES.CONTINUE": "Yes, Continue",
+
   "MENU.DASHBOARD": "Dashboard",
   "MENU.HOME": "Home",
   "MENU.GALLERY": "Gallery",
@@ -74,6 +83,7 @@
   "MENU.DONATION": "Donations",
   "MENU.PAGE": "Your Page",
   "MENU.SHOP": "Shop",
+  "MENU.EVENT": "Events",
   "MENU.MESSAGE": "Messages",
   "MENU.COMMISSION": "Commissions",
   "MENU.FEED": "Feed",
@@ -93,6 +103,8 @@
   "TRANSACTION.LAST_DAY": "Last {day} days",
   "TRANSACTION.ALL_TIME": "All time",
   "TRANSACTION.WITHDRAW": "Withdraw",
+  "TRANSACTION.RECENT": "Recent transactions",
+  "TRANSACTION.ANY": "You don't have any transaction",
 
   "HOME.TITLE": "Everything you need to make money doing what you love",
   "HOME.SUBTITLE": "Accept support. Start a membership. Setup a shop. It’s easier than you think.",
@@ -104,5 +116,11 @@
   "DASHBOARD.FEATURE.3.TITLE": "Membership",
   "DASHBOARD.FEATURE.3.DESCRIPTION": "Monthly membership for your biggest fans.",
   "DASHBOARD.FEATURE.4.TITLE": "Quality Products",
-  "DASHBOARD.FEATURE.4.DESCRIPTION": "Made with highest care"
+  "DASHBOARD.FEATURE.4.DESCRIPTION": "Made with highest care",
+
+  "UTIL.SEARCH_BY": "Search by first name, last name, email",
+  "UTIL.RESEND_INVITATION": "Resend invitation",
+  "UTIL.CONFIRM_RESEND_INVITATION": "Are you sure you want to resend invitation in this user?",
+  "UTIL.DELETE": "Delete",
+  "UTIL.CONFIRM_DELETE": "Are you sure you want to delete this?"
 }

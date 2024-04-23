@@ -1,10 +1,7 @@
 import { GetOnePostAPI } from '@/api-site/post';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { CreateOrUpdateFormAudioPost } from '@/components/post/create-or-update-form-audio-post';
-import { CreateOrUpdateFormGalleryPost } from '@/components/post/create-or-update-form-gallery-post';
 import { CreateOrUpdateFormPost } from '@/components/post/create-or-update-form-post';
-import { CreateOrUpdateFormVideoPost } from '@/components/post/create-or-update-form-video-post';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { LoadingFile } from '@/components/ui-setting/ant/loading-file';
 import { PrivateComponent } from '@/components/util/private-component';
@@ -60,15 +57,6 @@ const PostsEdit = () => {
       />
     ) : (
       <>
-        {user?.organizationId && post?.id && type === 'gallery' ? (
-          <CreateOrUpdateFormGalleryPost
-            uploadImages={uploadImages}
-            post={post}
-            refetch={refetch}
-            postId={postId}
-            organizationId={post?.organizationId}
-          />
-        ) : null}
 
         {post?.id && type === 'article' ? (
           <CreateOrUpdateFormPost
@@ -80,26 +68,6 @@ const PostsEdit = () => {
           />
         ) : null}
 
-        {post?.id && type === 'audio' ? (
-          <CreateOrUpdateFormAudioPost
-            post={post}
-            postId={postId}
-            refetch={refetch}
-            uploadFiles={uploadsFiles}
-            uploadImages={uploadImages}
-            organizationId={post?.organizationId}
-          />
-        ) : null}
-
-        {post?.id && type === 'video' ? (
-          <CreateOrUpdateFormVideoPost
-            uploadImages={uploadImages}
-            post={post}
-            refetch={refetch}
-            postId={postId}
-            organizationId={post?.organizationId}
-          />
-        ) : null}
       </>
     );
 

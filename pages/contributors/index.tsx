@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 
 const ContributorsIndex = () => {
   const { push } = useRouter();
-  const { search, isOpen, setIsOpen, handleSetSearch, userStorage } =
+  const { search, isOpen, setIsOpen, handleSetSearch, userStorage, t } =
     useInputState();
 
   const {
@@ -78,7 +78,7 @@ const ContributorsIndex = () => {
                   </div>
                   <div className="mt-4 sm:mt-0">
                     <SearchInput
-                      placeholder="Search by first name, last name, email"
+                      placeholder={t.formatMessage({ id: 'UTIL.SEARCH_BY' })}
                       onChange={handleSetSearch}
                     />
                   </div>

@@ -1,18 +1,13 @@
 import { cn } from '@/lib/utils';
 import {
-  Dice6Icon,
-  ExternalLinkIcon,
-  FanIcon,
-  HeartHandshakeIcon,
-  HeartIcon,
   HomeIcon,
   ImageIcon,
   ListIcon,
-  LockKeyholeIcon,
   MailIcon,
   MenuSquareIcon,
   SettingsIcon,
   StoreIcon,
+  TicketIcon
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -44,41 +39,19 @@ const VerticalNavDashboard = ({ user }: Props) => {
       href: '/dashboard',
       icon: <HomeIcon className={classIcon} />,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.PAGE' })}`,
-      href: `/${user?.username}`,
-      icon: <ExternalLinkIcon className={classIcon} />,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
-      href: '/home',
-      icon: <Dice6Icon className={classIcon} />,
-    },
   ]);
 
-  const [monetizeItems] = useState<NavbarProps[]>([
+  const [supportItems] = useState<NavbarProps[]>([
     {
-      title: `${t.formatMessage({ id: 'MENU.DONATION' })}`,
-      href: '/donations',
-      icon: <HeartIcon className={classIcon} />,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
-      href: '/memberships',
-      icon: <LockKeyholeIcon className={classIcon} />,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
-      href: '/commissions',
-      icon: <HeartHandshakeIcon className={classIcon} />,
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      href: '/events',
+      icon: <TicketIcon className={classIcon} />,
     },
     {
       title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
       href: '/shop',
       icon: <StoreIcon className={classIcon} />,
     },
-  ]);
-  const [supportItems] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.POST' })}`,
       href: '/posts',
@@ -89,11 +62,6 @@ const VerticalNavDashboard = ({ user }: Props) => {
       href: '/gallery',
       icon: <ImageIcon className={classIcon} />,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
-      href: '/messages',
-      icon: <MailIcon className={classIcon} />,
-    },
   ]);
   const [settingItems] = useState<NavbarProps[]>([
     {
@@ -102,14 +70,14 @@ const VerticalNavDashboard = ({ user }: Props) => {
       icon: <ListIcon className={classIcon} />,
     },
     {
+      title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
+      href: '/messages',
+      icon: <MailIcon className={classIcon} />,
+    },
+    {
       title: `${t.formatMessage({ id: 'MENU.SETTING' })}`,
       href: '/settings',
       icon: <SettingsIcon className={classIcon} />,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
-      href: '/affiliates',
-      icon: <FanIcon className={classIcon} />,
     },
   ]);
 
@@ -127,10 +95,9 @@ const VerticalNavDashboard = ({ user }: Props) => {
                   href={`${item.href}`}
                   title={item?.title}
                   className={cn(
-                    `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? bgColor
-                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                    `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
+                      ? bgColor
+                      : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
                     }`,
                   )}
                 >
@@ -142,47 +109,10 @@ const VerticalNavDashboard = ({ user }: Props) => {
             })}
           </nav>
 
-          <>
-            <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
-              Monetize
-            </p>
-
-            <nav className="mt-4 flex-1 space-y-1">
-              {monetizeItems.map((item: any, index: number) => {
-                const isActive = pathname?.startsWith(item.href);
-                return (
-                  <Link
-                    key={index}
-                    href={`${item.href}`}
-                    title={item?.title}
-                    className={cn(
-                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? bgColor
-                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                      }`,
-                    )}
-                  >
-                    {item?.icon}
-
-                    {item?.title}
-                  </Link>
-                );
-              })}
-
-              {/* <a href="#" title="" className="flex items-center px-4 py-2.5 text-sm font-medium transition-all duration-200 text-gray-900 rounded-lg hover:bg-gray-200 group">
-                                        <svg className="flex-shrink-0 w-5 h-5 mr-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                                        </svg>
-                                        Hotjar
-                                        <span className="text-xs uppercase ml-auto font-semibold text-indigo-600 bg-indigo-50 border border-indigo-300 rounded-full inline-flex items-center px-2 py-0.5"> New </span>
-                                    </a> */}
-            </nav>
-          </>
 
           <>
             <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
-              Support
+              {t.formatMessage({ id: 'MENU.SUPPORT' })}
             </p>
             <nav className="mt-4 flex-1 space-y-1">
               {supportItems.map((item: any, index: number) => {
@@ -193,10 +123,9 @@ const VerticalNavDashboard = ({ user }: Props) => {
                     href={`${item.href}`}
                     title={item?.title}
                     className={cn(
-                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? bgColor
-                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
+                        ? bgColor
+                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
                       }`,
                     )}
                   >
@@ -211,7 +140,7 @@ const VerticalNavDashboard = ({ user }: Props) => {
 
           <>
             <p className="px-4 text-xs font-semibold uppercase tracking-widest text-gray-400">
-              Settings
+              {t.formatMessage({ id: 'MENU.SETTING' })}
             </p>
             <nav className="mt-4 flex-1 space-y-1">
               {settingItems.map((item: any, index: number) => {
@@ -222,10 +151,9 @@ const VerticalNavDashboard = ({ user }: Props) => {
                     href={`${item.href}`}
                     title={item?.title}
                     className={cn(
-                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? bgColor
-                          : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                      `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
+                        ? bgColor
+                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
                       }`,
                     )}
                   >
