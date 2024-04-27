@@ -48,7 +48,6 @@ export type ProfileModel = {
   url: string;
   userId: string;
   description: string;
-  enableCommission: boolean;
   enableShop: boolean;
   enableGallery: boolean;
   currency: {
@@ -79,7 +78,6 @@ export type ProfileItemModel = {
   description: string;
   enableShop: boolean;
   galleryShop: boolean;
-  enableCommission: boolean;
   lastName: string;
   firstName: string;
   countryId: string;

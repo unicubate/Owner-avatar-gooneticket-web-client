@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
 import { ModelType } from '@/utils/paginations';
-import { ArrowRightLeftIcon } from 'lucide-react';
+import { ArrowRightLeftIcon, QrCodeIcon } from 'lucide-react';
 import { useInputState } from '../hooks/use-input-state';
-import { ButtonLoadMore, SearchInput } from '../ui-setting';
+import { ButtonInput, ButtonLoadMore, QrScannerModal, SearchInput } from '../ui-setting';
 import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListOrderItemsSeller } from './list-order-items-seller';
@@ -16,7 +16,7 @@ type Props = {
 
 export function TableOrderItemsSeller(props: Props) {
   const { model, organizationId, days } = props;
-  const { search, handleSetSearch } = useInputState();
+  const { search, handleSetSearch, isOpen, setIsOpen } = useInputState();
 
   const {
     isLoading: isLoadingOrderItems,
@@ -28,7 +28,7 @@ export function TableOrderItemsSeller(props: Props) {
   } = GetInfiniteOrderItemsAPI({
     search,
     organizationSellerId: organizationId,
-    modelIds: ['PRODUCT'],
+    modelIds: ['EVENT'],
     take: 10,
     sort: 'DESC',
     days,
@@ -52,12 +52,24 @@ export function TableOrderItemsSeller(props: Props) {
       ))
   );
 
+
+
   return (
     <>
       <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
+
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="mt-4 sm:mt-0">
-            <p className="text-lg font-bold">Recent orders</p>
+            <ButtonInput
+              type="button"
+              className="w-full"
+              size="lg"
+              variant="info"
+              onClick={() => setIsOpen((lk) => !lk)}
+              icon={<QrCodeIcon className="size-6" />}
+            >
+              Scan QR Code
+            </ButtonInput>
           </div>
           <div className="mt-4 sm:mt-0">
             <SearchInput
@@ -82,6 +94,12 @@ export function TableOrderItemsSeller(props: Props) {
           />
         </div>
       )}
+
+      {isOpen ?
+        <QrScannerModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        /> : null}
     </>
   );
 }

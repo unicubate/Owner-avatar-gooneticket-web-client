@@ -17,7 +17,7 @@ import * as yup from 'yup';
 import { useInputState, useUploadItem } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, ReactQuillInput } from '../ui-setting';
-import { DateInput, SelectSearchInput, SwitchInput } from '../ui-setting/ant';
+import { DateInput, SelectSearchInput, SwitchInput, TimePickerInput } from '../ui-setting/ant';
 import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Label } from '../ui/label';
 
@@ -41,6 +41,8 @@ const schema = yup.object({
   enableVisibility: yup.boolean().required(),
   address: yup.string().required('address is a required field'),
   city: yup.string().required('state is a required field'),
+  timeInit: yup.string().required('time start is a required field'),
+  timeEnd: yup.string().required('time end is a required field'),
   expiredAt: yup.date().min(new Date()).required('data is a required field'),
   countryId: yup.string().required('country is a required field'),
 });
@@ -94,6 +96,8 @@ const CreateOrUpdateFormEvent = ({
         'categoryId',
         'address',
         'city',
+        'timeInit',
+        'timeEnd',
         'countryId',
         'expiredAt',
         'messageAfterPayment',
@@ -176,16 +180,7 @@ const CreateOrUpdateFormEvent = ({
               />
             </div>
 
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-              <div className="mt-2">
-                <DateInput
-                  label="Date event"
-                  control={control}
-                  placeholder={formateYYDDMM(new Date(), locale)}
-                  name="expiredAt"
-                  errors={errors}
-                />
-              </div>
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-4">
               <div className="mt-2">
                 <SelectSearchInput
                   label="Counties"
@@ -198,8 +193,32 @@ const CreateOrUpdateFormEvent = ({
                   dataItem={countries}
                 />
               </div>
+              <div className="mt-2">
+                <DateInput
+                  label="Date event"
+                  control={control}
+                  placeholder={formateYYDDMM(new Date(), locale)}
+                  name="expiredAt"
+                  errors={errors}
+                />
+              </div>
+              <div className="mt-2">
+                <TimePickerInput
+                  label="Timer init"
+                  control={control}
+                  name="timeInit"
+                  errors={errors}
+                />
+              </div>
+              <div className="mt-2">
+                <TimePickerInput
+                  label="Timer End"
+                  control={control}
+                  name="timeEnd"
+                  errors={errors}
+                />
+              </div>
             </div>
-
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="mt-2">
                 <SelectInput

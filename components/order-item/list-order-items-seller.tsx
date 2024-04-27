@@ -5,12 +5,14 @@ import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
-import { ViewIcon } from 'lucide-react';
+import { CheckCheckIcon, MoreHorizontalIcon, ViewIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/ant';
 import { SerialPrice } from '../ui-setting/serial-price';
 import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { UpdateOrderItemModal } from './update-order-item-modal';
 
 type Props = {
@@ -36,14 +38,13 @@ export function ListOrderItemsSeller(props: Props) {
               <div className="shrink-0">
                 <Image
                   width={100}
-                  height={80}
+                  height={60}
                   preview={false}
-                  className="rounded-md"
                   src={`${viewOneFileUploadAPI({
                     folder: 'products',
                     fileName: item?.uploadsImages[0]?.path,
                   })}`}
-                  alt=""
+                  alt={item?.product?.title}
                 />
               </div>
             ) : null}
@@ -70,18 +71,38 @@ export function ListOrderItemsSeller(props: Props) {
                   </div>
                 </p>
               </div>
-              <p className="mt-1 text-sm font-medium  text-gray-600">
-                {item?.quantity && `Quantity: ${item?.quantity}`}
-              </p>
               <p className="mt-1 text-sm font-medium text-gray-500 lg:hidden">
                 {formateFromNow(item?.createdAt as Date, locale)}
               </p>
+
+              <div className="mt-2 min-w-0 flex-1 lg:hidden">
+                {item?.status === 'CANCELLED' && (
+                  <Badge className="rounded-sm" variant={'danger'}>
+                    {item?.status.toLocaleLowerCase()}
+                  </Badge>
+                )}
+                {['DELIVERED'].includes(item?.status) && (
+                  <Badge className="rounded-sm" variant={'success'}>
+                    {item?.status.toLocaleLowerCase()}
+                  </Badge>
+                )}
+                {['ACCEPTED'].includes(item?.status) && (
+                  <Badge className="rounded-sm" variant={'success'}>
+                    {item?.status.toLocaleLowerCase()}
+                  </Badge>
+                )}
+                {item?.status === 'PENDING' && (
+                  <Badge className="rounded-sm" variant={'warning'}>
+                    {item?.status.toLocaleLowerCase()}
+                  </Badge>
+                )}
+              </div>
             </div>
           </div>
         </td>
 
-        <td className="hidden text-sm font-bold dark:text-white lg:table-cell">
-          {item?.product?.productType}
+        <td className="hidden text-sm font-bold text-gray-600 lg:table-cell">
+          #{item?.orderNumber}
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
@@ -96,7 +117,7 @@ export function ListOrderItemsSeller(props: Props) {
             </Badge>
           )}
           {['ACCEPTED'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'info'}>
+            <Badge className="rounded-sm" variant={'success'}>
               {item?.status}
             </Badge>
           )}
@@ -123,14 +144,37 @@ export function ListOrderItemsSeller(props: Props) {
           {formateFromNow(item?.createdAt as Date, locale)}
         </td>
 
-        <td className="py-4 text-right text-sm font-medium">
-          <ButtonInput
-            type="button"
-            variant="ghost"
-            icon={<ViewIcon className="size-5 text-gray-400" />}
-            size="icon"
-            onClick={() => showDrawer()}
-          />
+        <td className="py-4 text-right text-sm font-medium text-gray-600">
+
+
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button type="button" size="icon" variant="ghost">
+                <MoreHorizontalIcon className="size-5 text-gray-400" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#121212]">
+              <DropdownMenuGroup>
+                <DropdownMenuItem
+                  onClick={() => showDrawer()}
+                >
+                  <ViewIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                    View
+                  </span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <Link href={`/events/orders/${item?.orderNumber}/confirm`}>
+                  <DropdownMenuItem>
+                    <CheckCheckIcon className="size-4 text-gray-600 hover:text-green-600" />
+                    <span className="ml-2 cursor-pointer hover:text-green-600">
+                      Confirm
+                    </span>
+                  </DropdownMenuItem>
+                </Link>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <div className="mt-1 pt-1 lg:hidden">
             <p className="inline-flex text-sm font-bold dark:text-white">
@@ -142,28 +186,6 @@ export function ListOrderItemsSeller(props: Props) {
             </p>
             <div className="ml-auto mt-2 min-w-0 flex-1 font-bold">
               {item?.product?.productType}
-            </div>
-            <div className="ml-auto mt-2 min-w-0 flex-1">
-              {item?.status === 'CANCELLED' && (
-                <Badge className="rounded-sm" variant={'danger'}>
-                  {item?.status.toLocaleLowerCase()}
-                </Badge>
-              )}
-              {['DELIVERED'].includes(item?.status) && (
-                <Badge className="rounded-sm" variant={'success'}>
-                  {item?.status.toLocaleLowerCase()}
-                </Badge>
-              )}
-              {['ACCEPTED'].includes(item?.status) && (
-                <Badge className="rounded-sm" variant={'info'}>
-                  {item?.status.toLocaleLowerCase()}
-                </Badge>
-              )}
-              {item?.status === 'PENDING' && (
-                <Badge className="rounded-sm" variant={'warning'}>
-                  {item?.status.toLocaleLowerCase()}
-                </Badge>
-              )}
             </div>
           </div>
         </td>

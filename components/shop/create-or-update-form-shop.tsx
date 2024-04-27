@@ -233,7 +233,7 @@ const CreateOrUpdateFormShop = ({
                 control={control}
                 label="Price*"
                 name="price"
-                placeholder="Price commission"
+                placeholder="Price"
                 errors={errors}
                 required
                 type="number"

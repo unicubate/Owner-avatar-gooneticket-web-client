@@ -43,6 +43,7 @@ const OrdersIndex = () => {
 
             {/* {profile?.id ? <EnableShop profile={profile} /> : null} */}
 
+
             <div className="flow-root">
               <TableOrderItemsSeller organizationId={user?.organizationId} />
             </div>

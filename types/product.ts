@@ -26,6 +26,8 @@ export type ProductModel = {
   subTitle: string;
   slug: string;
   sku: string;
+  timeInit: string;
+  timeEnd: string;
   address: string;
   city: string;
   whoCanSee: string;
@@ -80,6 +82,8 @@ export type ProductFormModel = {
   enableChooseQuantity: boolean;
   urlMedia: string;
   price: number;
+  timeEnd: string;
+  timeInit: string;
   messageAfterPayment: string;
   description: string;
   discountId: string;

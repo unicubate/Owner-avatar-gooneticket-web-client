@@ -20,7 +20,7 @@ export const UpdateOneOrderItemAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['order-items'];
+  const queryKey = ['order-item'];
   const queryClient = useQueryClient();
   const result = useMutation({
     // mutationKey: queryKey,
@@ -118,6 +118,31 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
     status,
     isPending,
     refetch,
+  };
+};
+
+export const GetOneOrderItemAPI = (payload: { orderNumber: string }) => {
+  const { orderNumber } = payload;
+  const { data, isError, isLoading, status, isPending, error, refetch } =
+    useQuery({
+      queryKey: ['order-item', payload],
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getOneOrderItem',
+          urlParams: { orderNumber },
+        }),
+      staleTime: 60_000,
+      refetchOnWindowFocus: false,
+    });
+
+  return {
+    data: data?.data as OrderItemModel,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+    error,
   };
 };
 

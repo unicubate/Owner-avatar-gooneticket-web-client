@@ -97,17 +97,9 @@ const Dashboard = () => {
                 </div>
 
                 <div className="mt-3 flex items-center text-gray-900 dark:text-white">
-                  <Link href="/settings/subscribes">
-                    <span className="text-lg font-bold">
-                      {user?.totalSubscribe ?? 0}
-                    </span>
-                    <span className="ml-2 text-sm font-normal">
-                      {t.formatMessage({ id: 'MENU.SUBSCRIBER' })}
-                    </span>
-                  </Link>
 
                   <Link href="/settings/followers">
-                    <span className="ml-4 text-lg font-bold">
+                    <span className="text-lg font-bold">
                       {user?.totalFollower ?? 0}
                     </span>
                     <span className="ml-2 text-sm font-normal">
@@ -123,6 +115,7 @@ const Dashboard = () => {
                       {t.formatMessage({ id: 'MENU.FOLLOWING' })}
                     </span>
                   </Link>
+
                 </div>
 
                 <div className="mt-3 flex items-center text-gray-900 dark:text-white">

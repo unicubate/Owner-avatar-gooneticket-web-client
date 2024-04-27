@@ -12,7 +12,7 @@ interface Props {
 
 export const ButtonLoadMore = ({
   children = 'Load More',
-  variant = 'default',
+  variant = 'outline',
   onClick,
   ref,
   size = 'lg',

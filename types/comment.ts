@@ -26,6 +26,5 @@ export type CommentFormModel = {
   description: string;
   postId: string;
   productId: string;
-  commissionId: string;
   userId: string;
 };

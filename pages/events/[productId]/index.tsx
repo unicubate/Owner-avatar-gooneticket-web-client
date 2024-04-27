@@ -1,14 +1,13 @@
-import { GetOneCartOrderAPI } from '@/api-site/cart';
 import { GetOneProductAPI } from '@/api-site/product';
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import { CartOrderFooterCart } from '@/components/cart/cart-order-footer-cart';
 import { PublicLastProductsEvent } from '@/components/event/public-last-products-event';
 import { ViewProductsEvent } from '@/components/event/view-products-event';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
-import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { Skeleton } from '@/components/ui/skeleton';
+import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
@@ -33,13 +32,6 @@ const ShopUserPublic = () => {
     userVisitorId: userBayer?.id,
   });
 
-  const {
-    isPending: isPendingCartOrder,
-    isError: isErrorCartOrder,
-    data: cartOrder,
-  } = GetOneCartOrderAPI({
-    organizationSellerId: product?.organizationId,
-  });
 
   const dataItemProduct = isLoadingProduct ? (
     <ProductSkeleton index={0} />
@@ -50,7 +42,7 @@ const ShopUserPublic = () => {
   );
   return (
     <>
-      <LayoutUserPublicSite title={`${product?.title || 'Shop'}`} user={user}>
+      <LayoutUserPublicSite title={`${product?.title || 'Event'}`} user={user}>
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
@@ -62,13 +54,23 @@ const ShopUserPublic = () => {
                 <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
                   <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">
-                      {product?.id && (
+                      {product?.id ? (
                         <PublicLastProductsEvent
                           userVisitor={{
                             id: user?.id,
                             organizationId: user?.organizationId,
                           }}
                         />
+                      ) : (
+                        itemsNumberArray(4).map((i, index) => (
+                          <li key={index} className="ml-4 flex items-center space-x-2 py-2">
+                            <Skeleton className="size-16 rounded-md" />
+                            <div className="space-y-1">
+                              <Skeleton className="h-4 w-[200px]" />
+                              <Skeleton className="h-4 w-[200px]" />
+                            </div>
+                          </li>
+                        ))
                       )}
                     </div>
                   </div>
@@ -78,20 +80,9 @@ const ShopUserPublic = () => {
           </div>
         </div>
 
-        {userBayer?.id && user?.id && cartOrder?.id ? (
-          <CartOrderFooterCart user={user} cartOrder={cartOrder} />
-        ) : null}
+
       </LayoutUserPublicSite>
 
-      {isPendingUser && isPendingCartOrder ? <LoadingFile /> : null}
-
-      {isErrorUser && isErrorCartOrder ? (
-        <ErrorFile
-          title="404"
-          description="Error find data please try again"
-          className="dark:text-white"
-        />
-      ) : null}
     </>
   );
 };

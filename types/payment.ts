@@ -28,9 +28,10 @@ export type PaymentCardFormModel = {
     cardCvc: string;
     fullName?: string;
     email?: string;
-    isReuse?: boolean;
+    isSaveCard?: boolean;
   };
   type: PaymentType;
+  reference: string;
 };
 
 export type PaymentItemModel = {

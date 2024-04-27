@@ -200,7 +200,7 @@ export function UpdateOrderItemModal(props: {
                     type="button"
                     className="w-full"
                     size="lg"
-                    variant="info"
+                    variant="success"
                     disabled
                   >
                     {item?.status}

@@ -1,6 +1,6 @@
 import { Skeleton } from '../ui/skeleton';
 
-export const CommissionCheckoutSkeleton = () => {
+export const EventCheckoutSkeleton = () => {
   return (
     <>
       <div className="mx-auto justify-center text-center">

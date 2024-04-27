@@ -6,6 +6,7 @@ export * from './copy-share-link';
 export * from './list-carousel-upload';
 export * from './loader-icon-component';
 export * from './phone-number-input';
+export * from './qr-scanner-modal';
 export * from './react-quill-input';
 export * from './search-input';
 export * from './serial-price';

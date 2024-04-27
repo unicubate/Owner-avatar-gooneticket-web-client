@@ -19,11 +19,6 @@ const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
           </p>
           <p className="mt-1 hidden text-sm font-medium text-gray-600 lg:block">
             <span>
-              {user?.totalSubscribe}{' '}
-              {t.formatMessage({ id: 'MENU.SUBSCRIBER' })}
-            </span>
-            {' - '}
-            <span>
               {user?.totalFollower ?? 0}{' '}
               {t.formatMessage({ id: 'MENU.FOLLOWER' })}
             </span>

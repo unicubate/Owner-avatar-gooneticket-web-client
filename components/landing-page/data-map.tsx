@@ -2,7 +2,6 @@ import { cn } from '@/lib/utils';
 import {
   CalendarClockIcon,
   GlobeIcon,
-  HeartHandshakeIcon,
   HeartIcon,
   ImageIcon,
   LockKeyholeIcon,
@@ -11,7 +10,7 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
   StoreIcon,
-  WalletIcon,
+  WalletIcon
 } from 'lucide-react';
 const className = 'size-12';
 export const featuresLandingPage = [
@@ -30,11 +29,6 @@ export const featuresLandingPage = [
     icon: <StoreIcon className={cn('text-green-600', className)} />,
     title: 'Shop',
     description: `Sell digital and physical products with just a link.`,
-  },
-  {
-    icon: <HeartHandshakeIcon className={cn('text-red-600', className)} />,
-    title: 'Commissions & Services',
-    description: `Let fans buy unique work or pay for direct access to you`,
   },
   {
     icon: <LockKeyholeIcon className={cn('text-yellow-400', className)} />,
@@ -73,11 +67,6 @@ export const featuresAboutPage = [
     icon: <StoreIcon className={cn('text-green-600', className)} />,
     title: 'Shop',
     description: `Sell digital and physical products`,
-  },
-  {
-    icon: <HeartHandshakeIcon className={cn('text-red-600', className)} />,
-    title: 'Commissions & Services',
-    description: `Let fans buy unique work`,
   },
   {
     icon: <LockKeyholeIcon className={cn('text-yellow-400', className)} />,

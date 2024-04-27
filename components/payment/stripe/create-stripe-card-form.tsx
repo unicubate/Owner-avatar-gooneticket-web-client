@@ -1,7 +1,9 @@
+"use client"
+
 import { PaymentCardFormModel } from '@/types/payment';
 
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { useCreditCardValidator } from 'react-creditcard-validator';
+import { images, useCreditCardValidator } from 'react-creditcard-validator';
 
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { useInputState } from '@/components/hooks';
@@ -19,12 +21,10 @@ import { StripeProps } from './create-payment-stripe';
 const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   const { push } = useRouter();
   const stripe = useStripe();
-  if (!stripe) {
-    return;
-  }
+
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const [isSaveCard, setIsSaveCard] = useState(false);
-  const [cardstate, setcardState] = useState({
+  const [cardstate, setCardState] = useState({
     fullName: '',
     email: '',
   });
@@ -49,7 +49,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { cardNumber, cvc, email, fullName, isReuse, expiryDate } =
+    const { cardNumber, cvc, fullName, isReuse, expiryDate } =
       cardstate as any;
     const strExpirySplit = expiryDate?.split(' ').join('');
     const strExpiryLength = Number(strExpirySplit?.length);
@@ -66,7 +66,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
         cardExpMonth: Number(`${monthDate}`),
         cardExpYear: Number(`20${yearDate}`),
         cardCvc: cvc,
-        email: email,
+        email: data?.userAddress?.email,
         isSaveCard: isSaveCard,
         fullName: fullName,
       },
@@ -84,7 +84,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
       setHasErrors(false);
       setLoading(false);
 
-      push(`/transactions/success?token=${newReference}`);
+      //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -117,7 +117,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               placeholder="Full name"
               name="fullName"
               onChange={(e) =>
-                setcardState({
+                setCardState({
                   ...cardstate,
                   [e.target.name]: e.target.value,
                 })
@@ -137,13 +137,42 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               }
             />
           </div> */}
-          <div className="relative mt-4">
+          <div className="mt-4">
+            <div className="max-w-auto relative flex w-full">
+              <Input
+                className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}
+                required
+                {...getCardNumberProps({
+                  onChange: (e) =>
+                    setCardState({
+                      ...cardstate,
+                      [e.target.name]: e.target.value,
+                    }),
+                })}
+              />
+              {erroredInputs?.cardNumber && (
+                <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                  {erroredInputs?.cardNumber}
+                </span>
+              )}
+              <ButtonInput
+                type="button"
+                variant="link"
+                size="sm"
+                className="!absolute right-1 top-1 rounded"
+              >
+                <svg {...getCardImageProps({ images })} />
+              </ButtonInput>
+
+            </div>
+
+            {/* <svg {...getCardImageProps({ images })} />
             <Input
               className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}
               required
               {...getCardNumberProps({
                 onChange: (e) =>
-                  setcardState({
+                  setCardState({
                     ...cardstate,
                     [e.target.name]: e.target.value,
                   }),
@@ -153,19 +182,18 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
                 {erroredInputs?.cardNumber}
               </span>
-            )}
+            )} */}
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
             <div className="mb-2">
               <Input
-                className={`${
-                  erroredInputs?.expiryDate ? 'border-red-500' : ''
-                }`}
+                className={`${erroredInputs?.expiryDate ? 'border-red-500' : ''
+                  }`}
                 required
                 {...getExpiryDateProps({
                   onChange: (e) =>
-                    setcardState({
+                    setCardState({
                       ...cardstate,
                       [e.target.name]: e.target.value,
                     }),
@@ -184,7 +212,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
                 required
                 {...getCVCProps({
                   onChange: (e) =>
-                    setcardState({
+                    setCardState({
                       ...cardstate,
                       [e.target.name]: e.target.value,
                     }),

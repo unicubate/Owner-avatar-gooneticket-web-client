@@ -51,12 +51,6 @@ const VerticalNavUserPublicSite = ({ user }: Props) => {
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
-      status: user?.profile?.enableCommission,
-      count: user?.commission?.count,
-      href: `/${username}/commissions`,
-    },
   ]);
   const bgColor = `bg-${user?.profile?.color}-600 text-white`;
   return (
@@ -75,11 +69,10 @@ const VerticalNavUserPublicSite = ({ user }: Props) => {
                     key={index}
                     href={`${item.href}`}
                     title={item?.title}
-                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
+                    className={`group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
                         ? bgColor
                         : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
-                    } `}
+                      } `}
                   >
                     {item?.icon}
 

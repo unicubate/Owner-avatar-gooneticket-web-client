@@ -170,16 +170,14 @@ export const UpdateEnableProfileAPI = ({
     mutationKey: queryKey,
     mutationFn: async (payload: {
       profileId: string;
-      enableCommission?: boolean;
       enableShop?: boolean;
       enableGallery?: boolean;
     }): Promise<{ data: UserModel }> => {
-      const { enableCommission, enableShop, enableGallery, profileId } =
-        payload;
+      const { enableShop, enableGallery, profileId } = payload;
       return await makeApiCall({
         action: 'updateEnableProfile',
         urlParams: { profileId },
-        queryParams: { enableCommission, enableShop, enableGallery },
+        queryParams: { enableShop, enableGallery },
       });
     },
     onError: async (error) => {

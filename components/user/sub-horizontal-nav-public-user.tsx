@@ -42,12 +42,6 @@ const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
-      status: user?.profile?.enableCommission,
-      count: user?.commission?.count,
-      href: `/${username}/commissions`,
-    },
   ]);
 
   return (
@@ -63,11 +57,10 @@ const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item.title}
-                  className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                    isActive
+                  className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
                       ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
                       : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-500`
-                  } `}
+                    } `}
                 >
                   {item?.icon}
 

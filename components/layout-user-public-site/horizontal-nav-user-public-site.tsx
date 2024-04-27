@@ -1,7 +1,6 @@
 import { UserModel } from '@/types/user.type';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { CreateModalPublicDonation } from '../donation/create-modal-public-donation';
 import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
@@ -64,12 +63,6 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
       status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.COMMISSION' })}`,
-      status: user?.profile?.enableCommission,
-      count: user?.commission?.count,
-      href: `/${username}/commissions`,
     },
   ]);
 
@@ -149,11 +142,10 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       key={index}
                       href={`${item?.href}`}
                       title={item?.title}
-                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                      } `}
+                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
+                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                        } `}
                     >
                       {item?.icon}
 
@@ -233,13 +225,6 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
         </div>
       </header>
 
-      {openModal ? (
-        <CreateModalPublicDonation
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          user={user}
-        />
-      ) : null}
     </>
   );
 };

@@ -40,6 +40,8 @@ export const CreateOrUpdateOneProductAPI = ({
       data.append('productType', `${payload.productType ?? ''}`);
       data.append('categoryId', `${payload.categoryId ?? ''}`);
       data.append('city', `${payload.city ?? ''}`);
+      data.append('timeInit', `${payload.timeInit ?? ''}`);
+      data.append('timeEnd', `${payload.timeEnd ?? ''}`);
       data.append('address', `${payload.address ?? ''}`);
       data.append('countryId', `${payload.countryId ?? ''}`);
       data.append('expiredAt', `${payload.expiredAt ?? ''}`);

@@ -1,4 +1,4 @@
-import { DatePicker } from 'antd';
+import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
 import { Control, Controller } from 'react-hook-form';
 
@@ -10,14 +10,14 @@ interface Props {
   placeholder?: string;
 }
 
-const DateInput: React.FC<Props> = ({
+const TimePickerInput: React.FC<Props> = ({
   control,
   label = '',
   name,
   errors,
   placeholder = '',
 }) => {
-  const format = "DD/MM/YYYY"
+  const format = 'HH:mm';
 
   return (
     <>
@@ -30,21 +30,21 @@ const DateInput: React.FC<Props> = ({
         name={name}
         control={control}
         render={({ field: { ref, ...field } }) => (
-          <DatePicker
-            picker="date"
-            size="large"
-            format="DD/MM/YYYY"
-            style={{ width: '100%' }}
-            id={name}
-            //className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white dark:placeholder:text-gray-500 ${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            placeholder={placeholder}
-            value={dayjs(field.value ?? new Date())}
-            onChange={(value) => {
-              field.onChange(value);
-            }}
-            status={errors?.[name]?.message ? 'error' : ''}
-          />
+          <>
+            <TimePicker
+              id={name}
+              size="large"
+              format={format}
+              placeholder={placeholder}
+              style={{ width: '100%' }}
+              className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              value={dayjs(field.value ?? dayjs(new Date()).format(format), format)}
+              onChange={(value) => {
+                field.onChange(dayjs(value).format(format));
+              }}
+              status={errors?.[name]?.message ? 'error' : ''}
+            />
+          </>
         )}
       />
       {errors?.[name] && (
@@ -56,4 +56,4 @@ const DateInput: React.FC<Props> = ({
   );
 };
 
-export { DateInput };
+export { TimePickerInput };

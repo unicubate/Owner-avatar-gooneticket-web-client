@@ -9,17 +9,10 @@ import {
 } from '@tanstack/react-query';
 
 export type PaymentModel =
-  | 'PAYPAL-DONATION'
-  | 'STRIPE-DONATION'
-  | 'PAYMENT-CREATE'
-  | 'PAYPAL-SUBSCRIBE'
-  | 'STRIPE-SUBSCRIBE'
-  | 'PAYPAL-COMMISSION'
-  | 'STRIPE-COMMISSION'
+  | 'PAYPAL-EVENT'
+  | 'STRIPE-EVENT'
   | 'PAYPAL-SHOP'
-  | 'STRIPE-SHOP'
-  | 'RESEND-VERIFY-CODE-PHONE'
-  | 'VERIFY-CODE-PHONE';
+  | 'STRIPE-SHOP';
 
 export const CreateOnPaymentPI = ({
   onSuccess,
@@ -35,34 +28,6 @@ export const CreateOnPaymentPI = ({
     mutationFn: async (payload: { data: any; paymentModel: PaymentModel }) => {
       const { paymentModel, data } = payload;
 
-      if (paymentModel === 'PAYPAL-SUBSCRIBE') {
-        return await makeApiCall({
-          action: 'createOnePaymentsPaypalSubscribe',
-          body: { paymentModel, ...data },
-        });
-      }
-
-      if (paymentModel === 'STRIPE-SUBSCRIBE') {
-        return await makeApiCall({
-          action: 'createOnePaymentsStripeSubscribe',
-          body: { paymentModel, ...data },
-        });
-      }
-
-      if (paymentModel === 'PAYPAL-DONATION') {
-        return await makeApiCall({
-          action: 'createOnePaymentsPaypalDonation',
-          body: { paymentModel, ...data },
-        });
-      }
-
-      if (paymentModel === 'STRIPE-DONATION') {
-        return await makeApiCall({
-          action: 'createOnePaymentsStripeDonation',
-          body: { paymentModel, ...data },
-        });
-      }
-
       if (paymentModel === 'PAYPAL-SHOP') {
         return await makeApiCall({
           action: 'createOnePaymentsPaypalShop',
@@ -77,16 +42,16 @@ export const CreateOnPaymentPI = ({
         });
       }
 
-      if (paymentModel === 'PAYPAL-COMMISSION') {
+      if (paymentModel === 'PAYPAL-EVENT') {
         return await makeApiCall({
-          action: 'createOnePaymentsPaypalCommission',
+          action: 'createOnePaymentsPaypalEvent',
           body: { paymentModel, ...data },
         });
       }
 
-      if (paymentModel === 'STRIPE-COMMISSION') {
+      if (paymentModel === 'STRIPE-EVENT') {
         return await makeApiCall({
-          action: 'createOnePaymentsStripeCommission',
+          action: 'createOnePaymentsStripeEvent',
           body: { paymentModel, ...data },
         });
       }

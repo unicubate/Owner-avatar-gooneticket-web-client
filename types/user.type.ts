@@ -71,9 +71,6 @@ export type UserModel = {
     amount: number;
     count: number;
   };
-  commission: {
-    count: number;
-  };
   post: {
     count: number;
   };

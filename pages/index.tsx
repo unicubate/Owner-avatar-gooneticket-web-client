@@ -1,16 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { MediumFooter } from '@/components/footer/medium-footer';
+import { useInputState } from '@/components/hooks';
 import {
   comparedLandingPage,
   featuresLandingPage,
 } from '@/components/landing-page/data-map';
 import { LayoutSite } from '@/components/layout-site';
-import { ButtonInput } from '@/components/ui-setting';
-import Link from 'next/link';
+import { ButtonInput, QrScannerModal } from '@/components/ui-setting';
+import { QrCodeIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
 export default function Home() {
+  const { search, handleSetSearch, isOpen, setIsOpen } = useInputState();
   const [features] = useState(featuresLandingPage);
   const [compared] = useState(comparedLandingPage);
   const t = useIntl();
@@ -30,7 +32,7 @@ export default function Home() {
 
           <div className="mx-auto max-w-xl text-center">
             <div className="flex flex-wrap justify-center">
-              <Link href={`/register`}>
+              {/* <Link href={`/register`}>
                 <ButtonInput
                   type="button"
                   className="px-10 text-lg"
@@ -39,7 +41,18 @@ export default function Home() {
                 >
                   Start free with email
                 </ButtonInput>
-              </Link>
+              </Link> */}
+
+              <ButtonInput
+                type="button"
+                className="w-full"
+                size="lg"
+                variant="info"
+                onClick={() => setIsOpen((lk) => !lk)}
+                icon={<QrCodeIcon className="size-6" />}
+              >
+                Scan QR Code
+              </ButtonInput>
             </div>
 
             <ul className="mt-2 flex items-center justify-center space-x-6 sm:space-x-8">
@@ -184,6 +197,12 @@ export default function Home() {
       </div>
 
       <MediumFooter />
+
+      {isOpen ?
+        <QrScannerModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        /> : null}
 
       {/* <section className="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-black/15 left-12 bottom-16 dark:border-gray-700 rounded-2xl">
         <h2 className="font-semibold text-gray-800 dark:text-white">

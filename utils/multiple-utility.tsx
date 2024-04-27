@@ -11,8 +11,8 @@ export const formatePrice = (options: { value: number; isDivide: boolean }) => {
   return (
     <>
       {!isNaN(numberCal) && String(numberCal).includes('.')
-        ? numberCal.toLocaleString('IT')
-        : `${numberCal.toLocaleString('IT')},00`}{' '}
+        ? numberCal.toFixed(2)
+        : `${numberCal.toFixed(2)}`}{' '}
     </>
   );
 };
@@ -21,9 +21,9 @@ export const oneImageToURL = (image: ImageProfileModel) => {
   const url =
     image?.key === 'aws'
       ? viewOneFileUploadAPI({
-          folder: 'profiles',
-          fileName: image?.patch,
-        })
+        folder: 'profiles',
+        fileName: image?.patch,
+      })
       : image?.patch;
 
   return url as string;

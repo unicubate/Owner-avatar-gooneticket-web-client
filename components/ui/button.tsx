@@ -14,6 +14,7 @@ export type VariantButton =
   | 'outline'
   | 'secondary'
   | 'ghost'
+  | 'primary'
   | 'success'
   | 'link';
 
@@ -28,6 +29,7 @@ const buttonVariants = cva(
         destructive:
           'bg-destructive text-destructive-foreground hover:bg-destructive/90',
         warning: 'bg-warning text-warning-foreground hover:bg-warning/50',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/50',
         info: 'bg-info text-info-foreground hover:bg-info/50',
         'info-hover': 'bg-info/50 text-info-foreground hover:bg-info',
         success: 'bg-success text-success-foreground hover:bg-success/50',
@@ -57,7 +59,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
 }
 

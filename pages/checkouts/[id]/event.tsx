@@ -1,13 +1,12 @@
 'use client';
 
 import { GetOneProductAPI } from '@/api-site/product';
-import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { useInputState, useReactHookForm } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ListCarouselUpload } from '@/components/shop/list-carousel-upload';
-import { CommissionCheckoutSkeleton } from '@/components/skeleton/commission-checkout-skeleton';
+import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
 import { ProfileCheckoutSkeleton } from '@/components/skeleton/profile-checkout-skeleton';
 import { ButtonInput } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/ant';
@@ -15,7 +14,7 @@ import { TextInput } from '@/components/ui-setting/shadcn';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatePrice } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
-import { MapIcon, PlusIcon } from 'lucide-react';
+import { MapIcon, MoveLeftIcon, PlusIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -23,6 +22,13 @@ import { useState } from 'react';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
+
+type NewAmountType = {
+  quantity: number,
+  currency: string,
+  value: number,
+  oneValue: number
+}
 
 const schema = yup.object({
   firstName: yup.string().required('first name is a required field'),
@@ -35,8 +41,8 @@ const CheckoutEvent = () => {
   const [isPayPalPay, setIsPayPalPay] = useState<boolean>(false);
   const [isCardPay, setIsCardPay] = useState<boolean>(true);
   const [isValidAddress, setIsValidAddress] = useState(false);
-  const { userStorage: userBayer } = useInputState();
-  const { query } = useRouter();
+  const { userStorage } = useInputState();
+  const { query, push } = useRouter();
   const { id: productId, username } = query;
   const {
     watch,
@@ -56,19 +62,19 @@ const CheckoutEvent = () => {
     productSlug: String(productId),
   });
 
-  const { data: userAddress } = GetOneUserAddressMeAPI();
-
   const calculatePrice = Number(item?.priceDiscount) * increment
-  const newAmount = watchAmount
+  const userAddress = {
+    firstName: watchFirstName,
+    lastName: watchLastName,
+    email: watchEmail
+  }
+  const newAmount: NewAmountType = watchAmount
     ? JSON.parse(watchAmount)
     : {
-      address: {
-        firstName: watchFirstName, lastName: watchLastName, email: watchEmail
-      },
-      valueTotal: calculatePrice,
       quantity: increment,
       currency: item?.currency?.code,
-      value: item?.priceDiscount,
+      value: calculatePrice,
+      oneValue: item?.priceDiscount,
     };
 
 
@@ -77,7 +83,18 @@ const CheckoutEvent = () => {
 
   return (
     <>
-      <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'commissions'}`}>
+      <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'events'}`}>
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="py-2 sm:mt-0">
+            <ButtonInput
+              type="button"
+              size="icon"
+              variant="outline"
+              onClick={() => push(`/events/${productId}`)}
+              icon={<MoveLeftIcon className="size-4" />}
+            />
+          </div>
+        </div>
         <div className="overflow-hidden rounded-xl bg-white shadow dark:bg-[#121212]">
           <div className="grid grid-cols-1 md:grid-cols-2">
             <div className="px-5 py-6 dark:bg-[#121212] md:px-8">
@@ -108,10 +125,14 @@ const CheckoutEvent = () => {
                         <div className="flex shrink-0 font-bold">
                           <MapIcon className="size-6" />
                           <span className="ml-2 text-lg">{item?.address ?? ''}</span>
-                          <span className="ml-2 text-lg">-</span>
+                          <span className="ml-2 text-lg  text-gray-400 dark:text-gray-600">-</span>
                           <span className="ml-2 text-lg">{item?.city ?? ''}</span>
-                          <span className="ml-2 text-lg">-</span>
+                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">-</span>
                           <span className="ml-2 text-lg">{item?.country?.name ?? ''}</span>
+                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">|</span>
+                          <span className="ml-2 text-lg">{item?.timeInit ?? ''}</span>
+                          <span className="ml-1.5 text-lg text-gray-400 dark:text-gray-600">-</span>
+                          <span className="ml-1.5 text-lg">{item?.timeEnd ?? ''}</span>
                         </div>
                       </div>
 
@@ -145,7 +166,7 @@ const CheckoutEvent = () => {
 
                   </>
                 ) : (
-                  <CommissionCheckoutSkeleton />
+                  <EventCheckoutSkeleton />
                 )}
               </div>
             </div>
@@ -173,23 +194,13 @@ const CheckoutEvent = () => {
                             </p>
                           </div>
 
-                          {/* <div className="ml-auto">
-                            <p className="cursor-pointer text-sm font-medium text-gray-400 transition-all duration-200 hover:text-gray-900">
-                              <Link
-                                className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
-                                href={`/${username}/commissions`}
-                              >
-                                Commission
-                              </Link>
-                            </p>
-                          </div> */}
                           <ButtonInput
                             type="button"
                             size="sm"
                             variant="info"
                             className="ml-auto"
                           >
-                            <Link href={`/${username}/commissions`}>
+                            <Link href={`/${username}/events`}>
                               Event
                             </Link>
                           </ButtonInput>
@@ -219,7 +230,7 @@ const CheckoutEvent = () => {
 
                           <li className="flex items-center justify-between">
                             <p className="text-sm font-bold text-gray-600">
-                              {newAmount?.currency} {newAmount?.value} x {increment}
+                              {newAmount?.currency} {newAmount?.oneValue} x {increment}
                             </p>
                             <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-100 dark:border-gray-900">
                               <ButtonInput
@@ -267,11 +278,11 @@ const CheckoutEvent = () => {
                             <p className="text-3xl font-medium dark:text-white">
                               Total
                             </p>
-                            {newAmount?.valueTotal ? (
+                            {newAmount?.value ? (
                               <>
                                 <p className="ml-auto text-xl font-bold dark:text-white">
                                   {formatePrice({
-                                    value: Number(newAmount?.valueTotal),
+                                    value: Number(newAmount?.value),
                                     isDivide: false,
                                   }) ?? ''}
                                 </p>
@@ -393,17 +404,15 @@ const CheckoutEvent = () => {
                                 {isCardPay ? (
                                   <>
                                     <CreateCardStripe
-                                      paymentModel="STRIPE-COMMISSION"
+                                      paymentModel="STRIPE-EVENT"
                                       data={{
                                         userAddress,
                                         productId: item?.id,
                                         amount: newAmount,
-                                        userReceiveId: item?.userId,
-                                        userBuyerId: userBayer?.id,
                                         organizationSellerId:
                                           item?.organizationId,
                                         organizationBuyerId:
-                                          userBayer?.organizationId,
+                                          userStorage?.organizationId,
                                       }}
                                     />
                                   </>
@@ -411,17 +420,15 @@ const CheckoutEvent = () => {
 
                                 {isPayPalPay ? (
                                   <CreatePaymentPayPal
-                                    paymentModel="PAYPAL-COMMISSION"
+                                    paymentModel="PAYPAL-EVENT"
                                     data={{
                                       userAddress,
                                       productId: productId,
                                       amount: newAmount,
-                                      userReceiveId: item?.userId,
-                                      userBuyerId: userBayer?.id,
                                       organizationSellerId:
                                         item?.organizationId,
                                       organizationBuyerId:
-                                        userBayer?.organizationId,
+                                        userStorage?.organizationId,
                                     }}
                                   />
                                 ) : null}

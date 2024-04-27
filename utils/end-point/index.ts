@@ -120,6 +120,7 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** OrderItem route */
   getOrderItems: GET(`${baseUrl}/orders/order-items`),
+  getOneOrderItem: GET(`${baseUrl}/orders/order-items/:orderNumber`),
   updateOneOrderItem: PUT(`${baseUrl}/orders/order-items/:orderItemId`),
 
   /****************** Currency or Countries route */
@@ -201,22 +202,10 @@ export const apiEndpoints: ClientApiMethods = {
     `${baseUrl}/payments/stripe/client-secret`,
   ),
   getPayments: GET(`${baseUrl}/payments`),
-  createOnePaymentsPaypalSubscribe: POST(
-    `${baseUrl}/payments/paypal/subscribe`,
-  ),
-  createOnePaymentsStripeSubscribe: POST(
-    `${baseUrl}/payments/stripe/subscribe`,
-  ),
-  createOnePaymentsPaypalDonation: POST(`${baseUrl}/payments/paypal/donation`),
-  createOnePaymentsStripeDonation: POST(`${baseUrl}/payments/stripe/donation`),
   createOnePaymentsPaypalShop: POST(`${baseUrl}/payments/paypal/shop`),
   createOnePaymentsStripeShop: POST(`${baseUrl}/payments/stripe/shop`),
-  createOnePaymentsPaypalCommission: POST(
-    `${baseUrl}/payments/paypal/commission`,
-  ),
-  createOnePaymentsStripeCommission: POST(
-    `${baseUrl}/payments/stripe/commission`,
-  ),
+  createOnePaymentsPaypalEvent: POST(`${baseUrl}/payments/paypal/event`),
+  createOnePaymentsStripeEvent: POST(`${baseUrl}/payments/stripe/event`),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
 

@@ -30,6 +30,7 @@ export const statusOderItemArray = [
 
 export type OrderItemModel = {
   createdAt: Date;
+  confirmedAt: Date;
   id: string;
   orderNumber: string;
   quantity: string;
@@ -41,7 +42,6 @@ export type OrderItemModel = {
   model: ModelType;
   status: StatusOderProduct;
   currency: string;
-  commissionId: null;
   productId: string;
   orderId: string;
   userId: string;
