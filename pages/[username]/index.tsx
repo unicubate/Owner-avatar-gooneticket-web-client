@@ -1,5 +1,4 @@
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import { CreateFormPublicDonation } from '@/components/donation/create-form-public-donation';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
@@ -79,19 +78,7 @@ const ProfilePublic = () => {
                 </div>
               )}
 
-              {user?.id ? (
-                <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                  <div className="flow-root">
-                    <div className="overflow-hidden rounded-lg bg-white shadow-xl dark:bg-[#121212]">
-                      <div className="p-8 sm:p-4">
-                        <div className="flex items-center">
-                          <CreateFormPublicDonation user={user} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : null}
+
 
 
             </div>

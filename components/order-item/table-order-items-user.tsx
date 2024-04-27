@@ -26,7 +26,7 @@ export function TableOrderItemsUser(props: Props) {
   } = GetInfiniteOrderItemsAPI({
     search,
     organizationBuyerId: organizationId,
-    modelIds: ['MEMBERSHIP', 'PRODUCT'],
+    modelIds: ['PRODUCT'],
     take: 10,
     sort: 'DESC',
     days,
