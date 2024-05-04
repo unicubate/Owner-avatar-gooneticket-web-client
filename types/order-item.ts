@@ -46,6 +46,7 @@ export type OrderItemModel = {
   orderId: string;
   userId: string;
   profile: ProfileItemModel;
+  organizationSeller: { name: string; image: string };
   profileSeller: ProfileItemModel;
   product: ProductModel;
   uploadsImages: Array<UploadModel>;

@@ -21,9 +21,9 @@ export const oneImageToURL = (image: ImageProfileModel) => {
   const url =
     image?.key === 'aws'
       ? viewOneFileUploadAPI({
-        folder: 'profiles',
-        fileName: image?.patch,
-      })
+          folder: 'profiles',
+          fileName: image?.patch,
+        })
       : image?.patch;
 
   return url as string;

@@ -17,7 +17,7 @@ const DateInput: React.FC<Props> = ({
   errors,
   placeholder = '',
 }) => {
-  const format = "DD/MM/YYYY"
+  const format = 'DD/MM/YYYY';
 
   return (
     <>

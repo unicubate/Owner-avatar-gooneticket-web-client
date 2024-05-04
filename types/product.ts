@@ -49,6 +49,7 @@ export type ProductModel = {
   model: ModelType;
   categoryId: string;
   totalComment: number;
+  isExpired: boolean;
   country: {
     code: string;
     name: string;

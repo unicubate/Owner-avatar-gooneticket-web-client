@@ -90,7 +90,6 @@ const ShopsExtras = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <HorizontalNavShop />
 
-
             <div className="flow-root">
               <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#121212]">
                 <div className="px-4 py-8">

@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import { UploadFolderType, UploadModel } from '@/types/upload';
+import { UploadModel } from '@/types/upload';
 import { Image } from 'antd';
 import React, { useState } from 'react';
 
 type Props = {
   uploads: UploadModel[];
-  folder: UploadFolderType;
+  folder: string;
   preview: boolean;
   className?: string;
   alt?: string;

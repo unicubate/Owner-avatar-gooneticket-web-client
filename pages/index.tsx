@@ -198,11 +198,7 @@ export default function Home() {
 
       <MediumFooter />
 
-      {isOpen ?
-        <QrScannerModal
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        /> : null}
+      {isOpen ? <QrScannerModal isOpen={isOpen} setIsOpen={setIsOpen} /> : null}
 
       {/* <section className="fixed max-w-md p-4 mx-auto bg-white border border-gray-200 dark:bg-black/15 left-12 bottom-16 dark:border-gray-700 rounded-2xl">
         <h2 className="font-semibold text-gray-800 dark:text-white">

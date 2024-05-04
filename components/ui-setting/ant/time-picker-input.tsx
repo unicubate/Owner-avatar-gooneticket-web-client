@@ -38,7 +38,10 @@ const TimePickerInput: React.FC<Props> = ({
               placeholder={placeholder}
               style={{ width: '100%' }}
               className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
-              value={dayjs(field.value ?? dayjs(new Date()).format(format), format)}
+              value={dayjs(
+                field.value ?? dayjs(new Date()).format(format),
+                format,
+              )}
               onChange={(value) => {
                 field.onChange(dayjs(value).format(format));
               }}

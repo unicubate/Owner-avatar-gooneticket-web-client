@@ -184,7 +184,7 @@ export const GetOneProductAPI = (payload: {
 
 export const getProductsAPI = async (
   payload: {
-    organizationId: string;
+    organizationId?: string;
     status?: string;
     modelIds: ModelType[];
     enableVisibility?: 'TRUE' | 'FALSE';
@@ -197,7 +197,7 @@ export const getProductsAPI = async (
 };
 
 export const GetInfiniteProductsAPI = (payload: {
-  organizationId: string;
+  organizationId?: string;
   take: number;
   status?: string;
   sort: SortModel;

@@ -12,7 +12,7 @@ const PublicComponent = (Component: ComponentType) => {
 
     useEffect(() => {
       if (userToken && isOnline) {
-        push(`/dashboard`);
+        push(`/orders`);
       }
     }, [userStorage, isOnline, push, query]);
 

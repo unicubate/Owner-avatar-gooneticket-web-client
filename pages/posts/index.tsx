@@ -80,7 +80,6 @@ const Posts = () => {
       <LayoutDashboard title={'Posts'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-
             {/* <div
               className={`mt-8 rounded-lg border border-gray-200 bg-white  px-3 py-2 dark:border-gray-800 dark:bg-[#121212]`}
             >

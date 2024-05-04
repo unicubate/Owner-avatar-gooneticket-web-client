@@ -1,18 +1,18 @@
-"use client"
+'use client';
 
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
-import * as React from "react"
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import * as React from 'react';
 
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { cn } from "@/lib/utils"
-import { Control, Controller } from 'react-hook-form'
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { Control, Controller } from 'react-hook-form';
 
 interface Props {
   control: Control<any>;
@@ -29,7 +29,7 @@ const DateInput = ({
   errors,
   placeholder = '',
 }: Props) => {
-  const [date, setDate] = React.useState<Date>()
+  const [date, setDate] = React.useState<Date>();
   return (
     <>
       {label ? (
@@ -44,14 +44,14 @@ const DateInput = ({
           <Popover>
             <PopoverTrigger asChild>
               <Button
-                variant={"outline"}
+                variant={'outline'}
                 className={cn(
-                  "w-full justify-start text-left font-normal",
-                  !date && "text-muted-foreground"
+                  'w-full justify-start text-left font-normal',
+                  !date && 'text-muted-foreground',
                 )}
               >
                 <CalendarIcon className="mr-2 size-4" />
-                {date ? format(date, "PPP") : <span>Pick a date</span>}
+                {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto dark:border-gray-800">
@@ -74,5 +74,4 @@ const DateInput = ({
   );
 };
 
-export { DateInput }
-
+export { DateInput };

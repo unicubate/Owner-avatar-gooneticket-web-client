@@ -6,9 +6,12 @@ import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { ArrowRightLeftIcon } from 'lucide-react';
+import { ShoppingCartIcon } from 'lucide-react';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-const PaymentsIndex = () => {
+const OrdersIndex = () => {
+  const { ref, inView } = useInView();
   const { userStorage } = useInputState() as any;
   const { search, handleSetSearch } = useInputState();
 
@@ -27,15 +30,37 @@ const PaymentsIndex = () => {
     sort: 'DESC',
   });
 
+  useEffect(() => {
+    let fetching = false;
+    if (inView) {
+      fetchNextPage();
+    }
+    const onScroll = async (event: any) => {
+      const { scrollHeight, scrollTop, clientHeight } =
+        event.target.scrollingElement;
+
+      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
+        fetching = true;
+        if (hasNextPage) await fetchNextPage();
+        fetching = false;
+      }
+    };
+
+    document.addEventListener('scroll', onScroll);
+    return () => {
+      document.removeEventListener('scroll', onScroll);
+    };
+  }, [fetchNextPage, hasNextPage, inView]);
+
   const dataTables = isLoadingOrderItems ? (
     <LoadingFile />
   ) : isErrorOrderItems ? (
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
     <EmptyData
-      image={<ArrowRightLeftIcon className="size-10" />}
+      image={<ShoppingCartIcon className="size-10" />}
       title="You don't have any order"
-      description={`Share your page with your audience to get started.`}
+      description={`Find your first product or event`}
     />
   ) : (
     dataOrderItems?.pages
@@ -47,16 +72,14 @@ const PaymentsIndex = () => {
 
   return (
     <>
-      <LayoutDashboard title={'Payments'}>
+      <LayoutDashboard title={'Orders'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
-            {/* <HorizontalNavShop /> */}
-
             <div className="flow-root">
               <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
-                    <p className="text-lg font-bold">Recent payments</p>
+                    <p className="text-lg font-bold">Recent orders</p>
                   </div>
                   <div className="mt-4 sm:mt-0">
                     <SearchInput
@@ -76,6 +99,7 @@ const PaymentsIndex = () => {
               {hasNextPage && (
                 <div className="mx-auto mt-2 justify-center text-center">
                   <ButtonLoadMore
+                    ref={ref}
                     isFetchingNextPage={isFetchingNextPage}
                     onClick={() => fetchNextPage()}
                   />
@@ -89,4 +113,4 @@ const PaymentsIndex = () => {
   );
 };
 
-export default PrivateComponent(PaymentsIndex);
+export default PrivateComponent(OrdersIndex);

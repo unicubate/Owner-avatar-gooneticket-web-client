@@ -7,8 +7,18 @@ import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
-import { AlertDangerNotification, AlertSuccessNotification, formateDate, formatePrice } from '@/utils';
-import { MapIcon, MessageCircleIcon, ShareIcon, ShoppingBagIcon } from 'lucide-react';
+import {
+  AlertDangerNotification,
+  AlertSuccessNotification,
+  formateDate,
+  formatePrice,
+} from '@/utils';
+import {
+  MapIcon,
+  MessageCircleIcon,
+  ShareIcon,
+  TicketPlusIcon,
+} from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { useInputState } from '../hooks';
@@ -19,8 +29,15 @@ type Props = {
 
 const ViewProductsEvent = ({ item }: Props) => {
   const { query, pathname, push } = useRouter();
-  const { linkHref, isOpen, setIsOpen, locale, loading, setLoading, userStorage } =
-    useInputState();
+  const {
+    linkHref,
+    isOpen,
+    setIsOpen,
+    locale,
+    loading,
+    setLoading,
+    userStorage,
+  } = useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
     onSuccess: () => { },
@@ -59,7 +76,7 @@ const ViewProductsEvent = ({ item }: Props) => {
             <div className="group relative mx-auto mt-2 justify-center text-center">
               <ListCarouselUpload
                 uploads={item?.uploadsImages}
-                folder="products"
+                folder={String(item?.model.toLocaleLowerCase())}
                 height={400}
                 className={`object-cover`}
               />
@@ -71,7 +88,7 @@ const ViewProductsEvent = ({ item }: Props) => {
               type="button"
               className="w-full"
               variant="info"
-              size='lg'
+              size="lg"
               onClick={() => {
                 userStorage?.id
                   ? push(
@@ -79,7 +96,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                   )
                   : push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
               }}
-              icon={<ShoppingBagIcon className="size-6" />}
+              icon={<TicketPlusIcon className="size-6" />}
             >
               Continue
             </ButtonInput>
@@ -89,11 +106,12 @@ const ViewProductsEvent = ({ item }: Props) => {
             <div className="mt-2 text-2xl font-bold">{item?.title ?? ''}</div>
           ) : null}
 
-
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-                <span className="ml-1 text-3xl">{item?.currency?.symbol ?? ''}</span>
+                <span className="ml-1 text-3xl">
+                  {item?.currency?.symbol ?? ''}
+                </span>
                 <span className="ml-1 text-3xl">
                   {formatePrice({
                     value: Number(item?.priceDiscount ?? 0),
@@ -117,9 +135,13 @@ const ViewProductsEvent = ({ item }: Props) => {
                 <span className="text-lg">
                   {formateDate(item?.expiredAt as Date, locale)}
                 </span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">-</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
                 <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">-</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
                 <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
               </div>
             </div>
@@ -129,43 +151,42 @@ const ViewProductsEvent = ({ item }: Props) => {
               <div className="flex shrink-0 font-bold">
                 <MapIcon className="size-6" />
                 <span className="ml-2 text-lg">{item?.address ?? ''}</span>
-                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">-</span>
+                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                  -
+                </span>
                 <span className="ml-2 text-lg">{item?.city ?? ''}</span>
-                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">-</span>
-                <span className="ml-2 text-lg">{item?.country?.name ?? ''}</span>
+                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                  -
+                </span>
+                <span className="ml-2 text-lg">
+                  {item?.country?.name ?? ''}
+                </span>
               </div>
             </div>
 
             <div className="text-lg lg:hidden">
-              <div className="flex font-bold">
-                Date
-              </div>
+              <div className="flex font-bold">Date</div>
               <div className="ml-auto">
                 <span className="text-sm">
                   {formateDate(item?.expiredAt as Date, locale)}
                 </span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">-</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
                 <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">-</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
                 <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
               </div>
             </div>
 
             <div className="mt-2 text-lg lg:hidden">
-              <div className="flex font-bold">
-                Location
-              </div>
-              <div className="flex">
-                {item?.address ?? ''}
-              </div>
-              <div className="flex">
-                {item?.city ?? ''}
-              </div>
-              <div className="flex">
-                {item?.country?.name ?? ''}
-              </div>
+              <div className="flex font-bold">Location</div>
+              <div className="flex">{item?.address ?? ''}</div>
+              <div className="flex">{item?.city ?? ''}</div>
+              <div className="flex">{item?.country?.name ?? ''}</div>
             </div>
-
           </div>
 
           {item?.description ? (

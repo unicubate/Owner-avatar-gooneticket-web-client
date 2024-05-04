@@ -121,15 +121,17 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
   };
 };
 
-export const GetOneOrderItemAPI = (payload: { orderNumber: string }) => {
-  const { orderNumber } = payload;
+export const GetOneOrderItemAPI = (payload: {
+  orderNumber: string;
+  organizationBuyerId: string;
+}) => {
   const { data, isError, isLoading, status, isPending, error, refetch } =
     useQuery({
       queryKey: ['order-item', payload],
       queryFn: async () =>
         await makeApiCall({
           action: 'getOneOrderItem',
-          urlParams: { orderNumber },
+          queryParams: payload,
         }),
       staleTime: 60_000,
       refetchOnWindowFocus: false,
@@ -145,7 +147,6 @@ export const GetOneOrderItemAPI = (payload: { orderNumber: string }) => {
     error,
   };
 };
-
 export const GetInfiniteOrderItemsAPI = (payload: {
   organizationSellerId?: string;
   organizationBuyerId?: string;

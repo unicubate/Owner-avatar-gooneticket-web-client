@@ -22,13 +22,12 @@ import { useState } from 'react';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
-
 type NewAmountType = {
-  quantity: number,
-  currency: string,
-  value: number,
-  oneValue: number
-}
+  quantity: number;
+  currency: string;
+  value: number;
+  oneValue: number;
+};
 
 const schema = yup.object({
   firstName: yup.string().required('first name is a required field'),
@@ -37,49 +36,42 @@ const schema = yup.object({
 });
 
 const CheckoutEvent = () => {
-  const [increment, setIncrement] = useState(1)
+  const [increment, setIncrement] = useState(1);
   const [isPayPalPay, setIsPayPalPay] = useState<boolean>(false);
   const [isCardPay, setIsCardPay] = useState<boolean>(true);
   const [isValidAddress, setIsValidAddress] = useState(false);
   const { userStorage } = useInputState();
   const { query, push } = useRouter();
   const { id: productId, username } = query;
-  const {
-    watch,
-    control,
-    handleSubmit,
-    errors,
-  } = useReactHookForm({ schema });
+  const { watch, control, handleSubmit, errors } = useReactHookForm({ schema });
   const watchAmount = watch('amount', '');
   const watchFirstName = watch('firstName', '');
   const watchLastName = watch('lastName', '');
   const watchEmail = watch('email', '');
 
-  const {
-    data: item,
-  } = GetOneProductAPI({
+  const { data: item } = GetOneProductAPI({
     enableVisibility: 'TRUE',
     productSlug: String(productId),
   });
 
-  const calculatePrice = Number(item?.priceDiscount) * increment
+  const calculatePrice = Number(item?.priceDiscount) * increment;
   const userAddress = {
     firstName: watchFirstName,
     lastName: watchLastName,
-    email: watchEmail
-  }
+    email: watchEmail,
+  };
   const newAmount: NewAmountType = watchAmount
     ? JSON.parse(watchAmount)
     : {
-      quantity: increment,
-      currency: item?.currency?.code,
-      value: calculatePrice,
-      oneValue: item?.priceDiscount,
-    };
+        quantity: increment,
+        currency: item?.currency?.code,
+        value: calculatePrice,
+        oneValue: item?.priceDiscount,
+      };
 
-
-
-  const onSubmit = async () => { setIsValidAddress(true) };
+  const onSubmit = async () => {
+    setIsValidAddress(true);
+  };
 
   return (
     <>
@@ -113,44 +105,52 @@ const CheckoutEvent = () => {
                       <div className="mx-auto mt-4 justify-center text-center">
                         <ListCarouselUpload
                           uploads={item?.uploadsImages}
-                          folder="products"
+                          folder={String(item?.model.toLocaleLowerCase())}
                           height={250}
                         />
                       </div>
                     ) : null}
 
-
                     <div className="relative shrink-0 cursor-pointer">
                       <div className="hidden items-center lg:table-cell">
                         <div className="flex shrink-0 font-bold">
                           <MapIcon className="size-6" />
-                          <span className="ml-2 text-lg">{item?.address ?? ''}</span>
-                          <span className="ml-2 text-lg  text-gray-400 dark:text-gray-600">-</span>
-                          <span className="ml-2 text-lg">{item?.city ?? ''}</span>
-                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">-</span>
-                          <span className="ml-2 text-lg">{item?.country?.name ?? ''}</span>
-                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">|</span>
-                          <span className="ml-2 text-lg">{item?.timeInit ?? ''}</span>
-                          <span className="ml-1.5 text-lg text-gray-400 dark:text-gray-600">-</span>
-                          <span className="ml-1.5 text-lg">{item?.timeEnd ?? ''}</span>
+                          <span className="ml-2 text-lg">
+                            {item?.address ?? ''}
+                          </span>
+                          <span className="ml-2 text-lg  text-gray-400 dark:text-gray-600">
+                            -
+                          </span>
+                          <span className="ml-2 text-lg">
+                            {item?.city ?? ''}
+                          </span>
+                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                            -
+                          </span>
+                          <span className="ml-2 text-lg">
+                            {item?.country?.name ?? ''}
+                          </span>
+                          <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                            |
+                          </span>
+                          <span className="ml-2 text-lg">
+                            {item?.timeInit ?? ''}
+                          </span>
+                          <span className="ml-1.5 text-lg text-gray-400 dark:text-gray-600">
+                            -
+                          </span>
+                          <span className="ml-1.5 text-lg">
+                            {item?.timeEnd ?? ''}
+                          </span>
                         </div>
                       </div>
 
                       <div className="text-lg lg:hidden">
-                        <div className="flex font-bold">
-                          Location
-                        </div>
-                        <div className="flex">
-                          {item?.address ?? ''}
-                        </div>
-                        <div className="flex">
-                          {item?.city ?? ''}
-                        </div>
-                        <div className="flex">
-                          {item?.country?.name ?? ''}
-                        </div>
+                        <div className="flex font-bold">Location</div>
+                        <div className="flex">{item?.address ?? ''}</div>
+                        <div className="flex">{item?.city ?? ''}</div>
+                        <div className="flex">{item?.country?.name ?? ''}</div>
                       </div>
-
                     </div>
 
                     {item?.description ? (
@@ -162,8 +162,6 @@ const CheckoutEvent = () => {
                         </span>
                       </div>
                     ) : null}
-
-
                   </>
                 ) : (
                   <EventCheckoutSkeleton />
@@ -200,9 +198,7 @@ const CheckoutEvent = () => {
                             variant="info"
                             className="ml-auto"
                           >
-                            <Link href={`/${username}/events`}>
-                              Event
-                            </Link>
+                            <Link href={`/${username}/events`}>Event</Link>
                           </ButtonInput>
                         </div>
                       </div>
@@ -227,10 +223,10 @@ const CheckoutEvent = () => {
                             ) : null}
                           </li> */}
 
-
                           <li className="flex items-center justify-between">
                             <p className="text-sm font-bold text-gray-600">
-                              {newAmount?.currency} {newAmount?.oneValue} x {increment}
+                              {newAmount?.currency} {newAmount?.oneValue} x{' '}
+                              {increment}
                             </p>
                             <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-100 dark:border-gray-900">
                               <ButtonInput
@@ -305,7 +301,6 @@ const CheckoutEvent = () => {
                         </div>
 
                         <form onSubmit={handleSubmit(onSubmit)}>
-
                           <div className="py-4">
                             <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                               <div className="mt-2">
@@ -316,7 +311,6 @@ const CheckoutEvent = () => {
                                   name="firstName"
                                   placeholder="First name"
                                   errors={errors}
-
                                 />
                               </div>
 
@@ -332,7 +326,6 @@ const CheckoutEvent = () => {
                               </div>
                             </div>
 
-
                             <div className="mt-2">
                               <TextInput
                                 label="Email"
@@ -345,8 +338,8 @@ const CheckoutEvent = () => {
                             </div>
 
                             {watchFirstName &&
-                              watchLastName &&
-                              watchEmail ? null :
+                            watchLastName &&
+                            watchEmail ? null : (
                               <div className="my-4 flex items-center space-x-4">
                                 <ButtonInput
                                   size="lg"
@@ -356,14 +349,12 @@ const CheckoutEvent = () => {
                                 >
                                   Continue
                                 </ButtonInput>
-                              </div>}
-
+                              </div>
+                            )}
                           </div>
                         </form>
 
-                        {watchFirstName &&
-                          watchLastName &&
-                          watchEmail ?
+                        {watchFirstName && watchLastName && watchEmail ? (
                           <>
                             <div className="py-4">
                               <h2 className="text-base font-bold text-gray-500">
@@ -442,10 +433,8 @@ const CheckoutEvent = () => {
                                 />
                               </>
                             </div>
-                          </> : null}
-
-
-
+                          </>
+                        ) : null}
                       </>
 
                       {/* {userBayer?.organizationId !== item?.organizationId ? (

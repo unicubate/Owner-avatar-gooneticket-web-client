@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import { UploadFolderType, UploadModel } from '@/types/upload';
+import { UploadModel } from '@/types/upload';
 import { Image } from 'antd';
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -15,7 +15,7 @@ import { WhoCanSeeItem } from '../ui-setting';
 
 type Props = {
   uploads: UploadModel[];
-  folder: UploadFolderType;
+  folder: string;
   preview?: boolean;
   className?: string;
   alt?: string;

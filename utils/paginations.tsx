@@ -26,6 +26,7 @@ export type ModelType =
 
 export const foldersType: KeyAsString = {
   PRODUCT: 'products',
+  EVENT: 'products',
   POST: 'posts',
 };
 
@@ -68,8 +69,9 @@ export const PaginationItem: React.FC<Props> = ({
           <div className="d-flex flex-center mb-0">
             <ul className="pagination">
               <li
-                className={`page-item previous ${(isPreviousData || pageItem <= 1) && 'disabled'
-                  }`}
+                className={`page-item previous ${
+                  (isPreviousData || pageItem <= 1) && 'disabled'
+                }`}
               >
                 <button
                   type="button"
@@ -88,10 +90,11 @@ export const PaginationItem: React.FC<Props> = ({
                 </button>
               </li>
               <li
-                className={`page-item next ${!isPreviousData &&
+                className={`page-item next ${
+                  !isPreviousData &&
                   data?.data?.total_page === pageItem &&
                   'disabled'
-                  }`}
+                }`}
               >
                 <button
                   type="button"

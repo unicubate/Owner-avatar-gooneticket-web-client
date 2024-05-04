@@ -10,6 +10,13 @@ interface IProps {
   children: React.ReactNode;
 }
 
+export type NavbarProps = {
+  title: string;
+  href: string;
+  count?: number;
+  icon?: any;
+};
+
 const LayoutDashboard = ({ children, title }: IProps) => {
   const { profile, username, theme } = useAuth() as any;
   const user = { profile, username };
@@ -57,13 +64,13 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         ) : null}
 
         <div className="flex flex-1 dark:bg-black/15">
-          {profile?.id ? (
+          {/* {profile?.id ? (
             <div className="hidden md:flex md:w-56 md:flex-col">
               <div className="fixed flex max-h-screen flex-col pt-5">
                 <VerticalNavDashboard user={user} />
               </div>
             </div>
-          ) : null}
+          ) : null} */}
 
           <div
             className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}

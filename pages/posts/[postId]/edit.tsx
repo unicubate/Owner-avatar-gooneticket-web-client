@@ -57,7 +57,6 @@ const PostsEdit = () => {
       />
     ) : (
       <>
-
         {post?.id && type === 'article' ? (
           <CreateOrUpdateFormPost
             uploadImages={uploadImages}
@@ -67,7 +66,6 @@ const PostsEdit = () => {
             organizationId={post?.organizationId}
           />
         ) : null}
-
       </>
     );
 

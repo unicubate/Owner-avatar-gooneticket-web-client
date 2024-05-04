@@ -38,10 +38,11 @@ export function HorizontalNavSetting() {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
-                  ? `text-${profile?.color}-600 border-${profile?.color}-600`
-                  : 'border-transparent hover:border-gray-300'
-                  } `}
+                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? `text-${profile?.color}-600 border-${profile?.color}-600`
+                    : 'border-transparent hover:border-gray-300'
+                } `}
               >
                 {item?.icon}
 

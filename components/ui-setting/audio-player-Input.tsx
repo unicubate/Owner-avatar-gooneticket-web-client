@@ -1,6 +1,5 @@
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { PostModel } from '@/types/post';
-import { UploadFolderType } from '@/types/upload';
 import { Avatar } from 'antd';
 import { LockKeyholeIcon } from 'lucide-react';
 import { useRef } from 'react';
@@ -8,7 +7,7 @@ import ReactH5AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 
 interface Props {
-  folder: UploadFolderType;
+  folder: string;
   item: PostModel;
 }
 

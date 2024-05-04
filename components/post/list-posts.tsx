@@ -30,8 +30,8 @@ const ListPosts = ({ item, index }: Props) => {
   const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOnePostAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = async (item: any) => {
@@ -56,7 +56,6 @@ const ListPosts = ({ item, index }: Props) => {
   return (
     <>
       <div key={index} className="flex items-center py-4">
-
         <div className="min-w-0 flex-1 cursor-pointer">
           <div className="flex items-center text-gray-600">
             <button className="font-normal">
@@ -122,7 +121,8 @@ const ListPosts = ({ item, index }: Props) => {
             }
             onClick={() =>
               push(
-                `/posts/${item?.id
+                `/posts/${
+                  item?.id
                 }/edit?type=${item?.type.toLocaleLowerCase()}`,
               )
             }

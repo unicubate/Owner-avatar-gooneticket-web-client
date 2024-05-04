@@ -23,8 +23,8 @@ const ViewProductsShop = ({ item }: Props) => {
     useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const addToCart = async (itemCard: any) => {

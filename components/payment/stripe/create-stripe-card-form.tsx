@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { PaymentCardFormModel } from '@/types/payment';
 
@@ -49,8 +49,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { cardNumber, cvc, fullName, isReuse, expiryDate } =
-      cardstate as any;
+    const { cardNumber, cvc, fullName, isReuse, expiryDate } = cardstate as any;
     const strExpirySplit = expiryDate?.split(' ').join('');
     const strExpiryLength = Number(strExpirySplit?.length);
     const monthDate = strExpirySplit?.substring(2, 0);
@@ -163,7 +162,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               >
                 <svg {...getCardImageProps({ images })} />
               </ButtonInput>
-
             </div>
 
             {/* <svg {...getCardImageProps({ images })} />
@@ -188,8 +186,9 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
           <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
             <div className="mb-2">
               <Input
-                className={`${erroredInputs?.expiryDate ? 'border-red-500' : ''
-                  }`}
+                className={`${
+                  erroredInputs?.expiryDate ? 'border-red-500' : ''
+                }`}
                 required
                 {...getExpiryDateProps({
                   onChange: (e) =>

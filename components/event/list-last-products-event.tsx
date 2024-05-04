@@ -23,7 +23,7 @@ export function ListLastProductsEvent(props: Props) {
             <div className="size-16 rounded-lg object-cover">
               <ListCarouselUpload
                 uploads={item?.uploadsImages}
-                folder="products"
+                folder={String(item?.model.toLocaleLowerCase())}
                 preview={false}
                 height={65}
                 className={`size-16`}
@@ -47,7 +47,9 @@ export function ListLastProductsEvent(props: Props) {
               <span className="text-sm">
                 {formateDate(item?.expiredAt as Date, locale)}
               </span>
-              <span className="ml-2 text-lg">{item?.currency?.symbol ?? ''}</span>
+              <span className="ml-2 text-lg">
+                {item?.currency?.symbol ?? ''}
+              </span>
               <span className="ml-1 text-lg">
                 {formatePrice({
                   value: Number(item?.priceDiscount ?? 0),

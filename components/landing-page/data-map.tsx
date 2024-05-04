@@ -10,7 +10,7 @@ import {
   ShieldCheckIcon,
   SparklesIcon,
   StoreIcon,
-  WalletIcon
+  WalletIcon,
 } from 'lucide-react';
 const className = 'size-12';
 export const featuresLandingPage = [

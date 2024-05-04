@@ -124,11 +124,9 @@ const Categories = () => {
                 />
               </div>
             )}
-
           </div>
         </div>
       </LayoutDashboard>
-
 
       {showCategoryModal ? (
         <CreateOrUpdateCategory

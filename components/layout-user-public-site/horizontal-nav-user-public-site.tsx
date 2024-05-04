@@ -1,7 +1,6 @@
 import { UserModel } from '@/types/user.type';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
@@ -17,6 +16,7 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
+import { NavbarProps } from '../layout-dashboard';
 import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
 import { ThemeToggle } from '../ui-setting';
 import { HorizontalNavPublicUser } from '../user/horizontal-nav-public-user';
@@ -36,31 +36,26 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   const [navigation] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
-      status: true,
       count: 1,
       href: `/${username}`,
     },
     {
       title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
-      status: true,
       count: user?.gallery?.count,
       href: `/${username}/gallery`,
     },
     {
       title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
-      status: true,
       count: user?.membership?.count,
       href: `/${username}/memberships`,
     },
     {
       title: `${t.formatMessage({ id: 'MENU.POST' })}`,
-      status: true,
       count: user?.post?.count,
       href: `/${username}/posts`,
     },
     {
       title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
-      status: user?.profile?.enableShop,
       count: user?.product?.count,
       href: `/${username}/shop`,
     },
@@ -75,7 +70,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   return (
     <>
       <header className="sticky top-0 z-20 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-[#1c1b22]">
-        <div className="mx-auto px-4">
+        <div className="mx-auto max-w-7xl">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
@@ -131,9 +126,6 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
 
             <nav className="ml-4 hidden w-auto space-x-10 lg:block">
               {navigation
-                .filter(
-                  (item) => item?.status === true && Number(item?.count) >= 1,
-                )
                 .map((item: any, index: number) => {
                   //const isActive = pathname === item.href;
                   const isActive = pathname?.startsWith(item.href);
@@ -143,8 +135,8 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       href={`${item?.href}`}
                       title={item?.title}
                       className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
-                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                          ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
                         } `}
                     >
                       {item?.icon}
@@ -224,7 +216,6 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
           </div>
         </div>
       </header>
-
     </>
   );
 };

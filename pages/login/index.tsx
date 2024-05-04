@@ -164,7 +164,7 @@ const Login = () => {
                   <ButtonInput
                     type="submit"
                     className="w-full"
-                    variant="info"
+                    variant="primary"
                     loading={loading}
                     disabled={!isDirty || !isValid}
                   >

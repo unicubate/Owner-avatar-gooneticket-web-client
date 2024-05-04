@@ -1,4 +1,3 @@
-import { UploadFolderType } from '@/types/upload';
 import { ModelType } from '@/utils';
 import { makeApiCall } from '@/utils/end-point';
 import { useQuery } from '@tanstack/react-query';
@@ -27,10 +26,10 @@ export const viewOneFileUploadAPI = ({
   folder,
 }: {
   fileName: string;
-  folder: UploadFolderType;
+  folder: string;
 }) =>
   fileName
-    ? `${process.env.NEXT_PUBLIC_AWS_CLOUD_FRONT_URL}/${folder}/${fileName}`
+    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/${folder}/${fileName}`
     : null;
 
 export const downloadOneFileUploadAPI = ({
@@ -38,7 +37,7 @@ export const downloadOneFileUploadAPI = ({
   folder,
 }: {
   fileName: string;
-  folder: UploadFolderType;
+  folder: string;
 }) =>
   fileName && folder
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/download/${folder}/${fileName}`

@@ -19,6 +19,7 @@ import { ClientOnly } from '@/components/util/client-only';
 import { ContextIntlProvider } from '@/i18n/context-intl-provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useRouter } from 'next/router';
+
 // const queryClient = new QueryClient({
 //   defaultOptions: { queries: { staleTime: 60_000, gcTime: 10 * (60 * 1000) } },
 // });

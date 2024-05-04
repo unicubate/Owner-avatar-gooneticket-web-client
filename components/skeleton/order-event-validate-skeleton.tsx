@@ -4,7 +4,6 @@ export const OrderEventValidateSkeleton = () => {
   return (
     <>
       <div className="px-4 py-5">
-
         <div className="mx-auto max-w-sm">
           <Skeleton className="h-20 w-full" />
         </div>
@@ -24,7 +23,6 @@ export const OrderEventValidateSkeleton = () => {
           </div>
         </div>
       </div>
-
     </>
   );
 };

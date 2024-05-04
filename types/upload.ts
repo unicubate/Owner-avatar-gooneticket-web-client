@@ -1,10 +1,3 @@
-export type UploadFolderType =
-  | 'posts'
-  | 'galleries'
-  | 'products'
-  | 'memberships'
-  | 'profiles';
-
 export type UploadModel = {
   createdAt: Date;
   uid: string;

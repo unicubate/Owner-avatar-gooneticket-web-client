@@ -18,7 +18,7 @@ import {
   PencilIcon,
   ShareIcon,
   TrashIcon,
-  WalletIcon
+  WalletIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -48,8 +48,8 @@ const ListProductsShop = ({ item, index }: Props) => {
   const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
 
   const { mutateAsync: saveMutation } = DeleteOneProductAPI({
-    onSuccess: () => { },
-    onError: (error?: any) => { },
+    onSuccess: () => {},
+    onError: (error?: any) => {},
   });
 
   const deleteItem = async (item: any) => {

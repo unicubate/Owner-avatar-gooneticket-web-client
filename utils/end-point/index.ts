@@ -120,7 +120,7 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** OrderItem route */
   getOrderItems: GET(`${baseUrl}/orders/order-items`),
-  getOneOrderItem: GET(`${baseUrl}/orders/order-items/:orderNumber`),
+  getOneOrderItem: GET(`${baseUrl}/orders/order-items/view`),
   updateOneOrderItem: PUT(`${baseUrl}/orders/order-items/:orderItemId`),
 
   /****************** Currency or Countries route */
@@ -144,14 +144,6 @@ export const apiEndpoints: ClientApiMethods = {
   createOneCommentReply: POST(`${baseUrl}/comments/replies`),
   updateOneComment: PUT(`${baseUrl}/comments/:commentId`),
   deleteOneComment: DELETE(`${baseUrl}/comments/:commentId`),
-
-  /****************** Contributors route */
-  getContributors: GET(`${baseUrl}/contributors`),
-  createOneContributor: POST(`${baseUrl}/contributors`),
-  updateOneContributor: PUT(`${baseUrl}/contributors/:contributorId`),
-  createOneContributorInvited: GET(`${baseUrl}/contributors/invited/:userId`),
-  confirmOneContributor: PUT(`${baseUrl}/contributors/confirm/:token`),
-  deleteOneContributor: DELETE(`${baseUrl}/contributors/:contributorId`),
 
   /****************** Discounts route */
   getDiscountsUser: GET(`${baseUrl}/discounts/user`),
