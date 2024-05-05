@@ -13,10 +13,8 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     userAddress,
     amount,
     affiliate,
-    membershipId,
+    productId,
     cartOrderId,
-    userBuyerId,
-    userReceiveId,
     organizationSellerId,
     organizationBuyerId,
   } = data;
@@ -43,18 +41,15 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       affiliate,
       userAddress,
       cartOrderId,
-      membershipId,
-      userBuyerId,
-      userReceiveId,
+      productId,
       organizationSellerId,
       organizationBuyerId,
       reference: newReference,
       amount: {
-        name: name,
-        description: amount?.description,
+        quantity: amount.quantity,
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),
-        month: amount?.month,
+        oneValue: amount?.oneValue,
       },
     };
 
@@ -132,7 +127,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
                 const details = await action?.order?.capture();
                 return handleApprove({ order: details });
               }}
-              onCancel={() => {}}
+              onCancel={() => { }}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);

@@ -414,12 +414,12 @@ const CheckoutEvent = () => {
                                     paymentModel="PAYPAL-EVENT"
                                     data={{
                                       userAddress,
-                                      productId: productId,
+                                      productId: item?.id,
                                       amount: newAmount,
                                       organizationSellerId:
                                         item?.organizationId,
                                       organizationBuyerId:
-                                        userStorage?.organizationId,
+                                        userStorage?.organizationId
                                     }}
                                   />
                                 ) : null}
