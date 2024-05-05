@@ -1,13 +1,12 @@
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useAuth } from '../util/context-user';
-import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const HorizontalNavPayoutSetting: React.FC = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
-  const [navigation] = useState<NavbarProps[]>([
+  const [navigation] = useState<any[]>([
     {
       title: 'Payout',
       href: '/payout-settings',
@@ -25,11 +24,10 @@ const HorizontalNavPayoutSetting: React.FC = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
-                  isActive
+                className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${isActive
                     ? `text- bg-gray-100${profile?.color}-500`
                     : `hover:text- bg-transparent text-gray-500${profile?.color}-500 group hover:bg-gray-100`
-                } `}
+                  } `}
               >
                 {item?.icon}
 

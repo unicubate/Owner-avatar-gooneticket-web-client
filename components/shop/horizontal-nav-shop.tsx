@@ -1,13 +1,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 import { useAuth } from '../util/context-user';
 
 const HorizontalNavShop: React.FC = () => {
   const { profile } = useAuth() as any;
   const pathname = usePathname();
-  const [navigation] = useState<NavbarProps[]>([
+  const [navigation] = useState<any[]>([
     {
       title: 'Shop',
       href: '/shop',
@@ -62,11 +61,10 @@ const HorizontalNavShop: React.FC = () => {
                 key={index}
                 href={`${item.href}`}
                 title={item.title}
-                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                  isActive
+                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
                     ? `text-${profile?.color}-600 border-${profile?.color}-600`
                     : 'border-transparent hover:border-gray-300'
-                } `}
+                  } `}
               >
                 {item?.icon}
 

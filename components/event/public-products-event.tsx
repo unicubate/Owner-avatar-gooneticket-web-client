@@ -3,9 +3,6 @@ import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ButtonLoadMore } from '../ui-setting';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { LoadingFile } from '../ui-setting/ant/loading-file';
-import { ListPublicProductsEvent } from './list-public-products-event';
 
 type Props = {
   organizationId: string;
@@ -53,21 +50,21 @@ export function PublicProductsEvent(props: Props) {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTableProducts = isLoadingPosts ? (
-    <LoadingFile />
-  ) : isErrorPosts ? (
-    <ErrorFile title="404" description="Error find data please try again" />
-  ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (
-    ''
-  ) : (
-    dataPosts?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => <ListPublicProductsEvent item={item} key={index} />)
-  );
+  // const dataTableProducts = isLoadingPosts ? (
+  //   <LoadingFile />
+  // ) : isErrorPosts ? (
+  //   <ErrorFile title="404" description="Error find data please try again" />
+  // ) : Number(dataPosts?.pages[0]?.data?.total) <= 0 ? (
+  //   ''
+  // ) : (
+  //   dataPosts?.pages
+  //     .flatMap((page: any) => page?.data?.value)
+  //     .map((item, index) => <ListPublicProductsEvent item={item} key={index} />)
+  // );
 
   return (
     <>
-      {dataTableProducts}
+      {/* {dataTableProducts} */}
 
       <div className="mx-auto mt-6 justify-center text-center">
         {hasNextPage && (

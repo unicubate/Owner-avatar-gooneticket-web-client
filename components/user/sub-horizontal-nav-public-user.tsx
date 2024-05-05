@@ -4,14 +4,13 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { NavbarProps } from '../layout-dashboard/vertical-nav-dashboard';
 
 const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
   const t = useIntl();
   const { query } = useRouter();
   const username = String(query?.username);
   const pathname = usePathname();
-  const [navigation] = useState<NavbarProps[]>([
+  const [navigation] = useState<any[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.HOME' })}`,
       status: true,
@@ -57,11 +56,10 @@ const SubHorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
                   key={index}
                   href={`${item.href}`}
                   title={item.title}
-                  className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                    isActive
+                  className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
                       ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
                       : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-500`
-                  } `}
+                    } `}
                 >
                   {item?.icon}
 
