@@ -249,7 +249,7 @@ const LoginPhone = () => {
                   setHasErrors(false);
                   window.location.href = `${redirect
                     ? redirect
-                    : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+                    : `${process.env.NEXT_PUBLIC_SITE}/orders`
                     }`;
                 } catch (error: any) {
                   setHasErrors(true);

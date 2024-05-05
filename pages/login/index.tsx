@@ -59,7 +59,7 @@ const Login = () => {
       setHasErrors(false);
       setLoading(false);
       if (user?.emailConfirmedAt) {
-        window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+        window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
           }`;
       } else {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
@@ -211,8 +211,8 @@ const Login = () => {
                   });
                   setHasErrors(false);
                   window.location.href = `${redirect
-                      ? redirect
-                      : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+                    ? redirect
+                    : `${process.env.NEXT_PUBLIC_SITE}/orders`
                     }`;
                 } catch (error: any) {
                   setHasErrors(true);
