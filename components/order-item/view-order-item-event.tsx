@@ -88,7 +88,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <ButtonInput
               type="submit"
               size="sm"
-              variant="info"
+              variant="primary"
               icon={<DownloadIcon className="size-6" />}
               onClick={() => {
                 push(

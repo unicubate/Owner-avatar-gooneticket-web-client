@@ -130,7 +130,7 @@ const UpdateOrderItemForm = ({ orderItem }: Props) => {
               <ButtonInput
                 type="button"
                 size="lg"
-                variant="info"
+                variant="primary"
                 icon={<CalendarDaysIcon className="size-4" />}
                 onClick={() => back()}
               >

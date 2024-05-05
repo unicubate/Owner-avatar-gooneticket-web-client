@@ -80,9 +80,8 @@ const Register = () => {
       });
       setHasErrors(false);
       setLoading(false);
-      window.location.href = `${
-        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      }`;
+      window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+        }`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -298,7 +297,7 @@ const Register = () => {
                 <ButtonInput
                   type="submit"
                   className="w-full"
-                  variant="info"
+                  variant="primary"
                   size="lg"
                   loading={loading}
                   disabled={watchCode.length !== 6 && true}
@@ -312,7 +311,7 @@ const Register = () => {
               <ButtonInput
                 type="button"
                 className="w-full"
-                variant="info"
+                variant="primary"
                 loading={loading}
                 disabled={!watchPhone.length || !watchPassword.length}
                 onClick={() => checkEmailOrPhoneItem()}

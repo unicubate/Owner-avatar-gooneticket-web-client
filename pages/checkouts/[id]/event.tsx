@@ -63,11 +63,11 @@ const CheckoutEvent = () => {
   const newAmount: NewAmountType = watchAmount
     ? JSON.parse(watchAmount)
     : {
-        quantity: increment,
-        currency: item?.currency?.code,
-        value: calculatePrice,
-        oneValue: item?.priceDiscount,
-      };
+      quantity: increment,
+      currency: item?.currency?.code,
+      value: calculatePrice,
+      oneValue: item?.priceDiscount,
+    };
 
   const onSubmit = async () => {
     setIsValidAddress(true);
@@ -195,7 +195,7 @@ const CheckoutEvent = () => {
                           <ButtonInput
                             type="button"
                             size="sm"
-                            variant="info"
+                            variant="primary"
                             className="ml-auto"
                           >
                             <Link href={`/${username}/events`}>Event</Link>
@@ -231,7 +231,7 @@ const CheckoutEvent = () => {
                             <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-100 dark:border-gray-900">
                               <ButtonInput
                                 type="button"
-                                variant="info"
+                                variant="primary"
                                 disabled={increment === 1 ? true : false}
                                 onClick={() => setIncrement((lk) => lk - 1)}
                                 icon={<PlusIcon className="size-5" />}
@@ -243,7 +243,7 @@ const CheckoutEvent = () => {
 
                               <ButtonInput
                                 type="button"
-                                variant="info"
+                                variant="primary"
                                 loading={false}
                                 onClick={() => setIncrement((lk) => lk + 1)}
                                 icon={<PlusIcon className="size-5" />}
@@ -295,7 +295,7 @@ const CheckoutEvent = () => {
                         <div className="py-4">
                           <div className="flex items-center">
                             <h2 className="text-base font-bold text-gray-500">
-                              Billing Information
+                              Billing primaryrmation
                             </h2>
                           </div>
                         </div>
@@ -338,13 +338,13 @@ const CheckoutEvent = () => {
                             </div>
 
                             {watchFirstName &&
-                            watchLastName &&
-                            watchEmail ? null : (
+                              watchLastName &&
+                              watchEmail ? null : (
                               <div className="my-4 flex items-center space-x-4">
                                 <ButtonInput
                                   size="lg"
                                   type="submit"
-                                  variant="info"
+                                  variant="primary"
                                   className="w-full"
                                 >
                                   Continue
@@ -367,7 +367,7 @@ const CheckoutEvent = () => {
                                 <ButtonInput
                                   size="lg"
                                   type="button"
-                                  variant={isCardPay ? 'info' : 'ghost'}
+                                  variant={isCardPay ? 'primary' : 'ghost'}
                                   className="w-full"
                                   onClick={() => {
                                     setIsPayPalPay(false);
@@ -380,7 +380,7 @@ const CheckoutEvent = () => {
                                 <ButtonInput
                                   size="lg"
                                   type="button"
-                                  variant={isPayPalPay ? 'info' : 'ghost'}
+                                  variant={isPayPalPay ? 'primary' : 'ghost'}
                                   className="w-full"
                                   onClick={() => {
                                     setIsCardPay(false);
@@ -459,7 +459,7 @@ const CheckoutEvent = () => {
                                   <ButtonInput
                                     size="lg"
                                     type="button"
-                                    variant={isCardPay ? 'info' : 'ghost'}
+                                    variant={isCardPay ? 'primary' : 'ghost'}
                                     className="w-full"
                                     onClick={() => {
                                       setIsPayPalPay(false);
@@ -472,7 +472,7 @@ const CheckoutEvent = () => {
                                   <ButtonInput
                                     size="lg"
                                     type="button"
-                                    variant={isPayPalPay ? 'info' : 'ghost'}
+                                    variant={isPayPalPay ? 'primary' : 'ghost'}
                                     className="w-full"
                                     onClick={() => {
                                       setIsCardPay(false);

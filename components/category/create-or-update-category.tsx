@@ -145,7 +145,7 @@ const CreateOrUpdateCategory = ({
                     type="submit"
                     className="w-full"
                     size="lg"
-                    variant="info"
+                    variant="primary"
                     disabled={loading}
                     loading={loading}
                   >

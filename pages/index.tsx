@@ -121,7 +121,7 @@ export default function Home() {
             type="button"
             className="px-10 text-lg"
             size="xlg"
-            variant="info"
+            variant="primary"
           >
             Start free with email
           </ButtonInput>

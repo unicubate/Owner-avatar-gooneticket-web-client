@@ -126,7 +126,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `Information save successfully`,
+        text: `primaryrmation save successfully`,
       });
     } catch (error: any) {
       setHasErrors(true);
@@ -138,8 +138,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
     }
   };
 
-  const handleChange: UploadProps['onChange'] = (info) => {
-    const { file } = info;
+  const handleChange: UploadProps['onChange'] = (primary) => {
+    const { file } = primary;
     if (['done', 'error'].includes(String(file?.status))) {
       getBase64(file?.originFileObj as FileType, (url) => {
         setImageUrl(url as any);
@@ -170,7 +170,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               <Controller
                 name="attachment"
                 control={control}
-                render={({}) => (
+                render={({ }) => (
                   <>
                     <div className="mx-auto justify-center text-center">
                       <Upload
@@ -317,20 +317,20 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                       <>
                         {colors?.length > 0
                           ? colors?.map((item: any, index: number) => (
-                              <Option
-                                key={index}
-                                value={item?.name}
-                                name={item?.name}
-                              >
-                                <Space>
-                                  <span
-                                    className={`text- text-xs font-semibold${item?.name}-600 bg-${item?.name}-50 border- border${item?.name}-600 inline-flex items-center rounded-md px-2.5 py-1`}
-                                  >
-                                    {item?.name}
-                                  </span>
-                                </Space>
-                              </Option>
-                            ))
+                            <Option
+                              key={index}
+                              value={item?.name}
+                              name={item?.name}
+                            >
+                              <Space>
+                                <span
+                                  className={`text- text-xs font-semibold${item?.name}-600 bg-${item?.name}-50 border- border${item?.name}-600 inline-flex items-center rounded-md px-2.5 py-1`}
+                                >
+                                  {item?.name}
+                                </span>
+                              </Space>
+                            </Option>
+                          ))
                           : null}
                       </>
                     </Select>
@@ -383,7 +383,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               <ButtonInput
                 size="lg"
                 type="submit"
-                variant="info"
+                variant="primary"
                 className="w-full"
                 loading={loading}
               >

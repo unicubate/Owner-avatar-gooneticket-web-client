@@ -102,7 +102,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
       <div className="py-4">
         <div className="flex items-center">
           <h2 className="text-base font-bold text-gray-500">
-            Billing Information
+            Billing primaryrmation
           </h2>
           {userAddress?.isUpdated &&
             userAddress?.street1 &&
@@ -111,7 +111,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
               <ButtonInput
                 type="button"
                 size="sm"
-                variant={isEdit ? 'info' : 'outline'}
+                variant={isEdit ? 'primary' : 'outline'}
                 onClick={() => setIsEdit((i: boolean) => !i)}
                 className="ml-auto"
               >
@@ -238,7 +238,7 @@ const CreateOrUpdateUserAddressForm = ({ userAddress }: Props) => {
               <ButtonInput
                 size="lg"
                 type="submit"
-                variant="info"
+                variant="primary"
                 className="w-full"
                 loading={loading}
               >

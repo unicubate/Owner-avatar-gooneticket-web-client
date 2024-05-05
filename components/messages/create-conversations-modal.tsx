@@ -102,7 +102,7 @@ export function CreateConversationsModal(props: {
                 />
                 <ButtonInput
                   type="submit"
-                  variant="info"
+                  variant="primary"
                   size="default"
                   className="!absolute right-1 top-1 rounded"
                   loading={loading}

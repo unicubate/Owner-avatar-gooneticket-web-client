@@ -99,7 +99,7 @@ const Configs = () => {
                       type="button"
                       className="w-full"
                       size="sm"
-                      variant="info"
+                      variant="primary"
                       onClick={() => setShowCategoryModal(true)}
                       icon={<PlusIcon className="size-4" />}
                     >
@@ -160,7 +160,7 @@ const Configs = () => {
                       type="button"
                       className="w-full"
                       size="sm"
-                      variant="info"
+                      variant="primary"
                       onClick={() => setShowModal(true)}
                       icon={<PlusIcon className="size-4" />}
                     >

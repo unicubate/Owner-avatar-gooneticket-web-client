@@ -53,7 +53,7 @@ const CartOrderFooterCart: React.FC<{
                       <ButtonInput
                         type="button"
                         size="lg"
-                        variant="info"
+                        variant="primary"
                         onClick={() =>
                           push(
                             `/checkouts/${cartOrder?.id}/shop?username=${cartOrder?.profileVendor?.username}`,

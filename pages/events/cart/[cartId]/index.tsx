@@ -285,7 +285,7 @@ const ShopView = () => {
                     <ButtonInput
                       type="submit"
                       size="lg"
-                      variant="info"
+                      variant="primary"
                       loading={loading}
                     >
                       Create account

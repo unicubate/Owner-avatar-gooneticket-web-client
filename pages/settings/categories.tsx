@@ -93,7 +93,7 @@ const Categories = () => {
                       type="button"
                       className="w-full"
                       size="sm"
-                      variant="info"
+                      variant="primary"
                       onClick={() => setShowCategoryModal(true)}
                       icon={<PlusIcon className="size-4" />}
                     >

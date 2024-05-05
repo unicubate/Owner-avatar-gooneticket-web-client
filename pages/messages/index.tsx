@@ -66,7 +66,7 @@ const Messages = () => {
                           type="button"
                           className="w-full"
                           size="sm"
-                          variant="info"
+                          variant="primary"
                           icon={<PlusIcon className="mr-2 size-4" />}
                         >
                           Invite contributor
@@ -80,7 +80,7 @@ const Messages = () => {
                       type="button"
                       className="w-full"
                       size="sm"
-                      variant="info"
+                      variant="primary"
                       icon={<PlusIcon className="mr-2 size-4" />}
                     >
                       New message

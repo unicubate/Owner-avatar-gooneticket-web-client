@@ -48,7 +48,7 @@ export function CreateFormMessages(props: {
     },
   });
 
-  const handleEmoji = () => {};
+  const handleEmoji = () => { };
   const onSubmit: SubmitHandler<MessageFormModel> = async (
     payload: MessageFormModel,
   ) => {
@@ -91,7 +91,7 @@ export function CreateFormMessages(props: {
           <EmojiPicker open={isOpenEmoji} onEmojiClick={handleEmoji} />
           <ButtonInput
             type="submit"
-            variant="info"
+            variant="primary"
             size="default"
             className="!absolute right-1 top-1 rounded"
             loading={loading}

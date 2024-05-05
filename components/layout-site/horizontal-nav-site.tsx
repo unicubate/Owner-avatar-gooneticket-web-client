@@ -143,7 +143,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   type="button"
                   className="w-full"
                   size="sm"
-                  variant="info"
+                  variant="primary"
                   onClick={() => {
                     push(`${user?.id ? `/orders` : `/register`}`);
                   }}

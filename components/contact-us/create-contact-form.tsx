@@ -191,7 +191,7 @@ const CreateContactForm = () => {
                 <ButtonInput
                   type="button"
                   size="sm"
-                  variant="info-hover"
+                  variant="primary"
                   icon={<UploadOutlined />}
                 >
                   Click to Upload
@@ -248,7 +248,7 @@ const CreateContactForm = () => {
           <ButtonInput
             type="submit"
             className="w-full"
-            variant="info"
+            variant="primary"
             size="lg"
             loading={loading}
           >

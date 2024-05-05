@@ -134,7 +134,7 @@ export function CreateOrUpdateFormCommentReply(props: {
             <ButtonInput
               type="submit"
               size="lg"
-              variant="info"
+              variant="primary"
               loading={loading}
               className="w-full"
               disabled={watchDescription.length >= 12 ? false : true}

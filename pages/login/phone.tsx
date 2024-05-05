@@ -199,7 +199,7 @@ const LoginPhone = () => {
                 <ButtonInput
                   type="submit"
                   className="w-full"
-                  variant="info"
+                  variant="primary"
                   loading={loading}
                   disabled={!watchPhone.length}
                   onClick={() => checkEmailOrPhoneItem()}
@@ -214,7 +214,7 @@ const LoginPhone = () => {
                 <ButtonInput
                   type="submit"
                   className="w-full"
-                  variant="info"
+                  variant="primary"
                   loading={loading}
                   disabled={watchCode.length !== 6 && true}
                 >
@@ -248,8 +248,8 @@ const LoginPhone = () => {
                   });
                   setHasErrors(false);
                   window.location.href = `${redirect
-                      ? redirect
-                      : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+                    ? redirect
+                    : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
                     }`;
                 } catch (error: any) {
                   setHasErrors(true);

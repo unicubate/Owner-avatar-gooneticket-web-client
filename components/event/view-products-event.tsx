@@ -87,7 +87,7 @@ const ViewProductsEvent = ({ item }: Props) => {
             <ButtonInput
               type="button"
               className="w-full"
-              variant="info"
+              variant="primary"
               size="lg"
               onClick={() => {
                 userStorage?.id

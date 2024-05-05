@@ -36,7 +36,7 @@ const UpdateFormPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `Information save successfully`,
+        text: `primaryrmation save successfully`,
       });
       reset();
     } catch (error: any) {
@@ -102,7 +102,7 @@ const UpdateFormPassword = () => {
               <ButtonInput
                 size="lg"
                 type="submit"
-                variant="info"
+                variant="primary"
                 className="w-full"
                 loading={loading}
               >

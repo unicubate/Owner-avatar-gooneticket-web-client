@@ -113,7 +113,7 @@ const ResetPassword = () => {
               type="submit"
               className="w-full"
               size="lg"
-              variant="info"
+              variant="primary"
               loading={loading}
             >
               Reset Password

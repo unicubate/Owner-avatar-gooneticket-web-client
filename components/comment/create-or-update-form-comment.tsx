@@ -145,7 +145,7 @@ export function CreateOrUpdateFormComment(props: {
                 <ButtonInput
                   type="submit"
                   size="lg"
-                  variant="info"
+                  variant="primary"
                   className="w-full"
                   loading={loading}
                   disabled={watchDescription.length >= 12 ? false : true}
@@ -160,7 +160,7 @@ export function CreateOrUpdateFormComment(props: {
                 }}
                 type="button"
                 size="lg"
-                variant="info"
+                variant="primary"
                 className="w-full"
                 loading={loading}
               >

@@ -41,7 +41,7 @@ const TransactionSuccess = () => {
                   type="button"
                   className="w-full"
                   size="lg"
-                  variant="info"
+                  variant="primary"
                   onClick={() => {
                     push(`/payments`);
                   }}
@@ -75,7 +75,7 @@ const TransactionSuccess = () => {
                   type="button"
                   className="w-full"
                   size="lg"
-                  variant="info"
+                  variant="primary"
                   onClick={() => {
                     push(`/payments`);
                   }}

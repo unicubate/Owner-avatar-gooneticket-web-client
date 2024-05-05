@@ -120,7 +120,7 @@ const CheckoutShop = () => {
                           <ButtonInput
                             type="button"
                             size="sm"
-                            variant="info"
+                            variant="primary"
                             className="ml-auto"
                           >
                             <Link href={`/${username}/shop`}>
@@ -193,9 +193,9 @@ const CheckoutShop = () => {
                       />
 
                       {userAddress?.isUpdated &&
-                      userAddress?.street1 &&
-                      userAddress?.city &&
-                      userAddress?.country ? (
+                        userAddress?.street1 &&
+                        userAddress?.city &&
+                        userAddress?.country ? (
                         <>
                           <div className="py-4">
                             <h2 className="text-base font-bold text-gray-500">
@@ -207,7 +207,7 @@ const CheckoutShop = () => {
                               <ButtonInput
                                 size="lg"
                                 type="button"
-                                variant={isCardPay ? 'info' : 'ghost'}
+                                variant={isCardPay ? 'primary' : 'ghost'}
                                 className="w-full"
                                 onClick={() => {
                                   setIsPayPalPay(false);
@@ -219,7 +219,7 @@ const CheckoutShop = () => {
                               <ButtonInput
                                 size="lg"
                                 type="button"
-                                variant={isPayPalPay ? 'info' : 'ghost'}
+                                variant={isPayPalPay ? 'primary' : 'ghost'}
                                 className="w-full"
                                 onClick={() => {
                                   setIsCardPay(false);

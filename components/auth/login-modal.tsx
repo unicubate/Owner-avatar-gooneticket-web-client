@@ -122,7 +122,7 @@ const LoginModal: React.FC<{
                 <ButtonInput
                   type="submit"
                   className="w-full"
-                  variant="info"
+                  variant="primary"
                   size="lg"
                   loading={loading}
                 >

@@ -121,7 +121,7 @@ const Explore = () => {
               />
 
               <div className="mt-4 sm:absolute sm:inset-y-0 sm:right-0 sm:mt-0 sm:flex sm:items-center sm:pr-2">
-                <ButtonInput type="button" size="sm" variant="info">
+                <ButtonInput type="button" size="sm" variant="primary">
                   Start my page
                 </ButtonInput>
               </div>
