@@ -9,7 +9,7 @@ export default function useRedirectAfterSomeSeconds(
   const router = useRouter();
 
   useEffect(() => {
-    if (secondsRemaining === 0) router.push('/');
+    if (secondsRemaining === 0) router.push('/orders');
 
     const timer = setTimeout(() => {
       setSecondsRemaining((prevSecondsRemaining) => prevSecondsRemaining - 1);
