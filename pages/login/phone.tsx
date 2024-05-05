@@ -61,9 +61,8 @@ const LoginPhone = () => {
       await loginPhoneUserAPI({ code, phone });
       setHasErrors(false);
       setLoading(false);
-      window.location.href = `${
-        redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-      }`;
+      window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
+        }`;
     } catch (error: any) {
       setLoading(false);
       setHasErrors(true);
@@ -248,11 +247,10 @@ const LoginPhone = () => {
                     token: String(credentialResponse.credential),
                   });
                   setHasErrors(false);
-                  window.location.href = `${
-                    redirect
+                  window.location.href = `${redirect
                       ? redirect
                       : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
-                  }`;
+                    }`;
                 } catch (error: any) {
                   setHasErrors(true);
                   setHasErrors(error.response.data.message);
