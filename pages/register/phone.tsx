@@ -77,6 +77,7 @@ const Register = () => {
     try {
       await registerUserAPI({
         ...payload,
+        status: 'CLIENT',
       });
       setHasErrors(false);
       setLoading(false);
@@ -343,6 +344,7 @@ const Register = () => {
               try {
                 await registerGoogleUserAPI({
                   token: String(credentialResponse.credential),
+                  status: 'CLIENT',
                 });
                 setHasErrors(false);
                 push(`/login${redirect ? `?redirect=${redirect}` : ''}`);

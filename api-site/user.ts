@@ -7,6 +7,7 @@ import {
   UserModel,
   UserRegisterFormModel,
   UserResetPasswordFormModel,
+  UserStatus,
   UserVerifyTokenModel,
 } from '@/types/user.type';
 import { makeApiCall } from '@/utils/end-point';
@@ -106,6 +107,7 @@ export const loginGoogleUserAPI = async (payload: {
 
 export const registerGoogleUserAPI = async (payload: {
   token: string;
+  status: UserStatus;
 }): Promise<{ data: UserModel }> => {
   return await makeApiCall({
     action: 'registerGoogleUser',

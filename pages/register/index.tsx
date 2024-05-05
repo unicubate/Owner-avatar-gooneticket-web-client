@@ -75,6 +75,7 @@ const Register = () => {
     try {
       await registerUserAPI({
         ...payload,
+        status: 'CLIENT',
       });
       setLoading(false);
       window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
@@ -342,6 +343,7 @@ const Register = () => {
               try {
                 await registerGoogleUserAPI({
                   token: String(credentialResponse.credential),
+                  status: 'CLIENT',
                 });
                 setHasErrors(false);
                 push(`/login${redirect ? `?redirect=${redirect}` : ''}`);

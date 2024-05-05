@@ -5,6 +5,8 @@ export type ResponseUserModel = {
   value: Array<UserModel>;
 } & PaginationResponse;
 
+export type UserStatus = 'CLIENT' | 'PROPONENT';
+
 export type NextStep =
   | 'SETTING_PROFILE'
   | 'SETTING_INTEREST'
@@ -27,6 +29,7 @@ export type UserRegisterFormModel = {
   password: string;
   firstName: string;
   lastName: string;
+  status: UserStatus;
   birthday?: string;
 };
 
