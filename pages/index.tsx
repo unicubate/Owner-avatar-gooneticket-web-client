@@ -7,7 +7,6 @@ import {
 } from '@/components/landing-page/data-map';
 import { LayoutSite } from '@/components/layout-site';
 import { ButtonInput } from '@/components/ui-setting';
-import { QrCodeIcon } from 'lucide-react';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -28,40 +27,6 @@ export default function Home() {
             <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
               {t.formatMessage({ id: 'HOME.SUBTITLE' })}
             </p>
-          </div>
-
-          <div className="mx-auto max-w-xl text-center">
-            <div className="flex flex-wrap justify-center">
-              {/* <Link href={`/register`}>
-                <ButtonInput
-                  type="button"
-                  className="px-10 text-lg"
-                  size="xlg"
-                  variant="info"
-                >
-                  Start free with email
-                </ButtonInput>
-              </Link> */}
-
-              <ButtonInput
-                type="button"
-                className="w-full"
-                size="lg"
-                variant="info"
-                onClick={() => setIsOpen((lk) => !lk)}
-                icon={<QrCodeIcon className="size-6" />}
-              >
-                Scan QR Code
-              </ButtonInput>
-            </div>
-
-            <ul className="mt-2 flex items-center justify-center space-x-6 sm:space-x-8">
-              <li className="flex items-center">
-                <span className="text-xs font-normal text-gray-500 sm:text-sm">
-                  It’s free, and takes less than a minute.
-                </span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
