@@ -40,25 +40,30 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
       href: `/${username}`,
     },
     {
-      title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
-      count: user?.gallery?.count,
-      href: `/${username}/gallery`,
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      count: 1,
+      href: `/events`,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
-      count: user?.membership?.count,
-      href: `/${username}/memberships`,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.POST' })}`,
-      count: user?.post?.count,
-      href: `/${username}/posts`,
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
-      count: user?.product?.count,
-      href: `/${username}/shop`,
-    },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
+    //   count: user?.gallery?.count,
+    //   href: `/${username}/gallery`,
+    // },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.MEMBERSHIP' })}`,
+    //   count: user?.membership?.count,
+    //   href: `/${username}/memberships`,
+    // },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.POST' })}`,
+    //   count: user?.post?.count,
+    //   href: `/${username}/posts`,
+    // },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.SHOP' })}`,
+    //   count: user?.product?.count,
+    //   href: `/${username}/shop`,
+    // },
   ]);
 
   const logoutUserItem = async () => {
@@ -135,8 +140,8 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       href={`${item?.href}`}
                       title={item?.title}
                       className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
-                          ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
                         } `}
                     >
                       {item?.icon}
