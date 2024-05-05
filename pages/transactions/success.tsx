@@ -1,9 +1,11 @@
+import useRedirectAfterSomeSeconds from '@/components/hooks/use-redirect-after-some-seconds';
 import { ButtonInput } from '@/components/ui-setting';
 import { useRouter } from 'next/router';
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
   const token = String(query.token);
+  const { secondsRemaining } = useRedirectAfterSomeSeconds('/orders', 5);
 
   return (
     <>
@@ -24,7 +26,7 @@ const TransactionSuccess = () => {
                 Payment Done!
               </h3>
               <p className="my-2 text-gray-600">
-                Thank you for completing your secure online payment.
+                Thank you for completing your secure online payment redirecting to orders in {secondsRemaining} {secondsRemaining > 1 ? 'seconds' : 'second'}.
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>
               <div className="mt-4 flex items-center space-x-4">

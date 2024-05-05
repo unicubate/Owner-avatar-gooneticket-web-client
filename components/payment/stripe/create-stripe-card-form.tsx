@@ -83,7 +83,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
       setHasErrors(false);
       setLoading(false);
 
-      //push(`/transactions/success?token=${newReference}`);
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
