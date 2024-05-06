@@ -17,7 +17,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
 import { NavbarProps } from '../layout-dashboard';
-import { CreateOrUpdateFormFollow } from '../like-follow/create-or-update-form-follow';
 import { ThemeToggle } from '../ui-setting';
 import { HorizontalNavPublicUser } from '../user/horizontal-nav-public-user';
 
@@ -42,7 +41,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
     {
       title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
       count: 1,
-      href: `/events`,
+      href: `/${username}/events`,
     },
     // {
     //   title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
@@ -75,7 +74,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   return (
     <>
       <header className="sticky top-0 z-20 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-[#1c1b22]">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
@@ -123,42 +122,48 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                           alt={process.env.NEXT_PUBLIC_NAME_SITE}
                         />
                       </div>
+                      <div className="ml-2 cursor-pointer">
+                        <p className="text-lg font-bold">
+                          {process.env.NEXT_PUBLIC_NAME_SITE}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </Link>
             </div>
 
-            <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-              {navigation
-                .map((item: any, index: number) => {
-                  //const isActive = pathname === item.href;
-                  const isActive = pathname?.startsWith(item.href);
-                  return (
-                    <Link
-                      key={index}
-                      href={`${item?.href}`}
-                      title={item?.title}
-                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
-                        ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
-                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                        } `}
-                    >
-                      {item?.icon}
+            <div className="ml-auto flex items-center justify-center">
 
-                      {item?.title}
-                    </Link>
-                  );
-                })}
-            </nav>
+              <nav className="ml-4 hidden w-auto space-x-10 lg:block">
+                {navigation
+                  .map((item: any, index: number) => {
+                    const isActive = pathname === item.href;
+                    // const isActive = pathname?.startsWith(item.href);
+                    return (
+                      <Link
+                        key={index}
+                        href={`${item?.href}`}
+                        title={item?.title}
+                        className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
+                          ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
+                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                          } `}
+                      >
+                        {item?.icon}
+
+                        {item?.title}
+                      </Link>
+                    );
+                  })}
+              </nav>
+
+            </div>
 
             <div className="ml-auto flex items-center justify-end">
               {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
               <div className="flex items-center">
                 <ThemeToggle />
-                {userVisiter?.id !== user?.id ? (
-                  <CreateOrUpdateFormFollow item={user} />
-                ) : null}
                 {/* <ButtonInput
                   type="button"
                   className="w-full"
@@ -192,20 +197,26 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                           </svg>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#1c1b22]">
+                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/dashboard`)}>
+                          <DropdownMenuItem
+                            onClick={() => push(`/orders`)}
+                          >
                             <span className="cursor-pointer">
-                              {t.formatMessage({ id: 'MENU.DASHBOARD' })}
+                              {t.formatMessage({ id: 'MENU.ORDER' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => push(`/settings`)}>
-                          <span className="cursor-pointer">
-                            {t.formatMessage({ id: 'MENU.SETTING' })}
-                          </span>
-                        </DropdownMenuItem>
+                        <DropdownMenuGroup>
+                          <DropdownMenuItem
+                            onClick={() => push(`/settings`)}
+                          >
+                            <span className="cursor-pointer">
+                              {t.formatMessage({ id: 'MENU.SETTING' })}
+                            </span>
+                          </DropdownMenuItem>
+                        </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
                           <span className="cursor-pointer">

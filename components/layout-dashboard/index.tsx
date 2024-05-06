@@ -1,6 +1,6 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Head from 'next/head';
 import { useInputState } from '../hooks';
+import { HeaderSite } from '../layout-site/header-site';
 import { useAuth } from '../util/context-user';
 import { HorizontalNavDashboard } from './horizontal-nav-dashboard';
 import { VerticalNavDashboard } from './vertical-nav-dashboard';
@@ -27,21 +27,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
   return (
     <>
-      <Head>
-        <title>
-          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-        </title>
-        <meta
-          property="og:title"
-          content={process.env.NEXT_PUBLIC_NAME_SITE}
-          key="title"
-        />
-        <meta
-          name="description"
-          content="Un Pot is the best way for creators and artists to accept support and membership from their fans."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <HeaderSite title={title} />
 
       <div className="flex flex-col">
         <HorizontalNavDashboard showDrawer={showDrawer} user={user} />

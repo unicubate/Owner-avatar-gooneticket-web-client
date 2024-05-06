@@ -4,6 +4,7 @@ import { PublicLastProductsEvent } from '@/components/event/public-last-products
 import { ViewProductsEvent } from '@/components/event/view-products-event';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -46,11 +47,11 @@ const ShopUserPublic = () => {
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
               <>
-                <div className="my-4 border-gray-200 lg:col-span-3 xl:col-span-4">
+                <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                   <div className="flow-root">{dataItemProduct}</div>
                 </div>
 
-                <div className="my-4 lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
+                <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
                   <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
                     <div className="flow-root">
                       {product?.id ? (
@@ -76,7 +77,13 @@ const ShopUserPublic = () => {
                       )}
                     </div>
                   </div>
+                  <div className="mx-auto my-8 mt-4 justify-center text-center">
+                    {userBayer?.id !== user?.id ? (
+                      <CreateOrUpdateFormFollow item={user} />
+                    ) : null}
+                  </div>
                 </div>
+
               </>
             </div>
           </div>

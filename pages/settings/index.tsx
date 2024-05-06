@@ -5,7 +5,6 @@ import {
 } from '@/api-site/profile';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
 import { DeleteOneUser } from '@/components/user/delete-one-user';
 import { UpdateFormPassword } from '@/components/user/update-form-password';
 import { UpdateFormProfile } from '@/components/user/update-form-profile';
@@ -25,9 +24,9 @@ const Settings = () => {
   return (
     <>
       <LayoutDashboard title={'Settings'}>
-        <div className="mx-auto max-w-5xl py-6">
+        <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-            <HorizontalNavSetting />
+
 
             <div className="flow-root">
               <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">

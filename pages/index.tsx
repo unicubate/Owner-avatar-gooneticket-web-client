@@ -17,7 +17,7 @@ export default function Home() {
   const t = useIntl();
 
   return (
-    <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
+    <LayoutSite title="Tickets for concerts, musicals, shows, sports and culture">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mt-8 max-w-5xl py-6 text-center">

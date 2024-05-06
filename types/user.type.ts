@@ -56,6 +56,10 @@ export type UserModel = {
   username: string;
   organizationId: string;
   profileId: string;
+  organization: {
+    name: string;
+    color: string;
+  };
   donation: {
     amount: number;
     count: number;

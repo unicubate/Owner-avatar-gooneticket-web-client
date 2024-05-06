@@ -28,20 +28,12 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
   const { push, pathname } = useRouter();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
-      href: '/events',
-    },
-    {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       href: '/orders',
     },
     {
       title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
       href: '/messages',
-    },
-    {
-      title: `${t.formatMessage({ id: 'MENU.SETTING' })}`,
-      href: '/settings',
     },
   ]);
 
@@ -54,7 +46,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
   return (
     <>
       <header className="sticky top-0 z-20 border-gray-300 bg-white dark:bg-black/15">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
               <Button onClick={showDrawer} type="button" variant="ghost">
@@ -95,38 +87,39 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                         alt={process.env.NEXT_PUBLIC_NAME_SITE}
                       />
                     </div>
-
-                    {/* <div className="ml-2 cursor-pointer">
+                    <div className="ml-2 cursor-pointer">
                       <p className="text-lg font-bold">
                         {process.env.NEXT_PUBLIC_NAME_SITE}
                       </p>
-                    </div> */}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-              {navigation.map((item: any, index: number) => {
-                //const isActive = pathname === item.href;
-                const isActive = pathname?.startsWith(item.href);
-                return (
-                  <Link
-                    key={index}
-                    href={`${item?.href}`}
-                    title={item?.title}
-                    className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
+            <div className="ml-auto flex items-center justify-center">
+              <nav className="ml-4 hidden w-auto space-x-10 lg:block">
+                {navigation.map((item: any, index: number) => {
+                  //const isActive = pathname === item.href;
+                  const isActive = pathname?.startsWith(item.href);
+                  return (
+                    <Link
+                      key={index}
+                      href={`${item?.href}`}
+                      title={item?.title}
+                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
                         ? `border-indigo-600 text-indigo-600`
                         : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                      } `}
-                  >
-                    {item?.icon}
+                        } `}
+                    >
+                      {item?.icon}
 
-                    {item?.title}
-                  </Link>
-                );
-              })}
-            </nav>
+                      {item?.title}
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
 
             <div className="ml-auto flex items-center justify-end">
               <ThemeToggle />
@@ -158,17 +151,11 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/dashboard`)}>
-                            <span className="cursor-pointer">
-                              {t.formatMessage({ id: 'MENU.DASHBOARD' })}
-                            </span>
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
                           <DropdownMenuItem
-                            onClick={() => push(`/contributors`)}
+                            onClick={() => push(`/settings`)}
                           >
                             <span className="cursor-pointer">
-                              {t.formatMessage({ id: 'MENU.CONTRIBUTOR' })}
+                              {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>

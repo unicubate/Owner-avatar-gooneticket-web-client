@@ -21,7 +21,7 @@ export function AvatarComponent(props: Props) {
             <>
               <Avatar
                 className={cn(
-                  `bg- object-cover${profile?.color}-600 rounded-full`,
+                  `bg-${profile?.color}-600 rounded-full`,
                   className,
                 )}
                 size={size}

@@ -1,13 +1,12 @@
 import { createOneConversationAPI } from '@/api-site/conversations';
 import { ConversationFormModel } from '@/types/message';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { X } from 'lucide-react';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert';
+import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -75,17 +74,15 @@ export function CreateConversationsModal(props: {
             </button>
 
             <div className="mx-auto flex">
-              <h6 className="mt-3 text-xl font-bold">{`${user?.profile?.firstName} ${user?.profile?.lastName}`}</h6>
+              <h6 className="mt-3 text-xl font-bold">{`${user?.organization?.name}`}</h6>
             </div>
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
                 <Alert
                   variant="destructive"
-                  className="mb-4 bg-red-600 text-center"
+                  className="mb-4 bg-red-600"
                 >
-                  <ExclamationTriangleIcon className="size-4" />
-                  <AlertTitle className="text-white">Error</AlertTitle>
                   <AlertDescription className="text-white">
                     {hasErrors}
                   </AlertDescription>

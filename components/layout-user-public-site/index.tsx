@@ -1,10 +1,10 @@
 import { UserModel } from '@/types/user.type';
-import Head from 'next/head';
 import { useAuth } from '../util/context-user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../hooks';
+import { HeaderSite } from '../layout-site/header-site';
 import { VerticalNavUserPublicSite } from './vertical-nav-user-public-site';
 interface IProps {
   user: UserModel;
@@ -22,11 +22,7 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
 
   return (
     <>
-      <Head>
-        <title>
-          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-        </title>
-      </Head>
+      <HeaderSite title={title} />
 
       {/* <div className="flex flex-col"> */}
       {user?.id ? (

@@ -69,7 +69,7 @@ const ViewProductsEvent = ({ item }: Props) => {
     <>
       <div
         key={item?.id}
-        className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
+        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
       >
         <div className="p-8 sm:px-8 sm:py-7">
           {item?.uploadsImages?.length > 0 ? (
@@ -98,7 +98,7 @@ const ViewProductsEvent = ({ item }: Props) => {
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
-              Continue
+              Book
             </ButtonInput>
           </div>
 

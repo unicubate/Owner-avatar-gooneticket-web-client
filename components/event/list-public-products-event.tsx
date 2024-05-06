@@ -15,27 +15,21 @@ type Props = {
 
 const ListPublicProductsEvent = ({ item, index }: Props) => {
   const {
-    linkHref,
-    isOpen,
-    setIsOpen,
     locale,
-    loading,
-    setLoading,
-    userStorage,
   } = useInputState();
 
   return (
     <>
       <Card
         key={index}
-        className="w-full dark:border-gray-800 dark:bg-black/15 sm:w-[450px] md:w-full"
+        className="w-full dark:border-gray-800 dark:bg-black/15"
       >
         {item?.uploadsImages?.length > 0 ? (
           <Image
             preview={false}
             height={200}
             width="100%"
-            className="size-full max-w-max rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
+            className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
             src={
               viewOneFileUploadAPI({
                 folder: 'event',

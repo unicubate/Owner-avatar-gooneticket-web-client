@@ -7,6 +7,7 @@ interface Props {
   ref?: (node?: Element | null) => void;
   isFetchingNextPage: boolean;
   size?: SizeButton;
+  className?: string;
   variant?: VariantButton;
 }
 
@@ -16,6 +17,7 @@ export const ButtonLoadMore = ({
   onClick,
   ref,
   size = 'lg',
+  className = "w-full",
   isFetchingNextPage,
 }: Props) => {
   return (
@@ -25,7 +27,7 @@ export const ButtonLoadMore = ({
           type="button"
           size={size}
           variant={variant}
-          className="w-full"
+          className={className}
           ref={ref}
           loading={isFetchingNextPage ? true : false}
           onClick={onClick}

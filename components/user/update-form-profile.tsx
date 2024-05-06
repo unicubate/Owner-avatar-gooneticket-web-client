@@ -16,7 +16,6 @@ import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { DateInput } from '../ui-setting/ant';
 import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
 import { ButtonInput } from '../ui-setting/button-input';
 import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
@@ -56,7 +55,6 @@ const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
-  birthday: yup.date().max(new Date()).required(),
   username: yup.string().required('username is a required field'),
   currencyId: yup.string().uuid().required('currency is a required field'),
   countryId: yup.string().uuid().required('country is a required field'),
@@ -82,7 +80,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
   useEffect(() => {
     if (profile) {
       const fields = [
-        'birthday',
         'currencyId',
         'countryId',
         'url',
@@ -261,12 +258,15 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                 />
               </div>
               <div className="mt-2">
-                <DateInput
-                  label="Birthday"
+                <SelectSearchInput
+                  label="Counties"
+                  firstOptionName="Country"
+                  valueType="key"
                   control={control}
-                  placeholder="12/01/2023"
-                  name="birthday"
                   errors={errors}
+                  placeholder="Country"
+                  name="countryId"
+                  dataItem={countries}
                 />
               </div>
             </div>
@@ -339,18 +339,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
             </div>
 
-            <div className="mt-2">
-              <SelectSearchInput
-                label="Counties"
-                firstOptionName="Country"
-                valueType="key"
-                control={control}
-                errors={errors}
-                placeholder="Country"
-                name="countryId"
-                dataItem={countries}
-              />
-            </div>
+
             <div className="mt-2">
               <SelectInput
                 label="Payment currency"
@@ -383,7 +372,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               <ButtonInput
                 size="lg"
                 type="submit"
-                variant="primary"
+                variant="info"
                 className="w-full"
                 loading={loading}
               >

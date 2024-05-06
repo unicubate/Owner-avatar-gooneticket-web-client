@@ -1,13 +1,11 @@
 import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { AlertDangerNotification } from '@/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 
-const CreateOrUpdateFormFollow: React.FC<{
-  item?: any;
-}> = ({ item }) => {
+const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
   const {
     isOpen: isOpenModalLogin,
     setIsOpen: setIsOpenModalLogin,
@@ -35,13 +33,13 @@ const CreateOrUpdateFormFollow: React.FC<{
       {
         isFollow
           ? await saveMutation({
-              followerId: item?.profile?.userId,
-              action: 'DELETE',
-            })
+            followerId: item?.profile?.userId,
+            action: 'DELETE',
+          })
           : await saveMutation({
-              followerId: item?.id,
-              action: 'CREATE',
-            });
+            followerId: item?.id,
+            action: 'CREATE',
+          });
       }
     } catch (error: any) {
       AlertDangerNotification({
@@ -55,6 +53,8 @@ const CreateOrUpdateFormFollow: React.FC<{
       {userStorage?.id ? (
         <>
           <ButtonInput
+            size="lg"
+            className="w-full"
             type="button"
             variant={isFollow ? 'outline' : 'danger'}
             onClick={() => {
@@ -66,6 +66,8 @@ const CreateOrUpdateFormFollow: React.FC<{
         </>
       ) : (
         <ButtonInput
+          size="lg"
+          className="w-full"
           type="button"
           variant="danger"
           onClick={() => {
