@@ -1,7 +1,6 @@
-import { PrivateComponent } from '@/components/util/private-component';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
 import { LayoutDashboard } from '@/components/layout-dashboard';
-import { HorizontalNavSetting } from '@/components/setting/horizontal-nav-setting';
+import { PrivateComponent } from '@/components/util/private-component';
+import { SubmitHandler } from 'react-hook-form';
 
 const Notifications = () => {
   const onSubmit: SubmitHandler<any> = (payload: any) => {
@@ -30,7 +29,7 @@ const Notifications = () => {
               </div>
 
               <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-                <HorizontalNavSetting />
+                {/* <HorizontalNavSetting /> */}
 
                 <div className="border-t border-gray-200 pt-6 lg:order-1 lg:col-span-10">
                   <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
