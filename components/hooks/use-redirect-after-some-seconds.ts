@@ -1,10 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-export default function useRedirectAfterSomeSeconds(
-  redirectTo: string,
-  seconds = 5,
-) {
+export function useRedirectAfterSomeSeconds(redirectTo: string, seconds = 5) {
   const [secondsRemaining, setSecondsRemaining] = useState(seconds);
   const router = useRouter();
 

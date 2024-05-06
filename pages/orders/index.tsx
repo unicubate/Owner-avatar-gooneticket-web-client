@@ -5,15 +5,25 @@ import { ListOrderItemsUser } from '@/components/order-item/list-order-items-use
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 import { PrivateComponent } from '@/components/util/private-component';
-import { ShoppingCartIcon } from 'lucide-react';
-import { useEffect } from 'react';
+import { CalendarCheckIcon, ShoppingCartIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const OrdersIndex = () => {
+  const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
   const { userStorage } = useInputState() as any;
-  const { search, handleSetSearch } = useInputState();
+  const { t, search, handleSetSearch } = useInputState();
 
   const {
     isLoading: isLoadingOrderItems,
@@ -28,6 +38,7 @@ const OrdersIndex = () => {
     modelIds: ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
+    days: dayCount,
   });
 
   useEffect(() => {
@@ -70,12 +81,63 @@ const OrdersIndex = () => {
       ))
   );
 
+  const handleDaysChange = (newDays: number) => {
+    setDayCount(newDays);
+  };
+
   return (
     <>
       <LayoutDashboard title={'Orders'}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
+              <div className="mt-4 flex items-center">
+                <div className="ml-auto flex items-center gap-2">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="outline" size="sm" className="h-8 gap-1">
+                        <CalendarCheckIcon className="size-3.5" />
+                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                          {t.formatMessage(
+                            { id: 'TRANSACTION.LAST_DAY' },
+                            { day: dayCount },
+                          )}
+                        </span>
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-20 dark:border-gray-800">
+                      <DropdownMenuGroup>
+                        <DropdownMenuItem
+                          onClick={() => {
+                            handleDaysChange(3);
+                          }}
+                        >
+                          <span className="cursor-pointer">
+                            {t.formatMessage(
+                              { id: 'TRANSACTION.LAST_DAY' },
+                              { day: 3 },
+                            )}
+                          </span>
+                        </DropdownMenuItem>
+                      </DropdownMenuGroup>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => {
+                          handleDaysChange(30);
+                        }}
+                      >
+                        <span className="cursor-pointer">
+                          {t.formatMessage(
+                            { id: 'TRANSACTION.LAST_DAY' },
+                            { day: 30 },
+                          )}
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </div>
+
               <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">

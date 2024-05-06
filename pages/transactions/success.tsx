@@ -1,4 +1,4 @@
-import useRedirectAfterSomeSeconds from '@/components/hooks/use-redirect-after-some-seconds';
+import { useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { useRouter } from 'next/router';
 

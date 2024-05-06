@@ -87,6 +87,7 @@ export const getOrderItemsAPI = async (
     status?: string;
     model?: string;
     orderId?: string;
+    daysConfirm?: number;
     organizationSellerId?: string;
     organizationBuyerId?: string;
     modelIds: ModelType[];
@@ -155,6 +156,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   search?: string;
   take: number;
   days?: number;
+  daysConfirm?: number;
   status?: string;
   sort: SortModel;
 }) => {
@@ -162,6 +164,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     modelIds,
     days,
     orderId,
+    daysConfirm,
     organizationSellerId,
     organizationBuyerId,
     search,
@@ -180,6 +183,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
         sort,
         days,
         orderId,
+        daysConfirm,
         organizationBuyerId,
         organizationSellerId,
         search: search,
