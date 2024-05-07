@@ -83,7 +83,7 @@ const MessagesView = () => {
   return (
     <>
       <LayoutDashboard title={'Messages'}>
-        <div className="mx-auto max-w-5xl py-6">
+        <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
               <div className="sm:flex sm:items-center sm:justify-between">
@@ -132,7 +132,7 @@ const MessagesView = () => {
                           ref={ref}
                           size="sm"
                           variant="secondary"
-                          children="Load old conversations"
+                          children={`Load old conversations`}
                           isFetchingNextPage={isFetchingNextPage}
                           onClick={() => fetchNextPage()}
                         />

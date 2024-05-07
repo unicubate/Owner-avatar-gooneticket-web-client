@@ -28,6 +28,10 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
   const { push, pathname } = useRouter();
   const [navigation] = useState<NavbarProps[]>([
     {
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      href: '/events',
+    },
+    {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       href: '/orders',
     },

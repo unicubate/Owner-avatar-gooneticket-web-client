@@ -233,6 +233,7 @@ export const GetOneUserPublicAPI = (payload: {
   userId?: string;
   userVisitorId?: string;
   username?: string;
+  organizationVisitorId?: string;
 }) => {
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
     queryKey: ['user', { ...payload }],

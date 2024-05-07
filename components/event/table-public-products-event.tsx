@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ProductModel } from '@/types/product';
+import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks';
+import { ProductEventSkeleton } from '../skeleton/product-event-skeleton';
 import { ButtonLoadMore } from '../ui-setting';
-import { EmptyData, LoadingFile } from '../ui-setting/ant';
+import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListPublicProductsEvent } from './list-public-products-event';
 
@@ -16,9 +18,9 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
   const { ref, inView } = useInView();
 
   const {
-    isLoading: isLoadingProduct,
-    isError: isErrorProduct,
-    data: dataProduct,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+    data: dataProducts,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
@@ -31,14 +33,14 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
   });
 
 
-  const dataTableProducts = isLoadingProduct ? (
-    <LoadingFile />
-  ) : isErrorProduct ? (
+  const dataTableProducts = isLoadingProducts ? (
+    itemsNumberArray(3).map((i, index) => <ProductEventSkeleton key={i} index={index} />)
+  ) : isErrorProducts ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
+  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
-    dataProduct?.pages
+    dataProducts?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item: ProductModel, index: number) => (
         <ListPublicProductsEvent item={item} key={index} index={index} />
@@ -53,7 +55,7 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
 
       </div>
 
-      {Number(dataProduct?.pages[0]?.data?.total) <= 0 ?
+      {Number(dataProducts?.pages[0]?.data?.total) <= 0 ?
         <EmptyData
           image={<TicketIcon className="size-10" />}
           title="This creator hasn't published anything yet!"

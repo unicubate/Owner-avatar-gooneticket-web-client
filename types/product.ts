@@ -66,6 +66,7 @@ export type ProductModel = {
     color: string;
   };
   profile: ProfileItemModel;
+  organization: { name: string; color: string };
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
   discount: {

@@ -6,6 +6,7 @@ import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import Link from 'next/link';
 import { useInputState } from '../hooks';
+import { AvatarComponent } from '../ui-setting/ant';
 import { Card } from '../ui/card';
 
 type Props = {
@@ -25,26 +26,36 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
         className="w-full dark:border-gray-800 dark:bg-black/15"
       >
         {item?.uploadsImages?.length > 0 ? (
-          <Image
-            preview={false}
-            height={200}
-            width="100%"
-            className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
-            src={
-              viewOneFileUploadAPI({
-                folder: 'event',
-                fileName: String(item?.uploadsImages?.[0]?.path),
-              }) as string
-            }
-            alt={item?.title}
-          />
+          <>
+            <Link
+              className="hover:text-blue-600"
+              href={`/events/${item?.slug}`}
+              title={item?.title}
+            >
+              <Image
+                preview={false}
+                height={200}
+                width="100%"
+                className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
+                src={
+                  viewOneFileUploadAPI({
+                    folder: 'event',
+                    fileName: String(item?.uploadsImages?.[0]?.path),
+                  }) as string
+                }
+                alt={item?.title}
+              />
+            </Link>
+
+          </>
+
         ) : null}
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            <p className="text-2xl">{item?.priceDiscount ?? ''}</p>
-            <p className="ml-1 text-sm">{item?.currency?.symbol ?? ''}</p>
-            <p className="ml-auto text-sm">
+            <p className="text-3xl">{item?.priceDiscount ?? ''}</p>
+            <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
+            <p className="ml-auto text-lg">
               {' '}
               {formateDate(item?.expiredAt as Date, locale)}
             </p>
@@ -61,7 +72,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
             ) : null}
           </div>
 
-          <h3 className="duratin-200 mt-2 flex-1 text-lg font-bold text-gray-900 transition-all hover:text-blue-600 dark:text-white sm:text-base">
+          <p className="mt-2 flex-1 text-xl font-bold text-gray-900 transition-all duration-200 hover:text-blue-600 dark:text-white sm:text-base">
             <Link
               className="hover:text-blue-600"
               href={`/events/${item?.slug}`}
@@ -69,18 +80,41 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
             >
               <ReadMore html={String(item?.title ?? '')} value={60} />
             </Link>
-          </h3>
-          <div className="flex flex-wrap justify-between space-x-2 pt-3 text-sm">
-            <div className="flex shrink-0 font-bold">
+          </p>
+          {/* <div className="flex flex-wrap justify-between space-x-2 pt-3">
+            <div className="flex shrink-0 font-semibold">
               <span>{item?.address ?? ''}</span>
               <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
               <span className="ml-1.5">{item?.city ?? ''}</span>
               <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
               <span className="ml-1.5">{item?.country?.name ?? ''}</span>
             </div>
+          </div> */}
+          <div className="flex flex-wrap justify-between space-x-2 pt-3">
+            <div className="flex shrink-0 font-semibold">
+              <span>{item?.address ?? ''}</span>
+              <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
+              <span className="ml-1.5">{item?.city ?? ''}</span>
+            </div>
             <span className="font-bold">
               {item?.timeInit} - {item?.timeEnd}
             </span>
+          </div>
+          {/* <div className="hidden lg:table-cell"> */}
+          <div className="flex flex-wrap justify-between pt-2">
+            <p className="mt-1 flex items-center font-semibold">
+              {item?.address ? (
+                <AvatarComponent size={35} profile={item?.profile} />
+              ) : null}
+              <div className="ml-2 min-w-0 flex-1">
+                <p className="text-sm">
+                  {item?.organization?.name}
+                </p>
+                <p className="text-sm text-gray-500">
+                  {formateDate(item?.createdAt as Date, locale)}
+                </p>
+              </div>
+            </p>
           </div>
         </div>
       </Card>

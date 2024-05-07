@@ -4,24 +4,25 @@ import { ListPublicProductsEvent } from '@/components/event/list-public-products
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
+import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
 import { ButtonLoadMore } from '@/components/ui-setting';
-import { CoverComponent, LoadingFile } from '@/components/ui-setting/ant';
+import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { ProductModel } from '@/types/product';
+import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 const EventsPublic = () => {
-  const { search, handleSetSearch } = useInputState();
   const { ref, inView } = useInView();
-  const { isOpen, setIsOpen, userStorage: userVisiter } = useInputState();
+  const { search, isOpen, setIsOpen, userStorage: userVisiter } = useInputState();
   const { query } = useRouter();
   const username = String(query?.username);
 
   const { status, data: user } = GetOneUserPublicAPI({
     username,
-    userVisitorId: userVisiter?.id,
+    organizationVisitorId: userVisiter?.organizationId,
   });
 
   const {
@@ -62,7 +63,7 @@ const EventsPublic = () => {
   }, [fetchNextPage, hasNextPage, inView]);
 
   const dataTableProducts = isLoadingProduct ? (
-    <LoadingFile />
+    itemsNumberArray(3).map((i, index) => <ProductEventSkeleton key={i} index={index} />)
   ) : isErrorProduct ? (
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
@@ -85,7 +86,7 @@ const EventsPublic = () => {
         <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
           <div className="container mx-auto space-y-8 p-6">
 
-            <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">
+            {/* <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">
               <div className="absolute inset-0">
                 <CoverComponent className="size-full object-cover" profile={user?.profile} />
               </div>
@@ -101,19 +102,19 @@ const EventsPublic = () => {
 
                 </div>
               </div>
-            </div>
+            </div> */}
 
 
             <div className="flow-root">
 
               <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
 
-                {dataTableProducts}
+                {user?.organizationId ? dataTableProducts : null}
 
               </div>
 
 
-              {hasNextPage && (
+              {user?.organizationId && hasNextPage && (
                 <div className="mx-auto mt-4 justify-center text-center">
                   <ButtonLoadMore
                     ref={ref}

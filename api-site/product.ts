@@ -231,3 +231,30 @@ export const GetInfiniteProductsAPI = (payload: {
     initialPageParam: 1,
   });
 };
+
+export const GetInfiniteFollowsProductsAPI = (payload: {
+  take: number;
+  sort: SortModel;
+  search?: string;
+  status?: string;
+  modelIds: ModelType[];
+}) => {
+  const { take, sort, status, search, modelIds } = payload;
+  return useInfiniteQuery({
+    queryKey: ['products-follows', 'infinite', { ...payload }],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await makeApiCall({
+        action: 'getFollowsProducts',
+        queryParams: {
+          take,
+          sort,
+          search,
+          modelIds,
+          status: status?.toUpperCase(),
+          page: Number(pageParam),
+        },
+      }),
+    initialPageParam: 1,
+  });
+};

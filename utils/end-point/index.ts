@@ -185,6 +185,7 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** Products route */
   getProducts: GET(`${baseUrl}/products`),
   createOneProduct: POST(`${baseUrl}/products`),
+  getFollowsProducts: GET(`${baseUrl}/products/follows`),
   updateOneProduct: PUT(`${baseUrl}/products/:productId`),
   getOneProduct: GET(`${baseUrl}/products/view`),
   deleteOneProduct: DELETE(`${baseUrl}/products/:productId`),

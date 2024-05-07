@@ -22,7 +22,7 @@ import { useInView } from 'react-intersection-observer';
 const OrdersIndex = () => {
   const [dayCount, setDayCount] = useState(30);
   const { ref, inView } = useInView();
-  const { userStorage } = useInputState() as any;
+  const { userStorage: user } = useInputState() as any;
   const { t, search, handleSetSearch } = useInputState();
 
   const {
@@ -34,7 +34,7 @@ const OrdersIndex = () => {
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
     search,
-    organizationBuyerId: userStorage?.organizationId,
+    organizationBuyerId: user?.organizationId,
     modelIds: ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
@@ -153,12 +153,12 @@ const OrdersIndex = () => {
 
                 <table className="mt-4 min-w-full lg:divide-y">
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                    {dataTables}
+                    {user?.organizationId ? dataTables : null}
                   </tbody>
                 </table>
               </div>
 
-              {hasNextPage && (
+              {user?.organizationId && hasNextPage && (
                 <div className="mx-auto mt-2 justify-center text-center">
                   <ButtonLoadMore
                     ref={ref}

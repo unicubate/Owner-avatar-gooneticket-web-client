@@ -33,11 +33,11 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
       {
         isFollow
           ? await saveMutation({
-            followerId: item?.profile?.userId,
+            followerId: item?.organizationId,
             action: 'DELETE',
           })
           : await saveMutation({
-            followerId: item?.id,
+            followerId: item?.organizationId,
             action: 'CREATE',
           });
       }
@@ -50,7 +50,7 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
 
   return (
     <>
-      {userStorage?.id ? (
+      {userStorage?.organizationId ? (
         <>
           <ButtonInput
             className="w-full"

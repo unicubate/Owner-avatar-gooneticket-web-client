@@ -36,7 +36,7 @@ const UpdateFormPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `primaryrmation save successfully`,
+        text: `information save successfully`,
       });
       reset();
     } catch (error: any) {

@@ -29,7 +29,7 @@ const ProfilePublic = () => {
 
   const { status, data: user } = GetOneUserPublicAPI({
     username,
-    userVisitorId: userVisiter?.id,
+    organizationVisitorId: userVisiter?.organizationId,
   });
 
   return (
@@ -53,12 +53,12 @@ const ProfilePublic = () => {
 
                   <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="mx-auto max-w-max text-center">
-                      <h1 className="text-3xl font-extrabold text-white sm:text-3xl lg:text-4xl">
+                      <h1 className="text-4xl font-extrabold text-white sm:text-3xl lg:text-4xl">
                         {user?.organization?.name}
                       </h1>
 
                       {user?.profile?.description && (
-                        <p className="mt-4 text-gray-200 sm:text-lg/relaxed">
+                        <p className="mt-4 font-bold text-gray-300 sm:text-sm/relaxed">
                           <HtmlParser
                             html={String(user?.profile?.description ?? '')}
                           />
@@ -76,7 +76,7 @@ const ProfilePublic = () => {
                     ) : null}
                   </div>
                   <div className="py-2 sm:mt-0">
-                    {userVisiter?.id !== user?.id ? (
+                    {userVisiter?.organizationId && userVisiter?.organizationId !== user?.organizationId ? (
                       <CreateOrUpdateFormFollow item={user} />
                     ) : null}
                   </div>

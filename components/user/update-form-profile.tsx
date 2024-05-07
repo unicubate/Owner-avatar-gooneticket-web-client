@@ -123,7 +123,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `primaryrmation save successfully`,
+        text: `information save successfully`,
       });
     } catch (error: any) {
       setHasErrors(true);

@@ -18,6 +18,10 @@ const VerticalNavDashboard = ({ user }: Props) => {
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      href: '/events',
+    },
+    {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       href: '/orders',
     },
@@ -45,10 +49,9 @@ const VerticalNavDashboard = ({ user }: Props) => {
                   href={`${item.href}`}
                   title={item?.title}
                   className={cn(
-                    `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
-                      isActive
-                        ? `bg-indigo-600 text-white`
-                        : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
+                    `group flex items-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${isActive
+                      ? `bg-indigo-600 text-white`
+                      : 'text-gray-900 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-700'
                     }`,
                   )}
                 >
