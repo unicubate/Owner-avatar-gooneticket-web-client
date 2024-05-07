@@ -82,7 +82,7 @@ const EventsPublic = () => {
           }`}
         user={user}
       >
-        <div className="mx-auto max-w-max px-4 sm:px-6 lg:px-8 lg:py-10">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
           <div className="container mx-auto space-y-8 p-6">
 
             <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">

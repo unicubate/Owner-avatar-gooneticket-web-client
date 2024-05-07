@@ -19,7 +19,6 @@ const CreateConversationForm = ({ item }: { item: any }) => {
         <>
           <ButtonInput
             type="button"
-            size="lg"
             variant="default"
             className="w-full"
             onClick={() => setIsContact(true)}
@@ -31,7 +30,6 @@ const CreateConversationForm = ({ item }: { item: any }) => {
       ) : (
         <ButtonInput
           type="button"
-          size="lg"
           variant="default"
           className="w-full"
           onClick={() => setIsOpenModalLogin(true)}

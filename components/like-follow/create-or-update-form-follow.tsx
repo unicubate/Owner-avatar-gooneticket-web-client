@@ -53,7 +53,6 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
       {userStorage?.id ? (
         <>
           <ButtonInput
-            size="lg"
             className="w-full"
             type="button"
             variant={isFollow ? 'outline' : 'danger'}
@@ -66,7 +65,6 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
         </>
       ) : (
         <ButtonInput
-          size="lg"
           className="w-full"
           type="button"
           variant="danger"

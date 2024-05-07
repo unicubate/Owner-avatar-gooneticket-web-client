@@ -4,7 +4,6 @@ import { PublicLastProductsEvent } from '@/components/event/public-last-products
 import { ViewProductsEvent } from '@/components/event/view-products-event';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
-import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -21,7 +20,7 @@ const ShopUserPublic = () => {
     data: product,
   } = GetOneProductAPI({
     enableVisibility: 'TRUE',
-    productSlug: String(query?.productId),
+    productSlug: String(query?.id),
   });
 
   const {
@@ -76,11 +75,6 @@ const ShopUserPublic = () => {
                         ))
                       )}
                     </div>
-                  </div>
-                  <div className="mx-auto my-8 mt-4 justify-center text-center">
-                    {userBayer?.id !== user?.id ? (
-                      <CreateOrUpdateFormFollow item={user} />
-                    ) : null}
                   </div>
                 </div>
 

@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ProductModel } from '@/types/product';
+import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks';
 import { ButtonLoadMore } from '../ui-setting';
-import { LoadingFile } from '../ui-setting/ant';
+import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListPublicProductsEvent } from './list-public-products-event';
 
@@ -51,6 +52,15 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
         {dataTableProducts}
 
       </div>
+
+      {Number(dataProduct?.pages[0]?.data?.total) <= 0 ?
+        <EmptyData
+          image={<TicketIcon className="size-10" />}
+          title="This creator hasn't published anything yet!"
+          description={`When he does, his publications will appear here first.`}
+        />
+        : null}
+
 
       {hasNextPage && (
         <div className="mx-auto justify-center text-center">
