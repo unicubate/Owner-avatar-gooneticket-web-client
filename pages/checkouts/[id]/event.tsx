@@ -43,7 +43,7 @@ const CheckoutEvent = () => {
   const { userStorage } = useInputState();
   const { query, push } = useRouter();
   const { id: productId, username } = query;
-  const { watch, control, handleSubmit, errors } = useReactHookForm({ schema });
+  const { isValid, watch, control, handleSubmit, errors } = useReactHookForm({ schema });
   const watchAmount = watch('amount', '');
   const watchFirstName = watch('firstName', '');
   const watchLastName = watch('lastName', '');
@@ -70,7 +70,7 @@ const CheckoutEvent = () => {
     };
 
   const onSubmit = async () => {
-    setIsValidAddress(true);
+    setIsValidAddress((lk) => !lk);
   };
 
   return (
@@ -230,6 +230,7 @@ const CheckoutEvent = () => {
                             </p>
                             <div className="ml-auto flex items-center justify-end space-x-8 rounded-md border border-gray-100 dark:border-gray-900">
                               <ButtonInput
+                                size="sm"
                                 type="button"
                                 variant="primary"
                                 disabled={increment === 1 ? true : false}
@@ -242,6 +243,7 @@ const CheckoutEvent = () => {
                               </span>
 
                               <ButtonInput
+                                size="sm"
                                 type="button"
                                 variant="primary"
                                 loading={false}
@@ -295,7 +297,7 @@ const CheckoutEvent = () => {
                         <div className="py-4">
                           <div className="flex items-center">
                             <h2 className="text-base font-bold text-gray-500">
-                              Billing primaryrmation
+                              Billing information
                             </h2>
                           </div>
                         </div>
@@ -337,24 +339,22 @@ const CheckoutEvent = () => {
                               />
                             </div>
 
-                            {watchFirstName &&
-                              watchLastName &&
-                              watchEmail ? null : (
+                            {!isValidAddress ?
                               <div className="my-4 flex items-center space-x-4">
                                 <ButtonInput
-                                  size="lg"
                                   type="submit"
                                   variant="primary"
                                   className="w-full"
+                                  size="lg"
                                 >
                                   Continue
                                 </ButtonInput>
-                              </div>
-                            )}
+                              </div> : null}
+
                           </div>
                         </form>
 
-                        {watchFirstName && watchLastName && watchEmail ? (
+                        {isValid && isValidAddress ? (
                           <>
                             <div className="py-4">
                               <h2 className="text-base font-bold text-gray-500">
@@ -365,7 +365,6 @@ const CheckoutEvent = () => {
                             <div className="py-6">
                               <div className="flex items-center space-x-4">
                                 <ButtonInput
-                                  size="lg"
                                   type="button"
                                   variant={isCardPay ? 'primary' : 'ghost'}
                                   className="w-full"
@@ -378,7 +377,6 @@ const CheckoutEvent = () => {
                                   Card
                                 </ButtonInput>
                                 <ButtonInput
-                                  size="lg"
                                   type="button"
                                   variant={isPayPalPay ? 'primary' : 'ghost'}
                                   className="w-full"
