@@ -129,7 +129,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="ghost"
                   onClick={() => {
-                    push(`${user?.id ? `/orders` : `/login${redirect ? `?redirect=${redirect}` : ''}`}`);
+                    push(`${user?.id ? `/orders` : `/login`}`);
                   }}
                 >
                   Log In
@@ -142,7 +142,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="primary"
                   onClick={() => {
-                    push(`${user?.id ? `/orders` : `register${redirect ? `?redirect=${redirect}` : ''}`}`);
+                    push(`${user?.id ? `/orders` : `register`}`);
                   }}
                 >
                   Sign Up

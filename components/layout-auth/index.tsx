@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/router';
 import { ButtonInput } from '../ui-setting';
 
 interface IProps {
@@ -8,7 +8,8 @@ interface IProps {
 }
 
 const LayoutAuth = ({ children, title }: IProps) => {
-  const { push } = useRouter();
+  const { query, push } = useRouter();
+  const { redirect } = query;
 
   return (
     <>
@@ -76,7 +77,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                   size="sm"
                   variant="ghost"
                   onClick={() => {
-                    push(`/login`);
+                    push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
                   }}
                 >
                   Log In
@@ -89,7 +90,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                   size="sm"
                   variant="info"
                   onClick={() => {
-                    push(`/register`);
+                    push(`/register${redirect ? `?redirect=${redirect}` : ''}`);
                   }}
                 >
                   Sign Up

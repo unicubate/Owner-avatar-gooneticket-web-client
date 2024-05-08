@@ -8,10 +8,8 @@ import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
 import {
-  AlertDangerNotification,
-  AlertSuccessNotification,
   formateDate,
-  formatePrice,
+  formatePrice
 } from '@/utils';
 import {
   MapIcon,
@@ -28,42 +26,22 @@ type Props = {
 };
 
 const ViewProductsEvent = ({ item }: Props) => {
-  const { query, pathname, push } = useRouter();
+  const { pathname, push } = useRouter();
+
   const {
     linkHref,
     isOpen,
     setIsOpen,
     locale,
-    loading,
-    setLoading,
     userStorage,
+    ipLocation
   } = useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
     onSuccess: () => { },
-    onError: (error?: any) => { },
+    onError: () => { },
   });
 
-  const addToCart = async (itemCard: any) => {
-    try {
-      if (userStorage?.id) {
-        await saveMutation({
-          quantity: 1,
-          productId: itemCard?.id,
-          organizationId: itemCard?.organizationId,
-        });
-        AlertSuccessNotification({
-          text: `Product add to cart successfully`,
-        });
-      } else {
-        push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
-      }
-    } catch (error: any) {
-      AlertDangerNotification({
-        text: `${error.response.data.message}`,
-      });
-    }
-  };
 
   return (
     <>
@@ -94,7 +72,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                   ? push(
                     `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
                   )
-                  : push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
+                  : push(`/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`);
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
