@@ -26,7 +26,8 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
       href: '/contact-us',
     },
   ]);
-  const { push } = useRouter();
+  const { query, push } = useRouter();
+  const { redirect } = query;
   const pathname = usePathname();
 
   return (
@@ -128,7 +129,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="ghost"
                   onClick={() => {
-                    push(`${user?.id ? `/orders` : `/login`}`);
+                    push(`${user?.id ? `/orders` : `/login${redirect ? `?redirect=${redirect}` : ''}`}`);
                   }}
                 >
                   Log In
@@ -141,7 +142,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   size="sm"
                   variant="primary"
                   onClick={() => {
-                    push(`${user?.id ? `/orders` : `/register`}`);
+                    push(`${user?.id ? `/orders` : `register${redirect ? `?redirect=${redirect}` : ''}`}`);
                   }}
                 >
                   Sign Up

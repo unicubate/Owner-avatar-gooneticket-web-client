@@ -38,11 +38,11 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
       count: 1,
       href: `/${username}`,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
-      count: 1,
-      href: `/${username}/events`,
-    },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+    //   count: 1,
+    //   href: `/${username}/events`,
+    // },
     // {
     //   title: `${t.formatMessage({ id: 'MENU.GALLERY' })}`,
     //   count: user?.gallery?.count,
@@ -77,7 +77,8 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
-              <Button onClick={showDrawer} type="button" variant="ghost">
+              <Button onClick={showDrawer} type="button" variant="ghost"
+                className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white">
                 <svg
                   className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +179,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button
-                          variant="link"
+                          variant="ghost"
                           className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
                         >
                           <svg
