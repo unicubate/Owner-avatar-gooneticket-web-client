@@ -98,9 +98,8 @@ const UpdateFormPassword = () => {
               </div>
             </div>
 
-            <div className="mb-2 mt-4 flex items-center space-x-4">
+            <div className="mb-2 mt-4 flex items-center justify-end space-x-4">
               <ButtonInput
-                size="lg"
                 type="submit"
                 variant="primary"
                 className="w-full"

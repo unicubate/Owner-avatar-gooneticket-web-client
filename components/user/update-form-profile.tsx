@@ -11,14 +11,13 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
-import { Avatar, GetProp, Select, Space, Upload, UploadProps } from 'antd';
+import { Avatar, GetProp, Select, Upload, UploadProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
-import { SelectSearchInput } from '../ui-setting/ant/select-search-input';
 import { ButtonInput } from '../ui-setting/button-input';
-import { SelectInput, TextAreaInput, TextInput } from '../ui-setting/shadcn';
+import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 const { Option } = Select;
 
@@ -84,7 +83,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
         'countryId',
         'url',
         'phone',
-        'color',
         'firstName',
         'lastName',
         'secondAddress',
@@ -200,7 +198,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               />
             </div>
 
-            <div className="mt-2">
+            {/* <div className="mt-2">
               <TextInput
                 control={control}
                 label="Username"
@@ -209,7 +207,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                 placeholder="username"
                 errors={errors}
               />
-            </div>
+            </div> */}
 
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
@@ -246,7 +244,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
             </div>
 
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInput
                   label="Website"
@@ -257,21 +255,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                   errors={errors}
                 />
               </div>
-              <div className="mt-2">
-                <SelectSearchInput
-                  label="Counties"
-                  firstOptionName="Country"
-                  valueType="key"
-                  control={control}
-                  errors={errors}
-                  placeholder="Country"
-                  name="countryId"
-                  dataItem={countries}
-                />
-              </div>
-            </div>
-
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInput
                   label="First address"
@@ -292,68 +275,6 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
                   errors={errors}
                 />
               </div>
-              <div className="mt-2">
-                <label className="mb-2 block text-sm font-bold text-gray-700">
-                  Color
-                </label>
-                <Controller
-                  name={'color'}
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      showSearch
-                      size="large"
-                      style={{ width: '100%' }}
-                      id={'color'}
-                      placeholder={'Color'}
-                      status={errors?.color?.message ? 'error' : ''}
-                      filterOption={(input, option) =>
-                        (option?.name ?? '')
-                          .toLowerCase()
-                          .includes(input.toLowerCase())
-                      }
-                      {...field}
-                    >
-                      <>
-                        {colors?.length > 0
-                          ? colors?.map((item: any, index: number) => (
-                            <Option
-                              key={index}
-                              value={item?.name}
-                              name={item?.name}
-                            >
-                              <Space>
-                                <span
-                                  className={`text- text-xs font-semibold${item?.name}-600 bg-${item?.name}-50 border- border${item?.name}-600 inline-flex items-center rounded-md px-2.5 py-1`}
-                                >
-                                  {item?.name}
-                                </span>
-                              </Space>
-                            </Option>
-                          ))
-                          : null}
-                      </>
-                    </Select>
-                  )}
-                />
-              </div>
-            </div>
-
-
-            <div className="mt-2">
-              <SelectInput
-                label="Payment currency"
-                firstOptionName="Currency"
-                valueType="key"
-                control={control}
-                errors={errors}
-                placeholder="Currency"
-                name="currencyId"
-                dataItem={currencies}
-              />
-              <span className="text-sm font-medium text-gray-400">
-                {`Your supporters will pay in this currency.`}
-              </span>
             </div>
 
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
@@ -368,9 +289,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
             </div>
 
-            <div className="mb-2 mt-4 flex items-center space-x-4">
+            <div className="mb-2 mt-4 flex items-center justify-end space-x-4">
               <ButtonInput
-                size="lg"
                 type="submit"
                 variant="info"
                 className="w-full"

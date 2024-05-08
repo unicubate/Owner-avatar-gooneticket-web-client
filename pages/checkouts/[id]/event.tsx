@@ -328,7 +328,7 @@ const CheckoutEvent = () => {
                               </div>
                             </div>
 
-                            <div className="mt-2">
+                            {/* <div className="mt-2">
                               <TextInput
                                 label="Email"
                                 control={control}
@@ -337,7 +337,7 @@ const CheckoutEvent = () => {
                                 placeholder="Email"
                                 errors={errors}
                               />
-                            </div>
+                            </div> */}
 
                             {!isValidAddress ?
                               <div className="my-4 flex items-center space-x-4">

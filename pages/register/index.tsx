@@ -24,11 +24,11 @@ import {
 const schema = yup.object({
   email: yup
     .string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
+    .email('wrong email format')
+    .min(3, 'minimum 3 symbols')
+    .max(50, 'maximum 50 symbols')
     .required(),
-  password: yup.string().min(8, 'Minimum 8 symbols').required(),
+  password: yup.string().min(8, 'minimum 8 symbols').required(),
   firstName: yup.string().required('first name is a required field'),
   lastName: yup.string().required('last name is a required field'),
   code: yup.string().required(),

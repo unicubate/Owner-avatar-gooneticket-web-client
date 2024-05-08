@@ -19,7 +19,7 @@ const schema = yup.object({
   password: yup.string().min(8, 'Minimum 8 symbols').required(),
   passwordConfirm: yup
     .string()
-    .min(8, 'Minimum 8 symbols')
+    .min(8, 'minimum 8 symbols')
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required('confirm password is a required field'),
 });
