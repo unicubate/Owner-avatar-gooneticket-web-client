@@ -47,26 +47,26 @@ export function ListLastProductsEvent(props: Props) {
               <span className="text-sm">
                 {formateDate(item?.expiredAt as Date, locale)}
               </span>
-              <span className="ml-2 text-lg">
-                {item?.currency?.symbol ?? ''}
-              </span>
-              <span className="ml-1 text-lg">
-                {formatePrice({
-                  value: Number(item?.priceDiscount ?? 0),
-                  isDivide: false,
-                })}
-              </span>
-
-              {item?.enableDiscount ? (
+              {Number(item?.prices?.length) > 0 ?
                 <>
-                  <p className="ml-2 text-xl text-red-500">
-                    <del> {item?.price ?? ''} </del>
-                  </p>
-                  <p className="ml-1 text-xl text-red-500">
-                    <del> {item?.currency?.symbol ?? ''} </del>
-                  </p>
+                  <span className="ml-2 text-lg">
+                    {item?.currency?.symbol ?? ''}
+                  </span>
+                  <span className="ml-1 text-lg">
+                    {formatePrice({
+                      value: Number(item?.prices?.[0].amount ?? 0),
+                      isDivide: false,
+                    })}
+                  </span>
                 </>
-              ) : null}
+                :
+                <span className="ml-2">
+                  Free
+                </span>
+              }
+
+
+
             </div>
           </div>
         </div>

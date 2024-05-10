@@ -112,7 +112,7 @@ const CheckoutEvent = () => {
                           </div>
                         ) : null}
 
-                        <div className="text-center font-semibold">
+                        <div className="font-semibold">
                           {item?.title ? (
                             <div className="my-2 text-lg font-bold">{item?.title ?? ''}</div>
                           ) : null}
@@ -123,7 +123,7 @@ const CheckoutEvent = () => {
                           </span>
                         </div>
 
-                        <div className="mt-2 text-center font-semibold">
+                        <div className="mt-2 font-semibold">
                           <span className='text-sm'>
                             {formateToRFC2822(item?.expiredAt as Date, locale)}
                           </span>
@@ -142,11 +142,14 @@ const CheckoutEvent = () => {
                         <div className="sm:flex sm:items-center sm:justify-between">
 
                           <div className="mt-4 sm:mt-0">
-                            <p className="text-lg font-bold">
-                              {item?.currency?.symbol} {newAmount?.oneValue} x{' '}
-                              {increment}
-
-                            </p>
+                            {Number(item?.prices?.length) > 0 ?
+                              <p className="text-lg font-bold">
+                                {item?.currency?.symbol} {newAmount?.oneValue} x{' '}
+                                {increment}
+                              </p>
+                              :
+                              <p className="text-lg font-bold">Free</p>
+                            }
                           </div>
                           <div className="mt-4 sm:mt-0">
                             <div className="flex max-w-max items-center space-x-8 rounded border border-gray-200 dark:border-gray-800">
@@ -240,7 +243,7 @@ const CheckoutEvent = () => {
                           </div>
                         </div>
 
-                        {watchFullName && watchEmail ?
+                        {newAmount?.value && watchFullName && watchEmail ?
                           <>
                             <hr className="mt-8 dark:border-gray-800" />
                             <div className="mt-4 font-extrabold">Payment method</div>
@@ -313,15 +316,21 @@ const CheckoutEvent = () => {
 
                       <li className="mb-2 flex items-center justify-between text-sm">
                         <p className="dark:text-gray-600">{increment} {item?.title} </p>
-                        <p className="ml-auto text-sm dark:text-gray-400">
-                          {item?.currency?.symbol}
-                        </p>
-                        <p className="ml-1 text-sm dark:text-gray-400">
-                          {formatePrice({
-                            value: Number(newAmount?.value),
-                            isDivide: false,
-                          }) ?? ''}
-                        </p>
+
+                        {newAmount?.value ?
+                          <>
+                            <p className="ml-auto text-sm dark:text-gray-400">
+                              {item?.currency?.symbol}
+                            </p>
+                            <p className="ml-1 text-sm dark:text-gray-400">
+                              {formatePrice({
+                                value: Number(newAmount?.value),
+                                isDivide: false,
+                              }) ?? ''}
+                            </p>
+                          </>
+                          : 'Free'}
+
                       </li>
 
                       {/* <hr className="my-4 dark:border-gray-800" />
@@ -350,56 +359,79 @@ const CheckoutEvent = () => {
                               }) ?? ''}
                             </p>
                           </>
-                        ) : null}
+                        ) : 'Free'}
                       </li>
                     </div>
                   </div>
 
-                  {!watchPaymentMethod ? <div className="my-4 flex items-center">
-                    <ButtonInput
-                      type="submit"
-                      variant="primary"
-                      className="w-full"
-                      disabled={!watchPaymentMethod}
-                    >
-                      Continue
-                    </ButtonInput>
-                  </div> : <>
-                    {isValid && watchPaymentMethod === 'STRIPE' ? (
-                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
-                        <div className="p-4 sm:p-4 lg:p-3">
-                          <CreateCardStripe
-                            paymentModel="STRIPE-EVENT"
-                            data={{
-                              userAddress,
-                              productId: item?.id,
-                              amount: newAmount,
-                              organizationSellerId:
-                                item?.organizationId,
-                              organizationBuyerId:
-                                userStorage?.organizationId,
-                            }}
-                          />
+                  {!watchPaymentMethod ?
+                    <div className="my-4 flex items-center">
+                      <ButtonInput
+                        type="submit"
+                        variant="primary"
+                        className="w-full"
+                        disabled={!watchPaymentMethod}
+                      >
+                        Continue
+                      </ButtonInput>
+                    </div>
+                    :
+                    <>
+
+                      {newAmount?.value && isValid ?
+                        <>
+                          {watchPaymentMethod === 'STRIPE' ? (
+                            <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                              <div className="p-4 sm:p-4 lg:p-3">
+                                <CreateCardStripe
+                                  paymentModel="STRIPE-EVENT"
+                                  data={{
+                                    userAddress,
+                                    productId: item?.id,
+                                    amount: newAmount,
+                                    organizationSellerId:
+                                      item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          ) : null}
+
+                          {watchPaymentMethod === 'PAYPAL' ? (
+                            <CreatePaymentPayPal
+                              paymentModel="PAYPAL-EVENT"
+                              data={{
+                                userAddress,
+                                productId: item?.id,
+                                amount: newAmount,
+                                organizationSellerId:
+                                  item?.organizationId,
+                                organizationBuyerId:
+                                  userStorage?.organizationId
+                              }}
+                            />
+                          ) : null}
+
+                        </>
+
+                        :
+                        <div className="my-4 flex items-center">
+                          <ButtonInput
+                            type="submit"
+                            variant="primary"
+                            className="w-full"
+                          >
+                            Continue
+                          </ButtonInput>
                         </div>
-                      </div>
-                    ) : null}
+                      }
 
-                    {isValid && watchPaymentMethod === 'PAYPAL' ? (
-                      <CreatePaymentPayPal
-                        paymentModel="PAYPAL-EVENT"
-                        data={{
-                          userAddress,
-                          productId: item?.id,
-                          amount: newAmount,
-                          organizationSellerId:
-                            item?.organizationId,
-                          organizationBuyerId:
-                            userStorage?.organizationId
-                        }}
-                      />
-                    ) : null}
 
-                  </>}
+
+
+                    </>}
 
                 </div>
 

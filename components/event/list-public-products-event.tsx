@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { ProductModel } from '@/types/product';
-import { formateDate } from '@/utils';
+import { formateDate, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
 import Link from 'next/link';
@@ -53,23 +53,26 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            <p className="text-3xl">{item?.priceDiscount ?? ''}</p>
-            <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
+            {Number(item?.prices?.length) > 0 ?
+              <>
+                <p className="text-3xl">
+                  {formatePrice({
+                    value: Number(item?.prices?.[0].amount ?? 0),
+                    isDivide: false,
+                  })}
+                </p>
+                <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
+              </>
+              :
+              <p className="text-2xl">
+                Free
+              </p>
+            }
             <p className="ml-auto text-lg">
               {' '}
               {formateDate(item?.expiredAt as Date, locale)}
             </p>
 
-            {item?.enableDiscount ? (
-              <>
-                <p className="ml-2 text-lg text-red-500">
-                  <del> {item?.price ?? ''} </del>
-                </p>
-                <p className="ml-1 text-lg text-red-500">
-                  <del> {item?.currency?.symbol ?? ''} </del>
-                </p>
-              </>
-            ) : null}
           </div>
 
           <p className="mt-2 flex-1 text-xl font-bold text-gray-900 transition-all duration-200 hover:text-blue-600 dark:text-white sm:text-base">

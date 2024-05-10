@@ -87,18 +87,22 @@ const ViewProductsEvent = ({ item }: Props) => {
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-                <span className="ml-1 text-3xl">
-                  {item?.currency?.symbol ?? ''}
-                </span>
+
                 {Number(item?.prices?.length) > 0 ?
-                  <span className="ml-1 text-3xl">
-                    {formatePrice({
-                      value: Number(item?.prices?.[0].amount ?? 0),
-                      isDivide: false,
-                    })}
-                  </span>
+                  <>
+                    <span className="ml-1 text-3xl">
+                      {item?.currency?.symbol ?? ''}
+                    </span>
+                    <span className="ml-1 text-3xl">
+                      {formatePrice({
+                        value: Number(item?.prices?.[0].amount ?? 0),
+                        isDivide: false,
+                      })}
+                    </span>
+                  </>
+
                   :
-                  <span className="ml-1 text-3xl">
+                  <span className="ml-1 text-2xl">
                     Free
                   </span>}
                 {/* <span className="ml-1 text-3xl">
