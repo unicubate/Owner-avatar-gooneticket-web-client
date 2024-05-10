@@ -55,7 +55,6 @@ export type PostFormModel = {
   allowDownload?: string;
   enableUrlMedia?: string;
   categoryId?: string;
-  albumId?: string;
   isLike?: number;
   type?: PostType;
   attachment?: any;

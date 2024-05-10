@@ -35,7 +35,6 @@ export type ProductModel = {
   organizationId: string;
   urlMedia: string;
   productType: ProductType;
-  priceNoDiscount: string;
   description: string;
   messageAfterPayment: string;
   moreDescription: string;
@@ -43,7 +42,6 @@ export type ProductModel = {
   enableUrlRedirect: boolean;
   enableChooseQuantity: boolean;
   enableLimitSlot: boolean;
-  enableDiscount: boolean;
   limitSlot: string;
   status: string;
   userId: string;
@@ -71,14 +69,7 @@ export type ProductModel = {
   organization: { name: string; color: string };
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
-  discount: {
-    isValid: boolean;
-    percent: number;
-    expiredAt: Date;
-    enableExpiredAt: boolean;
-  };
   price: string;
-  priceDiscount: string;
 };
 
 export type ProductFormModel = {
@@ -90,7 +81,6 @@ export type ProductFormModel = {
   timeInit: string;
   messageAfterPayment: string;
   description: string;
-  discountId: string;
   whoCanSee: string;
   categoryId: string;
   city: string;
@@ -98,7 +88,6 @@ export type ProductFormModel = {
   countryId: string;
   expiredAt: Date;
   productType: ProductType;
-  enableDiscount: boolean;
   limitSlot: number;
   enableVisibility: boolean;
   enableLimitSlot: boolean;

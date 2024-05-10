@@ -145,19 +145,6 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneComment: PUT(`${baseUrl}/comments/:commentId`),
   deleteOneComment: DELETE(`${baseUrl}/comments/:commentId`),
 
-  /****************** Discounts route */
-  getDiscountsUser: GET(`${baseUrl}/discounts/user`),
-  getDiscounts: GET(`${baseUrl}/discounts`),
-  createOneDiscount: POST(`${baseUrl}/discounts`),
-  updateOneDiscount: PUT(`${baseUrl}/discounts/:discountId`),
-  deleteOneDiscount: DELETE(`${baseUrl}/discounts/:discountId`),
-
-  /****************** Categories route */
-  getCategories: GET(`${baseUrl}/categories`),
-  createOneCategory: POST(`${baseUrl}/categories`),
-  updateOneCategory: PUT(`${baseUrl}/categories/:categoryId`),
-  deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
-
   /****************** Conversations route */
   getConversations: GET(`${baseUrl}/conversations`),
   getOneConversation: GET(`${baseUrl}/conversations/:fkConversationId`),
@@ -203,7 +190,6 @@ export const apiEndpoints: ClientApiMethods = {
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
 
   /****************** Posts route */
-  createOnePostGallery: POST(`${baseUrl}/posts/galleries`),
   createOnePost: POST(`${baseUrl}/posts`),
   createOnUploadPost: POST(`${baseUrl}/posts/upload`),
   getOnePost: GET(`${baseUrl}/posts/view`),

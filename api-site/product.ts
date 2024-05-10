@@ -51,8 +51,6 @@ export const CreateOrUpdateOneProductAPI = ({
         'messageAfterPayment',
         `${payload.messageAfterPayment ?? ''}`,
       );
-      data.append('enableDiscount', `${payload.enableDiscount ?? ''}`);
-      data.append('discountId', `${payload.discountId ?? ''}`);
       data.append('description', `${payload.description ?? ''}`);
       data.append('whoCanSee', `${payload.whoCanSee ?? ''}`);
       payload?.imageList?.length > 0 &&

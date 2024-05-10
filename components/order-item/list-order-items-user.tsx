@@ -67,39 +67,6 @@ const ListOrderItemsUser = (props: Props) => {
               ) : null}
 
               <div className="mt-2 flex items-center font-medium text-gray-600">
-                {/* <span className="font-normal">
-                  <WalletIcon className="size-4" />
-                </span>
-
-                {item?.percentDiscount ? (
-                  <>
-                    <span className="ml-1.5 text-sm">
-                      {formatePrice({
-                        value: Number(item?.priceDiscount ?? 0),
-                        isDivide: true,
-                      })}{' '}
-                      {item?.currency}
-                    </span>
-
-                    <span className="ml-1.5 text-sm text-red-600">
-                      <del>
-                        {formatePrice({
-                          value: Number(item?.price ?? 0),
-                          isDivide: true,
-                        })}{' '}
-                        {item?.currency}
-                      </del>
-                    </span>
-                  </>
-                ) : (
-                  <span className="ml-1.5 text-sm">
-                    {formatePrice({
-                      value: Number(item?.price ?? 0),
-                      isDivide: true,
-                    })}{' '}
-                    {item?.currency}
-                  </span>
-                )} */}
                 <span className="ml-1.5 text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>

@@ -37,7 +37,6 @@ export const CreateOrUpdateOnePostGalleryAPI = ({
       data.append('whoCanSee', `${payload.whoCanSee}`);
       data.append('enableVisibility', `${payload.enableVisibility}`);
       data.append('type', payload.type ?? '');
-      data.append('albumId', payload.albumId ?? '');
       data.append('categoryId', payload.categoryId ?? '');
       data.append('allowDownload', `${payload.allowDownload}`);
 
@@ -119,7 +118,6 @@ export const CreateOrUpdateOnePostAPI = ({
       data.append('enableVisibility', `${payload.enableVisibility}`);
       data.append('urlMedia', `${payload.urlMedia ?? ''}`);
       data.append('categoryId', `${payload.categoryId ?? ''}`);
-      data.append('albumId', `${payload.albumId ?? ''}`);
       data.append('allowDownload', `${payload.allowDownload ?? ''}`);
       data.append('enableUrlMedia', `${payload.enableUrlMedia}`);
       data.append('description', `${payload.description ?? ''}`);
