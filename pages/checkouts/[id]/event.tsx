@@ -187,7 +187,7 @@ const CheckoutEvent = () => {
 
                               <label
                                 htmlFor={price?.id}
-                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-[#121212]"
+                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#121212] dark:hover:border-blue-600"
                               >
                                 <p className="text-gray-700 dark:text-gray-200">{price?.name}</p>
 
@@ -246,40 +246,7 @@ const CheckoutEvent = () => {
                           </div>
                         </div>
 
-                        {newAmount?.value && watchFullName && watchEmail ?
-                          <>
-                            <hr className="mt-8 dark:border-gray-800" />
-                            <div className="mt-4 font-extrabold">Payment method</div>
-                            <div className="mt-4 space-y-4">
 
-                              {paymentMethodArray.map((lk, index) => (
-                                <div key={index}>
-
-                                  <label
-                                    htmlFor={lk?.value}
-                                    className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-[#121212]"
-                                  >
-                                    <p className="text-gray-700 dark:text-gray-200">{lk?.name}</p>
-
-                                    <p className="text-gray-700 dark:text-white">
-                                      {lk?.image}
-                                    </p>
-                                    <input
-                                      type="radio"
-                                      {...register("paymentMethod")}
-                                      value={lk?.value}
-                                      id={lk?.value}
-                                      className="sr-only"
-                                    />
-                                  </label>
-
-                                </div>
-                              ))}
-
-                            </div>
-                          </>
-
-                          : null}
 
 
                       </div>
@@ -367,13 +334,51 @@ const CheckoutEvent = () => {
                     </div>
                   </div>
 
-                  {!watchPaymentMethod ?
+
+                  {newAmount?.value && watchFullName && watchEmail ?
+                    <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                      <div className="p-4 sm:p-4 lg:p-3">
+                        <div className="font-extrabold">Payment method</div>
+                        <div className="mt-4 space-y-4">
+
+                          {paymentMethodArray.map((lk, index) => (
+                            <div key={index}>
+
+                              <label
+                                htmlFor={lk?.value}
+                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#121212] dark:hover:border-blue-600"
+                              >
+                                <p className="text-gray-700 dark:text-gray-200">{lk?.name}</p>
+
+                                <p className="text-gray-700 dark:text-white">
+                                  {lk?.image}
+                                </p>
+                                <input
+                                  type="radio"
+                                  {...register("paymentMethod")}
+                                  value={lk?.value}
+                                  id={lk?.value}
+                                  className="sr-only"
+                                />
+                              </label>
+
+                            </div>
+                          ))}
+
+                        </div>
+                      </div>
+                    </div>
+                    : null}
+
+
+
+                  {!isValid && !watchPaymentMethod ?
                     <div className="my-4 flex items-center">
                       <ButtonInput
                         type="submit"
                         variant="primary"
                         className="w-full"
-                        disabled={!watchPaymentMethod}
+                        disabled={!isValid && !watchPaymentMethod}
                       >
                         Continue
                       </ButtonInput>
@@ -381,7 +386,7 @@ const CheckoutEvent = () => {
                     :
                     <>
 
-                      {newAmount?.value && isValid ?
+                      {isValid && newAmount?.value ?
                         <>
                           {watchPaymentMethod === 'STRIPE' ? (
                             <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
