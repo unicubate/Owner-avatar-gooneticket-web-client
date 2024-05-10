@@ -11,7 +11,7 @@ import { TextInput } from '@/components/ui-setting/shadcn';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PriceModel } from '@/types/price';
 import { formatePrice, formateToRFC2822 } from '@/utils';
-import { MoveLeftIcon, PlusIcon } from 'lucide-react';
+import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
@@ -88,13 +88,17 @@ const CheckoutEvent = () => {
               <>
                 <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                   <div className="flow-root">
-                    <ButtonInput
+                    {/* <ButtonInput
                       type="button"
-                      size="icon"
+                      size="sm"
                       variant="outline"
-                      onClick={() => back()}
+                      onClick={() => {
+                        back();
+                      }}
                       icon={<MoveLeftIcon className="size-4" />}
-                    />
+                    >
+                      Come back
+                    </ButtonInput> */}
 
                     <div
                       key={item?.id}
@@ -295,7 +299,7 @@ const CheckoutEvent = () => {
                       Events
                     </ButtonInput>
                   </Link> */}
-                  <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
 
 
                     <div className="p-4 sm:p-6 lg:p-8">
