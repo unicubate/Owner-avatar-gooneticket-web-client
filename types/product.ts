@@ -1,4 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
+import { PriceModel } from './price';
 import { ProfileItemModel } from './profile.type';
 import { UploadModel } from './upload';
 
@@ -65,6 +66,7 @@ export type ProductModel = {
     slug: string;
     color: string;
   };
+  prices: Array<PriceModel>;
   profile: ProfileItemModel;
   organization: { name: string; color: string };
   uploadsImages: Array<UploadModel>;

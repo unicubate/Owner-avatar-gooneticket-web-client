@@ -103,6 +103,11 @@ const ListOrderItemsUser = (props: Props) => {
                 <span className="ml-1.5 text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>
+                <span className="ml-1.5 text-sm font-bold text-gray-600">-</span>
+                <span className="ml-1.5 text-sm font-bold text-gray-600">
+                  {item?.priceName?.toLocaleUpperCase() ?? 'FREE'}
+                </span>
+
               </div>
             </div>
           </div>

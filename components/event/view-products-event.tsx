@@ -90,7 +90,18 @@ const ViewProductsEvent = ({ item }: Props) => {
                 <span className="ml-1 text-3xl">
                   {item?.currency?.symbol ?? ''}
                 </span>
-                <span className="ml-1 text-3xl">
+                {Number(item?.prices?.length) > 0 ?
+                  <span className="ml-1 text-3xl">
+                    {formatePrice({
+                      value: Number(item?.prices?.[0].amount ?? 0),
+                      isDivide: false,
+                    })}
+                  </span>
+                  :
+                  <span className="ml-1 text-3xl">
+                    Free
+                  </span>}
+                {/* <span className="ml-1 text-3xl">
                   {formatePrice({
                     value: Number(item?.priceDiscount ?? 0),
                     isDivide: false,
@@ -106,7 +117,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                       <del> {item?.currency?.symbol ?? ''} </del>
                     </p>
                   </>
-                ) : null}
+                ) : null} */}
               </div>
 
               <div className="ml-auto hidden font-bold lg:table-cell">

@@ -41,6 +41,9 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </p>
         </div>
         <p className="mt-4 text-center text-xl font-semibold">
+          {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
+        </p>
+        <p className="mt-4 text-center text-xl font-semibold">
           #{orderItem?.orderNumber}
         </p>
         <p className="mt-4 text-center text-xl font-semibold">

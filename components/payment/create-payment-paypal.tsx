@@ -46,6 +46,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       organizationBuyerId,
       reference: newReference,
       amount: {
+        price: amount.price,
         quantity: amount.quantity,
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),

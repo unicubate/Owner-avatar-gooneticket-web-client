@@ -24,6 +24,7 @@ const useReactHookForm = <T>({ schema }: HookOptions<T>) => {
     watch,
     control,
     setValue,
+    register,
     handleSubmit,
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<any>({
@@ -36,6 +37,7 @@ const useReactHookForm = <T>({ schema }: HookOptions<T>) => {
     watch,
     control,
     setValue,
+    register,
     handleSubmit,
     errors,
     loading,

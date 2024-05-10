@@ -149,11 +149,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
                     }),
                 })}
               />
-              {erroredInputs?.cardNumber && (
-                <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-                  {erroredInputs?.cardNumber}
-                </span>
-              )}
               <ButtonInput
                 type="button"
                 variant="link"
@@ -163,24 +158,11 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
                 <svg {...getCardImageProps({ images })} />
               </ButtonInput>
             </div>
-
-            {/* <svg {...getCardImageProps({ images })} />
-            <Input
-              className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}
-              required
-              {...getCardNumberProps({
-                onChange: (e) =>
-                  setCardState({
-                    ...cardstate,
-                    [e.target.name]: e.target.value,
-                  }),
-              })}
-            />
             {erroredInputs?.cardNumber && (
               <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
                 {erroredInputs?.cardNumber}
               </span>
-            )} */}
+            )}
           </div>
 
           <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
@@ -222,31 +204,30 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
                 </span>
               )}
             </div>
-
-            <div className="mt-2">
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="isReuse"
-                  defaultChecked={isSaveCard}
-                  onChange={() => {
-                    setIsSaveCard((i) => !i);
-                  }}
-                />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium text-gray-500"
-                >
-                  Save this payment method
-                </label>
-              </div>
+          </div>
+          <div className="mt-2">
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="isReuse"
+                defaultChecked={isSaveCard}
+                onChange={() => {
+                  setIsSaveCard((i) => !i);
+                }}
+              />
+              <label
+                htmlFor="terms"
+                className="text-sm font-medium text-gray-500"
+              >
+                Save this payment method
+              </label>
             </div>
           </div>
+
 
           <div className="mt-4 flex items-center space-x-4">
             <ButtonInput
               type="submit"
               className="w-full"
-              size="lg"
               variant="primary"
               disabled={!stripe}
               loading={loading}
