@@ -47,7 +47,7 @@ const schema = yup.object({
 const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
   const { userStorage, locale } = useInputState();
-  const { query, push } = useRouter();
+  const { query, back } = useRouter();
   const { id: productId } = query;
   const { isValid, watch, control, errors, register } = useReactHookForm({ schema });
   const watchAmount = watch('amount', null);
@@ -92,7 +92,7 @@ const CheckoutEvent = () => {
                       type="button"
                       size="icon"
                       variant="outline"
-                      onClick={() => push(`/events/${productId}/edit?tab=event`)}
+                      onClick={() => back()}
                       icon={<MoveLeftIcon className="size-4" />}
                     />
 
