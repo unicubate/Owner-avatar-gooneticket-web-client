@@ -4,7 +4,7 @@ const ProductSkeleton = ({ index }: { index: number }) => {
   return (
     <div
       key={index}
-      className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
+      className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
     >
       <div className="p-8 sm:px-8 sm:py-7">
         <div className="mx-auto mt-4 justify-center text-center">

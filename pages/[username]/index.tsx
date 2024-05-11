@@ -87,7 +87,7 @@ const ProfilePublic = () => {
                           <MoreHorizontalIcon className="size-5 text-gray-400" />
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#121212]">
+                      <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => setCopied(true)}>
                             <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />

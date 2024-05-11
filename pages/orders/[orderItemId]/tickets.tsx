@@ -49,7 +49,7 @@ const OrderView = () => {
                   icon={<MoveLeftIcon className="size-4" />}
                 />
               </div> */}
-              <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 dark:bg-[#121212]">
+              <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 dark:bg-[#04080b]">
                 {dataOrderItem}
               </div>
             </div>

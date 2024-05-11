@@ -43,7 +43,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
     <>
       <header
         className={cn(
-          'sticky top-0 z-20 border-gray-300 bg-white dark:bg-[#121212]',
+          'sticky top-0 z-20 border-gray-300 bg-white dark:bg-[#04080b]',
         )}
       >
         <div className={cn('container mx-auto px-4 sm:px-6 lg:px-8')}>
@@ -53,7 +53,7 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                 onClick={showDrawer}
                 type="button"
                 className={cn(
-                  'inline-flex items-center justify-center rounded-lg bg-white p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-[#121212] dark:text-white dark:hover:bg-gray-100 dark:hover:text-gray-500 dark:focus:ring-indigo-600',
+                  'inline-flex items-center justify-center rounded-lg bg-white p-2 text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:bg-[#04080b] dark:text-white dark:hover:bg-gray-100 dark:hover:text-gray-500 dark:focus:ring-indigo-600',
                 )}
               >
                 <svg
@@ -100,14 +100,11 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                       href={`${item.href}`}
                       title={item?.title}
                       className={cn(
-                        `inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${
-                          isActive
-                            ? `text-${
-                                user?.profile?.color ?? 'indigo'
-                              }-600 border-${
-                                user?.profile?.color ?? 'indigo'
-                              }-600`
-                            : 'border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300'
+                        `inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${isActive
+                          ? `text-${user?.profile?.color ?? 'indigo'
+                          }-600 border-${user?.profile?.color ?? 'indigo'
+                          }-600`
+                          : 'border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300'
                         } `,
                       )}
                     >

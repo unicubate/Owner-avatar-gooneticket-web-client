@@ -47,7 +47,7 @@ export const RecentTransactions = ({ model, organizationId, days }: Props) => {
 
   return (
     <>
-      <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-gray-800 dark:bg-[#121212]">
+      <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-gray-800 dark:bg-[#04080b]">
         <div className="divide-y divide-gray-200 dark:divide-gray-800">
           <table className="mt-4 min-w-full lg:divide-y lg:divide-gray-200">
             <tbody className="divide-y divide-gray-200 dark:divide-gray-800">

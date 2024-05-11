@@ -98,7 +98,7 @@ const MessagesView = () => {
                 </div>
               </div>
               <div className="flex h-[580px] flex-col items-center justify-center">
-                <div className="flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl dark:border-gray-800 dark:bg-[#121212]">
+                <div className="flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl dark:border-gray-800 dark:bg-[#04080b]">
                   {conversation?.fkConversationId && (
                     <div className="mt-auto flex items-center border-b-2 border-gray-50 p-2 dark:border-gray-900">
                       <div className="relative shrink-0 cursor-pointer">

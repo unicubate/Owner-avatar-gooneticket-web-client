@@ -43,7 +43,7 @@ const SwitchInput = ({ control, label = '', name, defaultValue }: Props) => {
                   ease-in-out 
                   focus:outline-none 
                   dark:border-gray-800 
-                  dark:bg-[#121212]"
+                  dark:bg-[#04080b]"
               >
                 <label
                   htmlFor={name}

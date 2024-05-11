@@ -55,23 +55,23 @@ const SelectSearchInput: React.FC<Props> = ({
             }
             {...field}
             disabled={disabled}
-            //className={`dark:border-gray-800 dark:bg-[#121212] dark:text-white  dark:placeholder:text-gray-500`}
+          //className={`dark:border-gray-800 dark:bg-[#04080b] dark:text-white  dark:placeholder:text-gray-500`}
           >
             <>
               {dataItem?.length > 0
                 ? dataItem?.map((item: any, index: number) => (
-                    <Option
-                      key={index}
-                      value={valueType === 'key' ? item?.id : item?.name}
-                      name={item?.name}
-                    >
-                      <Space>
-                        {icon}
+                  <Option
+                    key={index}
+                    value={valueType === 'key' ? item?.id : item?.name}
+                    name={item?.name}
+                  >
+                    <Space>
+                      {icon}
 
-                        {item?.name}
-                      </Space>
-                    </Option>
-                  ))
+                      {item?.name}
+                    </Space>
+                  </Option>
+                ))
                 : null}
             </>
           </Select>

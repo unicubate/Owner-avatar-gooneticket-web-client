@@ -101,7 +101,7 @@ const CheckoutEvent = () => {
 
                     <div
                       key={item?.id}
-                      className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
+                      className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
                     >
                       <div className="p-8 sm:px-8 sm:py-7">
                         {item?.uploadsImages?.length > 0 ? (
@@ -187,7 +187,7 @@ const CheckoutEvent = () => {
 
                               <label
                                 htmlFor={price?.id}
-                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#121212] dark:hover:border-blue-600"
+                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
                               >
                                 <p className="text-gray-700 dark:text-gray-200">{price?.name}</p>
 
@@ -265,7 +265,7 @@ const CheckoutEvent = () => {
                       Events
                     </ButtonInput>
                   </Link> */}
-                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
 
 
                     <div className="p-4 sm:p-6 lg:p-8">
@@ -336,7 +336,7 @@ const CheckoutEvent = () => {
 
 
                   {newAmount?.value && watchFullName && watchEmail ?
-                    <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                    <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
                       <div className="p-4 sm:p-4 lg:p-3">
                         <div className="font-extrabold">Payment method</div>
                         <div className="mt-4 space-y-4">
@@ -346,7 +346,7 @@ const CheckoutEvent = () => {
 
                               <label
                                 htmlFor={lk?.value}
-                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#121212] dark:hover:border-blue-600"
+                                className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
                               >
                                 <p className="text-gray-700 dark:text-gray-200">{lk?.name}</p>
 
@@ -389,7 +389,7 @@ const CheckoutEvent = () => {
                       {isValid && newAmount?.value ?
                         <>
                           {watchPaymentMethod === 'STRIPE' ? (
-                            <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#121212]">
+                            <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
                               <div className="p-4 sm:p-4 lg:p-3">
                                 <CreateCardStripe
                                   paymentModel="STRIPE-EVENT"

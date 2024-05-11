@@ -47,7 +47,7 @@ const ViewProductsEvent = ({ item }: Props) => {
     <>
       <div
         key={item?.id}
-        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#121212]"
+        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
       >
         <div className="p-8 sm:px-8 sm:py-7">
           {item?.uploadsImages?.length > 0 ? (
