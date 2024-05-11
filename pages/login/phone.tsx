@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useDecrementTimer, useInputState } from '@/components/hooks';
 import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
-import { LayoutAuth } from '@/components/layout-auth';
+import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput, PhoneNumberInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';

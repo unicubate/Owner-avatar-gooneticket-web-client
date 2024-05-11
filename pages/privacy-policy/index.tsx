@@ -1,5 +1,5 @@
 import { MediumFooter } from '@/components/footer/medium-footer';
-import { LayoutSite } from '@/components/layout-site';
+import { LayoutSite } from '@/components/layouts/layout-site';
 
 const PrivacyPolicy = () => {
   return (

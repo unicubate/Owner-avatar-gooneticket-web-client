@@ -10,10 +10,10 @@ import {
 import { MoveLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useInputState } from '../hooks';
+import { useInputState } from '../../hooks';
+import { ButtonInput, ThemeToggle } from '../../ui-setting';
+import { Button } from '../../ui/button';
 import { HeaderSite } from '../layout-site/header-site';
-import { ButtonInput, ThemeToggle } from '../ui-setting';
-import { Button } from '../ui/button';
 
 interface IProps {
   title: string;

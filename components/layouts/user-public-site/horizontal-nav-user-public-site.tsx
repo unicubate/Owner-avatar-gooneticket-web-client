@@ -1,7 +1,7 @@
 import { UserModel } from '@/types/user.type';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { useAuth } from '../util/context-user';
+import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
 import { Button } from '@/components/ui/button';
@@ -16,9 +16,9 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
-import { NavbarProps } from '../layout-dashboard';
-import { ThemeToggle } from '../ui-setting';
-import { HorizontalNavPublicUser } from '../user/horizontal-nav-public-user';
+import { ThemeToggle } from '../../ui-setting';
+import { HorizontalNavPublicUser } from '../../user/horizontal-nav-public-user';
+import { NavbarProps } from '../dashboard';
 
 interface Props {
   user?: UserModel;

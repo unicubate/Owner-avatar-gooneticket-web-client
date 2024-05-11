@@ -1,6 +1,6 @@
 import { GetInfiniteConversationsAPI } from '@/api-site/conversations';
 import { useInputState } from '@/components/hooks';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListConversationsMessage } from '@/components/messages/list-conversations-message';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';

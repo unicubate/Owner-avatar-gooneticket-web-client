@@ -4,7 +4,7 @@ import {
   useInputState,
   useReactHookForm,
 } from '@/components/hooks';
-import { LayoutAuth } from '@/components/layout-auth';
+import { LayoutAuth } from '@/components/layouts/auth';
 import { PhoneNumberInput } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';

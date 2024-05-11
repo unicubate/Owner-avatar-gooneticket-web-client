@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput } from '../../ui-setting';
 
 export type NavbarProps = {
   title: string;

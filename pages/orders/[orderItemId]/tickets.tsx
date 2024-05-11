@@ -1,6 +1,6 @@
 import { GetOneOrderItemAPI } from '@/api-site/order-item';
 import { useInputState } from '@/components/hooks';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';

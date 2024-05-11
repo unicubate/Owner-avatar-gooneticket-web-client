@@ -1,6 +1,6 @@
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
 import { useInputState } from '@/components/hooks';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';

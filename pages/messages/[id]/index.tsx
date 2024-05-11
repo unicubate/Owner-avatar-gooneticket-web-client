@@ -2,7 +2,7 @@ import {
   GetConversationsMessagesAPI,
   GetOneConversationAPI,
 } from '@/api-site/conversations';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { CreateFormMessages } from '@/components/messages/create-form-messages';
 import { ListConversations } from '@/components/messages/list-conversations';
 import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';

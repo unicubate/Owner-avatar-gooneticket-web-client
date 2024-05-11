@@ -3,8 +3,8 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { NavbarSiteProps } from '.';
-import { ButtonInput } from '../ui-setting';
-import { Button } from '../ui/button';
+import { ButtonInput } from '../../ui-setting';
+import { Button } from '../../ui/button';
 
 interface Props {
   user?: any;

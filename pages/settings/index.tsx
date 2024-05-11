@@ -4,7 +4,7 @@ import {
   GetOneProfileAPI,
 } from '@/api-site/profile';
 import { useInputState } from '@/components/hooks';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { DeleteOneUser } from '@/components/user/delete-one-user';
 import { UpdateFormPassword } from '@/components/user/update-form-password';
 import { UpdateFormProfile } from '@/components/user/update-form-profile';

@@ -2,7 +2,7 @@
 
 import { GetOneProductAPI } from '@/api-site/product';
 import { useInputState, useReactHookForm } from '@/components/hooks';
-import { LayoutCheckoutSite } from '@/components/layout-checkout-site';
+import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';

@@ -1,4 +1,4 @@
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { PrivateComponent } from '@/components/util/private-component';
 import { SubmitHandler } from 'react-hook-form';
 

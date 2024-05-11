@@ -1,6 +1,6 @@
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { featuresAboutPage } from '@/components/landing-page/data-map';
-import { LayoutSite } from '@/components/layout-site';
+import { LayoutSite } from '@/components/layouts/layout-site';
 import { useState } from 'react';
 
 const About = () => {

@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { NavbarProps } from '.';
-import { ThemeToggle } from '../ui-setting';
-import { AvatarComponent } from '../ui-setting/ant';
-import { LangToggle } from '../ui-setting/lang-toggle';
-import { Button } from '../ui/button';
+import { ThemeToggle } from '../../ui-setting';
+import { AvatarComponent } from '../../ui-setting/ant';
+import { LangToggle } from '../../ui-setting/lang-toggle';
+import { Button } from '../../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
+} from '../../ui/dropdown-menu';
 
 interface Props {
   user?: any;

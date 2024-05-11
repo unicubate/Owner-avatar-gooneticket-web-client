@@ -5,7 +5,7 @@ import {
   comparedLandingPage,
   featuresLandingPage,
 } from '@/components/landing-page/data-map';
-import { LayoutSite } from '@/components/layout-site';
+import { LayoutSite } from '@/components/layouts/layout-site';
 import { ButtonInput } from '@/components/ui-setting';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';

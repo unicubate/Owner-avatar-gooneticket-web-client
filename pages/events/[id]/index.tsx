@@ -3,7 +3,7 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { PublicLastProductsEvent } from '@/components/event/public-last-products-event';
 import { ViewProductsEvent } from '@/components/event/view-products-event';
 import { useInputState } from '@/components/hooks';
-import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Skeleton } from '@/components/ui/skeleton';

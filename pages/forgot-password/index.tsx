@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useReactHookForm } from '@/components/hooks';
-import { LayoutAuth } from '@/components/layout-auth';
+import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';

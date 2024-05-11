@@ -2,7 +2,7 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { CreateConversationForm } from '@/components/contact-us/create-conversation-form';
 import { TablePublicProductsEvent } from '@/components/event/table-public-products-event';
 import { useInputState } from '@/components/hooks';
-import { LayoutUserPublicSite } from '@/components/layout-user-public-site';
+import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
 import { CopyShareLink } from '@/components/ui-setting';
 import { CoverComponent, LoadingFile } from '@/components/ui-setting/ant';

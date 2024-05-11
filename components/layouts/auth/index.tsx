@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput } from '../../ui-setting';
 
 interface IProps {
   title: string;

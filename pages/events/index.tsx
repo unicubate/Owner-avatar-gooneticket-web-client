@@ -1,7 +1,7 @@
 import { GetInfiniteFollowsProductsAPI } from '@/api-site/product';
 import { ListPublicProductsEvent } from '@/components/event/list-public-products-event';
 import { useInputState } from '@/components/hooks';
-import { LayoutDashboard } from '@/components/layout-dashboard';
+import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData } from '@/components/ui-setting/ant';
