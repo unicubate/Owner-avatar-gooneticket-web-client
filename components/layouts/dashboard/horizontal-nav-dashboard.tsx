@@ -1,11 +1,11 @@
 import { logoutUsersAPI } from '@/api-site/user';
+import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { NavbarProps } from '.';
-import { ThemeToggle } from '../../ui-setting';
 import { AvatarComponent } from '../../ui-setting/ant';
 import { LangToggle } from '../../ui-setting/lang-toggle';
 import { Button } from '../../ui/button';
@@ -76,20 +76,14 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                 <div className="block h-8 w-auto lg:hidden">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
+                      <ImageLogo />
                     </div>
                   </div>
                 </div>
                 <div className="ml-4 hidden h-8 w-auto lg:block">
                   <div className="flex items-center">
                     <div className="relative shrink-0 cursor-pointer">
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
+                      <ImageLogo />
                     </div>
                     <div className="ml-2 cursor-pointer">
                       <p className="text-lg font-bold">

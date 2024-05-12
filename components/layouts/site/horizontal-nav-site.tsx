@@ -1,9 +1,9 @@
+import { ButtonInput, ImageLogo } from '@/components/ui-setting';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { NavbarSiteProps } from '.';
-import { ButtonInput } from '../../ui-setting';
 import { Button } from '../../ui/button';
 
 interface Props {
@@ -60,10 +60,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   <div className="block h-8 w-auto lg:hidden">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
 
                       <div className="ml-2 cursor-pointer">
@@ -87,10 +84,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   </div> */}
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
 
                       <div className="ml-2 cursor-pointer">

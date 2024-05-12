@@ -3,6 +3,7 @@ export * from './avatar-coffee-component';
 export * from './button-input';
 export * from './button-load-more';
 export * from './copy-share-link';
+export * from './image-logo';
 export * from './list-carousel-upload';
 export * from './loader-icon-component';
 export * from './phone-number-input';

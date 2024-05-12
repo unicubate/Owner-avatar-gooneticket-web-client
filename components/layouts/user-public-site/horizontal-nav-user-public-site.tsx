@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
+import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -16,7 +17,6 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
-import { ThemeToggle } from '../../ui-setting';
 import { HorizontalNavPublicUser } from '../../user/horizontal-nav-public-user';
 import { NavbarProps } from '../dashboard';
 
@@ -102,10 +102,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                   <div className="block h-8 w-auto lg:hidden">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
 
                       <div className="ml-2 cursor-pointer">
@@ -118,10 +115,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                   <div className="hidden h-8 w-auto lg:block">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
                       <div className="ml-2 cursor-pointer">
                         <p className="text-lg font-bold">

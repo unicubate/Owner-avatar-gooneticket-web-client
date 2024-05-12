@@ -1,4 +1,5 @@
 import { logoutUsersAPI } from '@/api-site/user';
+import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,6 @@ import { MoveLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
-import { ButtonInput, ThemeToggle } from '../../ui-setting';
 import { Button } from '../../ui/button';
 import { HeaderSite } from '../site/header-site';
 
@@ -68,10 +68,7 @@ const LayoutCheckoutSite: React.FC<IProps> = ({ children, title }) => {
                   <div className="block h-8 w-auto lg:hidden">
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
 
                       <div className="ml-2 cursor-pointer">
@@ -95,10 +92,7 @@ const LayoutCheckoutSite: React.FC<IProps> = ({ children, title }) => {
                   </div> */}
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
-                        <img
-                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                          alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                        />
+                        <ImageLogo />
                       </div>
 
                       <div className="ml-2 cursor-pointer">

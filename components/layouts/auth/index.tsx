@@ -1,6 +1,8 @@
-import Head from 'next/head';
+import { ButtonInput, ImageLogo } from '@/components/ui-setting';
+import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ButtonInput } from '../../ui-setting';
+import { HeaderSite } from '../site/header-site';
 
 interface IProps {
   title: string;
@@ -13,57 +15,46 @@ const LayoutAuth = ({ children, title }: IProps) => {
 
   return (
     <>
-      <Head>
-        <title>
-          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-        </title>
-        <meta
-          property="og:title"
-          content={process.env.NEXT_PUBLIC_NAME_SITE}
-          key="title"
-        />
-        <meta
-          name="description"
-          content="Un Pot is the best way for creators and artists to accept support and membership from their fans."
-        />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <HeaderSite title={title} />
 
       <header className="sticky border-b border-gray-100 dark:border-gray-800">
-        <div className="mx-auto max-w-7xl">
+        <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="flex xl:ml-0">
-              <div className="flex shrink-0 items-center">
-                <div className="block h-8 w-auto lg:hidden">
-                  <div className="flex items-center">
-                    <div className="relative shrink-0 cursor-pointer">
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
+              <Link href="/">
+                <div className="flex shrink-0 items-center">
+                  <div className="block h-8 w-auto lg:hidden">
+                    <div className="flex items-center">
+                      <div className="relative shrink-0 cursor-pointer">
+                        <ImageLogo />
+                      </div>
 
-                    <div className="ml-2 cursor-pointer">
-                      <p className="text-lg font-bold">
-                        {process.env.NEXT_PUBLIC_NAME_SITE}
-                      </p>
+                      <div className="ml-2 cursor-pointer">
+                        <p className="text-lg font-bold">
+                          {process.env.NEXT_PUBLIC_NAME_SITE}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="hidden h-8 w-auto lg:block">
+                    <div className="flex items-center">
+                      <div className="relative shrink-0 cursor-pointer">
+                        <Image
+                          width={35}
+                          height={35}
+                          src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
+                          alt={`${process.env.NEXT_PUBLIC_NAME_SITE}`}
+                        />
+                      </div>
+                      <div className="ml-2 cursor-pointer">
+                        <p className="text-lg font-bold">
+                          {process.env.NEXT_PUBLIC_NAME_SITE}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="ml-4 hidden h-8 w-auto lg:block">
-                  <div className="flex items-center">
-                    <div
-                      onClick={() => push('/')}
-                      className="relative shrink-0 cursor-pointer"
-                    >
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </Link>
             </div>
 
             <div className="ml-auto flex items-center justify-end space-x-2">
