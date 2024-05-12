@@ -15,7 +15,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
+  DropdownMenuTrigger
 } from '../../ui/dropdown-menu';
 
 interface Props {
@@ -49,7 +49,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-gray-300 bg-white dark:bg-black/15">
+      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-[#04080b]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">

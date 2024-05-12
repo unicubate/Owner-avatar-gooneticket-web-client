@@ -1,5 +1,5 @@
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
-import { useInputState } from '@/components/hooks';
+import { useInputState, useReactIntersectionObserver } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
@@ -16,12 +16,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { PrivateComponent } from '@/components/util/private-component';
 import { CalendarCheckIcon, ShoppingCartIcon } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { Fragment, useState } from 'react';
+
 
 const OrdersIndex = () => {
   const [dayCount, setDayCount] = useState(30);
-  const { ref, inView } = useInView();
   const { userStorage: user } = useInputState() as any;
   const { t, search, handleSetSearch } = useInputState();
 
@@ -40,46 +39,9 @@ const OrdersIndex = () => {
     sort: 'DESC',
     days: dayCount,
   });
+  const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage })
 
-  useEffect(() => {
-    let fetching = false;
-    if (inView) {
-      fetchNextPage();
-    }
-    const onScroll = async (event: any) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement;
 
-      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-        fetching = false;
-      }
-    };
-
-    document.addEventListener('scroll', onScroll);
-    return () => {
-      document.removeEventListener('scroll', onScroll);
-    };
-  }, [fetchNextPage, hasNextPage, inView]);
-
-  const dataTables = isLoadingOrderItems ? (
-    <LoadingFile />
-  ) : isErrorOrderItems ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
-    <EmptyData
-      image={<ShoppingCartIcon className="size-10" />}
-      title="You don't have any order"
-      description={`Find your first product or event`}
-    />
-  ) : (
-    dataOrderItems?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListOrderItemsUser item={item} key={index} index={index} />
-      ))
-  );
 
   const handleDaysChange = (newDays: number) => {
     setDayCount(newDays);
@@ -151,9 +113,31 @@ const OrdersIndex = () => {
                   </div>
                 </div>
 
+
+
+
                 <table className="mt-4 min-w-full lg:divide-y">
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                    {user?.organizationId ? dataTables : null}
+                    {user?.organizationId ?
+                      isLoadingOrderItems ? (
+                        <LoadingFile />
+                      ) : isErrorOrderItems ? (
+                        <ErrorFile title="404" description="Error find data please try again..." />
+                      ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
+                        <EmptyData
+                          image={<ShoppingCartIcon className="size-10" />}
+                          title="You don't have any order"
+                          description={`Find your first product or event`}
+                        />
+                      ) : (
+                        dataOrderItems?.pages.map((page, i) => (
+                          <Fragment key={i}>
+                            {page?.data?.value.map((item, index) => (
+                              <ListOrderItemsUser item={item} key={index} index={index} />
+                            ))}
+                          </Fragment>
+                        ))
+                      ) : null}
                   </tbody>
                 </table>
               </div>
@@ -162,6 +146,7 @@ const OrdersIndex = () => {
                 <div className="mx-auto mt-2 justify-center text-center">
                   <ButtonLoadMore
                     ref={ref}
+                    hasNextPage={hasNextPage}
                     isFetchingNextPage={isFetchingNextPage}
                     onClick={() => fetchNextPage()}
                   />

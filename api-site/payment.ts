@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-query';
 
 export type PaymentModel =
+  | 'FREE-EVENT'
   | 'PAYPAL-EVENT'
   | 'STRIPE-EVENT'
   | 'PAYPAL-SHOP'
@@ -52,6 +53,13 @@ export const CreateOnPaymentPI = ({
       if (paymentModel === 'STRIPE-EVENT') {
         return await makeApiCall({
           action: 'createOnePaymentsStripeEvent',
+          body: { paymentModel, ...data },
+        });
+      }
+
+      if (paymentModel === 'FREE-EVENT') {
+        return await makeApiCall({
+          action: 'createOnePaymentsFreeEvent',
           body: { paymentModel, ...data },
         });
       }

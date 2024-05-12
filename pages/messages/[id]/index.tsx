@@ -132,7 +132,7 @@ const MessagesView = () => {
                           ref={ref}
                           size="sm"
                           variant="secondary"
-                          children={`Load old conversations`}
+                          title={`Load old conversations`}
                           isFetchingNextPage={isFetchingNextPage}
                           onClick={() => fetchNextPage()}
                         />

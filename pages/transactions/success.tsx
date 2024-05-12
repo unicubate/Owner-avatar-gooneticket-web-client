@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
   const token = String(query.token);
-  const { secondsRemaining } = useRedirectAfterSomeSeconds('/orders', 5);
+  const { secondsRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
 
   return (
     <>

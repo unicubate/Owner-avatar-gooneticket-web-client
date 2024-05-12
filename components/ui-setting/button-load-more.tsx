@@ -2,23 +2,25 @@ import { SizeButton, VariantButton } from '../ui/button';
 import { ButtonInput } from './index';
 
 interface Props {
-  children?: React.ReactNode;
+  title?: React.ReactNode;
   onClick?: () => void;
   ref?: (node?: Element | null) => void;
   isFetchingNextPage: boolean;
   size?: SizeButton;
   className?: string;
+  hasNextPage?: boolean;
   variant?: VariantButton;
 }
 
 export const ButtonLoadMore = ({
-  children = 'Load More',
+  title = 'Load More',
   variant = 'outline',
   onClick,
   ref,
   size = 'lg',
   className = "w-full",
   isFetchingNextPage,
+  hasNextPage,
 }: Props) => {
   return (
     <>
@@ -29,10 +31,11 @@ export const ButtonLoadMore = ({
           variant={variant}
           className={className}
           ref={ref}
+          disabled={!hasNextPage || isFetchingNextPage}
           loading={isFetchingNextPage ? true : false}
           onClick={onClick}
         >
-          {children}
+          {title}
         </ButtonInput>
       </div>
     </>

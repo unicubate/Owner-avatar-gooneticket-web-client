@@ -4,7 +4,7 @@ import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
-import { HeaderSite } from '../layout-site/header-site';
+import { HeaderSite } from '../site/header-site';
 import { VerticalNavUserPublicSite } from './vertical-nav-user-public-site';
 interface IProps {
   user: UserModel;

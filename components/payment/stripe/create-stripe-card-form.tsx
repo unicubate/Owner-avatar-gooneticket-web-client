@@ -229,8 +229,8 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               type="submit"
               className="w-full"
               variant="primary"
-              disabled={!stripe}
               loading={loading}
+              disabled={!stripe || !data?.userAddress?.email || !data?.userAddress?.fullName}
             >
               Continue
             </ButtonInput>

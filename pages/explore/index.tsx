@@ -1,4 +1,4 @@
-import { LayoutSite } from '@/components/layouts/layout-site';
+import { LayoutSite } from '@/components/layouts/site';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Image } from 'antd';

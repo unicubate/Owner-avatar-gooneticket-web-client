@@ -176,6 +176,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     queryKey: [['order-items', 'infinite'], { ...payload }],
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    getPreviousPageParam: (firstPage: any) => firstPage.data.prev_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getOrderItemsAPI({
         modelIds,

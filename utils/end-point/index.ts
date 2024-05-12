@@ -186,6 +186,7 @@ export const apiEndpoints: ClientApiMethods = {
   createOnePaymentsStripeShop: POST(`${baseUrl}/payments/stripe/shop`),
   createOnePaymentsPaypalEvent: POST(`${baseUrl}/payments/paypal/event`),
   createOnePaymentsStripeEvent: POST(`${baseUrl}/payments/stripe/event`),
+  createOnePaymentsFreeEvent: POST(`${baseUrl}/payments/free/event`),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
 

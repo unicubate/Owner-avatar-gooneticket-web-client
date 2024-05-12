@@ -1,6 +1,6 @@
 import { CreateContactForm } from '@/components/contact-us/create-contact-form';
 import { MediumFooter } from '@/components/footer/medium-footer';
-import { LayoutSite } from '@/components/layouts/layout-site';
+import { LayoutSite } from '@/components/layouts/site';
 
 export default function ContactUs() {
   return (

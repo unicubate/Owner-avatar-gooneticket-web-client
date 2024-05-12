@@ -3,6 +3,7 @@
 import { GetOneProductAPI } from '@/api-site/product';
 import { useInputState, useReactHookForm } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
+import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';
@@ -372,27 +373,48 @@ const CheckoutEvent = () => {
 
 
 
-                  {!isValid && !watchPaymentMethod ?
-                    <div className="my-4 flex items-center">
-                      <ButtonInput
-                        type="submit"
-                        variant="primary"
-                        className="w-full"
-                        disabled={!isValid && !watchPaymentMethod}
-                      >
-                        Continue
-                      </ButtonInput>
-                    </div>
-                    :
-                    <>
 
-                      {isValid && newAmount?.value ?
+                  {Number(item?.prices?.length) > 0 ?
+
+                    <>
+                      {!isValid && !watchPaymentMethod ?
+                        <div className="my-4 flex items-center">
+                          <ButtonInput
+                            type="submit"
+                            variant="primary"
+                            className="w-full"
+                            disabled={!isValid}
+                          >
+                            Continue
+                          </ButtonInput>
+                        </div>
+                        :
                         <>
-                          {watchPaymentMethod === 'STRIPE' ? (
-                            <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
-                              <div className="p-4 sm:p-4 lg:p-3">
-                                <CreateCardStripe
-                                  paymentModel="STRIPE-EVENT"
+
+                          {isValid && newAmount?.value ?
+                            <>
+                              {watchPaymentMethod === 'STRIPE' ? (
+                                <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                                  <div className="p-4 sm:p-4 lg:p-3">
+                                    <CreateCardStripe
+                                      paymentModel="STRIPE-EVENT"
+                                      data={{
+                                        userAddress,
+                                        productId: item?.id,
+                                        amount: newAmount,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userStorage?.organizationId,
+                                      }}
+                                    />
+                                  </div>
+                                </div>
+                              ) : null}
+
+                              {watchPaymentMethod === 'PAYPAL' ? (
+                                <CreatePaymentPayPal
+                                  paymentModel="PAYPAL-EVENT"
                                   data={{
                                     userAddress,
                                     productId: item?.id,
@@ -400,46 +422,52 @@ const CheckoutEvent = () => {
                                     organizationSellerId:
                                       item?.organizationId,
                                     organizationBuyerId:
-                                      userStorage?.organizationId,
+                                      userStorage?.organizationId
                                   }}
                                 />
-                              </div>
+                              ) : null}
+
+                            </>
+
+                            :
+                            <div className="my-4 flex items-center">
+                              <ButtonInput
+                                type="submit"
+                                variant="primary"
+                                className="w-full"
+                              >
+                                Continue
+                              </ButtonInput>
                             </div>
-                          ) : null}
-
-                          {watchPaymentMethod === 'PAYPAL' ? (
-                            <CreatePaymentPayPal
-                              paymentModel="PAYPAL-EVENT"
-                              data={{
-                                userAddress,
-                                productId: item?.id,
-                                amount: newAmount,
-                                organizationSellerId:
-                                  item?.organizationId,
-                                organizationBuyerId:
-                                  userStorage?.organizationId
-                              }}
-                            />
-                          ) : null}
-
+                          }
                         </>
-
-                        :
-                        <div className="my-4 flex items-center">
-                          <ButtonInput
-                            type="submit"
-                            variant="primary"
-                            className="w-full"
-                          >
-                            Continue
-                          </ButtonInput>
-                        </div>
                       }
 
+                    </>
+                    :
+                    <>
+                      <CreatePaymentFree
+                        paymentModel="FREE-EVENT"
+                        data={{
+                          userAddress,
+                          productId: item?.id,
+                          amount: {
+                            quantity: 1,
+                            price: 0,
+                            currency: 'USD',
+                            value: 0,
+                            oneValue: Number(priceJsonParse?.amount),
+                          },
+                          organizationSellerId:
+                            item?.organizationId,
+                          organizationBuyerId:
+                            userStorage?.organizationId,
+                        }}
+                      />
 
+                    </>
+                  }
 
-
-                    </>}
 
                 </div>
 

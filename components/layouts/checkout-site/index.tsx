@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { ButtonInput, ThemeToggle } from '../../ui-setting';
 import { Button } from '../../ui/button';
-import { HeaderSite } from '../layout-site/header-site';
+import { HeaderSite } from '../site/header-site';
 
 interface IProps {
   title: string;
@@ -40,7 +40,7 @@ const LayoutCheckoutSite: React.FC<IProps> = ({ children, title }) => {
         </div>
       </div> */}
 
-      <header className="sticky top-0 z-20 border-b border-gray-100 dark:border-gray-800">
+      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
@@ -134,7 +134,7 @@ const LayoutCheckoutSite: React.FC<IProps> = ({ children, title }) => {
                       <DropdownMenuTrigger asChild>
                         <Button
                           variant="ghost"
-                          className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
+                          className="-m-3"
                         >
                           <svg
                             className="size-6"

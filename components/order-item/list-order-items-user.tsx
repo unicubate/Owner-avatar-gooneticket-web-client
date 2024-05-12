@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
-import { formateDate, formateFromNow } from '@/utils';
+import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Avatar } from 'antd';
 import { CalendarIcon, MoveRightIcon } from 'lucide-react';
@@ -32,7 +32,7 @@ const ListOrderItemsUser = (props: Props) => {
             {item?.uploadsImages?.length > 0 ? (
               <div className="relative shrink-0 cursor-pointer">
                 <Avatar
-                  size={80}
+                  size={60}
                   shape="square"
                   src={viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
@@ -49,14 +49,14 @@ const ListOrderItemsUser = (props: Props) => {
                   <CalendarIcon className="size-4" />
                 </button>
                 <span className="ml-1.5 text-sm font-normal">
-                  {formateDate(item?.createdAt as Date, locale)}
+                  {formateToRFC2822(item?.product?.expiredAt as Date, locale)}
                 </span>
               </div>
 
               {item?.product?.title ? (
                 <Link href={linkRedirect}>
                   <div className="mt-2 flex items-center">
-                    <p className="text-lg font-bold text-gray-600 dark:text-white">
+                    <p className="font-bold text-gray-600 dark:text-white">
                       <ReadMore
                         html={String(item?.product?.title ?? '')}
                         value={100}
@@ -112,11 +112,12 @@ const ListOrderItemsUser = (props: Props) => {
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           <div className="ml-4 min-w-0 flex-1">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              <SerialPrice
-                className="text-sm"
-                value={Number(item?.priceDiscount)}
-                currency={{ code: String(item?.currency) }}
-              />
+              {Number(item?.price) > 0 ?
+                <SerialPrice
+                  className="text-sm"
+                  value={Number(item?.price)}
+                  currency={{ code: String(item?.currency) }}
+                /> : 'Free'}
             </p>
           </div>
         </td>
@@ -143,7 +144,7 @@ const ListOrderItemsUser = (props: Props) => {
           <div className="mt-1 pt-1 lg:hidden">
             <p className="inline-flex text-sm font-bold dark:text-white">
               {item?.product?.isExpired ? (
-                <Badge className="ml-2 mt-2 rounded-sm" variant={'danger'}>
+                <Badge className="rounded-sm" variant={'danger'}>
                   EXPIRED
                 </Badge>
               ) : null}

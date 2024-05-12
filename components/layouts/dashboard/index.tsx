@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
 import { useAuth } from '../../util/context-user';
-import { HeaderSite } from '../layout-site/header-site';
+import { HeaderSite } from '../site/header-site';
 import { HorizontalNavDashboard } from './horizontal-nav-dashboard';
 import { VerticalNavDashboard } from './vertical-nav-dashboard';
 
@@ -32,22 +32,15 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       <div className="flex flex-col">
         <HorizontalNavDashboard showDrawer={showDrawer} user={user} />
 
-        {profile?.id ? (
-          <>
-            {/* Fix Drawer */}
-            <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-              <SheetTrigger asChild>
-                {/* <Button variant="outline">Open</Button> */}
-              </SheetTrigger>
-              <SheetContent className="dark:border-gray-800 dark:bg-black/15">
-                <div className="flex flex-col overflow-y-auto pt-5">
-                  <VerticalNavDashboard user={user} />
-                </div>
-              </SheetContent>
-            </Sheet>
-            {/*End Fix Drawer */}
-          </>
-        ) : null}
+        <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
+          <SheetTrigger asChild>
+          </SheetTrigger>
+          <SheetContent className="dark:border-gray-800 dark:bg-black/15">
+            <div className="flex flex-col overflow-y-auto pt-5">
+              <VerticalNavDashboard user={user} />
+            </div>
+          </SheetContent>
+        </Sheet>
 
         <div className="flex flex-1 dark:bg-black/15">
           {/* {profile?.id ? (
