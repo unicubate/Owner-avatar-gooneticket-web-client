@@ -3,8 +3,8 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Image } from 'antd';
 import { CalendarIcon, MoveRightIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -34,12 +34,12 @@ const ListOrderItemsUser = (props: Props) => {
                 <Image
                   width={80}
                   height={60}
-                  preview={false}
                   src={`${viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
                     fileName: item?.uploadsImages[0]?.path,
                   })}`}
-                  alt={item?.product?.title} />
+                  alt={item?.product?.title}
+                />
               </div>
             ) : null}
 
@@ -53,18 +53,19 @@ const ListOrderItemsUser = (props: Props) => {
                 </span>
               </div>
 
-              {item?.product?.title ? (
-                <Link href={linkRedirect}>
-                  <div className="mt-2 flex items-center">
-                    <p className="font-bold text-gray-600 dark:text-white">
-                      <ReadMore
-                        html={String(item?.product?.title ?? '')}
-                        value={100}
-                      />
-                    </p>
-                  </div>
-                </Link>
-              ) : null}
+              {item?.product?.title ?
+                <p className="mt-2 font-bold transition-all duration-200 hover:text-blue-600">
+                  <Link
+                    href={linkRedirect}
+                    title={item?.product?.title}
+                  >
+                    <ReadMore
+                      html={String(item?.product?.title ?? '')}
+                      value={100}
+                    />
+                  </Link>
+                </p>
+                : null}
 
               <div className="mt-2 flex items-center font-medium text-gray-600">
                 <span className="ml-1.5 text-sm font-bold text-gray-600">

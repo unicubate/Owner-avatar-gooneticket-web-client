@@ -37,13 +37,11 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                 height={200}
                 width="100%"
                 className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
-                src={
-                  viewOneFileUploadAPI({
-                    folder: 'event',
-                    fileName: String(item?.uploadsImages?.[0]?.path),
-                  }) as string
-                }
-                alt={item?.title}
+                src={`${viewOneFileUploadAPI({
+                  folder: 'event',
+                  fileName: String(item?.uploadsImages?.[0]?.path),
+                })}`}
+                alt={String(item?.title)}
               />
             </Link>
 

@@ -16,6 +16,9 @@ const nextConfig = {
     "rc-table",
   ],
 
+  images: {
+    domains: ['localhost', 'api.gooneticket.com'],
+  },
 };
 
 export default nextConfig;

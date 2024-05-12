@@ -1,6 +1,6 @@
 import { GetInfiniteFollowsProductsAPI } from '@/api-site/product';
 import { ListPublicProductsEvent } from '@/components/event/list-public-products-event';
-import { useInputState } from '@/components/hooks';
+import { useInputState, useReactIntersectionObserver } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
@@ -9,11 +9,8 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
 import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 const EventsIndex = () => {
-    const { inView } = useInView();
     const { search, handleSetSearch } = useInputState();
 
     const {
@@ -29,28 +26,8 @@ const EventsIndex = () => {
         take: 10,
         sort: 'DESC',
     });
+    const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage })
 
-    useEffect(() => {
-        let fetching = false;
-        if (inView) {
-            fetchNextPage();
-        }
-        const onScroll = async (event: any) => {
-            const { scrollHeight, scrollTop, clientHeight } =
-                event.target.scrollingElement;
-
-            if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-                fetching = true;
-                if (hasNextPage) await fetchNextPage();
-                fetching = false;
-            }
-        };
-
-        document.addEventListener('scroll', onScroll);
-        return () => {
-            document.removeEventListener('scroll', onScroll);
-        };
-    }, [fetchNextPage, hasNextPage, inView]);
 
     const dataTableProducts = isLoadingProducts ? (
         itemsNumberArray(2).map((i, index) => <ProductEventSkeleton key={i} index={index} />)
@@ -105,6 +82,7 @@ const EventsIndex = () => {
                             {hasNextPage && (
                                 <div className="mx-auto justify-center text-center">
                                     <ButtonLoadMore
+                                        ref={ref}
                                         className="w-[240px]"
                                         isFetchingNextPage={isFetchingNextPage}
                                         onClick={() => fetchNextPage()}
