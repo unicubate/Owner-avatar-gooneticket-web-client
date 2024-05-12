@@ -3,7 +3,7 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Avatar } from 'antd';
+import { Image } from 'antd';
 import { CalendarIcon, MoveRightIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -31,15 +31,15 @@ const ListOrderItemsUser = (props: Props) => {
           <div className="flex min-w-0 flex-1 items-center">
             {item?.uploadsImages?.length > 0 ? (
               <div className="relative shrink-0 cursor-pointer">
-                <Avatar
-                  size={60}
-                  shape="square"
-                  src={viewOneFileUploadAPI({
+                <Image
+                  width={80}
+                  height={60}
+                  preview={false}
+                  src={`${viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
                     fileName: item?.uploadsImages[0]?.path,
-                  })}
-                  alt={item?.product?.title}
-                />
+                  })}`}
+                  alt={item?.product?.title} />
               </div>
             ) : null}
 
@@ -112,10 +112,10 @@ const ListOrderItemsUser = (props: Props) => {
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           <div className="ml-4 min-w-0 flex-1">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {Number(item?.price) > 0 ?
+              {Number(item?.priceDiscount) > 0 ?
                 <SerialPrice
                   className="text-sm"
-                  value={Number(item?.price)}
+                  value={Number(item?.priceDiscount)}
                   currency={{ code: String(item?.currency) }}
                 /> : 'Free'}
             </p>
