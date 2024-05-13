@@ -56,6 +56,7 @@ export type UserModel = {
   username: string;
   organizationId: string;
   profileId: string;
+  url: string;
   organization: {
     name: string;
     color: string;

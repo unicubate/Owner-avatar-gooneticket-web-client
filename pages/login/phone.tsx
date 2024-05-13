@@ -58,11 +58,10 @@ const LoginPhone = () => {
     const { code, phone } = payload;
 
     try {
-      await loginPhoneUserAPI({ code, phone });
+      const { data: user } = await loginPhoneUserAPI({ code, phone });
       setHasErrors(false);
       setLoading(false);
-      window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
-        }`;
+      window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
     } catch (error: any) {
       setLoading(false);
       setHasErrors(true);
@@ -243,14 +242,13 @@ const LoginPhone = () => {
               width="100%"
               onSuccess={async (credentialResponse) => {
                 try {
-                  await loginGoogleUserAPI({
+                  const { data: user } = await loginGoogleUserAPI({
                     token: String(credentialResponse.credential),
                   });
                   setHasErrors(false);
-                  window.location.href = `${redirect
-                    ? redirect
-                    : `${process.env.NEXT_PUBLIC_SITE}/orders`
-                    }`;
+                  window.location.href = `${
+                    redirect ? redirect : `${user?.url}/orders`
+                  }`;
                 } catch (error: any) {
                   setHasErrors(true);
                   setHasErrors(error.response.data.message);

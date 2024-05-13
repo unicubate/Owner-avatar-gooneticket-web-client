@@ -7,16 +7,8 @@ import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
-import {
-  formateDate,
-  formatePrice
-} from '@/utils';
-import {
-  MapIcon,
-  MessageCircleIcon,
-  ShareIcon,
-  TicketPlusIcon,
-} from 'lucide-react';
+import { formateDate, formatePrice } from '@/utils';
+import { MessageCircleIcon, ShareIcon, TicketPlusIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
 import { useInputState } from '../hooks';
@@ -28,20 +20,13 @@ type Props = {
 const ViewProductsEvent = ({ item }: Props) => {
   const { pathname, push } = useRouter();
 
-  const {
-    linkHref,
-    isOpen,
-    setIsOpen,
-    locale,
-    userStorage,
-    ipLocation
-  } = useInputState();
+  const { linkHref, isOpen, setIsOpen, locale, userStorage, ipLocation } =
+    useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => { },
-    onError: () => { },
+    onSuccess: () => {},
+    onError: () => {},
   });
-
 
   return (
     <>
@@ -70,9 +55,11 @@ const ViewProductsEvent = ({ item }: Props) => {
               onClick={() => {
                 userStorage?.id
                   ? push(
-                    `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
-                  )
-                  : push(`/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`);
+                      `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
+                    )
+                  : push(
+                      `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
+                    );
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
@@ -87,8 +74,7 @@ const ViewProductsEvent = ({ item }: Props) => {
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-
-                {Number(item?.prices?.length) > 0 ?
+                {Number(item?.prices?.length) > 0 ? (
                   <>
                     <span className="ml-1 text-3xl">
                       {item?.currency?.symbol ?? ''}
@@ -100,11 +86,9 @@ const ViewProductsEvent = ({ item }: Props) => {
                       })}
                     </span>
                   </>
-
-                  :
-                  <span className="ml-1 text-2xl">
-                    Free
-                  </span>}
+                ) : (
+                  <span className="ml-1 text-2xl">Free</span>
+                )}
                 {/* <span className="ml-1 text-3xl">
                   {formatePrice({
                     value: Number(item?.priceDiscount ?? 0),
@@ -142,8 +126,7 @@ const ViewProductsEvent = ({ item }: Props) => {
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="hidden items-center lg:table-cell">
               <div className="flex shrink-0 font-bold">
-                <MapIcon className="size-6" />
-                <span className="ml-2 text-lg">{item?.address ?? ''}</span>
+                <span className="text-lg">{item?.address ?? ''}</span>
                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                   -
                 </span>

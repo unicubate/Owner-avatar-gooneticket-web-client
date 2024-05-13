@@ -59,8 +59,7 @@ const Login = () => {
       setHasErrors(false);
       setLoading(false);
       if (user?.emailConfirmedAt) {
-        window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
-          }`;
+        window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
       } else {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
       }
@@ -206,14 +205,13 @@ const Login = () => {
               width="100%"
               onSuccess={async (credentialResponse) => {
                 try {
-                  await loginGoogleUserAPI({
+                  const { data: user } = await loginGoogleUserAPI({
                     token: String(credentialResponse.credential),
                   });
                   setHasErrors(false);
-                  window.location.href = `${redirect
-                    ? redirect
-                    : `${process.env.NEXT_PUBLIC_SITE}/orders`
-                    }`;
+                  window.location.href = `${
+                    redirect ? redirect : `${user?.url}/orders`
+                  }`;
                 } catch (error: any) {
                   setHasErrors(true);
                   setHasErrors(error.response.data.message);

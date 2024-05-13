@@ -73,13 +73,12 @@ const Register = () => {
     setHasErrors(undefined);
 
     try {
-      await registerUserAPI({
+      const { data: user } = await registerUserAPI({
         ...payload,
         status: 'CLIENT',
       });
       setLoading(false);
-      window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/orders`
-        }`;
+      window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

@@ -15,9 +15,7 @@ type Props = {
 };
 
 const ListPublicProductsEvent = ({ item, index }: Props) => {
-  const {
-    locale,
-  } = useInputState();
+  const { locale } = useInputState();
 
   return (
     <>
@@ -44,14 +42,12 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                 alt={String(item?.title)}
               />
             </Link>
-
           </>
-
         ) : null}
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            {Number(item?.prices?.length) > 0 ?
+            {Number(item?.prices?.length) > 0 ? (
               <>
                 <p className="text-3xl">
                   {formatePrice({
@@ -61,16 +57,12 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                 </p>
                 <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
               </>
-              :
-              <p className="text-2xl">
-                Free
-              </p>
-            }
+            ) : (
+              <p className="text-2xl">Free</p>
+            )}
             <p className="ml-auto text-lg">
-              {' '}
               {formateDate(item?.expiredAt as Date, locale)}
             </p>
-
           </div>
 
           <p className="mt-2 flex-1 text-xl font-bold text-gray-900 transition-all duration-200 hover:text-blue-600 dark:text-white sm:text-base">
@@ -108,9 +100,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                 <AvatarComponent size={35} profile={item?.profile} />
               ) : null}
               <div className="ml-2 min-w-0 flex-1">
-                <p className="text-sm">
-                  {item?.organization?.name}
-                </p>
+                <p className="text-sm">{item?.organization?.name}</p>
                 <p className="text-sm text-gray-500">
                   {formateDate(item?.createdAt as Date, locale)}
                 </p>
