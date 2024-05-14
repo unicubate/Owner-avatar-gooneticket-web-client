@@ -82,28 +82,25 @@ const ListOrderItemsUser = (props: Props) => {
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          {item?.status === 'CANCELLED' && (
+          {['CANCELLED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'danger'}>
               {item?.status}
             </Badge>
           )}
-          {['DELIVERED'].includes(item?.status) && (
+
+          {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'success'}>
               {item?.status}
             </Badge>
           )}
-          {['ACCEPTED'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'success'}>
-              {item?.status}
-            </Badge>
-          )}
-          {item?.status === 'PENDING' && (
+
+          {['PENDING'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'warning'}>
               {item?.status}
             </Badge>
           )}
 
-          {item?.product?.isExpired ? (
+          {!['DELIVERED', 'ACCEPTED'].includes(item?.status) && item?.product?.isExpired ? (
             <Badge className="ml-2 mt-2 rounded-sm" variant={'danger'}>
               EXPIRED
             </Badge>

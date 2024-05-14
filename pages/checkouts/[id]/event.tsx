@@ -8,6 +8,7 @@ import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal'
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
+import { Input } from '@/components/ui/input';
 import { PrivateComponent } from '@/components/util/private-component';
 import { PriceModel } from '@/types/price';
 import { formatePrice, formateToRFC2822 } from '@/utils';
@@ -120,58 +121,117 @@ const CheckoutEvent = () => {
                           {item?.title ? (
                             <div className="my-2 text-lg font-bold">{item?.title ?? ''}</div>
                           ) : null}
-                          <span className='text-sm'>{item?.city ?? ''}</span>{","}
-                          <span className="ml-1 text-sm">{item?.address ?? ''}</span>{","}
-                          <span className="ml-1 text-sm">
-                            {item?.country?.name ?? ''}
-                          </span>
                         </div>
 
-                        <div className="mt-2 font-semibold">
-                          <span className='text-sm'>
-                            {formateToRFC2822(item?.expiredAt as Date, locale)}
-                          </span>
-                          <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                            -
-                          </span>
-                          <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
-                          <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                            -
-                          </span>
-                          <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
-                        </div>
+                        <div className="relative mt-4 shrink-0 cursor-pointer">
+                          <div className="flex items-center">
+                            <div className="flex shrink-0 items-center font-bold">
+                              {Number(item?.prices?.length) > 0 ? (
+                                <>
+                                  <span className="ml-1 text-xl">
+                                    {item?.currency?.symbol ?? ''}
+                                  </span>
+                                  <span className="ml-1 text-xl">
+                                    {newAmount?.oneValue} x{' '}
+                                    {increment}
+                                  </span>
+                                </>
+                              ) : (
+                                <span className="ml-1 text-xl">Free</span>
+                              )}
+                            </div>
 
-
-                        <div className="mt-8 font-extrabold">Please select the seat category</div>
-                        <div className="sm:flex sm:items-center sm:justify-between">
-
-                          <div className="mt-4 sm:mt-0">
-                            {Number(item?.prices?.length) > 0 ?
-                              <p className="text-lg font-bold">
-                                {item?.currency?.symbol} {newAmount?.oneValue} x{' '}
-                                {increment}
-                              </p>
-                              :
-                              <p className="text-lg font-bold">Free</p>
-                            }
+                            <div className="ml-auto hidden font-bold lg:table-cell">
+                              <span className="text-lg">
+                                {formateToRFC2822(item?.expiredAt as Date, locale)}
+                              </span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
+                            </div>
                           </div>
-                          <div className="mt-4 sm:mt-0">
-                            <div className="flex max-w-max items-center space-x-8 rounded border border-gray-200 dark:border-gray-800">
+                        </div>
+
+                        <div className="relative mt-4 shrink-0 cursor-pointer">
+                          <div className="hidden items-center lg:table-cell">
+                            <div className="flex shrink-0 font-bold">
+                              <span className="text-lg">{item?.address ?? ''}</span>
+                              <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-2 text-lg">{item?.city ?? ''}</span>
+                              <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-2 text-lg">
+                                {item?.country?.name ?? ''}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="text-lg lg:hidden">
+                            <div className="flex font-bold">Date</div>
+                            <div className="ml-auto">
+                              <span className="text-sm">
+                                {formateToRFC2822(item?.expiredAt as Date, locale)}
+                              </span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 text-lg lg:hidden">
+                            <div className="flex font-bold">Location</div>
+                            <div className="ml-auto">
+                              <span className="text-sm">{item?.address ?? ''}</span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-2 text-sm">{item?.city ?? ''}</span>
+                              <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                -
+                              </span>
+                              <span className="ml-1.5 text-sm">{item?.country?.name ?? ''}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="sm:flex sm:items-center sm:justify-between">
+                          <div className="py-2 sm:mt-0">
+                            <p className="text-lg font-bold">Please select the seat category</p>
+                          </div>
+                          <div className="py-2 sm:mt-0">
+                            <div className="flex items-center rounded border border-gray-200 dark:border-gray-800">
                               <ButtonInput
                                 type="button"
                                 variant="primary"
+                                className="w-full"
                                 disabled={increment === 1 ? true : false}
                                 onClick={() => setIncrement((lk) => lk - 1)}
                                 icon={<PlusIcon className="size-5" />}
                               />
 
-                              <span className="text-base font-semibold text-black dark:text-white">
-                                {increment}
-                              </span>
-
+                              <Input
+                                type="number"
+                                id="increment"
+                                value={increment}
+                                className="h-8 w-20 border-transparent text-center [-moz-appearance:_textfield]"
+                              />
                               <ButtonInput
                                 type="button"
                                 variant="primary"
+                                className="w-full"
                                 loading={false}
                                 onClick={() => setIncrement((lk) => lk + 1)}
                                 icon={<PlusIcon className="size-5" />}
@@ -252,20 +312,12 @@ const CheckoutEvent = () => {
 
                       </div>
                     </div>
+
+
                   </div>
                 </div>
 
                 <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                  {/* <Link href={`/${username}/events`}>
-                    <ButtonInput
-                      type="button"
-                      variant="outline"
-                      className="ml-auto w-full"
-
-                    >
-                      Events
-                    </ButtonInput>
-                  </Link> */}
                   <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
 
 
@@ -378,8 +430,9 @@ const CheckoutEvent = () => {
 
                     <>
                       {!isValid && !watchPaymentMethod ?
-                        <div className="my-4 flex items-center">
+                        <div className="my-4 items-center">
                           <ButtonInput
+                            size="lg"
                             type="submit"
                             variant="primary"
                             className="w-full"
@@ -467,7 +520,6 @@ const CheckoutEvent = () => {
 
                     </>
                   }
-
 
                 </div>
 

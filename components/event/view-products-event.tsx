@@ -7,7 +7,7 @@ import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
 import { ProductModel } from '@/types/product';
-import { formateDate, formatePrice } from '@/utils';
+import { formatePrice, formateToRFC2822 } from '@/utils';
 import { MessageCircleIcon, ShareIcon, TicketPlusIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
@@ -24,8 +24,8 @@ const ViewProductsEvent = ({ item }: Props) => {
     useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => {},
-    onError: () => {},
+    onSuccess: () => { },
+    onError: () => { },
   });
 
   return (
@@ -55,11 +55,11 @@ const ViewProductsEvent = ({ item }: Props) => {
               onClick={() => {
                 userStorage?.id
                   ? push(
-                      `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
-                    )
+                    `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
+                  )
                   : push(
-                      `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
-                    );
+                    `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
+                  );
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
@@ -110,7 +110,7 @@ const ViewProductsEvent = ({ item }: Props) => {
 
               <div className="ml-auto hidden font-bold lg:table-cell">
                 <span className="text-lg">
-                  {formateDate(item?.expiredAt as Date, locale)}
+                  {formateToRFC2822(item?.expiredAt as Date, locale)}
                 </span>
                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                   -
@@ -144,7 +144,7 @@ const ViewProductsEvent = ({ item }: Props) => {
               <div className="flex font-bold">Date</div>
               <div className="ml-auto">
                 <span className="text-sm">
-                  {formateDate(item?.expiredAt as Date, locale)}
+                  {formateToRFC2822(item?.expiredAt as Date, locale)}
                 </span>
                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                   -
@@ -157,11 +157,19 @@ const ViewProductsEvent = ({ item }: Props) => {
               </div>
             </div>
 
-            <div className="mt-2 text-lg lg:hidden">
+            <div className="mt-4 text-lg lg:hidden">
               <div className="flex font-bold">Location</div>
-              <div className="flex">{item?.address ?? ''}</div>
-              <div className="flex">{item?.city ?? ''}</div>
-              <div className="flex">{item?.country?.name ?? ''}</div>
+              <div className="ml-auto">
+                <span className="text-sm">{item?.address ?? ''}</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
+                <span className="ml-2 text-sm">{item?.city ?? ''}</span>
+                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                  -
+                </span>
+                <span className="ml-1.5 text-sm">{item?.country?.name ?? ''}</span>
+              </div>
             </div>
           </div>
 
@@ -188,7 +196,7 @@ const ViewProductsEvent = ({ item }: Props) => {
           ) : null}
 
           <div className="mt-2 flex items-center font-medium text-gray-600">
-            <MessageCircleIcon className="size-5" />
+            <MessageCircleIcon className="size-7" />
             <span className="ml-2 text-sm">
               {item?.totalComment > 0 ? item?.totalComment : ''}
             </span>
@@ -196,14 +204,14 @@ const ViewProductsEvent = ({ item }: Props) => {
             <CopyShareLink
               isOpen={isOpen}
               setIsOpen={setIsOpen}
-              link={`${process.env.NEXT_PUBLIC_SITE}/events/${item?.slug}`}
+              link={window.location.href}
               buttonDialog={
                 <ButtonInput
                   className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
                   variant="link"
                   type="button"
                 >
-                  <ShareIcon className="size-5" />
+                  <ShareIcon className="size-6" />
                 </ButtonInput>
               }
             />
