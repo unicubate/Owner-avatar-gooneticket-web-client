@@ -24,16 +24,6 @@ const OrderView = () => {
     organizationBuyerId: user?.organizationId,
   });
 
-  const dataOrderItem = isLoadingOrderItem ? (
-    <LoadingFile className="my-6" />
-  ) : isErrorOrderItem ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : (
-    <>
-      {model === 'event' ? <ViewOrderItemEvent orderItem={orderItem} /> : null}
-    </>
-  );
-
   return (
     <>
       <LayoutDashboard title={'Order orders'}>
@@ -49,8 +39,21 @@ const OrderView = () => {
                   icon={<MoveLeftIcon className="size-4" />}
                 />
               </div> */}
-              <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 dark:border-gray-800 dark:bg-[#04080b]">
-                {dataOrderItem}
+              <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#04080b]">
+                {isLoadingOrderItem ? (
+                  <LoadingFile className="my-6" />
+                ) : isErrorOrderItem ? (
+                  <ErrorFile
+                    title="404"
+                    description="Error find data please try again..."
+                  />
+                ) : (
+                  <>
+                    {model === 'event' ? (
+                      <ViewOrderItemEvent orderItem={orderItem} />
+                    ) : null}
+                  </>
+                )}
               </div>
             </div>
           </div>
