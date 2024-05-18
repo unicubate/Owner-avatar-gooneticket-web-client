@@ -122,15 +122,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                 {orderItem?.status}
               </ButtonInput>
             )}
-            {['PENDING'].includes(orderItem?.status) && (
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="warning"
-              >
-                {orderItem?.status}
-              </ButtonInput>
-            )}
+
             {!['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) && orderItem?.product?.isExpired ? (
               <ButtonInput
                 type="button"
@@ -139,7 +131,16 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               >
                 EXPIRED
               </ButtonInput>
-            ) : null}
+            ) :
+              ['PENDING'].includes(orderItem?.status) && (
+                <ButtonInput
+                  type="button"
+                  size="sm"
+                  variant="warning"
+                >
+                  {orderItem?.status}
+                </ButtonInput>
+              )}
 
           </div>
         </div>

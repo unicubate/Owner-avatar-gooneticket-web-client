@@ -10,9 +10,9 @@ type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   const { push } = useRouter();
   const {
+    affiliation,
     userAddress,
     amount,
-    affiliate,
     productId,
     cartOrderId,
     organizationSellerId,
@@ -38,19 +38,20 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     const amountPalpal = order?.purchase_units[0]?.amount;
     setHasErrors(false);
     const payload = {
-      affiliate,
       userAddress,
       cartOrderId,
       productId,
       organizationSellerId,
       organizationBuyerId,
       reference: newReference,
+      affiliation: affiliation,
       amount: {
+        taxes: amount?.taxes,
         price: amount.price,
         quantity: amount.quantity,
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),
-        oneValue: amount?.oneValue,
+        oneValue: Number(amount?.oneValue),
       },
     };
 

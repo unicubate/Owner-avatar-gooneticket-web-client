@@ -127,6 +127,9 @@ export const apiEndpoints: ClientApiMethods = {
   getAllCurrencies: GET(`${baseUrl}/currencies`),
   getAllCounties: GET(`${baseUrl}/countries`),
 
+  /****************** Affiliations route */
+  getOneAffiliation: GET(`${baseUrl}/affiliations/view`),
+
   /****************** Follows route */
   getFollowers: GET(`${baseUrl}/follows/followers`),
   getFollowings: GET(`${baseUrl}/follows/followings`),

@@ -20,9 +20,6 @@ const ListOrderItemsUser = (props: Props) => {
   const { push } = useRouter();
   const { item, index } = props;
   const { isOpen, setIsOpen, locale } = useInputState();
-  const showDrawer = () => {
-    setIsOpen((i) => !i);
-  };
   const linkRedirect = `/orders/${item?.orderNumber}/tickets?model=${item?.model.toLocaleLowerCase()}`;
   return (
     <>
@@ -94,17 +91,16 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {['PENDING'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'warning'}>
-              {item?.status}
-            </Badge>
-          )}
-
           {!['DELIVERED', 'ACCEPTED'].includes(item?.status) && item?.product?.isExpired ? (
-            <Badge className="ml-2 mt-2 rounded-sm" variant={'danger'}>
+            <Badge className="rounded-sm" variant={'danger'}>
               EXPIRED
             </Badge>
-          ) : null}
+          ) :
+            ['PENDING'].includes(item?.status) && (
+              <Badge className="rounded-sm" variant={'warning'}>
+                {item?.status}
+              </Badge>
+            )}
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
