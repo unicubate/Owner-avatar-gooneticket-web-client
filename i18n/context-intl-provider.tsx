@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import Cookies from 'js-cookie';
 //import { navigator } from 'window'
 import { ReactNode, createContext, useContext } from 'react';
@@ -7,7 +6,7 @@ const I18N_CONFIG_KEY = process.env.NEXT_PUBLIC_I18N_CONFIG_KEY ?? 'x-lang';
 
 type Props = 'de' | 'en' | 'es' | 'fr' | 'ja' | 'zh';
 
-const initialState: Props =
+export const initialLang: Props =
   typeof window !== 'undefined' ? (navigator.language as Props) : 'en';
 
 function getConfig(): Props {
@@ -19,7 +18,7 @@ function getConfig(): Props {
       console.error(er);
     }
   }
-  return initialState;
+  return initialLang;
 }
 
 // Side effect
@@ -28,7 +27,7 @@ export function setLanguage(lang: string) {
   window.location.reload();
 }
 
-const I18nContext = createContext<Props>(initialState);
+const I18nContext = createContext<Props>(initialLang);
 
 const useLang = () => {
   return useContext(I18nContext);

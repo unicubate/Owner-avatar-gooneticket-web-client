@@ -51,6 +51,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
               <>
                 <p className="text-3xl">
                   {formatePrice({
+                    currency: String(item?.currency?.code),
                     value: Number(item?.prices?.[0].amount ?? 0),
                     isDivide: false,
                   })}

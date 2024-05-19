@@ -49,11 +49,9 @@ export function ListLastProductsEvent(props: Props) {
               </span>
               {Number(item?.prices?.length) > 0 ?
                 <>
-                  <span className="ml-2 text-lg">
-                    {item?.currency?.symbol ?? ''}
-                  </span>
-                  <span className="ml-1 text-lg">
+                  <span className="ml-2 text-sm">
                     {formatePrice({
+                      currency: String(item?.currency?.code),
                       value: Number(item?.prices?.[0].amount ?? 0),
                       isDivide: false,
                     })}

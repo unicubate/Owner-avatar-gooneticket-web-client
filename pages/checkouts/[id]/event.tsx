@@ -275,7 +275,8 @@ const CheckoutEvent = () => {
                                   <p className="text-gray-700 dark:text-gray-200">{price?.name}</p>
 
                                   <p className="text-gray-900 dark:text-white">
-                                    {item?.currency?.symbol}{formatePrice({
+                                    {formatePrice({
+                                      currency: `${item?.currency?.code}`,
                                       value: Number(price?.amount ?? 0),
                                       isDivide: false,
                                     })}{" "}
@@ -364,11 +365,9 @@ const CheckoutEvent = () => {
 
                           {newAmount?.value ?
                             <>
-                              <p className="ml-auto text-sm dark:text-gray-400">
-                                {item?.currency?.symbol}
-                              </p>
                               <p className="ml-1 text-sm dark:text-gray-400">
                                 {formatePrice({
+                                  currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,
                                 }) ?? ''}
@@ -394,11 +393,9 @@ const CheckoutEvent = () => {
                           </p>
                           {newAmount?.value ? (
                             <>
-                              <p className="ml-auto text-lg font-bold dark:text-white">
-                                {item?.currency?.symbol}
-                              </p>
                               <p className="ml-1 text-xl font-bold dark:text-white">
                                 {formatePrice({
+                                  currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,
                                 }) ?? ''}

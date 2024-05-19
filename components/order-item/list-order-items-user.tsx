@@ -3,8 +3,8 @@ import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
+import { Image } from 'antd';
 import { CalendarIcon, MoveRightIcon } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -30,7 +30,8 @@ const ListOrderItemsUser = (props: Props) => {
               <div className="relative shrink-0 cursor-pointer">
                 <Image
                   width={80}
-                  height={60}
+                  height={70}
+                  preview={false}
                   src={`${viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
                     fileName: item?.uploadsImages[0]?.path,

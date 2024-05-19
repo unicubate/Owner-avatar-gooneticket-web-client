@@ -77,10 +77,8 @@ const ViewProductsEvent = ({ item }: Props) => {
                 {Number(item?.prices?.length) > 0 ? (
                   <>
                     <span className="ml-1 text-3xl">
-                      {item?.currency?.symbol ?? ''}
-                    </span>
-                    <span className="ml-1 text-3xl">
                       {formatePrice({
+                        currency: String(item?.currency?.code),
                         value: Number(item?.prices?.[0].amount ?? 0),
                         isDivide: false,
                       })}
