@@ -56,7 +56,6 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                     isDivide: false,
                   })}
                 </p>
-                <p className="ml-1 text-lg">{item?.currency?.symbol ?? ''}</p>
               </>
             ) : (
               <p className="text-2xl">Free</p>

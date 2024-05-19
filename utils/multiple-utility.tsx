@@ -10,10 +10,11 @@ interface Props {
 
 export const formatePrice = ({ value, isDivide, currency }: Props) => {
   const numberCal = isDivide ? value / 100 : value;
+  const language = initialLang === 'fr' ? 'de' : initialLang
   return (
     <>
       {currency && numberCal && !isNaN(numberCal) ?
-        `${numberCal.toLocaleString(initialLang.toUpperCase(), {
+        `${numberCal.toLocaleString(language.toUpperCase(), {
           currency: currency,
           style: 'currency'
         })}` : null}
