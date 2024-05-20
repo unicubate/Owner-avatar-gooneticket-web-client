@@ -160,7 +160,6 @@ const CheckoutEvent = () => {
                                     </span> */}
                                     <span className="ml-1 text-xl">
                                       {formatePrice({
-                                        country: ipLocation?.countryCode,
                                         currency: `${item?.currency?.code}`,
                                         value: Number(newAmount?.oneValue ?? 0),
                                         isDivide: false,
@@ -313,7 +312,6 @@ const CheckoutEvent = () => {
 
                                     <p className="text-gray-900 dark:text-white">
                                       {formatePrice({
-                                        country: ipLocation?.countryCode,
                                         currency: `${item?.currency?.code}`,
                                         value: Number(price?.amount ?? 0),
                                         isDivide: false,
@@ -399,7 +397,6 @@ const CheckoutEvent = () => {
                             <>
                               <p className="ml-1 text-sm dark:text-gray-400">
                                 {formatePrice({
-                                  country: ipLocation?.countryCode,
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,
@@ -429,7 +426,6 @@ const CheckoutEvent = () => {
                             <>
                               <p className="ml-1 text-xl font-bold dark:text-white">
                                 {formatePrice({
-                                  country: ipLocation?.countryCode,
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,

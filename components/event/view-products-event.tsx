@@ -24,8 +24,8 @@ const ViewProductsEvent = ({ item }: Props) => {
     useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => {},
-    onError: () => {},
+    onSuccess: () => { },
+    onError: () => { },
   });
 
   return (
@@ -55,11 +55,11 @@ const ViewProductsEvent = ({ item }: Props) => {
               onClick={() => {
                 userStorage?.id
                   ? push(
-                      `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
-                    )
+                    `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
+                  )
                   : push(
-                      `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
-                    );
+                    `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
+                  );
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
@@ -78,7 +78,6 @@ const ViewProductsEvent = ({ item }: Props) => {
                   <>
                     <span className="ml-1 text-3xl">
                       {formatePrice({
-                        country: ipLocation?.countryCode,
                         currency: String(item?.currency?.code),
                         value: Number(item?.prices?.[0].amount ?? 0),
                         isDivide: false,

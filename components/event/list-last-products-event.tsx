@@ -51,7 +51,6 @@ export function ListLastProductsEvent(props: Props) {
                 <>
                   <span className="ml-2 text-sm">
                     {formatePrice({
-                      country: ipLocation?.countryCode,
                       currency: String(item?.currency?.code),
                       value: Number(item?.prices?.[0].amount ?? 0),
                       isDivide: false,

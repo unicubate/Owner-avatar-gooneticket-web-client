@@ -1,16 +1,16 @@
 import { viewOneFileUploadAPI } from '@/api-site/upload';
+import { initialLang } from '@/i18n/context-intl-provider';
 import { ImageProfileModel } from '@/types/profile.type';
 
 interface Props {
   value: number;
   isDivide: boolean;
   currency: string;
-  country: string;
 }
 
-export const formatePrice = ({ value, isDivide, currency, country }: Props) => {
+export const formatePrice = ({ value, isDivide, currency }: Props) => {
   const numberCal = isDivide ? value / 100 : value;
-  const language = ['FR', 'DE', 'CMR'].includes(country?.toUpperCase())
+  const language = ['FR', 'DE', 'CMR'].includes(initialLang?.toUpperCase())
     ? 'de-DE'
     : 'en-US';
   return (
