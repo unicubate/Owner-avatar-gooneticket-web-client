@@ -21,12 +21,13 @@ import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
 type NewAmountType = {
+  country: string;
   quantity: number;
   currency: string;
   value: number;
-  price: PriceModel,
+  price: PriceModel;
   oneValue: number;
-  taxes: number
+  taxes: number;
 };
 
 const paymentMethodArray = [
@@ -39,8 +40,8 @@ const paymentMethodArray = [
     name: 'PayPal',
     value: 'PAYPAL',
     image: <FaPaypal className="size-6" />,
-  }
-]
+  },
+];
 
 const schema = yup.object({
   fullName: yup.string().required('first name is a required field'),
@@ -50,10 +51,12 @@ const schema = yup.object({
 
 const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
-  const { userStorage, locale } = useInputState();
+  const { ipLocation, userStorage, locale } = useInputState();
   const { query, back } = useRouter();
   const { id: productId, partner } = query;
-  const { isValid, watch, control, errors, register } = useReactHookForm({ schema });
+  const { isValid, watch, control, errors, register } = useReactHookForm({
+    schema,
+  });
   const watchAmount = watch('amount', null);
   const watchPaymentMethod = watch('paymentMethod', null);
   const watchFullName = watch('fullName', '');
@@ -62,7 +65,7 @@ const CheckoutEvent = () => {
   const {
     data: item,
     isLoading: isLoadingProduct,
-    isError: isErrorProduct
+    isError: isErrorProduct,
   } = GetOneProductAPI({
     enableVisibility: 'TRUE',
     productSlug: String(productId),
@@ -73,42 +76,42 @@ const CheckoutEvent = () => {
     productId: item?.id,
   });
 
-
   const userAddress = {
     fullName: watchFullName,
     email: watchEmail,
   };
 
-  const priceJsonParse = watchAmount ? JSON.parse(watchAmount) : item?.prices?.[0] as PriceModel
+  const priceJsonParse = watchAmount
+    ? JSON.parse(watchAmount)
+    : (item?.prices?.[0] as PriceModel);
   const calculatePrice = Number(priceJsonParse?.amount) * increment;
   const newAmount: NewAmountType = {
     quantity: increment,
     price: priceJsonParse,
     currency: item?.currency?.code,
     value: calculatePrice,
+    country: ipLocation?.countryCode,
     oneValue: Number(priceJsonParse?.amount),
     taxes: Number(userStorage?.organization?.taxes),
-  }
+  };
 
   const newAffiliation = {
     id: affiliation?.id,
     code: affiliation?.code,
     percent: affiliation?.percent,
-    productId: affiliation?.productId
-  }
+    productId: affiliation?.productId,
+  };
 
   return (
     <>
       <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'events'}`}>
-
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
-
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
-              {isLoadingProduct ?
+              {isLoadingProduct ? (
                 <EventCheckoutSkeleton />
-                : <>
+              ) : (
+                <>
                   <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       {/* <ButtonInput
@@ -141,7 +144,9 @@ const CheckoutEvent = () => {
 
                           <div className="font-semibold">
                             {item?.title ? (
-                              <div className="my-2 text-lg font-bold">{item?.title ?? ''}b</div>
+                              <div className="my-2 text-lg font-bold">
+                                {item?.title ?? ''}b
+                              </div>
                             ) : null}
                           </div>
 
@@ -154,8 +159,7 @@ const CheckoutEvent = () => {
                                       {item?.currency?.symbol ?? ''}
                                     </span>
                                     <span className="ml-1 text-xl">
-                                      {newAmount?.oneValue} x{' '}
-                                      {increment}
+                                      {newAmount?.oneValue} x {increment}
                                     </span>
                                   </>
                                 ) : (
@@ -165,16 +169,23 @@ const CheckoutEvent = () => {
 
                               <div className="ml-auto hidden font-bold lg:table-cell">
                                 <span className="text-lg">
-                                  {formateToRFC2822(item?.expiredAt as Date, locale)}
+                                  {formateToRFC2822(
+                                    item?.expiredAt as Date,
+                                    locale,
+                                  )}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
+                                <span className="ml-2 text-sm">
+                                  {item?.timeInit ?? ''}
+                                </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
+                                <span className="ml-1.5 text-sm">
+                                  {item?.timeEnd ?? ''}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -182,11 +193,15 @@ const CheckoutEvent = () => {
                           <div className="relative mt-4 shrink-0 cursor-pointer">
                             <div className="hidden items-center lg:table-cell">
                               <div className="flex shrink-0 font-bold">
-                                <span className="text-lg">{item?.address ?? ''}</span>
+                                <span className="text-lg">
+                                  {item?.address ?? ''}
+                                </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-2 text-lg">{item?.city ?? ''}</span>
+                                <span className="ml-2 text-lg">
+                                  {item?.city ?? ''}
+                                </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
@@ -200,38 +215,53 @@ const CheckoutEvent = () => {
                               <div className="flex font-bold">Date</div>
                               <div className="ml-auto">
                                 <span className="text-sm">
-                                  {formateToRFC2822(item?.expiredAt as Date, locale)}
+                                  {formateToRFC2822(
+                                    item?.expiredAt as Date,
+                                    locale,
+                                  )}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
+                                <span className="ml-2 text-sm">
+                                  {item?.timeInit ?? ''}
+                                </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
+                                <span className="ml-1.5 text-sm">
+                                  {item?.timeEnd ?? ''}
+                                </span>
                               </div>
                             </div>
 
                             <div className="mt-4 text-lg lg:hidden">
                               <div className="flex font-bold">Location</div>
                               <div className="ml-auto">
-                                <span className="text-sm">{item?.address ?? ''}</span>
+                                <span className="text-sm">
+                                  {item?.address ?? ''}
+                                </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-2 text-sm">{item?.city ?? ''}</span>
+                                <span className="ml-2 text-sm">
+                                  {item?.city ?? ''}
+                                </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
-                                <span className="ml-1.5 text-sm">{item?.country?.name ?? ''}</span>
+                                <span className="ml-1.5 text-sm">
+                                  {item?.country?.name ?? ''}
+                                </span>
                               </div>
                             </div>
                           </div>
 
                           <div className="sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
-                              <p className="text-lg font-bold">Please select the seat category</p>
+                              <p className="text-lg font-bold">
+                                Please select the seat category
+                              </p>
                             </div>
                             <div className="py-2 sm:mt-0">
                               <div className="flex items-center rounded border border-gray-200 dark:border-gray-800">
@@ -264,41 +294,39 @@ const CheckoutEvent = () => {
                           </div>
 
                           <div className="mt-4 space-y-4">
+                            {item?.prices?.length > 0 &&
+                              item?.prices.map((price, index) => (
+                                <div key={index}>
+                                  <label
+                                    htmlFor={price?.id}
+                                    className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+                                  >
+                                    <p className="text-gray-700 dark:text-gray-200">
+                                      {price?.name}
+                                    </p>
 
-                            {item?.prices?.length > 0 && item?.prices.map((price, index) => (
-                              <div key={index}>
-
-                                <label
-                                  htmlFor={price?.id}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
-                                >
-                                  <p className="text-gray-700 dark:text-gray-200">{price?.name}</p>
-
-                                  <p className="text-gray-900 dark:text-white">
-                                    {formatePrice({
-                                      currency: `${item?.currency?.code}`,
-                                      value: Number(price?.amount ?? 0),
-                                      isDivide: false,
-                                    })}{" "}
-
-                                  </p>
-                                  <input
-                                    type="radio"
-                                    {...register("amount")}
-                                    value={JSON.stringify(price)}
-                                    id={price?.id}
-                                    className="sr-only"
-                                  />
-                                </label>
-
-                              </div>
-                            ))}
+                                    <p className="text-gray-900 dark:text-white">
+                                      {formatePrice({
+                                        currency: `${item?.currency?.code}`,
+                                        value: Number(price?.amount ?? 0),
+                                        isDivide: false,
+                                      })}{' '}
+                                    </p>
+                                    <input
+                                      type="radio"
+                                      {...register('amount')}
+                                      value={JSON.stringify(price)}
+                                      id={price?.id}
+                                      className="sr-only"
+                                    />
+                                  </label>
+                                </div>
+                              ))}
                           </div>
 
                           <hr className="mt-8 dark:border-gray-800" />
                           <div className="my-4 font-extrabold">Contact</div>
                           <div className="sm:flex sm:items-center sm:justify-between">
-
                             <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
                               <div className="mt-2">
                                 <TextInput
@@ -326,44 +354,41 @@ const CheckoutEvent = () => {
                                   {`We will only use it to save on the ticket.`}
                                 </span>
                               </div>
-
                             </div>
                           </div>
-
-
-
-
                         </div>
                       </div>
-
-
                     </div>
                   </div>
 
                   <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
                     <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
-
-
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
                         <li className="mb-4 mt-2 flex items-center justify-between text-sm">
-                          <span className='text-sm dark:text-gray-600'>
+                          <span className="text-sm dark:text-gray-600">
                             {formateToRFC2822(item?.expiredAt as Date, locale)}
                           </span>
                           <p className="ml-auto dark:text-gray-400">
-                            <span className="text-sm">{item?.timeInit ?? ''}</span>
+                            <span className="text-sm">
+                              {item?.timeInit ?? ''}
+                            </span>
                             <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                               -
                             </span>
-                            <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
+                            <span className="ml-1.5 text-sm">
+                              {item?.timeEnd ?? ''}
+                            </span>
                           </p>
                         </li>
 
                         <li className="mb-2 flex items-center justify-between text-sm">
-                          <p className="dark:text-gray-600">{increment} {item?.title} </p>
+                          <p className="dark:text-gray-600">
+                            {increment} {item?.title}{' '}
+                          </p>
 
-                          {newAmount?.value ?
+                          {newAmount?.value ? (
                             <>
                               <p className="ml-1 text-sm dark:text-gray-400">
                                 {formatePrice({
@@ -373,8 +398,9 @@ const CheckoutEvent = () => {
                                 }) ?? ''}
                               </p>
                             </>
-                            : 'Free'}
-
+                          ) : (
+                            'Free'
+                          )}
                         </li>
 
                         {/* <hr className="my-4 dark:border-gray-800" />
@@ -401,57 +427,53 @@ const CheckoutEvent = () => {
                                 }) ?? ''}
                               </p>
                             </>
-                          ) : 'Free'}
+                          ) : (
+                            'Free'
+                          )}
                         </li>
                       </div>
                     </div>
 
-
-
                     {!item?.isExpired && (
                       <>
-                        {newAmount?.value && watchFullName && watchEmail ?
+                        {newAmount?.value && watchFullName && watchEmail ? (
                           <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
                             <div className="p-4 sm:p-4 lg:p-3">
-                              <div className="font-extrabold">Payment method</div>
+                              <div className="font-extrabold">
+                                Payment method
+                              </div>
                               <div className="mt-4 space-y-4">
-
                                 {paymentMethodArray.map((lk, index) => (
                                   <div key={index}>
-
                                     <label
                                       htmlFor={lk?.value}
                                       className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
                                     >
-                                      <p className="text-gray-700 dark:text-gray-200">{lk?.name}</p>
+                                      <p className="text-gray-700 dark:text-gray-200">
+                                        {lk?.name}
+                                      </p>
 
                                       <p className="text-gray-700 dark:text-white">
                                         {lk?.image}
                                       </p>
                                       <input
                                         type="radio"
-                                        {...register("paymentMethod")}
+                                        {...register('paymentMethod')}
                                         value={lk?.value}
                                         id={lk?.value}
                                         className="sr-only"
                                       />
                                     </label>
-
                                   </div>
                                 ))}
-
                               </div>
                             </div>
                           </div>
-                          : null}
+                        ) : null}
 
-
-
-
-                        {Number(item?.prices?.length) > 0 ?
-
+                        {Number(item?.prices?.length) > 0 ? (
                           <>
-                            {!isValid && !watchPaymentMethod ?
+                            {!isValid && !watchPaymentMethod ? (
                               <div className="my-4 items-center">
                                 <ButtonInput
                                   size="lg"
@@ -463,10 +485,9 @@ const CheckoutEvent = () => {
                                   Continue
                                 </ButtonInput>
                               </div>
-                              :
+                            ) : (
                               <>
-
-                                {isValid && newAmount?.value ?
+                                {isValid && newAmount?.value ? (
                                   <>
                                     {watchPaymentMethod === 'STRIPE' ? (
                                       <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
@@ -499,13 +520,12 @@ const CheckoutEvent = () => {
                                           organizationSellerId:
                                             item?.organizationId,
                                           organizationBuyerId:
-                                            userStorage?.organizationId
+                                            userStorage?.organizationId,
                                         }}
                                       />
                                     ) : null}
-
                                   </>
-                                  :
+                                ) : (
                                   <div className="my-4 flex items-center">
                                     <ButtonInput
                                       type="submit"
@@ -515,11 +535,11 @@ const CheckoutEvent = () => {
                                       Continue
                                     </ButtonInput>
                                   </div>
-                                }
+                                )}
                               </>
-                            }
+                            )}
                           </>
-                          :
+                        ) : (
                           <>
                             <CreatePaymentFree
                               paymentModel="FREE-EVENT"
@@ -534,26 +554,19 @@ const CheckoutEvent = () => {
                                   value: 0,
                                   oneValue: Number(priceJsonParse?.amount),
                                 },
-                                organizationSellerId:
-                                  item?.organizationId,
+                                organizationSellerId: item?.organizationId,
                                 organizationBuyerId:
                                   userStorage?.organizationId,
                               }}
                             />
-
                           </>
-                        }
+                        )}
                       </>
                     )}
                   </div>
-
-                </>}
-
-
-
+                </>
+              )}
             </div>
-
-
           </div>
         </div>
       </LayoutCheckoutSite>

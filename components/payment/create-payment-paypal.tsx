@@ -46,6 +46,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       reference: newReference,
       affiliation: affiliation,
       amount: {
+        country: amount?.country,
         taxes: amount?.taxes,
         price: amount.price,
         quantity: amount.quantity,
@@ -129,7 +130,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
                 const details = await action?.order?.capture();
                 return handleApprove({ order: details });
               }}
-              onCancel={() => { }}
+              onCancel={() => {}}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);
