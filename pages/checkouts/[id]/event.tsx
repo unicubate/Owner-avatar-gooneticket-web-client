@@ -155,11 +155,16 @@ const CheckoutEvent = () => {
                               <div className="flex shrink-0 items-center font-bold">
                                 {Number(item?.prices?.length) > 0 ? (
                                   <>
-                                    <span className="ml-1 text-xl">
+                                    {/* <span className="ml-1 text-xl">
                                       {item?.currency?.symbol ?? ''}
-                                    </span>
+                                    </span> */}
                                     <span className="ml-1 text-xl">
-                                      {newAmount?.oneValue} x {increment}
+                                      {formatePrice({
+                                        country: ipLocation?.countryCode,
+                                        currency: `${item?.currency?.code}`,
+                                        value: Number(newAmount?.oneValue ?? 0),
+                                        isDivide: false,
+                                      })} x {increment}
                                     </span>
                                   </>
                                 ) : (
@@ -307,10 +312,11 @@ const CheckoutEvent = () => {
 
                                     <p className="text-gray-900 dark:text-white">
                                       {formatePrice({
+                                        country: ipLocation?.countryCode,
                                         currency: `${item?.currency?.code}`,
                                         value: Number(price?.amount ?? 0),
                                         isDivide: false,
-                                      })}{' '}
+                                      })}
                                     </p>
                                     <input
                                       type="radio"
@@ -392,6 +398,7 @@ const CheckoutEvent = () => {
                             <>
                               <p className="ml-1 text-sm dark:text-gray-400">
                                 {formatePrice({
+                                  country: ipLocation?.countryCode,
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,
@@ -421,6 +428,7 @@ const CheckoutEvent = () => {
                             <>
                               <p className="ml-1 text-xl font-bold dark:text-white">
                                 {formatePrice({
+                                  country: ipLocation?.countryCode,
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
                                   isDivide: false,

@@ -5,17 +5,18 @@ interface Props {
   value: number;
   isDivide: boolean;
   currency: string;
+  country: string;
 }
 
-export const formatePrice = ({ value, isDivide, currency }: Props) => {
+export const formatePrice = ({ value, isDivide, currency, country }: Props) => {
   const numberCal = isDivide ? value / 100 : value;
-  // const language = ['FR', 'IT'].includes(initialLang.toUpperCase())
-  //   ? 'DE'
-  //   : initialLang;
+  const language = ['FR', 'IT'].includes(country?.toUpperCase())
+    ? 'GB'
+    : country;
   return (
     <>
       {currency && numberCal && !isNaN(numberCal)
-        ? `${numberCal.toLocaleString('IT', {
+        ? `${numberCal.toLocaleString(language, {
           currency: currency,
           style: 'currency',
         })}`

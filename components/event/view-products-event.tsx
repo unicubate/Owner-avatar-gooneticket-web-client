@@ -78,6 +78,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                   <>
                     <span className="ml-1 text-3xl">
                       {formatePrice({
+                        country: ipLocation?.countryCode,
                         currency: String(item?.currency?.code),
                         value: Number(item?.prices?.[0].amount ?? 0),
                         isDivide: false,

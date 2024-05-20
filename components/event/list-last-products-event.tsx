@@ -10,7 +10,7 @@ type Props = {
 };
 
 export function ListLastProductsEvent(props: Props) {
-  const { locale } = useInputState();
+  const { locale, ipLocation } = useInputState();
   const { item } = props;
   return (
     <>
@@ -51,6 +51,7 @@ export function ListLastProductsEvent(props: Props) {
                 <>
                   <span className="ml-2 text-sm">
                     {formatePrice({
+                      country: ipLocation?.countryCode,
                       currency: String(item?.currency?.code),
                       value: Number(item?.prices?.[0].amount ?? 0),
                       isDivide: false,
