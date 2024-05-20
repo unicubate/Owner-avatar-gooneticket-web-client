@@ -16,7 +16,7 @@ export const formatePrice = ({ value, isDivide, currency, country }: Props) => {
   return (
     <>
       {currency && numberCal && !isNaN(numberCal)
-        ? `${numberCal.toLocaleString('GB', {
+        ? `${numberCal.toLocaleString('en-US', {
           currency: currency,
           style: 'currency',
         })}`

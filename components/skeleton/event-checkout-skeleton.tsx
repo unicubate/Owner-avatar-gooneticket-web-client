@@ -15,7 +15,7 @@ export const EventCheckoutSkeleton = () => {
                 <Skeleton className="h-4 w-full" />
               </div>
               <div className="mt-4 space-y-2">
-                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[240px]" />
               </div>
               <div className="mt-4 flex items-center">
                 <Skeleton className="h-6 w-40 rounded-md" />
