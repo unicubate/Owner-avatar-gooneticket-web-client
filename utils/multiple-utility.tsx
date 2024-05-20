@@ -10,7 +10,9 @@ interface Props {
 
 export const formatePrice = ({ value, isDivide, currency }: Props) => {
   const numberCal = isDivide ? value / 100 : value;
-  const language = ['fr', 'it'].includes(initialLang) ? 'de' : initialLang;
+  const language = ['FR', 'IT'].includes(initialLang.toUpperCase())
+    ? 'DE'
+    : initialLang;
   return (
     <>
       {currency && numberCal && !isNaN(numberCal)
