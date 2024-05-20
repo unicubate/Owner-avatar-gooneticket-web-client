@@ -164,7 +164,8 @@ const CheckoutEvent = () => {
                                         currency: `${item?.currency?.code}`,
                                         value: Number(newAmount?.oneValue ?? 0),
                                         isDivide: false,
-                                      })} x {increment}
+                                      })}{' '}
+                                      x {increment}
                                     </span>
                                   </>
                                 ) : (

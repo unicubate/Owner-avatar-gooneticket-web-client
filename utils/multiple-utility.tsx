@@ -17,9 +17,9 @@ export const formatePrice = ({ value, isDivide, currency, country }: Props) => {
     <>
       {currency && numberCal && !isNaN(numberCal)
         ? `${numberCal.toLocaleString(language, {
-          currency: currency,
-          style: 'currency',
-        })}`
+            currency: currency,
+            style: 'currency',
+          })}`
         : null}
     </>
   );
@@ -29,9 +29,9 @@ export const oneImageToURL = (image: ImageProfileModel) => {
   const url =
     image?.key === 'aws'
       ? viewOneFileUploadAPI({
-        folder: 'profiles',
-        fileName: image?.patch,
-      })
+          folder: 'profiles',
+          fileName: image?.patch,
+        })
       : image?.patch;
 
   return url as string;

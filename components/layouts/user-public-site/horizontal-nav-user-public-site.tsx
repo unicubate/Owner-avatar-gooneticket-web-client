@@ -77,8 +77,12 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
-              <Button onClick={showDrawer} type="button" variant="ghost"
-                className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white">
+              <Button
+                onClick={showDrawer}
+                type="button"
+                variant="ghost"
+                className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
+              >
                 <svg
                   className="size-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -129,30 +133,28 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="ml-auto flex items-center justify-center">
-
               <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-                {navigation
-                  .map((item: any, index: number) => {
-                    const isActive = pathname === item.href;
-                    // const isActive = pathname?.startsWith(item.href);
-                    return (
-                      <Link
-                        key={index}
-                        href={`${item?.href}`}
-                        title={item?.title}
-                        className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
+                {navigation.map((item: any, index: number) => {
+                  const isActive = pathname === item.href;
+                  // const isActive = pathname?.startsWith(item.href);
+                  return (
+                    <Link
+                      key={index}
+                      href={`${item?.href}`}
+                      title={item?.title}
+                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                        isActive
                           ? `text-${user?.profile?.color}-600 border-${user?.profile?.color}-600`
                           : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                          } `}
-                      >
-                        {item?.icon}
+                      } `}
+                    >
+                      {item?.icon}
 
-                        {item?.title}
-                      </Link>
-                    );
-                  })}
+                      {item?.title}
+                    </Link>
+                  );
+                })}
               </nav>
-
             </div>
 
             <div className="ml-auto flex items-center justify-end">
@@ -194,9 +196,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => push(`/orders`)}
-                          >
+                          <DropdownMenuItem onClick={() => push(`/orders`)}>
                             <span className="cursor-pointer">
                               {t.formatMessage({ id: 'MENU.ORDER' })}
                             </span>
@@ -204,9 +204,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => push(`/settings`)}
-                          >
+                          <DropdownMenuItem onClick={() => push(`/settings`)}>
                             <span className="cursor-pointer">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>

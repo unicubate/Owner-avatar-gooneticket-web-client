@@ -11,8 +11,11 @@ import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListPublicProductsEvent } from './list-public-products-event';
 
-
-const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }) => {
+const TablePublicProductsEvent = ({
+  organizationId,
+}: {
+  organizationId: string;
+}) => {
   const { t, userStorage: user } = useInputState();
   const { search } = useInputState();
   const { ref, inView } = useInView();
@@ -29,12 +32,13 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
     take: 10,
     sort: 'DESC',
     modelIds: ['EVENT'],
-    organizationId
+    organizationId,
   });
 
-
   const dataTableProducts = isLoadingProducts ? (
-    itemsNumberArray(3).map((i, index) => <ProductEventSkeleton key={i} index={index} />)
+    itemsNumberArray(3).map((i, index) => (
+      <ProductEventSkeleton key={i} index={index} />
+    ))
   ) : isErrorProducts ? (
     <ErrorFile title="404" description="Error find data please try again..." />
   ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
@@ -50,19 +54,16 @@ const TablePublicProductsEvent = ({ organizationId }: { organizationId: string }
   return (
     <>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-
         {dataTableProducts}
-
       </div>
 
-      {Number(dataProducts?.pages[0]?.data?.total) <= 0 ?
+      {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
         <EmptyData
           image={<TicketIcon className="size-10" />}
           title="This creator hasn't published anything yet!"
           description={`When he does, his publications will appear here first.`}
         />
-        : null}
-
+      ) : null}
 
       {hasNextPage && (
         <div className="mx-auto justify-center text-center">

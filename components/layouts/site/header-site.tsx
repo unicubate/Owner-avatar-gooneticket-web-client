@@ -5,7 +5,6 @@ interface IProps {
 }
 
 const HeaderSite = ({ title }: IProps) => {
-
   return (
     <Head>
       <title>

@@ -162,7 +162,6 @@ export default function Home() {
       </div>
 
       <MediumFooter />
-
     </LayoutSite>
   );
 }

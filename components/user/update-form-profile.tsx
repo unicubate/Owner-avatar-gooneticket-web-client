@@ -165,7 +165,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               <Controller
                 name="attachment"
                 control={control}
-                render={({ }) => (
+                render={({}) => (
                   <>
                     <div className="mx-auto justify-center text-center">
                       <Upload

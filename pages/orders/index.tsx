@@ -1,5 +1,8 @@
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
-import { useInputState, useReactIntersectionObserver } from '@/components/hooks';
+import {
+  useInputState,
+  useReactIntersectionObserver,
+} from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
@@ -12,12 +15,11 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
 import { CalendarCheckIcon, ShoppingCartIcon } from 'lucide-react';
 import { Fragment, useState } from 'react';
-
 
 const OrdersIndex = () => {
   const [dayCount, setDayCount] = useState(30);
@@ -39,9 +41,7 @@ const OrdersIndex = () => {
     sort: 'DESC',
     days: dayCount,
   });
-  const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage })
-
-
+  const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
   const handleDaysChange = (newDays: number) => {
     setDayCount(newDays);
@@ -113,16 +113,16 @@ const OrdersIndex = () => {
                   </div>
                 </div>
 
-
-
-
                 <table className="mt-4 min-w-full lg:divide-y">
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
-                    {user?.organizationId ?
+                    {user?.organizationId ? (
                       isLoadingOrderItems ? (
                         <LoadingFile />
                       ) : isErrorOrderItems ? (
-                        <ErrorFile title="404" description="Error find data please try again..." />
+                        <ErrorFile
+                          title="404"
+                          description="Error find data please try again..."
+                        />
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
                           image={<ShoppingCartIcon className="size-10" />}
@@ -133,11 +133,16 @@ const OrdersIndex = () => {
                         dataOrderItems?.pages.map((page, i) => (
                           <Fragment key={i}>
                             {page?.data?.value.map((item, index) => (
-                              <ListOrderItemsUser item={item} key={index} index={index} />
+                              <ListOrderItemsUser
+                                item={item}
+                                key={index}
+                                index={index}
+                              />
                             ))}
                           </Fragment>
                         ))
-                      ) : null}
+                      )
+                    ) : null}
                   </tbody>
                 </table>
               </div>

@@ -47,7 +47,7 @@ export function ListLastProductsEvent(props: Props) {
               <span className="text-sm">
                 {formateDate(item?.expiredAt as Date, locale)}
               </span>
-              {Number(item?.prices?.length) > 0 ?
+              {Number(item?.prices?.length) > 0 ? (
                 <>
                   <span className="ml-2 text-sm">
                     {formatePrice({
@@ -58,14 +58,9 @@ export function ListLastProductsEvent(props: Props) {
                     })}
                   </span>
                 </>
-                :
-                <span className="ml-2">
-                  Free
-                </span>
-              }
-
-
-
+              ) : (
+                <span className="ml-2">Free</span>
+              )}
             </div>
           </div>
         </div>

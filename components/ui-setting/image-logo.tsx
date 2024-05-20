@@ -1,7 +1,12 @@
 import Image from 'next/image';
 
-
-export const ImageLogo = ({ width = 35, height = 35 }: { width?: number, height?: number }) => {
+export const ImageLogo = ({
+  width = 35,
+  height = 35,
+}: {
+  width?: number;
+  height?: number;
+}) => {
   return (
     <Image
       width={width}

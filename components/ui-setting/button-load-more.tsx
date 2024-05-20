@@ -18,7 +18,7 @@ export const ButtonLoadMore = ({
   onClick,
   ref,
   size = 'lg',
-  className = "w-full",
+  className = 'w-full',
   isFetchingNextPage,
   hasNextPage,
 }: Props) => {

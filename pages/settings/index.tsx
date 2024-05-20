@@ -26,8 +26,6 @@ const Settings = () => {
       <LayoutDashboard title={'Settings'}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-
-
             <div className="flow-root">
               <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
                 {profile?.id ? (

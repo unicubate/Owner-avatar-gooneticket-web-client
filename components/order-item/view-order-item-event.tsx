@@ -105,43 +105,28 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               Download
             </ButtonInput>
             {['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) && (
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="success"
-              >
+              <ButtonInput type="button" size="sm" variant="success">
                 {orderItem?.status}
               </ButtonInput>
             )}
             {['CANCELLED'].includes(orderItem?.status) && (
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="danger"
-              >
+              <ButtonInput type="button" size="sm" variant="danger">
                 {orderItem?.status}
               </ButtonInput>
             )}
 
-            {!['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) && orderItem?.product?.isExpired ? (
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="danger"
-              >
+            {!['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) &&
+            orderItem?.product?.isExpired ? (
+              <ButtonInput type="button" size="sm" variant="danger">
                 EXPIRED
               </ButtonInput>
-            ) :
+            ) : (
               ['PENDING'].includes(orderItem?.status) && (
-                <ButtonInput
-                  type="button"
-                  size="sm"
-                  variant="warning"
-                >
+                <ButtonInput type="button" size="sm" variant="warning">
                   {orderItem?.status}
                 </ButtonInput>
-              )}
-
+              )
+            )}
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ type Props = {
 const ListOrderItemsUser = (props: Props) => {
   const { push } = useRouter();
   const { item, index } = props;
-  const { isOpen, setIsOpen, locale } = useInputState();
+  const { isOpen, setIsOpen, locale, ipLocation } = useInputState();
   const linkRedirect = `/orders/${item?.orderNumber}/tickets?model=${item?.model.toLocaleLowerCase()}`;
   return (
     <>
@@ -51,29 +51,27 @@ const ListOrderItemsUser = (props: Props) => {
                 </span>
               </div>
 
-              {item?.product?.title ?
+              {item?.product?.title ? (
                 <p className="mt-2 font-bold transition-all duration-200 hover:text-blue-600">
-                  <Link
-                    href={linkRedirect}
-                    title={item?.product?.title}
-                  >
+                  <Link href={linkRedirect} title={item?.product?.title}>
                     <ReadMore
                       html={String(item?.product?.title ?? '')}
                       value={100}
                     />
                   </Link>
                 </p>
-                : null}
+              ) : null}
 
               <div className="mt-2 flex items-center font-medium text-gray-600">
                 <span className="ml-1.5 text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>
-                <span className="ml-1.5 text-sm font-bold text-gray-600">-</span>
+                <span className="ml-1.5 text-sm font-bold text-gray-600">
+                  -
+                </span>
                 <span className="ml-1.5 text-sm font-bold text-gray-600">
                   {item?.priceName?.toLocaleUpperCase() ?? 'FREE'}
                 </span>
-
               </div>
             </div>
           </div>
@@ -92,27 +90,33 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {!['DELIVERED', 'ACCEPTED'].includes(item?.status) && item?.product?.isExpired ? (
+          {!['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
+          item?.product?.isExpired ? (
             <Badge className="rounded-sm" variant={'danger'}>
               EXPIRED
             </Badge>
-          ) :
+          ) : (
             ['PENDING'].includes(item?.status) && (
               <Badge className="rounded-sm" variant={'warning'}>
                 {item?.status}
               </Badge>
-            )}
+            )
+          )}
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           <div className="ml-4 min-w-0 flex-1">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {Number(item?.priceDiscount) > 0 ?
+              {Number(item?.priceDiscount) > 0 ? (
                 <SerialPrice
                   className="text-sm"
+                  country={ipLocation?.countryCode}
                   value={Number(item?.priceDiscount)}
                   currency={{ code: String(item?.currency) }}
-                /> : 'Free'}
+                />
+              ) : (
+                'Free'
+              )}
             </p>
           </div>
         </td>

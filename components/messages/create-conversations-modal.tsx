@@ -79,10 +79,7 @@ export function CreateConversationsModal(props: {
 
             <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
-                <Alert
-                  variant="destructive"
-                  className="mb-4 bg-red-600"
-                >
+                <Alert variant="destructive" className="mb-4 bg-red-600">
                   <AlertDescription className="text-white">
                     {hasErrors}
                   </AlertDescription>

@@ -168,8 +168,9 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
           <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
             <div className="mb-2">
               <Input
-                className={`${erroredInputs?.expiryDate ? 'border-red-500' : ''
-                  }`}
+                className={`${
+                  erroredInputs?.expiryDate ? 'border-red-500' : ''
+                }`}
                 required
                 {...getExpiryDateProps({
                   onChange: (e) =>
@@ -223,7 +224,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
             </div>
           </div>
 
-
           <div className="mt-4 flex items-center space-x-4">
             <ButtonInput
               size="lg"
@@ -231,7 +231,11 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               className="w-full"
               variant="primary"
               loading={loading}
-              disabled={!stripe || !data?.userAddress?.email || !data?.userAddress?.fullName}
+              disabled={
+                !stripe ||
+                !data?.userAddress?.email ||
+                !data?.userAddress?.fullName
+              }
             >
               Continue
             </ButtonInput>

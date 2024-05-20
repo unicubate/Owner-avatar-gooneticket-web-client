@@ -15,7 +15,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
 
 interface Props {
@@ -105,10 +105,11 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                       key={index}
                       href={`${item?.href}`}
                       title={item?.title}
-                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${isActive
-                        ? `border-indigo-600 text-indigo-600`
-                        : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                        } `}
+                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? `border-indigo-600 text-indigo-600`
+                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                      } `}
                     >
                       {item?.icon}
 
@@ -149,9 +150,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => push(`/settings`)}
-                          >
+                          <DropdownMenuItem onClick={() => push(`/settings`)}>
                             <span className="cursor-pointer">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>

@@ -100,11 +100,14 @@ const FooterSite: React.FC<Props> = ({ user, showDrawer }) => {
                       href={`${item.href}`}
                       title={item?.title}
                       className={cn(
-                        `inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${isActive
-                          ? `text-${user?.profile?.color ?? 'indigo'
-                          }-600 border-${user?.profile?.color ?? 'indigo'
-                          }-600`
-                          : 'border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300'
+                        `inline-flex items-center border-b-2 px-1 pt-1 text-sm  font-medium transition-all duration-200${
+                          isActive
+                            ? `text-${
+                                user?.profile?.color ?? 'indigo'
+                              }-600 border-${
+                                user?.profile?.color ?? 'indigo'
+                              }-600`
+                            : 'border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300'
                         } `,
                       )}
                     >

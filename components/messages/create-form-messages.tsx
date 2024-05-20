@@ -48,7 +48,7 @@ export function CreateFormMessages(props: {
     },
   });
 
-  const handleEmoji = () => { };
+  const handleEmoji = () => {};
   const onSubmit: SubmitHandler<MessageFormModel> = async (
     payload: MessageFormModel,
   ) => {

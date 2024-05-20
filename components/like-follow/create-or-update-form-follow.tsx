@@ -33,13 +33,13 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
       {
         isFollow
           ? await saveMutation({
-            followerId: item?.organizationId,
-            action: 'DELETE',
-          })
+              followerId: item?.organizationId,
+              action: 'DELETE',
+            })
           : await saveMutation({
-            followerId: item?.organizationId,
-            action: 'CREATE',
-          });
+              followerId: item?.organizationId,
+              action: 'CREATE',
+            });
       }
     } catch (error: any) {
       AlertDangerNotification({

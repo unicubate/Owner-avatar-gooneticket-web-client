@@ -13,7 +13,6 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
   const { push } = useRouter();
   const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
-
   const { mutateAsync } = CreateOnPaymentPI({
     onSuccess: () => {
       setHasErrors(false);
@@ -72,7 +71,9 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
               className="w-full"
               variant="primary"
               loading={loading}
-              disabled={!data?.userAddress?.email || !data?.userAddress?.fullName}
+              disabled={
+                !data?.userAddress?.email || !data?.userAddress?.fullName
+              }
             >
               Continue Free
             </ButtonInput>

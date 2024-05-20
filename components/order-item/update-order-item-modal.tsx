@@ -44,7 +44,7 @@ export function UpdateOrderItemModal(props: {
     hasErrors,
     setHasErrors,
   } = useReactHookForm({ schema });
-  const { locale } = useInputState();
+  const { locale, ipLocation } = useInputState();
 
   useEffect(() => {
     if (item) {
@@ -154,6 +154,7 @@ export function UpdateOrderItemModal(props: {
                 <div className="ml-auto">
                   <SerialPrice
                     className="text-lg font-bold"
+                    country={ipLocation?.countryCode}
                     value={Number(item?.priceDiscount)}
                     currency={{ code: String(item?.currency) }}
                   />

@@ -35,18 +35,21 @@ const ProfilePublic = () => {
   return (
     <>
       <LayoutUserPublicSite
-        title={`${user?.profile?.firstName || 'User'} ${user?.profile?.lastName ?? ''
-          }`}
+        title={`${user?.profile?.firstName || 'User'} ${
+          user?.profile?.lastName ?? ''
+        }`}
         user={user}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
           <div className="container mx-auto space-y-8 p-4">
-
-            {user?.organizationId ?
+            {user?.organizationId ? (
               <>
                 <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">
                   <div className="absolute inset-0">
-                    <CoverComponent className="size-full object-cover" profile={user?.profile} />
+                    <CoverComponent
+                      className="size-full object-cover"
+                      profile={user?.profile}
+                    />
                   </div>
 
                   <div className="absolute inset-0 bg-gray-900/50"></div>
@@ -64,7 +67,6 @@ const ProfilePublic = () => {
                           />
                         </p>
                       )}
-
                     </div>
                   </div>
                 </div>
@@ -76,7 +78,8 @@ const ProfilePublic = () => {
                     ) : null}
                   </div>
                   <div className="py-2 sm:mt-0">
-                    {userVisiter?.organizationId && userVisiter?.organizationId !== user?.organizationId ? (
+                    {userVisiter?.organizationId &&
+                    userVisiter?.organizationId !== user?.organizationId ? (
                       <CreateOrUpdateFormFollow item={user} />
                     ) : null}
                   </div>
@@ -110,25 +113,23 @@ const ProfilePublic = () => {
                   </div>
                 </div>
               </>
-
-              : null}
-
-
+            ) : null}
 
             <div className="flow-root">
-              {user?.organizationId ? <TablePublicProductsEvent organizationId={user?.organizationId} /> : null}
+              {user?.organizationId ? (
+                <TablePublicProductsEvent
+                  organizationId={user?.organizationId}
+                />
+              ) : null}
             </div>
-
           </div>
         </div>
-
 
         <CopyShareLink
           isOpen={copied}
           setIsOpen={setCopied}
           link={`${process.env.NEXT_PUBLIC_SITE}/${username}`}
         />
-
       </LayoutUserPublicSite>
 
       {status === 'pending' ? <LoadingFile /> : null}

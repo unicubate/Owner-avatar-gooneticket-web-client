@@ -32,7 +32,6 @@ const ShopUserPublic = () => {
     userVisitorId: userBayer?.id,
   });
 
-
   return (
     <>
       <LayoutUserPublicSite title={`${product?.title || 'Event'}`} user={user}>
@@ -41,11 +40,14 @@ const ShopUserPublic = () => {
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
               <>
                 <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
-                  <div className="flow-root">{
-                    isLoadingProduct ? (
+                  <div className="flow-root">
+                    {isLoadingProduct ? (
                       <ProductSkeleton index={0} />
                     ) : isErrorProduct ? (
-                      <ErrorFile title="404" description="Error find data please try again..." />
+                      <ErrorFile
+                        title="404"
+                        description="Error find data please try again..."
+                      />
                     ) : (
                       <ViewProductsEvent item={product} />
                     )}
@@ -79,7 +81,6 @@ const ShopUserPublic = () => {
                     </div>
                   </div>
                 </div>
-
               </>
             </div>
           </div>

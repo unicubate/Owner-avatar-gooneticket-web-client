@@ -126,10 +126,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
                   <>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          className="-m-3"
-                        >
+                        <Button variant="ghost" className="-m-3">
                           <svg
                             className="size-6"
                             xmlns="http://www.w3.org/2000/svg"
@@ -148,9 +145,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
                         <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => push(`/orders`)}
-                          >
+                          <DropdownMenuItem onClick={() => push(`/orders`)}>
                             <span className="cursor-pointer">
                               {t.formatMessage({ id: 'MENU.ORDER' })}
                             </span>
@@ -158,9 +153,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                          <DropdownMenuItem
-                            onClick={() => push(`/settings`)}
-                          >
+                          <DropdownMenuItem onClick={() => push(`/settings`)}>
                             <span className="cursor-pointer">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>

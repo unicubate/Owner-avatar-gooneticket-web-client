@@ -16,10 +16,7 @@ export function CoverComponent(props: Props) {
       {profile?.image && (
         <>
           <img
-            className={cn(
-              `bg-${profile?.color}-600`,
-              className,
-            )}
+            className={cn(`bg-${profile?.color}-600`, className)}
             src={oneImageToURL(profile?.image)}
             alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
           />
@@ -39,7 +36,6 @@ export function CoverComponent(props: Props) {
           />
         </>
       )}
-
     </>
   );
 }
