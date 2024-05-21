@@ -40,7 +40,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
         </div>
       </div> */}
 
-      <header className="items-center gap-4 border-b border-gray-100 dark:border-gray-800">
+      <header className="items-center gap-4 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-[#04080b]">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
@@ -71,11 +71,11 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
                         <ImageLogo />
                       </div>
 
-                      <div className="ml-2 cursor-pointer">
+                      {/* <div className="ml-2 cursor-pointer">
                         <p className="text-lg font-bold">
                           {process.env.NEXT_PUBLIC_NAME_SITE}
                         </p>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                   <div className="hidden h-8 w-auto lg:block">
