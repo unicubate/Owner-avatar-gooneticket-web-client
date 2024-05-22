@@ -1,8 +1,9 @@
+import { useCanonicalUrl } from '@/components/hooks';
 import { ButtonInput, ImageLogo } from '@/components/ui-setting';
+import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { HeaderSite } from '../site/header-site';
 
 interface IProps {
   title: string;
@@ -10,12 +11,30 @@ interface IProps {
 }
 
 const LayoutAuth = ({ children, title }: IProps) => {
+  const canonicalUrl = useCanonicalUrl();
   const { query, push } = useRouter();
   const { redirect } = query;
 
   return (
     <>
-      <HeaderSite title={title} />
+      <Head>
+        <title>
+          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
+        </title>
+        <meta
+          property="og:title"
+          content={process.env.NEXT_PUBLIC_NAME_SITE}
+          key="title"
+        />
+        <meta
+          name="description"
+          content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
+        />
+        {process.env.NEXT_ENV === 'prod' && (
+          <link rel="canonical" href={canonicalUrl} />
+        )}
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
 
       <header className="sticky border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-5">

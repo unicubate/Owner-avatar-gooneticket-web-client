@@ -1,11 +1,13 @@
+import { useCanonicalUrl } from '@/components/hooks';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import Head from 'next/head';
 import { useInputState } from '../../hooks';
-import { HeaderSite } from './header-site';
 import { HorizontalNavSite } from './horizontal-nav-site';
 import { VerticalNavSite } from './vertical-nav-site';
 
 interface IProps {
   title: string;
+  metas?: React.ReactNode;
   children: React.ReactNode;
 }
 
@@ -16,14 +18,29 @@ export type NavbarSiteProps = {
   icon?: any;
 };
 
-const LayoutSite = ({ children, title }: IProps) => {
+const LayoutSite = ({ children, title, metas }: IProps) => {
+  const canonicalUrl = useCanonicalUrl();
   const { isOpen, setIsOpen, userStorage } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
   return (
     <>
-      <HeaderSite title={title} />
+      <Head>
+        <title>
+          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
+        </title>
+        <meta
+          property="og:title"
+          content={process.env.NEXT_PUBLIC_NAME_SITE}
+          key="title"
+        />
+        {metas}
+        {process.env.NEXT_ENV === 'prod' && (
+          <link rel="canonical" href={canonicalUrl} />
+        )}
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
 
       {/* <div className="min-h-screen space-y-5"> */}
       <HorizontalNavSite showDrawer={showDrawer} user={userStorage} />

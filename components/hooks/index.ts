@@ -1,3 +1,4 @@
+export * from './use-canonical';
 export * from './use-debounce';
 export * from './use-decrement-timer';
 export * from './use-input-state';
