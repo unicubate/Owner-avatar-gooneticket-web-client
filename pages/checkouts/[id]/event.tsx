@@ -331,34 +331,32 @@ const CheckoutEvent = () => {
 
                           <hr className="mt-8 dark:border-gray-800" />
                           <div className="my-4 font-extrabold">Contact</div>
-                          <div className="sm:flex sm:items-center sm:justify-between">
-                            <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
-                              <div className="mt-2">
-                                <TextInput
-                                  label="Email"
-                                  control={control}
-                                  type="email"
-                                  name="email"
-                                  placeholder="Email"
-                                  errors={errors}
-                                />
-                                <span className="text-xs font-medium text-gray-400">
-                                  {`After booking, your ticket will be sent to this email address.`}
-                                </span>
-                              </div>
-                              <div className="mt-2">
-                                <TextInput
-                                  label="Full name"
-                                  control={control}
-                                  type="text"
-                                  name="fullName"
-                                  placeholder="Full name"
-                                  errors={errors}
-                                />
-                                <span className="text-xs font-medium text-gray-400">
-                                  {`We will only use it to save on the ticket.`}
-                                </span>
-                              </div>
+                          <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
+                            <div className="mt-2">
+                              <TextInput
+                                label="Email"
+                                control={control}
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                errors={errors}
+                              />
+                              <span className="text-xs font-medium text-gray-400">
+                                {`After booking, your ticket will be sent to this email address.`}
+                              </span>
+                            </div>
+                            <div className="mt-2">
+                              <TextInput
+                                label="Full name"
+                                control={control}
+                                type="text"
+                                name="fullName"
+                                placeholder="Full name"
+                                errors={errors}
+                              />
+                              <span className="text-xs font-medium text-gray-400">
+                                {`We will only use it to save on the ticket.`}
+                              </span>
                             </div>
                           </div>
                         </div>
