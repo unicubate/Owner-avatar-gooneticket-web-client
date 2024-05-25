@@ -30,15 +30,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   });
   const { cardNumber, cvc, fullName, isReuse, expiryDate } = cardstate as any;
 
-  const isValidCardNumber = valid.number(cardNumber).isValid;
   const isValidExpirationDate = valid.expirationDate(expiryDate).isValid;
-
-  const cardNumberValidator = () => {
-    if (!isValidCardNumber) {
-      return 'Credit card number is invalid';
-    }
-    return;
-  };
 
   const expiryDateValidator = (month: string, year: string) => {
     const currentYear = new Date().getFullYear();
@@ -113,7 +105,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     meta: { erroredInputs },
   } = useCreditCardValidator({
     expiryDateValidator,
-    cardNumberValidator,
   });
 
   return (
@@ -251,7 +242,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
             loading={loading}
             disabled={
               !stripe ||
-              !!isValidCardNumber ||
               !isValidExpirationDate ||
               !data?.userAddress?.email ||
               !data?.userAddress?.fullName
