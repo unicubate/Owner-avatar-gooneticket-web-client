@@ -105,25 +105,27 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   return (
     <>
       <form onSubmit={handleUserPageSubmit}>
-        <div className="flex-auto justify-center">
-          {hasErrors && (
-            <Alert variant="destructive" className="mb-4">
-              <AlertDescription>{hasErrors}</AlertDescription>
-            </Alert>
-          )}
-          <div className="relative mt-4">
-            <Input
-              placeholder="Full name"
-              name="fullName"
-              onChange={(e) =>
-                setCardState({
-                  ...cardstate,
-                  [e.target.name]: e.target.value,
-                })
-              }
-            />
-          </div>
-          {/* <div className="relative mt-4">
+        <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+          <div className="p-4 sm:p-4 lg:p-3">
+            <div className="flex-auto justify-center">
+              {hasErrors && (
+                <Alert variant="destructive" className="mb-4">
+                  <AlertDescription>{hasErrors}</AlertDescription>
+                </Alert>
+              )}
+              <div className="relative mt-4">
+                <Input
+                  placeholder="Full name"
+                  name="fullName"
+                  onChange={(e) =>
+                    setCardState({
+                      ...cardstate,
+                      [e.target.name]: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              {/* <div className="relative mt-4">
             <Input
               required
               placeholder="Email"
@@ -136,110 +138,111 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               }
             />
           </div> */}
-          <div className="mt-4">
-            <div className="max-w-auto relative flex w-full">
-              <Input
-                className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}
-                required
-                {...getCardNumberProps({
-                  onChange: (e) =>
-                    setCardState({
-                      ...cardstate,
-                      [e.target.name]: e.target.value,
-                    }),
-                })}
-              />
-              <ButtonInput
-                type="button"
-                variant="link"
-                size="sm"
-                className="!absolute right-1 top-1 rounded"
-              >
-                <svg {...getCardImageProps({ images })} />
-              </ButtonInput>
-            </div>
-            {erroredInputs?.cardNumber && (
-              <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-                {erroredInputs?.cardNumber}
-              </span>
-            )}
-          </div>
+              <div className="mt-4">
+                <div className="max-w-auto relative flex w-full">
+                  <Input
+                    className={`${erroredInputs?.cardNumber ? 'border-red-500' : ''}`}
+                    required
+                    {...getCardNumberProps({
+                      onChange: (e) =>
+                        setCardState({
+                          ...cardstate,
+                          [e.target.name]: e.target.value,
+                        }),
+                    })}
+                  />
+                  <ButtonInput
+                    type="button"
+                    variant="link"
+                    size="sm"
+                    className="!absolute right-1 top-1 rounded"
+                  >
+                    <svg {...getCardImageProps({ images })} />
+                  </ButtonInput>
+                </div>
+                {erroredInputs?.cardNumber && (
+                  <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                    {erroredInputs?.cardNumber}
+                  </span>
+                )}
+              </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
-            <div className="mb-2">
-              <Input
-                className={`${
-                  erroredInputs?.expiryDate ? 'border-red-500' : ''
-                }`}
-                required
-                {...getExpiryDateProps({
-                  onChange: (e) =>
-                    setCardState({
-                      ...cardstate,
-                      [e.target.name]: e.target.value,
-                    }),
-                })}
-              />
-              {erroredInputs?.expiryDate && (
-                <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-                  {erroredInputs?.expiryDate}
-                </span>
-              )}
-            </div>
+              <div className="mt-4 grid grid-cols-2 gap-x-6 sm:grid-cols-2">
+                <div className="mb-2">
+                  <Input
+                    className={`${
+                      erroredInputs?.expiryDate ? 'border-red-500' : ''
+                    }`}
+                    required
+                    {...getExpiryDateProps({
+                      onChange: (e) =>
+                        setCardState({
+                          ...cardstate,
+                          [e.target.name]: e.target.value,
+                        }),
+                    })}
+                  />
+                  {erroredInputs?.expiryDate && (
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {erroredInputs?.expiryDate}
+                    </span>
+                  )}
+                </div>
 
-            <div className="mb-2">
-              <Input
-                className={`${erroredInputs?.cvc ? 'border-red-500' : ''}`}
-                required
-                {...getCVCProps({
-                  onChange: (e) =>
-                    setCardState({
-                      ...cardstate,
-                      [e.target.name]: e.target.value,
-                    }),
-                })}
-              />
-              {erroredInputs?.cvc && (
-                <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
-                  {erroredInputs?.cvc}
-                </span>
-              )}
+                <div className="mb-2">
+                  <Input
+                    className={`${erroredInputs?.cvc ? 'border-red-500' : ''}`}
+                    required
+                    {...getCVCProps({
+                      onChange: (e) =>
+                        setCardState({
+                          ...cardstate,
+                          [e.target.name]: e.target.value,
+                        }),
+                    })}
+                  />
+                  {erroredInputs?.cvc && (
+                    <span className="ml-1 mt-1 flex items-center text-xs font-medium tracking-wide text-red-500">
+                      {erroredInputs?.cvc}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="mt-2">
+                <div className="flex items-center space-x-2">
+                  <Checkbox
+                    id="isReuse"
+                    defaultChecked={isSaveCard}
+                    onChange={() => {
+                      setIsSaveCard((i) => !i);
+                    }}
+                  />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm font-medium text-gray-500"
+                  >
+                    Save this payment method
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="mt-2">
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="isReuse"
-                defaultChecked={isSaveCard}
-                onChange={() => {
-                  setIsSaveCard((i) => !i);
-                }}
-              />
-              <label
-                htmlFor="terms"
-                className="text-sm font-medium text-gray-500"
-              >
-                Save this payment method
-              </label>
-            </div>
-          </div>
-
-          <div className="mt-4 flex items-center space-x-4">
-            <ButtonInput
-              size="lg"
-              type="submit"
-              className="w-full"
-              variant="primary"
-              loading={loading}
-              disabled={
-                !stripe ||
-                !data?.userAddress?.email ||
-                !data?.userAddress?.fullName
-              }
-            >
-              Continue
-            </ButtonInput>
-          </div>
+        </div>
+        <div className="mt-4 flex items-center space-x-4">
+          <ButtonInput
+            size="lg"
+            type="submit"
+            className="w-full"
+            variant="primary"
+            loading={loading}
+            disabled={
+              !stripe ||
+              !data?.userAddress?.email ||
+              !data?.userAddress?.fullName
+            }
+          >
+            Continue
+          </ButtonInput>
         </div>
       </form>
     </>

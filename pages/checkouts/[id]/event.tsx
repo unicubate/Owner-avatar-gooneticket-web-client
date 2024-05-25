@@ -2,6 +2,7 @@
 
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
 import { GetOneProductAPI } from '@/api-site/product';
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState, useReactHookForm } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentFree } from '@/components/payment/create-payment-free';
@@ -493,23 +494,19 @@ const CheckoutEvent = () => {
                                 {isValid && newAmount?.value ? (
                                   <>
                                     {watchPaymentMethod === 'STRIPE' ? (
-                                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
-                                        <div className="p-4 sm:p-4 lg:p-3">
-                                          <CreateCardStripe
-                                            paymentModel="STRIPE-EVENT"
-                                            data={{
-                                              userAddress,
-                                              productId: item?.id,
-                                              amount: newAmount,
-                                              affiliation: newAffiliation,
-                                              organizationSellerId:
-                                                item?.organizationId,
-                                              organizationBuyerId:
-                                                userStorage?.organizationId,
-                                            }}
-                                          />
-                                        </div>
-                                      </div>
+                                      <CreateCardStripe
+                                        paymentModel="STRIPE-EVENT"
+                                        data={{
+                                          userAddress,
+                                          productId: item?.id,
+                                          amount: newAmount,
+                                          affiliation: newAffiliation,
+                                          organizationSellerId:
+                                            item?.organizationId,
+                                          organizationBuyerId:
+                                            userStorage?.organizationId,
+                                        }}
+                                      />
                                     ) : null}
 
                                     {watchPaymentMethod === 'PAYPAL' ? (
@@ -570,7 +567,13 @@ const CheckoutEvent = () => {
                 </>
               )}
             </div>
+            <div className="items-center justify-center text-center">
+              <p className="text-sm font-normal text-gray-500">
+                All the taxes will be calculated while checkout
+              </p>
+            </div>
           </div>
+          <MediumFooter />
         </div>
       </LayoutCheckoutSite>
     </>

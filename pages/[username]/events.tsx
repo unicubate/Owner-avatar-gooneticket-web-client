@@ -1,7 +1,10 @@
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { ListPublicProductsEvent } from '@/components/event/list-public-products-event';
-import { useInputState } from '@/components/hooks';
+import {
+  useInputState,
+  useReactIntersectionObserver,
+} from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
 import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
@@ -11,11 +14,8 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { ProductModel } from '@/types/product';
 import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 const EventsPublic = () => {
-  const { ref, inView } = useInView();
   const {
     search,
     isOpen,
@@ -44,28 +44,7 @@ const EventsPublic = () => {
     modelIds: ['EVENT'],
     organizationId: user?.organizationId,
   });
-
-  useEffect(() => {
-    let fetching = false;
-    if (inView) {
-      fetchNextPage();
-    }
-    const onScroll = async (event: any) => {
-      const { scrollHeight, scrollTop, clientHeight } =
-        event.target.scrollingElement;
-
-      if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
-        fetching = true;
-        if (hasNextPage) await fetchNextPage();
-        fetching = false;
-      }
-    };
-
-    document.addEventListener('scroll', onScroll);
-    return () => {
-      document.removeEventListener('scroll', onScroll);
-    };
-  }, [fetchNextPage, hasNextPage, inView]);
+  const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
   const dataTableProducts = isLoadingProduct ? (
     itemsNumberArray(3).map((i, index) => (

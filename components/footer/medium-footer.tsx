@@ -1,6 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IoLogoInstagram, IoLogoTiktok, IoLogoYoutube } from 'react-icons/io5';
+import { ImageLogo } from '../ui-setting';
 
 type NavbarSiteProps = {
   title: string;
@@ -40,10 +42,7 @@ const MediumFooter = () => {
             <div className="shrink-0">
               <div className="flex items-center">
                 <div className="relative shrink-0 cursor-pointer">
-                  <img
-                    src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                    alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                  />
+                  <ImageLogo />
                 </div>
 
                 <div className="ml-2 cursor-pointer">
@@ -124,6 +123,16 @@ const MediumFooter = () => {
                 >
                   <IoLogoInstagram />
                 </a>
+              </li>
+
+              <li>
+                <Image
+                  className="mt-2"
+                  src={'/assets/payment-cards.png'}
+                  height={180}
+                  width={180}
+                  alt="Payment cards"
+                />
               </li>
             </ul>
           </div>
