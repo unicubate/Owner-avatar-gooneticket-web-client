@@ -32,18 +32,10 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
 
   const isValidCardNumber = valid.number(cardNumber).isValid;
   const isValidExpirationDate = valid.expirationDate(expiryDate).isValid;
-  const isValidCvv = valid.cvv(cvc).isValid;
 
   const cardNumberValidator = () => {
     if (!isValidCardNumber) {
       return 'Credit card number is invalid';
-    }
-    return;
-  };
-
-  const cvcValidator = () => {
-    if (!isValidCvv) {
-      return 'Credit card CVC is invalid';
     }
     return;
   };
@@ -122,7 +114,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   } = useCreditCardValidator({
     expiryDateValidator,
     cardNumberValidator,
-    cvcValidator,
   });
 
   return (
@@ -262,7 +253,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
               !stripe ||
               !!isValidCardNumber ||
               !isValidExpirationDate ||
-              !isValidCvv ||
               !data?.userAddress?.email ||
               !data?.userAddress?.fullName
             }
