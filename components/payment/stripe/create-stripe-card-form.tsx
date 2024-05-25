@@ -2,9 +2,6 @@
 
 import { PaymentCardFormModel } from '@/types/payment';
 
-import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { images, useCreditCardValidator } from 'react-creditcard-validator';
-
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
@@ -14,8 +11,11 @@ import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { useStripe } from '@stripe/react-stripe-js';
 import { Checkbox } from 'antd';
+import valid from 'card-validator';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import { images, useCreditCardValidator } from 'react-creditcard-validator';
 import { StripeProps } from './create-payment-stripe';
 
 const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
@@ -28,9 +28,29 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     fullName: '',
     email: '',
   });
+  const { cardNumber, cvc, fullName, isReuse, expiryDate } = cardstate as any;
 
-  const expDateValidate = (month: string, year: string) => {
-    if (Number(year) > 2070) {
+  const isValidCardNumber = valid.number(cardNumber).isValid;
+  const isValidExpirationDate = valid.expirationDate(expiryDate).isValid;
+  const isValidCvv = valid.cvv(cvc).isValid;
+
+  const cardNumberValidator = () => {
+    if (!isValidCardNumber) {
+      return 'Credit card number is invalid';
+    }
+    return;
+  };
+
+  const cvcValidator = () => {
+    if (!isValidCvv) {
+      return 'Credit card CVC is invalid';
+    }
+    return;
+  };
+
+  const expiryDateValidator = (month: string, year: string) => {
+    const currentYear = new Date().getFullYear();
+    if (Number(year) > currentYear + 20) {
       return 'Expiry Date Year cannot be greater than';
     }
     return;
@@ -49,7 +69,6 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const { cardNumber, cvc, fullName, isReuse, expiryDate } = cardstate as any;
     const strExpirySplit = expiryDate?.split(' ').join('');
     const strExpiryLength = Number(strExpirySplit?.length);
     const monthDate = strExpirySplit?.substring(2, 0);
@@ -100,7 +119,11 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     getCVCProps,
     getExpiryDateProps,
     meta: { erroredInputs },
-  } = useCreditCardValidator({ expiryDateValidator: expDateValidate });
+  } = useCreditCardValidator({
+    expiryDateValidator,
+    cardNumberValidator,
+    cvcValidator,
+  });
 
   return (
     <>
@@ -237,6 +260,9 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
             loading={loading}
             disabled={
               !stripe ||
+              !!isValidCardNumber ||
+              !isValidExpirationDate ||
+              !isValidCvv ||
               !data?.userAddress?.email ||
               !data?.userAddress?.fullName
             }
