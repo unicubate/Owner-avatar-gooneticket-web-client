@@ -143,13 +143,11 @@ const CheckoutEvent = () => {
                             </div>
                           ) : null}
 
-                          <div className="font-semibold">
-                            {item?.title ? (
-                              <div className="my-2 text-lg font-bold">
-                                {item?.title ?? ''}b
-                              </div>
-                            ) : null}
-                          </div>
+                          {item?.title ? (
+                            <div className="my-2 text-lg font-bold">
+                              {item?.title ?? ''}b
+                            </div>
+                          ) : null}
 
                           <div className="relative mt-4 shrink-0 cursor-pointer">
                             <div className="flex items-center">
