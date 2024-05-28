@@ -116,7 +116,6 @@ const ForgotPassword = () => {
             <ButtonInput
               type="submit"
               className="w-full"
-              size="lg"
               variant="primary"
               loading={loading}
               disabled={!isDirty || !isValid}
