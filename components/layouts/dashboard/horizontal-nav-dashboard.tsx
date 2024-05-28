@@ -148,7 +148,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                           </div>
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
+                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#04080b]">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/settings`)}>
                             <span className="cursor-pointer">
