@@ -122,5 +122,7 @@
   "UTIL.SEARCH_BY": "Ricerca con nome, cognome, email",
   "UTIL.CONFIRM_RESEND_INVITATION": "Sei sicuro di voler inviare nuovamente l'invito a questo utente?",
   "UTIL.DELETE": "Eliminare",
+  "UTIL.COME_BACK": "Tornare",
+  "UTIL.RECENT_ORDER": "Ordini recenti",
   "UTIL.CONFIRM_DELETE": "Sei sicuro di voler cancellare questo?"
 }

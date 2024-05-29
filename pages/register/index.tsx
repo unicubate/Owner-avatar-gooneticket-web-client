@@ -15,8 +15,8 @@ import { useState } from 'react';
 import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
+  authGoogleUserAPI,
   registerCheckEmailOrPhoneUserAPI,
-  registerGoogleUserAPI,
   registerUserAPI,
   sendCodeEmailUserAPI,
 } from '../../api-site/user';
@@ -340,12 +340,14 @@ const Register = () => {
             width="100%"
             onSuccess={async (credentialResponse) => {
               try {
-                await registerGoogleUserAPI({
+                const { data: user } = await authGoogleUserAPI({
                   token: String(credentialResponse.credential),
                   status: 'CLIENT',
                 });
                 setHasErrors(false);
-                push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
+                window.location.href = `${
+                  redirect ? redirect : `${user?.url}/orders`
+                }`;
               } catch (error: any) {
                 setHasErrors(true);
                 setHasErrors(error.response.data.message);

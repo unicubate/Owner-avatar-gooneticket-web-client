@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import {
   useDecrementTimer,
   useInputState,
@@ -12,7 +13,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserRegisterFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
-import { GoogleLogin } from '@react-oauth/google';
 import { Checkbox } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,7 +21,6 @@ import { Controller, SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
   registerCheckEmailOrPhoneUserAPI,
-  registerGoogleUserAPI,
   registerUserAPI,
   sendCodePhoneUserAPI,
 } from '../../api-site/user';
@@ -331,34 +330,9 @@ const Register = () => {
         </div>
 
         <div className="flex justify-center">
-          <GoogleLogin
-            size="large"
-            useOneTap
-            theme="outline"
-            type="standard"
-            shape="rectangular"
-            width="100%"
-            onSuccess={async (credentialResponse) => {
-              try {
-                await registerGoogleUserAPI({
-                  token: String(credentialResponse.credential),
-                  status: 'CLIENT',
-                });
-                setHasErrors(false);
-                push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
-              } catch (error: any) {
-                setHasErrors(true);
-                setHasErrors(error.response.data.message);
-                AlertDangerNotification({
-                  text: 'An error has occurred.',
-                });
-              }
-            }}
-            onError={() => {
-              console.log('Login Failed');
-            }}
-          />
+          <GoogleAuthLogin />
         </div>
+
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
           <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
             {' '}

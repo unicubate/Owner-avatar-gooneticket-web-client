@@ -263,7 +263,7 @@ const CheckoutEvent = () => {
 
                           <div className="sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
-                              <p className="text-lg font-bold">
+                              <p className="font-bold">
                                 Please select the seat category
                               </p>
                             </div>

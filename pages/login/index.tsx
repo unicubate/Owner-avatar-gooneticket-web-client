@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useReactHookForm } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput } from '@/components/ui-setting';
@@ -7,7 +8,6 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils/alert-notification';
-import { GoogleLogin } from '@react-oauth/google';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -15,7 +15,6 @@ import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
 import {
   loginCheckEmailOrPhoneUserAPI,
-  loginGoogleUserAPI,
   loginUserAPI,
 } from '../../api-site/user';
 
@@ -196,34 +195,7 @@ const Login = () => {
           </div>
 
           <div className="mx-auto mt-4 max-w-max">
-            <GoogleLogin
-              size="large"
-              useOneTap
-              theme="outline"
-              type="standard"
-              shape="rectangular"
-              width="100%"
-              onSuccess={async (credentialResponse) => {
-                try {
-                  const { data: user } = await loginGoogleUserAPI({
-                    token: String(credentialResponse.credential),
-                  });
-                  setHasErrors(false);
-                  window.location.href = `${
-                    redirect ? redirect : `${user?.url}/orders`
-                  }`;
-                } catch (error: any) {
-                  setHasErrors(true);
-                  setHasErrors(error.response.data.message);
-                  AlertDangerNotification({
-                    text: 'An error has occurred.',
-                  });
-                }
-              }}
-              onError={() => {
-                console.log('Login Failed');
-              }}
-            />
+            <GoogleAuthLogin />
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>

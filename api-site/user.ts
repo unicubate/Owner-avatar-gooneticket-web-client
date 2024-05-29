@@ -96,21 +96,12 @@ export const IpLocationAPI = () => {
   };
 };
 
-export const loginGoogleUserAPI = async (payload: {
-  token: string;
-}): Promise<{ data: UserModel }> => {
-  return await makeApiCall({
-    action: 'loginGoogleUser',
-    body: payload,
-  });
-};
-
-export const registerGoogleUserAPI = async (payload: {
+export const authGoogleUserAPI = async (payload: {
   token: string;
   status: UserStatus;
 }): Promise<{ data: UserModel }> => {
   return await makeApiCall({
-    action: 'registerGoogleUser',
+    action: 'authGoogleUser',
     body: payload,
   });
 };

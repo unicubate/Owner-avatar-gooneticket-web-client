@@ -103,7 +103,9 @@ const OrdersIndex = () => {
               <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-[#04080b]">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
-                    <p className="text-lg font-bold">Recent orders</p>
+                    <p className="text-lg font-bold">
+                      {t.formatMessage({ id: 'UTIL.RECENT_ORDER' })}
+                    </p>
                   </div>
                   <div className="mt-4 sm:mt-0">
                     <SearchInput

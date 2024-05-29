@@ -1,12 +1,7 @@
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { formateToRFC2822 } from '@/utils';
 import { QRCode, QRCodeProps } from 'antd';
-import {
-  BadgeAlertIcon,
-  CalendarDaysIcon,
-  DownloadIcon,
-  MoveLeftIcon,
-} from 'lucide-react';
+import { BadgeAlertIcon, CalendarDaysIcon, DownloadIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import * as yup from 'yup';
@@ -68,18 +63,29 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </p>
         </div>
         <p className="mt-4 text-center text-xl font-bold">
+          <span className="ml-2">
+            {orderItem?.product?.country?.name ?? ''}
+          </span>
+          <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.product?.address ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.product?.city ?? ''}</span>
-          <span className="ml-2 text-gray-400">|</span>
+        </p>
+        <p className="mt-2 text-center text-xl font-bold">
           <span className="ml-2">{orderItem?.product?.timeInit ?? ''}</span>
-          <span className="ml-1.5 text-gray-400">-</span>
-          <span className="ml-1.5">{orderItem?.product?.timeEnd ?? ''}</span>
+          {orderItem.product?.timeEnd ? (
+            <>
+              <span className="ml-1.5 text-gray-400">-</span>
+              <span className="ml-1.5">
+                {orderItem?.product?.timeEnd ?? ''}
+              </span>
+            </>
+          ) : null}
         </p>
 
         <div className="mx-auto max-w-max">
           <div className="my-4 flex items-center space-x-4">
-            <ButtonInput
+            {/* <ButtonInput
               type="button"
               size="sm"
               variant="outline"
@@ -87,7 +93,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               onClick={() => push(`/orders`)}
             >
               Back
-            </ButtonInput>
+            </ButtonInput> */}
             <ButtonInput
               type="submit"
               size="sm"

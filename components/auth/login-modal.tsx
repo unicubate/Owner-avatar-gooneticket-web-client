@@ -1,7 +1,6 @@
-import { loginGoogleUserAPI, loginUserAPI } from '@/api-site/user';
+import { loginUserAPI } from '@/api-site/user';
 import { UserLoginFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,6 +9,7 @@ import * as yup from 'yup';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
+import { GoogleAuthLogin } from './google-auth-login';
 
 const schema = yup.object({
   email: yup
@@ -140,36 +140,7 @@ const LoginModal: React.FC<{
             </div>
 
             <div className="flex justify-center">
-              <GoogleOAuthProvider
-                clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-              >
-                <GoogleLogin
-                  size="large"
-                  width="100%"
-                  useOneTap
-                  theme="filled_blue"
-                  type="standard"
-                  shape="rectangular"
-                  onSuccess={async (credentialResponse) => {
-                    try {
-                      const { data: user } = await loginGoogleUserAPI({
-                        token: String(credentialResponse.credential),
-                      });
-                      setHasErrors(false);
-                      location.reload();
-                    } catch (error: any) {
-                      setHasErrors(true);
-                      setHasErrors(error.response.data.message);
-                      AlertDangerNotification({
-                        text: 'An error has occurred.',
-                      });
-                    }
-                  }}
-                  onError={() => {
-                    console.log('Login Failed');
-                  }}
-                />
-              </GoogleOAuthProvider>
+              <GoogleAuthLogin />
             </div>
 
             <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
