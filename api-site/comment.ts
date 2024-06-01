@@ -1,7 +1,7 @@
 import { CommentFormModel } from '@/types/comment';
 import { ResponsePostModel } from '@/types/post';
+import { makeApiCall } from '@/utils/clients';
 import dyaxios from '@/utils/dyaxios';
-import { makeApiCall } from '@/utils/end-point';
 import { queyParamsFunc } from '@/utils/generate-random';
 import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {

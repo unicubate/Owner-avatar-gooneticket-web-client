@@ -4,7 +4,7 @@ import {
   OrderModel,
   ResponseOrderItemModel,
 } from '@/types/order-item';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

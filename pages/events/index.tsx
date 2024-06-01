@@ -10,6 +10,7 @@ import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
+import { ProductModel } from '@/types/product';
 import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 
@@ -31,22 +32,6 @@ const EventsIndex = () => {
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
-  const dataTableProducts = isLoadingProducts ? (
-    itemsNumberArray(2).map((i, index) => (
-      <ProductEventSkeleton key={i} index={index} />
-    ))
-  ) : isErrorProducts ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
-    ''
-  ) : (
-    dataProducts?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListPublicProductsEvent item={item} key={index} index={index} />
-      ))
-  );
-
   return (
     <>
       <LayoutDashboard title={'Orders'}>
@@ -66,8 +51,32 @@ const EventsIndex = () => {
               </div>
 
               <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-2">
-                {dataTableProducts}
+                {isLoadingProducts
+                  ? itemsNumberArray(2).map((i, index) => (
+                      <ProductEventSkeleton key={i} index={index} />
+                    ))
+                  : isErrorProducts
+                    ? null
+                    : Number(dataProducts?.pages[0]?.data?.total) <= 0
+                      ? null
+                      : dataProducts?.pages
+                          .flatMap((page: any) => page?.data?.value)
+                          .map((item: ProductModel, index: number) => (
+                            <ListPublicProductsEvent
+                              item={item}
+                              key={index}
+                              index={index}
+                            />
+                          ))}
               </div>
+
+              {isErrorProducts ? (
+                <ErrorFile
+                  title="404"
+                  className="flex items-center justify-center"
+                  description="Error find data please try again..."
+                />
+              ) : null}
 
               {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
                 <EmptyData

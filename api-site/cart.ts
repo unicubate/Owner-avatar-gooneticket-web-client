@@ -1,5 +1,5 @@
 import { CartFormModel, CartModel, CartOrderModel } from '@/types/cart';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const CreateOrUpdateOneCartAPI = ({

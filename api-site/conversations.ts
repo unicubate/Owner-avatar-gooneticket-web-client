@@ -3,7 +3,7 @@ import {
   ConversationModel,
   MessageFormModel,
 } from '@/types/message';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

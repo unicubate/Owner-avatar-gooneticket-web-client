@@ -10,12 +10,12 @@ interface Props {
   className?: string;
 }
 
-const ErrorFile: React.FC<Props> = ({
-  status = '404',
+const ErrorFile = ({
+  status = 'error',
   title,
   description,
   className = 'relative mx-auto justify-center',
-}) => {
+}: Props) => {
   return (
     <>
       <div className={className}>

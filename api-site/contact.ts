@@ -1,5 +1,5 @@
 import { ContactUsFormModel } from '@/types/contact-us';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { RcFile } from 'antd/es/upload';
 

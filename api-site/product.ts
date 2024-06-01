@@ -3,7 +3,7 @@ import {
   ProductModel,
   ResponseProductModel,
 } from '@/types/product';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
@@ -82,7 +82,7 @@ export const CreateOrUpdateOneProductAPI = ({
         });
       }
     },
-    onError: async (error) => {
+    onError: async (error: any) => {
       await queryClient.invalidateQueries({ queryKey });
       if (onError) {
         onError(error);
@@ -124,7 +124,7 @@ export const DeleteOneProductAPI = ({
         urlParams: { productId },
       });
     },
-    onError: async (error) => {
+    onError: async (error: any) => {
       await queryClient.invalidateQueries({ queryKey });
       if (onError) {
         onError(error);

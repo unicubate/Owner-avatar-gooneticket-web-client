@@ -1,5 +1,5 @@
 import { ResponsePostModel } from '@/types/post';
-import { makeApiCall } from '@/utils/end-point';
+import { makeApiCall } from '@/utils/clients';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
