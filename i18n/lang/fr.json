@@ -124,5 +124,9 @@
   "UTIL.DELETE": "Supprimer",
   "UTIL.COME_BACK": "Revenir",
   "UTIL.RECENT_ORDER": "Commandes récentes",
-  "UTIL.CONFIRM_DELETE": "Etes-vous sûr de vouloir supprimer ceci?"
+  "UTIL.CONFIRM_DELETE": "Etes-vous sûr de vouloir supprimer ceci?",
+  "UTIL.ANY_MESSAGE": "Vous n'avez pas de message",
+  "UTIL.ANY_SUB_MESSAGE": "Partagez votre page avec votre public pour commencer.",
+  "UTIL.ANY_ORDER": "Vous n'avez pas de commande",
+  "UTIL.ANY_SUB_ORDER": "Trouvez votre premier produit ou événement"
 }

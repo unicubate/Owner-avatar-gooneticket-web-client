@@ -124,5 +124,9 @@
   "UTIL.DELETE": "Delete",
   "UTIL.COME_BACK": "Come back",
   "UTIL.RECENT_ORDER": "Recent orders",
-  "UTIL.CONFIRM_DELETE": "Are you sure you want to delete this?"
+  "UTIL.CONFIRM_DELETE": "Are you sure you want to delete this?",
+  "UTIL.ANY_MESSAGE": "You don't have any message",
+  "UTIL.ANY_SUB_MESSAGE": "Share your page with your audience to get started.",
+  "UTIL.ANY_ORDER": "You don't have any order",
+  "UTIL.ANY_SUB_ORDER": "Find your first product or event"
 }

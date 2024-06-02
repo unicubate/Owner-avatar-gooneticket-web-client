@@ -49,7 +49,7 @@ const OrdersIndex = () => {
 
   return (
     <>
-      <LayoutDashboard title={'Orders'}>
+      <LayoutDashboard title={t.formatMessage({ id: 'MENU.ORDER' })}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
@@ -128,8 +128,10 @@ const OrdersIndex = () => {
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
                           image={<ShoppingCartIcon className="size-10" />}
-                          title="You don't have any order"
-                          description={`Find your first product or event`}
+                          title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
+                          description={t.formatMessage({
+                            id: 'UTIL.ANY_SUB_ORDER',
+                          })}
                         />
                       ) : (
                         dataOrderItems?.pages.map((page, i) => (

@@ -12,7 +12,7 @@ import { useInView } from 'react-intersection-observer';
 
 const Messages = () => {
   const { ref, inView } = useInView();
-  const { search, handleSetSearch } = useInputState();
+  const { t, search, handleSetSearch } = useInputState();
 
   const {
     isLoading: isLoadingConversation,
@@ -33,27 +33,9 @@ const Messages = () => {
     }
   }, [inView, fetchNextPage, hasNextPage]);
 
-  const dataTableContributors = isLoadingConversation ? (
-    <LoadingFile />
-  ) : isErrorConversation ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataConversation?.pages[0]?.data?.total) <= 0 ? (
-    <EmptyData
-      image={<MailIcon className="size-10" />}
-      title="You don't have any message"
-      description={`Share your page with your audience to get started.`}
-    />
-  ) : (
-    dataConversation?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListConversationsMessage item={item} key={index} index={index} />
-      ))
-  );
-
   return (
     <>
-      <LayoutDashboard title={'Messages'}>
+      <LayoutDashboard title={t.formatMessage({ id: 'MENU.MESSAGE' })}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
@@ -88,14 +70,39 @@ const Messages = () => {
                   </div>
                   <div className="mt-4 sm:mt-0">
                     <SearchInput
-                      placeholder="Search by first name, last name, email"
+                      placeholder={t.formatMessage({ id: 'UTIL.SEARCH_BY' })}
                       onChange={handleSetSearch}
                     />
                   </div>
                 </div>
 
                 <div className="mt-2 divide-y divide-gray-200 dark:divide-gray-800">
-                  {dataTableContributors}
+                  {isLoadingConversation ? (
+                    <LoadingFile />
+                  ) : isErrorConversation ? (
+                    <ErrorFile
+                      title="404"
+                      description="Error find data please try again..."
+                    />
+                  ) : Number(dataConversation?.pages[0]?.data?.total) <= 0 ? (
+                    <EmptyData
+                      image={<MailIcon className="size-10" />}
+                      title={t.formatMessage({ id: 'UTIL.ANY_MESSAGE' })}
+                      description={t.formatMessage({
+                        id: 'UTIL.ANY_SUB_MESSAGE',
+                      })}
+                    />
+                  ) : (
+                    dataConversation?.pages
+                      .flatMap((page: any) => page?.data?.value)
+                      .map((item, index) => (
+                        <ListConversationsMessage
+                          item={item}
+                          key={index}
+                          index={index}
+                        />
+                      ))
+                  )}
                 </div>
               </div>
 
