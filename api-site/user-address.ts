@@ -1,5 +1,5 @@
+import { makeApiCall } from '@/api-site/clients';
 import { UserAddressFormModel, UserAddressModel } from '@/types/user-address';
-import { makeApiCall } from '@/utils/clients';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const CreateOrUpdateOneUserAddressAPI = ({

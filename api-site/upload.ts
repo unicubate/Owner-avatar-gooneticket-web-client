@@ -1,5 +1,5 @@
+import { makeApiCall } from '@/api-site/clients';
 import { ModelType } from '@/utils';
-import { makeApiCall } from '@/utils/clients';
 import { useQuery } from '@tanstack/react-query';
 
 export const GetUploadsAPI = (payload: {

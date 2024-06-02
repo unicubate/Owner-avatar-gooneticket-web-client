@@ -1,6 +1,6 @@
+import { makeApiCall } from '@/api-site/clients';
 import { CommentFormModel } from '@/types/comment';
 import { ResponsePostModel } from '@/types/post';
-import { makeApiCall } from '@/utils/clients';
 import dyaxios from '@/utils/dyaxios';
 import { queyParamsFunc } from '@/utils/generate-random';
 import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';

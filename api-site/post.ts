@@ -1,3 +1,4 @@
+import { makeApiCall } from '@/api-site/clients';
 import {
   GetOnPostQueryModel,
   PostFormModel,
@@ -6,7 +7,6 @@ import {
   ResponsePostModel,
 } from '@/types/post';
 import { UserVisitorModel } from '@/types/user.type';
-import { makeApiCall } from '@/utils/clients';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

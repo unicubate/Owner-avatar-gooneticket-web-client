@@ -1,4 +1,4 @@
-import { makeApiCall } from '@/utils/clients';
+import { makeApiCall } from '@/api-site/clients';
 import { useQuery } from '@tanstack/react-query';
 
 export const GetOneAffiliationAPI = (payload: {

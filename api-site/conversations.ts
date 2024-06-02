@@ -1,9 +1,9 @@
+import { makeApiCall } from '@/api-site/clients';
 import {
   ConversationFormModel,
   ConversationModel,
   MessageFormModel,
 } from '@/types/message';
-import { makeApiCall } from '@/utils/clients';
 import { SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

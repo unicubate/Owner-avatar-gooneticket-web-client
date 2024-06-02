@@ -1,9 +1,9 @@
+import { makeApiCall } from '@/api-site/clients';
 import {
   ProductFormModel,
   ProductModel,
   ResponseProductModel,
 } from '@/types/product';
-import { makeApiCall } from '@/utils/clients';
 import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
