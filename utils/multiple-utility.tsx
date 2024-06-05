@@ -15,7 +15,7 @@ export const formatePrice = ({ value, isDivide, currency }: Props) => {
     : 'en-US';
   return (
     <>
-      {currency && numberCal && !isNaN(numberCal)
+      {currency && !isNaN(numberCal)
         ? `${numberCal.toLocaleString(language, {
             currency: currency,
             style: 'currency',

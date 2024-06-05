@@ -6,15 +6,14 @@ export type ResponseUserAddressModel = {
 
 export type UserAddressModel = {
   userId: string;
-  firstName: string;
-  lastName: string;
+  fullName: string;
   city: string;
   cap: string;
   country: string;
   phone: string;
   region: string;
-  street1: string;
-  street2: string;
+  address: string;
+  email: string;
   isUpdated: boolean;
   organizationId: string;
   createdAt: Date;

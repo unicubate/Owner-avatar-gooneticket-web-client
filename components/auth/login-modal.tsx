@@ -3,12 +3,13 @@ import { UserLoginFormModel } from '@/types/user.type';
 import { AlertDangerNotification } from '@/utils';
 import { X } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';
+import { useInputState } from '../hooks';
 import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
+import { Alert, AlertDescription } from '../ui/alert';
 import { GoogleAuthLogin } from './google-auth-login';
 
 const schema = yup.object({
@@ -25,8 +26,8 @@ const LoginModal: React.FC<{
   isOpen: boolean;
   setIsOpen: any;
 }> = ({ isOpen, setIsOpen }) => {
-  const { query } = useRouter();
-  const { redirect } = query;
+  const { linkHref } = useInputState();
+  const redirect = linkHref;
   const {
     control,
     handleSubmit,
@@ -59,6 +60,7 @@ const LoginModal: React.FC<{
     }
   };
 
+  console.log('query ====>', linkHref);
   return (
     <>
       {isOpen ? (
@@ -80,9 +82,14 @@ const LoginModal: React.FC<{
 
             <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
-                <div className="relative mb-4 block w-full rounded-lg p-4 text-base leading-5 opacity-100 dark:bg-red-500 dark:text-white">
-                  {hasErrors}
-                </div>
+                <Alert
+                  variant="destructive"
+                  className="mb-4 bg-red-600 text-center"
+                >
+                  <AlertDescription className="text-white">
+                    {hasErrors}
+                  </AlertDescription>
+                </Alert>
               )}
 
               <div className="mb-4">
@@ -123,7 +130,6 @@ const LoginModal: React.FC<{
                   type="submit"
                   className="w-full"
                   variant="primary"
-                  size="lg"
                   loading={loading}
                 >
                   Log In

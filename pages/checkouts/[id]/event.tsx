@@ -2,6 +2,7 @@
 
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
 import { GetOneProductAPI } from '@/api-site/product';
+import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState, useReactHookForm } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
@@ -10,9 +11,8 @@ import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal'
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
 import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';
-import { TextInput } from '@/components/ui-setting/shadcn';
 import { Input } from '@/components/ui/input';
-import { PrivateComponent } from '@/components/util/private-component';
+import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PriceModel } from '@/types/price';
 import { formatePrice, formateToRFC2822 } from '@/utils';
 import { PlusIcon } from 'lucide-react';
@@ -45,8 +45,6 @@ const paymentMethodArray = [
 ];
 
 const schema = yup.object({
-  fullName: yup.string().required('first name is a required field'),
-  email: yup.string().email().required('email is a required field'),
   paymentMethod: yup.string().required('payment method is a required field'),
 });
 
@@ -60,9 +58,9 @@ const CheckoutEvent = () => {
   });
   const watchAmount = watch('amount', null);
   const watchPaymentMethod = watch('paymentMethod', null);
-  const watchFullName = watch('fullName', '');
-  const watchEmail = watch('email', '');
 
+  const { data: userAddress } = GetOneUserAddressMeAPI();
+  const [isEdit, setIsEdit] = useState(userAddress?.isUpdated);
   const {
     data: item,
     isLoading: isLoadingProduct,
@@ -77,10 +75,10 @@ const CheckoutEvent = () => {
     productId: item?.id,
   });
 
-  const userAddress = {
-    fullName: watchFullName,
-    email: watchEmail,
-  };
+  // const userAddress = {
+  //   fullName: watchFullName,
+  //   email: watchEmail,
+  // };
 
   const priceJsonParse = watchAmount
     ? JSON.parse(watchAmount)
@@ -329,35 +327,27 @@ const CheckoutEvent = () => {
                           </div>
 
                           <hr className="mt-8 dark:border-gray-800" />
-                          <div className="my-4 font-extrabold">Contact</div>
-                          <div className="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2">
-                            <div className="mt-2">
-                              <TextInput
-                                label="Email"
-                                control={control}
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                errors={errors}
-                              />
-                              <span className="text-xs font-medium text-gray-400">
-                                {`After booking, your ticket will be sent to this email address.`}
-                              </span>
-                            </div>
-                            <div className="mt-2">
-                              <TextInput
-                                label="Full name"
-                                control={control}
-                                type="text"
-                                name="fullName"
-                                placeholder="Full name"
-                                errors={errors}
-                              />
-                              <span className="text-xs font-medium text-gray-400">
-                                {`We will only use it to save on the ticket.`}
-                              </span>
+                          <div className="py-2">
+                            <div className="flex items-center">
+                              <h2 className="text-base font-bold">Contact</h2>
+                              {userAddress?.isUpdated && userAddress?.email && (
+                                <ButtonInput
+                                  type="button"
+                                  size="sm"
+                                  variant={isEdit ? 'info' : 'outline'}
+                                  onClick={() => setIsEdit((i: boolean) => !i)}
+                                  className="ml-auto"
+                                >
+                                  {isEdit ? 'Edit address' : 'Cancel'}
+                                </ButtonInput>
+                              )}
                             </div>
                           </div>
+                          <CreateOrUpdateUserAddressForm
+                            isEdit={isEdit}
+                            setIsEdit={setIsEdit}
+                            userAddress={userAddress}
+                          />
                         </div>
                       </div>
                     </div>
@@ -438,7 +428,9 @@ const CheckoutEvent = () => {
 
                     {!item?.isExpired && (
                       <>
-                        {newAmount?.value && watchFullName && watchEmail ? (
+                        {isEdit &&
+                        userAddress?.isUpdated &&
+                        newAmount?.value ? (
                           <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
                             <div className="p-4 sm:p-4 lg:p-3">
                               <div className="font-extrabold">
@@ -473,92 +465,84 @@ const CheckoutEvent = () => {
                           </div>
                         ) : null}
 
-                        {Number(item?.prices?.length) > 0 ? (
+                        {isEdit ? (
                           <>
-                            {!isValid && !watchPaymentMethod ? (
-                              <div className="my-4 items-center">
-                                <ButtonInput
-                                  size="lg"
-                                  type="submit"
-                                  variant="primary"
-                                  className="w-full"
-                                  disabled={!isValid}
-                                >
-                                  Continue
-                                </ButtonInput>
-                              </div>
+                            {Number(item?.prices?.length) > 0 ? (
+                              <>
+                                {isValid && watchPaymentMethod ? (
+                                  <>
+                                    {newAmount?.value ? (
+                                      <>
+                                        {watchPaymentMethod === 'STRIPE' ? (
+                                          <CreateCardStripe
+                                            paymentModel="STRIPE-EVENT"
+                                            data={{
+                                              userAddress,
+                                              productId: item?.id,
+                                              amount: newAmount,
+                                              affiliation: newAffiliation,
+                                              organizationSellerId:
+                                                item?.organizationId,
+                                              organizationBuyerId:
+                                                userStorage?.organizationId,
+                                            }}
+                                          />
+                                        ) : null}
+
+                                        {watchPaymentMethod === 'PAYPAL' ? (
+                                          <CreatePaymentPayPal
+                                            paymentModel="PAYPAL-EVENT"
+                                            data={{
+                                              userAddress,
+                                              productId: item?.id,
+                                              amount: newAmount,
+                                              affiliation: newAffiliation,
+                                              organizationSellerId:
+                                                item?.organizationId,
+                                              organizationBuyerId:
+                                                userStorage?.organizationId,
+                                            }}
+                                          />
+                                        ) : null}
+                                      </>
+                                    ) : (
+                                      <div className="my-4 flex items-center">
+                                        <ButtonInput
+                                          type="submit"
+                                          variant="primary"
+                                          className="w-full"
+                                        >
+                                          Continue
+                                        </ButtonInput>
+                                      </div>
+                                    )}
+                                  </>
+                                ) : null}
+                              </>
                             ) : (
                               <>
-                                {isValid && newAmount?.value ? (
-                                  <>
-                                    {watchPaymentMethod === 'STRIPE' ? (
-                                      <CreateCardStripe
-                                        paymentModel="STRIPE-EVENT"
-                                        data={{
-                                          userAddress,
-                                          productId: item?.id,
-                                          amount: newAmount,
-                                          affiliation: newAffiliation,
-                                          organizationSellerId:
-                                            item?.organizationId,
-                                          organizationBuyerId:
-                                            userStorage?.organizationId,
-                                        }}
-                                      />
-                                    ) : null}
-
-                                    {watchPaymentMethod === 'PAYPAL' ? (
-                                      <CreatePaymentPayPal
-                                        paymentModel="PAYPAL-EVENT"
-                                        data={{
-                                          userAddress,
-                                          productId: item?.id,
-                                          amount: newAmount,
-                                          affiliation: newAffiliation,
-                                          organizationSellerId:
-                                            item?.organizationId,
-                                          organizationBuyerId:
-                                            userStorage?.organizationId,
-                                        }}
-                                      />
-                                    ) : null}
-                                  </>
-                                ) : (
-                                  <div className="my-4 flex items-center">
-                                    <ButtonInput
-                                      type="submit"
-                                      variant="primary"
-                                      className="w-full"
-                                    >
-                                      Continue
-                                    </ButtonInput>
-                                  </div>
-                                )}
+                                <CreatePaymentFree
+                                  paymentModel="FREE-EVENT"
+                                  data={{
+                                    userAddress,
+                                    productId: item?.id,
+                                    affiliation: newAffiliation,
+                                    amount: {
+                                      quantity: 1,
+                                      price: 0,
+                                      currency: 'USD',
+                                      value: 0,
+                                      oneValue: Number(priceJsonParse?.amount),
+                                    },
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                  }}
+                                />
                               </>
                             )}
                           </>
-                        ) : (
-                          <>
-                            <CreatePaymentFree
-                              paymentModel="FREE-EVENT"
-                              data={{
-                                userAddress,
-                                productId: item?.id,
-                                affiliation: newAffiliation,
-                                amount: {
-                                  quantity: 1,
-                                  price: 0,
-                                  currency: 'USD',
-                                  value: 0,
-                                  oneValue: Number(priceJsonParse?.amount),
-                                },
-                                organizationSellerId: item?.organizationId,
-                                organizationBuyerId:
-                                  userStorage?.organizationId,
-                              }}
-                            />
-                          </>
-                        )}
+                        ) : null}
                       </>
                     )}
                   </div>
@@ -577,4 +561,4 @@ const CheckoutEvent = () => {
     </>
   );
 };
-export default PrivateComponent(CheckoutEvent);
+export default CheckoutEvent;

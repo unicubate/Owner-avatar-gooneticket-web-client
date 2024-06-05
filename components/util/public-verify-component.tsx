@@ -15,7 +15,7 @@ const PublicVerifyComponent = (Component: ComponentType) => {
       if ((userTokenVerify || userToken) && isOnline) {
         push(`/dashboard`);
       }
-    }, [userStorage, userToken, isOnline, push, query]);
+    }, [userStorage, isOnline, push, query]);
 
     return <Component {...props} />;
   };
