@@ -150,6 +150,7 @@ const CreateOrUpdateUserAddressForm = ({
             {userStorage?.id ? (
               <>
                 <ButtonInput
+                  size="lg"
                   type="submit"
                   variant="info"
                   className="w-full"
@@ -160,6 +161,7 @@ const CreateOrUpdateUserAddressForm = ({
               </>
             ) : (
               <ButtonInput
+                size="lg"
                 onClick={() => {
                   setIsOpen(true);
                 }}
