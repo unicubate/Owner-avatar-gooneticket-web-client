@@ -170,7 +170,7 @@ const CreateOrUpdateUserAddressForm = ({
                 className="w-full"
                 loading={loading}
               >
-                Save
+                Continue
               </ButtonInput>
             )}
           </div>
