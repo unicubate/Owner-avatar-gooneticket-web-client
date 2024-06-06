@@ -60,14 +60,13 @@ const OrdersIndex = () => {
                       <Button variant="outline" size="sm" className="h-8 gap-1">
                         <CalendarCheckIcon className="size-3.5" />
                         <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {t.formatMessage(
-                            { id: 'TRANSACTION.LAST_DAY' },
-                            { day: dayCount },
-                          )}
+                          {dayCount > 0
+                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
+                            : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-20 dark:border-gray-800">
+                    <DropdownMenuContent className="w-auto dark:border-gray-800">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -77,7 +76,7 @@ const OrdersIndex = () => {
                           <span className="cursor-pointer">
                             {t.formatMessage(
                               { id: 'TRANSACTION.LAST_DAY' },
-                              { day: 3 },
+                              { day: 10 },
                             )}
                           </span>
                         </DropdownMenuItem>
@@ -91,8 +90,18 @@ const OrdersIndex = () => {
                         <span className="cursor-pointer">
                           {t.formatMessage(
                             { id: 'TRANSACTION.LAST_DAY' },
-                            { day: 30 },
+                            { day: 120 },
                           )}
+                        </span>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => {
+                          handleDaysChange(-1);
+                        }}
+                      >
+                        <span className="cursor-pointer">
+                          {t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}
                         </span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
