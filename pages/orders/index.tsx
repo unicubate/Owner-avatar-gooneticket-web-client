@@ -70,13 +70,13 @@ const OrdersIndex = () => {
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
-                            handleDaysChange(3);
+                            handleDaysChange(30);
                           }}
                         >
                           <span className="cursor-pointer">
                             {t.formatMessage(
                               { id: 'TRANSACTION.LAST_DAY' },
-                              { day: 10 },
+                              { day: 30 },
                             )}
                           </span>
                         </DropdownMenuItem>
