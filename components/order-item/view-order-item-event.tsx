@@ -73,7 +73,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         </p>
         <p className="mt-2 text-center text-xl font-bold">
           <span className="ml-2">{orderItem?.product?.timeInit ?? ''}</span>
-          {orderItem.product?.timeEnd ? (
+          {orderItem?.product?.timeEnd ? (
             <>
               <span className="ml-1.5 text-gray-400">-</span>
               <span className="ml-1.5">
