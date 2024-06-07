@@ -74,6 +74,7 @@ const CreateOrUpdateUserAddressForm = ({
   ) => {
     setLoading(true);
     setHasErrors(undefined);
+    setIsEdit((i: boolean) => !i);
     try {
       await saveMutation({
         ...payload,
@@ -81,7 +82,6 @@ const CreateOrUpdateUserAddressForm = ({
       });
       setHasErrors(false);
       setLoading(false);
-      setIsEdit((i: boolean) => !i);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
