@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
 export const ImageLogo = ({
-  width = 50,
-  height = 50,
+  width = 60,
+  height = 60,
 }: {
   width?: number;
   height?: number;

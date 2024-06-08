@@ -62,26 +62,9 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                       <div className="relative shrink-0 cursor-pointer">
                         <ImageLogo />
                       </div>
-
-                      <div className="ml-2 cursor-pointer">
-                        <p className="text-lg font-bold">
-                          {process.env.NEXT_PUBLIC_NAME_SITE}
-                        </p>
-                      </div>
                     </div>
                   </div>
                   <div className="hidden h-8 w-auto lg:block">
-                    {/* <div className="flex items-center">
-                    <div
-                      onClick={() => push('/')}
-                      className="relative shrink-0 cursor-pointer"
-                    >
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
-                  </div> */}
                     <div className="flex items-center">
                       <div className="relative shrink-0 cursor-pointer">
                         <ImageLogo />
