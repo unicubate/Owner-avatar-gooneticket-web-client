@@ -41,7 +41,9 @@ const OrderView = () => {
                 }}
                 icon={<MoveLeftIcon className="size-4" />}
               >
-                {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                </span>
               </ButtonInput>
               <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#04080b]">
                 {isLoadingOrderItem ? (
