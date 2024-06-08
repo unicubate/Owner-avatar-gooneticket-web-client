@@ -2,9 +2,9 @@ import { logoutUsersAPI } from '@/api-site/user';
 import { useCanonicalUrl } from '@/components/hooks';
 import {
   ButtonInput,
+  HeaderSite,
   ImageLogo,
   ThemeToggle,
-  TitleSite,
 } from '@/components/ui-setting';
 import {
   DropdownMenu,
@@ -15,7 +15,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { MoveLeftIcon } from 'lucide-react';
-import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
@@ -27,6 +26,9 @@ interface IProps {
 }
 
 const LayoutCheckoutSite = ({ children, title }: IProps) => {
+  const spacer = title ? ' | ' : '';
+  const titleOutput = `${title}${spacer}GoOneTicket`;
+
   const canonicalUrl = useCanonicalUrl();
   const { t, userStorage: userVisiter } = useInputState();
   const { back, push } = useRouter();
@@ -39,28 +41,15 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
 
   return (
     <>
-      <Head>
-        <TitleSite title={title} />
-        <meta
-          property="og:title"
-          content={process.env.NEXT_PUBLIC_NAME_SITE}
-          key="title"
-        />
-        <meta
-          name="description"
-          content={`Checkout tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-        />
-        {process.env.NEXT_ENV === 'prod' && (
-          <link rel="canonical" href={canonicalUrl} />
-        )}
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
-
-      {/* <div className="bg-gray-50 py-8 dark:bg-[#1c1b22] sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-         
-        </div>
-      </div> */}
+      <HeaderSite
+        title={title}
+        metas={
+          <meta
+            name="description"
+            content={`Checkout tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
+          />
+        }
+      />
 
       <header className="items-center gap-4 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-[#04080b]">
         <div className="mx-auto max-w-7xl px-5">

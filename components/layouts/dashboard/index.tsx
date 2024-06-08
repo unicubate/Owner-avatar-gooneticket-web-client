@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
+import { HeaderSite } from '../../ui-setting/header-site';
 import { useAuth } from '../../util/context-user';
-import { HeaderSite } from '../site/header-site';
 import { HorizontalNavDashboard } from './horizontal-nav-dashboard';
 import { VerticalNavDashboard } from './vertical-nav-dashboard';
 
@@ -27,7 +27,15 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
   return (
     <>
-      <HeaderSite title={title} />
+      <HeaderSite
+        title={title}
+        metas={
+          <meta
+            name="description"
+            content={`Setting your tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
+          />
+        }
+      />
 
       <div className="flex flex-col">
         <HorizontalNavDashboard showDrawer={showDrawer} user={user} />

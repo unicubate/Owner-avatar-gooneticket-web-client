@@ -2,9 +2,9 @@ import { UserModel } from '@/types/user.type';
 import { useAuth } from '../../util/context-user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
+import { HeaderSite } from '@/components/ui-setting';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
-import { HeaderSite } from '../site/header-site';
 import { VerticalNavUserPublicSite } from './vertical-nav-user-public-site';
 interface IProps {
   user: UserModel;
@@ -22,7 +22,15 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
 
   return (
     <>
-      <HeaderSite title={title} />
+      <HeaderSite
+        title={title}
+        metas={
+          <meta
+            name="description"
+            content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
+          />
+        }
+      />
 
       {/* <div className="flex flex-col"> */}
       {user?.id ? (
