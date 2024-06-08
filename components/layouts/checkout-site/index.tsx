@@ -1,6 +1,11 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { useCanonicalUrl } from '@/components/hooks';
-import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import {
+  ButtonInput,
+  ImageLogo,
+  ThemeToggle,
+  TitleSite,
+} from '@/components/ui-setting';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,9 +40,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
   return (
     <>
       <Head>
-        <title>
-          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-        </title>
+        <TitleSite title={title} />
         <meta
           property="og:title"
           content={process.env.NEXT_PUBLIC_NAME_SITE}

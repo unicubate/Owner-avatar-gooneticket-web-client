@@ -1,3 +1,4 @@
+import { TitleSite } from '@/components/ui-setting';
 import Head from 'next/head';
 
 interface IProps {
@@ -7,9 +8,7 @@ interface IProps {
 const HeaderSite = ({ title }: IProps) => {
   return (
     <Head>
-      <title>
-        {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-      </title>
+      <TitleSite title={title} />
       <meta
         property="og:title"
         content={process.env.NEXT_PUBLIC_NAME_SITE}

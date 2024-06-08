@@ -19,6 +19,9 @@ export type NavbarSiteProps = {
 };
 
 const LayoutSite = ({ children, title, metas }: IProps) => {
+  const spacer = title ? ' | ' : '';
+  const titleOutput = `${title}${spacer}GoOneTicket`;
+
   const canonicalUrl = useCanonicalUrl();
   const { isOpen, setIsOpen, userStorage } = useInputState();
   const showDrawer = () => {
@@ -27,9 +30,7 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
   return (
     <>
       <Head>
-        <title>
-          {title} | {process.env.NEXT_PUBLIC_NAME_SITE}
-        </title>
+        <title>{titleOutput}</title>
         <meta
           property="og:title"
           content={process.env.NEXT_PUBLIC_NAME_SITE}

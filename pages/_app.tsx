@@ -49,23 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
                   </ContextUserProvider>
                 </ConfigProvider>
               </HydrationBoundary>
-              {/* <NextIntlClientProvider
-                  formats={{
-                    dateTime: {
-                      short: {
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                      },
-                    },
-                  }}
-                  locale={router.locale}
-                  messages={pageProps.messages}
-                  timeZone="Europe/Rome"
-                  now={new Date()}
-                >
-                  
-                </NextIntlClientProvider> */}
             </ThemeProvider>
           </ClientOnly>
         </GoogleOAuthProvider>
