@@ -1,4 +1,5 @@
-import { ButtonInput, ImageLogo } from '@/components/ui-setting';
+import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
@@ -91,6 +92,8 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   );
                 })}
               </nav>
+              <ThemeToggle />
+              <LangToggle />
               <div className="relative">
                 <ButtonInput
                   type="button"

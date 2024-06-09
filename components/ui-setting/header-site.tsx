@@ -9,7 +9,7 @@ interface IProps {
 
 const HeaderSite = ({ title, metas }: IProps) => {
   const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GoOneTicket`;
+  const titleOutput = `${title}${spacer}GooneTicket`;
 
   const canonicalUrl = useCanonicalUrl();
 

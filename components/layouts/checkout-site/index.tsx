@@ -27,7 +27,7 @@ interface IProps {
 
 const LayoutCheckoutSite = ({ children, title }: IProps) => {
   const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GoOneTicket`;
+  const titleOutput = `${title}${spacer}GooneTicket`;
 
   const canonicalUrl = useCanonicalUrl();
   const { t, userStorage: userVisiter } = useInputState();

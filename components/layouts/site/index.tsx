@@ -20,7 +20,7 @@ export type NavbarSiteProps = {
 
 const LayoutSite = ({ children, title, metas }: IProps) => {
   const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GoOneTicket`;
+  const titleOutput = `${title}${spacer}GooneTicket`;
 
   const canonicalUrl = useCanonicalUrl();
   const { isOpen, setIsOpen, userStorage } = useInputState();
