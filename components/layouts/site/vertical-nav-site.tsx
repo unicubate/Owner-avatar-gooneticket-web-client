@@ -9,18 +9,6 @@ const VerticalNavSite = () => {
   const pathname = usePathname();
   const [navigation] = useState<NavbarSiteProps[]>([
     {
-      title: 'Explore',
-      href: '/explore',
-    },
-    {
-      title: 'Faq',
-      href: '/faqs',
-    },
-    {
-      title: 'about',
-      href: '/about',
-    },
-    {
       title: 'Contact',
       href: '/contact-us',
     },

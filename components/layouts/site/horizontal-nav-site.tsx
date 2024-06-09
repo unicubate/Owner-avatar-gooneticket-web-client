@@ -14,14 +14,6 @@ interface Props {
 const HorizontalNavSite = ({ user, showDrawer }: Props) => {
   const [navigation] = useState<NavbarSiteProps[]>([
     {
-      title: 'Faq',
-      href: '/faqs',
-    },
-    {
-      title: 'About',
-      href: '/about',
-    },
-    {
       title: 'Contact',
       href: '/contact-us',
     },

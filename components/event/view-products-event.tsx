@@ -24,8 +24,8 @@ const ViewProductsEvent = ({ item }: Props) => {
     useInputState();
 
   const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => {},
-    onError: () => {},
+    onSuccess: () => { },
+    onError: () => { },
   });
 
   return (
@@ -53,13 +53,9 @@ const ViewProductsEvent = ({ item }: Props) => {
               variant="primary"
               size="lg"
               onClick={() => {
-                userStorage?.id
-                  ? push(
-                      `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
-                    )
-                  : push(
-                      `/login${pathname ? `?redirect=${`${ipLocation?.url}/checkouts/${item?.slug}/event?username=${item?.profile?.username}`}` : ''}`,
-                    );
+                push(
+                  `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
+                )
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
