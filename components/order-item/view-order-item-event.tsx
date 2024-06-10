@@ -29,7 +29,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
           <p className="mt-4 text-center text-lg font-semibold">
             <QRCode
-              size={330}
+              size={200}
               errorLevel={level as QRCodeProps['errorLevel']}
               value={orderItem?.orderNumber}
             />
