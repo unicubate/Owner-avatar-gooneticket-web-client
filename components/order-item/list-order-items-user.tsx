@@ -67,7 +67,7 @@ const ListOrderItemsUser = (props: Props) => {
                 </p>
               ) : null}
 
-              <div className="mt-4 flex items-center font-medium text-gray-600">
+              <div className="mt-2 flex items-center font-medium text-gray-600">
                 <span className="text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>
