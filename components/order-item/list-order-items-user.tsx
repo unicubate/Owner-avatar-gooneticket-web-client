@@ -7,6 +7,7 @@ import { Image } from 'antd';
 import {
   BadgeAlertIcon,
   CalendarIcon,
+  CheckCheckIcon,
   MoveRightIcon,
   TicketIcon,
 } from 'lucide-react';
@@ -34,8 +35,8 @@ const ListOrderItemsUser = (props: Props) => {
             {item?.uploadsImages?.length > 0 ? (
               <div className="relative shrink-0 cursor-pointer">
                 <Image
-                  width={60}
-                  height={60}
+                  width={64}
+                  height={64}
                   preview={false}
                   src={`${viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
@@ -46,13 +47,13 @@ const ListOrderItemsUser = (props: Props) => {
               </div>
             ) : null}
 
-            <div className="ml-3 min-w-0 flex-1 cursor-pointer">
+            <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className="flex items-center text-gray-600">
                 <button className="tex-sm">
                   <CalendarIcon className="size-4" />
                 </button>
                 <span className="ml-1.5 text-sm font-normal">
-                  {formateToRFC2822(item?.product?.expiredAt as Date, locale)}
+                  {formateToRFC2822(item?.createdAt as Date, locale)}
                 </span>
               </div>
 
@@ -80,6 +81,27 @@ const ListOrderItemsUser = (props: Props) => {
                     </span>
                   </Badge>
                 </p>
+                {item?.product?.isExpired ? (
+                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
+                    <Badge className="gap-1 rounded-sm" variant="danger">
+                      <BadgeAlertIcon className="size-3.5" />
+                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        EXPIRED
+                      </span>
+                    </Badge>
+                  </p>
+                ) : null}
+
+                {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
+                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
+                    <Badge className="gap-1 rounded-sm" variant="success">
+                      <CheckCheckIcon className="size-3.5" />
+                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        {item?.status}
+                      </span>
+                    </Badge>
+                  </p>
+                )}
               </div>
             </div>
           </div>
@@ -93,15 +115,21 @@ const ListOrderItemsUser = (props: Props) => {
           )}
 
           {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'success'}>
-              {item?.status}
+            <Badge className="gap-1 rounded-sm" variant="success">
+              <CheckCheckIcon className="size-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                {item?.status}
+              </span>
             </Badge>
           )}
 
           {!['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
           item?.product?.isExpired ? (
-            <Badge className="rounded-sm" variant={'danger'}>
-              EXPIRED
+            <Badge className="gap-1 rounded-sm" variant="danger">
+              <BadgeAlertIcon className="size-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                EXPIRED
+              </span>
             </Badge>
           ) : (
             ['PENDING'].includes(item?.status) && (
@@ -148,7 +176,7 @@ const ListOrderItemsUser = (props: Props) => {
             </div>
           )}
 
-          <div className="ml-auto flex items-center gap-2 lg:hidden">
+          {/* <div className="ml-auto flex items-center gap-2 lg:hidden">
             {item?.product?.isExpired ? (
               <Badge className="gap-1 rounded-sm" variant="danger">
                 <BadgeAlertIcon className="size-3.5" />
@@ -157,7 +185,7 @@ const ListOrderItemsUser = (props: Props) => {
                 </span>
               </Badge>
             ) : null}
-          </div>
+          </div> */}
         </td>
       </tr>
     </>
