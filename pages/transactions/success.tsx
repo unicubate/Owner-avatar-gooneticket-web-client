@@ -1,11 +1,125 @@
 import { useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
+import { type ISourceOptions } from '@tsparticles/engine';
+import Particles, { initParticlesEngine } from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim';
 import { useRouter } from 'next/router';
+import { useEffect, useMemo } from 'react';
 
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
   const token = String(query.token);
   const { secondsRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
+
+  // this should be run only once per application lifetime
+  useEffect(() => {
+    initParticlesEngine(async (engine) => {
+      await loadSlim(engine);
+    });
+  }, []);
+
+  const options: ISourceOptions = useMemo(
+    () => ({
+      fullScreen: {
+        zIndex: 1,
+      },
+      particles: {
+        color: {
+          value: ['#FFFFFF', '#FFd700'],
+        },
+        move: {
+          direction: 'bottom',
+          enable: true,
+          outModes: {
+            default: 'out',
+          },
+          size: true,
+          speed: {
+            min: 1,
+            max: 3,
+          },
+        },
+        number: {
+          value: 500,
+          density: {
+            enable: true,
+            area: 800,
+          },
+        },
+        opacity: {
+          value: 1,
+          animation: {
+            enable: false,
+            startValue: 'max',
+            destroy: 'min',
+            speed: 0.3,
+            sync: true,
+          },
+        },
+        rotate: {
+          value: {
+            min: 0,
+            max: 360,
+          },
+          direction: 'random',
+          move: true,
+          animation: {
+            enable: true,
+            speed: 120,
+          },
+        },
+        tilt: {
+          direction: 'random',
+          enable: true,
+          move: true,
+          value: {
+            min: 0,
+            max: 360,
+          },
+          animation: {
+            enable: true,
+            speed: 120,
+          },
+        },
+        shape: {
+          type: ['circle', 'square', 'triangle'],
+          options: {},
+        },
+        size: {
+          value: {
+            min: 2,
+            max: 4,
+          },
+        },
+        roll: {
+          darken: {
+            enable: true,
+            value: 30,
+          },
+          enlighten: {
+            enable: true,
+            value: 30,
+          },
+          enable: true,
+          speed: {
+            min: 15,
+            max: 25,
+          },
+        },
+        wobble: {
+          distance: 30,
+          enable: true,
+          move: true,
+          speed: {
+            min: -15,
+            max: 15,
+          },
+        },
+      },
+      detectRetina: true,
+    }),
+    [],
+  );
 
   return (
     <>
@@ -21,6 +135,8 @@ const TransactionSuccess = () => {
                 d="M12,0A12,12,0,1,0,24,12,12.014,12.014,0,0,0,12,0Zm6.927,8.2-6.845,9.289a1.011,1.011,0,0,1-1.43.188L5.764,13.769a1,1,0,1,1,1.25-1.562l4.076,3.261,6.227-8.451A1,1,0,1,1,18.927,8.2Z"
               ></path>
             </svg>
+
+            {token ? <Particles id="tsparticles" options={options} /> : null}
             <div className="text-center">
               <h3 className="text-center text-base font-semibold md:text-2xl">
                 Payment Done!
