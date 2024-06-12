@@ -1,18 +1,16 @@
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { OrderItemModel } from '@/types/order-item';
 import { formateToRFC2822 } from '@/utils';
 import { QRCode, QRCodeProps } from 'antd';
 import { BadgeAlertIcon, CalendarDaysIcon, DownloadIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import * as yup from 'yup';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting/button-input';
 
 type Props = {
-  orderItem: any;
+  orderItem: OrderItemModel;
 };
-
-const schema = yup.object({});
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
   const { locale } = useInputState();
@@ -35,6 +33,15 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             />
           </p>
         </div>
+        {!orderItem?.isExpired ? (
+          <div className="mt-4 flex justify-center">
+            <span className="relative flex size-8">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex size-8 rounded-full bg-green-500"></span>
+            </span>
+          </div>
+        ) : null}
+
         <p className="mt-4 text-center text-xl font-semibold">
           {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
         </p>

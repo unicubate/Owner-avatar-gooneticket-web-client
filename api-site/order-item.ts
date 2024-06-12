@@ -3,9 +3,8 @@ import {
   OrderItemFormModel,
   OrderItemModel,
   OrderModel,
-  ResponseOrderItemModel,
 } from '@/types/order-item';
-import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
+import { SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -81,24 +80,6 @@ export const GetOrderItemsAPI = (payload: {
   };
 };
 
-export const getOrderItemsAPI = async (
-  payload: {
-    days?: number;
-    status?: string;
-    model?: string;
-    orderId?: string;
-    daysConfirm?: number;
-    organizationSellerId?: string;
-    organizationBuyerId?: string;
-    modelIds: ModelType[];
-  } & PaginationRequest,
-): Promise<{ data: ResponseOrderItemModel }> => {
-  return await makeApiCall({
-    action: 'getOrderItems',
-    queryParams: payload,
-  });
-};
-
 export const GetOneOrderAPI = (payload: { orderId: string }) => {
   const { orderId } = payload;
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
@@ -152,7 +133,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   organizationSellerId?: string;
   organizationBuyerId?: string;
   orderId?: string;
-  modelIds: ModelType[];
+  modelIds: string[];
   search?: string;
   take: number;
   days?: number;
@@ -178,18 +159,21 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     getPreviousPageParam: (firstPage: any) => firstPage.data.prev_page,
     queryFn: async ({ pageParam = 1 }) =>
-      await getOrderItemsAPI({
-        modelIds,
-        take,
-        sort,
-        days,
-        orderId,
-        daysConfirm,
-        organizationBuyerId,
-        organizationSellerId,
-        search: search,
-        status: status?.toUpperCase(),
-        page: Number(pageParam),
+      await makeApiCall({
+        action: 'getOrderItems',
+        queryParams: {
+          modelIds,
+          take,
+          sort,
+          days,
+          orderId,
+          daysConfirm,
+          organizationBuyerId,
+          organizationSellerId,
+          search: search,
+          status: status?.toUpperCase(),
+          page: Number(pageParam),
+        },
       }),
   });
 };

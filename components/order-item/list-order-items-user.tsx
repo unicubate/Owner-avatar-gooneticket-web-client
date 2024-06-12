@@ -4,7 +4,12 @@ import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
-import { CalendarIcon, MoveRightIcon } from 'lucide-react';
+import {
+  BadgeAlertIcon,
+  CalendarIcon,
+  MoveRightIcon,
+  TicketIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -29,8 +34,8 @@ const ListOrderItemsUser = (props: Props) => {
             {item?.uploadsImages?.length > 0 ? (
               <div className="relative shrink-0 cursor-pointer">
                 <Image
-                  width={80}
-                  height={70}
+                  width={60}
+                  height={60}
                   preview={false}
                   src={`${viewOneFileUploadAPI({
                     folder: String(item?.model.toLocaleLowerCase()),
@@ -62,22 +67,25 @@ const ListOrderItemsUser = (props: Props) => {
                 </p>
               ) : null}
 
-              <div className="mt-2 flex items-center font-medium text-gray-600">
-                <span className="ml-1.5 text-sm font-bold text-gray-600">
+              <div className="mt-4 flex items-center font-medium text-gray-600">
+                <span className="text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>
-                <span className="ml-1.5 text-sm font-bold text-gray-600">
-                  -
-                </span>
-                <span className="ml-1.5 text-sm font-bold text-gray-600">
-                  {item?.priceName?.toLocaleUpperCase() ?? 'FREE'}
-                </span>
+
+                <p className="ml-1.5 inline-flex text-sm font-bold">
+                  <Badge className="gap-1 rounded-sm" variant="secondary">
+                    <TicketIcon className="size-3.5" />
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {item?.model}
+                    </span>
+                  </Badge>
+                </p>
               </div>
             </div>
           </div>
         </td>
 
-        <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
+        <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
           {['CANCELLED'].includes(item?.status) && (
             <Badge className="rounded-sm" variant={'danger'}>
               {item?.status}
@@ -140,14 +148,15 @@ const ListOrderItemsUser = (props: Props) => {
             </div>
           )}
 
-          <div className="mt-1 pt-1 lg:hidden">
-            <p className="inline-flex text-sm font-bold dark:text-white">
-              {item?.product?.isExpired ? (
-                <Badge className="rounded-sm" variant={'danger'}>
+          <div className="ml-auto flex items-center gap-2 lg:hidden">
+            {item?.product?.isExpired ? (
+              <Badge className="gap-1 rounded-sm" variant="danger">
+                <BadgeAlertIcon className="size-3.5" />
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                   EXPIRED
-                </Badge>
-              ) : null}
-            </p>
+                </span>
+              </Badge>
+            ) : null}
           </div>
         </td>
       </tr>

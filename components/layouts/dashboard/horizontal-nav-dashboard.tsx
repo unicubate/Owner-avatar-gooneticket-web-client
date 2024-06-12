@@ -29,14 +29,22 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
   const [navigation] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      count: 1,
       href: '/events',
     },
     {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
+      count: 1,
       href: '/orders',
     },
     {
+      title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
+      count: user?.affiliation?.count,
+      href: `/affiliates`,
+    },
+    {
       title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
+      count: 1,
       href: '/messages',
     },
   ]);
@@ -97,26 +105,28 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
             <div className="ml-auto flex items-center justify-center">
               <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-                {navigation.map((item: any, index: number) => {
-                  //const isActive = pathname === item.href;
-                  const isActive = pathname?.startsWith(item.href);
-                  return (
-                    <Link
-                      key={index}
-                      href={`${item?.href}`}
-                      title={item?.title}
-                      className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                        isActive
-                          ? `border-indigo-600 text-indigo-600`
-                          : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                      } `}
-                    >
-                      {item?.icon}
+                {navigation
+                  .filter((i) => Number(i.count) >= 1)
+                  .map((item: any, index: number) => {
+                    //const isActive = pathname === item.href;
+                    const isActive = pathname?.startsWith(item.href);
+                    return (
+                      <Link
+                        key={index}
+                        href={`${item?.href}`}
+                        title={item?.title}
+                        className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                          isActive
+                            ? `border-indigo-600 text-indigo-600`
+                            : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                        } `}
+                      >
+                        {item?.icon}
 
-                      {item?.title}
-                    </Link>
-                  );
-                })}
+                        {item?.title}
+                      </Link>
+                    );
+                  })}
               </nav>
             </div>
 

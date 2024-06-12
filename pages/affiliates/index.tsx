@@ -4,7 +4,6 @@ import {
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
@@ -18,17 +17,10 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
-import { OrderItemModel } from '@/types/order-item';
-import { modelProductArray } from '@/types/product';
-import {
-  CalendarCheckIcon,
-  ListFilterIcon,
-  ShoppingCartIcon,
-} from 'lucide-react';
-import { Fragment, useState } from 'react';
+import { CalendarCheckIcon, ShoppingCartIcon } from 'lucide-react';
+import { useState } from 'react';
 
-const OrdersIndex = () => {
-  const [model, setModel] = useState('');
+const AffiliateIndex = () => {
   const [dayCount, setDayCount] = useState(30);
   const { userStorage: user } = useInputState() as any;
   const { t, search, handleSetSearch } = useInputState();
@@ -43,7 +35,7 @@ const OrdersIndex = () => {
   } = GetInfiniteOrderItemsAPI({
     search,
     organizationBuyerId: user?.organizationId,
-    modelIds: model ? [model.toLocaleUpperCase()] : ['PRODUCT', 'EVENT'],
+    modelIds: ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
     days: dayCount,
@@ -51,7 +43,7 @@ const OrdersIndex = () => {
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
   const handleDaysChange = (newDays: number) => setDayCount(newDays);
-  const handleModelChange = (i: string) => setModel(i);
+
   return (
     <>
       <LayoutDashboard title={t.formatMessage({ id: 'MENU.ORDER' })}>
@@ -60,39 +52,6 @@ const OrdersIndex = () => {
             <div className="flow-root">
               <div className="mt-4 flex items-center">
                 <div className="ml-auto flex items-center gap-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="sm" variant="outline" className="h-8 gap-1">
-                        <ListFilterIcon className="size-3.5" />
-                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {model ? model : `All`}
-                        </span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-800">
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem
-                          onClick={() => {
-                            handleModelChange('');
-                          }}
-                        >
-                          <span className="cursor-pointer">All</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuGroup>
-                      {modelProductArray.map((or, index) => (
-                        <Fragment key={index}>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => {
-                              handleModelChange(or?.label);
-                            }}
-                          >
-                            <span className="cursor-pointer">{or?.label}</span>
-                          </DropdownMenuItem>
-                        </Fragment>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline" size="sm" className="h-8 gap-1">
@@ -181,19 +140,7 @@ const OrdersIndex = () => {
                           })}
                         />
                       ) : (
-                        dataOrderItems?.pages.map((page, i) => (
-                          <Fragment key={i}>
-                            {page?.data?.value.map(
-                              (item: OrderItemModel, index: number) => (
-                                <ListOrderItemsUser
-                                  item={item}
-                                  key={index}
-                                  index={index}
-                                />
-                              ),
-                            )}
-                          </Fragment>
-                        ))
+                        <>Test</>
                       )
                     ) : null}
                   </tbody>
@@ -218,4 +165,4 @@ const OrdersIndex = () => {
   );
 };
 
-export default PrivateComponent(OrdersIndex);
+export default PrivateComponent(AffiliateIndex);

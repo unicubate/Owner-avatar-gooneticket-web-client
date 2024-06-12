@@ -13,6 +13,11 @@ export const arrayProductTypes = [
   // { id: '2', name: 'PHYSICAL' },
 ];
 
+export const modelProductArray = [
+  { id: 'EVENT', name: 'EVENT', label: 'Event' },
+  { id: 'PRODUCT', name: 'PRODUCT', label: 'Product' },
+];
+
 export type ProductType = 'DIGITAL' | 'PHYSICAL';
 
 export type ResponseProductModel = {

@@ -32,6 +32,7 @@ export type OrderItemModel = {
   createdAt: Date;
   confirmedAt: Date;
   id: string;
+  isExpired: boolean;
   orderNumber: string;
   quantity: string;
   percentDiscount: string;
