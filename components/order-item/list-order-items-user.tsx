@@ -32,20 +32,22 @@ const ListOrderItemsUser = (props: Props) => {
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            {item?.uploadsImages?.length > 0 ? (
-              <div className="relative shrink-0 cursor-pointer">
-                <Image
-                  width={64}
-                  height={64}
-                  preview={false}
-                  src={`${viewOneFileUploadAPI({
-                    folder: String(item?.model.toLocaleLowerCase()),
-                    fileName: item?.uploadsImages[0]?.path,
-                  })}`}
-                  alt={item?.product?.title}
-                />
-              </div>
-            ) : null}
+            <Link href={linkRedirect} title={item?.product?.title}>
+              {item?.uploadsImages?.length > 0 ? (
+                <div className="relative shrink-0 cursor-pointer">
+                  <Image
+                    width={64}
+                    height={64}
+                    preview={false}
+                    src={`${viewOneFileUploadAPI({
+                      folder: String(item?.model.toLocaleLowerCase()),
+                      fileName: item?.uploadsImages[0]?.path,
+                    })}`}
+                    alt={item?.product?.title}
+                  />
+                </div>
+              ) : null}
+            </Link>
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className="flex items-center text-gray-600">
