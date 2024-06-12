@@ -81,17 +81,6 @@ const ListOrderItemsUser = (props: Props) => {
                     </span>
                   </Badge>
                 </p>
-                {item?.product?.isExpired ? (
-                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
-                    <Badge className="gap-1 rounded-sm" variant="danger">
-                      <BadgeAlertIcon className="size-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        EXPIRED
-                      </span>
-                    </Badge>
-                  </p>
-                ) : null}
-
                 {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
                   <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
                     <Badge className="gap-1 rounded-sm" variant="success">
@@ -102,6 +91,18 @@ const ListOrderItemsUser = (props: Props) => {
                     </Badge>
                   </p>
                 )}
+
+                {!['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
+                item?.product?.isExpired ? (
+                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
+                    <Badge className="gap-1 rounded-sm" variant="danger">
+                      <BadgeAlertIcon className="size-3.5" />
+                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                        EXPIRED
+                      </span>
+                    </Badge>
+                  </p>
+                ) : null}
               </div>
             </div>
           </div>
