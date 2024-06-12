@@ -2,6 +2,7 @@
 
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
 import { GetOneProductAPI } from '@/api-site/product';
+import { GetOneUserPublicAPI } from '@/api-site/user';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState, useReactHookForm } from '@/components/hooks';
@@ -11,13 +12,14 @@ import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal'
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
 import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';
+import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PriceModel } from '@/types/price';
 import { formatePrice, formateToRFC2822 } from '@/utils';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
@@ -52,8 +54,8 @@ const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
   const { ipLocation, userStorage, locale } = useInputState();
   const { query, back } = useRouter();
-  const { id: productId, partner } = query;
-  const { isValid, watch, control, errors, register } = useReactHookForm({
+  const { id: productId, partner, username } = query;
+  const { isValid, watch, register } = useReactHookForm({
     schema,
   });
   const watchAmount = watch('amount', null);
@@ -61,6 +63,15 @@ const CheckoutEvent = () => {
 
   const { data: userAddress } = GetOneUserAddressMeAPI();
   const [isEdit, setIsEdit] = useState(userAddress?.isUpdated);
+
+  const {
+    isError: isErrorUser,
+    isLoading: isLoadingUser,
+    data: user,
+  } = GetOneUserPublicAPI({
+    username: String(username),
+    organizationVisitorId: userStorage?.organizationId,
+  });
   const {
     data: item,
     isLoading: isLoadingProduct,
@@ -103,27 +114,30 @@ const CheckoutEvent = () => {
 
   return (
     <>
-      <LayoutCheckoutSite title={`Checkout - ${item?.title ?? 'events'}`}>
+      <LayoutCheckoutSite
+        user={user}
+        title={`Checkout - ${item?.title ?? 'events'}`}
+      >
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
-              {isLoadingProduct ? (
+              {isLoadingProduct || isLoadingUser ? (
                 <EventCheckoutSkeleton />
-              ) : (
-                <>
+              ) : item?.id ? (
+                <Fragment>
                   <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       {/* <ButtonInput
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    back();
-                  }}
-                  icon={<MoveLeftIcon className="size-4" />}
-                >
-                  Come back
-                </ButtonInput> */}
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  back();
+                }}
+                icon={<MoveLeftIcon className="size-4" />}
+              >
+                Come back
+              </ButtonInput> */}
 
                       <div
                         key={item?.id}
@@ -153,8 +167,8 @@ const CheckoutEvent = () => {
                                 {Number(item?.prices?.length) > 0 ? (
                                   <>
                                     {/* <span className="ml-1 text-xl">
-                                      {item?.currency?.symbol ?? ''}
-                                    </span> */}
+                                    {item?.currency?.symbol ?? ''}
+                                  </span> */}
                                     <span className="ml-1 text-xl">
                                       {formatePrice({
                                         currency: `${item?.currency?.code}`,
@@ -397,12 +411,12 @@ const CheckoutEvent = () => {
 
                         {/* <hr className="my-4 dark:border-gray-800" />
 
-                  <li className="flex items-center justify-between text-sm">
-                    <p className="dark:text-gray-600">Commissioni di servizio</p>
-                    <p className="ml-auto dark:text-gray-400">
-                      € 3,00
-                    </p>
-                  </li> */}
+                <li className="flex items-center justify-between text-sm">
+                  <p className="dark:text-gray-600">Commissioni di servizio</p>
+                  <p className="ml-auto dark:text-gray-400">
+                    € 3,00
+                  </p>
+                </li> */}
                         <hr className="my-4 dark:border-gray-800" />
 
                         <li className="my-2 flex items-center justify-between">
@@ -546,9 +560,18 @@ const CheckoutEvent = () => {
                       </>
                     )}
                   </div>
-                </>
-              )}
+                </Fragment>
+              ) : null}
             </div>
+            {isErrorUser || isErrorProduct ? (
+              <div className="items-center justify-center text-center">
+                <ErrorFile
+                  title="404"
+                  description="Error find data please try again..."
+                />
+              </div>
+            ) : null}
+
             <div className="items-center justify-center text-center">
               <p className="text-sm font-normal text-gray-500">
                 All the taxes will be calculated while checkout
