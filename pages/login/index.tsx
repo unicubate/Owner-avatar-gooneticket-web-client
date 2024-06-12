@@ -6,7 +6,7 @@ import { ButtonInput } from '@/components/ui-setting';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
-import { UserLoginFormModel } from '@/types/user.type';
+import { UserLoginFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

@@ -1,4 +1,4 @@
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import { useAuth } from '../../util/context-user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 

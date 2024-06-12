@@ -1,10 +1,10 @@
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
-import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import { CopyShareLink, ThemeToggle } from '@/components/ui-setting';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -14,6 +14,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  AlertCircleIcon,
+  LogOutIcon,
+  SettingsIcon,
+  ShareIcon,
+  ShoppingCartIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
@@ -28,6 +35,7 @@ interface Props {
 const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   const t = useIntl();
   const { push } = useRouter();
+  const [copied, setCopied] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
@@ -101,35 +109,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="ml-2 flex xl:ml-0">
-              <Link href="/">
-                <div className="flex shrink-0 items-center">
-                  <div className="block h-8 w-auto lg:hidden">
-                    <div className="flex items-center">
-                      <div className="relative shrink-0 cursor-pointer">
-                        <ImageLogo />
-                      </div>
-
-                      <div className="ml-2 cursor-pointer">
-                        <p className="text-lg font-bold">
-                          {process.env.NEXT_PUBLIC_NAME_SITE}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="hidden h-8 w-auto lg:block">
-                    <div className="flex items-center">
-                      <div className="relative shrink-0 cursor-pointer">
-                        <ImageLogo />
-                      </div>
-                      <div className="ml-2 cursor-pointer">
-                        <p className="text-lg font-bold">
-                          {process.env.NEXT_PUBLIC_NAME_SITE}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
             </div>
 
             <div className="ml-auto flex items-center justify-center">
@@ -158,46 +138,56 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="ml-auto flex items-center justify-end">
-              {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
               <div className="flex items-center">
                 <ThemeToggle />
-                {/* <ButtonInput
-                  type="button"
-                  className="w-full"
-                  size="sm"
-                  variant="info"
-                  icon={<PlusIcon className="mr-2 size-4" />}
-                >
-                  Create
-                </ButtonInput> */}
-                {userVisiter?.id ? (
-                  <>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
-                        >
-                          <svg
-                            className="size-6"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M4 6h16M4 12h16M4 18h16"
-                            />
-                          </svg>
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#1c1b22] dark:hover:text-white"
+                    >
+                      <svg
+                        className="size-6"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M4 6h16M4 12h16M4 18h16"
+                        />
+                      </svg>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => setCopied(true)}>
+                        <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                        <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                          {t.formatMessage({ id: 'UTIL.SHARE' })}
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuGroup>
+                      <DropdownMenuItem onClick={() => push(`/orders`)}>
+                        <AlertCircleIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                        <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                          {t.formatMessage({ id: 'UTIL.REPORT' })}
+                        </span>
+                      </DropdownMenuItem>
+                    </DropdownMenuGroup>
+
+                    {userVisiter?.id ? (
+                      <>
+                        <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/orders`)}>
-                            <span className="cursor-pointer">
+                            <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
                               {t.formatMessage({ id: 'MENU.ORDER' })}
                             </span>
                           </DropdownMenuItem>
@@ -205,26 +195,34 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/settings`)}>
-                            <span className="cursor-pointer">
+                            <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <span className="cursor-pointer">
+                          <LogOutIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                          <span className="ml-2 cursor-pointer hover:text-indigo-600">
                             {t.formatMessage({ id: 'MENU.LOGOUT' })}
                           </span>
                         </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </>
-                ) : null}
+                      </>
+                    ) : null}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </div>
         </div>
       </header>
+
+      <CopyShareLink
+        isOpen={copied}
+        setIsOpen={setCopied}
+        link={`${process.env.NEXT_PUBLIC_SITE}/${username}`}
+      />
     </>
   );
 };

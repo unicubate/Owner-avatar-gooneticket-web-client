@@ -1,11 +1,6 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { useCanonicalUrl } from '@/components/hooks';
-import {
-  ButtonInput,
-  HeaderSite,
-  ImageLogo,
-  ThemeToggle,
-} from '@/components/ui-setting';
+import { ButtonInput, HeaderSite, ThemeToggle } from '@/components/ui-setting';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,18 +9,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
+import { UserModel } from '@/types/user';
 import { MoveLeftIcon } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { Button } from '../../ui/button';
 
 interface IProps {
   title: string;
+  user?: UserModel;
   children: React.ReactNode;
 }
 
-const LayoutCheckoutSite = ({ children, title }: IProps) => {
+const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
   const spacer = title ? ' | ' : '';
   const titleOutput = `${title}${spacer}GooneTicket`;
 
@@ -74,47 +71,7 @@ const LayoutCheckoutSite = ({ children, title }: IProps) => {
             </div>
 
             <div className="ml-2 flex xl:ml-0">
-              <Link href="/">
-                <div className="flex shrink-0 items-center">
-                  <div className="block h-8 w-auto lg:hidden">
-                    <div className="flex items-center">
-                      <div className="relative shrink-0 cursor-pointer">
-                        <ImageLogo />
-                      </div>
-
-                      {/* <div className="ml-2 cursor-pointer">
-                        <p className="text-lg font-bold">
-                          {process.env.NEXT_PUBLIC_NAME_SITE}
-                        </p>
-                      </div> */}
-                    </div>
-                  </div>
-                  <div className="hidden h-8 w-auto lg:block">
-                    {/* <div className="flex items-center">
-                    <div
-                      onClick={() => push('/')}
-                      className="relative shrink-0 cursor-pointer"
-                    >
-                      <img
-                        src="https://landingfoliocom.imgix.net/store/collection/clarity-dashboard/images/logo-symbol.svg"
-                        alt={process.env.NEXT_PUBLIC_NAME_SITE}
-                      />
-                    </div>
-                  </div> */}
-                    <div className="flex items-center">
-                      <div className="relative shrink-0 cursor-pointer">
-                        <ImageLogo />
-                      </div>
-
-                      <div className="ml-2 cursor-pointer">
-                        <p className="text-lg font-bold">
-                          {process.env.NEXT_PUBLIC_NAME_SITE}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
             </div>
 
             <div className="ml-auto flex items-center justify-end space-x-2">

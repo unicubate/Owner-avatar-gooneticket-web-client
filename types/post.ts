@@ -1,5 +1,5 @@
 import { PaginationResponse } from '@/utils/paginations';
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
 
 export const arrayWhoCanSees = [

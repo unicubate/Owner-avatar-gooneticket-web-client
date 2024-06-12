@@ -2,12 +2,11 @@ import { formatePrice } from '@/utils';
 
 interface Props {
   value: number;
-  className: string;
-  country: string;
+  className?: string;
   currency: { amount?: string; code: string };
 }
 
-const SerialPrice = ({ value, currency, className, country }: Props) => {
+const SerialPrice = ({ value, currency, className }: Props) => {
   return (
     <>
       <span className={className}>

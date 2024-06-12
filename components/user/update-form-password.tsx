@@ -1,5 +1,5 @@
 import { updateUpdatePasswordAPI } from '@/api-site/user';
-import { UserUpdatePasswordFormModel } from '@/types/user.type';
+import { UserUpdatePasswordFormModel } from '@/types/user';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { SubmitHandler } from 'react-hook-form';
 import * as yup from 'yup';

@@ -1,10 +1,6 @@
 import { UpdateOneProfileAPI } from '@/api-site/profile';
-import {
-  ProfileFormModel,
-  ProfileModel,
-  arrayColors,
-} from '@/types/profile.type';
-import { UserModel } from '@/types/user.type';
+import { ProfileFormModel, ProfileModel, arrayColors } from '@/types/profile';
+import { UserModel } from '@/types/user';
 import { oneImageToURL } from '@/utils';
 import {
   AlertDangerNotification,

@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
+import { Image } from 'antd';
 import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
 
 interface Props {
@@ -15,7 +16,10 @@ export function CoverComponent(props: Props) {
     <>
       {profile?.image && (
         <>
-          <img
+          <Image
+            height="100%"
+            width="100%"
+            preview={false}
             className={cn(`bg-${profile?.color}-600`, className)}
             src={oneImageToURL(profile?.image)}
             alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
@@ -25,7 +29,10 @@ export function CoverComponent(props: Props) {
 
       {!profile?.image && (
         <>
-          <img
+          <Image
+            height="100%"
+            width="100%"
+            preview={false}
             className={cn(`object-cover`, className)}
             //size={size}
             alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetCartsAPI } from '@/api-site/cart';
 import { CartOrderModel } from '@/types/cart';
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BiCart } from 'react-icons/bi';

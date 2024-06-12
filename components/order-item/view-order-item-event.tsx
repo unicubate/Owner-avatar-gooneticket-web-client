@@ -6,6 +6,7 @@ import { BadgeAlertIcon, CalendarDaysIcon, DownloadIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
+import { SerialPrice } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
 
 type Props = {
@@ -13,7 +14,7 @@ type Props = {
 };
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
-  const { locale } = useInputState();
+  const { locale, ipLocation } = useInputState();
   const [level, setLevel] = useState<string | number>('L');
   const { query, push, back } = useRouter();
 
@@ -45,8 +46,20 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         <p className="mt-4 text-center text-xl font-semibold">
           {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
         </p>
-        <p className="mt-4 text-center text-xl font-semibold">
-          #{orderItem?.orderNumber}
+        <p className="mt-4 text-center font-semibold">
+          <span>
+            {Number(orderItem?.priceDiscount) > 0 ? (
+              <SerialPrice
+                className="text-2xl"
+                value={Number(orderItem?.priceDiscount)}
+                currency={{ code: String(orderItem?.currency) }}
+              />
+            ) : (
+              'Free'
+            )}
+          </span>
+          <span className="ml-2 text-gray-400">-</span>
+          <span className="ml-2 text-xl ">#{orderItem?.orderNumber}</span>
         </p>
         <p className="mt-4 text-center text-xl font-semibold">
           {orderItem?.product?.title}
@@ -70,9 +83,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </p>
         </div>
         <p className="mt-4 text-center text-xl font-bold">
-          <span className="ml-2">
-            {orderItem?.product?.country?.name ?? ''}
-          </span>
+          <span>{orderItem?.product?.country?.name ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.product?.address ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>

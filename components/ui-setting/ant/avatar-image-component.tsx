@@ -1,29 +1,27 @@
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
-import { Avatar } from 'antd';
-import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
+import { Image } from 'antd';
 
 interface Props {
   profile: any;
-  size?: number | ScreenSizeMap;
+  preview?: boolean;
   className?: string;
 }
 
-export function AvatarComponent(props: Props) {
-  const { profile, size, className } = props;
+export function AvatarImageComponent(props: Props) {
+  const { profile, preview, className } = props;
   return (
     <>
       <div className="relative sm:flex sm:items-center">
         <div className="relative inline-flex shrink-0">
           {profile?.image && (
             <>
-              <Avatar
-                className={cn(
-                  `bg-${profile?.color}-600 rounded-full`,
-                  className,
-                )}
-                size={size}
+              <Image
+                className={cn(`bg-${profile?.color}-600`, className)}
+                height={50}
+                width={60}
+                preview={preview}
                 src={oneImageToURL(profile?.image)}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
               />
@@ -32,9 +30,10 @@ export function AvatarComponent(props: Props) {
 
           {!profile?.image && (
             <>
-              <Avatar
-                className={cn(`rounded-full object-cover`, className)}
-                size={size}
+              <Image
+                className={cn(`object-cover`, className)}
+                height={50}
+                width={60}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
                 src={`https://ui-avatars.com/api/?name=${capitalizeOneFirstLetter(
                   String(profile?.firstName ?? ''),

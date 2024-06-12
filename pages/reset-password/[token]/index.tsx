@@ -5,7 +5,7 @@ import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
-import { UserResetPasswordFormModel } from '@/types/user.type';
+import { UserResetPasswordFormModel } from '@/types/user';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,

@@ -1,6 +1,7 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { capitalizeFirstLetter } from '@/utils/utils';
+import { LogOutIcon, SettingsIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -161,14 +162,16 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                       <DropdownMenuContent className="w-auto dark:border-gray-800 dark:bg-[#04080b]">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/settings`)}>
-                            <span className="cursor-pointer">
+                            <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <span className="cursor-pointer">
+                          <LogOutIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                          <span className="ml-2 cursor-pointer hover:text-indigo-600">
                             {t.formatMessage({ id: 'MENU.LOGOUT' })}
                           </span>
                         </DropdownMenuItem>

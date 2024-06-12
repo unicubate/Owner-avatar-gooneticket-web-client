@@ -149,7 +149,6 @@ const ListOrderItemsUser = (props: Props) => {
               {Number(item?.priceDiscount) > 0 ? (
                 <SerialPrice
                   className="text-sm"
-                  country={ipLocation?.countryCode}
                   value={Number(item?.priceDiscount)}
                   currency={{ code: String(item?.currency) }}
                 />

@@ -33,7 +33,7 @@ export const CopyShareLink = ({
     <>
       <Dialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
         <DialogTrigger asChild>{buttonDialog}</DialogTrigger>
-        <DialogContent className="dark:border-gray-800 dark:bg-[#04080b] sm:max-w-md">
+        <DialogContent className="dark:border-gray-800 dark:bg-[#04080b] sm:max-w-lg">
           <DialogHeader>
             <DialogTitle>Share link</DialogTitle>
             <DialogDescription>

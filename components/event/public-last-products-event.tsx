@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ProductModel } from '@/types/product';
-import { UserVisitorModel } from '@/types/user.type';
+import { UserVisitorModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';

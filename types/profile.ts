@@ -1,4 +1,4 @@
-import { NextStep } from './user.type';
+import { NextStep } from './user';
 
 export type ColorType = 'indigo' | 'red' | 'sky';
 

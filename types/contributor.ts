@@ -1,5 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 
 export type ResponseContributorModel = {
   value: Array<ContributorModel>;

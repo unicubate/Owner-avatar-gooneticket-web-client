@@ -1,5 +1,5 @@
 import { GetOneUserMeAPI, IpLocationAPI } from '@/api-site/user';
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import Cookies from 'js-cookie';
 import { FC, ReactNode, createContext, useContext } from 'react';
 

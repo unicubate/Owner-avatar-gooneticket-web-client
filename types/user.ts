@@ -1,5 +1,5 @@
 import { PaginationResponse } from '@/utils/paginations';
-import { ProfileModel } from './profile.type';
+import { ProfileModel } from './profile';
 
 export type ResponseUserModel = {
   value: Array<UserModel>;

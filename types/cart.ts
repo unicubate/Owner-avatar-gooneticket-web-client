@@ -1,4 +1,4 @@
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
 
 export type ResponseCartModel = {

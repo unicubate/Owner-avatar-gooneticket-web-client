@@ -4,25 +4,11 @@ import { TablePublicProductsEvent } from '@/components/event/table-public-produc
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
-import { CopyShareLink } from '@/components/ui-setting';
-import { CoverComponent, LoadingFile } from '@/components/ui-setting/ant';
+import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { HtmlParser } from '@/utils/html-parser';
-import { AlertCircleIcon, MoreHorizontalIcon, ShareIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 const ProfilePublic = () => {
-  const [copied, setCopied] = useState(false);
   const { userStorage: userVisiter } = useInputState();
   const { query } = useRouter();
   const username = String(query?.username);
@@ -41,10 +27,16 @@ const ProfilePublic = () => {
         user={user}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
-          <div className="container mx-auto space-y-8 p-4">
+          <div className="container mx-auto space-y-4 p-4">
             {user?.organizationId ? (
               <>
-                <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">
+                {/* <div className="absolute inset-0">
+                  <CoverComponent
+                    className="size-full object-cover"
+                    profile={user?.profile}
+                  />
+                </div> */}
+                {/* <div className="relative bg-gray-900 py-20 sm:py-20 lg:py-24 xl:py-32">
                   <div className="absolute inset-0">
                     <CoverComponent
                       className="size-full object-cover"
@@ -69,9 +61,9 @@ const ProfilePublic = () => {
                       )}
                     </div>
                   </div>
-                </div>
+                </div> */}
 
-                <div className="flex flex-wrap justify-center gap-4 lg:justify-end">
+                <div className="flex flex-wrap justify-center gap-2 lg:justify-end">
                   <div className="py-2 sm:mt-0">
                     {userVisiter?.id !== user?.id ? (
                       <CreateConversationForm item={user} />
@@ -83,7 +75,7 @@ const ProfilePublic = () => {
                       <CreateOrUpdateFormFollow item={user} />
                     ) : null}
                   </div>
-                  <div className="py-2 sm:mt-0">
+                  {/* <div className="py-2 sm:mt-0">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button type="button" variant="outline">
@@ -110,7 +102,7 @@ const ProfilePublic = () => {
                         </DropdownMenuGroup>
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </div>
+                  </div> */}
                 </div>
               </>
             ) : null}
@@ -124,12 +116,6 @@ const ProfilePublic = () => {
             </div>
           </div>
         </div>
-
-        <CopyShareLink
-          isOpen={copied}
-          setIsOpen={setCopied}
-          link={`${process.env.NEXT_PUBLIC_SITE}/${username}`}
-        />
       </LayoutUserPublicSite>
 
       {status === 'pending' ? <LoadingFile /> : null}

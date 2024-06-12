@@ -1,5 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 
 export type ResponseCommentModel = {
   value: Array<CommentModel>;

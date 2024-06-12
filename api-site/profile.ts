@@ -3,7 +3,7 @@ import {
   NextStepProfileFormModel,
   ProfileFormModel,
   ProfileModel,
-} from '@/types/profile.type';
+} from '@/types/profile';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const UpdateOneProfileNextStepAPI = ({

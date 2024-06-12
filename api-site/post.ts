@@ -6,7 +6,7 @@ import {
   PostType,
   ResponsePostModel,
 } from '@/types/post';
-import { UserVisitorModel } from '@/types/user.type';
+import { UserVisitorModel } from '@/types/user';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

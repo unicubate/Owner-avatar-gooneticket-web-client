@@ -10,7 +10,7 @@ import {
   UserResetPasswordFormModel,
   UserStatus,
   UserVerifyTokenModel,
-} from '@/types/user.type';
+} from '@/types/user';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,

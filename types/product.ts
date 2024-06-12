@@ -1,6 +1,6 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { PriceModel } from './price';
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
 
 export const arrayWhoCanSees = [

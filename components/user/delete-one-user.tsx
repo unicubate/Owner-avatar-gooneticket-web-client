@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { deleteOneUserAPI } from '@/api-site/user';
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';

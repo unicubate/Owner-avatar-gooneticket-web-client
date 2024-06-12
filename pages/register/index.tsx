@@ -6,7 +6,7 @@ import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
-import { UserRegisterFormModel } from '@/types/user.type';
+import { UserRegisterFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { Checkbox } from 'antd';
 import Link from 'next/link';

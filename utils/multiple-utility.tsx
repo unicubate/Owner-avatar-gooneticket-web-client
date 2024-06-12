@@ -1,6 +1,6 @@
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { initialLang } from '@/i18n/context-intl-provider';
-import { ImageProfileModel } from '@/types/profile.type';
+import { ImageProfileModel } from '@/types/profile';
 
 interface Props {
   value: number;

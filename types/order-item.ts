@@ -1,7 +1,7 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { KeyAsString } from '@/utils/utils';
 import { ProductModel } from './product';
-import { ProfileItemModel } from './profile.type';
+import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
 
 export type ResponseOrderItemModel = {

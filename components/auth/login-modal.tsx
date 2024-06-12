@@ -1,5 +1,5 @@
 import { loginUserAPI } from '@/api-site/user';
-import { UserLoginFormModel } from '@/types/user.type';
+import { UserLoginFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils';
 import { X } from 'lucide-react';
 import Link from 'next/link';

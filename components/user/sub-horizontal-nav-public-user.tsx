@@ -1,4 +1,4 @@
-import { UserModel } from '@/types/user.type';
+import { UserModel } from '@/types/user';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';

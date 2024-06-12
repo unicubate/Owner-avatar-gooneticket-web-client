@@ -7,7 +7,7 @@ import { ButtonInput, PhoneNumberInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
-import { UserLoginPhoneFormModel } from '@/types/user.type';
+import { UserLoginPhoneFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
