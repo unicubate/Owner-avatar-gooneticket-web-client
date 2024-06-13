@@ -24,6 +24,7 @@ export function PublicProductsEvent(props: Props) {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
+    expired: 'FALSE',
     modelIds: ['PRODUCT'],
     enableVisibility: 'TRUE',
   });

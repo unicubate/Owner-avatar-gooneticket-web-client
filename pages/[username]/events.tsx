@@ -42,6 +42,7 @@ const EventsPublic = () => {
     take: 10,
     sort: 'DESC',
     modelIds: ['EVENT'],
+    expired: 'FALSE',
     organizationId: user?.organizationId,
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });

@@ -25,6 +25,7 @@ export function PublicLastProductsEvent({
     sort: 'DESC',
     organizationId: userVisitor?.organizationId,
     status: 'ACTIVE',
+    expired: 'FALSE',
     modelIds: ['EVENT'],
   });
 

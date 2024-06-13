@@ -32,6 +32,7 @@ const TablePublicProductsEvent = ({
     take: 10,
     sort: 'DESC',
     modelIds: ['EVENT'],
+    expired: 'FALSE',
     organizationId,
   });
 

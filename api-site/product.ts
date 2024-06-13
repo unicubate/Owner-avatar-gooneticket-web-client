@@ -1,10 +1,6 @@
 import { makeApiCall } from '@/api-site/clients';
-import {
-  ProductFormModel,
-  ProductModel,
-  ResponseProductModel,
-} from '@/types/product';
-import { ModelType, PaginationRequest, SortModel } from '@/utils/paginations';
+import { ProductFormModel, ProductModel } from '@/types/product';
+import { ModelType, SortModel } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -180,20 +176,6 @@ export const GetOneProductAPI = (payload: {
   };
 };
 
-export const getProductsAPI = async (
-  payload: {
-    organizationId?: string;
-    status?: string;
-    modelIds: ModelType[];
-    enableVisibility?: 'TRUE' | 'FALSE';
-  } & PaginationRequest,
-): Promise<{ data: ResponseProductModel }> => {
-  return await makeApiCall({
-    action: 'getProducts',
-    queryParams: payload,
-  });
-};
-
 export const GetInfiniteProductsAPI = (payload: {
   organizationId?: string;
   take: number;
@@ -202,6 +184,7 @@ export const GetInfiniteProductsAPI = (payload: {
   search?: string;
   modelIds: ModelType[];
   enableVisibility?: 'TRUE' | 'FALSE';
+  expired: 'TRUE' | 'FALSE';
 }) => {
   const {
     organizationId,
@@ -211,20 +194,25 @@ export const GetInfiniteProductsAPI = (payload: {
     enableVisibility,
     modelIds,
     search,
+    expired,
   } = payload;
   return useInfiniteQuery({
     queryKey: ['products', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
-      await getProductsAPI({
-        organizationId,
-        take,
-        sort,
-        search,
-        modelIds,
-        enableVisibility,
-        status: status?.toUpperCase(),
-        page: pageParam,
+      await makeApiCall({
+        action: 'getProducts',
+        queryParams: {
+          organizationId,
+          take,
+          sort,
+          search,
+          modelIds,
+          expired,
+          enableVisibility,
+          status: status?.toUpperCase(),
+          page: pageParam,
+        },
       }),
     initialPageParam: 1,
   });
