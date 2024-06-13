@@ -128,7 +128,9 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             >
               Download
             </ButtonInput>
-            {['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) && (
+            {['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
+              orderItem?.status,
+            ) && (
               <ButtonInput type="button" size="sm" variant="success">
                 {orderItem?.status}
               </ButtonInput>
@@ -139,8 +141,9 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               </ButtonInput>
             )}
 
-            {!['DELIVERED', 'ACCEPTED'].includes(orderItem?.status) &&
-            orderItem?.product?.isExpired ? (
+            {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
+              orderItem?.status,
+            ) && orderItem?.product?.isExpired ? (
               <ButtonInput type="button" size="sm" variant="danger">
                 EXPIRED
               </ButtonInput>

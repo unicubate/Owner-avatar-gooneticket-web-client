@@ -117,7 +117,7 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
+          {['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(item?.status) && (
             <Badge className="gap-1 rounded-sm" variant="success">
               <CheckCheckIcon className="size-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -126,7 +126,7 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {!['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
+          {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(item?.status) &&
           item?.product?.isExpired ? (
             <Badge className="gap-1 rounded-sm" variant="danger">
               <BadgeAlertIcon className="size-3.5" />
