@@ -21,7 +21,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
     <>
       <Card
         key={index}
-        className="w-full dark:border-gray-800 dark:bg-black/15"
+        className="w-full dark:border-gray-800 dark:bg-[#04080b]"
       >
         {item?.uploadsImages?.length > 0 ? (
           <>

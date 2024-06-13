@@ -35,26 +35,27 @@ const TablePublicProductsEvent = ({
     organizationId,
   });
 
-  const dataTableProducts = isLoadingProducts ? (
-    itemsNumberArray(3).map((i, index) => (
-      <ProductEventSkeleton key={i} index={index} />
-    ))
-  ) : isErrorProducts ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
-    ''
-  ) : (
-    dataProducts?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item: ProductModel, index: number) => (
-        <ListPublicProductsEvent item={item} key={index} index={index} />
-      ))
-  );
-
   return (
     <>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-        {dataTableProducts}
+        {isLoadingProducts ? (
+          itemsNumberArray(3).map((i, index) => (
+            <ProductEventSkeleton key={i} index={index} />
+          ))
+        ) : isErrorProducts ? (
+          <ErrorFile
+            title="404"
+            description="Error find data please try again..."
+          />
+        ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
+          ''
+        ) : (
+          dataProducts?.pages
+            .flatMap((page: any) => page?.data?.value)
+            .map((item: ProductModel, index: number) => (
+              <ListPublicProductsEvent item={item} key={index} index={index} />
+            ))
+        )}
       </div>
 
       {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (

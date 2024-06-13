@@ -11,7 +11,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
 import { UserModel } from '@/types/user';
-import { MoveLeftIcon } from 'lucide-react';
+import {
+  LogOutIcon,
+  MoveLeftIcon,
+  SettingsIcon,
+  ShoppingCartIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { Button } from '../../ui/button';
@@ -111,10 +116,11 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
                           </svg>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#1c1b22]">
+                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#04080b]">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/orders`)}>
-                            <span className="cursor-pointer">
+                            <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
                               {t.formatMessage({ id: 'MENU.ORDER' })}
                             </span>
                           </DropdownMenuItem>
@@ -122,14 +128,16 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/settings`)}>
-                            <span className="cursor-pointer">
+                            <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
                               {t.formatMessage({ id: 'MENU.SETTING' })}
                             </span>
                           </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <span className="cursor-pointer">
+                          <LogOutIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                          <span className="ml-2 cursor-pointer hover:text-indigo-600">
                             {t.formatMessage({ id: 'MENU.LOGOUT' })}
                           </span>
                         </DropdownMenuItem>
