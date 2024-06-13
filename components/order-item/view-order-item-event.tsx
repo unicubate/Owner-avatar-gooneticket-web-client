@@ -43,27 +43,34 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </div>
         ) : null}
 
-        <p className="mt-4 text-center text-xl font-semibold">
-          {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
-        </p>
-        <p className="mt-4 text-center font-semibold">
-          <span>
-            {Number(orderItem?.priceDiscount) > 0 ? (
-              <SerialPrice
-                className="text-2xl"
-                value={Number(orderItem?.priceDiscount)}
-                currency={{ code: String(orderItem?.currency) }}
-              />
-            ) : (
-              'Free'
-            )}
-          </span>
-          <span className="ml-2 text-gray-400">-</span>
-          <span className="ml-2 text-xl ">#{orderItem?.orderNumber}</span>
-        </p>
-        <p className="mt-4 text-center text-xl font-semibold">
-          {orderItem?.product?.title}
-        </p>
+        <div className="text-center">
+          <p className="mt-2 text-xl font-semibold">
+            {orderItem?.address?.fullName}
+          </p>
+
+          <p className="mt-2 text-lg font-semibold">
+            {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
+          </p>
+          <p className="mt-2 font-semibold">
+            <span>
+              {Number(orderItem?.priceDiscount) > 0 ? (
+                <SerialPrice
+                  className="text-2xl"
+                  value={Number(orderItem?.priceDiscount)}
+                  currency={{ code: String(orderItem?.currency) }}
+                />
+              ) : (
+                'Free'
+              )}
+            </span>
+            <span className="ml-2 text-gray-400">-</span>
+            <span className="ml-2 text-xl ">#{orderItem?.orderNumber}</span>
+          </p>
+          <p className="mt-4 text-xl font-semibold">
+            {orderItem?.product?.title}
+          </p>
+        </div>
+
         <div className="mx-auto max-w-sm">
           <p className="mt-4 text-center text-lg font-semibold">
             <ButtonInput

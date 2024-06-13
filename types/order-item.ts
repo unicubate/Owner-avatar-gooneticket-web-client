@@ -47,6 +47,10 @@ export type OrderItemModel = {
   orderId: string;
   userId: string;
   priceName: string;
+  address: {
+    fullName: string;
+    email: string;
+  };
   profile: ProfileItemModel;
   organizationSeller: { name: string; image: string };
   profileSeller: ProfileItemModel;
@@ -71,10 +75,8 @@ export type OrderModel = {
     phone: string;
     region: string;
     country: string;
-    street1: string;
-    street2: string;
-    lastName: string;
-    firstName: string;
+    address: string;
+    fullName: string;
   };
   userId: string;
 };

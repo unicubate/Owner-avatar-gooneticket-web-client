@@ -16,7 +16,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PriceModel } from '@/types/price';
-import { formatePrice, formateToRFC2822 } from '@/utils';
+import { formateFromNow, formatePrice, formateToRFC2822 } from '@/utils';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
@@ -127,18 +127,6 @@ const CheckoutEvent = () => {
                 <Fragment>
                   <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
-                      {/* <ButtonInput
-                type="button"
-                size="sm"
-                variant="outline"
-                onClick={() => {
-                  back();
-                }}
-                icon={<MoveLeftIcon className="size-4" />}
-              >
-                Come back
-              </ButtonInput> */}
-
                       <div
                         key={item?.id}
                         className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
@@ -166,9 +154,6 @@ const CheckoutEvent = () => {
                               <div className="flex shrink-0 items-center font-bold">
                                 {Number(item?.prices?.length) > 0 ? (
                                   <>
-                                    {/* <span className="ml-1 text-xl">
-                                    {item?.currency?.symbol ?? ''}
-                                  </span> */}
                                     <span className="ml-1 text-xl">
                                       {formatePrice({
                                         currency: `${item?.currency?.code}`,
@@ -185,7 +170,7 @@ const CheckoutEvent = () => {
 
                               <div className="ml-auto hidden font-bold lg:table-cell">
                                 <span className="text-lg">
-                                  {formateToRFC2822(
+                                  {formateFromNow(
                                     item?.expiredAt as Date,
                                     locale,
                                   )}
