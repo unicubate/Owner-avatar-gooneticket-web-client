@@ -105,7 +105,7 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
 
 export const GetOneOrderItemAPI = (payload: {
   orderNumber: string;
-  organizationBuyerId: string;
+  organizationBuyerId?: string;
 }) => {
   const { data, isError, isLoading, status, isPending, error, refetch } =
     useQuery({

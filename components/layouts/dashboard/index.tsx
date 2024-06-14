@@ -1,3 +1,4 @@
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
 import { HeaderSite } from '../../ui-setting/header-site';
@@ -61,7 +62,11 @@ const LayoutDashboard = ({ children, title }: IProps) => {
           <div
             className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
           >
-            <main>{children}</main>
+            <main>
+              {children}
+
+              <MediumFooter />
+            </main>
           </div>
         </div>
       </div>

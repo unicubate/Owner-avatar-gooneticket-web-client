@@ -8,14 +8,26 @@ import {
   BadgeAlertIcon,
   CalendarIcon,
   CheckCheckIcon,
+  MoreHorizontalIcon,
   MoveRightIcon,
+  ShareIcon,
   TicketIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { ButtonInput, SerialPrice } from '../ui-setting';
+import { CopyShareLink, SerialPrice } from '../ui-setting';
 import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 type Props = {
   item: OrderItemModel;
@@ -25,8 +37,9 @@ type Props = {
 const ListOrderItemsUser = (props: Props) => {
   const { push } = useRouter();
   const { item, index } = props;
-  const { isOpen, setIsOpen, locale, ipLocation } = useInputState();
-  const linkRedirect = `/orders/${item?.orderNumber}/tickets?model=${item?.model.toLocaleLowerCase()}`;
+  const [copied, setCopied] = useState(false);
+  const { t, isOpen, setIsOpen, locale, ipLocation } = useInputState();
+  const linkRedirect = `/orders/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`;
   return (
     <>
       <tr key={index}>
@@ -164,32 +177,40 @@ const ListOrderItemsUser = (props: Props) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium text-gray-600">
-          {item?.productId && (
-            <div className="py-4 text-right text-sm font-medium text-gray-600">
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="ghost"
-                className="text-gray-600 hover:text-indigo-600"
-                onClick={() => push(linkRedirect)}
-                title={'View Content'}
-                icon={<MoveRightIcon className="size-5 text-gray-400" />}
-              />
-            </div>
-          )}
-
-          {/* <div className="ml-auto flex items-center gap-2 lg:hidden">
-            {item?.product?.isExpired ? (
-              <Badge className="gap-1 rounded-sm" variant="danger">
-                <BadgeAlertIcon className="size-3.5" />
-                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  EXPIRED
-                </span>
-              </Badge>
-            ) : null}
-          </div> */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button type="button" size="icon" variant="ghost">
+                <MoreHorizontalIcon className="size-5 text-gray-400" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
+              <DropdownMenuGroup>
+                <Link href={linkRedirect}>
+                  <DropdownMenuItem>
+                    <MoveRightIcon className="size-4 text-gray-600 hover:text-blue-600" />
+                    <span className="ml-2 cursor-pointer hover:text-blue-600">
+                      Manage
+                    </span>
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => setCopied(true)}>
+                  <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                    {t.formatMessage({ id: 'UTIL.SHARE' })}
+                  </span>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </td>
       </tr>
+
+      <CopyShareLink
+        isOpen={copied}
+        setIsOpen={setCopied}
+        link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderNumber}/ticket-public`}
+      />
     </>
   );
 };
