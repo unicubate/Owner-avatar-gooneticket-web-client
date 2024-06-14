@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
+import { CreateConversationForm } from '@/components/contact-us/create-conversation-form';
+import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
 import { CopyShareLink, ThemeToggle } from '@/components/ui-setting';
 import { Button } from '@/components/ui/button';
 import {
@@ -138,13 +140,28 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="ml-auto flex items-center justify-end">
-              <div className="flex items-center">
+              <div className="flex items-center space-x-2">
                 <ThemeToggle />
+                <div className="py-2 sm:mt-0">
+                  {userVisiter?.id !== user?.id ? (
+                    <CreateConversationForm item={user} />
+                  ) : null}
+                </div>
+                <div className="py-2 sm:mt-0">
+                  {/* {userVisiter?.organizationId &&
+                    userVisiter?.organizationId !== user?.organizationId ? (
+                      <CreateOrUpdateFormFollow item={user} />
+                    ) : null} */}
+                  {userVisiter?.organizationId !== user?.organizationId ? (
+                    <CreateOrUpdateFormFollow item={user} />
+                  ) : null}
+                </div>
+
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="-m-3 bg-white text-gray-700 hover:text-gray-900 dark:bg-[#04080b] dark:hover:text-white"
+                      className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#04080b] dark:hover:text-white"
                     >
                       <svg
                         className="size-6"

@@ -1,9 +1,10 @@
 import { CreateOrDeleteOneFollowerAPI } from '@/api-site/follow';
 import { AlertDangerNotification } from '@/utils';
+import { UserRoundCheckIcon, UserRoundPlus } from 'lucide-react';
 import { useState } from 'react';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
+import { Button } from '../ui/button';
 
 const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
   const {
@@ -52,28 +53,36 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
     <>
       {userStorage?.organizationId ? (
         <>
-          <ButtonInput
-            className="w-full"
-            type="button"
+          <Button
+            className="h-8 cursor-pointer gap-1 rounded-sm"
             variant={isFollow ? 'outline' : 'danger'}
             onClick={() => {
               followItem(item), setIsFollow((i: any) => !i);
             }}
           >
-            {isFollow ? 'UnFollow' : 'Follow'}
-          </ButtonInput>
+            {isFollow ? (
+              <UserRoundCheckIcon className="size-5" />
+            ) : (
+              <UserRoundPlus className="size-5" />
+            )}
+            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              {isFollow ? 'UnFollow' : 'Follow'}
+            </span>
+          </Button>
         </>
       ) : (
-        <ButtonInput
-          className="w-full"
-          type="button"
-          variant="danger"
-          onClick={() => {
-            setIsOpenModalLogin(true);
-          }}
-        >
-          Follow
-        </ButtonInput>
+        <>
+          <Button
+            className="h-8 cursor-pointer gap-1 rounded-sm"
+            variant="danger"
+            onClick={() => setIsOpenModalLogin(true)}
+          >
+            <UserRoundPlus className="size-5" />
+            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              Follow
+            </span>
+          </Button>
+        </>
       )}
 
       <LoginModal isOpen={isOpenModalLogin} setIsOpen={setIsOpenModalLogin} />

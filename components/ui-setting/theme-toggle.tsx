@@ -17,7 +17,7 @@ const ThemeToggle = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="link" size="icon">
+          <Button className="h-8" variant="link" size="icon">
             {['dark'].includes(theme as string) && (
               <MoonIcon
                 onClick={() => setTheme('light')}

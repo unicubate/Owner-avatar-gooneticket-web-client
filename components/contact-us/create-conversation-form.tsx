@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { CreateConversationsModal } from '../messages/create-conversations-modal';
-import { ButtonInput } from '../ui-setting';
+import { Button } from '../ui/button';
 
 const CreateConversationForm = ({ item }: { item: any }) => {
   const {
@@ -17,26 +17,30 @@ const CreateConversationForm = ({ item }: { item: any }) => {
     <>
       {userStorage?.id ? (
         <>
-          <ButtonInput
-            type="button"
+          <Button
+            className="h-8 cursor-pointer gap-1 rounded-sm"
             variant="default"
-            className="w-full"
             onClick={() => setIsContact(true)}
-            icon={<MailPlusIcon className="size-5" />}
           >
-            Send message
-          </ButtonInput>
+            <MailPlusIcon className="size-5" />
+            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              Send message
+            </span>
+          </Button>
         </>
       ) : (
-        <ButtonInput
-          type="button"
-          variant="default"
-          className="w-full"
-          onClick={() => setIsOpenModalLogin(true)}
-          icon={<MailPlusIcon className="size-5" />}
-        >
-          Send message
-        </ButtonInput>
+        <>
+          <Button
+            className="h-8 cursor-pointer gap-1 rounded-sm"
+            variant="default"
+            onClick={() => setIsOpenModalLogin(true)}
+          >
+            <MailPlusIcon className="size-5" />
+            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+              Send message
+            </span>
+          </Button>
+        </>
       )}
 
       <LoginModal isOpen={isOpenModalLogin} setIsOpen={setIsOpenModalLogin} />
