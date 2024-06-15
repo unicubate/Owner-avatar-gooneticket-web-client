@@ -42,7 +42,7 @@ const OrdersIndex = () => {
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
     search,
-    organizationBuyerId: user?.organizationId,
+    customer: 'buyer',
     modelIds: model ? [model.toLocaleUpperCase()] : ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',

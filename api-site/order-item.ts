@@ -130,8 +130,6 @@ export const GetOneOrderItemAPI = (payload: {
   };
 };
 export const GetInfiniteOrderItemsAPI = (payload: {
-  organizationSellerId?: string;
-  organizationBuyerId?: string;
   orderId?: string;
   modelIds: string[];
   search?: string;
@@ -140,17 +138,17 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   daysConfirm?: number;
   status?: string;
   sort: SortModel;
+  customer: 'seller' | 'buyer';
 }) => {
   const {
     modelIds,
     days,
     orderId,
     daysConfirm,
-    organizationSellerId,
-    organizationBuyerId,
     search,
     take,
     sort,
+    customer,
     status,
   } = payload;
   return useInfiniteQuery({
@@ -167,9 +165,8 @@ export const GetInfiniteOrderItemsAPI = (payload: {
           sort,
           days,
           orderId,
+          customer,
           daysConfirm,
-          organizationBuyerId,
-          organizationSellerId,
           search: search,
           status: status?.toUpperCase(),
           page: Number(pageParam),

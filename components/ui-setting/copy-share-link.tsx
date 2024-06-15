@@ -56,18 +56,19 @@ export const CopyShareLink = ({
                 copyToClipBoard(link), setCopied(true);
               }}
               onMouseLeave={() => setCopied(false)}
+              icon={
+                copied ? (
+                  <>
+                    <CheckIcon className="size-4" />
+                  </>
+                ) : (
+                  <>
+                    <CopyIcon className="size-4" />
+                  </>
+                )
+              }
             >
-              {copied ? (
-                <>
-                  <CheckIcon className="size-4" />
-                  <span className="ml-1">Copied</span>
-                </>
-              ) : (
-                <>
-                  <CopyIcon className="size-4" />
-                  <span className="ml-1">Copy</span>
-                </>
-              )}
+              {copied ? 'Copied' : 'Copy'}
             </ButtonInput>
           </div>
         </DialogContent>
