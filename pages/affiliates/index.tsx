@@ -34,7 +34,7 @@ const AffiliateIndex = () => {
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
     search,
-    organizationBuyerId: user?.organizationId,
+    customer: 'buyer',
     modelIds: ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
