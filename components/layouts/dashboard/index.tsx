@@ -20,8 +20,8 @@ export type NavbarProps = {
 };
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  const { profile, username, email, theme } = useAuth() as any;
-  const user = { profile, username, email };
+  const { profile, username, email, status, theme } = useAuth() as any;
+  const user = { profile, username, email, status };
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
