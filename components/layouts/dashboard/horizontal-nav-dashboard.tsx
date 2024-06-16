@@ -174,6 +174,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                               <a
                                 href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}
                                 title="Dashboard"
+                                target="_blank"
                               >
                                 <span className="ml-2 cursor-pointer hover:text-indigo-600">
                                   {t.formatMessage({ id: 'MENU.DASHBOARD' })}
