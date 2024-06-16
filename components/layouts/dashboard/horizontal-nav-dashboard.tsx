@@ -1,7 +1,8 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import { UserModel } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { LogOutIcon, SettingsIcon } from 'lucide-react';
+import { HomeIcon, LogOutIcon, SettingsIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -20,7 +21,7 @@ import {
 } from '../../ui/dropdown-menu';
 
 interface Props {
-  user?: any;
+  user?: UserModel;
   showDrawer?: () => void;
 }
 
@@ -150,18 +151,39 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                             className="size-9"
                             profile={user?.profile}
                           />
-                          <div className="ml-2 hidden min-w-0 flex-1 lg:block">
-                            <p className="ml-1 w-auto text-sm font-bold text-gray-900 dark:text-white">
+
+                          <div className="ml-2 flex flex-col items-start justify-center">
+                            <div
+                              className="line-clamp-1 text-sm font-bold"
+                              title={`${user?.profile?.firstName} ${user?.profile?.lastName}`}
+                            >
                               {capitalizeFirstLetter(user?.profile?.firstName)}{' '}
                               {capitalizeFirstLetter(user?.profile?.lastName)}
-                            </p>
-                            <p className="mt-1 text-sm font-medium text-gray-600 sm:table-cell">
-                              <span>{user?.profile?.email}</span>
-                            </p>
+                            </div>
+                            <div className="line-clamp-1 text-xs font-normal text-gray-500">
+                              {user?.email}
+                            </div>
                           </div>
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent className="w-auto dark:border-gray-800 dark:bg-[#04080b]">
+                        {user?.status === 'CREATOR' ? (
+                          <>
+                            <DropdownMenuItem>
+                              <HomeIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                              <a
+                                href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}
+                                title="Dashboard"
+                              >
+                                <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                                  {t.formatMessage({ id: 'MENU.DASHBOARD' })}
+                                </span>
+                              </a>
+                            </DropdownMenuItem>
+                            <DropdownMenuSeparator />
+                          </>
+                        ) : null}
+
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/settings`)}>
                             <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />

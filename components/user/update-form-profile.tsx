@@ -15,6 +15,7 @@ import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting/button-input';
 import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
+import { Label } from '../ui/label';
 const { Option } = Select;
 
 type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
@@ -42,26 +43,23 @@ const beforeUpload = (file: FileType) => {
 type Props = {
   user: UserModel | any;
   profile: ProfileModel | any;
-  countries: any;
-  currencies: any;
 };
 
 const schema = yup.object({
   firstName: yup.string().required(),
+  username: yup.string().required('username is a required field'),
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
-  username: yup.string().required('username is a required field'),
-  currencyId: yup.string().uuid().required('currency is a required field'),
-  countryId: yup.string().uuid().required('country is a required field'),
 });
 
-const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
+const UpdateFormProfile = ({ profile, user }: Props) => {
   const [imageUrl, setImageUrl] = useState<string>(
     oneImageToURL(profile?.image),
   );
   const [attachment, setAttachment] = useState<any>();
   const [colors] = useState(arrayColors);
   const {
+    watch,
     control,
     setValue,
     handleSubmit,
@@ -75,14 +73,11 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
   useEffect(() => {
     if (profile) {
       const fields = [
-        'currencyId',
-        'countryId',
         'url',
         'phone',
         'firstName',
         'lastName',
-        'secondAddress',
-        'firstAddress',
+        'address',
         'description',
       ];
       fields?.forEach((field: any) => setValue(field, profile[field]));
@@ -91,7 +86,8 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
       const fields = ['username'];
       fields?.forEach((field: any) => setValue(field, user[field]));
     }
-  }, [profile, user, setValue]);
+  }, [user, profile, setValue]);
+  const watchUsername = watch('username', user?.username);
 
   const { mutateAsync: saveMutation } = UpdateOneProfileAPI({
     onSuccess: () => {
@@ -205,6 +201,23 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               />
             </div> */}
 
+            <div className="mt-2">
+              <TextInput
+                control={control}
+                label="Username"
+                type="text"
+                name="username"
+                placeholder="username"
+                errors={errors}
+                required
+                labelHelp={
+                  <Label className="ml-auto block text-start text-sm">
+                    {`${process.env.NEXT_PUBLIC_SITE}/${watchUsername}`}
+                  </Label>
+                }
+              />
+            </div>
+
             <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
               <div className="mt-2">
                 <TextInput
@@ -240,7 +253,7 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
             </div>
 
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
+            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
               <div className="mt-2">
                 <TextInput
                   label="Website"
@@ -253,21 +266,11 @@ const UpdateFormProfile = ({ profile, user, countries, currencies }: Props) => {
               </div>
               <div className="mt-2">
                 <TextInput
-                  label="First address"
+                  label="Address"
                   control={control}
                   type="text"
-                  name="firstAddress"
-                  placeholder="First address"
-                  errors={errors}
-                />
-              </div>
-              <div className="mt-2">
-                <TextInput
-                  label="Second address"
-                  control={control}
-                  type="text"
-                  name="secondAddress"
-                  placeholder="Second address"
+                  name="address"
+                  placeholder="address"
                   errors={errors}
                 />
               </div>

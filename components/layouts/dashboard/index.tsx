@@ -1,5 +1,6 @@
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { UserModel } from '@/types/user';
 import { useInputState } from '../../hooks';
 import { HeaderSite } from '../../ui-setting/header-site';
 import { useAuth } from '../../util/context-user';
@@ -19,8 +20,8 @@ export type NavbarProps = {
 };
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  const { profile, username, theme } = useAuth() as any;
-  const user = { profile, username };
+  const { profile, username, email, theme } = useAuth() as any;
+  const user = { profile, username, email };
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
@@ -39,7 +40,10 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       />
 
       <div className="flex flex-col">
-        <HorizontalNavDashboard showDrawer={showDrawer} user={user} />
+        <HorizontalNavDashboard
+          showDrawer={showDrawer}
+          user={user as UserModel}
+        />
 
         <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
           <SheetTrigger asChild></SheetTrigger>

@@ -22,6 +22,7 @@ export type ProfileFormModel = {
   currencyId: string;
   color: string;
   url: string;
+  address: string;
   countryId: string;
   imageList: any;
   social: any;

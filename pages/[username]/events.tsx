@@ -47,24 +47,6 @@ const EventsPublic = () => {
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
-  const dataTableProducts = isLoadingProduct ? (
-    itemsNumberArray(3).map((i, index) => (
-      <ProductEventSkeleton key={i} index={index} />
-    ))
-  ) : isErrorProduct ? (
-    <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
-    ''
-  ) : (
-    dataProduct?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item: ProductModel, index: number) =>
-        user?.organizationId ? (
-          <ListPublicProductsEvent item={item} key={index} index={index} />
-        ) : null,
-      )
-  );
-
   return (
     <>
       <LayoutUserPublicSite
@@ -95,7 +77,32 @@ const EventsPublic = () => {
 
             <div className="flow-root">
               <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-                {user?.organizationId ? dataTableProducts : null}
+                {user?.organizationId ? (
+                  isLoadingProduct ? (
+                    itemsNumberArray(3).map((i, index) => (
+                      <ProductEventSkeleton key={i} index={index} />
+                    ))
+                  ) : isErrorProduct ? (
+                    <ErrorFile
+                      title="404"
+                      description="Error find data please try again..."
+                    />
+                  ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
+                    ''
+                  ) : (
+                    dataProduct?.pages
+                      .flatMap((page: any) => page?.data?.value)
+                      .map((item: ProductModel, index: number) =>
+                        user?.organizationId ? (
+                          <ListPublicProductsEvent
+                            item={item}
+                            key={index}
+                            index={index}
+                          />
+                        ) : null,
+                      )
+                  )
+                ) : null}
               </div>
 
               {user?.organizationId && hasNextPage && (

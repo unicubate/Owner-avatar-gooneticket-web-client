@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteProductsAPI } from '@/api-site/product';
 import { ProductModel } from '@/types/product';
+import { UserModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
@@ -11,12 +12,7 @@ import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListPublicProductsEvent } from './list-public-products-event';
 
-const TablePublicProductsEvent = ({
-  organizationId,
-}: {
-  organizationId: string;
-}) => {
-  const { t, userStorage: user } = useInputState();
+const TablePublicProductsEvent = ({ user }: { user: UserModel }) => {
   const { search } = useInputState();
   const { ref, inView } = useInView();
 
@@ -33,7 +29,7 @@ const TablePublicProductsEvent = ({
     sort: 'DESC',
     modelIds: ['EVENT'],
     expired: 'FALSE',
-    organizationId,
+    organizationId: user?.organizationId,
   });
 
   return (
@@ -60,11 +56,13 @@ const TablePublicProductsEvent = ({
       </div>
 
       {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
-        <EmptyData
-          image={<TicketIcon className="size-10" />}
-          title="This creator hasn't published anything yet!"
-          description={`When he does, his publications will appear here first.`}
-        />
+        <>
+          <EmptyData
+            image={<TicketIcon className="size-10" />}
+            title={`This ${user?.status.toLowerCase()} has not yet published anything as an event`}
+            description={`When he does, his publications will appear here first.`}
+          />
+        </>
       ) : null}
 
       {hasNextPage && (

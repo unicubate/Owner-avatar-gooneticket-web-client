@@ -62,10 +62,7 @@ export const UpdateOneProfileAPI = ({
       const { attachment } = payload;
       let data = new FormData();
       data.append('url', `${payload.url ?? ''}`);
-      data.append('color', `${payload.color ?? ''}`);
-      data.append('currencyId', `${payload.currencyId ?? ''}`);
-      data.append('countryId', `${payload.countryId ?? ''}`);
-      data.append('birthday', `${payload.birthday ?? ''}`);
+      data.append('address', `${payload.address ?? ''}`);
       data.append('phone', `${payload.phone ?? ''}`);
       data.append('lastName', `${payload.lastName ?? ''}`);
       data.append('firstName', `${payload.firstName ?? ''}`);

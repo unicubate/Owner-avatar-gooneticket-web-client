@@ -140,8 +140,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
             </div>
 
             <div className="ml-auto flex items-center justify-end">
-              <div className="flex items-center space-x-2">
-                <ThemeToggle />
+              <div className="flex items-center space-x-1.5">
                 <div className="py-2 sm:mt-0">
                   {userVisiter?.id !== user?.id ? (
                     <CreateConversationForm item={user} />
@@ -157,6 +156,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                   ) : null}
                 </div>
 
+                <ThemeToggle />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button

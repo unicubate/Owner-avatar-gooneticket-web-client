@@ -28,9 +28,7 @@ const ProfilePublic = () => {
           <div className="container mx-auto space-y-4 p-4">
             <div className="flow-root">
               {user?.organizationId ? (
-                <TablePublicProductsEvent
-                  organizationId={user?.organizationId}
-                />
+                <TablePublicProductsEvent user={user} />
               ) : null}
             </div>
           </div>

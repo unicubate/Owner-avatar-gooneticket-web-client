@@ -1,8 +1,4 @@
-import {
-  GetAllCountiesAPI,
-  GetAllCurrenciesAPI,
-  GetOneProfileAPI,
-} from '@/api-site/profile';
+import { GetOneProfileAPI } from '@/api-site/profile';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { DeleteOneUser } from '@/components/user/delete-one-user';
@@ -17,10 +13,6 @@ const Settings = () => {
     profileId: user?.profileId,
   });
 
-  const { data: currencies } = GetAllCurrenciesAPI();
-
-  const { data: countries } = GetAllCountiesAPI();
-
   return (
     <>
       <LayoutDashboard title={'Settings'}>
@@ -29,12 +21,7 @@ const Settings = () => {
             <div className="flow-root">
               <div className="border-gray-200 pt-6 lg:order-1 lg:col-span-1">
                 {profile?.id ? (
-                  <UpdateFormProfile
-                    profile={profile}
-                    currencies={currencies}
-                    countries={countries}
-                    user={user}
-                  />
+                  <UpdateFormProfile profile={profile} user={user} />
                 ) : null}
 
                 {user?.provider === 'DEFAULT' ? <UpdateFormPassword /> : null}
