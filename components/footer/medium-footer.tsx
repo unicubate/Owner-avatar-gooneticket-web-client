@@ -132,6 +132,8 @@ const MediumFooter = () => {
                   height={180}
                   width={180}
                   alt="Payment cards"
+                  quality={90}
+                  priority={true}
                 />
               </li>
             </ul>
