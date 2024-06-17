@@ -122,7 +122,7 @@ const OrdersIndex = () => {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          handleDaysChange(30);
+                          handleDaysChange(120);
                         }}
                       >
                         <span className="cursor-pointer">
