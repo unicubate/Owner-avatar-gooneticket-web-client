@@ -2,7 +2,6 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
-import Image from 'next/image';
 
 interface Props {
   profile: any;
@@ -17,18 +16,25 @@ export function AvatarComponent(props: Props) {
         <div className="relative inline-flex shrink-0">
           {profile?.image && (
             <>
-              <Image
-                width={50}
-                height={50}
-                quality={90}
-                priority={true}
+              <Avatar
                 className={cn(
-                  `bg-${profile?.color}-600 rounded-full`,
+                  `bg-${profile?.color}-600 rounded-full object-cover`,
                   className,
                 )}
-                src={oneImageToURL(profile?.image)}
-                alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
-              />
+              >
+                <AvatarImage
+                  src={oneImageToURL(profile?.image)}
+                  alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
+                />
+                <AvatarFallback>
+                  {profile?.fullName
+                    ? capitalizeOneFirstLetter(String(profile?.fullName ?? ''))
+                    : capitalizeOneFirstLetter(
+                        String(profile?.firstName ?? ''),
+                        String(profile?.lastName ?? ''),
+                      )}
+                </AvatarFallback>
+              </Avatar>
             </>
           )}
 
