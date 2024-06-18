@@ -1,7 +1,7 @@
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
-import { Avatar } from 'antd';
 import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
 import Image from 'next/image';
 
@@ -36,15 +36,30 @@ export function AvatarComponent(props: Props) {
 
           {!profile?.image && (
             <>
-              <Avatar
-                className={cn(`rounded-full object-cover`, className)}
-                size={size}
-                alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
-                src={`https://ui-avatars.com/api/?name=${capitalizeOneFirstLetter(
-                  String(profile?.firstName ?? ''),
-                  String(profile?.lastName ?? ''),
-                )}&color=7F9CF5&background=EBF4FF`}
-              />
+              <Avatar>
+                <AvatarImage
+                  className={cn(`rounded-full object-cover`, className)}
+                  alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
+                  src={`https://ui-avatars.com/api/?name=${
+                    profile?.fullName
+                      ? capitalizeOneFirstLetter(
+                          String(profile?.fullName ?? ''),
+                        )
+                      : capitalizeOneFirstLetter(
+                          String(profile?.firstName ?? ''),
+                          String(profile?.lastName ?? ''),
+                        )
+                  }&color=7F9CF5&background=EBF4FF`}
+                />
+                <AvatarFallback>
+                  {profile?.fullName
+                    ? capitalizeOneFirstLetter(String(profile?.fullName ?? ''))
+                    : capitalizeOneFirstLetter(
+                        String(profile?.firstName ?? ''),
+                        String(profile?.lastName ?? ''),
+                      )}
+                </AvatarFallback>
+              </Avatar>
             </>
           )}
         </div>
