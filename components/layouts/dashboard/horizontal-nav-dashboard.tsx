@@ -145,14 +145,14 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                       <DropdownMenuTrigger asChild>
                         <button
                           type="button"
-                          className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+                          className="flex max-w-xs items-center gap-1 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
                         >
                           <AvatarComponent
                             className="size-9"
                             profile={user?.profile}
                           />
 
-                          <div className="ml-2 flex flex-col items-start justify-center">
+                          <div className="sr-only ml-2 flex flex-col items-start justify-center sm:not-sr-only">
                             <div
                               className="line-clamp-1 text-sm font-bold"
                               title={`${user?.profile?.firstName} ${user?.profile?.lastName}`}
