@@ -74,7 +74,7 @@ const ListCommentTransactions = ({
       <li key={index} className="py-4">
         <div className="flex items-start">
           <AvatarComponent
-            size={45}
+            className="size-9"
             profile={
               item?.profile?.username
                 ? item?.profile

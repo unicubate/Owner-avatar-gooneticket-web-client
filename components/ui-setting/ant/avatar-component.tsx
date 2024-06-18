@@ -2,17 +2,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
-import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
 import Image from 'next/image';
 
 interface Props {
   profile: any;
-  size?: number | ScreenSizeMap;
   className?: string;
 }
 
 export function AvatarComponent(props: Props) {
-  const { profile, size, className } = props;
+  const { profile, className } = props;
   return (
     <>
       <div className="relative sm:flex sm:items-center">
@@ -36,9 +34,8 @@ export function AvatarComponent(props: Props) {
 
           {!profile?.image && (
             <>
-              <Avatar>
+              <Avatar className={cn(`rounded-full object-cover`, className)}>
                 <AvatarImage
-                  className={cn(`rounded-full object-cover`, className)}
                   alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
                   src={`https://ui-avatars.com/api/?name=${
                     profile?.fullName

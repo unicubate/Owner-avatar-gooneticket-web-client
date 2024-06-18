@@ -97,7 +97,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
           <div className="flex flex-wrap justify-between pt-2">
             <p className="mt-1 flex items-center font-semibold">
               {item?.address ? (
-                <AvatarComponent size={35} profile={item?.profile} />
+                <AvatarComponent className="size-9" profile={item?.profile} />
               ) : null}
               <div className="ml-2 min-w-0 flex-1">
                 <p className="text-sm">{item?.organization?.name}</p>

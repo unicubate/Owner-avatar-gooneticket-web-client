@@ -103,7 +103,7 @@ const MessagesView = () => {
                     <div className="mt-auto flex items-center border-b-2 border-gray-50 p-2 dark:border-gray-900">
                       <div className="relative shrink-0 cursor-pointer">
                         <AvatarComponent
-                          size={40}
+                          className="size-9"
                           profile={conversation?.profile}
                         />
                       </div>

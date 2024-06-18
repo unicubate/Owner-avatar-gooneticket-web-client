@@ -51,7 +51,7 @@ export function ListConversationsMessage({ item, index }: Props) {
         }}
       >
         <div className="flex items-center">
-          <AvatarComponent size={50} profile={item?.profile} />
+          <AvatarComponent className="size-9" profile={item?.profile} />
           <div className="ml-2 min-w-0 flex-1">
             <div className="flex items-center">
               <p className="text-sm font-bold">

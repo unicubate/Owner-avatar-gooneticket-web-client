@@ -52,7 +52,7 @@ const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
   return (
     <>
       <div key={index} className="mt-4 flex items-start">
-        <AvatarComponent size={40} profile={item?.profile} />
+        <AvatarComponent className="size-9" profile={item?.profile} />
 
         <div className="ml-3">
           <div className="flex items-center space-x-px">
