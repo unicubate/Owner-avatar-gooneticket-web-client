@@ -3,6 +3,7 @@ import { oneImageToURL } from '@/utils';
 import { capitalizeOneFirstLetter } from '@/utils/utils';
 import { Avatar } from 'antd';
 import { ScreenSizeMap } from 'antd/es/_util/responsiveObserver';
+import Image from 'next/image';
 
 interface Props {
   profile: any;
@@ -18,12 +19,15 @@ export function AvatarComponent(props: Props) {
         <div className="relative inline-flex shrink-0">
           {profile?.image && (
             <>
-              <Avatar
+              <Image
+                width={50}
+                height={50}
+                quality={90}
+                priority={true}
                 className={cn(
                   `bg-${profile?.color}-600 rounded-full`,
                   className,
                 )}
-                size={size}
                 src={oneImageToURL(profile?.image)}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
               />

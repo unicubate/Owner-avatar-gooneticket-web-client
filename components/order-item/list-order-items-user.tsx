@@ -38,7 +38,7 @@ const ListOrderItemsUser = (props: Props) => {
   const { push } = useRouter();
   const { item, index } = props;
   const [copied, setCopied] = useState(false);
-  const { t, isOpen, setIsOpen, locale, ipLocation } = useInputState();
+  const { t, locale } = useInputState();
   const linkRedirect = `/orders/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`;
   return (
     <>

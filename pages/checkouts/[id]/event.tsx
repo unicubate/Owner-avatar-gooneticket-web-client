@@ -16,7 +16,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PriceModel } from '@/types/price';
-import { formateFromNow, formatePrice, formateToRFC2822 } from '@/utils';
+import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
@@ -168,12 +168,9 @@ const CheckoutEvent = () => {
                                 )}
                               </div>
 
-                              <div className="ml-auto hidden font-bold lg:table-cell">
+                              <div className="ml-auto hidden font-bold text-blue-600 lg:table-cell">
                                 <span className="text-lg">
-                                  {formateFromNow(
-                                    item?.expiredAt as Date,
-                                    locale,
-                                  )}
+                                  {formateDate(item?.expiredAt as Date, locale)}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
@@ -306,13 +303,23 @@ const CheckoutEvent = () => {
                                       {price?.name}
                                     </p>
 
-                                    <p className="text-gray-900 dark:text-white">
+                                    <div className="text-gray-900 dark:text-white">
                                       {formatePrice({
                                         currency: `${item?.currency?.code}`,
                                         value: Number(price?.amount ?? 0),
                                         isDivide: false,
                                       })}
-                                    </p>
+
+                                      {/* <ButtonInput
+                                        variant="link"
+                                        type="button"
+                                        size="icon"
+                                        title="Edit"
+                                        icon={
+                                          <CircleAlertIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                                        }
+                                      /> */}
+                                    </div>
                                     <input
                                       type="radio"
                                       {...register('amount')}
