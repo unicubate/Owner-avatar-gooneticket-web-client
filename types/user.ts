@@ -53,7 +53,7 @@ export type UserModel = {
   phoneConfirmedAt: Date;
   email: string;
   id: string;
-  status: 'CREATOR' | 'USER';
+  status: 'CREATOR' | 'CLIENT';
   username: string;
   organizationId: string;
   profileId: string;

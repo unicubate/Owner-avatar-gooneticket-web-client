@@ -25,9 +25,10 @@ const GoogleAuthLogin = () => {
               status: 'CLIENT',
             });
             setHasErrors(false);
-            window.location.href = `${
-              redirect ? redirect : `${user?.url}/orders`
-            }`;
+            window.location.href =
+              user?.status === 'CREATOR'
+                ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
+                : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
           } catch (error: any) {
             setHasErrors(true);
             setHasErrors(error.response.data.message);

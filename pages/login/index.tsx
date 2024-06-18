@@ -58,7 +58,10 @@ const Login = () => {
       setHasErrors(false);
       setLoading(false);
       if (user?.emailConfirmedAt) {
-        window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
+        window.location.href =
+          user?.status === 'CREATOR'
+            ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
+            : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
       } else {
         push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
       }
