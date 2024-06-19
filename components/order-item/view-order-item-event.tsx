@@ -2,7 +2,12 @@ import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateToRFC2822 } from '@/utils';
 import { QRCode, QRCodeProps } from 'antd';
-import { BadgeAlertIcon, CalendarDaysIcon, DownloadIcon } from 'lucide-react';
+import {
+  BadgeAlertIcon,
+  CalendarDaysIcon,
+  CheckCheckIcon,
+  DownloadIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
@@ -21,14 +26,14 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
   return (
     <>
       <div className="px-4 py-5">
-        <p className="mt-4 text-center text-3xl font-semibold">
+        <p className="mt-4 text-center text-2xl font-semibold uppercase">
           {orderItem?.organizationSeller?.name}
         </p>
 
         <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
           <p className="mt-4 text-center text-lg font-semibold">
             <QRCode
-              size={200}
+              size={250}
               errorLevel={level as QRCodeProps['errorLevel']}
               value={orderItem?.orderNumber}
             />
@@ -138,7 +143,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             {['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
               orderItem?.status,
             ) && (
-              <ButtonInput type="button" size="sm" variant="success">
+              <ButtonInput
+                icon={<CheckCheckIcon className="size-6" />}
+                type="button"
+                size="sm"
+                variant="success"
+              >
                 {orderItem?.status}
               </ButtonInput>
             )}
@@ -151,7 +161,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
               orderItem?.status,
             ) && orderItem?.product?.isExpired ? (
-              <ButtonInput type="button" size="sm" variant="danger">
+              <ButtonInput
+                icon={<BadgeAlertIcon className="size-6" />}
+                type="button"
+                size="sm"
+                variant="danger"
+              >
                 EXPIRED
               </ButtonInput>
             ) : (
