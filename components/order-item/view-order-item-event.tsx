@@ -33,7 +33,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
           <p className="mt-4 text-center text-lg font-semibold">
             <QRCode
-              size={250}
+              size={240}
               errorLevel={level as QRCodeProps['errorLevel']}
               value={orderItem?.orderNumber}
             />
@@ -58,10 +58,10 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </p>
           <p className="mt-2 font-semibold">
             <span>
-              {Number(orderItem?.priceDiscount) > 0 ? (
+              {Number(orderItem?.price) > 0 ? (
                 <SerialPrice
                   className="text-2xl"
-                  value={Number(orderItem?.priceDiscount)}
+                  value={Number(orderItem?.price)}
                   currency={{ code: String(orderItem?.currency) }}
                 />
               ) : (
@@ -72,7 +72,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <span className="ml-2 text-xl ">#{orderItem?.orderNumber}</span>
           </p>
           <p className="mt-4 text-xl font-semibold">
-            {orderItem?.product?.title}
+            {orderItem?.event?.title}
           </p>
         </div>
 
@@ -81,37 +81,36 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <ButtonInput
               type="button"
               className="uppercase"
-              variant={orderItem?.product?.isExpired ? 'danger' : 'success'}
+              variant={orderItem?.event?.isExpired ? 'danger' : 'success'}
               icon={
-                orderItem?.product?.isExpired ? (
+                orderItem?.event?.isExpired ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
                   <CalendarDaysIcon className="size-4" />
                 )
               }
             >
-              {formateToRFC2822(orderItem?.product?.expiredAt as Date, locale)}
+              {formateToRFC2822(orderItem?.event?.expiredAt as Date, locale)} at{' '}
+              {orderItem?.event?.timeInit}
             </ButtonInput>
           </p>
         </div>
-        <p className="mt-4 text-center text-xl font-bold">
-          <span>{orderItem?.product?.country?.name ?? ''}</span>
+        <p className="mt-4 text-center font-bold uppercase">
+          <span>{orderItem?.event?.country?.name ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
-          <span className="ml-2">{orderItem?.product?.address ?? ''}</span>
+          <span className="ml-2">{orderItem?.event?.city ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
-          <span className="ml-2">{orderItem?.product?.city ?? ''}</span>
+          <span className="ml-2">{orderItem?.event?.address ?? ''}</span>
         </p>
-        <p className="mt-2 text-center text-xl font-bold">
-          <span className="ml-2">{orderItem?.product?.timeInit ?? ''}</span>
-          {orderItem?.product?.timeEnd ? (
+        {/* <p className="mt-2 text-center text-xl font-bold">
+          <span className="ml-2">{orderItem?.event?.timeInit ?? ''}</span>
+          {orderItem?.event?.timeEnd ? (
             <>
               <span className="ml-1.5 text-gray-400">-</span>
-              <span className="ml-1.5">
-                {orderItem?.product?.timeEnd ?? ''}
-              </span>
+              <span className="ml-1.5">{orderItem?.event?.timeEnd ?? ''}</span>
             </>
           ) : null}
-        </p>
+        </p> */}
 
         <div className="mx-auto max-w-max">
           <div className="my-4 flex items-center space-x-4">
@@ -160,7 +159,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
 
             {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
               orderItem?.status,
-            ) && orderItem?.product?.isExpired ? (
+            ) && orderItem?.event?.isExpired ? (
               <ButtonInput
                 icon={<BadgeAlertIcon className="size-6" />}
                 type="button"

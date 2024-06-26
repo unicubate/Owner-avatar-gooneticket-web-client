@@ -1,6 +1,5 @@
-import { useCanonicalUrl } from '@/components/hooks';
+import { HeaderSite } from '@/components/ui-setting';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import Head from 'next/head';
 import { useInputState } from '../../hooks';
 import { HorizontalNavSite } from './horizontal-nav-site';
 import { VerticalNavSite } from './vertical-nav-site';
@@ -19,29 +18,25 @@ export type NavbarSiteProps = {
 };
 
 const LayoutSite = ({ children, title, metas }: IProps) => {
-  const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GooneTicket`;
-
-  const canonicalUrl = useCanonicalUrl();
   const { isOpen, setIsOpen, userStorage } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
   return (
     <>
-      <Head>
-        <title>{titleOutput}</title>
-        <meta
-          property="og:title"
-          content={process.env.NEXT_PUBLIC_NAME_SITE}
-          key="title"
-        />
-        {metas}
-        {process.env.NEXT_ENV === 'prod' && (
-          <link rel="canonical" href={canonicalUrl} />
-        )}
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-      </Head>
+      <HeaderSite
+        title={title}
+        metas={
+          <>
+            <meta
+              property="og:title"
+              key="title"
+              name="description"
+              content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
+            />
+          </>
+        }
+      />
 
       {/* <div className="min-h-screen space-y-5"> */}
       <HorizontalNavSite showDrawer={showDrawer} user={userStorage} />

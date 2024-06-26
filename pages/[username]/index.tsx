@@ -1,5 +1,5 @@
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import { TablePublicProductsEvent } from '@/components/event/table-public-products-event';
+import { TablePublicEvents } from '@/components/event/table-public-events';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { LoadingFile } from '@/components/ui-setting/ant';
@@ -24,12 +24,14 @@ const ProfilePublic = () => {
         }`}
         user={user}
       >
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
-          <div className="container mx-auto space-y-4 p-4">
-            <div className="flow-root">
-              {user?.organizationId ? (
-                <TablePublicProductsEvent user={user} />
-              ) : null}
+        <div className="mx-auto max-w-6xl py-6">
+          <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
+            <div className="container mx-auto space-y-4 p-4">
+              <div className="flow-root">
+                {user?.organizationId ? (
+                  <TablePublicEvents user={user} />
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

@@ -1,16 +1,16 @@
-import { GetInfiniteFollowsProductsAPI } from '@/api-site/product';
-import { ListPublicProductsEvent } from '@/components/event/list-public-products-event';
+import { GetInfiniteFollowsEventsAPI } from '@/api-site/event';
+import { ListPublicEvents } from '@/components/event/list-public-events';
 import {
   useInputState,
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
+import { EventSkeleton } from '@/components/skeleton/event-skeleton';
 import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { ProductModel } from '@/types/product';
+import { EventModel } from '@/types/event';
 import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 
@@ -18,15 +18,14 @@ const EventsIndex = () => {
   const { search, handleSetSearch } = useInputState();
 
   const {
-    isLoading: isLoadingProducts,
-    isError: isErrorProducts,
-    data: dataProducts,
+    isLoading: isLoadingEvents,
+    isError: isErrorEvents,
+    data: dataEvents,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteFollowsProductsAPI({
+  } = GetInfiniteFollowsEventsAPI({
     search,
-    modelIds: ['EVENT'],
     take: 10,
     sort: 'DESC',
   });
@@ -50,19 +49,19 @@ const EventsIndex = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-2">
-                {isLoadingProducts
-                  ? itemsNumberArray(2).map((i, index) => (
-                      <ProductEventSkeleton key={i} index={index} />
+              <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-3 lg:grid-cols-3">
+                {isLoadingEvents
+                  ? itemsNumberArray(3).map((i, index) => (
+                      <EventSkeleton key={i} index={index} />
                     ))
-                  : isErrorProducts
+                  : isErrorEvents
                     ? null
-                    : Number(dataProducts?.pages[0]?.data?.total) <= 0
+                    : Number(dataEvents?.pages[0]?.data?.total) <= 0
                       ? null
-                      : dataProducts?.pages
+                      : dataEvents?.pages
                           .flatMap((page: any) => page?.data?.value)
-                          .map((item: ProductModel, index: number) => (
-                            <ListPublicProductsEvent
+                          .map((item: EventModel, index: number) => (
+                            <ListPublicEvents
                               item={item}
                               key={index}
                               index={index}
@@ -70,7 +69,7 @@ const EventsIndex = () => {
                           ))}
               </div>
 
-              {isErrorProducts ? (
+              {isErrorEvents ? (
                 <ErrorFile
                   title="404"
                   className="flex items-center justify-center"
@@ -78,7 +77,7 @@ const EventsIndex = () => {
                 />
               ) : null}
 
-              {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
+              {Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
                 <EmptyData
                   image={<TicketIcon className="size-10" />}
                   title="This page hasn't published anything!"

@@ -34,6 +34,7 @@ export function AvatarImageComponent(props: Props) {
                 className={cn(`object-cover`, className)}
                 height={50}
                 width={60}
+                preview={preview}
                 alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
                 src={`https://ui-avatars.com/api/?name=${capitalizeOneFirstLetter(
                   String(profile?.firstName ?? ''),

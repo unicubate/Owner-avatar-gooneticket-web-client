@@ -6,7 +6,7 @@ export function useRedirectAfterSomeSeconds(redirectTo: string, seconds = 5) {
   const router = useRouter();
 
   useEffect(() => {
-    if (secondsRemaining === 0) router.push('/orders');
+    if (secondsRemaining === 0) router.push(redirectTo);
 
     const timer = setTimeout(() => {
       setSecondsRemaining((prevSecondsRemaining) => prevSecondsRemaining - 1);
@@ -18,5 +18,9 @@ export function useRedirectAfterSomeSeconds(redirectTo: string, seconds = 5) {
     };
   }, [router, secondsRemaining, redirectTo]);
 
-  return { secondsRemaining };
+  const minutes = Math.floor(secondsRemaining / 60);
+  const displaySeconds = secondsRemaining % 60;
+  const timerRemaining = `${minutes < 0 && secondsRemaining === 0 ? '0:0' : `${minutes}:${displaySeconds < 10 ? `${displaySeconds}` : displaySeconds}`} `;
+
+  return { timerRemaining };
 }

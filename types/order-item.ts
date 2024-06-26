@@ -1,5 +1,7 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { KeyAsString } from '@/utils/utils';
+import { EventModel } from './event';
+import { EventDateModel } from './event-date';
 import { ProductModel } from './product';
 import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
@@ -55,6 +57,7 @@ export type OrderItemModel = {
   organizationSeller: { name: string; image: string };
   profileSeller: ProfileItemModel;
   product: ProductModel;
+  event: EventModel & EventDateModel;
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
 };

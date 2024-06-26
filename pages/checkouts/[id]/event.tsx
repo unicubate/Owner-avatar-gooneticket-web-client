@@ -1,25 +1,35 @@
 'use client';
 
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
-import { GetOneProductAPI } from '@/api-site/product';
+import { GetOneEventAPI } from '@/api-site/event';
+import { GetOneEventDateAPI } from '@/api-site/event-date';
+import { GetInfinitePricesAPI } from '@/api-site/price';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { MediumFooter } from '@/components/footer/medium-footer';
-import { useInputState, useReactHookForm } from '@/components/hooks';
+import { useInputState, useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
-import { ButtonInput, ListCarouselUpload } from '@/components/ui-setting';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  ListCarouselUpload,
+} from '@/components/ui-setting';
+import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PriceModel } from '@/types/price';
 import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
+import { capitalizeFirstLetter } from '@/utils/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
@@ -53,10 +63,16 @@ const schema = yup.object({
 const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
   const { ipLocation, userStorage, locale } = useInputState();
-  const { query, back } = useRouter();
-  const { id: productId, partner, username } = query;
-  const { isValid, watch, register } = useReactHookForm({
-    schema,
+  const { query } = useRouter();
+  const { id: eventDateId, partner } = query;
+
+  const {
+    watch,
+    register,
+    formState: { isValid },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
   });
   const watchAmount = watch('amount', null);
   const watchPaymentMethod = watch('paymentMethod', null);
@@ -65,25 +81,47 @@ const CheckoutEvent = () => {
   const [isEdit, setIsEdit] = useState(userAddress?.isUpdated);
 
   const {
+    data: eventDate,
+    isError: isErrorEventDate,
+    isLoading: isLoadingEventDate,
+  } = GetOneEventDateAPI({
+    id: String(eventDateId),
+  });
+
+  const {
+    data: item,
+    isLoading: isLoadingEvent,
+    isError: isErrorEvent,
+  } = GetOneEventAPI({
+    enableVisibility: 'TRUE',
+    slugOrId: eventDate?.eventId,
+  });
+
+  const { data: affiliation } = GetOneAffiliationAPI({
+    code: `${partner ?? ''}`,
+    eventId: item?.id,
+  });
+
+  const {
+    isLoading: isLoadingPrices,
+    isError: isErrorPrices,
+    data: dataPrices,
+    isFetchingNextPage: isFetchingNextPagePrices,
+    hasNextPage: hasNextPagePrices,
+    fetchNextPage: fetchNextPagePrices,
+  } = GetInfinitePricesAPI({
+    take: 10,
+    sort: 'ASC',
+    eventId: item?.id,
+  });
+
+  const {
     isError: isErrorUser,
     isLoading: isLoadingUser,
     data: user,
   } = GetOneUserPublicAPI({
-    username: String(username),
+    username: item?.profile?.username,
     organizationVisitorId: userStorage?.organizationId,
-  });
-  const {
-    data: item,
-    isLoading: isLoadingProduct,
-    isError: isErrorProduct,
-  } = GetOneProductAPI({
-    enableVisibility: 'TRUE',
-    productSlug: String(productId),
-  });
-
-  const { data: affiliation } = GetOneAffiliationAPI({
-    code: String(partner),
-    productId: item?.id,
   });
 
   // const userAddress = {
@@ -91,9 +129,7 @@ const CheckoutEvent = () => {
   //   email: watchEmail,
   // };
 
-  const priceJsonParse = watchAmount
-    ? JSON.parse(watchAmount)
-    : (item?.prices?.[0] as PriceModel);
+  const priceJsonParse = watchAmount ? JSON.parse(watchAmount) : item?.onePrice;
   const calculatePrice = Number(priceJsonParse?.amount) * increment;
   const newAmount: NewAmountType = {
     quantity: increment,
@@ -105,13 +141,10 @@ const CheckoutEvent = () => {
     taxes: Number(userStorage?.organization?.taxes),
   };
 
-  const newAffiliation = {
-    id: affiliation?.id,
-    code: affiliation?.code,
-    percent: affiliation?.percent,
-    productId: affiliation?.productId,
-  };
-
+  const { timerRemaining } = useRedirectAfterSomeSeconds(
+    `/events/${item?.slug}${partner ? `?partner=${partner}` : ''}`,
+    500,
+  );
   return (
     <>
       <LayoutCheckoutSite
@@ -121,7 +154,7 @@ const CheckoutEvent = () => {
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="mt-2 grid grid-cols-1 gap-y-10 sm:mt-12 sm:grid-cols-1 sm:gap-8 lg:grid-cols-5 lg:items-start lg:gap-x-10 xl:grid-cols-6 xl:gap-x-10">
-              {isLoadingProduct || isLoadingUser ? (
+              {isLoadingEvent || isLoadingUser || isLoadingEventDate ? (
                 <EventCheckoutSkeleton />
               ) : item?.id ? (
                 <Fragment>
@@ -145,16 +178,16 @@ const CheckoutEvent = () => {
 
                           {item?.title ? (
                             <div className="my-2 text-lg font-bold">
-                              {item?.title ?? ''}b
+                              {item?.title ?? ''}
                             </div>
                           ) : null}
 
                           <div className="relative mt-4 shrink-0 cursor-pointer">
                             <div className="flex items-center">
                               <div className="flex shrink-0 items-center font-bold">
-                                {Number(item?.prices?.length) > 0 ? (
+                                {Number(item?.onePrice?.amount) > 0 ? (
                                   <>
-                                    <span className="ml-1 text-xl">
+                                    <span className="text-xl">
                                       {formatePrice({
                                         currency: `${item?.currency?.code}`,
                                         value: Number(newAmount?.oneValue ?? 0),
@@ -164,26 +197,35 @@ const CheckoutEvent = () => {
                                     </span>
                                   </>
                                 ) : (
-                                  <span className="ml-1 text-xl">Free</span>
+                                  <span className="text-xl">Free</span>
                                 )}
                               </div>
 
                               <div className="ml-auto hidden font-bold text-blue-600 lg:table-cell">
                                 <span className="text-lg">
-                                  {formateDate(item?.expiredAt as Date, locale)}
+                                  {capitalizeFirstLetter(
+                                    formateToRFC2822(
+                                      eventDate?.expiredAt,
+                                      locale,
+                                    ),
+                                  )}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-sm">
-                                  {item?.timeInit ?? ''}
+                                  {eventDate?.timeInit ?? ''}
                                 </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-1.5 text-sm">
-                                  {item?.timeEnd ?? ''}
-                                </span>
+                                {eventDate?.timeEnd ? (
+                                  <>
+                                    <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                      -
+                                    </span>
+                                    <span className="ml-1.5 text-sm">
+                                      {eventDate?.timeEnd ?? ''}
+                                    </span>
+                                  </>
+                                ) : null}
                               </div>
                             </div>
                           </div>
@@ -192,76 +234,96 @@ const CheckoutEvent = () => {
                             <div className="hidden items-center lg:table-cell">
                               <div className="flex shrink-0 font-bold">
                                 <span className="text-lg">
-                                  {item?.address ?? ''}
+                                  {eventDate?.address ?? ''}
                                 </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-lg">
-                                  {item?.city ?? ''}
+                                  {eventDate?.city ?? ''}
                                 </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-lg">
-                                  {item?.country?.name ?? ''}
+                                  {eventDate?.country?.name ?? ''}
                                 </span>
                               </div>
                             </div>
 
                             <div className="text-lg lg:hidden">
                               <div className="flex font-bold">Date</div>
-                              <div className="ml-auto">
-                                <span className="text-sm">
-                                  {formateToRFC2822(
-                                    item?.expiredAt as Date,
-                                    locale,
+                              <div className="ml-auto font-bold text-blue-600">
+                                <span>
+                                  {capitalizeFirstLetter(
+                                    formateToRFC2822(
+                                      eventDate?.expiredAt,
+                                      locale,
+                                    ),
                                   )}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-sm">
-                                  {item?.timeInit ?? ''}
+                                  {eventDate?.timeInit ?? ''}
                                 </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-1.5 text-sm">
-                                  {item?.timeEnd ?? ''}
-                                </span>
+                                {eventDate?.timeEnd ? (
+                                  <>
+                                    <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                      -
+                                    </span>
+                                    <span className="ml-1.5 text-sm">
+                                      {eventDate?.timeEnd ?? ''}
+                                    </span>
+                                  </>
+                                ) : null}
                               </div>
                             </div>
 
                             <div className="mt-4 text-lg lg:hidden">
                               <div className="flex font-bold">Location</div>
-                              <div className="ml-auto">
+                              <div className="ml-auto font-bold">
                                 <span className="text-sm">
-                                  {item?.address ?? ''}
+                                  {eventDate?.address ?? ''}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-sm">
-                                  {item?.city ?? ''}
+                                  {eventDate?.city ?? ''}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-1.5 text-sm">
-                                  {item?.country?.name ?? ''}
+                                  {eventDate?.country?.name ?? ''}
                                 </span>
                               </div>
                             </div>
                           </div>
 
-                          <div className="sm:flex sm:items-center sm:justify-between">
+                          {/* <div className="mt-2 sm:flex sm:items-center sm:justify-between">
+                            <div className="py-2 sm:mt-0">
+                              <p className="font-bold">
+                                Please select the date
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="mt-4 space-y-4">
+                            <ListEventDatesForEventDate
+                              event={{ id: item?.id, slug: item?.slug }}
+                            />
+                          </div> */}
+
+                          <div className="mt-2 sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
                               <p className="font-bold">
                                 Please select the seat category
                               </p>
                             </div>
-                            <div className="py-2 sm:mt-0">
+                            <div className="mt-2 py-2 sm:mt-0">
                               <div className="flex items-center rounded border border-gray-200 dark:border-gray-800">
                                 <ButtonInput
                                   type="button"
@@ -292,44 +354,71 @@ const CheckoutEvent = () => {
                           </div>
 
                           <div className="mt-4 space-y-4">
-                            {item?.prices?.length > 0 &&
-                              item?.prices.map((price, index) => (
-                                <div key={index}>
-                                  <label
-                                    htmlFor={price?.id}
-                                    className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
-                                  >
-                                    <p className="text-gray-700 dark:text-gray-200">
-                                      {price?.name}
-                                    </p>
+                            {isLoadingPrices ? (
+                              <LoadingFile />
+                            ) : isErrorPrices ? (
+                              <ErrorFile
+                                title="404"
+                                description="Error find data please try again"
+                              />
+                            ) : Number(dataPrices?.pages[0]?.data?.total) <=
+                              0 ? (
+                              <div>
+                                <label
+                                  htmlFor={`price`}
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-[#04080b]"
+                                >
+                                  <p className="text-gray-700 dark:text-gray-200">
+                                    Free
+                                  </p>
+                                </label>
+                              </div>
+                            ) : (
+                              dataPrices?.pages.map((page, index: number) => (
+                                <Fragment key={index}>
+                                  {page?.data?.value.map(
+                                    (price: PriceModel, index: number) => (
+                                      <div key={index}>
+                                        <label
+                                          htmlFor={price?.id}
+                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+                                        >
+                                          <p className="text-gray-700 dark:text-gray-200">
+                                            {price?.name}
+                                          </p>
 
-                                    <div className="text-gray-900 dark:text-white">
-                                      {formatePrice({
-                                        currency: `${item?.currency?.code}`,
-                                        value: Number(price?.amount ?? 0),
-                                        isDivide: false,
-                                      })}
-
-                                      {/* <ButtonInput
-                                        variant="link"
-                                        type="button"
-                                        size="icon"
-                                        title="Edit"
-                                        icon={
-                                          <CircleAlertIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                                        }
-                                      /> */}
-                                    </div>
-                                    <input
-                                      type="radio"
-                                      {...register('amount')}
-                                      value={JSON.stringify(price)}
-                                      id={price?.id}
-                                      className="sr-only"
-                                    />
-                                  </label>
-                                </div>
-                              ))}
+                                          <div className="text-gray-900 dark:text-white">
+                                            {formatePrice({
+                                              currency: `${item?.currency?.code}`,
+                                              value: Number(price?.amount ?? 0),
+                                              isDivide: false,
+                                            })}
+                                          </div>
+                                          <input
+                                            type="radio"
+                                            {...register('amount')}
+                                            value={JSON.stringify(price)}
+                                            id={price?.id}
+                                            className="sr-only"
+                                          />
+                                        </label>
+                                      </div>
+                                    ),
+                                  )}
+                                </Fragment>
+                              ))
+                            )}
+                            {hasNextPagePrices && (
+                              <div className="mx-auto mt-2 justify-center text-center">
+                                <ButtonLoadMore
+                                  size="sm"
+                                  className="mx-[200px]"
+                                  hasNextPage={hasNextPagePrices}
+                                  isFetchingNextPage={isFetchingNextPagePrices}
+                                  onClick={() => fetchNextPagePrices()}
+                                />
+                              </div>
+                            )}
                           </div>
 
                           <hr className="mt-8 dark:border-gray-800" />
@@ -340,7 +429,7 @@ const CheckoutEvent = () => {
                                 <ButtonInput
                                   type="button"
                                   size="sm"
-                                  variant={isEdit ? 'info' : 'outline'}
+                                  variant={isEdit ? 'primary' : 'outline'}
                                   onClick={() => setIsEdit((i: boolean) => !i)}
                                   className="ml-auto"
                                 >
@@ -360,24 +449,44 @@ const CheckoutEvent = () => {
                   </div>
 
                   <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                    <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                    <div className="mt-8 flex items-center">
+                      <h2 className="text-base font-bold">Checkout</h2>
+                      <ButtonInput
+                        type="button"
+                        variant="outline"
+                        className="ml-auto w-[80px]"
+                        icon={
+                          <span className="relative flex size-6">
+                            <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex size-6 rounded-full bg-green-500"></span>
+                          </span>
+                        }
+                      >
+                        <span className="font-bold">{timerRemaining}</span>
+                      </ButtonInput>
+                    </div>
+                    <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
-                        <li className="mb-4 mt-2 flex items-center justify-between text-sm">
-                          <span className="text-sm dark:text-gray-600">
-                            {formateToRFC2822(item?.expiredAt as Date, locale)}
+                        <li className="mb-4 mt-2 flex items-center justify-between text-sm font-semibold">
+                          <span className="text-sm text-blue-600">
+                            {formateDate(eventDate?.expiredAt, locale)}
                           </span>
-                          <p className="ml-auto dark:text-gray-400">
+                          <p className="ml-auto text-blue-600">
                             <span className="text-sm">
-                              {item?.timeInit ?? ''}
+                              {eventDate?.timeInit ?? ''}
                             </span>
-                            <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                              -
-                            </span>
-                            <span className="ml-1.5 text-sm">
-                              {item?.timeEnd ?? ''}
-                            </span>
+                            {eventDate?.timeEnd ? (
+                              <>
+                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
+                                  -
+                                </span>
+                                <span className="ml-1.5 text-sm">
+                                  {eventDate?.timeEnd ?? ''}
+                                </span>
+                              </>
+                            ) : null}
                           </p>
                         </li>
 
@@ -417,7 +526,7 @@ const CheckoutEvent = () => {
                           </p>
                           {newAmount?.value ? (
                             <>
-                              <p className="ml-1 text-xl font-bold dark:text-white">
+                              <p className="ml-1 text-2xl font-bold dark:text-white">
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
@@ -432,130 +541,129 @@ const CheckoutEvent = () => {
                       </div>
                     </div>
 
-                    {!item?.isExpired && (
-                      <>
-                        {isEdit &&
-                        userAddress?.isUpdated &&
-                        newAmount?.value ? (
-                          <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
-                            <div className="p-4 sm:p-4 lg:p-3">
-                              <div className="font-extrabold">
-                                Payment method
-                              </div>
-                              <div className="mt-4 space-y-4">
-                                {paymentMethodArray.map((lk, index) => (
-                                  <div key={index}>
-                                    <label
-                                      htmlFor={lk?.value}
-                                      className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
-                                    >
-                                      <p className="text-gray-700 dark:text-gray-200">
-                                        {lk?.name}
-                                      </p>
+                    {isEdit && userAddress?.isUpdated && newAmount?.value ? (
+                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                        <div className="p-4 sm:p-4 lg:p-3">
+                          <div className="font-extrabold">Payment method</div>
+                          <div className="mt-4 space-y-4">
+                            {paymentMethodArray.map((lk, index) => (
+                              <div key={index}>
+                                <label
+                                  htmlFor={lk?.value}
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+                                >
+                                  <p className="text-gray-700 dark:text-gray-200">
+                                    {lk?.name}
+                                  </p>
 
-                                      <p className="text-gray-700 dark:text-white">
-                                        {lk?.image}
-                                      </p>
-                                      <input
-                                        type="radio"
-                                        {...register('paymentMethod')}
-                                        value={lk?.value}
-                                        id={lk?.value}
-                                        className="sr-only"
-                                      />
-                                    </label>
-                                  </div>
-                                ))}
+                                  <p className="text-gray-700 dark:text-white">
+                                    {lk?.image}
+                                  </p>
+                                  <input
+                                    type="radio"
+                                    {...register('paymentMethod')}
+                                    value={lk?.value}
+                                    id={lk?.value}
+                                    className="sr-only"
+                                  />
+                                </label>
                               </div>
-                            </div>
+                            ))}
                           </div>
-                        ) : null}
+                        </div>
+                      </div>
+                    ) : null}
 
-                        {isEdit ? (
+                    {isEdit ? (
+                      <>
+                        {Number(item?.onePrice?.amount) > 0 ? (
                           <>
-                            {Number(item?.prices?.length) > 0 ? (
+                            {isValid && watchPaymentMethod ? (
                               <>
-                                {isValid && watchPaymentMethod ? (
+                                {newAmount?.value ? (
                                   <>
-                                    {newAmount?.value ? (
-                                      <>
-                                        {watchPaymentMethod === 'STRIPE' ? (
-                                          <CreateCardStripe
-                                            paymentModel="STRIPE-EVENT"
-                                            data={{
-                                              userAddress,
-                                              productId: item?.id,
-                                              amount: newAmount,
-                                              affiliation: newAffiliation,
-                                              organizationSellerId:
-                                                item?.organizationId,
-                                              organizationBuyerId:
-                                                userStorage?.organizationId,
-                                            }}
-                                          />
-                                        ) : null}
+                                    {watchPaymentMethod === 'STRIPE' ? (
+                                      <CreateCardStripe
+                                        paymentModel="STRIPE-EVENT"
+                                        data={{
+                                          userAddress,
+                                          eventId: item?.id,
+                                          amount: newAmount,
+                                          eventDateId: eventDate?.id,
+                                          affiliation: affiliation,
+                                          organizationSellerId:
+                                            item?.organizationId,
+                                          organizationBuyerId:
+                                            userStorage?.organizationId,
+                                        }}
+                                      />
+                                    ) : null}
 
-                                        {watchPaymentMethod === 'PAYPAL' ? (
-                                          <CreatePaymentPayPal
-                                            paymentModel="PAYPAL-EVENT"
-                                            data={{
-                                              userAddress,
-                                              productId: item?.id,
-                                              amount: newAmount,
-                                              affiliation: newAffiliation,
-                                              organizationSellerId:
-                                                item?.organizationId,
-                                              organizationBuyerId:
-                                                userStorage?.organizationId,
-                                            }}
-                                          />
-                                        ) : null}
-                                      </>
-                                    ) : (
-                                      <div className="my-4 flex items-center">
-                                        <ButtonInput
-                                          type="submit"
-                                          variant="primary"
-                                          className="w-full"
-                                        >
-                                          Continue
-                                        </ButtonInput>
-                                      </div>
-                                    )}
+                                    {watchPaymentMethod === 'PAYPAL' ? (
+                                      <CreatePaymentPayPal
+                                        paymentModel="PAYPAL-EVENT"
+                                        data={{
+                                          userAddress,
+                                          eventDateId: eventDate?.id,
+                                          eventId: item?.id,
+                                          amount: newAmount,
+                                          affiliation: affiliation,
+                                          organizationSellerId:
+                                            item?.organizationId,
+                                          organizationBuyerId:
+                                            userStorage?.organizationId,
+                                        }}
+                                      />
+                                    ) : null}
                                   </>
-                                ) : null}
+                                ) : (
+                                  <div className="my-4 flex items-center">
+                                    <ButtonInput
+                                      type="submit"
+                                      variant="primary"
+                                      className="w-full"
+                                    >
+                                      Continue
+                                    </ButtonInput>
+                                  </div>
+                                )}
                               </>
-                            ) : (
-                              <>
-                                <CreatePaymentFree
-                                  paymentModel="FREE-EVENT"
-                                  data={{
-                                    userAddress,
-                                    productId: item?.id,
-                                    affiliation: newAffiliation,
-                                    amount: {
-                                      quantity: 1,
-                                      price: 0,
-                                      currency: 'USD',
-                                      value: 0,
-                                      oneValue: Number(priceJsonParse?.amount),
-                                    },
-                                    organizationSellerId: item?.organizationId,
-                                    organizationBuyerId:
-                                      userStorage?.organizationId,
-                                  }}
-                                />
-                              </>
-                            )}
+                            ) : null}
                           </>
-                        ) : null}
+                        ) : (
+                          <>
+                            <CreatePaymentFree
+                              paymentModel="FREE-EVENT"
+                              data={{
+                                userAddress,
+                                eventId: item?.id,
+                                eventDateId: eventDate?.id,
+                                affiliation: affiliation,
+                                amount: {
+                                  quantity: 1,
+                                  price: 0,
+                                  currency: 'USD',
+                                  value: 0,
+                                  country: ipLocation?.countryCode,
+                                  oneValue: Number(priceJsonParse?.amount),
+                                  taxes: Number(
+                                    userStorage?.organization?.taxes,
+                                  ),
+                                },
+                                organizationSellerId: item?.organizationId,
+                                organizationBuyerId:
+                                  userStorage?.organizationId,
+                              }}
+                            />
+                          </>
+                        )}
                       </>
-                    )}
+                    ) : null}
                   </div>
                 </Fragment>
               ) : null}
             </div>
-            {isErrorUser || isErrorProduct ? (
+            {isErrorUser || isErrorEvent || isErrorEventDate ? (
               <div className="items-center justify-center text-center">
                 <ErrorFile
                   title="404"

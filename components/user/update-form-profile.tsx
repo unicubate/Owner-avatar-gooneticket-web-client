@@ -7,11 +7,12 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Avatar, GetProp, Select, Upload, UploadProps } from 'antd';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting/button-input';
 import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
@@ -58,17 +59,18 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
   );
   const [attachment, setAttachment] = useState<any>();
   const [colors] = useState(arrayColors);
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
+    reset,
     watch,
-    control,
     setValue,
+    control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   useEffect(() => {
     if (profile) {

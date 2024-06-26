@@ -1,7 +1,7 @@
 import { Card } from '../ui/card';
 import { Skeleton } from '../ui/skeleton';
 
-const ProductEventSkeleton = ({ index }: { index: number }) => {
+const EventSkeleton = ({ index }: { index: number }) => {
   return (
     <Card key={index} className="w-full dark:border-gray-800 dark:bg-black/15">
       <div className="p-8 sm:px-6 sm:py-4">
@@ -27,4 +27,4 @@ const ProductEventSkeleton = ({ index }: { index: number }) => {
     </Card>
   );
 };
-export { ProductEventSkeleton };
+export { EventSkeleton };

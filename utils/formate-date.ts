@@ -20,6 +20,15 @@ export const formateFromNow = (date: Date, locale: string) => {
     : dateInit.setLocale(locale).toFormat('D');
 };
 
+export const formateToCccc = (date: Date, locale: string) =>
+  DateTime.fromISO(String(date)).setLocale(locale).toFormat('cccc');
+
+export const formateTodd = (date: Date, locale: string) =>
+  DateTime.fromISO(String(date)).setLocale(locale).toFormat('dd');
+
+export const formateToLLLL = (date: Date, locale: string) =>
+  DateTime.fromISO(String(date)).setLocale(locale).toFormat('LLLL');
+
 export const formateYYDDMM = (date: Date, locale: string) => {
   const dateInit = DateTime.fromISO(String(date));
   return dateInit.setLocale(locale).toFormat('cccc dd LLLL yyyy HH:mm');

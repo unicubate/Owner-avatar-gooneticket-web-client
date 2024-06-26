@@ -8,7 +8,7 @@ type Props = {
   organizationId: string;
 };
 
-export function PublicProductsEvent(props: Props) {
+export function PublicEvents(props: Props) {
   const { organizationId } = props;
   const { ref, inView } = useInView();
 

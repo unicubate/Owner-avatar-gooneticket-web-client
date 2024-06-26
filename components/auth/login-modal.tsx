@@ -1,12 +1,12 @@
 import { loginUserAPI } from '@/api-site/user';
 import { UserLoginFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { X } from 'lucide-react';
 import Link from 'next/link';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
@@ -26,17 +26,17 @@ const LoginModal: React.FC<{
   isOpen: boolean;
   setIsOpen: any;
 }> = ({ isOpen, setIsOpen }) => {
-  const { linkHref } = useInputState();
+  const { loading, setLoading, hasErrors, setHasErrors, linkHref } =
+    useInputState();
   const redirect = linkHref;
   const {
     control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
     payload: UserLoginFormModel,
@@ -98,7 +98,7 @@ const LoginModal: React.FC<{
                   label="Email"
                   type="email"
                   name="email"
-                  placeholder="Email Address"
+                  placeholder="Email address"
                   errors={errors}
                 />
               </div>

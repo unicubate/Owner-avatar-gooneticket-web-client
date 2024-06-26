@@ -1,17 +1,17 @@
-import { GetInfiniteProductsAPI } from '@/api-site/product';
+import { GetInfiniteEventsAPI } from '@/api-site/event';
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import { ListPublicProductsEvent } from '@/components/event/list-public-products-event';
+import { ListPublicEvents } from '@/components/event/list-public-events';
 import {
   useInputState,
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
-import { ProductEventSkeleton } from '@/components/skeleton/product-event-skeleton';
+import { EventSkeleton } from '@/components/skeleton/event-skeleton';
 import { ButtonLoadMore } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
-import { ProductModel } from '@/types/product';
+import { EventModel } from '@/types/event';
 import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';
 
@@ -31,17 +31,16 @@ const EventsPublic = () => {
   });
 
   const {
-    isLoading: isLoadingProduct,
-    isError: isErrorProduct,
-    data: dataProduct,
+    isLoading: isLoadingEvent,
+    isError: isErrorEvent,
+    data: dataEvent,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteProductsAPI({
+  } = GetInfiniteEventsAPI({
     search,
     take: 10,
     sort: 'DESC',
-    modelIds: ['EVENT'],
     expired: 'FALSE',
     organizationId: user?.organizationId,
   });
@@ -78,23 +77,23 @@ const EventsPublic = () => {
             <div className="flow-root">
               <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
                 {user?.organizationId ? (
-                  isLoadingProduct ? (
+                  isLoadingEvent ? (
                     itemsNumberArray(3).map((i, index) => (
-                      <ProductEventSkeleton key={i} index={index} />
+                      <EventSkeleton key={i} index={index} />
                     ))
-                  ) : isErrorProduct ? (
+                  ) : isErrorEvent ? (
                     <ErrorFile
                       title="404"
                       description="Error find data please try again..."
                     />
-                  ) : Number(dataProduct?.pages[0]?.data?.total) <= 0 ? (
+                  ) : Number(dataEvent?.pages[0]?.data?.total) <= 0 ? (
                     ''
                   ) : (
-                    dataProduct?.pages
+                    dataEvent?.pages
                       .flatMap((page: any) => page?.data?.value)
-                      .map((item: ProductModel, index: number) =>
+                      .map((item: EventModel, index: number) =>
                         user?.organizationId ? (
-                          <ListPublicProductsEvent
+                          <ListPublicEvents
                             item={item}
                             key={index}
                             index={index}

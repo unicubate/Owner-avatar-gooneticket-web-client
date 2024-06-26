@@ -1,5 +1,4 @@
 import { UserModel } from '@/types/user';
-import { useAuth } from '../../util/context-user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
 import { HeaderSite } from '@/components/ui-setting';
@@ -13,12 +12,10 @@ interface IProps {
 }
 
 const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
-  const { theme } = useAuth() as any;
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
-  // const user = useAuth() as any;
 
   return (
     <>

@@ -1,35 +1,34 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetInfiniteProductsAPI } from '@/api-site/product';
+import { GetInfiniteEventsAPI } from '@/api-site/event';
 import { ProductModel } from '@/types/product';
 import { UserVisitorModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
 import { ButtonLoadMore } from '../ui-setting';
 import { ErrorFile } from '../ui-setting/ant/error-file';
 import { Skeleton } from '../ui/skeleton';
-import { ListLastProductsEvent } from './list-last-products-event';
+import { ListLastEvents } from './list-last-events';
 
-export function PublicLastProductsEvent({
+export function PublicLastEvents({
   userVisitor,
 }: {
   userVisitor: UserVisitorModel;
 }) {
   const {
-    isLoading: isLoadingProducts,
-    isError: isErrorProducts,
-    data: dataProducts,
+    isLoading: isLoadingEvents,
+    isError: isErrorEvents,
+    data: dataEvents,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteProductsAPI({
+  } = GetInfiniteEventsAPI({
     take: 6,
     sort: 'DESC',
     organizationId: userVisitor?.organizationId,
     status: 'ACTIVE',
     expired: 'FALSE',
-    modelIds: ['EVENT'],
   });
 
-  const dataTable = isLoadingProducts ? (
+  const dataTable = isLoadingEvents ? (
     <>
       {itemsNumberArray(4).map((i, index) => (
         <li key={index} className="flex items-center space-x-2 py-2">
@@ -41,18 +40,18 @@ export function PublicLastProductsEvent({
         </li>
       ))}
     </>
-  ) : isErrorProducts ? (
+  ) : isErrorEvents ? (
     <ErrorFile title="404" description="Error find data please try again..." />
-  ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
+  ) : Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
     ''
   ) : (
     <>
       <div className="mt-8 flow-root">
         <ul className="-my-7 divide-y divide-gray-200 dark:divide-gray-800">
-          {dataProducts?.pages
+          {dataEvents?.pages
             .flatMap((page: any) => page?.data?.value)
             .map((item: ProductModel, index) => (
-              <ListLastProductsEvent item={item} key={index} />
+              <ListLastEvents item={item} key={index} />
             ))}
         </ul>
       </div>

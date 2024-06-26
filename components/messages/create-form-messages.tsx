@@ -2,11 +2,12 @@ import { CreateOneConversationMessagesAPI } from '@/api-site/conversations';
 import { ConversationModel, MessageFormModel } from '@/types/message';
 import { AlertDangerNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
+import { yupResolver } from '@hookform/resolvers/yup';
 import EmojiPicker from 'emoji-picker-react';
 import { useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { useInputState } from '../hooks';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { SwitchInput } from '../ui-setting/ant';
 
@@ -22,18 +23,18 @@ export function CreateFormMessages(props: {
   const [isOpenEmoji, setIsOpenEmoji] = useState(false);
   const { conversation, chatContainerRef, model } = props;
 
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
     reset,
-    setValue,
     watch,
+    setValue,
     control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchDescription = watch('description', '');
 
   // Create or Update data

@@ -10,7 +10,7 @@ import { useEffect, useMemo } from 'react';
 const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
   const token = String(query.token);
-  const { secondsRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
+  const { timerRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
 
   // this should be run only once per application lifetime
   useEffect(() => {
@@ -138,8 +138,7 @@ const TransactionSuccess = () => {
               </h3>
               <p className="my-2 text-gray-600">
                 Thank you for completing your secure online payment redirecting
-                to orders in {secondsRemaining}{' '}
-                {secondsRemaining > 1 ? 'seconds' : 'second'}.
+                to orders in {timerRemaining}
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>
               <div className="mt-4 flex items-center space-x-4">

@@ -59,7 +59,7 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
       <form onSubmit={handleUserPageSubmit}>
         <div className="flex-auto justify-center">
           {hasErrors && (
-            <Alert variant="destructive" className="mb-4">
+            <Alert variant="destructive" className="mt-4">
               <AlertDescription>{hasErrors}</AlertDescription>
             </Alert>
           )}

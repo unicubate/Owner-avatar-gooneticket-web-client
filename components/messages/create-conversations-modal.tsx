@@ -1,10 +1,11 @@
 import { createOneConversationAPI } from '@/api-site/conversations';
 import { ConversationFormModel } from '@/types/message';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { X } from 'lucide-react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { useInputState } from '../hooks';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 import { Alert, AlertDescription } from '../ui/alert';
 
@@ -18,18 +19,18 @@ export function CreateConversationsModal(props: {
   user: any;
 }) {
   const { isOpen, setIsOpen, user } = props;
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
-    watch,
     reset,
+    watch,
     setValue,
     control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchDescription = watch('description', '');
 
   const onSubmit: SubmitHandler<ConversationFormModel> = async (

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useReactHookForm } from '@/components/hooks';
+import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextPasswordInput } from '@/components/ui-setting/shadcn';
@@ -10,8 +10,9 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { resetPasswordAPI } from '../../../api-site/user';
 
@@ -29,15 +30,16 @@ const ResetPassword = () => {
   const { redirect } = query;
   const token = String(query?.token);
 
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
     control,
+    setValue,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   const onSubmit: SubmitHandler<UserResetPasswordFormModel> = async (
     payload: UserResetPasswordFormModel,

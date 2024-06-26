@@ -2,12 +2,12 @@ import { CreateOrUpdateOneCommentAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
@@ -33,19 +33,27 @@ export function CreateOrUpdateFormComment(props: {
     setOpenModal,
   } = props;
 
-  const { isOpen, setIsOpen, userStorage } = useInputState();
   const {
-    reset,
-    setValue,
-    watch,
-    control,
-    handleSubmit,
-    errors,
     loading,
     setLoading,
     hasErrors,
     setHasErrors,
-  } = useReactHookForm({ schema });
+    isOpen,
+    setIsOpen,
+    userStorage,
+  } = useInputState();
+  const {
+    reset,
+    watch,
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+
   const watchDescription = watch('description', '');
 
   useEffect(() => {

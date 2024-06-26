@@ -1,10 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
-import {
-  useDecrementTimer,
-  useInputState,
-  useReactHookForm,
-} from '@/components/hooks';
+import { useDecrementTimer, useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { PhoneNumberInput } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
@@ -13,11 +9,12 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserRegisterFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Checkbox } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import {
   registerCheckEmailOrPhoneUserAPI,
@@ -48,21 +45,27 @@ const Register = () => {
 
   const [isSuccessCheckEmailOrPhone, setIsSuccessCheckEmailOrPhone] =
     useState(false);
-  const { ipLocation } = useInputState();
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
-    watch,
-    control,
-    handleSubmit,
-    errors,
     loading,
     setLoading,
     hasErrors,
+    setHasErrors,
+    ipLocation,
     hasSuccess,
     setHasSuccess,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+  } = useInputState();
+  const {
+    watch,
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchPhone = watch('phone', '');
   const watchCode = watch('code', '');
   const watchPassword = watch('password', '');

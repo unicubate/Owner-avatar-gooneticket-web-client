@@ -173,11 +173,20 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Products route */
   getProducts: GET(`${baseUrl}/products`),
-  createOneProduct: POST(`${baseUrl}/products`),
   getFollowsProducts: GET(`${baseUrl}/products/follows`),
-  updateOneProduct: PUT(`${baseUrl}/products/:productId`),
   getOneProduct: GET(`${baseUrl}/products/view`),
-  deleteOneProduct: DELETE(`${baseUrl}/products/:productId`),
+
+  /****************** Events route */
+  getEvents: GET(`${baseUrl}/events`),
+  getFollowsEvents: GET(`${baseUrl}/events/follows`),
+  getOneEvent: GET(`${baseUrl}/events/view/:slugOrId`),
+
+  /****************** Price route */
+  getPrices: GET(`${baseUrl}/prices`),
+
+  /****************** EventDate route */
+  getEventDates: GET(`${baseUrl}/event-dates`),
+  getOneEventDate: GET(`${baseUrl}/event-dates/view/:id`),
 
   /****************** Payments route */
   getOnePaymentsStripeClientSecret: GET(

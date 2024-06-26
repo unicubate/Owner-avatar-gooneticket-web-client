@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useDecrementTimer, useInputState } from '@/components/hooks';
-import { useReactHookForm } from '@/components/hooks/use-react-hook-form';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput, PhoneNumberInput } from '@/components/ui-setting';
 import { TextInput } from '@/components/ui-setting/shadcn';
@@ -9,10 +8,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginPhoneFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import {
   loginCheckEmailOrPhoneUserAPI,
@@ -35,17 +35,23 @@ const LoginPhone = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
-    watch,
-    control,
-    handleSubmit,
-    errors,
     loading,
     setLoading,
     hasErrors,
     setHasErrors,
     hasSuccess,
     setHasSuccess,
-  } = useReactHookForm({ schema });
+  } = useInputState();
+  const {
+    watch,
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors, isDirty, isValid },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchCode = watch('code', '');
   const watchPhone = watch('phone', '');
 

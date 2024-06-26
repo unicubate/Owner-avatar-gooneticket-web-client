@@ -9,7 +9,7 @@ type Props = {
   item: ProductModel;
 };
 
-export function ListLastProductsEvent(props: Props) {
+export function ListLastEvents(props: Props) {
   const { locale, ipLocation } = useInputState();
   const { item } = props;
   return (

@@ -16,7 +16,7 @@ const badgeVariants = cva(
           'border-transparent border-transparent bg-destructive text-destructive-foreground hover:bg-destructive/80',
         warning:
           'border-transparent bg-warning text-warning-foreground hover:bg-warning/50',
-        info: 'border-transparent bg-info text-info-foreground hover:bg-info/50',
+        primary: 'bg-primary text-primary-foreground hover:bg-primary/50',
         success:
           'border-transparent bg-success text-success-foreground hover:bg-success/50',
         danger:
@@ -36,7 +36,10 @@ export interface BadgeProps
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props} />
+    <div
+      className={cn(`border-none ${badgeVariants({ variant })}`, className)}
+      {...props}
+    />
   );
 }
 

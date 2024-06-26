@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { useReactHookForm } from '@/components/hooks';
+import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
@@ -10,9 +10,10 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { passwordResetUserAPI } from '../../api-site/user';
 
@@ -26,22 +27,25 @@ const schema = yup.object({
 });
 
 const ForgotPassword = () => {
-  const { query, push } = useRouter();
+  const { query } = useRouter();
   const { redirect } = query;
   const {
-    watch,
-    control,
-    handleSubmit,
-    errors,
-    isValid,
-    isDirty,
     loading,
     setLoading,
     hasErrors,
     setHasErrors,
     hasSuccess,
     setHasSuccess,
-  } = useReactHookForm({ schema });
+  } = useInputState();
+  const {
+    watch,
+    control,
+    handleSubmit,
+    formState: { errors, isDirty, isValid },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchEmail = watch('email', '');
 
   const onSubmit: SubmitHandler<UserForgotPasswordFormModel> = async (

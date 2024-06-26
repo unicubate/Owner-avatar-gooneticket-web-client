@@ -1,5 +1,5 @@
 import { CreateContactAPI } from '@/api-site/contact';
-import { useReactHookForm, useUploadItem } from '@/components/hooks';
+import { useInputState, useUploadItem } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import {
   SwitchInput,
@@ -13,9 +13,10 @@ import {
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
 import { UploadOutlined } from '@ant-design/icons';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Checkbox, Upload } from 'antd';
 import Link from 'next/link';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const schema = yup.object({
@@ -36,17 +37,19 @@ const schema = yup.object({
 
 const CreateContactForm = () => {
   const { fileList, handleFileChange } = useUploadItem({});
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
     reset,
     watch,
+    setValue,
     control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
+
   const watchEnableUpload = watch('enableUpload', false);
 
   const { mutateAsync: saveMutation } = CreateContactAPI({

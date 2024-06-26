@@ -1,4 +1,5 @@
 import { logoutUsersAPI } from '@/api-site/user';
+import { useInputState } from '@/components/hooks';
 import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { UserModel } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
@@ -6,7 +7,6 @@ import { HomeIcon, LogOutIcon, SettingsIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useIntl } from 'react-intl';
 import { NavbarProps } from '.';
 import { AvatarComponent } from '../../ui-setting/ant';
 import { LangToggle } from '../../ui-setting/lang-toggle';
@@ -26,8 +26,8 @@ interface Props {
 }
 
 const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
-  const t = useIntl();
   const { push, pathname } = useRouter();
+  const { t, linkHref } = useInputState();
   const [navigation] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
@@ -53,7 +53,7 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
 
   const logoutUserItem = async () => {
     await logoutUsersAPI();
-    push(`/login`);
+    push(`/login?redirect=${linkHref}`);
     location.reload();
   };
 

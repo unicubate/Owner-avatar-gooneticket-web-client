@@ -1,33 +1,32 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetInfiniteProductsAPI } from '@/api-site/product';
-import { ProductModel } from '@/types/product';
+import { GetInfiniteEventsAPI } from '@/api-site/event';
+import { EventModel } from '@/types/event';
 import { UserModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks';
-import { ProductEventSkeleton } from '../skeleton/product-event-skeleton';
+import { EventSkeleton } from '../skeleton/event-skeleton';
 import { ButtonLoadMore } from '../ui-setting';
 import { EmptyData } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { ListPublicProductsEvent } from './list-public-products-event';
+import { ListPublicEvents } from './list-public-events';
 
-const TablePublicProductsEvent = ({ user }: { user: UserModel }) => {
+const TablePublicEvents = ({ user }: { user: UserModel }) => {
   const { search } = useInputState();
   const { ref, inView } = useInView();
 
   const {
-    isLoading: isLoadingProducts,
-    isError: isErrorProducts,
-    data: dataProducts,
+    isLoading: isLoadingEvents,
+    isError: isErrorEvents,
+    data: dataEvents,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteProductsAPI({
+  } = GetInfiniteEventsAPI({
     search,
     take: 10,
     sort: 'DESC',
-    modelIds: ['EVENT'],
     expired: 'FALSE',
     organizationId: user?.organizationId,
   });
@@ -35,27 +34,27 @@ const TablePublicProductsEvent = ({ user }: { user: UserModel }) => {
   return (
     <>
       <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-        {isLoadingProducts ? (
+        {isLoadingEvents ? (
           itemsNumberArray(3).map((i, index) => (
-            <ProductEventSkeleton key={i} index={index} />
+            <EventSkeleton key={i} index={index} />
           ))
-        ) : isErrorProducts ? (
+        ) : isErrorEvents ? (
           <ErrorFile
             title="404"
             description="Error find data please try again..."
           />
-        ) : Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
+        ) : Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
           ''
         ) : (
-          dataProducts?.pages
+          dataEvents?.pages
             .flatMap((page: any) => page?.data?.value)
-            .map((item: ProductModel, index: number) => (
-              <ListPublicProductsEvent item={item} key={index} index={index} />
+            .map((item: EventModel, index: number) => (
+              <ListPublicEvents item={item} key={index} index={index} />
             ))
         )}
       </div>
 
-      {Number(dataProducts?.pages[0]?.data?.total) <= 0 ? (
+      {Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
         <>
           <EmptyData
             image={<TicketIcon className="size-10" />}
@@ -77,4 +76,4 @@ const TablePublicProductsEvent = ({ user }: { user: UserModel }) => {
     </>
   );
 };
-export { TablePublicProductsEvent };
+export { TablePublicEvents };

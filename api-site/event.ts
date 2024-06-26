@@ -1,33 +1,29 @@
 import { makeApiCall } from '@/api-site/clients';
-import { ProductModel } from '@/types/product';
-import { ModelType, SortModel } from '@/utils/paginations';
+import { EventModel } from '@/types/event';
+import { SortModel } from '@/utils/paginations';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const GetOneProductAPI = (payload: {
-  productId?: string;
-  productSlug?: string;
-  organizationId?: string;
+export const GetOneEventAPI = (payload: {
+  slugOrId: string;
   enableVisibility?: 'TRUE' | 'FALSE';
 }) => {
-  const { productId, organizationId, enableVisibility, productSlug } = payload;
+  const { slugOrId, enableVisibility } = payload;
   const { data, isError, isLoading, isPending, status, refetch } = useQuery({
-    queryKey: ['product', { ...payload }],
+    queryKey: ['event', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
-        action: 'getOneProduct',
+        action: 'getOneEvent',
+        urlParams: { slugOrId },
         queryParams: {
-          productId,
-          organizationId,
           enableVisibility,
-          productSlug,
         },
       }),
-    // staleTime: 60_000,
+    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
   return {
-    data: data?.data as ProductModel,
+    data: data?.data as EventModel,
     isError,
     isPending,
     isLoading,
@@ -36,38 +32,35 @@ export const GetOneProductAPI = (payload: {
   };
 };
 
-export const GetInfiniteProductsAPI = (payload: {
-  organizationId?: string;
+export const GetInfiniteEventsAPI = (payload: {
+  organizationId: string;
   take: number;
   status?: string;
   sort: SortModel;
   search?: string;
-  modelIds: ModelType[];
   enableVisibility?: 'TRUE' | 'FALSE';
   expired: 'TRUE' | 'FALSE';
 }) => {
   const {
     organizationId,
     take,
+    expired,
     sort,
     status,
     enableVisibility,
-    modelIds,
     search,
-    expired,
   } = payload;
   return useInfiniteQuery({
-    queryKey: ['products', 'infinite', { ...payload }],
+    queryKey: ['events', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await makeApiCall({
-        action: 'getProducts',
+        action: 'getEvents',
         queryParams: {
           organizationId,
           take,
           sort,
           search,
-          modelIds,
           expired,
           enableVisibility,
           status: status?.toUpperCase(),
@@ -78,25 +71,23 @@ export const GetInfiniteProductsAPI = (payload: {
   });
 };
 
-export const GetInfiniteFollowsProductsAPI = (payload: {
+export const GetInfiniteFollowsEventsAPI = (payload: {
   take: number;
   sort: SortModel;
   search?: string;
   status?: string;
-  modelIds: ModelType[];
 }) => {
-  const { take, sort, status, search, modelIds } = payload;
+  const { take, sort, status, search } = payload;
   return useInfiniteQuery({
-    queryKey: ['products-follows', 'infinite', { ...payload }],
+    queryKey: ['events-follows', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await makeApiCall({
-        action: 'getFollowsProducts',
+        action: 'getFollowsEvents',
         queryParams: {
           take,
           sort,
           search,
-          modelIds,
           status: status?.toUpperCase(),
           page: Number(pageParam),
         },

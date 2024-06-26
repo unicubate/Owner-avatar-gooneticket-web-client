@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
-import { useReactHookForm } from '@/components/hooks';
+import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput } from '@/components/ui-setting';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
@@ -8,10 +8,11 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserLoginFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import {
   loginCheckEmailOrPhoneUserAPI,
@@ -32,18 +33,16 @@ const Login = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const [isSuccessCheckEmail, setIsSuccessCheckEmail] = useState(false);
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
     watch,
     control,
     handleSubmit,
-    errors,
-    loading,
-    isValid,
-    isDirty,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors, isValid, isDirty },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchEmail = watch('email', '');
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (

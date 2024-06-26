@@ -21,6 +21,9 @@ export function useInputState() {
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined,
   );
+  const [hasSuccess, setHasSuccess] = useState<boolean | string | undefined>(
+    undefined,
+  );
 
   const handleClearDate = () => {
     setFromAt(null);
@@ -58,6 +61,8 @@ export function useInputState() {
     loading,
     isOpen,
     hasErrors,
+    hasSuccess,
+    setHasSuccess,
     setIsOpen,
     setLoading,
     setSuccess,

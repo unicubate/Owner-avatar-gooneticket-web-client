@@ -1,5 +1,4 @@
 import { logoutUsersAPI } from '@/api-site/user';
-import { useCanonicalUrl } from '@/components/hooks';
 import { ButtonInput, HeaderSite, ThemeToggle } from '@/components/ui-setting';
 import {
   DropdownMenu,
@@ -28,16 +27,12 @@ interface IProps {
 }
 
 const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
-  const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GooneTicket`;
-
-  const canonicalUrl = useCanonicalUrl();
-  const { t, userStorage: userVisiter } = useInputState();
+  const { t, userStorage: userVisiter, linkHref } = useInputState();
   const { back, push } = useRouter();
 
   const logoutUserItem = async () => {
     await logoutUsersAPI();
-    push(`/login`);
+    push(`/login?redirect=${linkHref}`);
     location.reload();
   };
 

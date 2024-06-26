@@ -1,9 +1,10 @@
 import { updateUpdatePasswordAPI } from '@/api-site/user';
 import { UserUpdatePasswordFormModel } from '@/types/user';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
-import { SubmitHandler } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { TextPasswordInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
@@ -15,16 +16,18 @@ const schema = yup.object({
 });
 
 const UpdateFormPassword = () => {
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
+    reset,
+    watch,
+    setValue,
     control,
     handleSubmit,
-    errors,
-    loading,
-    reset,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   const onSubmit: SubmitHandler<UserUpdatePasswordFormModel> = async (
     payload: any,

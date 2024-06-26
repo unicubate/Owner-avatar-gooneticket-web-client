@@ -39,13 +39,30 @@ const ListOrderItemsUser = (props: Props) => {
   const { item, index } = props;
   const [copied, setCopied] = useState(false);
   const { t, locale } = useInputState();
-  const linkRedirect = `/orders/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`;
+  const arrayItem = [
+    {
+      model: 'EVENT',
+      title: item?.event?.title,
+      url: `/orders/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`,
+    },
+    {
+      model: 'PRODUCT',
+      title: item?.product?.title,
+      url: `/orders/${item?.orderNumber}/product?model=${item?.model.toLocaleLowerCase()}`,
+    },
+  ];
+  const oneItem = (model: string) =>
+    arrayItem.find((item) => item?.model === model);
+
   return (
     <>
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            <Link href={linkRedirect} title={item?.product?.title}>
+            <Link
+              href={`${oneItem(item?.model)?.url}`}
+              title={oneItem(item?.model)?.title}
+            >
               {item?.uploadsImages?.length > 0 ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <Image
@@ -57,7 +74,7 @@ const ListOrderItemsUser = (props: Props) => {
                       folder: String(item?.model.toLocaleLowerCase()),
                       fileName: item?.uploadsImages[0]?.path,
                     })}`}
-                    alt={item?.product?.title}
+                    alt={`${oneItem(item?.model)?.title}`}
                   />
                 </div>
               ) : null}
@@ -73,11 +90,14 @@ const ListOrderItemsUser = (props: Props) => {
                 </span>
               </div>
 
-              {item?.product?.title ? (
+              {item?.id ? (
                 <p className="mt-2 font-bold transition-all duration-200 hover:text-blue-600">
-                  <Link href={linkRedirect} title={item?.product?.title}>
+                  <Link
+                    href={`${oneItem(item?.model)?.url}`}
+                    title={oneItem(item?.model)?.title}
+                  >
                     <ReadMore
-                      html={String(item?.product?.title ?? '')}
+                      html={`${oneItem(item?.model)?.title}`}
                       value={100}
                     />
                   </Link>
@@ -108,8 +128,9 @@ const ListOrderItemsUser = (props: Props) => {
                   </p>
                 )}
 
-                {!['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
-                item?.product?.isExpired ? (
+                {item?.model === 'EVENT' &&
+                !['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
+                item?.event?.isExpired ? (
                   <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
                     <Badge className="gap-1 rounded-sm" variant="danger">
                       <BadgeAlertIcon className="size-3.5" />
@@ -141,7 +162,7 @@ const ListOrderItemsUser = (props: Props) => {
           )}
 
           {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(item?.status) &&
-          item?.product?.isExpired ? (
+          item?.event?.isExpired ? (
             <Badge className="gap-1 rounded-sm" variant="danger">
               <BadgeAlertIcon className="size-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -160,10 +181,10 @@ const ListOrderItemsUser = (props: Props) => {
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
           <div className="ml-4 min-w-0 flex-1">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {Number(item?.priceDiscount) > 0 ? (
+              {Number(item?.price) > 0 ? (
                 <SerialPrice
                   className="text-sm"
-                  value={Number(item?.priceDiscount)}
+                  value={Number(item?.price)}
                   currency={{ code: String(item?.currency) }}
                 />
               ) : (
@@ -186,7 +207,10 @@ const ListOrderItemsUser = (props: Props) => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
               <DropdownMenuGroup>
-                <Link href={linkRedirect}>
+                <Link
+                  href={`${oneItem(item?.model)?.url}`}
+                  title={oneItem(item?.model)?.title}
+                >
                   <DropdownMenuItem>
                     <MoveRightIcon className="size-4 text-gray-600 hover:text-blue-600" />
                     <span className="ml-2 cursor-pointer hover:text-blue-600">
@@ -194,13 +218,17 @@ const ListOrderItemsUser = (props: Props) => {
                     </span>
                   </DropdownMenuItem>
                 </Link>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => setCopied(true)}>
-                  <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                    {t.formatMessage({ id: 'UTIL.SHARE' })}
-                  </span>
-                </DropdownMenuItem>
+                {item?.model === 'EVENT' && (
+                  <>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem onClick={() => setCopied(true)}>
+                      <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                      <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                        {t.formatMessage({ id: 'UTIL.SHARE' })}
+                      </span>
+                    </DropdownMenuItem>
+                  </>
+                )}
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>

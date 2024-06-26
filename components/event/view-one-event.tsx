@@ -1,32 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { HtmlParser } from '@/utils/html-parser';
-import { useRouter } from 'next/router';
 import 'react-h5-audio-player/lib/styles.css';
 import { ButtonInput, CopyShareLink } from '../ui-setting';
 import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
-import { CreateOrUpdateOneCartAPI } from '@/api-site/cart';
-import { ProductModel } from '@/types/product';
-import { formatePrice, formateToRFC2822 } from '@/utils';
-import { MessageCircleIcon, ShareIcon, TicketPlusIcon } from 'lucide-react';
+import { EventModel } from '@/types/event';
+import { formatePrice } from '@/utils';
+import { MessageCircleIcon, ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
-import { ListComments } from '../comment/list-comments';
+import { ListEventDatesForEventDate } from '../event-date/list-event-dates-for-event-date';
 import { useInputState } from '../hooks';
 
 type Props = {
-  item: ProductModel;
+  item: EventModel;
 };
 
-const ViewProductsEvent = ({ item }: Props) => {
-  const { pathname, push } = useRouter();
-
-  const { linkHref, isOpen, setIsOpen, locale, userStorage, ipLocation } =
-    useInputState();
-
-  const { mutateAsync: saveMutation } = CreateOrUpdateOneCartAPI({
-    onSuccess: () => { },
-    onError: () => { },
-  });
+const ViewOneEvent = ({ item }: Props) => {
+  const { isOpen, setIsOpen, locale, userStorage } = useInputState();
 
   return (
     <>
@@ -46,36 +36,34 @@ const ViewProductsEvent = ({ item }: Props) => {
             </div>
           ) : null}
 
-          <div className="items-center justify-items-center">
+          {/* <div className="items-center justify-items-center">
             <ButtonInput
               type="button"
               className="w-full"
               variant="primary"
               size="lg"
               onClick={() => {
-                push(
-                  `/checkouts/${item?.slug}/event?username=${item?.profile?.username}`,
-                )
+                push(`/checkouts/${item?.slug}/event`);
               }}
               icon={<TicketPlusIcon className="size-6" />}
             >
               Book
             </ButtonInput>
-          </div>
+          </div> */}
 
           {item?.title ? (
-            <div className="mt-2 text-2xl font-bold">{item?.title ?? ''}</div>
+            <div className="text-2xl font-bold">{item?.title ?? ''}</div>
           ) : null}
 
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-                {Number(item?.prices?.length) > 0 ? (
+                {Number(item?.onePrice?.amount) > 0 ? (
                   <>
                     <span className="ml-1 text-3xl">
                       {formatePrice({
                         currency: String(item?.currency?.code),
-                        value: Number(item?.prices?.[0].amount ?? 0),
+                        value: Number(item?.onePrice?.amount ?? 0),
                         isDivide: false,
                       })}
                     </span>
@@ -102,7 +90,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                 ) : null} */}
               </div>
 
-              <div className="ml-auto hidden font-bold lg:table-cell">
+              {/* <div className="ml-auto hidden font-bold lg:table-cell">
                 <span className="text-lg">
                   {formateToRFC2822(item?.expiredAt as Date, locale)}
                 </span>
@@ -114,27 +102,34 @@ const ViewProductsEvent = ({ item }: Props) => {
                   -
                 </span>
                 <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
-              </div>
+              </div> */}
             </div>
           </div>
+          <div className="mt-4 space-y-4">
+            <ListEventDatesForEventDate
+              event={{ id: item?.id, slug: item?.slug }}
+            />
+          </div>
           <div className="relative mt-4 shrink-0 cursor-pointer">
-            <div className="hidden items-center lg:table-cell">
+            {/* <div className="hidden items-center lg:table-cell">
               <div className="flex shrink-0 font-bold">
-                <span className="text-lg">{item?.address ?? ''}</span>
+                <span className="text-lg uppercase">{item?.address ?? ''}</span>
                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                   -
                 </span>
-                <span className="ml-2 text-lg">{item?.city ?? ''}</span>
+                <span className="ml-2 text-lg uppercase">
+                  {item?.city ?? ''}
+                </span>
                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                   -
                 </span>
-                <span className="ml-2 text-lg">
+                <span className="ml-2 text-lg uppercase">
                   {item?.country?.name ?? ''}
                 </span>
               </div>
-            </div>
+            </div> */}
 
-            <div className="text-lg lg:hidden">
+            {/* <div className="text-lg lg:hidden">
               <div className="flex font-bold">Date</div>
               <div className="ml-auto">
                 <span className="text-sm">
@@ -166,7 +161,7 @@ const ViewProductsEvent = ({ item }: Props) => {
                   {item?.country?.name ?? ''}
                 </span>
               </div>
-            </div>
+            </div> */}
           </div>
 
           {item?.description ? (
@@ -213,18 +208,18 @@ const ViewProductsEvent = ({ item }: Props) => {
             />
           </div>
 
-          <ListComments
-            model="PRODUCT"
-            modelIds={['PRODUCT']}
+          {/* <ListComments
+            model="EVENT"
+            modelIds={['EVENT']}
             take={6}
             userVisitorId={userStorage?.id}
             organizationId={item?.organizationId}
             productId={item?.id}
-          />
+          /> */}
         </div>
       </div>
     </>
   );
 };
 
-export { ViewProductsEvent };
+export { ViewOneEvent };

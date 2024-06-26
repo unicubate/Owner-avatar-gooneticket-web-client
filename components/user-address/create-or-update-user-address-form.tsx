@@ -2,12 +2,12 @@ import { GetAllCountiesAPI } from '@/api-site/profile';
 import { CreateOrUpdateOneUserAddressAPI } from '@/api-site/user-address';
 import { UserAddressFormModel } from '@/types/user-address';
 import { AlertDangerNotification } from '@/utils/alert-notification';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
 import { ButtonInput } from '../ui-setting';
 import { TextInput } from '../ui-setting/shadcn';
 
@@ -29,17 +29,26 @@ const CreateOrUpdateUserAddressForm = ({
   setIsEdit,
   isEdit,
 }: Props) => {
-  const { userStorage, isOpen, setIsOpen } = useInputState();
   const {
-    control,
-    setValue,
-    handleSubmit,
-    errors,
     loading,
     setLoading,
     hasErrors,
     setHasErrors,
-  } = useReactHookForm({ schema });
+    userStorage,
+    isOpen,
+    setIsOpen,
+  } = useInputState();
+  const {
+    reset,
+    watch,
+    setValue,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
 
   const { data: countries } = GetAllCountiesAPI();
   useEffect(() => {
@@ -116,6 +125,17 @@ const CreateOrUpdateUserAddressForm = ({
             type="text"
             name="fullName"
             placeholder="Full name"
+            errors={errors}
+            disabled={isEdit}
+          />
+        </div>
+        <div className="mt-2">
+          <TextInput
+            label="Phone number"
+            control={control}
+            type="text"
+            name="phone"
+            placeholder="Phone number"
             errors={errors}
             disabled={isEdit}
           />

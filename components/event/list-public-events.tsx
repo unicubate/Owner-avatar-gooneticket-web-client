@@ -1,20 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
-import { ProductModel } from '@/types/product';
-import { formateDate, formatePrice } from '@/utils';
+import { EventModel } from '@/types/event';
+import { formatePrice, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { Image } from 'antd';
+import { TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
-import { AvatarComponent } from '../ui-setting/ant';
+import { ButtonInput } from '../ui-setting';
 import { Card } from '../ui/card';
 
 type Props = {
-  item: ProductModel;
+  item: EventModel;
   index: number;
 };
 
-const ListPublicProductsEvent = ({ item, index }: Props) => {
+const ListPublicEvents = ({ item, index }: Props) => {
+  const { push } = useRouter();
   const { locale, ipLocation } = useInputState();
 
   return (
@@ -32,7 +35,7 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
             >
               <Image
                 preview={false}
-                height={200}
+                height={150}
                 width="100%"
                 className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
                 src={`${viewOneFileUploadAPI({
@@ -45,14 +48,28 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
           </>
         ) : null}
 
+        <div className="mt-2 items-center justify-items-center px-3">
+          <ButtonInput
+            type="button"
+            className="w-full"
+            variant="primary"
+            onClick={() => {
+              push(`/events/${item?.slug}`);
+            }}
+            icon={<TicketPlusIcon className="size-6" />}
+          >
+            Ticket
+          </ButtonInput>
+        </div>
+
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            {Number(item?.prices?.length) > 0 ? (
+            {Number(item?.onePrice?.amount) > 0 ? (
               <>
-                <p className="text-3xl">
+                <p className="text-2xl">
                   {formatePrice({
                     currency: String(item?.currency?.code),
-                    value: Number(item?.prices?.[0].amount ?? 0),
+                    value: Number(item?.onePrice?.amount ?? 0),
                     isDivide: false,
                   })}
                 </p>
@@ -60,8 +77,8 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
             ) : (
               <p className="text-2xl">Free</p>
             )}
-            <p className="ml-auto text-lg">
-              {formateDate(item?.expiredAt as Date, locale)}
+            <p className="ml-auto text-lg text-blue-600">
+              {formateToRFC2822(item?.oneEventDate?.expiredAt as Date, locale)}
             </p>
           </div>
 
@@ -85,16 +102,21 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
           </div> */}
           <div className="flex flex-wrap justify-between space-x-2 pt-3">
             <div className="flex shrink-0 font-semibold">
-              <span>{item?.address ?? ''}</span>
+              <span>{item?.oneEventDate?.city ?? ''}</span>
               <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
-              <span className="ml-1.5">{item?.city ?? ''}</span>
+              <span className="ml-1.5">
+                {item?.oneEventDate?.address ?? ''}
+              </span>
             </div>
+          </div>
+          <div className="flex flex-wrap justify-between space-x-2 pt-3">
             <span className="font-bold">
-              {item?.timeInit} - {item?.timeEnd}
+              {item?.oneEventDate?.timeInit}
+              {`${item?.oneEventDate?.timeEnd ? ` - ${item?.oneEventDate?.timeEnd}` : ''}`}
             </span>
           </div>
           {/* <div className="hidden lg:table-cell"> */}
-          <div className="flex flex-wrap justify-between pt-2">
+          {/* <div className="flex flex-wrap justify-between pt-2">
             <p className="mt-1 flex items-center font-semibold">
               {item?.address ? (
                 <AvatarComponent className="size-9" profile={item?.profile} />
@@ -106,10 +128,10 @@ const ListPublicProductsEvent = ({ item, index }: Props) => {
                 </p>
               </div>
             </p>
-          </div>
+          </div> */}
         </div>
       </Card>
     </>
   );
 };
-export { ListPublicProductsEvent };
+export { ListPublicEvents };

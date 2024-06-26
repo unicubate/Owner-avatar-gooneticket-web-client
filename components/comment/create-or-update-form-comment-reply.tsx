@@ -2,10 +2,11 @@ import { CreateOrUpdateOneCommentReplyAPI } from '@/api-site/comment';
 import { CommentFormModel } from '@/types/comment';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
-import { SubmitHandler } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useReactHookForm } from '../hooks/use-react-hook-form';
+import { useInputState } from '../hooks';
 import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
 
 const schema = yup.object({
@@ -29,18 +30,18 @@ export function CreateOrUpdateFormCommentReply(props: {
     setOpenModalReply,
   } = props;
 
+  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const {
     reset,
-    setValue,
     watch,
+    setValue,
     control,
     handleSubmit,
-    errors,
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-  } = useReactHookForm({ schema });
+    formState: { errors },
+  } = useForm<any>({
+    resolver: yupResolver(schema),
+    mode: 'onChange',
+  });
   const watchDescription = watch('description', '');
 
   useEffect(() => {
