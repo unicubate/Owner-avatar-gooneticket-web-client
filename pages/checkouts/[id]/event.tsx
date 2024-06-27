@@ -22,6 +22,7 @@ import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
+import { PrivateComponent } from '@/components/util/private-component';
 import { PriceModel } from '@/types/price';
 import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
@@ -234,7 +235,7 @@ const CheckoutEvent = () => {
                             <div className="hidden items-center lg:table-cell">
                               <div className="flex shrink-0 font-bold">
                                 <span className="text-lg">
-                                  {eventDate?.address ?? ''}
+                                  {eventDate?.country?.name ?? ''}
                                 </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
@@ -246,7 +247,7 @@ const CheckoutEvent = () => {
                                   -
                                 </span>
                                 <span className="ml-2 text-lg">
-                                  {eventDate?.country?.name ?? ''}
+                                  {eventDate?.address ?? ''}
                                 </span>
                               </div>
                             </div>
@@ -285,7 +286,7 @@ const CheckoutEvent = () => {
                               <div className="flex font-bold">Location</div>
                               <div className="ml-auto font-bold">
                                 <span className="text-sm">
-                                  {eventDate?.address ?? ''}
+                                  {eventDate?.country?.name ?? ''}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
@@ -297,7 +298,7 @@ const CheckoutEvent = () => {
                                   -
                                 </span>
                                 <span className="ml-1.5 text-sm">
-                                  {eventDate?.country?.name ?? ''}
+                                  {eventDate?.address ?? ''}
                                 </span>
                               </div>
                             </div>
@@ -684,4 +685,4 @@ const CheckoutEvent = () => {
     </>
   );
 };
-export default CheckoutEvent;
+export default PrivateComponent(CheckoutEvent);

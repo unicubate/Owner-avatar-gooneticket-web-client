@@ -15,7 +15,7 @@ type Props = {
 const ListEventDates = ({ item, index }: Props) => {
   const { query, push } = useRouter();
   const { partner } = query;
-  const { locale } = useInputState();
+  const { locale, userStorage, ipLocation } = useInputState();
 
   return (
     <>
@@ -23,7 +23,11 @@ const ListEventDates = ({ item, index }: Props) => {
         <label
           onClick={() =>
             push(
-              `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`,
+              `${
+                userStorage?.id
+                  ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+                  : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+              }`,
             )
           }
           htmlFor={`${item?.id}`}
