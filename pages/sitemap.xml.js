@@ -10,21 +10,16 @@ function generateSiteMap() {
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
       </url>
-      <url>
-        <loc>${`${NEXT_PUBLIC_SITE}/projects`}</loc>
-        <changefreq>weekly</changefreq>
-        <priority>1</priority>
-      </url>
 
       <url>
         <loc>${`${NEXT_PUBLIC_SITE}/login`}</loc>
         <changefreq>never</changefreq>
-        <priority>0.4</priority>
+        <priority>0.2</priority>
       </url>
       <url>
         <loc>${`${NEXT_PUBLIC_SITE}/register`}</loc>
         <changefreq>never</changefreq>
-        <priority>0.4</priority>
+        <priority>0.2</priority>
       </url>
 
       <url>
