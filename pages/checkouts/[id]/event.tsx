@@ -456,9 +456,9 @@ const CheckoutEvent = () => {
                         variant="outline"
                         className="ml-auto w-[80px]"
                         icon={
-                          <span className="relative flex size-6">
+                          <span className="relative flex size-4">
                             <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
-                            <span className="relative inline-flex size-6 rounded-full bg-green-500"></span>
+                            <span className="relative inline-flex size-4 rounded-full bg-green-500"></span>
                           </span>
                         }
                       >
