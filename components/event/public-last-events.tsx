@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteEventsAPI } from '@/api-site/event';
-import { ProductModel } from '@/types/product';
+import { EventModel } from '@/types/event';
 import { UserVisitorModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
 import { ButtonLoadMore } from '../ui-setting';
@@ -50,7 +50,7 @@ export function PublicLastEvents({
         <ul className="-my-7 divide-y divide-gray-200 dark:divide-gray-800">
           {dataEvents?.pages
             .flatMap((page: any) => page?.data?.value)
-            .map((item: ProductModel, index) => (
+            .map((item: EventModel, index) => (
               <ListLastEvents item={item} key={index} />
             ))}
         </ul>

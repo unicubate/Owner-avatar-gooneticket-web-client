@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { ProductModel } from '@/types/product';
-import { formateDate, formatePrice } from '@/utils';
+import { EventModel } from '@/types/event';
 import Link from 'next/link';
 import { useInputState } from '../hooks';
 import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 type Props = {
-  item: ProductModel;
+  item: EventModel;
 };
 
 export function ListLastEvents(props: Props) {
@@ -43,11 +42,11 @@ export function ListLastEvents(props: Props) {
               </Link>
             ) : null}
 
-            <div className="mt-2 flex items-center font-medium">
+            {/* <div className="mt-2 flex items-center font-medium">
               <span className="text-sm">
                 {formateDate(item?.expiredAt as Date, locale)}
               </span>
-              {Number(item?.prices?.length) > 0 ? (
+              {Number(item?.one) > 0 ? (
                 <>
                   <span className="ml-2 text-sm">
                     {formatePrice({
@@ -60,7 +59,7 @@ export function ListLastEvents(props: Props) {
               ) : (
                 <span className="ml-2">Free</span>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </li>

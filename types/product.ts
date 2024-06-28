@@ -1,6 +1,5 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { ProfileItemModel } from './profile';
-import { PriceModel } from './ticket';
 import { UploadModel } from './upload';
 
 export const arrayWhoCanSees = [
@@ -69,7 +68,6 @@ export type ProductModel = {
     slug: string;
     color: string;
   };
-  prices: Array<PriceModel>;
   profile: ProfileItemModel;
   organization: { name: string; color: string };
   uploadsImages: Array<UploadModel>;
