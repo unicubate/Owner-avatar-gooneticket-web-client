@@ -52,6 +52,7 @@ const TextInput = ({
         {label ? (
           <Label htmlFor={name} className="mb-2 block text-sm font-bold">
             {label}
+            {required ? <span className="ml-1 text-red-600">*</span> : null}
           </Label>
         ) : null}
         {labelHelp}

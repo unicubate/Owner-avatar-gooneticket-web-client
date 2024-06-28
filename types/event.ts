@@ -1,7 +1,7 @@
 import { ModelType, PaginationResponse } from '@/utils/paginations';
 import { EventDateModel } from './event-date';
-import { PriceModel } from './price';
 import { ProfileItemModel } from './profile';
+import { TicketModel } from './ticket';
 import { UploadModel } from './upload';
 
 export type ResponseEventModel = {
@@ -51,7 +51,7 @@ export type EventModel = {
     quantity: number;
   };
   oneEventDate: EventDateModel;
-  onePrice: PriceModel;
+  oneTicket: TicketModel;
 
   // subTitle: string;
   // slug: string;

@@ -3,7 +3,7 @@
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
 import { GetOneEventAPI } from '@/api-site/event';
 import { GetOneEventDateAPI } from '@/api-site/event-date';
-import { GetInfinitePricesAPI } from '@/api-site/price';
+import { GetInfiniteTicketsAPI } from '@/api-site/ticket';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { MediumFooter } from '@/components/footer/medium-footer';
@@ -23,7 +23,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
-import { PriceModel } from '@/types/price';
+import { TicketModel } from '@/types/ticket';
 import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -39,7 +39,7 @@ type NewAmountType = {
   quantity: number;
   currency: string;
   value: number;
-  price: PriceModel;
+  ticket: TicketModel;
   oneValue: number;
   taxes: number;
 };
@@ -104,13 +104,13 @@ const CheckoutEvent = () => {
   });
 
   const {
-    isLoading: isLoadingPrices,
-    isError: isErrorPrices,
-    data: dataPrices,
-    isFetchingNextPage: isFetchingNextPagePrices,
-    hasNextPage: hasNextPagePrices,
-    fetchNextPage: fetchNextPagePrices,
-  } = GetInfinitePricesAPI({
+    isLoading: isLoadingTickets,
+    isError: isErrorTickets,
+    data: dataTickets,
+    isFetchingNextPage: isFetchingNextPageTickets,
+    hasNextPage: hasNextPageTickets,
+    fetchNextPage: fetchNextPageTickets,
+  } = GetInfiniteTicketsAPI({
     take: 10,
     sort: 'ASC',
     eventId: item?.id,
@@ -130,15 +130,17 @@ const CheckoutEvent = () => {
   //   email: watchEmail,
   // };
 
-  const priceJsonParse = watchAmount ? JSON.parse(watchAmount) : item?.onePrice;
-  const calculatePrice = Number(priceJsonParse?.amount) * increment;
+  const ticketJsonParse = watchAmount
+    ? JSON.parse(watchAmount)
+    : item?.oneTicket;
+  const calculatePrice = Number(ticketJsonParse?.amount) * increment;
   const newAmount: NewAmountType = {
     quantity: increment,
-    price: priceJsonParse,
+    ticket: ticketJsonParse,
     currency: item?.currency?.code,
     value: calculatePrice,
     country: ipLocation?.countryCode,
-    oneValue: Number(priceJsonParse?.amount),
+    oneValue: Number(ticketJsonParse?.amount),
     taxes: Number(userStorage?.organization?.taxes),
   };
 
@@ -186,7 +188,7 @@ const CheckoutEvent = () => {
                           <div className="relative mt-4 shrink-0 cursor-pointer">
                             <div className="flex items-center">
                               <div className="flex shrink-0 items-center font-bold">
-                                {Number(item?.onePrice?.amount) > 0 ? (
+                                {Number(item?.oneTicket?.amount) > 0 ? (
                                   <>
                                     <span className="text-xl">
                                       {formatePrice({
@@ -355,18 +357,18 @@ const CheckoutEvent = () => {
                           </div>
 
                           <div className="mt-4 space-y-4">
-                            {isLoadingPrices ? (
+                            {isLoadingTickets ? (
                               <LoadingFile />
-                            ) : isErrorPrices ? (
+                            ) : isErrorTickets ? (
                               <ErrorFile
                                 title="404"
                                 description="Error find data please try again"
                               />
-                            ) : Number(dataPrices?.pages[0]?.data?.total) <=
+                            ) : Number(dataTickets?.pages[0]?.data?.total) <=
                               0 ? (
                               <div>
                                 <label
-                                  htmlFor={`price`}
+                                  htmlFor={`ticket`}
                                   className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-[#04080b]"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
@@ -375,31 +377,33 @@ const CheckoutEvent = () => {
                                 </label>
                               </div>
                             ) : (
-                              dataPrices?.pages.map((page, index: number) => (
+                              dataTickets?.pages.map((page, index: number) => (
                                 <Fragment key={index}>
                                   {page?.data?.value.map(
-                                    (price: PriceModel, index: number) => (
+                                    (ticket: TicketModel, index: number) => (
                                       <div key={index}>
                                         <label
-                                          htmlFor={price?.id}
+                                          htmlFor={ticket?.id}
                                           className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
                                         >
                                           <p className="text-gray-700 dark:text-gray-200">
-                                            {price?.name}
+                                            {ticket?.name}
                                           </p>
 
                                           <div className="text-gray-900 dark:text-white">
                                             {formatePrice({
                                               currency: `${item?.currency?.code}`,
-                                              value: Number(price?.amount ?? 0),
+                                              value: Number(
+                                                ticket?.amount ?? 0,
+                                              ),
                                               isDivide: false,
                                             })}
                                           </div>
                                           <input
                                             type="radio"
                                             {...register('amount')}
-                                            value={JSON.stringify(price)}
-                                            id={price?.id}
+                                            value={JSON.stringify(ticket)}
+                                            id={ticket?.id}
                                             className="sr-only"
                                           />
                                         </label>
@@ -409,14 +413,14 @@ const CheckoutEvent = () => {
                                 </Fragment>
                               ))
                             )}
-                            {hasNextPagePrices && (
+                            {hasNextPageTickets && (
                               <div className="mx-auto mt-2 justify-center text-center">
                                 <ButtonLoadMore
                                   size="sm"
                                   className="mx-[200px]"
-                                  hasNextPage={hasNextPagePrices}
-                                  isFetchingNextPage={isFetchingNextPagePrices}
-                                  onClick={() => fetchNextPagePrices()}
+                                  hasNextPage={hasNextPageTickets}
+                                  isFetchingNextPage={isFetchingNextPageTickets}
+                                  onClick={() => fetchNextPageTickets()}
                                 />
                               </div>
                             )}
@@ -577,7 +581,7 @@ const CheckoutEvent = () => {
 
                     {isEdit ? (
                       <>
-                        {Number(item?.onePrice?.amount) > 0 ? (
+                        {Number(item?.oneTicket?.amount) > 0 ? (
                           <>
                             {isValid && watchPaymentMethod ? (
                               <>
@@ -642,11 +646,11 @@ const CheckoutEvent = () => {
                                 affiliation: affiliation,
                                 amount: {
                                   quantity: 1,
-                                  price: 0,
+                                  ticket: null,
                                   currency: 'USD',
                                   value: 0,
                                   country: ipLocation?.countryCode,
-                                  oneValue: Number(priceJsonParse?.amount),
+                                  oneValue: Number(ticketJsonParse?.amount),
                                   taxes: Number(
                                     userStorage?.organization?.taxes,
                                   ),

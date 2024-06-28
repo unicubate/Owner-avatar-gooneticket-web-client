@@ -61,8 +61,6 @@ const Login = () => {
           user?.status === 'CREATOR'
             ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
             : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
-      } else {
-        push(`/verify/confirm-email${redirect ? `?redirect=${redirect}` : ''}`);
       }
     } catch (error: any) {
       setHasErrors(true);

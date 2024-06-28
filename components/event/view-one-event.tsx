@@ -58,12 +58,12 @@ const ViewOneEvent = ({ item }: Props) => {
           <div className="relative mt-4 shrink-0 cursor-pointer">
             <div className="flex items-center">
               <div className="flex shrink-0 items-center font-bold">
-                {Number(item?.onePrice?.amount) > 0 ? (
+                {Number(item?.oneTicket?.amount) > 0 ? (
                   <>
                     <span className="ml-1 text-3xl">
                       {formatePrice({
                         currency: String(item?.currency?.code),
-                        value: Number(item?.onePrice?.amount ?? 0),
+                        value: Number(item?.oneTicket?.amount ?? 0),
                         isDivide: false,
                       })}
                     </span>

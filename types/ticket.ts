@@ -1,4 +1,4 @@
-export type PriceModel = {
+export type TicketModel = {
   createdAt: Date;
   expiredAt: Date;
   id: string;
@@ -7,9 +7,4 @@ export type PriceModel = {
   productId: string;
   description: string;
   amount: number;
-};
-
-export type PriceFormModel = {
-  name: string;
-  amount: boolean;
 };

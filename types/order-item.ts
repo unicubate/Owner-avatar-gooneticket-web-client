@@ -48,7 +48,7 @@ export type OrderItemModel = {
   productId: string;
   orderId: string;
   userId: string;
-  priceName: string;
+  ticketName: string;
   address: {
     fullName: string;
     email: string;

@@ -181,8 +181,8 @@ export const apiEndpoints: ClientApiMethods = {
   getFollowsEvents: GET(`${baseUrl}/events/follows`),
   getOneEvent: GET(`${baseUrl}/events/view/:slugOrId`),
 
-  /****************** Price route */
-  getPrices: GET(`${baseUrl}/prices`),
+  /****************** Ticket route */
+  getTickets: GET(`${baseUrl}/tickets`),
 
   /****************** EventDate route */
   getEventDates: GET(`${baseUrl}/event-dates`),

@@ -54,7 +54,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </p>
 
           <p className="mt-2 text-lg font-semibold">
-            {orderItem?.priceName?.toLocaleUpperCase() ?? 'FREE'}
+            {orderItem?.ticketName?.toLocaleUpperCase() ?? 'FREE'}
           </p>
           <p className="mt-2 font-semibold">
             <span>
