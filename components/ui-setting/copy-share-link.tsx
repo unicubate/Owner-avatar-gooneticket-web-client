@@ -15,7 +15,7 @@ import { ButtonInput } from '.';
 interface Props {
   link: string;
   isOpen: boolean;
-  setIsOpen: any;
+  setIsOpen: (i: boolean) => void;
   buttonDialog?: React.ReactNode;
 }
 

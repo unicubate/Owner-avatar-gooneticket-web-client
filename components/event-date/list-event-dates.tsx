@@ -1,6 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { EventDateModel } from '@/types/event-date';
-import { formateToCccc, formateToLLLL, formateTodd } from '@/utils';
+import {
+  formateToCccc,
+  formateToLLLL,
+  formateTodd,
+  viewYyformateToYyyy,
+} from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -44,6 +49,9 @@ const ListEventDates = ({ item, index }: Props) => {
                     {capitalizeFirstLetter(
                       formateToLLLL(item?.expiredAt as Date, locale),
                     )}
+                    <span className="ml-1.5">
+                      {viewYyformateToYyyy(item?.expiredAt as Date)}
+                    </span>
                   </p>
                   <p className="mt-1 font-semibold text-gray-500">
                     {formateToCccc(item?.expiredAt as Date, locale)},{' '}

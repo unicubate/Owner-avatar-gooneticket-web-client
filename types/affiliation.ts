@@ -1,5 +1,8 @@
 import { PaginationResponse } from '@/utils/paginations';
+import { EventDateModel } from './event-date';
 import { ProfileItemModel } from './profile';
+import { TicketModel } from './ticket';
+import { UploadModel } from './upload';
 
 export type ResponseAffiliationModel = {
   value: Array<AffiliationModel>;
@@ -15,16 +18,23 @@ export type AffiliationModel = {
   expiredAt: string;
   productId: string;
   product: {
+    currency: string;
     title: string;
     slug: string;
   };
+  event: {
+    currency: string;
+    title: string;
+    slug: string;
+    model: string;
+  };
+  orderItem: {
+    amount: number;
+    quantity: number;
+  };
+  oneUploadImagesEvent: UploadModel;
+  oneEventDate: EventDateModel;
+  oneTicket: TicketModel;
   profile: ProfileItemModel;
   organizationSellerId: string;
-};
-
-export type AffiliationFormModel = {
-  email: string;
-  productId: string;
-  percent: number;
-  description: string;
 };

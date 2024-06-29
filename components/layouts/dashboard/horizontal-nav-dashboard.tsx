@@ -1,9 +1,11 @@
-import { logoutUsersAPI } from '@/api-site/user';
 import { useInputState } from '@/components/hooks';
-import { ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import {
+  DropdownMenuContentUser,
+  ImageLogo,
+  ThemeToggle,
+} from '@/components/ui-setting';
 import { UserModel } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { HomeIcon, LogOutIcon, SettingsIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -11,14 +13,7 @@ import { NavbarProps } from '.';
 import { AvatarComponent } from '../../ui-setting/ant';
 import { LangToggle } from '../../ui-setting/lang-toggle';
 import { Button } from '../../ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../../ui/dropdown-menu';
+import { DropdownMenu, DropdownMenuTrigger } from '../../ui/dropdown-menu';
 
 interface Props {
   user?: UserModel;
@@ -50,12 +45,6 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
       href: '/messages',
     },
   ]);
-
-  const logoutUserItem = async () => {
-    await logoutUsersAPI();
-    push(`/login?redirect=${linkHref}`);
-    location.reload();
-  };
 
   return (
     <>
@@ -166,41 +155,8 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
                           </div>
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-auto dark:border-gray-800 dark:bg-[#04080b]">
-                        {user?.status === 'CREATOR' ? (
-                          <>
-                            <DropdownMenuItem>
-                              <HomeIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                              <a
-                                href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}
-                                title="Dashboard"
-                                target="_blank"
-                              >
-                                <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                                  {t.formatMessage({ id: 'MENU.DASHBOARD' })}
-                                </span>
-                              </a>
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                          </>
-                        ) : null}
 
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/settings`)}>
-                            <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                              {t.formatMessage({ id: 'MENU.SETTING' })}
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <LogOutIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                          <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                            {t.formatMessage({ id: 'MENU.LOGOUT' })}
-                          </span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
+                      <DropdownMenuContentUser />
                     </DropdownMenu>
                   </>
                 ) : null}

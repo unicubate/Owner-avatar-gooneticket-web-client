@@ -30,7 +30,7 @@ const ViewOneEvent = ({ item }: Props) => {
               <ListCarouselUpload
                 uploads={item?.uploadsImages}
                 folder={String(item?.model.toLocaleLowerCase())}
-                height={400}
+                height={350}
                 className={`object-cover`}
               />
             </div>

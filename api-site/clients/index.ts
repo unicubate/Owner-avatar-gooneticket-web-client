@@ -128,6 +128,7 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Affiliations route */
   getOneAffiliation: GET(`${baseUrl}/affiliations/view`),
+  getAffiliationsUser: GET(`${baseUrl}/affiliations/user`),
 
   /****************** Follows route */
   getFollowers: GET(`${baseUrl}/follows/followers`),

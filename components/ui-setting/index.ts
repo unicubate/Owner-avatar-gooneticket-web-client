@@ -3,6 +3,7 @@ export * from './avatar-coffee-component';
 export * from './button-input';
 export * from './button-load-more';
 export * from './copy-share-link';
+export * from './dropdown-menu-content-user';
 export * from './header-site';
 export * from './image-logo';
 export * from './list-carousel-upload';

@@ -6,23 +6,12 @@ import { useAuth } from '../../util/context-user';
 import { logoutUsersAPI } from '@/api-site/user';
 import { CreateConversationForm } from '@/components/contact-us/create-conversation-form';
 import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
-import { CopyShareLink, ThemeToggle } from '@/components/ui-setting';
+import { DropdownMenuContentUser, ThemeToggle } from '@/components/ui-setting';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  AlertCircleIcon,
-  LogOutIcon,
-  SettingsIcon,
-  ShareIcon,
-  ShoppingCartIcon,
-} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
@@ -179,67 +168,13 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                       </svg>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#04080b]">
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem onClick={() => setCopied(true)}>
-                        <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                        <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                          {t.formatMessage({ id: 'UTIL.SHARE' })}
-                        </span>
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem onClick={() => push(`/orders`)}>
-                        <AlertCircleIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                        <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                          {t.formatMessage({ id: 'UTIL.REPORT' })}
-                        </span>
-                      </DropdownMenuItem>
-                    </DropdownMenuGroup>
-
-                    {userVisiter?.id ? (
-                      <>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/orders`)}>
-                            <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                              {t.formatMessage({ id: 'MENU.ORDER' })}
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                          <DropdownMenuItem onClick={() => push(`/settings`)}>
-                            <SettingsIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                            <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                              {t.formatMessage({ id: 'MENU.SETTING' })}
-                            </span>
-                          </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => logoutUserItem()}>
-                          <LogOutIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                          <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                            {t.formatMessage({ id: 'MENU.LOGOUT' })}
-                          </span>
-                        </DropdownMenuItem>
-                      </>
-                    ) : null}
-                  </DropdownMenuContent>
+                  <DropdownMenuContentUser username={username ?? ''} />
                 </DropdownMenu>
               </div>
             </div>
           </div>
         </div>
       </header>
-
-      <CopyShareLink
-        isOpen={copied}
-        setIsOpen={setCopied}
-        link={`${process.env.NEXT_PUBLIC_SITE}/${username}`}
-      />
     </>
   );
 };
