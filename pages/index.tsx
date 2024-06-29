@@ -74,7 +74,7 @@ export default function Home() {
           content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
         />
       }
-      title="Tickets for concerts, musicals, shows, sports and culture"
+      title=""
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
