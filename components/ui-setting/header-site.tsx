@@ -21,7 +21,13 @@ const HeaderSite = ({ title, metas }: IProps) => {
         <link rel="canonical" href={canonicalUrl} />
       )}
       <meta property="og:title" content={titleOutput} key="title" />
+      <meta property="og:site_name" content={titleOutput} />
+      <meta property="og:url" content={process.env.NEXT_PUBLIC_SITE} />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <meta
+        property="og:description"
+        content="The most easy way to organize the booking process"
+      />
     </Head>
   );
 };
