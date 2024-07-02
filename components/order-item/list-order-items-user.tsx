@@ -66,11 +66,10 @@ const ListOrderItemsUser = (props: Props) => {
               {item?.uploadsImages?.length > 0 ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <Image
-                    width={100}
-                    height={100}
+                    width={90}
+                    height={90}
                     quality={90}
                     priority={true}
-                    layout="responsive"
                     src={`${viewOneFileUploadAPI({
                       folder: String(item?.model.toLocaleLowerCase()),
                       fileName: item?.uploadsImages[0]?.path,
