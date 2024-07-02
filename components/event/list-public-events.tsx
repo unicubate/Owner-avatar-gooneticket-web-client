@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { EventModel } from '@/types/event';
-import { formatePrice, formateToRFC2822 } from '@/utils';
+import { formateDate, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { Image } from 'antd';
 import { TicketPlusIcon } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -34,9 +34,11 @@ const ListPublicEvents = ({ item, index }: Props) => {
               title={item?.title}
             >
               <Image
-                preview={false}
-                height={150}
-                width="100%"
+                height={500}
+                width={500}
+                quality={90}
+                priority={true}
+                layout="responsive"
                 className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
                 src={`${viewOneFileUploadAPI({
                   folder: 'event',
@@ -77,9 +79,11 @@ const ListPublicEvents = ({ item, index }: Props) => {
             ) : (
               <p className="text-2xl">Free</p>
             )}
-            <p className="ml-auto text-lg text-blue-600">
-              {formateToRFC2822(item?.oneEventDate?.expiredAt as Date, locale)}
-            </p>
+            {item?.oneEventDate?.expiredAt ? (
+              <p className="ml-auto text-lg text-blue-600">
+                {formateDate(item?.oneEventDate?.expiredAt as Date, locale)}
+              </p>
+            ) : null}
           </div>
 
           <p className="mt-2 flex-1 text-xl font-bold text-gray-900 transition-all duration-200 hover:text-blue-600 dark:text-white sm:text-base">
@@ -100,21 +104,28 @@ const ListPublicEvents = ({ item, index }: Props) => {
               <span className="ml-1.5">{item?.country?.name ?? ''}</span>
             </div>
           </div> */}
-          <div className="flex flex-wrap justify-between space-x-2 pt-3">
-            <div className="flex shrink-0 font-semibold">
-              <span>{item?.oneEventDate?.city ?? ''}</span>
-              <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
-              <span className="ml-1.5">
-                {item?.oneEventDate?.address ?? ''}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-wrap justify-between space-x-2 pt-3">
-            <span className="font-bold">
-              {item?.oneEventDate?.timeInit}
-              {`${item?.oneEventDate?.timeEnd ? ` - ${item?.oneEventDate?.timeEnd}` : ''}`}
-            </span>
-          </div>
+          {item?.oneEventDate ? (
+            <>
+              <div className="flex flex-wrap justify-between space-x-2 pt-3">
+                <div className="flex shrink-0 font-semibold">
+                  <span>{item?.oneEventDate?.city ?? ''}</span>
+                  <span className="ml-1 text-gray-400 dark:text-gray-600">
+                    -
+                  </span>
+                  <span className="ml-1.5">
+                    {item?.oneEventDate?.address ?? ''}
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-wrap justify-between space-x-2 pt-3">
+                <span className="font-bold">
+                  {item?.oneEventDate?.timeInit}
+                  {`${item?.oneEventDate?.timeEnd ? ` - ${item?.oneEventDate?.timeEnd}` : ''}`}
+                </span>
+              </div>
+            </>
+          ) : null}
+
           {/* <div className="hidden lg:table-cell"> */}
           {/* <div className="flex flex-wrap justify-between pt-2">
             <p className="mt-1 flex items-center font-semibold">
