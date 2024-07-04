@@ -9,7 +9,7 @@ import { ListEventDates } from './list-event-dates';
 const ListEventDatesForEventDate = ({
   event,
 }: {
-  event: { id: string; slug: string };
+  event: { id: string; organizationId: string; slug: string };
 }) => {
   const { search } = useInputState();
 
@@ -25,6 +25,7 @@ const ListEventDatesForEventDate = ({
     take: 6,
     sort: 'DESC',
     eventId: event?.id,
+    organizationId: event?.organizationId,
   });
 
   return (

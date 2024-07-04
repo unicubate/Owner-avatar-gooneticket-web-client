@@ -10,10 +10,10 @@ import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListEventDates } from './list-event-dates';
 
 const TableEventDates = ({
-  eventId,
+  event,
   currency,
 }: {
-  eventId: string;
+  event: { id: string; organizationId: string; slug: string };
   currency: { code: string; symbol: string };
 }) => {
   const { push } = useRouter();
@@ -31,7 +31,8 @@ const TableEventDates = ({
     search,
     take: 10,
     sort: 'ASC',
-    eventId,
+    eventId: event?.id,
+    organizationId: event?.organizationId,
   });
 
   return (

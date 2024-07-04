@@ -53,7 +53,7 @@ const ListEventDates = ({ item, index }: Props) => {
                       {viewYyformateToYyyy(item?.expiredAt as Date)}
                     </span>
                   </p>
-                  <p className="mt-1 font-semibold text-gray-500">
+                  <p className="mt-1 font-semibold">
                     {formateToCccc(item?.expiredAt as Date, locale)},{' '}
                     {item?.timeInit}
                   </p>
@@ -61,15 +61,19 @@ const ListEventDates = ({ item, index }: Props) => {
               </div>
 
               <div className="mt-2">
-                <p className="font-semibold uppercase">
-                  {item?.city} - {item?.address}
+                <p className="font-bold">
+                  {capitalizeFirstLetter(String(item?.city))} -{' '}
+                  {capitalizeFirstLetter(String(item?.address))}
                 </p>
               </div>
             </div>
           </div>
 
           <div className="py-4">
-            <Badge className="gap-1 rounded-sm" variant="primary">
+            <Badge
+              className="cursor-pointer gap-1  rounded-sm"
+              variant="primary"
+            >
               <TicketIcon className="size-6" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                 Tickets

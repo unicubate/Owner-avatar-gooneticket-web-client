@@ -1,60 +1,53 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetInfiniteEventsAPI } from '@/api-site/event';
-import { EventModel } from '@/types/event';
+import { GetInfiniteEventDatesAPI } from '@/api-site/event-date';
+import { EventDateModel } from '@/types/event-date';
 import { UserModel } from '@/types/user';
-import { itemsNumberArray } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks';
-import { EventSkeleton } from '../skeleton/event-skeleton';
 import { ButtonLoadMore } from '../ui-setting';
-import { EmptyData } from '../ui-setting/ant';
+import { EmptyData, LoadingFile } from '../ui-setting/ant';
 import { ErrorFile } from '../ui-setting/ant/error-file';
-import { ListPublicEvents } from './list-public-events';
+import { ListPublicEventDates } from './list-public-event-dates';
 
-const TablePublicEvents = ({ user }: { user: UserModel }) => {
+const TablePublicEventDates = ({ user }: { user: UserModel }) => {
   const { search } = useInputState();
   const { ref, inView } = useInView();
 
   const {
-    isLoading: isLoadingEvents,
-    isError: isErrorEvents,
-    data: dataEvents,
-    isFetchingNextPage,
-    hasNextPage,
-    fetchNextPage,
-  } = GetInfiniteEventsAPI({
+    isLoading: isLoading,
+    isError: isError,
+    data: data,
+    isFetchingNextPage: isFetchingNextPage,
+    hasNextPage: hasNextPage,
+    fetchNextPage: fetchNextPage,
+  } = GetInfiniteEventDatesAPI({
     search,
     take: 10,
     sort: 'DESC',
-    expired: 'FALSE',
     organizationId: user?.organizationId,
   });
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
-        {isLoadingEvents ? (
-          itemsNumberArray(3).map((i, index) => (
-            <EventSkeleton key={i} index={index} />
-          ))
-        ) : isErrorEvents ? (
+      {user?.organizationId ? (
+        isLoading ? (
+          <LoadingFile />
+        ) : isError ? (
           <ErrorFile
             title="404"
             description="Error find data please try again..."
           />
-        ) : Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
-          ''
-        ) : (
-          dataEvents?.pages
+        ) : Number(data?.pages[0]?.data?.total) <= 0 ? null : (
+          data?.pages
             .flatMap((page: any) => page?.data?.value)
-            .map((item: EventModel, index: number) => (
-              <ListPublicEvents item={item} key={index} index={index} />
+            .map((item: EventDateModel, index: number) => (
+              <ListPublicEventDates item={item} key={index} index={index} />
             ))
-        )}
-      </div>
+        )
+      ) : null}
 
-      {Number(dataEvents?.pages[0]?.data?.total) <= 0 ? (
+      {Number(data?.pages[0]?.data?.total) <= 0 ? (
         <>
           <EmptyData
             image={<TicketIcon className="size-10" />}
@@ -68,6 +61,7 @@ const TablePublicEvents = ({ user }: { user: UserModel }) => {
         <div className="mx-auto justify-center text-center">
           <ButtonLoadMore
             className="w-[240px]"
+            hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
             onClick={() => fetchNextPage()}
           />
@@ -76,4 +70,4 @@ const TablePublicEvents = ({ user }: { user: UserModel }) => {
     </>
   );
 };
-export { TablePublicEvents };
+export { TablePublicEventDates };

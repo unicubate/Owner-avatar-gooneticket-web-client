@@ -60,7 +60,6 @@ const LoginModal: React.FC<{
     }
   };
 
-  console.log('query ====>', linkHref);
   return (
     <>
       {isOpen ? (

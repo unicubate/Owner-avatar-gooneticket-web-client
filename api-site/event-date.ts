@@ -27,12 +27,13 @@ export const GetOneEventDateAPI = (payload: { id: string }) => {
 };
 
 export const GetInfiniteEventDatesAPI = (payload: {
-  eventId: string;
+  eventId?: string;
   search?: string;
   take: number;
   sort: SortModel;
+  organizationId: string;
 }) => {
-  const { take, sort, search, eventId } = payload;
+  const { take, sort, search, organizationId, eventId } = payload;
   return useInfiniteQuery({
     queryKey: ['event-dates', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -46,6 +47,7 @@ export const GetInfiniteEventDatesAPI = (payload: {
           search,
           expired: 'false',
           page: pageParam,
+          organizationId,
         },
       }),
     staleTime: 60_000,

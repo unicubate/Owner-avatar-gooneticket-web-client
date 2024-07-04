@@ -7,4 +7,5 @@ export type UploadModel = {
   size: number;
   productId: string;
   path: string;
+  model: string;
 };

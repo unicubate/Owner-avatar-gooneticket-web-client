@@ -1,5 +1,5 @@
 import { GetOneUserPublicAPI } from '@/api-site/user';
-import { TablePublicEvents } from '@/components/event/table-public-events';
+import { TablePublicEventDates } from '@/components/event-date/table-public-event-dates';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { LoadingFile } from '@/components/ui-setting/ant';
@@ -29,7 +29,7 @@ const ProfilePublic = () => {
             <div className="container mx-auto space-y-4 p-4">
               <div className="flow-root">
                 {user?.organizationId ? (
-                  <TablePublicEvents user={user} />
+                  <TablePublicEventDates user={user} />
                 ) : null}
               </div>
             </div>

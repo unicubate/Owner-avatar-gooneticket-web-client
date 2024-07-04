@@ -54,6 +54,11 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
         taxes: amount?.taxes,
         ticket: amount.ticket,
         quantity: amount.quantity,
+        payer: {
+          amount: amountPalpal,
+          payerId: order?.payer_id,
+          email_address: order?.email_address,
+        },
         currency: amountPalpal?.currency_code,
         value: Number(amountPalpal?.value),
         oneValue: Number(amount?.oneValue),
@@ -65,7 +70,6 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
         data: payload,
         paymentModel: paymentModel,
       });
-
       push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
@@ -80,7 +84,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     return actions?.order?.create({
       purchase_units: [
         {
-          description: 'Payment balance',
+          description: `Payment ticket`,
           amount: {
             currency_code: currency,
             value: Number(amount?.value),

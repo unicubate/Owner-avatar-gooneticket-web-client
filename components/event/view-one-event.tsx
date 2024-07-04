@@ -107,7 +107,11 @@ const ViewOneEvent = ({ item }: Props) => {
           </div>
           <div className="mt-4 space-y-4">
             <ListEventDatesForEventDate
-              event={{ id: item?.id, slug: item?.slug }}
+              event={{
+                organizationId: item?.organizationId,
+                id: item?.id,
+                slug: item?.slug,
+              }}
             />
           </div>
           <div className="relative mt-4 shrink-0 cursor-pointer">
