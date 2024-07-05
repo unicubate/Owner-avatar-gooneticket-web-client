@@ -6,7 +6,6 @@ import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -30,6 +29,15 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   const [copied, setCopied] = useState(false);
   const { locale, userStorage, ipLocation } = useInputState();
 
+  const handlerFindPage = () => {
+    push(
+      `${
+        userStorage?.id
+          ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+          : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+      }`,
+    );
+  };
   return (
     <>
       <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-gray-800 dark:bg-[#04080b]">
@@ -86,7 +94,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                       ) : null}
                     </div>
 
-                    <div className="mt-1.5 text-sm">
+                    <div className="mt-1.5 text-sm font-bold">
                       <span>
                         {capitalizeFirstLetter(String(item?.country?.name))}
                       </span>
@@ -121,15 +129,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                   <Badge
                     className="cursor-pointer gap-1 rounded-sm"
                     variant="primary"
-                    onClick={() =>
-                      push(
-                        `${
-                          userStorage?.id
-                            ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
-                            : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
-                        }`,
-                      )
-                    }
+                    onClick={() => handlerFindPage()}
                   >
                     <TicketIcon className="size-6" />
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -170,8 +170,9 @@ const ListPublicEventDates = ({ item, index }: Props) => {
               </div>
             </div> */}
             <div className="mt-1 flex items-center">
-              <Link
-                href={`/`}
+              <a
+                href={void 0}
+                onClick={() => handlerFindPage()}
                 className="hover:text-blue-600 dark:hover:text-blue-600"
               >
                 {item?.event?.title ? (
@@ -182,7 +183,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                     />
                   </p>
                 ) : null}
-              </Link>
+              </a>
             </div>
           </div>
 

@@ -146,7 +146,7 @@ const CheckoutEvent = () => {
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(
     `/events/${item?.slug}${partner ? `?partner=${partner}` : ''}`,
-    500,
+    600,
   );
   return (
     <>
@@ -322,7 +322,7 @@ const CheckoutEvent = () => {
 
                           <div className="mt-2 sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
-                              <p className="font-bold">
+                              <p className="font-bold dark:text-gray-600">
                                 Please select the seat category
                               </p>
                             </div>
@@ -429,7 +429,9 @@ const CheckoutEvent = () => {
                           <hr className="mt-8 dark:border-gray-800" />
                           <div className="py-2">
                             <div className="flex items-center">
-                              <h2 className="text-base font-bold">Contact</h2>
+                              <h2 className="text-base font-bold dark:text-gray-600">
+                                Contact
+                              </h2>
                               {userAddress?.isUpdated && userAddress?.email && (
                                 <ButtonInput
                                   type="button"

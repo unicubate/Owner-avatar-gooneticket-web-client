@@ -112,6 +112,25 @@ export function CreateOrUpdateFormComment(props: {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
+        {/* <div className="max-w-auto relative mt-4 flex w-full">
+          <TextareaReactQuillInput
+            control={control}
+            name="description"
+            placeholder="Participate in the conversation"
+            errors={errors}
+            className="h-auto"
+          />
+          <ButtonInput
+            type="submit"
+            variant="primary"
+            size="default"
+            className="!absolute right-1 top-1 rounded"
+            loading={loading}
+            disabled={watchDescription.length >= 12 ? false : true}
+          >
+            Send
+          </ButtonInput>
+        </div> */}
         <div className="mt-4 space-y-2 sm:flex sm:items-end sm:space-x-4 sm:space-y-0">
           {/* <div className="flex items-start">
             <Avatar

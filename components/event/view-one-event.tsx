@@ -8,6 +8,7 @@ import { EventModel } from '@/types/event';
 import { formatePrice } from '@/utils';
 import { MessageCircleIcon, ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
+import { ListComments } from '../comment/list-comments';
 import { ListEventDatesForEventDate } from '../event-date/list-event-dates-for-event-date';
 import { useInputState } from '../hooks';
 
@@ -212,14 +213,14 @@ const ViewOneEvent = ({ item }: Props) => {
             />
           </div>
 
-          {/* <ListComments
+          <ListComments
             model="EVENT"
             modelIds={['EVENT']}
             take={6}
             userVisitorId={userStorage?.id}
             organizationId={item?.organizationId}
             productId={item?.id}
-          /> */}
+          />
         </div>
       </div>
     </>
