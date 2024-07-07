@@ -106,7 +106,7 @@ export function ListCommentsPosts(props: {
 
   return (
     <>
-      <li key={index} className="py-4">
+      <li key={index} className="py-2">
         {!openModal ? (
           <div className="flex items-start">
             <AvatarComponent className="size-9" profile={item?.profile} />

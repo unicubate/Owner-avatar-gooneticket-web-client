@@ -25,6 +25,7 @@ export type CommentFormModel = {
   model: ModelType;
   description: string;
   postId: string;
+  eventId: string;
   productId: string;
   userId: string;
 };

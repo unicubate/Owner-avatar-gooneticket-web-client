@@ -44,7 +44,7 @@ const ListEventDates = ({ item, index }: Props) => {
                 <p className="text-4xl font-semibold text-blue-700">
                   {formateTodd(item?.expiredAt as Date, locale)}
                 </p>
-                <div className="ml-2 cursor-pointer">
+                <div className="ml-2">
                   <p className="tex-lg font-bold">
                     {capitalizeFirstLetter(
                       formateToLLLL(item?.expiredAt as Date, locale),
@@ -54,16 +54,31 @@ const ListEventDates = ({ item, index }: Props) => {
                     </span>
                   </p>
                   <p className="mt-1 font-semibold">
-                    {formateToCccc(item?.expiredAt as Date, locale)},{' '}
-                    {item?.timeInit}
+                    <span>
+                      {formateToCccc(item?.expiredAt as Date, locale)}
+                    </span>
+                    ,<span className="ml-1">{item?.timeInit}</span>
+                    {item?.timeEnd ? (
+                      <>
+                        <span className="ml-1">-</span>
+                        <span className="ml-1">{item?.timeEnd}</span>
+                      </>
+                    ) : null}
                   </p>
                 </div>
               </div>
 
               <div className="mt-2">
                 <p className="font-bold">
-                  {capitalizeFirstLetter(String(item?.city))} -{' '}
-                  {capitalizeFirstLetter(String(item?.address))}
+                  <span>{capitalizeFirstLetter(String(item?.address))}</span>
+                  <span className="ml-1">-</span>
+                  <span className="ml-1">
+                    {capitalizeFirstLetter(String(item?.city))}
+                  </span>
+                  <span className="ml-1">-</span>
+                  <span className="ml-1">
+                    {capitalizeFirstLetter(String(item?.country?.name))}
+                  </span>
                 </p>
               </div>
             </div>

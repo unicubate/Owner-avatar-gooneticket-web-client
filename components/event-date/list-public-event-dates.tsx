@@ -41,11 +41,11 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   return (
     <>
       <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-gray-800 dark:bg-[#04080b]">
-        <div className="divide-y divide-gray-200 dark:divide-gray-800">
+        <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
           <div key={index} className="py-2">
             <div className="flex items-center">
               {item?.oneUploadsImage ? (
-                <div className="relative shrink-0 cursor-pointer">
+                <div className="relative shrink-0">
                   <Image
                     width={100}
                     height={100}
@@ -63,14 +63,14 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                 </div>
               ) : null}
 
-              <div className="ml-2 min-w-0 flex-1 cursor-pointer">
+              <div className="ml-2 min-w-0 flex-1">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="sm:mt-0">
                     <div className="flex items-center">
                       <p className="text-4xl font-semibold text-blue-700">
                         {formateTodd(item?.expiredAt as Date, locale)}
                       </p>
-                      <div className="tex-sm ml-2 cursor-pointer">
+                      <div className="tex-sm ml-1.5">
                         <p className="font-bold">
                           {capitalizeFirstLetter(
                             formateToLLLL(item?.expiredAt as Date, locale),
@@ -96,15 +96,15 @@ const ListPublicEventDates = ({ item, index }: Props) => {
 
                     <div className="mt-1.5 text-sm font-bold">
                       <span>
-                        {capitalizeFirstLetter(String(item?.country?.name))}
+                        {capitalizeFirstLetter(String(item?.address))}
                       </span>
                       <span className="ml-1">-</span>
                       <span className="ml-1">
                         {capitalizeFirstLetter(String(item?.city))}
-                      </span>{' '}
+                      </span>
                       <span className="ml-1">-</span>
                       <span className="ml-1">
-                        {capitalizeFirstLetter(String(item?.address))}
+                        {capitalizeFirstLetter(String(item?.country?.name))}
                       </span>
                     </div>
                   </div>

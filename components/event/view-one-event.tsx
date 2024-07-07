@@ -219,7 +219,7 @@ const ViewOneEvent = ({ item }: Props) => {
             take={6}
             userVisitorId={userStorage?.id}
             organizationId={item?.organizationId}
-            productId={item?.id}
+            eventId={item?.id}
           />
         </div>
       </div>

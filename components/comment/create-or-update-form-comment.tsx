@@ -18,6 +18,7 @@ export function CreateOrUpdateFormComment(props: {
   organizationId: string;
   productId?: string;
   postId?: string;
+  eventId?: string;
   comment?: any;
   model: ModelType;
   setOpenModal?: any;
@@ -27,6 +28,7 @@ export function CreateOrUpdateFormComment(props: {
     postId,
     organizationId,
     model,
+    eventId,
     productId,
     comment,
     openModal,
@@ -83,7 +85,8 @@ export function CreateOrUpdateFormComment(props: {
     try {
       await saveMutation({
         ...payload,
-        model: model ?? '',
+        model: model,
+        eventId: eventId ?? '',
         postId: postId ?? '',
         productId: productId ?? '',
         commentId: comment?.id,

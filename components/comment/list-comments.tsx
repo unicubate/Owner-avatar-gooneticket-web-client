@@ -12,6 +12,7 @@ type Props = {
   organizationId: string;
   modelIds: ModelType[];
   postId?: string;
+  eventId?: string;
   productId?: string;
   userVisitorId: string;
 };
@@ -23,6 +24,7 @@ export function ListComments(props: Props) {
     modelIds,
     organizationId,
     postId,
+    eventId,
     productId,
     userVisitorId,
   } = props;
@@ -38,8 +40,9 @@ export function ListComments(props: Props) {
     take: take,
     sort: 'DESC',
     modelIds,
-    postId: postId ?? '',
-    productId: productId ?? '',
+    eventId,
+    postId,
+    productId,
     userVisitorId,
     organizationId,
   });
@@ -72,6 +75,7 @@ export function ListComments(props: Props) {
         postId={postId}
         organizationId={organizationId}
         productId={productId}
+        eventId={eventId}
         model={model}
       />
 
