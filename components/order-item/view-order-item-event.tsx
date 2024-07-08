@@ -98,8 +98,6 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         <p className="mt-4 text-center font-bold uppercase">
           <span>{orderItem?.event?.address ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
-          <span>{orderItem?.event?.country?.name ?? ''}</span>
-          <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.event?.city ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.event?.country?.name ?? ''}</span>
