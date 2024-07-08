@@ -33,20 +33,20 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
           <p className="mt-4 text-center text-lg font-semibold">
             <QRCode
-              size={240}
+              size={220}
               errorLevel={level as QRCodeProps['errorLevel']}
               value={orderItem?.orderNumber}
             />
           </p>
         </div>
-        {!orderItem?.isExpired ? (
+        {/* {!orderItem?.isExpired ? (
           <div className="mt-4 flex justify-center">
             <span className="relative flex size-8">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex size-8 rounded-full bg-green-500"></span>
             </span>
           </div>
-        ) : null}
+        ) : null} */}
 
         <div className="text-center">
           <p className="mt-2 text-xl font-semibold">

@@ -102,7 +102,7 @@
   "MENU.SUBSCRIBER": "Membres",
 
   "TRANSACTION.LAST_DAY": "Dernier {day} jours",
-  "TRANSACTION.ALL_TIME": "Toute le temp",
+  "TRANSACTION.ALL_TIME": "Tout le temps",
   "TRANSACTION.WITHDRAW": "Retrait",
   "TRANSACTION.RECENT": "Derniers transactions",
   "TRANSACTION.ANY": "Vous n'avez aucune transaction",

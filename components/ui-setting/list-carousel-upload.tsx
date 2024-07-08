@@ -68,7 +68,7 @@ export function ListCarouselUpload(props: Props) {
       >
         {uploads &&
           uploads?.length > 0 &&
-          uploads?.map((item: any, index: number) => (
+          uploads?.map((item: UploadModel, index: number) => (
             <SwiperSlide key={index}>
               <Image
                 width={width}
@@ -81,7 +81,9 @@ export function ListCarouselUpload(props: Props) {
                   fileName: item?.path,
                 })}`}
                 alt={alt}
-                loading="lazy"
+                decoding="auto"
+                fetchPriority="high"
+                //loading="lazy"
               />
             </SwiperSlide>
           ))}
