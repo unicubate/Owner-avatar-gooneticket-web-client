@@ -173,7 +173,7 @@ const CheckoutEvent = () => {
                               <ListCarouselUpload
                                 uploads={item?.uploadsImages}
                                 folder={String(item?.model.toLocaleLowerCase())}
-                                height={200}
+                                height="200px"
                                 className={`object-cover`}
                               />
                             </div>

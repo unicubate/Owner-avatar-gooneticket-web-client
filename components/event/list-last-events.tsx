@@ -23,8 +23,7 @@ export function ListLastEvents(props: Props) {
               <ListCarouselUpload
                 uploads={item?.uploadsImages}
                 folder={String(item?.model.toLocaleLowerCase())}
-                preview={false}
-                height={65}
+                height="65px"
                 className={`size-16`}
               />
             </div>

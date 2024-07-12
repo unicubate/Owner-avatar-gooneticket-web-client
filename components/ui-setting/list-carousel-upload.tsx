@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { UploadModel } from '@/types/upload';
-import { Image } from 'antd';
+//import { Image } from 'antd';
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -10,16 +10,16 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 // import required modules
 import { PostModel } from '@/types/post';
+import Image from 'next/image';
 import { Pagination, Zoom } from 'swiper/modules';
 
 type Props = {
   uploads: UploadModel[];
   folder: string;
-  preview?: boolean;
   className?: string;
   alt?: string;
   post?: PostModel;
-  height?: string | number;
+  height?: string;
   width?: string | number;
 };
 
@@ -33,7 +33,6 @@ export function ListCarouselUpload(props: Props) {
   const {
     uploads,
     folder,
-    preview = false,
     alt,
     post,
     className = '',
@@ -71,16 +70,25 @@ export function ListCarouselUpload(props: Props) {
           uploads?.map((item: UploadModel, index: number) => (
             <SwiperSlide key={index}>
               <Image
-                width={width}
-                height={height}
+                height={500}
+                width={1000}
+                style={{
+                  left: 0,
+                  right: 0,
+                  height: `${height}`,
+                  width: `${width}`,
+                  marginInline: 'auto',
+                  aspectRatio: 'auto',
+                  filter: 'drop-shadow(0px 4px 40px #666a)',
+                  pointerEvents: 'none',
+                }}
                 className={className}
-                preview={preview}
-                style={contentStyle}
                 src={`${viewOneFileUploadAPI({
                   folder: folder,
                   fileName: item?.path,
                 })}`}
-                alt={alt}
+                priority
+                alt={String(alt)}
                 decoding="auto"
                 fetchPriority="high"
                 //loading="lazy"
