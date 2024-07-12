@@ -87,7 +87,8 @@ export function ListCarouselUpload(props: Props) {
                   folder: folder,
                   fileName: item?.path,
                 })}`}
-                priority
+                quality={90}
+                priority={true}
                 alt={String(alt)}
                 decoding="auto"
                 fetchPriority="high"
