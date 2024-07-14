@@ -5,7 +5,6 @@ import { formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -15,7 +14,7 @@ import {
   viewYyformateToYyyy,
 } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
-import { CopyShareLink } from '../ui-setting';
+import { CopyShareLink, SwiperImage } from '../ui-setting';
 import { Badge } from '../ui/badge';
 
 type Props = {
@@ -46,12 +45,9 @@ const ListPublicEventDates = ({ item, index }: Props) => {
             <div className="flex items-center">
               {item?.oneUploadsImage ? (
                 <div className="relative shrink-0">
-                  <Image
-                    width={100}
-                    height={100}
-                    quality={90}
-                    priority={true}
-                    className="object-cover"
+                  <SwiperImage
+                    height="80px"
+                    width="120px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(
                         item?.oneUploadsImage?.model.toLocaleLowerCase(),
