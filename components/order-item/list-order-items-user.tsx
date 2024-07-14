@@ -12,12 +12,11 @@ import {
   ShareIcon,
   TicketIcon,
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CopyShareLink, SerialPrice } from '../ui-setting';
+import { CopyShareLink, SerialPrice, SwiperImage } from '../ui-setting';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import {
@@ -65,11 +64,9 @@ const ListOrderItemsUser = (props: Props) => {
             >
               {item?.uploadsImages?.length > 0 ? (
                 <div className="relative shrink-0 cursor-pointer">
-                  <Image
-                    width={90}
-                    height={90}
-                    quality={90}
-                    priority={true}
+                  <SwiperImage
+                    height="70px"
+                    width="80px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(item?.model.toLocaleLowerCase()),
                       fileName: item?.uploadsImages[0]?.path,

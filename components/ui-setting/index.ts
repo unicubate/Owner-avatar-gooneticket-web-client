@@ -12,6 +12,7 @@ export * from './phone-number-input';
 export * from './react-quill-input';
 export * from './search-input';
 export * from './serial-price';
+export * from './swiper-image';
 export * from './textarea-react-quill-input';
 export * from './theme-toggle';
 export * from './who-can-see-item';
