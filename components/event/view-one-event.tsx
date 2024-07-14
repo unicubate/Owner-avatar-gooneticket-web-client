@@ -32,7 +32,6 @@ const ViewOneEvent = ({ item }: Props) => {
                 uploads={item?.uploadsImages}
                 folder={String(item?.model.toLocaleLowerCase())}
                 height="400px"
-                className={`object-cover`}
               />
             </div>
           ) : null}

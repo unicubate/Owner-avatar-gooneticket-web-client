@@ -174,7 +174,6 @@ const CheckoutEvent = () => {
                                 uploads={item?.uploadsImages}
                                 folder={String(item?.model.toLocaleLowerCase())}
                                 height="200px"
-                                className={`object-cover`}
                               />
                             </div>
                           ) : null}

@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 // import required modules
+import { cn } from '@/lib/utils';
 import { PostModel } from '@/types/post';
 import Image from 'next/image';
 import { Pagination, Zoom } from 'swiper/modules';
@@ -73,16 +74,13 @@ export function ListCarouselUpload(props: Props) {
                 height={500}
                 width={1000}
                 style={{
-                  left: 0,
-                  right: 0,
                   height: `${height}`,
                   width: `${width}`,
                   marginInline: 'auto',
                   aspectRatio: 'auto',
-                  filter: 'drop-shadow(0px 4px 40px #666a)',
                   pointerEvents: 'none',
                 }}
-                className={className}
+                className={cn('rounded-md object-cover', className)}
                 src={`${viewOneFileUploadAPI({
                   folder: folder,
                   fileName: item?.path,
