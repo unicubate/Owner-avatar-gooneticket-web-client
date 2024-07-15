@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils';
 import { DatePicker } from 'antd';
 import dayjs from 'dayjs';
 import { Control, Controller } from 'react-hook-form';
@@ -36,8 +37,9 @@ const DateInput: React.FC<Props> = ({
             format="DD/MM/YYYY"
             style={{ width: '100%' }}
             id={name}
-            //className={`dark:border-gray-800 dark:bg-[#04080b] dark:text-white dark:placeholder:text-gray-500 ${errors?.[name]?.message ? 'border-red-500' : ''}`}
-            className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+            className={cn(
+              `border border-input dark:border-gray-800 dark:bg-background dark:text-white dark:placeholder:text-gray-500 ${errors?.[name]?.message ? 'border-red-500' : ''}`,
+            )}
             placeholder={placeholder}
             value={dayjs(field.value ?? new Date())}
             onChange={(value) => {
