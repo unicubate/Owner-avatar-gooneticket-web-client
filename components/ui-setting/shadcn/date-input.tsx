@@ -53,7 +53,7 @@ const DateInput = ({
                 )}
               >
                 {field.value ? (
-                  format(field.value, 'PPP')
+                  format(field.value, 'P')
                 ) : (
                   <span className="font-semibold">{placeholder}</span>
                 )}
