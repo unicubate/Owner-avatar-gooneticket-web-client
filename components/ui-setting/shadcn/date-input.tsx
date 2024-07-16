@@ -2,7 +2,6 @@
 
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
-import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -20,6 +19,8 @@ interface Props {
   name: string;
   errors: { [key: string]: any };
   placeholder?: string;
+  required?: boolean;
+  disabled?: boolean | ((date: Date) => boolean);
 }
 
 const DateInput = ({
@@ -27,9 +28,10 @@ const DateInput = ({
   label = '',
   name,
   errors,
-  placeholder = '',
+  placeholder = 'Pick a date',
+  disabled,
+  required,
 }: Props) => {
-  const [date, setDate] = React.useState<Date>();
   return (
     <>
       {label ? (
@@ -46,20 +48,29 @@ const DateInput = ({
               <Button
                 variant={'outline'}
                 className={cn(
-                  'w-full justify-start text-left font-normal',
-                  !date && 'text-muted-foreground',
+                  `w-full pl-3 text-left font-normal ${errors?.[name]?.message ? 'border-red-500' : ''}`,
+                  !field.value && 'text-muted-foreground',
                 )}
               >
-                <CalendarIcon className="mr-2 size-4" />
-                {date ? format(date, 'PPP') : <span>Pick a date</span>}
+                {field.value ? (
+                  format(field.value, 'PPP')
+                ) : (
+                  <span className="font-semibold">{placeholder}</span>
+                )}
+                <CalendarIcon className="ml-auto size-4 opacity-50" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto dark:border-gray-800">
+            <PopoverContent
+              className="w-auto p-0 dark:border-gray-800"
+              align="start"
+            >
               <Calendar
+                disabled={disabled}
+                selected={field.value}
+                onSelect={field.onChange}
                 mode="single"
-                selected={date}
-                onSelect={setDate}
                 initialFocus
+                required={required}
               />
             </PopoverContent>
           </Popover>
