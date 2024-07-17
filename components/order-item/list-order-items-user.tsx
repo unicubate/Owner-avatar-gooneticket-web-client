@@ -78,7 +78,7 @@ const ListOrderItemsUser = (props: Props) => {
             </Link>
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className="flex items-center text-gray-600">
+              <div className="flex items-center font-bold text-gray-600">
                 <button className="text-sm">
                   <CalendarIcon className="size-4" />
                 </button>
