@@ -2,6 +2,7 @@ export * from '../avatar-coffee-component';
 export * from './avatar-component';
 export * from './avatar-image-component';
 export * from './cover-component';
+export * from './date-input';
 export * from './empty-data';
 export * from './loading-file';
 export * from './number-input';

@@ -115,53 +115,30 @@ export function CreateOrUpdateFormComment(props: {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* <div className="max-w-auto relative mt-4 flex w-full">
-          <TextareaReactQuillInput
-            control={control}
-            name="description"
-            placeholder="Participate in the conversation"
-            errors={errors}
-            className="h-auto"
-          />
-          <ButtonInput
-            type="submit"
-            variant="primary"
-            size="default"
-            className="!absolute right-1 top-1 rounded"
-            loading={loading}
-            disabled={watchDescription.length >= 12 ? false : true}
-          >
-            Send
-          </ButtonInput>
-        </div> */}
-        <div className="mt-4 space-y-2 sm:flex sm:items-end sm:space-x-4 sm:space-y-0">
-          {/* <div className="flex items-start">
-            <Avatar
-              size={40}
-              className="flex-shrink-0 bg-gray-300 rounded-full w-8 h-10"
-              src={user?.profile?.image}
-              alt=""
-            />
+        <div className="max-w-auto relative mt-4 flex w-full">
+          {/* <div className="flex items-start px-1.5">
             <AvatarComponent
               size={40}
-              className="flex-shrink-0 bg-gray-300 rounded-full w-10 h-10"
-              profile={''}
+              className="size-10 shrink-0 rounded-full bg-gray-300"
+              profile={userStorage?.profile}
             />
           </div> */}
+
           <TextareaReactQuillInput
             control={control}
             name="description"
-            placeholder="Participate in the conversation"
+            placeholder="Write your message"
             errors={errors}
             className="h-auto"
           />
+
           <div className="flex justify-between space-x-2">
             {openModal ? (
               <ButtonInput
                 type="button"
-                size="lg"
-                variant="outline"
-                className="w-full"
+                variant="secondary"
+                size="default"
+                className="!absolute right-20 top-1 rounded"
                 onClick={() => {
                   setOpenModal(false);
                 }}
@@ -174,9 +151,9 @@ export function CreateOrUpdateFormComment(props: {
               <>
                 <ButtonInput
                   type="submit"
-                  size="lg"
                   variant="primary"
-                  className="w-full"
+                  size="default"
+                  className="!absolute right-1 top-1 rounded"
                   loading={loading}
                   disabled={watchDescription.length >= 12 ? false : true}
                 >
@@ -189,9 +166,9 @@ export function CreateOrUpdateFormComment(props: {
                   setIsOpen(true);
                 }}
                 type="button"
-                size="lg"
                 variant="primary"
-                className="w-full"
+                size="default"
+                className="!absolute right-1 top-1 rounded"
                 loading={loading}
               >
                 Save
