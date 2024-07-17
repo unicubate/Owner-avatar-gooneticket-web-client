@@ -82,7 +82,7 @@ const ListOrderItemsUser = (props: Props) => {
                 <button className="text-sm">
                   <CalendarIcon className="size-4" />
                 </button>
-                <span className="ml-1.5 text-sm font-normal">
+                <span className="ml-1.5 text-sm font-bold">
                   {formateToRFC2822(item?.createdAt as Date, locale)}
                 </span>
               </div>
