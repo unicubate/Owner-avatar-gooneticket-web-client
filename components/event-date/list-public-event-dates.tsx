@@ -39,7 +39,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   };
   return (
     <>
-      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-gray-800 dark:bg-[#04080b]">
+      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 hover:-translate-y-1 dark:border-gray-800 dark:bg-[#04080b]">
         <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
           <div key={index} className="py-2">
             <div className="flex items-center">

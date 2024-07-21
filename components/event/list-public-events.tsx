@@ -4,11 +4,10 @@ import { EventModel } from '@/types/event';
 import { formateDate, formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { TicketPlusIcon } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput, SwiperImage } from '../ui-setting';
 import { Card } from '../ui/card';
 
 type Props = {
@@ -33,13 +32,9 @@ const ListPublicEvents = ({ item, index }: Props) => {
               href={`/events/${item?.slug}`}
               title={item?.title}
             >
-              <Image
-                height={500}
-                width={500}
-                quality={90}
-                priority={true}
-                layout="responsive"
-                className="size-full rounded-lg object-cover transition-all duration-300 group-hover:scale-125"
+              <SwiperImage
+                height="200px"
+                className="size-full rounded-lg transition-all duration-300 group-hover:scale-125"
                 src={`${viewOneFileUploadAPI({
                   folder: 'event',
                   fileName: String(item?.uploadsImages?.[0]?.path),

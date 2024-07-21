@@ -36,7 +36,7 @@ const ListEventDates = ({ item, index }: Props) => {
             )
           }
           htmlFor={`${item?.id}`}
-          className="flex cursor-pointer justify-between gap-4 rounded-lg border border-gray-300 bg-white p-2 text-sm shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+          className="flex cursor-pointer justify-between gap-4 rounded-lg border border-gray-300 bg-white p-2 text-sm shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
         >
           <div className="sm:flex sm:items-center sm:justify-between">
             <div className="sm:mt-0">
