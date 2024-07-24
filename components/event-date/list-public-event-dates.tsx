@@ -44,10 +44,14 @@ const ListPublicEventDates = ({ item, index }: Props) => {
           <div key={index} className="py-2">
             <div className="flex items-center">
               {item?.oneUploadsImage ? (
-                <div className="relative shrink-0">
+                <a
+                  href={void 0}
+                  onClick={() => handlerFindPage()}
+                  className="relative shrink-0"
+                >
                   <SwiperImage
-                    height="80px"
-                    width="120px"
+                    height="70px"
+                    width="100px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(
                         item?.oneUploadsImage?.model.toLocaleLowerCase(),
@@ -56,7 +60,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                     })}`}
                     alt={String(item?.event?.title)}
                   />
-                </div>
+                </a>
               ) : null}
 
               <div className="ml-2 min-w-0 flex-1">
@@ -76,18 +80,16 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                           </span>
                         </p>
                         <p className="mt-1 font-semibold">
-                          {formateToCccc(item?.expiredAt as Date, locale)}
+                          {formateToCccc(item?.expiredAt as Date, locale)},
+                          <span className="ml-1">{item?.timeInit}</span>
+                          {item?.timeEnd ? (
+                            <>
+                              <span className="ml-1">-</span>
+                              <span className="ml-1"> {item?.timeEnd}</span>
+                            </>
+                          ) : null}
                         </p>
                       </div>
-                    </div>
-                    <div className="mt-1 text-sm font-bold">
-                      <span>{item?.timeInit}</span>
-                      {item?.timeEnd ? (
-                        <>
-                          <span className="ml-1">-</span>
-                          <span className="ml-1">{item?.timeEnd}</span>
-                        </>
-                      ) : null}
                     </div>
 
                     <div className="mt-1.5 text-sm font-bold">

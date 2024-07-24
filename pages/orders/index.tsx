@@ -30,8 +30,7 @@ import { Fragment, useState } from 'react';
 const OrdersIndex = () => {
   const [model, setModel] = useState('');
   const [dayCount, setDayCount] = useState(30);
-  const { userStorage: user } = useInputState() as any;
-  const { t, search, handleSetSearch } = useInputState();
+  const { t, search, handleSetSearch, userStorage: user } = useInputState();
 
   const {
     isLoading: isLoadingOrderItems,
