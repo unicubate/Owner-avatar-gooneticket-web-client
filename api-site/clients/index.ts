@@ -105,6 +105,7 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Transaction route */
   getTransactions: GET(`${baseUrl}/transactions`),
+  getOneBuyerTransaction: GET(`${baseUrl}/transactions/:transactionId/buyer`),
   getStatisticsTransactions: GET(`${baseUrl}/transactions/statistics`),
 
   /****************** Cart route */

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 
 const TicketPublic = () => {
   const { query } = useRouter();
-  const orderNumber = String(query?.orderItemId);
+  const orderNumber = String(query?.id);
 
   const {
     data: orderItem,

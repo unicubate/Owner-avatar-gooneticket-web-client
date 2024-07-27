@@ -53,6 +53,12 @@ export type OrderItemModel = {
     fullName: string;
     email: string;
   };
+  order: {
+    orderNumber: string;
+    transaction: {
+      id: string;
+    };
+  };
   profile: ProfileItemModel;
   organizationSeller: { name: string; image: string };
   profileSeller: ProfileItemModel;
@@ -71,8 +77,10 @@ export type OrderModel = {
   totalPriceDiscount: number;
   totalPriceNoDiscount: number;
   currency: string;
+  quantity: number;
   address: {
     id: string;
+    email: string;
     cap: string;
     city: string;
     phone: string;

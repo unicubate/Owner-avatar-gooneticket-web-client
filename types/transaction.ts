@@ -3,6 +3,7 @@ import {
   PaginationResponse,
   PaymentType,
 } from '@/utils/paginations';
+import { OrderModel } from './order-item';
 import { ProfileItemModel } from './profile';
 
 export type ResponseTransactionModel = {
@@ -25,6 +26,7 @@ export type TransactionModel = {
   id: string;
   createdAt: Date;
   amount: string;
+  amountInTaxes: string;
   title: string;
   description: string;
   currency: string;
@@ -36,9 +38,11 @@ export type TransactionModel = {
   userBuyerId: string;
   userReceiveId: string;
   userId: string;
+  status: 'IN' | 'OUT';
   email: string;
   color: string;
   fullName: string;
+  order: OrderModel;
   gift: {
     id: string;
     title: string;

@@ -8,6 +8,7 @@ import {
   CheckCheckIcon,
   DownloadIcon,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
@@ -175,6 +176,15 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                 </ButtonInput>
               )
             )}
+          </div>
+
+          <div className="mt-3 flex justify-center text-sm">
+            <Link
+              href={`/orders/${orderItem?.order?.transaction?.id}/transaction`}
+              className="text-primary group-hover:underline group-hover:underline-offset-4"
+            >
+              #{orderItem?.order?.orderNumber}
+            </Link>
           </div>
         </div>
       </div>

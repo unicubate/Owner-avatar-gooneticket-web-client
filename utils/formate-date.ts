@@ -34,6 +34,11 @@ export const formateYYDDMM = (date: Date, locale: string) => {
   return dateInit.setLocale(locale).toFormat('cccc dd LLLL yyyy HH:mm');
 };
 
+export const formatDateDDMMYYToUtc = (date: Date, locale: string) => {
+  const dateInit = DateTime.fromISO(String(date));
+  return dateInit.setLocale(locale).toFormat('dd/LL/yyyy');
+};
+
 export const formateToRFC2822 = (date: Date, locale: string) =>
   DateTime.fromISO(String(date)).setLocale(locale).toFormat('DDDD');
 

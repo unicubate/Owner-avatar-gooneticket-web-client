@@ -2,6 +2,7 @@ import { makeApiCall } from '@/api-site/clients';
 import {
   ResponseTransactionModel,
   StatisticTransactionModel,
+  TransactionModel,
 } from '@/types/transaction';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
@@ -41,6 +42,32 @@ export const GetStatisticsTransactionsAPI = (payload: {
     isLoading,
     status,
     error: error as any,
+    refetch,
+  };
+};
+
+export const GetOneTransactionAPI = ({
+  transactionId,
+}: {
+  transactionId: string;
+}) => {
+  const { data, isError, isLoading, isPending, status, refetch } = useQuery({
+    queryKey: ['transaction', { transactionId }],
+    queryFn: async () =>
+      await makeApiCall({
+        action: 'getOneBuyerTransaction',
+        urlParams: { transactionId },
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as TransactionModel,
+    isError,
+    isPending,
+    isLoading,
+    status,
     refetch,
   };
 };

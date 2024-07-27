@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { EventDateModel } from '@/types/event-date';
 import {
+  formatePrice,
   formateToCccc,
   formateToLLLL,
   formateTodd,
@@ -85,8 +86,22 @@ const ListEventDates = ({ item, index }: Props) => {
           </div>
 
           <div className="py-4">
+            <span className="text-xl font-bold">
+              {item?.oneTicket?.id ? (
+                <>
+                  {formatePrice({
+                    currency: `${item?.oneTicket?.currency?.code}`,
+                    value: Number(item?.oneTicket?.amount ?? 0),
+                    isDivide: false,
+                  })}
+                </>
+              ) : (
+                'Free'
+              )}
+            </span>
+
             <Badge
-              className="cursor-pointer gap-1  rounded-sm"
+              className="ml-2 cursor-pointer gap-1  rounded-sm"
               variant="primary"
             >
               <TicketIcon className="size-6" />

@@ -5,7 +5,6 @@ import { ButtonInput, CopyShareLink } from '../ui-setting';
 import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { EventModel } from '@/types/event';
-import { formatePrice } from '@/utils';
 import { MessageCircleIcon, ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListComments } from '../comment/list-comments';
@@ -52,59 +51,9 @@ const ViewOneEvent = ({ item }: Props) => {
           </div> */}
 
           {item?.title ? (
-            <div className="text-2xl font-bold">{item?.title ?? ''}</div>
+            <div className="mt-2 text-2xl font-bold">{item?.title ?? ''}</div>
           ) : null}
 
-          <div className="relative mt-4 shrink-0 cursor-pointer">
-            <div className="flex items-center">
-              <div className="flex shrink-0 items-center font-bold">
-                {Number(item?.oneTicket?.amount) > 0 ? (
-                  <>
-                    <span className="ml-1 text-3xl">
-                      {formatePrice({
-                        currency: String(item?.currency?.code),
-                        value: Number(item?.oneTicket?.amount ?? 0),
-                        isDivide: false,
-                      })}
-                    </span>
-                  </>
-                ) : (
-                  <span className="ml-1 text-2xl">Free</span>
-                )}
-                {/* <span className="ml-1 text-3xl">
-                  {formatePrice({
-                    value: Number(item?.priceDiscount ?? 0),
-                    isDivide: false,
-                  })}
-                </span>
-
-                {item?.enableDiscount ? (
-                  <>
-                    <p className="ml-2 text-xl text-red-500">
-                      <del> {item?.price ?? ''} </del>
-                    </p>
-                    <p className="ml-1 text-xl text-red-500">
-                      <del> {item?.currency?.symbol ?? ''} </del>
-                    </p>
-                  </>
-                ) : null} */}
-              </div>
-
-              {/* <div className="ml-auto hidden font-bold lg:table-cell">
-                <span className="text-lg">
-                  {formateToRFC2822(item?.expiredAt as Date, locale)}
-                </span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
-              </div> */}
-            </div>
-          </div>
           <div className="mt-4 space-y-4">
             <ListEventDatesForEventDate
               event={{

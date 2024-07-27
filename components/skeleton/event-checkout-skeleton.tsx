@@ -22,14 +22,17 @@ export const EventCheckoutSkeleton = () => {
                 <Skeleton className="ml-auto h-6 w-40 rounded-md" />
               </div>
               <div className="mt-4 flex items-center">
-                <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-10 w-full" />
               </div>
               <div className="mt-4 flex items-center">
-                <Skeleton className="h-8 w-full" />
+                <Skeleton className="h-10 w-full" />
               </div>
               <div className="mt-4 flex items-center">
                 <Skeleton className="h-8 w-[250px] rounded-md" />
                 <Skeleton className="ml-auto h-8 w-[250px] rounded-md" />
+              </div>
+              <div className="mt-4 flex items-center">
+                <Skeleton className="h-8 w-full" />
               </div>
             </div>
           </Card>
@@ -54,9 +57,9 @@ export const EventCheckoutSkeleton = () => {
             </div>
           </div>
         </Card>
-        <div className="mt-4 flex items-center">
+        {/* <div className="mt-4 flex items-center">
           <Skeleton className="h-8 w-full" />
-        </div>
+        </div> */}
       </div>
     </>
   );

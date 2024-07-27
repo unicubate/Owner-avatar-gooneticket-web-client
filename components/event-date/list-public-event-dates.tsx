@@ -109,7 +109,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                 </div>
               </div>
 
-              <div className="ml-auto py-4 text-right font-medium">
+              <div className="ml-auto py-2 text-right font-medium">
                 <div className="text-lg font-bold">
                   {Number(item?.oneTicket?.amount) > 0 ? (
                     <span className="ml-1.5">

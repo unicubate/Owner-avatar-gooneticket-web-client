@@ -25,6 +25,7 @@ import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-
 import { PrivateComponent } from '@/components/util/private-component';
 import { TicketModel } from '@/types/ticket';
 import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
+import { HtmlParser } from '@/utils/html-parser';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { PlusIcon } from 'lucide-react';
@@ -114,6 +115,7 @@ const CheckoutEvent = () => {
     take: 10,
     sort: 'ASC',
     eventId: item?.id,
+    eventDateId: eventDate?.id,
   });
 
   const {
@@ -125,14 +127,9 @@ const CheckoutEvent = () => {
     organizationVisitorId: userStorage?.organizationId,
   });
 
-  // const userAddress = {
-  //   fullName: watchFullName,
-  //   email: watchEmail,
-  // };
-
   const ticketJsonParse = watchAmount
     ? JSON.parse(watchAmount)
-    : item?.oneTicket;
+    : eventDate?.oneTicket;
   const calculatePrice = Number(ticketJsonParse?.amount) * increment;
   const newAmount: NewAmountType = {
     quantity: increment,
@@ -148,6 +145,7 @@ const CheckoutEvent = () => {
     `/events/${item?.slug}${partner ? `?partner=${partner}` : ''}`,
     600,
   );
+
   return (
     <>
       <LayoutCheckoutSite
@@ -187,20 +185,20 @@ const CheckoutEvent = () => {
                           <div className="relative mt-4 shrink-0 cursor-pointer">
                             <div className="flex items-center">
                               <div className="flex shrink-0 items-center font-bold">
-                                {Number(item?.oneTicket?.amount) > 0 ? (
-                                  <>
-                                    <span className="text-xl">
+                                <span className="text-xl">
+                                  {eventDate?.oneTicket?.id ? (
+                                    <>
                                       {formatePrice({
-                                        currency: `${item?.currency?.code}`,
+                                        currency: `${eventDate?.oneTicket?.currency?.code}`,
                                         value: Number(newAmount?.oneValue ?? 0),
                                         isDivide: false,
                                       })}{' '}
                                       x {increment}
-                                    </span>
-                                  </>
-                                ) : (
-                                  <span className="text-xl">Free</span>
-                                )}
+                                    </>
+                                  ) : (
+                                    'Free'
+                                  )}
+                                </span>
                               </div>
 
                               <div className="ml-auto hidden font-bold text-blue-600 lg:table-cell">
@@ -385,11 +383,27 @@ const CheckoutEvent = () => {
                                           htmlFor={ticket?.id}
                                           className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
                                         >
-                                          <p className="text-gray-700 dark:text-gray-200">
-                                            {ticket?.name}
-                                          </p>
+                                          <div className="sm:flex sm:items-center sm:justify-between">
+                                            <div className="sm:mt-0">
+                                              <p className="font-bold text-gray-700 dark:text-gray-200">
+                                                {ticket?.name}
+                                              </p>
 
-                                          <div className="text-gray-900 dark:text-white">
+                                              {ticket?.description ? (
+                                                <div
+                                                  className={`group relative mt-2 text-sm font-normal text-gray-600 dark:text-gray-300`}
+                                                >
+                                                  <HtmlParser
+                                                    html={String(
+                                                      ticket?.description ?? '',
+                                                    )}
+                                                  />
+                                                </div>
+                                              ) : null}
+                                            </div>
+                                          </div>
+
+                                          <p className="text-lg font-bold text-gray-900 dark:text-white">
                                             {formatePrice({
                                               currency: `${item?.currency?.code}`,
                                               value: Number(
@@ -397,7 +411,8 @@ const CheckoutEvent = () => {
                                               ),
                                               isDivide: false,
                                             })}
-                                          </div>
+                                          </p>
+
                                           <input
                                             type="radio"
                                             {...register('amount')}

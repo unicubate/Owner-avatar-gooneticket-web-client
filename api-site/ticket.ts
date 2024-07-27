@@ -4,11 +4,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 export const GetInfiniteTicketsAPI = (payload: {
   eventId: string;
+  eventDateId: string;
   search?: string;
   take: number;
   sort: SortModel;
 }) => {
-  const { take, sort, search, eventId } = payload;
+  const { take, sort, search, eventId, eventDateId } = payload;
   return useInfiniteQuery({
     queryKey: ['tickets', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -20,6 +21,7 @@ export const GetInfiniteTicketsAPI = (payload: {
           sort,
           take,
           search,
+          eventDateId,
           page: pageParam,
         },
       }),

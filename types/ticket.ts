@@ -7,4 +7,9 @@ export type TicketModel = {
   productId: string;
   description: string;
   amount: number;
+  currency: {
+    code: string;
+    name: string;
+    symbol: string;
+  };
 };
