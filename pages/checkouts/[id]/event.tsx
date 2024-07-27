@@ -419,6 +419,9 @@ const CheckoutEvent = () => {
                                             value={JSON.stringify(ticket)}
                                             id={ticket?.id}
                                             className="sr-only"
+                                            defaultChecked={
+                                              index === 0 ? true : false
+                                            }
                                           />
                                         </label>
                                       </div>
@@ -586,6 +589,7 @@ const CheckoutEvent = () => {
                                     value={lk?.value}
                                     id={lk?.value}
                                     className="sr-only"
+                                    required
                                   />
                                 </label>
                               </div>
@@ -597,7 +601,7 @@ const CheckoutEvent = () => {
 
                     {isEdit ? (
                       <>
-                        {Number(item?.oneTicket?.amount) > 0 ? (
+                        {eventDate?.oneTicket?.id ? (
                           <>
                             {isValid && watchPaymentMethod ? (
                               <>
