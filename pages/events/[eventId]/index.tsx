@@ -27,7 +27,7 @@ const ShopUserPublic = () => {
     data: user,
   } = GetOneUserPublicAPI({
     username: event?.profile?.username,
-    userVisitorId: userBayer?.id,
+    organizationVisitorId: userBayer?.organizationId,
   });
 
   return (
@@ -37,9 +37,9 @@ const ShopUserPublic = () => {
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
               <div className="flow-root">
-                {isLoadingEvent ? (
+                {isPendingUser || isLoadingEvent ? (
                   <ProductSkeleton index={0} />
-                ) : isErrorEvent ? (
+                ) : isErrorUser || isErrorEvent ? (
                   <ErrorFile
                     title="404"
                     description="Error find data please try again..."

@@ -30,6 +30,9 @@ const ListEventDatesForEventDate = ({
 
   return (
     <>
+      <div className="py-2 sm:mt-0">
+        <p className="font-bold">Please select a date</p>
+      </div>
       {isLoading ? (
         <LoadingFile />
       ) : isError ? (

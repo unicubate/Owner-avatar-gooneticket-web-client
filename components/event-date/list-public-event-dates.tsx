@@ -5,6 +5,7 @@ import { formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { TicketIcon } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
@@ -14,8 +15,7 @@ import {
   viewYyformateToYyyy,
 } from '../../utils/formate-date';
 import { useInputState } from '../hooks';
-import { CopyShareLink, SwiperImage } from '../ui-setting';
-import { Badge } from '../ui/badge';
+import { ButtonInput, CopyShareLink, SwiperImage } from '../ui-setting';
 
 type Props = {
   item?: EventDateModel;
@@ -28,30 +28,28 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   const [copied, setCopied] = useState(false);
   const { locale, userStorage, ipLocation } = useInputState();
 
-  const handlerFindPage = () => {
-    push(
-      `${
-        userStorage?.id
-          ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
-          : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
-      }`,
-    );
-  };
+  const linkHrefCheckouts = `${
+    userStorage?.id
+      ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+      : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
+  }`;
+
+  const linkHrefView = `/events/${item?.event?.slug}`;
+
   return (
     <>
-      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 hover:-translate-y-1 dark:border-gray-800 dark:bg-[#04080b]">
+      <div
+        key={index}
+        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 hover:-translate-y-1 dark:border-gray-800 dark:bg-[#04080b]"
+      >
         <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
-          <div key={index} className="py-2">
+          <div className="py-1">
             <div className="flex items-center">
               {item?.oneUploadsImage ? (
-                <a
-                  href={void 0}
-                  onClick={() => handlerFindPage()}
-                  className="relative shrink-0"
-                >
+                <Link href={linkHrefCheckouts} className="relative shrink-0">
                   <SwiperImage
-                    height="70px"
-                    width="100px"
+                    height="90px"
+                    width="90px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(
                         item?.oneUploadsImage?.model.toLocaleLowerCase(),
@@ -60,7 +58,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                     })}`}
                     alt={String(item?.event?.title)}
                   />
-                </a>
+                </Link>
               ) : null}
 
               <div className="ml-2 min-w-0 flex-1">
@@ -72,6 +70,9 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                       </p>
                       <div className="tex-sm ml-1.5">
                         <p className="font-bold">
+                          {formateToCccc(item?.expiredAt as Date, locale)}
+                        </p>
+                        <p className="mt-1 font-semibold">
                           {capitalizeFirstLetter(
                             formateToLLLL(item?.expiredAt as Date, locale),
                           )}
@@ -80,8 +81,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                           </span>
                         </p>
                         <p className="mt-1 font-semibold">
-                          {formateToCccc(item?.expiredAt as Date, locale)},
-                          <span className="ml-1">{item?.timeInit}</span>
+                          <span>{item?.timeInit}</span>
                           {item?.timeEnd ? (
                             <>
                               <span className="ml-1">-</span>
@@ -110,67 +110,34 @@ const ListPublicEventDates = ({ item, index }: Props) => {
               </div>
 
               <div className="ml-auto py-2 text-right font-medium">
-                <div className="text-lg font-bold">
-                  {Number(item?.oneTicket?.amount) > 0 ? (
-                    <span className="ml-1.5">
-                      {formatePrice({
-                        currency: `${item?.event?.currency?.code}`,
-                        value: Number(item?.oneTicket?.amount ?? 0),
-                        isDivide: false,
-                      })}
-                    </span>
-                  ) : (
-                    <span className="ml-2">Free</span>
-                  )}
-                </div>
-                <div className="mt-4">
-                  <Badge
-                    className="cursor-pointer gap-1 rounded-sm"
-                    variant="primary"
-                    onClick={() => handlerFindPage()}
+                <div className="mt-1.5 hidden sm:block">
+                  <Link href={linkHrefCheckouts}>
+                    <ButtonInput
+                      type="button"
+                      variant="primary"
+                      size="sm"
+                      icon={<TicketIcon className="size-6" />}
+                    >
+                      Ticket
+                    </ButtonInput>
+                  </Link>
+
+                  {/* <Button
+                    className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+                    variant="link"
+                    type="button"
+                    size="icon"
+                    onClick={() => setCopied(true)}
                   >
-                    <TicketIcon className="size-6" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      Tickets
-                    </span>
-                  </Badge>
+                    <ShareIcon className="size-5" />
+                  </Button> */}
                 </div>
               </div>
             </div>
 
-            {/* <div className="mt-1 lg:hidden">
-              <div className="mt-1 flex items-center">
-                <p className="text-4xl font-semibold text-blue-700">
-                  {formateTodd(item?.createdAt as Date, locale)}
-                </p>
-                <div className="tex-sm ml-2 cursor-pointer">
-                  <p className="font-bold">
-                    {capitalizeFirstLetter(
-                      formateToLLLL(item?.createdAt as Date, locale),
-                    )}
-                    <span className="ml-1.5">
-                      {viewYyformateToYyyy(item?.createdAt as Date)}
-                    </span>
-                  </p>
-                  <p className="mt-1 font-semibold">
-                    {formateToCccc(item?.createdAt as Date, locale)}, 18:00 -
-                    6:00
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-1 text-sm">
-                <p className="font-bold">
-                  {capitalizeFirstLetter(String('Italy'))} -{' '}
-                  {capitalizeFirstLetter(String('Milan'))} -{' '}
-                  {capitalizeFirstLetter(String('Via della costa'))}
-                </p>
-              </div>
-            </div> */}
             <div className="mt-1 flex items-center">
-              <a
-                href={void 0}
-                onClick={() => handlerFindPage()}
+              <Link
+                href={linkHrefView}
                 className="hover:text-blue-600 dark:hover:text-blue-600"
               >
                 {item?.event?.title ? (
@@ -181,7 +148,33 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                     />
                   </p>
                 ) : null}
-              </a>
+              </Link>
+              <div className="ml-auto text-xl font-bold">
+                {Number(item?.oneTicket?.amount) > 0 ? (
+                  <>
+                    {formatePrice({
+                      currency: `${item?.event?.currency?.code}`,
+                      value: Number(item?.oneTicket?.amount ?? 0),
+                      isDivide: false,
+                    })}
+                  </>
+                ) : (
+                  'Free'
+                )}
+              </div>
+            </div>
+            <div className="mt-1.5 sm:hidden">
+              <Link href={linkHrefCheckouts}>
+                <ButtonInput
+                  type="button"
+                  variant="primary"
+                  className="w-full"
+                  size="sm"
+                  icon={<TicketIcon className="size-6" />}
+                >
+                  Ticket
+                </ButtonInput>
+              </Link>
             </div>
           </div>
 
@@ -189,7 +182,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
           <CopyShareLink
             isOpen={copied}
             setIsOpen={setCopied}
-            link={`${process.env.NEXT_PUBLIC_SITE}/events/${item?.event?.slug}`}
+            link={`${process.env.NEXT_PUBLIC_SITE}/checkouts/${item?.id}/event`}
           />
         </div>
       </div>

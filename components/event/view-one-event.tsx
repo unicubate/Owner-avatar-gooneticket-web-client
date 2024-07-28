@@ -35,21 +35,6 @@ const ViewOneEvent = ({ item }: Props) => {
             </div>
           ) : null}
 
-          {/* <div className="items-center justify-items-center">
-            <ButtonInput
-              type="button"
-              className="w-full"
-              variant="primary"
-              size="lg"
-              onClick={() => {
-                push(`/checkouts/${item?.slug}/event`);
-              }}
-              icon={<TicketPlusIcon className="size-6" />}
-            >
-              Book
-            </ButtonInput>
-          </div> */}
-
           {item?.title ? (
             <div className="mt-2 text-2xl font-bold">{item?.title ?? ''}</div>
           ) : null}
@@ -62,59 +47,6 @@ const ViewOneEvent = ({ item }: Props) => {
                 slug: item?.slug,
               }}
             />
-          </div>
-          <div className="relative mt-4 shrink-0 cursor-pointer">
-            {/* <div className="hidden items-center lg:table-cell">
-              <div className="flex shrink-0 font-bold">
-                <span className="text-lg uppercase">{item?.address ?? ''}</span>
-                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-2 text-lg uppercase">
-                  {item?.city ?? ''}
-                </span>
-                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-2 text-lg uppercase">
-                  {item?.country?.name ?? ''}
-                </span>
-              </div>
-            </div> */}
-
-            {/* <div className="text-lg lg:hidden">
-              <div className="flex font-bold">Date</div>
-              <div className="ml-auto">
-                <span className="text-sm">
-                  {formateToRFC2822(item?.expiredAt as Date, locale)}
-                </span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-2 text-sm">{item?.timeInit ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-1.5 text-sm">{item?.timeEnd ?? ''}</span>
-              </div>
-            </div>
-
-            <div className="mt-4 text-lg lg:hidden">
-              <div className="flex font-bold">Location</div>
-              <div className="ml-auto">
-                <span className="text-sm">{item?.address ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-2 text-sm">{item?.city ?? ''}</span>
-                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                  -
-                </span>
-                <span className="ml-1.5 text-sm">
-                  {item?.country?.name ?? ''}
-                </span>
-              </div>
-            </div> */}
           </div>
 
           {item?.description ? (
@@ -154,6 +86,7 @@ const ViewOneEvent = ({ item }: Props) => {
                   className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
                   variant="link"
                   type="button"
+                  size="icon"
                 >
                   <ShareIcon className="size-6" />
                 </ButtonInput>

@@ -61,19 +61,20 @@ const ListPublicEvents = ({ item, index }: Props) => {
 
         <div className="flex flex-1 flex-col p-3">
           <div className="flex shrink-0 items-center font-bold">
-            {Number(item?.oneTicket?.amount) > 0 ? (
-              <>
-                <p className="text-2xl">
+            <span className="text-2xl">
+              {item?.oneTicket?.id ? (
+                <>
                   {formatePrice({
                     currency: String(item?.currency?.code),
                     value: Number(item?.oneTicket?.amount ?? 0),
                     isDivide: false,
                   })}
-                </p>
-              </>
-            ) : (
-              <p className="text-2xl">Free</p>
-            )}
+                </>
+              ) : (
+                'Free'
+              )}
+            </span>
+
             {item?.oneEventDate?.expiredAt ? (
               <p className="ml-auto text-lg text-blue-600">
                 {formateDate(item?.oneEventDate?.expiredAt as Date, locale)}

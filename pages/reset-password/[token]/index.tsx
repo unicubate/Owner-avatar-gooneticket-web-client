@@ -52,7 +52,7 @@ const ResetPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Email send successfully',
+        text: 'Password change successfully',
       });
       push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
