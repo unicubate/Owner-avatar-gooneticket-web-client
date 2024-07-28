@@ -129,6 +129,7 @@ export const GetOneOrderItemAPI = (payload: {
     error,
   };
 };
+
 export const GetInfiniteOrderItemsAPI = (payload: {
   orderId?: string;
   modelIds: string[];
@@ -169,6 +170,40 @@ export const GetInfiniteOrderItemsAPI = (payload: {
           daysConfirm,
           search: search,
           status: status?.toUpperCase(),
+          page: Number(pageParam),
+        },
+      }),
+  });
+};
+
+export const GetInfiniteOrdersAPI = (payload: {
+  orderItemId?: string;
+  search?: string;
+  take: number;
+  days?: number;
+  daysConfirm?: number;
+  status?: string;
+  sort: SortModel;
+  customer: 'seller' | 'buyer';
+}) => {
+  const { days, orderItemId, daysConfirm, search, take, sort, customer } =
+    payload;
+  return useInfiniteQuery({
+    queryKey: [['orders', 'infinite'], { ...payload }],
+    initialPageParam: 1,
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    getPreviousPageParam: (firstPage: any) => firstPage.data.prev_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await makeApiCall({
+        action: 'getOrders',
+        queryParams: {
+          take,
+          sort,
+          days,
+          search,
+          customer,
+          orderItemId,
+          daysConfirm,
           page: Number(pageParam),
         },
       }),

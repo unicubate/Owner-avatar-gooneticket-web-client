@@ -42,12 +42,12 @@ const ListOrderItemsUser = (props: Props) => {
     {
       model: 'EVENT',
       title: item?.event?.title,
-      url: `/orders/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`,
+      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`,
     },
     {
       model: 'PRODUCT',
       title: item?.product?.title,
-      url: `/orders/${item?.orderNumber}/product?model=${item?.model.toLocaleLowerCase()}`,
+      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/product?model=${item?.model.toLocaleLowerCase()}`,
     },
   ];
   const oneItem = (model: string) =>
@@ -114,7 +114,7 @@ const ListOrderItemsUser = (props: Props) => {
                     </span>
                   </Badge>
                 </p>
-                {['DELIVERED', 'ACCEPTED'].includes(item?.status) && (
+                {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
                   <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
                     <Badge className="gap-1 rounded-sm" variant="success">
                       <CheckCheckIcon className="size-3.5" />
@@ -126,7 +126,7 @@ const ListOrderItemsUser = (props: Props) => {
                 )}
 
                 {item?.model === 'EVENT' &&
-                !['DELIVERED', 'ACCEPTED'].includes(item?.status) &&
+                !['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
                 item?.event?.isExpired ? (
                   <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
                     <Badge className="gap-1 rounded-sm" variant="danger">
@@ -149,7 +149,7 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(item?.status) && (
+          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
             <Badge className="gap-1 rounded-sm" variant="success">
               <CheckCheckIcon className="size-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
@@ -158,7 +158,7 @@ const ListOrderItemsUser = (props: Props) => {
             </Badge>
           )}
 
-          {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(item?.status) &&
+          {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.event?.isExpired ? (
             <Badge className="gap-1 rounded-sm" variant="danger">
               <BadgeAlertIcon className="size-3.5" />
@@ -167,8 +167,8 @@ const ListOrderItemsUser = (props: Props) => {
               </span>
             </Badge>
           ) : (
-            ['PENDING'].includes(item?.status) && (
-              <Badge className="rounded-sm" variant={'warning'}>
+            ['ACCEPTED'].includes(item?.status) && (
+              <Badge className="rounded-sm" variant="warning">
                 {item?.status}
               </Badge>
             )

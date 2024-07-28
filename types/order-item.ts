@@ -5,6 +5,7 @@ import { EventDateModel } from './event-date';
 import { ProductModel } from './product';
 import { ProfileItemModel } from './profile';
 import { UploadModel } from './upload';
+import { UserAddressModel } from './user-address';
 
 export type ResponseOrderItemModel = {
   value: Array<OrderItemModel>;
@@ -70,27 +71,21 @@ export type OrderItemModel = {
 
 export type OrderModel = {
   createdAt: Date;
-  updatedAt: Date;
-  deletedAt: Date;
   id: string;
   orderNumber: string;
-  totalPriceDiscount: number;
+  totalPrice: number;
   totalPriceNoDiscount: number;
+  quantity: string;
   currency: string;
-  quantity: number;
-  address: {
-    id: string;
-    email: string;
-    cap: string;
-    city: string;
-    phone: string;
-    region: string;
-    country: string;
-    address: string;
-    fullName: string;
-  };
-  userId: string;
+  country: string;
+  ticketName: string;
+  address: UserAddressModel;
+  organizationBuyerId: string;
+  organizationSellerId: string;
+  event: EventModel;
+  oneUploadImage: UploadModel;
 };
+
 export interface OrderItemFormModel {
   status: StatusOderProduct;
 }

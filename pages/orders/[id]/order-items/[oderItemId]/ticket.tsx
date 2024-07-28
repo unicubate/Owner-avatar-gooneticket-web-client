@@ -13,7 +13,7 @@ const Ticket = () => {
   const { t, userStorage: user } = useInputState();
   const { query, push } = useRouter();
   const { model } = query;
-  const orderNumber = String(query?.id);
+  const orderNumber = String(query?.oderItemId);
 
   const {
     data: orderItem,
