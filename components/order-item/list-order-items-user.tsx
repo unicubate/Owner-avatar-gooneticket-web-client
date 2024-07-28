@@ -235,7 +235,7 @@ const ListOrderItemsUser = (props: Props) => {
       <CopyShareLink
         isOpen={copied}
         setIsOpen={setCopied}
-        link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderNumber}/ticket-public`}
+        link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket-public`}
       />
     </>
   );
