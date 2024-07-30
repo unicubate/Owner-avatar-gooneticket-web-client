@@ -19,7 +19,7 @@ const TicketPublic = () => {
 
   return (
     <>
-      <LayoutDashboard title={`Order ${orderItem?.product?.title ?? ''}`}>
+      <LayoutDashboard title={`Order ${orderItem?.event?.title ?? ''}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <div className="flow-root">

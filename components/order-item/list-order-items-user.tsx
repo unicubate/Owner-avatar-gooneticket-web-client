@@ -69,7 +69,7 @@ const ListOrderItemsUser = (props: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.eventDate?.isExpired ? `text-gray-600` : `text-primary`}`}
+                className={`${item?.eventDate?.isExpired ? `${item?.confirmedAt ? 'text-gray-600' : 'text-danger'}` : `text-primary`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
@@ -83,7 +83,7 @@ const ListOrderItemsUser = (props: Props) => {
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className={`flex items-center font-bold`}>
                 <p
-                  className={`text-sm ${item?.eventDate?.isExpired ? `text-gray-600` : `text-primary`}`}
+                  className={`text-sm ${item?.eventDate?.isExpired ? `${item?.confirmedAt ? 'text-gray-600' : 'text-danger'}` : `text-primary`}`}
                 >
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),

@@ -26,7 +26,7 @@ const Ticket = () => {
 
   return (
     <>
-      <LayoutDashboard title={`Order ${orderItem?.product?.title ?? ''}`}>
+      <LayoutDashboard title={`Order ${orderItem?.event?.title ?? ''}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
@@ -35,7 +35,7 @@ const Ticket = () => {
                 size="sm"
                 variant="outline"
                 onClick={() => {
-                  push(`/orders`);
+                  push(`/orders/${orderItem?.orderId}/order-items`);
                 }}
                 icon={<MoveLeftIcon className="size-4" />}
               >

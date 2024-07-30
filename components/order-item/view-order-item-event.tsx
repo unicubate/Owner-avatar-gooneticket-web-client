@@ -139,12 +139,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                 size="sm"
                 variant="success"
               >
-                {orderItem?.status}
+                {capitalizeFirstLetter(orderItem?.status)}
               </ButtonInput>
             )}
             {['CANCELLED'].includes(orderItem?.status) && (
               <ButtonInput type="button" size="sm" variant="danger">
-                {orderItem?.status}
+                {capitalizeFirstLetter(orderItem?.status)}
               </ButtonInput>
             )}
 
@@ -161,7 +161,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             ) : (
               ['ACCEPTED'].includes(orderItem?.status) && (
                 <ButtonInput type="button" size="sm" variant="warning">
-                  {orderItem?.status}
+                  {capitalizeFirstLetter(orderItem?.status)}
                 </ButtonInput>
               )
             )}
