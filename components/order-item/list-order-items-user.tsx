@@ -2,6 +2,7 @@
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
+import { QRCode, QRCodeProps } from 'antd';
 import {
   BadgeAlertIcon,
   CalendarIcon,
@@ -34,6 +35,7 @@ type Props = {
 
 const ListOrderItemsUser = (props: Props) => {
   const { push } = useRouter();
+  const [level, setLevel] = useState<string | number>('L');
   const { item, index } = props;
   const [copied, setCopied] = useState(false);
   const { t, locale } = useInputState();
@@ -57,7 +59,20 @@ const ListOrderItemsUser = (props: Props) => {
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            <div className="min-w-0 flex-1 cursor-pointer">
+            <Link
+              href={`${oneItem(item?.model)?.url}`}
+              title={oneItem(item?.model)?.title}
+            >
+              <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
+                <QRCode
+                  size={70}
+                  errorLevel={level as QRCodeProps['errorLevel']}
+                  value={item?.orderNumber}
+                />
+              </div>
+            </Link>
+
+            <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className="flex items-center font-bold uppercase text-primary">
                 <button className="text-sm">
                   <CalendarIcon className="size-4" />
