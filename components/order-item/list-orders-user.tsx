@@ -1,9 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderModel } from '@/types/order-item';
-import { formateFromNow, formateToRFC2822 } from '@/utils';
+import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { CalendarIcon, MoreHorizontalIcon, MoveRightIcon } from 'lucide-react';
+import {
+  BrickWallIcon,
+  MoreHorizontalIcon,
+  MoveRightIcon,
+  NotepadTextIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -15,6 +20,7 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 
@@ -23,9 +29,8 @@ type Props = {
   index: number;
 };
 
-const ListOrdersUser = (props: Props) => {
+const ListOrdersUser = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { item, index } = props;
   const [copied, setCopied] = useState(false);
   const { t, locale } = useInputState();
 
@@ -57,11 +62,8 @@ const ListOrdersUser = (props: Props) => {
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className="flex items-center font-bold text-gray-600">
-                <button className="text-sm">
-                  <CalendarIcon className="size-4" />
-                </button>
-                <span className="ml-1.5 text-sm font-bold">
-                  {formateToRFC2822(item?.createdAt as Date, locale)}
+                <span className="text-sm font-bold text-gray-600">
+                  #{item?.orderNumber}
                 </span>
               </div>
 
@@ -77,8 +79,11 @@ const ListOrdersUser = (props: Props) => {
               ) : null}
 
               <div className="mt-2 flex items-center font-medium text-gray-600">
-                <span className="text-sm font-bold text-gray-600">
-                  #{item?.orderNumber}
+                <button className="text-sm">
+                  <BrickWallIcon className="size-4" />
+                </button>
+                <span className="ml-1.5 text-sm font-bold">
+                  {item?.quantity}
                 </span>
               </div>
             </div>
@@ -122,6 +127,15 @@ const ListOrdersUser = (props: Props) => {
                     <MoveRightIcon className="size-4 text-gray-600 hover:text-blue-600" />
                     <span className="ml-2 cursor-pointer hover:text-blue-600">
                       Manage
+                    </span>
+                  </DropdownMenuItem>
+                </Link>
+                <DropdownMenuSeparator />
+                <Link href={`/orders/${item?.transaction?.id}/transaction`}>
+                  <DropdownMenuItem>
+                    <NotepadTextIcon className="size-4 text-gray-600 hover:text-blue-600" />
+                    <span className="ml-2 cursor-pointer hover:text-blue-600">
+                      Invoice
                     </span>
                   </DropdownMenuItem>
                 </Link>

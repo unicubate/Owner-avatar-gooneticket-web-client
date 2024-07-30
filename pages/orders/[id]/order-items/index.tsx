@@ -5,7 +5,11 @@ import {
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
-import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  SearchInput,
+} from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
@@ -23,6 +27,7 @@ import { modelProductArray } from '@/types/product';
 import {
   CalendarCheckIcon,
   ListFilterIcon,
+  MoveLeftIcon,
   ShoppingCartIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -31,7 +36,7 @@ import { Fragment, useState } from 'react';
 const OrderItemsIndex = () => {
   const [model, setModel] = useState('');
   const [dayCount, setDayCount] = useState(30);
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const orderId = String(query?.id);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
 
@@ -62,6 +67,19 @@ const OrderItemsIndex = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
               <div className="mt-4 flex items-center">
+                <ButtonInput
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    push(`/orders`);
+                  }}
+                  icon={<MoveLeftIcon className="size-4" />}
+                >
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                  </span>
+                </ButtonInput>
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

@@ -8,7 +8,6 @@ import {
   CheckCheckIcon,
   DownloadIcon,
 } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
@@ -82,26 +81,31 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <ButtonInput
               type="button"
               className="uppercase"
-              variant={orderItem?.event?.isExpired ? 'danger' : 'success'}
+              variant={orderItem?.eventDate?.isExpired ? 'danger' : 'success'}
               icon={
-                orderItem?.event?.isExpired ? (
+                orderItem?.eventDate?.isExpired ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
                   <CalendarDaysIcon className="size-4" />
                 )
               }
             >
-              {formateToRFC2822(orderItem?.event?.expiredAt as Date, locale)} at{' '}
-              {orderItem?.event?.timeInit}
+              {formateToRFC2822(
+                orderItem?.eventDate?.expiredAt as Date,
+                locale,
+              )}{' '}
+              at {orderItem?.eventDate?.timeInit}
             </ButtonInput>
           </p>
         </div>
         <p className="mt-4 text-center font-bold uppercase">
-          <span>{orderItem?.event?.address ?? ''}</span>
+          <span>{orderItem?.eventDate?.address ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
-          <span className="ml-2">{orderItem?.event?.city ?? ''}</span>
+          <span className="ml-2">{orderItem?.eventDate?.city ?? ''}</span>
           <span className="ml-2 text-gray-400">-</span>
-          <span className="ml-2">{orderItem?.event?.country?.name ?? ''}</span>
+          <span className="ml-2">
+            {orderItem?.eventDate?.country?.name ?? ''}
+          </span>
         </p>
         {/* <p className="mt-2 text-center text-xl font-bold">
           <span className="ml-2">{orderItem?.event?.timeInit ?? ''}</span>
@@ -115,15 +119,6 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
 
         <div className="mx-auto max-w-max">
           <div className="my-4 flex items-center space-x-4">
-            {/* <ButtonInput
-              type="button"
-              size="sm"
-              variant="outline"
-              icon={<MoveLeftIcon className="size-6" />}
-              onClick={() => push(`/orders`)}
-            >
-              Back
-            </ButtonInput> */}
             <ButtonInput
               type="submit"
               size="sm"
@@ -140,9 +135,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             >
               Download
             </ButtonInput>
-            {['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
-              orderItem?.status,
-            ) && (
+            {['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) && (
               <ButtonInput
                 icon={<CheckCheckIcon className="size-6" />}
                 type="button"
@@ -158,9 +151,8 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               </ButtonInput>
             )}
 
-            {!['DELIVERED', 'ACCEPTED', 'CONFIRMED'].includes(
-              orderItem?.status,
-            ) && orderItem?.event?.isExpired ? (
+            {!['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) &&
+            orderItem?.eventDate?.isExpired ? (
               <ButtonInput
                 icon={<BadgeAlertIcon className="size-6" />}
                 type="button"
@@ -170,21 +162,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                 EXPIRED
               </ButtonInput>
             ) : (
-              ['PENDING'].includes(orderItem?.status) && (
+              ['ACCEPTED'].includes(orderItem?.status) && (
                 <ButtonInput type="button" size="sm" variant="warning">
                   {orderItem?.status}
                 </ButtonInput>
               )
             )}
-          </div>
-
-          <div className="mt-3 flex justify-center text-sm">
-            <Link
-              href={`/orders/${orderItem?.order?.transaction?.id}/transaction`}
-              className="text-primary group-hover:underline group-hover:underline-offset-4"
-            >
-              #{orderItem?.order?.orderNumber}
-            </Link>
           </div>
         </div>
       </div>

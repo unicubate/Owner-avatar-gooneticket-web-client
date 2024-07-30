@@ -24,10 +24,6 @@ export type EventModel = {
   messageAfterPayment: string;
   enableChooseQuantity: boolean;
   totalComment: number;
-  country: {
-    code: string;
-    name: string;
-  };
   currency: {
     code: string;
     name: string;
@@ -52,57 +48,6 @@ export type EventModel = {
   };
   oneEventDate: EventDateModel;
   oneTicket: TicketModel;
-
-  // subTitle: string;
-  // slug: string;
-  // sku: string;
-  // whoCanSee: string;
-  // organizationId: string;
-  // priceNoDiscount: string;
-  // moreDescription: string;
-  // urlRedirect: string;
-  // enableUrlRedirect: boolean;
-  // enableDiscount: boolean;
-  // limitSlot: string;
-  // status: string;
-  // userId: string;
-  // totalComment: number;
-  // country: {
-  //   code: string;
-  //   name: string;
-  // };
-  // currency: {
-  //   code: string;
-  //   name: string;
-  //   symbol: string;
-  // };
-  // category: {
-  //   id: string;
-  //   name: string;
-  //   slug: string;
-  //   color: string;
-  // };
-  // isExpired: boolean;
-  // prices: Array<PriceModel>;
-  // profile: ProfileItemModel;
-  // uploadsImages: Array<UploadModel>;
-  // uploadsFiles: Array<UploadModel>;
-  // discount: {
-  //   isValid: boolean;
-  //   percent: number;
-  //   expiredAt: Date;
-  //   enableExpiredAt: boolean;
-  // };
-  // price: string;
-  // priceDiscount: string;
-  // orderItem: {
-  //   amount: number;
-  //   quantity: number;
-  // };
-  // affiliation: {
-  //   amount: number;
-  //   quantity: number;
-  // };
 };
 
 export type EventFormModel = {

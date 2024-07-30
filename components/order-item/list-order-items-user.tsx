@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateFromNow, formateToRFC2822 } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
@@ -16,7 +15,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CopyShareLink, SerialPrice, SwiperImage } from '../ui-setting';
+import { CopyShareLink, SerialPrice } from '../ui-setting';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import {
@@ -58,27 +57,8 @@ const ListOrderItemsUser = (props: Props) => {
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            <Link
-              href={`${oneItem(item?.model)?.url}`}
-              title={oneItem(item?.model)?.title}
-            >
-              {item?.uploadsImages?.length > 0 ? (
-                <div className="relative shrink-0 cursor-pointer">
-                  <SwiperImage
-                    height="70px"
-                    width="80px"
-                    src={`${viewOneFileUploadAPI({
-                      folder: String(item?.model.toLocaleLowerCase()),
-                      fileName: item?.uploadsImages[0]?.path,
-                    })}`}
-                    alt={`${oneItem(item?.model)?.title}`}
-                  />
-                </div>
-              ) : null}
-            </Link>
-
-            <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className="flex items-center font-bold text-gray-600">
+            <div className="min-w-0 flex-1 cursor-pointer">
+              <div className="flex items-center font-bold uppercase text-primary">
                 <button className="text-sm">
                   <CalendarIcon className="size-4" />
                 </button>
@@ -127,7 +107,7 @@ const ListOrderItemsUser = (props: Props) => {
 
                 {item?.model === 'EVENT' &&
                 !['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
-                item?.event?.isExpired ? (
+                item?.eventDate?.isExpired ? (
                   <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
                     <Badge className="gap-1 rounded-sm" variant="danger">
                       <BadgeAlertIcon className="size-3.5" />
@@ -159,7 +139,7 @@ const ListOrderItemsUser = (props: Props) => {
           )}
 
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
-          item?.event?.isExpired ? (
+          item?.eventDate?.isExpired ? (
             <Badge className="gap-1 rounded-sm" variant="danger">
               <BadgeAlertIcon className="size-3.5" />
               <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">

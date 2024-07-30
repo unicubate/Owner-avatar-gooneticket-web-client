@@ -64,7 +64,8 @@ export type OrderItemModel = {
   organizationSeller: { name: string; image: string };
   profileSeller: ProfileItemModel;
   product: ProductModel;
-  event: EventModel & EventDateModel;
+  event: EventModel;
+  eventDate: EventDateModel;
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
 };
@@ -83,6 +84,7 @@ export type OrderModel = {
   organizationBuyerId: string;
   organizationSellerId: string;
   event: EventModel;
+  transaction: { id: string };
   oneUploadImage: UploadModel;
 };
 
