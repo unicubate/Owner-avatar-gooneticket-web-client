@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { OrderItemModel } from '@/types/order-item';
-import { formateFromNow, formateToRFC2822 } from '@/utils';
+import {
+  formateFromNow,
+  formateToCccc,
+  formateTodd,
+  formateToLLLL,
+  viewYyformateToYyyy,
+} from '@/utils';
 import { ReadMore } from '@/utils/read-more';
-import { QRCode, QRCodeProps } from 'antd';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   BadgeAlertIcon,
-  CalendarIcon,
   CheckCheckIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
@@ -63,27 +68,38 @@ const ListOrderItemsUser = (props: Props) => {
               href={`${oneItem(item?.model)?.url}`}
               title={oneItem(item?.model)?.title}
             >
-              <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
-                <QRCode
-                  size={70}
-                  errorLevel={level as QRCodeProps['errorLevel']}
-                  value={item?.orderNumber}
-                />
+              <div
+                className={`${item?.eventDate?.isExpired ? `text-gray-600` : `text-primary`}`}
+              >
+                <div className="mx-auto max-w-max border-none text-5xl">
+                  {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
+                </div>
+                <span className="mt-1 text-center">
+                  {formateToCccc(item?.eventDate?.expiredAt as Date, locale)}
+                </span>
               </div>
             </Link>
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className="flex items-center font-bold uppercase text-primary">
-                <button className="text-sm">
-                  <CalendarIcon className="size-4" />
-                </button>
-                <span className="ml-1.5 text-sm font-bold">
-                  {formateToRFC2822(item?.createdAt as Date, locale)}
+              <div className={`flex items-center font-bold`}>
+                <p
+                  className={`text-sm ${item?.eventDate?.isExpired ? `text-gray-600` : `text-primary`}`}
+                >
+                  {capitalizeFirstLetter(
+                    formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
+                  )}
+                  <span className="ml-1.5">
+                    {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
+                  </span>
+                </p>
+                <span className="ml-1 text-gray-600">-</span>
+                <span className="ml-1 text-sm font-bold text-gray-600">
+                  {capitalizeFirstLetter(item?.ticketName)}
                 </span>
               </div>
 
               {item?.id ? (
-                <p className="mt-2 font-bold transition-all duration-200 hover:text-blue-600">
+                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
                   <Link
                     href={`${oneItem(item?.model)?.url}`}
                     title={oneItem(item?.model)?.title}
@@ -96,7 +112,7 @@ const ListOrderItemsUser = (props: Props) => {
                 </p>
               ) : null}
 
-              <div className="mt-2 flex items-center font-medium text-gray-600">
+              <div className="mt-2 flex items-center font-medium">
                 <span className="text-sm font-bold text-gray-600">
                   #{item?.orderNumber}
                 </span>

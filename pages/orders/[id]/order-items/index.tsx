@@ -33,7 +33,7 @@ import {
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
-const OrderItemsIndex = () => {
+const OrderItemsViewIndex = () => {
   const [model, setModel] = useState('');
   const [dayCount, setDayCount] = useState(30);
   const { query, push } = useRouter();
@@ -239,4 +239,4 @@ const OrderItemsIndex = () => {
   );
 };
 
-export default PrivateComponent(OrderItemsIndex);
+export default PrivateComponent(OrderItemsViewIndex);

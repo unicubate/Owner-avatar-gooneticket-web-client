@@ -4,10 +4,10 @@ import { OrderModel } from '@/types/order-item';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import {
-  BrickWallIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
   NotepadTextIcon,
+  UserIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -62,9 +62,8 @@ const ListOrdersUser = ({ item, index }: Props) => {
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className="flex items-center font-bold text-gray-600">
-                <span className="text-sm font-bold text-gray-600">
-                  #{item?.orderNumber}
-                </span>
+                <UserIcon className="size-4" />
+                <span className="ml-1">{item?.address?.fullName}</span>
               </div>
 
               {item?.id ? (
@@ -78,12 +77,10 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 </p>
               ) : null}
 
-              <div className="mt-2 flex items-center font-medium text-gray-600">
-                <button className="text-sm">
-                  <BrickWallIcon className="size-4" />
-                </button>
-                <span className="ml-1.5 text-sm font-bold">
-                  {item?.quantity}
+              <div className="mt-2 flex items-center text-sm font-bold text-gray-600">
+                <span>Qty: {item?.quantity}</span>
+                <span className="ml-1.5 text-sm font-bold text-gray-600">
+                  #{item?.orderNumber}
                 </span>
               </div>
             </div>

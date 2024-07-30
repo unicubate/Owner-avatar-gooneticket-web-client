@@ -1,15 +1,11 @@
-import { GetInfiniteOrdersAPI } from '@/api-site/order-item';
+import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
 import {
   useInputState,
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ListOrdersUser } from '@/components/order-item/list-orders-user';
-import {
-  ButtonInput,
-  ButtonLoadMore,
-  SearchInput,
-} from '@/components/ui-setting';
+import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
+import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
 import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
@@ -22,31 +18,34 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
-import { OrderModel } from '@/types/order-item';
+import { OrderItemModel } from '@/types/order-item';
 import { modelProductArray } from '@/types/product';
 import {
   CalendarCheckIcon,
   ListFilterIcon,
   ShoppingCartIcon,
-  TicketIcon,
 } from 'lucide-react';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
-const OrdersIndex = () => {
+const OrderItemsIndex = () => {
   const [model, setModel] = useState('');
   const [dayCount, setDayCount] = useState(30);
+  const { query, push } = useRouter();
+  const orderId = String(query?.id);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
 
   const {
-    isLoading: isLoadingOrders,
-    isError: isErrorOrders,
-    data: dataOrders,
+    isLoading: isLoadingOrderItems,
+    isError: isErrorOrderItems,
+    data: dataOrderItems,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfiniteOrdersAPI({
+  } = GetInfiniteOrderItemsAPI({
     search,
     customer: 'buyer',
+    modelIds: model ? [model.toLocaleUpperCase()] : ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
     days: dayCount,
@@ -62,19 +61,6 @@ const OrdersIndex = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
               <div className="mt-4 flex items-center">
-                <ButtonInput
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  // onClick={() => {
-                  //   push(`/orders`);
-                  // }}
-                  icon={<TicketIcon className="size-4" />}
-                >
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {t.formatMessage({ id: 'MENU.ORDER' })}
-                  </span>
-                </ButtonInput>
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -181,14 +167,14 @@ const OrdersIndex = () => {
                 <table className="mt-4 min-w-full lg:divide-y">
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
                     {user?.organizationId ? (
-                      isLoadingOrders ? (
+                      isLoadingOrderItems ? (
                         <LoadingFile />
-                      ) : isErrorOrders ? (
+                      ) : isErrorOrderItems ? (
                         <ErrorFile
                           title="404"
                           description="Error find data please try again..."
                         />
-                      ) : Number(dataOrders?.pages[0]?.data?.total) <= 0 ? (
+                      ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
                           image={<ShoppingCartIcon className="size-10" />}
                           title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
@@ -197,11 +183,11 @@ const OrdersIndex = () => {
                           })}
                         />
                       ) : (
-                        dataOrders?.pages.map((page, i) => (
+                        dataOrderItems?.pages.map((page, i) => (
                           <Fragment key={i}>
                             {page?.data?.value.map(
-                              (item: OrderModel, index: number) => (
-                                <ListOrdersUser
+                              (item: OrderItemModel, index: number) => (
+                                <ListOrderItemsUser
                                   item={item}
                                   key={index}
                                   index={index}
@@ -234,4 +220,4 @@ const OrdersIndex = () => {
   );
 };
 
-export default PrivateComponent(OrdersIndex);
+export default PrivateComponent(OrderItemsIndex);

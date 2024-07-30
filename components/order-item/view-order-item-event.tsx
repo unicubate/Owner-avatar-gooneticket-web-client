@@ -1,6 +1,7 @@
 import { downloadOneFileUploadAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
 import { formateToRFC2822 } from '@/utils';
+import { capitalizeFirstLetter } from '@/utils/utils';
 import { QRCode, QRCodeProps } from 'antd';
 import {
   BadgeAlertIcon,
@@ -49,10 +50,6 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         ) : null} */}
 
         <div className="text-center">
-          <p className="mt-2 text-xl font-semibold">
-            {orderItem?.address?.fullName}
-          </p>
-
           <p className="mt-2 text-lg font-semibold">
             {orderItem?.ticketName?.toLocaleUpperCase() ?? 'FREE'}
           </p>
@@ -159,7 +156,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                 size="sm"
                 variant="danger"
               >
-                EXPIRED
+                {capitalizeFirstLetter('EXPIRED')}
               </ButtonInput>
             ) : (
               ['ACCEPTED'].includes(orderItem?.status) && (
