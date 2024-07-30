@@ -11,9 +11,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CopyShareLink, SerialPrice, SwiperImage } from '../ui-setting';
+import { SerialPrice, SwiperImage } from '../ui-setting';
 import { Button } from '../ui/button';
 import {
   DropdownMenu,
@@ -31,7 +30,6 @@ type Props = {
 
 const ListOrdersUser = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const [copied, setCopied] = useState(false);
   const { t, locale } = useInputState();
 
   return (
@@ -141,12 +139,6 @@ const ListOrdersUser = ({ item, index }: Props) => {
           </DropdownMenu>
         </td>
       </tr>
-
-      <CopyShareLink
-        isOpen={copied}
-        setIsOpen={setCopied}
-        link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderNumber}/ticket-public`}
-      />
     </>
   );
 };

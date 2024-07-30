@@ -100,6 +100,7 @@
   "MENU.FOLLOWER": "Abonnés",
   "MENU.FOLLOWING": "Suivis",
   "MENU.SUBSCRIBER": "Membres",
+  "MENU.TICKET": "Billets",
 
   "TRANSACTION.LAST_DAY": "Dernier {day} jours",
   "TRANSACTION.ALL_TIME": "Tout le temps",

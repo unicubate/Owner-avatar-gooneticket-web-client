@@ -100,6 +100,7 @@
   "MENU.FOLLOWER": "Followers",
   "MENU.FOLLOWING": "Followings",
   "MENU.SUBSCRIBER": "Subscribes",
+  "MENU.TICKET": "Tickets",
 
   "TRANSACTION.LAST_DAY": "Last {day} days",
   "TRANSACTION.ALL_TIME": "All time",
