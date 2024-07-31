@@ -74,7 +74,9 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
                 </div>
                 <span className="mt-1 text-center">
-                  {formateToCccc(item?.eventDate?.expiredAt as Date, locale)}
+                  {capitalizeFirstLetter(
+                    formateToCccc(item?.eventDate?.expiredAt as Date, locale),
+                  )}
                 </span>
               </div>
             </Link>
