@@ -4,6 +4,7 @@ import { EventModel } from './event';
 import { EventDateModel } from './event-date';
 import { ProductModel } from './product';
 import { ProfileItemModel } from './profile';
+import { TicketModel } from './ticket';
 import { UploadModel } from './upload';
 import { UserAddressModel } from './user-address';
 
@@ -47,6 +48,7 @@ export type OrderItemModel = {
   currency: string;
   productId: string;
   orderId: string;
+  ticket: TicketModel;
   userId: string;
   ticketName: string;
   address: {
@@ -79,6 +81,7 @@ export type OrderModel = {
   currency: string;
   country: string;
   ticketName: string;
+  ticket: TicketModel;
   address: UserAddressModel;
   organizationBuyerId: string;
   organizationSellerId: string;

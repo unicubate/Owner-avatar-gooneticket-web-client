@@ -38,10 +38,9 @@ type Props = {
   index: number;
 };
 
-const ListOrderItemsUser = (props: Props) => {
+const ListOrderItemsUser = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [level, setLevel] = useState<string | number>('L');
-  const { item, index } = props;
   const [copied, setCopied] = useState(false);
   const { t, locale } = useInputState();
   const arrayItem = [
@@ -69,7 +68,7 @@ const ListOrderItemsUser = (props: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.eventDate?.isExpired ? `${item?.confirmedAt ? 'text-gray-600' : 'text-danger'}` : `text-primary`}`}
+                className={`${item?.confirmedAt ? 'text-gray-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
@@ -83,7 +82,7 @@ const ListOrderItemsUser = (props: Props) => {
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className={`flex items-center font-bold`}>
                 <p
-                  className={`text-sm ${item?.eventDate?.isExpired ? `${item?.confirmedAt ? 'text-gray-600' : 'text-danger'}` : `text-primary`}`}
+                  className={`text-sm ${item?.confirmedAt ? 'text-gray-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
                 >
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
@@ -93,9 +92,12 @@ const ListOrderItemsUser = (props: Props) => {
                   </span>
                 </p>
                 <span className="ml-1 text-gray-600">-</span>
-                <span className="ml-1 text-sm font-bold text-gray-600">
-                  {capitalizeFirstLetter(item?.ticketName)}
-                </span>
+                <Badge
+                  className="ml-1 h-6 rounded-sm  text-sm"
+                  variant="secondary"
+                >
+                  {capitalizeFirstLetter(item?.ticket?.name)}
+                </Badge>
               </div>
 
               {item?.id ? (

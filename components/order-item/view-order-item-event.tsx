@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { SerialPrice } from '../ui-setting';
 import { ButtonInput } from '../ui-setting/button-input';
+import { Badge } from '../ui/badge';
 
 type Props = {
   orderItem: OrderItemModel;
@@ -50,9 +51,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         ) : null} */}
 
         <div className="text-center">
-          <p className="mt-2 text-lg font-semibold">
-            {orderItem?.ticketName?.toLocaleUpperCase() ?? 'FREE'}
-          </p>
+          <Badge
+            className="mt-2 rounded-sm  text-lg font-semibold"
+            variant="secondary"
+          >
+            {capitalizeFirstLetter(orderItem?.ticket?.name) ?? 'FREE'}
+          </Badge>
           <p className="mt-2 font-semibold">
             <span>
               {Number(orderItem?.price) > 0 ? (
