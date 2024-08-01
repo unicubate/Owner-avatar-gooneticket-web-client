@@ -55,7 +55,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             className="mt-2 rounded-sm  text-lg font-semibold"
             variant="secondary"
           >
-            {capitalizeFirstLetter(orderItem?.ticket?.name) ?? 'FREE'}
+            {capitalizeFirstLetter(orderItem?.ticket?.name ?? 'FREE')}
           </Badge>
           <p className="mt-2 font-semibold">
             <span>

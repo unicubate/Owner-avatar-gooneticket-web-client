@@ -99,7 +99,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
                   className="ml-1 h-6 rounded-sm  text-sm"
                   variant="secondary"
                 >
-                  {capitalizeFirstLetter(item?.ticket?.name)}
+                  {capitalizeFirstLetter(item?.ticket?.name ?? 'FREE')}
                 </Badge>
               </div>
 
