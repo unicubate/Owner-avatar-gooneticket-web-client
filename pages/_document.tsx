@@ -1,24 +1,9 @@
 import { StyleProvider, createCache, extractStyle } from '@ant-design/cssinjs';
 import type { DocumentContext } from 'next/document';
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import { siteConfig } from './siteConfig';
-
-export interface SeoProps {
-  title: string;
-  titleForTitleTag: undefined | string;
-  description?: string;
-  image?: string;
-  children?: React.ReactNode;
-  isHomePage: boolean;
-  searchOrder?: number;
-}
 
 const MyDocument = () => (
-  <Html
-    lang={siteConfig.languageCode}
-    dir={siteConfig.isRTL ? 'rtl' : 'ltr'}
-    className="system"
-  >
+  <Html lang={'en'} className="system">
     <Head>
       <link
         rel="apple-touch-icon"

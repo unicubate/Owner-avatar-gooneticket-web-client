@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import { ReactNode } from 'react';
-import { siteConfig } from '../../pages/siteConfig';
 import { useCanonicalUrl } from '../hooks';
 
 interface IProps {
@@ -12,7 +11,7 @@ interface IProps {
 const getDomain = (domain: string) => domain + `.gooneticket.com`;
 
 const HeaderSite = ({ title, metas, isHomePage = false }: IProps) => {
-  const siteDomain = getDomain(siteConfig.languageCode);
+  const siteDomain = getDomain('www');
 
   const spacer = title ? ' | ' : '';
   const titleOutput = `${title}${spacer}GooneTicket`;
