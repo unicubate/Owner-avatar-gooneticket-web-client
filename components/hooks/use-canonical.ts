@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useDeferredValue, useEffect, useState } from 'react';
 
 export const useCanonicalUrl = () => {
   const router = useRouter();
   const [canonicalUrl, setCanonicalUrl] = useState('');
+  const deferredCanonicalUrl = useDeferredValue(canonicalUrl);
 
   useEffect(() => {
     const origin = window.location.origin;
@@ -11,5 +12,5 @@ export const useCanonicalUrl = () => {
     setCanonicalUrl(origin + path);
   }, [router.asPath]);
 
-  return canonicalUrl;
+  return deferredCanonicalUrl;
 };

@@ -71,6 +71,7 @@ export default function Home() {
       metas={
         <meta
           name="description"
+          key="description"
           content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
         />
       }
