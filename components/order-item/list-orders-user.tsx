@@ -38,6 +38,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
             <Link
+              prefetch={true}
               href={`/orders/${item?.id}/order-items`}
               title={item?.event?.title}
             >
@@ -115,6 +116,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
             <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
               <DropdownMenuGroup>
                 <Link
+                  prefetch={true}
                   href={`/orders/${item?.id}/order-items`}
                   title={item?.event?.title}
                 >
@@ -126,7 +128,10 @@ const ListOrdersUser = ({ item, index }: Props) => {
                   </DropdownMenuItem>
                 </Link>
                 <DropdownMenuSeparator />
-                <Link href={`/orders/${item?.transaction?.id}/transaction`}>
+                <Link
+                  prefetch={true}
+                  href={`/orders/${item?.transaction?.id}/transaction`}
+                >
                   <DropdownMenuItem>
                     <NotepadTextIcon className="size-4 text-gray-600 hover:text-blue-600" />
                     <span className="ml-2 cursor-pointer hover:text-blue-600">

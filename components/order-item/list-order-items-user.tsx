@@ -64,6 +64,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
             <Link
+              prefetch={true}
               href={`${oneItem(item?.model)?.url}`}
               title={oneItem(item?.model)?.title}
             >
@@ -105,6 +106,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               {item?.id ? (
                 <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
                   <Link
+                    prefetch={true}
                     href={`${oneItem(item?.model)?.url}`}
                     title={oneItem(item?.model)?.title}
                   >
@@ -220,6 +222,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
             <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
               <DropdownMenuGroup>
                 <Link
+                  prefetch={true}
                   href={`${oneItem(item?.model)?.url}`}
                   title={oneItem(item?.model)?.title}
                 >

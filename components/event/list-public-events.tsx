@@ -28,6 +28,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
         {item?.uploadsImages?.length > 0 ? (
           <>
             <Link
+              prefetch={true}
               className="hover:text-blue-600"
               href={`/events/${item?.slug}`}
               title={item?.title}

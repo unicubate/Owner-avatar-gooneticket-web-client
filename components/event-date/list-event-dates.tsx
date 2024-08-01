@@ -28,6 +28,7 @@ const ListEventDates = ({ item, index }: Props) => {
   return (
     <>
       <Link
+        prefetch={true}
         href={`${
           userStorage?.id
             ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
