@@ -13,9 +13,7 @@ const getDomain = (domain: string) => domain + `.gooneticket.com`;
 const HeaderSite = ({ title, metas }: IProps) => {
   const siteDomain = getDomain('www');
 
-  const spacer = title
-    ? ' | '
-    : `${nameSite} - Tickets, Concerts, Entertainment, Sport & Culture`;
+  const spacer = title ? ' | ' : '';
   const titleOutput = title + spacer + nameSite;
 
   const canonicalUrl = useCanonicalUrl();
@@ -23,7 +21,6 @@ const HeaderSite = ({ title, metas }: IProps) => {
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      {title != null && <title key="title">{titleOutput}</title>}
 
       <link rel="canonical" href={canonicalUrl} />
       <link
@@ -31,6 +28,7 @@ const HeaderSite = ({ title, metas }: IProps) => {
         href={canonicalUrl.replace(siteDomain, getDomain('www'))}
         hrefLang="x-default"
       />
+      {title != null && <title key="title">{titleOutput}</title>}
       {title != null && (
         <meta property="og:title" content={titleOutput} key="og:title" />
       )}
