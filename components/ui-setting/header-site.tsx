@@ -17,18 +17,24 @@ const HeaderSite = ({ title, metas }: IProps) => {
   const titleOutput = title + spacer + nameSite;
 
   const canonicalUrl = useCanonicalUrl();
+  console.log('jdjjdd', canonicalUrl.replace(siteDomain, getDomain('www')));
 
-  //${nameSite} - Tickets, Concerts, Entertainment, Sport & Culture
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <link rel="canonical" href={canonicalUrl} />
-      <link
-        rel="alternate"
-        href={canonicalUrl.replace(siteDomain, getDomain('www'))}
-        hrefLang="x-default"
-      />
+      {process.env.NEXT_ENV !== 'dev' ? (
+        <>
+          <link rel="canonical" href={canonicalUrl} />
+          <link
+            rel="alternate"
+            href={canonicalUrl.replace(siteDomain, getDomain('www'))}
+            hrefLang="x-default"
+          />
+          <meta property="og:url" key="og:url" content={canonicalUrl} />
+        </>
+      ) : null}
+
       {title != null && <title key="title">{titleOutput}</title>}
       {title != null && (
         <meta property="og:title" content={titleOutput} key="og:title" />
@@ -39,7 +45,6 @@ const HeaderSite = ({ title, metas }: IProps) => {
         content="summary_large_image"
       />
       <meta property="og:type" key="og:type" content="website" />
-      <meta property="og:url" key="og:url" content={canonicalUrl} />
       {metas}
       {/* <meta
           name="google-site-verification"
