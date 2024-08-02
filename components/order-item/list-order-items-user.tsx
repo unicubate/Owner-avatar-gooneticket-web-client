@@ -193,26 +193,22 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          <div className="ml-4 min-w-0 flex-1">
-            <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {Number(item?.price) > 0 ? (
-                <SerialPrice
-                  className="text-sm"
-                  value={Number(item?.price)}
-                  currency={{ code: String(item?.currency) }}
-                />
-              ) : (
-                'Free'
-              )}
-            </p>
-          </div>
+          {Number(item?.price) > 0 ? (
+            <SerialPrice
+              className="text-sm"
+              value={Number(item?.price)}
+              currency={{ code: String(item?.currency) }}
+            />
+          ) : (
+            'Free'
+          )}
         </td>
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date, locale)}
         </td>
 
-        <td className="py-4 text-right text-sm font-medium text-gray-600">
+        <td className="py-4 text-right text-sm font-medium">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button type="button" size="icon" variant="ghost">
@@ -247,6 +243,21 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+          <div className="pt-1 lg:hidden">
+            <p className={`inline-flex text-sm font-bold`}>
+              <span className={`ml-1`}>
+                {Number(item?.price) > 0 ? (
+                  <SerialPrice
+                    className="text-sm"
+                    value={Number(item?.price)}
+                    currency={{ code: String(item?.currency) }}
+                  />
+                ) : (
+                  'Free'
+                )}
+              </span>
+            </p>
+          </div>
         </td>
       </tr>
 

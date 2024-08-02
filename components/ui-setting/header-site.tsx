@@ -5,16 +5,18 @@ import { useCanonicalUrl } from '../hooks';
 interface IProps {
   title: string;
   metas?: ReactNode;
-  isHomePage?: boolean;
 }
+const nameSite = process.env.NEXT_PUBLIC_NAME_SITE;
 
 const getDomain = (domain: string) => domain + `.gooneticket.com`;
 
-const HeaderSite = ({ title, metas, isHomePage = false }: IProps) => {
+const HeaderSite = ({ title, metas }: IProps) => {
   const siteDomain = getDomain('www');
 
-  const spacer = title ? ' | ' : '';
-  const titleOutput = `${title}${spacer}GooneTicket`;
+  const spacer = title
+    ? ' | '
+    : `${nameSite} - Tickets, Concerts, Entertainment, Sport & Culture`;
+  const titleOutput = title + spacer + nameSite;
 
   const canonicalUrl = useCanonicalUrl();
 

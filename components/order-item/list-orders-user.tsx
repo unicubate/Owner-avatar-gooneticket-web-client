@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderModel } from '@/types/order-item';
-import { formateFromNow } from '@/utils';
+import { formateDate, formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import {
+  CalendarIcon,
+  MailIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
   NotepadTextIcon,
@@ -45,7 +47,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
               {item?.oneUploadImage?.path ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <SwiperImage
-                    height="70px"
+                    height="74px"
                     width="80px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(
@@ -60,13 +62,16 @@ const ListOrdersUser = ({ item, index }: Props) => {
             </Link>
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className="flex items-center font-bold text-gray-600">
-                <UserIcon className="size-4" />
-                <span className="ml-1">{item?.address?.fullName}</span>
+              <div className="flex items-center font-bold text-gray-600 lg:hidden">
+                <CalendarIcon className="size-4" />
+                <span className="ml-1">
+                  {formateDate(item?.createdAt as Date, locale)}
+                </span>
+                <span className="ml-1">-</span>
+                <span className="ml-1">{item?.orderNumber}</span>
               </div>
-
               {item?.id ? (
-                <p className="mt-2 font-bold transition-all duration-200 hover:text-blue-600">
+                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
                   <Link
                     href={`/orders/${item?.id}/order-items`}
                     title={item?.event?.title}
@@ -75,38 +80,46 @@ const ListOrdersUser = ({ item, index }: Props) => {
                   </Link>
                 </p>
               ) : null}
+              {item?.address?.fullName ? (
+                <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <UserIcon className="size-4" />
+                  <span className="ml-1">{item?.address?.fullName}</span>
+                </div>
+              ) : null}
 
-              <div className="mt-2 flex items-center text-sm font-bold text-gray-600">
-                <span>Qty: {item?.quantity}</span>
-                <span className="ml-1.5 text-sm font-bold text-gray-600">
-                  #{item?.orderNumber}
-                </span>
+              <div className="mt-1 flex items-center font-bold text-gray-600">
+                <MailIcon className="size-4" />
+                <span className="ml-1"> {item?.address?.email}</span>
               </div>
             </div>
           </div>
         </td>
 
-        <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          <div className="ml-4 min-w-0 flex-1">
-            <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {Number(item?.totalPrice) > 0 ? (
-                <SerialPrice
-                  className="text-sm"
-                  value={Number(item?.totalPrice)}
-                  currency={{ code: String(item?.currency) }}
-                />
-              ) : (
-                'Free'
-              )}
-            </p>
-          </div>
+        <td className="hidden text-left text-sm font-medium text-gray-600 lg:table-cell">
+          {item?.quantity}
+        </td>
+
+        <td className="hidden text-center text-sm font-bold dark:text-white lg:table-cell">
+          {Number(item?.totalPrice) > 0 ? (
+            <SerialPrice
+              className="text-sm"
+              value={Number(item?.totalPrice)}
+              currency={{ code: String(item?.currency) }}
+            />
+          ) : (
+            'Free'
+          )}
+        </td>
+
+        <td className="hidden text-center text-sm font-medium text-gray-600 lg:table-cell">
+          {item?.orderNumber}
         </td>
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date, locale)}
         </td>
 
-        <td className="py-4 text-right text-sm font-medium text-gray-600">
+        <td className="py-4 text-right text-sm font-medium">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button type="button" size="icon" variant="ghost">
@@ -142,6 +155,24 @@ const ListOrdersUser = ({ item, index }: Props) => {
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
+          <div className="pt-1 lg:hidden">
+            <p className={`inline-flex text-sm font-bold`}>
+              <span className={`ml-1`}>
+                {Number(item?.totalPrice) > 0 ? (
+                  <SerialPrice
+                    className="text-sm"
+                    value={Number(item?.totalPrice)}
+                    currency={{ code: String(item?.currency) }}
+                  />
+                ) : (
+                  'Free'
+                )}
+              </span>
+            </p>
+          </div>
+          <div className="pt-1 lg:hidden">
+            <span className="text-gray-600">Qty: {item?.quantity}</span>
+          </div>
         </td>
       </tr>
     </>
