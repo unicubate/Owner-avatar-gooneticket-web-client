@@ -24,19 +24,7 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
   };
   return (
     <>
-      <HeaderSite
-        title={title}
-        metas={
-          <>
-            <meta
-              property="og:title"
-              key="title"
-              name="description"
-              content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-            />
-          </>
-        }
-      />
+      <HeaderSite title={title} metas={metas} />
 
       {/* <div className="min-h-screen space-y-5"> */}
       <HorizontalNavSite showDrawer={showDrawer} user={userStorage} />

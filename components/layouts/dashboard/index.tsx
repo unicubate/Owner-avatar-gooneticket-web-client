@@ -29,15 +29,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
   return (
     <>
-      <HeaderSite
-        title={title}
-        metas={
-          <meta
-            name="description"
-            content={`Setting your tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-          />
-        }
-      />
+      <HeaderSite title={title} />
 
       <div className="flex flex-col">
         <HorizontalNavDashboard

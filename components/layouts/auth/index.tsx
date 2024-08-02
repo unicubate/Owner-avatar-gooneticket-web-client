@@ -13,17 +13,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
 
   return (
     <>
-      <HeaderSite
-        title={title}
-        metas={
-          <>
-            <meta
-              name="description"
-              content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-            />
-          </>
-        }
-      />
+      <HeaderSite title={title} />
 
       <header className="sticky border-b border-gray-100 dark:border-gray-800">
         <div className="mx-auto max-w-7xl px-5">

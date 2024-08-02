@@ -38,15 +38,7 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
 
   return (
     <>
-      <HeaderSite
-        title={title}
-        metas={
-          <meta
-            name="description"
-            content={`Checkout tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-          />
-        }
-      />
+      <HeaderSite title={title} />
 
       <header className="items-center gap-4 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-[#04080b]">
         <div className="mx-auto max-w-7xl px-5">
