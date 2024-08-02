@@ -69,7 +69,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.confirmedAt ? 'text-gray-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
+                className={`${item?.confirmedAt ? 'text-gray-600 hover:text-gray-500' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
