@@ -18,6 +18,7 @@ const HeaderSite = ({ title, metas }: IProps) => {
 
   const canonicalUrl = useCanonicalUrl();
 
+  //${nameSite} - Tickets, Concerts, Entertainment, Sport & Culture
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
