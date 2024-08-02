@@ -17,7 +17,6 @@ const HeaderSite = ({ title, metas }: IProps) => {
   const titleOutput = title + spacer + nameSite;
 
   const canonicalUrl = useCanonicalUrl();
-  console.log('jdjjdd', canonicalUrl.replace(siteDomain, getDomain('www')));
 
   return (
     <Head>
