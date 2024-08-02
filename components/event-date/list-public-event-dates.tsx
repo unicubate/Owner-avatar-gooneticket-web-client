@@ -44,12 +44,27 @@ const ListPublicEventDates = ({ item, index }: Props) => {
       >
         <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
           <div className="py-1">
-            <div className="flex items-center">
+            <div className="mt-1 sm:hidden">
+              <SwiperImage
+                height="160px"
+                src={`${viewOneFileUploadAPI({
+                  folder: String(
+                    item?.oneUploadsImage?.model.toLocaleLowerCase(),
+                  ),
+                  fileName: String(item?.oneUploadsImage?.path),
+                })}`}
+                alt={String(item?.event?.title)}
+              />
+            </div>
+            <div className="mt-1 flex items-center">
               {item?.oneUploadsImage ? (
-                <Link href={linkHrefCheckouts} className="relative shrink-0">
+                <Link
+                  href={linkHrefCheckouts}
+                  className="relative hidden shrink-0 sm:table-cell"
+                >
                   <SwiperImage
-                    height="90px"
-                    width="90px"
+                    height="80px"
+                    width="100px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(
                         item?.oneUploadsImage?.model.toLocaleLowerCase(),
@@ -61,18 +76,15 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                 </Link>
               ) : null}
 
-              <div className="ml-2 min-w-0 flex-1">
+              <div className="ml-1.5 min-w-0 flex-1">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="sm:mt-0">
                     <div className="flex items-center">
-                      <p className="text-4xl font-semibold text-blue-700">
+                      <p className="text-5xl font-semibold text-blue-700">
                         {formateTodd(item?.expiredAt as Date, locale)}
                       </p>
                       <div className="tex-sm ml-1.5">
-                        <p className="font-bold">
-                          {formateToCccc(item?.expiredAt as Date, locale)}
-                        </p>
-                        <p className="mt-1 font-semibold">
+                        <p className="mt-1">
                           {capitalizeFirstLetter(
                             formateToLLLL(item?.expiredAt as Date, locale),
                           )}
@@ -80,12 +92,17 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                             {viewYyformateToYyyy(item?.expiredAt as Date)}
                           </span>
                         </p>
-                        <p className="mt-1 font-semibold">
-                          <span>{item?.timeInit}</span>
+                        <p className="mt-1">
+                          <span>
+                            {capitalizeFirstLetter(
+                              formateToCccc(item?.expiredAt as Date, locale),
+                            )}
+                          </span>
+                          ,<span className="ml-1">{item?.timeInit}</span>
                           {item?.timeEnd ? (
                             <>
                               <span className="ml-1">-</span>
-                              <span className="ml-1"> {item?.timeEnd}</span>
+                              <span className="ml-1">{item?.timeEnd}</span>
                             </>
                           ) : null}
                         </p>
@@ -135,7 +152,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
               </div>
             </div>
 
-            <div className="mt-1 flex items-center">
+            <div className="mt-1.5 flex items-center">
               <Link
                 href={linkHrefView}
                 className="hover:text-blue-600 dark:hover:text-blue-600"

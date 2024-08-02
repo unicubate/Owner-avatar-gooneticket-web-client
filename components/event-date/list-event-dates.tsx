@@ -51,9 +51,6 @@ const ListEventDates = ({ item, index }: Props) => {
                         </p>
                         <div className="tex-sm ml-1.5">
                           <p className="font-bold">
-                            {formateToCccc(item?.expiredAt as Date, locale)}
-                          </p>
-                          <p className="mt-1 font-semibold">
                             {capitalizeFirstLetter(
                               formateToLLLL(item?.expiredAt as Date, locale),
                             )}
@@ -61,19 +58,25 @@ const ListEventDates = ({ item, index }: Props) => {
                               {viewYyformateToYyyy(item?.expiredAt as Date)}
                             </span>
                           </p>
-                          <p className="mt-1 font-semibold">
-                            <span>{item?.timeInit}</span>
+
+                          <p className="mt-1">
+                            <span>
+                              {capitalizeFirstLetter(
+                                formateToCccc(item?.expiredAt as Date, locale),
+                              )}
+                            </span>
+                            ,<span className="ml-1">{item?.timeInit}</span>
                             {item?.timeEnd ? (
                               <>
                                 <span className="ml-1">-</span>
-                                <span className="ml-1"> {item?.timeEnd}</span>
+                                <span className="ml-1">{item?.timeEnd}</span>
                               </>
                             ) : null}
                           </p>
                         </div>
                       </div>
 
-                      <div className="mt-1.5 text-sm font-bold">
+                      <div className="mt-1.5 text-sm">
                         <span>
                           {capitalizeFirstLetter(String(item?.address))}
                         </span>
