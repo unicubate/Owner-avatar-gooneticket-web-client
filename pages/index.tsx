@@ -67,16 +67,7 @@ export default function Home() {
   const t = useIntl();
 
   return (
-    <LayoutSite
-      metas={
-        <meta
-          name="description"
-          key="description"
-          content={`Tickets for concerts, musicals, shows, sports and culture on ${process.env.NEXT_PUBLIC_NAME_SITE}`}
-        />
-      }
-      title="Tickets, Concerts, Entertainment, Sport & Culture"
-    >
+    <LayoutSite title="Tickets, Concerts, Entertainment, Sport & Culture">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mt-8 max-w-5xl py-6 text-center">
