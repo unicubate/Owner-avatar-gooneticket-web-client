@@ -40,7 +40,7 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
     <>
       <HeaderSite title={title} />
 
-      <header className="items-center gap-4 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-[#04080b]">
+      <header className="items-center gap-4 border-b border-gray-100 bg-white dark:border-gray-800 dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
@@ -103,7 +103,7 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
                           </svg>
                         </Button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-[#04080b]">
+                      <DropdownMenuContent className="w-40 dark:border-gray-800 dark:bg-background">
                         <DropdownMenuGroup>
                           <DropdownMenuItem onClick={() => push(`/orders`)}>
                             <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />

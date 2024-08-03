@@ -67,7 +67,7 @@ const ShopUserPublic = () => {
                 </div>
 
                 <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
-                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                  <div className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-background">
                     <div className="flow-root">
                       {event?.id ? (
                         <PublicLastEvents

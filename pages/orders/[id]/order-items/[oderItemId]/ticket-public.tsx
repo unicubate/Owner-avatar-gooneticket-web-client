@@ -23,7 +23,7 @@ const TicketPublic = () => {
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#04080b]">
+              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-background">
                 {isLoadingOrderItem ? (
                   <LoadingFile className="my-6" />
                 ) : isErrorOrderItem ? (

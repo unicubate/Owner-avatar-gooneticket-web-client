@@ -43,7 +43,7 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
         <SheetTrigger asChild>
           {/* <Button variant="outline">Open</Button> */}
         </SheetTrigger>
-        <SheetContent className="dark:border-gray-800 dark:bg-[#04080b]">
+        <SheetContent className="dark:border-gray-800 dark:bg-background">
           <div className="flex flex-col overflow-y-auto pt-5">
             <VerticalNavSite />
           </div>

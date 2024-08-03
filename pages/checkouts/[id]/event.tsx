@@ -163,7 +163,7 @@ const CheckoutEvent = () => {
                     <div className="flow-root">
                       <div
                         key={item?.id}
-                        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
+                        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-background"
                       >
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
@@ -366,7 +366,7 @@ const CheckoutEvent = () => {
                               <div>
                                 <label
                                   htmlFor={`ticket`}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-[#04080b]"
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-background"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
                                     Free
@@ -381,7 +381,7 @@ const CheckoutEvent = () => {
                                       <div key={index}>
                                         <label
                                           htmlFor={ticket?.id}
-                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-background dark:hover:border-blue-600"
                                         >
                                           <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:mt-0">
@@ -489,7 +489,7 @@ const CheckoutEvent = () => {
                         <span className="font-bold">{timerRemaining}</span>
                       </ButtonInput>
                     </div>
-                    <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                    <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-background">
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
@@ -566,7 +566,7 @@ const CheckoutEvent = () => {
                     </div>
 
                     {isEdit && userAddress?.isUpdated && newAmount?.value ? (
-                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]">
+                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-background">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
                           <div className="mt-4 space-y-4">
@@ -574,7 +574,7 @@ const CheckoutEvent = () => {
                               <div key={index}>
                                 <label
                                   htmlFor={lk?.value}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-[#04080b] dark:hover:border-blue-600"
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-background dark:hover:border-blue-600"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
                                     {lk?.name}

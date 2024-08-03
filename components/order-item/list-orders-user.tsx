@@ -96,7 +96,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-left text-sm font-medium text-gray-600 lg:table-cell">
-          {item?.quantity}
+          {Number(item?.quantity)}
         </td>
 
         <td className="hidden text-center text-sm font-bold dark:text-white lg:table-cell">
@@ -126,7 +126,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 <MoreHorizontalIcon className="size-5 text-gray-400" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-[#04080b]">
+            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-background">
               <DropdownMenuGroup>
                 <Link
                   prefetch={true}

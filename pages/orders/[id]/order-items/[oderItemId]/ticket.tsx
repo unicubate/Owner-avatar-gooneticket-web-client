@@ -43,7 +43,7 @@ const Ticket = () => {
                   {t.formatMessage({ id: 'UTIL.COME_BACK' })}
                 </span>
               </ButtonInput>
-              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-[#04080b]">
+              <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-background">
                 {isLoadingOrderItem ? (
                   <LoadingFile className="my-6" />
                 ) : isErrorOrderItem ? (

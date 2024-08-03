@@ -21,10 +21,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
 
   return (
     <>
-      <Card
-        key={index}
-        className="w-full dark:border-gray-800 dark:bg-[#04080b]"
-      >
+      <Card key={index} className="w-full dark:border-input dark:bg-background">
         {item?.uploadsImages?.length > 0 ? (
           <>
             <Link

@@ -22,7 +22,7 @@ const ViewOneEvent = ({ item }: Props) => {
     <>
       <div
         key={item?.id}
-        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-[#04080b]"
+        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-background"
       >
         <div className="p-8 sm:px-8 sm:py-7">
           {item?.uploadsImages?.length > 0 ? (

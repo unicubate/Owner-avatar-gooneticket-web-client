@@ -26,6 +26,10 @@ const MyDocument = () => (
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#404756" />
       <meta name="msapplication-TileColor" content="#2b5797" />
       <meta name="theme-color" content="#23272f" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Krona+One&display=optional"
+        rel="stylesheet"
+      />
       <title key="title">{`${process.env.NEXT_PUBLIC_NAME_SITE}`}</title>
     </Head>
     <body>

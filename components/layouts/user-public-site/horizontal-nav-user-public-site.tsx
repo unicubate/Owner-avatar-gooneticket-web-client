@@ -72,7 +72,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-[#04080b]">
+      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
@@ -80,7 +80,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                 onClick={showDrawer}
                 type="button"
                 variant="ghost"
-                className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#04080b] dark:hover:text-white"
+                className="bg-white text-gray-700 hover:text-gray-900 dark:bg-background dark:hover:text-white"
               >
                 <svg
                   className="size-6"
@@ -150,7 +150,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
-                      className="bg-white text-gray-700 hover:text-gray-900 dark:bg-[#04080b] dark:hover:text-white"
+                      className="bg-white text-gray-700 hover:text-gray-900 dark:bg-background dark:hover:text-white"
                     >
                       <svg
                         className="size-6"
