@@ -72,7 +72,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-300 bg-white dark:border-gray-800 dark:bg-background">
+      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b bg-white dark:border-input dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
