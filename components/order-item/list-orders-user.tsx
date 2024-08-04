@@ -67,8 +67,6 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 <span className="ml-1">
                   {formateDate(item?.createdAt as Date, locale)}
                 </span>
-                <span className="ml-1">-</span>
-                <span className="ml-1">{item?.orderNumber}</span>
               </div>
               {item?.id ? (
                 <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
