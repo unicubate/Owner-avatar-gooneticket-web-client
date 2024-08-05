@@ -24,7 +24,7 @@ const TablePublicEventDates = ({ user }: { user: UserModel }) => {
   } = GetInfiniteEventDatesAPI({
     search,
     take: 10,
-    sort: 'DESC',
+    sort: 'ASC',
     organizationId: user?.organizationId,
   });
 
