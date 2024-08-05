@@ -82,9 +82,15 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <ButtonInput
               type="button"
               className="uppercase"
-              variant={orderItem?.eventDate?.isExpired ? 'danger' : 'success'}
+              variant={
+                orderItem?.confirmedAt
+                  ? 'success'
+                  : `${orderItem?.eventDate?.isExpired ? 'danger' : 'primary'}`
+              }
               icon={
-                orderItem?.eventDate?.isExpired ? (
+                orderItem?.confirmedAt ? (
+                  <CheckCheckIcon className="size-4" />
+                ) : orderItem?.eventDate?.isExpired ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
                   <CalendarDaysIcon className="size-4" />
@@ -164,7 +170,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               </ButtonInput>
             ) : (
               ['ACCEPTED'].includes(orderItem?.status) && (
-                <ButtonInput type="button" size="sm" variant="warning">
+                <ButtonInput type="button" size="sm" variant="primary">
                   {capitalizeFirstLetter(orderItem?.status)}
                 </ButtonInput>
               )
