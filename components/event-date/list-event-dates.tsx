@@ -39,83 +39,77 @@ const ListEventDates = ({ item, index }: Props) => {
           key={index}
           className="mt-2 cursor-pointer justify-between  gap-4 rounded-lg border border-input p-2 text-sm shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
         >
-          <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
-            <div className="py-1">
-              <div className="flex items-center">
-                <div className="min-w-0 flex-1">
-                  <div className="sm:flex sm:items-center sm:justify-between">
-                    <div className="sm:mt-0">
-                      <div className="flex items-center">
-                        <p className="text-4xl font-semibold text-blue-700">
-                          {formateTodd(item?.expiredAt as Date, locale)}
-                        </p>
-                        <div className="tex-sm ml-1.5">
-                          <p className="font-bold">
-                            {capitalizeFirstLetter(
-                              formateToLLLL(item?.expiredAt as Date, locale),
-                            )}
-                            <span className="ml-1.5">
-                              {viewYyformateToYyyy(item?.expiredAt as Date)}
-                            </span>
-                          </p>
-
-                          <p className="mt-1">
-                            <span>
-                              {capitalizeFirstLetter(
-                                formateToCccc(item?.expiredAt as Date, locale),
-                              )}
-                            </span>
-                            ,<span className="ml-1">{item?.timeInit}</span>
-                            {item?.timeEnd ? (
-                              <>
-                                <span className="ml-1">-</span>
-                                <span className="ml-1">{item?.timeEnd}</span>
-                              </>
-                            ) : null}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="mt-1.5 text-sm">
-                        <span>
-                          {capitalizeFirstLetter(String(item?.address))}
-                        </span>
-                        <span className="ml-1">-</span>
-                        <span className="ml-1">
-                          {capitalizeFirstLetter(String(item?.city))}
-                        </span>
-                        <span className="ml-1">-</span>
-                        <span className="ml-1">
-                          {capitalizeFirstLetter(String(item?.country?.name))}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="mt-2">
-                      <p className="text-xl font-bold">
-                        {item?.oneTicket?.id ? (
-                          <>
-                            {formatePrice({
-                              currency: `${item?.oneTicket?.currency?.code}`,
-                              value: Number(item?.oneTicket?.amount ?? 0),
-                              isDivide: false,
-                            })}
-                          </>
-                        ) : (
-                          'Free'
+          <div className="flex items-center py-1">
+            <div className="min-w-0 flex-1">
+              <div className="sm:flex sm:items-center sm:justify-between">
+                <div className="sm:mt-0">
+                  <div className="flex items-center">
+                    <p className="text-4xl font-semibold text-blue-700">
+                      {formateTodd(item?.expiredAt as Date, locale)}
+                    </p>
+                    <div className="tex-sm ml-1.5 font-semibold">
+                      <p>
+                        {capitalizeFirstLetter(
+                          formateToLLLL(item?.expiredAt as Date, locale),
                         )}
+                        <span className="ml-1.5">
+                          {viewYyformateToYyyy(item?.expiredAt as Date)}
+                        </span>
                       </p>
-                      <ButtonInput
-                        type="button"
-                        variant="primary"
-                        className="ml-auto mt-2 w-full"
-                        size="sm"
-                        icon={<TicketIcon className="size-6" />}
-                      >
-                        Ticket
-                      </ButtonInput>
+
+                      <p className="mt-1">
+                        <span>
+                          {capitalizeFirstLetter(
+                            formateToCccc(item?.expiredAt as Date, locale),
+                          )}
+                        </span>
+                        ,<span className="ml-1">{item?.timeInit}</span>
+                        {item?.timeEnd ? (
+                          <>
+                            <span className="ml-1">-</span>
+                            <span className="ml-1">{item?.timeEnd}</span>
+                          </>
+                        ) : null}
+                      </p>
                     </div>
                   </div>
+
+                  <div className="mt-1.5 text-sm font-semibold">
+                    <span>{capitalizeFirstLetter(String(item?.address))}</span>
+                    <span className="ml-1">-</span>
+                    <span className="ml-1">
+                      {capitalizeFirstLetter(String(item?.city))}
+                    </span>
+                    <span className="ml-1">-</span>
+                    <span className="ml-1">
+                      {capitalizeFirstLetter(String(item?.country))}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="mt-2">
+                  <p className="text-xl font-bold">
+                    {item?.oneTicket?.id ? (
+                      <>
+                        {formatePrice({
+                          currency: `${item?.oneTicket?.currency?.code}`,
+                          value: Number(item?.oneTicket?.amount ?? 0),
+                          isDivide: false,
+                        })}
+                      </>
+                    ) : (
+                      'Free'
+                    )}
+                  </p>
+                  <ButtonInput
+                    type="button"
+                    variant="primary"
+                    className="ml-auto mt-2 w-full"
+                    size="sm"
+                    icon={<TicketIcon className="size-6" />}
+                  >
+                    Ticket
+                  </ButtonInput>
                 </div>
               </div>
             </div>

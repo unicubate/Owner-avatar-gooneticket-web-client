@@ -23,10 +23,7 @@ export type EventDateModel = {
     };
   };
   oneUploadsImage: UploadModel;
-  country: {
-    code: string;
-    name: string;
-  };
+  country: string;
 };
 
 export type EventDateFormModel = {

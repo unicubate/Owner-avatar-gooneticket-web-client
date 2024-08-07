@@ -95,7 +95,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
               <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
               <span className="ml-1.5">{item?.city ?? ''}</span>
               <span className="ml-1 text-gray-400 dark:text-gray-600">-</span>
-              <span className="ml-1.5">{item?.country?.name ?? ''}</span>
+              <span className="ml-1.5">{item?.country ?? ''}</span>
             </div>
           </div> */}
           {item?.oneEventDate ? (

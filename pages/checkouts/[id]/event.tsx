@@ -235,19 +235,23 @@ const CheckoutEvent = () => {
                             <div className="hidden items-center lg:table-cell">
                               <div className="flex shrink-0 font-bold">
                                 <span className="text-lg">
-                                  {eventDate?.country?.name ?? ''}
+                                  {capitalizeFirstLetter(
+                                    eventDate?.address ?? '',
+                                  )}
                                 </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-lg">
-                                  {eventDate?.city ?? ''}
+                                  {capitalizeFirstLetter(eventDate?.city ?? '')}
                                 </span>
                                 <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-lg">
-                                  {eventDate?.address ?? ''}
+                                  {capitalizeFirstLetter(
+                                    eventDate?.country ?? '',
+                                  )}
                                 </span>
                               </div>
                             </div>
@@ -286,19 +290,23 @@ const CheckoutEvent = () => {
                               <div className="flex font-bold">Location</div>
                               <div className="ml-auto font-bold">
                                 <span className="text-sm">
-                                  {eventDate?.country?.name ?? ''}
+                                  {capitalizeFirstLetter(
+                                    eventDate?.address ?? '',
+                                  )}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-2 text-sm">
-                                  {eventDate?.city ?? ''}
+                                  {capitalizeFirstLetter(eventDate?.city ?? '')}
                                 </span>
                                 <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
                                   -
                                 </span>
                                 <span className="ml-1.5 text-sm">
-                                  {eventDate?.address ?? ''}
+                                  {capitalizeFirstLetter(
+                                    eventDate?.country ?? '',
+                                  )}
                                 </span>
                               </div>
                             </div>

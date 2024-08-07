@@ -119,7 +119,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                       </span>
                       <span className="ml-1">-</span>
                       <span className="ml-1">
-                        {capitalizeFirstLetter(String(item?.country?.name))}
+                        {capitalizeFirstLetter(String(item?.country))}
                       </span>
                     </div>
                   </div>
