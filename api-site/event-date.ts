@@ -12,7 +12,6 @@ export const GetOneEventDateAPI = (payload: { id: string }) => {
         action: 'getOneEventDate',
         urlParams: { id },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -50,7 +49,6 @@ export const GetInfiniteEventDatesAPI = (payload: {
           organizationId,
         },
       }),
-    staleTime: 60_000,
     initialPageParam: 1,
   });
 };

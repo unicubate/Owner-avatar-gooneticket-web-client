@@ -14,7 +14,6 @@ export const GetOneAffiliationAPI = (payload: {
         action: 'getOneAffiliation',
         queryParams: payload,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -48,7 +47,6 @@ export const GetInfiniteAffiliationsUserAPI = (
           page: pageParam,
         },
       }),
-    staleTime: 60_000,
     initialPageParam: 1,
   });
 };

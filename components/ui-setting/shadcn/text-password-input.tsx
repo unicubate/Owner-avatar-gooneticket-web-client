@@ -1,9 +1,9 @@
 import { PasswordInput } from '@/components/ui/password-input';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   name: string;
   min?: number;

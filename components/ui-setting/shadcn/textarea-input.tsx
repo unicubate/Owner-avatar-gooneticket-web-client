@@ -1,9 +1,9 @@
 import { Textarea } from '@/components/ui/textarea';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   name: string;
   errors: { [key: string]: any };

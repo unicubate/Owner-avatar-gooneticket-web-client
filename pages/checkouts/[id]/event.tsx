@@ -9,6 +9,7 @@ import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState, useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
+import { CreatePaymentBooking } from '@/components/payment/create-payment-booking';
 import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
@@ -366,7 +367,7 @@ const CheckoutEvent = () => {
                               <div>
                                 <label
                                   htmlFor={`ticket`}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:border-gray-600 dark:bg-background"
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:bg-background"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
                                     Free
@@ -381,7 +382,7 @@ const CheckoutEvent = () => {
                                       <div key={index}>
                                         <label
                                           htmlFor={ticket?.id}
-                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-background dark:hover:border-blue-600"
+                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
                                         >
                                           <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:mt-0">
@@ -565,7 +566,10 @@ const CheckoutEvent = () => {
                       </div>
                     </div>
 
-                    {isEdit && userAddress?.isUpdated && newAmount?.value ? (
+                    {ticketJsonParse?.enableOnlinePayment &&
+                    isEdit &&
+                    userAddress?.isUpdated &&
+                    newAmount?.value ? (
                       <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-background">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
@@ -574,7 +578,7 @@ const CheckoutEvent = () => {
                               <div key={index}>
                                 <label
                                   htmlFor={lk?.value}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-gray-300 bg-white p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:border-gray-600 dark:bg-background dark:hover:border-blue-600"
+                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
                                     {lk?.name}
@@ -603,57 +607,64 @@ const CheckoutEvent = () => {
                       <>
                         {eventDate?.oneTicket?.id ? (
                           <>
-                            {isValid && watchPaymentMethod ? (
-                              <>
-                                {newAmount?.value ? (
-                                  <>
-                                    {watchPaymentMethod === 'STRIPE' ? (
-                                      <CreateCardStripe
-                                        paymentModel="STRIPE-EVENT"
-                                        data={{
-                                          userAddress,
-                                          eventId: item?.id,
-                                          amount: newAmount,
-                                          eventDateId: eventDate?.id,
-                                          affiliation: affiliation,
-                                          organizationSellerId:
-                                            item?.organizationId,
-                                          organizationBuyerId:
-                                            userStorage?.organizationId,
-                                        }}
-                                      />
-                                    ) : null}
+                            <>
+                              {isValid &&
+                              newAmount?.value &&
+                              watchPaymentMethod &&
+                              ticketJsonParse?.enableOnlinePayment ? (
+                                <>
+                                  {watchPaymentMethod === 'STRIPE' ? (
+                                    <CreateCardStripe
+                                      paymentModel="STRIPE-EVENT"
+                                      data={{
+                                        userAddress,
+                                        eventId: item?.id,
+                                        amount: newAmount,
+                                        eventDateId: eventDate?.id,
+                                        affiliation: affiliation,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userStorage?.organizationId,
+                                      }}
+                                    />
+                                  ) : null}
 
-                                    {watchPaymentMethod === 'PAYPAL' ? (
-                                      <CreatePaymentPayPal
-                                        paymentModel="PAYPAL-EVENT"
-                                        data={{
-                                          userAddress,
-                                          eventDateId: eventDate?.id,
-                                          eventId: item?.id,
-                                          amount: newAmount,
-                                          affiliation: affiliation,
-                                          organizationSellerId:
-                                            item?.organizationId,
-                                          organizationBuyerId:
-                                            userStorage?.organizationId,
-                                        }}
-                                      />
-                                    ) : null}
-                                  </>
-                                ) : (
-                                  <div className="my-4 flex items-center">
-                                    <ButtonInput
-                                      type="submit"
-                                      variant="primary"
-                                      className="w-full"
-                                    >
-                                      Continue
-                                    </ButtonInput>
-                                  </div>
-                                )}
-                              </>
-                            ) : null}
+                                  {watchPaymentMethod === 'PAYPAL' ? (
+                                    <CreatePaymentPayPal
+                                      paymentModel="PAYPAL-EVENT"
+                                      data={{
+                                        userAddress,
+                                        eventDateId: eventDate?.id,
+                                        eventId: item?.id,
+                                        amount: newAmount,
+                                        affiliation: affiliation,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userStorage?.organizationId,
+                                      }}
+                                    />
+                                  ) : null}
+                                </>
+                              ) : null}
+
+                              {!ticketJsonParse?.enableOnlinePayment ? (
+                                <CreatePaymentBooking
+                                  paymentModel="BOOKING-EVENT"
+                                  data={{
+                                    userAddress,
+                                    eventDateId: eventDate?.id,
+                                    eventId: item?.id,
+                                    amount: newAmount,
+                                    affiliation: affiliation,
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                  }}
+                                />
+                              ) : null}
+                            </>
                           </>
                         ) : (
                           <>

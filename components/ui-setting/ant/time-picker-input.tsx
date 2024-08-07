@@ -1,9 +1,9 @@
 import { TimePicker } from 'antd';
 import dayjs from 'dayjs';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   name: string;
   errors: { [key: string]: any };

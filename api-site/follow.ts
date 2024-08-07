@@ -115,7 +115,6 @@ export const GetInfiniteFollowersAPI = (payload: {
         search: search,
         page: pageParam,
       }),
-    staleTime: 60_000,
     initialPageParam: 1,
   });
 };
@@ -136,7 +135,6 @@ export const GetInfiniteFollowingsAPI = (payload: {
         sort: sort,
         search: search,
       }),
-    staleTime: 60_000,
     initialPageParam: 1,
   });
 };

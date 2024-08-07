@@ -99,7 +99,6 @@ export const GetOneUserAddressMeAPI = () => {
       await makeApiCall({
         action: 'getOneUserAddress',
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

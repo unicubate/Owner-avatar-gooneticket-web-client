@@ -1,10 +1,10 @@
 import { Label } from '@/components/ui/label';
 import { Select, Space } from 'antd';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 const { Option } = Select;
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   dataItem: any;
   label?: string;
   name: string;

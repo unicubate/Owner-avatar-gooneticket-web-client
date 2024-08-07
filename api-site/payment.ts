@@ -10,6 +10,7 @@ import {
 
 export type PaymentModel =
   | 'FREE-EVENT'
+  | 'BOOKING-EVENT'
   | 'PAYPAL-EVENT'
   | 'STRIPE-EVENT'
   | 'PAYPAL-SHOP'
@@ -64,9 +65,9 @@ export const CreateOnPaymentPI = ({
         });
       }
 
-      if (paymentModel === 'PAYMENT-CREATE') {
+      if (paymentModel === 'BOOKING-EVENT') {
         return await makeApiCall({
-          action: 'createOnePaymentsCreate',
+          action: 'createOnePaymentsBookingEvent',
           body: { paymentModel, ...data },
         });
       }
@@ -170,7 +171,6 @@ export const GetOnePaymentsStripeClientSecretAPI = (payload: any) => {
         action: 'getOnePaymentsStripeClientSecret',
         queryParams: payload,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

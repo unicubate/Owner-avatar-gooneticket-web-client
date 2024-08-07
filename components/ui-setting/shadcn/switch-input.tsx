@@ -1,8 +1,8 @@
 import { Switch } from '@/components/ui/switch';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   name: string;
 }

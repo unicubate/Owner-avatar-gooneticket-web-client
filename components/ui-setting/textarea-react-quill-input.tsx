@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import dynamic from 'next/dynamic';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import ReactQuill, { ReactQuillProps } from 'react-quill';
 import 'react-quill/dist/quill.bubble.css';
 
@@ -18,7 +18,7 @@ const DynamicReactQuill = dynamic<QuillWrapperProps>(
 );
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   name: string;
   className: string;

@@ -205,7 +205,6 @@ export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
         action: 'getOneUserPrivate',
         urlParams: { userId },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
     enabled: Boolean(userId),
   });
@@ -233,7 +232,6 @@ export const GetOneUserPublicAPI = (payload: {
         action: 'getOneUserPublic',
         queryParams: payload,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -254,7 +252,6 @@ export const GetOneUserMeAPI = () => {
       await makeApiCall({
         action: 'getOneUserMe',
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -285,7 +282,6 @@ export const VerifyTokenUsersAPI = ({ token }: { token: string }) => {
         action: 'verifyTokenUser',
         queryParams: { token },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

@@ -130,7 +130,6 @@ export const GetAllCurrenciesAPI = (search?: string) => {
         action: 'getAllCurrencies',
         queryParams: search,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -145,7 +144,6 @@ export const GetAllCountiesAPI = (search?: string) => {
         action: 'getAllCounties',
         queryParams: search,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

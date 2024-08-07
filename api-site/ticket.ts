@@ -25,7 +25,6 @@ export const GetInfiniteTicketsAPI = (payload: {
           page: pageParam,
         },
       }),
-    staleTime: 60_000,
     initialPageParam: 1,
   });
 };

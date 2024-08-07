@@ -58,7 +58,6 @@ export const GetOneTransactionAPI = ({
         action: 'getOneBuyerTransaction',
         urlParams: { transactionId },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

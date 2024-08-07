@@ -7,11 +7,11 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   dataItem: any;
   label?: string;
   className?: string;

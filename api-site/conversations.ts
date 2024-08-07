@@ -151,7 +151,6 @@ export const GetOneConversationAPI = (payload: {
         action: 'getOneConversation',
         urlParams: payload,
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

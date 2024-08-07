@@ -18,7 +18,6 @@ export const GetOneEventAPI = (payload: {
           enableVisibility,
         },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 

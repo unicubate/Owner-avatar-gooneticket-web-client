@@ -1,10 +1,10 @@
-import { Control, Controller } from 'react-hook-form';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { Label } from '../ui/label';
 
 interface Props {
-  control: Control<any>;
+  control: Control<FieldValues>;
   label?: string;
   defaultCountry: any;
   name: string;
@@ -32,6 +32,7 @@ const PhoneNumberInput = ({
         {label ? (
           <Label htmlFor={name} className="mb-2 block text-sm font-bold">
             {label}
+            {required ? <span className="ml-1 text-red-600">*</span> : null}
           </Label>
         ) : null}
         {labelHelp}

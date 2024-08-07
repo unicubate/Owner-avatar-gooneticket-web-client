@@ -89,7 +89,6 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
         action: 'getOneOrder',
         urlParams: { orderId },
       }),
-    staleTime: 60_000,
     refetchOnWindowFocus: false,
   });
 
@@ -115,7 +114,6 @@ export const GetOneOrderItemAPI = (payload: {
           action: 'getOneOrderItem',
           queryParams: payload,
         }),
-      staleTime: 60_000,
       refetchOnWindowFocus: false,
     });
 
