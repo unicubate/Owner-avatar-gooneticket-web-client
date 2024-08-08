@@ -57,7 +57,6 @@ const LayoutAuth = ({ children, title }: IProps) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   icon={<CiLogin />}
                   variant="outline"
                   onClick={() => {
@@ -71,7 +70,6 @@ const LayoutAuth = ({ children, title }: IProps) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   icon={<FiUserPlus />}
                   variant="info"
                   onClick={() => {
