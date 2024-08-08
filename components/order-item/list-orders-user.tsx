@@ -94,7 +94,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-left text-sm font-medium text-gray-600 lg:table-cell">
-          {Number(item?.quantity)}
+          Qty: {Number(item?.quantity)}
         </td>
 
         <td className="hidden text-center text-sm font-bold dark:text-white lg:table-cell">
