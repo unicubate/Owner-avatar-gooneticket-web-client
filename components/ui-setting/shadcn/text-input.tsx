@@ -1,9 +1,9 @@
-import { Control, Controller, FieldValues } from 'react-hook-form';
+import { Control, Controller } from 'react-hook-form';
 import { Input } from '../../ui/input';
 import { Label } from '../../ui/label';
 
 interface Props {
-  control: Control<FieldValues>;
+  control: Control<any>;
   label?: string;
   name: string;
   min?: number;
@@ -27,6 +27,7 @@ interface Props {
     | 'decimal'
     | 'search'
     | undefined;
+  onKeyPress?: (event: any) => void;
 }
 
 const TextInput = ({
@@ -45,6 +46,7 @@ const TextInput = ({
   labelHelp,
   disabled,
   inputMode,
+  onKeyPress,
 }: Props) => {
   return (
     <>
@@ -73,6 +75,7 @@ const TextInput = ({
               autoComplete={autoComplete}
               min={min}
               max={max}
+              onKeyPress={onKeyPress}
               inputMode={inputMode}
               disabled={disabled}
               {...field}

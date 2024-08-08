@@ -31,7 +31,7 @@ const LoginPhone = () => {
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
   const [isResend, setIsResend] = useState(false);
 
-  const { ipLocation } = useInputState();
+  const { t, ipLocation } = useInputState();
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
@@ -123,9 +123,11 @@ const LoginPhone = () => {
       <LayoutAuth title="Login">
         <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto mt-4 flex justify-center">
-            <h6 className="text-center text-xl font-bold">{`Log in`}</h6>
+            <h6 className="text-center text-xl font-bold">
+              {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+            </h6>
           </div>
-          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
               <Alert
                 variant="destructive"
@@ -141,7 +143,7 @@ const LoginPhone = () => {
               <div className="rounded-lg bg-indigo-200 text-center">
                 <div className="ml-3 flex-1 md:flex md:items-center md:justify-between">
                   <p className="p-3 text-sm font-medium text-indigo-800">
-                    We sent a verification code to{' '}
+                    {t.formatMessage({ id: 'UTIL.CONFIRM.SEND.CODE' })}{' '}
                     <strong className="text-blue-600 underline">
                       {watchPhone}
                     </strong>
@@ -155,8 +157,8 @@ const LoginPhone = () => {
                 defaultCountry={ipLocation?.countryCode ?? 'IT'}
                 control={control}
                 name="phone"
-                label="Phone"
-                placeholder="Phone number"
+                label={t.formatMessage({ id: 'AUTH.INPUT.PHONE.SHORT' })}
+                placeholder={t.formatMessage({ id: 'PLACEHOLDER.PHONE' })}
                 errors={errors}
                 required
                 labelHelp={
@@ -164,7 +166,7 @@ const LoginPhone = () => {
                     href={`/login${redirect ? `?redirect=${redirect}` : ''}`}
                   >
                     <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                      Log in with email
+                      {t.formatMessage({ id: 'AUTH.LOGIN.EMAIL' })}
                     </p>
                   </Link>
                 }
@@ -177,7 +179,7 @@ const LoginPhone = () => {
                   <TextInput
                     control={control}
                     name="code"
-                    placeholder="Enter 6-digit code"
+                    placeholder={t.formatMessage({ id: 'UTIL.DIGIT.CODE' })}
                     errors={errors}
                     required
                     type="number"
@@ -194,7 +196,8 @@ const LoginPhone = () => {
                     onClick={() => resendCodeItem()}
                     disabled={!watchPhone || isRunning ? true : false}
                   >
-                    {timer} Resend code
+                    {timer}{' '}
+                    {t.formatMessage({ id: 'AUTH.GENERAL.RESEND_CODE' })}
                   </ButtonInput>
                 </div>
               </div>
@@ -208,7 +211,7 @@ const LoginPhone = () => {
                   disabled={!watchPhone.length}
                   onClick={() => checkEmailOrPhoneItem()}
                 >
-                  Continue with phone
+                  {t.formatMessage({ id: 'AUTH.LOGIN.CONTINUE.PHONE' })}
                 </ButtonInput>
               </div>
             )}
@@ -222,7 +225,7 @@ const LoginPhone = () => {
                   loading={loading}
                   disabled={watchCode.length !== 6 && true}
                 >
-                  Log In
+                  {t.formatMessage({ id: 'AUTH.GENERAL.SUBMIT_BUTTON' })}
                 </ButtonInput>
               </div>
             )}
@@ -231,7 +234,7 @@ const LoginPhone = () => {
           <div className="my-4 flex items-center justify-between">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
             <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
-              or login with Social Media
+              {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
             </p>
 
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
@@ -242,9 +245,13 @@ const LoginPhone = () => {
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-            <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
+            <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
               {' '}
-              New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
+              {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
+              {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+              <span className="font-bold">
+                {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
+              </span>
             </p>
           </Link>
         </div>

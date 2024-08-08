@@ -15,22 +15,33 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { resetPasswordAPI } from '../../../api-site/user';
-
-const schema = yup.object({
-  password: yup.string().min(8, 'Minimum 8 symbols').required(),
-  passwordConfirm: yup
-    .string()
-    .min(8, 'minimum 8 symbols')
-    .oneOf([yup.ref('password')], 'Passwords must match')
-    .required('confirm password is a required field'),
-});
+import { FieldRequiredMessage } from '@/components/ui-setting';
 
 const ResetPassword = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const token = String(query?.token);
 
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { t, loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const schema = yup.object({
+    password: yup
+      .string()
+      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .required(),
+    passwordConfirm: yup
+      .string()
+      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .oneOf(
+        [yup.ref('password')],
+        t.formatMessage({ id: 'AUTH.INPUT.PASSWORDS.MATCH' }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.CONFIRM_PASSWORD',
+        }),
+      ),
+  });
   const {
     control,
     setValue,
@@ -52,7 +63,7 @@ const ResetPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Password change successfully',
+        text: t.formatMessage({ id: 'AUTH.RESET.SEND.SUCCESSFULLY' }),
       });
       push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
@@ -76,10 +87,14 @@ const ResetPassword = () => {
         />
       </div> */}
         <div className="mx-auto flex justify-center">
-          <h6 className="mt-3 text-xl font-bold">{`Reset password?`}</h6>
+          <h6 className="mt-3 text-xl font-bold">
+            {t.formatMessage({ id: 'AUTH.RESET.TITLE' })}
+          </h6>
         </div>
-
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <p className="mt-6 text-center">
+          {t.formatMessage({ id: 'AUTH.RESET.DESC' })}
+        </p>
+        <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
             <Alert variant="destructive" className="mb-4 bg-red-600">
               <AlertDescription className="text-white">
@@ -91,9 +106,11 @@ const ResetPassword = () => {
           <div className="mb-4">
             <TextPasswordInput
               control={control}
-              label="Password"
+              label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
               name="password"
-              placeholder="Password"
+              placeholder={t.formatMessage({
+                id: 'PLACEHOLDER.PASSWORD',
+              })}
               errors={errors}
               required
             />
@@ -102,9 +119,11 @@ const ResetPassword = () => {
           <div className="mb-4">
             <TextPasswordInput
               control={control}
-              label="Confirm password"
+              label={t.formatMessage({ id: 'AUTH.INPUT.CONFIRM_PASSWORD' })}
               name="passwordConfirm"
-              placeholder="Confirm password"
+              placeholder={t.formatMessage({
+                id: 'PLACEHOLDER.CONFIRM_PASSWORD',
+              })}
               errors={errors}
               required
             />
@@ -117,7 +136,7 @@ const ResetPassword = () => {
               variant="primary"
               loading={loading}
             >
-              Reset Password
+              {t.formatMessage({ id: 'AUTH.RESET.SUBMIT' })}
             </ButtonInput>
           </div>
         </form>

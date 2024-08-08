@@ -1,6 +1,10 @@
+import { useInputState } from '@/components/hooks';
 import { ButtonInput, HeaderSite, ImageLogo } from '@/components/ui-setting';
+import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { CiLogin } from 'react-icons/ci';
+import { FiUserPlus } from 'react-icons/fi';
 
 interface IProps {
   title: string;
@@ -8,6 +12,7 @@ interface IProps {
 }
 
 const LayoutAuth = ({ children, title }: IProps) => {
+  const { t } = useInputState();
   const { query, push } = useRouter();
   const { redirect } = query;
 
@@ -45,33 +50,35 @@ const LayoutAuth = ({ children, title }: IProps) => {
             </div>
 
             <div className="ml-auto flex items-center justify-end space-x-2">
-              {/* <div className="flex items-center">
-                <ThemeToggle />
-              </div> */}
+              <div className="flex items-center">
+                <LangToggle />
+              </div>
               <div className="relative">
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
-                  variant="ghost"
+                  size="lg"
+                  icon={<CiLogin />}
+                  variant="outline"
                   onClick={() => {
                     push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
                   }}
                 >
-                  Log In
+                  {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
                 </ButtonInput>
               </div>
               <div className="relative">
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
+                  size="lg"
+                  icon={<FiUserPlus />}
                   variant="info"
                   onClick={() => {
                     push(`/register${redirect ? `?redirect=${redirect}` : ''}`);
                   }}
                 >
-                  Sign Up
+                  {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
                 </ButtonInput>
               </div>
             </div>

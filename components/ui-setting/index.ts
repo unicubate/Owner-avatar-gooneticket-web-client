@@ -16,3 +16,4 @@ export * from './swiper-image';
 export * from './textarea-react-quill-input';
 export * from './theme-toggle';
 export * from './who-can-see-item';
+export * from  './field-required-message';

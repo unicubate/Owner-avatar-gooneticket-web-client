@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* 
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -214,4 +214,14 @@ body {
   margin-left: 4px;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
 }

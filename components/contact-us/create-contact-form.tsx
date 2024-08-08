@@ -18,26 +18,55 @@ import { Checkbox, Upload } from 'antd';
 import Link from 'next/link';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required(),
-  fullName: yup.string().required('first name is a required field'),
-  subject: yup.string().required('last name is a required field'),
-  description: yup.string().required('last name is a required field'),
-  confirm: yup
-    .boolean()
-    .oneOf([true], 'Please check the box to deactivate your account')
-    .required(),
-});
+import { FieldRequiredMessage } from '../ui-setting';
 
 const CreateContactForm = () => {
   const { fileList, handleFileChange } = useUploadItem({});
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { t, loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(
+        50,
+        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.EMAIL',
+        }),
+      ),
+    fullName: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'AUTH.INPUT.FULLNAME',
+      }),
+    ),
+    subject: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'AUTH.INPUT.SUBJECT',
+      }),
+    ),
+    description: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'AUTH.INPUT.MESSAGE',
+      }),
+    ),
+    confirm: yup
+      .boolean()
+      .oneOf([true], t.formatMessage({ id: 'AUTH.VALIDATION.BOX.CONFIRM' }))
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.CONFIRM',
+        }),
+      ),
+  });
+
   const {
     reset,
     watch,
@@ -49,7 +78,6 @@ const CreateContactForm = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-
   const watchEnableUpload = watch('enableUpload', false);
 
   const { mutateAsync: saveMutation } = CreateContactAPI({
@@ -84,7 +112,7 @@ const CreateContactForm = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `Message send successfully`,
+        text: t.formatMessage({ id: 'CONTACT.US.SEND.SUCCESSFULLY' }),
       });
       reset({
         ...data,
@@ -116,30 +144,35 @@ const CreateContactForm = () => {
         <div className="mb-4">
           <TextInput
             control={control}
-            label="Full Name"
+            label={t.formatMessage({ id: 'AUTH.INPUT.FULLNAME' })}
             type="text"
             name="fullName"
-            placeholder="Full Name"
+            placeholder={t.formatMessage({ id: 'PLACEHOLDER.FULLNAME' })}
             errors={errors}
           />
         </div>
         <div className="mb-4">
           <TextInput
             control={control}
-            label="Phone"
+            label={t.formatMessage({ id: 'AUTH.INPUT.PHONE' })}
             type="tel"
             name="phone"
-            placeholder="Phone"
+            onKeyPress={(event: any) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault();
+              }
+            }}
+            placeholder={t.formatMessage({ id: 'PLACEHOLDER.PHONE' })}
             errors={errors}
           />
         </div>
         <div className="mb-4">
           <TextInput
             control={control}
-            label="Email"
+            label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
             type="text"
             name="email"
-            placeholder="Email Address"
+            placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
             errors={errors}
           />
         </div>
@@ -148,18 +181,18 @@ const CreateContactForm = () => {
           <TextInput
             control={control}
             type="text"
-            label="Subject"
+            label={t.formatMessage({ id: 'AUTH.INPUT.SUBJECT' })}
             name="subject"
-            placeholder="Subject"
+            placeholder={t.formatMessage({ id: 'PLACEHOLDER.SUBJECT' })}
             errors={errors}
           />
         </div>
         <div className="mb-4">
           <TextAreaInput
             control={control}
-            label="Message"
+            label={t.formatMessage({ id: 'AUTH.INPUT.MESSAGE' })}
             name="description"
-            placeholder="Message"
+            placeholder={t.formatMessage({ id: 'PLACEHOLDER.MESSAGE' })}
             errors={errors}
           />
         </div>
@@ -168,10 +201,10 @@ const CreateContactForm = () => {
           <div className="flex min-w-0 flex-1 items-center">
             <div className="min-w-0 flex-1">
               <p className="text-sm font-bold dark:text-white">
-                File to upload
+                {t.formatMessage({ id: 'CONTACT.US.FILE_UPLOAD' })}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500">
-                I have a file I want to attach
+                {t.formatMessage({ id: 'CONTACT.US.FILE_UPLOAD.SUBTITLE' })}
               </p>
             </div>
           </div>
@@ -197,7 +230,7 @@ const CreateContactForm = () => {
                   variant="primary"
                   icon={<UploadOutlined />}
                 >
-                  Click to Upload
+                  {t.formatMessage({ id: 'CONTACT.US.FILE_UPLOAD.BTN' })}
                 </ButtonInput>
               )}
             </Upload>
@@ -220,19 +253,19 @@ const CreateContactForm = () => {
                       //className="text-sm font-bold text-gray-700"
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
-                      I accept the{' '}
+                      {t.formatMessage({ id: 'CONTACT.US.ACCEPT_TERMS' })}{' '}
                       <Link
                         className="text-sm text-blue-600 hover:underline"
                         href="/terms-condition"
                       >
-                        terms
+                        {t.formatMessage({ id: 'CONTACT.US.TERMS_OF_USE' })}
                       </Link>{' '}
                       &{' '}
                       <Link
                         className="text-sm text-blue-600 hover:underline"
                         href="/privacy-policy"
                       >
-                        privacy policy
+                        {t.formatMessage({ id: 'CONTACT.US.PRIVACY_POLICY' })}
                       </Link>
                     </label>
                   </div>
@@ -255,7 +288,7 @@ const CreateContactForm = () => {
             size="lg"
             loading={loading}
           >
-            Create account
+            {t.formatMessage({ id: 'CONTACT.US.SUBMIT' })}
           </ButtonInput>
         </div>
       </form>
