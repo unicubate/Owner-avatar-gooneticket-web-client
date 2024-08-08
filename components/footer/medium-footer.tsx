@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { IoLogoInstagram, IoLogoTiktok, IoLogoYoutube } from 'react-icons/io5';
 import { ImageLogo } from '../ui-setting';
+import { useInputState } from '../hooks';
 
 type NavbarSiteProps = {
   title: string;
@@ -12,9 +13,10 @@ type NavbarSiteProps = {
 };
 
 const MediumFooter = () => {
+  const { t } = useInputState();
   const [navigation] = useState<NavbarSiteProps[]>([
     {
-      title: 'About',
+      title: 'FOOTER.ABOUT',
       description: 'About',
       href: '/about',
     },
@@ -24,12 +26,12 @@ const MediumFooter = () => {
     //   href: '/features',
     // },
     {
-      title: 'Privacy',
+      title: 'FOOTER.PRIVACY_POLICY',
       description: 'Privacy',
       href: '/privacy-policy',
     },
     {
-      title: 'Terms',
+      title: 'FOOTER.TERMS_OF_USE',
       description: 'Terms',
       href: '/terms-condition',
     },
@@ -63,8 +65,7 @@ const MediumFooter = () => {
                     className="text-base font-medium transition-all duration-200 hover:-translate-y-1"
                   >
                     {item?.icon}
-
-                    {item?.title}
+                    {t.formatMessage({ id: item?.title })}
                   </Link>
                 );
               })}
@@ -141,7 +142,8 @@ const MediumFooter = () => {
 
           <div className="mt-4 border-t pt-4 text-center dark:border-gray-600 sm:mt-8 lg:mt-8">
             <p className="text-sm font-normal dark:text-gray-600">
-              © Copyright {new Date().getFullYear()}, All Rights Reserved by{' '}
+              © Copyright {new Date().getFullYear()},{' '}
+              {t.formatMessage({ id: 'FOOTER.COPYRIGHT' })}{' '}
               {process.env.NEXT_PUBLIC_NAME_SITE}
             </p>
           </div>

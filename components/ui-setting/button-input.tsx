@@ -1,5 +1,6 @@
 import { LoadingOutlined } from '@ant-design/icons';
 import { Button, SizeButton, VariantButton } from '../ui/button';
+import { useInputState } from '../hooks';
 
 interface Props {
   asChild?: boolean;
@@ -32,6 +33,8 @@ export const ButtonInput = ({
   onMouseLeave,
   ref,
 }: Props) => {
+  const { t } = useInputState();
+
   return (
     <>
       <Button
@@ -52,7 +55,7 @@ export const ButtonInput = ({
               style={{ fontSize: 20, color: '##1E90FF' }}
               className="size-4 animate-spin"
             />
-            <span className="ml-2">Please wait</span>
+            <span className="ml-2">{t.formatMessage({ id: 'UTIL.WAIT' })}</span>
           </>
         ) : (
           <>

@@ -16,20 +16,13 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { passwordResetUserAPI } from '../../api-site/user';
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required(),
-});
+import { FieldRequiredMessage } from '@/components/ui-setting';
 
 const ForgotPassword = () => {
   const { query } = useRouter();
   const { redirect } = query;
   const {
+    t,
     loading,
     setLoading,
     hasErrors,
@@ -37,6 +30,22 @@ const ForgotPassword = () => {
     hasSuccess,
     setHasSuccess,
   } = useInputState();
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(
+        50,
+        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.EMAIL',
+        }),
+      ),
+  });
   const {
     watch,
     control,
@@ -59,7 +68,7 @@ const ForgotPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Email send successfully',
+        text: t.formatMessage({ id: 'AUTH.FORGOT.SEND.SUCCESSFULLY' }),
       });
       setHasSuccess(true);
     } catch (error: any) {
@@ -77,10 +86,13 @@ const ForgotPassword = () => {
       <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
         <div className="mx-auto flex justify-center">
           <h6 className="mt-3 text-center text-xl font-bold">
-            {`Forgot password?`}
+            {t.formatMessage({ id: 'AUTH.FORGOT.TITLE' })}
           </h6>
         </div>
-        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+        <p className="mt-4 text-center">
+          {t.formatMessage({ id: 'AUTH.FORGOT.DESC' })}
+        </p>
+        <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
             <Alert
               variant="destructive"
@@ -96,7 +108,7 @@ const ForgotPassword = () => {
             <div className="rounded-lg bg-indigo-200 text-center">
               <div className="ml-3 flex-1 md:flex md:items-center md:justify-between">
                 <p className="p-3 text-sm font-medium text-indigo-800">
-                  We sent a link recovery{' '}
+                  {t.formatMessage({ id: 'UTIL.SEND.LINK' })}{' '}
                   <strong className="text-blue-600 underline">
                     {watchEmail}
                   </strong>
@@ -108,10 +120,11 @@ const ForgotPassword = () => {
           <div className="mt-4">
             <TextInput
               control={control}
-              label="Email"
+              label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
               type="text"
+              required
               name="email"
-              placeholder="Email Address"
+              placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
               errors={errors}
             />
           </div>
@@ -124,14 +137,19 @@ const ForgotPassword = () => {
               loading={loading}
               disabled={!isDirty || !isValid}
             >
-              Request Password Reset
+              {t.formatMessage({ id: 'AUTH.FORGOT.SUBMIT' })}
             </ButtonInput>
           </div>
         </form>
 
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
-          <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
-            Already have an account? Log in here
+          <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
+            {' '}
+            {t.formatMessage({ id: 'UTIL.ALREADY_TO' })}{' '}
+            {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+            <span className="font-bold">
+              {t.formatMessage({ id: 'AUTH.LOGIN.HERE' })}
+            </span>
           </p>
         </Link>
       </div>

@@ -2,7 +2,10 @@
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useDecrementTimer, useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
-import { PhoneNumberInput } from '@/components/ui-setting';
+import {
+  FieldRequiredMessage,
+  PhoneNumberInput,
+} from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -22,22 +25,6 @@ import {
   sendCodePhoneUserAPI,
 } from '../../api-site/user';
 
-const schema = yup.object({
-  phone: yup
-    .string()
-    .min(3, 'minimum 3 symbols')
-    .max(50, 'maximum 50 symbols')
-    .required(),
-  password: yup.string().min(8, 'minimum 8 symbols').required(),
-  firstName: yup.string().required('first name is a required field'),
-  lastName: yup.string().required('last name is a required field'),
-  code: yup.string().required(),
-  confirm: yup
-    .boolean()
-    .oneOf([true], 'Please check the box to deactivate your account')
-    .required(),
-});
-
 const Register = () => {
   const defaultTimer = 60;
   const { timer, isRunning, setIsRunning } = useDecrementTimer(defaultTimer);
@@ -48,6 +35,7 @@ const Register = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const {
+    t,
     loading,
     setLoading,
     hasErrors,
@@ -56,6 +44,58 @@ const Register = () => {
     hasSuccess,
     setHasSuccess,
   } = useInputState();
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(
+        50,
+        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.EMAIL',
+        }),
+      ),
+    password: yup
+      .string()
+      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.PASSWORD',
+        }),
+      ),
+    firstName: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'INPUT.FIRSTNAME',
+      }),
+    ),
+    lastName: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'INPUT.LASTNAME',
+      }),
+    ),
+    code: yup.string().required(
+      FieldRequiredMessage({
+        id: 'AUTH.VALIDATION.REQUIRED',
+        name: 'INPUT.CODE',
+      }),
+    ),
+    confirm: yup
+      .boolean()
+      .oneOf([true], t.formatMessage({ id: 'AUTH.VALIDATION.BOX.CONFIRM' }))
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.CONFIRM',
+        }),
+      ),
+  });
   const {
     watch,
     control,
@@ -138,11 +178,11 @@ const Register = () => {
       <div className="m-auto mt-10 w-full max-w-lg rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
         <div className="mx-auto mt-4 flex justify-center">
           <h6 className="text-center text-xl font-bold">
-            {`Sign up. It's free!`}
+            {t.formatMessage({ id: 'AUTH.REGISTER.SUBTITLE' })}
           </h6>
         </div>
 
-        <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
           {hasErrors && (
             <Alert
               variant="destructive"
@@ -158,7 +198,7 @@ const Register = () => {
             <div className="rounded-lg bg-indigo-200">
               <div className="ml-3 flex-1 md:flex md:items-center md:justify-between">
                 <p className="p-3 text-sm font-medium text-indigo-800">
-                  We sent a verification code to{' '}
+                  {t.formatMessage({ id: 'UTIL.CONFIRM.SEND.CODE' })}{' '}
                   <strong className="text-blue-600 underline">
                     {watchPhone}
                   </strong>
@@ -181,7 +221,7 @@ const Register = () => {
                   href={`/register${redirect ? `?redirect=${redirect}` : ''}`}
                 >
                   <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                    Sign up with email
+                    {t.formatMessage({ id: 'AUTH.REGISTER.EMAIL' })}
                   </p>
                 </Link>
               }
@@ -191,9 +231,9 @@ const Register = () => {
           <div className="mt-4">
             <TextPasswordInput
               control={control}
-              label="Password"
+              label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
               name="password"
-              placeholder="Password"
+              placeholder={t.formatMessage({ id: 'PLACEHOLDER.PASSWORD' })}
               errors={errors}
               required
             />
@@ -206,7 +246,7 @@ const Register = () => {
                   <TextInput
                     control={control}
                     name="code"
-                    placeholder="Enter 6-digit code"
+                    placeholder={t.formatMessage({ id: 'UTIL.DIGIT.CODE' })}
                     errors={errors}
                     required
                     type="number"
@@ -223,7 +263,8 @@ const Register = () => {
                     onClick={() => resendCodeItem()}
                     disabled={!watchPhone || isRunning ? true : false}
                   >
-                    {timer} Resend code
+                    {timer}{' '}
+                    {t.formatMessage({ id: 'AUTH.GENERAL.RESEND_CODE' })}
                   </ButtonInput>
                 </div>
               </div>
@@ -231,10 +272,12 @@ const Register = () => {
                 <div className="mt-2">
                   <TextInput
                     control={control}
-                    label="First name"
+                    label={t.formatMessage({ id: 'INPUT.FIRSTNAME' })}
                     type="text"
                     name="firstName"
-                    placeholder="First name"
+                    placeholder={t.formatMessage({
+                      id: 'PLACEHOLDER.FIRSTNAME',
+                    })}
                     errors={errors}
                     required
                   />
@@ -243,10 +286,12 @@ const Register = () => {
                 <div className="mt-2">
                   <TextInput
                     control={control}
-                    label="Last name"
+                    label={t.formatMessage({ id: 'INPUT.LASTNAME' })}
                     type="text"
                     name="lastName"
-                    placeholder="Last name"
+                    placeholder={t.formatMessage({
+                      id: 'PLACEHOLDER.LASTNAME',
+                    })}
                     errors={errors}
                     required
                   />
@@ -268,19 +313,23 @@ const Register = () => {
                             //className="text-sm font-bold text-gray-700"
                             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                           >
-                            I accept the{' '}
+                            {t.formatMessage({ id: 'CONTACT.US.ACCEPT_TERMS' })}{' '}
                             <Link
                               className="text-sm text-blue-600 hover:underline"
                               href="/terms-condition"
                             >
-                              terms
+                              {t.formatMessage({
+                                id: 'CONTACT.US.TERMS_OF_USE',
+                              })}
                             </Link>{' '}
                             &{' '}
                             <Link
                               className="text-sm text-blue-600 hover:underline"
                               href="/privacy-policy"
                             >
-                              privacy policy
+                              {t.formatMessage({
+                                id: 'CONTACT.US.PRIVACY_POLICY',
+                              })}
                             </Link>
                           </label>
                         </div>
@@ -303,7 +352,7 @@ const Register = () => {
                   loading={loading}
                   disabled={watchCode.length !== 6 && true}
                 >
-                  Create account
+                  {t.formatMessage({ id: 'AUTH.REGISTER.SUBMIT' })}
                 </ButtonInput>
               </div>
             </>
@@ -317,7 +366,7 @@ const Register = () => {
                 disabled={!watchPhone.length || !watchPassword.length}
                 onClick={() => checkEmailOrPhoneItem()}
               >
-                Continue
+                {t.formatMessage({ id: 'AUTH.GENERAL.NEXT_BUTTON' })}
               </ButtonInput>
             </div>
           )}
@@ -326,7 +375,7 @@ const Register = () => {
         <div className="my-4 flex items-center justify-between">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
           <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
-            or login with Social Media
+            {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
           </p>
 
           <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
@@ -337,9 +386,13 @@ const Register = () => {
         </div>
 
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
-          <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:text-blue-600 hover:underline">
+          <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
             {' '}
-            Already have an account? Log in here
+            {t.formatMessage({ id: 'UTIL.ALREADY_TO' })}{' '}
+            {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+            <span className="font-bold">
+              {t.formatMessage({ id: 'AUTH.LOGIN.HERE' })}
+            </span>
           </p>
         </Link>
       </div>

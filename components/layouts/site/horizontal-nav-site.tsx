@@ -6,6 +6,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { NavbarSiteProps } from '.';
 import { Button } from '../../ui/button';
+import { useInputState } from '@/components/hooks';
+import { FiUserPlus } from 'react-icons/fi';
+import { CiLogin } from 'react-icons/ci';
 
 interface Props {
   user?: any;
@@ -13,9 +16,10 @@ interface Props {
 }
 
 const HorizontalNavSite = ({ user, showDrawer }: Props) => {
+  const { t } = useInputState();
   const [navigation] = useState<NavbarSiteProps[]>([
     {
-      title: 'Contact',
+      title: 'AUTH.GENERAL.CONTACT',
       href: '/contact-us',
     },
   ]);
@@ -82,12 +86,11 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     <Link
                       key={index}
                       href={`${item?.href}`}
-                      title={item?.title}
+                      title={t.formatMessage({ id: item?.title })}
                       className={`whitespace-nowrap border-transparent py-4 text-sm font-medium transition-all duration-200 hover:text-indigo-600`}
                     >
                       {item?.icon}
-
-                      {item?.title}
+                      {t.formatMessage({ id: item?.title })}
                     </Link>
                   );
                 })}
@@ -98,26 +101,28 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
-                  variant="ghost"
+                  variant="outline"
+                  size="lg"
+                  icon={<CiLogin />}
                   onClick={() => {
                     push(`${user?.id ? `/orders` : `/login`}`);
                   }}
                 >
-                  Log In
+                  {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
                 </ButtonInput>
               </div>
               <div className="relative">
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="sm"
                   variant="primary"
+                  size="lg"
+                  icon={<FiUserPlus />}
                   onClick={() => {
                     push(`${user?.id ? `/orders` : `register`}`);
                   }}
                 >
-                  Sign Up
+                  {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
                 </ButtonInput>
               </div>
             </div>

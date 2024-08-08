@@ -67,7 +67,7 @@ const LangToggle = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-auto dark:border-gray-800">
           <DropdownMenuGroup>
-            {languages.map((l, i) => (
+            {languages.filter(lang => lang.name !== currentLanguage?.name).map((l, i) => (
               <DropdownMenuItem
                 key={i}
                 onClick={() => {

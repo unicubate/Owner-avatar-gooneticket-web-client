@@ -2,7 +2,7 @@
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
-import { ButtonInput } from '@/components/ui-setting';
+import { ButtonInput, FieldRequiredMessage } from '@/components/ui-setting';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { PublicComponent } from '@/components/util/public-component';
@@ -19,21 +19,31 @@ import {
   loginUserAPI,
 } from '../../api-site/user';
 
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('wrong email format')
-    .min(3, 'minimum 3 symbols')
-    .max(50, 'maximum 50 symbols')
-    .required(),
-  password: yup.string().min(8, 'minimum 8 symbols').required(),
-});
-
 const Login = () => {
   const { query, push } = useRouter();
   const { redirect } = query;
   const [isSuccessCheckEmail, setIsSuccessCheckEmail] = useState(false);
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { t, loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(
+        50,
+        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.EMAIL',
+        }),
+      ),
+    password: yup
+      .string()
+      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .required(),
+  });
   const {
     watch,
     control,
@@ -97,10 +107,12 @@ const Login = () => {
       <LayoutAuth title="Login">
         <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
           <div className="mx-auto mt-4 flex justify-center">
-            <h6 className="text-center text-xl font-bold">{`Log in`}</h6>
+            <h6 className="text-center text-xl font-bold">
+              {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+            </h6>
           </div>
 
-          <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+          <form className="mt-10" onSubmit={handleSubmit(onSubmit)}>
             {hasErrors && (
               <Alert
                 variant="destructive"
@@ -115,18 +127,18 @@ const Login = () => {
             <div className="mb-4">
               <TextInput
                 control={control}
-                label="Email"
+                label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
                 type="email"
                 name="email"
                 inputMode="email"
-                placeholder="Email address"
+                placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
                 errors={errors}
                 labelHelp={
                   <Link
                     href={`/login/phone${redirect ? `?redirect=${redirect}` : ''}`}
                   >
                     <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                      Log in with phone
+                      {t.formatMessage({ id: 'AUTH.LOGIN.PHONE' })}
                     </p>
                   </Link>
                 }
@@ -138,9 +150,11 @@ const Login = () => {
                 <div className="mb-4">
                   <TextPasswordInput
                     control={control}
-                    label="Password"
+                    label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
                     name="password"
-                    placeholder="Password"
+                    placeholder={t.formatMessage({
+                      id: 'PLACEHOLDER.PASSWORD',
+                    })}
                     errors={errors}
                   />
                   <div className="flex items-center justify-between">
@@ -152,7 +166,7 @@ const Login = () => {
                       className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                       href={`/forgot-password${redirect ? `?redirect=${redirect}` : ''}`}
                     >
-                      Forgot password?
+                      {t.formatMessage({ id: 'AUTH.FORGOT.TITLE' })}
                     </Link>
                   </div>
                 </div>
@@ -165,7 +179,7 @@ const Login = () => {
                     loading={loading}
                     disabled={!isDirty || !isValid}
                   >
-                    Log In
+                    {t.formatMessage({ id: 'AUTH.GENERAL.SUBMIT_BUTTON' })}
                   </ButtonInput>
                 </div>
               </>
@@ -179,7 +193,7 @@ const Login = () => {
                   disabled={!watchEmail.length}
                   onClick={() => checkEmailOrPhoneItem()}
                 >
-                  Continue with email
+                  {t.formatMessage({ id: 'AUTH.LOGIN.CONTINUE.EMAIL' })}
                 </ButtonInput>
               </div>
             )}
@@ -188,7 +202,7 @@ const Login = () => {
           <div className="my-4 flex items-center justify-between">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
             <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
-              or login with Social Media
+              {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
             </p>
 
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
@@ -199,9 +213,13 @@ const Login = () => {
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-            <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
+            <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
               {' '}
-              New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
+              {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
+              {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+              <span className="font-bold">
+                {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
+              </span>
             </p>
           </Link>
         </div>

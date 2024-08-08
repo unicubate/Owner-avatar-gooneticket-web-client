@@ -7,28 +7,43 @@ import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
+import { ButtonInput, FieldRequiredMessage } from '../ui-setting';
 import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 import { GoogleAuthLogin } from './google-auth-login';
-
-const schema = yup.object({
-  email: yup
-    .string()
-    .email('Wrong email format')
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required(),
-  password: yup.string().min(8, 'Minimum 8 symbols').required(),
-});
 
 const LoginModal: React.FC<{
   isOpen: boolean;
   setIsOpen: any;
 }> = ({ isOpen, setIsOpen }) => {
-  const { loading, setLoading, hasErrors, setHasErrors, linkHref } =
+  const { t, loading, setLoading, hasErrors, setHasErrors, linkHref } =
     useInputState();
   const redirect = linkHref;
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(
+        50,
+        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
+      )
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.EMAIL',
+        }),
+      ),
+    password: yup
+      .string()
+      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .required(
+        FieldRequiredMessage({
+          id: 'AUTH.VALIDATION.REQUIRED',
+          name: 'AUTH.INPUT.PASSWORD',
+        }),
+      ),
+  });
   const {
     control,
     handleSubmit,
@@ -76,7 +91,9 @@ const LoginModal: React.FC<{
             </button>
 
             <div className="mx-auto flex justify-center">
-              <h6 className="mt-3 text-center text-xl font-bold">{`Log in`}</h6>
+              <h6 className="mt-3 text-center text-xl font-bold">
+                {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+              </h6>
             </div>
 
             <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
@@ -94,10 +111,10 @@ const LoginModal: React.FC<{
               <div className="mb-4">
                 <TextInput
                   control={control}
-                  label="Email"
+                  label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
                   type="email"
                   name="email"
-                  placeholder="Email address"
+                  placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
                   errors={errors}
                 />
               </div>
@@ -105,9 +122,11 @@ const LoginModal: React.FC<{
               <div className="mb-4">
                 <TextPasswordInput
                   control={control}
-                  label="Password"
+                  label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
                   name="password"
-                  placeholder="Password"
+                  placeholder={t.formatMessage({
+                    id: 'PLACEHOLDER.PASSWORD',
+                  })}
                   errors={errors}
                 />
                 <div className="flex items-center justify-between">
@@ -119,7 +138,7 @@ const LoginModal: React.FC<{
                     className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
                     href={`/forgot-password${redirect ? `?redirect=${redirect}` : ''}`}
                   >
-                    Forgot password?
+                    {t.formatMessage({ id: 'AUTH.FORGOT.TITLE' })}
                   </Link>
                 </div>
               </div>
@@ -131,14 +150,14 @@ const LoginModal: React.FC<{
                   variant="primary"
                   loading={loading}
                 >
-                  Log In
+                  {t.formatMessage({ id: 'AUTH.GENERAL.SUBMIT_BUTTON' })}
                 </ButtonInput>
               </div>
             </form>
             <div className="my-4 flex items-center justify-between">
               <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
               <p className="text-center text-xs uppercase dark:dark:text-gray-400 dark:text-gray-500">
-                or login with Social Media
+                {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
               </p>
 
               <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
@@ -149,9 +168,13 @@ const LoginModal: React.FC<{
             </div>
 
             <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-              <p className="mt-8 cursor-pointer text-center text-xs font-bold text-gray-600 hover:underline dark:hover:text-blue-600">
+              <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
                 {' '}
-                New to {process.env.NEXT_PUBLIC_NAME_SITE}? Sign up here
+                {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
+                {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+                <span className="font-bold">
+                  {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
+                </span>
               </p>
             </Link>
           </div>
