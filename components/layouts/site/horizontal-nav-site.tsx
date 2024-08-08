@@ -1,14 +1,14 @@
+import { useInputState } from '@/components/hooks';
 import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { CiLogin } from 'react-icons/ci';
+import { FiUserPlus } from 'react-icons/fi';
 import { NavbarSiteProps } from '.';
 import { Button } from '../../ui/button';
-import { useInputState } from '@/components/hooks';
-import { FiUserPlus } from 'react-icons/fi';
-import { CiLogin } from 'react-icons/ci';
 
 interface Props {
   user?: any;
@@ -102,7 +102,6 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   type="button"
                   className="w-full"
                   variant="outline"
-                  size="lg"
                   icon={<CiLogin />}
                   onClick={() => {
                     push(`${user?.id ? `/orders` : `/login`}`);
@@ -116,7 +115,6 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   type="button"
                   className="w-full"
                   variant="primary"
-                  size="lg"
                   icon={<FiUserPlus />}
                   onClick={() => {
                     push(`${user?.id ? `/orders` : `register`}`);
