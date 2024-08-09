@@ -1,10 +1,9 @@
 import { useInputState } from '@/components/hooks';
 import { ButtonInput, HeaderSite, ImageLogo } from '@/components/ui-setting';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
+import { LogInIcon, UserPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { CiLogin } from 'react-icons/ci';
-import { FiUserPlus } from 'react-icons/fi';
 
 interface IProps {
   title: string;
@@ -54,30 +53,34 @@ const LayoutAuth = ({ children, title }: IProps) => {
                 <LangToggle />
               </div>
               <div className="relative">
-                <ButtonInput
-                  type="button"
-                  className="w-full"
-                  icon={<CiLogin />}
-                  variant="outline"
-                  onClick={() => {
-                    push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
-                  }}
-                >
-                  {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
-                </ButtonInput>
+                <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    variant="outline"
+                    icon={<LogInIcon className="size-4" />}
+                  >
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+                    </span>
+                  </ButtonInput>
+                </Link>
               </div>
               <div className="relative">
-                <ButtonInput
-                  type="button"
-                  className="w-full"
-                  icon={<FiUserPlus />}
-                  variant="info"
-                  onClick={() => {
-                    push(`/register${redirect ? `?redirect=${redirect}` : ''}`);
-                  }}
+                <Link
+                  href={`/register${redirect ? `?redirect=${redirect}` : ''}`}
                 >
-                  {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
-                </ButtonInput>
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    variant="primary"
+                    icon={<UserPlusIcon className="size-4" />}
+                  >
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
+                    </span>
+                  </ButtonInput>
+                </Link>
               </div>
             </div>
           </div>
