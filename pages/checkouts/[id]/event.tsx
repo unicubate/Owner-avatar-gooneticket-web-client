@@ -160,11 +160,11 @@ const CheckoutEvent = () => {
                 <EventCheckoutSkeleton />
               ) : item?.id ? (
                 <Fragment>
-                  <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
+                  <div className="g:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       <div
                         key={item?.id}
-                        className="my-8 overflow-hidden rounded-lg bg-white dark:bg-background"
+                        className="my-8 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background"
                       >
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
@@ -498,7 +498,7 @@ const CheckoutEvent = () => {
                         <span className="font-bold">{timerRemaining}</span>
                       </ButtonInput>
                     </div>
-                    <div className="mt-4 overflow-hidden rounded-lg bg-white dark:bg-background">
+                    <div className="mt-4 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
@@ -578,7 +578,7 @@ const CheckoutEvent = () => {
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.value ? (
-                      <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-background">
+                      <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
                           <div className="mt-4 space-y-4">

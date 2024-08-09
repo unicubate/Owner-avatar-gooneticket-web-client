@@ -41,7 +41,7 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
 
       <div className="flex flex-1 dark:bg-black/15">
         <div
-          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#1c1b22]`}
+          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-background`}
         >
           <main>{children}</main>
         </div>

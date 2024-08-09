@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { IoLogoInstagram, IoLogoTiktok, IoLogoYoutube } from 'react-icons/io5';
-import { ImageLogo } from '../ui-setting';
 import { useInputState } from '../hooks';
+import { ImageLogo } from '../ui-setting';
 
 type NavbarSiteProps = {
   title: string;
@@ -140,7 +140,7 @@ const MediumFooter = () => {
             </ul>
           </div>
 
-          <div className="mt-4 border-t pt-4 text-center dark:border-gray-600 sm:mt-8 lg:mt-8">
+          <div className="mt-4 border-t border-input pt-4 text-center sm:mt-8 lg:mt-8">
             <p className="text-sm font-normal dark:text-gray-600">
               © Copyright {new Date().getFullYear()},{' '}
               {t.formatMessage({ id: 'FOOTER.COPYRIGHT' })}{' '}

@@ -1,12 +1,11 @@
 import { useInputState } from '@/components/hooks';
 import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
+import { LogInIcon, UserPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { CiLogin } from 'react-icons/ci';
-import { FiUserPlus } from 'react-icons/fi';
 import { NavbarSiteProps } from '.';
 import { Button } from '../../ui/button';
 
@@ -24,12 +23,11 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
     },
   ]);
   const { query, push } = useRouter();
-  const { redirect } = query;
   const pathname = usePathname();
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-b bg-white dark:border-input dark:bg-background">
+      <header className="sticky top-0 z-40 border-b border-input bg-white transition duration-200 ease-in-out dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
@@ -98,30 +96,32 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               <ThemeToggle />
               <LangToggle />
               <div className="relative">
-                <ButtonInput
-                  type="button"
-                  className="w-full"
-                  variant="outline"
-                  icon={<CiLogin />}
-                  onClick={() => {
-                    push(`${user?.id ? `/orders` : `/login`}`);
-                  }}
-                >
-                  {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
-                </ButtonInput>
+                <Link href={`${user?.id ? `/orders` : `/login`}`}>
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    variant="outline"
+                    icon={<LogInIcon className="size-4" />}
+                  >
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+                    </span>
+                  </ButtonInput>
+                </Link>
               </div>
               <div className="relative">
-                <ButtonInput
-                  type="button"
-                  className="w-full"
-                  variant="primary"
-                  icon={<FiUserPlus />}
-                  onClick={() => {
-                    push(`${user?.id ? `/orders` : `register`}`);
-                  }}
-                >
-                  {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
-                </ButtonInput>
+                <Link href={`${user?.id ? `/orders` : `register`}`}>
+                  <ButtonInput
+                    type="button"
+                    className="w-full"
+                    variant="primary"
+                    icon={<UserPlusIcon className="size-4" />}
+                  >
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
+                    </span>
+                  </ButtonInput>
+                </Link>
               </div>
             </div>
           </div>

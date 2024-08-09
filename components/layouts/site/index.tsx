@@ -50,7 +50,10 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
         </SheetContent>
       </Sheet>
       {/*End Fix Drawer */}
-      <main>{children}</main>
+
+      <div className={`flex min-h-screen flex-1 flex-col dark:bg-background`}>
+        <main>{children}</main>
+      </div>
 
       {/* </div> */}
     </>
