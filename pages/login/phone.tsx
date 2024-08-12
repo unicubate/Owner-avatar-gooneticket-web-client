@@ -64,9 +64,9 @@ const LoginPhone = () => {
 
     try {
       const { data: user } = await loginPhoneUserAPI({ code, phone });
+      window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
       setHasErrors(false);
       setLoading(false);
-      window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
     } catch (error: any) {
       setLoading(false);
       setHasErrors(true);

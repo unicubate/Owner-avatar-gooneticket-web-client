@@ -2,6 +2,7 @@
 import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useDecrementTimer, useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
+import { FieldRequiredMessage } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -20,7 +21,6 @@ import {
   registerUserAPI,
   sendCodeEmailUserAPI,
 } from '../../api-site/user';
-import { FieldRequiredMessage } from '@/components/ui-setting';
 
 const Register = () => {
   const defaultTimer = 60;
@@ -117,8 +117,8 @@ const Register = () => {
         ...payload,
         status: 'CLIENT',
       });
-      setLoading(false);
       window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
+      setLoading(false);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

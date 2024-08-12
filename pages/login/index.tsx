@@ -64,14 +64,14 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      setHasErrors(false);
-      setLoading(false);
       if (user?.emailConfirmedAt) {
         window.location.href =
           user?.status === 'CREATOR'
             ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
             : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
       }
+      setHasErrors(false);
+      setLoading(false);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
