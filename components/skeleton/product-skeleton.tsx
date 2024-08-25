@@ -4,7 +4,7 @@ const ProductSkeleton = ({ index }: { index: number }) => {
   return (
     <div
       key={index}
-      className="mt-8 overflow-hidden rounded-lg bg-white dark:bg-background"
+      className="mt-8 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background"
     >
       <div className="p-8 sm:px-8 sm:py-7">
         <div className="mx-auto mt-4 justify-center text-center">
@@ -13,14 +13,9 @@ const ProductSkeleton = ({ index }: { index: number }) => {
         <div className="mx-auto mt-4 justify-center text-center">
           <Skeleton className="h-4 w-full" />
         </div>
-        <div className="mt-6 flex items-center">
-          <Skeleton className="h-10 w-24 rounded-md" />
-          <Skeleton className="ml-auto h-10 w-40 rounded-md" />
-        </div>
         <div className="mt-6 space-y-2">
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-10 w-full" />
+          <Skeleton className="h-10 w-full" />
         </div>
 
         <div className="mt-6 flex items-center">
