@@ -90,7 +90,7 @@ const OrderItemsViewIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-800">
+                    <DropdownMenuContent className="w-auto dark:border-gray-900">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -125,7 +125,7 @@ const OrderItemsViewIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-800">
+                    <DropdownMenuContent className="w-auto dark:border-gray-900">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {

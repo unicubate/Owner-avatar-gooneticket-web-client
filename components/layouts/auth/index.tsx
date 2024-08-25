@@ -19,7 +19,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
     <>
       <HeaderSite title={title} />
 
-      <header className="sticky border-b border-gray-100 dark:border-gray-800">
+      <header className="sticky border-b border-gray-100 dark:border-gray-900 dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="flex xl:ml-0">
@@ -58,7 +58,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                     type="button"
                     className="w-full"
                     variant="outline"
-                    icon={<LogInIcon className="size-4" />}
+                    icon={<LogInIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                       {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
@@ -74,7 +74,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                     type="button"
                     className="w-full"
                     variant="primary"
-                    icon={<UserPlusIcon className="size-4" />}
+                    icon={<UserPlusIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                       {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
@@ -87,7 +87,9 @@ const LayoutAuth = ({ children, title }: IProps) => {
         </div>
       </header>
 
-      <main>{children}</main>
+      <div className={`flex min-h-screen flex-1 flex-col dark:bg-background`}>
+        <main>{children}</main>
+      </div>
     </>
   );
 };

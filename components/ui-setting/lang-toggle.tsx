@@ -65,25 +65,27 @@ const LangToggle = () => {
             <span className="sr-only">Toggle lang</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-auto dark:border-gray-800">
+        <DropdownMenuContent className="w-auto dark:border-gray-900">
           <DropdownMenuGroup>
-            {languages.filter(lang => lang.name !== currentLanguage?.name).map((l, i) => (
-              <DropdownMenuItem
-                key={i}
-                onClick={() => {
-                  setLanguage(l?.lang);
-                }}
-              >
-                <Image
-                  width={15}
-                  height={15}
-                  className="mr-2"
-                  src={String(l?.flag)}
-                  alt={String(l?.name)}
-                />
-                <span className="cursor-pointer"> {l?.name}</span>
-              </DropdownMenuItem>
-            ))}
+            {languages
+              .filter((lang) => lang.name !== currentLanguage?.name)
+              .map((l, i) => (
+                <DropdownMenuItem
+                  key={i}
+                  onClick={() => {
+                    setLanguage(l?.lang);
+                  }}
+                >
+                  <Image
+                    width={15}
+                    height={15}
+                    className="mr-2"
+                    src={String(l?.flag)}
+                    alt={String(l?.name)}
+                  />
+                  <span className="cursor-pointer"> {l?.name}</span>
+                </DropdownMenuItem>
+              ))}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

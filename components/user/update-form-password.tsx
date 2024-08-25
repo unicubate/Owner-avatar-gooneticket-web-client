@@ -55,7 +55,7 @@ const UpdateFormPassword = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-background">
+        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-900 dark:bg-background">
           <div className="px-4 py-5">
             <h2 className="text-base font-bold"> Change password </h2>
 

@@ -55,7 +55,7 @@ const SelectInput = ({
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
-              <SelectContent className={cn('dark:border-gray-800', className)}>
+              <SelectContent className={cn('dark:border-gray-900', className)}>
                 <SelectGroup>
                   {dataItem?.length > 0 ? (
                     dataItem?.map((item: any, index: number) => (

@@ -105,7 +105,7 @@ const Login = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 p-6 shadow-md dark:border-gray-900 md:mt-16">
           <div className="mx-auto mt-4 flex justify-center">
             <h6 className="text-center text-xl font-bold">
               {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}

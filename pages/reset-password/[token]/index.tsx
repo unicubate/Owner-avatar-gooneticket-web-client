@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
+import { FieldRequiredMessage } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -15,7 +16,6 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { resetPasswordAPI } from '../../../api-site/user';
-import { FieldRequiredMessage } from '@/components/ui-setting';
 
 const ResetPassword = () => {
   const { query, push } = useRouter();
@@ -78,7 +78,7 @@ const ResetPassword = () => {
 
   return (
     <LayoutAuth title="Reset password">
-      <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
+      <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 p-6 shadow-md dark:border-gray-900 md:mt-16">
         {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"

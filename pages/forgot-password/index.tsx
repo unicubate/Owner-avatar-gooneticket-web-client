@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
+import { FieldRequiredMessage } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -16,7 +17,6 @@ import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { passwordResetUserAPI } from '../../api-site/user';
-import { FieldRequiredMessage } from '@/components/ui-setting';
 
 const ForgotPassword = () => {
   const { query } = useRouter();
@@ -83,9 +83,9 @@ const ForgotPassword = () => {
 
   return (
     <LayoutAuth title="Forgot password">
-      <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 py-12 shadow-md dark:bg-black md:mt-16">
+      <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 p-6 shadow-md dark:border-gray-900 md:mt-16">
         <div className="mx-auto flex justify-center">
-          <h6 className="mt-3 text-center text-xl font-bold">
+          <h6 className="text-center text-xl font-bold">
             {t.formatMessage({ id: 'AUTH.FORGOT.TITLE' })}
           </h6>
         </div>

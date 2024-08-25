@@ -55,7 +55,7 @@ const SelectSearchInput: React.FC<Props> = ({
             }
             {...field}
             disabled={disabled}
-            //className={`dark:border-gray-800 dark:bg-background dark:text-white  dark:placeholder:text-gray-500`}
+            //className={`dark:border-gray-900 dark:bg-background dark:text-white  dark:placeholder:text-gray-500`}
           >
             <>
               {dataItem?.length > 0

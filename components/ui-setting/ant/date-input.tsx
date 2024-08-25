@@ -38,7 +38,7 @@ const DateInput: React.FC<Props> = ({
             style={{ width: '100%' }}
             id={name}
             className={cn(
-              `border border-input dark:border-gray-800 dark:bg-background dark:text-white dark:placeholder:text-gray-500`,
+              `border border-input dark:border-gray-900 dark:bg-background dark:text-white dark:placeholder:text-gray-500`,
             )}
             placeholder={placeholder}
             value={dayjs(field.value ?? new Date())}

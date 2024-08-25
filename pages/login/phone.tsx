@@ -121,7 +121,8 @@ const LoginPhone = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg p-6 shadow-md dark:bg-black md:mt-16">
+        <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 p-6 shadow-md dark:border-gray-900 md:mt-16">
+          {' '}
           <div className="mx-auto mt-4 flex justify-center">
             <h6 className="text-center text-xl font-bold">
               {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
@@ -230,7 +231,6 @@ const LoginPhone = () => {
               </div>
             )}
           </form>
-
           <div className="my-4 flex items-center justify-between">
             <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
             <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
@@ -239,11 +239,9 @@ const LoginPhone = () => {
 
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
           </div>
-
           <div className="mx-auto mt-4 max-w-max">
             <GoogleAuthLogin />
           </div>
-
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
             <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
               {' '}

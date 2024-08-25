@@ -85,7 +85,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-800">
+                    <DropdownMenuContent className="w-auto dark:border-gray-900">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -120,7 +120,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-800">
+                    <DropdownMenuContent className="w-auto dark:border-gray-900">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -163,7 +163,7 @@ const OrdersIndex = () => {
                 </div>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-input dark:bg-background">
+              <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-gray-900 dark:bg-background">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
                     <p className="text-lg font-bold">
@@ -179,7 +179,7 @@ const OrdersIndex = () => {
                 </div>
 
                 <table className="mt-4 min-w-full lg:divide-y">
-                  <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
+                  <tbody className="divide-y divide-gray-200 dark:divide-gray-900">
                     {user?.organizationId ? (
                       isLoadingOrders ? (
                         <LoadingFile />

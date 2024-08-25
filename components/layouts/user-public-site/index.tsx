@@ -31,7 +31,7 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
         <SheetTrigger asChild>
           {/* <Button variant="outline">Open</Button> */}
         </SheetTrigger>
-        <SheetContent className="dark:border-gray-800 dark:bg-background">
+        <SheetContent className="dark:border-gray-900 dark:bg-background">
           <div className="flex flex-col overflow-y-auto pt-5">
             <VerticalNavUserPublicSite user={user} />
           </div>

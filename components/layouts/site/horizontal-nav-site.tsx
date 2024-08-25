@@ -239,7 +239,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
         </div>
       </header> */}
 
-      <header className="sticky top-0 z-50 w-full border-b border-input bg-white  backdrop-blur duration-200 ease-in-out dark:bg-background">
+      <header className="sticky top-0 z-50 w-full border-b border-gray-100 bg-white backdrop-blur  duration-200 ease-in-out dark:border-gray-900 dark:bg-background">
         {/* sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 */}
         {/* <div className="mx-auto max-w-7xl px-5"> */}
         <div className="container mx-auto h-14 max-w-screen-2xl items-center">
@@ -315,7 +315,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     type="button"
                     className="w-full"
                     variant="outline"
-                    icon={<LogInIcon className="size-4" />}
+                    icon={<LogInIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                       {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
@@ -329,7 +329,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     type="button"
                     className="w-full"
                     variant="primary"
-                    icon={<UserPlusIcon className="size-4" />}
+                    icon={<UserPlusIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
                       {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}

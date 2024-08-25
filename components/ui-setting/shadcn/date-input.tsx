@@ -61,7 +61,7 @@ const DateInput = ({
               </Button>
             </PopoverTrigger>
             <PopoverContent
-              className="w-auto p-0 dark:border-gray-800"
+              className="w-auto p-0 dark:border-gray-900"
               align="start"
             >
               <Calendar

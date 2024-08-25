@@ -45,10 +45,6 @@ const HeaderSite = ({ title, metas }: IProps) => {
       />
       <meta property="og:type" key="og:type" content="website" />
       {metas}
-      {/* <meta
-          name="google-site-verification"
-          content="sIlAGs48RulR4DdP95YSWNKZIEtCqQmRjzn-Zq-CcD0"
-        /> */}
     </Head>
   );
 };
