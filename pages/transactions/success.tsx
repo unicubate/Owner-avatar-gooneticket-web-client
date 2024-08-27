@@ -1,4 +1,5 @@
-import { useRedirectAfterSomeSeconds } from '@/components/hooks';
+import { CreateOnPaymentPI } from '@/api-site/payment';
+import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { type ISourceOptions } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
@@ -8,16 +9,52 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
 const TransactionSuccess = () => {
+  const { setLoading, setHasErrors } = useInputState();
   const { query, push, back } = useRouter();
-  const token = String(query.token);
-  const { timerRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
+  const { type, token } = query;
+
+  //const { timerRemaining } = useRedirectAfterSomeSeconds('/orders', 2);
 
   // this should be run only once per application lifetime
+  const { mutateAsync } = CreateOnPaymentPI({
+    onSuccess: () => {
+      setHasErrors(false);
+      setLoading(false);
+    },
+    onError: (error?: any) => {
+      setHasErrors(true);
+      setHasErrors(error.response.data.message);
+    },
+  });
+
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    });
-  }, []);
+    const loadItem = async () => {
+      if (token && type === 'stripe') {
+        setLoading(true);
+        setHasErrors(undefined);
+        try {
+          const { data: session } = await mutateAsync({
+            data: { token },
+            paymentModel: 'STRIPE-CONFIRM-CHECKOUT-SESSION-EVENT',
+          });
+          setHasErrors(false);
+          setLoading(false);
+          if (session?.id) {
+            window.location.href = `${session?.url}`;
+          }
+        } catch (error: any) {
+          setHasErrors(true);
+          setLoading(false);
+          setHasErrors(error.response.data.message);
+        }
+      }
+      initParticlesEngine(async (engine) => {
+        await loadSlim(engine);
+      });
+    };
+
+    loadItem();
+  }, [type, token, mutateAsync, setLoading, setHasErrors]);
 
   const options: ISourceOptions = useMemo(
     () => ({
@@ -138,7 +175,7 @@ const TransactionSuccess = () => {
               </h3>
               <p className="my-2 text-gray-600">
                 Thank you for completing your secure online payment redirecting
-                to orders in {timerRemaining}
+                {/* to orders in {timerRemaining} */}
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>
               <div className="mt-4 flex items-center space-x-4">

@@ -52,7 +52,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       amount: {
         country: amount?.country,
         taxes: amount?.taxes,
-        ticket: amount?.ticket,
+        ticketId: amount?.ticketId,
         quantity: amount?.quantity,
         payer: {
           amount: amountPalpal,

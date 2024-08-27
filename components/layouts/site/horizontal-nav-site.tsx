@@ -318,7 +318,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     icon={<LogInIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+                      {t.formatMessage({ id: 'MENU.REGISTER' })}
                     </span>
                   </ButtonInput>
                 </Link>
@@ -332,7 +332,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     icon={<UserPlusIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
+                      {t.formatMessage({ id: 'MENU.LOGIN' })}
                     </span>
                   </ButtonInput>
                 </Link>

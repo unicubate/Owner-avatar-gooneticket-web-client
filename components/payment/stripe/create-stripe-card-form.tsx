@@ -22,7 +22,8 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   const { push } = useRouter();
   const stripe = useStripe();
 
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { loading, linkHref, setLoading, hasErrors, setHasErrors } =
+    useInputState();
   const [isSaveCard, setIsSaveCard] = useState(false);
   const [cardstate, setCardState] = useState({
     fullName: '',
@@ -74,6 +75,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
       },
       ...data,
       type: 'CARD',
+      cancelUrl: linkHref,
       reference: newReference,
     };
     setLoading(true);
@@ -86,7 +88,9 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
       setHasErrors(false);
       setLoading(false);
 
-      push(`/transactions/success?token=${newReference}`);
+      //const redirect = await stripeKeyPromise.redirectToCheckout({ sessionId: '' });
+
+      //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -110,7 +114,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   return (
     <>
       <form onSubmit={handleUserPageSubmit}>
-        <div className="mt-2 overflow-hidden rounded-lg bg-white dark:bg-background">
+        <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
           <div className="p-4 sm:p-4 lg:p-3">
             <div className="flex-auto justify-center">
               {hasErrors && (

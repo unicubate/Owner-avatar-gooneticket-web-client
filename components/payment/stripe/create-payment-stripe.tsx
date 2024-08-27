@@ -14,22 +14,6 @@ export type StripeProps = {
   paymentModel: PaymentModel;
 };
 
-// export const CreatePaymentStripe = (props: StripeProps) => {
-//   const { data, paymentModel } = props;
-
-//   return (
-//     <>
-//       <div className="mt-4">
-//         {stripeKeyPromise && (
-//           <Elements stripe={stripeKeyPromise}>
-//             <StripeCheckoutForm paymentModel={paymentModel} data={data} />
-//           </Elements>
-//         )}
-//       </div>
-//     </>
-//   );
-// };
-
 export const CreateCardStripe = (props: StripeProps) => {
   const { data, paymentModel } = props;
   return (

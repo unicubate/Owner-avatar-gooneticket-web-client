@@ -198,6 +198,12 @@ export const apiEndpoints: ClientApiMethods = {
   getPayments: GET(`${baseUrl}/payments`),
   createOnePaymentsPaypalShop: POST(`${baseUrl}/payments/paypal/shop`),
   createOnePaymentsStripeShop: POST(`${baseUrl}/payments/stripe/shop`),
+  createOnePaymentsStripeCheckoutSessionEvent: POST(
+    `${baseUrl}/payments/stripe/checkout-session/event`,
+  ),
+  confirmPaymentsStripeCheckoutSessionEvent: POST(
+    `${baseUrl}/payments/stripe/confirm-checkout-session/event/:token`,
+  ),
   createOnePaymentsPaypalEvent: POST(`${baseUrl}/payments/paypal/event`),
   createOnePaymentsStripeEvent: POST(`${baseUrl}/payments/stripe/event`),
   createOnePaymentsFreeEvent: POST(`${baseUrl}/payments/free/event`),

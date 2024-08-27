@@ -14,7 +14,9 @@ export type PaymentModel =
   | 'PAYPAL-EVENT'
   | 'STRIPE-EVENT'
   | 'PAYPAL-SHOP'
-  | 'STRIPE-SHOP';
+  | 'STRIPE-SHOP'
+  | 'STRIPE-CHECKOUT-SESSION-EVENT'
+  | 'STRIPE-CONFIRM-CHECKOUT-SESSION-EVENT';
 
 export const CreateOnPaymentPI = ({
   onSuccess,
@@ -34,6 +36,20 @@ export const CreateOnPaymentPI = ({
         return await makeApiCall({
           action: 'createOnePaymentsPaypalShop',
           body: { paymentModel, ...data },
+        });
+      }
+
+      if (paymentModel === 'STRIPE-CHECKOUT-SESSION-EVENT') {
+        return await makeApiCall({
+          action: 'createOnePaymentsStripeCheckoutSessionEvent',
+          body: { paymentModel, ...data },
+        });
+      }
+
+      if (paymentModel === 'STRIPE-CONFIRM-CHECKOUT-SESSION-EVENT') {
+        return await makeApiCall({
+          action: 'confirmPaymentsStripeCheckoutSessionEvent',
+          urlParams: { token: data?.token },
         });
       }
 

@@ -12,7 +12,7 @@ import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentBooking } from '@/components/payment/create-payment-booking';
 import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
-import { CreateCardStripe } from '@/components/payment/stripe/create-payment-stripe';
+import { StripeButtonCardForm } from '@/components/payment/stripe/create-button-stripe-form';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
 import {
   ButtonInput,
@@ -41,7 +41,7 @@ type NewAmountType = {
   quantity: number;
   currency: string;
   value: number;
-  ticket: TicketModel;
+  ticketId: string;
   oneValue: number;
   taxes: number;
 };
@@ -134,7 +134,7 @@ const CheckoutEvent = () => {
   const calculatePrice = Number(ticketJsonParse?.amount) * increment;
   const newAmount: NewAmountType = {
     quantity: increment,
-    ticket: ticketJsonParse,
+    ticketId: ticketJsonParse?.id,
     currency: item?.currency?.code,
     value: calculatePrice,
     country: ipLocation?.countryCode,
@@ -622,8 +622,8 @@ const CheckoutEvent = () => {
                               ticketJsonParse?.enableOnlinePayment ? (
                                 <>
                                   {watchPaymentMethod === 'STRIPE' ? (
-                                    <CreateCardStripe
-                                      paymentModel="STRIPE-EVENT"
+                                    <StripeButtonCardForm
+                                      paymentModel="STRIPE-CHECKOUT-SESSION-EVENT"
                                       data={{
                                         userAddress,
                                         eventId: item?.id,

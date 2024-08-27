@@ -17,7 +17,7 @@
   "AUTH.GENERAL.PRIVACY": "Privacy",
   "AUTH.GENERAL.LEGAL": "Legal",
   "AUTH.GENERAL.CONTACT": "Contact",
-  "AUTH.LOGIN.TITLE": "Je m'identifie",
+  "AUTH.LOGIN.TITLE": "Connexion",
   "AUTH.LOGIN.PHONE": "Se connecter avec numéro",
   "AUTH.LOGIN.EMAIL": "Se connecter avec e-mail",
   "AUTH.LOGIN.CONTINUE.EMAIL": "Continuer avec l'e-mail",

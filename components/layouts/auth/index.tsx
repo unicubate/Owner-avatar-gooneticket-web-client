@@ -61,7 +61,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                     icon={<LogInIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
+                      {t.formatMessage({ id: 'MENU.REGISTER' })}
                     </span>
                   </ButtonInput>
                 </Link>
@@ -77,7 +77,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
                     icon={<UserPlusIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'AUTH.REGISTER.TITLE' })}
+                      {t.formatMessage({ id: 'MENU.LOGIN' })}
                     </span>
                   </ButtonInput>
                 </Link>
