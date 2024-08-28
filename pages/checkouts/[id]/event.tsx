@@ -160,7 +160,7 @@ const CheckoutEvent = () => {
                 <EventCheckoutSkeleton />
               ) : item?.id ? (
                 <Fragment>
-                  <div className="g:col-span-3 xl:col-span-4">
+                  <div className="lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       <div
                         key={item?.id}

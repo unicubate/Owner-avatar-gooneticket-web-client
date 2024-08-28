@@ -47,28 +47,6 @@ export function ListComments(props: Props) {
     organizationId,
   });
 
-  const dataTableComments = isLoadingComments ? (
-    <LoadingFile />
-  ) : isErrorComments ? (
-    <ErrorFile title="404" description="Error find data please try again" />
-  ) : Number(dataComments?.pages[0]?.data?.total) <= 0 ? (
-    ''
-  ) : (
-    dataComments?.pages
-      .flatMap((page: any) => page?.data?.value)
-      .map((item, index) => (
-        <ListCommentsPosts
-          item={item}
-          key={index}
-          model={model}
-          index={index}
-          organizationId={item?.organizationId}
-          userVisitorId={userVisitorId}
-          modelIds={modelIds}
-        />
-      ))
-  );
-
   return (
     <>
       <CreateOrUpdateFormComment
@@ -80,7 +58,30 @@ export function ListComments(props: Props) {
       />
 
       <ul className="my-2 mt-4 divide-y divide-gray-200 dark:divide-gray-800">
-        {dataTableComments}
+        {isLoadingComments ? (
+          <LoadingFile />
+        ) : isErrorComments ? (
+          <ErrorFile
+            title="404"
+            description="Error find data please try again"
+          />
+        ) : Number(dataComments?.pages[0]?.data?.total) <= 0 ? (
+          ''
+        ) : (
+          dataComments?.pages
+            .flatMap((page: any) => page?.data?.value)
+            .map((item, index) => (
+              <ListCommentsPosts
+                item={item}
+                key={index}
+                model={model}
+                index={index}
+                organizationId={item?.organizationId}
+                userVisitorId={userVisitorId}
+                modelIds={modelIds}
+              />
+            ))
+        )}
       </ul>
 
       {hasNextPage ? (
@@ -88,7 +89,7 @@ export function ListComments(props: Props) {
           <div className="mt-4 flex flex-col items-center justify-between">
             {isFetchingNextPage ? null : (
               <button
-                disabled={isFetchingNextPage ? true : false}
+                disabled={!hasNextPage || isFetchingNextPage ? true : false}
                 onClick={() => fetchNextPage()}
                 className="text-sm font-medium text-blue-600 decoration-2 hover:underline"
               >

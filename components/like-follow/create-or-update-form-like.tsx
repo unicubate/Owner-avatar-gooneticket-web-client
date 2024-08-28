@@ -51,7 +51,7 @@ export function CreateOrUpdateFormLike(props: {
               }}
               className="text-indigo-600"
             >
-              <MdOutlineFavorite className="size-7" />
+              <MdOutlineFavorite className="size-4" />
             </button>
           ) : (
             <button
@@ -60,7 +60,7 @@ export function CreateOrUpdateFormLike(props: {
               }}
               className="hover:text-indigo-600 focus:ring-indigo-600"
             >
-              <MdOutlineFavoriteBorder className="size-7" />
+              <MdOutlineFavoriteBorder className="size-4" />
             </button>
           )}
         </>
@@ -71,7 +71,7 @@ export function CreateOrUpdateFormLike(props: {
           }}
           className="hover:text-indigo-600 focus:ring-indigo-600"
         >
-          <HeartIcon className="size-7" />
+          <HeartIcon className="size-4" />
         </button>
       )}
 

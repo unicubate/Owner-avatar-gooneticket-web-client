@@ -1,8 +1,9 @@
 import { loginUserAPI } from '@/api-site/user';
+import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { UserLoginFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { X } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -10,6 +11,7 @@ import { useInputState } from '../hooks';
 import { ButtonInput, FieldRequiredMessage } from '../ui-setting';
 import { TextInput, TextPasswordInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
+import { Button } from '../ui/button';
 import { GoogleAuthLogin } from './google-auth-login';
 
 const LoginModal: React.FC<{
@@ -77,26 +79,25 @@ const LoginModal: React.FC<{
 
   return (
     <>
-      {isOpen ? (
-        <div className="min-w-screen animated fadeIn faster fixed  inset-0  z-50 flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat outline-none focus:outline-none">
-          <div className="absolute inset-0 z-0 bg-black opacity-100"></div>
-          <div className="relative  m-auto w-full max-w-sm rounded-xl bg-white p-5 shadow-lg  dark:bg-background">
-            <button
-              className="float-right border-0 bg-transparent text-black"
+      <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
+        <AlertDialogContent className="max-h-screen max-w-sm overflow-y-scroll dark:border-gray-900">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Button
+              type="button"
+              size="icon"
+              variant="ghost"
+              className="float-right"
               onClick={() => setIsOpen(false)}
             >
               <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-                <X />
+                <XIcon />
               </span>
-            </button>
-
-            <div className="mx-auto flex justify-center">
-              <h6 className="mt-3 text-center text-xl font-bold">
+            </Button>
+            <div className="flex-auto justify-center p-2">
+              <h6 className="mt-4 text-center text-xl font-bold">
                 {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
               </h6>
-            </div>
 
-            <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
               {hasErrors && (
                 <Alert
                   variant="destructive"
@@ -108,7 +109,7 @@ const LoginModal: React.FC<{
                 </Alert>
               )}
 
-              <div className="mb-4">
+              <div className="mt-4">
                 <TextInput
                   control={control}
                   label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
@@ -119,7 +120,7 @@ const LoginModal: React.FC<{
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mt-4">
                 <TextPasswordInput
                   control={control}
                   label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
@@ -153,33 +154,33 @@ const LoginModal: React.FC<{
                   {t.formatMessage({ id: 'AUTH.GENERAL.SUBMIT_BUTTON' })}
                 </ButtonInput>
               </div>
-            </form>
-            <div className="my-4 flex items-center justify-between">
-              <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
-              <p className="text-center text-xs uppercase dark:dark:text-gray-400 dark:text-gray-500">
-                {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
-              </p>
-
-              <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
             </div>
+          </form>
+          <div className="mt-2 flex items-center justify-between">
+            <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+            <p className="text-center text-xs uppercase dark:dark:text-gray-400 dark:text-gray-500">
+              {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
+            </p>
 
-            <div className="flex justify-center">
-              <GoogleAuthLogin />
-            </div>
-
-            <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-              <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
-                {' '}
-                {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
-                {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
-                <span className="font-bold">
-                  {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
-                </span>
-              </p>
-            </Link>
+            <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/5"></span>
           </div>
-        </div>
-      ) : null}
+
+          <div className="flex justify-center">
+            <GoogleAuthLogin />
+          </div>
+
+          <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
+            <p className="mt-4 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
+              {' '}
+              {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
+              {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+              <span className="font-bold">
+                {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
+              </span>
+            </p>
+          </Link>
+        </AlertDialogContent>
+      </AlertDialog>
     </>
   );
 };
