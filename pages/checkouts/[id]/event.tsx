@@ -543,6 +543,24 @@ const CheckoutEvent = () => {
                           )}
                         </li>
 
+                        <li className="mb-2 flex items-center justify-between text-sm">
+                          <p className="dark:text-gray-600">Commissions</p>
+
+                          {newAmount?.value ? (
+                            <>
+                              <p className="ml-1 text-sm dark:text-gray-400">
+                                {formatePrice({
+                                  currency: `${item?.currency?.code}`,
+                                  value: Number(4),
+                                  isDivide: false,
+                                }) ?? ''}
+                              </p>
+                            </>
+                          ) : (
+                            'Free'
+                          )}
+                        </li>
+
                         {/* <hr className="my-4 dark:border-gray-900" />
 
                 <li className="flex items-center justify-between text-sm">

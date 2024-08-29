@@ -69,7 +69,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 </span>
               </div>
               {item?.id ? (
-                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
+                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-900">
                   <Link
                     href={`/orders/${item?.id}/order-items`}
                     title={item?.event?.title}

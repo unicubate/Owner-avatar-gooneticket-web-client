@@ -69,7 +69,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
+                className={`${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
@@ -85,7 +85,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className={`flex items-center font-bold`}>
                 <p
-                  className={`text-sm ${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
+                  className={`text-sm ${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
                 >
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
@@ -104,7 +104,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               </div>
 
               {item?.id ? (
-                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
+                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-900">
                   <Link
                     prefetch={true}
                     href={`${oneItem(item?.model)?.url}`}

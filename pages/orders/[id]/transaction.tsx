@@ -42,7 +42,7 @@ const TransactionsView = () => {
                 {t.formatMessage({ id: 'UTIL.COME_BACK' })}
               </span>
             </ButtonInput>
-            <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-gray-900 dark:bg-background">
+            <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
               <div className="p-8 sm:px-8 sm:py-7">
                 {isLoadingTransaction ? (
                   <LoadingFile />
@@ -142,7 +142,7 @@ const TransactionsView = () => {
                       </div>
                       <div className="mt-8">
                         {/* <div className="space-y-4 rounded-lg border border-gray-200 p-4 dark:border-gray-900"> */}
-                        <div className="space-y-4 border-gray-200 dark:border-gray-900">
+                        <div className="space-y-4 border-gray-200 dark:border-input">
                           <div className="hidden sm:grid sm:grid-cols-5">
                             <div className="text-xs font-medium uppercase sm:col-span-2">
                               Item
@@ -158,7 +158,7 @@ const TransactionsView = () => {
                             </div>
                           </div>
 
-                          <div className="hidden border-b border-gray-200 dark:border-gray-900 sm:block"></div>
+                          <div className="hidden border-b border-gray-200 dark:border-input sm:block"></div>
 
                           <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                             <div className="col-span-full sm:col-span-2">
@@ -207,7 +207,7 @@ const TransactionsView = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="border-b border-gray-200 dark:border-gray-900"></div>
+                          <div className="border-b border-gray-200 dark:border-input"></div>
                         </div>
                       </div>
 

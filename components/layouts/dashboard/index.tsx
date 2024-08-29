@@ -39,7 +39,10 @@ const LayoutDashboard = ({ children, title }: IProps) => {
 
         <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
           <SheetTrigger asChild></SheetTrigger>
-          <SheetContent className="dark:border-input dark:bg-black/15">
+          <SheetContent
+            side="left"
+            className="dark:border-gray-900 dark:bg-black/15"
+          >
             <div className="flex flex-col overflow-y-auto pt-5">
               <VerticalNavDashboard user={user} />
             </div>
