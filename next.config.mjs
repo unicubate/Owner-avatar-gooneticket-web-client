@@ -16,7 +16,18 @@ const nextConfig = {
   ],
 
   images: {
-    domains: ['localhost', 'api.gooneticket.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'api.gooneticket.com',
+        pathname: '**',
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        pathname: '**',
+      },
+    ],
   },
 };
 
