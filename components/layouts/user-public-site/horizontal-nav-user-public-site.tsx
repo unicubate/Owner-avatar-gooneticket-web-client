@@ -12,7 +12,6 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
 import { HorizontalNavPublicUser } from '../../user/horizontal-nav-public-user';
@@ -103,7 +102,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
               {user?.id ? <HorizontalNavPublicUser user={user} /> : null}
             </div>
 
-            <div className="ml-auto flex items-center justify-center">
+            {/* <div className="ml-auto flex items-center justify-center">
               <nav className="ml-4 hidden w-auto space-x-10 lg:block">
                 {navigation.map((item: any, index: number) => {
                   const isActive = pathname === item.href;
@@ -126,7 +125,7 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
                   );
                 })}
               </nav>
-            </div>
+            </div> */}
 
             <div className="ml-auto flex items-center justify-end">
               <div className="flex items-center space-x-1.5">

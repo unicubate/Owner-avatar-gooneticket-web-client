@@ -1,7 +1,6 @@
 import { GetOneEventAPI } from '@/api-site/event';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { ViewOneEvent } from '@/components/event/view-one-event';
-import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
@@ -96,7 +95,6 @@ const ShopUserPublic = () => {
               </>
             </div> */}
           </div>
-          <MediumFooter />
         </div>
       </LayoutUserPublicSite>
     </>

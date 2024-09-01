@@ -75,8 +75,7 @@ export type OrderModel = {
   createdAt: Date;
   id: string;
   orderNumber: string;
-  totalPrice: number;
-  totalPriceNoDiscount: number;
+  amountTotal: number;
   quantity: string;
   currency: string;
   country: string;

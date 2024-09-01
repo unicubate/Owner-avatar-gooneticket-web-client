@@ -59,8 +59,10 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
           payerId: order?.payer_id,
           email_address: order?.email_address,
         },
+        commission: Number(Number(amount?.commission ?? 0).toFixed(2)),
+        valueTotal: Number(amountPalpal?.value),
         currency: amountPalpal?.currency_code,
-        value: Number(amountPalpal?.value),
+        value: Number(amount?.value),
         oneValue: Number(amount?.oneValue),
       },
     };
@@ -87,7 +89,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
           description: `Payment ticket`,
           amount: {
             currency_code: currency,
-            value: Number(amount?.value),
+            value: Number(amount?.valueTotal).toFixed(2),
           },
         },
       ],
@@ -131,7 +133,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
                 label: 'paypal',
                 color: 'gold',
               }}
-              forceReRender={[Number(amount?.value), currency]}
+              forceReRender={[Number(amount?.valueTotal).toFixed(2), currency]}
               fundingSource="paypal"
               createOrder={(data, actions) => createOrder(data, actions)}
               onApprove={async (data, action) => {

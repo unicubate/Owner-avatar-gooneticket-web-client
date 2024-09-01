@@ -1,22 +1,19 @@
 import { useDebounce } from '@/utils';
-import { useState } from 'react';
+import { useDeferredValue, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLang } from '../../i18n/context-intl-provider';
 import { useAuth } from '../util/context-user';
 
 export function useInputState() {
   const t = useIntl();
-  const [fromAt, setFromAt] = useState<any>(null);
-  const [toAt, setToAt] = useState<any>(null);
   const [search, setSearch] = useState<string>('');
+  const deferredSearch = useDeferredValue(search);
   const [extension, setExtension] = useState<'xlsx' | 'csv'>('xlsx');
-  const initTime = fromAt?.$d?.toISOString();
-  const endTime = toAt?.$d?.toISOString();
 
   const { userStorage, ipLocation, profile } = useAuth() as any;
   const locale = useLang();
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [success, setSuccess] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
     undefined,
@@ -24,11 +21,6 @@ export function useInputState() {
   const [hasSuccess, setHasSuccess] = useState<boolean | string | undefined>(
     undefined,
   );
-
-  const handleClearDate = () => {
-    setFromAt(null);
-    setToAt(null);
-  };
 
   const handleChangeExtension = (event: any) => {
     setExtension(event.target.value);
@@ -40,29 +32,22 @@ export function useInputState() {
     setSearch(event.target.value);
   };
 
-  const newSearch = useDebounce(search, 500);
+  const newSearch = useDebounce(deferredSearch, 500);
 
   const linkHref = typeof window !== 'undefined' ? window.location.href : null;
   return {
-    fromAt,
-    setFromAt,
-    toAt,
-    setToAt,
     search: newSearch,
     setSearch,
     extension,
     setExtension,
-    initTime,
-    endTime,
-    handleClearDate,
     handleChangeExtension,
     handleSetSearch,
     success,
     loading,
     isOpen,
-    hasErrors,
     hasSuccess,
     setHasSuccess,
+    hasErrors,
     setIsOpen,
     setLoading,
     setSuccess,

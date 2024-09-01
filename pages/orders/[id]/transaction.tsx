@@ -188,14 +188,11 @@ const TransactionsView = () => {
                                 Amount
                               </h5>
                               <p className="text-sm sm:text-end">
-                                {Number(item?.order?.totalPriceNoDiscount) >
-                                0 ? (
+                                {Number(item?.order?.amountTotal) > 0 ? (
                                   <>
                                     <SerialPrice
                                       className="text-sm"
-                                      value={Number(
-                                        item?.order?.totalPriceNoDiscount,
-                                      )}
+                                      value={Number(item?.order?.amountTotal)}
                                       currency={{
                                         code: String(item?.order?.currency),
                                       }}

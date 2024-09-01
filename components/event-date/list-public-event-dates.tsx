@@ -40,106 +40,101 @@ const ListPublicEventDates = ({ item, index }: Props) => {
     <>
       <div
         key={index}
-        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 hover:-translate-y-1 dark:border-gray-900 dark:bg-background"
+        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-gray-900 dark:bg-background"
       >
-        <div className="cursor-pointer divide-y divide-gray-200 dark:divide-gray-800">
-          <div className="py-1">
-            <div className="mt-1 sm:hidden">
-              <SwiperImage
-                height="160px"
-                src={`${viewOneFileUploadAPI({
-                  folder: String(
-                    item?.oneUploadsImage?.model.toLocaleLowerCase(),
-                  ),
-                  fileName: String(item?.oneUploadsImage?.path),
-                })}`}
-                alt={String(item?.event?.title)}
-              />
-            </div>
-            <div className="mt-1 flex items-center">
-              {item?.oneUploadsImage ? (
-                <Link
-                  href={linkHrefCheckouts}
-                  className="relative hidden shrink-0 sm:table-cell"
-                >
-                  <SwiperImage
-                    height="80px"
-                    width="100px"
-                    src={`${viewOneFileUploadAPI({
-                      folder: String(
-                        item?.oneUploadsImage?.model.toLocaleLowerCase(),
-                      ),
-                      fileName: String(item?.oneUploadsImage?.path),
-                    })}`}
-                    alt={String(item?.event?.title)}
-                  />
-                </Link>
-              ) : null}
+        <Link href={linkHrefCheckouts}>
+          <div className="divide-y divide-gray-200 dark:divide-gray-900">
+            <div className="py-1">
+              <div className="mt-1  cursor-pointer sm:hidden">
+                <SwiperImage
+                  height="160px"
+                  src={`${viewOneFileUploadAPI({
+                    folder: String(
+                      item?.oneUploadsImage?.model.toLocaleLowerCase(),
+                    ),
+                    fileName: String(item?.oneUploadsImage?.path),
+                  })}`}
+                  alt={String(item?.event?.title)}
+                />
+              </div>
+              <div className="mt-1 flex items-center">
+                {item?.oneUploadsImage ? (
+                  <div className="relative hidden shrink-0 cursor-pointer sm:table-cell">
+                    <SwiperImage
+                      height="80px"
+                      width="100px"
+                      src={`${viewOneFileUploadAPI({
+                        folder: String(
+                          item?.oneUploadsImage?.model.toLocaleLowerCase(),
+                        ),
+                        fileName: String(item?.oneUploadsImage?.path),
+                      })}`}
+                      alt={String(item?.event?.title)}
+                    />
+                  </div>
+                ) : null}
 
-              <div className="ml-1.5 min-w-0 flex-1">
-                <div className="sm:flex sm:items-center sm:justify-between">
-                  <div className="sm:mt-0">
-                    <div className="flex items-center">
-                      <p className="text-5xl font-semibold text-blue-700">
-                        {formateTodd(item?.expiredAt as Date, locale)}
-                      </p>
-                      <div className="tex-sm ml-1.5">
-                        <p className="mt-1">
-                          {capitalizeFirstLetter(
-                            formateToLLLL(item?.expiredAt as Date, locale),
-                          )}
-                          <span className="ml-1.5">
-                            {viewYyformateToYyyy(item?.expiredAt as Date)}
-                          </span>
+                <div className="ml-1.5 min-w-0 flex-1">
+                  <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="sm:mt-0">
+                      <div className="flex items-center">
+                        <p className="text-5xl font-semibold text-blue-700">
+                          {formateTodd(item?.expiredAt as Date, locale)}
                         </p>
-                        <p className="mt-1">
-                          <span>
+                        <div className="tex-sm ml-1.5 text-sm font-bold">
+                          <p className="mt-1">
                             {capitalizeFirstLetter(
-                              formateToCccc(item?.expiredAt as Date, locale),
+                              formateToLLLL(item?.expiredAt as Date, locale),
                             )}
-                          </span>
-                          ,<span className="ml-1">{item?.timeInit}</span>
-                          {item?.timeEnd ? (
-                            <>
-                              <span className="ml-1">-</span>
-                              <span className="ml-1">{item?.timeEnd}</span>
-                            </>
-                          ) : null}
-                        </p>
+                            <span className="ml-1.5">
+                              {viewYyformateToYyyy(item?.expiredAt as Date)}
+                            </span>
+                          </p>
+                          <p className="mt-1">
+                            <span>
+                              {capitalizeFirstLetter(
+                                formateToCccc(item?.expiredAt as Date, locale),
+                              )}
+                            </span>
+                            ,<span className="ml-1">{item?.timeInit}</span>
+                            {item?.timeEnd ? (
+                              <>
+                                <span className="ml-1">-</span>
+                                <span className="ml-1">{item?.timeEnd}</span>
+                              </>
+                            ) : null}
+                          </p>
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="mt-1.5 text-sm font-bold">
-                      <span>
-                        {capitalizeFirstLetter(String(item?.address))}
-                      </span>
-                      <span className="ml-1">-</span>
-                      <span className="ml-1">
-                        {capitalizeFirstLetter(String(item?.city))}
-                      </span>
-                      <span className="ml-1">-</span>
-                      <span className="ml-1">
-                        {capitalizeFirstLetter(String(item?.country))}
-                      </span>
+                      <div className="mt-1.5 text-sm font-bold">
+                        <span>
+                          {capitalizeFirstLetter(String(item?.address))}
+                        </span>
+                        <span className="ml-1">-</span>
+                        <span className="ml-1">
+                          {capitalizeFirstLetter(String(item?.city))}
+                        </span>
+                        <span className="ml-1">-</span>
+                        <span className="ml-1">
+                          {capitalizeFirstLetter(String(item?.country))}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="ml-auto py-2 text-right font-medium">
-                <div className="mt-1.5 hidden sm:block">
-                  <Link href={linkHrefCheckouts}>
+                <div className="ml-auto py-2 text-right font-medium">
+                  <div className="mt-1.5 hidden sm:block">
                     <ButtonInput
                       type="button"
                       variant="primary"
-                      size="sm"
                       icon={<TicketIcon className="size-6" />}
                     >
-                      Ticket
+                      Continue
                     </ButtonInput>
-                  </Link>
 
-                  {/* <Button
+                    {/* <Button
                     className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
                     variant="link"
                     type="button"
@@ -148,60 +143,58 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                   >
                     <ShareIcon className="size-5" />
                   </Button> */}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="mt-1.5 flex items-center">
-              <Link
-                href={linkHrefView}
-                className="hover:text-blue-600 dark:hover:text-blue-600"
-              >
-                {item?.event?.title ? (
-                  <p className="font-bold">
-                    <ReadMore
-                      html={String(item?.event?.title ?? '')}
-                      value={100}
-                    />
-                  </p>
-                ) : null}
-              </Link>
-              <div className="ml-auto text-xl font-bold">
-                {Number(item?.oneTicket?.amount) > 0 ? (
-                  <>
-                    {formatePrice({
-                      currency: `${item?.event?.currency?.code}`,
-                      value: Number(item?.oneTicket?.amount ?? 0),
-                      isDivide: false,
-                    })}
-                  </>
-                ) : (
-                  'Free'
-                )}
+              <div className="mt-1.5 flex items-center">
+                <Link
+                  href={linkHrefView}
+                  className="hover:text-blue-600 dark:hover:text-blue-600"
+                >
+                  {item?.event?.title ? (
+                    <p className="font-bold">
+                      <ReadMore
+                        html={String(item?.event?.title ?? '')}
+                        value={100}
+                      />
+                    </p>
+                  ) : null}
+                </Link>
+                <div className="ml-auto text-xl font-bold">
+                  {Number(item?.oneTicket?.amount) > 0 ? (
+                    <>
+                      {formatePrice({
+                        currency: `${item?.event?.currency?.code}`,
+                        value: Number(item?.oneTicket?.amount ?? 0),
+                        isDivide: false,
+                      })}
+                    </>
+                  ) : (
+                    'Free'
+                  )}
+                </div>
               </div>
-            </div>
-            <div className="mt-1.5 sm:hidden">
-              <Link href={linkHrefCheckouts}>
+              <div className="mt-1.5 sm:hidden">
                 <ButtonInput
                   type="button"
                   variant="primary"
                   className="w-full"
-                  size="sm"
                   icon={<TicketIcon className="size-6" />}
                 >
-                  Ticket
+                  Continue
                 </ButtonInput>
-              </Link>
+              </div>
             </div>
-          </div>
 
-          {/**** Copy and delete *****/}
-          <CopyShareLink
-            isOpen={copied}
-            setIsOpen={setCopied}
-            link={`${process.env.NEXT_PUBLIC_SITE}/checkouts/${item?.id}/event`}
-          />
-        </div>
+            {/**** Copy and delete *****/}
+            <CopyShareLink
+              isOpen={copied}
+              setIsOpen={setCopied}
+              link={`${process.env.NEXT_PUBLIC_SITE}/checkouts/${item?.id}/event`}
+            />
+          </div>
+        </Link>
       </div>
     </>
   );

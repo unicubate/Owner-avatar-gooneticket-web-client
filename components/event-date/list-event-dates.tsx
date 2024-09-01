@@ -44,7 +44,7 @@ const ListEventDates = ({ item, index }: Props) => {
               <div className="sm:flex sm:items-center sm:justify-between">
                 <div className="sm:mt-0">
                   <div className="flex items-center">
-                    <p className="text-4xl font-semibold text-blue-700">
+                    <p className="text-5xl font-semibold text-blue-700">
                       {formateTodd(item?.expiredAt as Date, locale)}
                     </p>
                     <div className="tex-sm ml-1.5 font-semibold">

@@ -1,6 +1,7 @@
 import { UserModel } from '@/types/user';
 import { HorizontalNavUserPublicSite } from './horizontal-nav-user-public-site';
 
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { HeaderSite } from '@/components/ui-setting';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
@@ -41,16 +42,14 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
 
       <div className="flex flex-1 dark:bg-black/15">
         <div
-          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-background`}
+          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#121212]`}
         >
-          <main>{children}</main>
+          <main>
+            {children}
+            <MediumFooter />
+          </main>
         </div>
       </div>
-
-      {/* <main>{children}</main> */}
-
-      {/* </div> */}
-      {/* </div> */}
     </>
   );
 };

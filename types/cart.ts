@@ -47,7 +47,6 @@ export type OneCartModel = {
 export type CartModel = {
   summary: {
     totalQuantity: number;
-    totalPriceDiscount: number;
   };
   cartItems: OneCartModel[];
 };

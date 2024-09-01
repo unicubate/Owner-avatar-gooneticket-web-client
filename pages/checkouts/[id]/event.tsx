@@ -14,18 +14,20 @@ import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { StripeButtonCardForm } from '@/components/payment/stripe/create-button-stripe-form';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
-import {
-  ButtonInput,
-  ButtonLoadMore,
-  ListCarouselUpload,
-} from '@/components/ui-setting';
+import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { ListCarouselUploadMini } from '@/components/ui-setting/list-carousel-upload-mini';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
 import { TicketModel } from '@/types/ticket';
-import { formateDate, formatePrice, formateToRFC2822 } from '@/utils';
+import {
+  formateDate,
+  formatePrice,
+  formateToRFC2822,
+  useDebounce,
+} from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -44,6 +46,8 @@ type NewAmountType = {
   ticketId: string;
   oneValue: number;
   taxes: number;
+  valueTotal: number;
+  commission: number;
 };
 
 const paymentMethodArray = [
@@ -65,6 +69,7 @@ const schema = yup.object({
 
 const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
+  const debounceIncrement = useDebounce(increment, 500);
   const { ipLocation, userStorage, locale } = useInputState();
   const { query } = useRouter();
   const { id: eventDateId, partner } = query;
@@ -131,14 +136,19 @@ const CheckoutEvent = () => {
   const ticketJsonParse = watchAmount
     ? JSON.parse(watchAmount)
     : eventDate?.oneTicket;
-  const calculatePrice = Number(ticketJsonParse?.amount) * increment;
+  const calculateCommission =
+    Number(ticketJsonParse?.commission) * debounceIncrement ?? 0;
+  const calculatePrice = Number(ticketJsonParse?.amount) * debounceIncrement;
+
   const newAmount: NewAmountType = {
-    quantity: increment,
+    quantity: debounceIncrement,
     ticketId: ticketJsonParse?.id,
     currency: item?.currency?.code,
     value: calculatePrice,
+    valueTotal: calculateCommission + calculatePrice,
     country: ipLocation?.countryCode,
     oneValue: Number(ticketJsonParse?.amount),
+    commission: calculateCommission,
     taxes: Number(userStorage?.organization?.taxes),
   };
 
@@ -169,7 +179,7 @@ const CheckoutEvent = () => {
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
                             <div className="group relative mx-auto mt-2 justify-center text-center">
-                              <ListCarouselUpload
+                              <ListCarouselUploadMini
                                 uploads={item?.uploadsImages}
                                 folder={String(item?.model.toLocaleLowerCase())}
                                 height="200px"
@@ -551,7 +561,7 @@ const CheckoutEvent = () => {
                               <p className="ml-1 text-sm dark:text-gray-400">
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
-                                  value: Number(4),
+                                  value: newAmount?.commission,
                                   isDivide: false,
                                 }) ?? ''}
                               </p>
@@ -580,7 +590,7 @@ const CheckoutEvent = () => {
                               <p className="ml-1 text-2xl font-bold dark:text-white">
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
-                                  value: Number(newAmount?.value),
+                                  value: Number(newAmount?.valueTotal),
                                   isDivide: false,
                                 }) ?? ''}
                               </p>
@@ -595,7 +605,7 @@ const CheckoutEvent = () => {
                     {ticketJsonParse?.enableOnlinePayment &&
                     isEdit &&
                     userAddress?.isUpdated &&
-                    newAmount?.value ? (
+                    newAmount?.valueTotal ? (
                       <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
@@ -635,7 +645,7 @@ const CheckoutEvent = () => {
                           <>
                             <>
                               {isValid &&
-                              newAmount?.value &&
+                              newAmount?.valueTotal &&
                               watchPaymentMethod &&
                               ticketJsonParse?.enableOnlinePayment ? (
                                 <>

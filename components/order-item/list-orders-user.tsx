@@ -98,10 +98,10 @@ const ListOrdersUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-center text-sm font-bold dark:text-white lg:table-cell">
-          {Number(item?.totalPrice) > 0 ? (
+          {Number(item?.amountTotal) > 0 ? (
             <SerialPrice
               className="text-sm"
-              value={Number(item?.totalPrice)}
+              value={Number(item?.amountTotal)}
               currency={{ code: String(item?.currency) }}
             />
           ) : (
@@ -156,10 +156,10 @@ const ListOrdersUser = ({ item, index }: Props) => {
           <div className="pt-1 lg:hidden">
             <p className={`inline-flex text-sm font-bold`}>
               <span className={`ml-1`}>
-                {Number(item?.totalPrice) > 0 ? (
+                {Number(item?.amountTotal) > 0 ? (
                   <SerialPrice
                     className="text-sm"
-                    value={Number(item?.totalPrice)}
+                    value={Number(item?.amountTotal)}
                     currency={{ code: String(item?.currency) }}
                   />
                 ) : (

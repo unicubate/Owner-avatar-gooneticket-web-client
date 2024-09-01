@@ -78,7 +78,7 @@ const ResetPassword = () => {
 
   return (
     <LayoutAuth title="Reset password">
-      <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 p-6 shadow-md dark:border-gray-900 md:mt-16">
+      <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 bg-white p-6 shadow-md dark:border-gray-900 dark:bg-background md:mt-16">
         {/* <div className="mx-auto flex justify-center">
         <img
           className="h-7 w-auto sm:h-8"

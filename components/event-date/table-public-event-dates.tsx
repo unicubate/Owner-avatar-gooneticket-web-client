@@ -58,9 +58,9 @@ const TablePublicEventDates = ({ user }: { user: UserModel }) => {
       ) : null}
 
       {hasNextPage && (
-        <div className="mx-auto justify-center text-center">
+        <div className="mx-auto mt-4 justify-center text-center">
           <ButtonLoadMore
-            className="w-[240px]"
+            className="w-full"
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}
             onClick={() => fetchNextPage()}
