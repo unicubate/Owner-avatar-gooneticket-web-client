@@ -3,6 +3,7 @@
 import { GetOneAffiliationAPI } from '@/api-site/affiliation';
 import { GetOneEventAPI } from '@/api-site/event';
 import { GetOneEventDateAPI } from '@/api-site/event-date';
+import { GetAllCountiesAPI } from '@/api-site/profile';
 import { GetInfiniteTicketsAPI } from '@/api-site/ticket';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
@@ -82,6 +83,7 @@ const CheckoutEvent = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
+  const { data: countries } = GetAllCountiesAPI();
   const watchAmount = watch('amount', null);
   const watchPaymentMethod = watch('paymentMethod', null);
 
@@ -485,6 +487,7 @@ const CheckoutEvent = () => {
                             isEdit={isEdit}
                             setIsEdit={setIsEdit}
                             userAddress={userAddress}
+                            countries={countries}
                           />
                         </div>
                       </div>

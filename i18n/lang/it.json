@@ -129,6 +129,7 @@
   "MENU.FOLLOWING": "Seguito",
   "MENU.SUBSCRIBER": "Membri",
   "MENU.TICKET": "Biglietti",
+  "MENU.INVOICE": "Fatture",
 
   "TRANSACTION.LAST_DAY": "Ultimi {day} giorni",
   "TRANSACTION.ALL_TIME": "Sempre",

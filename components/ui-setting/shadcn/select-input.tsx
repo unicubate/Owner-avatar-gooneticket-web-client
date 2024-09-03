@@ -1,37 +1,30 @@
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { Select, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
 interface Props {
   control: Control<FieldValues>;
-  dataItem: any;
   label?: string;
   className?: string;
   name: string;
   errors: { [key: string]: any };
   placeholder?: string;
-  firstOptionName: string;
-  valueType: 'key' | 'text';
-  allowClear?: boolean;
+  required?: boolean;
+  defaultValue?: string;
+  children: React.ReactNode;
 }
 
 const SelectInput = ({
   control,
-  dataItem,
   label = '',
   name,
   errors,
   className,
+  required,
   placeholder = '',
-  valueType,
+  children,
+  defaultValue,
 }: Props) => {
   return (
     <>
@@ -41,6 +34,7 @@ const SelectInput = ({
           className="mb-2 block text-sm font-bold dark:text-white"
         >
           {label}
+          {required ? <span className="ml-1 text-red-600">*</span> : null}
         </Label>
       ) : null}
 
@@ -49,58 +43,23 @@ const SelectInput = ({
         control={control}
         render={({ field: { value, onChange } }) => (
           <>
-            <Select onValueChange={onChange} name={name} value={value}>
+            <Select
+              onValueChange={onChange}
+              name={name}
+              value={value}
+              required={required}
+              defaultValue={defaultValue}
+            >
               <SelectTrigger
-                className={`${errors?.[name]?.message ? 'border-red-500' : ''}`}
+                className={cn(
+                  `${errors?.[name]?.message ? 'border-red-500' : ''}`,
+                  className,
+                )}
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
-              <SelectContent className={cn('dark:border-gray-900', className)}>
-                <SelectGroup>
-                  {dataItem?.length > 0 ? (
-                    dataItem?.map((item: any, index: number) => (
-                      <SelectItem
-                        value={valueType === 'key' ? item?.id : item?.name}
-                        key={index}
-                      >
-                        <span className="font-normal">{item?.name}</span>
-                      </SelectItem>
-                    ))
-                  ) : (
-                    <div style={{ textAlign: 'center' }}>
-                      <p>Data Not Found</p>
-                    </div>
-                  )}
-                </SelectGroup>
-              </SelectContent>
+              {children}
             </Select>
-
-            {/* <Select
-              size="large"
-              style={{ width: "100%" }}
-              id={name}
-              placeholder={placeholder}
-              status={errors?.[name]?.message ? "error" : ""}
-              {...field}
-            >
-              {dataItem?.length > 0 ? (
-                dataItem?.map((item: any, index: number) => (
-                  <Option
-
-                    value={optionType === "currency" ? item?.code : item?.id}
-                    key={index}
-                  >
-                    {optionType === "currency"
-                      ? ${item?.code} - ${item?.name}
-                      : item?.name}
-                  </Option>
-                ))
-              ) : (
-                <div style={{ textAlign: "center" }}>
-                  <p>Data Not Found</p>
-                </div>
-              )}
-            </Select> */}
           </>
         )}
       />

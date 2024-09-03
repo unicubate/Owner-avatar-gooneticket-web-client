@@ -129,6 +129,7 @@
   "MENU.FOLLOWING": "Followings",
   "MENU.SUBSCRIBER": "Subscribes",
   "MENU.TICKET": "Tickets",
+  "MENU.INVOICE": "Invoices",
 
   "TRANSACTION.LAST_DAY": "Last {day} days",
   "TRANSACTION.ALL_TIME": "All time",

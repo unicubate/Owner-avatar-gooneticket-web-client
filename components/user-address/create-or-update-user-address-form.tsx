@@ -1,4 +1,3 @@
-import { GetAllCountiesAPI } from '@/api-site/profile';
 import { CreateOrUpdateOneUserAddressAPI } from '@/api-site/user-address';
 import { UserAddressFormModel } from '@/types/user-address';
 import { AlertDangerNotification } from '@/utils/alert-notification';
@@ -9,12 +8,14 @@ import * as yup from 'yup';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
-import { TextInput } from '../ui-setting/shadcn';
+import { SelectInput, TextInput } from '../ui-setting/shadcn';
+import { SelectContent, SelectGroup, SelectItem } from '../ui/select';
 
 type Props = {
   userAddress?: any;
   isEdit: boolean;
   setIsEdit: any;
+  countries: any[];
 };
 
 const schema = yup.object({
@@ -22,12 +23,14 @@ const schema = yup.object({
   address: yup.string().required('address is a required field'),
   email: yup.string().email().required('email is a required field'),
   city: yup.string().required('city is a required field'),
+  country: yup.string().required('country is a required field'),
 });
 
 const CreateOrUpdateUserAddressForm = ({
   userAddress,
   setIsEdit,
   isEdit,
+  countries,
 }: Props) => {
   const {
     loading,
@@ -50,7 +53,6 @@ const CreateOrUpdateUserAddressForm = ({
     mode: 'onChange',
   });
 
-  const { data: countries } = GetAllCountiesAPI();
   useEffect(() => {
     if (userAddress) {
       const fields = [
@@ -129,6 +131,33 @@ const CreateOrUpdateUserAddressForm = ({
             disabled={isEdit}
           />
         </div>
+
+        <div className="mt-4">
+          <SelectInput
+            label="Country"
+            control={control}
+            errors={errors}
+            placeholder="Select country"
+            name="country"
+          >
+            <SelectContent className="dark:border-gray-800">
+              <SelectGroup>
+                {countries?.length > 0 ? (
+                  countries?.map((item: any, index: number) => (
+                    <SelectItem value={item?.name} key={index}>
+                      <span className="font-normal">{item?.name}</span>
+                    </SelectItem>
+                  ))
+                ) : (
+                  <div style={{ textAlign: 'center' }}>
+                    <p>Data Not Found</p>
+                  </div>
+                )}
+              </SelectGroup>
+            </SelectContent>
+          </SelectInput>
+        </div>
+
         <div className="mt-2">
           <TextInput
             label="Phone number"
