@@ -1,6 +1,5 @@
 import { MediumFooter } from '@/components/footer/medium-footer';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { UserModel } from '@/types/user';
 import { useInputState } from '../../hooks';
 import { HeaderSite } from '../../ui-setting/header-site';
 import { useAuth } from '../../util/context-user';
@@ -32,10 +31,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
       <HeaderSite title={title} />
 
       <div className="flex flex-col">
-        <HorizontalNavDashboard
-          showDrawer={showDrawer}
-          user={user as UserModel}
-        />
+        <HorizontalNavDashboard showDrawer={showDrawer} />
 
         <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
           <SheetTrigger asChild></SheetTrigger>

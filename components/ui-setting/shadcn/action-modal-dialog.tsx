@@ -1,7 +1,7 @@
 import { VariantButton } from '@/components/ui/button';
 import { ButtonInput } from '..';
 
-import { useInputState } from '@/components/hooks';
+import { useInputState, useMediaQuery } from '@/components/hooks';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -10,6 +10,15 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 
 interface Props {
   title: string;
@@ -33,9 +42,10 @@ const ActionModalDialog = ({
   variant = 'danger',
 }: Props) => {
   const { t } = useInputState();
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  return (
-    <>
+  if (isDesktop) {
+    return (
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
         <AlertDialogTrigger asChild>{buttonDialog}</AlertDialogTrigger>
         <AlertDialogContent className="dark:border-gray-900">
@@ -66,6 +76,42 @@ const ActionModalDialog = ({
           </div>
         </AlertDialogContent>
       </AlertDialog>
+    );
+  }
+
+  return (
+    <>
+      <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <DrawerContent className="h-[200px] dark:border-gray-900">
+          <DrawerHeader className="text-left ">
+            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerDescription>{description}</DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <div className="mb-4 flex items-center space-x-4">
+              <ButtonInput
+                type="button"
+                className="w-full"
+                size="lg"
+                variant="outline"
+                onClick={() => setIsOpen((lk: boolean) => !lk)}
+              >
+                {t.formatMessage({ id: 'ACTION.NO.CANCEL' })}
+              </ButtonInput>
+              <ButtonInput
+                type="button"
+                className="w-full"
+                size="lg"
+                variant={'danger'}
+                onClick={onClick}
+                loading={loading}
+              >
+                {t.formatMessage({ id: 'ACTION.YES.CONTINUE' })}
+              </ButtonInput>
+            </div>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

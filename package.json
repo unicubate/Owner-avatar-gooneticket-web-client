@@ -119,6 +119,7 @@
     "typescript": "5.5.4",
     "universal-cookie": "^7.2.0",
     "uuid": "^10.0.0",
+    "vaul": "^0.9.1",
     "wavesurfer-react": "^3.0.3",
     "wavesurfer.js": "^7.8.4",
     "yup": "^1.4.0",

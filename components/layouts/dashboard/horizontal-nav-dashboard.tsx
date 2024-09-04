@@ -4,7 +4,6 @@ import {
   ImageLogo,
   ThemeToggle,
 } from '@/components/ui-setting';
-import { UserModel } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -16,13 +15,12 @@ import { Button } from '../../ui/button';
 import { DropdownMenu, DropdownMenuTrigger } from '../../ui/dropdown-menu';
 
 interface Props {
-  user?: UserModel;
   showDrawer?: () => void;
 }
 
-const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
+const HorizontalNavDashboard = ({ showDrawer }: Props) => {
   const { push, pathname } = useRouter();
-  const { t, linkHref } = useInputState();
+  const { t, linkHref, userStorage: user } = useInputState();
   const [navigation] = useState<NavbarProps[]>([
     {
       title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
@@ -94,32 +92,34 @@ const HorizontalNavDashboard = ({ user, showDrawer }: Props) => {
               </div>
             </div>
 
-            <div className="ml-auto flex items-center justify-center">
-              <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-                {navigation
-                  .filter((i) => Number(i.count) >= 1)
-                  .map((item: any, index: number) => {
-                    //const isActive = pathname === item.href;
-                    const isActive = pathname?.startsWith(item.href);
-                    return (
-                      <Link
-                        key={index}
-                        href={`${item?.href}`}
-                        title={item?.title}
-                        className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                          isActive
-                            ? `border-indigo-600 text-indigo-600`
-                            : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
-                        } `}
-                      >
-                        {item?.icon}
+            {user ? (
+              <div className="ml-auto flex items-center justify-center">
+                <nav className="ml-4 hidden w-auto space-x-10 lg:block">
+                  {navigation
+                    .filter((i) => Number(i.count) >= 1)
+                    .map((item: any, index: number) => {
+                      //const isActive = pathname === item.href;
+                      const isActive = pathname?.startsWith(item.href);
+                      return (
+                        <Link
+                          key={index}
+                          href={`${item?.href}`}
+                          title={item?.title}
+                          className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                            isActive
+                              ? `border-indigo-600 text-indigo-600`
+                              : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                          } `}
+                        >
+                          {item?.icon}
 
-                        {item?.title}
-                      </Link>
-                    );
-                  })}
-              </nav>
-            </div>
+                          {item?.title}
+                        </Link>
+                      );
+                    })}
+                </nav>
+              </div>
+            ) : null}
 
             <div className="ml-auto flex items-center justify-end">
               <ThemeToggle />
