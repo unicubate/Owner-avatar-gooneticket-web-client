@@ -172,19 +172,24 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
-          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <div title={`Event confirmed`} className="pt-1 lg:hidden">
-              <CircleCheckBigIcon className="ml-auto text-green-500" />
-            </div>
-          )}
-
-          {item?.model === 'EVENT' &&
-          !['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
+          {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
             <div title={`Event expired`} className="pt-1 lg:hidden">
-              <BadgeAlertIcon className="ml-auto  text-red-500" />
+              <BadgeAlertIcon className="ml-auto  text-red-600" />
             </div>
-          ) : null}
+          ) : (
+            ['ACCEPTED'].includes(item?.status) && (
+              <div title={`Event accepted`} className="pt-1 lg:hidden">
+                <CircleCheckBigIcon className="ml-auto text-blue-600" />
+              </div>
+            )
+          )}
+
+          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
+            <div title={`Event confirmed`} className="pt-1 lg:hidden">
+              <CircleCheckBigIcon className="ml-auto text-green-600" />
+            </div>
+          )}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

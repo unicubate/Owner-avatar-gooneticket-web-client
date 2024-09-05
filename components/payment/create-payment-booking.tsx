@@ -18,8 +18,13 @@ const schema = yup.object({
   email: yup.string().email().required('email is a required field'),
 });
 
-type Props = { data?: any; paymentModel: PaymentModel };
-const CreatePaymentBooking = ({ data, paymentModel }: Props) => {
+const CreatePaymentBooking = ({
+  data,
+  paymentModel,
+}: {
+  data?: any;
+  paymentModel: PaymentModel;
+}) => {
   const { push } = useRouter();
   const { loading, setLoading, hasErrors, setHasErrors, ipLocation } =
     useInputState();
@@ -64,7 +69,7 @@ const CreatePaymentBooking = ({ data, paymentModel }: Props) => {
       setHasErrors(false);
       setLoading(false);
 
-      push(`/transactions/success?token=${newReference}`);
+      //push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

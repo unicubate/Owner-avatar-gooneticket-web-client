@@ -108,6 +108,17 @@ const CreateOrUpdateUserAddressForm = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="mt-2">
           <TextInput
+            label="Full name"
+            control={control}
+            type="text"
+            name="fullName"
+            placeholder="Full name"
+            errors={errors}
+            disabled={isEdit}
+          />
+        </div>
+        <div className="mt-2">
+          <TextInput
             label="Email"
             control={control}
             type="email"
@@ -119,17 +130,6 @@ const CreateOrUpdateUserAddressForm = ({
           <span className="text-xs font-medium text-gray-400">
             {`After booking, your ticket will be sent to this email address.`}
           </span>
-        </div>
-        <div className="mt-2">
-          <TextInput
-            label="Full name"
-            control={control}
-            type="text"
-            name="fullName"
-            placeholder="Full name"
-            errors={errors}
-            disabled={isEdit}
-          />
         </div>
 
         <div className="mt-4">

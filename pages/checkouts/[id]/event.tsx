@@ -590,7 +590,7 @@ const CheckoutEvent = () => {
                           </p>
                           {newAmount?.value ? (
                             <>
-                              <p className="ml-1 text-2xl font-bold dark:text-white">
+                              <p className="ml-1 text-3xl font-bold dark:text-white">
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.valueTotal),
