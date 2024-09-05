@@ -40,6 +40,8 @@ export type OrderItemModel = {
   quantity: string;
   percentDiscount: string;
   price: string;
+  fullName: string;
+  email: string;
   priceDiscount: string;
   organizationBuyerId: string;
   organizationSellerId: string;
@@ -91,4 +93,7 @@ export type OrderModel = {
 
 export interface OrderItemFormModel {
   status: StatusOderProduct;
+  orderItemId: string;
+  fullName: string;
+  email: string;
 }

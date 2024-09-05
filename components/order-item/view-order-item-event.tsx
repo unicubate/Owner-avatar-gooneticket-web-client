@@ -8,6 +8,7 @@ import {
   CalendarDaysIcon,
   CheckCheckIcon,
   DownloadIcon,
+  User2Icon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -28,7 +29,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
   return (
     <>
       <div className="px-4 py-5">
-        <p className="mt-4 text-center text-2xl font-semibold uppercase">
+        <p className="mt-4 text-center text-xl font-semibold uppercase">
           {orderItem?.organizationSeller?.name}
         </p>
 
@@ -51,6 +52,14 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         ) : null} */}
 
         <div className="text-center">
+          {orderItem?.fullName ? (
+            <div className="mt-2">
+              <Badge className="rounded-sm text-sm font-bold" variant="outline">
+                <User2Icon className="size-4" />
+                <span className="ml-1.5">{orderItem?.fullName}</span>
+              </Badge>
+            </div>
+          ) : null}
           <Badge
             className="mt-2 rounded-sm  text-lg font-semibold"
             variant="secondary"
@@ -127,7 +136,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             <ButtonInput
               type="submit"
               size="sm"
-              variant="primary"
+              variant="ghost"
               icon={<DownloadIcon className="size-6" />}
               onClick={() => {
                 push(

@@ -4,7 +4,7 @@ import { ButtonInput } from '@/components/ui-setting';
 import { type ISourceOptions } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import { CircleCheckIcon } from 'lucide-react';
+import { CircleCheckBigIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
@@ -165,7 +165,7 @@ const TransactionSuccess = () => {
         <div className="h-screen">
           <div className="p-6  md:mx-auto">
             <div className="mx-auto mt-4 max-w-max text-green-500">
-              <CircleCheckIcon className="size-28" />
+              <CircleCheckBigIcon className="size-28" />
             </div>
 
             {token ? <Particles id="tsparticles" options={options} /> : null}

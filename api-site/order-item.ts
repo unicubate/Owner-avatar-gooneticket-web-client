@@ -19,10 +19,10 @@ export const UpdateOneOrderItemAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['order-item'];
+  const queryKey = ['order-items'];
   const queryClient = useQueryClient();
   const result = useMutation({
-    // mutationKey: queryKey,
+    mutationKey: queryKey,
     mutationFn: async (
       payload: OrderItemFormModel & { orderItemId: string },
     ) => {
@@ -62,7 +62,7 @@ export const GetOrderItemsAPI = (payload: {
   cartOrderId?: string;
 }) => {
   const { data, isError, isLoading, status, refetch } = useQuery({
-    queryKey: ['order-items', { ...payload }],
+    queryKey: ['order-item', { ...payload }],
     queryFn: async () =>
       await makeApiCall({
         action: 'getOrderItems',
@@ -151,7 +151,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     status,
   } = payload;
   return useInfiniteQuery({
-    queryKey: [['order-items', 'infinite'], { ...payload }],
+    queryKey: ['order-items', 'infinite', { ...payload }],
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     getPreviousPageParam: (firstPage: any) => firstPage.data.prev_page,
@@ -187,7 +187,7 @@ export const GetInfiniteOrdersAPI = (payload: {
   const { days, orderItemId, daysConfirm, search, take, sort, customer } =
     payload;
   return useInfiniteQuery({
-    queryKey: [['orders', 'infinite'], { ...payload }],
+    queryKey: ['orders', 'infinite', { ...payload }],
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     getPreviousPageParam: (firstPage: any) => firstPage.data.prev_page,

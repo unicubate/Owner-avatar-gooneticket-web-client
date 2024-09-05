@@ -7,15 +7,17 @@ import {
   formateToLLLL,
   viewYyformateToYyyy,
 } from '@/utils';
-import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   BadgeAlertIcon,
   CheckCheckIcon,
+  CircleCheckBigIcon,
+  MailIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
+  PencilIcon,
   ShareIcon,
-  TicketIcon,
+  UserIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -32,6 +34,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import { UpdateOrderItemsModal } from './update-order-items-modal';
 
 type Props = {
   item: OrderItemModel;
@@ -42,7 +45,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [level, setLevel] = useState<string | number>('L');
   const [copied, setCopied] = useState(false);
-  const { t, locale } = useInputState();
+  const { t, locale, isOpen, setIsOpen } = useInputState();
   const arrayItem = [
     {
       model: 'EVENT',
@@ -69,7 +72,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
+                className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
@@ -85,7 +88,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className={`flex items-center font-bold`}>
                 <p
-                  className={`text-sm ${item?.confirmedAt ? 'text-gray-600 hover:text-green-600' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
+                  className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
                 >
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
@@ -94,67 +97,27 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
                     {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
                   </span>
                 </p>
-                <span className="ml-1 text-gray-600">-</span>
-                <Badge
-                  className="ml-1 h-6 rounded-sm  text-sm"
-                  variant="secondary"
-                >
+              </div>
+
+              <div className="mt-2 text-sm">
+                <Badge className="rounded-sm text-sm" variant="secondary">
                   {capitalizeFirstLetter(item?.ticket?.name ?? 'FREE')}
                 </Badge>
               </div>
 
-              {item?.id ? (
-                <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-900">
-                  <Link
-                    prefetch={true}
-                    href={`${oneItem(item?.model)?.url}`}
-                    title={oneItem(item?.model)?.title}
-                  >
-                    <ReadMore
-                      html={`${oneItem(item?.model)?.title}`}
-                      value={100}
-                    />
-                  </Link>
-                </p>
+              {item?.fullName ? (
+                <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <UserIcon className="size-4" />
+                  <span className="ml-1">{item?.fullName}</span>
+                </div>
               ) : null}
 
-              <div className="mt-2 flex items-center font-medium">
-                <span className="text-sm font-bold text-gray-600">
-                  #{item?.orderNumber}
-                </span>
-
-                <p className="ml-1.5 inline-flex text-sm font-bold">
-                  <Badge className="gap-1 rounded-sm" variant="secondary">
-                    <TicketIcon className="size-3.5" />
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {item?.model}
-                    </span>
-                  </Badge>
-                </p>
-                {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
-                    <Badge className="gap-1 rounded-sm" variant="success">
-                      <CheckCheckIcon className="size-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        {item?.status}
-                      </span>
-                    </Badge>
-                  </p>
-                )}
-
-                {item?.model === 'EVENT' &&
-                !['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
-                item?.eventDate?.isExpired ? (
-                  <p className="ml-1.5 inline-flex gap-2 text-sm font-bold lg:hidden">
-                    <Badge className="gap-1 rounded-sm" variant="danger">
-                      <BadgeAlertIcon className="size-3.5" />
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        EXPIRED
-                      </span>
-                    </Badge>
-                  </p>
-                ) : null}
-              </div>
+              {item?.email ? (
+                <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <MailIcon className="size-4" />
+                  <span className="ml-1"> {item?.email}</span>
+                </div>
+              ) : null}
             </div>
           </div>
         </td>
@@ -209,6 +172,20 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
+          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
+            <div title={`Event confirmed`} className="pt-1 lg:hidden">
+              <CircleCheckBigIcon className="ml-auto text-green-500" />
+            </div>
+          )}
+
+          {item?.model === 'EVENT' &&
+          !['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
+          item?.eventDate?.isExpired ? (
+            <div title={`Event expired`} className="pt-1 lg:hidden">
+              <BadgeAlertIcon className="ml-auto  text-red-500" />
+            </div>
+          ) : null}
+
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button type="button" size="icon" variant="ghost">
@@ -229,34 +206,37 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
                     </span>
                   </DropdownMenuItem>
                 </Link>
-                {item?.model === 'EVENT' && (
+                <DropdownMenuSeparator />
+                {!item?.confirmedAt ? (
                   <>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => setCopied(true)}>
-                      <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                    <DropdownMenuItem onClick={() => setIsOpen(true)}>
+                      <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
                       <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                        {t.formatMessage({ id: 'UTIL.SHARE' })}
+                        {t.formatMessage({ id: 'MENU.SETTING' })}
                       </span>
                     </DropdownMenuItem>
+                    <DropdownMenuSeparator />
                   </>
-                )}
+                ) : null}
+                <DropdownMenuItem onClick={() => setCopied(true)}>
+                  <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                    {t.formatMessage({ id: 'UTIL.SHARE' })}
+                  </span>
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          <div className="pt-1 lg:hidden">
-            <p className={`inline-flex text-sm font-bold`}>
-              <span className={`ml-1`}>
-                {Number(item?.price) > 0 ? (
-                  <SerialPrice
-                    className="text-sm"
-                    value={Number(item?.price)}
-                    currency={{ code: String(item?.currency) }}
-                  />
-                ) : (
-                  'Free'
-                )}
-              </span>
-            </p>
+          <div className="pt-1 text-sm font-bold lg:hidden">
+            {Number(item?.price) > 0 ? (
+              <SerialPrice
+                className="text-sm"
+                value={Number(item?.price)}
+                currency={{ code: String(item?.currency) }}
+              />
+            ) : (
+              'Free'
+            )}
           </div>
         </td>
       </tr>
@@ -266,6 +246,14 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         setIsOpen={setCopied}
         link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket-public`}
       />
+
+      {isOpen ? (
+        <UpdateOrderItemsModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          orderItem={item}
+        />
+      ) : null}
     </>
   );
 };
