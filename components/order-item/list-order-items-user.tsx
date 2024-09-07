@@ -72,7 +72,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               title={oneItem(item?.model)?.title}
             >
               <div
-                className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary hover:text-blue-900`}`}`}
+                className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
                 <div className="mx-auto max-w-max border-none text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
@@ -88,7 +88,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
               <div className={`flex items-center font-bold`}>
                 <p
-                  className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-primary`}`}`}
+                  className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600`}`}`}
                 >
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
@@ -180,7 +180,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
               <div title={`Event accepted`} className="pt-1 lg:hidden">
-                <CircleCheckBigIcon className="ml-auto text-blue-600" />
+                <CircleCheckBigIcon className="ml-auto text-gray-600" />
               </div>
             )
           )}
