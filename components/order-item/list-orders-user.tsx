@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderModel } from '@/types/order-item';
-import { formateDate, formateFromNow } from '@/utils';
+import { formateddLLLyyyyHHmm, formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import {
-  CalendarIcon,
+  CalendarPlus2,
   MailIcon,
   MoreHorizontalIcon,
   MoveRightIcon,
@@ -62,10 +62,12 @@ const ListOrdersUser = ({ item, index }: Props) => {
             </Link>
 
             <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className="flex items-center font-bold text-gray-600 lg:hidden">
-                <CalendarIcon className="size-4" />
-                <span className="ml-1">
-                  {formateDate(item?.createdAt as Date, locale)}
+              <div className="flex items-center text-gray-600 lg:hidden">
+                <span className="font-bold">
+                  <CalendarPlus2 className="size-4" />
+                </span>
+                <span className="ml-1.5 text-sm font-normal">
+                  {formateddLLLyyyyHHmm(item?.createdAt as Date, locale)}
                 </span>
               </div>
               {item?.id ? (

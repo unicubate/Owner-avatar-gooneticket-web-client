@@ -20,6 +20,16 @@ export const formateFromNow = (date: Date, locale: string) => {
     : dateInit.setLocale(locale).toFormat('D');
 };
 
+export const formateddLLLyyyyHHmm = (date: Date, locale: string) => {
+  const todaysDate = new Date();
+  const currentYear = todaysDate.getFullYear();
+  const dateInit = DateTime.fromISO(String(date));
+  const dateYear = Number(dateInit.toFormat('yyyy'));
+  return currentYear === dateYear
+    ? dateInit.setLocale(locale).toFormat('dd LLL HH:mm')
+    : dateInit.setLocale(locale).toFormat('D');
+};
+
 export const formateToCccc = (date: Date, locale: string) =>
   DateTime.fromISO(String(date)).setLocale(locale).toFormat('cccc');
 
