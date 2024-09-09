@@ -10,7 +10,6 @@ import {
 import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   BadgeAlertIcon,
-  CheckCheckIcon,
   CircleCheckBigIcon,
   MailIcon,
   MoreHorizontalIcon,
@@ -123,35 +122,23 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
-          {['CANCELLED'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'danger'}>
-              {item?.status}
-            </Badge>
-          )}
-
-          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <Badge className="gap-1 rounded-sm" variant="success">
-              <CheckCheckIcon className="size-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                {item?.status}
-              </span>
-            </Badge>
-          )}
-
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
-            <Badge className="gap-1 rounded-sm" variant="danger">
-              <BadgeAlertIcon className="size-3.5" />
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                EXPIRED
-              </span>
+            <Badge className="ml-2 mt-2 rounded-sm" variant={'danger'}>
+              EXPIRED
             </Badge>
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
-              <Badge className="rounded-sm" variant="primary">
+              <Badge className="rounded-sm" variant="secondary">
                 {item?.status}
               </Badge>
             )
+          )}
+
+          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
+            <Badge className="rounded-sm" variant={'success'}>
+              {item?.status}
+            </Badge>
           )}
         </td>
 

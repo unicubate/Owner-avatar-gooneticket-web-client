@@ -18,41 +18,42 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ClientOnly } from '@/components/util/client-only';
 import { ContextIntlProvider } from '@/i18n/context-intl-provider';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { useRouter } from 'next/router';
-
-// const queryClient = new QueryClient({
-//   defaultOptions: { queries: { staleTime: 60_000, gcTime: 10 * (60 * 1000) } },
-// });
-const queryClient = new QueryClient();
+import { useState } from 'react';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
-      <ContextIntlProvider>
-        <GoogleOAuthProvider
-          clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
-        >
-          <ClientOnly fallback={<LoadingFile />}>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <HydrationBoundary state={pageProps.dehydratedState}>
+      <HydrationBoundary state={pageProps.dehydratedState}>
+        <ContextIntlProvider>
+          <GoogleOAuthProvider
+            clientId={`${process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID}`}
+          >
+            <ClientOnly fallback={<LoadingFile />}>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+              >
                 <ConfigProvider>
                   <ContextUserProvider>
+                    
                     <Component {...pageProps} />
 
-                    {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-                      <ReactQueryDevtools
-                        buttonPosition="bottom-right"
-                        initialIsOpen={false}
-                      />
-                    )}
                   </ContextUserProvider>
                 </ConfigProvider>
-              </HydrationBoundary>
-            </ThemeProvider>
-          </ClientOnly>
-        </GoogleOAuthProvider>
-      </ContextIntlProvider>
+              </ThemeProvider>
+            </ClientOnly>
+          </GoogleOAuthProvider>
+        </ContextIntlProvider>
+      </HydrationBoundary>
+
+      {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
+        <ReactQueryDevtools
+          buttonPosition="bottom-right"
+          initialIsOpen={false}
+        />
+      )}
     </QueryClientProvider>
   );
 }

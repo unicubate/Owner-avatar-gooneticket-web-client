@@ -87,7 +87,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
         </div>
       </header>
 
-      <div className="flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#121212]">
+      <div className="flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-background/100">
         <main>{children}</main>
       </div>
     </>
