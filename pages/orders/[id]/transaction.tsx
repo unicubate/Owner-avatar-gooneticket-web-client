@@ -141,7 +141,7 @@ const TransactionsView = () => {
                         </div>
                       </div>
                       <div className="mt-8">
-                        {/* <div className="space-y-4 rounded-lg border border-gray-200 p-4 dark:border-gray-900"> */}
+                        {/* <div className="space-y-4 rounded-lg border border-gray-200 p-4 dark:border-input"> */}
                         <div className="space-y-4 border-gray-200 dark:border-input">
                           <div className="hidden sm:grid sm:grid-cols-5">
                             <div className="text-xs font-medium uppercase sm:col-span-2">

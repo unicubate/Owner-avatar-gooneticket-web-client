@@ -83,7 +83,7 @@ const CreatePaymentBooking = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
+        <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
           <div className="p-4 sm:p-4 lg:p-3">
             <p className="text-center text-sm font-semibold">
               The purchase of this ticket can only be done on site

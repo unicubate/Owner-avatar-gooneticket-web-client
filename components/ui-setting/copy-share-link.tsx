@@ -90,7 +90,7 @@ export const CopyShareLink = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="h-[180px] dark:border-gray-900">
+        <DrawerContent className="h-[180px] dark:border-input">
           <DrawerHeader className="text-left ">
             <DrawerTitle>Share link</DrawerTitle>
             <DrawerDescription>

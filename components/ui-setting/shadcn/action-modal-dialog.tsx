@@ -48,7 +48,7 @@ const ActionModalDialog = ({
     return (
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
         <AlertDialogTrigger asChild>{buttonDialog}</AlertDialogTrigger>
-        <AlertDialogContent className="dark:border-gray-900">
+        <AlertDialogContent className="dark:border-input">
           <AlertDialogHeader>
             <AlertDialogTitle>{title}</AlertDialogTitle>
             <AlertDialogDescription>{description}</AlertDialogDescription>
@@ -82,7 +82,7 @@ const ActionModalDialog = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="h-[200px] dark:border-gray-900">
+        <DrawerContent className="h-[200px] dark:border-input">
           <DrawerHeader className="text-left ">
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{description}</DrawerDescription>

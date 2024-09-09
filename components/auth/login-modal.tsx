@@ -80,7 +80,7 @@ const LoginModal: React.FC<{
   return (
     <>
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-        <AlertDialogContent className="max-h-screen max-w-sm overflow-y-scroll dark:border-gray-900">
+        <AlertDialogContent className="max-h-screen max-w-sm overflow-y-scroll dark:border-input">
           <form onSubmit={handleSubmit(onSubmit)}>
             <Button
               type="button"

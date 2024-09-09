@@ -30,7 +30,7 @@ const UpdateOrderItemsModal = ({
     return (
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
         <AlertDialogTrigger>Open</AlertDialogTrigger>
-        <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-gray-900">
+        <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-input">
           <FormCreateOrUpdateOrderItems
             setShowModal={setIsOpen}
             orderItem={orderItem}
@@ -43,7 +43,7 @@ const UpdateOrderItemsModal = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="h-[300px] dark:border-gray-900">
+        <DrawerContent className="h-[300px] dark:border-input">
           <DrawerHeader className="text-left">
             <DrawerTitle asChild />
             <DrawerDescription asChild />

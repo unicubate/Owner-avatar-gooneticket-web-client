@@ -176,7 +176,7 @@ const CheckoutEvent = () => {
                     <div className="flow-root">
                       <div
                         key={item?.id}
-                        className="my-8 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background"
+                        className="my-8 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background"
                       >
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
@@ -295,7 +295,7 @@ const CheckoutEvent = () => {
                               </p>
                             </div>
                             <div className="mt-2 py-2 sm:mt-0">
-                              <div className="flex items-center rounded border border-gray-200 dark:border-gray-900">
+                              <div className="flex items-center rounded border border-gray-200 dark:border-input">
                                 <ButtonInput
                                   type="button"
                                   variant="primary"
@@ -414,7 +414,7 @@ const CheckoutEvent = () => {
                             )}
                           </div>
 
-                          <hr className="mt-8 dark:border-gray-900" />
+                          <hr className="mt-8 dark:border-input" />
                           <div className="py-2">
                             <div className="flex items-center">
                               <h2 className="text-base font-bold dark:text-gray-600">
@@ -461,7 +461,7 @@ const CheckoutEvent = () => {
                         <span className="font-bold">{timerRemaining}</span>
                       </ButtonInput>
                     </div>
-                    <div className="mt-4 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
+                    <div className="mt-4 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
@@ -524,7 +524,7 @@ const CheckoutEvent = () => {
                           )}
                         </li>
 
-                        {/* <hr className="my-4 dark:border-gray-900" />
+                        {/* <hr className="my-4 dark:border-input" />
 
                 <li className="flex items-center justify-between text-sm">
                   <p className="dark:text-gray-600">Commissioni di servizio</p>
@@ -532,7 +532,7 @@ const CheckoutEvent = () => {
                     € 3,00
                   </p>
                 </li> */}
-                        <hr className="my-4 dark:border-gray-900" />
+                        <hr className="my-4 dark:border-input" />
 
                         <li className="my-2 flex items-center justify-between">
                           <p className="text-3xl font-medium dark:text-white">
@@ -559,7 +559,7 @@ const CheckoutEvent = () => {
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.valueTotal ? (
-                      <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
+                      <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
                           <div className="mt-4 space-y-4">

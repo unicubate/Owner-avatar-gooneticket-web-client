@@ -42,7 +42,7 @@ const SwitchInput = ({ control, label = '', name, defaultValue }: Props) => {
                   duration-200  
                   ease-in-out 
                   focus:outline-none 
-                  dark:border-gray-900 
+                  dark:border-input 
                   dark:bg-background"
               >
                 <label

@@ -114,7 +114,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
   return (
     <>
       <form onSubmit={handleUserPageSubmit}>
-        <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-gray-900 dark:bg-background">
+        <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
           <div className="p-4 sm:p-4 lg:p-3">
             <div className="flex-auto justify-center">
               {hasErrors && (

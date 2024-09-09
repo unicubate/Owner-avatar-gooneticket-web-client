@@ -64,7 +64,7 @@ export function TextareaReactQuillInput(props: Props) {
               placeholder={placeholder}
               modules={{ toolbar: false }}
               className={cn(
-                'px-full py-full w-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring dark:border-gray-900',
+                'px-full py-full w-full rounded-lg border-none focus:border-blue-300 focus:outline-none focus:ring dark:border-input',
                 className,
               )}
             />

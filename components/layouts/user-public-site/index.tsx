@@ -32,7 +32,7 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
         <SheetTrigger asChild>
           {/* <Button variant="outline">Open</Button> */}
         </SheetTrigger>
-        <SheetContent className="dark:border-gray-900 dark:bg-background">
+        <SheetContent className="dark:border-input dark:bg-background">
           <div className="flex flex-col overflow-y-auto pt-5">
             <VerticalNavUserPublicSite user={user} />
           </div>
@@ -42,7 +42,7 @@ const LayoutUserPublicSite = ({ children, title, user }: IProps) => {
 
       <div className="flex flex-1 dark:bg-black/15">
         <div
-          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-[#121212]`}
+          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-background/100`}
         >
           <main>
             {children}

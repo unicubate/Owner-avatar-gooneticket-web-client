@@ -63,7 +63,7 @@ const AffiliateIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-gray-900">
+                    <DropdownMenuContent className="w-auto dark:border-input">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -106,7 +106,7 @@ const AffiliateIndex = () => {
                 </div>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-gray-900 dark:bg-background">
+              <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-input dark:bg-background">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
                     <p className="text-lg font-bold">

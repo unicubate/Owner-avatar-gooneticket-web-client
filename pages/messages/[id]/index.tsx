@@ -98,9 +98,9 @@ const MessagesView = () => {
                 </div>
               </div>
               <div className="flex h-[580px] flex-col items-center justify-center">
-                <div className="flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl dark:border-gray-900 dark:bg-background">
+                <div className="flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl dark:border-input dark:bg-background">
                   {conversation?.fkConversationId && (
-                    <div className="mt-auto flex items-center border-b-2 border-gray-50 p-2 dark:border-gray-900">
+                    <div className="mt-auto flex items-center border-b-2 border-gray-50 p-2 dark:border-input">
                       <div className="relative shrink-0 cursor-pointer">
                         <AvatarComponent
                           className="size-9"
@@ -123,7 +123,7 @@ const MessagesView = () => {
                     </div>
                   )}
                   <div
-                    className="flex h-0 grow flex-col overflow-auto border-b-2 border-gray-50 p-4 dark:border-gray-900"
+                    className="flex h-0 grow flex-col overflow-auto border-b-2 border-gray-50 p-4 dark:border-input"
                     ref={chatContainerRef}
                   >
                     {hasNextPage && (

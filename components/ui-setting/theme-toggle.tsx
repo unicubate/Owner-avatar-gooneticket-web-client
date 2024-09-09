@@ -39,7 +39,7 @@ const ThemeToggle = () => {
             <span className="sr-only">Toggle theme</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-auto dark:border-gray-900">
+        <DropdownMenuContent className="w-auto dark:border-input">
           <DropdownMenuGroup>
             <DropdownMenuItem onClick={() => setTheme('light')}>
               <span className="cursor-pointer">Light</span>

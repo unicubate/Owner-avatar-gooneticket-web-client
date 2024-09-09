@@ -37,7 +37,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
           <SheetTrigger asChild></SheetTrigger>
           <SheetContent
             side="left"
-            className="dark:border-gray-900 dark:bg-background"
+            className="dark:border-input dark:bg-background"
           >
             <div className="flex flex-col overflow-y-auto pt-5">
               <VerticalNavDashboard user={user} />

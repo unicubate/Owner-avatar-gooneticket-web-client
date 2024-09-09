@@ -37,7 +37,7 @@ const TableEventDates = ({
 
   return (
     <>
-      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-gray-900 dark:bg-background">
+      <div className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-input dark:bg-background">
         <div className="px-4 py-3">
           <div className="py-4 sm:flex sm:items-center sm:justify-between">
             <div className="mt-4 sm:mt-0">

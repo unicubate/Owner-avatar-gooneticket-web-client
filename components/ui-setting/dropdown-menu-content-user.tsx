@@ -31,7 +31,7 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
   };
   return (
     <>
-      <DropdownMenuContent className="w-auto dark:border-gray-900 dark:bg-background">
+      <DropdownMenuContent className="w-auto dark:border-input dark:bg-background">
         {user?.status === 'CREATOR' ? (
           <>
             <DropdownMenuGroup>

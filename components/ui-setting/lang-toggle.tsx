@@ -65,7 +65,7 @@ const LangToggle = () => {
             <span className="sr-only">Toggle lang</span>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-auto dark:border-gray-900">
+        <DropdownMenuContent className="w-auto dark:border-input">
           <DropdownMenuGroup>
             {languages
               .filter((lang) => lang.name !== currentLanguage?.name)

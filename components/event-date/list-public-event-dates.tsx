@@ -40,7 +40,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
     <>
       <div
         key={index}
-        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-gray-900 dark:bg-background"
+        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-input dark:bg-background"
       >
         <Link href={linkHrefCheckouts}>
           <div className="divide-y divide-gray-200 dark:divide-gray-900">

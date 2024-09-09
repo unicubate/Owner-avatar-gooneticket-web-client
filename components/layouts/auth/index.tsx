@@ -19,7 +19,7 @@ const LayoutAuth = ({ children, title }: IProps) => {
     <>
       <HeaderSite title={title} />
 
-      <header className="sticky border-b border-gray-100 dark:border-gray-900 dark:bg-background">
+      <header className="sticky border-b border-gray-100 dark:border-input dark:bg-background">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="flex xl:ml-0">
