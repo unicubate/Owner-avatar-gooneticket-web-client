@@ -75,7 +75,7 @@ export function ListCarouselUploadMini(props: Props) {
                 style={{
                   left: 0,
                   right: 0,
-                  height: '240px',
+                  height: '250px',
                   width: `100%`,
                   marginInline: 'auto',
                   aspectRatio: 'auto',
@@ -95,9 +95,9 @@ export function ListCarouselUploadMini(props: Props) {
 
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  height={500}
-                  width={500}
-                  className={`size-40 rounded-md object-cover`}
+                  height={100}
+                  width={100}
+                  className="size-48 rounded-md object-cover"
                   src={`${viewOneFileUploadAPI({
                     folder: folder,
                     fileName: item?.path,

@@ -189,154 +189,104 @@ const CheckoutEvent = () => {
                             </div>
                           ) : null}
 
-                          {item?.title ? (
-                            <div className="my-2 text-lg font-bold">
-                              {item?.title ?? ''}
-                            </div>
-                          ) : null}
-
-                          <div className="relative mt-4 shrink-0 cursor-pointer">
-                            <div className="flex items-center">
-                              <div className="flex shrink-0 items-center font-bold">
-                                <span className="text-xl">
-                                  {eventDate?.oneTicket?.id ? (
-                                    <>
-                                      {formatePrice({
-                                        currency: `${eventDate?.oneTicket?.currency?.code}`,
-                                        value: Number(newAmount?.oneValue ?? 0),
-                                        isDivide: false,
-                                      })}{' '}
-                                      x {increment}
-                                    </>
-                                  ) : (
-                                    'Free'
-                                  )}
-                                </span>
-                              </div>
-
-                              <div className="ml-auto hidden font-bold text-blue-600 lg:table-cell">
-                                <span className="text-lg">
-                                  {capitalizeFirstLetter(
-                                    formateToRFC2822(
-                                      eventDate?.expiredAt,
-                                      locale,
-                                    ),
-                                  )}
-                                </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-2 text-sm">
-                                  {eventDate?.timeInit ?? ''}
-                                </span>
-                                {eventDate?.timeEnd ? (
-                                  <>
-                                    <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                      -
-                                    </span>
-                                    <span className="ml-1.5 text-sm">
-                                      {eventDate?.timeEnd ?? ''}
-                                    </span>
-                                  </>
-                                ) : null}
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="relative mt-4 shrink-0 cursor-pointer">
-                            <div className="hidden items-center lg:table-cell">
-                              <div className="flex shrink-0 font-bold">
-                                <span className="text-lg">
-                                  {capitalizeFirstLetter(
-                                    eventDate?.address ?? '',
-                                  )}
-                                </span>
-                                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-2 text-lg">
-                                  {capitalizeFirstLetter(eventDate?.city ?? '')}
-                                </span>
-                                <span className="ml-2 text-lg text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-2 text-lg">
-                                  {capitalizeFirstLetter(
-                                    eventDate?.country ?? '',
-                                  )}
-                                </span>
-                              </div>
-                            </div>
-
-                            <div className="text-lg lg:hidden">
-                              <div className="flex font-bold">Date</div>
-                              <div className="ml-auto font-bold text-blue-600">
-                                <span>
-                                  {capitalizeFirstLetter(
-                                    formateToRFC2822(
-                                      eventDate?.expiredAt,
-                                      locale,
-                                    ),
-                                  )}
-                                </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-2 text-sm">
-                                  {eventDate?.timeInit ?? ''}
-                                </span>
-                                {eventDate?.timeEnd ? (
-                                  <>
-                                    <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                      -
-                                    </span>
-                                    <span className="ml-1.5 text-sm">
-                                      {eventDate?.timeEnd ?? ''}
-                                    </span>
-                                  </>
-                                ) : null}
-                              </div>
-                            </div>
-
-                            <div className="mt-4 text-lg lg:hidden">
-                              <div className="flex font-bold">Location</div>
-                              <div className="ml-auto font-bold">
-                                <span className="text-sm">
-                                  {capitalizeFirstLetter(
-                                    eventDate?.address ?? '',
-                                  )}
-                                </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-2 text-sm">
-                                  {capitalizeFirstLetter(eventDate?.city ?? '')}
-                                </span>
-                                <span className="ml-1.5 text-sm text-gray-400 dark:text-gray-600">
-                                  -
-                                </span>
-                                <span className="ml-1.5 text-sm">
-                                  {capitalizeFirstLetter(
-                                    eventDate?.country ?? '',
-                                  )}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* <div className="mt-2 sm:flex sm:items-center sm:justify-between">
-                            <div className="py-2 sm:mt-0">
+                          <li className="mt-2 flex items-center justify-between font-semibold">
+                            {item?.title ? (
                               <p className="font-bold">
-                                Please select the date
+                                {increment} x {item?.title ?? ''}
                               </p>
-                            </div>
+                            ) : null}
+                            <p className="text-lg text-blue-600">
+                              {eventDate?.oneTicket?.id ? (
+                                <>
+                                  {formatePrice({
+                                    currency: `${eventDate?.oneTicket?.currency?.code}`,
+                                    value: Number(newAmount?.oneValue ?? 0),
+                                    isDivide: false,
+                                  })}
+                                </>
+                              ) : (
+                                'Free'
+                              )}
+                            </p>
+                          </li>
+
+                          <div className="mt-2 items-center justify-between">
+                            <span>
+                              {capitalizeFirstLetter(
+                                formateToRFC2822(eventDate?.expiredAt, locale),
+                              )}
+                            </span>
+                            <span className="ml-1.5 text-gray-400 dark:text-gray-600">
+                              -
+                            </span>
+                            <span className="ml-2">
+                              {eventDate?.timeInit ?? ''}
+                            </span>
+                            {eventDate?.timeEnd ? (
+                              <>
+                                <span className="ml-1.5 text-gray-400 dark:text-gray-600">
+                                  -
+                                </span>
+                                <span className="ml-1.5">
+                                  {eventDate?.timeEnd ?? ''}
+                                </span>
+                              </>
+                            ) : null}
                           </div>
 
-                          <div className="mt-4 space-y-4">
-                            <ListEventDatesForEventDate
-                              event={{ id: item?.id, slug: item?.slug }}
-                            />
-                          </div> */}
+                          <div className="mt-1.5">
+                            <span>
+                              {capitalizeFirstLetter(eventDate?.address ?? '')}
+                            </span>
+                            <span className="ml-1.5 text-gray-400 dark:text-gray-600">
+                              -
+                            </span>
+                            <span className="ml-2">
+                              {capitalizeFirstLetter(eventDate?.city ?? '')}
+                            </span>
+                            <span className="ml-1.5 text-gray-400 dark:text-gray-600">
+                              -
+                            </span>
+                            <span className="ml-1.5">
+                              {capitalizeFirstLetter(eventDate?.country ?? '')}
+                            </span>
+                          </div>
+
+                          <li className="mt-4 flex items-center justify-between text-sm font-semibold">
+                            <p className="text-gray-600">Unique place</p>
+
+                            {ticketJsonParse?.price ? (
+                              <>
+                                <p className="text-gray-600">
+                                  {formatePrice({
+                                    currency: `${item?.currency?.code}`,
+                                    value: ticketJsonParse?.price,
+                                    isDivide: false,
+                                  }) ?? ''}
+                                </p>
+                              </>
+                            ) : (
+                              'Free'
+                            )}
+                          </li>
+
+                          <li className="mt-2 flex items-center justify-between text-sm font-semibold">
+                            <p className="text-gray-600">Pre-sale</p>
+
+                            {ticketJsonParse?.price ? (
+                              <>
+                                <p className="text-gray-600">
+                                  {formatePrice({
+                                    currency: `${item?.currency?.code}`,
+                                    value: ticketJsonParse?.preSale,
+                                    isDivide: false,
+                                  }) ?? ''}
+                                </p>
+                              </>
+                            ) : (
+                              'Free'
+                            )}
+                          </li>
 
                           <div className="mt-2 sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
