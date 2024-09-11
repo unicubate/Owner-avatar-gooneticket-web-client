@@ -1,13 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { HtmlParser } from '@/utils/html-parser';
 import 'react-h5-audio-player/lib/styles.css';
-import { ButtonInput, CopyShareLink } from '../ui-setting';
+import { CopyShareLink } from '../ui-setting';
 import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { EventModel } from '@/types/event';
-import { MessageCircleIcon, ShareIcon } from 'lucide-react';
+import { ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
-import { ListComments } from '../comment/list-comments';
 import { ListEventDatesForEventDate } from '../event-date/list-event-dates-for-event-date';
 import { useInputState } from '../hooks';
 
@@ -72,36 +70,39 @@ const ViewOneEvent = ({ item }: Props) => {
           ) : null}
 
           <div className="mt-2 flex items-center font-medium text-gray-600">
-            <MessageCircleIcon className="size-7" />
-            <span className="ml-2 text-sm">
+            <ShareIcon
+              onClick={() => setIsOpen(true)}
+              className="size-6 cursor-pointer hover:text-gray-400 focus:ring-gray-900"
+            />
+            {/* <span className="ml-2 text-sm">
               {item?.totalComment > 0 ? item?.totalComment : ''}
-            </span>
+            </span> */}
 
             <CopyShareLink
               isOpen={isOpen}
               setIsOpen={setIsOpen}
               link={window.location.href}
-              buttonDialog={
-                <ButtonInput
-                  className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
-                  variant="link"
-                  type="button"
-                  size="icon"
-                >
-                  <ShareIcon className="size-6" />
-                </ButtonInput>
-              }
+              // buttonDialog={
+              //   <ButtonInput
+              //     className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
+              //     variant="link"
+              //     type="button"
+              //     size="icon"
+              //   >
+              //     <ShareIcon className="size-6" />
+              //   </ButtonInput>
+              // }
             />
           </div>
 
-          <ListComments
+          {/* <ListComments
             model="EVENT"
             modelIds={['EVENT']}
             take={6}
             userVisitorId={userStorage?.id}
             organizationId={item?.organizationId}
             eventId={item?.id}
-          />
+          /> */}
         </div>
       </div>
     </>
