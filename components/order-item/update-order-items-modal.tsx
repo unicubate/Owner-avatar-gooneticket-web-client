@@ -43,7 +43,7 @@ const UpdateOrderItemsModal = ({
   return (
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="h-[300px] dark:border-input">
+        <DrawerContent className="h-auto dark:border-input">
           <DrawerHeader className="text-left">
             <DrawerTitle asChild />
             <DrawerDescription asChild />

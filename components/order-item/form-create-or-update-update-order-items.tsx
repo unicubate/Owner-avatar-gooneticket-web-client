@@ -2,7 +2,6 @@ import { UpdateOneOrderItemAPI } from '@/api-site/order-item';
 import { OrderItemFormModel, OrderItemModel } from '@/types/order-item';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { XIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,7 +10,6 @@ import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
-import { Button } from '../ui/button';
 
 const schema = yup.object({
   fullName: yup.string().required(),
@@ -87,21 +85,7 @@ const FormCreateOrUpdateOrderItems = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Button
-          type="button"
-          size="icon"
-          variant="ghost"
-          className="float-right"
-          onClick={() => setShowModal(false)}
-        >
-          <span className="opacity-7 block size-6 rounded-full py-0 text-xl  dark:text-white">
-            <XIcon />
-          </span>
-        </Button>
         <div className="flex-auto justify-center p-2">
-          {/* <AlertDialogTitle className="text-center">
-            Update ticket
-          </AlertDialogTitle> */}
           {hasErrors && (
             <Alert
               variant="destructive"
@@ -136,6 +120,15 @@ const FormCreateOrUpdateOrderItems = ({
             />
           </div>
           <div className="mt-4 flex justify-center space-x-4">
+            <ButtonInput
+              type="button"
+              className="w-full"
+              size="lg"
+              variant="outline"
+              onClick={() => setShowModal(false)}
+            >
+              Cancel
+            </ButtonInput>
             <ButtonInput
               type="submit"
               className="w-full"
