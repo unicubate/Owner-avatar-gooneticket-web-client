@@ -139,7 +139,7 @@ const CheckoutEvent = () => {
     ? JSON.parse(watchAmount)
     : eventDate?.oneTicket;
   const calculateCommission =
-    Number(ticketJsonParse?.commission) * debounceIncrement ?? 0;
+    Number(Number(ticketJsonParse?.commission) * debounceIncrement) ?? 0;
   const calculatePrice = Number(ticketJsonParse?.amount) * debounceIncrement;
 
   const newAmount: NewAmountType = {
