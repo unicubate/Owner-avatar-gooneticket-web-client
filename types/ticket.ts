@@ -8,11 +8,13 @@ export type TicketModel = {
   title: string;
   name: string;
   limit: number;
+  quantity: number;
   organizationId: number;
   eventId: string;
   description: string;
   amount: number;
   eventDate: EventDateModel;
+  difference: number;
   currency: {
     code: string;
     name: string;

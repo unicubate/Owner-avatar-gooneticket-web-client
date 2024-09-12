@@ -37,7 +37,7 @@ const ListEventDates = ({ item, index }: Props) => {
       >
         <div
           key={index}
-          className="mt-2 cursor-pointer justify-between  gap-4 rounded-lg border border-input p-2 text-sm shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
+          className="mt-2 cursor-pointer justify-between  gap-4 rounded-lg border border-input p-2 text-sm shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background"
         >
           <div className="flex items-center py-1">
             <div className="min-w-0 flex-1">
@@ -49,9 +49,7 @@ const ListEventDates = ({ item, index }: Props) => {
                     </p>
                     <div className="tex-sm ml-1.5 font-semibold">
                       <p>
-                        {capitalizeFirstLetter(
-                          formateToLLLL(item?.expiredAt as Date, locale),
-                        )}
+                        {formateToLLLL(item?.expiredAt as Date, locale)}
                         <span className="ml-1.5">
                           {viewYyformateToYyyy(item?.expiredAt as Date)}
                         </span>
@@ -59,9 +57,7 @@ const ListEventDates = ({ item, index }: Props) => {
 
                       <p className="mt-1">
                         <span>
-                          {capitalizeFirstLetter(
-                            formateToCccc(item?.expiredAt as Date, locale),
-                          )}
+                          {formateToCccc(item?.expiredAt as Date, locale)}
                         </span>
                         ,<span className="ml-1">{item?.timeInit}</span>
                         {item?.timeEnd ? (
@@ -88,7 +84,7 @@ const ListEventDates = ({ item, index }: Props) => {
                 </div>
 
                 <div className="mt-2">
-                  <p className="text-xl font-bold">
+                  <p className="text-right text-xl font-bold">
                     {item?.oneTicket?.id ? (
                       <>
                         {formatePrice({

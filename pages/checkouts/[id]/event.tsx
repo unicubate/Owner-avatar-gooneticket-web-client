@@ -19,6 +19,7 @@ import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { ListCarouselUploadMini } from '@/components/ui-setting/list-carousel-upload-mini';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { CreateOrUpdateUserAddressForm } from '@/components/user-address/create-or-update-user-address-form';
 import { PrivateComponent } from '@/components/util/private-component';
@@ -70,6 +71,7 @@ const schema = yup.object({
 
 const CheckoutEvent = () => {
   const [increment, setIncrement] = useState(1);
+  const [isLimitMax, setIsLimitMax] = useState(true);
   const debounceIncrement = useDebounce(increment, 500);
   const { ipLocation, userStorage, locale } = useInputState();
   const { query } = useRouter();
@@ -212,9 +214,7 @@ const CheckoutEvent = () => {
 
                           <div className="mt-2 items-center justify-between">
                             <span>
-                              {capitalizeFirstLetter(
-                                formateToRFC2822(eventDate?.expiredAt, locale),
-                              )}
+                              {formateToRFC2822(eventDate?.expiredAt, locale)}
                             </span>
                             <span className="ml-1.5 text-gray-400 dark:text-gray-600">
                               -
@@ -318,7 +318,7 @@ const CheckoutEvent = () => {
                                   loading={false}
                                   onClick={() => setIncrement((lk) => lk + 1)}
                                   icon={<PlusIcon className="size-5" />}
-                                  disabled={!watchAmount}
+                                  disabled={!watchAmount || isLimitMax}
                                 />
                               </div>
                             </div>
@@ -352,7 +352,7 @@ const CheckoutEvent = () => {
                                       <div key={index}>
                                         <label
                                           htmlFor={ticket?.id}
-                                          className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
+                                          className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background`}
                                         >
                                           <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:mt-0">
@@ -374,15 +374,25 @@ const CheckoutEvent = () => {
                                             </div>
                                           </div>
 
-                                          <p className="text-lg font-bold text-gray-900 dark:text-white">
-                                            {formatePrice({
-                                              currency: `${item?.currency?.code}`,
-                                              value: Number(
-                                                ticket?.amount ?? 0,
-                                              ),
-                                              isDivide: false,
-                                            })}
-                                          </p>
+                                          <div className="sm:mt-0">
+                                            <p className="text-right text-lg font-bold text-gray-900 dark:text-white">
+                                              {formatePrice({
+                                                currency: `${item?.currency?.code}`,
+                                                value: Number(
+                                                  ticket?.amount ?? 0,
+                                                ),
+                                                isDivide: false,
+                                              })}
+                                            </p>
+                                            {Number(ticket?.difference) <= 0 ? (
+                                              <Badge
+                                                className="mt-1 rounded-sm uppercase"
+                                                variant="destructive"
+                                              >
+                                                Completed
+                                              </Badge>
+                                            ) : null}
+                                          </div>
 
                                           <input
                                             type="radio"
@@ -390,6 +400,13 @@ const CheckoutEvent = () => {
                                             value={JSON.stringify(ticket)}
                                             id={ticket?.id}
                                             className="sr-only"
+                                            onClick={() => {
+                                              setIsLimitMax(
+                                                Number(ticket?.difference) <= 0
+                                                  ? true
+                                                  : false,
+                                              );
+                                            }}
                                             defaultChecked={
                                               index === 0 ? true : false
                                             }
@@ -488,7 +505,7 @@ const CheckoutEvent = () => {
 
                         <li className="mb-2 flex items-center justify-between text-sm">
                           <p className="dark:text-gray-600">
-                            {increment} {item?.title}{' '}
+                            {increment} {item?.title}
                           </p>
 
                           {newAmount?.value ? (
@@ -555,7 +572,8 @@ const CheckoutEvent = () => {
                       </div>
                     </div>
 
-                    {ticketJsonParse?.enableOnlinePayment &&
+                    {!isLimitMax &&
+                    ticketJsonParse?.enableOnlinePayment &&
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.valueTotal ? (
@@ -592,7 +610,7 @@ const CheckoutEvent = () => {
                       </div>
                     ) : null}
 
-                    {isEdit ? (
+                    {!isLimitMax && isEdit ? (
                       <>
                         {eventDate?.oneTicket?.id ? (
                           <>
