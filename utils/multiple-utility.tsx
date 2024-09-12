@@ -4,11 +4,11 @@ import { ImageProfileModel } from '@/types/profile';
 
 interface Props {
   value: number;
-  isDivide: boolean;
+  isDivide?: boolean;
   currency: string;
 }
 
-export const formatePrice = ({ value, isDivide, currency }: Props) => {
+export const formatePrice = ({ value, isDivide = false, currency }: Props) => {
   const numberCal = isDivide ? value / 100 : value;
   const language = ['FR', 'DE', 'CMR'].includes(initialLang?.toUpperCase())
     ? 'de-DE'

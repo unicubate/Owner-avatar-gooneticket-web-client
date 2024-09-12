@@ -381,7 +381,6 @@ const CheckoutEvent = () => {
                                                 value: Number(
                                                   ticket?.amount ?? 0,
                                                 ),
-                                                isDivide: false,
                                               })}
                                             </p>
                                             {Number(ticket?.difference) <= 0 ? (
@@ -407,9 +406,9 @@ const CheckoutEvent = () => {
                                                   : false,
                                               );
                                             }}
-                                            defaultChecked={
-                                              index === 0 ? true : false
-                                            }
+                                            // defaultChecked={
+                                            //   index === 0 ? true : false
+                                            // }
                                           />
                                         </label>
                                       </div>
@@ -610,12 +609,13 @@ const CheckoutEvent = () => {
                       </div>
                     ) : null}
 
-                    {!isLimitMax && isEdit ? (
+                    {!isLimitMax || isEdit ? (
                       <>
                         {eventDate?.oneTicket?.id ? (
                           <>
                             <>
-                              {isValid &&
+                              {!isLimitMax &&
+                              isValid &&
                               newAmount?.valueTotal &&
                               watchPaymentMethod &&
                               ticketJsonParse?.enableOnlinePayment ? (
