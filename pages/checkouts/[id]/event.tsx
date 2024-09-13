@@ -203,7 +203,6 @@ const CheckoutEvent = () => {
                                   {formatePrice({
                                     currency: `${eventDate?.oneTicket?.currency?.code}`,
                                     value: Number(newAmount?.oneValue ?? 0),
-                                    isDivide: false,
                                   })}
                                 </>
                               ) : (
@@ -261,7 +260,6 @@ const CheckoutEvent = () => {
                                   {formatePrice({
                                     currency: `${item?.currency?.code}`,
                                     value: ticketJsonParse?.price,
-                                    isDivide: false,
                                   }) ?? ''}
                                 </p>
                               </>
@@ -279,7 +277,6 @@ const CheckoutEvent = () => {
                                   {formatePrice({
                                     currency: `${item?.currency?.code}`,
                                     value: ticketJsonParse?.preSale,
-                                    isDivide: false,
                                   }) ?? ''}
                                 </p>
                               </>
@@ -290,7 +287,7 @@ const CheckoutEvent = () => {
 
                           <div className="mt-2 sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
-                              <p className="font-bold dark:text-gray-600">
+                              <p className="font-bold">
                                 Please select the seat category
                               </p>
                             </div>
@@ -386,7 +383,7 @@ const CheckoutEvent = () => {
                                             {Number(ticket?.difference) <= 0 ? (
                                               <Badge
                                                 className="mt-1 rounded-sm uppercase"
-                                                variant="destructive"
+                                                variant="danger"
                                               >
                                                 Completed
                                               </Badge>
@@ -406,9 +403,9 @@ const CheckoutEvent = () => {
                                                   : false,
                                               );
                                             }}
-                                            // defaultChecked={
-                                            //   index === 0 ? true : false
-                                            // }
+                                            defaultChecked={
+                                              index === 0 ? true : false
+                                            }
                                           />
                                         </label>
                                       </div>
@@ -513,7 +510,6 @@ const CheckoutEvent = () => {
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.value),
-                                  isDivide: false,
                                 }) ?? ''}
                               </p>
                             </>
@@ -531,7 +527,6 @@ const CheckoutEvent = () => {
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
                                   value: newAmount?.commission,
-                                  isDivide: false,
                                 }) ?? ''}
                               </p>
                             </>
