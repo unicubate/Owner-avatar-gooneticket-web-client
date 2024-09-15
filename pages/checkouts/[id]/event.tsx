@@ -213,7 +213,9 @@ const CheckoutEvent = () => {
 
                           <div className="mt-2 items-center justify-between">
                             <span>
-                              {formateToRFC2822(eventDate?.expiredAt, locale)}
+                              {capitalizeFirstLetter(
+                                formateToRFC2822(eventDate?.expiredAt, locale),
+                              )}
                             </span>
                             <span className="ml-1.5 text-gray-400 dark:text-gray-600">
                               -
@@ -549,19 +551,19 @@ const CheckoutEvent = () => {
                           <p className="text-3xl font-medium dark:text-white">
                             Total
                           </p>
-                          {newAmount?.value ? (
-                            <>
-                              <p className="ml-1 text-3xl font-bold dark:text-white">
+                          <p className="text-2xl font-bold dark:text-white">
+                            {newAmount?.value ? (
+                              <>
                                 {formatePrice({
                                   currency: `${item?.currency?.code}`,
                                   value: Number(newAmount?.valueTotal),
                                   isDivide: false,
-                                }) ?? ''}
-                              </p>
-                            </>
-                          ) : (
-                            'Free'
-                          )}
+                                })}
+                              </>
+                            ) : (
+                              'Free'
+                            )}
+                          </p>
                         </li>
                       </div>
                     </div>
@@ -604,7 +606,7 @@ const CheckoutEvent = () => {
                       </div>
                     ) : null}
 
-                    {!isLimitMax || isEdit ? (
+                    {isEdit ? (
                       <>
                         {eventDate?.oneTicket?.id ? (
                           <>

@@ -73,14 +73,14 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
-                <div className="mx-auto max-w-max border-none text-5xl">
+                <p className="text-6xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
-                </div>
-                <span className="mt-1 text-center">
+                </p>
+                <p className="mt-1 text-center">
                   {capitalizeFirstLetter(
                     formateToCccc(item?.eventDate?.expiredAt as Date, locale),
                   )}
-                </span>
+                </p>
               </div>
             </Link>
 

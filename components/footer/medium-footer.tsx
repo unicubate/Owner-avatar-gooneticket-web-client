@@ -146,6 +146,9 @@ const MediumFooter = () => {
               {t.formatMessage({ id: 'FOOTER.COPYRIGHT' })}{' '}
               {process.env.NEXT_PUBLIC_NAME_SITE}
             </p>
+            <p className="text-sm font-normal dark:text-gray-600">
+              Partita IVA: 04024941207
+            </p>
           </div>
         </div>
       </footer>
