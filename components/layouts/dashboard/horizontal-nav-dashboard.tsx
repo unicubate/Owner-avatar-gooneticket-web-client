@@ -107,8 +107,8 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                           title={item?.title}
                           className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
                             isActive
-                              ? `border-indigo-600 text-indigo-600`
-                              : `border-transparent text-gray-500 hover:border-gray-300 dark:text-gray-300`
+                              ? `border-blue-700 text-blue-700`
+                              : `border-transparent hover:border-blue-600 hover:text-blue-600`
                           } `}
                         >
                           {item?.icon}
