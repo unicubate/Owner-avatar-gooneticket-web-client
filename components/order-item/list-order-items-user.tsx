@@ -7,7 +7,11 @@ import {
   formateToLLLL,
   viewYyformateToYyyy,
 } from '@/utils';
-import { capitalizeFirstLetter } from '@/utils/utils';
+import {
+  capitalizeFirstLetter,
+  obfuscateEmail,
+  truncateInput,
+} from '@/utils/utils';
 import {
   BadgeAlertIcon,
   CircleCheckBigIcon,
@@ -47,9 +51,9 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
   const { t, locale, isOpen, setIsOpen } = useInputState();
   const arrayItem = [
     {
-      model: 'EVENT',
+      model: 'TICKET',
       title: item?.event?.title,
-      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket?model=${item?.model.toLocaleLowerCase()}`,
+      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket`,
     },
     {
       model: 'PRODUCT',
@@ -107,14 +111,24 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
               {item?.fullName ? (
                 <div className="mt-1 flex items-center font-bold text-gray-600">
                   <UserIcon className="size-4" />
-                  <span className="ml-1">{item?.fullName}</span>
+                  <span className="ml-1 sm:hidden">
+                    {truncateInput(item?.fullName, 16)}
+                  </span>
+                  <span className="ml-1 hidden sm:table-cell">
+                    {item?.fullName}
+                  </span>
                 </div>
               ) : null}
 
               {item?.email ? (
                 <div className="mt-1 flex items-center font-bold text-gray-600">
                   <MailIcon className="size-4" />
-                  <span className="ml-1"> {item?.email}</span>
+                  <span className="ml-1 sm:hidden">
+                    {obfuscateEmail(item?.email)}
+                  </span>
+                  <span className="ml-1 hidden sm:table-cell">
+                    {item?.email}
+                  </span>
                 </div>
               ) : null}
             </div>

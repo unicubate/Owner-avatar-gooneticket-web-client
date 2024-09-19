@@ -69,8 +69,7 @@ export type OrderItemModel = {
   product: ProductModel;
   event: EventModel;
   eventDate: EventDateModel;
-  uploadsImages: Array<UploadModel>;
-  uploadsFiles: Array<UploadModel>;
+  uploadsFileTicket: UploadModel;
 };
 
 export type OrderModel = {

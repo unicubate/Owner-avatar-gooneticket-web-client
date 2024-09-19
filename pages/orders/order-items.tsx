@@ -45,7 +45,9 @@ const OrderItemsIndex = () => {
   } = GetInfiniteOrderItemsAPI({
     search,
     customer: 'buyer',
-    modelIds: model ? [model.toLocaleUpperCase()] : ['PRODUCT', 'EVENT'],
+    modelIds: model
+      ? [model.toLocaleUpperCase()]
+      : ['PRODUCT', 'EVENT', 'TICKET'],
     take: 10,
     sort: 'DESC',
     days: dayCount,

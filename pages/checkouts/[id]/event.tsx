@@ -255,36 +255,34 @@ const CheckoutEvent = () => {
 
                           <li className="mt-4 flex items-center justify-between text-sm font-semibold">
                             <p className="text-gray-600">Unique place</p>
-
-                            {ticketJsonParse?.price ? (
-                              <>
-                                <p className="text-gray-600">
+                            <p className="text-gray-600">
+                              {ticketJsonParse?.price ? (
+                                <>
                                   {formatePrice({
                                     currency: `${item?.currency?.code}`,
                                     value: ticketJsonParse?.price,
                                   }) ?? ''}
-                                </p>
-                              </>
-                            ) : (
-                              'Free'
-                            )}
+                                </>
+                              ) : (
+                                'Free'
+                              )}
+                            </p>
                           </li>
 
                           <li className="mt-2 flex items-center justify-between text-sm font-semibold">
                             <p className="text-gray-600">Pre-sale</p>
-
-                            {ticketJsonParse?.price ? (
-                              <>
-                                <p className="text-gray-600">
+                            <p className="text-gray-600">
+                              {ticketJsonParse?.price ? (
+                                <>
                                   {formatePrice({
                                     currency: `${item?.currency?.code}`,
                                     value: ticketJsonParse?.preSale,
                                   }) ?? ''}
-                                </p>
-                              </>
-                            ) : (
-                              'Free'
-                            )}
+                                </>
+                              ) : (
+                                'Free'
+                              )}
+                            </p>
                           </li>
 
                           <div className="mt-2 sm:flex sm:items-center sm:justify-between">
@@ -333,15 +331,10 @@ const CheckoutEvent = () => {
                               />
                             ) : Number(dataTickets?.pages[0]?.data?.total) <=
                               0 ? (
-                              <div>
-                                <label
-                                  htmlFor={`ticket`}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:bg-background"
-                                >
-                                  <p className="text-gray-700 dark:text-gray-200">
-                                    Free
-                                  </p>
-                                </label>
+                              <div className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:bg-background">
+                                <p className="text-gray-700 dark:text-gray-200">
+                                  Free
+                                </p>
                               </div>
                             ) : (
                               dataTickets?.pages.map((page, index: number) => (
@@ -405,9 +398,9 @@ const CheckoutEvent = () => {
                                                   : false,
                                               );
                                             }}
-                                            defaultChecked={
-                                              index === 0 ? true : false
-                                            }
+                                            // defaultChecked={
+                                            //   index === 0 ? true : false
+                                            // }
                                           />
                                         </label>
                                       </div>
@@ -429,31 +422,38 @@ const CheckoutEvent = () => {
                             )}
                           </div>
 
-                          <hr className="mt-8 dark:border-input" />
-                          <div className="py-2">
-                            <div className="flex items-center">
-                              <h2 className="text-base font-bold dark:text-gray-600">
-                                Contact
-                              </h2>
-                              {userAddress?.isUpdated && userAddress?.email && (
-                                <ButtonInput
-                                  type="button"
-                                  size="sm"
-                                  variant={isEdit ? 'primary' : 'outline'}
-                                  onClick={() => setIsEdit((i: boolean) => !i)}
-                                  className="ml-auto"
-                                >
-                                  {isEdit ? 'Edit address' : 'Cancel'}
-                                </ButtonInput>
-                              )}
-                            </div>
-                          </div>
-                          <CreateOrUpdateUserAddressForm
-                            isEdit={isEdit}
-                            setIsEdit={setIsEdit}
-                            userAddress={userAddress}
-                            countries={countries}
-                          />
+                          {watchAmount ? (
+                            <>
+                              <hr className="mt-8 dark:border-input" />
+                              <div className="py-2">
+                                <div className="flex items-center">
+                                  <h2 className="text-base font-bold dark:text-gray-600">
+                                    Contact
+                                  </h2>
+                                  {userAddress?.isUpdated &&
+                                    userAddress?.email && (
+                                      <ButtonInput
+                                        type="button"
+                                        size="sm"
+                                        variant={isEdit ? 'primary' : 'outline'}
+                                        onClick={() =>
+                                          setIsEdit((i: boolean) => !i)
+                                        }
+                                        className="ml-auto"
+                                      >
+                                        {isEdit ? 'Edit address' : 'Cancel'}
+                                      </ButtonInput>
+                                    )}
+                                </div>
+                              </div>
+                              <CreateOrUpdateUserAddressForm
+                                isEdit={isEdit}
+                                setIsEdit={setIsEdit}
+                                userAddress={userAddress}
+                                countries={countries}
+                              />
+                            </>
+                          ) : null}
                         </div>
                       </div>
                     </div>

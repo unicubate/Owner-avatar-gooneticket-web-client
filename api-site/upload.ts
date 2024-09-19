@@ -32,13 +32,12 @@ export const viewOneFileUploadAPI = ({
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/${folder}/${fileName}`
     : null;
 
-export const downloadOneFileUploadAPI = ({
-  fileName,
-  folder,
-}: {
-  fileName: string;
+export const downloadOneUploadsAPI = async (payload: {
   folder: string;
-}) =>
-  fileName && folder
-    ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/uploads/download/${folder}/${fileName}`
-    : null;
+  fileName: string;
+}) => {
+  return await makeApiCall({
+    action: 'downloadOneUploads',
+    urlParams: payload,
+  });
+};

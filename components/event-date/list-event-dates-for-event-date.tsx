@@ -23,7 +23,7 @@ const ListEventDatesForEventDate = ({
   } = GetInfiniteEventDatesAPI({
     search,
     take: 6,
-    sort: 'DESC',
+    sort: 'ASC',
     eventId: event?.id,
     organizationId: event?.organizationId,
   });
@@ -37,7 +37,11 @@ const ListEventDatesForEventDate = ({
         <LoadingFile />
       ) : isError ? (
         <ErrorFile title="404" description="Error find data please try again" />
-      ) : Number(data?.pages[0]?.data?.total) <= 0 ? null : event?.id ? (
+      ) : Number(data?.pages[0]?.data?.total) <= 0 ? (
+        <div className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:bg-background">
+          <p className="text-gray-700 dark:text-gray-200">Date not present</p>
+        </div>
+      ) : event?.id ? (
         data?.pages
           .flatMap((page: any) => page?.data?.value)
           .map((item, index: number) => (

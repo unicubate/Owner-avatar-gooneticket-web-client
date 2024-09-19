@@ -173,6 +173,7 @@ export const apiEndpoints: ClientApiMethods = {
   /****************** Uploads route */
   getUploads: GET(`${baseUrl}/uploads`),
   updateOneUpload: PUT(`${baseUrl}/uploads/update`),
+  downloadOneUploads: GET(`${baseUrl}/uploads/download/:folder/:fileName`),
 
   /****************** Products route */
   getProducts: GET(`${baseUrl}/products`),

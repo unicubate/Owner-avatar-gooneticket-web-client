@@ -1,6 +1,6 @@
-import { downloadOneFileUploadAPI } from '@/api-site/upload';
+import { downloadOneUploadsAPI } from '@/api-site/upload';
 import { OrderItemModel } from '@/types/order-item';
-import { formateToRFC2822 } from '@/utils';
+import { AlertDangerNotification, formateToRFC2822 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { QRCode, QRCodeProps } from 'antd';
 import {
@@ -22,10 +22,30 @@ type Props = {
 };
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
-  const { locale, ipLocation } = useInputState();
+  const { locale, loading, setLoading } = useInputState();
   const [level, setLevel] = useState<string | number>('L');
   const { query, push, back } = useRouter();
 
+  const handleDownloadRows = async () => {
+    setLoading(true);
+    try {
+      const response = await downloadOneUploadsAPI({
+        folder: String(orderItem?.model.toLocaleLowerCase()),
+        fileName: orderItem?.uploadsFileTicket?.path,
+      });
+      const link = document.createElement('a');
+      link.href = response?.config?.url;
+      link.click();
+      link.remove();
+
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      AlertDangerNotification({
+        text: "C'è stato un errore.",
+      });
+    }
+  };
   return (
     <>
       <div className="px-4 py-5">
@@ -137,15 +157,9 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               type="submit"
               size="sm"
               variant="ghost"
+              loading={loading}
               icon={<DownloadIcon className="size-6" />}
-              onClick={() => {
-                push(
-                  `${downloadOneFileUploadAPI({
-                    folder: String(orderItem?.model.toLocaleLowerCase()),
-                    fileName: orderItem?.uploadsFiles[0]?.path,
-                  })}`,
-                );
-              }}
+              onClick={() => handleDownloadRows()}
             >
               Download
             </ButtonInput>

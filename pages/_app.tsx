@@ -1,5 +1,4 @@
 import '@/styles/globals.css';
-import 'animate.css';
 import { ConfigProvider } from 'antd';
 import type { AppProps } from 'next/app';
 import 'react-quill/dist/quill.snow.css';
@@ -37,9 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
               >
                 <ConfigProvider>
                   <ContextUserProvider>
-                    
                     <Component {...pageProps} />
-
                   </ContextUserProvider>
                 </ConfigProvider>
               </ThemeProvider>

@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 const Ticket = () => {
   const { t, userStorage: user } = useInputState();
   const { query, push } = useRouter();
-  const { model } = query;
   const orderNumber = String(query?.oderItemId);
 
   const {
@@ -52,11 +51,7 @@ const Ticket = () => {
                     description="Error find data please try again..."
                   />
                 ) : (
-                  <>
-                    {model === 'event' ? (
-                      <ViewOrderItemEvent orderItem={orderItem} />
-                    ) : null}
-                  </>
+                  <ViewOrderItemEvent orderItem={orderItem} />
                 )}
               </div>
             </div>

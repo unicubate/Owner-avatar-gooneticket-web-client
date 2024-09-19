@@ -40,6 +40,12 @@ export const truncateSubstring = (input: string, value: number) => {
   return input?.length > value ? input.substring(value) : input;
 };
 
+export const obfuscateEmail = (email: string): string => {
+  const [localPart, domainPart] = email.split('@');
+  const maskedLocalPart = `${localPart[0]}****${localPart.slice(-2)}`;
+  return `${maskedLocalPart}@${domainPart}`;
+};
+
 export const filterImageAndFile = (options: {
   imageList?: UploadFile[];
   fileList?: UploadFile[];

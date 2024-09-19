@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { OrderModel } from '@/types/order-item';
-import { formateddLLLyyyyHHmm, formateFromNow } from '@/utils';
+import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
+import { obfuscateEmail, truncateInput } from '@/utils/utils';
 import {
   CalendarPlus2,
   MailIcon,
@@ -67,7 +68,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
                   <CalendarPlus2 className="size-4" />
                 </span>
                 <span className="ml-1.5 text-sm font-normal">
-                  {formateddLLLyyyyHHmm(item?.createdAt as Date, locale)}
+                  {formateFromNow(item?.createdAt as Date, locale)}
                 </span>
               </div>
               {item?.id ? (
@@ -80,17 +81,30 @@ const ListOrdersUser = ({ item, index }: Props) => {
                   </Link>
                 </p>
               ) : null}
+
               {item?.address?.fullName ? (
                 <div className="mt-1 flex items-center font-bold text-gray-600">
                   <UserIcon className="size-4" />
-                  <span className="ml-1">{item?.address?.fullName}</span>
+                  <span className="ml-1 sm:hidden">
+                    {truncateInput(item?.address?.fullName, 16)}
+                  </span>
+                  <span className="ml-1 hidden sm:table-cell">
+                    {item?.address?.fullName}
+                  </span>
                 </div>
               ) : null}
 
-              <div className="mt-1 flex items-center font-bold text-gray-600">
-                <MailIcon className="size-4" />
-                <span className="ml-1"> {item?.address?.email}</span>
-              </div>
+              {item?.address?.email ? (
+                <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <MailIcon className="size-4" />
+                  <span className="ml-1 sm:hidden">
+                    {obfuscateEmail(item?.address?.email)}
+                  </span>
+                  <span className="ml-1 hidden sm:table-cell">
+                    {item?.address?.email}
+                  </span>
+                </div>
+              ) : null}
             </div>
           </div>
         </td>
@@ -155,20 +169,16 @@ const ListOrdersUser = ({ item, index }: Props) => {
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-          <div className="pt-1 lg:hidden">
-            <p className={`inline-flex text-sm font-bold`}>
-              <span className={`ml-1`}>
-                {Number(item?.amountTotal) > 0 ? (
-                  <SerialPrice
-                    className="text-sm"
-                    value={Number(item?.amountTotal)}
-                    currency={{ code: String(item?.currency) }}
-                  />
-                ) : (
-                  'Free'
-                )}
-              </span>
-            </p>
+          <div className="pt-1 text-sm font-bold lg:hidden">
+            {Number(item?.amountTotal) > 0 ? (
+              <SerialPrice
+                className="text-sm"
+                value={Number(item?.amountTotal)}
+                currency={{ code: String(item?.currency) }}
+              />
+            ) : (
+              'Free'
+            )}
           </div>
           <div className="pt-1 lg:hidden">
             <span className="text-gray-600">Qty: {item?.quantity}</span>
