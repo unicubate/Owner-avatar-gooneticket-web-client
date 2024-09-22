@@ -17,6 +17,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     productId,
     eventDateId,
     cartOrderId,
+    userId,
     organizationSellerId,
     organizationBuyerId,
   } = data;
@@ -47,6 +48,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       eventDateId,
       organizationSellerId,
       organizationBuyerId,
+      userId,
       reference: newReference,
       affiliation: affiliation,
       amount: {
@@ -72,7 +74,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
         data: payload,
         paymentModel: paymentModel,
       });
-      push(`/transactions/success?token=${newReference}`);
+      push(`/transactions/success?token=${newReference}&type=paypal&tag=order`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);

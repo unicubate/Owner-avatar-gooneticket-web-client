@@ -69,7 +69,9 @@ const CreatePaymentBooking = ({
       setHasErrors(false);
       setLoading(false);
 
-      //push(`/transactions/success?token=${newReference}`);
+      push(
+        `/transactions/success?token=${newReference}&type=booking&tag=booking`,
+      );
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);

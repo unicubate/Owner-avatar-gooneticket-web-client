@@ -422,7 +422,8 @@ const CheckoutEvent = () => {
                             )}
                           </div>
 
-                          {watchAmount ? (
+                          {Number(dataTickets?.pages[0]?.data?.total) <= 0 ||
+                          watchAmount ? (
                             <>
                               <hr className="mt-8 dark:border-input" />
                               <div className="py-2">
@@ -630,6 +631,7 @@ const CheckoutEvent = () => {
                                           item?.organizationId,
                                         organizationBuyerId:
                                           userStorage?.organizationId,
+                                        userId: userStorage?.id,
                                       }}
                                     />
                                   ) : null}
@@ -647,6 +649,7 @@ const CheckoutEvent = () => {
                                           item?.organizationId,
                                         organizationBuyerId:
                                           userStorage?.organizationId,
+                                        userId: userStorage?.id,
                                       }}
                                     />
                                   ) : null}
@@ -665,6 +668,7 @@ const CheckoutEvent = () => {
                                     organizationSellerId: item?.organizationId,
                                     organizationBuyerId:
                                       userStorage?.organizationId,
+                                    userId: userStorage?.id,
                                   }}
                                 />
                               ) : null}
@@ -693,6 +697,7 @@ const CheckoutEvent = () => {
                                 organizationSellerId: item?.organizationId,
                                 organizationBuyerId:
                                   userStorage?.organizationId,
+                                userId: userStorage?.id,
                               }}
                             />
                           </>
