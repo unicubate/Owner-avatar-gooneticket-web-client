@@ -46,7 +46,7 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         </Sheet>
 
         <div
-          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-background/100`}
+          className={`flex min-h-screen flex-1 flex-col bg-gray-100 dark:bg-black/60`}
         >
           <main>
             {children}
