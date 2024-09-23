@@ -7,7 +7,7 @@ import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatDateDDMMYYToUtc, formateDate } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { MoveLeftIcon } from 'lucide-react';
+import { DownloadIcon, MoveLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 
 const TransactionsView = () => {
@@ -29,19 +29,39 @@ const TransactionsView = () => {
       <LayoutDashboard title={`Transaction #${item?.order?.orderNumber ?? ''}`}>
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
-            <ButtonInput
-              type="button"
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                back();
-              }}
-              icon={<MoveLeftIcon className="size-4" />}
-            >
-              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-              </span>
-            </ButtonInput>
+            <div className="flex items-center">
+              <div className="sm:mt-0">
+                <ButtonInput
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={() => {
+                    back();
+                  }}
+                  icon={<MoveLeftIcon className="size-4" />}
+                >
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                  </span>
+                </ButtonInput>
+              </div>
+
+              <div className="ml-auto flex items-center gap-2">
+                <ButtonInput
+                  type="submit"
+                  size="sm"
+                  variant="ghost"
+                  //loading={loading}
+                  icon={<DownloadIcon className="size-6" />}
+                  //onClick={() => handleDownloadRows()}
+                >
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Download
+                  </span>
+                </ButtonInput>
+              </div>
+            </div>
+
             <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
               <div className="p-8 sm:px-8 sm:py-7">
                 {isLoadingTransaction ? (
@@ -221,16 +241,17 @@ const TransactionsView = () => {
                         </dl> */}
 
                             <dl className="grid gap-x-3 sm:grid-cols-5">
-                              <dt className="col-span-3 font-semibold">
+                              <dt className="col-span-3 text-lg font-semibold">
                                 Total:
                               </dt>
                               <dd className="col-span-2 font-bold">
                                 {Number(item?.amount) > 0 ? (
                                   <>
                                     <SerialPrice
-                                      value={Number(item?.amount)}
+                                      className="text-lg"
+                                      value={Number(item?.order?.amountTotal)}
                                       currency={{
-                                        code: String(item?.currency),
+                                        code: String(item?.order?.currency),
                                       }}
                                     />
                                   </>
