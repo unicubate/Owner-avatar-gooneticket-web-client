@@ -32,8 +32,8 @@ const TransactionsView = () => {
             <div className="flex items-center">
               <div className="sm:mt-0">
                 <ButtonInput
-                  type="button"
                   size="sm"
+                  type="button"
                   variant="outline"
                   onClick={() => {
                     back();
@@ -48,11 +48,11 @@ const TransactionsView = () => {
 
               <div className="ml-auto flex items-center gap-2">
                 <ButtonInput
-                  type="submit"
                   size="sm"
-                  variant="ghost"
+                  type="button"
+                  variant="outline"
                   //loading={loading}
-                  icon={<DownloadIcon className="size-6" />}
+                  icon={<DownloadIcon className="size-4" />}
                   //onClick={() => handleDownloadRows()}
                 >
                   <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
