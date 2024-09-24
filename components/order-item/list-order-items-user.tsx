@@ -250,7 +250,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
       <CopyShareLink
         isOpen={copied}
         setIsOpen={setCopied}
-        link={`${ipLocation?.url}/orders/validate/${item?.orderNumber}/ticket-public`}
+        link={`${ipLocation?.url}/validate/${item?.orderNumber}/ticket-public`}
       />
 
       {isOpen ? (
