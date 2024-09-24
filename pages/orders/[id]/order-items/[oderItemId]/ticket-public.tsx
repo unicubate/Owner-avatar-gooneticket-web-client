@@ -15,6 +15,7 @@ const TicketPublic = () => {
     isLoading: isLoadingOrderItem,
   } = GetOneOrderItemAPI({
     orderNumber: orderNumber,
+    customer: 'buyer',
   });
 
   return (

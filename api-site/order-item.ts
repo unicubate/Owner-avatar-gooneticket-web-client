@@ -103,6 +103,7 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
 };
 
 export const GetOneOrderItemAPI = (payload: {
+  userId?: string;
   customer: 'buyer';
   orderNumber: string;
   organizationId?: string;
