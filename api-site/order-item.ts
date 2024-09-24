@@ -102,18 +102,36 @@ export const GetOneOrderAPI = (payload: { orderId: string }) => {
   };
 };
 
-export const GetOneOrderItemAPI = (payload: {
-  userId?: string;
-  customer: 'buyer';
-  orderNumber: string;
-  organizationId?: string;
-}) => {
+export const GetOneOrderItemAPI = (payload: { orderNumber: string }) => {
   const { data, isError, isLoading, status, isPending, error, refetch } =
     useQuery({
       queryKey: ['order-item', payload],
       queryFn: async () =>
         await makeApiCall({
           action: 'getOneOrderItem',
+          queryParams: payload,
+        }),
+      refetchOnWindowFocus: false,
+    });
+
+  return {
+    data: data?.data as OrderItemModel,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+    error,
+  };
+};
+
+export const GetOneOrderItemPublicAPI = (payload: { orderNumber: string }) => {
+  const { data, isError, isLoading, status, isPending, error, refetch } =
+    useQuery({
+      queryKey: ['order-item-public', payload],
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getOneOrderItemPublic',
           queryParams: payload,
         }),
       refetchOnWindowFocus: false,

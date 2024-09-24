@@ -1,4 +1,4 @@
-import { GetOneOrderItemAPI } from '@/api-site/order-item';
+import { GetOneOrderItemPublicAPI } from '@/api-site/order-item';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
 import { LoadingFile } from '@/components/ui-setting/ant';
@@ -13,9 +13,8 @@ const TicketPublic = () => {
     data: orderItem,
     isError: isErrorOrderItem,
     isLoading: isLoadingOrderItem,
-  } = GetOneOrderItemAPI({
+  } = GetOneOrderItemPublicAPI({
     orderNumber: orderNumber,
-    customer: 'buyer',
   });
 
   return (

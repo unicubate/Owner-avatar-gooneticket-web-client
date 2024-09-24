@@ -10,7 +10,7 @@ import { MoveLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 
 const Ticket = () => {
-  const { t, userStorage: user } = useInputState();
+  const { t } = useInputState();
   const { query, push } = useRouter();
   const orderNumber = String(query?.oderItemId);
 
@@ -19,10 +19,7 @@ const Ticket = () => {
     isError: isErrorOrderItem,
     isLoading: isLoadingOrderItem,
   } = GetOneOrderItemAPI({
-    userId: user?.id,
-    customer: 'buyer',
     orderNumber: orderNumber,
-    organizationId: user?.organizationId,
   });
 
   return (

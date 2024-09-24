@@ -122,6 +122,7 @@ export const apiEndpoints: ClientApiMethods = {
   getOrders: GET(`${baseUrl}/orders`),
   getOrderItems: GET(`${baseUrl}/orders/order-items`),
   getOneOrderItem: GET(`${baseUrl}/orders/order-items/view`),
+  getOneOrderItemPublic: GET(`${baseUrl}/orders/order-items/public`),
   updateOneOrderItem: PUT(`${baseUrl}/orders/order-items/:orderItemId`),
 
   /****************** Currency or Countries route */
