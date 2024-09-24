@@ -34,17 +34,14 @@ type Props = {
 const ListOrdersUser = ({ item, index }: Props) => {
   const { push } = useRouter();
   const { t, locale } = useInputState();
+  const urlRedirect = `/orders/${item?.id}/tickets`;
 
   return (
     <>
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            <Link
-              prefetch={true}
-              href={`/orders/${item?.id}/order-items`}
-              title={item?.event?.title}
-            >
+            <Link prefetch={true} href={urlRedirect} title={item?.event?.title}>
               {item?.oneUploadImage?.path ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <SwiperImage
@@ -73,10 +70,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
               </div>
               {item?.id ? (
                 <p className="mt-1 font-bold transition-all duration-200 hover:text-blue-900">
-                  <Link
-                    href={`/orders/${item?.id}/order-items`}
-                    title={item?.event?.title}
-                  >
+                  <Link href={urlRedirect} title={item?.event?.title}>
                     <ReadMore html={item?.event?.title} value={100} />
                   </Link>
                 </p>
@@ -144,7 +138,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
               <DropdownMenuGroup>
                 <Link
                   prefetch={true}
-                  href={`/orders/${item?.id}/order-items`}
+                  href={urlRedirect}
                   title={item?.event?.title}
                 >
                   <DropdownMenuItem>

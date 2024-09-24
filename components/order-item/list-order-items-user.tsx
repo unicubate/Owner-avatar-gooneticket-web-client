@@ -48,12 +48,12 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [level, setLevel] = useState<string | number>('L');
   const [copied, setCopied] = useState(false);
-  const { t, locale, isOpen, setIsOpen } = useInputState();
+  const { ipLocation, t, locale, isOpen, setIsOpen } = useInputState();
   const arrayItem = [
     {
       model: 'TICKET',
       title: item?.event?.title,
-      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket`,
+      url: `/validate/${item?.orderNumber}/ticket`,
     },
     {
       model: 'PRODUCT',
@@ -250,7 +250,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
       <CopyShareLink
         isOpen={copied}
         setIsOpen={setCopied}
-        link={`${process.env.NEXT_PUBLIC_SITE}/orders/${item?.orderId}/order-items/${item?.orderNumber}/ticket-public`}
+        link={`${ipLocation?.url}/orders/validate/${item?.orderNumber}/ticket-public`}
       />
 
       {isOpen ? (

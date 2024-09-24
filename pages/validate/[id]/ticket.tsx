@@ -2,17 +2,19 @@ import { GetOneOrderItemAPI } from '@/api-site/order-item';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
-import { ButtonInput } from '@/components/ui-setting';
+import { ButtonInput, CopyShareLink } from '@/components/ui-setting';
 import { LoadingFile } from '@/components/ui-setting/ant';
 import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { PrivateComponent } from '@/components/util/private-component';
-import { MoveLeftIcon } from 'lucide-react';
+import { MoveLeftIcon, ShareIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 const Ticket = () => {
-  const { t } = useInputState();
-  const { query, push } = useRouter();
-  const orderNumber = String(query?.oderItemId);
+  const { t, ipLocation } = useInputState();
+  const { query, push, back } = useRouter();
+  const [copied, setCopied] = useState(false);
+  const orderNumber = String(query?.id);
 
   const {
     data: orderItem,
@@ -29,19 +31,34 @@ const Ticket = () => {
         <div className="mx-auto max-w-4xl py-6">
           <div className="mx-auto mt-8 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <ButtonInput
-                type="button"
-                size="sm"
-                variant="outline"
-                onClick={() => {
-                  push(`/orders/${orderItem?.orderId}/order-items`);
-                }}
-                icon={<MoveLeftIcon className="size-4" />}
-              >
-                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-                </span>
-              </ButtonInput>
+              <div className="flex items-center">
+                <div className="sm:mt-0">
+                  <ButtonInput
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => back()}
+                    icon={<MoveLeftIcon className="size-4" />}
+                  >
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                    </span>
+                  </ButtonInput>
+                </div>
+
+                <div className="ml-auto flex items-center gap-2">
+                  <ButtonInput
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setCopied(true)}
+                    icon={<ShareIcon className="size-4" />}
+                  >
+                    {t.formatMessage({ id: 'UTIL.SHARE' })}
+                  </ButtonInput>
+                </div>
+              </div>
+
               <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
                 {isLoadingOrderItem ? (
                   <LoadingFile className="my-6" />
@@ -57,6 +74,11 @@ const Ticket = () => {
             </div>
           </div>
         </div>
+        <CopyShareLink
+          isOpen={copied}
+          setIsOpen={setCopied}
+          link={`${ipLocation?.url}/validate/${orderItem?.orderNumber}/ticket-public`}
+        />
       </LayoutDashboard>
     </>
   );

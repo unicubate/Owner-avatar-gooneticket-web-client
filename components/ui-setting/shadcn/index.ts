@@ -5,3 +5,4 @@ export * from './switch-input';
 export * from './text-input';
 export * from './text-password-input';
 export * from './textarea-input';
+export * from './tooltip-provider-input';
