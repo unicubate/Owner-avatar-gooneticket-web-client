@@ -19,8 +19,9 @@ const Ticket = () => {
     isError: isErrorOrderItem,
     isLoading: isLoadingOrderItem,
   } = GetOneOrderItemAPI({
+    customer: 'buyer',
     orderNumber: orderNumber,
-    organizationBuyerId: user?.organizationId,
+    organizationId: user?.organizationId,
   });
 
   return (

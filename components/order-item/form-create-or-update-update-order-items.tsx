@@ -63,6 +63,7 @@ const FormCreateOrUpdateOrderItems = ({
     try {
       await saveMutation({
         ...payload,
+        customer: 'buyer',
         orderItemId: `${orderItem?.id}`,
       });
       setHasErrors(false);

@@ -95,4 +95,5 @@ export interface OrderItemFormModel {
   orderItemId: string;
   fullName: string;
   email: string;
+  customer: 'buyer';
 }
