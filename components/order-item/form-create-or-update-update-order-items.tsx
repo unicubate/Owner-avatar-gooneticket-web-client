@@ -24,8 +24,7 @@ const FormCreateOrUpdateOrderItems = ({
   orderItem?: OrderItemModel;
 }) => {
   const { push } = useRouter();
-  const { loading, setLoading, hasErrors, setHasErrors, locale, userStorage } =
-    useInputState();
+  const { hasErrors, setHasErrors, locale, userStorage } = useInputState();
   const {
     reset,
     watch,
@@ -46,36 +45,25 @@ const FormCreateOrUpdateOrderItems = ({
   }, [orderItem, setValue]);
 
   // Create or Update data
-  const { mutateAsync: saveMutation } = UpdateOneOrderItemAPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const {
+    isError,
+    isPending: loading,
+    mutateAsync: saveMutation,
+  } = UpdateOneOrderItemAPI();
 
   const onSubmit = async (payload: OrderItemFormModel) => {
-    setLoading(true);
-    setHasErrors(undefined);
     try {
       await saveMutation({
         ...payload,
         customer: 'buyer',
         orderItemId: `${orderItem?.id}`,
       });
-      setHasErrors(false);
-      setLoading(false);
       reset();
       AlertSuccessNotification({
         text: 'Ticket update successfully',
       });
       setShowModal(false);
     } catch (error: any) {
-      setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -87,7 +75,7 @@ const FormCreateOrUpdateOrderItems = ({
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex-auto justify-center p-2">
-          {hasErrors && (
+          {isError && (
             <Alert
               variant="destructive"
               className="mt-2 bg-red-600 text-center"
