@@ -8,7 +8,7 @@ import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   BadgeAlertIcon,
   CalendarDaysIcon,
-  CheckCheckIcon,
+  CircleCheckBigIcon,
   DownloadIcon,
   User2Icon,
 } from 'lucide-react';
@@ -112,7 +112,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               }
               icon={
                 orderItem?.confirmedAt ? (
-                  <CheckCheckIcon className="size-4" />
+                  <CircleCheckBigIcon className="size-4" />
                 ) : orderItem?.eventDate?.isExpired ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
@@ -159,7 +159,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             </ButtonInput>
             {['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) && (
               <ButtonInput
-                icon={<CheckCheckIcon className="size-6" />}
+                icon={<CircleCheckBigIcon className="size-6" />}
                 type="button"
                 size="sm"
                 variant="success"

@@ -13,30 +13,13 @@ import {
   LoadingFile,
   SearchInput,
 } from '@/components/ui-setting';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
 import { OrderItemModel } from '@/types/order-item';
-import { modelProductArray } from '@/types/product';
-import {
-  CalendarCheckIcon,
-  ListFilterIcon,
-  MoveLeftIcon,
-  ShoppingCartIcon,
-} from 'lucide-react';
+import { MoveLeftIcon, ShoppingCartIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment } from 'react';
 
 const OrderItemsViewIndex = () => {
-  const [model, setModel] = useState('');
-  const [dayCount, setDayCount] = useState(30);
   const { query, push } = useRouter();
   const orderId = String(query?.id);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
@@ -50,19 +33,14 @@ const OrderItemsViewIndex = () => {
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
     search,
-    customer: 'buyer',
-    modelIds: model
-      ? [model.toLocaleUpperCase()]
-      : ['PRODUCT', 'EVENT', 'TICKET'],
     take: 10,
     sort: 'DESC',
-    days: dayCount,
     orderId: orderId,
+    customer: 'buyer',
+    modelIds: ['EVENT', 'TICKET'],
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
-  const handleDaysChange = (newDays: number) => setDayCount(newDays);
-  const handleModelChange = (i: string) => setModel(i);
   return (
     <>
       <LayoutDashboard title={t.formatMessage({ id: 'MENU.ORDER' })}>
@@ -83,92 +61,6 @@ const OrderItemsViewIndex = () => {
                     {t.formatMessage({ id: 'UTIL.COME_BACK' })}
                   </span>
                 </ButtonInput>
-                <div className="ml-auto flex items-center gap-2">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button size="sm" variant="outline" className="h-8 gap-1">
-                        <ListFilterIcon className="size-3.5" />
-                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {model ? model : `All`}
-                        </span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem
-                          onClick={() => {
-                            handleModelChange('');
-                          }}
-                        >
-                          <span className="cursor-pointer">All</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuGroup>
-                      {modelProductArray.map((or, index) => (
-                        <Fragment key={index}>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => {
-                              handleModelChange(or?.label);
-                            }}
-                          >
-                            <span className="cursor-pointer">{or?.label}</span>
-                          </DropdownMenuItem>
-                        </Fragment>
-                      ))}
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size="sm" className="h-8 gap-1">
-                        <CalendarCheckIcon className="size-3.5" />
-                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {dayCount > 0
-                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
-                            : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
-                        </span>
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
-                      <DropdownMenuGroup>
-                        <DropdownMenuItem
-                          onClick={() => {
-                            handleDaysChange(30);
-                          }}
-                        >
-                          <span className="cursor-pointer">
-                            {t.formatMessage(
-                              { id: 'TRANSACTION.LAST_DAY' },
-                              { day: 30 },
-                            )}
-                          </span>
-                        </DropdownMenuItem>
-                      </DropdownMenuGroup>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => {
-                          handleDaysChange(120);
-                        }}
-                      >
-                        <span className="cursor-pointer">
-                          {t.formatMessage(
-                            { id: 'TRANSACTION.LAST_DAY' },
-                            { day: 120 },
-                          )}
-                        </span>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => {
-                          handleDaysChange(-1);
-                        }}
-                      >
-                        <span className="cursor-pointer">
-                          {t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}
-                        </span>
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
               </div>
 
               <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border bg-white p-4">
