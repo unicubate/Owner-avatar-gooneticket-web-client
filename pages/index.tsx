@@ -22,6 +22,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { PublicComponent } from '@/components/util/public-component';
 
 // Custom components
 
@@ -60,7 +61,7 @@ const content: FAQItem[] = [
   },
 ];
 
-export default function Home() {
+const Home = () => {
   const { search, handleSetSearch, isOpen, setIsOpen } = useInputState();
   const [features] = useState(featuresLandingPage);
   const [compared] = useState(comparedLandingPage);
@@ -251,7 +252,9 @@ export default function Home() {
       <MediumFooter />
     </LayoutSite>
   );
-}
+};
+
+export default PublicComponent(Home);
 
 declare global {
   interface BigInt {

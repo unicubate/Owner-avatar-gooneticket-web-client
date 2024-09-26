@@ -26,20 +26,20 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
   const { t, linkHref, userStorage: user } = useInputState();
   const [navigation] = useState<NavbarProps[]>([
     {
-      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
-      count: 1,
-      href: '/events',
-    },
-    {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       count: 1,
       href: '/orders',
     },
     {
-      title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
-      count: user?.affiliation?.count,
-      href: `/affiliates`,
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      count: 1,
+      href: '/events',
     },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
+    //   count: user?.affiliation?.count,
+    //   href: `/affiliates`,
+    // },
     {
       title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
       count: 1,
@@ -49,7 +49,7 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
 
   return (
     <>
-      <header className="sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-100 bg-background dark:border-input">
+      <header className="bg-background dark:border-input sticky top-0 z-20 h-16 items-center gap-4 border-b border-gray-100">
         <div className="mx-auto max-w-7xl px-5">
           <div className="flex h-16 items-center justify-between">
             <div className="-m-3 flex items-center lg:hidden">
