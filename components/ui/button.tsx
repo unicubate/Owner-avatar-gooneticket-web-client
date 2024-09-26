@@ -8,8 +8,6 @@ export type VariantButton =
   | 'default'
   | 'destructive'
   | 'warning'
-  | 'info'
-  | 'info-hover'
   | 'danger'
   | 'outline'
   | 'secondary'
@@ -31,7 +29,6 @@ const buttonVariants = cva(
         warning: 'bg-warning text-warning-foreground hover:bg-warning/50',
         primary: 'bg-primary text-primary-foreground hover:bg-primary/50',
         info: 'bg-info text-info-foreground hover:bg-info/50',
-        'info-hover': 'bg-info/50 text-info-foreground hover:bg-info',
         success: 'bg-success text-success-foreground hover:bg-success/50',
         danger: 'bg-danger text-danger-foreground hover:bg-danger/50',
         outline:

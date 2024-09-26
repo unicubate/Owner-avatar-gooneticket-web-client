@@ -1,13 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteEventDatesAPI } from '@/api-site/event-date';
+import {
+  ButtonLoadMore,
+  EmptyData,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { EventDateModel } from '@/types/event-date';
 import { UserModel } from '@/types/user';
 import { TicketIcon } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
 import { useInputState } from '../hooks';
-import { ButtonLoadMore } from '../ui-setting';
-import { EmptyData, LoadingFile } from '../ui-setting/ant';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListPublicEventDates } from './list-public-event-dates';
 
 const TablePublicEventDates = ({ user }: { user: UserModel }) => {

@@ -12,9 +12,8 @@ import { PencilIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
 import { ButtonInput } from '../ui-setting';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { AvatarComponent } from '../ui-setting/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
 
@@ -81,8 +80,6 @@ export function ListCommentsRepliesPosts(props: {
           </p>
 
           <div className="mt-2 flex items-center font-medium text-gray-600">
-            <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
-
             {userId === item?.userId ? (
               <>
                 <button

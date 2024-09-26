@@ -8,9 +8,11 @@ import {
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { CreateConversationsModal } from '@/components/messages/create-conversations-modal';
 import { EventSkeleton } from '@/components/skeleton/event-skeleton';
-import { ButtonLoadMore } from '@/components/ui-setting';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  ButtonLoadMore,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { EventModel } from '@/types/event';
 import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';

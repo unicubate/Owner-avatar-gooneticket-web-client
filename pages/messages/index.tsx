@@ -2,9 +2,13 @@ import { GetInfiniteConversationsAPI } from '@/api-site/conversations';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListConversationsMessage } from '@/components/messages/list-conversations-message';
-import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
-import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  ButtonLoadMore,
+  EmptyData,
+  ErrorFile,
+  LoadingFile,
+  SearchInput,
+} from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { MailIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -39,7 +43,7 @@ const Messages = () => {
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4 dark:border-input dark:bg-background">
+              <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border border-gray-200 bg-white p-4">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
                     {/* <CreateContributorModal

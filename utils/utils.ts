@@ -1,5 +1,3 @@
-import { UploadFile } from 'antd';
-
 export interface KeyAsString {
   [key: string]: string;
 }
@@ -47,8 +45,8 @@ export const obfuscateEmail = (email: string): string => {
 };
 
 export const filterImageAndFile = (options: {
-  imageList?: UploadFile[];
-  fileList?: UploadFile[];
+  imageList?: any[];
+  fileList?: any[];
 }) => {
   let newFileLists: any = [];
   let newImageLists: any = [];

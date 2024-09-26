@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteCommentsRepliesAPI } from '@/api-site/comment';
+import { AvatarComponent, ErrorFile } from '@/components/ui-setting';
 import { CommentModel } from '@/types/comment';
 import { formateFromNow } from '@/utils';
 import { HtmlParser } from '@/utils/html-parser';
@@ -9,8 +10,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
 import { useInputState } from '../hooks';
-import { AvatarComponent } from '../ui-setting/ant';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { useAuth } from '../util/context-user';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
 

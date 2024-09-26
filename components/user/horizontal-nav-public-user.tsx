@@ -2,7 +2,6 @@ import { UserModel } from '@/types/user';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useIntl } from 'react-intl';
-import { AvatarImageComponent } from '../ui-setting/ant';
 
 const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
   const t = useIntl();
@@ -12,11 +11,11 @@ const HorizontalNavPublicUser = ({ user }: { user: UserModel }) => {
       <div className="flex max-w-xs items-center rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2">
         <div className="hidden lg:block">
           <Link href={`/${user?.username}`}>
-            <AvatarImageComponent
+            {/* <AvatarImageComponent
               preview={false}
               className="size-10 rounded-md"
               profile={user?.profile}
-            />
+            /> */}
           </Link>
         </div>
         <div className="ml-3 min-w-0 flex-1">

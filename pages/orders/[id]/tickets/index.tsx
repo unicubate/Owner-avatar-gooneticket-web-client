@@ -8,10 +8,11 @@ import { ListOrderItemsUser } from '@/components/order-item/list-order-items-use
 import {
   ButtonInput,
   ButtonLoadMore,
+  EmptyData,
+  ErrorFile,
+  LoadingFile,
   SearchInput,
 } from '@/components/ui-setting';
-import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -92,7 +93,7 @@ const OrderItemsViewIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-input">
+                    <DropdownMenuContent className="dark:border-input w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -127,7 +128,7 @@ const OrderItemsViewIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-input">
+                    <DropdownMenuContent className="dark:border-input w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -170,7 +171,7 @@ const OrderItemsViewIndex = () => {
                 </div>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-input dark:bg-background">
+              <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border bg-white p-4">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
                     <p className="text-lg font-bold">

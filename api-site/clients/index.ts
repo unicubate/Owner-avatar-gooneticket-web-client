@@ -94,7 +94,6 @@ export const apiEndpoints: ClientApiMethods = {
   deleteOneUser: DELETE(`${baseUrl}/users/:userId`),
   getOneUserPublic: GET(`${baseUrl}/users/view`),
   getOneUserMe: GET(`${baseUrl}/users/me`),
-  getUsers: GET(`${baseUrl}/users`),
 
   /****************** Profile route */
   updateOneProfileNextStep: PUT(`${baseUrl}/profile/update/:userId`),
@@ -139,10 +138,6 @@ export const apiEndpoints: ClientApiMethods = {
   createOneFollowers: POST(`${baseUrl}/follows/create/:followerId`),
   deleteOneFollowers: POST(`${baseUrl}/follows/delete/:followerId`),
 
-  /****************** Like route */
-  createOneLike: POST(`${baseUrl}/likes/:type/:likeableId`),
-  deleteOneLike: DELETE(`${baseUrl}/likes/:type/:likeableId`),
-
   /****************** Comments route */
   getComments: GET(`${baseUrl}/comments`),
   getCommentsRepliesAPI: GET(`${baseUrl}/comments/replies`),
@@ -160,7 +155,6 @@ export const apiEndpoints: ClientApiMethods = {
   createOneConversationMessage: POST(`${baseUrl}/conversations/messages`),
   createOneConversation: POST(`${baseUrl}/conversations`),
   readOneConversation: PUT(`${baseUrl}/conversations/:fkConversationId/readAt`),
-  // deleteOneCategory: DELETE(`${baseUrl}/categories/:categoryId`),
 
   /****************** UserAddress route */
   getOneUserAddress: GET(`${baseUrl}/user-address`),
@@ -212,13 +206,4 @@ export const apiEndpoints: ClientApiMethods = {
   createOnePaymentsBookingEvent: POST(`${baseUrl}/payments/booking/event`),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
-
-  /****************** Posts route */
-  createOnePost: POST(`${baseUrl}/posts`),
-  createOnUploadPost: POST(`${baseUrl}/posts/upload`),
-  getOnePost: GET(`${baseUrl}/posts/view`),
-  getFollowsPosts: GET(`${baseUrl}/posts/follows`),
-  updateOnePost: PUT(`${baseUrl}/posts/:postId`),
-  deleteOnePost: DELETE(`${baseUrl}/posts/:postId`),
-  getPosts: GET(`${baseUrl}/posts`),
 };

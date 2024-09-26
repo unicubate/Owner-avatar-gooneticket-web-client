@@ -8,20 +8,22 @@ export const GetOneEventAPI = (payload: {
   enableVisibility?: 'TRUE' | 'FALSE';
 }) => {
   const { slugOrId, enableVisibility } = payload;
-  const { data, isError, isLoading, isPending, status, refetch } = useQuery({
-    queryKey: ['event', { ...payload }],
-    queryFn: async () =>
-      await makeApiCall({
-        action: 'getOneEvent',
-        urlParams: { slugOrId },
-        queryParams: {
-          enableVisibility,
-        },
-      }),
-    refetchOnWindowFocus: false,
-  });
+  const { data, isError, isLoading, isPending, status, error, refetch } =
+    useQuery({
+      queryKey: ['event', { ...payload }],
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getOneEvent',
+          urlParams: { slugOrId },
+          queryParams: {
+            enableVisibility,
+          },
+        }),
+      refetchOnWindowFocus: false,
+    });
 
   return {
+    error: (error as any)?.response,
     data: data?.data as EventModel,
     isError,
     isPending,

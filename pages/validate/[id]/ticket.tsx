@@ -2,9 +2,12 @@ import { GetOneOrderItemAPI } from '@/api-site/order-item';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
-import { ButtonInput, CopyShareLink } from '@/components/ui-setting';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  ButtonInput,
+  CopyShareLink,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { MoveLeftIcon, ShareIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -18,6 +21,7 @@ const Ticket = () => {
 
   const {
     data: orderItem,
+    error: errorOrderItem,
     isError: isErrorOrderItem,
     isLoading: isLoadingOrderItem,
   } = GetOneOrderItemAPI({
@@ -59,13 +63,13 @@ const Ticket = () => {
                 </div>
               </div>
 
-              <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
+              <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border bg-white">
                 {isLoadingOrderItem ? (
-                  <LoadingFile className="my-6" />
+                  <LoadingFile className="my-2" />
                 ) : isErrorOrderItem ? (
                   <ErrorFile
-                    title="404"
-                    description="Error find data please try again..."
+                    title={errorOrderItem?.status ?? '404'}
+                    description="Error find data please try later"
                   />
                 ) : (
                   <ViewOrderItemEvent orderItem={orderItem} />

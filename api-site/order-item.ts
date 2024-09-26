@@ -118,13 +118,13 @@ export const GetOneOrderItemAPI = (payload: {
     });
 
   return {
+    error: (error as any)?.response,
     data: data?.data as OrderItemModel,
     isError,
     isLoading,
     status,
     isPending,
     refetch,
-    error,
   };
 };
 

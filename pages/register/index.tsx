@@ -6,11 +6,11 @@ import { FieldRequiredMessage } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
 import { TextInput, TextPasswordInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Checkbox } from '@/components/ui/checkbox';
 import { PublicComponent } from '@/components/util/public-component';
 import { UserRegisterFormModel } from '@/types/user';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Checkbox } from 'antd';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -171,7 +171,7 @@ const Register = () => {
   };
   return (
     <LayoutAuth title="Register">
-      <div className="m-auto mt-10 w-full max-w-lg rounded-lg border border-gray-100 bg-white p-6 shadow-md dark:border-input dark:bg-background md:mt-16">
+      <div className="dark:border-input dark:bg-background m-auto mt-10 w-full max-w-lg rounded-lg border border-gray-100 bg-white p-6 shadow-md md:mt-16">
         <div className="mx-auto mt-4 flex justify-center">
           <h6 className="text-center text-xl font-bold">
             {t.formatMessage({ id: 'AUTH.REGISTER.SUBTITLE' })}
@@ -300,36 +300,31 @@ const Register = () => {
                   control={control}
                   render={({ field: { value, onChange } }) => (
                     <>
-                      <div className="flex items-center">
-                        <div className="flex">
-                          <Checkbox checked={value} onChange={onChange} />
-                        </div>
-                        <div className="ml-3">
-                          <label
-                            htmlFor="remember-me"
-                            //className="text-sm font-bold text-gray-700"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      <div className="flex items-center space-x-2">
+                        <Checkbox checked={value} onCheckedChange={onChange} />
+                        <label
+                          htmlFor="terms"
+                          className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                          {t.formatMessage({ id: 'CONTACT.US.ACCEPT_TERMS' })}{' '}
+                          <Link
+                            className="text-sm text-blue-600 hover:underline"
+                            href="/terms-condition"
                           >
-                            {t.formatMessage({ id: 'CONTACT.US.ACCEPT_TERMS' })}{' '}
-                            <Link
-                              className="text-sm text-blue-600 hover:underline"
-                              href="/terms-condition"
-                            >
-                              {t.formatMessage({
-                                id: 'CONTACT.US.TERMS_OF_USE',
-                              })}
-                            </Link>{' '}
-                            &{' '}
-                            <Link
-                              className="text-sm text-blue-600 hover:underline"
-                              href="/privacy-policy"
-                            >
-                              {t.formatMessage({
-                                id: 'CONTACT.US.PRIVACY_POLICY',
-                              })}
-                            </Link>
-                          </label>
-                        </div>
+                            {t.formatMessage({
+                              id: 'CONTACT.US.TERMS_OF_USE',
+                            })}
+                          </Link>{' '}
+                          &{' '}
+                          <Link
+                            className="text-sm text-blue-600 hover:underline"
+                            href="/privacy-policy"
+                          >
+                            {t.formatMessage({
+                              id: 'CONTACT.US.PRIVACY_POLICY',
+                            })}
+                          </Link>
+                        </label>
                       </div>
                     </>
                   )}
@@ -373,7 +368,7 @@ const Register = () => {
         </form>
 
         <div className="my-4 flex items-center justify-between">
-          <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+          <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
           <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
             {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
           </p>
@@ -385,7 +380,7 @@ const Register = () => {
           <GoogleAuthLogin />
         </div>
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
-          <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
+          <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:text-blue-600">
             {' '}
             {t.formatMessage({ id: 'UTIL.ALREADY_TO' })}{' '}
             {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}

@@ -15,9 +15,12 @@ import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
 import { StripeButtonCardForm } from '@/components/payment/stripe/create-button-stripe-form';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
-import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { ListCarouselUploadMini } from '@/components/ui-setting/list-carousel-upload-mini';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -178,7 +181,7 @@ const CheckoutEvent = () => {
                     <div className="flow-root">
                       <div
                         key={item?.id}
-                        className="my-8 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background"
+                        className="dark:border-input dark:bg-background my-8 overflow-hidden rounded-lg border border-gray-100 bg-white"
                       >
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
@@ -292,7 +295,7 @@ const CheckoutEvent = () => {
                               </p>
                             </div>
                             <div className="mt-2 py-2 sm:mt-0">
-                              <div className="flex items-center rounded border border-gray-200 dark:border-input">
+                              <div className="dark:border-input flex items-center rounded border border-gray-200">
                                 <ButtonInput
                                   type="button"
                                   variant="primary"
@@ -331,7 +334,7 @@ const CheckoutEvent = () => {
                               />
                             ) : Number(dataTickets?.pages[0]?.data?.total) <=
                               0 ? (
-                              <div className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500 dark:bg-background">
+                              <div className="border-input dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500">
                                 <p className="text-gray-700 dark:text-gray-200">
                                   Free
                                 </p>
@@ -344,7 +347,7 @@ const CheckoutEvent = () => {
                                       <div key={index}>
                                         <label
                                           htmlFor={ticket?.id}
-                                          className={`flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-semibold shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background`}
+                                          className={`border-input dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600`}
                                         >
                                           <div className="sm:flex sm:items-center sm:justify-between">
                                             <div className="sm:mt-0">
@@ -425,7 +428,7 @@ const CheckoutEvent = () => {
                           {Number(dataTickets?.pages[0]?.data?.total) <= 0 ||
                           watchAmount ? (
                             <>
-                              <hr className="mt-8 dark:border-input" />
+                              <hr className="dark:border-input mt-8" />
                               <div className="py-2">
                                 <div className="flex items-center">
                                   <h2 className="text-base font-bold dark:text-gray-600">
@@ -477,7 +480,7 @@ const CheckoutEvent = () => {
                         <span className="font-bold">{timerRemaining}</span>
                       </ButtonInput>
                     </div>
-                    <div className="mt-4 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
+                    <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border border-gray-100 bg-white">
                       <div className="p-4 sm:p-6 lg:p-8">
                         <h3 className="font-bold dark:text-white">Riepilogo</h3>
 
@@ -546,7 +549,7 @@ const CheckoutEvent = () => {
                     € 3,00
                   </p>
                 </li> */}
-                        <hr className="my-4 dark:border-input" />
+                        <hr className="dark:border-input my-4" />
 
                         <li className="my-2 flex items-center justify-between">
                           <p className="text-3xl font-medium dark:text-white">
@@ -574,7 +577,7 @@ const CheckoutEvent = () => {
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.valueTotal ? (
-                      <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
+                      <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-extrabold">Payment method</div>
                           <div className="mt-4 space-y-4">
@@ -582,7 +585,7 @@ const CheckoutEvent = () => {
                               <div key={index}>
                                 <label
                                   htmlFor={lk?.value}
-                                  className="flex cursor-pointer items-center justify-between gap-4 rounded-lg border border-input p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background dark:hover:border-blue-600"
+                                  className="border-input dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-medium shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:hover:border-blue-600"
                                 >
                                   <p className="text-gray-700 dark:text-gray-200">
                                     {lk?.name}

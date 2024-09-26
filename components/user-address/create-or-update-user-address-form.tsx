@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { SelectInput, TextInput } from '../ui-setting/shadcn';
@@ -32,18 +31,8 @@ const CreateOrUpdateUserAddressForm = ({
   isEdit,
   countries,
 }: Props) => {
+  const { setHasErrors, userStorage, isOpen, setIsOpen } = useInputState();
   const {
-    loading,
-    setLoading,
-    hasErrors,
-    setHasErrors,
-    userStorage,
-    isOpen,
-    setIsOpen,
-  } = useInputState();
-  const {
-    reset,
-    watch,
     setValue,
     control,
     handleSubmit,
@@ -69,33 +58,19 @@ const CreateOrUpdateUserAddressForm = ({
     }
   }, [userAddress, setValue]);
 
-  const { mutateAsync: saveMutation } = CreateOrUpdateOneUserAddressAPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending: loading, mutateAsync: saveMutation } =
+    CreateOrUpdateOneUserAddressAPI();
 
   const onSubmit: SubmitHandler<UserAddressFormModel> = async (
     payload: UserAddressFormModel,
   ) => {
-    setLoading(true);
-    setHasErrors(undefined);
     setIsEdit((i: boolean) => !i);
     try {
       await saveMutation({
         ...payload,
         userAddressId: userAddress?.id,
       });
-      setHasErrors(false);
-      setLoading(false);
     } catch (error: any) {
-      setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -201,7 +176,7 @@ const CreateOrUpdateUserAddressForm = ({
                 <ButtonInput
                   size="lg"
                   type="submit"
-                  variant="info"
+                  variant="primary"
                   className="w-full"
                   loading={loading}
                 >
@@ -225,7 +200,6 @@ const CreateOrUpdateUserAddressForm = ({
           </div>
         ) : null}
       </form>
-      <LoginModal isOpen={isOpen} setIsOpen={setIsOpen} />
     </>
   );
 };

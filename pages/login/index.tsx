@@ -105,7 +105,7 @@ const Login = () => {
   return (
     <>
       <LayoutAuth title="Login">
-        <div className="m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 bg-white p-6 shadow-md dark:border-input dark:bg-background md:mt-16">
+        <div className="dark:border-input dark:bg-background m-auto mt-10 w-full max-w-sm rounded-lg border border-gray-100 bg-white p-6 shadow-md md:mt-16">
           <div className="mx-auto mt-4 flex justify-center">
             <h6 className="text-center text-xl font-bold">
               {t.formatMessage({ id: 'AUTH.LOGIN.TITLE' })}
@@ -200,7 +200,7 @@ const Login = () => {
           </form>
 
           <div className="my-4 flex items-center justify-between">
-            <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
+            <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
             <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
               {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
             </p>
@@ -213,7 +213,7 @@ const Login = () => {
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-            <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
+            <p className="mt-8 cursor-pointer text-center text-sm text-gray-600 hover:underline dark:text-blue-600">
               {' '}
               {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
               {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}

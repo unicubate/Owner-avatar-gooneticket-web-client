@@ -1,7 +1,6 @@
 import { makeApiCall } from '@/api-site/clients';
 import {
   IpLocationModal,
-  ResponseUserModel,
   UserForgotPasswordFormModel,
   UserLoginFormModel,
   UserLoginPhoneFormModel,
@@ -11,13 +10,7 @@ import {
   UserStatus,
   UserVerifyTokenModel,
 } from '@/types/user';
-import { PaginationRequest, SortModel } from '@/utils/paginations';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel,
@@ -198,18 +191,20 @@ export const UpdateEnableProfileAPI = ({
 
 export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
   const { userId } = payload;
-  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: async () =>
-      await makeApiCall({
-        action: 'getOneUserPrivate',
-        urlParams: { userId },
-      }),
-    refetchOnWindowFocus: false,
-    enabled: Boolean(userId),
-  });
+  const { data, isError, isLoading, status, isPending, error, refetch } =
+    useQuery({
+      queryKey: ['user', userId],
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getOneUserPrivate',
+          urlParams: { userId },
+        }),
+      refetchOnWindowFocus: false,
+      enabled: Boolean(userId),
+    });
 
   return {
+    error: (error as any)?.response,
     data: data?.data as any,
     isError,
     isLoading,
@@ -225,17 +220,19 @@ export const GetOneUserPublicAPI = (payload: {
   username?: string;
   organizationVisitorId?: string;
 }) => {
-  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
-    queryKey: ['user', { ...payload }],
-    queryFn: async () =>
-      await makeApiCall({
-        action: 'getOneUserPublic',
-        queryParams: payload,
-      }),
-    refetchOnWindowFocus: false,
-  });
+  const { data, isError, isLoading, status, isPending, error, refetch } =
+    useQuery({
+      queryKey: ['user', { ...payload }],
+      queryFn: async () =>
+        await makeApiCall({
+          action: 'getOneUserPublic',
+          queryParams: payload,
+        }),
+      refetchOnWindowFocus: false,
+    });
 
   return {
+    error: (error as any)?.response,
     data: data?.data as UserModel,
     isError,
     isLoading,
@@ -263,15 +260,6 @@ export const GetOneUserMeAPI = () => {
     isPending,
     refetch,
   };
-};
-
-export const getUsersAPI = async (
-  payload: PaginationRequest,
-): Promise<{ data: ResponseUserModel }> => {
-  return await makeApiCall({
-    action: 'getUsers',
-    queryParams: payload,
-  });
 };
 
 export const VerifyTokenUsersAPI = ({ token }: { token: string }) => {
@@ -316,22 +304,5 @@ export const updateUpdatePasswordAPI = async (body: {
   await makeApiCall({
     action: 'updateUpdatePassword',
     body: body,
-  });
-};
-
-export const GetInfiniteUsersAPI = (payload: {
-  search: string;
-  take: number;
-  sort: SortModel;
-}) => {
-  return useInfiniteQuery({
-    queryKey: ['users', 'infinite', { ...payload }],
-    queryFn: async ({ pageParam = 1 }) =>
-      await getUsersAPI({
-        ...payload,
-        page: pageParam,
-      }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage: any) => lastPage.data.next_page ?? undefined,
   });
 };

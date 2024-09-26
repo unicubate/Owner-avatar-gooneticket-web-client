@@ -6,9 +6,12 @@ import {
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { EventSkeleton } from '@/components/skeleton/event-skeleton';
-import { ButtonLoadMore, SearchInput } from '@/components/ui-setting';
-import { EmptyData } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  ButtonLoadMore,
+  EmptyData,
+  ErrorFile,
+  SearchInput,
+} from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { EventModel } from '@/types/event';
 import { itemsNumberArray } from '@/utils/utils';

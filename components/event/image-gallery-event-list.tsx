@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { UploadModel } from '@/types/upload';
-import { Image } from 'antd';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 type Props = {
@@ -42,15 +42,14 @@ const ImageGalleryEventList: React.FC<Props> = ({
           <div className="lg:order-2 lg:ml-5">
             <div className="overflow-hidden rounded-sm border-2 border-transparent">
               <Image
-                width={width}
+                width={Number(width)}
                 height={400}
                 className={className}
-                preview={true}
                 src={`${viewOneFileUploadAPI({
                   folder: folder,
                   fileName: selectedImage,
                 })}`}
-                alt={alt}
+                alt={String(alt)}
               />
             </div>
           </div>
@@ -67,7 +66,7 @@ const ImageGalleryEventList: React.FC<Props> = ({
                     onClick={() => setSelectedImage(item?.path)}
                   >
                     <div className="aspect-w-1 aspect-h-1 sm:aspect-w-4 sm:aspect-h-3 overflow-hidden rounded-sm border-2 border-transparent">
-                      <Image
+                      {/* <Image
                         width={width}
                         height={100}
                         className={className}
@@ -77,7 +76,7 @@ const ImageGalleryEventList: React.FC<Props> = ({
                           fileName: item?.path,
                         })}`}
                         alt={alt}
-                      />
+                      /> */}
                     </div>
                   </button>
                 ))}

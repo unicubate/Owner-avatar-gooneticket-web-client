@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteEventDatesAPI } from '@/api-site/event-date';
+import {
+  ButtonLoadMore,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { useInputState } from '../hooks';
-import { ButtonLoadMore } from '../ui-setting';
-import { LoadingFile } from '../ui-setting/ant';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListEventDates } from './list-event-dates';
 
 const ListEventDatesForEventDate = ({

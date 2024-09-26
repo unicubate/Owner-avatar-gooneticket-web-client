@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { viewOneFileUploadAPI } from '@/api-site/upload';
 import { UploadModel } from '@/types/upload';
-//import { Image } from 'antd';
 import React, { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

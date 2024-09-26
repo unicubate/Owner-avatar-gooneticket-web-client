@@ -12,7 +12,7 @@ import { TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
+import { AvatarComponent } from '../ui-setting/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { useAuth } from '../util/context-user';
 

@@ -2,8 +2,7 @@ import { GetOneUserPublicAPI } from '@/api-site/user';
 import { TablePublicEventDates } from '@/components/event-date/table-public-event-dates';
 import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
-import { LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import { ErrorFile, LoadingFile } from '@/components/ui-setting';
 import { useRouter } from 'next/router';
 
 const ProfilePublic = () => {

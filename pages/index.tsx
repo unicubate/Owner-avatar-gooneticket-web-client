@@ -224,7 +224,7 @@ export default function Home() {
           <Accordion key={index} type="single" collapsible>
             <AccordionItem
               value={item.question}
-              className="rounded-md border bg-muted/20 px-4  transition-all hover:bg-muted/50 dark:border-input dark:bg-black/15"
+              className="bg-muted/20 hover:bg-muted/50 dark:border-input rounded-md  border px-4 transition-all dark:bg-black/15"
             >
               <AccordionTrigger className="text-left hover:no-underline">
                 {item.question}

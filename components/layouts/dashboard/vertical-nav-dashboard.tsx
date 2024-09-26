@@ -27,11 +27,11 @@ const VerticalNavDashboard = ({ user }: Props) => {
       count: 1,
       href: '/orders',
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
-      count: user?.affiliation?.count,
-      href: `/orders/affiliates`,
-    },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
+    //   count: user?.affiliation?.count,
+    //   href: `/orders/affiliates`,
+    // },
     {
       title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
       count: 1,

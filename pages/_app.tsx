@@ -1,10 +1,9 @@
 import '@/styles/globals.css';
-import { ConfigProvider } from 'antd';
 import type { AppProps } from 'next/app';
 import 'react-quill/dist/quill.snow.css';
 import 'toastify-js/src/toastify.css';
 
-import { LoadingFile } from '@/components/ui-setting/ant';
+import { LoadingFile } from '@/components/ui-setting';
 import { ContextUserProvider } from '@/components/util/context-user';
 import { ThemeProvider } from '@/components/util/theme-provider';
 import {
@@ -34,11 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 defaultTheme="system"
                 enableSystem
               >
-                <ConfigProvider>
-                  <ContextUserProvider>
-                    <Component {...pageProps} />
-                  </ContextUserProvider>
-                </ConfigProvider>
+                <ContextUserProvider>
+                  <Component {...pageProps} />
+                </ContextUserProvider>
               </ThemeProvider>
             </ClientOnly>
           </GoogleOAuthProvider>

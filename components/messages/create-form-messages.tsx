@@ -1,4 +1,6 @@
 import { CreateOneConversationMessagesAPI } from '@/api-site/conversations';
+import { ButtonInput, TextareaReactQuillInput } from '@/components/ui-setting';
+import { SwitchInput } from '@/components/ui-setting/shadcn';
 import { ConversationModel, MessageFormModel } from '@/types/message';
 import { AlertDangerNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
@@ -8,8 +10,6 @@ import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
-import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
-import { SwitchInput } from '../ui-setting/ant';
 
 const schema = yup.object({
   description: yup.string().required(),
@@ -113,12 +113,7 @@ export function CreateFormMessages(props: {
               </div>
             </div>
 
-            <SwitchInput
-              control={control}
-              defaultValue={true}
-              name="enableSendEmail"
-              label=""
-            />
+            <SwitchInput control={control} name="enableSendEmail" label="" />
           </div>
         </div>
       </form>

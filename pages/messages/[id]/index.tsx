@@ -5,13 +5,14 @@ import {
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { CreateFormMessages } from '@/components/messages/create-form-messages';
 import { ListConversations } from '@/components/messages/list-conversations';
-import { ButtonInput, ButtonLoadMore } from '@/components/ui-setting';
 import {
   AvatarComponent,
+  ButtonInput,
+  ButtonLoadMore,
   EmptyData,
+  ErrorFile,
   LoadingFile,
-} from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+} from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { MailIcon, MoveLeft } from 'lucide-react';
@@ -98,9 +99,9 @@ const MessagesView = () => {
                 </div>
               </div>
               <div className="flex h-[580px] flex-col items-center justify-center">
-                <div className="flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl dark:border-input dark:bg-background">
+                <div className="dark:border-input dark:bg-background flex w-full grow flex-col overflow-hidden rounded-lg bg-white shadow-xl">
                   {conversation?.fkConversationId && (
-                    <div className="mt-auto flex items-center border-b-2 border-gray-50 p-2 dark:border-input">
+                    <div className="dark:border-input mt-auto flex items-center border-b-2 border-gray-50 p-2">
                       <div className="relative shrink-0 cursor-pointer">
                         <AvatarComponent
                           className="size-9"
@@ -123,7 +124,7 @@ const MessagesView = () => {
                     </div>
                   )}
                   <div
-                    className="flex h-0 grow flex-col overflow-auto border-b-2 border-gray-50 p-4 dark:border-input"
+                    className="dark:border-input flex h-0 grow flex-col overflow-auto border-b-2 border-gray-50 p-4"
                     ref={chatContainerRef}
                   >
                     {hasNextPage && (

@@ -1,12 +1,12 @@
 'use client';
 
 import { ReadOneConversationAPI } from '@/api-site/conversations';
+import { AvatarComponent } from '@/components/ui-setting';
 import { ConversationModel } from '@/types/message';
 import { AlertDangerNotification, formateFromNow } from '@/utils';
 import { HtmlParserMessage } from '@/utils/html-parser';
 import { useRouter } from 'next/navigation';
 import { useInputState } from '../hooks';
-import { AvatarComponent } from '../ui-setting/ant';
 
 type Props = {
   item?: ConversationModel;

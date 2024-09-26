@@ -1,7 +1,6 @@
 import { makeApiCall } from '@/api-site/clients';
 import { ContactUsFormModel } from '@/types/contact-us';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { RcFile } from 'antd/es/upload';
 
 export const CreateContactAPI = ({
   onSuccess,
@@ -24,7 +23,7 @@ export const CreateContactAPI = ({
 
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
-          data.append('attachmentFiles', file?.originFileObj as RcFile);
+          data.append('attachmentFiles', file?.originFileObj);
         });
 
       return await makeApiCall({

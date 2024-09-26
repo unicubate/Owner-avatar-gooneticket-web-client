@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteCommentsAPI } from '@/api-site/comment';
+import { ErrorFile, LoadingFile } from '@/components/ui-setting';
 import { ModelType } from '@/utils/paginations';
-import { LoadingFile } from '../ui-setting/ant';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { ListCommentsPosts } from './list-comments-posts';
 

@@ -37,7 +37,7 @@ const ListEventDates = ({ item, index }: Props) => {
       >
         <div
           key={index}
-          className="mt-2 cursor-pointer justify-between  gap-4 rounded-lg border border-input p-2 text-sm shadow-sm hover:-translate-y-1 hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background"
+          className="mt-2 cursor-pointer justify-between  gap-4 rounded-lg border border-input p-2 text-sm shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600 dark:bg-background"
         >
           <div className="flex items-center py-1">
             <div className="min-w-0 flex-1">

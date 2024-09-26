@@ -1,9 +1,13 @@
 import { GetOneTransactionAPI } from '@/api-site/transaction';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ButtonInput, SerialPrice } from '@/components/ui-setting';
-import { AvatarComponent, LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
+import {
+  AvatarComponent,
+  ButtonInput,
+  ErrorFile,
+  LoadingFile,
+  SerialPrice,
+} from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { formatDateDDMMYYToUtc, formateDate } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
@@ -62,7 +66,7 @@ const TransactionsView = () => {
               </div>
             </div>
 
-            <div className="mt-2 overflow-hidden rounded-lg border bg-white dark:border-input dark:bg-background">
+            <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border bg-white">
               <div className="p-8 sm:px-8 sm:py-7">
                 {isLoadingTransaction ? (
                   <LoadingFile />
@@ -162,7 +166,7 @@ const TransactionsView = () => {
                       </div>
                       <div className="mt-8">
                         {/* <div className="space-y-4 rounded-lg border border-gray-200 p-4 dark:border-input"> */}
-                        <div className="space-y-4 border-gray-200 dark:border-input">
+                        <div className="dark:border-input space-y-4 border-gray-200">
                           <div className="hidden sm:grid sm:grid-cols-5">
                             <div className="text-xs font-medium uppercase sm:col-span-2">
                               Item
@@ -178,7 +182,7 @@ const TransactionsView = () => {
                             </div>
                           </div>
 
-                          <div className="hidden border-b border-gray-200 dark:border-input sm:block"></div>
+                          <div className="dark:border-input hidden border-b border-gray-200 sm:block"></div>
 
                           <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                             <div className="col-span-full sm:col-span-2">
@@ -224,7 +228,7 @@ const TransactionsView = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="border-b border-gray-200 dark:border-input"></div>
+                          <div className="dark:border-input border-b border-gray-200"></div>
                         </div>
                       </div>
 

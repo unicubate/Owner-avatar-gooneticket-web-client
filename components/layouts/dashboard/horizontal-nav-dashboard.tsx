@@ -4,15 +4,18 @@ import {
   ImageLogo,
   ThemeToggle,
 } from '@/components/ui-setting';
+import { AvatarComponent } from '@/components/ui-setting/';
+import { LangToggle } from '@/components/ui-setting/lang-toggle';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { NavbarProps } from '.';
-import { AvatarComponent } from '../../ui-setting/ant';
-import { LangToggle } from '../../ui-setting/lang-toggle';
-import { Button } from '../../ui/button';
-import { DropdownMenu, DropdownMenuTrigger } from '../../ui/dropdown-menu';
 
 interface Props {
   showDrawer?: () => void;

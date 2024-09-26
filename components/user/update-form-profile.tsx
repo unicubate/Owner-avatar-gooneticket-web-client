@@ -6,9 +6,7 @@ import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { UploadOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Avatar, GetProp, Select, Upload, UploadProps } from 'antd';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -17,29 +15,29 @@ import { ButtonInput } from '../ui-setting/button-input';
 import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 import { Label } from '../ui/label';
-const { Option } = Select;
+// const { Option } = Select;
 
-type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
-const getBase64 = (img: FileType, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
-  reader.readAsDataURL(img);
-};
-const beforeUpload = (file: FileType) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-  if (!isJpgOrPng) {
-    AlertDangerNotification({
-      text: 'You can only upload JPG/PNG file!',
-    });
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    AlertDangerNotification({
-      text: 'Image must smaller than 2MB!',
-    });
-  }
-  return isJpgOrPng && isLt2M;
-};
+// type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+// const getBase64 = (img: FileType, callback: (url: string) => void) => {
+//   const reader = new FileReader();
+//   reader.addEventListener('load', () => callback(reader.result as string));
+//   reader.readAsDataURL(img);
+// };
+// const beforeUpload = (file: FileType) => {
+//   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+//   if (!isJpgOrPng) {
+//     AlertDangerNotification({
+//       text: 'You can only upload JPG/PNG file!',
+//     });
+//   }
+//   const isLt2M = file.size / 1024 / 1024 < 2;
+//   if (!isLt2M) {
+//     AlertDangerNotification({
+//       text: 'Image must smaller than 2MB!',
+//     });
+//   }
+//   return isJpgOrPng && isLt2M;
+// };
 
 type Props = {
   user: UserModel | any;
@@ -127,15 +125,15 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
     }
   };
 
-  const handleChange: UploadProps['onChange'] = (primary) => {
-    const { file } = primary;
-    if (['done', 'error'].includes(String(file?.status))) {
-      getBase64(file?.originFileObj as FileType, (url) => {
-        setImageUrl(url as any);
-        setAttachment(file?.originFileObj);
-      });
-    }
-  };
+  // const handleChange: UploadProps['onChange'] = (primary) => {
+  //   const { file } = primary;
+  //   if (['done', 'error'].includes(String(file?.status))) {
+  //     getBase64(file?.originFileObj as FileType, (url) => {
+  //       setImageUrl(url as any);
+  //       setAttachment(file?.originFileObj);
+  //     });
+  //   }
+  // };
 
   return (
     <>
@@ -162,7 +160,7 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
                 render={({}) => (
                   <>
                     <div className="mx-auto justify-center text-center">
-                      <Upload
+                      {/* <Upload
                         name="attachment"
                         listType="picture-circle"
                         className="avatar-uploader"
@@ -185,7 +183,7 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
                             <div style={{ marginTop: 8 }}>Profile</div>
                           </div>
                         )}
-                      </Upload>
+                      </Upload> */}
                     </div>
                   </>
                 )}
@@ -293,7 +291,7 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
             <div className="mb-2 mt-4 flex items-center justify-end space-x-4">
               <ButtonInput
                 type="submit"
-                variant="info"
+                variant="primary"
                 className="w-full"
                 loading={loading}
               >

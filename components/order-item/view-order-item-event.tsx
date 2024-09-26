@@ -1,8 +1,10 @@
 import { downloadOneUploadsAPI } from '@/api-site/upload';
+import { QRCodeInput, SerialPrice } from '@/components/ui-setting';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import { Badge } from '@/components/ui/badge';
 import { OrderItemModel } from '@/types/order-item';
 import { AlertDangerNotification, formateToRFC2822 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { QRCode, QRCodeProps } from 'antd';
 import {
   BadgeAlertIcon,
   CalendarDaysIcon,
@@ -10,12 +12,7 @@ import {
   DownloadIcon,
   User2Icon,
 } from 'lucide-react';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { SerialPrice } from '../ui-setting';
-import { ButtonInput } from '../ui-setting/button-input';
-import { Badge } from '../ui/badge';
 
 type Props = {
   orderItem: OrderItemModel;
@@ -23,8 +20,6 @@ type Props = {
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
   const { locale, loading, setLoading } = useInputState();
-  const [level, setLevel] = useState<string | number>('L');
-  const { query, push, back } = useRouter();
 
   const handleDownloadRows = async () => {
     setLoading(true);
@@ -53,15 +48,14 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           {orderItem?.organizationSeller?.name}
         </p>
 
-        <div className="mx-auto max-w-max border-none border-gray-200 bg-white">
-          <p className="mt-4 text-center text-lg font-semibold">
-            <QRCode
-              size={220}
-              errorLevel={level as QRCodeProps['errorLevel']}
-              value={orderItem?.orderNumber}
-            />
-          </p>
+        <div className="mx-auto mt-4 max-w-max">
+          <QRCodeInput
+            size={200}
+            errorLevel="L"
+            value={orderItem?.orderNumber}
+          />
         </div>
+
         {/* {!orderItem?.isExpired ? (
           <div className="mt-4 flex justify-center">
             <span className="relative flex size-8">

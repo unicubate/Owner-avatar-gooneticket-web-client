@@ -8,10 +8,11 @@ import { ListOrdersUser } from '@/components/order-item/list-orders-user';
 import {
   ButtonInput,
   ButtonLoadMore,
+  EmptyData,
+  ErrorFile,
+  LoadingFile,
   SearchInput,
 } from '@/components/ui-setting';
-import { EmptyData, LoadingFile } from '@/components/ui-setting/ant';
-import { ErrorFile } from '@/components/ui-setting/ant/error-file';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -85,7 +86,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-input">
+                    <DropdownMenuContent className="dark:border-input w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -120,7 +121,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-auto dark:border-input">
+                    <DropdownMenuContent className="dark:border-input w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -163,7 +164,7 @@ const OrdersIndex = () => {
                 </div>
               </div>
 
-              <div className="mt-4 overflow-hidden rounded-lg border bg-white p-4 dark:border-input dark:bg-background">
+              <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border bg-white p-4">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
                     <p className="text-lg font-bold">
@@ -179,7 +180,7 @@ const OrdersIndex = () => {
                 </div>
 
                 <table className="mt-4 min-w-full lg:divide-y">
-                  <tbody className="divide-y divide-input dark:divide-input">
+                  <tbody className="divide-input dark:divide-input divide-y">
                     {user?.organizationId ? (
                       isLoadingOrders ? (
                         <LoadingFile />

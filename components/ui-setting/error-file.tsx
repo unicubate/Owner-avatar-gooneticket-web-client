@@ -1,11 +1,10 @@
-import { Result } from 'antd';
-import { ResultStatusType } from 'antd/es/result';
-import Link from 'next/link';
+import { CircleXIcon } from 'lucide-react';
+import { useRouter } from 'next/router';
 import { useSyncExternalStore } from 'react';
-import { ButtonInput } from '..';
+import { ButtonInput } from './button-input';
 
 interface Props {
-  status?: ResultStatusType;
+  status?: any;
   title: React.ReactNode;
   description?: React.ReactNode;
   className?: string;
@@ -28,12 +27,48 @@ const ErrorFile = ({
   description,
   className = 'relative mx-auto justify-center',
 }: Props) => {
+  const { back } = useRouter();
   const isOnline = useSyncExternalStore(subscribe, getSnapshot);
   return (
     <>
       <div className={className}>
-        <div className="inset-x-0 top-0 grid place-items-center">
-          <Result
+        <div className="inset-x-0 top-0 m-8 grid place-items-center">
+          <div className="mx-auto max-w-max text-red-600">
+            <CircleXIcon className="size-28" />
+          </div>
+          <p className="text-8xl font-bold dark:text-white">
+            {isOnline ? title : '500'}
+          </p>
+          {isOnline ? (
+            <ButtonInput
+              size="sm"
+              variant="primary"
+              type="button"
+              onClick={() => back()}
+              className="mt-2"
+            >
+              Back To Try
+            </ButtonInput>
+          ) : null}
+
+          <ul className="mt-3 flex items-center justify-center space-x-6 sm:space-x-8">
+            <li className="items-center">
+              <span className="text-xl font-bold text-gray-500">
+                {isOnline ? description : 'No internet'}
+              </span>
+            </li>
+          </ul>
+
+          <ul className="mt-3 flex items-center justify-center space-x-6 sm:space-x-8">
+            <li className="items-center">
+              {!isOnline ? (
+                <span className="mt-1 font-bold text-gray-500">
+                  ERR_INTERNET_DISCONNECTED
+                </span>
+              ) : null}
+            </li>
+          </ul>
+          {/* <Result
             status={isOnline ? status : '500'}
             title={
               <p className="text-8xl font-bold dark:text-white">
@@ -70,7 +105,7 @@ const ErrorFile = ({
                 </div>
               </>
             }
-          />
+          /> */}
         </div>
       </div>
     </>

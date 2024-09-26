@@ -7,14 +7,13 @@ import {
   TextInput,
 } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Checkbox } from '@/components/ui/checkbox';
 import { ContactUsFormModel } from '@/types/contact-us';
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from '@/utils/alert-notification';
-import { UploadOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Checkbox, Upload } from 'antd';
 import Link from 'next/link';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -212,7 +211,7 @@ const CreateContactForm = () => {
           <SwitchInput control={control} name="enableUpload" label="" />
         </div>
 
-        {watchEnableUpload && (
+        {/* {watchEnableUpload && (
           <div className="mx-auto mt-4 justify-center text-center">
             <Upload
               multiple
@@ -235,7 +234,7 @@ const CreateContactForm = () => {
               )}
             </Upload>
           </div>
-        )}
+        )} */}
 
         <div className="mt-4">
           <Controller

@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteEventDatesAPI } from '@/api-site/event-date';
+import {
+  ButtonInput,
+  ButtonLoadMore,
+  LoadingFile,
+} from '@/components/ui-setting';
+import { ErrorFile } from '@/components/ui-setting/';
 import { PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { ButtonInput, ButtonLoadMore } from '../ui-setting';
-import { LoadingFile } from '../ui-setting/ant';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ListEventDates } from './list-event-dates';
 
 const TableEventDates = ({

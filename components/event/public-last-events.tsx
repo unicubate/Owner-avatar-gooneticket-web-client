@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { GetInfiniteEventsAPI } from '@/api-site/event';
+import { ButtonLoadMore, ErrorFile } from '@/components/ui-setting';
+import { Skeleton } from '@/components/ui/skeleton';
 import { EventModel } from '@/types/event';
 import { UserVisitorModel } from '@/types/user';
 import { itemsNumberArray } from '@/utils/utils';
-import { ButtonLoadMore } from '../ui-setting';
-import { ErrorFile } from '../ui-setting/ant/error-file';
-import { Skeleton } from '../ui/skeleton';
 import { ListLastEvents } from './list-last-events';
 
 export function PublicLastEvents({

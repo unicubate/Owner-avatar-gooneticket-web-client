@@ -3,6 +3,12 @@ import {
   DeleteOneCommentAPI,
   GetInfiniteCommentsRepliesAPI,
 } from '@/api-site/comment';
+import {
+  AvatarComponent,
+  ButtonInput,
+  ErrorFile,
+  LoadingFile,
+} from '@/components/ui-setting';
 import { CommentModel } from '@/types/comment';
 import {
   AlertDangerNotification,
@@ -15,11 +21,6 @@ import { PencilIcon, ReplyIcon, TrashIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CreateOrUpdateFormLike } from '../like-follow/create-or-update-form-like';
-import { ButtonInput } from '../ui-setting';
-import { LoadingFile } from '../ui-setting/ant';
-import { AvatarComponent } from '../ui-setting/ant/avatar-component';
-import { ErrorFile } from '../ui-setting/ant/error-file';
 import { ActionModalDialog } from '../ui-setting/shadcn';
 import { CreateOrUpdateFormComment } from './create-or-update-form-comment';
 import { CreateOrUpdateFormCommentReply } from './create-or-update-form-comment-reply';
@@ -129,8 +130,6 @@ export function ListCommentsPosts(props: {
                 <HtmlParser html={String(item?.description ?? '')} />
               </p>
               <div className="mt-2 flex items-center font-medium text-gray-600">
-                <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
-
                 {userStorage?.id ? (
                   <button
                     onClick={() => {
