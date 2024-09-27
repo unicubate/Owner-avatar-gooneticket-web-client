@@ -1,7 +1,10 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 import { oneImageToURL } from '@/utils';
-import { capitalizeOneFirstLetter } from '@/utils/utils';
+import {
+  capitalizeOneFirstLetter,
+  capitalizeTruncateOneFirstLetter,
+} from '@/utils/utils';
 
 interface Props {
   profile: any;
@@ -28,10 +31,11 @@ export function AvatarComponent(props: Props) {
                 />
                 <AvatarFallback>
                   {profile?.fullName
-                    ? capitalizeOneFirstLetter(String(profile?.fullName ?? ''))
-                    : capitalizeOneFirstLetter(
-                        String(profile?.firstName ?? ''),
-                        String(profile?.lastName ?? ''),
+                    ? capitalizeTruncateOneFirstLetter(
+                        String(profile?.fullName ?? ''),
+                      )
+                    : capitalizeTruncateOneFirstLetter(
+                        `${profile?.lastName} ${profile?.firstName}`,
                       )}
                 </AvatarFallback>
               </Avatar>
@@ -45,12 +49,11 @@ export function AvatarComponent(props: Props) {
                   alt={`${profile?.firstName ?? ''} ${profile?.lastName ?? ''}`}
                   src={`https://ui-avatars.com/api/?name=${
                     profile?.fullName
-                      ? capitalizeOneFirstLetter(
+                      ? capitalizeTruncateOneFirstLetter(
                           String(profile?.fullName ?? ''),
                         )
-                      : capitalizeOneFirstLetter(
-                          String(profile?.firstName ?? ''),
-                          String(profile?.lastName ?? ''),
+                      : capitalizeTruncateOneFirstLetter(
+                          `${profile?.lastName} ${profile?.firstName}`,
                         )
                   }&color=7F9CF5&background=EBF4FF`}
                 />

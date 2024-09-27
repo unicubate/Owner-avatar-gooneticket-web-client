@@ -29,6 +29,12 @@ export const capitalizeOneFirstLetter = (a: string, b?: string) => {
   return `${fistLetter}${secondLetter}`;
 };
 
+export const capitalizeTruncateOneFirstLetter = (input: string) => {
+  const words = input.split(' ');
+  const initials = words.map((word) => word.charAt(0)).join('');
+  return initials.toUpperCase();
+};
+
 /** Fix truncate */
 export const truncateInput = (input: string, value: number) => {
   return input?.length > value ? `${input.substring(0, value)}...` : input;
