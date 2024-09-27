@@ -4,17 +4,16 @@ import { useInputState } from '../hooks';
 import { getCookieUser } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
-  const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
+    const userToken = getCookieUser();
     const { linkHref, userStorage } = useInputState();
-    const isOnline = userStorage?.id !== undefined;
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!userToken && !isOnline) {
+      if (!userStorage && !userToken) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [userStorage, isOnline, pathname, push, linkHref]);
+    }, [userStorage, userToken, pathname, push, linkHref]);
 
     return <Component {...props} />;
   };

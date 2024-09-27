@@ -7,14 +7,13 @@ const PublicComponent = (Component: ComponentType) => {
   const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
     const { userStorage } = useInputState();
-    const isOnline = userStorage?.id !== undefined;
-    const { push, query } = useRouter();
+    const { push } = useRouter();
 
     useEffect(() => {
-      if (userToken && isOnline) {
+      if (userToken && userStorage) {
         push(`/orders`);
       }
-    }, [userStorage, isOnline, push, query]);
+    }, [userStorage, push]);
 
     return <Component {...props} />;
   };
