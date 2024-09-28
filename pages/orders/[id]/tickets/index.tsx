@@ -91,7 +91,7 @@ const OrderItemsViewIndex = () => {
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
                           image={<TicketPlusIcon className="size-10" />}
-                          title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
+                          title={t.formatMessage({ id: 'UTIL.ANY_TICKET' })}
                           description={t.formatMessage({
                             id: 'UTIL.ANY_SUB_ORDER',
                           })}
