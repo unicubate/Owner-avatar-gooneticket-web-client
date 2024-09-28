@@ -74,7 +74,7 @@ export function ListCarouselUploadMini(props: Props) {
                 style={{
                   left: 0,
                   right: 0,
-                  height: '250px',
+                  height: `${height}`,
                   width: `100%`,
                   marginInline: 'auto',
                   aspectRatio: 'auto',

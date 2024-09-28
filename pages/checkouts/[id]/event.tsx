@@ -189,7 +189,7 @@ const CheckoutEvent = () => {
                               <ListCarouselUploadMini
                                 uploads={item?.uploadsImages}
                                 folder={String(item?.model.toLocaleLowerCase())}
-                                height="200px"
+                                height="250px"
                               />
                             </div>
                           ) : null}
@@ -343,71 +343,75 @@ const CheckoutEvent = () => {
                               dataTickets?.pages.map((page, index: number) => (
                                 <Fragment key={index}>
                                   {page?.data?.value.map(
-                                    (ticket: TicketModel, index: number) => (
-                                      <div key={index}>
-                                        <label
-                                          htmlFor={ticket?.id}
-                                          className={`border-input dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600`}
-                                        >
-                                          <div className="sm:flex sm:items-center sm:justify-between">
-                                            <div className="sm:mt-0">
-                                              <p className="font-bold text-gray-700 dark:text-gray-200">
-                                                {ticket?.name}
-                                              </p>
+                                    (ticket: TicketModel, index: number) => {
+                                      const leftTicket = Number(ticket?.left);
+                                      return (
+                                        <div key={index}>
+                                          <label
+                                            htmlFor={ticket?.id}
+                                            className={`${leftTicket <= 0 ? 'pointer-events-none opacity-50' : ''} border-input  dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600`}
+                                          >
+                                            <div className="sm:flex sm:items-center sm:justify-between">
+                                              <div className="sm:mt-0">
+                                                <p className="font-bold text-gray-700 dark:text-gray-200">
+                                                  {ticket?.name}
+                                                </p>
 
-                                              {ticket?.description ? (
-                                                <div
-                                                  className={`group relative mt-2 text-sm font-normal text-gray-600 dark:text-gray-300`}
+                                                {ticket?.description ? (
+                                                  <div
+                                                    className={`group relative mt-2 text-sm font-normal text-gray-600 dark:text-gray-300`}
+                                                  >
+                                                    <HtmlParser
+                                                      html={String(
+                                                        ticket?.description ??
+                                                          '',
+                                                      )}
+                                                    />
+                                                  </div>
+                                                ) : null}
+                                              </div>
+                                            </div>
+
+                                            <div className="sm:mt-0">
+                                              <p className="text-right text-lg font-bold text-gray-900 dark:text-white">
+                                                {formatePrice({
+                                                  currency: `${item?.currency?.code}`,
+                                                  value: Number(
+                                                    ticket?.amount ?? 0,
+                                                  ),
+                                                })}
+                                              </p>
+                                              {leftTicket <= 0 ? (
+                                                <Badge
+                                                  className="mt-1 rounded-sm uppercase"
+                                                  variant="danger"
                                                 >
-                                                  <HtmlParser
-                                                    html={String(
-                                                      ticket?.description ?? '',
-                                                    )}
-                                                  />
-                                                </div>
+                                                  Completed
+                                                </Badge>
                                               ) : null}
                                             </div>
-                                          </div>
 
-                                          <div className="sm:mt-0">
-                                            <p className="text-right text-lg font-bold text-gray-900 dark:text-white">
-                                              {formatePrice({
-                                                currency: `${item?.currency?.code}`,
-                                                value: Number(
-                                                  ticket?.amount ?? 0,
-                                                ),
-                                              })}
-                                            </p>
-                                            {Number(ticket?.difference) <= 0 ? (
-                                              <Badge
-                                                className="mt-1 rounded-sm uppercase"
-                                                variant="danger"
-                                              >
-                                                Completed
-                                              </Badge>
-                                            ) : null}
-                                          </div>
-
-                                          <input
-                                            type="radio"
-                                            {...register('amount')}
-                                            value={JSON.stringify(ticket)}
-                                            id={ticket?.id}
-                                            className="sr-only"
-                                            onClick={() => {
-                                              setIsLimitMax(
-                                                Number(ticket?.difference) <= 0
-                                                  ? true
-                                                  : false,
-                                              );
-                                            }}
-                                            // defaultChecked={
-                                            //   index === 0 ? true : false
-                                            // }
-                                          />
-                                        </label>
-                                      </div>
-                                    ),
+                                            <input
+                                              type="radio"
+                                              {...register('amount')}
+                                              value={JSON.stringify(ticket)}
+                                              id={ticket?.id}
+                                              className="sr-only"
+                                              onClick={() => {
+                                                setIsLimitMax(
+                                                  Number(ticket?.left) <= 0
+                                                    ? true
+                                                    : false,
+                                                );
+                                              }}
+                                              // defaultChecked={
+                                              //   index === 0 ? true : false
+                                              // }
+                                            />
+                                          </label>
+                                        </div>
+                                      );
+                                    },
                                   )}
                                 </Fragment>
                               ))

@@ -1,13 +1,13 @@
 import { HtmlParser } from '@/utils/html-parser';
 import 'react-h5-audio-player/lib/styles.css';
 import { CopyShareLink } from '../ui-setting';
-import { ListCarouselUpload } from '../ui-setting/list-carousel-upload';
 
 import { EventModel } from '@/types/event';
 import { ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListEventDatesForEventDate } from '../event-date/list-event-dates-for-event-date';
 import { useInputState } from '../hooks';
+import { ListCarouselUploadMini } from '../ui-setting/list-carousel-upload-mini';
 
 type Props = {
   item: EventModel;
@@ -21,10 +21,10 @@ const ViewOneEvent = ({ item }: Props) => {
       <div className="p-8 sm:px-8 sm:py-7">
         {item?.uploadsImages?.length > 0 ? (
           <div className="group relative mx-auto mt-2 justify-center text-center">
-            <ListCarouselUpload
+            <ListCarouselUploadMini
               uploads={item?.uploadsImages}
               folder={String(item?.model.toLocaleLowerCase())}
-              height="400px"
+              height="300px"
             />
           </div>
         ) : null}
