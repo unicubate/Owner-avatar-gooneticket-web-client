@@ -10,7 +10,7 @@ const EmptyData = ({ title, image, description }: Props) => {
       <div className="relative">
         <div className="inset-x-0 top-0 grid place-items-center">
           {image}
-          <div className="text-lg font-bold">{title}</div>
+          <div className="mt-2 text-lg font-bold">{title}</div>
           <span className="font-medium text-gray-600">{description}</span>
         </div>
       </div>
