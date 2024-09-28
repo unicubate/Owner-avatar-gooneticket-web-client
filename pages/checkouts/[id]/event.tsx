@@ -390,7 +390,7 @@ const CheckoutEvent = () => {
                                                   className="mt-1 rounded-sm uppercase"
                                                   variant="danger"
                                                 >
-                                                  Completed
+                                                  Sold out
                                                 </Badge>
                                               ) : null}
                                             </div>
