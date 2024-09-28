@@ -318,7 +318,11 @@ const CheckoutEvent = () => {
                                   loading={false}
                                   onClick={() => setIncrement((lk) => lk + 1)}
                                   icon={<PlusIcon className="size-5" />}
-                                  disabled={!watchAmount || isLimitMax}
+                                  disabled={
+                                    !watchAmount ||
+                                    isLimitMax ||
+                                    increment >= 10
+                                  }
                                 />
                               </div>
                             </div>
