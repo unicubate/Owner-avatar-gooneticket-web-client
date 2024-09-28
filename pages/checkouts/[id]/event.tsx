@@ -433,7 +433,7 @@ const CheckoutEvent = () => {
                             )}
                           </div>
                           <hr className="dark:border-input mt-8" />
-                          <div className="py-2">
+                          <div className="py-2" ref={addressRef}>
                             <div className="flex items-center">
                               <h2 className="text-base font-bold dark:text-gray-600">
                                 Contact
@@ -451,18 +451,16 @@ const CheckoutEvent = () => {
                               )}
                             </div>
                           </div>
-                          <div ref={addressRef}>
-                            <CreateOrUpdateUserAddressForm
-                              isEdit={isEdit}
-                              isContinue={
-                                watchAmount ||
-                                Number(dataTickets?.pages[0]?.data?.total) <= 0
-                              }
-                              setIsEdit={setIsEdit}
-                              userAddress={userAddress}
-                              countries={countries}
-                            />
-                          </div>
+                          <CreateOrUpdateUserAddressForm
+                            isEdit={isEdit}
+                            isContinue={
+                              watchAmount ||
+                              Number(dataTickets?.pages[0]?.data?.total) <= 0
+                            }
+                            setIsEdit={setIsEdit}
+                            userAddress={userAddress}
+                            countries={countries}
+                          />
                         </div>
                       </div>
                     </div>
