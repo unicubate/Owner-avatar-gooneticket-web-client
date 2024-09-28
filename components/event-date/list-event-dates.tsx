@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { EventDateModel } from '@/types/event-date';
 import {
-  formatePrice,
   formateToCccc,
   formateTodd,
   formateToLLLL,
@@ -88,7 +87,7 @@ const ListEventDates = ({ item, index }: Props) => {
                 </div>
 
                 <div className="mt-2">
-                  <p className="text-right text-xl font-bold">
+                  {/* <p className="text-right text-xl font-bold">
                     {item?.oneTicket?.id ? (
                       <>
                         {formatePrice({
@@ -100,7 +99,7 @@ const ListEventDates = ({ item, index }: Props) => {
                     ) : (
                       'Free'
                     )}
-                  </p>
+                  </p> */}
                   <ButtonInput
                     type="button"
                     variant="primary"
