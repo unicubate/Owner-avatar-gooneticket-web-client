@@ -18,14 +18,19 @@ const VerticalNavDashboard = ({ user }: Props) => {
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
-      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      title: `${t.formatMessage({ id: 'MENU.TICKET' })}`,
       count: 1,
-      href: '/events',
+      href: '/tickets',
     },
     {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       count: 1,
       href: '/orders',
+    },
+    {
+      title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
+      count: 1,
+      href: '/events',
     },
     // {
     //   title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
