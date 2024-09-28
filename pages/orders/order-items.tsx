@@ -4,7 +4,7 @@ import {
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
+import { ListOrderItemsTicketUser } from '@/components/order-item/list-order-items-ticket-user';
 import {
   ButtonLoadMore,
   EmptyData,
@@ -183,7 +183,7 @@ const OrderItemsIndex = () => {
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
                           image={<ShoppingCartIcon className="size-10" />}
-                          title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
+                          title={t.formatMessage({ id: 'UTIL.ANY_TICKET' })}
                           description={t.formatMessage({
                             id: 'UTIL.ANY_SUB_ORDER',
                           })}
@@ -193,7 +193,7 @@ const OrderItemsIndex = () => {
                           <Fragment key={i}>
                             {page?.data?.value.map(
                               (item: OrderItemModel, index: number) => (
-                                <ListOrderItemsUser
+                                <ListOrderItemsTicketUser
                                   item={item}
                                   key={index}
                                   index={index}
