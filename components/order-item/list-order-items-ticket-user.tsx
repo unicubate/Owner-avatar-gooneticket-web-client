@@ -34,7 +34,7 @@ type Props = {
   index: number;
 };
 
-const ListOrderItemsUser = ({ item, index }: Props) => {
+const ListOrderItemsTicketUser = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [level, setLevel] = useState<string | number>('L');
   const [copied, setCopied] = useState(false);
@@ -238,4 +238,4 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
   );
 };
 
-export { ListOrderItemsUser };
+export { ListOrderItemsTicketUser };

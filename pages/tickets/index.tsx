@@ -4,7 +4,7 @@ import {
   useReactIntersectionObserver,
 } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
-import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
+import { ListOrderItemsTicketUser } from '@/components/order-item/list-order-items-ticket-user';
 import {
   ButtonLoadMore,
   EmptyData,
@@ -14,7 +14,7 @@ import {
 } from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { OrderItemModel } from '@/types/order-item';
-import { ShoppingCartIcon } from 'lucide-react';
+import { TicketPlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -71,7 +71,7 @@ const OrderItemsViewIndex = () => {
                         />
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
                         <EmptyData
-                          image={<ShoppingCartIcon className="size-10" />}
+                          image={<TicketPlusIcon className="size-10" />}
                           title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
                           description={t.formatMessage({
                             id: 'UTIL.ANY_SUB_ORDER',
@@ -82,7 +82,7 @@ const OrderItemsViewIndex = () => {
                           <Fragment key={i}>
                             {page?.data?.value.map(
                               (item: OrderItemModel, index: number) => (
-                                <ListOrderItemsUser
+                                <ListOrderItemsTicketUser
                                   item={item}
                                   key={index}
                                   index={index}
