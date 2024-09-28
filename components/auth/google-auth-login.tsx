@@ -28,7 +28,7 @@ const GoogleAuthLogin = () => {
             window.location.href =
               user?.status === 'CREATOR'
                 ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
-                : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
+                : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
           } catch (error: any) {
             setHasErrors(true);
             setHasErrors(error.response.data.message);

@@ -38,7 +38,7 @@ import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
@@ -76,7 +76,7 @@ const CheckoutEvent = () => {
   const addressRef = useRef<any>(null);
   const [increment, setIncrement] = useState(1);
   const debounceIncrement = useDebounce(increment, 500);
-  const { ipLocation, userStorage, locale } = useInputState();
+  const { ipLocation, userStorage, locale, scrollToBottom } = useInputState();
   const { query } = useRouter();
   const { id: eventDateId, partner } = query;
 
@@ -169,6 +169,10 @@ const CheckoutEvent = () => {
       addressRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
+  useEffect(() => {
+    isEdit ? scrollToElement() : null;
+  }, [isEdit]);
 
   return (
     <>
@@ -408,9 +412,11 @@ const CheckoutEvent = () => {
                                               onClick={() => {
                                                 scrollToElement();
                                               }}
-                                              // defaultChecked={
-                                              //   index === 0 ? true : false
-                                              // }
+                                              defaultChecked={
+                                                leftTicket >= 0 && index === 0
+                                                  ? true
+                                                  : false
+                                              }
                                             />
                                           </label>
                                         </div>

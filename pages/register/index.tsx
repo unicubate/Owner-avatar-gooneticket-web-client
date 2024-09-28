@@ -117,7 +117,7 @@ const Register = () => {
         ...payload,
         status: 'CLIENT',
       });
-      window.location.href = `${redirect ? redirect : `${user?.url}/orders`}`;
+      window.location.href = `${redirect ? redirect : `${user?.url}/tickets`}`;
       setLoading(false);
     } catch (error: any) {
       setHasErrors(true);

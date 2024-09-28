@@ -16,11 +16,10 @@ import {
   BadgeAlertIcon,
   CircleCheckBigIcon,
   MailIcon,
-  MoreHorizontalIcon,
-  MoveRightIcon,
   PencilIcon,
   ShareIcon,
   UserIcon,
+  ViewIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -28,15 +27,6 @@ import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { CopyShareLink, SerialPrice } from '../ui-setting';
 import { Badge } from '../ui/badge';
-import { Button } from '../ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '../ui/dropdown-menu';
 import { UpdateOrderItemsModal } from './update-order-items-modal';
 
 type Props = {
@@ -53,7 +43,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
     {
       model: 'TICKET',
       title: item?.event?.title,
-      url: `/validate/${item?.orderNumber}/ticket`,
+      url: `/tickets/${item?.orderNumber}/validate`,
     },
     {
       model: 'PRODUCT',
@@ -175,65 +165,49 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
         <td className="py-4 text-right text-sm font-medium">
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
-            <div title={`Event expired`} className="pt-1 lg:hidden">
-              <BadgeAlertIcon className="ml-auto  text-red-600" />
+            <div title={`Event expired`} className="lg:hidden">
+              <BadgeAlertIcon className="ml-auto  text-red-600 size-5" />
             </div>
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
-              <div title={`Event accepted`} className="pt-1 lg:hidden">
-                <CircleCheckBigIcon className="ml-auto text-gray-600" />
+              <div title={`Event accepted`} className="lg:hidden">
+                <CircleCheckBigIcon className="ml-auto text-gray-600 size-5" />
               </div>
             )
           )}
 
           {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <div title={`Event confirmed`} className="pt-1 lg:hidden">
-              <CircleCheckBigIcon className="ml-auto text-green-600" />
+            <div title={`Event confirmed`} className="lg:hidden">
+              <CircleCheckBigIcon className="ml-auto text-green-600 size-5" />
             </div>
           )}
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button type="button" size="icon" variant="ghost">
-                <MoreHorizontalIcon className="size-5 text-gray-400" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-16 dark:border-gray-800 dark:bg-background">
-              <DropdownMenuGroup>
-                <Link
-                  prefetch={true}
-                  href={`${oneItem(item?.model)?.url}`}
-                  title={oneItem(item?.model)?.title}
-                >
-                  <DropdownMenuItem>
-                    <MoveRightIcon className="size-4 text-gray-600 hover:text-blue-600" />
-                    <span className="ml-2 cursor-pointer hover:text-blue-600">
-                      Manage
-                    </span>
-                  </DropdownMenuItem>
-                </Link>
-                <DropdownMenuSeparator />
-                {!item?.confirmedAt ? (
-                  <>
-                    <DropdownMenuItem onClick={() => setIsOpen(true)}>
-                      <PencilIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                      <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                        {t.formatMessage({ id: 'MENU.SETTING' })}
-                      </span>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                  </>
-                ) : null}
-                <DropdownMenuItem onClick={() => setCopied(true)}>
-                  <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
-                    {t.formatMessage({ id: 'UTIL.SHARE' })}
-                  </span>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <div className="pt-1 text-sm font-bold lg:hidden">
+          <div className="py-4 flex justify-end font-medium space-x-3">
+            <Link
+              prefetch={true}
+              href={`${oneItem(item?.model)?.url}`}
+              title={oneItem(item?.model)?.title}
+            >
+              <ViewIcon
+                onClick={() => setIsOpen(true)}
+                className="text-gray-600 hover:text-indigo-600 cursor-pointer size-5"
+              />
+            </Link>
+
+            {!item?.confirmedAt ? (
+              <PencilIcon
+                onClick={() => setIsOpen(true)}
+                className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
+              />
+            ) : null}
+
+            <ShareIcon
+              onClick={() => setCopied(true)}
+              className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
+            />
+          </div>
+
+          <div className="text-sm font-bold lg:hidden">
             {Number(item?.price) > 0 ? (
               <SerialPrice
                 className="text-sm"
@@ -250,7 +224,7 @@ const ListOrderItemsUser = ({ item, index }: Props) => {
       <CopyShareLink
         isOpen={copied}
         setIsOpen={setCopied}
-        link={`${ipLocation?.url}/validate/${item?.orderNumber}/ticket-public`}
+        link={`${ipLocation?.url}/tickets/${item?.orderNumber}/validate-public`}
       />
 
       {isOpen ? (

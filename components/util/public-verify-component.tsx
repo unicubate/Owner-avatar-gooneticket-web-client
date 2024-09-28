@@ -13,7 +13,7 @@ const PublicVerifyComponent = (Component: ComponentType) => {
 
     useEffect(() => {
       if ((userTokenVerify || userToken) && isOnline) {
-        push(`/dashboard`);
+        push(`/tickets`);
       }
     }, [userStorage, isOnline, push, query]);
 

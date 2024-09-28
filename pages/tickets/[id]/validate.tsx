@@ -81,7 +81,7 @@ const Ticket = () => {
         <CopyShareLink
           isOpen={copied}
           setIsOpen={setCopied}
-          link={`${ipLocation?.url}/validate/${orderItem?.orderNumber}/ticket-public`}
+          link={`${ipLocation?.url}/tickets/${orderItem?.orderNumber}/validate-public`}
         />
       </LayoutDashboard>
     </>

@@ -6,7 +6,6 @@ import {
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrdersUser } from '@/components/order-item/list-orders-user';
 import {
-  ButtonInput,
   ButtonLoadMore,
   EmptyData,
   ErrorFile,
@@ -29,7 +28,6 @@ import {
   CalendarCheckIcon,
   ListFilterIcon,
   ShoppingCartIcon,
-  TicketIcon,
 } from 'lucide-react';
 import { Fragment, useState } from 'react';
 
@@ -63,19 +61,6 @@ const OrdersIndex = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
               <div className="mt-4 flex items-center">
-                <ButtonInput
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  // onClick={() => {
-                  //   push(`/orders`);
-                  // }}
-                  icon={<TicketIcon className="size-4" />}
-                >
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {t.formatMessage({ id: 'MENU.ORDER' })}
-                  </span>
-                </ButtonInput>
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>

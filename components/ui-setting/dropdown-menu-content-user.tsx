@@ -1,6 +1,5 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import {
-  AlertCircleIcon,
   FileTextIcon,
   HomeIcon,
   LogOutIcon,
@@ -66,14 +65,14 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
           </>
         ) : null}
 
-        <DropdownMenuGroup>
+        {/* <DropdownMenuGroup>
           <DropdownMenuItem>
             <AlertCircleIcon className="size-4 text-gray-600 hover:text-indigo-600" />
             <span className="ml-2 cursor-pointer hover:text-indigo-600">
               {t.formatMessage({ id: 'UTIL.REPORT' })}
             </span>
           </DropdownMenuItem>
-        </DropdownMenuGroup>
+        </DropdownMenuGroup> */}
 
         {user?.id ? (
           <>

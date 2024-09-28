@@ -13,7 +13,7 @@ const TransactionSuccess = () => {
   const { query, push, back } = useRouter();
   const { type, token } = query;
 
-  const { timerRemaining } = useRedirectAfterSomeSeconds('/orders', 5);
+  const { timerRemaining } = useRedirectAfterSomeSeconds('/tickets', 2);
 
   // this should be run only once per application lifetime
   const { mutateAsync } = CreateOnPaymentPI({

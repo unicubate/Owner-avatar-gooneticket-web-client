@@ -26,6 +26,11 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
   const { t, linkHref, userStorage: user } = useInputState();
   const [navigation] = useState<NavbarProps[]>([
     {
+      title: `${t.formatMessage({ id: 'MENU.TICKET' })}`,
+      count: 1,
+      href: '/tickets',
+    },
+    {
       title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
       count: 1,
       href: '/orders',

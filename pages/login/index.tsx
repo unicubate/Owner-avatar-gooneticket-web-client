@@ -68,7 +68,7 @@ const Login = () => {
         window.location.href =
           user?.status === 'CREATOR'
             ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
-            : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/orders`}`;
+            : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
       }
       setHasErrors(false);
       setLoading(false);

@@ -4,7 +4,7 @@ import { EventDateModel } from '@/types/event-date';
 import { formatePrice } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { TicketIcon } from 'lucide-react';
+import { TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -40,7 +40,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
     <>
       <div
         key={index}
-        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-input dark:bg-background"
+        className="mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white px-2 dark:border-input dark:bg-background hover:border-blue-600 dark:hover:border-blue-600"
       >
         <Link href={linkHrefCheckouts}>
           <div className="divide-y divide-gray-200 dark:divide-gray-900">
@@ -129,9 +129,10 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                     <ButtonInput
                       type="button"
                       variant="primary"
-                      icon={<TicketIcon className="size-6" />}
+                      size="sm"
+                      icon={<TicketPlusIcon className="size-6" />}
                     >
-                      Continue
+                      Ticket
                     </ButtonInput>
 
                     {/* <Button
@@ -180,9 +181,9 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                   type="button"
                   variant="primary"
                   className="w-full"
-                  icon={<TicketIcon className="size-6" />}
+                  icon={<TicketPlusIcon className="size-6" />}
                 >
-                  Continue
+                  Ticket
                 </ButtonInput>
               </div>
             </div>

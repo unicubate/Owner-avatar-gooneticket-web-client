@@ -11,7 +11,7 @@ const PublicComponent = (Component: ComponentType) => {
 
     useEffect(() => {
       if (userToken && userStorage) {
-        push(`/orders`);
+        push(`/tickets`);
       }
     }, [userStorage, push]);
 

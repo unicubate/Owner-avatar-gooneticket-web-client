@@ -7,7 +7,7 @@ import {
   viewYyformateToYyyy,
 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { TicketIcon } from 'lucide-react';
+import { TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -105,7 +105,7 @@ const ListEventDates = ({ item, index }: Props) => {
                     variant="primary"
                     className="ml-auto mt-2 w-full"
                     size="sm"
-                    icon={<TicketIcon className="size-6" />}
+                    icon={<TicketPlusIcon className="size-6" />}
                   >
                     Ticket
                   </ButtonInput>

@@ -6,7 +6,6 @@ import {
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsUser } from '@/components/order-item/list-order-items-user';
 import {
-  ButtonInput,
   ButtonLoadMore,
   EmptyData,
   ErrorFile,
@@ -15,13 +14,12 @@ import {
 } from '@/components/ui-setting';
 import { PrivateComponent } from '@/components/util/private-component';
 import { OrderItemModel } from '@/types/order-item';
-import { MoveLeftIcon, ShoppingCartIcon } from 'lucide-react';
+import { ShoppingCartIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
 const OrderItemsViewIndex = () => {
   const { query, push } = useRouter();
-  const orderId = String(query?.id);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
 
   const {
@@ -35,7 +33,6 @@ const OrderItemsViewIndex = () => {
     search,
     take: 10,
     sort: 'DESC',
-    orderId: orderId,
     customer: 'buyer',
     modelIds: ['EVENT', 'TICKET'],
   });
@@ -47,22 +44,6 @@ const OrderItemsViewIndex = () => {
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="mt-4 flex items-center">
-                <ButtonInput
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                  onClick={() => {
-                    push(`/orders`);
-                  }}
-                  icon={<MoveLeftIcon className="size-4" />}
-                >
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-                  </span>
-                </ButtonInput>
-              </div>
-
               <div className="dark:border-input dark:bg-background mt-4 overflow-hidden rounded-lg border bg-white p-4">
                 <div className="sm:flex sm:items-center sm:justify-between">
                   <div className="mt-4 sm:mt-0">
