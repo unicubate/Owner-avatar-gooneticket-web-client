@@ -35,7 +35,17 @@ export function useInputState() {
   const newSearch = useDebounce(deferredSearch, 500);
 
   const linkHref = typeof window !== 'undefined' ? window.location.href : null;
+
+  /** scroll to bottom */
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  };
+  /** End scroll to bottom */
   return {
+    scrollToBottom,
     search: newSearch,
     setSearch,
     extension,

@@ -31,7 +31,7 @@ const CreateOrUpdateUserAddressForm = ({
   isEdit,
   countries,
 }: Props) => {
-  const { setHasErrors, userStorage, isOpen, setIsOpen } = useInputState();
+  const { setHasErrors, scrollToBottom } = useInputState();
   const {
     setValue,
     control,
@@ -70,6 +70,7 @@ const CreateOrUpdateUserAddressForm = ({
         ...payload,
         userAddressId: userAddress?.id,
       });
+      scrollToBottom();
     } catch (error: any) {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
@@ -171,32 +172,15 @@ const CreateOrUpdateUserAddressForm = ({
 
         {!isEdit ? (
           <div className="mt-4 flex items-center space-x-4">
-            {userStorage?.id ? (
-              <>
-                <ButtonInput
-                  size="lg"
-                  type="submit"
-                  variant="primary"
-                  className="w-full"
-                  loading={loading}
-                >
-                  Continue
-                </ButtonInput>
-              </>
-            ) : (
-              <ButtonInput
-                size="lg"
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-                type="button"
-                variant="primary"
-                className="w-full"
-                loading={loading}
-              >
-                Continue
-              </ButtonInput>
-            )}
+            <ButtonInput
+              size="lg"
+              type="submit"
+              variant="primary"
+              className="w-full"
+              loading={loading}
+            >
+              Checkout
+            </ButtonInput>
           </div>
         ) : null}
       </form>

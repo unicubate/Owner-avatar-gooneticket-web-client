@@ -473,7 +473,7 @@ const CheckoutEvent = () => {
 
                   <div className="lg:sticky lg:top-6 lg:order-2 lg:col-span-2">
                     <div className="mt-8 flex items-center">
-                      <h2 className="text-base font-bold">Checkout</h2>
+                      <p className="text-2xl font-bold">Checkout</p>
                       <ButtonInput
                         type="button"
                         variant="outline"
