@@ -14,6 +14,7 @@ type Props = {
   userAddress?: any;
   isEdit: boolean;
   setIsEdit: any;
+  isContinue: boolean;
   countries: any[];
 };
 
@@ -29,6 +30,7 @@ const CreateOrUpdateUserAddressForm = ({
   userAddress,
   setIsEdit,
   isEdit,
+  isContinue,
   countries,
 }: Props) => {
   const { setHasErrors, scrollToBottom } = useInputState();
@@ -170,7 +172,7 @@ const CreateOrUpdateUserAddressForm = ({
           </div>
         </div>
 
-        {!isEdit ? (
+        {isContinue && !isEdit ? (
           <div className="mt-4 flex items-center space-x-4">
             <ButtonInput
               size="lg"

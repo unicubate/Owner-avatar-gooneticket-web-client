@@ -36,9 +36,9 @@ import {
 import { HtmlParser } from '@/utils/html-parser';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { PlusIcon } from 'lucide-react';
+import { MinusIcon, PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
@@ -73,8 +73,8 @@ const schema = yup.object({
 });
 
 const CheckoutEvent = () => {
+  const addressRef = useRef<any>(null);
   const [increment, setIncrement] = useState(1);
-  const [isLimitMax, setIsLimitMax] = useState(true);
   const debounceIncrement = useDebounce(increment, 500);
   const { ipLocation, userStorage, locale } = useInputState();
   const { query } = useRouter();
@@ -163,6 +163,12 @@ const CheckoutEvent = () => {
     `/events/${item?.slug}${partner ? `?partner=${partner}` : ''}`,
     600,
   );
+
+  const scrollToElement = () => {
+    if (addressRef.current) {
+      addressRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <>
@@ -297,12 +303,13 @@ const CheckoutEvent = () => {
                             <div className="mt-2 py-2 sm:mt-0">
                               <div className="dark:border-input flex items-center rounded border border-gray-200">
                                 <ButtonInput
+                                  size="sm"
                                   type="button"
                                   variant="primary"
                                   className="w-full"
                                   disabled={increment === 1 ? true : false}
                                   onClick={() => setIncrement((lk) => lk - 1)}
-                                  icon={<PlusIcon className="size-5" />}
+                                  icon={<MinusIcon className="size-5" />}
                                 />
 
                                 <Input
@@ -312,17 +319,14 @@ const CheckoutEvent = () => {
                                   className="h-8 w-20 border-transparent text-center [-moz-appearance:_textfield]"
                                 />
                                 <ButtonInput
+                                  size="sm"
                                   type="button"
                                   variant="primary"
                                   className="w-full"
                                   loading={false}
                                   onClick={() => setIncrement((lk) => lk + 1)}
                                   icon={<PlusIcon className="size-5" />}
-                                  disabled={
-                                    !watchAmount ||
-                                    isLimitMax ||
-                                    increment >= 10
-                                  }
+                                  disabled={increment >= 10}
                                 />
                               </div>
                             </div>
@@ -402,11 +406,7 @@ const CheckoutEvent = () => {
                                               id={ticket?.id}
                                               className="sr-only"
                                               onClick={() => {
-                                                setIsLimitMax(
-                                                  Number(ticket?.left) <= 0
-                                                    ? true
-                                                    : false,
-                                                );
+                                                scrollToElement();
                                               }}
                                               // defaultChecked={
                                               //   index === 0 ? true : false
@@ -432,40 +432,37 @@ const CheckoutEvent = () => {
                               </div>
                             )}
                           </div>
-
-                          {Number(dataTickets?.pages[0]?.data?.total) <= 0 ||
-                          watchAmount ? (
-                            <>
-                              <hr className="dark:border-input mt-8" />
-                              <div className="py-2">
-                                <div className="flex items-center">
-                                  <h2 className="text-base font-bold dark:text-gray-600">
-                                    Contact
-                                  </h2>
-                                  {userAddress?.isUpdated &&
-                                    userAddress?.email && (
-                                      <ButtonInput
-                                        type="button"
-                                        size="sm"
-                                        variant={isEdit ? 'primary' : 'outline'}
-                                        onClick={() =>
-                                          setIsEdit((i: boolean) => !i)
-                                        }
-                                        className="ml-auto"
-                                      >
-                                        {isEdit ? 'Edit address' : 'Cancel'}
-                                      </ButtonInput>
-                                    )}
-                                </div>
-                              </div>
-                              <CreateOrUpdateUserAddressForm
-                                isEdit={isEdit}
-                                setIsEdit={setIsEdit}
-                                userAddress={userAddress}
-                                countries={countries}
-                              />
-                            </>
-                          ) : null}
+                          <hr className="dark:border-input mt-8" />
+                          <div className="py-2">
+                            <div className="flex items-center">
+                              <h2 className="text-base font-bold dark:text-gray-600">
+                                Contact
+                              </h2>
+                              {userAddress?.isUpdated && userAddress?.email && (
+                                <ButtonInput
+                                  type="button"
+                                  size="sm"
+                                  variant={isEdit ? 'primary' : 'outline'}
+                                  onClick={() => setIsEdit((i: boolean) => !i)}
+                                  className="ml-auto"
+                                >
+                                  {isEdit ? 'Edit address' : 'Cancel'}
+                                </ButtonInput>
+                              )}
+                            </div>
+                          </div>
+                          <div ref={addressRef}>
+                            <CreateOrUpdateUserAddressForm
+                              isEdit={isEdit}
+                              isContinue={
+                                watchAmount ||
+                                Number(dataTickets?.pages[0]?.data?.total) <= 0
+                              }
+                              setIsEdit={setIsEdit}
+                              userAddress={userAddress}
+                              countries={countries}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -580,14 +577,13 @@ const CheckoutEvent = () => {
                       </div>
                     </div>
 
-                    {!isLimitMax &&
-                    ticketJsonParse?.enableOnlinePayment &&
+                    {ticketJsonParse?.enableOnlinePayment &&
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.valueTotal ? (
                       <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white">
                         <div className="p-4 sm:p-4 lg:p-3">
-                          <div className="font-extrabold">Payment method</div>
+                          <div className="font-bold">Select payment method</div>
                           <div className="mt-4 space-y-4">
                             {paymentMethodArray.map((lk, index) => (
                               <div key={index}>
@@ -623,8 +619,7 @@ const CheckoutEvent = () => {
                         {eventDate?.oneTicket?.id ? (
                           <>
                             <>
-                              {!isLimitMax &&
-                              isValid &&
+                              {isValid &&
                               newAmount?.valueTotal &&
                               watchPaymentMethod &&
                               ticketJsonParse?.enableOnlinePayment ? (
