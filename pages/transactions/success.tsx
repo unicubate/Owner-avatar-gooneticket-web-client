@@ -9,28 +9,18 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
 const TransactionSuccess = () => {
-  const { setLoading, setHasErrors } = useInputState();
+  const { setHasErrors } = useInputState();
   const { query, push, back } = useRouter();
-  const { type, token } = query;
+  const { type, token, tag } = query;
 
-  const { timerRemaining } = useRedirectAfterSomeSeconds('/tickets', 2);
+  const { timerRemaining } = useRedirectAfterSomeSeconds(`/${tag}`, 2);
 
   // this should be run only once per application lifetime
-  const { mutateAsync } = CreateOnPaymentPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending, mutateAsync } = CreateOnPaymentPI();
 
   useEffect(() => {
     const loadItem = async () => {
       if (token && type === 'stripe') {
-        setLoading(true);
         setHasErrors(undefined);
         try {
           const { data: session } = await mutateAsync({
@@ -38,13 +28,11 @@ const TransactionSuccess = () => {
             paymentModel: 'STRIPE-CONFIRM-CHECKOUT-SESSION-EVENT',
           });
           setHasErrors(false);
-          setLoading(false);
           if (session?.id) {
             window.location.href = `${session?.url}`;
           }
         } catch (error: any) {
           setHasErrors(true);
-          setLoading(false);
           setHasErrors(error.response.data.message);
         }
       }
@@ -54,7 +42,7 @@ const TransactionSuccess = () => {
     };
 
     loadItem();
-  }, [type, token, mutateAsync, setLoading, setHasErrors]);
+  }, [type, token, mutateAsync, setHasErrors]);
 
   const options: ISourceOptions = useMemo(
     () => ({

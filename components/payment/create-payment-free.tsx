@@ -11,18 +11,9 @@ import { ButtonInput } from '../ui-setting';
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentFree = ({ data, paymentModel }: Props) => {
   const { push } = useRouter();
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { hasErrors, setHasErrors } = useInputState();
 
-  const { mutateAsync } = CreateOnPaymentPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -33,7 +24,6 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
       type: 'FREE',
       reference: newReference,
     };
-    setLoading(true);
     setHasErrors(undefined);
     try {
       await mutateAsync({
@@ -41,12 +31,10 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
         paymentModel: paymentModel,
       });
       setHasErrors(false);
-      setLoading(false);
 
-      push(`/transactions/success?token=${newReference}`);
+      push(`/transactions/success?token=${newReference}&type=free&tag=tickets`);
     } catch (error: any) {
       setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,

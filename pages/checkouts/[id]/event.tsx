@@ -13,7 +13,7 @@ import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentBooking } from '@/components/payment/create-payment-booking';
 import { CreatePaymentFree } from '@/components/payment/create-payment-free';
 import { CreatePaymentPayPal } from '@/components/payment/create-payment-paypal';
-import { StripeButtonCardForm } from '@/components/payment/stripe/create-button-stripe-form';
+import { CreatePaymentStripe } from '@/components/payment/create-payment-stripe';
 import { EventCheckoutSkeleton } from '@/components/skeleton/event-checkout-skeleton';
 import {
   ButtonInput,
@@ -629,7 +629,7 @@ const CheckoutEvent = () => {
                               ticketJsonParse?.enableOnlinePayment ? (
                                 <>
                                   {watchPaymentMethod === 'STRIPE' ? (
-                                    <StripeButtonCardForm
+                                    <CreatePaymentStripe
                                       paymentModel="STRIPE-CHECKOUT-SESSION-EVENT"
                                       data={{
                                         userAddress,

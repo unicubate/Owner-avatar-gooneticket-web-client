@@ -1,6 +1,6 @@
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { AlertDangerNotification } from '@/utils';
+import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRouter } from 'next/router';
@@ -26,12 +26,9 @@ const CreatePaymentBooking = ({
   paymentModel: PaymentModel;
 }) => {
   const { push } = useRouter();
-  const { loading, setLoading, hasErrors, setHasErrors, ipLocation } =
-    useInputState();
+  const { hasErrors, setHasErrors, ipLocation } = useInputState();
   const {
     reset,
-    watch,
-    setValue,
     control,
     handleSubmit,
     formState: { errors },
@@ -40,16 +37,7 @@ const CreatePaymentBooking = ({
     mode: 'onChange',
   });
 
-  const { mutateAsync } = CreateOnPaymentPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
 
   const onSubmit: SubmitHandler<any> = async (payload: any) => {
     const newReference = generateLongUUID(30);
@@ -59,7 +47,6 @@ const CreatePaymentBooking = ({
       type: 'FREE',
       reference: newReference,
     };
-    setLoading(true);
     setHasErrors(undefined);
     try {
       await mutateAsync({
@@ -67,14 +54,16 @@ const CreatePaymentBooking = ({
         paymentModel: paymentModel,
       });
       setHasErrors(false);
-      setLoading(false);
 
-      push(
-        `/transactions/success?token=${newReference}&type=booking&tag=booking`,
-      );
+      AlertSuccessNotification({
+        text: `Booking save successfully`,
+      });
+      reset();
+      // push(
+      //   `/transactions/success?token=${newReference}&type=booking&tag=booking`,
+      // );
     } catch (error: any) {
       setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,

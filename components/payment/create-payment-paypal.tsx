@@ -5,6 +5,7 @@ import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { PaymentModel } from '../../api-site/payment';
+import { Alert, AlertDescription } from '../ui/alert';
 
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
@@ -24,15 +25,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
-  const { mutateAsync } = CreateOnPaymentPI({
-    onSuccess: () => {
-      setHasErrors(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { mutateAsync } = CreateOnPaymentPI();
 
   const handleApprove = async (options: { order: any }) => {
     const { order } = options;
@@ -74,7 +67,9 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
         data: payload,
         paymentModel: paymentModel,
       });
-      push(`/transactions/success?token=${newReference}&type=paypal&tag=order`);
+      push(
+        `/transactions/success?token=${newReference}&type=paypal&tag=tickets`,
+      );
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -101,17 +96,11 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   return (
     <>
       <div className="mt-4">
-        {hasErrors ? (
-          <div className="rounded-lg bg-red-600">
-            <div className="p-3">
-              <div className="flex items-start justify-between md:items-center">
-                <div className="flex-1 md:flex md:items-center md:justify-between">
-                  <p className="text-sm font-medium text-white">{hasErrors}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        {hasErrors && (
+          <Alert variant="destructive" className="mt-4">
+            <AlertDescription>{hasErrors}</AlertDescription>
+          </Alert>
+        )}
         <PayPalScriptProvider
           options={{
             clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,

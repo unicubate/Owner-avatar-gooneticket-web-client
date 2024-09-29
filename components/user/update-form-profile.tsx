@@ -14,7 +14,6 @@ import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting/button-input';
 import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
-import { Label } from '../ui/label';
 // const { Option } = Select;
 
 // type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
@@ -46,7 +45,6 @@ type Props = {
 
 const schema = yup.object({
   firstName: yup.string().required(),
-  username: yup.string().required('username is a required field'),
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
 });
@@ -57,7 +55,7 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
   );
   const [attachment, setAttachment] = useState<any>();
   const [colors] = useState(arrayColors);
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
+  const { hasErrors, setHasErrors } = useInputState();
   const {
     reset,
     watch,
@@ -82,42 +80,27 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
       ];
       fields?.forEach((field: any) => setValue(field, profile[field]));
     }
-    if (user) {
-      const fields = ['username'];
-      fields?.forEach((field: any) => setValue(field, user[field]));
-    }
   }, [user, profile, setValue]);
-  const watchUsername = watch('username', user?.username);
 
-  const { mutateAsync: saveMutation } = UpdateOneProfileAPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending: loading, mutateAsync: saveMutation } =
+    UpdateOneProfileAPI();
 
   const onSubmit: SubmitHandler<ProfileFormModel> = async (
     data: ProfileFormModel,
   ) => {
-    setLoading(true);
     setHasErrors(undefined);
     try {
       await saveMutation({
         ...data,
+        username: user?.username,
         attachment,
       });
       setHasErrors(false);
-      setLoading(false);
       AlertSuccessNotification({
         text: `information save successfully`,
       });
     } catch (error: any) {
       setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -187,34 +170,6 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
                     </div>
                   </>
                 )}
-              />
-            </div>
-
-            {/* <div className="mt-2">
-              <TextInput
-                control={control}
-                label="Username"
-                type="text"
-                name="username"
-                placeholder="username"
-                errors={errors}
-              />
-            </div> */}
-
-            <div className="mt-2">
-              <TextInput
-                control={control}
-                label="Username"
-                type="text"
-                name="username"
-                placeholder="username"
-                errors={errors}
-                required
-                labelHelp={
-                  <Label className="ml-auto block text-start text-sm">
-                    {`${process.env.NEXT_PUBLIC_SITE}/${watchUsername}`}
-                  </Label>
-                }
               />
             </div>
 

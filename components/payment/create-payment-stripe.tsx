@@ -7,27 +7,14 @@ import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
-import { useRouter } from 'next/navigation';
 import { FormEvent } from 'react';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import { StripeProps } from './create-payment-stripe';
+import { StripeProps } from './stripe/create-payment-stripe';
 
-const StripeButtonCardForm = ({ data, paymentModel }: StripeProps) => {
-  const { push } = useRouter();
+const CreatePaymentStripe = ({ data, paymentModel }: StripeProps) => {
+  const { linkHref, hasErrors, setHasErrors } = useInputState();
 
-  const { loading, linkHref, setLoading, hasErrors, setHasErrors } =
-    useInputState();
-
-  const { mutateAsync } = CreateOnPaymentPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,7 +26,6 @@ const StripeButtonCardForm = ({ data, paymentModel }: StripeProps) => {
       cancelUrl: linkHref,
       reference: newReference,
     };
-    setLoading(true);
     setHasErrors(undefined);
     try {
       const { data: session } = await mutateAsync({
@@ -47,13 +33,11 @@ const StripeButtonCardForm = ({ data, paymentModel }: StripeProps) => {
         paymentModel: paymentModel,
       });
       setHasErrors(false);
-      setLoading(false);
       if (session?.id) {
         window.location.href = `${session?.url}`;
       }
     } catch (error: any) {
       setHasErrors(true);
-      setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
         text: `${error.response.data.message}`,
@@ -81,4 +65,4 @@ const StripeButtonCardForm = ({ data, paymentModel }: StripeProps) => {
   );
 };
 
-export { StripeButtonCardForm };
+export { CreatePaymentStripe };
