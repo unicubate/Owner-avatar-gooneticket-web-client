@@ -34,7 +34,7 @@ import { Fragment, useState } from 'react';
 
 const OrderItemsIndex = () => {
   const [model, setModel] = useState('');
-  const [dayCount, setDayCount] = useState(30);
+  const [period, setPeriod] = useState(30);
   const { query, push } = useRouter();
   const orderId = String(query?.id);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
@@ -54,11 +54,11 @@ const OrderItemsIndex = () => {
       : ['PRODUCT', 'EVENT', 'TICKET'],
     take: 10,
     sort: 'DESC',
-    days: dayCount,
+    period: period,
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
-  const handleDaysChange = (newDays: number) => setDayCount(newDays);
+  const handlePeriodChange = (i: number) => setPeriod(i);
   const handleModelChange = (i: string) => setModel(i);
   return (
     <>
@@ -106,8 +106,8 @@ const OrderItemsIndex = () => {
                       <Button variant="outline" size="sm" className="h-8 gap-1">
                         <CalendarCheckIcon className="size-3.5" />
                         <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {dayCount > 0
-                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
+                          {period > 0
+                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: period })}`
                             : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                         </span>
                       </Button>
@@ -116,7 +116,7 @@ const OrderItemsIndex = () => {
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
-                            handleDaysChange(30);
+                            handlePeriodChange(30);
                           }}
                         >
                           <span className="cursor-pointer">
@@ -130,7 +130,7 @@ const OrderItemsIndex = () => {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          handleDaysChange(120);
+                          handlePeriodChange(120);
                         }}
                       >
                         <span className="cursor-pointer">
@@ -143,7 +143,7 @@ const OrderItemsIndex = () => {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          handleDaysChange(-1);
+                          handlePeriodChange(-1);
                         }}
                       >
                         <span className="cursor-pointer">

@@ -7,6 +7,7 @@ import {
   formateToLLLL,
   viewYyformateToYyyy,
 } from '@/utils';
+import { ReadMore } from '@/utils/read-more';
 import {
   capitalizeFirstLetter,
   obfuscateEmail,
@@ -122,6 +123,15 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                 </div>
               ) : null}
             </div>
+          </div>
+          <div className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
+            <Link
+              prefetch={true}
+              href={`${oneItem(item?.model)?.url}`}
+              title={oneItem(item?.model)?.title}
+            >
+              <ReadMore html={item?.event?.title} value={100} />
+            </Link>
           </div>
         </td>
 

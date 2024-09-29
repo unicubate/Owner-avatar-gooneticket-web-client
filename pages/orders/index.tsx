@@ -6,6 +6,7 @@ import {
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrdersUser } from '@/components/order-item/list-orders-user';
 import {
+  ButtonInput,
   ButtonLoadMore,
   EmptyData,
   ErrorFile,
@@ -28,7 +29,9 @@ import {
   CalendarCheckIcon,
   ListFilterIcon,
   ShoppingCartIcon,
+  TicketPlusIcon,
 } from 'lucide-react';
+import Link from 'next/link';
 import { Fragment, useState } from 'react';
 
 const OrdersIndex = () => {
@@ -61,6 +64,17 @@ const OrdersIndex = () => {
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
               <div className="mt-4 flex items-center">
+                <Link href="/tickets">
+                  <ButtonInput
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    icon={<TicketPlusIcon className="size-4" />}
+                  >
+                    {t.formatMessage({ id: 'MENU.TICKET' })}
+                  </ButtonInput>
+                </Link>
+
                 <div className="ml-auto flex items-center gap-2">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -99,11 +113,9 @@ const OrdersIndex = () => {
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline" size="sm" className="h-8 gap-1">
                         <CalendarCheckIcon className="size-3.5" />
-                        <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                          {dayCount > 0
-                            ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
-                            : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
-                        </span>
+                        {dayCount > 0
+                          ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: dayCount })}`
+                          : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="dark:border-input w-auto">

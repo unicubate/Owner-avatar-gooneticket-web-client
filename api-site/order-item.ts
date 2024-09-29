@@ -156,7 +156,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   modelIds: string[];
   search?: string;
   take: number;
-  days?: number;
+  period?: number;
   daysConfirm?: number;
   status?: string;
   sort: SortModel;
@@ -164,7 +164,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
 }) => {
   const {
     modelIds,
-    days,
+    period,
     orderId,
     daysConfirm,
     search,
@@ -185,7 +185,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
           modelIds,
           take,
           sort,
-          days,
+          period,
           orderId,
           customer,
           daysConfirm,
