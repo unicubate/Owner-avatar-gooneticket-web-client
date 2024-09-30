@@ -3,7 +3,13 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerHeader,
+  DrawerTitle,
+} from '@/components/ui/drawer';
 import { OrderItemModel } from '@/types/order-item';
 import { useInputState, useMediaQuery } from '../hooks';
 import { FormCreateOrUpdateOrderItems } from './form-create-or-update-update-order-items';
@@ -36,20 +42,7 @@ const UpdateOrderItemsModal = ({
 
   return (
     <>
-      <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-        <SheetTrigger asChild />
-        <SheetContent
-          side="bottom"
-          className="dark:border-input dark:bg-background"
-        >
-          <FormCreateOrUpdateOrderItems
-            setShowModal={setIsOpen}
-            orderItem={orderItem}
-          />
-        </SheetContent>
-      </Sheet>
-
-      {/* <Drawer open={isOpen} onOpenChange={setIsOpen}>
+      <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerContent className="h-auto dark:border-input">
           <DrawerHeader className="text-left">
             <DrawerTitle asChild />
@@ -60,7 +53,7 @@ const UpdateOrderItemsModal = ({
             orderItem={orderItem}
           />
         </DrawerContent>
-      </Drawer> */}
+      </Drawer>
     </>
   );
 };
