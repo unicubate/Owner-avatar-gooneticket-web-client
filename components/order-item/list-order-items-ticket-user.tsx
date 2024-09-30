@@ -138,21 +138,15 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
-            <Badge className="ml-2 mt-2 rounded-sm" variant={'danger'}>
-              EXPIRED
-            </Badge>
+            <BadgeAlertIcon className="size-5 text-red-600" />
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
-              <Badge className="rounded-sm" variant="secondary">
-                {item?.status}
-              </Badge>
+              <CircleCheckBigIcon className="size-5 text-gray-600" />
             )
           )}
 
           {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <Badge className="rounded-sm" variant={'success'}>
-              {item?.status}
-            </Badge>
+            <CircleCheckBigIcon className="size-5 text-green-600" />
           )}
         </td>
 

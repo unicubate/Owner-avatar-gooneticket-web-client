@@ -3,6 +3,7 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { OrderItemModel } from '@/types/order-item';
 import { useInputState, useMediaQuery } from '../hooks';
 import { FormCreateOrUpdateOrderItems } from './form-create-or-update-update-order-items';
@@ -19,22 +20,8 @@ const UpdateOrderItemsModal = ({
   const { t } = useInputState();
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  // if (isDesktop) {
-  //   return (
-  //     <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-  //       <AlertDialogTrigger>Open</AlertDialogTrigger>
-  //       <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-input">
-  //         <FormCreateOrUpdateOrderItems
-  //           setShowModal={setIsOpen}
-  //           orderItem={orderItem}
-  //         />
-  //       </AlertDialogContent>
-  //     </AlertDialog>
-  //   );
-  // }
-
-  return (
-    <>
+  if (isDesktop) {
+    return (
       <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
         <AlertDialogTrigger>Open</AlertDialogTrigger>
         <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-input">
@@ -44,6 +31,24 @@ const UpdateOrderItemsModal = ({
           />
         </AlertDialogContent>
       </AlertDialog>
+    );
+  }
+
+  return (
+    <>
+      <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
+        <SheetTrigger asChild />
+        <SheetContent
+          side="bottom"
+          className="dark:border-input dark:bg-background"
+        >
+          <FormCreateOrUpdateOrderItems
+            setShowModal={setIsOpen}
+            orderItem={orderItem}
+          />
+        </SheetContent>
+      </Sheet>
+
       {/* <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerContent className="h-auto dark:border-input">
           <DrawerHeader className="text-left">
