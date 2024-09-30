@@ -82,10 +82,10 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           </Badge>
           <p className="mt-2 font-semibold">
             <span>
-              {Number(orderItem?.price) > 0 ? (
+              {Number(orderItem?.priceTotal) > 0 ? (
                 <SerialPrice
                   className="text-2xl"
-                  value={Number(orderItem?.price)}
+                  value={Number(orderItem?.priceTotal)}
                   currency={{ code: String(orderItem?.currency) }}
                 />
               ) : (

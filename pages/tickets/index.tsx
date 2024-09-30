@@ -51,7 +51,7 @@ const OrderItemsViewIndex = () => {
     take: 10,
     sort: 'DESC',
     customer: 'buyer',
-    modelIds: ['EVENT', 'TICKET'],
+    modelIds: ['EVENT', 'TICKET', 'BOOKING'],
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 

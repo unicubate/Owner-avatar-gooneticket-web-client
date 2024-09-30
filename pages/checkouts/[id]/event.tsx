@@ -51,6 +51,10 @@ type NewAmountType = {
   ticketId: string;
   oneValue: number;
   taxes: number;
+  eventDate: {
+    id: string;
+    expiredAt: Date;
+  };
   valueTotal: number;
   commission: number;
 };
@@ -113,8 +117,8 @@ const CheckoutEvent = () => {
   });
 
   const { data: affiliation } = GetOneAffiliationAPI({
-    code: `${partner ?? ''}`,
     eventId: item?.id,
+    code: String(partner),
   });
 
   const {
@@ -152,11 +156,12 @@ const CheckoutEvent = () => {
     ticketId: ticketJsonParse?.id,
     currency: item?.currency?.code,
     value: calculatePrice,
-    valueTotal: calculateCommission + calculatePrice,
     country: ipLocation?.countryCode,
     oneValue: Number(ticketJsonParse?.amount),
     commission: calculateCommission,
     taxes: Number(userStorage?.organization?.taxes),
+    valueTotal: calculateCommission + calculatePrice,
+    eventDate: { id: eventDate?.id, expiredAt: eventDate?.expiredAt },
   };
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(
@@ -174,6 +179,7 @@ const CheckoutEvent = () => {
     isEdit ? scrollToElement() : null;
   }, [isEdit]);
 
+  console.log('affiliation ======>', affiliation);
   return (
     <>
       <LayoutCheckoutSite

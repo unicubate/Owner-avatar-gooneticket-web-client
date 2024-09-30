@@ -4,8 +4,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 export const GetOneAffiliationAPI = (payload: {
   code: string;
-  eventId?: string;
-  productId?: string;
+  eventId: string;
 }) => {
   const { data, isError, isLoading, status, isPending, refetch } = useQuery({
     queryKey: ['affiliation', { ...payload }],

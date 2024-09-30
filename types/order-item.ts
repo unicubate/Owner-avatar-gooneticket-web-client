@@ -43,6 +43,7 @@ export type OrderItemModel = {
   fullName: string;
   email: string;
   priceDiscount: string;
+  priceTotal: number;
   organizationBuyerId: string;
   organizationSellerId: string;
   model: ModelType;

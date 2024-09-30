@@ -26,7 +26,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { CopyShareLink } from '../ui-setting';
+import { CopyShareLink, SerialPrice } from '../ui-setting';
 import { Badge } from '../ui/badge';
 import { UpdateOrderItemsModal } from './update-order-items-modal';
 
@@ -42,18 +42,18 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
   const { ipLocation, t, locale, isOpen, setIsOpen } = useInputState();
   const arrayItem = [
     {
-      model: 'TICKET',
+      models: ['TICKET', 'BOOKING'],
       title: item?.event?.title,
       url: `/tickets/${item?.orderNumber}/validate`,
     },
     {
-      model: 'PRODUCT',
+      models: ['PRODUCT'],
       title: item?.product?.title,
       url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/product?model=${item?.model.toLocaleLowerCase()}`,
     },
   ];
   const oneItem = (model: string) =>
-    arrayItem.find((item) => item?.model === model);
+    arrayItem.find((item) => item?.models.includes(model));
 
   return (
     <>
@@ -156,6 +156,18 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
           )}
         </td>
 
+        <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
+          {Number(item?.priceTotal) > 0 ? (
+            <SerialPrice
+              className="text-sm"
+              value={Number(item?.priceTotal)}
+              currency={{ code: String(item?.currency) }}
+            />
+          ) : (
+            'Free'
+          )}
+        </td>
+
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
           {formateFromNow(item?.createdAt as Date, locale)}
         </td>
@@ -164,7 +176,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
             <div title={`Event expired`} className="lg:hidden">
-              <BadgeAlertIcon className="ml-auto  text-red-600 size-5" />
+              <BadgeAlertIcon className="ml-auto text-red-600 size-5" />
             </div>
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
@@ -203,6 +215,18 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               onClick={() => setCopied(true)}
               className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
             />
+          </div>
+
+          <div className="text-sm font-bold lg:hidden">
+            {Number(item?.priceTotal) > 0 ? (
+              <SerialPrice
+                className="text-sm"
+                value={Number(item?.priceTotal)}
+                currency={{ code: String(item?.currency) }}
+              />
+            ) : (
+              'Free'
+            )}
           </div>
         </td>
       </tr>

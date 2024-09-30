@@ -12,8 +12,7 @@ import { ButtonInput, PhoneNumberInput } from '../ui-setting';
 import { TextInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
-  firstName: yup.string().required('first name is a required field'),
-  lastName: yup.string().required('last name is a required field'),
+  fullName: yup.string().required('full name is a required field'),
   phone: yup.string().required('phone is a required field'),
   email: yup.string().email().required('email is a required field'),
 });
@@ -44,7 +43,7 @@ const CreatePaymentBooking = ({
     const payloadSave = {
       ...data,
       ...payload,
-      type: 'FREE',
+      type: 'BOOKING',
       reference: newReference,
     };
     setHasErrors(undefined);
@@ -58,10 +57,9 @@ const CreatePaymentBooking = ({
       AlertSuccessNotification({
         text: `Booking save successfully`,
       });
-      reset();
-      // push(
-      //   `/transactions/success?token=${newReference}&type=booking&tag=booking`,
-      // );
+      push(
+        `/transactions/success?token=${newReference}&type=booking&tag=tickets`,
+      );
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -87,23 +85,11 @@ const CreatePaymentBooking = ({
 
             <div className="mt-2">
               <TextInput
-                label="First name"
+                label="Full name"
                 control={control}
                 type="text"
-                name="firstName"
-                placeholder="First name"
-                errors={errors}
-                required
-              />
-            </div>
-
-            <div className="mt-2">
-              <TextInput
-                label="Last name"
-                control={control}
-                type="text"
-                name="lastName"
-                placeholder="Last name"
+                name="fullName"
+                placeholder="Full name"
                 errors={errors}
                 required
               />

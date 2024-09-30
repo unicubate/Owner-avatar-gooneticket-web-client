@@ -42,7 +42,6 @@ const AffiliateIndex = () => {
     modelIds: ['PRODUCT', 'EVENT'],
     take: 10,
     sort: 'DESC',
-    //days: dayCount,
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
