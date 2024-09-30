@@ -11,7 +11,7 @@ import {
   DrawerTitle,
 } from '@/components/ui/drawer';
 import { OrderItemModel } from '@/types/order-item';
-import { useInputState, useMediaQuery } from '../hooks';
+import { useMediaQuery } from '../hooks';
 import { FormCreateOrUpdateOrderItems } from './form-create-or-update-update-order-items';
 
 const UpdateOrderItemsModal = ({
@@ -23,37 +23,38 @@ const UpdateOrderItemsModal = ({
   setIsOpen: (i: boolean) => void;
   orderItem: OrderItemModel;
 }) => {
-  const { t } = useInputState();
   const isDesktop = useMediaQuery('(min-width: 768px)');
-
-  if (isDesktop) {
-    return (
-      <AlertDialog onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>
-        <AlertDialogTrigger>Open</AlertDialogTrigger>
-        <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-input">
-          <FormCreateOrUpdateOrderItems
-            setShowModal={setIsOpen}
-            orderItem={orderItem}
-          />
-        </AlertDialogContent>
-      </AlertDialog>
-    );
-  }
 
   return (
     <>
-      <Drawer open={isOpen} onOpenChange={setIsOpen}>
-        <DrawerContent className="h-auto dark:border-input">
-          <DrawerHeader className="text-left">
-            <DrawerTitle asChild />
-            <DrawerDescription asChild />
-          </DrawerHeader>
-          <FormCreateOrUpdateOrderItems
-            setShowModal={setIsOpen}
-            orderItem={orderItem}
-          />
-        </DrawerContent>
-      </Drawer>
+      {isDesktop ? (
+        <AlertDialog
+          onOpenChange={setIsOpen}
+          open={isOpen}
+          defaultOpen={isOpen}
+        >
+          <AlertDialogTrigger />
+          <AlertDialogContent className="max-h-screen max-w-2xl overflow-y-scroll dark:border-input">
+            <FormCreateOrUpdateOrderItems
+              setShowModal={setIsOpen}
+              orderItem={orderItem}
+            />
+          </AlertDialogContent>
+        </AlertDialog>
+      ) : (
+        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+          <DrawerContent className="h-auto dark:border-input">
+            <DrawerHeader className="text-left">
+              <DrawerTitle asChild />
+              <DrawerDescription asChild />
+            </DrawerHeader>
+            <FormCreateOrUpdateOrderItems
+              setShowModal={setIsOpen}
+              orderItem={orderItem}
+            />
+          </DrawerContent>
+        </Drawer>
+      )}
     </>
   );
 };
