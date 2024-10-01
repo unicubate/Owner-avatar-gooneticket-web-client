@@ -32,7 +32,7 @@ const CreatePaymentStripe = ({ data, paymentModel }: StripeProps) => {
         data: payload,
         paymentModel: paymentModel,
       });
-      setHasErrors(false);
+      if (typeof window === 'undefined') return;
       if (session?.id) {
         window.location.href = `${session?.url}`;
       }
