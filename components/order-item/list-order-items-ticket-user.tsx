@@ -46,11 +46,6 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
       title: item?.event?.title,
       url: `/tickets/${item?.orderNumber}/validate`,
     },
-    {
-      models: ['PRODUCT'],
-      title: item?.product?.title,
-      url: `/orders/${item?.orderId}/order-items/${item?.orderNumber}/product?model=${item?.model.toLocaleLowerCase()}`,
-    },
   ];
   const oneItem = (model: string) =>
     arrayItem.find((item) => item?.models.includes(model));
@@ -68,7 +63,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
-                <p className="text-6xl">
+                <p className="text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
                 </p>
                 <p className="mt-1 text-center">
@@ -87,7 +82,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                   {capitalizeFirstLetter(
                     formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
                   )}
-                  <span className="ml-1.5">
+                  <span className="ml-1">
                     {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
                   </span>
                 </p>
@@ -124,7 +119,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               ) : null}
             </div>
           </div>
-          <div className="mt-1 font-bold transition-all duration-200 hover:text-blue-600">
+          <div className="mt-1 text-sm font-bold transition-all duration-200 hover:text-blue-600">
             <Link
               prefetch={true}
               href={`${oneItem(item?.model)?.url}`}
@@ -170,19 +165,19 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
             <div title={`Event expired`} className="lg:hidden">
-              <BadgeAlertIcon className="ml-auto text-red-600 size-5" />
+              <BadgeAlertIcon className="ml-auto text-red-600 size-4" />
             </div>
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
               <div title={`Event accepted`} className="lg:hidden">
-                <CircleCheckBigIcon className="ml-auto text-gray-600 size-5" />
+                <CircleCheckBigIcon className="ml-auto text-gray-600 size-4" />
               </div>
             )
           )}
 
           {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
             <div title={`Event confirmed`} className="lg:hidden">
-              <CircleCheckBigIcon className="ml-auto text-green-600 size-5" />
+              <CircleCheckBigIcon className="ml-auto text-green-600 size-4" />
             </div>
           )}
 
@@ -194,20 +189,20 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
             >
               <ViewIcon
                 onClick={() => setIsOpen(true)}
-                className="text-gray-600 hover:text-indigo-600 cursor-pointer size-5"
+                className="text-gray-600 hover:text-indigo-600 cursor-pointer size-4"
               />
             </Link>
 
             {!item?.confirmedAt ? (
               <PencilIcon
                 onClick={() => setIsOpen(true)}
-                className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
+                className="text-gray-600 hover:text-blue-600 cursor-pointer size-4"
               />
             ) : null}
 
             <ShareIcon
               onClick={() => setCopied(true)}
-              className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
+              className="text-gray-600 hover:text-blue-600 cursor-pointer size-4"
             />
           </div>
 
