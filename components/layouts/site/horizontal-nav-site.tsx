@@ -44,9 +44,9 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   y2="208"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="16"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="16"
                 ></line>
                 <line
                   x1="192"
@@ -55,9 +55,9 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   y2="192"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="16"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="16"
                 ></line>
               </svg>
               <span className="hidden font-bold lg:inline-block">
@@ -118,7 +118,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
             data-state="closed"
           >
             <svg
-              stroke-width="1.5"
+              strokeWidth="1.5"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -127,23 +127,23 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               <path
                 d="M3 5H11"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M3 12H16"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
               <path
                 d="M3 19H21"
                 stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               ></path>
             </svg>
             <span className="sr-only">Toggle Menu</span>
@@ -252,11 +252,11 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  stroke-width="2"
+                  strokeWidth="2"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M4 6h16M4 12h16M4 18h16"
                   ></path>
                 </svg>
