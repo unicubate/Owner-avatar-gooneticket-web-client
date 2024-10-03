@@ -288,21 +288,23 @@ const CheckoutEvent = () => {
                             </p>
                           </li>
 
-                          <li className="mt-2 flex items-center justify-between text-sm font-semibold">
-                            <p className="text-gray-600">Pre-sale</p>
-                            <p className="text-gray-600">
-                              {ticketJsonParse?.price ? (
-                                <>
-                                  {formatePrice({
-                                    currency: `${item?.currency?.code}`,
-                                    value: ticketJsonParse?.preSale,
-                                  }) ?? ''}
-                                </>
-                              ) : (
-                                'Free'
-                              )}
-                            </p>
-                          </li>
+                          {ticketJsonParse?.preSale > 0 ? (
+                            <li className="mt-2 flex items-center justify-between text-sm font-semibold">
+                              <p className="text-gray-600">Pre-sale</p>
+                              <p className="text-gray-600">
+                                {ticketJsonParse?.price ? (
+                                  <>
+                                    {formatePrice({
+                                      currency: `${item?.currency?.code}`,
+                                      value: ticketJsonParse?.preSale,
+                                    }) ?? ''}
+                                  </>
+                                ) : (
+                                  'Free'
+                                )}
+                              </p>
+                            </li>
+                          ) : null}
 
                           <div className="mt-2 sm:flex sm:items-center sm:justify-between">
                             <div className="py-2 sm:mt-0">
@@ -539,22 +541,17 @@ const CheckoutEvent = () => {
                           )}
                         </li>
 
-                        <li className="mb-2 flex items-center justify-between text-sm">
-                          <p className="dark:text-gray-600">Commissions</p>
-
-                          {newAmount?.value ? (
-                            <>
-                              <p className="ml-1 text-sm dark:text-gray-400">
-                                {formatePrice({
-                                  currency: `${item?.currency?.code}`,
-                                  value: newAmount?.commission,
-                                }) ?? ''}
-                              </p>
-                            </>
-                          ) : (
-                            'Free'
-                          )}
-                        </li>
+                        {newAmount?.commission > 0 ? (
+                          <li className="mb-2 flex items-center justify-between text-sm">
+                            <p className="dark:text-gray-600">Commissions</p>
+                            <p className="ml-1 text-sm dark:text-gray-400">
+                              {formatePrice({
+                                currency: `${item?.currency?.code}`,
+                                value: newAmount?.commission,
+                              }) ?? ''}
+                            </p>
+                          </li>
+                        ) : null}
 
                         {/* <hr className="my-4 dark:border-input" />
 
