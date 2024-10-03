@@ -49,7 +49,7 @@ const OrderItemsViewIndex = () => {
     period,
     search,
     take: 10,
-    sort: 'ASC',
+    sort: 'DESC',
     customer: 'buyer',
     modelIds: ['EVENT', 'TICKET', 'BOOKING'],
   });
