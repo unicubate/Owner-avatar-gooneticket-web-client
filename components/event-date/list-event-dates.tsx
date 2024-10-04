@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { EventDateModel } from '@/types/event-date';
 import {
+  formatePrice,
   formateToCccc,
   formateTodd,
   formateToLLLL,
@@ -71,6 +72,18 @@ const ListEventDates = ({ item, index }: Props) => {
                         ) : null}
                       </p>
                     </div>
+                    <div className="ml-auto text-xl font-bold sm:hidden">
+                      {item?.oneTicket?.id ? (
+                        <>
+                          {formatePrice({
+                            currency: `${item?.oneTicket?.currency?.code}`,
+                            value: Number(item?.oneTicket?.amount ?? 0),
+                          })}
+                        </>
+                      ) : (
+                        'Free'
+                      )}
+                    </div>
                   </div>
 
                   <div className="mt-1.5 text-sm font-semibold">
@@ -87,24 +100,22 @@ const ListEventDates = ({ item, index }: Props) => {
                 </div>
 
                 <div className="mt-2">
-                  {/* <p className="text-right text-xl font-bold">
+                  <div className="text-xl font-bold sr-only sm:not-sr-only sm:whitespace-nowrap">
                     {item?.oneTicket?.id ? (
                       <>
                         {formatePrice({
                           currency: `${item?.oneTicket?.currency?.code}`,
                           value: Number(item?.oneTicket?.amount ?? 0),
-                          isDivide: false,
                         })}
                       </>
                     ) : (
-                      'Free'
+                      `Free`
                     )}
-                  </p> */}
+                  </div>
                   <ButtonInput
                     type="button"
                     variant="primary"
                     className="ml-auto mt-2 w-full"
-                    size="sm"
                     icon={<TicketPlusIcon className="size-6" />}
                   >
                     Ticket

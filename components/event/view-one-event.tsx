@@ -30,7 +30,7 @@ const ViewOneEvent = ({ item }: Props) => {
         ) : null}
 
         {item?.title ? (
-          <div className="mt-2 text-2xl font-bold">{item?.title ?? ''}</div>
+          <div className="mt-2 text-2xl font-bold">{item.title}</div>
         ) : null}
 
         <div className="mt-4 space-y-4">
@@ -48,7 +48,7 @@ const ViewOneEvent = ({ item }: Props) => {
             className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
           >
             <span className={`ql-editor`}>
-              <HtmlParser html={String(item?.description ?? '')} />
+              <HtmlParser html={String(item?.description)} />
             </span>
           </div>
         ) : null}
@@ -78,16 +78,6 @@ const ViewOneEvent = ({ item }: Props) => {
             isOpen={isOpen}
             setIsOpen={setIsOpen}
             link={window.location.href}
-            // buttonDialog={
-            //   <ButtonInput
-            //     className="text-gray-600 hover:text-gray-400 focus:ring-gray-900"
-            //     variant="link"
-            //     type="button"
-            //     size="icon"
-            //   >
-            //     <ShareIcon className="size-6" />
-            //   </ButtonInput>
-            // }
           />
         </div>
 
