@@ -6,7 +6,7 @@ const TermsCondition = () => {
     <>
       <LayoutSite title="Terms Condition">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mt-6 bg-white py-12 sm:py-16 lg:py-20 dark:bg-[#1c1b22]">
+          <div className="mt-6 bg-white py-12 sm:py-16 lg:py-20 dark:bg-background">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl lg:text-4xl">
                 Terms of use

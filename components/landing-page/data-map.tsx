@@ -1,13 +1,14 @@
 import { cn } from '@/lib/utils';
 import {
-  CalendarClockIcon,
+  BellIcon,
   GlobeIcon,
   HeartIcon,
   ImageIcon,
   LockKeyholeIcon,
   MailPlusIcon,
   MenuSquareIcon,
-  ShieldCheckIcon,
+  ScanQrCodeIcon,
+  ShoppingCartIcon,
   SparklesIcon,
   StoreIcon,
   WalletIcon,
@@ -15,40 +16,25 @@ import {
 const className = 'size-12';
 export const featuresLandingPage = [
   {
-    icon: <ImageIcon className={cn('text-sky-600', className)} />,
-    title: 'Gallery',
+    icon: <ScanQrCodeIcon className={cn('text-gray-600', className)} />,
+    title: 'Ticket validation',
+    description: `Responsive design for smooth use on mobile for validating tickets and scanning QR codes`,
+  },
+  {
+    icon: <BellIcon className={cn('text-gray-600', className)} />,
+    title: 'Event reminder',
     description:
-      'Create a portfolio of your best work and share your creative process',
+      'Reminder of upcoming events for which the user has reserved tickets, with practical information (time, location, etc.)',
   },
   {
-    icon: <MenuSquareIcon className={cn('text-pink-600', className)} />,
-    title: 'Posts',
-    description: `Share your creative journey with blog posts, videos and audio clips.`,
+    icon: <ShoppingCartIcon className={cn('text-gray-600', className)} />,
+    title: 'Purchase history',
+    description: `Access to the history of events booked, tickets purchased, and associated details with the possibility of re-downloading tickets and QR codes`,
   },
   {
-    icon: <StoreIcon className={cn('text-green-600', className)} />,
-    title: 'Shop',
-    description: `Sell digital and physical products with just a link.`,
-  },
-  {
-    icon: <LockKeyholeIcon className={cn('text-yellow-400', className)} />,
-    title: 'Supporter-Only Content',
-    description: `Make exclusive content available to supporters or members.`,
-  },
-  {
-    icon: <WalletIcon className={cn('text-yellow-400', className)} />,
-    title: 'Get Paid Directly',
-    description: `0% platform fees. Donations go directly to your PayPal or Stripe account.`,
-  },
-  {
-    icon: <SparklesIcon className={cn('text-rose-600', className)} />,
-    title: 'Rewards',
-    description: `Let supporters unlock exclusive posts, Discord roles, Member-only products and more.`,
-  },
-  {
-    icon: <MailPlusIcon className={cn('text-blue-600', className)} />,
+    icon: <MailPlusIcon className={cn('text-gray-600', className)} />,
     title: 'Messages of Support',
-    description: `Receive messages of encouragement from your supporters.`,
+    description: `Receive messages of encouragement from your clients.`,
   },
 ];
 
@@ -92,19 +78,9 @@ export const featuresAboutPage = [
 
 export const comparedLandingPage = [
   {
-    icon: <ShieldCheckIcon className={cn('text-gray-600', className)} />,
-    title: 'Your privacy comes first',
-    description: `Receive fan support safely without disclosing your identity or address. We’ll do the heavy-lifting.`,
-  },
-  {
     icon: <MailPlusIcon className={cn('text-gray-600', className)} />,
     title: 'Email marketing',
     description: `Instead of paying separately for email marketing tools like Mailchimp, send unlimited emails to your fans for free.`,
-  },
-  {
-    icon: <CalendarClockIcon className={cn('text-gray-600', className)} />,
-    title: 'Not just a membership',
-    description: `Creators who previously only used Patreon noticed a massive increase in earnings after accepting one-off payments.`,
   },
   {
     icon: <HeartIcon className={cn('text-gray-600', className)} />,

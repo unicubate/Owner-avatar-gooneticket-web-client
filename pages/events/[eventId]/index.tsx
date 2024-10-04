@@ -34,7 +34,7 @@ const ShopUserPublic = () => {
     <>
       <LayoutUserPublicSite title={`${event?.title || 'Event'}`} user={user}>
         <div className="max-w-8xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
             <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
               <div className="flow-root">
                 <div className="dark:border-input dark:bg-background my-8 overflow-hidden rounded-lg border border-gray-100 bg-white">

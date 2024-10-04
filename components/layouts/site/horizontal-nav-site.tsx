@@ -312,6 +312,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               <div className="relative">
                 <Link href={`${user?.id ? `/orders` : `/login`}`}>
                   <ButtonInput
+                    size="sm"
                     type="button"
                     className="w-full"
                     variant="outline"
@@ -326,6 +327,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               <div className="relative">
                 <Link href={`${user?.id ? `/orders` : `register`}`}>
                   <ButtonInput
+                    size="sm"
                     type="button"
                     className="w-full"
                     variant="primary"

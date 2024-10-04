@@ -15,11 +15,11 @@ type NavbarSiteProps = {
 const MediumFooter = () => {
   const { t } = useInputState();
   const [navigation] = useState<NavbarSiteProps[]>([
-    {
-      title: 'FOOTER.ABOUT',
-      description: 'About',
-      href: '/about',
-    },
+    // {
+    //   title: 'FOOTER.ABOUT',
+    //   description: 'About',
+    //   href: '/about',
+    // },
     // {
     //   title: 'Features',
     //   description: 'About',

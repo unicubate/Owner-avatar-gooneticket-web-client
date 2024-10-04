@@ -1,11 +1,7 @@
 import { CreateContactAPI } from '@/api-site/contact';
-import { useInputState, useUploadItem } from '@/components/hooks';
+import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting/button-input';
-import {
-  SwitchInput,
-  TextAreaInput,
-  TextInput,
-} from '@/components/ui-setting/shadcn';
+import { TextAreaInput, TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ContactUsFormModel } from '@/types/contact-us';
@@ -20,7 +16,6 @@ import * as yup from 'yup';
 import { FieldRequiredMessage } from '../ui-setting';
 
 const CreateContactForm = () => {
-  const { fileList, handleFileChange } = useUploadItem({});
   const { t, loading, setLoading, hasErrors, setHasErrors } = useInputState();
   const schema = yup.object({
     email: yup
@@ -77,18 +72,8 @@ const CreateContactForm = () => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  const watchEnableUpload = watch('enableUpload', false);
 
-  const { mutateAsync: saveMutation } = CreateContactAPI({
-    onSuccess: () => {
-      setHasErrors(false);
-      setLoading(false);
-    },
-    onError: (error?: any) => {
-      setHasErrors(true);
-      setHasErrors(error.response.data.message);
-    },
-  });
+  const { mutateAsync: saveMutation } = CreateContactAPI();
 
   const onSubmit: SubmitHandler<ContactUsFormModel> = async (
     data: ContactUsFormModel,
@@ -98,15 +83,8 @@ const CreateContactForm = () => {
     setHasErrors(undefined);
 
     try {
-      fileList
-        .filter((file: any) => file?.status === 'success')
-        .forEach((file: any) => {
-          newImageLists.push(file);
-        });
-
       await saveMutation({
         ...data,
-        fileList,
       });
       setHasErrors(false);
       setLoading(false);
@@ -115,7 +93,6 @@ const CreateContactForm = () => {
       });
       reset({
         ...data,
-        fileList,
       });
       setHasErrors(false);
       setLoading(false);
@@ -196,21 +173,6 @@ const CreateContactForm = () => {
           />
         </div>
 
-        <div className="sm:flex sm:items-center sm:justify-between sm:space-x-5">
-          <div className="flex min-w-0 flex-1 items-center">
-            <div className="min-w-0 flex-1">
-              <p className="text-sm font-bold dark:text-white">
-                {t.formatMessage({ id: 'CONTACT.US.FILE_UPLOAD' })}
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-500">
-                {t.formatMessage({ id: 'CONTACT.US.FILE_UPLOAD.SUBTITLE' })}
-              </p>
-            </div>
-          </div>
-
-          <SwitchInput control={control} name="enableUpload" label="" />
-        </div>
-
         {/* {watchEnableUpload && (
           <div className="mx-auto mt-4 justify-center text-center">
             <Upload
@@ -244,7 +206,7 @@ const CreateContactForm = () => {
               <>
                 <div className="flex items-center">
                   <div className="flex">
-                    <Checkbox checked={value} onChange={onChange} />
+                    <Checkbox checked={value} onCheckedChange={onChange} />
                   </div>
                   <div className="ml-3">
                     <label
