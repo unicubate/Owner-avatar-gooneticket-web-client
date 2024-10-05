@@ -33,7 +33,7 @@ const GoogleAuthLogin = () => {
             setHasErrors(true);
             setHasErrors(error.response.data.message);
             AlertDangerNotification({
-              text: 'An error has occurred.',
+              text: error.response.data.message,
             });
           }
         }}
