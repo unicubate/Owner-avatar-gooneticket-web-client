@@ -1,5 +1,5 @@
 import { CreateOrUpdateOneUserAddressAPI } from '@/api-site/user-address';
-import { UserAddressFormModel } from '@/types/user-address';
+import { UserAddressModel } from '@/types/user-address';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
@@ -52,7 +52,6 @@ const CreateOrUpdateUserAddressForm = ({
         'phone',
         'cap',
         'city',
-        'fullName',
         'email',
         'address',
       ];
@@ -63,8 +62,8 @@ const CreateOrUpdateUserAddressForm = ({
   const { isPending: loading, mutateAsync: saveMutation } =
     CreateOrUpdateOneUserAddressAPI();
 
-  const onSubmit: SubmitHandler<UserAddressFormModel> = async (
-    payload: UserAddressFormModel,
+  const onSubmit: SubmitHandler<UserAddressModel> = async (
+    payload: UserAddressModel,
   ) => {
     setIsEdit((i: boolean) => !i);
     try {

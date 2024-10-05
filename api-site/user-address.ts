@@ -1,5 +1,5 @@
 import { makeApiCall } from '@/api-site/clients';
-import { UserAddressFormModel, UserAddressModel } from '@/types/user-address';
+import { UserAddressModel } from '@/types/user-address';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const CreateOrUpdateOneUserAddressAPI = ({
@@ -14,7 +14,7 @@ export const CreateOrUpdateOneUserAddressAPI = ({
   const result = useMutation({
     mutationKey: queryKey,
     mutationFn: async (
-      payload: UserAddressFormModel & { userAddressId: string },
+      payload: UserAddressModel & { userAddressId: string },
     ) => {
       const { userAddressId } = payload;
       return userAddressId
