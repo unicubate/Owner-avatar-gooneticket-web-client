@@ -15,7 +15,7 @@ import { useIntl } from 'react-intl';
 // UI component imports
 
 import { PublicComponent } from '@/components/util/public-component';
-import { PlusIcon, TicketPlusIcon } from 'lucide-react';
+import { PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 
 // Custom components
@@ -153,7 +153,6 @@ const Home = () => {
               className="px-10 text-lg"
               size="xlg"
               variant="primary"
-              icon={<TicketPlusIcon />}
             >
               Start free with email
             </ButtonInput>
@@ -193,43 +192,6 @@ const Home = () => {
           ))}
         </div>
       </div>
-
-      {/* <Container> */}
-      {/* <h3 className="!mt-0">Frequently Asked Questions</h3>
-
-      <h4 className="text-muted-foreground">
-        Can&apos;t find the answer you&apos;re looking for? Reach out to our
-        customer support team.
-      </h4> */}
-
-      {/* <div className="not-prose mx-auto mt-4 flex max-w-6xl flex-col gap-4 md:mt-8">
-        {content.map((item, index) => (
-          <Accordion key={index} type="single" collapsible>
-            <AccordionItem
-              value={item.question}
-              className="bg-muted/20 hover:bg-muted/50 dark:border-input rounded-md  border px-4 transition-all dark:bg-black/15"
-            >
-              <AccordionTrigger className="text-left hover:no-underline">
-                {item.question}
-              </AccordionTrigger>
-
-              <AccordionContent className="text-base md:w-3/4">
-                {item.answer}
-
-                {item.link && (
-                  <a
-                    href={item.link}
-                    className="mt-2 flex w-full items-center opacity-60 transition-all hover:opacity-100"
-                  >
-                    Learn more <ArrowUpRight className="ml-1" size="16" />
-                  </a>
-                )}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        ))}
-      </div> */}
-      {/* </Container> */}
 
       <MediumFooter />
     </LayoutSite>

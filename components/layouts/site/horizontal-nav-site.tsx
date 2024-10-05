@@ -310,7 +310,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
               <ThemeToggle />
               <LangToggle />
               <div className="relative">
-                <Link href={`${user?.id ? `/orders` : `/login`}`}>
+                <Link href={`${user?.id ? `/tickets` : `/login`}`}>
                   <ButtonInput
                     size="sm"
                     type="button"
@@ -319,13 +319,13 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     icon={<LogInIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'MENU.REGISTER' })}
+                      {t.formatMessage({ id: 'MENU.LOGIN' })}
                     </span>
                   </ButtonInput>
                 </Link>
               </div>
               <div className="relative">
-                <Link href={`${user?.id ? `/orders` : `register`}`}>
+                <Link href={`${user?.id ? `/tickets` : `register`}`}>
                   <ButtonInput
                     size="sm"
                     type="button"
@@ -334,7 +334,7 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                     icon={<UserPlusIcon className="size-4 lg:hidden" />}
                   >
                     <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'MENU.LOGIN' })}
+                      {t.formatMessage({ id: 'MENU.REGISTER' })}
                     </span>
                   </ButtonInput>
                 </Link>
