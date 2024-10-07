@@ -1,11 +1,7 @@
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
-import {
-  PayPalButtons,
-  PayPalScriptProvider,
-  usePayPalScriptReducer,
-} from '@paypal/react-paypal-js';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { PaymentModel } from '../../api-site/payment';
@@ -13,7 +9,7 @@ import { Alert, AlertDescription } from '../ui/alert';
 
 type Props = { data?: any; paymentModel: PaymentModel };
 const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
-  const [{ isPending }] = usePayPalScriptReducer();
+  // const [{ isPending }] = usePayPalScriptReducer();
   const { push } = useRouter();
   const {
     affiliation,
