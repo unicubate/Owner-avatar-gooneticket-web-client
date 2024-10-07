@@ -54,6 +54,7 @@ const CreateOrUpdateUserAddressForm = ({
         'city',
         'email',
         'address',
+        'fullName',
       ];
       fields?.forEach((field: any) => setValue(field, userAddress[field]));
     }
