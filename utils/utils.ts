@@ -12,6 +12,9 @@ export const capitalizeName = (s: string) => {
   return v.charAt(0).toUpperCase() + v.slice(1);
 };
 
+export const getURLWithoutProtocol = (url: string): string =>
+  url.replace(/^https?:\/\//, '');
+
 export const capitalizeFirstLetter = (value: string): string => {
   const valueLower = String(value).toLowerCase();
   return valueLower.charAt(0).toUpperCase() + valueLower.slice(1);
