@@ -1,4 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { OrderItemModel } from '@/types/order-item';
 import {
   formateFromNow,
@@ -63,7 +69,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
-                <p className="text-5xl">
+                <p className="text-6xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
                 </p>
                 <p className="mt-1 text-center">
@@ -133,15 +139,15 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
-            <BadgeAlertIcon className="size-5 text-red-600" />
+            <BadgeAlertIcon className="text-red-600" />
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
-              <CircleCheckBigIcon className="size-5 text-gray-600" />
+              <CircleCheckBigIcon className="text-gray-600" />
             )
           )}
 
           {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <CircleCheckBigIcon className="size-5 text-green-600" />
+            <CircleCheckBigIcon className="text-green-600" />
           )}
         </td>
 
@@ -162,24 +168,41 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
-          {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
-          item?.eventDate?.isExpired ? (
-            <div title={`Event expired`} className="lg:hidden">
-              <BadgeAlertIcon className="ml-auto text-red-600 size-4" />
-            </div>
-          ) : (
-            ['ACCEPTED'].includes(item?.status) && (
-              <div title={`Event accepted`} className="lg:hidden">
-                <CircleCheckBigIcon className="ml-auto text-gray-600 size-4" />
-              </div>
-            )
-          )}
+          <TooltipProvider>
+            <Tooltip>
+              <>
+                {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
+                item?.eventDate?.isExpired ? (
+                  <>
+                    <TooltipTrigger className="lg:hidden">
+                      <BadgeAlertIcon className="ml-auto text-red-600" />
+                    </TooltipTrigger>
+                    <TooltipContent>Event expired</TooltipContent>
+                  </>
+                ) : (
+                  ['ACCEPTED'].includes(item?.status) && (
+                    <>
+                      <TooltipTrigger className="lg:hidden">
+                        <CircleCheckBigIcon className="ml-auto text-gray-600" />
+                      </TooltipTrigger>
+                      <TooltipContent>Event accepted</TooltipContent>
+                    </>
+                  )
+                )}
+              </>
+            </Tooltip>
+          </TooltipProvider>
 
-          {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-            <div title={`Event confirmed`} className="lg:hidden">
-              <CircleCheckBigIcon className="ml-auto text-green-600 size-4" />
-            </div>
-          )}
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger className="lg:hidden">
+                {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
+                  <CircleCheckBigIcon className="ml-auto text-green-600" />
+                )}
+              </TooltipTrigger>
+              <TooltipContent>Event confirmed</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
 
           <div className="py-4 flex justify-end font-medium space-x-3">
             <Link

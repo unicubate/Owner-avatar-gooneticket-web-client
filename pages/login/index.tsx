@@ -65,10 +65,7 @@ const Login = () => {
     try {
       const { data: user } = await loginUserAPI({ email, password });
       if (user?.emailConfirmedAt) {
-        window.location.href =
-          user?.status === 'CREATOR'
-            ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
-            : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
+        window.location.href = `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
       }
       setHasErrors(false);
       setLoading(false);

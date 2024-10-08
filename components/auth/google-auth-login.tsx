@@ -20,15 +20,12 @@ const GoogleAuthLogin = () => {
         width="100%"
         onSuccess={async (credentialResponse) => {
           try {
-            const { data: user } = await authGoogleUserAPI({
+            await authGoogleUserAPI({
               token: String(credentialResponse.credential),
               status: 'CLIENT',
             });
             setHasErrors(false);
-            window.location.href =
-              user?.status === 'CREATOR'
-                ? `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}`
-                : `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
+            window.location.href = `${redirect ? redirect : `${process?.env.NEXT_PUBLIC_SITE}/tickets`}`;
           } catch (error: any) {
             setHasErrors(true);
             setHasErrors(error.response.data.message);
