@@ -60,12 +60,12 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
     <>
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
-          <div className="flex min-w-0 flex-1 items-center">
-            <Link
-              prefetch={true}
-              href={`${oneItem(item?.model)?.url}`}
-              title={oneItem(item?.model)?.title}
-            >
+          <Link
+            prefetch={true}
+            href={`${oneItem(item?.model)?.url}`}
+            title={oneItem(item?.model)?.title}
+          >
+            <div className="flex min-w-0 flex-1 items-center">
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
@@ -78,62 +78,56 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                   )}
                 </p>
               </div>
-            </Link>
 
-            <div className="ml-2 min-w-0 flex-1 cursor-pointer">
-              <div className={`flex items-center font-bold`}>
-                <p
-                  className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600`}`}`}
-                >
-                  {capitalizeFirstLetter(
-                    formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
-                  )}
-                  <span className="ml-1">
-                    {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
-                  </span>
-                </p>
-              </div>
-
-              <div className="mt-2 text-sm">
-                <Badge className="rounded-sm text-sm" variant="secondary">
-                  {capitalizeFirstLetter(item?.ticket?.name ?? 'FREE')}
-                </Badge>
-              </div>
-
-              {item?.fullName ? (
-                <div className="mt-1 flex items-center font-bold text-gray-600">
-                  <UserIcon className="size-4" />
-                  <span className="ml-1 sm:hidden">
-                    {truncateInput(item?.fullName, 16)}
-                  </span>
-                  <span className="ml-1 hidden sm:table-cell">
-                    {item?.fullName}
-                  </span>
+              <div className="ml-2 min-w-0 flex-1 cursor-pointer">
+                <div className={`flex items-center font-bold`}>
+                  <p
+                    className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600`}`}`}
+                  >
+                    {capitalizeFirstLetter(
+                      formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
+                    )}
+                    <span className="ml-1">
+                      {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
+                    </span>
+                  </p>
                 </div>
-              ) : null}
 
-              {item?.email ? (
-                <div className="mt-1 flex items-center font-bold text-gray-600">
-                  <MailIcon className="size-4" />
-                  <span className="ml-1 sm:hidden">
-                    {obfuscateEmail(item?.email)}
-                  </span>
-                  <span className="ml-1 hidden sm:table-cell">
-                    {item?.email}
-                  </span>
+                <div className="mt-2 text-sm">
+                  <Badge className="rounded-sm text-sm" variant="secondary">
+                    {capitalizeFirstLetter(item?.ticket?.name ?? 'FREE')}
+                  </Badge>
                 </div>
-              ) : null}
+
+                {item?.fullName ? (
+                  <div className="mt-1 flex items-center font-bold text-gray-600">
+                    <UserIcon className="size-4" />
+                    <span className="ml-1 sm:hidden">
+                      {truncateInput(item?.fullName, 16)}
+                    </span>
+                    <span className="ml-1 hidden sm:table-cell">
+                      {item?.fullName}
+                    </span>
+                  </div>
+                ) : null}
+
+                {item?.email ? (
+                  <div className="mt-1 flex items-center font-bold text-gray-600">
+                    <MailIcon className="size-4" />
+                    <span className="ml-1 sm:hidden">
+                      {obfuscateEmail(item?.email)}
+                    </span>
+                    <span className="ml-1 hidden sm:table-cell">
+                      {item?.email}
+                    </span>
+                  </div>
+                ) : null}
+              </div>
             </div>
-          </div>
-          <div className="mt-1 text-sm font-bold transition-all duration-200 hover:text-blue-600">
-            <Link
-              prefetch={true}
-              href={`${oneItem(item?.model)?.url}`}
-              title={oneItem(item?.model)?.title}
-            >
+            <div className="mt-1 text-sm font-bold transition-all duration-200 hover:text-blue-600">
               <ReadMore html={item?.event?.title} value={100} />
-            </Link>
-          </div>
+            </div>
+          </Link>
         </td>
 
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
@@ -216,7 +210,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               />
             </Link>
 
-            {!item?.confirmedAt ? (
+            {!item?.confirmedAt && !item?.eventDate?.isExpired ? (
               <PencilIcon
                 onClick={() => setIsOpen(true)}
                 className="text-gray-600 hover:text-blue-600 cursor-pointer size-4"
