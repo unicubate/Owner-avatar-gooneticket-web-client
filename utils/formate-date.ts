@@ -55,6 +55,6 @@ export const formateToRFC2822 = (date: Date, locale: string) =>
 export const viewYyformateToYyyy = (date: Date) => {
   const todaysDate = new Date();
   const currentYear = todaysDate.getFullYear();
-  const dateYear = Number(DateTime.fromISO(String(date)).toFormat('yyyy'));
-  return currentYear === dateYear ? null : `- ${dateYear}`;
+  const dateYear = DateTime.fromISO(String(date)).toFormat('yyyy');
+  return currentYear === Number(dateYear) ? null : `- ${dateYear}`;
 };

@@ -1,6 +1,5 @@
 import { CreateOnPaymentPI } from '@/api-site/payment';
 import { useInputState, useRedirectAfterSomeSeconds } from '@/components/hooks';
-import { ButtonInput } from '@/components/ui-setting';
 import { type ISourceOptions } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
@@ -166,7 +165,7 @@ const TransactionSuccess = () => {
                 to orders in {timerRemaining}
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>
-              <div className="mt-4 flex items-center space-x-4">
+              {/* <div className="mt-4 flex items-center space-x-4">
                 <ButtonInput
                   type="button"
                   className="w-full"
@@ -187,7 +186,7 @@ const TransactionSuccess = () => {
                 >
                   Go Payments
                 </ButtonInput>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

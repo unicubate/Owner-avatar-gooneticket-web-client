@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import { Badge } from '@/components/ui/badge';
 import {
   Tooltip,
   TooltipContent,
@@ -26,14 +27,12 @@ import {
   PencilIcon,
   ShareIcon,
   UserIcon,
-  ViewIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
 import { CopyShareLink, SerialPrice } from '../ui-setting';
-import { Badge } from '../ui/badge';
 import { UpdateOrderItemsModal } from './update-order-items-modal';
 
 type Props = {
@@ -69,7 +68,10 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
               >
-                <p className="text-6xl">
+                {/* <Badge className="rounded-sm" variant="danger">
+                  <BookmarkPlusIcon className="size-4" /> Booking
+                </Badge> */}
+                <p className="mt-1 text-5xl">
                   {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
                 </p>
                 <p className="mt-1 text-center">
@@ -93,8 +95,8 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                   </p>
                 </div>
 
-                <div className="mt-2 text-sm">
-                  <Badge className="rounded-sm text-sm" variant="secondary">
+                <div className="mt-2">
+                  <Badge className="rounded-sm" variant="secondary">
                     {capitalizeFirstLetter(item?.ticket?.name ?? 'FREE')}
                   </Badge>
                 </div>
@@ -164,62 +166,47 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         <td className="py-4 text-right text-sm font-medium">
           <TooltipProvider>
             <Tooltip>
-              <>
-                {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
-                item?.eventDate?.isExpired ? (
+              {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
+              item?.eventDate?.isExpired ? (
+                <>
+                  <TooltipTrigger className="lg:hidden">
+                    <BadgeAlertIcon className="ml-auto text-red-600 size-5" />
+                  </TooltipTrigger>
+                  <TooltipContent>Event expired</TooltipContent>
+                </>
+              ) : (
+                ['ACCEPTED'].includes(item?.status) && (
                   <>
                     <TooltipTrigger className="lg:hidden">
-                      <BadgeAlertIcon className="ml-auto text-red-600" />
+                      <CircleCheckBigIcon className="ml-auto text-gray-600 size-5" />
                     </TooltipTrigger>
-                    <TooltipContent>Event expired</TooltipContent>
+                    <TooltipContent>Event accepted</TooltipContent>
                   </>
-                ) : (
-                  ['ACCEPTED'].includes(item?.status) && (
-                    <>
-                      <TooltipTrigger className="lg:hidden">
-                        <CircleCheckBigIcon className="ml-auto text-gray-600" />
-                      </TooltipTrigger>
-                      <TooltipContent>Event accepted</TooltipContent>
-                    </>
-                  )
-                )}
-              </>
-            </Tooltip>
-          </TooltipProvider>
+                )
+              )}
 
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="lg:hidden">
-                {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
-                  <CircleCheckBigIcon className="ml-auto text-green-600" />
-                )}
-              </TooltipTrigger>
-              <TooltipContent>Event confirmed</TooltipContent>
+              {['DELIVERED', 'CONFIRMED'].includes(item?.status) && (
+                <>
+                  <TooltipTrigger className="lg:hidden">
+                    <CircleCheckBigIcon className="ml-auto text-green-600 size-5" />
+                  </TooltipTrigger>
+                  <TooltipContent>Event confirmed</TooltipContent>
+                </>
+              )}
             </Tooltip>
           </TooltipProvider>
 
           <div className="py-4 flex justify-end font-medium space-x-3">
-            <Link
-              prefetch={true}
-              href={`${oneItem(item?.model)?.url}`}
-              title={oneItem(item?.model)?.title}
-            >
-              <ViewIcon
-                onClick={() => setIsOpen(true)}
-                className="text-gray-600 hover:text-indigo-600 cursor-pointer size-4"
-              />
-            </Link>
-
             {!item?.confirmedAt && !item?.eventDate?.isExpired ? (
               <PencilIcon
                 onClick={() => setIsOpen(true)}
-                className="text-gray-600 hover:text-blue-600 cursor-pointer size-4"
+                className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
               />
             ) : null}
 
             <ShareIcon
               onClick={() => setCopied(true)}
-              className="text-gray-600 hover:text-blue-600 cursor-pointer size-4"
+              className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
             />
           </div>
 
