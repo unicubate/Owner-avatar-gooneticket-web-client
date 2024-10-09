@@ -101,7 +101,7 @@ const ListEventDates = ({ item, index }: Props) => {
 
                 <div className="mt-2">
                   <div className="text-xl font-bold sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {item?.oneTicket?.id ? (
+                    {Number(item?.oneTicket?.amount) > 0 ? (
                       <>
                         {formatePrice({
                           currency: `${item?.oneTicket?.currency?.code}`,

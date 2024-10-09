@@ -179,7 +179,6 @@ const CheckoutEvent = () => {
     isEdit ? scrollToElement() : null;
   }, [isEdit]);
 
-  console.log('affiliation ======>', affiliation);
   return (
     <>
       <LayoutCheckoutSite
@@ -394,12 +393,14 @@ const CheckoutEvent = () => {
 
                                             <div className="sm:mt-0">
                                               <p className="text-right text-lg font-bold text-gray-900 dark:text-white">
-                                                {formatePrice({
-                                                  currency: `${item?.currency?.code}`,
-                                                  value: Number(
-                                                    ticket?.amount ?? 0,
-                                                  ),
-                                                })}
+                                                {ticket?.amount > 0
+                                                  ? formatePrice({
+                                                      currency: `${item?.currency?.code}`,
+                                                      value: Number(
+                                                        ticket?.amount ?? 0,
+                                                      ),
+                                                    })
+                                                  : 'Free'}
                                               </p>
                                               {leftTicket <= 0 ? (
                                                 <Badge
@@ -685,36 +686,26 @@ const CheckoutEvent = () => {
                                   }}
                                 />
                               ) : null}
+
+                              {newAmount?.valueTotal <= 0 ? (
+                                <CreatePaymentFree
+                                  paymentModel="FREE-EVENT"
+                                  data={{
+                                    userAddress,
+                                    eventId: item?.id,
+                                    eventDateId: eventDate?.id,
+                                    affiliation: affiliation,
+                                    amount: newAmount,
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                    userId: userStorage?.id,
+                                  }}
+                                />
+                              ) : null}
                             </>
                           </>
-                        ) : (
-                          <>
-                            <CreatePaymentFree
-                              paymentModel="FREE-EVENT"
-                              data={{
-                                userAddress,
-                                eventId: item?.id,
-                                eventDateId: eventDate?.id,
-                                affiliation: affiliation,
-                                amount: {
-                                  quantity: 1,
-                                  ticket: null,
-                                  currency: 'USD',
-                                  value: 0,
-                                  country: ipLocation?.countryCode,
-                                  oneValue: Number(ticketJsonParse?.amount),
-                                  taxes: Number(
-                                    userStorage?.organization?.taxes,
-                                  ),
-                                },
-                                organizationSellerId: item?.organizationId,
-                                organizationBuyerId:
-                                  userStorage?.organizationId,
-                                userId: userStorage?.id,
-                              }}
-                            />
-                          </>
-                        )}
+                        ) : null}
                       </>
                     ) : null}
                   </div>

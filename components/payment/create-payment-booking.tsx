@@ -123,6 +123,7 @@ const CreatePaymentBooking = ({
         </div>
         <div className="mt-4 flex items-center space-x-4">
           <ButtonInput
+            size="lg"
             type="submit"
             className="w-full"
             variant="primary"
