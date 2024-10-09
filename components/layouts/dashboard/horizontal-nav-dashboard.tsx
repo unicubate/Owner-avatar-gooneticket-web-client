@@ -115,11 +115,10 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                       //const isActive = pathname === item.href;
                       const isActive = pathname?.startsWith(item.href);
                       return (
-                        <TooltipProvider>
+                        <TooltipProvider key={index}>
                           <Tooltip>
                             <TooltipTrigger>
                               <Link
-                                key={index}
                                 href={`${item?.href}`}
                                 className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
                                   isActive

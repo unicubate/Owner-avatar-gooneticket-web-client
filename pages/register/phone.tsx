@@ -385,7 +385,7 @@ const Register = () => {
         </div>
 
         <div className="flex justify-center">
-          <GoogleAuthLogin />
+          <GoogleAuthLogin setHasErrors={setHasErrors} />
         </div>
 
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>

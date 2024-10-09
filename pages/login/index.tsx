@@ -206,7 +206,7 @@ const Login = () => {
           </div>
 
           <div className="mx-auto mt-4 max-w-max">
-            <GoogleAuthLogin />
+            <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>

@@ -2,12 +2,10 @@ import { authGoogleUserAPI } from '@/api-site/user';
 import { AlertDangerNotification } from '@/utils';
 import { GoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/router';
-import { useInputState } from '../hooks';
 
-const GoogleAuthLogin = () => {
+const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   const { query } = useRouter();
   const { redirect } = query;
-  const { loading, setLoading, hasErrors, setHasErrors } = useInputState();
 
   return (
     <>

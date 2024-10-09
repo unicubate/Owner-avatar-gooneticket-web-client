@@ -240,7 +240,7 @@ const LoginPhone = () => {
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
           </div>
           <div className="mx-auto mt-4 max-w-max">
-            <GoogleAuthLogin />
+            <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
             <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:hover:text-blue-600">
