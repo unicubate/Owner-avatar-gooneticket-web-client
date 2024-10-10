@@ -124,9 +124,9 @@ const CreateOrUpdateUserAddressForm = ({
                 </option>
               ))
             ) : (
-              <div style={{ textAlign: 'center' }}>
-                <p>Data Not Found</p>
-              </div>
+              <option style={{ textAlign: 'center' }}>
+                <span>Data Not Found</span>
+              </option>
             )}
           </SelectInput>
         </div>
