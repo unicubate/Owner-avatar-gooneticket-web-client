@@ -22,7 +22,7 @@ const schema = yup.object({
   address: yup.string().required('address is a required field'),
   email: yup.string().email().required('email is a required field'),
   city: yup.string().required('city is a required field'),
-  country: yup.string().required('country is a required field'),
+  //country: yup.string().required('country is a required field'),
 });
 
 const CreateOrUpdateUserAddressForm = ({
@@ -109,8 +109,8 @@ const CreateOrUpdateUserAddressForm = ({
           </span>
         </div>
 
-        <div className="mt-4">
-          {/* <SelectInput
+        {/* <div className="mt-4">
+          <SelectInput
             label="Country"
             control={control}
             errors={errors}
@@ -132,7 +132,7 @@ const CreateOrUpdateUserAddressForm = ({
                 )}
               </SelectGroup>
             </SelectContent>
-          </SelectInput> */}
+          </SelectInput>
 
           <TextInput
             label="Country"
@@ -143,7 +143,7 @@ const CreateOrUpdateUserAddressForm = ({
             errors={errors}
             disabled={isEdit}
           />
-        </div>
+        </div> */}
 
         <div className="mt-2">
           <TextInput
