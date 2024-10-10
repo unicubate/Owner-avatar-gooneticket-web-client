@@ -158,7 +158,7 @@ const LoginPhone = () => {
                 defaultCountry={ipLocation?.countryCode ?? 'IT'}
                 control={control}
                 name="phone"
-                label={t.formatMessage({ id: 'AUTH.INPUT.PHONE.SHORT' })}
+                label={t.formatMessage({ id: 'INPUT.PHONE.SHORT' })}
                 placeholder={t.formatMessage({ id: 'PLACEHOLDER.PHONE' })}
                 errors={errors}
                 required

@@ -19,7 +19,7 @@ type Props = {
 };
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
-  const { locale, loading, setLoading } = useInputState();
+  const { t, locale, loading, setLoading } = useInputState();
 
   const handleDownloadRows = async () => {
     setLoading(true);
@@ -78,7 +78,9 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
             className="mt-2 rounded-sm  text-lg font-semibold"
             variant="secondary"
           >
-            {capitalizeFirstLetter(orderItem?.ticket?.name ?? 'FREE')}
+            {capitalizeFirstLetter(
+              orderItem?.ticket?.name ?? t.formatMessage({ id: 'UTIL.FREE' }),
+            )}
           </Badge>
           <p className="mt-2 font-semibold">
             <span>
@@ -89,7 +91,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
                   currency={{ code: String(orderItem?.currency) }}
                 />
               ) : (
-                'Free'
+                t.formatMessage({ id: 'UTIL.FREE' })
               )}
             </span>
             <span className="ml-2 text-gray-400">-</span>

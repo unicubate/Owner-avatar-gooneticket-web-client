@@ -47,52 +47,49 @@ const Register = () => {
   const schema = yup.object({
     email: yup
       .string()
-      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
-      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
-      .max(
-        50,
-        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
-      )
+      .email(t.formatMessage({ id: 'VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(50, t.formatMessage({ id: 'VALIDATION.MAX_LENGTH' }, { max: 50 }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.EMAIL',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.EMAIL',
         }),
       ),
     password: yup
       .string()
-      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .min(8, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 8 }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.PASSWORD',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.PASSWORD',
         }),
       ),
     firstName: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
+        id: 'VALIDATION.REQUIRED',
         name: 'INPUT.FIRSTNAME',
       }),
     ),
     lastName: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
+        id: 'VALIDATION.REQUIRED',
         name: 'INPUT.LASTNAME',
       }),
     ),
     code: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
+        id: 'VALIDATION.REQUIRED',
         name: 'INPUT.CODE',
       }),
     ),
     confirm: yup
       .boolean()
-      .oneOf([true], t.formatMessage({ id: 'AUTH.VALIDATION.BOX.CONFIRM' }))
+      .oneOf([true], t.formatMessage({ id: 'VALIDATION.BOX.CONFIRM' }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.CONFIRM',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.CONFIRM',
         }),
       ),
   });
@@ -231,7 +228,7 @@ const Register = () => {
           <div className="mt-4">
             <TextPasswordInput
               control={control}
-              label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
+              label={t.formatMessage({ id: 'INPUT.PASSWORD' })}
               name="password"
               placeholder={t.formatMessage({ id: 'PLACEHOLDER.PASSWORD' })}
               errors={errors}

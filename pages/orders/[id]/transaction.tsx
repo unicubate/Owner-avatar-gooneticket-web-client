@@ -117,7 +117,7 @@ const TransactionsView = () => {
                             />
                           </>
                         ) : (
-                          'Free'
+                          t.formatMessage({ id: 'UTIL.FREE' })
                         )}
                       </div>
                     </div>
@@ -223,7 +223,7 @@ const TransactionsView = () => {
                                     />
                                   </>
                                 ) : (
-                                  'Free'
+                                  t.formatMessage({ id: 'UTIL.FREE' })
                                 )}
                               </p>
                             </div>
@@ -260,7 +260,7 @@ const TransactionsView = () => {
                                     />
                                   </>
                                 ) : (
-                                  'Free'
+                                  t.formatMessage({ id: 'UTIL.FREE' })
                                 )}
                               </dd>
                             </dl>

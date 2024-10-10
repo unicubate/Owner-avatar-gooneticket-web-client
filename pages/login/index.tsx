@@ -27,21 +27,18 @@ const Login = () => {
   const schema = yup.object({
     email: yup
       .string()
-      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
-      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
-      .max(
-        50,
-        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
-      )
+      .email(t.formatMessage({ id: 'VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(50, t.formatMessage({ id: 'VALIDATION.MAX_LENGTH' }, { max: 50 }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.EMAIL',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.EMAIL',
         }),
       ),
     password: yup
       .string()
-      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .min(8, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 8 }))
       .required(),
   });
   const {
@@ -124,7 +121,7 @@ const Login = () => {
             <div className="mb-4">
               <TextInput
                 control={control}
-                label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
+                label={t.formatMessage({ id: 'INPUT.EMAIL' })}
                 type="email"
                 name="email"
                 inputMode="email"
@@ -147,7 +144,7 @@ const Login = () => {
                 <div className="mb-4">
                   <TextPasswordInput
                     control={control}
-                    label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
+                    label={t.formatMessage({ id: 'INPUT.PASSWORD' })}
                     name="password"
                     placeholder={t.formatMessage({
                       id: 'PLACEHOLDER.PASSWORD',

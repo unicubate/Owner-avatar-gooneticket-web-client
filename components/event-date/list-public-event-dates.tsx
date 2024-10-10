@@ -26,7 +26,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   const { query, push } = useRouter();
   const { partner } = query;
   const [copied, setCopied] = useState(false);
-  const { locale, userStorage, ipLocation } = useInputState();
+  const { t, locale, userStorage, ipLocation } = useInputState();
 
   const linkHrefCheckouts = `${
     userStorage?.id
@@ -172,7 +172,7 @@ const ListPublicEventDates = ({ item, index }: Props) => {
                       })}
                     </>
                   ) : (
-                    'Free'
+                    t.formatMessage({ id: 'UTIL.FREE' })
                   )}
                 </div>
               </div>

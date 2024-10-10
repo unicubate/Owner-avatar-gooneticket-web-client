@@ -80,7 +80,8 @@ const CheckoutEvent = () => {
   const addressRef = useRef<any>(null);
   const [increment, setIncrement] = useState(1);
   const debounceIncrement = useDebounce(increment, 500);
-  const { ipLocation, userStorage, locale, scrollToBottom } = useInputState();
+  const { t, ipLocation, userStorage, locale, scrollToBottom } =
+    useInputState();
   const { query } = useRouter();
   const { id: eventDateId, partner } = query;
 
@@ -210,13 +211,11 @@ const CheckoutEvent = () => {
                           ) : null}
 
                           <li className="mt-2 flex items-center justify-between font-semibold">
-                            {item?.title ? (
-                              <p className="font-bold">
-                                {increment} x {item?.title ?? ''}
-                              </p>
-                            ) : null}
+                            <p className="font-bold">
+                              {increment} x {item?.title ?? ''}
+                            </p>
                             <p className="text-lg text-blue-600">
-                              {eventDate?.oneTicket?.id ? (
+                              {eventDate?.oneTicket?.amount > 0 ? (
                                 <>
                                   {formatePrice({
                                     currency: `${eventDate?.oneTicket?.currency?.code}`,
@@ -224,7 +223,7 @@ const CheckoutEvent = () => {
                                   })}
                                 </>
                               ) : (
-                                'Free'
+                                t.formatMessage({ id: 'UTIL.FREE' })
                               )}
                             </p>
                           </li>
@@ -282,7 +281,7 @@ const CheckoutEvent = () => {
                                   }) ?? ''}
                                 </>
                               ) : (
-                                'Free'
+                                t.formatMessage({ id: 'UTIL.FREE' })
                               )}
                             </p>
                           </li>
@@ -299,7 +298,7 @@ const CheckoutEvent = () => {
                                     }) ?? ''}
                                   </>
                                 ) : (
-                                  'Free'
+                                  t.formatMessage({ id: 'UTIL.FREE' })
                                 )}
                               </p>
                             </li>
@@ -355,7 +354,7 @@ const CheckoutEvent = () => {
                               0 ? (
                               <div className="border-input dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-medium shadow-sm hover:border-blue-500 has-[:checked]:border-blue-500 has-[:checked]:ring-1 has-[:checked]:ring-blue-500">
                                 <p className="text-gray-700 dark:text-gray-200">
-                                  Free
+                                  {t.formatMessage({ id: 'UTIL.FREE' })}
                                 </p>
                               </div>
                             ) : (
@@ -400,7 +399,9 @@ const CheckoutEvent = () => {
                                                         ticket?.amount ?? 0,
                                                       ),
                                                     })
-                                                  : 'Free'}
+                                                  : t.formatMessage({
+                                                      id: 'UTIL.FREE',
+                                                    })}
                                               </p>
                                               {leftTicket <= 0 ? (
                                                 <Badge
@@ -538,7 +539,7 @@ const CheckoutEvent = () => {
                               </p>
                             </>
                           ) : (
-                            'Free'
+                            t.formatMessage({ id: 'UTIL.FREE' })
                           )}
                         </li>
 
@@ -578,7 +579,7 @@ const CheckoutEvent = () => {
                                 })}
                               </>
                             ) : (
-                              'Free'
+                              t.formatMessage({ id: 'UTIL.FREE' })
                             )}
                           </p>
                         </li>

@@ -22,8 +22,7 @@ type Props = {
 const ListEventDates = ({ item, index }: Props) => {
   const { query, push } = useRouter();
   const { partner } = query;
-  const { locale, userStorage, ipLocation, loading, setLoading } =
-    useInputState();
+  const { t, locale, userStorage, ipLocation } = useInputState();
 
   return (
     <>
@@ -72,28 +71,6 @@ const ListEventDates = ({ item, index }: Props) => {
                         ) : null}
                       </p>
                     </div>
-                    <div className="ml-auto text-xl font-bold sm:hidden">
-                      {Number(item?.oneTicket?.amount) > 0 ? (
-                        <>
-                          {formatePrice({
-                            currency: `${item?.oneTicket?.currency?.code}`,
-                            value: Number(item?.oneTicket?.amount ?? 0),
-                          })}
-                        </>
-                      ) : (
-                        `Free`
-                      )}
-                      {/* {item?.oneTicket?.id ? (
-                        <>
-                          {formatePrice({
-                            currency: `${item?.oneTicket?.currency?.code}`,
-                            value: Number(item?.oneTicket?.amount ?? 0),
-                          })}
-                        </>
-                      ) : (
-                        'Free'
-                      )} */}
-                    </div>
                   </div>
 
                   <div className="mt-1.5 text-sm font-semibold">
@@ -110,7 +87,7 @@ const ListEventDates = ({ item, index }: Props) => {
                 </div>
 
                 <div className="mt-2">
-                  <div className="text-xl font-bold sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  <div className="text-lg font-bold sr-only sm:not-sr-only sm:whitespace-nowrap">
                     {Number(item?.oneTicket?.amount) > 0 ? (
                       <>
                         {formatePrice({
@@ -119,7 +96,7 @@ const ListEventDates = ({ item, index }: Props) => {
                         })}
                       </>
                     ) : (
-                      `Free`
+                      t.formatMessage({ id: 'UTIL.FREE' })
                     )}
                   </div>
                   <ButtonInput
@@ -128,7 +105,20 @@ const ListEventDates = ({ item, index }: Props) => {
                     className="ml-auto mt-2 w-full"
                     icon={<TicketPlusIcon className="size-6" />}
                   >
-                    Ticket
+                    {t.formatMessage({ id: 'MENU.TICKET' })}
+                    <span className="ml-20 sm:hidden">
+                      {' '}
+                      {Number(item?.oneTicket?.amount) > 0 ? (
+                        <>
+                          {formatePrice({
+                            currency: `${item?.oneTicket?.currency?.code}`,
+                            value: Number(item?.oneTicket?.amount ?? 0),
+                          })}
+                        </>
+                      ) : (
+                        t.formatMessage({ id: 'UTIL.FREE' })
+                      )}
+                    </span>
                   </ButtonInput>
                 </div>
               </div>

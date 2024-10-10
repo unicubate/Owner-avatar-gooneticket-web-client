@@ -155,7 +155,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               currency={{ code: String(item?.currency) }}
             />
           ) : (
-            'Free'
+            t.formatMessage({ id: 'UTIL.FREE' })
           )}
         </td>
 
@@ -218,7 +218,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                 currency={{ code: String(item?.currency) }}
               />
             ) : (
-              'Free'
+              t.formatMessage({ id: 'UTIL.FREE' })
             )}
           </div>
         </td>

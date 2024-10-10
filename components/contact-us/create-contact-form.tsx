@@ -20,43 +20,40 @@ const CreateContactForm = () => {
   const schema = yup.object({
     email: yup
       .string()
-      .email(t.formatMessage({ id: 'AUTH.VALIDATION.WRONG.FORMAT' }))
-      .min(3, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 3 }))
-      .max(
-        50,
-        t.formatMessage({ id: 'AUTH.VALIDATION.MAX_LENGTH' }, { max: 50 }),
-      )
+      .email(t.formatMessage({ id: 'VALIDATION.WRONG.FORMAT' }))
+      .min(3, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 3 }))
+      .max(50, t.formatMessage({ id: 'VALIDATION.MAX_LENGTH' }, { max: 50 }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.EMAIL',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.EMAIL',
         }),
       ),
     fullName: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
-        name: 'AUTH.INPUT.FULLNAME',
+        id: 'VALIDATION.REQUIRED',
+        name: 'INPUT.FULLNAME',
       }),
     ),
     subject: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
-        name: 'AUTH.INPUT.SUBJECT',
+        id: 'VALIDATION.REQUIRED',
+        name: 'INPUT.SUBJECT',
       }),
     ),
     description: yup.string().required(
       FieldRequiredMessage({
-        id: 'AUTH.VALIDATION.REQUIRED',
-        name: 'AUTH.INPUT.MESSAGE',
+        id: 'VALIDATION.REQUIRED',
+        name: 'INPUT.MESSAGE',
       }),
     ),
     confirm: yup
       .boolean()
-      .oneOf([true], t.formatMessage({ id: 'AUTH.VALIDATION.BOX.CONFIRM' }))
+      .oneOf([true], t.formatMessage({ id: 'VALIDATION.BOX.CONFIRM' }))
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.CONFIRM',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.CONFIRM',
         }),
       ),
   });
@@ -120,7 +117,7 @@ const CreateContactForm = () => {
         <div className="mb-4">
           <TextInput
             control={control}
-            label={t.formatMessage({ id: 'AUTH.INPUT.FULLNAME' })}
+            label={t.formatMessage({ id: 'INPUT.FULLNAME' })}
             type="text"
             name="fullName"
             placeholder={t.formatMessage({ id: 'PLACEHOLDER.FULLNAME' })}
@@ -130,7 +127,7 @@ const CreateContactForm = () => {
         <div className="mb-4">
           <TextInput
             control={control}
-            label={t.formatMessage({ id: 'AUTH.INPUT.PHONE' })}
+            label={t.formatMessage({ id: 'INPUT.PHONE' })}
             type="tel"
             name="phone"
             onKeyPress={(event: any) => {
@@ -145,7 +142,7 @@ const CreateContactForm = () => {
         <div className="mb-4">
           <TextInput
             control={control}
-            label={t.formatMessage({ id: 'AUTH.INPUT.EMAIL' })}
+            label={t.formatMessage({ id: 'INPUT.EMAIL' })}
             type="text"
             name="email"
             placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
@@ -157,7 +154,7 @@ const CreateContactForm = () => {
           <TextInput
             control={control}
             type="text"
-            label={t.formatMessage({ id: 'AUTH.INPUT.SUBJECT' })}
+            label={t.formatMessage({ id: 'INPUT.SUBJECT' })}
             name="subject"
             placeholder={t.formatMessage({ id: 'PLACEHOLDER.SUBJECT' })}
             errors={errors}
@@ -166,7 +163,7 @@ const CreateContactForm = () => {
         <div className="mb-4">
           <TextAreaInput
             control={control}
-            label={t.formatMessage({ id: 'AUTH.INPUT.MESSAGE' })}
+            label={t.formatMessage({ id: 'INPUT.MESSAGE' })}
             name="description"
             placeholder={t.formatMessage({ id: 'PLACEHOLDER.MESSAGE' })}
             errors={errors}

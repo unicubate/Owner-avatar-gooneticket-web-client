@@ -26,19 +26,19 @@ const ResetPassword = () => {
   const schema = yup.object({
     password: yup
       .string()
-      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .min(8, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 8 }))
       .required(),
     passwordConfirm: yup
       .string()
-      .min(8, t.formatMessage({ id: 'AUTH.VALIDATION.MIN_LENGTH' }, { min: 8 }))
+      .min(8, t.formatMessage({ id: 'VALIDATION.MIN_LENGTH' }, { min: 8 }))
       .oneOf(
         [yup.ref('password')],
-        t.formatMessage({ id: 'AUTH.INPUT.PASSWORDS.MATCH' }),
+        t.formatMessage({ id: 'INPUT.PASSWORDS.MATCH' }),
       )
       .required(
         FieldRequiredMessage({
-          id: 'AUTH.VALIDATION.REQUIRED',
-          name: 'AUTH.INPUT.CONFIRM_PASSWORD',
+          id: 'VALIDATION.REQUIRED',
+          name: 'INPUT.CONFIRM_PASSWORD',
         }),
       ),
   });
@@ -106,7 +106,7 @@ const ResetPassword = () => {
           <div className="mb-4">
             <TextPasswordInput
               control={control}
-              label={t.formatMessage({ id: 'AUTH.INPUT.PASSWORD' })}
+              label={t.formatMessage({ id: 'INPUT.PASSWORD' })}
               name="password"
               placeholder={t.formatMessage({
                 id: 'PLACEHOLDER.PASSWORD',
@@ -119,7 +119,7 @@ const ResetPassword = () => {
           <div className="mb-4">
             <TextPasswordInput
               control={control}
-              label={t.formatMessage({ id: 'AUTH.INPUT.CONFIRM_PASSWORD' })}
+              label={t.formatMessage({ id: 'INPUT.CONFIRM_PASSWORD' })}
               name="passwordConfirm"
               placeholder={t.formatMessage({
                 id: 'PLACEHOLDER.CONFIRM_PASSWORD',

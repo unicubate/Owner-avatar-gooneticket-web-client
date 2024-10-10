@@ -17,7 +17,7 @@ type Props = {
 
 const ListPublicEvents = ({ item, index }: Props) => {
   const { push } = useRouter();
-  const { locale, ipLocation } = useInputState();
+  const { t, locale, ipLocation } = useInputState();
 
   return (
     <>
@@ -69,7 +69,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
                   })}
                 </>
               ) : (
-                'Free'
+                t.formatMessage({ id: 'UTIL.FREE' })
               )}
             </span>
 
