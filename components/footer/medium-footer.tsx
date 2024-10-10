@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
@@ -69,8 +70,8 @@ const MediumFooter = () => {
               })}
             </nav>
 
-            {/* <ul className="flex items-center justify-end space-x-3">
-              <li>
+            <ul className="flex items-center justify-end space-x-3">
+              {/* <li>
                 <a
                   href="#"
                   title=""
@@ -122,7 +123,7 @@ const MediumFooter = () => {
                 >
                   <IoLogoInstagram />
                 </a>
-              </li>
+              </li> */}
 
               <li>
                 <Image
@@ -135,7 +136,7 @@ const MediumFooter = () => {
                   priority={true}
                 />
               </li>
-            </ul> */}
+            </ul>
           </div>
 
           <div className="mt-4 border-t border-input pt-4 text-center sm:mt-8 lg:mt-8">

@@ -31,7 +31,8 @@ const CreateConversationForm = ({ item }: { item: any }) => {
       ) : (
         <>
           <Button
-            className="h-8 cursor-pointer gap-1 rounded-sm"
+            size="sm"
+            className="h-7 cursor-pointer gap-1 rounded-sm"
             variant="default"
             onClick={() => setIsOpenModalLogin(true)}
           >

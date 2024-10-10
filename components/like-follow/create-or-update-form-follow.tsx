@@ -73,8 +73,8 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
       ) : (
         <>
           <Button
-            className="h-8 cursor-pointer gap-1 rounded-sm"
             variant="danger"
+            className="h-7 cursor-pointer gap-1 rounded-sm"
             onClick={() => setIsOpenModalLogin(true)}
           >
             <UserRoundPlus className="size-5" />

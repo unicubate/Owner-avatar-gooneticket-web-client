@@ -20,7 +20,7 @@ export type StatusOderProduct =
   | 'CANCELLED';
 
 export const statusOderProductLists: KeyAsString = {
-  PENDING: 'info',
+  PENDING: 'primary',
   ACCEPTED: 'success',
   CANCELLED: 'danger',
 };
