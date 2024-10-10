@@ -73,7 +73,17 @@ const ListEventDates = ({ item, index }: Props) => {
                       </p>
                     </div>
                     <div className="ml-auto text-xl font-bold sm:hidden">
-                      {item?.oneTicket?.id ? (
+                      {Number(item?.oneTicket?.amount) > 0 ? (
+                        <>
+                          {formatePrice({
+                            currency: `${item?.oneTicket?.currency?.code}`,
+                            value: Number(item?.oneTicket?.amount ?? 0),
+                          })}
+                        </>
+                      ) : (
+                        `Free`
+                      )}
+                      {/* {item?.oneTicket?.id ? (
                         <>
                           {formatePrice({
                             currency: `${item?.oneTicket?.currency?.code}`,
@@ -82,7 +92,7 @@ const ListEventDates = ({ item, index }: Props) => {
                         </>
                       ) : (
                         'Free'
-                      )}
+                      )} */}
                     </div>
                   </div>
 

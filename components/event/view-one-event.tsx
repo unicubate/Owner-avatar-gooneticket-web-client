@@ -30,7 +30,7 @@ const ViewOneEvent = ({ item }: Props) => {
         ) : null}
 
         {item?.title ? (
-          <div className="mt-2 text-2xl font-bold">{item.title}</div>
+          <div className="mt-2 text-xl font-bold">{item.title}</div>
         ) : null}
 
         <div className="mt-4 space-y-4">

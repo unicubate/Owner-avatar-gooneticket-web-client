@@ -3,10 +3,12 @@ import {
   FileTextIcon,
   HomeIcon,
   LogOutIcon,
+  PlusIcon,
   SettingsIcon,
   ShareIcon,
   ShoppingCartIcon,
 } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
@@ -36,7 +38,7 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <HomeIcon className="size-4 text-gray-600 hover:text-indigo-600" />
-                <a
+                <Link
                   href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/dashboard`}
                   title="Dashboard"
                   target="_blank"
@@ -44,12 +46,30 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
                   <span className="ml-2 cursor-pointer hover:text-indigo-600">
                     {t.formatMessage({ id: 'MENU.DASHBOARD' })}
                   </span>
-                </a>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
           </>
-        ) : null}
+        ) : (
+          <>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <PlusIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                <Link
+                  href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/events/create`}
+                  title="Create event"
+                  target="_blank"
+                >
+                  <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                    Create event
+                  </span>
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+          </>
+        )}
 
         {username ? (
           <>
@@ -76,7 +96,6 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
 
         {user?.id ? (
           <>
-            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem onClick={() => push(`/orders`)}>
                 <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />
