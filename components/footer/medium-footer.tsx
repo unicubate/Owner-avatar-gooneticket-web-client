@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { IoLogoInstagram, IoLogoTiktok, IoLogoYoutube } from 'react-icons/io5';
 import { useInputState } from '../hooks';
 import { ImageLogo } from '../ui-setting';
 
@@ -71,7 +69,7 @@ const MediumFooter = () => {
               })}
             </nav>
 
-            <ul className="flex items-center justify-end space-x-3">
+            {/* <ul className="flex items-center justify-end space-x-3">
               <li>
                 <a
                   href="#"
@@ -137,7 +135,7 @@ const MediumFooter = () => {
                   priority={true}
                 />
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           <div className="mt-4 border-t border-input pt-4 text-center sm:mt-8 lg:mt-8">
