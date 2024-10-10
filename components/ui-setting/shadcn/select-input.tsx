@@ -52,24 +52,6 @@ const SelectInput = ({
               <option selected>{placeholder}</option>
               {children}
             </select>
-            {/* <Select
-              onValueChange={onChange}
-              name={name}
-              value={value}
-              required={required}
-              defaultValue={defaultValue}
-            >
-              <SelectTrigger
-                className={cn(
-                  `${errors?.[name]?.message ? 'border-red-500' : ''}`,
-                  className,
-                )}
-              >
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-
-          
-            </Select> */}
           </>
         )}
       />

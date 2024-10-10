@@ -109,25 +109,7 @@ const CreateOrUpdateUserAddressForm = ({
           </span>
         </div>
 
-        <div className="mt-4">
-          <select
-            id="countries"
-            className="flex h-10 w-full bg-background border border-input text-sm rounded-md px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none"
-          >
-            <option selected>Choose a country</option>
-            {countries?.length > 0 ? (
-              countries?.map((item: any, index: number) => (
-                <option value={item?.name} key={index}>
-                  <span className="font-normal">{item?.name}</span>
-                </option>
-              ))
-            ) : (
-              <div style={{ textAlign: 'center' }}>
-                <p>Data Not Found</p>
-              </div>
-            )}
-          </select>
-
+        <div className="mt-2">
           <SelectInput
             label="Country"
             control={control}
