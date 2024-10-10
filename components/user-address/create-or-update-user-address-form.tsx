@@ -1,13 +1,13 @@
 import { CreateOrUpdateOneUserAddressAPI } from '@/api-site/user-address';
+import { useInputState } from '@/components/hooks';
+import { ButtonInput } from '@/components/ui-setting';
+import { SelectInput, TextInput } from '@/components/ui-setting/shadcn';
 import { UserAddressModel } from '@/types/user-address';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting';
-import { TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   userAddress?: any;
@@ -22,7 +22,7 @@ const schema = yup.object({
   address: yup.string().required('address is a required field'),
   email: yup.string().email().required('email is a required field'),
   city: yup.string().required('city is a required field'),
-  //country: yup.string().required('country is a required field'),
+  country: yup.string().required('country is a required field'),
 });
 
 const CreateOrUpdateUserAddressForm = ({
@@ -109,7 +109,25 @@ const CreateOrUpdateUserAddressForm = ({
           </span>
         </div>
 
-        {/* <div className="mt-4">
+        <div className="mt-4">
+          <select
+            id="countries"
+            className="flex h-10 w-full bg-background border border-input text-sm rounded-md px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none"
+          >
+            <option selected>Choose a country</option>
+            {countries?.length > 0 ? (
+              countries?.map((item: any, index: number) => (
+                <option value={item?.name} key={index}>
+                  <span className="font-normal">{item?.name}</span>
+                </option>
+              ))
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <p>Data Not Found</p>
+              </div>
+            )}
+          </select>
+
           <SelectInput
             label="Country"
             control={control}
@@ -117,33 +135,19 @@ const CreateOrUpdateUserAddressForm = ({
             placeholder="Select country"
             name="country"
           >
-            <SelectContent className="dark:border-gray-800">
-              <SelectGroup>
-                {countries?.length > 0 ? (
-                  countries?.map((item: any, index: number) => (
-                    <SelectItem value={item?.name} key={index}>
-                      <span className="font-normal">{item?.name}</span>
-                    </SelectItem>
-                  ))
-                ) : (
-                  <div style={{ textAlign: 'center' }}>
-                    <p>Data Not Found</p>
-                  </div>
-                )}
-              </SelectGroup>
-            </SelectContent>
+            {countries?.length > 0 ? (
+              countries?.map((item: any, index: number) => (
+                <option value={item?.name} key={index}>
+                  <span className="font-normal">{item?.name}</span>
+                </option>
+              ))
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <p>Data Not Found</p>
+              </div>
+            )}
           </SelectInput>
-
-          <TextInput
-            label="Country"
-            control={control}
-            type="text"
-            name="country"
-            placeholder="Country"
-            errors={errors}
-            disabled={isEdit}
-          />
-        </div> */}
+        </div>
 
         <div className="mt-2">
           <TextInput

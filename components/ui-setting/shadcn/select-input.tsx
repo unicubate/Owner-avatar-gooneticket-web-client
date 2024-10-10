@@ -1,5 +1,3 @@
-import { Select, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
@@ -43,7 +41,18 @@ const SelectInput = ({
         control={control}
         render={({ field: { value, onChange } }) => (
           <>
-            <Select
+            <select
+              id={name}
+              name={name}
+              value={value}
+              onChange={onChange}
+              defaultValue={defaultValue}
+              className={`flex h-10 w-full bg-background border ${errors?.[name] ? 'border-red-600' : 'border-input'}  text-sm rounded-md px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none`}
+            >
+              <option selected>{placeholder}</option>
+              {children}
+            </select>
+            {/* <Select
               onValueChange={onChange}
               name={name}
               value={value}
@@ -58,8 +67,9 @@ const SelectInput = ({
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
-              {children}
-            </Select>
+
+          
+            </Select> */}
           </>
         )}
       />
