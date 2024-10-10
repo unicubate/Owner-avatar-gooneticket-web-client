@@ -7,8 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
-import { SelectInput, TextInput } from '../ui-setting/shadcn';
-import { SelectContent, SelectGroup, SelectItem } from '../ui/select';
+import { TextInput } from '../ui-setting/shadcn';
 
 type Props = {
   userAddress?: any;
@@ -23,7 +22,7 @@ const schema = yup.object({
   address: yup.string().required('address is a required field'),
   email: yup.string().email().required('email is a required field'),
   city: yup.string().required('city is a required field'),
-  //country: yup.string().required('country is a required field'),
+  country: yup.string().required('country is a required field'),
 });
 
 const CreateOrUpdateUserAddressForm = ({
@@ -111,7 +110,7 @@ const CreateOrUpdateUserAddressForm = ({
         </div>
 
         <div className="mt-4">
-          <SelectInput
+          {/* <SelectInput
             label="Country"
             control={control}
             errors={errors}
@@ -133,7 +132,17 @@ const CreateOrUpdateUserAddressForm = ({
                 )}
               </SelectGroup>
             </SelectContent>
-          </SelectInput>
+          </SelectInput> */}
+
+          <TextInput
+            label="Country"
+            control={control}
+            type="text"
+            name="country"
+            placeholder="Country"
+            errors={errors}
+            disabled={isEdit}
+          />
         </div>
 
         <div className="mt-2">
