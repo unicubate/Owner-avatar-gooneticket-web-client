@@ -23,7 +23,7 @@ const schema = yup.object({
   address: yup.string().required('address is a required field'),
   email: yup.string().email().required('email is a required field'),
   city: yup.string().required('city is a required field'),
-  country: yup.string().required('country is a required field'),
+  //country: yup.string().required('country is a required field'),
 });
 
 const CreateOrUpdateUserAddressForm = ({
