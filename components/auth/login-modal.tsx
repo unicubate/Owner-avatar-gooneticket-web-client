@@ -166,7 +166,7 @@ const LoginModal: React.FC<{
           </div>
 
           <div className="flex justify-center">
-            <GoogleAuthLogin />
+            <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
