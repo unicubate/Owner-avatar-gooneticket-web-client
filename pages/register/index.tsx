@@ -236,31 +236,29 @@ const Register = () => {
           {isSuccessCheckEmailOrPhone ? (
             <>
               <div className="mt-4">
-                <div className="max-w-auto relative flex w-full">
-                  <TextInput
-                    control={control}
-                    name="code"
-                    placeholder={t.formatMessage({ id: 'UTIL.DIGIT.CODE' })}
-                    errors={errors}
-                    required
-                    type="number"
-                    pattern="[0-9]*"
-                    inputMode="numeric"
-                  />
-
-                  <ButtonInput
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className="!absolute right-1 top-1 rounded"
-                    loading={isResend}
-                    onClick={() => resendCodeItem()}
-                    disabled={!watchEmail || isRunning ? true : false}
-                  >
-                    {timer}{' '}
-                    {t.formatMessage({ id: 'AUTH.GENERAL.RESEND_CODE' })}
-                  </ButtonInput>
-                </div>
+                <TextInput
+                  control={control}
+                  name="code"
+                  placeholder={t.formatMessage({ id: 'UTIL.DIGIT.CODE' })}
+                  errors={errors}
+                  required
+                  type="number"
+                  pattern="[0-9]*"
+                  inputMode="numeric"
+                  prefix={
+                    <ButtonInput
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      loading={isResend}
+                      onClick={() => resendCodeItem()}
+                      disabled={!watchEmail || isRunning ? true : false}
+                    >
+                      {timer}{' '}
+                      {t.formatMessage({ id: 'AUTH.GENERAL.RESEND_CODE' })}
+                    </ButtonInput>
+                  }
+                />
               </div>
               <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
                 <div className="mt-2">
