@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useDecrementTimer, useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { FieldRequiredMessage } from '@/components/ui-setting';
@@ -362,7 +361,7 @@ const Register = () => {
           )}
         </form>
 
-        <div className="my-4 flex items-center justify-between">
+        {/* <div className="my-4 flex items-center justify-between">
           <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
           <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
             {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
@@ -371,9 +370,9 @@ const Register = () => {
           <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
         </div>
 
-        <div className="flex justify-center">
+        <div className="sm:hidden flex justify-center">
           <GoogleAuthLogin setHasErrors={setHasErrors} />
-        </div>
+        </div> */}
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
           <p className="mt-8 cursor-pointer text-center text-xs text-gray-600 hover:underline dark:text-blue-600">
             {' '}
