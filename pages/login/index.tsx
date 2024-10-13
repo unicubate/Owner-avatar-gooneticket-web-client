@@ -193,19 +193,17 @@ const Login = () => {
             )}
           </form>
 
-          <div className="hidden lg:hidden mx-auto max-w-max">
-            <div className="my-4 flex items-center justify-between">
-              <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
-              <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
-                {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
-              </p>
+          <div className="my-4 flex items-center justify-between">
+            <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
+            <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
+              {t.formatMessage({ id: 'AUTH.LOGIN.SOCIAL.TITLE' })}
+            </p>
 
-              <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
-            </div>
+            <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
+          </div>
 
-            <div className="mt-4">
-              <GoogleAuthLogin setHasErrors={setHasErrors} />
-            </div>
+          <div className="mx-auto mt-4 max-w-max">
+            <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>

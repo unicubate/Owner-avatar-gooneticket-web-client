@@ -239,7 +239,7 @@ const LoginPhone = () => {
 
             <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
           </div>
-          <div className="sm:hidden mx-auto mt-4 max-w-max">
+          <div className="mx-auto mt-4 max-w-max">
             <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>

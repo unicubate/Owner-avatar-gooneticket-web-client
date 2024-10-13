@@ -371,7 +371,7 @@ const Register = () => {
           <span className="w-1/5 border-b border-gray-400 lg:w-1/5"></span>
         </div>
 
-        <div className="sm:hidden flex justify-center">
+        <div className="flex justify-center">
           <GoogleAuthLogin setHasErrors={setHasErrors} />
         </div>
         <Link href={`/login${redirect ? `?redirect=${redirect}` : ''}`}>
