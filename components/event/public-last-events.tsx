@@ -24,7 +24,7 @@ export function PublicLastEvents({
     sort: 'DESC',
     organizationId: userVisitor?.organizationId,
     status: 'ACTIVE',
-    expired: 'FALSE',
+    expired: 'false',
   });
 
   const dataTable = isLoadingEvents ? (

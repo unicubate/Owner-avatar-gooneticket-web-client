@@ -17,7 +17,7 @@ const ShopUserPublic = () => {
     data: event,
     error: errorEvent,
   } = GetOneEventAPI({
-    enableVisibility: 'TRUE',
+    enableVisibility: 'true',
     slugOrId: String(query?.eventId),
   });
 

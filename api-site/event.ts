@@ -5,7 +5,7 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 export const GetOneEventAPI = (payload: {
   slugOrId: string;
-  enableVisibility?: 'TRUE' | 'FALSE';
+  enableVisibility?: 'true' | 'false';
 }) => {
   const { slugOrId, enableVisibility } = payload;
   const { data, isError, isLoading, isPending, status, error, refetch } =
@@ -39,18 +39,9 @@ export const GetInfiniteEventsAPI = (payload: {
   status?: string;
   sort: SortModel;
   search?: string;
-  enableVisibility?: 'TRUE' | 'FALSE';
-  expired: 'TRUE' | 'FALSE';
+  expired: 'true' | 'false';
 }) => {
-  const {
-    organizationId,
-    take,
-    expired,
-    sort,
-    status,
-    enableVisibility,
-    search,
-  } = payload;
+  const { organizationId, take, expired, sort, status, search } = payload;
   return useInfiniteQuery({
     queryKey: ['events', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
@@ -63,9 +54,9 @@ export const GetInfiniteEventsAPI = (payload: {
           sort,
           search,
           expired,
-          enableVisibility,
           status: status?.toUpperCase(),
           page: pageParam,
+          isActive: 'true',
         },
       }),
     initialPageParam: 1,

@@ -23,6 +23,7 @@ export const GetInfiniteTicketsAPI = (payload: {
           search,
           eventDateId,
           page: pageParam,
+          isActive: 'true',
         },
       }),
     initialPageParam: 1,

@@ -60,6 +60,7 @@ export type EventFormModel = {
   enableLimitSlot: boolean;
   enableComment: boolean;
   expiredAt: Date;
+  startedAt: Date;
   city: string;
   timeInit: string;
   timeEnd: string;

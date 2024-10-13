@@ -15,7 +15,7 @@ import { KeyAsString } from './utils';
 
 export type SortModel = 'ASC' | 'DESC';
 
-export type IsPaginate = 'TRUE' | 'FALSE';
+export type IsPaginate = 'true' | 'false';
 
 export type PaymentType =
   | 'PAYPAL'

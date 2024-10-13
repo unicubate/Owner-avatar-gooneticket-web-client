@@ -45,6 +45,7 @@ export const GetInfiniteEventDatesAPI = (payload: {
           take,
           search,
           expired: 'false',
+          isActive: 'true',
           page: pageParam,
           organizationId,
         },

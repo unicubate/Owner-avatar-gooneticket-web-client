@@ -7,7 +7,7 @@ export const GetOneProductAPI = (payload: {
   productId?: string;
   productSlug?: string;
   organizationId?: string;
-  enableVisibility?: 'TRUE' | 'FALSE';
+  enableVisibility?: 'true' | 'false';
 }) => {
   const { productId, organizationId, enableVisibility, productSlug } = payload;
   const { data, isError, isLoading, isPending, status, refetch } = useQuery({
@@ -43,8 +43,8 @@ export const GetInfiniteProductsAPI = (payload: {
   sort: SortModel;
   search?: string;
   modelIds: ModelType[];
-  enableVisibility?: 'TRUE' | 'FALSE';
-  expired: 'TRUE' | 'FALSE';
+  enableVisibility?: 'true' | 'false';
+  expired: 'true' | 'false';
 }) => {
   const {
     organizationId,

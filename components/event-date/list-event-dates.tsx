@@ -44,22 +44,22 @@ const ListEventDates = ({ item, index }: Props) => {
                 <div className="sm:mt-0">
                   <div className="flex items-center">
                     <p className="text-5xl font-semibold text-blue-700">
-                      {formateTodd(item?.expiredAt as Date, locale)}
+                      {formateTodd(item?.startedAt as Date, locale)}
                     </p>
                     <div className="tex-sm ml-1.5 font-semibold">
                       <p>
                         {capitalizeFirstLetter(
-                          formateToLLLL(item?.expiredAt as Date, locale),
+                          formateToLLLL(item?.startedAt as Date, locale),
                         )}
                         <span className="ml-1.5">
-                          {viewYyformateToYyyy(item?.expiredAt as Date)}
+                          {viewYyformateToYyyy(item?.startedAt as Date)}
                         </span>
                       </p>
 
                       <p className="mt-1">
                         <span>
                           {capitalizeFirstLetter(
-                            formateToCccc(item?.expiredAt as Date, locale),
+                            formateToCccc(item?.startedAt as Date, locale),
                           )}
                         </span>
                         ,<span className="ml-1">{item?.timeInit}</span>

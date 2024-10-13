@@ -54,6 +54,7 @@ type NewAmountType = {
   eventDate: {
     id: string;
     expiredAt: Date;
+    startedAt: Date;
   };
   valueTotal: number;
   commission: number;
@@ -113,7 +114,7 @@ const CheckoutEvent = () => {
     isLoading: isLoadingEvent,
     isError: isErrorEvent,
   } = GetOneEventAPI({
-    enableVisibility: 'TRUE',
+    enableVisibility: 'true',
     slugOrId: eventDate?.eventId,
   });
 
@@ -162,7 +163,11 @@ const CheckoutEvent = () => {
     commission: calculateCommission,
     taxes: Number(userStorage?.organization?.taxes),
     valueTotal: calculateCommission + calculatePrice,
-    eventDate: { id: eventDate?.id, expiredAt: eventDate?.expiredAt },
+    eventDate: {
+      id: eventDate?.id,
+      expiredAt: eventDate?.expiredAt,
+      startedAt: eventDate?.startedAt,
+    },
   };
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(
@@ -231,7 +236,7 @@ const CheckoutEvent = () => {
                           <div className="mt-2 items-center justify-between">
                             <span>
                               {capitalizeFirstLetter(
-                                formateToRFC2822(eventDate?.expiredAt, locale),
+                                formateToRFC2822(eventDate?.startedAt, locale),
                               )}
                             </span>
                             <span className="ml-1.5 text-gray-400 dark:text-gray-600">
@@ -505,7 +510,7 @@ const CheckoutEvent = () => {
 
                         <li className="mb-4 mt-2 flex items-center justify-between text-sm font-semibold">
                           <span className="text-sm text-blue-600">
-                            {formateDate(eventDate?.expiredAt, locale)}
+                            {formateDate(eventDate?.startedAt, locale)}
                           </span>
                           <p className="ml-auto text-blue-600">
                             <span className="text-sm">
@@ -586,7 +591,7 @@ const CheckoutEvent = () => {
                       </div>
                     </div>
 
-                    {ticketJsonParse?.enableOnlinePayment &&
+                    {ticketJsonParse?.isOnlinePayment &&
                     isEdit &&
                     userAddress?.isUpdated &&
                     newAmount?.valueTotal ? (
@@ -631,7 +636,7 @@ const CheckoutEvent = () => {
                               {isValid &&
                               newAmount?.valueTotal &&
                               watchPaymentMethod &&
-                              ticketJsonParse?.enableOnlinePayment ? (
+                              ticketJsonParse?.isOnlinePayment ? (
                                 <>
                                   {watchPaymentMethod === 'STRIPE' ? (
                                     <CreatePaymentStripe
@@ -671,7 +676,7 @@ const CheckoutEvent = () => {
                                 </>
                               ) : null}
 
-                              {!ticketJsonParse?.enableOnlinePayment ? (
+                              {!ticketJsonParse?.isOnlinePayment ? (
                                 <CreatePaymentBooking
                                   paymentModel="BOOKING-EVENT"
                                   data={{

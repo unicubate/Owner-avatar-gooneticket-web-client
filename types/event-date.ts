@@ -4,6 +4,7 @@ import { UploadModel } from './upload';
 export type EventDateModel = {
   createdAt: Date;
   expiredAt: Date;
+  startedAt: Date;
   id: string;
   isExpired: boolean;
   eventId: string;
@@ -24,11 +25,4 @@ export type EventDateModel = {
   };
   oneUploadsImage: UploadModel;
   country: string;
-};
-
-export type EventDateFormModel = {
-  expiredAt: Date;
-  eventId: string;
-  timeInit: string;
-  timeEnd: string;
 };

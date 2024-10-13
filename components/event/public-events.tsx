@@ -24,9 +24,9 @@ export function PublicEvents(props: Props) {
     sort: 'DESC',
     organizationId,
     status: 'ACTIVE',
-    expired: 'FALSE',
+    expired: 'false',
     modelIds: ['PRODUCT'],
-    enableVisibility: 'TRUE',
+    enableVisibility: 'true',
   });
 
   useEffect(() => {

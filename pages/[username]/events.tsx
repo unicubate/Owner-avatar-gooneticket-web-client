@@ -43,7 +43,7 @@ const EventsPublic = () => {
     search,
     take: 10,
     sort: 'DESC',
-    expired: 'FALSE',
+    expired: 'false',
     organizationId: user?.organizationId,
   });
   const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });

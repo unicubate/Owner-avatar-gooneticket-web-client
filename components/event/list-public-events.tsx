@@ -73,9 +73,9 @@ const ListPublicEvents = ({ item, index }: Props) => {
               )}
             </span>
 
-            {item?.oneEventDate?.expiredAt ? (
+            {item?.oneEventDate?.startedAt ? (
               <p className="ml-auto text-lg text-blue-600">
-                {formateDate(item?.oneEventDate?.expiredAt as Date, locale)}
+                {formateDate(item?.oneEventDate?.startedAt as Date, locale)}
               </p>
             ) : null}
           </div>
