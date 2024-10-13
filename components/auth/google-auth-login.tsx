@@ -7,6 +7,17 @@ const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   const { query } = useRouter();
   const { redirect } = query;
 
+  const userAgent = window.navigator.userAgent;
+  const url = window.location.href;
+  if (
+    userAgent.includes('Mobile') &&
+    (userAgent.includes('iPhone') || userAgent.includes('iPad')) &&
+    userAgent.includes('InstagramApp')
+  ) {
+    window.location.href = 'x-safari-' + url;
+    return;
+  }
+
   return (
     <>
       <GoogleLogin
