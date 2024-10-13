@@ -114,7 +114,6 @@ const CheckoutEvent = () => {
     isLoading: isLoadingEvent,
     isError: isErrorEvent,
   } = GetOneEventAPI({
-    enableVisibility: 'true',
     slugOrId: eventDate?.eventId,
   });
 

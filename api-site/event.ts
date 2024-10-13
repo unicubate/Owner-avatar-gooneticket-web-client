@@ -3,11 +3,8 @@ import { EventModel } from '@/types/event';
 import { SortModel } from '@/utils/paginations';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const GetOneEventAPI = (payload: {
-  slugOrId: string;
-  enableVisibility?: 'true' | 'false';
-}) => {
-  const { slugOrId, enableVisibility } = payload;
+export const GetOneEventAPI = (payload: { slugOrId: string }) => {
+  const { slugOrId } = payload;
   const { data, isError, isLoading, isPending, status, error, refetch } =
     useQuery({
       queryKey: ['event', { ...payload }],
@@ -16,7 +13,7 @@ export const GetOneEventAPI = (payload: {
           action: 'getOneEvent',
           urlParams: { slugOrId },
           queryParams: {
-            enableVisibility,
+            isActive: 'true',
           },
         }),
       refetchOnWindowFocus: false,

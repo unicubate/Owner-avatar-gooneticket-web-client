@@ -110,12 +110,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               variant={
                 orderItem?.confirmedAt
                   ? 'success'
-                  : `${orderItem?.eventDate?.isExpired ? 'danger' : 'primary'}`
+                  : `${orderItem?.eventDate?.expiredAt ? 'danger' : 'primary'}`
               }
               icon={
                 orderItem?.confirmedAt ? (
                   <CircleCheckBigIcon className="size-4" />
-                ) : orderItem?.eventDate?.isExpired ? (
+                ) : orderItem?.eventDate?.expiredAt ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
                   <CalendarDaysIcon className="size-4" />
@@ -123,7 +123,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               }
             >
               {formateToRFC2822(
-                orderItem?.eventDate?.expiredAt as Date,
+                orderItem?.eventDate?.startedAt as Date,
                 locale,
               )}{' '}
               at {orderItem?.eventDate?.timeInit}
