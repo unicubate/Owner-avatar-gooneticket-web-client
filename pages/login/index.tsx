@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { GoogleAuthLogin } from '@/components/auth/google-auth-login';
 import { useInputState } from '@/components/hooks';
 import { LayoutAuth } from '@/components/layouts/auth';
 import { ButtonInput, FieldRequiredMessage } from '@/components/ui-setting';
@@ -192,7 +193,7 @@ const Login = () => {
             )}
           </form>
 
-          {/* <div className="hidden lg:hidden mx-auto max-w-max">
+          <div className="hidden lg:hidden mx-auto max-w-max">
             <div className="my-4 flex items-center justify-between">
               <span className="w-1/5 border-b lg:w-1/5 dark:border-gray-600"></span>
               <p className="text-center text-xs uppercase text-gray-500 dark:text-gray-400">
@@ -205,7 +206,7 @@ const Login = () => {
             <div className="mt-4">
               <GoogleAuthLogin setHasErrors={setHasErrors} />
             </div>
-          </div> */}
+          </div>
 
           <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
             <p className="mt-8 cursor-pointer text-center text-sm text-gray-600 hover:underline dark:text-blue-600">
