@@ -60,7 +60,6 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           />
         </div>
 
-        {/* !orderItem?.eventDate?.isExpired && */}
         {!orderItem?.eventDate?.isExpired &&
         formateTodd(orderItem?.eventDate?.startedAt, locale) ===
           String(new Date().getDate()) ? (
