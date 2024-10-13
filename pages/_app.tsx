@@ -21,17 +21,6 @@ import { useState } from 'react';
 export default function App({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient());
 
-  const userAgent = window.navigator.userAgent;
-  const linkHref = typeof window !== 'undefined' ? window.location.href : null;
-  if (
-    userAgent.includes('Mobile') &&
-    (userAgent.includes('iPhone') ||
-      userAgent.includes('iPad') ||
-      userAgent.includes('iPod'))
-  ) {
-    window.location.href = 'x-safari-' + linkHref;
-    return;
-  }
   return (
     <QueryClientProvider client={queryClient}>
       <HydrationBoundary state={pageProps.dehydratedState}>
