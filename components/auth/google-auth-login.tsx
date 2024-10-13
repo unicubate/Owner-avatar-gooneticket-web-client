@@ -1,11 +1,19 @@
 import { authGoogleUserAPI } from '@/api-site/user';
 import { AlertDangerNotification } from '@/utils';
+import { isWebview } from '@/utils/utils';
 import { GoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/router';
 
 const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   const { query } = useRouter();
   const { redirect } = query;
+
+  if (isWebview(window.navigator.userAgent)) {
+    const linkHref =
+      typeof window !== 'undefined' ? window.location.href : null;
+    window.location.href = 'x-safari-' + linkHref;
+    return;
+  }
 
   // if (isWebview(window.navigator.userAgent)) {
   //   toast("Open Fatebook in Safari or Chrome to sign in.\n\nGoogle does not support this browser.", {
@@ -14,17 +22,17 @@ const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   //   return
   // }
 
-  const userAgent = window.navigator.userAgent;
-  const linkHref = typeof window !== 'undefined' ? window.location.href : null;
-  if (
-    userAgent.includes('Mobile') &&
-    (userAgent.includes('iPhone') ||
-      userAgent.includes('iPad') ||
-      userAgent.includes('iPod'))
-  ) {
-    window.location.href = 'x-safari-' + linkHref;
-    return;
-  }
+  // const userAgent = window.navigator.userAgent;
+  // const linkHref = typeof window !== 'undefined' ? window.location.href : null;
+  // if (
+  //   userAgent.includes('Mobile') &&
+  //   (userAgent.includes('iPhone') ||
+  //     userAgent.includes('iPad') ||
+  //     userAgent.includes('iPod'))
+  // ) {
+  //   window.location.href = 'x-safari-' + linkHref;
+  //   return;
+  // }
 
   return (
     <>
