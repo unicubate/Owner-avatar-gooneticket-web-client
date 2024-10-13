@@ -1,13 +1,20 @@
+import { downloadOneUploadsAPI } from '@/api-site/upload';
 import { QRCodeInput, SerialPrice } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
+import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
 import { Badge } from '@/components/ui/badge';
 import { OrderItemModel } from '@/types/order-item';
-import { formateToRFC2822 } from '@/utils';
+import {
+  AlertDangerNotification,
+  formateTodd,
+  formateToRFC2822,
+} from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import {
   BadgeAlertIcon,
   CalendarDaysIcon,
   CircleCheckBigIcon,
+  DownloadIcon,
   User2Icon,
 } from 'lucide-react';
 import { useInputState } from '../hooks';
@@ -17,8 +24,27 @@ type Props = {
 };
 
 const ViewOrderItemEvent = ({ orderItem }: Props) => {
-  const { t, locale } = useInputState();
+  const { t, locale, loading, setLoading } = useInputState();
 
+  const handleDownloadRows = async () => {
+    setLoading(true);
+    try {
+      const response = await downloadOneUploadsAPI({
+        folder: String(orderItem?.model.toLocaleLowerCase()),
+        fileName: orderItem?.uploadsFileTicket?.path,
+      });
+      const link = document.createElement('a');
+      link.href = response?.config?.url;
+      link.click();
+      link.remove();
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      AlertDangerNotification({
+        text: "C'è stato un errore.",
+      });
+    }
+  };
   return (
     <>
       <div className="px-4 py-5">
@@ -26,13 +52,25 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           {orderItem?.organizationSeller?.name}
         </p>
 
-        <div className="mx-auto mt-4 max-w-max">
+        <div className="mx-auto mt-2 max-w-max">
           <QRCodeInput
             size={200}
             errorLevel="L"
             value={orderItem?.orderNumber}
           />
         </div>
+
+        {/* !orderItem?.eventDate?.isExpired && */}
+        {!orderItem?.eventDate?.isExpired &&
+        formateTodd(orderItem?.eventDate?.startedAt, locale) ===
+          String(new Date().getDate()) ? (
+          <div className="mt-2 flex justify-center">
+            <span className="relative flex w-20 h-6">
+              <span className="absolute inline-flex w-20 h-6 animate-ping bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex w-20 h-6 bg-green-500"></span>
+            </span>
+          </div>
+        ) : null}
 
         {/* {!orderItem?.isExpired ? (
           <div className="mt-4 flex justify-center">
@@ -115,6 +153,69 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
           <span className="ml-2 text-gray-400">-</span>
           <span className="ml-2">{orderItem?.eventDate?.country ?? ''}</span>
         </p>
+
+        <div className="flex mt-2 justify-center gap-2">
+          {['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) && (
+            <TooltipProviderInput
+              description={capitalizeFirstLetter(orderItem?.status)}
+            >
+              <ButtonInput
+                icon={<CircleCheckBigIcon className="size-4" />}
+                type="button"
+                size="sm"
+                variant="success"
+              >
+                {capitalizeFirstLetter(orderItem?.status)}
+              </ButtonInput>
+            </TooltipProviderInput>
+          )}
+
+          {!['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) &&
+          orderItem?.eventDate?.isExpired ? (
+            <TooltipProviderInput
+              description={capitalizeFirstLetter(orderItem?.status)}
+            >
+              <ButtonInput
+                icon={<BadgeAlertIcon className="size-4" />}
+                type="button"
+                size="sm"
+                variant="danger"
+              >
+                {capitalizeFirstLetter(orderItem?.status)}
+              </ButtonInput>
+            </TooltipProviderInput>
+          ) : (
+            ['ACCEPTED'].includes(orderItem?.status) && (
+              <TooltipProviderInput
+                description={capitalizeFirstLetter(orderItem?.status)}
+              >
+                <ButtonInput
+                  icon={<CircleCheckBigIcon className="size-4 text-gray-600" />}
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                >
+                  {capitalizeFirstLetter(orderItem?.status)}
+                </ButtonInput>
+              </TooltipProviderInput>
+            )
+          )}
+
+          <TooltipProviderInput
+            description={t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
+          >
+            <ButtonInput
+              type="button"
+              size="sm"
+              variant="outline"
+              loading={loading}
+              onClick={() => handleDownloadRows()}
+              icon={<DownloadIcon className="size-4" />}
+            >
+              {t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
+            </ButtonInput>
+          </TooltipProviderInput>
+        </div>
         {/* <p className="mt-2 text-center text-xl font-bold">
           <span className="ml-2">{orderItem?.event?.timeInit ?? ''}</span>
           {orderItem?.event?.timeEnd ? (

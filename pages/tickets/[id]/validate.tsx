@@ -1,5 +1,4 @@
 import { GetOneOrderItemAPI } from '@/api-site/order-item';
-import { downloadOneUploadsAPI } from '@/api-site/upload';
 import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
@@ -11,15 +10,7 @@ import {
 } from '@/components/ui-setting';
 import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
 import { PrivateComponent } from '@/components/util/private-component';
-import { AlertDangerNotification } from '@/utils';
-import { capitalizeFirstLetter } from '@/utils/utils';
-import {
-  BadgeAlertIcon,
-  CircleCheckBigIcon,
-  DownloadIcon,
-  MoveLeftIcon,
-  ShareIcon,
-} from 'lucide-react';
+import { MoveLeftIcon, ShareIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -38,26 +29,6 @@ const Ticket = () => {
     customer: 'buyer',
     orderNumber: orderNumber,
   });
-
-  const handleDownloadRows = async () => {
-    setLoading(true);
-    try {
-      const response = await downloadOneUploadsAPI({
-        folder: String(orderItem?.model.toLocaleLowerCase()),
-        fileName: orderItem?.uploadsFileTicket?.path,
-      });
-      const link = document.createElement('a');
-      link.href = response?.config?.url;
-      link.click();
-      link.remove();
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      AlertDangerNotification({
-        text: "C'è stato un errore.",
-      });
-    }
-  };
 
   return (
     <>
@@ -85,61 +56,6 @@ const Ticket = () => {
                 </div>
 
                 <div className="ml-auto flex items-center gap-2">
-                  {['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) && (
-                    <TooltipProviderInput
-                      description={capitalizeFirstLetter(orderItem?.status)}
-                    >
-                      <ButtonInput
-                        icon={<CircleCheckBigIcon className="text-success" />}
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                      />
-                    </TooltipProviderInput>
-                  )}
-
-                  {!['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) &&
-                  orderItem?.eventDate?.isExpired ? (
-                    <TooltipProviderInput
-                      description={capitalizeFirstLetter(orderItem?.status)}
-                    >
-                      <ButtonInput
-                        icon={<BadgeAlertIcon className="text-danger" />}
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                      />
-                    </TooltipProviderInput>
-                  ) : (
-                    ['ACCEPTED'].includes(orderItem?.status) && (
-                      <TooltipProviderInput
-                        description={capitalizeFirstLetter(orderItem?.status)}
-                      >
-                        <ButtonInput
-                          icon={
-                            <CircleCheckBigIcon className="text-gray-600" />
-                          }
-                          type="button"
-                          size="sm"
-                          variant="outline"
-                        />
-                      </TooltipProviderInput>
-                    )
-                  )}
-
-                  <TooltipProviderInput
-                    description={t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
-                  >
-                    <ButtonInput
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                      loading={loading}
-                      onClick={() => handleDownloadRows()}
-                      icon={<DownloadIcon className="size-4" />}
-                    />
-                  </TooltipProviderInput>
-
                   <TooltipProviderInput
                     description={t.formatMessage({ id: 'UTIL.SHARE' })}
                   >

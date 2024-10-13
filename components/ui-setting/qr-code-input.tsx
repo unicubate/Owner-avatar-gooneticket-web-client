@@ -67,7 +67,7 @@ const QRCodeInput: React.FC<QRCodeProps> = ({
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex mt-2 items-center justify-center">
       <div className="rounded-lg border bg-white dark:border-input dark:bg-background">
         {renderContent()}
       </div>
