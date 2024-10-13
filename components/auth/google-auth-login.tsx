@@ -11,16 +11,10 @@ const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   if (isWebview(window.navigator.userAgent)) {
     const linkHref =
       typeof window !== 'undefined' ? window.location.href : null;
-    window.location.href = 'x-safari-' + linkHref;
+    //window.location.href = 'x-safari-' + linkHref;
+    window.location.href = `${linkHref}`;
     return;
   }
-
-  // if (isWebview(window.navigator.userAgent)) {
-  //   toast("Open Fatebook in Safari or Chrome to sign in.\n\nGoogle does not support this browser.", {
-  //     duration: 10000,
-  //   })
-  //   return
-  // }
 
   // const userAgent = window.navigator.userAgent;
   // const linkHref = typeof window !== 'undefined' ? window.location.href : null;
