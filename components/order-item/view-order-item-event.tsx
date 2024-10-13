@@ -110,12 +110,12 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
               variant={
                 orderItem?.confirmedAt
                   ? 'success'
-                  : `${orderItem?.eventDate?.expiredAt ? 'danger' : 'primary'}`
+                  : `${orderItem?.eventDate?.isExpired ? 'danger' : 'primary'}`
               }
               icon={
                 orderItem?.confirmedAt ? (
                   <CircleCheckBigIcon className="size-4" />
-                ) : orderItem?.eventDate?.expiredAt ? (
+                ) : orderItem?.eventDate?.isExpired ? (
                   <BadgeAlertIcon className="size-4" />
                 ) : (
                   <CalendarDaysIcon className="size-4" />
