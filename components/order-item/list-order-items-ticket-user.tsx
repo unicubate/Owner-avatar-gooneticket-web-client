@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/tooltip';
 import { OrderItemModel } from '@/types/order-item';
 import {
-  formateFromNow,
+  formateddLLLyyyyHHmm,
   formateToCccc,
   formateTodd,
   formateToLLLL,
@@ -102,26 +102,18 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                 </div>
 
                 {item?.fullName ? (
-                  <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <div className="lg:hidden mt-1 flex items-center font-bold text-gray-600">
                     <UserIcon className="size-4" />
-                    <span className="ml-1 sm:hidden">
+                    <span className="ml-1">
                       {truncateInput(item?.fullName, 16)}
-                    </span>
-                    <span className="ml-1 hidden sm:table-cell">
-                      {item?.fullName}
                     </span>
                   </div>
                 ) : null}
 
                 {item?.email ? (
-                  <div className="mt-1 flex items-center font-bold text-gray-600">
+                  <div className="lg:hidden mt-1 flex items-center font-bold text-gray-600">
                     <MailIcon className="size-4" />
-                    <span className="ml-1 sm:hidden">
-                      {obfuscateEmail(item?.email)}
-                    </span>
-                    <span className="ml-1 hidden sm:table-cell">
-                      {item?.email}
-                    </span>
+                    <span className="ml-1">{obfuscateEmail(item?.email)}</span>
                   </div>
                 ) : null}
               </div>
@@ -130,6 +122,20 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               <ReadMore html={item?.event?.title} value={100} />
             </div>
           </Link>
+        </td>
+
+        <td className="hidden text-center text-sm font-bold items-center text-gray-600 lg:table-cell">
+          {item?.fullName ? (
+            <div className="mt-1 flex">
+              <span className="ml-1">{item?.fullName}</span>
+            </div>
+          ) : null}
+
+          {item?.email ? (
+            <div className="mt-1 flex">
+              <span className="ml-1">{item?.email}</span>
+            </div>
+          ) : null}
         </td>
 
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
@@ -160,7 +166,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-right text-sm font-medium text-gray-600 lg:table-cell">
-          {formateFromNow(item?.createdAt as Date, locale)}
+          {formateddLLLyyyyHHmm(item?.createdAt as Date, locale)}
         </td>
 
         <td className="py-4 text-right text-sm font-medium">
@@ -220,6 +226,10 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
             ) : (
               t.formatMessage({ id: 'UTIL.FREE' })
             )}
+          </div>
+
+          <div className="mt-1 text-right text-sm font-medium text-gray-600 lg:hidden">
+            {formateddLLLyyyyHHmm(item?.createdAt as Date, locale)}
           </div>
         </td>
       </tr>

@@ -60,7 +60,7 @@ export const ButtonInput = ({
         ) : (
           <>
             {icon}
-            <span className="ml-2">{children}</span>
+            {children ? <span className="ml-2">{children}</span> : null}
           </>
         )}
       </Button>

@@ -44,9 +44,7 @@ const TransactionsView = () => {
                   }}
                   icon={<MoveLeftIcon className="size-4" />}
                 >
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-                  </span>
+                  {t.formatMessage({ id: 'UTIL.COME_BACK' })}
                 </ButtonInput>
               </div>
 
@@ -59,9 +57,7 @@ const TransactionsView = () => {
                   icon={<DownloadIcon className="size-4" />}
                   //onClick={() => handleDownloadRows()}
                 >
-                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    Download
-                  </span>
+                  {t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
                 </ButtonInput>
               </div>
             </div>

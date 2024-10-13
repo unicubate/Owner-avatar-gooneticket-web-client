@@ -6,17 +6,12 @@ import {
 } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
+import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/components/ui/tooltip';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -115,25 +110,23 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                       //const isActive = pathname === item.href;
                       const isActive = pathname?.startsWith(item.href);
                       return (
-                        <TooltipProvider key={index}>
-                          <Tooltip>
-                            <TooltipTrigger>
-                              <Link
-                                href={`${item?.href}`}
-                                className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                                  isActive
-                                    ? `border-blue-700 text-blue-700`
-                                    : `border-transparent hover:border-blue-600 hover:text-blue-600`
-                                } `}
-                              >
-                                {item?.icon}
+                        <TooltipProviderInput
+                          key={index}
+                          description={item.title}
+                        >
+                          <Link
+                            href={`${item?.href}`}
+                            className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                              isActive
+                                ? `border-blue-700 text-blue-700`
+                                : `border-transparent hover:border-blue-600 hover:text-blue-600`
+                            } `}
+                          >
+                            {item?.icon}
 
-                                {item?.title}
-                              </Link>
-                            </TooltipTrigger>
-                            <TooltipContent>{item.title}</TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
+                            {item?.title}
+                          </Link>
+                        </TooltipProviderInput>
                       );
                     })}
                 </nav>

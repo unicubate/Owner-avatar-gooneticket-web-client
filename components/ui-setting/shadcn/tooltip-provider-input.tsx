@@ -16,9 +16,7 @@ const TooltipProviderInput = ({ description, children }: Props) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger>{children}</TooltipTrigger>
-          <TooltipContent className="border-input">
-            <p>{description}</p>
-          </TooltipContent>
+          <TooltipContent>{description}</TooltipContent>
         </Tooltip>
       </TooltipProvider>
     </>
