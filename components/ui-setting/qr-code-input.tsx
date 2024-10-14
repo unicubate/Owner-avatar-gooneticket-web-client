@@ -25,6 +25,7 @@ const QRCodeInput: React.FC<QRCodeProps> = ({
     setError(null);
     try {
       const url = await QRCode.toDataURL(value, {
+        margin: 2,
         version: 2,
         errorCorrectionLevel: errorLevel,
       });
@@ -50,17 +51,19 @@ const QRCodeInput: React.FC<QRCodeProps> = ({
     }
     if (qrCodeUrl) {
       return (
-        <Image
-          height={size}
-          width={size}
-          className={cn('rounded-md object-cover', className)}
-          src={qrCodeUrl}
-          quality={90}
-          priority={true}
-          alt={value}
-          decoding="auto"
-          fetchPriority="high"
-        />
+        <div className="rounded-lg border dark:border-input dark:bg-background">
+          <Image
+            height={size}
+            width={size}
+            className={cn('rounded-md object-cover', className)}
+            src={qrCodeUrl}
+            quality={90}
+            priority={true}
+            alt={value}
+            decoding="auto"
+            fetchPriority="high"
+          />
+        </div>
       );
     }
     return null;
@@ -68,9 +71,7 @@ const QRCodeInput: React.FC<QRCodeProps> = ({
 
   return (
     <div className="flex mt-2 items-center justify-center">
-      <div className="rounded-lg border bg-white dark:border-input dark:bg-background">
-        {renderContent()}
-      </div>
+      {renderContent()}
     </div>
   );
 };

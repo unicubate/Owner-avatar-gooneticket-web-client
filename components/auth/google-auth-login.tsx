@@ -15,18 +15,6 @@ const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
     return;
   }
 
-  // const userAgent = window.navigator.userAgent;
-  // const linkHref = typeof window !== 'undefined' ? window.location.href : null;
-  // if (
-  //   userAgent.includes('Mobile') &&
-  //   (userAgent.includes('iPhone') ||
-  //     userAgent.includes('iPad') ||
-  //     userAgent.includes('iPod'))
-  // ) {
-  //   window.location.href = 'x-safari-' + linkHref;
-  //   return;
-  // }
-
   return (
     <>
       <GoogleLogin
