@@ -8,7 +8,6 @@ import {
 import { LayoutSite } from '@/components/layouts/site';
 import { ButtonInput } from '@/components/ui-setting';
 import { useState } from 'react';
-import { useIntl } from 'react-intl';
 
 // Third-party library imports
 
@@ -56,10 +55,9 @@ const content: FAQItem[] = [
 ];
 
 const Home = () => {
-  const { search, handleSetSearch, isOpen, setIsOpen } = useInputState();
+  const { t, search, handleSetSearch, isOpen, setIsOpen } = useInputState();
   const [features] = useState(featuresLandingPage);
   const [compared] = useState(comparedLandingPage);
-  const t = useIntl();
 
   return (
     <LayoutSite title="Tickets, Concerts, Entertainment, Sport & Culture">
@@ -72,30 +70,25 @@ const Home = () => {
             <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
               {t.formatMessage({ id: 'HOME.SUBTITLE' })}
             </p>
-            <div className="mt-4 flex justify-center space-x-2">
-              <Link href={`/login`}>
-                <ButtonInput
-                  type="button"
-                  className="text-lg"
-                  size="lg"
-                  variant="outline"
-                >
-                  Login
-                </ButtonInput>
-              </Link>
+            <div className="mx-auto mt-4 flex flex-col justify-center space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
               <Link
                 href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/events/create`}
               >
                 <ButtonInput
-                  type="button"
-                  className="text-lg"
                   size="lg"
+                  type="button"
                   variant="primary"
+                  className="text-lg"
                   icon={<PlusIcon />}
                 >
-                  Create event
+                  {t.formatMessage({ id: 'UTIL.CREATE_EVENT' })}
                 </ButtonInput>
               </Link>
+              {/* <Link href={`/login`}>
+                <ButtonInput type="button" size="lg" variant="outline">
+                  {t.formatMessage({ id: 'MENU.LOGIN' })}
+                </ButtonInput>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -150,7 +143,7 @@ const Home = () => {
           <Link href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/register`}>
             <ButtonInput
               type="button"
-              className="px-10 text-lg"
+              className="px-10"
               size="xlg"
               variant="primary"
             >

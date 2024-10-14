@@ -59,14 +59,10 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
     <>
       <tr key={index}>
         <td className="py-2 text-sm font-bold">
-          <Link
-            prefetch={true}
-            href={`${oneItem(item?.model)?.url}`}
-            title={oneItem(item?.model)?.title}
-          >
+          <Link prefetch={true} href={`${oneItem(item?.model)?.url}`}>
             <div className="flex min-w-0 flex-1 items-center">
               <div
-                className={`${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600 hover:text-gray-800`}`}`}
+                className={`${item?.confirmedAt ? 'text-success hover:text-green-900' : `${item?.eventDate?.isExpired ? `text-danger hover:text-rose-900` : `text-gray-600 hover:text-gray-800`}`}`}
               >
                 {/* <Badge className="rounded-sm" variant="danger">
                   <BookmarkPlusIcon className="size-4" /> Booking
@@ -84,7 +80,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               <div className="ml-2 min-w-0 flex-1 cursor-pointer">
                 <div className={`flex items-center font-bold`}>
                   <p
-                    className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-700' : `${item?.eventDate?.isExpired ? `text-danger` : `text-gray-600`}`}`}
+                    className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-900' : `${item?.eventDate?.isExpired ? `text-danger hover:text-rose-900` : `text-gray-600 hover:text-gray-800`}`}`}
                   >
                     {capitalizeFirstLetter(
                       formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
