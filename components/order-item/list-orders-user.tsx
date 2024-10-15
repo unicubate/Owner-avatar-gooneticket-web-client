@@ -45,7 +45,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
               {item?.oneUploadImage?.path ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <SwiperImage
-                    height="74px"
+                    height="65px"
                     width="80px"
                     src={`${viewOneFileUploadAPI({
                       folder: String(

@@ -137,7 +137,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         <td className="hidden space-x-1 text-right text-sm font-bold dark:text-white lg:table-cell">
           {!['DELIVERED', 'CONFIRMED'].includes(item?.status) &&
           item?.eventDate?.isExpired ? (
-            <BadgeAlertIcon className="text-red-600" />
+            <BadgeAlertIcon className="text-danger" />
           ) : (
             ['ACCEPTED'].includes(item?.status) && (
               <CircleCheckBigIcon className="text-gray-600" />
@@ -172,7 +172,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
               item?.eventDate?.isExpired ? (
                 <>
                   <TooltipTrigger className="lg:hidden">
-                    <BadgeAlertIcon className="ml-auto text-red-600 size-5" />
+                    <BadgeAlertIcon className="ml-auto text-danger size-5" />
                   </TooltipTrigger>
                   <TooltipContent>Event expired</TooltipContent>
                 </>
