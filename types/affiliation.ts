@@ -36,5 +36,19 @@ export type AffiliationModel = {
   oneEventDate: EventDateModel;
   oneTicket: TicketModel;
   profile: ProfileItemModel;
+  value: number;
   organizationSellerId: string;
+};
+
+export type AffiliationActivityModel = {
+  createdAt: Date;
+  id: string;
+  amount: number;
+  event: {
+    title: string;
+  };
+  transaction: {
+    status: 'IN' | 'OUT';
+    currency: string;
+  };
 };

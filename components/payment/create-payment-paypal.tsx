@@ -1,4 +1,4 @@
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
 import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
@@ -26,7 +26,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
   const currency = amount?.currency;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
-  const { mutateAsync } = CreateOnPaymentPI();
+  const { mutateAsync } = CreateOnPaymentAPI();
 
   const handleApprove = async (options: { order: any }) => {
     const { order } = options;

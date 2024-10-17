@@ -2,7 +2,7 @@
 
 import { PaymentCardFormModel } from '@/types/payment';
 
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { AlertDangerNotification } from '@/utils';
@@ -14,7 +14,7 @@ import { StripeProps } from './stripe/create-payment-stripe';
 const CreatePaymentStripe = ({ data, paymentModel }: StripeProps) => {
   const { linkHref, hasErrors, setHasErrors } = useInputState();
 
-  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
+  const { isPending: loading, mutateAsync } = CreateOnPaymentAPI();
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

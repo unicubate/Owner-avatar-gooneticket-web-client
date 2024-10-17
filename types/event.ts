@@ -38,6 +38,7 @@ export type EventModel = {
   profile: ProfileItemModel;
   uploadsImages: Array<UploadModel>;
   uploadsFiles: Array<UploadModel>;
+  oneUploadImagesEvent: UploadModel;
   orderItem: {
     amount: number;
     quantity: number;

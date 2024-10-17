@@ -1,4 +1,5 @@
 import { makeApiCall } from '@/api-site/clients';
+import { AffiliationModel } from '@/types/affiliation';
 import { PaginationRequest } from '@/utils';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
@@ -17,7 +18,7 @@ export const GetOneAffiliationAPI = (payload: {
   });
 
   return {
-    data: data?.data as any,
+    data: data?.data as AffiliationModel,
     isError,
     isLoading,
     status,
@@ -26,19 +27,36 @@ export const GetOneAffiliationAPI = (payload: {
   };
 };
 
-export const GetInfiniteAffiliationsUserAPI = (
-  payload: {
-    search?: string;
-    take: number;
-  } & PaginationRequest,
-) => {
+export const GetInfiniteAffiliationsUserAPI = (payload: PaginationRequest) => {
   const { take, sort, search } = payload;
   return useInfiniteQuery({
-    queryKey: ['affiliations-user', 'infinite', { ...payload }],
+    queryKey: ['affiliations', 'infinite', { ...payload }],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await makeApiCall({
-        action: 'getAffiliationsUser',
+        action: 'getAffiliations',
+        queryParams: {
+          take,
+          sort,
+          search,
+          page: pageParam,
+          customer: 'affiliations',
+        },
+      }),
+    initialPageParam: 1,
+  });
+};
+
+export const GetInfiniteAffiliationsActivitiesUserAPI = (
+  payload: PaginationRequest,
+) => {
+  const { take, sort, search } = payload;
+  return useInfiniteQuery({
+    queryKey: ['affiliations-activities', 'infinite', { ...payload }],
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 1 }) =>
+      await makeApiCall({
+        action: 'getAffiliationsActivities',
         queryParams: {
           take,
           sort,

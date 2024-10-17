@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { deleteOneUserAPI } from '@/api-site/user';
+import { deleteOneUserAPI, logoutUsersAPI } from '@/api-site/user';
 import { UserModel } from '@/types/user';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
+import { TrashIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting/button-input';
@@ -20,12 +21,14 @@ const DeleteOneUser = ({ user }: Props) => {
     setIsOpen(true);
     try {
       await deleteOneUserAPI({ userId: item?.id });
+      await logoutUsersAPI();
       AlertSuccessNotification({
         text: 'User deleted successfully',
       });
       setLoading(false);
       setIsOpen(false);
       push(`/`);
+      location.reload();
     } catch (error: any) {
       setLoading(false);
       setIsOpen(true);
@@ -37,39 +40,37 @@ const DeleteOneUser = ({ user }: Props) => {
 
   return (
     <>
-      <div className={`mt-8 rounded-lg border border-red-500 bg-red-100 `}>
-        <div className="px-4 py-5 sm:p-3">
-          <div className="md:flex md:items-center md:justify-between">
-            <div className="max-w-2xs flex-1 md:mt-0">
-              <p className="text-base font-bold text-gray-600">
-                Delete account
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-500">
-                You can delete your account here. This action is not reversible
-              </p>
-            </div>
-            <div className="mt-4 flex items-center justify-start space-x-6 md:ml-auto md:mt-0 md:justify-end md:space-x-reverse">
-              <ActionModalDialog
-                title="Delete account?"
-                loading={loading}
-                isOpen={isOpen}
-                setIsOpen={setIsOpen}
-                onClick={() => deleteItem(user)}
-                description="Are you sure you want to delete your account?"
-                buttonDialog={
-                  <ButtonInput
-                    type="button"
-                    className="w-full"
-                    variant="danger"
-                  >
-                    Delete account
-                  </ButtonInput>
-                }
-              />
-            </div>
+      <div className="border-input mt-4 flex flex-row rounded-md border p-3 border-red-500 bg-red-100">
+        <div className="flex min-w-0 flex-1 items-center">
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-bold text-gray-600">Delete account</p>
+            <p className="mt-1 text-sm font-medium text-gray-500">
+              You can delete your account here. This action is not reversible
+            </p>
           </div>
         </div>
+
+        <div className="flex items-center justify-between pl-14 sm:mt-0 sm:justify-end sm:space-x-6 sm:pl-0">
+          <ButtonInput
+            type="button"
+            variant="danger"
+            className="w-full"
+            icon={<TrashIcon className="size-4" />}
+            onClick={() => setIsOpen(true)}
+          >
+            Delete account
+          </ButtonInput>
+        </div>
       </div>
+
+      <ActionModalDialog
+        title="Delete account?"
+        loading={loading}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onClick={() => deleteItem(user)}
+        description="Are you sure you want to delete your account?"
+      />
     </>
   );
 };

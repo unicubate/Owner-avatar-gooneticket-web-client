@@ -1,4 +1,5 @@
 import { logoutUsersAPI } from '@/api-site/user';
+import { MediumFooter } from '@/components/footer/medium-footer';
 import {
   ButtonInput,
   DropdownMenuContentUser,
@@ -113,6 +114,8 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
       >
         <main>{children}</main>
       </div>
+
+      <MediumFooter />
     </>
   );
 };

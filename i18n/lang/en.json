@@ -140,6 +140,7 @@
   "MENU.SUBSCRIBER": "Subscribes",
   "MENU.TICKET": "Tickets",
   "MENU.INVOICE": "Invoices",
+  "MENU.ACTIVITY": "Activities",
 
   "TRANSACTION.LAST_DAY": "Last {day} days",
   "TRANSACTION.ALL_TIME": "All time",
@@ -183,6 +184,12 @@
   "UTIL.FREE": "Free",
   "UTIL.DOWNLOAD": "Download",
   "UTIL.CREATE_EVENT": "Create event",
+  "UTIL.ANY_AFFILIATION": "You don't have any affiliation",
+  "UTIL.ANY_SUB_AFFILIATION": "Find your first product or event affiliation",
+  "UTIL.TODAY": "Today",
+  "UTIL.ACTIVITY_RECENT": "Recent activities",
+  "UTIL.SAVE": "Save",
+  "UTIL.CANCEL": "Cancel",
 
   "CONTACT.US.TITLE": "Contact us",
   "CONTACT.US.SUBTITLE": "Customer support response times may vary depending on urgency. You will receive a response as soon as possible. In the meantime, please do not submit new requests.",

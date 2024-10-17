@@ -1,8 +1,5 @@
 import { GetInfiniteOrderItemsAPI } from '@/api-site/order-item';
-import {
-  useInputState,
-  useReactIntersectionObserver,
-} from '@/components/hooks';
+import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ListOrderItemsTicketUser } from '@/components/order-item/list-order-items-ticket-user';
 import {
@@ -24,18 +21,14 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { PrivateComponent } from '@/components/util/private-component';
 import { OrderItemModel } from '@/types/order-item';
-import {
-  CalendarCheckIcon,
-  ShoppingCartIcon,
-  TicketPlusIcon,
-} from 'lucide-react';
+import { ListFilterIcon, ShoppingCartIcon, TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 const OrderItemsViewIndex = () => {
   const { query, push } = useRouter();
-  const [period, setPeriod] = useState(30);
+  const [started, setStarted] = useState(-1);
   const { t, search, handleSetSearch, userStorage: user } = useInputState();
 
   const {
@@ -46,23 +39,22 @@ const OrderItemsViewIndex = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteOrderItemsAPI({
-    period,
+    started,
     search,
-    take: 10,
+    take: 20,
     sort: 'DESC',
     customer: 'buyer',
     modelIds: ['EVENT', 'TICKET', 'BOOKING'],
   });
-  const { ref } = useReactIntersectionObserver({ hasNextPage, fetchNextPage });
 
-  const handlePeriodChange = (i: number) => setPeriod(i);
+  const handleStartedChange = (i: number) => setStarted(i);
   return (
     <>
       <LayoutDashboard title={t.formatMessage({ id: 'MENU.TICKET' })}>
         <div className="mx-auto max-w-6xl py-6">
           <div className="mx-auto mt-6 px-4 sm:px-6 md:px-8">
             <div className="flow-root">
-              <div className="mt-4 flex items-center">
+              <div className="mt-4 flex items-center gap-2">
                 <Link href="/orders">
                   <ButtonInput
                     type="button"
@@ -78,44 +70,28 @@ const OrderItemsViewIndex = () => {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline" size="sm" className="h-8 gap-1">
-                        <CalendarCheckIcon className="size-3.5" />
-                        {period > 0
-                          ? `${t.formatMessage({ id: 'TRANSACTION.LAST_DAY' }, { day: period })}`
-                          : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
+                        <ListFilterIcon className="size-3.5" />
+                        {started > 0
+                          ? t.formatMessage({ id: 'UTIL.TODAY' })
+                          : t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="dark:border-input w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
-                            handlePeriodChange(30);
+                            handleStartedChange(2);
                           }}
                         >
                           <span className="cursor-pointer">
-                            {t.formatMessage(
-                              { id: 'TRANSACTION.LAST_DAY' },
-                              { day: 30 },
-                            )}
+                            {t.formatMessage({ id: 'UTIL.TODAY' })}
                           </span>
                         </DropdownMenuItem>
                       </DropdownMenuGroup>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem
                         onClick={() => {
-                          handlePeriodChange(120);
-                        }}
-                      >
-                        <span className="cursor-pointer">
-                          {t.formatMessage(
-                            { id: 'TRANSACTION.LAST_DAY' },
-                            { day: 120 },
-                          )}
-                        </span>
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => {
-                          handlePeriodChange(-1);
+                          handleStartedChange(-1);
                         }}
                       >
                         <span className="cursor-pointer">
@@ -146,20 +122,28 @@ const OrderItemsViewIndex = () => {
                   <tbody className="divide-y divide-gray-200 dark:divide-gray-800">
                     {user?.organizationId ? (
                       isLoadingOrderItems ? (
-                        <LoadingFile />
+                        <tr className="table-row">
+                          <td className="table-cell">
+                            <LoadingFile className="table-row" />
+                          </td>
+                        </tr>
                       ) : isErrorOrderItems ? (
                         <ErrorFile
                           title="404"
                           description="Error find data please try again..."
                         />
                       ) : Number(dataOrderItems?.pages[0]?.data?.total) <= 0 ? (
-                        <EmptyData
-                          image={<TicketPlusIcon className="size-10" />}
-                          title={t.formatMessage({ id: 'UTIL.ANY_TICKET' })}
-                          description={t.formatMessage({
-                            id: 'UTIL.ANY_SUB_ORDER',
-                          })}
-                        />
+                        <tr className="table-row">
+                          <td className="table-cell">
+                            <EmptyData
+                              image={<TicketPlusIcon className="size-10" />}
+                              title={t.formatMessage({ id: 'UTIL.ANY_TICKET' })}
+                              description={t.formatMessage({
+                                id: 'UTIL.ANY_SUB_ORDER',
+                              })}
+                            />
+                          </td>
+                        </tr>
                       ) : (
                         dataOrderItems?.pages.map((page, i) => (
                           <Fragment key={i}>
@@ -180,10 +164,9 @@ const OrderItemsViewIndex = () => {
                 </table>
               </div>
 
-              {user?.organizationId && hasNextPage && (
+              {hasNextPage && (
                 <div className="mx-auto mt-2 justify-center text-center">
                   <ButtonLoadMore
-                    ref={ref}
                     hasNextPage={hasNextPage}
                     isFetchingNextPage={isFetchingNextPage}
                     onClick={() => fetchNextPage()}

@@ -2,9 +2,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useIntl } from 'react-intl';
-import { NavbarProps } from '.';
 
 const classIcon = 'flex-shrink-0 size-5 mr-4';
 
@@ -16,7 +14,7 @@ const VerticalNavDashboard = ({ user }: Props) => {
   const t = useIntl();
   const router = useRouter();
   const pathname = usePathname();
-  const [navigationItems] = useState<NavbarProps[]>([
+  const navigationItems = [
     {
       title: `${t.formatMessage({ id: 'MENU.TICKET' })}`,
       count: 1,
@@ -32,22 +30,12 @@ const VerticalNavDashboard = ({ user }: Props) => {
       count: 1,
       href: '/events',
     },
-    // {
-    //   title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
-    //   count: user?.affiliation?.count,
-    //   href: `/orders/affiliates`,
-    // },
     {
-      title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
-      count: 1,
-      href: '/messages',
+      title: `${t.formatMessage({ id: 'MENU.AFFILIATION' })}`,
+      count: user?.affiliation?.count,
+      href: `/affiliations`,
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.SETTING' })}`,
-      count: 1,
-      href: '/settings',
-    },
-  ]);
+  ];
 
   const bgColor = `bg-indigo-600 text-white`;
   return (

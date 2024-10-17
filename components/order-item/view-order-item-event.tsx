@@ -1,7 +1,6 @@
 import { downloadOneUploadsAPI } from '@/api-site/upload';
 import { QRCodeInput, SerialPrice } from '@/components/ui-setting';
 import { ButtonInput } from '@/components/ui-setting/button-input';
-import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
 import { Badge } from '@/components/ui/badge';
 import { OrderItemModel } from '@/types/order-item';
 import {
@@ -155,65 +154,49 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
 
         <div className="flex mt-2 justify-center gap-2">
           {['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) && (
-            <TooltipProviderInput
-              description={capitalizeFirstLetter(orderItem?.status)}
+            <ButtonInput
+              icon={<CircleCheckBigIcon className="size-4" />}
+              type="button"
+              size="sm"
+              variant="success"
             >
-              <ButtonInput
-                icon={<CircleCheckBigIcon className="size-4" />}
-                type="button"
-                size="sm"
-                variant="success"
-              >
-                {capitalizeFirstLetter(orderItem?.status)}
-              </ButtonInput>
-            </TooltipProviderInput>
+              {capitalizeFirstLetter(orderItem?.status)}
+            </ButtonInput>
           )}
 
           {!['DELIVERED', 'CONFIRMED'].includes(orderItem?.status) &&
           orderItem?.eventDate?.isExpired ? (
-            <TooltipProviderInput
-              description={capitalizeFirstLetter(orderItem?.status)}
+            <ButtonInput
+              icon={<BadgeAlertIcon className="size-4" />}
+              type="button"
+              size="sm"
+              variant="danger"
             >
+              {capitalizeFirstLetter(orderItem?.status)}
+            </ButtonInput>
+          ) : (
+            ['ACCEPTED'].includes(orderItem?.status) && (
               <ButtonInput
-                icon={<BadgeAlertIcon className="size-4" />}
+                icon={<CircleCheckBigIcon className="size-4 text-gray-600" />}
                 type="button"
                 size="sm"
-                variant="danger"
+                variant="outline"
               >
                 {capitalizeFirstLetter(orderItem?.status)}
               </ButtonInput>
-            </TooltipProviderInput>
-          ) : (
-            ['ACCEPTED'].includes(orderItem?.status) && (
-              <TooltipProviderInput
-                description={capitalizeFirstLetter(orderItem?.status)}
-              >
-                <ButtonInput
-                  icon={<CircleCheckBigIcon className="size-4 text-gray-600" />}
-                  type="button"
-                  size="sm"
-                  variant="outline"
-                >
-                  {capitalizeFirstLetter(orderItem?.status)}
-                </ButtonInput>
-              </TooltipProviderInput>
             )
           )}
 
-          <TooltipProviderInput
-            description={t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
+          <ButtonInput
+            type="button"
+            size="sm"
+            variant="outline"
+            loading={loading}
+            onClick={() => handleDownloadRows()}
+            icon={<DownloadIcon className="size-4" />}
           >
-            <ButtonInput
-              type="button"
-              size="sm"
-              variant="outline"
-              loading={loading}
-              onClick={() => handleDownloadRows()}
-              icon={<DownloadIcon className="size-4" />}
-            >
-              {t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
-            </ButtonInput>
-          </TooltipProviderInput>
+            {t.formatMessage({ id: 'UTIL.DOWNLOAD' })}
+          </ButtonInput>
         </div>
         {/* <p className="mt-2 text-center text-xl font-bold">
           <span className="ml-2">{orderItem?.event?.timeInit ?? ''}</span>

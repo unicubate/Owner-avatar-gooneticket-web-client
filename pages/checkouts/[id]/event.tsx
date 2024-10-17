@@ -7,7 +7,6 @@ import { GetAllCountiesAPI } from '@/api-site/profile';
 import { GetInfiniteTicketsAPI } from '@/api-site/ticket';
 import { GetOneUserPublicAPI } from '@/api-site/user';
 import { GetOneUserAddressMeAPI } from '@/api-site/user-address';
-import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState, useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { LayoutCheckoutSite } from '@/components/layouts/checkout-site';
 import { CreatePaymentBooking } from '@/components/payment/create-payment-booking';
@@ -732,7 +731,6 @@ const CheckoutEvent = () => {
               </p>
             </div>
           </div>
-          <MediumFooter />
         </div>
       </LayoutCheckoutSite>
     </>

@@ -4,7 +4,7 @@ import {
   OrderItemModel,
   OrderModel,
 } from '@/types/order-item';
-import { SortModel } from '@/utils/paginations';
+import { PaginationRequest } from '@/utils/paginations';
 import {
   useInfiniteQuery,
   useMutation,
@@ -151,17 +151,17 @@ export const GetOneOrderItemPublicAPI = (payload: { orderNumber: string }) => {
   };
 };
 
-export const GetInfiniteOrderItemsAPI = (payload: {
-  orderId?: string;
-  modelIds: string[];
-  search?: string;
-  take: number;
-  period?: number;
-  daysConfirm?: number;
-  status?: string;
-  sort: SortModel;
-  customer: 'seller' | 'buyer';
-}) => {
+export const GetInfiniteOrderItemsAPI = (
+  payload: {
+    orderId?: string;
+    modelIds: string[];
+    period?: number;
+    started?: number;
+    daysConfirm?: number;
+    status?: string;
+    customer: 'seller' | 'buyer';
+  } & PaginationRequest,
+) => {
   const {
     modelIds,
     period,
@@ -170,6 +170,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
     search,
     take,
     sort,
+    started,
     customer,
     status,
   } = payload;
@@ -188,6 +189,7 @@ export const GetInfiniteOrderItemsAPI = (payload: {
           period,
           orderId,
           customer,
+          started,
           daysConfirm,
           search: search,
           status: status?.toUpperCase(),
@@ -197,16 +199,15 @@ export const GetInfiniteOrderItemsAPI = (payload: {
   });
 };
 
-export const GetInfiniteOrdersAPI = (payload: {
-  orderItemId?: string;
-  search?: string;
-  take: number;
-  days?: number;
-  daysConfirm?: number;
-  status?: string;
-  sort: SortModel;
-  customer: 'seller' | 'buyer';
-}) => {
+export const GetInfiniteOrdersAPI = (
+  payload: {
+    orderItemId?: string;
+    days?: number;
+    daysConfirm?: number;
+    status?: string;
+    customer: 'seller' | 'buyer';
+  } & PaginationRequest,
+) => {
   const { days, orderItemId, daysConfirm, search, take, sort, customer } =
     payload;
   return useInfiniteQuery({

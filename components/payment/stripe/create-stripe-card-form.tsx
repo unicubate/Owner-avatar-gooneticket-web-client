@@ -2,7 +2,7 @@
 
 import { PaymentCardFormModel } from '@/types/payment';
 
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -41,7 +41,7 @@ const CreateStripeCardForm = ({ data, paymentModel }: StripeProps) => {
     return;
   };
 
-  const { mutateAsync } = CreateOnPaymentPI({
+  const { mutateAsync } = CreateOnPaymentAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);

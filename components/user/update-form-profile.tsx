@@ -1,4 +1,12 @@
 import { UpdateOneProfileAPI } from '@/api-site/profile';
+import { useInputState } from '@/components/hooks';
+import { ButtonInput } from '@/components/ui-setting/button-input';
+import {
+  SelectInput,
+  TextAreaInput,
+  TextInput,
+} from '@/components/ui-setting/shadcn';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 import { ProfileFormModel, ProfileModel, arrayColors } from '@/types/profile';
 import { UserModel } from '@/types/user';
 import { oneImageToURL } from '@/utils';
@@ -10,10 +18,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-import { useInputState } from '../hooks';
-import { ButtonInput } from '../ui-setting/button-input';
-import { TextAreaInput, TextInput } from '../ui-setting/shadcn';
-import { Alert, AlertDescription } from '../ui/alert';
 // const { Option } = Select;
 
 // type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
@@ -39,6 +43,7 @@ import { Alert, AlertDescription } from '../ui/alert';
 // };
 
 type Props = {
+  currencies: any[];
   user: UserModel | any;
   profile: ProfileModel | any;
 };
@@ -47,9 +52,10 @@ const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
   url: yup.string().url().nullable(),
+  currencyId: yup.string().required('country is a required field'),
 });
 
-const UpdateFormProfile = ({ profile, user }: Props) => {
+const UpdateFormProfile = ({ profile, user, currencies }: Props) => {
   const [imageUrl, setImageUrl] = useState<string>(
     oneImageToURL(profile?.image),
   );
@@ -70,15 +76,16 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
 
   useEffect(() => {
     if (profile) {
-      const fields = [
+      const fields: (keyof ProfileFormModel)[] = [
         'url',
         'phone',
+        'currencyId',
         'firstName',
         'lastName',
         'address',
         'description',
       ];
-      fields?.forEach((field: any) => setValue(field, profile[field]));
+      fields.forEach((field) => setValue(field, profile[field]));
     }
   }, [user, profile, setValue]);
 
@@ -121,29 +128,24 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-8 overflow-hidden rounded-lg border border-gray-200 bg-white dark:border-input dark:bg-background">
-          <div className="px-4 py-5">
-            <h2 className="text-base font-bold"> Profile </h2>
+        <h2 className="text-base font-bold"> Profile </h2>
 
-            {hasErrors && (
-              <Alert
-                variant="destructive"
-                className="mb-4 bg-red-600 text-center"
-              >
-                <AlertDescription className="text-white">
-                  {hasErrors}
-                </AlertDescription>
-              </Alert>
-            )}
+        {hasErrors && (
+          <Alert variant="destructive" className="mb-4 bg-red-600 text-center">
+            <AlertDescription className="text-white">
+              {hasErrors}
+            </AlertDescription>
+          </Alert>
+        )}
 
-            <div className="mt-4">
-              <Controller
-                name="attachment"
-                control={control}
-                render={({}) => (
-                  <>
-                    <div className="mx-auto justify-center text-center">
-                      {/* <Upload
+        <div className="mt-4">
+          <Controller
+            name="attachment"
+            control={control}
+            render={({}) => (
+              <>
+                <div className="mx-auto justify-center text-center">
+                  {/* <Upload
                         name="attachment"
                         listType="picture-circle"
                         className="avatar-uploader"
@@ -167,93 +169,117 @@ const UpdateFormProfile = ({ profile, user }: Props) => {
                           </div>
                         )}
                       </Upload> */}
-                    </div>
-                  </>
-                )}
-              />
-            </div>
+                </div>
+              </>
+            )}
+          />
+        </div>
 
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
-              <div className="mt-2">
-                <TextInput
-                  label="First name"
-                  control={control}
-                  type="text"
-                  name="firstName"
-                  placeholder="First name"
-                  errors={errors}
-                />
-              </div>
-
-              <div className="mt-2">
-                <TextInput
-                  label="Last name"
-                  control={control}
-                  type="text"
-                  name="lastName"
-                  placeholder="Last name"
-                  errors={errors}
-                />
-              </div>
-
-              <div className="mt-2">
-                <TextInput
-                  label="Phone"
-                  control={control}
-                  type="text"
-                  name="phone"
-                  placeholder="Phone"
-                  errors={errors}
-                />
-              </div>
-            </div>
-
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
-              <div className="mt-2">
-                <TextInput
-                  label="Website"
-                  control={control}
-                  type="url"
-                  name="url"
-                  placeholder="Website"
-                  errors={errors}
-                />
-              </div>
-              <div className="mt-2">
-                <TextInput
-                  label="Address"
-                  control={control}
-                  type="text"
-                  name="address"
-                  placeholder="address"
-                  errors={errors}
-                />
-              </div>
-            </div>
-
-            <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
-              <div className="mt-2">
-                <TextAreaInput
-                  control={control}
-                  label="Bio"
-                  name="description"
-                  placeholder="Introduce yourself and what you're creating"
-                  errors={errors}
-                />
-              </div>
-            </div>
-
-            <div className="mb-2 mt-4 flex items-center justify-end space-x-4">
-              <ButtonInput
-                type="submit"
-                variant="primary"
-                className="w-full"
-                loading={loading}
-              >
-                Save changes
-              </ButtonInput>
-            </div>
+        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-3">
+          <div className="mt-2">
+            <TextInput
+              label="First name"
+              control={control}
+              type="text"
+              name="firstName"
+              placeholder="First name"
+              errors={errors}
+            />
           </div>
+
+          <div className="mt-2">
+            <TextInput
+              label="Last name"
+              control={control}
+              type="text"
+              name="lastName"
+              placeholder="Last name"
+              errors={errors}
+            />
+          </div>
+
+          <div className="mt-2">
+            <TextInput
+              label="Phone"
+              control={control}
+              type="text"
+              name="phone"
+              placeholder="Phone"
+              errors={errors}
+            />
+          </div>
+        </div>
+
+        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
+          <div className="mt-2">
+            <TextInput
+              label="Website"
+              control={control}
+              type="url"
+              name="url"
+              placeholder="Website"
+              errors={errors}
+            />
+          </div>
+          <div className="mt-2">
+            <TextInput
+              label="Address"
+              control={control}
+              type="text"
+              name="address"
+              placeholder="address"
+              errors={errors}
+            />
+          </div>
+        </div>
+
+        <div className="mt-4">
+          <SelectInput
+            label="Currency"
+            control={control}
+            errors={errors}
+            placeholder="Currency"
+            name="currencyId"
+          >
+            {currencies?.length > 0 ? (
+              currencies?.map((item: any, index: number) => (
+                <option value={item?.id} key={index}>
+                  <span className="font-normal">{item?.name}</span>
+                </option>
+              ))
+            ) : (
+              <option style={{ textAlign: 'center' }}>
+                <span>Data Not Found</span>
+              </option>
+            )}
+          </SelectInput>
+
+          <span className="text-sm font-medium text-gray-400">
+            {`Your supporters will pay in this currency.`}
+          </span>
+        </div>
+
+        <div className="mt-2 grid grid-cols-1 gap-x-6 gap-y-5">
+          <div className="mt-2">
+            <TextAreaInput
+              control={control}
+              label="Bio"
+              name="description"
+              placeholder="Introduce yourself and what you're creating"
+              errors={errors}
+            />
+          </div>
+        </div>
+
+        <div className="mb-2 mt-4 flex items-center justify-end space-x-4">
+          <ButtonInput
+            type="submit"
+            variant="primary"
+            className="w-full"
+            loading={loading}
+          >
+            Save changes
+          </ButtonInput>
         </div>
       </form>
     </>
