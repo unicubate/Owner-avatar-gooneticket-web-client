@@ -140,6 +140,7 @@
   "MENU.SUBSCRIBER": "Membri",
   "MENU.TICKET": "Biglietti",
   "MENU.INVOICE": "Fatture",
+  "MENU.ACTIVITY": "Attività",
 
   "TRANSACTION.LAST_DAY": "Ultimi {day} giorni",
   "TRANSACTION.ALL_TIME": "Sempre",
@@ -183,6 +184,12 @@
   "UTIL.FREE": "Gratuito",
   "UTIL.DOWNLOAD": "Scaricare",
   "UTIL.CREATE_EVENT": "Creare un evento",
+  "UTIL.ANY_AFFILIATION": "Non avete alcuna affiliazione",
+  "UTIL.ANY_SUB_AFFILIATION": "Trovate la vostra prima affiliazione a un prodotto o a un evento",
+  "UTIL.TODAY": "Oggi",
+  "UTIL.ACTIVITY_RECENT": "Attività recenti",
+  "UTIL.SAVE": "Salva",
+  "UTIL.CANCEL": "Annula",
 
   "CONTACT.US.TITLE": "Contattaci",
   "CONTACT.US.SUBTITLE": "I tempi di risposta dell'assistenza clienti possono variare a seconda dell'urgenza. Riceverai una risposta il prima possibile. Nel frattempo si prega di non inviare nuove richieste.",

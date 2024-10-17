@@ -79,6 +79,14 @@ export const filterImageAndFile = (options: {
 export const itemsNumberArray = (value: number) =>
   Array.from({ length: value }, (_, index) => index);
 
+export const maskIBAN = (iban: string): string => {
+  const firstPart = iban.slice(0, 6);
+  const lastPart = iban.slice(-4);
+
+  const maskedPart = '***********';
+  return iban.length < 10 ? iban : `${maskedPart}${lastPart}`;
+};
+
 export const isWebview = (ua: string): boolean => {
   const rules = [
     // if it says it's a webview, let's go with that

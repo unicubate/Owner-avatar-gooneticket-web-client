@@ -116,6 +116,7 @@ const CreateOrUpdateUserAddressForm = ({
             errors={errors}
             placeholder="Select country"
             name="country"
+            disabled={isEdit}
           >
             {countries?.length > 0 ? (
               countries?.map((item: any, index: number) => (

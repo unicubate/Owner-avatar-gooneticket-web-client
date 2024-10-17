@@ -54,3 +54,28 @@ export type PaymentItemModel = {
   userId: string;
   organizationId: string;
 };
+
+type Status = 'PENDING' | 'ACTIVE' | 'INVALID' | 'CONFIRMED';
+
+export type WithdrawalsModel = {
+  createdAt: Date;
+  id: string;
+  amount: number;
+  amountConvert: number;
+  description: string;
+  currency: string;
+  status: Status;
+  confirmedAt: Date;
+  type: string;
+  payment: {
+    id: string;
+    iban: string;
+    email: string;
+    phone: string;
+  };
+};
+
+export type PaymentsPayoutModel = {
+  ibanUser: PaymentItemModel;
+  ibanOrganization: PaymentItemModel;
+};

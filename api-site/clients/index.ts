@@ -130,7 +130,8 @@ export const apiEndpoints: ClientApiMethods = {
 
   /****************** Affiliations route */
   getOneAffiliation: GET(`${baseUrl}/affiliations/view`),
-  getAffiliationsUser: GET(`${baseUrl}/affiliations/user`),
+  getAffiliations: GET(`${baseUrl}/affiliations`),
+  getAffiliationsActivities: GET(`${baseUrl}/affiliations/activity`),
 
   /****************** Follows route */
   getFollowers: GET(`${baseUrl}/follows/followers`),
@@ -187,11 +188,17 @@ export const apiEndpoints: ClientApiMethods = {
   getEventDates: GET(`${baseUrl}/event-dates`),
   getOneEventDate: GET(`${baseUrl}/event-dates/view/:id`),
 
+  /****************** Statistic route */
+  getStatisticsAffiliationsActivities: GET(
+    `${baseUrl}/statistics/affiliation-activities`,
+  ),
+
   /****************** Payments route */
   getOnePaymentsStripeClientSecret: GET(
     `${baseUrl}/payments/stripe/client-secret`,
   ),
   getPayments: GET(`${baseUrl}/payments`),
+  getPaymentsPayoutSetup: GET(`${baseUrl}/payments/payout-setup`),
   createOnePaymentsPaypalShop: POST(`${baseUrl}/payments/paypal/shop`),
   createOnePaymentsStripeShop: POST(`${baseUrl}/payments/stripe/shop`),
   createOnePaymentsStripeCheckoutSessionEvent: POST(
@@ -206,4 +213,6 @@ export const apiEndpoints: ClientApiMethods = {
   createOnePaymentsBookingEvent: POST(`${baseUrl}/payments/booking/event`),
   createOnePaymentsCreate: POST(`${baseUrl}/payments/create`),
   deleteOnePayment: DELETE(`${baseUrl}/payments/:paymentId`),
+  createOnePaymentsSellerWithdrawals: POST(`${baseUrl}/payments/withdrawals`),
+  getPaymentsWithdrawals: GET(`${baseUrl}/withdrawals`),
 };

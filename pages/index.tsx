@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { MediumFooter } from '@/components/footer/medium-footer';
 import { useInputState } from '@/components/hooks';
 import {
   comparedLandingPage,
@@ -63,11 +62,11 @@ const Home = () => {
     <LayoutSite title="Tickets, Concerts, Entertainment, Sport & Culture">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-10">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto mt-8 py-6 text-center">
-            <h1 className="text-2xl font-bold sm:text-4xl lg:text-5xl">
+          <div className="mx-auto mt-10 py-6 text-center">
+            <h1 className="text-2xl font-bold sm:text-4xl lg:text-6xl">
               {t.formatMessage({ id: 'HOME.TITLE' })}
             </h1>
-            <p className="mx-auto mt-6 max-w-md text-base font-normal leading-7 text-gray-500">
+            <p className="mx-auto mt-4 max-w-md text-base font-normal leading-7 text-gray-500">
               {t.formatMessage({ id: 'HOME.SUBTITLE' })}
             </p>
             <div className="mx-auto mt-4 flex flex-col justify-center space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0">
@@ -75,10 +74,8 @@ const Home = () => {
                 href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/events/create`}
               >
                 <ButtonInput
-                  size="lg"
                   type="button"
                   variant="primary"
-                  className="text-lg"
                   icon={<PlusIcon />}
                 >
                   {t.formatMessage({ id: 'UTIL.CREATE_EVENT' })}
@@ -141,12 +138,7 @@ const Home = () => {
 
         <div className="mt-4 flex flex-wrap justify-center">
           <Link href={`${process.env.NEXT_PUBLIC_SITE_CREATOR}/register`}>
-            <ButtonInput
-              type="button"
-              className="px-10"
-              size="xlg"
-              variant="primary"
-            >
+            <ButtonInput type="button" className="px-10" variant="primary">
               Start free with email
             </ButtonInput>
           </Link>
@@ -185,8 +177,6 @@ const Home = () => {
           ))}
         </div>
       </div>
-
-      <MediumFooter />
     </LayoutSite>
   );
 };

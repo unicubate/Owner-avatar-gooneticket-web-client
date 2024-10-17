@@ -1,4 +1,4 @@
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertDangerNotification, AlertSuccessNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
@@ -36,7 +36,7 @@ const CreatePaymentBooking = ({
     mode: 'onChange',
   });
 
-  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
+  const { isPending: loading, mutateAsync } = CreateOnPaymentAPI();
 
   const onSubmit: SubmitHandler<any> = async (payload: any) => {
     const newReference = generateLongUUID(30);

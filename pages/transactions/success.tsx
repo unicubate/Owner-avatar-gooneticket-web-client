@@ -1,4 +1,4 @@
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { useInputState, useRedirectAfterSomeSeconds } from '@/components/hooks';
 import { type ISourceOptions } from '@tsparticles/engine';
 import Particles, { initParticlesEngine } from '@tsparticles/react';
@@ -15,7 +15,7 @@ const TransactionSuccess = () => {
   const { timerRemaining } = useRedirectAfterSomeSeconds(`/${tag}`, 2);
 
   // this should be run only once per application lifetime
-  const { isPending, mutateAsync } = CreateOnPaymentPI();
+  const { isPending, mutateAsync } = CreateOnPaymentAPI();
 
   useEffect(() => {
     const loadItem = async () => {

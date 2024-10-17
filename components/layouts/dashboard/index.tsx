@@ -19,8 +19,8 @@ export type NavbarProps = {
 };
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  const { profile, username, email, status, theme } = useAuth() as any;
-  const user = { profile, username, email, status };
+  const { profile, username, email, status, affiliation } = useAuth() as any;
+  const user = { profile, username, email, status, affiliation };
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
@@ -46,14 +46,12 @@ const LayoutDashboard = ({ children, title }: IProps) => {
         </Sheet>
 
         <div
-          className={`dark:bg-background flex min-h-screen flex-1 flex-col bg-gray-100`}
+          className={`dark:bg-background min-h-screen flex-1 flex-col bg-gray-100`}
         >
-          <main>
-            {children}
-
-            <MediumFooter />
-          </main>
+          <main>{children}</main>
         </div>
+
+        <MediumFooter />
       </div>
     </>
   );

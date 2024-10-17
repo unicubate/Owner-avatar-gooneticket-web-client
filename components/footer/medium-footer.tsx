@@ -36,8 +36,8 @@ const MediumFooter = () => {
     },
   ]);
   return (
-    <>
-      <footer className="max-w-8xl mx-auto mt-4 px-4 sm:px-6 lg:px-8 lg:py-10">
+    <div className="dark:bg-background border  border-input">
+      <footer className="max-w-8xl mx-auto mt-4 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center space-y-4 lg:flex-row lg:justify-between lg:space-y-0">
             <div className="shrink-0">
@@ -151,7 +151,7 @@ const MediumFooter = () => {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 export { MediumFooter };

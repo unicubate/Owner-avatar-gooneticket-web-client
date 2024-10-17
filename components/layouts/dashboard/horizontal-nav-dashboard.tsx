@@ -15,8 +15,6 @@ import {
 import { capitalizeFirstLetter } from '@/utils/utils';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import { NavbarProps } from '.';
 
 interface Props {
   showDrawer?: () => void;
@@ -25,7 +23,7 @@ interface Props {
 const HorizontalNavDashboard = ({ showDrawer }: Props) => {
   const { push, pathname } = useRouter();
   const { t, linkHref, userStorage: user } = useInputState();
-  const [navigation] = useState<NavbarProps[]>([
+  const navigation = [
     {
       title: `${t.formatMessage({ id: 'MENU.TICKET' })}`,
       count: 1,
@@ -41,17 +39,17 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
       count: 1,
       href: '/events',
     },
-    // {
-    //   title: `${t.formatMessage({ id: 'MENU.AFFILIATE' })}`,
-    //   count: user?.affiliation?.count,
-    //   href: `/affiliates`,
-    // },
     {
-      title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
-      count: 1,
-      href: '/messages',
+      title: `${t.formatMessage({ id: 'MENU.AFFILIATION' })}`,
+      count: Number(user?.affiliation?.count),
+      href: `/affiliations?tab=all`,
     },
-  ]);
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.MESSAGE' })}`,
+    //   count: 1,
+    //   href: '/messages',
+    // },
+  ];
 
   return (
     <>
@@ -101,37 +99,35 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
               </div>
             </div>
 
-            {user ? (
-              <div className="ml-auto flex items-center justify-center">
-                <nav className="ml-4 hidden w-auto space-x-10 lg:block">
-                  {navigation
-                    .filter((i) => Number(i.count) >= 1)
-                    .map((item: any, index: number) => {
-                      //const isActive = pathname === item.href;
-                      const isActive = pathname?.startsWith(item.href);
-                      return (
-                        <TooltipProviderInput
-                          key={index}
-                          description={item.title}
+            <div className="ml-auto flex items-center justify-center">
+              <nav className="ml-4 hidden w-auto space-x-10 lg:block">
+                {navigation
+                  .filter((i) => i.count >= 1)
+                  .map((item: any, index: number) => {
+                    //const isActive = pathname === item.href;
+                    const isActive = pathname?.startsWith(item.href);
+                    return (
+                      <TooltipProviderInput
+                        key={index}
+                        description={item.title}
+                      >
+                        <Link
+                          href={`${item?.href}`}
+                          className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                            isActive
+                              ? `border-blue-700 text-blue-700`
+                              : `border-transparent hover:border-blue-600 hover:text-blue-600`
+                          } `}
                         >
-                          <Link
-                            href={`${item?.href}`}
-                            className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
-                              isActive
-                                ? `border-blue-700 text-blue-700`
-                                : `border-transparent hover:border-blue-600 hover:text-blue-600`
-                            } `}
-                          >
-                            {item?.icon}
+                          {item?.icon}
 
-                            {item?.title}
-                          </Link>
-                        </TooltipProviderInput>
-                      );
-                    })}
-                </nav>
-              </div>
-            ) : null}
+                          {item?.title}
+                        </Link>
+                      </TooltipProviderInput>
+                    );
+                  })}
+              </nav>
+            </div>
 
             <div className="ml-auto flex items-center justify-end">
               <ThemeToggle />

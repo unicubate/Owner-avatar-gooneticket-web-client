@@ -57,9 +57,9 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
 
   return (
     <>
-      <tr key={index}>
-        <td className="py-2 text-sm font-bold">
-          <Link prefetch={true} href={`${oneItem(item?.model)?.url}`}>
+      <tr key={index} className="table-row">
+        <td className="py-2 text-sm font-bold table-cell">
+          <Link href={`${oneItem(item?.model)?.url}`}>
             <div className="flex min-w-0 flex-1 items-center">
               <div
                 className={`${item?.confirmedAt ? 'text-success hover:text-green-900' : `${item?.eventDate?.isExpired ? `text-danger hover:text-rose-900` : `text-gray-600 hover:text-gray-800`}`}`}
@@ -67,12 +67,24 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                 {/* <Badge className="rounded-sm" variant="danger">
                   <BookmarkPlusIcon className="size-4" /> Booking
                 </Badge> */}
+
+                {!item?.eventDate?.isExpired &&
+                formateTodd(item?.eventDate?.startedAt, locale) ===
+                  String(new Date().getDate()) ? (
+                  <div className="flex justify-center">
+                    <span className="relative flex size-4">
+                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex size-4 rounded-full bg-green-500"></span>
+                    </span>
+                  </div>
+                ) : null}
+
                 <p className="mt-1 text-5xl">
-                  {formateTodd(item?.eventDate?.expiredAt as Date, locale)}
+                  {formateTodd(item?.eventDate?.startedAt as Date, locale)}
                 </p>
                 <p className="mt-1 text-center">
                   {capitalizeFirstLetter(
-                    formateToCccc(item?.eventDate?.expiredAt as Date, locale),
+                    formateToCccc(item?.eventDate?.startedAt as Date, locale),
                   )}
                 </p>
               </div>
@@ -83,10 +95,10 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                     className={`text-sm ${item?.confirmedAt ? 'text-success hover:text-green-900' : `${item?.eventDate?.isExpired ? `text-danger hover:text-rose-900` : `text-gray-600 hover:text-gray-800`}`}`}
                   >
                     {capitalizeFirstLetter(
-                      formateToLLLL(item?.eventDate?.expiredAt as Date, locale),
+                      formateToLLLL(item?.eventDate?.startedAt as Date, locale),
                     )}
                     <span className="ml-1">
-                      {viewYyformateToYyyy(item?.eventDate?.expiredAt as Date)}
+                      {viewYyformateToYyyy(item?.eventDate?.startedAt as Date)}
                     </span>
                   </p>
                 </div>
@@ -198,21 +210,21 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
             </Tooltip>
           </TooltipProvider>
 
-          <div className="py-4 flex justify-end font-medium space-x-3">
-            {!item?.confirmedAt && !item?.eventDate?.isExpired ? (
+          {!item?.confirmedAt && !item?.eventDate?.isExpired ? (
+            <div className="mt-2 flex justify-end font-medium space-x-3">
               <PencilIcon
                 onClick={() => setIsOpen(true)}
                 className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
               />
-            ) : null}
 
-            <ShareIcon
-              onClick={() => setCopied(true)}
-              className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
-            />
-          </div>
+              <ShareIcon
+                onClick={() => setCopied(true)}
+                className="text-gray-600 hover:text-blue-600 cursor-pointer size-5"
+              />
+            </div>
+          ) : null}
 
-          <div className="text-sm font-bold lg:hidden">
+          <div className="mt-2 text-sm font-bold lg:hidden">
             {Number(item?.priceTotal) > 0 ? (
               <SerialPrice
                 className="text-sm"

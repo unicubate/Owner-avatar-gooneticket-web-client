@@ -85,7 +85,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -118,7 +118,7 @@ const OrdersIndex = () => {
                           : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -180,20 +180,28 @@ const OrdersIndex = () => {
                   <tbody className="divide-input dark:divide-input divide-y">
                     {user?.organizationId ? (
                       isLoadingOrders ? (
-                        <LoadingFile />
+                        <tr className="table-row">
+                          <td className="table-cell">
+                            <LoadingFile className="table-row" />
+                          </td>
+                        </tr>
                       ) : isErrorOrders ? (
                         <ErrorFile
                           title="404"
                           description="Error find data please try again..."
                         />
                       ) : Number(dataOrders?.pages[0]?.data?.total) <= 0 ? (
-                        <EmptyData
-                          image={<ShoppingCartIcon className="size-10" />}
-                          title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
-                          description={t.formatMessage({
-                            id: 'UTIL.ANY_SUB_ORDER',
-                          })}
-                        />
+                        <tr className="table-row">
+                          <td className="table-cell">
+                            <EmptyData
+                              image={<ShoppingCartIcon className="size-10" />}
+                              title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
+                              description={t.formatMessage({
+                                id: 'UTIL.ANY_SUB_ORDER',
+                              })}
+                            />
+                          </td>
+                        </tr>
                       ) : (
                         dataOrders?.pages.map((page, i) => (
                           <Fragment key={i}>

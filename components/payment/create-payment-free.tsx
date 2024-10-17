@@ -1,4 +1,4 @@
-import { CreateOnPaymentPI } from '@/api-site/payment';
+import { CreateOnPaymentAPI } from '@/api-site/payment';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertDangerNotification } from '@/utils';
 import { generateLongUUID } from '@/utils/generate-random';
@@ -13,7 +13,7 @@ const CreatePaymentFree = ({ data, paymentModel }: Props) => {
   const { push } = useRouter();
   const { hasErrors, setHasErrors } = useInputState();
 
-  const { isPending: loading, mutateAsync } = CreateOnPaymentPI();
+  const { isPending: loading, mutateAsync } = CreateOnPaymentAPI();
 
   const handleUserPageSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

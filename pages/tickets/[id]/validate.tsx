@@ -8,7 +8,6 @@ import {
   ErrorFile,
   LoadingFile,
 } from '@/components/ui-setting';
-import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
 import { PrivateComponent } from '@/components/util/private-component';
 import { MoveLeftIcon, ShareIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
@@ -38,35 +37,26 @@ const Ticket = () => {
             <div className="flow-root">
               <div className="flex items-center">
                 <div className="sm:mt-0">
-                  <TooltipProviderInput
-                    description={t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                  <ButtonInput
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => back()}
+                    icon={<MoveLeftIcon className="size-4" />}
                   >
-                    <ButtonInput
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                      onClick={() => back()}
-                      icon={<MoveLeftIcon className="size-4" />}
-                    >
-                      <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                        {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-                      </span>
-                    </ButtonInput>
-                  </TooltipProviderInput>
+                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                      {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                    </span>
+                  </ButtonInput>
                 </div>
-
                 <div className="ml-auto flex items-center gap-2">
-                  <TooltipProviderInput
-                    description={t.formatMessage({ id: 'UTIL.SHARE' })}
-                  >
-                    <ButtonInput
-                      type="button"
-                      size="sm"
-                      variant="outline"
-                      onClick={() => setCopied(true)}
-                      icon={<ShareIcon className="size-4" />}
-                    />
-                  </TooltipProviderInput>
+                  <ButtonInput
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={() => setCopied(true)}
+                    icon={<ShareIcon className="size-4" />}
+                  />
                 </div>
               </div>
 

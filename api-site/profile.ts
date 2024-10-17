@@ -54,10 +54,11 @@ export const UpdateOneProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['profile'];
+  const queryKey1 = ['profile'];
+  const queryKey2 = ['user'];
   const queryClient = useQueryClient();
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: [...queryKey1],
     mutationFn: async (payload: ProfileFormModel): Promise<any> => {
       const { attachment } = payload;
       let data = new FormData();
@@ -68,6 +69,7 @@ export const UpdateOneProfileAPI = ({
       data.append('firstName', `${payload.firstName ?? ''}`);
       data.append('username', `${payload.username ?? ''}`);
       data.append('description', `${payload.description ?? ''}`);
+      data.append('currencyId', `${payload.currencyId ?? ''}`);
       data.append('attachment', attachment);
 
       await makeApiCall({
@@ -78,19 +80,22 @@ export const UpdateOneProfileAPI = ({
       return 'Ok';
     },
     onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
+      await queryClient.invalidateQueries({ queryKey: queryKey1 });
+      await queryClient.invalidateQueries({ queryKey: queryKey2 });
       if (onError) {
         onError(error);
       }
     },
     onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
+      await queryClient.invalidateQueries({ queryKey: queryKey1 });
+      await queryClient.invalidateQueries({ queryKey: queryKey2 });
       if (onSuccess) {
         onSuccess();
       }
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
+      await queryClient.invalidateQueries({ queryKey: queryKey1 });
+      await queryClient.invalidateQueries({ queryKey: queryKey2 });
       if (onSuccess) {
         onSuccess();
       }
@@ -113,7 +118,7 @@ export const GetOneProfileAPI = (payload: { profileId: string }) => {
   });
 
   return {
-    data: data?.data as ProfileModel | any,
+    data: data?.data as ProfileModel,
     isError,
     isLoading,
     status,

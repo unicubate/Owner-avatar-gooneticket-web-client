@@ -7,6 +7,7 @@ import {
   SettingsIcon,
   ShareIcon,
   ShoppingCartIcon,
+  TicketPlusIcon,
 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -32,7 +33,7 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
   };
   return (
     <>
-      <DropdownMenuContent className="w-auto dark:border-input dark:bg-background">
+      <DropdownMenuContent className="w-auto">
         {user?.status === 'CREATOR' ? (
           <>
             <DropdownMenuGroup>
@@ -96,6 +97,16 @@ const DropdownMenuContentUser = ({ username }: { username?: string }) => {
 
         {user?.id ? (
           <>
+            {' '}
+            <DropdownMenuGroup>
+              <DropdownMenuItem onClick={() => push(`/tickets`)}>
+                <TicketPlusIcon className="size-4 text-gray-600 hover:text-indigo-600" />
+                <span className="ml-2 cursor-pointer hover:text-indigo-600">
+                  {t.formatMessage({ id: 'MENU.TICKET' })}
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem onClick={() => push(`/orders`)}>
                 <ShoppingCartIcon className="size-4 text-gray-600 hover:text-indigo-600" />

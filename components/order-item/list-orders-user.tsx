@@ -38,10 +38,10 @@ const ListOrdersUser = ({ item, index }: Props) => {
 
   return (
     <>
-      <tr key={index}>
+      <tr key={index} className="table-row">
         <td className="py-2 text-sm font-bold">
           <div className="flex min-w-0 flex-1 items-center">
-            <Link prefetch={true} href={urlRedirect} title={item?.event?.title}>
+            <Link href={urlRedirect} title={item?.event?.title}>
               {item?.oneUploadImage?.path ? (
                 <div className="relative shrink-0 cursor-pointer">
                   <SwiperImage
@@ -134,7 +134,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 <MoreHorizontalIcon className="size-5 text-gray-400" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-16 dark:border-input dark:bg-background">
+            <DropdownMenuContent className="w-auto">
               <DropdownMenuGroup>
                 <Link
                   prefetch={true}

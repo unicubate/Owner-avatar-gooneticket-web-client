@@ -59,8 +59,8 @@ export const ButtonInput = ({
           </>
         ) : (
           <>
-            {icon}
-            {children ? <span className="ml-2">{children}</span> : null}
+            {icon ? <span className="mr-2">{icon}</span> : null}
+            {children}
           </>
         )}
       </Button>

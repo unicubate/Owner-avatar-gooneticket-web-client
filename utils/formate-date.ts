@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { DateTime } from 'luxon';
 
 export const formateDate = (date: Date, locale: string) => {
@@ -57,4 +58,32 @@ export const viewYyformateToYyyy = (date: Date) => {
   const currentYear = todaysDate.getFullYear();
   const dateYear = DateTime.fromISO(String(date)).toFormat('yyyy');
   return currentYear === Number(dateYear) ? null : `- ${dateYear}`;
+};
+
+export const dateTimeNowUtc = () => DateTime.utc().toJSDate();
+
+export const monthTimeNowUtc = (date: Date) =>
+  dayjs(date).format('MM') as unknown as Date;
+
+export const dayTimeNowUtc = (date: Date) =>
+  dayjs(date).format('DD') as unknown as Date;
+
+export const formatYYMMDDDateDaysJS = (date: Date) =>
+  dayjs(date).format('YYYY-MM-DD') as unknown as Date;
+
+export const addDaysToTimeNowUtcDate = (dayNumber: number) =>
+  DateTime.utc().plus({ days: dayNumber }).toJSDate();
+
+export const formateMMLongDate = (date: Date, locale: string) => {
+  return DateTime.fromJSDate(date)
+    .setLocale(locale)
+    .toLocaleString({ month: 'long' });
+};
+
+export const formateDDDate = (date: Date, lang: string) => {
+  return DateTime.fromJSDate(date).setLocale(lang).toFormat('DD');
+};
+
+export const formateddLLDate = (date: Date, lang: string) => {
+  return DateTime.fromJSDate(date).setLocale(lang).toFormat('dd LLL');
 };

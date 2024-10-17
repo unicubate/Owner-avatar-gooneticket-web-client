@@ -1,3 +1,4 @@
+import { MediumFooter } from '@/components/footer/medium-footer';
 import { HeaderSite } from '@/components/ui-setting';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
@@ -55,6 +56,7 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
         <main>{children}</main>
       </div>
 
+      <MediumFooter />
       {/* </div> */}
     </>
   );
