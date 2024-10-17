@@ -134,7 +134,7 @@ const ListOrdersUser = ({ item, index }: Props) => {
                 <MoreHorizontalIcon className="size-5 text-gray-400" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-16 dark:border-input dark:bg-background">
+            <DropdownMenuContent className="w-auto">
               <DropdownMenuGroup>
                 <Link
                   prefetch={true}

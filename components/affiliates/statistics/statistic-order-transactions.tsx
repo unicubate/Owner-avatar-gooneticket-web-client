@@ -114,7 +114,7 @@ export function StatisticAffiliationsActivities() {
                       </span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-auto dark:border-gray-800">
+                  <DropdownMenuContent className="w-auto">
                     {statisticsMo?.map((item: any, index: number) => (
                       <Fragment key={index}>
                         <DropdownMenuGroup>

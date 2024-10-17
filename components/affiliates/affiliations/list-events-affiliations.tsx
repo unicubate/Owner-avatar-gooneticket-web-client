@@ -135,7 +135,7 @@ const ListEventsAffiliations = ({ item, index }: Props) => {
                   <MoreHorizontalIcon className="size-5 text-gray-400" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="dark:bg-background w-16 dark:border-gray-800">
+              <DropdownMenuContent className="w-auto">
                 <DropdownMenuGroup>
                   <DropdownMenuItem onClick={() => setCopied(true)}>
                     <ShareIcon className="size-4 text-gray-600 hover:text-indigo-600" />

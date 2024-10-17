@@ -77,7 +77,7 @@ const OrderItemsIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -112,7 +112,7 @@ const OrderItemsIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {

@@ -85,7 +85,7 @@ const OrdersIndex = () => {
                         </span>
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
@@ -118,7 +118,7 @@ const OrdersIndex = () => {
                           : `${t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}`}
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="dark:border-input w-auto">
+                    <DropdownMenuContent className="w-auto">
                       <DropdownMenuGroup>
                         <DropdownMenuItem
                           onClick={() => {
