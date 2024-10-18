@@ -49,7 +49,7 @@ const Ticket = () => {
                     </span>
                   </ButtonInput>
                 </div>
-                {!orderItem?.confirmedAt || !orderItem?.eventDate?.isExpired ? (
+                {!orderItem?.confirmedAt && !orderItem?.eventDate?.isExpired ? (
                   <div className="ml-auto flex items-center gap-2">
                     <ButtonInput
                       type="button"

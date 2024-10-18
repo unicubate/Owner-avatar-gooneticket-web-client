@@ -210,7 +210,7 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
             </Tooltip>
           </TooltipProvider>
 
-          {!item?.confirmedAt || !item?.eventDate?.isExpired ? (
+          {!item?.confirmedAt && !item?.eventDate?.isExpired ? (
             <div className="mt-2 flex justify-end font-medium space-x-3">
               <PencilIcon
                 onClick={() => setIsOpen(true)}
