@@ -49,15 +49,17 @@ const Ticket = () => {
                     </span>
                   </ButtonInput>
                 </div>
-                <div className="ml-auto flex items-center gap-2">
-                  <ButtonInput
-                    type="button"
-                    size="sm"
-                    variant="outline"
-                    onClick={() => setCopied(true)}
-                    icon={<ShareIcon className="size-4" />}
-                  />
-                </div>
+                {!orderItem?.confirmedAt || !orderItem?.eventDate?.isExpired ? (
+                  <div className="ml-auto flex items-center gap-2">
+                    <ButtonInput
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={() => setCopied(true)}
+                      icon={<ShareIcon className="size-4" />}
+                    />
+                  </div>
+                ) : null}
               </div>
 
               <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border bg-white">
