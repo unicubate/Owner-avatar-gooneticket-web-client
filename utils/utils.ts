@@ -53,29 +53,6 @@ export const obfuscateEmail = (email: string): string => {
   return `${maskedLocalPart}@${domainPart}`;
 };
 
-export const filterImageAndFile = (options: {
-  imageList?: any[];
-  fileList?: any[];
-}) => {
-  let newFileLists: any = [];
-  let newImageLists: any = [];
-  const { imageList, fileList } = options;
-
-  imageList
-    ?.filter((file: any) => file?.status === 'success')
-    .forEach((file: any) => {
-      newImageLists.push(file);
-    });
-
-  fileList
-    ?.filter((file: any) => file?.status === 'success')
-    .forEach((file: any) => {
-      newFileLists.push(file);
-    });
-
-  return { newFileLists, newImageLists };
-};
-
 export const itemsNumberArray = (value: number) =>
   Array.from({ length: value }, (_, index) => index);
 

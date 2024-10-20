@@ -6,4 +6,3 @@ export * from './use-media-query';
 export * from './use-react-intersection-observer';
 export * from './use-redirect-after-some-seconds';
 export * from './use-update-query-string-value-without-navigation';
-export * from './use-upload-item';
