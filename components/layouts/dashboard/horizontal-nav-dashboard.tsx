@@ -120,7 +120,6 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                           } `}
                         >
                           {item?.icon}
-
                           {item?.title}
                         </Link>
                       </TooltipProviderInput>
