@@ -46,7 +46,7 @@ export function CreateConversationsModal(props: {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Message send successfully',
+        description: 'Message send successfully',
       });
       reset();
       setIsOpen(false);
@@ -55,7 +55,7 @@ export function CreateConversationsModal(props: {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

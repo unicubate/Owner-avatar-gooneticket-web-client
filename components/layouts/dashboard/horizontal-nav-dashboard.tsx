@@ -113,7 +113,7 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                       >
                         <Link
                           href={`${item?.href}`}
-                          className={`whitespace-nowrap border-b-2 py-4 text-sm font-medium transition-all duration-200 ${
+                          className={`group inline-flex items-center gap-1 whitespace-nowrap rounded-lg p-1 text-sm font-medium transition-all duration-200 ${
                             isActive
                               ? `border-blue-700 text-blue-700`
                               : `border-transparent hover:border-blue-600 hover:text-blue-600`

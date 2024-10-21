@@ -1,5 +1,4 @@
 import { Head, Html, Main, NextScript } from 'next/document';
-import { Toaster } from 'sonner';
 
 export default function Document() {
   return (
@@ -35,7 +34,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <Toaster />
       </body>
     </Html>
   );

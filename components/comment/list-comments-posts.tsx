@@ -56,7 +56,7 @@ export function ListCommentsPosts(props: {
     try {
       await saveMutation({ commentId: item?.id });
       AlertSuccessNotification({
-        text: 'Comment deleted successfully',
+        description: 'Comment deleted successfully',
       });
       setLoading(false);
       setIsOpen(false);
@@ -64,7 +64,7 @@ export function ListCommentsPosts(props: {
       setLoading(false);
       setIsOpen(true);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

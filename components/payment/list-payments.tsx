@@ -34,7 +34,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
     try {
       await deleteOnMutate({ paymentId: item?.id });
       AlertSuccessNotification({
-        text: 'Payment deleted successfully',
+        description: 'Payment deleted successfully',
       });
       setLoading(false);
       setIsOpen(false);
@@ -42,7 +42,7 @@ const ListPayments = (props: { item: PaymentItemModel; index: number }) => {
       setLoading(false);
       setIsOpen(true);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

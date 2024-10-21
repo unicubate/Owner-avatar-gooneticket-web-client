@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/sonner';
 import { IntlProvider } from '@/i18n/intl-provider';
 import {
   PropsWithChildren,
@@ -30,6 +31,7 @@ export const ClientOnly = ({
   return (
     <Suspense fallback={fallback}>
       <IntlProvider>{children}</IntlProvider>
+      <Toaster />
     </Suspense>
   );
 };

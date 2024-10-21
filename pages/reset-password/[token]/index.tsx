@@ -63,7 +63,7 @@ const ResetPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: t.formatMessage({ id: 'AUTH.RESET.SEND.SUCCESSFULLY' }),
+        description: t.formatMessage({ id: 'AUTH.RESET.SEND.SUCCESSFULLY' }),
       });
       push(`/login${redirect ? `?redirect=${redirect}` : ''}`);
     } catch (error: any) {
@@ -71,7 +71,7 @@ const ResetPassword = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: 'An error has occurred.',
+        description: 'An error has occurred.',
       });
     }
   };

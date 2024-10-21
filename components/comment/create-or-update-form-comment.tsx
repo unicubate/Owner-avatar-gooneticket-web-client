@@ -100,14 +100,14 @@ export function CreateOrUpdateFormComment(props: {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: 'Comment save successfully',
+        description: 'Comment save successfully',
       });
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
       setHasErrors(error?.response?.data?.message);
       AlertDangerNotification({
-        text: `${error?.response?.data?.message}`,
+        description: `${error?.response?.data?.message}`,
       });
     }
   };

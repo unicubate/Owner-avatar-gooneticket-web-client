@@ -40,7 +40,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
     } catch (error) {
       setLoading(false);
       AlertDangerNotification({
-        text: "C'è stato un errore.",
+        description: "C'è stato un errore.",
       });
     }
   };

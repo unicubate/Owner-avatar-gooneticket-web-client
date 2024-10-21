@@ -23,7 +23,7 @@ const DeleteOneUser = ({ user }: Props) => {
       await deleteOneUserAPI({ userId: item?.id });
       await logoutUsersAPI();
       AlertSuccessNotification({
-        text: 'User deleted successfully',
+        description: 'User deleted successfully',
       });
       setLoading(false);
       setIsOpen(false);
@@ -33,7 +33,7 @@ const DeleteOneUser = ({ user }: Props) => {
       setLoading(false);
       setIsOpen(true);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

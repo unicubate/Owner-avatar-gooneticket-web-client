@@ -44,9 +44,7 @@ const Ticket = () => {
                     onClick={() => back()}
                     icon={<MoveLeftIcon className="size-4" />}
                   >
-                    <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                      {t.formatMessage({ id: 'UTIL.COME_BACK' })}
-                    </span>
+                    {t.formatMessage({ id: 'UTIL.COME_BACK' })}
                   </ButtonInput>
                 </div>
                 {!orderItem?.confirmedAt && !orderItem?.eventDate?.isExpired ? (

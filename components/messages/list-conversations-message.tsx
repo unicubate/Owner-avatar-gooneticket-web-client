@@ -34,7 +34,7 @@ export function ListConversationsMessage({ item, index }: Props) {
     } catch (error: any) {
       setHasErrors(true);
       AlertDangerNotification({
-        text: `${error?.response?.data?.message}`,
+        description: `${error?.response?.data?.message}`,
       });
     }
   };

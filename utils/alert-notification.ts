@@ -1,22 +1,23 @@
+import { toast } from 'sonner';
 import Toastify from 'toastify-js';
 
-export const AlertSuccessNotification = (options: { text: string }) => {
-  const { text } = options;
-  return Toastify({
-    text: text,
-    className: 'info',
-    gravity: 'bottom', // `top` or `bottom`
-    position: 'center', // `left`, `center` or `right`
-    style: {
-      background: `linear-gradient(to right, #1d4ed8, #1d4ed8)`,
-    },
-  }).showToast();
+export const AlertSuccessNotification = ({
+  text = 'Success',
+  description,
+}: {
+  text?: string;
+  description?: React.ReactNode;
+}) => {
+  return toast.success(description);
 };
 
-export const AlertDangerNotification = (options: { text: string }) => {
-  const { text } = options;
+export const AlertDangerNotification = ({
+  description,
+}: {
+  description: string;
+}) => {
   return Toastify({
-    text: text,
+    text: description,
     className: 'info',
     gravity: 'top', // `top` or `bottom`
     position: 'center', // `left`, `center` or `right`

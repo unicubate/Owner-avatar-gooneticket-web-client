@@ -28,13 +28,13 @@ const PayoutFormUser = () => {
     try {
       await saveMutation({ paymentId });
       AlertSuccessNotification({
-        text: 'Payout deleted successfully',
+        description: 'Payout deleted successfully',
       });
       setIsOpenDelete(false);
     } catch (error: any) {
       setIsOpenDelete(true);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

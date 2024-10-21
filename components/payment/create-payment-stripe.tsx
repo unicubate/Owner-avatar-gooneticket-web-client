@@ -40,7 +40,7 @@ const CreatePaymentStripe = ({ data, paymentModel }: StripeProps) => {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

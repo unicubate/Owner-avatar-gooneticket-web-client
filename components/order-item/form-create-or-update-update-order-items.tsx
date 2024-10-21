@@ -60,13 +60,13 @@ const FormCreateOrUpdateOrderItems = ({
       });
       reset();
       AlertSuccessNotification({
-        text: 'Ticket update successfully',
+        description: 'Ticket update successfully',
       });
       setShowModal(false);
     } catch (error: any) {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

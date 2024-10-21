@@ -39,7 +39,7 @@ const UpdateFormPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: `information save successfully`,
+        description: `information save successfully`,
       });
       reset();
     } catch (error: any) {
@@ -47,7 +47,7 @@ const UpdateFormPassword = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

@@ -55,14 +55,14 @@ const CreatePaymentIbanFormUserModal = ({ isOpen, setIsOpen }: Props) => {
         paymentModel: 'PAYMENT-CREATE',
       });
       AlertSuccessNotification({
-        text: 'IBAN save successfully',
+        description: 'IBAN save successfully',
       });
       setIsOpen(false);
       reset();
     } catch (error: any) {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

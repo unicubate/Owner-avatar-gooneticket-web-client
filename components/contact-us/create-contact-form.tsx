@@ -86,7 +86,7 @@ const CreateContactForm = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: t.formatMessage({ id: 'CONTACT.US.SEND.SUCCESSFULLY' }),
+        description: t.formatMessage({ id: 'CONTACT.US.SEND.SUCCESSFULLY' }),
       });
       reset({
         ...data,
@@ -98,7 +98,7 @@ const CreateContactForm = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

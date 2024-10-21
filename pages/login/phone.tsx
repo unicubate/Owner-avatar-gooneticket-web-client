@@ -72,7 +72,7 @@ const LoginPhone = () => {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: error.response.data.message,
+        description: error.response.data.message,
       });
     }
   };
@@ -94,7 +94,7 @@ const LoginPhone = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };
@@ -113,7 +113,7 @@ const LoginPhone = () => {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

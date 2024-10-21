@@ -55,7 +55,7 @@ const CreatePaymentBooking = ({
       setHasErrors(false);
 
       AlertSuccessNotification({
-        text: `Booking save successfully`,
+        description: `Booking save successfully`,
       });
       push(
         `/transactions/success?token=${newReference}&type=booking&tag=tickets`,
@@ -64,7 +64,7 @@ const CreatePaymentBooking = ({
       setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

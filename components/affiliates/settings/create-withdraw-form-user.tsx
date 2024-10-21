@@ -67,7 +67,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
       });
       setHasErrors(false);
       AlertSuccessNotification({
-        text: 'Request send successfully',
+        description: 'Request send successfully',
       });
       reset();
       setIsOpen(false);
@@ -75,7 +75,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

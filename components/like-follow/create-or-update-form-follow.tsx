@@ -44,7 +44,7 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
       }
     } catch (error: any) {
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };

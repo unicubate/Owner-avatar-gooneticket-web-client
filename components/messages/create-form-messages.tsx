@@ -73,7 +73,7 @@ export function CreateFormMessages(props: {
       setLoading(false);
       setHasErrors(error?.response?.data?.message);
       AlertDangerNotification({
-        text: `${error?.response?.data?.message}`,
+        description: `${error?.response?.data?.message}`,
       });
     }
   };

@@ -69,7 +69,7 @@ const LoginModal: React.FC<{
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: 'An error has occurred.',
+        description: 'An error has occurred.',
       });
     }
   };

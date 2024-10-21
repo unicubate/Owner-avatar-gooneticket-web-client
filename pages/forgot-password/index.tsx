@@ -65,7 +65,7 @@ const ForgotPassword = () => {
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: t.formatMessage({ id: 'AUTH.FORGOT.SEND.SUCCESSFULLY' }),
+        description: t.formatMessage({ id: 'AUTH.FORGOT.SEND.SUCCESSFULLY' }),
       });
       setHasSuccess(true);
     } catch (error: any) {
@@ -73,7 +73,7 @@ const ForgotPassword = () => {
       setLoading(false);
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: error.response.data.message,
+        description: error.response.data.message,
       });
     }
   };

@@ -75,7 +75,7 @@ const CreateOrUpdateUserAddressForm = ({
     } catch (error: any) {
       setHasErrors(error.response.data.message);
       AlertDangerNotification({
-        text: `${error.response.data.message}`,
+        description: `${error.response.data.message}`,
       });
     }
   };
@@ -118,17 +118,13 @@ const CreateOrUpdateUserAddressForm = ({
             name="country"
             disabled={isEdit}
           >
-            {countries?.length > 0 ? (
-              countries?.map((item: any, index: number) => (
-                <option value={item?.name} key={index}>
-                  <span className="font-normal">{item?.name}</span>
-                </option>
-              ))
-            ) : (
-              <option style={{ textAlign: 'center' }}>
-                <span>Data Not Found</span>
-              </option>
-            )}
+            {countries?.length > 0
+              ? countries?.map((item: any, index: number) => (
+                  <option value={item?.name} key={index}>
+                    <span className="font-normal">{item?.name}</span>
+                  </option>
+                ))
+              : null}
           </SelectInput>
         </div>
 
