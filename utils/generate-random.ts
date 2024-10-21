@@ -41,9 +41,6 @@ export const generateNumber = (length: number) => {
   return result;
 };
 
-export const isNotUndefined = (input: string): boolean =>
-  String(input) !== String(undefined) && input.trim() !== '';
-
 export const queyParamsFunc = (payload: any) => queryString.stringify(payload);
 
 export function toURL(title: string) {
