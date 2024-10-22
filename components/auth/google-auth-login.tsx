@@ -11,7 +11,7 @@ const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
 
   if (isWebview(window.navigator.userAgent)) {
     const { linkHref } = useInputState();
-    window.location.href = `x-safari-${linkHref}?redirect=${linkHref}`;
+    window.location.href = `x-safari-${linkHref}`;
     return;
   }
 
