@@ -5,11 +5,18 @@ import { useInputState } from '@/components/hooks';
 import { LayoutUserPublicSite } from '@/components/layouts/user-public-site';
 import { ProductSkeleton } from '@/components/skeleton/product-skeleton';
 import { ErrorFile } from '@/components/ui-setting';
+import { isWebview } from '@/utils/utils';
 import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
   const { query, push } = useRouter();
   const { userStorage: userBayer } = useInputState();
+
+  if (isWebview(window.navigator.userAgent)) {
+    const { linkHref } = useInputState();
+    window.location.href = `x-safari-${linkHref}`;
+    return;
+  }
 
   const {
     isLoading: isLoadingEvent,
