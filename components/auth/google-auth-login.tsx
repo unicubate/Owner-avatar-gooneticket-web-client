@@ -3,15 +3,15 @@ import { AlertDangerNotification } from '@/utils';
 import { isWebview } from '@/utils/utils';
 import { GoogleLogin } from '@react-oauth/google';
 import { useRouter } from 'next/router';
+import { useInputState } from '../hooks';
 
 const GoogleAuthLogin = ({ setHasErrors }: { setHasErrors: any }) => {
   const { query } = useRouter();
   const { redirect } = query;
 
   if (isWebview(window.navigator.userAgent)) {
-    const linkHref =
-      typeof window !== 'undefined' ? window.location.href : null;
-    window.location.href = 'x-safari-' + linkHref;
+    const { linkHref } = useInputState();
+    window.location.href = `x-safari-${linkHref}?redirect=${linkHref}`;
     return;
   }
 
