@@ -24,7 +24,7 @@ const languages = [
   {
     lang: 'it',
     name: 'Italian',
-    flag: 'media/flags/italy.svg',
+    flag: '/media/flags/italy.svg',
   },
   // {
   //   lang: 'zh',
