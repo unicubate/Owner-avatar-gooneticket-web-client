@@ -1,8 +1,8 @@
-import { HtmlParser } from '@/utils/html-parser';
 import 'react-h5-audio-player/lib/styles.css';
 import { CopyShareLink } from '../ui-setting';
 
 import { EventModel } from '@/types/event';
+import RichText from '@/utils/rich-text';
 import { ShareIcon } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ListEventDatesForEventDate } from '../event-date/list-event-dates-for-event-date';
@@ -43,11 +43,9 @@ const ViewOneEvent = ({ item }: Props) => {
 
         {item?.description ? (
           <div
-            className={`group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
+            className={`mt-2 group relative text-sm font-normal text-gray-600 dark:text-gray-300`}
           >
-            <span className={`ql-editor`}>
-              <HtmlParser html={String(item?.description)} />
-            </span>
+            <RichText string={item?.description} />
           </div>
         ) : null}
 

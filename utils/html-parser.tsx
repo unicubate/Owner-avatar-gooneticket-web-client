@@ -1,6 +1,7 @@
 import { cn } from '@/lib/utils';
 import parse, { HTMLReactParserOptions, domToReact } from 'html-react-parser';
 import linkifyHtml from 'linkify-html';
+import { compiler } from 'markdown-to-jsx';
 import { useState } from 'react';
 
 interface HtmlParserProps {
@@ -32,12 +33,13 @@ export const HtmlParser = ({ html, value, className }: HtmlParserProps) => {
       url: 'text-blue-500 hover:underline',
     },
   };
+
   const cleanHtmlString = linkifyHtml(html.slice(0, value), {
     ...classNameValue,
   });
-  const cleanHtmlNotSliceString = linkifyHtml(html, { ...classNameValue });
+  const cleanHtmlNotSliceString = compiler(html);
   const parseSliceValue = parse(cleanHtmlString, options);
-  const parseNotSliceValue = parse(cleanHtmlNotSliceString, options);
+  const parseNotSliceValue = parse(cleanHtmlNotSliceString as any, options);
 
   return (
     <>
