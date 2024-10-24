@@ -15,8 +15,6 @@ import { KeyAsString } from './utils';
 
 export type SortModel = 'ASC' | 'DESC';
 
-export type IsPaginate = 'true' | 'false';
-
 export type PaymentType =
   | 'PAYPAL'
   | 'STRIPE'
@@ -44,7 +42,6 @@ export const foldersType: KeyAsString = {
 
 export type PaginationRequest = {
   organizationId?: string;
-  isPaginate?: IsPaginate;
   search?: string;
   sort: SortModel;
   page?: number;
