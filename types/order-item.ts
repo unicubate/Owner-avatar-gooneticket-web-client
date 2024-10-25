@@ -58,6 +58,10 @@ export type OrderItemModel = {
     fullName: string;
     email: string;
   };
+  booking: {
+    id: string;
+    confirmedAt: Date;
+  };
   order: {
     orderNumber: string;
     transaction: {

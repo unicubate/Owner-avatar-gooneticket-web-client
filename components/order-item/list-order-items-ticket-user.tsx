@@ -162,14 +162,22 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          {Number(item?.priceTotal) > 0 ? (
-            <SerialPrice
-              className="text-sm"
-              value={Number(item?.priceTotal)}
-              currency={{ code: String(item?.currency) }}
-            />
+          {!item?.booking?.confirmedAt ? (
+            <Badge className="h-6 rounded-sm" variant="outline">
+              <span className={`text-sm text-blue-600`}>Booking</span>
+            </Badge>
           ) : (
-            t.formatMessage({ id: 'UTIL.FREE' })
+            <>
+              {Number(item?.priceTotal) > 0 ? (
+                <SerialPrice
+                  className="text-sm"
+                  value={Number(item?.priceTotal)}
+                  currency={{ code: String(item?.currency) }}
+                />
+              ) : (
+                t.formatMessage({ id: 'UTIL.FREE' })
+              )}
+            </>
           )}
         </td>
 
@@ -225,7 +233,11 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
           ) : null}
 
           <div className="mt-2 text-sm font-bold lg:hidden">
-            {Number(item?.priceTotal) > 0 ? (
+            {!item?.booking?.confirmedAt ? (
+              <Badge className="h-6 rounded-sm" variant="outline">
+                <span className={`text-sm text-blue-600`}>Booking</span>
+              </Badge>
+            ) : Number(item?.priceTotal) > 0 ? (
               <SerialPrice
                 className="text-sm"
                 value={Number(item?.priceTotal)}
