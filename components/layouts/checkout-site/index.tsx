@@ -1,7 +1,6 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { MediumFooter } from '@/components/footer/medium-footer';
 import {
-  ButtonInput,
   DropdownMenuContentUser,
   HeaderSite,
   ThemeToggle,
@@ -12,7 +11,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
 import { UserModel } from '@/types/user';
-import { MoveLeftIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { Button } from '../../ui/button';
@@ -65,19 +63,6 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
 
             <div className="ml-auto flex items-center justify-end space-x-2">
               <div className="flex items-center">
-                <div className="relative">
-                  <ButtonInput
-                    type="button"
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => {
-                      back();
-                    }}
-                    icon={<MoveLeftIcon className="size-4" />}
-                  >
-                    Come back
-                  </ButtonInput>
-                </div>
                 <ThemeToggle />
                 {userVisiter?.id ? (
                   <>

@@ -35,7 +35,7 @@ import {
 import { HtmlParser } from '@/utils/html-parser';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { MinusIcon, PlusIcon } from 'lucide-react';
+import { MinusIcon, MoveLeftIcon, PlusIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -82,7 +82,7 @@ const CheckoutEvent = () => {
   const debounceIncrement = useDebounce(increment, 500);
   const { t, ipLocation, userStorage, locale, scrollToBottom } =
     useInputState();
-  const { query } = useRouter();
+  const { query, back } = useRouter();
   const { id: eventDateId, partner } = query;
 
   const {
@@ -198,9 +198,22 @@ const CheckoutEvent = () => {
                 <Fragment>
                   <div className="lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
+                      <div className="flex items-center">
+                        <div className="sm:mt-0">
+                          <ButtonInput
+                            type="button"
+                            size="sm"
+                            variant="outline"
+                            onClick={() => back()}
+                            icon={<MoveLeftIcon className="size-4" />}
+                          >
+                            {t.formatMessage({ id: 'UTIL.COME_BACK' })}
+                          </ButtonInput>
+                        </div>
+                      </div>
                       <div
                         key={item?.id}
-                        className="dark:border-input dark:bg-background my-8 overflow-hidden rounded-lg border border-gray-100 bg-white"
+                        className="dark:border-input dark:bg-background my-2 overflow-hidden rounded-lg border border-gray-100 bg-white"
                       >
                         <div className="p-8 sm:px-8 sm:py-7">
                           {item?.uploadsImages?.length > 0 ? (
