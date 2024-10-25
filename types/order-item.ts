@@ -53,6 +53,7 @@ export type OrderItemModel = {
   orderId: string;
   ticket: TicketModel;
   userId: string;
+  bookingId: string;
   ticketName: string;
   address: {
     fullName: string;

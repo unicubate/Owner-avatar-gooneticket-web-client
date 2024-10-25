@@ -162,10 +162,24 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
         </td>
 
         <td className="hidden text-right text-sm font-bold dark:text-white lg:table-cell">
-          {!item?.booking?.confirmedAt ? (
-            <Badge className="h-6 rounded-sm" variant="outline">
-              <span className={`text-sm text-blue-600`}>Booking</span>
-            </Badge>
+          {item?.bookingId ? (
+            <>
+              {item?.booking?.confirmedAt ? (
+                Number(item?.priceTotal) > 0 ? (
+                  <SerialPrice
+                    className="text-sm"
+                    value={Number(item?.priceTotal)}
+                    currency={{ code: String(item?.currency) }}
+                  />
+                ) : (
+                  t.formatMessage({ id: 'UTIL.FREE' })
+                )
+              ) : (
+                <Badge className="h-6 rounded-sm" variant="outline">
+                  <span className={`text-sm text-blue-600`}>Booking</span>
+                </Badge>
+              )}
+            </>
           ) : (
             <>
               {Number(item?.priceTotal) > 0 ? (
@@ -233,18 +247,36 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
           ) : null}
 
           <div className="mt-2 text-sm font-bold lg:hidden">
-            {!item?.booking?.confirmedAt ? (
-              <Badge className="h-6 rounded-sm" variant="outline">
-                <span className={`text-sm text-blue-600`}>Booking</span>
-              </Badge>
-            ) : Number(item?.priceTotal) > 0 ? (
-              <SerialPrice
-                className="text-sm"
-                value={Number(item?.priceTotal)}
-                currency={{ code: String(item?.currency) }}
-              />
+            {item?.bookingId ? (
+              <>
+                {item?.booking?.confirmedAt ? (
+                  Number(item?.priceTotal) > 0 ? (
+                    <SerialPrice
+                      className="text-sm"
+                      value={Number(item?.priceTotal)}
+                      currency={{ code: String(item?.currency) }}
+                    />
+                  ) : (
+                    t.formatMessage({ id: 'UTIL.FREE' })
+                  )
+                ) : (
+                  <Badge className="h-6 rounded-sm" variant="outline">
+                    <span className={`text-sm text-blue-600`}>Booking</span>
+                  </Badge>
+                )}
+              </>
             ) : (
-              t.formatMessage({ id: 'UTIL.FREE' })
+              <>
+                {Number(item?.priceTotal) > 0 ? (
+                  <SerialPrice
+                    className="text-sm"
+                    value={Number(item?.priceTotal)}
+                    currency={{ code: String(item?.currency) }}
+                  />
+                ) : (
+                  t.formatMessage({ id: 'UTIL.FREE' })
+                )}
+              </>
             )}
           </div>
 
