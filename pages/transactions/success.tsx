@@ -60,8 +60,8 @@ const TransactionSuccess = () => {
           },
           size: true,
           speed: {
-            min: 1,
-            max: 3,
+            min: 6,
+            max: 10,
           },
         },
         number: {
@@ -69,75 +69,6 @@ const TransactionSuccess = () => {
           density: {
             enable: true,
             area: 800,
-          },
-        },
-        opacity: {
-          value: 1,
-          animation: {
-            enable: false,
-            startValue: 'max',
-            destroy: 'min',
-            speed: 0.3,
-            sync: true,
-          },
-        },
-        rotate: {
-          value: {
-            min: 0,
-            max: 360,
-          },
-          direction: 'random',
-          move: true,
-          animation: {
-            enable: true,
-            speed: 120,
-          },
-        },
-        tilt: {
-          direction: 'random',
-          enable: true,
-          move: true,
-          value: {
-            min: 0,
-            max: 360,
-          },
-          animation: {
-            enable: true,
-            speed: 120,
-          },
-        },
-        shape: {
-          type: ['circle', 'square', 'triangle'],
-          options: {},
-        },
-        size: {
-          value: {
-            min: 2,
-            max: 4,
-          },
-        },
-        roll: {
-          darken: {
-            enable: true,
-            value: 30,
-          },
-          enlighten: {
-            enable: true,
-            value: 30,
-          },
-          enable: true,
-          speed: {
-            min: 15,
-            max: 25,
-          },
-        },
-        wobble: {
-          distance: 30,
-          enable: true,
-          move: true,
-          speed: {
-            min: -15,
-            max: 15,
           },
         },
       },
@@ -152,7 +83,7 @@ const TransactionSuccess = () => {
         <div className="h-screen">
           <div className="p-6  md:mx-auto">
             <div className="mx-auto mt-4 max-w-max text-green-500">
-              <CircleCheckBigIcon className="size-28" />
+              <CircleCheckBigIcon className="size-32" />
             </div>
 
             {token ? <Particles id="tsparticles" options={options} /> : null}
