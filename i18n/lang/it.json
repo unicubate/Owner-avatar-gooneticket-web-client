@@ -139,6 +139,7 @@
   "MENU.FOLLOWING": "Seguito",
   "MENU.SUBSCRIBER": "Membri",
   "MENU.TICKET": "Biglietti",
+  "MENU.BOOKINGS": "Prenotazioni",
   "MENU.INVOICE": "Fatture",
   "MENU.ACTIVITY": "Attività",
 
@@ -190,6 +191,10 @@
   "UTIL.ACTIVITY_RECENT": "Attività recenti",
   "UTIL.SAVE": "Salva",
   "UTIL.CANCEL": "Annula",
+  "UTIL.BOOK": "Prenota ora",
+  "UTIL.TITLE_PAYMENT_BOOKING": "Questo biglietto può essere acquistato e confermato solo in loco.",
+  "UTIL.VIEW_RATE": "Visualizza tariffe",
+  "UTIL.SELECT_DATE": "Selezionare una data",
 
   "CONTACT.US.TITLE": "Contattaci",
   "CONTACT.US.SUBTITLE": "I tempi di risposta dell'assistenza clienti possono variare a seconda dell'urgenza. Riceverai una risposta il prima possibile. Nel frattempo si prega di non inviare nuove richieste.",

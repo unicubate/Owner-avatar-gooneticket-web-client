@@ -25,7 +25,7 @@ const CreatePaymentBooking = ({
   paymentModel: PaymentModel;
 }) => {
   const { push } = useRouter();
-  const { hasErrors, setHasErrors, ipLocation } = useInputState();
+  const { t, hasErrors, setHasErrors, ipLocation } = useInputState();
   const {
     reset,
     control,
@@ -75,7 +75,7 @@ const CreatePaymentBooking = ({
         <div className="mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white dark:border-input dark:bg-background">
           <div className="p-4 sm:p-4 lg:p-3">
             <p className="text-center text-sm font-semibold">
-              The purchase of this ticket can only be done on site
+              {t.formatMessage({ id: 'UTIL.TITLE_PAYMENT_BOOKING' })}
             </p>
             {hasErrors && (
               <Alert variant="destructive" className="mt-4">
@@ -130,7 +130,7 @@ const CreatePaymentBooking = ({
             loading={loading}
             disabled={!data?.userAddress?.email || !data?.userAddress?.fullName}
           >
-            Booking
+            {t.formatMessage({ id: 'UTIL.BOOK' })}
           </ButtonInput>
         </div>
       </form>

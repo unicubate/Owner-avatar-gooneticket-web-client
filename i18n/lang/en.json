@@ -139,6 +139,7 @@
   "MENU.FOLLOWING": "Followings",
   "MENU.SUBSCRIBER": "Subscribes",
   "MENU.TICKET": "Tickets",
+  "MENU.BOOKING": "Bookings",
   "MENU.INVOICE": "Invoices",
   "MENU.ACTIVITY": "Activities",
 
@@ -190,6 +191,10 @@
   "UTIL.ACTIVITY_RECENT": "Recent activities",
   "UTIL.SAVE": "Save",
   "UTIL.CANCEL": "Cancel",
+  "UTIL.BOOK": "Book",
+  "UTIL.TITLE_PAYMENT_BOOKING": "This ticket can only be purchased and confirmed on site.",
+  "UTIL.VIEW_RATE": "View rates",
+  "UTIL.SELECT_DATE": "Please select a date",
 
   "CONTACT.US.TITLE": "Contact us",
   "CONTACT.US.SUBTITLE": "Customer support response times may vary depending on urgency. You will receive a response as soon as possible. In the meantime, please do not submit new requests.",

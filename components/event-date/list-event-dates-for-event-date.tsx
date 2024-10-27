@@ -13,7 +13,7 @@ const ListEventDatesForEventDate = ({
 }: {
   event: { id: string; organizationId: string; slug: string };
 }) => {
-  const { search } = useInputState();
+  const { t, search } = useInputState();
 
   const {
     isLoading: isLoading,
@@ -33,7 +33,9 @@ const ListEventDatesForEventDate = ({
   return (
     <>
       <div className="py-2 sm:mt-0">
-        <p className="font-bold">Please select a date</p>
+        <p className="font-bold">
+          {t.formatMessage({ id: 'UTIL.SELECT_DATE' })}
+        </p>
       </div>
       {isLoading ? (
         <LoadingFile />

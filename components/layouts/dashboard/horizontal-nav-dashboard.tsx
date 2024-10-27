@@ -105,7 +105,7 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
                   .filter((i) => i.count >= 1)
                   .map((item: any, index: number) => {
                     //const isActive = pathname === item.href;
-                    const isActive = pathname?.startsWith(item.href);
+                    const isActive = pathname.startsWith(item.href);
                     return (
                       <TooltipProviderInput
                         key={index}

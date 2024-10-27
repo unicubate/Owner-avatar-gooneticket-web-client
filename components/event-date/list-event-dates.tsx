@@ -1,14 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { EventDateModel } from '@/types/event-date';
 import {
-  formatePrice,
   formateToCccc,
   formateTodd,
   formateToLLLL,
   viewYyformateToYyyy,
 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
-import { TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useInputState } from '../hooks';
@@ -87,38 +85,13 @@ const ListEventDates = ({ item, index }: Props) => {
                 </div>
 
                 <div className="mt-2">
-                  <div className="text-lg font-bold sr-only sm:not-sr-only sm:whitespace-nowrap">
-                    {Number(item?.oneTicket?.amount) > 0 ? (
-                      <>
-                        {formatePrice({
-                          currency: `${item?.oneTicket?.currency?.code}`,
-                          value: Number(item?.oneTicket?.amount ?? 0),
-                        })}
-                      </>
-                    ) : (
-                      t.formatMessage({ id: 'UTIL.FREE' })
-                    )}
-                  </div>
                   <ButtonInput
                     type="button"
                     variant="primary"
                     className="ml-auto mt-2 w-full"
-                    icon={<TicketPlusIcon className="size-6" />}
+                    //icon={<TicketPlusIcon className="size-6" />}
                   >
-                    {t.formatMessage({ id: 'MENU.TICKET' })}
-                    <span className="ml-20 sm:hidden">
-                      {' '}
-                      {Number(item?.oneTicket?.amount) > 0 ? (
-                        <>
-                          {formatePrice({
-                            currency: `${item?.oneTicket?.currency?.code}`,
-                            value: Number(item?.oneTicket?.amount ?? 0),
-                          })}
-                        </>
-                      ) : (
-                        t.formatMessage({ id: 'UTIL.FREE' })
-                      )}
-                    </span>
+                    {t.formatMessage({ id: 'UTIL.VIEW_RATE' })}
                   </ButtonInput>
                 </div>
               </div>

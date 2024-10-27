@@ -14,6 +14,7 @@ export type TicketModel = {
   description: string;
   amount: number;
   eventDate: EventDateModel;
+  isOnlinePayment: boolean;
   left: number;
   currency: {
     code: string;
