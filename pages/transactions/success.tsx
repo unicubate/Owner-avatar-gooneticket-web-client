@@ -158,11 +158,11 @@ const TransactionSuccess = () => {
             {token ? <Particles id="tsparticles" options={options} /> : null}
             <div className="text-center">
               <h3 className="text-center text-base font-semibold md:text-2xl">
-                {tag === 'booking' ? 'Booking' : 'Payment'} Done!
+                {type === 'booking' ? 'Booking' : 'Payment'} Done!
               </h3>
               <p className="my-2 text-gray-600">
                 Thank you for completing your{' '}
-                {tag === 'booking' ? 'booking' : 'secure online payment'}{' '}
+                {type === 'booking' ? 'booking' : 'secure online payment'}{' '}
                 redirecting to orders in {timerRemaining}
               </p>
               <p className="text-gray-00 my-2"> Order number: {token} </p>
