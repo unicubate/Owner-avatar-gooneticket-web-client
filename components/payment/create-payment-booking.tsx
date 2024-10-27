@@ -130,7 +130,7 @@ const CreatePaymentBooking = ({
             loading={loading}
             disabled={!data?.userAddress?.email || !data?.userAddress?.fullName}
           >
-            {t.formatMessage({ id: 'UTIL.BOOK' })}
+            {t.formatMessage({ id: 'UTIL.RESERVE' })}
           </ButtonInput>
         </div>
       </form>

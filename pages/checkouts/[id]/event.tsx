@@ -35,7 +35,13 @@ import {
 import { HtmlParser } from '@/utils/html-parser';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { MinusIcon, MoveLeftIcon, PlusIcon } from 'lucide-react';
+import {
+  CheckCheckIcon,
+  Edit3Icon,
+  MinusIcon,
+  MoveLeftIcon,
+  PlusIcon,
+} from 'lucide-react';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -427,6 +433,17 @@ const CheckoutEvent = () => {
                                                   Sold out
                                                 </Badge>
                                               ) : null}
+
+                                              {!ticket?.isOnlinePayment ? (
+                                                <Badge
+                                                  className="mt-1 ml-1.5 rounded-sm uppercase"
+                                                  variant="secondary"
+                                                >
+                                                  {t.formatMessage({
+                                                    id: 'UTIL.RESERVE',
+                                                  })}
+                                                </Badge>
+                                              ) : null}
                                             </div>
 
                                             <input
@@ -477,6 +494,13 @@ const CheckoutEvent = () => {
                                   variant={isEdit ? 'primary' : 'outline'}
                                   onClick={() => setIsEdit((i: boolean) => !i)}
                                   className="ml-auto"
+                                  icon={
+                                    isEdit ? (
+                                      <Edit3Icon className="size-4" />
+                                    ) : (
+                                      <CheckCheckIcon className="size-4" />
+                                    )
+                                  }
                                 >
                                   {isEdit ? 'Edit address' : 'Cancel'}
                                 </ButtonInput>
