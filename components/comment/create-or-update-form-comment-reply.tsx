@@ -7,7 +7,8 @@ import { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
-import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
+import { ButtonInput } from '../ui-setting';
+import { TextAreaInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   description: yup.string().max(1000).required(),
@@ -107,12 +108,11 @@ export function CreateOrUpdateFormCommentReply(props: {
               alt=""
             />
           </div> */}
-          <TextareaReactQuillInput
+          <TextAreaInput
             control={control}
             name="description"
             placeholder="Reply to conversation"
             errors={errors}
-            className="h-auto"
           />
 
           {openModalReply ? (

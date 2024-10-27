@@ -8,7 +8,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { LoginModal } from '../auth/login-modal';
 import { useInputState } from '../hooks';
-import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
+import { ButtonInput } from '../ui-setting';
+import { TextAreaInput } from '../ui-setting/shadcn';
 
 const schema = yup.object({
   description: yup.string().max(1000).required(),
@@ -124,12 +125,11 @@ export function CreateOrUpdateFormComment(props: {
             />
           </div> */}
 
-          <TextareaReactQuillInput
+          <TextAreaInput
             control={control}
             name="description"
             placeholder="Write your message"
             errors={errors}
-            className="h-auto"
           />
 
           <div className="flex justify-between space-x-2">

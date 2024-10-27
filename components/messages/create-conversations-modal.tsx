@@ -6,7 +6,8 @@ import { X } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { useInputState } from '../hooks';
-import { ButtonInput, TextareaReactQuillInput } from '../ui-setting';
+import { ButtonInput } from '../ui-setting';
+import { TextAreaInput } from '../ui-setting/shadcn';
 import { Alert, AlertDescription } from '../ui/alert';
 
 const schema = yup.object({
@@ -88,12 +89,11 @@ export function CreateConversationsModal(props: {
               )}
 
               <div className="max-w-auto relative flex w-full">
-                <TextareaReactQuillInput
+                <TextAreaInput
                   control={control}
                   name="description"
                   placeholder="Write your message"
                   errors={errors}
-                  className="h-auto"
                 />
                 <ButtonInput
                   type="submit"

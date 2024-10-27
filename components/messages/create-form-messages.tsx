@@ -1,6 +1,6 @@
 import { CreateOneConversationMessagesAPI } from '@/api-site/conversations';
-import { ButtonInput, TextareaReactQuillInput } from '@/components/ui-setting';
-import { SwitchInput } from '@/components/ui-setting/shadcn';
+import { ButtonInput } from '@/components/ui-setting';
+import { SwitchInput, TextAreaInput } from '@/components/ui-setting/shadcn';
 import { ConversationModel, MessageFormModel } from '@/types/message';
 import { AlertDangerNotification } from '@/utils';
 import { ModelType } from '@/utils/paginations';
@@ -82,12 +82,11 @@ export function CreateFormMessages(props: {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="max-w-auto relative flex w-full">
-          <TextareaReactQuillInput
+          <TextAreaInput
             control={control}
             name="description"
             placeholder="Write your message"
             errors={errors}
-            className="h-auto"
           />
           <EmojiPicker open={isOpenEmoji} onEmojiClick={handleEmoji} />
           <ButtonInput
