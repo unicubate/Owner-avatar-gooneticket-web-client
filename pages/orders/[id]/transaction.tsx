@@ -75,26 +75,24 @@ const TransactionsView = () => {
                   <>
                     <div className="flex items-center">
                       <div
-                        onClick={() => push(`/${item?.profileSend?.username}`)}
+                        onClick={() => push(`/${item?.profile?.username}`)}
                         className="relative shrink-0 cursor-pointer"
                       >
                         <AvatarComponent
                           className="size-12"
-                          profile={item?.profileSend}
+                          profile={item?.profile}
                         />
                       </div>
 
                       <div
-                        onClick={() => push(`/${item?.profileSend?.username}`)}
+                        onClick={() => push(`/${item?.profile?.username}`)}
                         className="ml-2 cursor-pointer"
                       >
                         <p className="text-sm font-bold">
                           {capitalizeFirstLetter(
-                            item?.profileSend?.firstName ?? '',
+                            item?.profile?.firstName ?? '',
                           )}{' '}
-                          {capitalizeFirstLetter(
-                            item?.profileSend?.lastName ?? '',
-                          )}
+                          {capitalizeFirstLetter(item?.profile?.lastName ?? '')}
                         </p>
                         <p className="mt-1 text-sm font-medium text-gray-500">
                           {formateDate(item?.createdAt as Date, locale)}

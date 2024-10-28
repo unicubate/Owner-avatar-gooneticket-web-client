@@ -52,6 +52,6 @@ export type TransactionModel = {
     id: string;
     title: string;
   };
-  profileSend: ProfileItemModel;
+  profile: ProfileItemModel;
   profileReceive: ProfileItemModel;
 };
