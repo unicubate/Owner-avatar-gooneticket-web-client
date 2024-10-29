@@ -221,13 +221,15 @@ const UpdateFormProfile = ({ profile, user, currencies }: Props) => {
           >
             <SelectContent>
               <SelectGroup>
-                {currencies?.length > 0
-                  ? currencies?.map((item: any, index: number) => (
-                      <SelectItem value={item?.id} key={index}>
-                        <span className="font-normal">{item?.name}</span>
-                      </SelectItem>
-                    ))
-                  : null}
+                <div>
+                  {currencies?.length > 0
+                    ? currencies?.map((item: any, index: number) => (
+                        <SelectItem value={item?.id} key={index}>
+                          <span className="font-normal">{item?.name}</span>
+                        </SelectItem>
+                      ))
+                    : null}
+                </div>
               </SelectGroup>
             </SelectContent>
           </SelectInput>

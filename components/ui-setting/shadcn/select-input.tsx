@@ -60,7 +60,7 @@ const SelectInput = ({
               >
                 <SelectValue placeholder={placeholder} />
               </SelectTrigger>
-              <div>{children}</div>
+              {children}
             </Select>
           </>
         )}
