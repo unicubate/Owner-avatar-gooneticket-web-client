@@ -47,7 +47,7 @@ const PhoneNumberInput = ({
               defaultCountry={defaultCountry}
               international
               withCountryCallingCode
-              className={`input-phone w-full rounded-md border px-4 py-2.5 text-base font-semibold dark:border-input ${errors?.[name]?.message ? 'border-red-500' : ''}`}
+              className={`border-input dark:bg-background w-full rounded-md border px-3 py-2 text-sm font-semibold dark:border-gray-800 ${errors?.[name]?.message ? 'border-red-500' : ''}`}
               placeholder={placeholder}
               id={name}
               required={required}
