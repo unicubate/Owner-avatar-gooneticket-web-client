@@ -61,6 +61,7 @@
     "@types/react-scroll": "^1.8.10",
     "autoprefixer": "10.4.20",
     "axios": "^1.7.7",
+    "axios-retry": "^4.5.0",
     "card-validator": "^10.0.0",
     "class-validator": "^0.14.1",
     "class-variance-authority": "^0.7.0",

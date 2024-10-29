@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/tooltip';
 import { OrderItemModel } from '@/types/order-item';
 import {
+  formatDateDDMMYYToUtc,
   formateddLLLyyyyHHmm,
   formateToCccc,
   formateTodd,
@@ -69,8 +70,8 @@ const ListOrderItemsTicketUser = ({ item, index }: Props) => {
                 </Badge> */}
 
                 {!item?.eventDate?.isExpired &&
-                formateTodd(item?.eventDate?.startedAt, locale) ===
-                  String(new Date().getDate()) ? (
+                formatDateDDMMYYToUtc(item?.eventDate?.startedAt, locale) ===
+                  formatDateDDMMYYToUtc(new Date(), locale) ? (
                   <div className="flex justify-center">
                     <span className="relative flex size-4">
                       <span className="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"></span>

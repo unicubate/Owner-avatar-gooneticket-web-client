@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { OrderItemModel } from '@/types/order-item';
 import {
   AlertDangerNotification,
-  formateTodd,
+  formatDateDDMMYYToUtc,
   formateToRFC2822,
 } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
@@ -60,8 +60,8 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
         </div>
 
         {!orderItem?.eventDate?.isExpired &&
-        formateTodd(orderItem?.eventDate?.startedAt, locale) ===
-          String(new Date().getDate()) ? (
+        formatDateDDMMYYToUtc(orderItem?.eventDate?.startedAt, locale) ===
+          formatDateDDMMYYToUtc(new Date(), locale) ? (
           <div className="mt-2 flex justify-center">
             <span className="relative flex w-20 h-6">
               <span className="absolute inline-flex w-20 h-6 animate-ping bg-green-400 opacity-75"></span>

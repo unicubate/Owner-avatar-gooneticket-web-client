@@ -1,4 +1,5 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import { DELETE, GET, POST, PUT } from './consts';
 export interface ClientApiMethods {
   [key: string]: {
@@ -59,6 +60,7 @@ export const makeApiCall = async ({
   //   const m = this._methods[req.action];
 
   // axios.defaults.headers.common['Authorization'] = `${userToken}` ?? {};
+  axiosRetry(axios, { retries: 3 });
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     url: url,
