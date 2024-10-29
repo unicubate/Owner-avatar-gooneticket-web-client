@@ -1,5 +1,3 @@
-import { Select, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import { Control, Controller, FieldValues } from 'react-hook-form';
 import { Label } from '../../ui/label';
 
@@ -8,15 +6,14 @@ interface Props {
   label?: string;
   className?: string;
   name: string;
-  disabled?: boolean;
   errors: { [key: string]: any };
   placeholder?: string;
   required?: boolean;
-  defaultValue?: string;
   children: React.ReactNode;
+  defaultValue?: string;
 }
 
-const SelectInput = ({
+const SelectOptionInput = ({
   control,
   label = '',
   name,
@@ -25,7 +22,6 @@ const SelectInput = ({
   required,
   placeholder = '',
   children,
-  disabled,
   defaultValue,
 }: Props) => {
   return (
@@ -45,23 +41,20 @@ const SelectInput = ({
         control={control}
         render={({ field: { value, onChange } }) => (
           <>
-            <Select
-              onValueChange={onChange}
+            <select
+              id={name}
               name={name}
               value={value}
+              onChange={onChange}
               required={required}
-              defaultValue={defaultValue}
+              defaultValue="default"
+              className={`bg-background flex h-10 w-full border ${errors?.[name] ? 'border-red-600' : 'border-input'}  focus-visible:ring-ring ring-offset-background file:text-foreground placeholder:text-muted-foreground rounded-md px-3 py-2 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50`}
             >
-              <SelectTrigger
-                className={cn(
-                  `${errors?.[name]?.message ? 'border-red-500' : ''}`,
-                  className,
-                )}
-              >
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-              <div>{children}</div>
-            </Select>
+              <option value="default" disabled selected>
+                {placeholder}
+              </option>
+              {children}
+            </select>
           </>
         )}
       />
@@ -74,4 +67,4 @@ const SelectInput = ({
   );
 };
 
-export { SelectInput };
+export { SelectOptionInput };

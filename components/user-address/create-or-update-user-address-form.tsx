@@ -2,6 +2,7 @@ import { CreateOrUpdateOneUserAddressAPI } from '@/api-site/user-address';
 import { useInputState } from '@/components/hooks';
 import { ButtonInput } from '@/components/ui-setting';
 import { SelectInput, TextInput } from '@/components/ui-setting/shadcn';
+import { SelectContent, SelectGroup, SelectItem } from '@/components/ui/select';
 import { UserAddressModel } from '@/types/user-address';
 import { AlertDangerNotification } from '@/utils/alert-notification';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -118,13 +119,17 @@ const CreateOrUpdateUserAddressForm = ({
             name="country"
             disabled={isEdit}
           >
-            {countries?.length > 0
-              ? countries?.map((item: any, index: number) => (
-                  <option value={item?.name} key={index}>
-                    <span className="font-normal">{item?.name}</span>
-                  </option>
-                ))
-              : null}
+            <SelectContent>
+              <SelectGroup>
+                {countries?.length > 0
+                  ? countries?.map((item: any, index: number) => (
+                      <SelectItem value={item?.name} key={index}>
+                        <span className="font-normal">{item?.name}</span>
+                      </SelectItem>
+                    ))
+                  : null}
+              </SelectGroup>
+            </SelectContent>
           </SelectInput>
         </div>
 

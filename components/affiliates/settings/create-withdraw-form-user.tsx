@@ -8,7 +8,7 @@ import * as yup from 'yup';
 
 import { CreateOnPaymentAPI, GetInfinitePaymentsAPI } from '@/api-site/payment';
 import { useInputState } from '@/components/hooks';
-import { SelectInput, TextInput } from '@/components/ui-setting/shadcn';
+import { SelectOptionInput, TextInput } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { AlertDialog, AlertDialogContent } from '@/components/ui/alert-dialog';
 import { PaymentItemModel } from '@/types/payment';
@@ -116,7 +116,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
               </div>
 
               <div className="mt-4">
-                <SelectInput
+                <SelectOptionInput
                   label="Payment method"
                   control={control}
                   errors={errors}
@@ -136,12 +136,14 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
                     dataPayments?.pages
                       .flatMap((page: any) => page?.data?.value)
                       .map((item: PaymentItemModel, index: number) => (
-                        <option value={item?.id} key={index}>
-                          <p className="text-lg font-semibold">
-                            {item?.type === 'IBAN' && item?.iban}
-                            {item?.type === 'PAYPAL' && item?.email}
-                          </p>
-                        </option>
+                        <>
+                          <option value={item?.id} key={index}>
+                            <p className="text-lg font-semibold">
+                              {item?.type === 'IBAN' && item?.iban}
+                              {item?.type === 'PAYPAL' && item?.email}
+                            </p>
+                          </option>
+                        </>
                       ))
                   )}
 
@@ -155,7 +157,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
                       />
                     </div>
                   )}
-                </SelectInput>
+                </SelectOptionInput>
               </div>
 
               <div className="mt-4 flex items-center space-x-4">

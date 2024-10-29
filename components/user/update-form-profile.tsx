@@ -7,6 +7,7 @@ import {
   TextInput,
 } from '@/components/ui-setting/shadcn';
 import { Alert, AlertDescription } from '@/components/ui/alert';
+import { SelectContent, SelectGroup, SelectItem } from '@/components/ui/select';
 import { ProfileFormModel, ProfileModel, arrayColors } from '@/types/profile';
 import { UserModel } from '@/types/user';
 import { oneImageToURL } from '@/utils';
@@ -18,29 +19,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
-// const { Option } = Select;
-
-// type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
-// const getBase64 = (img: FileType, callback: (url: string) => void) => {
-//   const reader = new FileReader();
-//   reader.addEventListener('load', () => callback(reader.result as string));
-//   reader.readAsDataURL(img);
-// };
-// const beforeUpload = (file: FileType) => {
-//   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
-//   if (!isJpgOrPng) {
-//     AlertDangerNotification({
-//       text: 'You can only upload JPG/PNG file!',
-//     });
-//   }
-//   const isLt2M = file.size / 1024 / 1024 < 2;
-//   if (!isLt2M) {
-//     AlertDangerNotification({
-//       text: 'Image must smaller than 2MB!',
-//     });
-//   }
-//   return isJpgOrPng && isLt2M;
-// };
 
 type Props = {
   currencies: any[];
@@ -241,17 +219,17 @@ const UpdateFormProfile = ({ profile, user, currencies }: Props) => {
             placeholder="Currency"
             name="currencyId"
           >
-            {currencies?.length > 0 ? (
-              currencies?.map((item: any, index: number) => (
-                <option value={item?.id} key={index}>
-                  <span className="font-normal">{item?.name}</span>
-                </option>
-              ))
-            ) : (
-              <option style={{ textAlign: 'center' }}>
-                <span>Data Not Found</span>
-              </option>
-            )}
+            <SelectContent>
+              <SelectGroup>
+                {currencies?.length > 0
+                  ? currencies?.map((item: any, index: number) => (
+                      <SelectItem value={item?.id} key={index}>
+                        <span className="font-normal">{item?.name}</span>
+                      </SelectItem>
+                    ))
+                  : null}
+              </SelectGroup>
+            </SelectContent>
           </SelectInput>
 
           <span className="text-sm font-medium text-gray-400">
