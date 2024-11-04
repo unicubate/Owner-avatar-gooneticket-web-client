@@ -212,7 +212,6 @@ const CheckoutEvent = () => {
 
   // }, []);
 
-  console.log('tickets ====>', tickets);
   return (
     <>
       <LayoutCheckoutSite
