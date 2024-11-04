@@ -1,24 +1,26 @@
+'use client';
+
 import { GetOneUserMeAPI, IpLocationAPI } from '@/api-site/user';
-import { UserModel } from '@/types/user';
 import Cookies from 'js-cookie';
-import { FC, ReactNode, createContext, useContext } from 'react';
+import { FC, ReactNode, createContext, useContext, useState } from 'react';
 
-type AuthContextProps = {
-  user?: UserModel | undefined;
-  userStorage?: any;
+type ContextProps = {
+  user?: any;
+  ipLocation: any;
+  collapse: string;
+  toggleCollapse: () => void;
 };
 
-const initAuthContextPropsState = {
+const initContextPropsState = {
+  collapse: 'false',
+  ipLocation: undefined,
   user: undefined,
-  userStorage: undefined,
-};
+} as ContextProps;
 
-const AuthContext = createContext<AuthContextProps>(
-  initAuthContextPropsState as any,
-);
+const CreateContext = createContext<ContextProps>(initContextPropsState);
 
-const useAuth = () => {
-  return useContext(AuthContext);
+const useAuthContext = () => {
+  return useContext(CreateContext);
 };
 
 export const getCookieUser = () =>
@@ -31,23 +33,35 @@ export const getCookieVerifyUser = () =>
     ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_VERIFY_TOKEN))
     : null;
 
-const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
+const ContextProvider: FC<{ children?: ReactNode }> = ({ children }) => {
+  const [collapse, setCollapse] = useState(() => {
+    return localStorage.getItem('collapse') || 'true';
+  });
+
   const { data: user } = GetOneUserMeAPI();
+
   const { data: ipLocation } = IpLocationAPI();
+
+  const toggleCollapse = () => {
+    const newCollapse = collapse === 'true' ? 'false' : 'true';
+    setCollapse(newCollapse);
+    localStorage.setItem('collapse', newCollapse);
+  };
 
   return (
     <>
-      <AuthContext.Provider
+      <CreateContext.Provider
         value={{
-          ...(user as any),
-          userStorage: user,
-          ipLocation: ipLocation,
+          user: user,
+          ipLocation,
+          collapse,
+          toggleCollapse,
         }}
       >
         {children}
-      </AuthContext.Provider>
+      </CreateContext.Provider>
     </>
   );
 };
 
-export { ContextUserProvider, useAuth };
+export { ContextProvider, useAuthContext };

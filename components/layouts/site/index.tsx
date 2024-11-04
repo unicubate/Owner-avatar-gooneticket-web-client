@@ -19,7 +19,7 @@ export type NavbarSiteProps = {
 };
 
 const LayoutSite = ({ children, title, metas }: IProps) => {
-  const { isOpen, setIsOpen, userStorage } = useInputState();
+  const { isOpen, setIsOpen, user } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
   };
@@ -37,7 +37,7 @@ const LayoutSite = ({ children, title, metas }: IProps) => {
       />
 
       {/* <div className="min-h-screen space-y-5"> */}
-      <HorizontalNavSite showDrawer={showDrawer} user={userStorage} />
+      <HorizontalNavSite showDrawer={showDrawer} user={user} />
 
       {/* Fix Drawer */}
       <Sheet onOpenChange={setIsOpen} open={isOpen} defaultOpen={isOpen}>

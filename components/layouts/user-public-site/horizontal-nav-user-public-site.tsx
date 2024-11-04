@@ -1,7 +1,6 @@
 import { UserModel } from '@/types/user';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
 import { DropdownMenuContentUser } from '@/components/ui-setting';
@@ -26,7 +25,6 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
   const { push } = useRouter();
   const [copied, setCopied] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const { userStorage: userVisiter } = useAuth() as any;
   const pathname = usePathname();
   const username = user?.username;
   const [navigation] = useState<NavbarProps[]>([

@@ -20,14 +20,14 @@ type Props = {
 const ListEventDates = ({ item, index }: Props) => {
   const { query, push } = useRouter();
   const { partner } = query;
-  const { t, locale, userStorage, ipLocation } = useInputState();
+  const { t, locale, user, ipLocation } = useInputState();
 
   return (
     <>
       <Link
         prefetch={true}
         href={`${
-          userStorage?.id
+          user?.id
             ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
             : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
         }`}

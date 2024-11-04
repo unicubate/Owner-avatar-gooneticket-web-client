@@ -8,7 +8,7 @@ import { UpdateFormProfile } from '@/components/user/update-form-profile';
 import { PrivateComponent } from '@/components/util/private-component';
 
 const Settings = () => {
-  const { userStorage: user } = useInputState();
+  const { user } = useInputState();
 
   const {
     isLoading,

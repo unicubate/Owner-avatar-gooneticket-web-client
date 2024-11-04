@@ -36,7 +36,7 @@ export function ListCommentsPosts(props: {
 }) {
   const { model, item, modelIds, userVisitorId, organizationId, index } = props;
 
-  const { isOpen, setIsOpen, loading, setLoading, userStorage, locale } =
+  const { isOpen, setIsOpen, loading, setLoading, user, locale } =
     useInputState();
   const [openModal, setOpenModal] = useState(false);
   const [openModalReply, setOpenModalReply] = useState(false);
@@ -100,7 +100,7 @@ export function ListCommentsPosts(props: {
           item={item}
           key={index}
           index={index}
-          userId={userStorage?.id}
+          userId={user?.id}
         />
       ))
   );
@@ -130,7 +130,7 @@ export function ListCommentsPosts(props: {
                 <HtmlParser html={String(item?.description ?? '')} />
               </p>
               <div className="mt-2 flex items-center font-medium text-gray-600">
-                {userStorage?.id ? (
+                {user?.id ? (
                   <button
                     onClick={() => {
                       setOpenModalReply((lk) => !lk);
@@ -141,7 +141,7 @@ export function ListCommentsPosts(props: {
                   </button>
                 ) : null}
 
-                {userStorage?.id === item?.userId ? (
+                {user?.id === item?.userId ? (
                   <>
                     <button
                       onClick={() => editItem(item)}

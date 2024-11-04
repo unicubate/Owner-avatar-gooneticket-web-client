@@ -36,7 +36,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
-  const { userStorage } = useInputState();
+  const { user } = useInputState();
 
   const {
     isLoading: isLoadingPayments,
@@ -60,7 +60,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
       await saveMutation({
         data: {
           ...payload,
-          currency: userStorage?.profile?.currency?.code,
+          currency: user?.profile?.currency?.code,
           customer: 'client',
         },
         paymentModel: 'PAYMENT-SELLER-WITHDRAWALS-CREATE',
@@ -111,7 +111,7 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
                   required
                   type="number"
                   pattern="[0-9]*"
-                  prefix={userStorage?.profile?.currency?.code}
+                  prefix={user?.profile?.currency?.code}
                 />
               </div>
 

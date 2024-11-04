@@ -6,14 +6,14 @@ import { getCookieUser } from './context-user';
 const PrivateComponent = (Component: ComponentType) => {
   return function ProtectedRoute({ ...props }) {
     const userToken = getCookieUser();
-    const { linkHref, userStorage } = useInputState();
+    const { linkHref, user } = useInputState();
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!userStorage && !userToken) {
+      if (!user && !userToken) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [userStorage, userToken, pathname, push, linkHref]);
+    }, [user, userToken, pathname, push, linkHref]);
 
     return <Component {...props} />;
   };

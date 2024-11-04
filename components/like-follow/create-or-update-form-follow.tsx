@@ -10,7 +10,7 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
   const {
     isOpen: isOpenModalLogin,
     setIsOpen: setIsOpenModalLogin,
-    userStorage,
+    user,
     setLoading,
     hasErrors,
     setHasErrors,
@@ -51,7 +51,7 @@ const CreateOrUpdateFormFollow = ({ item }: { item: any }) => {
 
   return (
     <>
-      {userStorage?.organizationId ? (
+      {user?.organizationId ? (
         <>
           <Button
             className="h-8 cursor-pointer gap-1 rounded-sm"

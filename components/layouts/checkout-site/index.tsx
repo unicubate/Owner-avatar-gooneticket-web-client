@@ -20,7 +20,7 @@ interface IProps {
 }
 
 const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
-  const { t, userStorage: userVisiter, linkHref } = useInputState();
+  const { t, user: userVisiter, linkHref } = useInputState();
   const { back, push } = useRouter();
 
   const logoutUserItem = async () => {

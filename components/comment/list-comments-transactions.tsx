@@ -10,7 +10,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { CreateOrUpdateFormCommentReply } from '../comment/create-or-update-form-comment-reply';
 import { useInputState } from '../hooks';
-import { useAuth } from '../util/context-user';
 import { ListCommentsRepliesTransactions } from './list-comments-replies-transactions';
 
 type Props = {
@@ -30,8 +29,7 @@ const ListCommentTransactions = ({
   organizationId,
   index,
 }: Props) => {
-  const { locale } = useInputState();
-  const { userStorage: userVisiter } = useAuth() as any;
+  const { locale, user: userVisiter } = useInputState();
   const [openModalReply, setOpenModalReply] = useState(false);
 
   const {

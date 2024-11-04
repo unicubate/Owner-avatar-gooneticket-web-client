@@ -49,7 +49,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function StatisticAffiliationsActivities() {
-  const { locale, t, userStorage: user } = useInputState();
+  const { locale, t } = useInputState();
   const [years, seYears] = useState<string>(
     `${dateTimeNowUtc().getFullYear()}`,
   );

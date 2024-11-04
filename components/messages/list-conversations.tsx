@@ -11,9 +11,9 @@ type Props = {
 };
 
 export function ListConversations({ item, index }: Props) {
-  const { locale, userStorage } = useInputState();
+  const { locale, user } = useInputState();
 
-  const organizationId = userStorage?.organizationId;
+  const organizationId = user?.organizationId;
   return (
     <>
       <div

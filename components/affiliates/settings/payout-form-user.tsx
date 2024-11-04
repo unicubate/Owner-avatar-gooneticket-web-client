@@ -11,7 +11,7 @@ import { useInputState } from '../../hooks';
 import { CreatePaymentIbanFormUserModal } from './create-payment-iban-form-user-modal';
 
 const PayoutFormUser = () => {
-  const { t, isOpen, setIsOpen, locale, userStorage: user } = useInputState();
+  const { t, isOpen, setIsOpen, locale } = useInputState();
   const [isOpenDelete, setIsOpenDelete] = useState(false);
 
   const { isPending: loading, mutateAsync: saveMutation } =

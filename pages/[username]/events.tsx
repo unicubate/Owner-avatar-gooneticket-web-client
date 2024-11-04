@@ -18,12 +18,7 @@ import { itemsNumberArray } from '@/utils/utils';
 import { useRouter } from 'next/router';
 
 const EventsPublic = () => {
-  const {
-    search,
-    isOpen,
-    setIsOpen,
-    userStorage: userVisiter,
-  } = useInputState();
+  const { search, isOpen, setIsOpen, user: userVisiter } = useInputState();
   const { query } = useRouter();
   const username = String(query?.username);
 

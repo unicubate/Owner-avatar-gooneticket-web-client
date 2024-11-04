@@ -6,14 +6,14 @@ import { getCookieUser } from './context-user';
 const PublicComponent = (Component: ComponentType) => {
   const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
-    const { userStorage } = useInputState();
+    const { user } = useInputState();
     const { push } = useRouter();
 
     useEffect(() => {
-      if (userToken && userStorage) {
+      if (userToken && user) {
         push(`/tickets`);
       }
-    }, [userStorage, push]);
+    }, [user, push]);
 
     return <Component {...props} />;
   };

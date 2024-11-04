@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import 'toastify-js/src/toastify.css';
 
 import { LoadingFile } from '@/components/ui-setting';
-import { ContextUserProvider } from '@/components/util/context-user';
+import { ContextProvider } from '@/components/util/context-user';
 import { ThemeProvider } from '@/components/util/theme-provider';
 import {
   HydrationBoundary,
@@ -33,9 +33,9 @@ export default function App({ Component, pageProps }: AppProps) {
                 defaultTheme="system"
                 enableSystem
               >
-                <ContextUserProvider>
+                <ContextProvider>
                   <Component {...pageProps} />
-                </ContextUserProvider>
+                </ContextProvider>
               </ThemeProvider>
             </ClientOnly>
           </GoogleOAuthProvider>

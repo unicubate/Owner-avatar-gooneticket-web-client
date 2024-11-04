@@ -2,7 +2,7 @@ import { useDebounce } from '@/utils';
 import { useDeferredValue, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLang } from '../../i18n/context-intl-provider';
-import { useAuth } from '../util/context-user';
+import { useAuthContext } from '../util/context-user';
 
 export function useInputState() {
   const t = useIntl();
@@ -10,7 +10,7 @@ export function useInputState() {
   const deferredSearch = useDeferredValue(search);
   const [extension, setExtension] = useState<'xlsx' | 'csv'>('xlsx');
 
-  const { userStorage, ipLocation, profile } = useAuth() as any;
+  const { user, ipLocation } = useAuthContext();
   const locale = useLang();
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -62,9 +62,8 @@ export function useInputState() {
     setLoading,
     setSuccess,
     setHasErrors,
-    userStorage,
+    user,
     ipLocation,
-    profile,
     linkHref,
     locale,
     t,

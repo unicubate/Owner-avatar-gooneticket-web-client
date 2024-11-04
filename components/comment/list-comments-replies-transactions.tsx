@@ -14,7 +14,6 @@ import { useInputState } from '../hooks';
 import { ButtonInput } from '../ui-setting';
 import { AvatarComponent } from '../ui-setting/avatar-component';
 import { ActionModalDialog } from '../ui-setting/shadcn';
-import { useAuth } from '../util/context-user';
 
 type Props = {
   model: ModelType;
@@ -24,8 +23,14 @@ type Props = {
 };
 
 const ListCommentsRepliesTransactions = ({ item, index }: Props) => {
-  const { isOpen, setIsOpen, loading, setLoading, locale } = useInputState();
-  const { userStorage: userVisitor } = useAuth() as any;
+  const {
+    isOpen,
+    setIsOpen,
+    loading,
+    setLoading,
+    locale,
+    user: userVisitor,
+  } = useInputState();
   const { mutateAsync: saveMutation } = DeleteOneCommentReplyAPI({
     onSuccess: () => {},
     onError: (error?: any) => {},

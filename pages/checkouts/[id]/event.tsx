@@ -87,8 +87,7 @@ const CheckoutEvent = () => {
   const addressRef = useRef<any>(null);
   const [increment, setIncrement] = useState(1);
   const debounceIncrement = useDebounce(increment, 500);
-  const { t, ipLocation, userStorage, locale, scrollToBottom } =
-    useInputState();
+  const { t, ipLocation, user, locale, scrollToBottom } = useInputState();
   const { query, back } = useRouter();
   const { id: eventDateId, partner } = query;
 
@@ -147,10 +146,10 @@ const CheckoutEvent = () => {
   const {
     isError: isErrorUser,
     isLoading: isLoadingUser,
-    data: user,
+    data: userItem,
   } = GetOneUserPublicAPI({
     username: item?.profile?.username,
-    organizationVisitorId: userStorage?.organizationId,
+    organizationVisitorId: user?.organizationId,
   });
 
   const ticketJsonParse = watchTicket
@@ -166,7 +165,7 @@ const CheckoutEvent = () => {
     quantity: debounceIncrement,
     country: ipLocation?.countryCode,
     commission: calculateCommission,
-    taxes: Number(userStorage?.organization?.taxes),
+    taxes: Number(user?.organization?.taxes),
     valueTotal: calculateCommission + calculatePrice,
   };
 
@@ -193,8 +192,8 @@ const CheckoutEvent = () => {
     amount: newAmount,
     affiliation: affiliation,
     organizationSellerId: item?.organizationId,
-    organizationBuyerId: userStorage?.organizationId,
-    userId: userStorage?.id,
+    organizationBuyerId: user?.organizationId,
+    userId: user?.id,
   };
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(

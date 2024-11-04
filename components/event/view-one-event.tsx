@@ -14,7 +14,7 @@ type Props = {
 };
 
 const ViewOneEvent = ({ item }: Props) => {
-  const { isOpen, setIsOpen, locale, userStorage } = useInputState();
+  const { isOpen, setIsOpen, locale, user } = useInputState();
 
   return (
     <>
@@ -81,7 +81,7 @@ const ViewOneEvent = ({ item }: Props) => {
             model="EVENT"
             modelIds={['EVENT']}
             take={6}
-            userVisitorId={userStorage?.id}
+            userVisitorId={user?.id}
             organizationId={item?.organizationId}
             eventId={item?.id}
           /> */}

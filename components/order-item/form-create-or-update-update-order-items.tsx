@@ -24,7 +24,7 @@ const FormCreateOrUpdateOrderItems = ({
   orderItem?: OrderItemModel;
 }) => {
   const { push } = useRouter();
-  const { hasErrors, setHasErrors, locale, userStorage } = useInputState();
+  const { hasErrors, setHasErrors, locale } = useInputState();
   const {
     reset,
     watch,

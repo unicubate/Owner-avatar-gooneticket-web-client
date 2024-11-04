@@ -29,7 +29,7 @@ import { Fragment, useState } from 'react';
 const OrderItemsViewIndex = () => {
   const { query, push } = useRouter();
   const [started, setStarted] = useState(-1);
-  const { t, search, handleSetSearch, userStorage: user } = useInputState();
+  const { t, search, handleSetSearch, user } = useInputState();
 
   const {
     isLoading: isLoadingOrderItems,

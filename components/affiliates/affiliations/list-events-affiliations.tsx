@@ -32,7 +32,7 @@ type Props = {
 const ListEventsAffiliations = ({ item, index }: Props) => {
   const { push } = useRouter();
   const [copied, setCopied] = useState(false);
-  const { t, isOpen, setIsOpen, locale, userStorage: user } = useInputState();
+  const { t, isOpen, setIsOpen, locale } = useInputState();
 
   return (
     <>

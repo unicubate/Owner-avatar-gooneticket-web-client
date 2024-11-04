@@ -22,7 +22,7 @@ import { Fragment } from 'react';
 const OrderItemsViewIndex = () => {
   const { query, push } = useRouter();
   const orderId = String(query?.id);
-  const { t, search, handleSetSearch, userStorage: user } = useInputState();
+  const { t, search, handleSetSearch, user } = useInputState();
 
   const {
     isLoading: isLoadingOrderItems,

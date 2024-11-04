@@ -9,13 +9,13 @@ const CreateConversationForm = ({ item }: { item: any }) => {
   const {
     isOpen: isOpenModalLogin,
     setIsOpen: setIsOpenModalLogin,
-    userStorage,
+    user,
   } = useInputState();
   const [isContact, setIsContact] = useState(false);
 
   return (
     <>
-      {userStorage?.id ? (
+      {user?.id ? (
         <>
           <Button
             className="h-8 cursor-pointer gap-1 rounded-sm"

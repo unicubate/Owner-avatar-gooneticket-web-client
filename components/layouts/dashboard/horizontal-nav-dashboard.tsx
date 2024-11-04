@@ -18,7 +18,7 @@ interface Props {
 
 const HorizontalNavDashboard = ({ showDrawer }: Props) => {
   const { push, pathname } = useRouter();
-  const { t, linkHref, userStorage: user } = useInputState();
+  const { t, linkHref, user } = useInputState();
   const navigation = [
     {
       title: `${t.formatMessage({ id: 'MENU.TICKET' })}`,

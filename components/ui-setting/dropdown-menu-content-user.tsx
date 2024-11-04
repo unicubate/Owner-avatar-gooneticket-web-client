@@ -23,7 +23,7 @@ import { CopyShareLink } from './copy-share-link';
 
 const DropdownMenuContentUser = ({ username }: { username?: string }) => {
   const { push } = useRouter();
-  const { t, linkHref, userStorage: user } = useInputState();
+  const { t, linkHref, user } = useInputState();
   const [copied, setCopied] = useState(false);
 
   const logoutUserItem = async () => {

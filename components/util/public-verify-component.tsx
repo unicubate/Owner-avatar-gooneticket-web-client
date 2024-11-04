@@ -7,15 +7,15 @@ const PublicVerifyComponent = (Component: ComponentType) => {
   const userTokenVerify = getCookieVerifyUser();
   const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
-    const { userStorage } = useInputState();
-    const isOnline = userStorage?.id !== undefined;
+    const { user } = useInputState();
+    const isOnline = user?.id !== undefined;
     const { push, query } = useRouter();
 
     useEffect(() => {
       if ((userTokenVerify || userToken) && isOnline) {
         push(`/tickets`);
       }
-    }, [userStorage, isOnline, push, query]);
+    }, [user, isOnline, push, query]);
 
     return <Component {...props} />;
   };

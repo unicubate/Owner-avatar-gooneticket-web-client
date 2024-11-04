@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 
 const ShopUserPublic = () => {
   const { query, push } = useRouter();
-  const { userStorage: userBayer } = useInputState();
+  const { user: userBayer } = useInputState();
 
   if (isWebview(window.navigator.userAgent)) {
     const { linkHref } = useInputState();

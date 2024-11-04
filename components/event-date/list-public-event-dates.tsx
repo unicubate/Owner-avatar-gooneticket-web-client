@@ -26,10 +26,10 @@ const ListPublicEventDates = ({ item, index }: Props) => {
   const { query, push } = useRouter();
   const { partner } = query;
   const [copied, setCopied] = useState(false);
-  const { t, locale, userStorage, ipLocation } = useInputState();
+  const { t, locale, user, ipLocation } = useInputState();
 
   const linkHrefCheckouts = `${
-    userStorage?.id
+    user?.id
       ? `/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
       : `/login?redirect=${ipLocation?.url}/checkouts/${item?.id}/event${partner ? `?partner=${partner}` : ''}`
   }`;

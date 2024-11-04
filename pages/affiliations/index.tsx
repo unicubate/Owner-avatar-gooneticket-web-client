@@ -22,7 +22,7 @@ import { capitalizeFirstLetter } from '../../utils/utils';
 const AffiliationsIndex = () => {
   const { push, query, back, pathname } = useRouter();
   const { tab } = query;
-  const { userStorage: user } = useInputState() as any;
+  const { user } = useInputState() as any;
   const { t, search, handleSetSearch } = useInputState();
 
   const navigation = [

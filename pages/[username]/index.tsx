@@ -6,7 +6,7 @@ import { ErrorFile, LoadingFile } from '@/components/ui-setting';
 import { useRouter } from 'next/router';
 
 const ProfilePublic = () => {
-  const { userStorage: userVisiter } = useInputState();
+  const { user: userVisiter } = useInputState();
   const { query } = useRouter();
   const username = String(query?.username);
 

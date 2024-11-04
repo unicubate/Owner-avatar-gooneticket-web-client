@@ -12,7 +12,7 @@ import { CreateWithdrawFormUser } from './create-withdraw-form-user';
 import { ListPayoutHistory } from './list-payout-history';
 
 const PayoutHistoryTable = () => {
-  const { userStorage: user, t, isOpen, setIsOpen } = useInputState();
+  const { t, isOpen, setIsOpen } = useInputState();
   const {
     isLoading: isLoadingWithdrawals,
     isError: isErrorWithdrawals,

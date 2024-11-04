@@ -43,7 +43,7 @@ export function CreateOrUpdateFormComment(props: {
     setHasErrors,
     isOpen,
     setIsOpen,
-    userStorage,
+    user,
   } = useInputState();
   const {
     reset,
@@ -121,7 +121,7 @@ export function CreateOrUpdateFormComment(props: {
             <AvatarComponent
               size={40}
               className="size-10 shrink-0 rounded-full bg-gray-300"
-              profile={userStorage?.profile}
+              profile={user?.profile}
             />
           </div> */}
 
@@ -147,7 +147,7 @@ export function CreateOrUpdateFormComment(props: {
               </ButtonInput>
             ) : null}
 
-            {userStorage?.id ? (
+            {user?.id ? (
               <>
                 <ButtonInput
                   type="submit"
