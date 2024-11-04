@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useInputState } from '../hooks';
-import { ImageLogo } from '../ui-setting';
+import { ImageLogo, ThemeToggle } from '../ui-setting';
 
 type NavbarSiteProps = {
   title: string;
@@ -126,8 +126,10 @@ const MediumFooter = () => {
               </li> */}
 
               <li>
+                <ThemeToggle />
+              </li>
+              <li>
                 <Image
-                  className="mt-2"
                   src={'/assets/payment-cards.png'}
                   height={180}
                   width={180}

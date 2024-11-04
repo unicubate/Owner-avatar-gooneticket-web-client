@@ -1,5 +1,5 @@
 import { useInputState } from '@/components/hooks';
-import { ButtonInput, ImageLogo, ThemeToggle } from '@/components/ui-setting';
+import { ButtonInput, ImageLogo } from '@/components/ui-setting';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import { LogInIcon, UserPlusIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -307,7 +307,6 @@ const HorizontalNavSite = ({ user, showDrawer }: Props) => {
                   );
                 })}
               </nav>
-              <ThemeToggle />
               <LangToggle />
               <div className="relative">
                 <Link href={`${user?.id ? `/tickets` : `/login`}`}>

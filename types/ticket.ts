@@ -16,6 +16,9 @@ export type TicketModel = {
   eventDate: EventDateModel;
   isOnlinePayment: boolean;
   left: number;
+  event: {
+    title: string;
+  };
   currency: {
     code: string;
     name: string;

@@ -50,7 +50,7 @@ const ViewOneEvent = ({ item }: Props) => {
         ) : null}
 
         {item?.urlMedia ? (
-          <div className={`mx-auto mt-1`}>
+          <div className={`mx-auto mt-4`}>
             <ReactPlayer
               className={`mr-auto`}
               url={item?.urlMedia}

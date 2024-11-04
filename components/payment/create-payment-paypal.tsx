@@ -20,6 +20,7 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
     eventDateId,
     cartOrderId,
     userId,
+    tickets,
     organizationSellerId,
     organizationBuyerId,
   } = data;
@@ -43,12 +44,12 @@ const CreatePaymentPayPal = ({ data, paymentModel }: Props) => {
       organizationSellerId,
       organizationBuyerId,
       userId,
+      tickets,
       reference: newReference,
       affiliation: affiliation,
       amount: {
         country: amount?.country,
         taxes: amount?.taxes,
-        ticketId: amount?.ticketId,
         quantity: amount?.quantity,
         payer: {
           amount: amountPalpal,

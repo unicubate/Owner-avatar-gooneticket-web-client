@@ -4,14 +4,13 @@ import { useState } from 'react';
 import { useAuth } from '../../util/context-user';
 
 import { logoutUsersAPI } from '@/api-site/user';
-import { CreateConversationForm } from '@/components/contact-us/create-conversation-form';
-import { CreateOrUpdateFormFollow } from '@/components/like-follow/create-or-update-form-follow';
-import { DropdownMenuContentUser, ThemeToggle } from '@/components/ui-setting';
+import { DropdownMenuContentUser } from '@/components/ui-setting';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { GripIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
 import { HorizontalNavPublicUser } from '../../user/horizontal-nav-public-user';
@@ -129,42 +128,24 @@ const HorizontalNavUserPublicSite = ({ user, showDrawer }: Props) => {
 
             <div className="ml-auto flex items-center justify-end">
               <div className="flex items-center space-x-1.5">
-                <div className="py-2 sm:mt-0">
+                {/* <div className="py-2 sm:mt-0">
                   {userVisiter?.id !== user?.id ? (
                     <CreateConversationForm item={user} />
                   ) : null}
                 </div>
                 <div className="py-2 sm:mt-0">
-                  {/* {userVisiter?.organizationId &&
-                    userVisiter?.organizationId !== user?.organizationId ? (
-                      <CreateOrUpdateFormFollow item={user} />
-                    ) : null} */}
                   {userVisiter?.organizationId !== user?.organizationId ? (
                     <CreateOrUpdateFormFollow item={user} />
                   ) : null}
-                </div>
+                </div> */}
 
-                <ThemeToggle />
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
-                      variant="ghost"
+                      variant="link"
                       className="bg-white text-gray-700 hover:text-gray-900 dark:bg-background dark:hover:text-white"
                     >
-                      <svg
-                        className="size-6"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4 6h16M4 12h16M4 18h16"
-                        />
-                      </svg>
+                      <GripIcon className="size-6" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContentUser username={username ?? ''} />

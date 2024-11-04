@@ -8,7 +8,9 @@ export const AlertSuccessNotification = ({
   text?: string;
   description?: React.ReactNode;
 }) => {
-  return toast.success(description);
+  return toast.success(description, {
+    position: 'bottom-center',
+  });
 };
 
 export const AlertDangerNotification = ({

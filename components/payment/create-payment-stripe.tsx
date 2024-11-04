@@ -22,7 +22,7 @@ const CreatePaymentStripe = ({ data, paymentModel }: StripeProps) => {
     const newReference = generateLongUUID(30);
     const payload: PaymentCardFormModel = {
       ...data,
-      type: 'CARD',
+      type: 'STRIPE',
       cancelUrl: linkHref,
       reference: newReference,
     };

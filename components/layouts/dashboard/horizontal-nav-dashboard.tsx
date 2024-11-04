@@ -1,9 +1,5 @@
 import { useInputState } from '@/components/hooks';
-import {
-  DropdownMenuContentUser,
-  ImageLogo,
-  ThemeToggle,
-} from '@/components/ui-setting';
+import { DropdownMenuContentUser, ImageLogo } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
@@ -129,7 +125,6 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
             </div>
 
             <div className="ml-auto flex items-center justify-end">
-              <ThemeToggle />
               <LangToggle />
               <div className="items-end">
                 {/* <ThemeToggle /> */}

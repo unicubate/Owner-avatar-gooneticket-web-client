@@ -43,17 +43,24 @@ import {
   PlusIcon,
 } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaCreditCard, FaPaypal } from 'react-icons/fa';
 import * as yup from 'yup';
 
 type NewAmountType = {
   country: string;
+  quantity: number;
   currency: string;
   value: number;
+  ticketId: string;
+  oneValue: number;
   taxes: number;
-  quantity: number;
+  eventDate: {
+    id: string;
+    expiredAt: Date;
+    startedAt: Date;
+  };
   valueTotal: number;
   commission: number;
 };
@@ -72,16 +79,8 @@ const paymentMethodArray = [
 ];
 
 const schema = yup.object({
-  ticket: yup.string().required('ticket is a required field'),
+  paymentMethod: yup.string().required('payment method is a required field'),
 });
-
-interface TicketReq {
-  id: string;
-  name: string;
-  quantity: number;
-  amount: number;
-  eventTitle: string;
-}
 
 const CheckoutEvent = () => {
   const addressRef = useRef<any>(null);
@@ -94,16 +93,14 @@ const CheckoutEvent = () => {
 
   const {
     watch,
-    control,
     register,
-    setValue,
-    formState: { isDirty, isValid },
+    formState: { isValid },
   } = useForm<any>({
     resolver: yupResolver(schema),
     mode: 'onChange',
   });
   const { data: countries } = GetAllCountiesAPI();
-  const watchTicket = watch('ticket', null);
+  const watchAmount = watch('amount', null);
   const watchPaymentMethod = watch('paymentMethod', null);
 
   const { data: userAddress } = GetOneUserAddressMeAPI();
@@ -153,48 +150,28 @@ const CheckoutEvent = () => {
     organizationVisitorId: userStorage?.organizationId,
   });
 
-  const ticketJsonParse = watchTicket
-    ? JSON.parse(watchTicket)
+  const ticketJsonParse = watchAmount
+    ? JSON.parse(watchAmount)
     : eventDate?.oneTicket;
   const calculateCommission =
     Number(Number(ticketJsonParse?.commission) * debounceIncrement) ?? 0;
   const calculatePrice = Number(ticketJsonParse?.amount) * debounceIncrement;
 
   const newAmount: NewAmountType = {
+    quantity: debounceIncrement,
+    ticketId: ticketJsonParse?.id,
     currency: item?.currency?.code,
     value: calculatePrice,
-    quantity: debounceIncrement,
     country: ipLocation?.countryCode,
+    oneValue: Number(ticketJsonParse?.amount),
     commission: calculateCommission,
     taxes: Number(userStorage?.organization?.taxes),
     valueTotal: calculateCommission + calculatePrice,
-  };
-
-  const tickets = [
-    {
-      id: ticketJsonParse?.id,
-      name: ticketJsonParse?.name,
-      quantity: debounceIncrement,
-      amount: ticketJsonParse?.amount,
-      eventTitle: ticketJsonParse?.event?.title,
-    },
-  ];
-
-  const payload: any = {
-    tickets: tickets,
-    userAddress,
     eventDate: {
       id: eventDate?.id,
       expiredAt: eventDate?.expiredAt,
       startedAt: eventDate?.startedAt,
     },
-    eventDateId: eventDate?.id,
-    eventId: item?.id,
-    amount: newAmount,
-    affiliation: affiliation,
-    organizationSellerId: item?.organizationId,
-    organizationBuyerId: userStorage?.organizationId,
-    userId: userStorage?.id,
   };
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(
@@ -202,17 +179,16 @@ const CheckoutEvent = () => {
     600,
   );
 
-  // const scrollToElement = () => {
-  //   // if (addressRef.current) {
-  //   //   addressRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  //   // }
-  // };
+  const scrollToElement = () => {
+    if (addressRef.current) {
+      addressRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
-  // useEffect(() => {
+  useEffect(() => {
+    isEdit ? scrollToElement() : null;
+  }, [isEdit]);
 
-  // }, []);
-
-  console.log('tickets ====>', tickets);
   return (
     <>
       <LayoutCheckoutSite
@@ -261,12 +237,16 @@ const CheckoutEvent = () => {
                               {increment} x {item?.title ?? ''}
                             </p>
                             <p className="text-lg text-blue-600">
-                              {eventDate?.oneTicket?.amount > 0
-                                ? formatePrice({
+                              {eventDate?.oneTicket?.amount > 0 ? (
+                                <>
+                                  {formatePrice({
                                     currency: `${eventDate?.oneTicket?.currency?.code}`,
-                                    value: Number(tickets[0]?.amount ?? 0),
-                                  })
-                                : t.formatMessage({ id: 'UTIL.FREE' })}
+                                    value: Number(newAmount?.oneValue ?? 0),
+                                  })}
+                                </>
+                              ) : (
+                                t.formatMessage({ id: 'UTIL.FREE' })
+                              )}
                             </p>
                           </li>
 
@@ -359,7 +339,7 @@ const CheckoutEvent = () => {
                                   type="button"
                                   variant="primary"
                                   className="w-full"
-                                  disabled={increment <= 1}
+                                  disabled={increment === 1 ? true : false}
                                   onClick={() => setIncrement((lk) => lk - 1)}
                                   icon={<MinusIcon className="size-5" />}
                                 />
@@ -368,7 +348,7 @@ const CheckoutEvent = () => {
                                   type="number"
                                   id="increment"
                                   value={increment}
-                                  className="h-8 w-14 border-transparent text-center [-moz-appearance:_textfield]"
+                                  className="h-8 w-20 border-transparent text-center [-moz-appearance:_textfield]"
                                 />
                                 <ButtonInput
                                   size="sm"
@@ -378,9 +358,7 @@ const CheckoutEvent = () => {
                                   loading={false}
                                   onClick={() => setIncrement((lk) => lk + 1)}
                                   icon={<PlusIcon className="size-5" />}
-                                  disabled={
-                                    increment >= 10 || !isValid || !isDirty
-                                  }
+                                  disabled={increment >= 10}
                                 />
                               </div>
                             </div>
@@ -470,13 +448,18 @@ const CheckoutEvent = () => {
 
                                             <input
                                               type="radio"
-                                              {...register('ticket')}
+                                              {...register('amount')}
                                               value={JSON.stringify(ticket)}
                                               id={ticket?.id}
                                               className="sr-only"
-                                              // onClick={() => {
-                                              //   //scrollToElement();
-                                              // }}
+                                              onClick={() => {
+                                                scrollToElement();
+                                              }}
+                                              defaultChecked={
+                                                leftTicket >= 0 && index === 0
+                                                  ? true
+                                                  : false
+                                              }
                                             />
                                           </label>
                                         </div>
@@ -486,7 +469,6 @@ const CheckoutEvent = () => {
                                 </Fragment>
                               ))
                             )}
-
                             {hasNextPageTickets && (
                               <div className="mx-auto mt-2 justify-center text-center">
                                 <ButtonLoadMore
@@ -528,7 +510,7 @@ const CheckoutEvent = () => {
                           <CreateOrUpdateUserAddressForm
                             isEdit={isEdit}
                             isContinue={
-                              watchTicket ||
+                              watchAmount ||
                               Number(dataTickets?.pages[0]?.data?.total) <= 0
                             }
                             setIsEdit={setIsEdit}
@@ -582,28 +564,28 @@ const CheckoutEvent = () => {
                           </p>
                         </li>
 
-                        {tickets.map((lk: TicketReq, index: number) => (
-                          <li
-                            key={index}
-                            className="mt-2 flex items-center justify-between text-sm"
-                          >
-                            <p className="dark:text-gray-600">
-                              {lk?.quantity} {lk?.name}
-                            </p>
-                            <p className="ml-1 dark:text-gray-400">
-                              {lk?.amount > 0
-                                ? formatePrice({
-                                    currency: item?.currency?.code,
-                                    value: Number(lk?.amount),
-                                  })
-                                : t.formatMessage({ id: 'UTIL.FREE' })}
-                            </p>
-                          </li>
-                        ))}
+                        <li className="mb-2 flex items-center justify-between text-sm">
+                          <p className="dark:text-gray-600">
+                            {increment} {item?.title}
+                          </p>
+
+                          {newAmount?.value ? (
+                            <>
+                              <p className="ml-1 text-sm dark:text-gray-400">
+                                {formatePrice({
+                                  currency: `${item?.currency?.code}`,
+                                  value: Number(newAmount?.value),
+                                }) ?? ''}
+                              </p>
+                            </>
+                          ) : (
+                            t.formatMessage({ id: 'UTIL.FREE' })
+                          )}
+                        </li>
 
                         {newAmount?.commission > 0 ? (
-                          <li className="mt-2 flex items-center justify-between text-sm">
-                            <p className="dark:text-gray-600">Commissions</p>
+                          <li className="mb-2 flex items-center justify-between text-sm">
+                            <p className="dark:text-gray-700">Commissions</p>
                             <p className="ml-1 text-sm dark:text-gray-400">
                               {formatePrice({
                                 currency: `${item?.currency?.code}`,
@@ -613,22 +595,32 @@ const CheckoutEvent = () => {
                           </li>
                         ) : null}
 
-                        {watchTicket && (isValid || isDirty) ? (
-                          <>
-                            <hr className="dark:border-input my-4" />
-                            <li className="my-2 flex items-center justify-between">
-                              <p className="text-3xl font-medium">Total</p>
-                              <p className="text-2xl font-bold">
-                                {newAmount?.valueTotal > 0
-                                  ? formatePrice({
-                                      currency: `${item?.currency?.code}`,
-                                      value: Number(newAmount?.valueTotal),
-                                    })
-                                  : t.formatMessage({ id: 'UTIL.FREE' })}
-                              </p>
-                            </li>
-                          </>
-                        ) : null}
+                        {/* <hr className="my-4 dark:border-input" />
+
+                <li className="flex items-center justify-between text-sm">
+                  <p className="dark:text-gray-600">Commissioni di servizio</p>
+                  <p className="ml-auto dark:text-gray-400">
+                    € 3,00
+                  </p>
+                </li> */}
+                        <hr className="dark:border-input my-4" />
+
+                        <li className="my-2 flex items-center justify-between">
+                          <p className="text-3xl font-medium">Total</p>
+                          <p className="text-2xl font-bold">
+                            {newAmount?.value ? (
+                              <>
+                                {formatePrice({
+                                  currency: `${item?.currency?.code}`,
+                                  value: Number(newAmount?.valueTotal),
+                                  isDivide: false,
+                                })}
+                              </>
+                            ) : (
+                              t.formatMessage({ id: 'UTIL.FREE' })
+                            )}
+                          </p>
+                        </li>
                       </div>
                     </div>
 
@@ -669,12 +661,12 @@ const CheckoutEvent = () => {
                       </div>
                     ) : null}
 
-                    {watchTicket && isEdit ? (
+                    {isEdit ? (
                       <>
                         {eventDate?.oneTicket?.id ? (
                           <>
                             <>
-                              {(isValid || isDirty) &&
+                              {isValid &&
                               newAmount?.valueTotal &&
                               watchPaymentMethod &&
                               ticketJsonParse?.isOnlinePayment ? (
@@ -682,31 +674,72 @@ const CheckoutEvent = () => {
                                   {watchPaymentMethod === 'STRIPE' ? (
                                     <CreatePaymentStripe
                                       paymentModel="STRIPE-CHECKOUT-SESSION-EVENT"
-                                      data={payload}
+                                      data={{
+                                        userAddress,
+                                        eventId: item?.id,
+                                        amount: newAmount,
+                                        eventDateId: eventDate?.id,
+                                        affiliation: affiliation,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userStorage?.organizationId,
+                                        userId: userStorage?.id,
+                                      }}
                                     />
                                   ) : null}
 
                                   {watchPaymentMethod === 'PAYPAL' ? (
                                     <CreatePaymentPayPal
                                       paymentModel="PAYPAL-EVENT"
-                                      data={payload}
+                                      data={{
+                                        userAddress,
+                                        eventDateId: eventDate?.id,
+                                        eventId: item?.id,
+                                        amount: newAmount,
+                                        affiliation: affiliation,
+                                        organizationSellerId:
+                                          item?.organizationId,
+                                        organizationBuyerId:
+                                          userStorage?.organizationId,
+                                        userId: userStorage?.id,
+                                      }}
                                     />
                                   ) : null}
                                 </>
                               ) : null}
 
-                              {(isValid || isDirty) &&
-                              !ticketJsonParse?.isOnlinePayment ? (
+                              {!ticketJsonParse?.isOnlinePayment ? (
                                 <CreatePaymentBooking
                                   paymentModel="BOOKING-EVENT"
-                                  data={payload}
+                                  data={{
+                                    userAddress,
+                                    eventDateId: eventDate?.id,
+                                    eventId: item?.id,
+                                    amount: newAmount,
+                                    affiliation: affiliation,
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                    userId: userStorage?.id,
+                                  }}
                                 />
                               ) : null}
 
                               {newAmount?.valueTotal <= 0 ? (
                                 <CreatePaymentFree
                                   paymentModel="FREE-EVENT"
-                                  data={payload}
+                                  data={{
+                                    userAddress,
+                                    eventId: item?.id,
+                                    eventDateId: eventDate?.id,
+                                    affiliation: affiliation,
+                                    amount: newAmount,
+                                    organizationSellerId: item?.organizationId,
+                                    organizationBuyerId:
+                                      userStorage?.organizationId,
+                                    userId: userStorage?.id,
+                                  }}
                                 />
                               ) : null}
                             </>

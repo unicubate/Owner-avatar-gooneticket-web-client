@@ -1,16 +1,14 @@
 import { logoutUsersAPI } from '@/api-site/user';
 import { MediumFooter } from '@/components/footer/medium-footer';
-import {
-  DropdownMenuContentUser,
-  HeaderSite,
-  ThemeToggle,
-} from '@/components/ui-setting';
+import { DropdownMenuContentUser, HeaderSite } from '@/components/ui-setting';
+import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { HorizontalNavPublicUser } from '@/components/user/horizontal-nav-public-user';
 import { UserModel } from '@/types/user';
+import { GripIcon } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { Button } from '../../ui/button';
@@ -63,26 +61,13 @@ const LayoutCheckoutSite = ({ user, children, title }: IProps) => {
 
             <div className="ml-auto flex items-center justify-end space-x-2">
               <div className="flex items-center">
-                <ThemeToggle />
+                <LangToggle />
                 {userVisiter?.id ? (
                   <>
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="-m-3">
-                          <svg
-                            className="size-6"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M4 6h16M4 12h16M4 18h16"
-                            />
-                          </svg>
+                          <GripIcon className="size-6" />
                         </Button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContentUser />
