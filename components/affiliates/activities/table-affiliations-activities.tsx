@@ -23,8 +23,7 @@ import { StatisticAffiliationsActivities } from '../statistics/statistic-order-t
 import { ListAffiliationsTransactions } from './list-affiliations-activities';
 
 export const TableAffiliationsActivities = () => {
-  const [period, setPeriod] = useState(120);
-  const { search, handleSetSearch, t } = useInputState();
+  const { search, t } = useInputState();
   const { ref, inView } = useInView();
   const [dayCount, setDayCount] = useState(30);
   const handleDaysChange = (newDays: number) => setDayCount(newDays);

@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 
 const TransactionCancel = () => {
   const { query, push } = useRouter();
-  const username = String(query?.username);
 
   return (
     <>

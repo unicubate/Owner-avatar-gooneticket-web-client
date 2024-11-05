@@ -1,5 +1,4 @@
 import { GetOneOrderItemPublicAPI } from '@/api-site/order-item';
-import { useInputState } from '@/components/hooks';
 import { LayoutDashboard } from '@/components/layouts/dashboard';
 import { ViewOrderItemEvent } from '@/components/order-item/view-order-item-event';
 import { ErrorFile, LoadingFile } from '@/components/ui-setting';
@@ -7,7 +6,6 @@ import { useRouter } from 'next/router';
 
 const TicketPublic = () => {
   const { query } = useRouter();
-  const { t } = useInputState();
   const orderNumber = String(query?.id);
 
   const {

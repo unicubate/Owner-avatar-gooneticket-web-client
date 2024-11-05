@@ -23,11 +23,9 @@ import { PrivateComponent } from '@/components/util/private-component';
 import { OrderItemModel } from '@/types/order-item';
 import { ListFilterIcon, ShoppingCartIcon, TicketPlusIcon } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 const OrderItemsViewIndex = () => {
-  const { query, push } = useRouter();
   const [started, setStarted] = useState(-1);
   const { t, search, handleSetSearch, user } = useInputState();
 

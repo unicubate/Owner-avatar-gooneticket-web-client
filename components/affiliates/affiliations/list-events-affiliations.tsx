@@ -11,7 +11,6 @@ import { AffiliationModel } from '@/types/affiliation';
 import { ReadMore } from '@/utils/read-more';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { MoreHorizontalIcon, ShareIcon } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import {
   formateToCccc,
@@ -30,9 +29,8 @@ type Props = {
 };
 
 const ListEventsAffiliations = ({ item, index }: Props) => {
-  const { push } = useRouter();
   const [copied, setCopied] = useState(false);
-  const { t, isOpen, setIsOpen, locale } = useInputState();
+  const { t, locale } = useInputState();
 
   return (
     <>

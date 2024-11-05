@@ -3,7 +3,6 @@ import { AffiliationActivityModel } from '@/types/affiliation';
 import { formateFromNow } from '@/utils';
 import { ReadMore } from '@/utils/read-more';
 import { CalendarPlus2 } from 'lucide-react';
-import { useRouter } from 'next/router';
 import { useInputState } from '../../hooks';
 import { SerialPrice } from '../../ui-setting/serial-price';
 
@@ -14,7 +13,6 @@ type Props = {
 
 export const ListAffiliationsTransactions = ({ item, index }: Props) => {
   const { locale } = useInputState();
-  const { push } = useRouter();
   return (
     <>
       <tr key={index}>

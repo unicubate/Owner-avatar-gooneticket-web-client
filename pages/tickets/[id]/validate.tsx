@@ -14,7 +14,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 const Ticket = () => {
-  const { t, ipLocation, loading, setLoading } = useInputState();
+  const { t, ipLocation } = useInputState();
   const { query, push, back } = useRouter();
   const [copied, setCopied] = useState(false);
   const orderNumber = String(query?.id);

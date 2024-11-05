@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/router';
 import { useIntl } from 'react-intl';
-
-const classIcon = 'flex-shrink-0 size-5 mr-4';
 
 interface Props {
   user?: any;
@@ -12,7 +9,6 @@ interface Props {
 
 const VerticalNavDashboard = ({ user }: Props) => {
   const t = useIntl();
-  const router = useRouter();
   const pathname = usePathname();
   const navigationItems = [
     {
@@ -37,7 +33,6 @@ const VerticalNavDashboard = ({ user }: Props) => {
     },
   ];
 
-  const bgColor = `bg-indigo-600 text-white`;
   return (
     <>
       <div className="flex h-full flex-1 flex-col justify-between overflow-x-scroll px-4">

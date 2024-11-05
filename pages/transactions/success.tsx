@@ -9,7 +9,7 @@ import { useEffect, useMemo } from 'react';
 
 const TransactionSuccess = () => {
   const { setHasErrors } = useInputState();
-  const { query, push, back } = useRouter();
+  const { query } = useRouter();
   const { type, token, tag } = query;
 
   const { timerRemaining } = useRedirectAfterSomeSeconds(`/${tag}`, 2);
