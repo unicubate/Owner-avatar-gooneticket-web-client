@@ -1,5 +1,5 @@
 import { useInputState } from '@/components/hooks';
-import { DropdownMenuContentUser } from '@/components/ui-setting';
+import { DropdownMenuContentUser, ImageLogo } from '@/components/ui-setting';
 import { AvatarComponent } from '@/components/ui-setting/';
 import { LangToggle } from '@/components/ui-setting/lang-toggle';
 import { TooltipProviderInput } from '@/components/ui-setting/shadcn';
@@ -75,27 +75,21 @@ const HorizontalNavDashboard = ({ showDrawer }: Props) => {
               <div className="flex shrink-0 items-center">
                 <div className="block h-8 w-auto lg:hidden">
                   <div className="flex items-center">
-                    <span className="cursor-pointer text-lg font-bold">
-                      {process.env.NEXT_PUBLIC_NAME_SITE}
-                    </span>
-                    {/* <div className="relative shrink-0 cursor-pointer">
+                    <div className="relative shrink-0 cursor-pointer">
                       <ImageLogo />
-                    </div> */}
+                    </div>
                   </div>
                 </div>
                 <div className="ml-4 hidden h-8 w-auto lg:block">
                   <div className="flex items-center">
-                    {/* <div className="relative shrink-0 cursor-pointer">
+                    <div className="relative shrink-0 cursor-pointer">
                       <ImageLogo />
                     </div>
                     <div className="ml-2 cursor-pointer">
                       <p className="text-lg font-bold">
                         {process.env.NEXT_PUBLIC_NAME_SITE}
                       </p>
-                    </div> */}
-                    <span className="px-5 cursor-pointer text-lg font-bold">
-                      {process.env.NEXT_PUBLIC_NAME_SITE}
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
