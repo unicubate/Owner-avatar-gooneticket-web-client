@@ -5,6 +5,7 @@ import { Calendar as CalendarIcon } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
+import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
@@ -35,9 +36,9 @@ const DateInput = ({
   return (
     <>
       {label ? (
-        <label className="mb-2 block text-sm font-bold" htmlFor={name}>
+        <Label className="mb-2 block text-sm font-bold" htmlFor={name}>
           {label}
-        </label>
+        </Label>
       ) : null}
       <Controller
         name={name}

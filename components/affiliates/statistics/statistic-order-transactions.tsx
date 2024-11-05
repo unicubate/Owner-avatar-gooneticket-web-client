@@ -33,7 +33,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { dateTimeNowUtc, formateMMLongDate, monthTimeNowUtc } from '@/utils';
+import { dateTimeNowUtc, formateMMLongDate } from '@/utils';
 import { capitalizeFirstLetter } from '@/utils/utils';
 import { isPositive } from 'class-validator';
 import { CalendarCheckIcon } from 'lucide-react';
@@ -53,9 +53,10 @@ export function StatisticAffiliationsActivities() {
   const [years, seYears] = useState<string>(
     `${dateTimeNowUtc().getFullYear()}`,
   );
-  const [months, setMonths] = useState<string>(
-    `${monthTimeNowUtc(new Date())}`,
-  );
+  const [months, setMonths] = useState<string>('-1');
+  // const [months, setMonths] = useState<string>(
+  //   `${monthTimeNowUtc(new Date())}`,
+  // );
 
   const { data: statistics } = GetStatisticsAffiliationsActivitiesAPI({
     year: years,
@@ -110,7 +111,7 @@ export function StatisticAffiliationsActivities() {
                               new Date(`${years}-${months}-01`),
                               locale,
                             )
-                          : months}
+                          : t.formatMessage({ id: 'TRANSACTION.ALL_TIME' })}
                       </span>
                     </Button>
                   </DropdownMenuTrigger>
