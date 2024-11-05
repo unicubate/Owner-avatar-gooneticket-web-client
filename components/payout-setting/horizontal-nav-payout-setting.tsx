@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useState } from 'react';
-import { useAuth } from '../util/context-user';
+import { useAuthContext } from '../util/context-user';
 
 const HorizontalNavPayoutSetting: React.FC = () => {
-  const { profile } = useAuth() as any;
+  const { user } = useAuthContext() as any;
   const pathname = usePathname();
   const [navigation] = useState<any[]>([
     {
@@ -26,8 +26,8 @@ const HorizontalNavPayoutSetting: React.FC = () => {
                 title={item.title}
                 className={`group inline-flex items-center whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   isActive
-                    ? `text- bg-gray-100${profile?.color}-500`
-                    : `hover:text- bg-transparent text-gray-500${profile?.color}-500 group hover:bg-gray-100`
+                    ? `text- bg-gray-100${user?.profile?.color}-500`
+                    : `hover:text- bg-transparent text-gray-500${user?.profile?.color}-500 group hover:bg-gray-100`
                 } `}
               >
                 {item?.icon}

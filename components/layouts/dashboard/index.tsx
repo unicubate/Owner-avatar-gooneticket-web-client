@@ -2,7 +2,7 @@ import { MediumFooter } from '@/components/footer/medium-footer';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useInputState } from '../../hooks';
 import { HeaderSite } from '../../ui-setting/header-site';
-import { useAuth } from '../../util/context-user';
+import { useAuthContext } from '../../util/context-user';
 import { HorizontalNavDashboard } from './horizontal-nav-dashboard';
 import { VerticalNavDashboard } from './vertical-nav-dashboard';
 
@@ -19,8 +19,7 @@ export type NavbarProps = {
 };
 
 const LayoutDashboard = ({ children, title }: IProps) => {
-  const { profile, username, email, status, affiliation } = useAuth() as any;
-  const user = { profile, username, email, status, affiliation };
+  const { user } = useAuthContext();
   const { isOpen, setIsOpen } = useInputState();
   const showDrawer = () => {
     setIsOpen((i) => !i);
