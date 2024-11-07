@@ -119,7 +119,6 @@ export function CreateOrUpdateFormCommentReply(props: {
             <div className="flex items-center justify-between">
               <ButtonInput
                 type="button"
-                size="lg"
                 variant="outline"
                 onClick={() => {
                   setOpenModalReply(false);
@@ -134,7 +133,6 @@ export function CreateOrUpdateFormCommentReply(props: {
           <div className="flex-col sm:flex sm:items-end sm:justify-between">
             <ButtonInput
               type="submit"
-              size="lg"
               variant="primary"
               loading={loading}
               className="w-full"

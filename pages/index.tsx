@@ -82,7 +82,7 @@ const Home = () => {
                 </ButtonInput>
               </Link>
               {/* <Link href={`/login`}>
-                <ButtonInput type="button" size="lg" variant="outline">
+                <ButtonInput type="button"  variant="outline">
                   {t.formatMessage({ id: 'MENU.LOGIN' })}
                 </ButtonInput>
               </Link> */}

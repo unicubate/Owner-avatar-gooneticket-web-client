@@ -101,7 +101,6 @@ const TransactionSuccess = () => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="outline"
                   onClick={() => back()}
                 >
@@ -110,7 +109,6 @@ const TransactionSuccess = () => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="primary"
                   onClick={() => {
                     push(`/payments`);
@@ -135,7 +133,6 @@ const TransactionSuccess = () => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="outline"
                   onClick={() => back()}
                 >
@@ -144,7 +141,6 @@ const TransactionSuccess = () => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="primary"
                   onClick={() => {
                     push(`/payments`);

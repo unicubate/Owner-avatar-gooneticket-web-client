@@ -112,7 +112,6 @@ const FormCreateOrUpdateOrderItems = ({
             <ButtonInput
               type="button"
               className="w-full"
-              size="lg"
               variant="outline"
               onClick={() => setShowModal(false)}
             >
@@ -121,7 +120,6 @@ const FormCreateOrUpdateOrderItems = ({
             <ButtonInput
               type="submit"
               className="w-full"
-              size="lg"
               variant="primary"
               disabled={loading}
               loading={loading}

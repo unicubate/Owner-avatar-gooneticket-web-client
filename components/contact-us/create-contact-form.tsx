@@ -243,7 +243,6 @@ const CreateContactForm = () => {
             type="submit"
             className="w-full"
             variant="primary"
-            size="lg"
             loading={loading}
           >
             {t.formatMessage({ id: 'CONTACT.US.SUBMIT' })}

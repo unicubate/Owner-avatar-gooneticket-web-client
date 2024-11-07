@@ -43,7 +43,6 @@ export function RedirectToMembershipsButton(props: {
         className={cn('mt-2', className)}
         type="button"
         variant="default"
-        size="lg"
         icon={<LockKeyholeIcon className="mr-2 size-6" />}
       >
         Become a member

@@ -164,7 +164,6 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="outline"
                   onClick={() => setIsOpen(false)}
                 >
@@ -173,7 +172,6 @@ const CreateWithdrawFormUser = ({ isOpen, setIsOpen }: Props) => {
                 <ButtonInput
                   type="submit"
                   className="w-full"
-                  size="lg"
                   variant="primary"
                   loading={loading}
                 >

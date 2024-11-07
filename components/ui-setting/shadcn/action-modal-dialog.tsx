@@ -62,7 +62,6 @@ const ActionModalDialog = ({
               <ButtonInput
                 type="button"
                 className="w-full"
-                size="lg"
                 variant="outline"
                 onClick={() => setIsOpen((lk: boolean) => !lk)}
               >
@@ -71,7 +70,6 @@ const ActionModalDialog = ({
               <ButtonInput
                 type="button"
                 className="w-full"
-                size="lg"
                 variant={variant}
                 onClick={onClick}
                 loading={loading}
@@ -93,7 +91,6 @@ const ActionModalDialog = ({
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="outline"
                   onClick={() => setIsOpen((lk: boolean) => !lk)}
                 >
@@ -102,7 +99,6 @@ const ActionModalDialog = ({
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant={'danger'}
                   onClick={onClick}
                   loading={loading}

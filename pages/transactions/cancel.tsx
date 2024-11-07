@@ -24,7 +24,6 @@ const TransactionCancel = () => {
                 <ButtonInput
                   type="button"
                   className="w-full"
-                  size="lg"
                   variant="primary"
                   onClick={() => {
                     push(`/`);

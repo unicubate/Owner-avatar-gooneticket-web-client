@@ -336,7 +336,6 @@ const Register = () => {
                   type="submit"
                   className="w-full"
                   variant="primary"
-                  size="lg"
                   loading={loading}
                   disabled={watchCode.length !== 6 && true}
                 >
