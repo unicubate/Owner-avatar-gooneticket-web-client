@@ -30,7 +30,7 @@ const ViewOrderItemEvent = ({ orderItem }: Props) => {
     try {
       const response = await downloadOneUploadsAPI({
         folder: String(orderItem?.model.toLocaleLowerCase()),
-        fileName: orderItem?.uploadsFileTicket?.path,
+        fileName: orderItem?.uploadFilesTicket?.path,
       });
       const link = document.createElement('a');
       link.href = response?.config?.url;

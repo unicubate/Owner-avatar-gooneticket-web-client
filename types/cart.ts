@@ -22,8 +22,8 @@ export type OneCartModel = {
   organizationSellerId: string;
   priceTotalProduct: number;
   profileVendor: ProfileItemModel;
-  uploadsImages: Array<UploadModel>;
-  uploadsFiles: Array<UploadModel>;
+  uploadImages: Array<UploadModel>;
+  uploadFiles: Array<UploadModel>;
   product: {
     id: string;
     slug: string;

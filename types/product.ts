@@ -70,8 +70,8 @@ export type ProductModel = {
   };
   profile: ProfileItemModel;
   organization: { name: string; color: string };
-  uploadsImages: Array<UploadModel>;
-  uploadsFiles: Array<UploadModel>;
+  uploadImages: Array<UploadModel>;
+  uploadFiles: Array<UploadModel>;
   price: string;
 };
 

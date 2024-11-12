@@ -75,7 +75,7 @@ export type OrderItemModel = {
   product: ProductModel;
   event: EventModel;
   eventDate: EventDateModel;
-  uploadsFileTicket: UploadModel;
+  uploadFilesTicket: UploadModel;
 };
 
 export type OrderModel = {

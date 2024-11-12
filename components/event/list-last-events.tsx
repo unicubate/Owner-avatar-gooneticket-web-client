@@ -18,10 +18,10 @@ export function ListLastEvents(props: Props) {
         className="flex items-stretch justify-between space-x-2 py-7"
       >
         <div className="shrink-0">
-          {item?.uploadsImages?.length > 0 ? (
+          {item?.uploadImages?.length > 0 ? (
             <div className="size-16 rounded-lg object-cover">
               <ListCarouselUpload
-                uploads={item?.uploadsImages}
+                uploads={item?.uploadImages}
                 folder={String(item?.model.toLocaleLowerCase())}
                 height="65px"
                 className={`size-16`}

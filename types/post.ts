@@ -32,8 +32,8 @@ export type PostModel = {
   description: string;
   totalComment: number;
   totalLike: number;
-  uploadsImages: UploadModel[];
-  uploadsFiles: UploadModel[];
+  uploadImages: UploadModel[];
+  uploadFiles: UploadModel[];
   isValidSubscribe: number;
   enableUrlMedia: boolean;
   category: {
