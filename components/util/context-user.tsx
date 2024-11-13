@@ -8,6 +8,7 @@ type ContextProps = {
   user?: any;
   ipLocation: any;
   collapse: string;
+  status?: 'error' | 'success' | 'pending';
   toggleCollapse: () => void;
 };
 
@@ -15,6 +16,7 @@ const initContextPropsState = {
   collapse: 'false',
   ipLocation: undefined,
   user: undefined,
+  status: undefined,
 } as ContextProps;
 
 const CreateContext = createContext<ContextProps>(initContextPropsState);

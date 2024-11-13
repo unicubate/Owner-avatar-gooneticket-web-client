@@ -1,22 +1,19 @@
 import { useRouter } from 'next/router';
 import { ComponentType, useEffect } from 'react';
 import { useInputState } from '../hooks';
-import { getCookieUser } from './context-user';
+import { useAuthContext } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
   return function ProtectedRoute({ ...props }) {
-    const userToken = getCookieUser();
-    const { linkHref, user } = useInputState();
+    const { status } = useAuthContext();
+    const { linkHref } = useInputState();
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!userToken) {
-        if (!user?.id) {
-          push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
-        }
+      if (status === 'error') {
+        push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [user, userToken, pathname, push, linkHref]);
-
+    }, [status, pathname, push, linkHref]);
     return <Component {...props} />;
   };
 };

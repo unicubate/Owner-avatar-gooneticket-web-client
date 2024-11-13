@@ -1,21 +1,17 @@
 import { useRouter } from 'next/router';
 import { ComponentType, useEffect } from 'react';
-import { useInputState } from '../hooks';
-import { getCookieUser } from './context-user';
+import { useAuthContext } from './context-user';
 
 const PublicComponent = (Component: ComponentType) => {
-  const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
-    const { user } = useInputState();
+    const { status } = useAuthContext();
     const { push } = useRouter();
 
     useEffect(() => {
-      if (userToken) {
-        if (user) {
-          push(`/dashboard`);
-        }
+      if (status === 'success') {
+        push(`/tickets`);
       }
-    }, [user, push]);
+    }, [status, push]);
 
     return <Component {...props} />;
   };
