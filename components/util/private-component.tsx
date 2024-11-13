@@ -10,8 +10,10 @@ const PrivateComponent = (Component: ComponentType) => {
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!user && !userToken) {
-        push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
+      if (!userToken) {
+        if (!user?.id) {
+          push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
+        }
       }
     }, [user, userToken, pathname, push, linkHref]);
 

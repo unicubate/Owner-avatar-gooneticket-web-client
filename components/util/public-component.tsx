@@ -10,8 +10,10 @@ const PublicComponent = (Component: ComponentType) => {
     const { push } = useRouter();
 
     useEffect(() => {
-      if (userToken && user) {
-        push(`/tickets`);
+      if (userToken) {
+        if (user) {
+          push(`/dashboard`);
+        }
       }
     }, [user, push]);
 
