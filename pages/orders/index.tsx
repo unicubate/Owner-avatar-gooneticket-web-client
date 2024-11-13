@@ -178,51 +178,49 @@ const OrdersIndex = () => {
 
                 <table className="mt-4 min-w-full lg:divide-y">
                   <tbody className="divide-input dark:divide-input divide-y">
-                    {user?.organizationId ? (
-                      isLoadingOrders ? (
-                        <tr className="table-row">
-                          <td className="table-cell">
-                            <LoadingFile className="table-row" />
-                          </td>
-                        </tr>
-                      ) : isErrorOrders ? (
-                        <ErrorFile
-                          title="404"
-                          description="Error find data please try again..."
-                        />
-                      ) : Number(dataOrders?.pages[0]?.data?.total) <= 0 ? (
-                        <tr className="table-row">
-                          <td className="table-cell">
-                            <EmptyData
-                              image={<ShoppingCartIcon className="size-10" />}
-                              title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
-                              description={t.formatMessage({
-                                id: 'UTIL.ANY_SUB_ORDER',
-                              })}
-                            />
-                          </td>
-                        </tr>
-                      ) : (
-                        dataOrders?.pages.map((page, i) => (
-                          <Fragment key={i}>
-                            {page?.data?.value.map(
-                              (item: OrderModel, index: number) => (
-                                <ListOrdersUser
-                                  item={item}
-                                  key={index}
-                                  index={index}
-                                />
-                              ),
-                            )}
-                          </Fragment>
-                        ))
-                      )
-                    ) : null}
+                    {isLoadingOrders ? (
+                      <tr className="table-row">
+                        <td className="table-cell">
+                          <LoadingFile className="table-row" />
+                        </td>
+                      </tr>
+                    ) : isErrorOrders ? (
+                      <ErrorFile
+                        title="404"
+                        description="Error find data please try again..."
+                      />
+                    ) : Number(dataOrders?.pages[0]?.data?.total) <= 0 ? (
+                      <tr className="table-row">
+                        <td className="table-cell">
+                          <EmptyData
+                            image={<ShoppingCartIcon className="size-10" />}
+                            title={t.formatMessage({ id: 'UTIL.ANY_ORDER' })}
+                            description={t.formatMessage({
+                              id: 'UTIL.ANY_SUB_ORDER',
+                            })}
+                          />
+                        </td>
+                      </tr>
+                    ) : (
+                      dataOrders?.pages.map((page, i) => (
+                        <Fragment key={i}>
+                          {page?.data?.value.map(
+                            (item: OrderModel, index: number) => (
+                              <ListOrdersUser
+                                item={item}
+                                key={index}
+                                index={index}
+                              />
+                            ),
+                          )}
+                        </Fragment>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
 
-              {user?.organizationId && hasNextPage && (
+              {hasNextPage && (
                 <div className="mx-auto mt-2 justify-center text-center">
                   <ButtonLoadMore
                     ref={ref}
