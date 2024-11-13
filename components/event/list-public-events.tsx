@@ -22,7 +22,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
   return (
     <>
       <Card key={index} className="w-full dark:border-input dark:bg-background">
-        {item?.uploadsImages?.length > 0 ? (
+        {item?.uploadImages?.length > 0 ? (
           <>
             <Link
               prefetch={true}
@@ -35,7 +35,7 @@ const ListPublicEvents = ({ item, index }: Props) => {
                 className="size-full rounded-lg transition-all duration-300 group-hover:scale-125"
                 src={`${viewOneFileUploadAPI({
                   folder: 'event',
-                  fileName: String(item?.uploadsImages?.[0]?.path),
+                  fileName: String(item?.uploadImages?.[0]?.path),
                 })}`}
                 alt={String(item?.title)}
               />

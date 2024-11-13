@@ -18,8 +18,8 @@ export type MembershipModel = {
   messageWelcome: string;
   currencyId: string;
   userId: string;
-  uploadsImages: Array<UploadModel>;
-  uploadsFiles: Array<UploadModel>;
+  uploadImages: Array<UploadModel>;
+  uploadFiles: Array<UploadModel>;
   currency: {
     code: string;
     symbol: string;

@@ -19,10 +19,10 @@ const ViewOneEvent = ({ item }: Props) => {
   return (
     <>
       <div className="p-8 sm:px-8 sm:py-7">
-        {item?.uploadsImages?.length > 0 ? (
+        {item?.uploadImages?.length > 0 ? (
           <div className="group relative mx-auto mt-2 justify-center text-center">
             <ListCarouselUploadMini
-              uploads={item?.uploadsImages}
+              uploads={item?.uploadImages}
               folder={String(item?.model.toLocaleLowerCase())}
               height="300px"
             />
