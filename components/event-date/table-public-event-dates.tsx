@@ -33,22 +33,20 @@ const TablePublicEventDates = ({ user }: { user: UserModel }) => {
 
   return (
     <>
-      {user?.organizationId ? (
-        isLoading ? (
-          <LoadingFile />
-        ) : isError ? (
-          <ErrorFile
-            title="404"
-            description="Error find data please try again..."
-          />
-        ) : Number(data?.pages[0]?.data?.total) <= 0 ? null : (
-          data?.pages
-            .flatMap((page: any) => page?.data?.value)
-            .map((item: EventDateModel, index: number) => (
-              <ListPublicEventDates item={item} key={index} index={index} />
-            ))
-        )
-      ) : null}
+      {isLoading ? (
+        <LoadingFile />
+      ) : isError ? (
+        <ErrorFile
+          title="404"
+          description="Error find data please try again..."
+        />
+      ) : Number(data?.pages[0]?.data?.total) <= 0 ? null : (
+        data?.pages
+          .flatMap((page: any) => page?.data?.value)
+          .map((item: EventDateModel, index: number) => (
+            <ListPublicEventDates item={item} key={index} index={index} />
+          ))
+      )}
 
       {Number(data?.pages[0]?.data?.total) <= 0 ? (
         <>

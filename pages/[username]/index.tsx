@@ -27,9 +27,7 @@ const ProfilePublic = () => {
           <div className="mx-auto px-4 sm:px-6 lg:px-8 lg:py-10">
             <div className="container mx-auto space-y-4 p-4">
               <div className="flow-root">
-                {user?.organizationId ? (
-                  <TablePublicEventDates user={user} />
-                ) : null}
+                <TablePublicEventDates user={user} />
               </div>
             </div>
           </div>
