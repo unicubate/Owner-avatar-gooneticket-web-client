@@ -16,11 +16,11 @@ const VerticalNavDashboard = ({ user }: Props) => {
       count: 1,
       href: '/tickets',
     },
-    {
-      title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
-      count: 1,
-      href: '/orders',
-    },
+    // {
+    //   title: `${t.formatMessage({ id: 'MENU.ORDER' })}`,
+    //   count: 1,
+    //   href: '/orders',
+    // },
     {
       title: `${t.formatMessage({ id: 'MENU.EVENT' })}`,
       count: 1,
