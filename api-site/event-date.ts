@@ -11,6 +11,9 @@ export const GetOneEventDateAPI = (payload: { id: string }) => {
       await makeApiCall({
         action: 'getOneEventDate',
         urlParams: { id },
+        queryParams: {
+          expired: 'false',
+        },
       }),
     refetchOnWindowFocus: false,
   });

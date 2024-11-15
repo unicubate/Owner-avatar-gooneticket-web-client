@@ -87,15 +87,13 @@ const CheckoutEvent = () => {
   const addressRef = useRef<any>(null);
   const [increment, setIncrement] = useState(1);
   const debounceIncrement = useDebounce(increment, 500);
-  const { t, ipLocation, user, locale, scrollToBottom } = useInputState();
+  const { t, ipLocation, user, locale } = useInputState();
   const { query, back } = useRouter();
   const { id: eventDateId, partner } = query;
 
   const {
     watch,
-    control,
     register,
-    setValue,
     formState: { isDirty, isValid },
   } = useForm<any>({
     resolver: yupResolver(schema),
@@ -143,14 +141,11 @@ const CheckoutEvent = () => {
     eventDateId: eventDate?.id,
   });
 
-  const {
-    isError: isErrorUser,
-    isLoading: isLoadingUser,
-    data: userItem,
-  } = GetOneUserPublicAPI({
-    username: item?.profile?.username,
-    organizationVisitorId: user?.organizationId,
-  });
+  const { isError: isErrorUser, isLoading: isLoadingUser } =
+    GetOneUserPublicAPI({
+      username: item?.profile?.username,
+      organizationVisitorId: user?.organizationId,
+    });
 
   const ticketJsonParse = watchTicket
     ? JSON.parse(watchTicket)
@@ -176,18 +171,22 @@ const CheckoutEvent = () => {
       quantity: debounceIncrement,
       amount: ticketJsonParse?.amount,
       eventTitle: ticketJsonParse?.event?.title,
+      eventId: ticketJsonParse?.eventId,
+      expiredAt: ticketJsonParse?.eventDate?.expiredAt,
+      startedAt: ticketJsonParse?.eventDate?.startedAt,
+      eventDateId: ticketJsonParse?.eventDateId,
     },
   ];
 
   const payload: any = {
     tickets: tickets,
     userAddress,
+    eventDateIds: [eventDate?.id],
     eventDate: {
       id: eventDate?.id,
       expiredAt: eventDate?.expiredAt,
       startedAt: eventDate?.startedAt,
     },
-    eventDateId: eventDate?.id,
     eventId: item?.id,
     amount: newAmount,
     affiliation: affiliation,
@@ -211,6 +210,7 @@ const CheckoutEvent = () => {
 
   // }, []);
 
+  console.log('tickets ====>', tickets);
   return (
     <>
       <LayoutCheckoutSite
@@ -409,7 +409,7 @@ const CheckoutEvent = () => {
                                         <div key={index}>
                                           <label
                                             htmlFor={ticket?.id}
-                                            className={`${leftTicket <= 0 ? 'pointer-events-none opacity-50' : ''} border-input  dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600`}
+                                            className={`${leftTicket <= 0 ? 'pointer-events-none opacity-50' : ''} active:scale-105 border-input  dark:bg-background flex cursor-pointer items-center justify-between gap-4 rounded-lg border p-4 text-sm font-semibold shadow-sm hover:border-blue-600 has-[:checked]:border-blue-600 has-[:checked]:ring-1 has-[:checked]:ring-blue-600`}
                                           >
                                             <div className="sm:flex sm:items-center sm:justify-between">
                                               <div className="sm:mt-0">
@@ -633,7 +633,8 @@ const CheckoutEvent = () => {
                     {ticketJsonParse?.isOnlinePayment &&
                     isEdit &&
                     userAddress?.isUpdated &&
-                    newAmount?.valueTotal ? (
+                    newAmount?.valueTotal &&
+                    tickets[0]?.eventDateId ? (
                       <div className="dark:border-input dark:bg-background mt-2 overflow-hidden rounded-lg border border-gray-100 bg-white">
                         <div className="p-4 sm:p-4 lg:p-3">
                           <div className="font-bold">Select payment method</div>
@@ -673,7 +674,7 @@ const CheckoutEvent = () => {
                           <>
                             <>
                               {(isValid || isDirty) &&
-                              newAmount?.valueTotal &&
+                              tickets[0]?.eventDateId &&
                               watchPaymentMethod &&
                               ticketJsonParse?.isOnlinePayment ? (
                                 <>

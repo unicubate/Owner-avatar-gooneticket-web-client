@@ -55,7 +55,9 @@ const Ticket = () => {
                       variant="outline"
                       onClick={() => setCopied(true)}
                       icon={<ShareIcon className="size-4" />}
-                    />
+                    >
+                      {t.formatMessage({ id: 'UTIL.SHARE' })}
+                    </ButtonInput>
                   </div>
                 ) : null}
               </div>
