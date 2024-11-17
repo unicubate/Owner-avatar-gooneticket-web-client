@@ -127,15 +127,15 @@ const Login = () => {
                 inputMode="email"
                 placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
                 errors={errors}
-                labelHelp={
-                  <Link
-                    href={`/login/phone${redirect ? `?redirect=${redirect}` : ''}`}
-                  >
-                    <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                      {t.formatMessage({ id: 'AUTH.LOGIN.PHONE' })}
-                    </p>
-                  </Link>
-                }
+                // labelHelp={
+                //   <Link
+                //     href={`/login/phone${redirect ? `?redirect=${redirect}` : ''}`}
+                //   >
+                //     <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
+                //       {t.formatMessage({ id: 'AUTH.LOGIN.PHONE' })}
+                //     </p>
+                //   </Link>
+                // }
               />
             </div>
 
@@ -206,16 +206,19 @@ const Login = () => {
             <GoogleAuthLogin setHasErrors={setHasErrors} />
           </div>
 
-          <Link href={`/register${redirect ? `?redirect=${redirect}` : ''}`}>
-            <p className="mt-8 cursor-pointer text-center text-sm text-gray-600 hover:underline dark:text-blue-600">
-              {' '}
-              {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
-              {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+          <p className="mt-8 cursor-pointer text-center text-sm text-gray-600">
+            {' '}
+            {t.formatMessage({ id: 'UTIL.NEW_TO' })}{' '}
+            {process.env.NEXT_PUBLIC_NAME_SITE}?{' '}
+            <Link
+              className="text-primary hover:underline"
+              href={`/register${redirect ? `?redirect=${redirect}` : ''}`}
+            >
               <span className="font-bold">
                 {t.formatMessage({ id: 'AUTH.REGISTER.HERE' })}
               </span>
-            </p>
-          </Link>
+            </Link>
+          </p>
         </div>
       </LayoutAuth>
     </>

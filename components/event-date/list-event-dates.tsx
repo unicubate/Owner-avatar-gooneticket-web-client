@@ -41,15 +41,15 @@ const ListEventDates = ({ item, index }: Props) => {
               <div className="sm:flex sm:items-center sm:justify-between">
                 <div className="sm:mt-0">
                   <div className="flex items-center">
-                    <p className="text-5xl font-semibold text-blue-700">
+                    <p className="text-6xl font-semibold text-blue-700">
                       {formateTodd(item?.startedAt as Date, locale)}
                     </p>
-                    <div className="tex-sm ml-1.5 font-semibold">
+                    <div className="tex-sm ml-1 font-semibold">
                       <p>
                         {capitalizeFirstLetter(
                           formateToLLLL(item?.startedAt as Date, locale),
                         )}
-                        <span className="ml-1.5">
+                        <span className="ml-1">
                           {viewYyformateToYyyy(item?.startedAt as Date)}
                         </span>
                       </p>
@@ -61,17 +61,17 @@ const ListEventDates = ({ item, index }: Props) => {
                           )}
                         </span>
                         ,<span className="ml-1">{item?.timeInit}</span>
-                        {item?.timeEnd ? (
+                        {/* {item?.timeEnd ? (
                           <>
                             <span className="ml-1">-</span>
                             <span className="ml-1">{item?.timeEnd}</span>
                           </>
-                        ) : null}
+                        ) : null} */}
                       </p>
                     </div>
                   </div>
 
-                  <div className="mt-1.5 text-sm font-semibold">
+                  <div className="mt-1 text-sm font-semibold">
                     <span>{capitalizeFirstLetter(String(item?.address))}</span>
                     <span className="ml-1">-</span>
                     <span className="ml-1">

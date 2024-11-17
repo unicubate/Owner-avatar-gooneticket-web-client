@@ -210,15 +210,15 @@ const Register = () => {
               placeholder={t.formatMessage({ id: 'PLACEHOLDER.EMAIL' })}
               errors={errors}
               required
-              labelHelp={
-                <Link
-                  href={`/register/phone${redirect ? `?redirect=${redirect}` : ''}`}
-                >
-                  <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
-                    {t.formatMessage({ id: 'AUTH.REGISTER.PHONE' })}
-                  </p>
-                </Link>
-              }
+              // labelHelp={
+              //   <Link
+              //     href={`/register/phone${redirect ? `?redirect=${redirect}` : ''}`}
+              //   >
+              //     <p className="cursor-pointer text-xs font-bold text-blue-600 hover:underline dark:hover:text-blue-600">
+              //       {t.formatMessage({ id: 'AUTH.REGISTER.PHONE' })}
+              //     </p>
+              //   </Link>
+              // }
             />
           </div>
 
