@@ -1,6 +1,7 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import { UserAddressModel } from '@/types/user-address';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const CreateOrUpdateOneUserAddressAPI = ({
   onSuccess,
@@ -9,10 +10,14 @@ export const CreateOrUpdateOneUserAddressAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user-address'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['user-address'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (
       payload: UserAddressModel & { userAddressId: string },
     ) => {
@@ -28,24 +33,10 @@ export const CreateOrUpdateOneUserAddressAPI = ({
             body: payload,
           });
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;
@@ -58,10 +49,14 @@ export const DeleteOneUserAddressAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user-address'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['user-address'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: { userAddressId: string }) => {
       const { userAddressId } = payload;
       return await makeApiCall({
@@ -69,24 +64,10 @@ export const DeleteOneUserAddressAPI = ({
         urlParams: { userAddressId },
       });
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

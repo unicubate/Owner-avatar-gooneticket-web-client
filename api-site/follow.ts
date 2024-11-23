@@ -1,11 +1,8 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import { ResponseFollowModel } from '@/types/follow';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation } from '@tanstack/react-query';
 
 export const CreateOrDeleteOneFollowerAPI = ({
   onSuccess,
@@ -14,10 +11,15 @@ export const CreateOrDeleteOneFollowerAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['user'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: {
       followerId?: string;
       action: 'DELETE' | 'CREATE';
@@ -38,24 +40,10 @@ export const CreateOrDeleteOneFollowerAPI = ({
         });
       }
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

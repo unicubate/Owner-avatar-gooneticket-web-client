@@ -1,10 +1,11 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import {
   NextStepProfileFormModel,
   ProfileFormModel,
   ProfileModel,
 } from '@/types/profile';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const UpdateOneProfileNextStepAPI = ({
   onSuccess,
@@ -13,10 +14,14 @@ export const UpdateOneProfileNextStepAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['user'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: NextStepProfileFormModel): Promise<any> => {
       return await makeApiCall({
         action: 'updateOneProfileNextStep',
@@ -24,24 +29,10 @@ export const UpdateOneProfileNextStepAPI = ({
         urlParams: { userId: payload?.userId },
       });
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;
@@ -54,11 +45,15 @@ export const UpdateOneProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey1 = ['profile'];
-  const queryKey2 = ['user'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['profile', 'user'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: [...queryKey1],
+    mutationKey: queryKeys,
     mutationFn: async (payload: ProfileFormModel): Promise<any> => {
       const { attachment } = payload;
       let data = new FormData();
@@ -79,27 +74,10 @@ export const UpdateOneProfileAPI = ({
 
       return 'Ok';
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

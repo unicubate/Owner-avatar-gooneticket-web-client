@@ -1,16 +1,12 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import {
   ConversationFormModel,
   ConversationModel,
   MessageFormModel,
 } from '@/types/message';
 import { SortModel } from '@/utils/paginations';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 
 export const CreateOneConversationMessagesAPI = ({
   onSuccess,
@@ -19,34 +15,25 @@ export const CreateOneConversationMessagesAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['conversations-messages'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['oconversations-messages'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: MessageFormModel) => {
       return await makeApiCall({
         action: 'createOneConversationMessage',
         body: { ...payload },
       });
     },
-    onError: (error) => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;
@@ -59,10 +46,15 @@ export const ReadOneConversationAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['conversations'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['oconversations'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: { fkConversationId: string }) => {
       const { fkConversationId } = payload;
       return await makeApiCall({
@@ -70,24 +62,10 @@ export const ReadOneConversationAPI = ({
         urlParams: { fkConversationId },
       });
     },
-    onError: (error) => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

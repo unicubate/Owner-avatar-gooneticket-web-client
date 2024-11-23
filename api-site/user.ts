@@ -1,4 +1,5 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import {
   IpLocationModal,
   UserForgotPasswordFormModel,
@@ -10,7 +11,7 @@ import {
   UserStatus,
   UserVerifyTokenModel,
 } from '@/types/user';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel,
@@ -150,10 +151,15 @@ export const UpdateEnableProfileAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['user'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['user'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: {
       profileId: string;
       enableShop?: boolean;
@@ -166,24 +172,10 @@ export const UpdateEnableProfileAPI = ({
         queryParams: { enableShop, enableGallery },
       });
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

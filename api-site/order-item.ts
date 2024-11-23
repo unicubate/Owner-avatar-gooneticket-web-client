@@ -1,16 +1,12 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import {
   OrderItemFormModel,
   OrderItemModel,
   OrderModel,
 } from '@/types/order-item';
 import { PaginationRequest } from '@/utils/paginations';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 
 export const UpdateOneOrderItemAPI = ({
   onSuccess,
@@ -19,10 +15,15 @@ export const UpdateOneOrderItemAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['order-items'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['order-items'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (
       payload: OrderItemFormModel & { orderItemId: string },
     ) => {
@@ -33,24 +34,10 @@ export const UpdateOneOrderItemAPI = ({
         urlParams: { orderItemId },
       });
     },
-    onError: (error) => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;

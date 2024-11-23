@@ -1,12 +1,8 @@
 import { makeApiCall } from '@/api-site/clients';
+import { useMutationHandlers } from '@/components/hooks';
 import { PaymentsPayoutModel } from '@/types/payment';
 import { PaginationRequest, SortModel } from '@/utils/paginations';
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 
 export type PaymentModel =
   | 'PAYMENT-CREATE'
@@ -27,12 +23,15 @@ export const CreateOnPaymentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey1 = ['payout-setup'];
-  const queryKey2 = ['user'];
-  const queryKey3 = ['withdrawals'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['payout-setup', 'user', 'withdrawals'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: [...queryKey1],
+    mutationKey: queryKeys,
     mutationFn: async (payload: { data: any; paymentModel: PaymentModel }) => {
       const { paymentModel, data } = payload;
 
@@ -106,30 +105,10 @@ export const CreateOnPaymentAPI = ({
         });
       }
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      await queryClient.invalidateQueries({ queryKey: queryKey3 });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      await queryClient.invalidateQueries({ queryKey: queryKey3 });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: queryKey1 });
-      await queryClient.invalidateQueries({ queryKey: queryKey2 });
-      await queryClient.invalidateQueries({ queryKey: queryKey3 });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;
@@ -142,10 +121,15 @@ export const DeleteOnePaymentAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ['payout-setup'];
-  const queryClient = useQueryClient();
+  const queryKeys = ['payout-setup'];
+  const { handleError, handleSettled, handleSuccess } = useMutationHandlers({
+    queryKeys,
+    onSuccess,
+    onError,
+  });
+
   const result = useMutation({
-    mutationKey: queryKey,
+    mutationKey: queryKeys,
     mutationFn: async (payload: { paymentId: string }) => {
       const { paymentId } = payload;
       return await makeApiCall({
@@ -153,24 +137,10 @@ export const DeleteOnePaymentAPI = ({
         urlParams: { paymentId },
       });
     },
-    onError: async (error) => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onError) {
-        onError(error);
-      }
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey });
-      if (onSuccess) {
-        onSuccess();
-      }
-    },
+
+    onError: handleError,
+    onSettled: handleSettled,
+    onSuccess: handleSuccess,
   });
 
   return result;
