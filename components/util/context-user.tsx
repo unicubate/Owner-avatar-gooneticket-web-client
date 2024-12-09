@@ -7,7 +7,7 @@ type ContextProps = {
   user?: any;
   ipLocation: any;
   collapse: string;
-  status?: 'error' | 'success' | 'pending';
+  isAuthenticated: boolean;
   toggleCollapse: () => void;
 };
 
@@ -15,7 +15,7 @@ const initContextPropsState = {
   collapse: 'false',
   ipLocation: undefined,
   user: undefined,
-  status: undefined,
+  isAuthenticated: false,
 } as ContextProps;
 
 const CreateContext = createContext<ContextProps>(initContextPropsState);
@@ -43,10 +43,10 @@ const ContextProvider: FC<{ children?: ReactNode }> = ({ children }) => {
     <>
       <CreateContext.Provider
         value={{
-          status,
           user: user,
           ipLocation,
           collapse,
+          isAuthenticated: !!user,
           toggleCollapse,
         }}
       >

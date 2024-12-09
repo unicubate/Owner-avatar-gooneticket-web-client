@@ -4,14 +4,14 @@ import { useAuthContext } from './context-user';
 
 const PublicComponent = (Component: ComponentType) => {
   return function ProtectedRoute({ ...props }) {
-    const { status } = useAuthContext();
+    const { isAuthenticated } = useAuthContext();
     const { push } = useRouter();
 
     useEffect(() => {
-      if (status === 'success') {
+      if (isAuthenticated) {
         push(`/tickets`);
       }
-    }, [status, push]);
+    }, [isAuthenticated, push]);
 
     return <Component {...props} />;
   };

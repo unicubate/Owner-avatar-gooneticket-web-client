@@ -43,6 +43,7 @@ const SelectInput = ({
       <Controller
         name={name}
         control={control}
+        defaultValue={defaultValue}
         render={({ field: { value, onChange } }) => (
           <>
             <Select
@@ -50,7 +51,6 @@ const SelectInput = ({
               name={name}
               value={value}
               required={required}
-              defaultValue={defaultValue}
             >
               <SelectTrigger
                 className={cn(

@@ -5,15 +5,15 @@ import { useAuthContext } from './context-user';
 
 const PrivateComponent = (Component: ComponentType) => {
   return function ProtectedRoute({ ...props }) {
-    const { status } = useAuthContext();
+    const { isAuthenticated } = useAuthContext();
     const { linkHref } = useInputState();
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (status === 'error') {
+      if (!isAuthenticated) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [status, pathname, push, linkHref]);
+    }, [isAuthenticated, pathname, push, linkHref]);
     return <Component {...props} />;
   };
 };
